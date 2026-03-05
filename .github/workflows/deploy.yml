@@ -24,6 +24,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install dependencies
+        working-directory: ./server
+        run: npm ci
       - name: Run Schema Validation
         run: node server/validate.js
 
