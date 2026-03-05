@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crossover Stockton</title>
+  <link id="favicon" rel="icon" type="image/svg+xml" href="/icons/sun.svg">
+  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="siteHeader">
+    <div class="headerInner container">
+      <div class="headerLeft">
+        <button class="uiIconBtn" type="button" aria-label="Menu" id="openMenu">
+          <span class="menu" aria-hidden="true"><i data-lucide="menu"></i></span>
+        </button>
+      </div>
+
+      <div class="headerCenter">
+
+        <div class="brand" aria-label="Crossover Stockton">
+          <a href="/" class="brandLink">Crossover Stockton</a>
+        </div>
+
+      </div>
+
+      <div class="headerRight"></div>
+
+      <button class="uiIconBtn uiIconBtn--theme" type="button" id="themeToggle" aria-label="Toggle theme">
+        <span class="icon-sun" aria-hidden="true"><i data-lucide="sun"></i></span>
+        <span class="icon-moon" aria-hidden="true"><i data-lucide="moon"></i></span>
+      </button>
+
+    </div>
+  </header>
+
+
+
+
+
+
+  <!-- TOOLBAR -->
+  <header class="toolbar">
+    <div class="toolbarInner container">
+      <div class="toolbarLeft">
+
+        <button class="uiBtn uiBtn--square" id="openFilters" aria-controls="filtersModal" type="button"
+          aria-expanded="false">
+          <i data-lucide="sliders-horizontal"></i>
+          <span>Filters</span>
+        </button>
+
+
+        <button class="uiBtn uiBtn--square uiBtn--toggle" id="openNowToggle" aria-pressed="false">
+          <i data-lucide="clock"></i>
+          <span>Open</span>
+        </button>
+
+        <button class="uiBtn uiBtn--square uiBtn--toggle" id="petFriendlyToggle" aria-pressed="false">
+          <i data-lucide="paw-print"></i>
+          <span>Pet Friendly</span>
+        </button>
+
+
+      </div>
+
+    </div>
+
+    <div class="toolbarCenter">
+
+    </div>
+  </header>
+
+
+
+  <!-- REALITY DASHBOARD  -->
+  <section class="realityDash">
+    <div class="appShell container">
+
+      <!-- REALITY TILES -->
+      <section class="realityDashboardTiles realityDashboardTiles--strip" aria-label="Reality dashboard tiles">
+        <div class="realityDashTitle">Live Services Dashboard</div>
+        <div class="realityDashSubTitle">Quick links to services near you</div>
+        <div class="rail" aria-label="Reality tiles rail">
+          <div id="realityDashboard"></div>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+
+
+
+
+
+  <!-- MAIN -->
+  <main class="page">
+    <div class="appShell container">
+
+      <!-- MAIN LAYOUT (CHANGES BY BREAKPOINT) -->
+      <section class="mainLayout" aria-label="Results layout">
+
+        <!-- RESULTS COLUMN -->
+        <section class="resultsPane" aria-label="Results">
+
+          <!-- RESULTS BAR BUTTONS - FILTER, OPEN NOW, SORT (FULL WIDTH) -->
+          <section class="resultsBar" aria-label="Results summary">
+            <div class="resultsBarInner">
+
+              <!-- SHOWING SERVICES HEADING -->
+              <section class="servicesShowing" aria-label="Showing services">
+                <div class="servicesShowingLeft" id="servicesShowing">
+                  <span class="resultsSelection" id="resultsSelection">All services</span>
+                  <span class="resultsKicker" id="resultsKicker"></span>
+                </div>
+                <div class="servicesShowingRight">
+                  <button class="uiBtn uiBtn--square" id="openSort" type="button">
+                    <span class="uiBtn__label">Sort</span>
+                    <i data-lucide="arrow-up-down"></i>
+                  </button>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <!-- RESULTS GRID TILES (FULL WIDTH) -->
+          <section class="resultsGrid" id="results"></section>
+          <span class="resultsCount" id="resultsCount">20 results</span>
+        </section>
+
+        <!-- MAP COLUMN (drops below on mobile; sticky on desktop) -->
+        <section class="mapPane" id="mapPane" aria-label="Map">
+          <div class="mapPlaceholder" id="map">Map (placeholder)</div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer class="homeFooter">
+    <div class="container">
+      <div class="footerGrid">
+        <nav class="footerCol">
+          <h2 class="footerTitle">About</h2>
+          <a class="footerLink" href="/about">What this is</a>
+          <a class="footerLink" href="/privacy">Privacy</a>
+        </nav>
+        <nav class="footerCol">
+          <h2 class="footerTitle">Get Help</h2>
+          <a class="footerLink" href="/emergency">Immediate Needs</a>
+          <a class="footerLink" href="/housing">Housing</a>
+        </nav>
+        <nav class="footerCol">
+          <h2 class="footerTitle">Providers</h2>
+          <a class="footerLink" href="/providers">Update Listing</a>
+        </nav>
+      </div>
+      <div class="footerMeta">
+        <div>© 2026 Crossover Stockton</div>
+        <div><span class="lastUpdated" id="lastUpdated" aria-label="Last updated">Updated just now</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- NAV DRAWER -->
+  <div id="navDrawer" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel modal__panel--drawer" role="dialog" aria-modal="true">
+      <header class="modal__header">
+        <span class="brandText">Menu</span>
+        <button class="uiIconBtn" aria-label="Close" data-close type="button">✕</button>
+      </header>
+      <div class="modal__body">
+        <nav class="drawerNav">
+          <a href="/" class="drawerLink">Home</a>
+          <a href="/about" class="drawerLink">About Project</a>
+          <hr class="drawerDivider">
+          <h3 class="drawerHeading">Resources</h3>
+          <a href="/emergency" class="drawerLink">Emergency Shelter</a>
+          <a href="/food" class="drawerLink">Food Access</a>
+          <a href="/health" class="drawerLink">Health</a>
+          <hr class="drawerDivider">
+          <a href="/providers" class="drawerLink">For Service Providers</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FILTERS MODAL (mobile overlay + desktop dockable panel) -->
+  <div id="filtersModal" class="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="filtersTitle">
+      <header class="modal__header">
+        <div class="modal__headerLeft">
+          <button type="button" class="uiIconBtn modal__back" data-back hidden aria-label="Back">
+            <span class="back" aria-hidden="true"><i data-lucide="chevron-left"></i></span>
+          </button>
+          <span id="filtersTitle" class="modal__title">Filters</span>
+        </div>
+        <button class="uiIconBtn modal__close" aria-label="Close" data-close type="button">
+          <span class="close" aria-hidden="true"><i data-lucide="x"></i></span>
+        </button>
+
+      </header>
+
+      <div class="modal__body">
+        <div id="filtersGrid" class="filtersGrid"></div>
+      </div>
+
+      <footer class="modal__footer">
+        <button id="clearFilters" class="uiBtn uiBtn--square" type="button">Clear all</button>
+        <span id="selectedSummary" class="muted">0 selected</span>
+        <div class="footerRight">
+          <button id="applyFilters" class="uiBtn uiBtn--square uiBtn--primary" type="button">
+            Show Results
+          </button>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- MOBILE MAP TOGGLE (FAB) -->
+  <button id="mobileMapToggle" class="mobileMapToggle" aria-pressed="false" aria-label="Toggle map view">
+    <span class="icon"><i data-lucide="map"></i></span>
+    <span class="label mapLabel">Show Map</span>
+    <span class="label listLabel" hidden>Show List</span>
+  </button>
+
+  <script type="module" src="/app/app.js"></script>
+</body>
+
+</html>

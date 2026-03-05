@@ -1,0 +1,154 @@
+{
+    "groups": [
+        {
+            "id": "compatibility",
+            "label": "Compatibility"
+        },
+        {
+            "id": "access",
+            "label": "Access"
+        },
+        {
+            "id": "eligibility",
+            "label": "Eligibility"
+        }
+    ],
+    "facets": {
+        "compatibility": [
+            {
+                "id": "pet_friendly",
+                "label": "Pet friendly",
+                "type": "boolean",
+                "path": "compatibility.pet_friendly"
+            },
+            {
+                "id": "rv_supported",
+                "label": "Vehicle / RV supported",
+                "type": "boolean",
+                "path": "compatibility.rv_supported"
+            },
+            {
+                "id": "employment_compatible",
+                "label": "Employment compatible",
+                "type": "boolean",
+                "path": "compatibility.employment_compatible"
+            },
+            {
+                "id": "family_friendly",
+                "label": "Families welcome",
+                "type": "boolean",
+                "path": "compatibility.family_friendly"
+            }
+        ],
+        "access": [
+            {
+                "id": "walk_in",
+                "label": "Walk-in available",
+                "type": "boolean",
+                "path": "access.walk_in"
+            },
+            {
+                "id": "appointment_required",
+                "label": "Appointment required",
+                "type": "boolean",
+                "path": "access.appointment_required"
+            },
+            {
+                "id": "phone_required",
+                "label": "Phone required",
+                "type": "boolean",
+                "path": "access.phone_required"
+            },
+            {
+                "id": "documentation_required",
+                "label": "Documentation",
+                "type": "enum",
+                "path": "access.documentation_required",
+                "options": [
+                    {
+                        "value": "unknown",
+                        "label": "Unknown"
+                    },
+                    {
+                        "value": "none",
+                        "label": "None"
+                    },
+                    {
+                        "value": "minimal",
+                        "label": "Minimal"
+                    },
+                    {
+                        "value": "standard",
+                        "label": "Standard"
+                    },
+                    {
+                        "value": "heavy",
+                        "label": "Heavy"
+                    }
+                ]
+            },
+            {
+                "id": "cost",
+                "label": "Cost",
+                "type": "enum",
+                "path": "access.cost",
+                "options": [
+                    {
+                        "value": "unknown",
+                        "label": "Unknown"
+                    },
+                    {
+                        "value": "free",
+                        "label": "Free"
+                    },
+                    {
+                        "value": "low",
+                        "label": "Low cost"
+                    },
+                    {
+                        "value": "varies",
+                        "label": "Varies"
+                    }
+                ]
+            },
+            {
+                "id": "sobriety_required",
+                "label": "Sobriety required",
+                "type": "boolean",
+                "path": "access.sobriety_required"
+            },
+            {
+                "id": "low_barrier_access",
+                "label": "Low-barrier Access",
+                "type": "boolean",
+                "path": "access.low_barrier_access"
+            }
+        ],
+        "eligibility": [
+            {
+                "id": "age_min",
+                "label": "Minimum age",
+                "type": "number_min",
+                "path": "eligibility.age_min"
+            },
+            {
+                "id": "single_adults_ok",
+                "label": "Single adults welcome",
+                "type": "boolean",
+                "path": "eligibility.single_adults_ok"
+            },
+            {
+                "id": "veterans_only",
+                "label": "Veterans only",
+                "type": "boolean",
+                "path": "eligibility.veterans_only"
+            },
+            {
+                "id": "referral_required",
+                "label": "Referral required",
+                "type": "boolean",
+                "path": "eligibility.referral_required"
+            }
+        ]
+    }
+}
