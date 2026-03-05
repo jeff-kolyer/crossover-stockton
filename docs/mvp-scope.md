@@ -1,4 +1,4 @@
-\# Crossover Stockton — MVP Scope (v0)
+# Crossover Stockton — MVP Scope (v0)
 
 
 
@@ -6,47 +6,47 @@ The MVP will include only the minimum features required for real-world testing.
 
 
 
-\## Included
+## Included
 
 
 
-\- Four-button intake screen (no visible track labels)
+- Four-button intake screen (no visible track labels)
 
-\- Track-based routing logic
+- Track-based routing logic
 
-\- Resource list filtered by:
+- Resource list filtered by:
 
-&nbsp; - Track eligibility
+- Track eligibility
 
-&nbsp; - Pet friendly
+- Pet friendly
 
-&nbsp; - RV allowed
+- RV allowed
 
-&nbsp; - Employment compatible
+- Employment compatible
 
-\- Basic contact actions:
+- Basic contact actions:
 
-&nbsp; - Call
+- Call
 
-&nbsp; - Map
+- Map
 
-&nbsp; - Text (where available)
-
-
-
-\## Excluded (for v0)
+- Text (where available)
 
 
 
-\- User accounts
+## Excluded (for v0)
 
-\- Logins or authentication
 
-\- Case management features
 
-\- Data analytics dashboards
+- User accounts
 
-\- Complex forms
+- Logins or authentication
+
+- Case management features
+
+- Data analytics dashboards
+
+- Complex forms
 
 
 

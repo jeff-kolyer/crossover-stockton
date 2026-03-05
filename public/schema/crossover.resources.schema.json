@@ -1,0 +1,478 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://crossoverstockton.org/schema/crossover.resources.schema.json",
+    "title": "Crossover Resources Feed",
+    "$comment": "Crossover Stockton schema v1.0.1 (backward-compatible): validates core track + compatibility keys while allowing evolution.",
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+        "schema_version",
+        "data_version",
+        "last_updated",
+        "jurisdiction",
+        "resources"
+    ],
+    "properties": {
+        "$schema": {
+            "type": "string",
+            "const": "https://crossoverstockton.org/schema/crossover.resources.schema.json",
+            "description": "Optional pointer to this schema for tooling."
+        },
+        "schema_version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "data_version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "last_updated": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "jurisdiction": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "city",
+                "state",
+                "country"
+            ],
+            "properties": {
+                "city": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "state": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "country": {
+                    "type": "string",
+                    "minLength": 2,
+                    "maxLength": 2
+                }
+            }
+        },
+        "resources": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/$defs/resource"
+            }
+        }
+    },
+    "$defs": {
+        "resource": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "id",
+                "name",
+                "services",
+                "location",
+                "schedule",
+                "provenance"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                    "description": "Stable slug id, e.g. stk-st-marys-hygiene-001"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "description": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "location",
+                        "mobile",
+                        "hotline",
+                        "service_area"
+                    ],
+                    "default": "location",
+                    "description": "High-level resource type for mapping/UX."
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "active",
+                        "temporarily_closed",
+                        "permanently_closed"
+                    ],
+                    "default": "active",
+                    "description": "Operational status; separate from open/closed schedule."
+                },
+                "services": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$",
+                        "description": "Canonical service id (underscores)"
+                    }
+                },
+                "contact": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "phone": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "website": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "uri"
+                        },
+                        "email": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "format": "email"
+                        }
+                    }
+                },
+                "location": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                        "address",
+                        "geo"
+                    ],
+                    "properties": {
+                        "address": {
+                            "type": "string",
+                            "minLength": 1
+                        },
+                        "notes": {
+                            "type": "string"
+                        },
+                        "geo": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "lat",
+                                "lng"
+                            ],
+                            "properties": {
+                                "lat": {
+                                    "type": "number",
+                                    "minimum": -90,
+                                    "maximum": 90
+                                },
+                                "lng": {
+                                    "type": "number",
+                                    "minimum": -180,
+                                    "maximum": 180
+                                },
+                                "accuracy": {
+                                    "type": "string",
+                                    "enum": [
+                                        "unknown",
+                                        "approx",
+                                        "rooftop",
+                                        "range",
+                                        "service_area"
+                                    ],
+                                    "default": "unknown"
+                                }
+                            }
+                        }
+                    }
+                },
+                "hours_text": {
+                    "type": "string",
+                    "description": "Optional human-readable hours; do not compute from this."
+                },
+                "schedule": {
+                    "description": "Machine-readable schedule. null means unknown.",
+                    "oneOf": [
+                        {
+                            "type": "null"
+                        },
+                        {
+                            "$ref": "#/$defs/schedule"
+                        }
+                    ]
+                },
+                "compatibility": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Facet bucket; keys defined in facetsCatalog.js. Core keys validated here; bucket remains open for evolution.",
+                    "properties": {
+                        "pet_friendly": {
+                            "type": "boolean",
+                            "description": "True if pets are allowed/compatible."
+                        },
+                        "rv_allowed": {
+                            "type": "boolean",
+                            "description": "True if RV/vehicle situations are allowed/compatible."
+                        },
+                        "employment_compatible": {
+                            "type": "boolean",
+                            "description": "True if service pathway supports maintaining employment (hours, requirements, etc.)."
+                        }
+                    }
+                },
+                "access": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Facet bucket; keys defined in facetsCatalog.js. Kept open in schema v1 to allow evolution.",
+                    "properties": {
+                        "low_barrier_access": {
+                            "type": "boolean",
+                            "description": "True if this resource is identified as a low barrier shelter."
+                        }
+                    }
+                },
+                "eligibility": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "Facet bucket; keys defined in facetsCatalog.js. Core track key validated here; bucket remains open for evolution.",
+                    "properties": {
+                        "track_eligibility": {
+                            "type": "array",
+                            "minItems": 1,
+                            "uniqueItems": true,
+                            "items": {
+                                "type": "string",
+                                "enum": [
+                                    "A",
+                                    "B",
+                                    "C",
+                                    "D"
+                                ]
+                            },
+                            "description": "Which enforced tracks this resource is eligible for (A–D)."
+                        }
+                    }
+                },
+                "notes": {
+                    "type": "string"
+                },
+                "provenance": {
+                    "$ref": "#/$defs/provenance"
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "eligibility": {
+                                "properties": {
+                                    "track_eligibility": {
+                                        "contains": {
+                                            "const": "A"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "then": {
+                        "properties": {
+                            "compatibility": {
+                                "properties": {
+                                    "rv_allowed": {
+                                        "const": true
+                                    },
+                                    "employment_compatible": {
+                                        "const": true
+                                    }
+                                },
+                                "required": [
+                                    "rv_allowed",
+                                    "employment_compatible"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "compatibility"
+                        ]
+                    }
+                }
+            ]
+        },
+        "schedule": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "timezone",
+                "regular"
+            ],
+            "properties": {
+                "timezone": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "IANA tz name, e.g. America/Los_Angeles"
+                },
+                "regular": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/$defs/schedule_block"
+                    }
+                },
+                "exceptions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/schedule_exception"
+                    }
+                },
+                "notes": {
+                    "type": "string"
+                }
+            }
+        },
+        "schedule_block": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "days",
+                "open",
+                "close"
+            ],
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "days": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string",
+                        "enum": [
+                            "mon",
+                            "tue",
+                            "wed",
+                            "thu",
+                            "fri",
+                            "sat",
+                            "sun"
+                        ]
+                    }
+                },
+                "open": {
+                    "type": "string",
+                    "pattern": "^(?:([01][0-9]|2[0-3]):[0-5][0-9]|24:00)$",
+                    "description": "HH:MM, 24-hour clock. Use 00:00 for midnight."
+                },
+                "close": {
+                    "type": "string",
+                    "pattern": "^(?:([01][0-9]|2[0-3]):[0-5][0-9]|24:00)$",
+                    "description": "HH:MM, 24-hour clock. Use 24:00 for end-of-day."
+                }
+            }
+        },
+        "schedule_exception": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "date"
+            ],
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                },
+                "closed": {
+                    "type": "boolean"
+                },
+                "open": {
+                    "type": "string",
+                    "pattern": "^(?:([01][0-9]|2[0-3]):[0-5][0-9]|24:00)$"
+                },
+                "close": {
+                    "type": "string",
+                    "pattern": "^(?:([01][0-9]|2[0-3]):[0-5][0-9]|24:00)$"
+                },
+                "notes": {
+                    "type": "string"
+                }
+            },
+            "allOf": [
+                {
+                    "if": {
+                        "properties": {
+                            "closed": {
+                                "const": true
+                            }
+                        },
+                        "required": [
+                            "closed"
+                        ]
+                    },
+                    "then": {
+                        "not": {
+                            "anyOf": [
+                                {
+                                    "required": [
+                                        "open"
+                                    ]
+                                },
+                                {
+                                    "required": [
+                                        "close"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        "provenance": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+                "source_urls",
+                "last_verified"
+            ],
+            "properties": {
+                "source_urls": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "last_verified": {
+                    "type": "string",
+                    "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+                },
+                "method": {
+                    "type": "string",
+                    "enum": [
+                        "web",
+                        "phone",
+                        "in_person",
+                        "provider",
+                        "unknown"
+                    ],
+                    "default": "unknown"
+                },
+                "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                },
+                "notes": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

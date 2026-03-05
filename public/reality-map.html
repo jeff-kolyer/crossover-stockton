@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reality Map — Crossover Stockton</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+    <!-- HEADER (match index.html so CSS applies) -->
+    <header class="siteHeader">
+        <div class="headerInner container">
+
+            <div class="headerLeft">
+                <button class="iconBtn" type="button" aria-label="Menu" id="openMenu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+
+            <div class="brand" aria-label="Crossover Stockton">
+                <a href="/" class="brandLink">Crossover Stockton</a>
+            </div>
+
+            <div class="headerRight">
+                <span class="lastUpdated" id="lastUpdated" aria-label="Last updated">Updated just now</span>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="page">
+        <div class="appShell container">
+
+            <!-- TOP / HERO OVERLAY AREA (reuse existing CSS classes) -->
+            <section class="appTop" aria-label="Reality Map summary">
+
+                <div class="topMeta">
+                    <span class="pageKicker">Stockton — Reality Map</span>
+                    <div class="pageSub">A complete picture of what exists — with counts.</div>
+                </div>
+
+                <!-- Optional: use selectionTitle styling for the page title -->
+                <h1 class="selectionTitle">Reality Map</h1>
+
+                <!-- SITUATION MENU ROWS (your JS fills these) -->
+                <section class="situBar" role="region" aria-label="Situation awareness">
+                    <div class="typeMenu" id="typeMenu" role="tablist" aria-label="Service categories"></div>
+                    <div class="serviceMenu" id="serviceMenu" role="region" aria-label="Services"></div>
+                </section>
+
+            </section>
+
+        </div>
+    </main>
+
+    <!-- NAV DRAWER (keep if you want) -->
+    <div id="navDrawer" class="modal" aria-hidden="true">
+        <div class="modal__backdrop" data-close></div>
+        <div class="modal__panel modal__panel--drawer" role="dialog" aria-modal="true">
+            <header class="modal__header">
+                <span class="brandText">Menu</span>
+                <button class="iconBtn" aria-label="Close" data-close type="button">✕</button>
+            </header>
+            <div class="modal__body">
+                <nav class="drawerNav">
+                    <a href="/" class="drawerLink">Home</a>
+                    <a href="/reality-map.html" class="drawerLink">Reality Map</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/app/app.js"></script>
+</body>
+
+</html>

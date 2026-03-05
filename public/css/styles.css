@@ -1,0 +1,1684 @@
+/* =========================================================
+   CROSSOVER STOCKTON — MASTER BASE (REFRESHED ORDER + DEDUPED)
+   - Sticky Header + Sticky Toolbar
+   - Toolbar = swipe rail (no shrink)
+   - ResultsBar NOT sticky (flush with results list)
+   - Results GRID: 1-col mobile, 2-col wide
+   - Map sticky below header + toolbar
+   - Modal single source (mobile full-screen, >=700px left drawer)
+   - Reality Dashboard tiles: ONE spaced-tile system (NO strip)
+   - Reality tiles selection: “creamy blue” edge (NO thick borders)
+========================================================= */
+
+/* ---------------------------------------------------------
+   0) TOKENS / THEME (Solar / Lunar)
+   NOTE: keep ONE :root and ONE dark override.
+--------------------------------------------------------- */
+:root {
+    --max: 100%;
+    --gutter: 15px;
+
+    --headerH: 60px;
+    --toolbarH: 48px;
+
+    --rXS: 6px;
+    --rSm: 8px;
+    --rMd: 12px;
+    --rLg: 16px;
+
+    /* Day (subtle tint, calm) */
+    --bg: #ffffff;
+    /* not pure white */
+    --bgHeader: #f8fafc;
+    --bgToolbar: #f3f7ff;
+    /* slight blue wash */
+
+    --panel: #ffffff;
+    --panel2: #ffffff;
+
+    --tile: #ffffff;
+    --tileR: #ffffff;
+
+    --text: #111827;
+    --muted: #4b5563;
+    --line: #d1d5db;
+    --placeholder: #e5e7eb;
+
+    --bgFooter: #ffffff;
+
+    --accent: #60a5fa;
+    --focus: rgba(17, 24, 39, .35);
+
+    --active: #111827;
+    --active-text: #ffffff;
+
+    /* Reality tiles: shadows + bevel + bars */
+    --rtShadowDay: 0 1px 4px rgba(0, 0, 0, .05), 0 2px 6px rgba(0, 0, 0, .06);
+    --rtShadowNight: 0 1px 4px rgba(0, 0, 0, .45), 0 2px 6px rgba(0, 0, 0, .35);
+
+    --rtBevelTopDay: rgba(255, 255, 255, .85);
+    --rtBevelBotDay: rgba(0, 0, 0, .06);
+    --rtBevelTopNight: rgba(255, 255, 255, .10);
+    --rtBevelBotNight: rgba(0, 0, 0, .55);
+
+    --lineSoft: rgba(17, 24, 39, .10);
+    --lineSofter: rgba(17, 24, 39, .07);
+
+    /* Strength bars */
+    --barOK: #22c55e;
+    --barLOW: #f59e0b;
+    --barNONE: #ef4444;
+
+    --barTrack: rgba(0, 0, 0, .04);
+    --barTrackBorder: rgba(0, 0, 0, .10);
+
+    /* Selection system (base tokens; specific looks below) */
+    --rtSelCream1: rgba(255, 255, 255, .06);
+    --rtSelCream2: rgba(255, 255, 255, .03);
+    --rtSelWash1: rgba(106, 169, 255, .14);
+    --rtSelWash2: rgba(106, 169, 255, .08);
+    --rtSelEdge: rgba(106, 169, 255, .40);
+    --rtSelEdge2: rgba(255, 255, 255, .14);
+    --rtSelGlow: rgba(106, 169, 255, .18);
+}
+
+body[data-theme="dark"] {
+    --bg: #0b1014;
+    --bgHeader: #10161d;
+    --bgToolbar: #10161d;
+
+    --panel: #10161d;
+    --panel2: #10161d;
+
+    --tile: #141b23;
+    --tileR: #141b23;
+
+    --text: #eef2f6;
+    --muted: #aeb6c1;
+    --line: #242e39;
+    --placeholder: #16202b;
+
+    --bgFooter: #0c1116;
+
+    --accent: #6aa9ff;
+    --focus: rgba(238, 242, 246, .25);
+
+    --active: #eef2f6;
+    --active-text: #0c1116;
+
+    --lineSoft: rgba(255, 255, 255, .09);
+    --lineSofter: rgba(255, 255, 255, .06);
+
+    --barOK: #34d399;
+    --barLOW: #fbbf24;
+    --barNONE: #fb7185;
+
+    --barTrack: rgba(255, 255, 255, .04);
+    --barTrackBorder: rgba(255, 255, 255, .10);
+
+    /* milky blue selection (night tokens) */
+    --rtSelCream1: rgba(255, 255, 255, .12);
+    --rtSelCream2: rgba(255, 255, 255, .06);
+    --rtSelWash1: rgba(106, 169, 255, .30);
+    --rtSelWash2: rgba(106, 169, 255, .14);
+    --rtSelEdge: rgba(140, 190, 255, .62);
+    --rtSelEdge2: rgba(255, 255, 255, .20);
+    --rtSelGlow: rgba(106, 169, 255, .34);
+}
+
+/* ---------------------------------------------------------
+   1) BASE / TYPO
+--------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.35;
+    overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: var(--rSm);
+}
+
+p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+h2,
+h3 {
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+/* ---------------------------------------------------------
+   2) LAYOUT SHELL
+--------------------------------------------------------- */
+.container {
+    width: 100%;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+}
+
+.page {
+    min-height: calc(100vh - var(--headerH));
+    background: transparent;
+    position: relative;
+    z-index: 2;
+}
+
+/* Ensure grid children can shrink */
+.mainLayout>* {
+    min-width: 0;
+}
+
+.mainLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    align-items: start;
+}
+
+.filtersPane,
+.resultsPane,
+.mapPane {
+    min-width: 0;
+}
+
+/* Filters are MODAL-ONLY */
+.filtersPane {
+    display: none !important;
+}
+
+@media (min-width:768px) {
+    .mainLayout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .mapPane {
+        margin-right: calc(var(--gutter) * -1);
+    }
+
+    /* flush right edge */
+}
+
+@media (max-width:699px) {
+    .mainLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .mapPane {
+        margin-right: 0;
+    }
+}
+
+/* ---------------------------------------------------------
+   3) HEADER (sticky)
+--------------------------------------------------------- */
+.siteHeader {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--headerH);
+    background: var(--bgHeader);
+    border-bottom: 1px solid var(--line);
+}
+
+.headerInner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 8px;
+}
+
+.headerLeft,
+.headerRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.headerRight {
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.headerCenter {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.headerCenter .brandLink,
+.headerCenter button {
+    pointer-events: auto;
+}
+
+.brandLink {
+    font-size: 16px;
+    font-weight: 520;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60vw;
+}
+
+@media (min-width:900px) {
+    .brandLink {
+        display: inline-flex;
+        font-size: 18px;
+        max-width: 520px;
+    }
+}
+
+.lastUpdated {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* ---------------------------------------------------------
+   4) TOOLBAR (sticky swipe rail)
+--------------------------------------------------------- */
+.toolbar {
+    position: sticky;
+    top: var(--headerH);
+    z-index: 45;
+    background: var(--bgToolbar);
+    border-bottom: 1px solid var(--line);
+    padding: 2px 0;
+    isolation: isolate;
+}
+
+/* swipe rail */
+.toolbarInner {
+    height: var(--toolbarH);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    white-space: nowrap;
+
+    padding: 8px calc(var(--gutter) + 6px);
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.toolbarInner::-webkit-scrollbar {
+    display: none;
+}
+
+/* groups + buttons must not shrink */
+.toolbarLeft,
+.toolbarRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+    min-width: max-content;
+}
+
+.toolbarRight {
+    margin-left: 0;
+}
+
+.toolbar .uiBtn,
+.toolbar .uiIconBtn {
+    flex: 0 0 auto;
+}
+
+/* subtle edge fades (skin) */
+.toolbar::before,
+.toolbar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 18px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.toolbar::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bgToolbar), rgba(255, 255, 255, 0));
+}
+
+.toolbar::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bgToolbar), rgba(255, 255, 255, 0));
+}
+
+body[data-theme="dark"] .toolbar::before {
+    background: linear-gradient(to right, var(--bgToolbar), rgba(0, 0, 0, 0));
+}
+
+body[data-theme="dark"] .toolbar::after {
+    background: linear-gradient(to left, var(--bgToolbar), rgba(0, 0, 0, 0));
+}
+
+/* ---------------------------------------------------------
+   5) REALITY DASH (Reality Tiles) — ONE SYSTEM
+   - Default: spaced tiles
+   - Optional: strip segments via .realityDashboardTiles--strip
+--------------------------------------------------------- */
+.realityDash {
+    position: relative;
+    z-index: 1;
+    background-color: var(--panel);
+    padding-top: clamp(10px, 2vw, 20px);
+    padding-bottom: clamp(2px, 1vw, 10px);
+    container-type: inline-size;
+    overflow: visible;
+    isolation: isolate;
+    /* keeps ::before behind content */
+}
+
+/* soft band behind the whole dashboard (safe: no layout impact) */
+.realityDash::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-bottom: 1px solid var(--lineSoft);
+    background:
+        radial-gradient(120% 90% at 50% 14%,
+            rgba(96, 165, 250, .16),
+            rgba(96, 165, 250, 0) 72%),
+        linear-gradient(180deg,
+            rgba(248, 250, 252, .92),
+            rgba(248, 250, 252, 0));
+}
+
+body[data-theme="dark"] .realityDash::before {
+    border-bottom-color: var(--lineSoft);
+    background:
+        radial-gradient(120% 90% at 50% 0%,
+            rgba(106, 169, 255, .18),
+            rgba(106, 169, 255, 0) 60%),
+        linear-gradient(180deg,
+            rgba(0, 0, 0, .22),
+            rgba(0, 0, 0, 0));
+}
+
+.realityDashTitle {
+    font-size: 20px;
+    font-weight: 450;
+    letter-spacing: -.02em;
+    padding-left: 4px;
+    margin-bottom: 6px;
+    /* tighten title + separate from tiles */
+}
+
+.realityDashSubTitle {
+    display: none;
+}
+
+@container (min-width:900px) {
+    .realityDashTitle {
+        font-size: 22px;
+    }
+}
+
+/* -----------------------------
+   Reality Dash tokens (single source)
+------------------------------ */
+.realityDash .realityDashboardTiles {
+    --rtile: 112px;
+    --rtileH: var(--rtile);
+    --rgap: 10px;
+    --rpadY: 4px;
+
+    --ricon: 38px;
+    --rlabel: 14px;
+    --rcount: 12px;
+    --rstrength: 8px;
+
+    --rtilePad: 10px;
+    --rtileRad: 12px;
+
+    --rShadow: 14px;
+    --rEdge: 18px;
+
+    --stripRad: 10px;
+}
+
+@container (max-width:768px) {
+    .realityDash .realityDashboardTiles {
+        --rtile: 88px;
+        --rtileH: calc(var(--rtile) * 1.15);
+        --rgap: 2px;
+
+        --ricon: 28px;
+        --rlabel: 12px;
+        --rcount: 11px;
+        --rstrength: 6px;
+
+        --rtilePad: 8px;
+        --rtileRad: 12px;
+
+        --rShadow: 12px;
+        --rEdge: 14px;
+    }
+}
+
+@container (min-width:769px) and (max-width:1280px) {
+    .realityDash .realityDashboardTiles {
+        --rtile: 100px;
+        --rtileH: calc(var(--rtile) * 1.15);
+        --rgap: 3px;
+
+        --ricon: 32px;
+        --rlabel: 13px;
+        --rcount: 12px;
+        --rstrength: 7px;
+
+        --rtilePad: 10px;
+        --rtileRad: 15px;
+
+        --rShadow: 12px;
+        --rEdge: 14px;
+    }
+}
+
+@container (min-width:1281px) and (max-width:1720px) {
+    .realityDash .realityDashboardTiles {
+        --rtile: 115px;
+        --rtileH: calc(var(--rtile) * 1.15);
+        --rgap: 3px;
+
+        --ricon: 34px;
+        --rlabel: 13px;
+        --rcount: 12px;
+        --rstrength: 10px;
+
+        --rtilePad: 14px;
+        --rtileRad: 12px;
+
+        --rShadow: 12px;
+        --rEdge: 14px;
+    }
+}
+
+@container (min-width:1721px) {
+    .realityDash .realityDashboardTiles {
+        --rtile: 130px;
+        --rtileH: calc(var(--rtile) * 1.10);
+        --rgap: 4px;
+
+        --ricon: 36px;
+        --rlabel: 15px;
+        --rcount: 13px;
+        --rstrength: 10px;
+
+        --rtilePad: 16px;
+        --rtileRad: 12px;
+
+        --rShadow: 12px;
+        --rEdge: 14px;
+    }
+}
+
+/* Rail */
+.realityDashboardTiles {
+    overflow: visible;
+}
+
+.realityDashboardTiles #realityDashboard {
+    height: auto;
+    overflow: visible;
+}
+
+.realityDashboardTiles .rail {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-behavior: auto;
+    touch-action: pan-x;
+
+    display: block;
+    padding-top: calc(var(--rpadY) + var(--rShadow));
+    padding-bottom: calc(var(--rpadY) + var(--rShadow));
+    padding-left: 0;
+    /* align rail left edge with title */
+
+    height: calc(var(--rtileH) + (var(--rpadY)*2) + (var(--rShadow)*2));
+
+    cursor: grab;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    scroll-padding-left: var(--rEdge);
+    scroll-padding-right: var(--rEdge);
+}
+
+.realityDashboardTiles .rail:active {
+    cursor: grabbing;
+}
+
+.realityDashboardTiles .rail::-webkit-scrollbar {
+    display: none;
+}
+
+/* Tile row */
+.realityDashboardTiles .realityTiles {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: var(--rgap);
+    height: var(--rtileH);
+    align-items: center;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+
+    scroll-snap-type: x proximity;
+}
+
+/* Tile base (spaced tiles) */
+.realityDashboardTiles .realityTile {
+    flex: 0 0 auto;
+    width: var(--rtile);
+    height: var(--rtileH);
+
+    padding: var(--rtilePad);
+    border-radius: var(--rtileRad);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    border: 1px solid var(--lineSoft);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .92), rgba(255, 255, 255, .78));
+    box-shadow: var(--rtShadowDay);
+    color: var(--text);
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    scroll-snap-align: start;
+    transition: box-shadow .14s ease, border-color .14s ease, background .14s ease;
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTile {
+    border-color: var(--lineSoft);
+    background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(255, 255, 255, .02));
+    box-shadow: var(--rtShadowNight);
+}
+
+/* bevel overlay (spaced tiles only) */
+.realityDashboardTiles .realityTile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 1px 0 var(--rtBevelTopDay) inset, 0 -1px 0 var(--rtBevelBotDay) inset;
+    opacity: .9;
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTile::before {
+    box-shadow: 0 1px 0 var(--rtBevelTopNight) inset, 0 -1px 0 var(--rtBevelBotNight) inset;
+    opacity: .75;
+}
+
+/* kill any global hover transforms */
+#realityDashboard .realityTile:hover,
+#realityDashboard button:hover {
+    transform: none !important;
+    filter: none !important;
+}
+
+.realityDashboardTiles .realityTile:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .10) inset, 0 2px 6px rgba(0, 0, 0, .08);
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTile:active {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .65) inset, 0 2px 6px rgba(0, 0, 0, .40);
+}
+
+/* selected (base “creamy blue” ring feel) */
+.realityDashboardTiles .realityTile[aria-pressed="true"] {
+    background:
+        linear-gradient(180deg, var(--rtSelWash1), var(--rtSelWash2)),
+        linear-gradient(180deg, var(--rtSelCream1), var(--rtSelCream2));
+    box-shadow:
+        inset 0 0 0 1px var(--rtSelEdge),
+        inset 0 1px 0 var(--rtSelEdge2),
+        0 8px 18px -14px var(--rtSelGlow),
+        var(--rtShadowDay);
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTile[aria-pressed="true"] {
+    box-shadow:
+        inset 0 0 0 1px var(--rtSelEdge),
+        inset 0 1px 0 var(--rtSelEdge2),
+        0 10px 22px -16px var(--rtSelGlow),
+        var(--rtShadowNight);
+}
+
+/* Tile content */
+.realityDashboardTiles .realityTileIcon {
+    width: var(--ricon);
+    height: var(--ricon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.realityDashboardTiles .realityTileIcon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.realityDashboardTiles .realityTileLabel {
+    margin-top: 6px;
+    font-size: var(--rlabel);
+    font-weight: 600;
+    text-align: center;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .28);
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTileLabel {
+    text-shadow: none;
+}
+
+.realityDashboardTiles .realityTileBottom {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.realityDashboardTiles .realityTileCount {
+    font-size: var(--rcount);
+    color: var(--muted);
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* strength bar */
+.realityDashboardTiles .realityStrength {
+    width: 100%;
+    height: var(--rstrength);
+    border: 1px solid var(--barTrackBorder);
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--barTrack);
+}
+
+.realityDashboardTiles .realityStrength>span {
+    display: block;
+    height: 100%;
+    width: var(--pct, 0%);
+    border-radius: 999px;
+    background: var(--barOK);
+    opacity: .95;
+}
+
+.realityDashboardTiles .realityTile[data-state="low"] .realityStrength>span {
+    background: var(--barLOW);
+    opacity: .90;
+}
+
+.realityDashboardTiles .realityTile[data-state="none"] .realityStrength>span {
+    background: var(--barNONE);
+    opacity: .85;
+}
+
+/* availability (non-color) */
+.realityDashboardTiles .realityTile[data-state="low"] {
+    opacity: .92;
+}
+
+.realityDashboardTiles .realityTile[data-state="low"] .realityTileIcon {
+    opacity: .85;
+}
+
+.realityDashboardTiles .realityTile[data-state="none"] {
+    opacity: .55;
+}
+
+.realityDashboardTiles .realityTile[data-state="none"] .realityTileIcon {
+    opacity: .35;
+}
+
+.realityDashboardTiles .realityTile[data-state="none"] .realityTileLabel {
+    opacity: .65;
+}
+
+.realityDashboardTiles .realityTile[data-state="none"] .realityStrength {
+    opacity: .40;
+}
+
+.realityDashboardTiles .realityTile[data-state="none"] .realityStrength>span {
+    width: 0% !important;
+}
+
+/* ---- STRIP / SEGMENTS MODE ---- */
+.realityDashboardTiles--strip .realityTiles {
+    gap: 0 !important;
+}
+
+.realityDashboardTiles--strip .realityTile {
+    border-radius: 0 !important;
+    border: 0;
+    border-top: 1px solid var(--lineSoft);
+    border-bottom: 1px solid var(--lineSoft);
+    border-right: 1px solid var(--lineSoft);
+}
+
+.realityDashboardTiles--strip .realityTile:first-child {
+    border-left: 1px solid var(--lineSoft);
+    border-top-left-radius: var(--stripRad) !important;
+    border-bottom-left-radius: var(--stripRad) !important;
+}
+
+.realityDashboardTiles--strip .realityTile:last-child {
+    border-top-right-radius: var(--stripRad) !important;
+    border-bottom-right-radius: var(--stripRad) !important;
+}
+
+.realityDashboardTiles--strip .realityTile::before {
+    content: none !important;
+}
+
+.realityDashboardTiles--strip .realityTile[aria-pressed="true"] {
+    transform: none !important;
+}
+
+/* ---------------------------------------------------------
+   6) RESULTS BAR (flush, not sticky)
+--------------------------------------------------------- */
+.resultsBar {
+    position: relative;
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    padding: 10px var(--gutter);
+    background: var(--panel);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .06);
+    border-bottom: 1px solid var(--lineSoft);
+    /* give it a divider */
+}
+
+.servicesShowing {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+    padding-left: 7px;
+}
+
+.servicesShowingLeft {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.servicesShowingRight {
+    margin-left: auto;
+    flex: 0 0 auto;
+}
+
+.resultsSelection,
+.resultsKicker {
+    display: block;
+    max-width: 100%;
+    min-width: 0;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.resultsSelection {
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 450;
+}
+
+.resultsKicker {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 450;
+    margin-top: 2px;
+    opacity: .85;
+}
+
+@media (min-width:900px) {
+    .resultsSelection {
+        font-size: 22px;
+    }
+
+    .resultsKicker {
+        margin-top: 4px;
+        font-size: 15px;
+    }
+}
+
+.resultsPane {
+    overflow: visible;
+    transform: none;
+    filter: none;
+    scroll-margin-top: calc(var(--headerH) + var(--toolbarH));
+}
+
+/* ---------------------------------------------------------
+   7) RESULTS GRID (1-col mobile, 2-col wide)
+--------------------------------------------------------- */
+.resultsGrid {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px var(--gutter);
+
+    background: var(--panel);
+}
+
+@media (min-width:1580px) {
+    .resultsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        padding: 14px var(--gutter);
+    }
+}
+
+.resultsGrid .tile {
+    background: var(--tile);
+    border: 1px solid var(--line);
+    border-radius: var(--rSm);
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+    /* subtle skin */
+}
+
+body[data-theme="dark"] .resultsGrid .tile {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+
+.resultsGrid .tileBody {
+    padding: 14px 14px;
+}
+
+@media (max-width:420px) {
+    .resultsGrid {
+        gap: 10px;
+        padding: 10px var(--gutter);
+    }
+
+    .resultsGrid .tileBody {
+        padding: 12px 12px;
+    }
+}
+
+.tileTitle {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.tileBody p {
+    margin: 0 0 6px;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.tileMeta {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.resultsGrid>.loading,
+.resultsGrid>.empty,
+.resultsGrid>[role="status"] {
+    padding: 14px 7px;
+    margin: 0;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+@media (min-width:900px) {
+
+    .resultsGrid>.loading,
+    .resultsGrid>.empty,
+    .resultsGrid>[role="status"] {
+        font-size: 15px;
+    }
+}
+
+/* ---------------------------------------------------------
+   8) MAP PANE (flush + sticky)
+--------------------------------------------------------- */
+.mapPane {
+    padding: 0;
+    overflow: hidden;
+    background: var(--panel2);
+}
+
+@media (min-width:768px) {
+    .mapPane {
+        position: sticky;
+        top: calc(var(--headerH) + var(--toolbarH));
+        height: calc(100vh - var(--headerH) - var(--toolbarH));
+        border-left: 1px solid var(--line);
+    }
+}
+
+@media (max-width:699px) {
+    .mapPane {
+        display: none;
+    }
+
+    body.show-map .mapPane {
+        display: block;
+        height: calc(100vh - var(--headerH) - 80px);
+        /* Leave room for FAB */
+        margin-left: calc(var(--gutter) * -1);
+        margin-right: calc(var(--gutter) * -1);
+    }
+
+    body.show-map .resultsPane {
+        display: none;
+    }
+}
+
+/* ---------------------------------------------------------
+   8.1) MOBILE MAP TOGGLE (FAB)
+--------------------------------------------------------- */
+.mobileMapToggle {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 9999px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.mobileMapToggle:active {
+    transform: translateX(-50%) scale(0.96);
+}
+
+.mobileMapToggle .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobileMapToggle .icon i {
+    width: 18px;
+    height: 18px;
+}
+
+body[data-theme="dark"] .mobileMapToggle {
+    background: var(--panel2);
+    color: var(--text);
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 800px) and (max-height: 450px) {
+    .mobileMapToggle {
+        left: auto;
+        right: var(--gutter);
+        transform: none;
+        bottom: 12px;
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .mobileMapToggle:active {
+        transform: scale(0.96);
+    }
+}
+
+@media (min-width: 700px) {
+    .mobileMapToggle {
+        display: none;
+    }
+}
+
+#map,
+.mapPlaceholder {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    min-height: 360px;
+}
+
+.mapPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-weight: 700;
+    border-radius: 0;
+    border: 1px solid var(--line);
+    border-left: 0;
+
+    background:
+        linear-gradient(to bottom, rgba(0, 0, 0, .03), rgba(0, 0, 0, 0)),
+        repeating-linear-gradient(90deg,
+            rgba(0, 0, 0, .04) 0px,
+            rgba(0, 0, 0, .04) 1px,
+            transparent 1px,
+            transparent 24px);
+}
+
+body[data-theme="dark"] .mapPlaceholder {
+    background:
+        linear-gradient(to bottom, rgba(255, 255, 255, .02), rgba(255, 255, 255, 0)),
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, .035) 0px,
+            rgba(255, 255, 255, .035) 1px,
+            transparent 1px,
+            transparent 28px);
+}
+
+/* ---------------------------------------------------------
+   9) MODAL (mobile full-screen, >=700px left drawer)
+--------------------------------------------------------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 2000;
+}
+
+.modal[aria-hidden="false"] {
+    display: block;
+}
+
+.modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 24, 39, .55);
+}
+
+.modal__panel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 0;
+    border-radius: 0;
+}
+
+.modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+}
+
+.modal__headerLeft {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.modal__title {
+    font-size: 14px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.modal__header .uiIconBtn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.modal__body {
+    padding: 12px var(--gutter) 18px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.modal__footer {
+    padding: 12px var(--gutter);
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal__back[hidden] {
+    display: none;
+}
+
+@media (min-width:700px) {
+    .modal__panel {
+        inset: 0 auto 0 0;
+        width: min(520px, 42vw);
+        border-right: 1px solid var(--line);
+    }
+
+    .modal__backdrop {
+        cursor: pointer;
+    }
+}
+
+/* ---------------------------------------------------------
+   10) BUTTONS / ICON BUTTONS
+--------------------------------------------------------- */
+.uiBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    padding: 6px 8px;
+
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text);
+    border-radius: 999px;
+}
+
+@media (min-width:900px) {
+    .uiBtn {
+        font-size: 15px;
+        gap: 8px;
+        padding: 8px 12px;
+    }
+}
+
+.uiBtn--square {
+    border-radius: 6px;
+}
+
+.uiBtn--toggle[aria-pressed="true"],
+.uiBtn.is-active {
+    border-width: 2px;
+}
+
+#openNowToggle[aria-pressed="true"] {
+    border-color: var(--barOK);
+    background: var(--rtBevelTop);
+    color: var(--barOK);
+}
+
+body[data-theme="dark"] #openNowToggle[aria-pressed="true"] {
+    background: rgba(46, 204, 113, 0.1);
+}
+
+.uiBtn svg,
+.uiBtn i,
+.uiBtn i svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    opacity: .92;
+}
+
+.uiBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.uiIconBtn {
+    border: none;
+    background: transparent;
+    color: var(--text);
+    border-radius: var(--rSm);
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu svg,
+.back svg,
+.close svg,
+.water svg,
+.icon-sun svg,
+.icon-moon svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Theme icons */
+.icon-sun,
+.icon-moon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+body[data-theme="light"] .icon-sun {
+    display: inline-flex;
+    color: rgba(255, 196, 0, .87);
+}
+
+body[data-theme="light"] .icon-moon {
+    display: none;
+}
+
+body[data-theme="dark"] .icon-sun {
+    display: none;
+}
+
+body[data-theme="dark"] .icon-moon {
+    display: inline-flex;
+}
+
+body:not([data-theme]) .icon-sun {
+    display: inline-flex;
+}
+
+body:not([data-theme]) .icon-moon {
+    display: none;
+}
+
+/* ---------------------------------------------------------
+   11) FILTERS (modal content)
+--------------------------------------------------------- */
+.filterGroup {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.filterGroup__title {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .2px;
+}
+
+.filterOptions {
+    display: grid;
+    gap: 6px 14px;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width:700px) {
+    .filterOptions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.filterItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: 10px;
+    user-select: none;
+    min-width: 0;
+}
+
+body[data-theme="light"] .filterItem:hover {
+    background: #f3f4f6;
+}
+
+body[data-theme="dark"] .filterItem:hover {
+    background: #0b1a33;
+}
+
+.filterItem input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+}
+
+.filterItem__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   12) FOOTER
+--------------------------------------------------------- */
+.homeFooter {
+    border-top: 1px solid var(--line);
+    padding: 18px 0 28px;
+    background: var(--bgFooter);
+}
+
+.footerGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+@media (min-width:900px) {
+    .footerGrid {
+        grid-template-columns: repeat(3, max-content);
+        justify-content: center;
+        gap: 10%;
+    }
+}
+
+.footerTitle {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.footerLink {
+    display: block;
+    margin: 4px 0;
+    color: var(--muted);
+}
+
+.footerMeta {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------
+   13) UTILITIES
+--------------------------------------------------------- */
+.wfPanel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--rMd);
+}
+
+/* ---------------------------------------------------------
+   14) FINISH PASSES (kept, but deduped + scoped)
+--------------------------------------------------------- */
+
+/* NIGHT: ResultsBar + ResultsGrid calm + grounded (no “floating strip”) */
+body[data-theme="dark"] .resultsBar {
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    box-shadow: none;
+}
+
+body[data-theme="dark"] .resultsGrid {
+    background: var(--panel);
+    border-top: 1px solid var(--lineSofter);
+}
+
+body[data-theme="dark"] .resultsGrid .tile {
+    box-shadow: none;
+    border-color: var(--line);
+}
+
+body[data-theme="dark"] .resultsGrid .tile:hover {
+    border-color: rgba(255, 255, 255, .16);
+}
+
+body[data-theme="dark"] .mapPane {
+    border-left-color: var(--line);
+}
+
+/* Optional: map placeholder quieter (night) */
+body[data-theme="dark"] .mapPlaceholder {
+    background:
+        linear-gradient(to bottom, rgba(255, 255, 255, .02), rgba(255, 255, 255, 0)),
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, .035) 0px,
+            rgba(255, 255, 255, .035) 1px,
+            transparent 1px,
+            transparent 28px);
+}
+
+/* ---------------------------------------------------------
+   NIGHT MODE MAP
+--------------------------------------------------------- */
+body[data-theme="dark"] .leaflet-layer,
+body[data-theme="dark"] .leaflet-control-zoom-in,
+body[data-theme="dark"] .leaflet-control-zoom-out,
+body[data-theme="dark"] .leaflet-control-attribution {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+
+/* ---------------------------------------------------------
+   15) SELECTION LOOKS (premium day + mellow night)
+   (These override the base selected rule above without changing behavior.)
+--------------------------------------------------------- */
+
+/* DAY SELECT — milky blue (premium) */
+body[data-theme="light"] .realityDashboardTiles .realityTile[aria-pressed="true"],
+body:not([data-theme]) .realityDashboardTiles .realityTile[aria-pressed="true"] {
+    background:
+        radial-gradient(130% 95% at 50% 0%,
+            rgba(255, 255, 255, .92),
+            rgba(255, 255, 255, 0) 58%),
+        linear-gradient(180deg,
+            rgba(96, 165, 250, .22) 0%,
+            rgba(96, 165, 250, .12) 55%,
+            rgba(96, 165, 250, .08) 100%),
+        linear-gradient(180deg,
+            rgba(255, 255, 255, .92),
+            rgba(255, 255, 255, .72));
+
+    border-color: rgba(96, 165, 250, .45);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(96, 165, 250, .55),
+        inset 0 1px 0 rgba(255, 255, 255, .75),
+        0 10px 22px -16px rgba(96, 165, 250, .45),
+        0 0 0 1px rgba(96, 165, 250, .18),
+        var(--rtShadowDay);
+}
+
+body[data-theme="light"] .realityDashboardTiles .realityTile[aria-pressed="true"] .realityTileIcon,
+body:not([data-theme]) .realityDashboardTiles .realityTile[aria-pressed="true"] .realityTileIcon {
+    filter: drop-shadow(0 6px 10px rgba(96, 165, 250, .20));
+}
+
+body[data-theme="light"] .realityDashboardTiles .realityTile[aria-pressed="true"] .realityTileLabel,
+body:not([data-theme]) .realityDashboardTiles .realityTile[aria-pressed="true"] .realityTileLabel {
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .65);
+}
+
+/* NIGHT SELECT — mellow blue, friendly glow (NO spotlight) */
+body[data-theme="dark"] .realityDashboardTiles .realityTile[aria-pressed="true"] {
+    background:
+        linear-gradient(180deg,
+            rgba(106, 169, 255, .16),
+            rgba(106, 169, 255, .06));
+
+    border-color: rgba(160, 205, 255, .30);
+
+    box-shadow:
+        inset 0 0 0 1px rgba(160, 205, 255, .52),
+        inset 0 1px 0 rgba(255, 255, 255, .10),
+        0 0 12px rgba(106, 169, 255, .22),
+        0 10px 26px -18px rgba(106, 169, 255, .28),
+        var(--rtShadowNight);
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTile[aria-pressed="true"] .realityTileIcon {
+    filter: drop-shadow(0 0 7px rgba(106, 169, 255, .28));
+}
+
+body[data-theme="dark"] .realityDashboardTiles .realityTile[aria-pressed="true"] .realityTileLabel {
+    text-shadow: 0 0 5px rgba(106, 169, 255, .20);
+}
+
+
+
+
+
+
+body[data-theme="light"] .realityDash {
+    border-bottom: 1px solid rgba(15, 23, 42, .08);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --------------------------------------------
+   TOOLBAR TOGGLES: no layout shift, clearer active
+-------------------------------------------- */
+
+/* Base: keep border width constant */
+.uiBtn {
+    border-width: 1px;
+    transition: background .14s ease, border-color .14s ease, box-shadow .14s ease, transform .06s ease;
+}
+
+/* REMOVE this effect (it causes the “touching” look) */
+/* .uiBtn--toggle[aria-pressed="true"], .uiBtn.is-active { border-width: 2px; } */
+
+/* Optional: slightly more breathing room in the rail */
+.toolbarInner {
+    gap: 12px;
+}
+
+/* was 10px */
+
+/* Active: ring + fill (no size change) */
+.uiBtn--toggle[aria-pressed="true"],
+.uiBtn.is-active {
+    position: relative;
+    z-index: 2;
+
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+
+    box-shadow:
+        0 0 0 2px color-mix(in srgb, var(--accent) 28%, transparent),
+        /* outer ring */
+        0 1px 0 rgba(255, 255, 255, .45) inset;
+    /* tiny “cap” */
+}
+
+/* Night: slightly stronger ring, calmer fill */
+body[data-theme="dark"] .uiBtn--toggle[aria-pressed="true"],
+body[data-theme="dark"] .uiBtn.is-active {
+    border-color: rgba(160, 205, 255, .35);
+    background: rgba(106, 169, 255, .10);
+    box-shadow:
+        0 0 0 2px rgba(106, 169, 255, .26),
+        0 1px 0 rgba(255, 255, 255, .08) inset;
+}
+
+/* Press feedback */
+.uiBtn--toggle:active {
+    transform: translateY(1px);
+}

@@ -1,0 +1,411 @@
+{
+  "$schema": "https://crossoverstockton.org/schema/crossover.resources.schema.json",
+  "schema_version": "1.0.0",
+  "data_version": "0.4.0",
+  "last_updated": "2026-03-02",
+  "jurisdiction": {
+    "city": "Stockton",
+    "state": "CA",
+    "country": "US"
+  },
+  "resources": [
+    {
+      "id": "stk-emergency-food-bank-001",
+      "name": "Emergency Food Bank (Main Pantry)",
+      "description": "Food pantry distribution.",
+      "contact": {
+        "phone": "(209) 464-7369",
+        "website": "https://www.stocktonfoodbank.org"
+      },
+      "location": {
+        "address": "7 W Scotts Ave, Stockton, CA 95203",
+        "geo": {
+          "lat": 37.960195,
+          "lng": -121.27162
+        }
+      },
+      "hours_text": "Mon–Fri 9:00am–12:00pm",
+      "schedule": {
+        "timezone": "America/Los_Angeles",
+        "regular": [
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri"
+            ],
+            "open": "09:00",
+            "close": "12:00"
+          }
+        ],
+        "notes": "Pantry hours listed publicly; confirm holiday exceptions."
+      },
+      "compatibility": {
+        "pet_friendly": true,
+        "rv_allowed": false,
+        "employment_compatible": true
+      },
+      "access": {
+        "walk_in": true,
+        "appointment_required": false,
+        "phone_required": false,
+        "documentation_required": "unknown",
+        "sobriety_required": false,
+        "low_barrier_access": true,
+        "cost": "free"
+      },
+      "eligibility": {
+        "track_eligibility": [
+          "B"
+        ]
+      },
+      "services": [
+        "food_pantry"
+      ],
+      "provenance": {
+        "source_urls": [
+          "https://example.com"
+        ],
+        "last_verified": "2026-03-02",
+        "method": "web",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "stk-st-marys-002",
+      "name": "St. Mary's Dining Room",
+      "description": "Meals, showers, clothing, and support services.",
+      "contact": {
+        "phone": "(209) 467-0703",
+        "website": "https://stmarysdiningroom.org"
+      },
+      "location": {
+        "address": "545 W Sonora St, Stockton, CA 95203",
+        "geo": {
+          "lat": 37.9475399,
+          "lng": -121.2907312
+        }
+      },
+      "hours_text": "Meals: Mon-Sun 8:30am-9:15am, 12:00pm-1:00pm, 4:30pm-5:30pm; Showers: Sun-Fri 7:30am-12:00pm",
+      "schedule": {
+        "timezone": "America/Los_Angeles",
+        "regular": [
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri"
+            ],
+            "open": "08:00",
+            "close": "16:00",
+            "label": "Administrative office"
+          },
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "07:30",
+            "close": "18:00",
+            "label": "Kitchen & dining room"
+          }
+        ],
+        "notes": "Multiple programs at this address; times vary by service."
+      },
+      "compatibility": {},
+      "access": {
+        "walk_in": true,
+        "appointment_required": false,
+        "phone_required": false,
+        "documentation_required": "unknown",
+        "sobriety_required": false,
+        "cost": "free",
+        "low_barrier_access": true
+      },
+      "eligibility": {
+        "track_eligibility": [
+          "B",
+          "C"
+        ]
+      },
+      "services": [
+        "prepared_meals"
+      ],
+      "provenance": {
+        "source_urls": [
+          "https://example.com"
+        ],
+        "last_verified": "2026-03-01",
+        "method": "web",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "stk-gcrm-003",
+      "name": "Gospel Center Rescue Mission",
+      "description": "Low-barrier shelter and services.",
+      "contact": {
+        "phone": "(209) 466-2138",
+        "website": "https://gcrmi.org"
+      },
+      "location": {
+        "address": "445 S San Joaquin St, Stockton, CA 95203",
+        "geo": {
+          "lat": 37.948438,
+          "lng": -121.286106
+        }
+      },
+      "hours_text": "Open 24 hours",
+      "schedule": {
+        "timezone": "America/Los_Angeles",
+        "regular": [
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "00:00",
+            "close": "24:00"
+          }
+        ],
+        "notes": "Intake windows vary; facility available 24/7."
+      },
+      "compatibility": {
+        "rv_allowed": true,
+        "employment_compatible": true
+      },
+      "access": {
+        "walk_in": true,
+        "appointment_required": false,
+        "phone_required": false,
+        "documentation_required": "unknown",
+        "sobriety_required": false,
+        "cost": "free",
+        "low_barrier_access": true
+      },
+      "eligibility": {
+        "track_eligibility": [
+          "A",
+          "C"
+        ]
+      },
+      "services": [
+        "emergency_shelter"
+      ],
+      "provenance": {
+        "source_urls": [
+          "https://example.com"
+        ],
+        "last_verified": "2026-02-28",
+        "method": "web",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "stk-stockton-shelter-004",
+      "name": "Stockton Shelter for the Homeless",
+      "description": "Emergency shelter services.",
+      "contact": {
+        "phone": "(209) 465-3612",
+        "website": "https://stocktonshelter.org"
+      },
+      "location": {
+        "address": "411 S Harrison St, Stockton, CA 95203",
+        "geo": {
+          "lat": 37.9470951,
+          "lng": -121.2980561
+        }
+      },
+      "hours_text": "24/7",
+      "schedule": {
+        "timezone": "America/Los_Angeles",
+        "regular": [
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "00:00",
+            "close": "24:00"
+          }
+        ],
+        "notes": "Primary emergency facility."
+      },
+      "compatibility": {
+        "pet_friendly": true,
+        "rv_allowed": true,
+        "employment_compatible": true
+      },
+      "access": {
+        "walk_in": true,
+        "appointment_required": false,
+        "phone_required": false,
+        "documentation_required": "unknown",
+        "sobriety_required": false,
+        "cost": "free"
+      },
+      "eligibility": {
+        "track_eligibility": [
+          "A",
+          "B"
+        ]
+      },
+      "services": [
+        "emergency_shelter"
+      ],
+      "provenance": {
+        "source_urls": [
+          "https://example.com"
+        ],
+        "last_verified": "2026-03-02",
+        "method": "web",
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "stk-prevail-safe-house-005",
+      "name": "PREVAIL Safe House",
+      "description": "21-day emergency shelter for youth ages 12-17.",
+      "contact": {
+        "phone": "(209) 941-2611",
+        "website": "https://weshallprevail.org"
+      },
+      "location": {
+        "address": "436 E Flora St, Stockton, CA 95202",
+        "geo": {
+          "lat": 37.9575,
+          "lng": -121.2858
+        }
+      },
+      "hours_text": "24/7",
+      "schedule": {
+        "timezone": "America/Los_Angeles",
+        "regular": [
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "00:00",
+            "close": "24:00"
+          }
+        ],
+        "notes": "Emergency intake available 24/7."
+      },
+      "compatibility": {},
+      "access": {
+        "walk_in": true,
+        "appointment_required": false,
+        "phone_required": true,
+        "documentation_required": "unknown",
+        "sobriety_required": false,
+        "cost": "free"
+      },
+      "eligibility": {
+        "track_eligibility": [
+          "B"
+        ]
+      },
+      "services": [
+        "emergency_shelter",
+        "crisis_intervention"
+      ],
+      "provenance": {
+        "source_urls": [
+          "https://weshallprevail.org"
+        ],
+        "last_verified": "2026-03-03",
+        "method": "web",
+        "confidence": 0.9
+      }
+    },
+    {
+      "id": "stk-mary-graham-006",
+      "name": "Mary Graham Children's Shelter",
+      "description": "Emergency temporary facility for children from newborn to 18 years of age.",
+      "contact": {
+        "phone": "(209) 468-1000",
+        "website": "https://sjchsa.org"
+      },
+      "location": {
+        "address": "6861 West Mary Graham Lane, French Camp, CA 95231",
+        "geo": {
+          "lat": 37.8824,
+          "lng": -121.2842
+        }
+      },
+      "hours_text": "24/7",
+      "schedule": {
+        "timezone": "America/Los_Angeles",
+        "regular": [
+          {
+            "days": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ],
+            "open": "00:00",
+            "close": "24:00"
+          }
+        ],
+        "notes": "Emergency facility operated by San Joaquin County."
+      },
+      "compatibility": {},
+      "access": {
+        "walk_in": false,
+        "appointment_required": true,
+        "phone_required": true,
+        "documentation_required": "standard",
+        "sobriety_required": false,
+        "cost": "free"
+      },
+      "eligibility": {
+        "track_eligibility": [
+          "B",
+          "C"
+        ]
+      },
+      "services": [
+        "emergency_shelter",
+        "medical_clinic",
+        "mental_health_services"
+      ],
+      "provenance": {
+        "source_urls": [
+          "https://sjchsa.org"
+        ],
+        "last_verified": "2026-03-03",
+        "method": "web",
+        "confidence": 0.9
+      }
+    }
+  ]
+}

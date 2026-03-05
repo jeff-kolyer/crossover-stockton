@@ -1,0 +1,141 @@
+{
+    "groups": [
+        {
+            "id": "basic_needs",
+            "title": "Basic Needs",
+            "blurb": "Immediate essentials: water, restrooms, food, hygiene, connectivity, power."
+        },
+        {
+            "id": "shelter_stability",
+            "title": "Shelter & Stability",
+            "blurb": "Protection and continuity: shelter, safe parking, RV support, storage, day shelter."
+        },
+        {
+            "id": "system_access",
+            "title": "System Access",
+            "blurb": "Access to formal systems: benefits, housing navigation, health care, legal help, crisis support."
+        }
+    ],
+    "services": [
+        {
+            "id": "drinking_water",
+            "label": "Water",
+            "group": "basic_needs"
+        },
+        {
+            "id": "public_restrooms",
+            "label": "Bathrooms",
+            "group": "basic_needs"
+        },
+        {
+            "id": "showers",
+            "label": "Showers",
+            "group": "basic_needs"
+        },
+        {
+            "id": "laundry_services",
+            "label": "Laundry",
+            "group": "basic_needs"
+        },
+        {
+            "id": "hygiene_supplies",
+            "label": "Hygiene",
+            "group": "basic_needs"
+        },
+        {
+            "id": "food_pantry",
+            "label": "Food pantry",
+            "group": "basic_needs"
+        },
+        {
+            "id": "prepared_meals",
+            "label": "Meals",
+            "group": "basic_needs"
+        },
+        {
+            "id": "public_wifi",
+            "label": "Wi-Fi",
+            "group": "basic_needs"
+        },
+        {
+            "id": "device_charging",
+            "label": "Charging",
+            "group": "basic_needs"
+        },
+        {
+            "id": "day_space",
+            "label": "Day space",
+            "group": "basic_needs"
+        },
+        {
+            "id": "emergency_shelter",
+            "label": "Safe rest",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "day_shelter",
+            "label": "Day shelter",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "safe_parking",
+            "label": "Safe parking",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "rv_parking",
+            "label": "RV parking",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "rv_services",
+            "label": "RV services",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "belongings_storage",
+            "label": "Storage",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "street_outreach",
+            "label": "Outreach",
+            "group": "shelter_stability"
+        },
+        {
+            "id": "benefits_assistance",
+            "label": "Benefits",
+            "group": "system_access"
+        },
+        {
+            "id": "housing_navigation",
+            "label": "Housing nav",
+            "group": "system_access"
+        },
+        {
+            "id": "legal_services",
+            "label": "Legal help",
+            "group": "system_access"
+        },
+        {
+            "id": "medical_clinic",
+            "label": "Medical care",
+            "group": "system_access"
+        },
+        {
+            "id": "mental_health_services",
+            "label": "Mental health",
+            "group": "system_access"
+        },
+        {
+            "id": "substance_use_services",
+            "label": "Recovery",
+            "group": "system_access"
+        },
+        {
+            "id": "crisis_intervention",
+            "label": "Crisis support",
+            "group": "system_access"
+        }
+    ]
+}

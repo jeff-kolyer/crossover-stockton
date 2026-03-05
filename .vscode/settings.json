@@ -1,0 +1,10 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "**/resources.json"
+            ],
+            "url": "./public/schema/crossover.resources.schema.json"
+        }
+    ]
+}
