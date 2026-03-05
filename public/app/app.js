@@ -15,9 +15,9 @@ import { convertToGeoJSON, initMap, updateMap, panToMarker } from "./core/map.js
 // NEW: theme toggle
 import { initTheme } from "./core/theme.js";
 
-const DATA_URL = "/api/v1/resources.json";
-const SERVICES_URL = "/api/v1/servicesCatalog.json";
-const FACETS_URL = "/api/v1/facetsCatalog.json";
+const DATA_URL = "./api/v1/resources.json";
+const SERVICES_URL = "./api/v1/servicesCatalog.json";
+const FACETS_URL = "./api/v1/facetsCatalog.json";
 
 const SERVICES_STORAGE_KEY = "selectedServices";
 const ACCESS_STORAGE_KEY = "selectedAccess";
