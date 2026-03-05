@@ -2,6 +2,7 @@
   "name": "crossover-stockton",
   "private": true,
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "start": "npx http-server public -p 3000 -c-1"
   }

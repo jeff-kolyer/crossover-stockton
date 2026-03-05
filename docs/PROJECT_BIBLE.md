@@ -150,6 +150,7 @@ The feed is:
 * Forkable
 * Machine-readable
 * Versioned
+* **CC0 Public Domain:** The raw data feed (`resources.json`) is explicitly dedicated to the public domain. It is completely free of copyright restrictions, allowing frictionless ingestion by AI agents, researchers, and other cities without requiring attribution or complex licensing negotiations.
 
 The feed is the civic asset.
 The UI is just one client.
@@ -185,6 +186,21 @@ Corrections begin with:
 * GitHub issues for technical feedback only
 
 Slack is not required.
+
+---
+
+### 4.4 The Agent Data Pipeline (Updating Truth)
+
+Crossover Stockton allows for massive intelligence and data curation without requiring a typical backend server or database tier. It achieves this by fully isolating the **gathering** of data from the **hosting** of data.
+
+When it comes time to automate data verification, the expected architecture is the **GitOps Model**:
+
+1.  **"Smart" External Agents:** AI Agents or scripts will run on external, dedicated compute (e.g., GitHub Actions schedules, Google Cloud Functions, or AWS Lambda). 
+2.  **The Work:** These agents will crawl local websites, make automated queries, or process human feedback to verify hours and the "strength of service."
+3.  **The Update:** When an agent confirms a change, it simply modifies the `resources.json` and pushes a single new commit to the GitHub repository, exactly as a human developer would.
+4.  **"Dumb" Static Hosting:** The moment that commit hits the `main` branch, the CI/CD pipeline runs `validate.js` to ensure the agent didn't break the JSON format, and then seamlessly deploys the fresh HTML/CSS and the updated JSON feed locally to GitHub Pages.
+
+**The result:** The web hosting remains infinitely scalable, free, and incredibly fast, while the heavy lifting of AI intelligence happens entirely behind the scenes during the build process.
 
 ---
 
