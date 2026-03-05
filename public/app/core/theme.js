@@ -12,8 +12,8 @@ export function initTheme() {
         if (favicon) {
             favicon.href =
                 theme === "dark"
-                    ? "/icons/moon.svg"
-                    : "/icons/sun.svg";
+                    ? "./icons/moon.svg"
+                    : "./icons/sun.svg";
         }
     }
 
