@@ -146,19 +146,19 @@ Map enhances clarity, not complexity.
 
 ---
 
-# Phase 4 — Publishing & Pipeline
+# [x] Phase 4 — Publishing & Pipeline
 
 **Goal:** Establish the production environment and automated deployment.
 
 Steps:
-- Establish GitHub repository and clean push
-- Configure GitHub Pages or static host (Netlify/Vercel/S3) for `/public`
-- Configure DNS settings and custom domain mapping
-- Set up automated CI/pipeline to run `validate.js` before deploying
-- Establish canonical production URL and apply SSL/TLS certificates
+- [x] Establish GitHub repository and clean push
+- [x] Configure GitHub Pages or static host (Netlify/Vercel/S3) for `/public`
+- [x] Configure DNS settings and custom domain mapping
+- [x] Set up automated CI/pipeline to run `validate.js` before deploying
+- [x] Establish canonical production URL and apply SSL/TLS certificates
 
 **Deliverable:**  
-The site is live, stable, and auto-checks its own data integrity.
+The site is live (`crossoverstockton.org`), stable, and auto-checks its own data integrity.
 
 ---
 
@@ -297,7 +297,19 @@ Trust and debugging improve; changes are visible and attributable.
 
 ---
 
-## 11.3 Verification & Provenance Rules
+## 11.3 Agent Auto-Updating (The GitOps Pipeline)
+
+- To maintain the data feed without ballooning the web hosting architecture, establish external AI agents.
+- Agents run on external compute (e.g., GitHub Actions, Google Cloud) on a cron schedule.
+- Agents verify services, modify the raw `resources.json`, and commit the changes directly to GitHub.
+- The repository's CI/CD pipeline serves as the ultimate gatekeeper, validating the data before triggering a static deployment to GitHub Pages.
+
+**Deliverable:**  
+The dataset remains fresh and accurate automatically without requiring complex APIs, custom databases, or expensive hosting.
+
+---
+
+## 11.4 Verification & Provenance Rules
 
 - Enforce `last_verified_at` for every resource
 - Optional: `verification_method` (`call`, `website`, `in_person`, `partner_report`)
