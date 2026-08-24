@@ -1,0 +1,792 @@
+[
+  {
+    "id": "dogs-safe-placement",
+    "slug": "too-many-dogs-still-lack-safe-placement",
+    "title": "Too many dogs still lack safe placement",
+    "status": "critical",
+    "active": true,
+    "rank": 1,
+    "summary": "Dogs continue entering a local animal-welfare system constrained by shelter space, veterinary capacity, foster and rescue placement, and access to spay/neuter services.",
+    "what_we_are_seeing": [
+      "Stray and abandoned dogs continue to be reported across Stockton.",
+      "City records say stray animal intakes regularly exceed shelter capacity.",
+      "The local response includes street outreach, sheltering, veterinary treatment, foster and adoption, rescue transfers, and spay/neuter work."
+    ],
+    "contributing_factors": [
+      "Animal overpopulation and unplanned litters",
+      "Limited spay and neuter capacity",
+      "Shelter and placement capacity pressure",
+      "Limited access to affordable and timely veterinary care",
+      "Abandonment and stray intake",
+      "Insufficient foster, rescue, and permanent placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs",
+      "stockton-animal-services",
+      "hard-luck-awa"
+    ],
+    "action_ids": [
+      "foster-a-dog",
+      "adopt-a-dog",
+      "doggie-day-out",
+      "donate-dog-supplies",
+      "volunteer-with-streetdogs",
+      "transport-a-dog"
+    ],
+    "story_ids": [
+      "streetdogs-fed-70-animals",
+      "cats-transferred-out-of-overcrowding"
+    ],
+    "sources": [
+      {
+        "title": "A Stockton woman was mauled by wild dogs. Here's how to avoid becoming a target",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
+        "published_at": "2026-05-11",
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "'Out of control' pet population gives rise to call for mandatory spay-neuter law",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
+        "published_at": "2026-05-05",
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "Help Us Save the Streetdogs",
+        "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+        "url": "https://streetdogsanctuary.com/",
+        "published_at": null,
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Hard Luck Animal Welfare Advocates",
+        "publisher": "Hard Luck AWA",
+        "url": "https://www.hardluckawa.org/",
+        "published_at": null,
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Stockton Animal Shelter spay and neuter services agreement",
+        "publisher": "City of Stockton",
+        "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+        "published_at": "2026-01-13",
+        "checked_at": "2026-08-21T17:07:00-07:00",
+        "type": "government"
+      },
+      {
+        "title": "Stockton Animal Shelter halts intakes, adoptions after strep zoo case",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/community/2026/05/21/stockton-animal-shelter-halts-intakes-adoptions-after-strep-zoo-case/",
+        "published_at": "2026-05-21",
+        "checked_at": "2026-08-21T17:07:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "Hard Luck Animal Welfare Advocates contract extension",
+        "publisher": "City of Stockton",
+        "url": "https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A",
+        "published_at": "2026-06-09",
+        "checked_at": "2026-08-21T17:07:00-07:00",
+        "type": "government"
+      }
+    ],
+    "artwork": "/images/reality/dog-street-hero.jpg",
+    "first_seen": "2026-08-20",
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "current_state": "Stockton continues to report pet overpopulation and stray-animal intake pressure beyond normal shelter capacity.",
+    "record_ids": [
+      "sas-2026-01-13-spay-neuter-capacity",
+      "sas-2026-03-05-cat-transfer",
+      "sas-2026-05-05-overpopulation-report",
+      "stockton-2026-05-11-stray-dog-report",
+      "sas-2026-05-21-intake-adoption-pause",
+      "ssd-2026-06-08-street-response",
+      "hlawa-2026-06-09-contract-extension",
+      "sas-standing-doggie-day-out",
+      "ssd-standing-foster-adopt",
+      "ssd-standing-volunteer-rescue-partner",
+      "ssd-standing-food-supplies"
+    ],
+    "most_useful_now": {
+      "label": "Create placement capacity by fostering or adopting.",
+      "action_ids": [
+        "foster-a-dog",
+        "adopt-a-dog"
+      ],
+      "confidence": "medium",
+      "basis_record_ids": [
+        "ssd-standing-foster-adopt",
+        "sas-2026-05-05-overpopulation-report",
+        "sas-2026-01-13-spay-neuter-capacity"
+      ]
+    },
+    "responder_roles": [
+      {
+        "organization_id": "stockton-street-dogs",
+        "label": "Street outreach, rescue, fostering, and placement for dogs living outside.",
+        "current_role": "Finding safe placements and supporting dogs in the field.",
+        "basis_record_ids": [
+          "ssd-2026-06-08-street-response",
+          "ssd-standing-foster-adopt",
+          "ssd-standing-volunteer-rescue-partner",
+          "ssd-standing-food-supplies"
+        ],
+        "updated_at": "2026-08-21T17:07:00-07:00"
+      },
+      {
+        "organization_id": "stockton-animal-services",
+        "label": "Shelter intake, care, adoption, veterinary services, and rescue coordination.",
+        "current_role": "Managing intake pressure and moving animals through shelter, foster, rescue, and adoption pathways.",
+        "basis_record_ids": [
+          "sas-2026-01-13-spay-neuter-capacity",
+          "sas-2026-05-05-overpopulation-report",
+          "sas-2026-05-21-intake-adoption-pause",
+          "sas-standing-doggie-day-out",
+          "hlawa-2026-06-09-contract-extension"
+        ],
+        "updated_at": "2026-08-21T17:07:00-07:00"
+      },
+      {
+        "organization_id": "hard-luck-awa",
+        "label": "Veterinary and medical support for vulnerable and shelter animals.",
+        "current_role": "Expanding veterinary capacity and supporting shelter animals needing treatment.",
+        "basis_record_ids": [
+          "hlawa-2026-06-09-contract-extension",
+          "sas-standing-doggie-day-out"
+        ],
+        "updated_at": "2026-08-21T17:07:00-07:00"
+      }
+    ],
+    "latest_change": {
+      "record_id": "hlawa-2026-06-09-contract-extension",
+      "label": "Stockton extended its Hard Luck veterinary-services partnership and added four positions."
+    },
+    "current_state_items": [
+      {
+        "label": "Shelter capacity pressure",
+        "value": "Exceeds capacity",
+        "detail": "Stray intake pressure",
+        "record_ids": [
+          "sas-2026-01-13-spay-neuter-capacity"
+        ]
+      },
+      {
+        "label": "Spay/neuter backlog",
+        "value": "200+ procedures",
+        "detail": "Contracted intervention",
+        "record_ids": [
+          "sas-2026-01-13-spay-neuter-capacity"
+        ]
+      },
+      {
+        "label": "Placement capacity",
+        "value": "Active / constrained",
+        "detail": "Foster and adoption pathway",
+        "record_ids": [
+          "ssd-standing-foster-adopt"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "pet-inclusive-shelter",
+    "slug": "people-with-pets-still-face-barriers-to-safe-shelter",
+    "title": "People with pets still face barriers to safe shelter",
+    "status": "high",
+    "active": true,
+    "rank": 2,
+    "summary": "Pet ownership remains a documented barrier to some shelter and housing options, even as Stockton adds low-barrier capacity designed to keep people with their companion animals.",
+    "what_we_are_seeing": [
+      "San Joaquin County's 2024 survey found 34% of unhoused respondents had a pet, and 45% of pet-owning respondents had two or more pets.",
+      "The 2026 homelessness count added a specific question to measure whether pets are preventing people from entering shelter.",
+      "St. Mary's Pathways now provides low-barrier shelter options designed to accommodate people with pets, partners, family, or belongings.",
+      "Stockton Streetdogs is also pursuing a Safe Grounds model intended to keep unhoused people and companion animals together while they move toward housing."
+    ],
+    "contributing_factors": [
+      "Pet restrictions in some shelter and housing settings",
+      "Limited pet-inclusive shelter and transitional capacity",
+      "Multiple pets can make placement harder",
+      "Need for pet food, veterinary care, crates, and other support infrastructure",
+      "Fear of separation from companion animals"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs",
+      "st-marys-dining-room"
+    ],
+    "action_ids": [
+      "support-pet-inclusive-shelter",
+      "donate-pet-supplies"
+    ],
+    "story_ids": [
+      "streetdogs-fed-70-animals"
+    ],
+    "sources": [
+      {
+        "title": "The number of people living on the streets of San Joaquin County has dropped by almost 50%, officials report",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/homeless/2026/05/15/the-number-of-people-living-on-the-streets-of-san-joaquin-county-has-dropped-by-almost-50-this-year-officials-report/",
+        "published_at": "2026-05-15",
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "HHAP Round 3 - City of Stockton",
+        "publisher": "California Department of Housing and Community Development",
+        "url": "https://www.hcd.ca.gov/sites/default/files/docs/grants-and-funding/calich/hhap_round3/cities/stockton.pdf",
+        "published_at": "2022-01-01",
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "government"
+      },
+      {
+        "title": "Stockton dog rescue to implement safe temporary campground for homeless residents",
+        "publisher": "CBS Sacramento",
+        "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
+        "published_at": "2026-06-08",
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "2024 San Joaquin County Point-In-Time Count Report",
+        "publisher": "San Joaquin Continuum of Care",
+        "url": "https://www.sanjoaquincoc.org/wp-content/uploads/2024/09/2024-San-Joaquin-County-Point-In-Time-Count-Report.pdf",
+        "published_at": "2024-09-01",
+        "checked_at": "2026-08-21T20:48:00-07:00",
+        "type": "government"
+      },
+      {
+        "title": "Pathways Program",
+        "publisher": "St. Mary's Community Services / community resource listing",
+        "url": "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926",
+        "published_at": null,
+        "checked_at": "2026-08-21T20:48:00-07:00",
+        "type": "organization"
+      }
+    ],
+    "artwork": "/images/reality/pet-inclusive-shelter-hero.jpg",
+    "first_seen": "2026-08-20",
+    "updated_at": "2026-08-21T20:48:00-07:00",
+    "current_state": "Pets remain a measurable shelter-access factor in San Joaquin County, while new pet-accommodating capacity such as St. Mary's Pathways is expanding the available response.",
+    "record_ids": [
+      "stockton-2022-hhap-pets-shelter-barrier",
+      "sjc-2024-pit-pet-ownership",
+      "stockton-2026-05-15-pit-pet-question",
+      "ssd-2026-06-08-safe-grounds",
+      "smcs-2026-06-17-pathways-open",
+      "smcs-standing-pathways-pet-inclusive",
+      "ssd-standing-food-supplies"
+    ],
+    "most_useful_now": {
+      "label": "Help people stay with their pets while they move toward housing.",
+      "action_ids": [
+        "support-pet-inclusive-shelter",
+        "donate-pet-supplies"
+      ],
+      "confidence": "medium",
+      "basis_record_ids": [
+        "ssd-2026-06-08-safe-grounds",
+        "smcs-standing-pathways-pet-inclusive",
+        "ssd-standing-food-supplies"
+      ]
+    },
+    "responder_roles": [
+      {
+        "organization_id": "st-marys-dining-room",
+        "label": "Low-barrier shelter and housing support designed to accommodate people with pets, partners, family, or belongings.",
+        "current_role": "Operating Pathways, a current 24/7 transitional shelter with pet-accommodating units and case management.",
+        "basis_record_ids": [
+          "smcs-2026-06-17-pathways-open",
+          "smcs-standing-pathways-pet-inclusive"
+        ],
+        "updated_at": "2026-08-21T20:48:00-07:00"
+      },
+      {
+        "organization_id": "stockton-street-dogs",
+        "label": "Street-level animal support for unhoused people and their companion animals.",
+        "current_role": "Providing field support and advancing a Safe Grounds model intended to keep people and pets together while moving toward housing.",
+        "basis_record_ids": [
+          "ssd-2026-06-08-safe-grounds",
+          "ssd-standing-food-supplies"
+        ],
+        "updated_at": "2026-08-21T20:48:00-07:00"
+      }
+    ],
+    "latest_change": {
+      "record_id": "smcs-2026-06-17-pathways-open",
+      "label": "St. Mary's opened Pathways, adding low-barrier shelter capacity that can accommodate people with pets."
+    },
+    "current_state_items": [
+      {
+        "label": "People with pets",
+        "value": "34%",
+        "detail": "Of 2024 surveyed unhoused respondents",
+        "record_ids": [
+          "sjc-2024-pit-pet-ownership"
+        ]
+      },
+      {
+        "label": "Multiple pets",
+        "value": "45%",
+        "detail": "Of pet-owning respondents reported 2+",
+        "record_ids": [
+          "sjc-2024-pit-pet-ownership"
+        ]
+      },
+      {
+        "label": "Pet-inclusive shelter",
+        "value": "Available / limited",
+        "detail": "Pathways accommodates people with pets",
+        "record_ids": [
+          "smcs-standing-pathways-pet-inclusive"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "food-distribution-capacity",
+    "slug": "food-distribution-capacity-isnt-keeping-up-with-need",
+    "title": "Food distribution capacity isn't keeping up with need",
+    "status": "high",
+    "active": true,
+    "rank": 3,
+    "summary": "Large food donations and strong community demand are colliding with limited cold storage, refrigerated transport, and the logistics needed to move food quickly across Stockton and San Joaquin County.",
+    "what_we_are_seeing": [
+      "A roughly three-semitruck frozen-food donation exceeded Bread of Life's two existing freezers in August 2026.",
+      "Bread of Life relied on local partners for refrigerated transportation and temporary cold storage so the donation could still reach residents.",
+      "Bread of Life currently reports distributing through more than 33 locations and serving about 7,000 people per month.",
+      "Community Partnership for Families also provides neighborhood food distribution and fresh-food access through its Family Resource Centers."
+    ],
+    "contributing_factors": [
+      "Limited cold-storage capacity",
+      "Need for refrigerated transportation and temporary overflow storage",
+      "Large multi-site distribution footprint",
+      "High household demand",
+      "Distribution labor and coordination needs"
+    ],
+    "organization_ids": [
+      "bread-of-life",
+      "community-partnership-families"
+    ],
+    "action_ids": [
+      "support-food-storage-capacity",
+      "help-food-distribution",
+      "donate-food-supplies"
+    ],
+    "story_ids": [
+      "truckloads-of-food-reached-families"
+    ],
+    "sources": [
+      {
+        "title": "'It helps a lot of people': Bread of Life brings truckloads of donated food to Stockton families",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
+        "published_at": "2026-08-06",
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "Bread of Life | Stockton, CA | Feeding Families in San Joaquin County",
+        "publisher": "Bread of Life",
+        "url": "https://www.breadoflifeca.org/",
+        "published_at": null,
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Weekly Food Distribution Calendar",
+        "publisher": "Bread of Life",
+        "url": "https://www.breadoflifeca.org/food-calendar",
+        "published_at": null,
+        "checked_at": "2026-08-20T18:28:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Volunteer With Bread of Life",
+        "publisher": "Bread of Life",
+        "url": "https://www.breadoflifeca.org/volunteer",
+        "published_at": null,
+        "checked_at": "2026-08-21T21:42:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Donate Food",
+        "publisher": "Bread of Life",
+        "url": "https://www.breadoflifeca.org/donate-food",
+        "published_at": null,
+        "checked_at": "2026-08-21T21:42:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Family Resource Centers",
+        "publisher": "Community Partnership for Families of San Joaquin County",
+        "url": "https://cpfsj.org/family-resource-centers/",
+        "published_at": null,
+        "checked_at": "2026-08-21T21:42:00-07:00",
+        "type": "organization"
+      }
+    ],
+    "artwork": "/images/reality/food-distribution-capacity.jpg",
+    "first_seen": "2026-08-20",
+    "updated_at": "2026-08-21T21:42:00-07:00",
+    "current_state": "Bread of Life is moving food at significant scale, but a recent donation exceeded its cold-storage capacity and exposed a concrete need for additional freezer and refrigerated-distribution capacity.",
+    "record_ids": [
+      "bol-2026-08-06-cold-storage-overflow",
+      "bol-2026-08-06-freezer-expansion-need",
+      "bol-standing-distribution-scale",
+      "bol-standing-volunteer",
+      "bol-standing-donate-food",
+      "bol-standing-donate-funds",
+      "cpf-standing-food-access"
+    ],
+    "most_useful_now": {
+      "label": "Help expand the capacity to store and move donated food while it is available.",
+      "action_ids": [
+        "support-food-storage-capacity",
+        "help-food-distribution",
+        "donate-food-supplies"
+      ],
+      "confidence": "high",
+      "basis_record_ids": [
+        "bol-2026-08-06-cold-storage-overflow",
+        "bol-2026-08-06-freezer-expansion-need",
+        "bol-standing-volunteer",
+        "bol-standing-donate-food"
+      ]
+    },
+    "responder_roles": [
+      {
+        "organization_id": "bread-of-life",
+        "label": "Food rescue, cold storage, and multi-site grocery distribution across Stockton and San Joaquin County.",
+        "current_role": "Moving large food donations through a 33+ location network and coordinating refrigerated transportation and temporary storage when donations exceed warehouse capacity.",
+        "basis_record_ids": [
+          "bol-2026-08-06-cold-storage-overflow",
+          "bol-standing-distribution-scale",
+          "bol-standing-volunteer",
+          "bol-standing-donate-food"
+        ],
+        "updated_at": "2026-08-21T21:42:00-07:00"
+      },
+      {
+        "organization_id": "community-partnership-families",
+        "label": "Neighborhood family-resource centers connecting households to food and other basic-needs support.",
+        "current_role": "Providing neighborhood food distribution, mobile farmers markets, senior commodities, and fresh-produce events through Family Resource Centers.",
+        "basis_record_ids": [
+          "cpf-standing-food-access"
+        ],
+        "updated_at": "2026-08-21T21:42:00-07:00"
+      }
+    ],
+    "latest_change": {
+      "record_id": "bol-2026-08-06-cold-storage-overflow",
+      "label": "A large frozen-food donation exceeded Bread of Life's existing freezer capacity, requiring refrigerated transport and temporary storage from partner organizations."
+    },
+    "current_state_items": [
+      {
+        "label": "Cold storage",
+        "value": "At capacity",
+        "detail": "Recent donation exceeded two existing freezers",
+        "record_ids": [
+          "bol-2026-08-06-cold-storage-overflow"
+        ]
+      },
+      {
+        "label": "Expansion need",
+        "value": "≈ $38,000",
+        "detail": "Estimated cost of another freezer",
+        "record_ids": [
+          "bol-2026-08-06-freezer-expansion-need"
+        ]
+      },
+      {
+        "label": "Distribution scale",
+        "value": "≈ 7,000 / month",
+        "detail": "People served across 33+ locations",
+        "record_ids": [
+          "bol-standing-distribution-scale"
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reentry-housing-instability",
+    "slug": "people-leaving-incarceration-still-face-unstable-reentry-housing",
+    "title": "People leaving incarceration still face unstable reentry housing",
+    "status": "watch",
+    "active": true,
+    "rank": 4,
+    "summary": "Housing, work, and basic stability have to come together after incarceration. Stockton has active reentry pathways, but stable housing remains one of the core conditions for a successful second chance.",
+    "what_we_are_seeing": [
+      "Ready To Work currently combines transitional housing, paid work, case management, training, and links to permanent housing for eligible men.",
+      "Friends Outside currently provides housing and rental assistance, employment readiness, basic-needs support, and case management for people returning from incarceration.",
+      "Friends Outside identifies housing alongside education and employment as one of the three pillars of successful reentry.",
+      "The prison puppy-raising program at California Health Care Facility in Stockton provides a related pre-release pathway centered on responsibility, service, and connection."
+    ],
+    "contributing_factors": [
+      "Difficulty securing stable housing after incarceration",
+      "Employment and income instability during reentry",
+      "Criminal-record barriers",
+      "Multiple needs arriving at once after release",
+      "Need for family, community, and case-management support"
+    ],
+    "organization_ids": [
+      "ready-to-work-sjc",
+      "friends-outside"
+    ],
+    "action_ids": [
+      "hire-ready-to-work",
+      "support-ready-to-work",
+      "support-friends-outside-reentry"
+    ],
+    "story_ids": [
+      "prison-puppy-program"
+    ],
+    "sources": [
+      {
+        "title": "Get Help",
+        "publisher": "Ready To Work San Joaquin",
+        "url": "https://www.readytoworksjc.org/get-help/",
+        "published_at": null,
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Get Involved",
+        "publisher": "Ready To Work San Joaquin",
+        "url": "https://www.readytoworksjc.org/get-involved/",
+        "published_at": null,
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Reentry Services",
+        "publisher": "Friends Outside",
+        "url": "https://friendsoutside.org/Programs-Services/Reentry-Services",
+        "published_at": null,
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "organization"
+      },
+      {
+        "title": "Canine Companions 2024 Annual Report",
+        "publisher": "Canine Companions",
+        "url": "https://canine.org/wp-content/uploads/2025/06/CC25_AnnualReport2024-lists-ADA.pdf",
+        "published_at": "2025-06-01",
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "organization"
+      }
+    ],
+    "artwork": "/images/reality/reentry-housing-hero.jpg",
+    "first_seen": "2026-08-22",
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "current_state": "Stockton has active housing-and-work reentry programs, but those programs themselves continue to treat stable housing as a central condition for successful reintegration.",
+    "current_state_items": [
+      {
+        "label": "Transitional housing",
+        "value": "Active",
+        "detail": "Ready To Work provides housing for eligible men",
+        "record_ids": [
+          "rtw-standing-housing-work-pathway"
+        ]
+      },
+      {
+        "label": "Housing assistance",
+        "value": "Active",
+        "detail": "Friends Outside includes housing and rental help",
+        "record_ids": [
+          "friends-outside-standing-reentry-housing"
+        ]
+      },
+      {
+        "label": "Reentry pathway",
+        "value": "Housing + work",
+        "detail": "Local programs connect stability, employment, and support",
+        "record_ids": [
+          "rtw-standing-housing-work-pathway",
+          "friends-outside-standing-housing-pillar"
+        ]
+      }
+    ],
+    "record_ids": [
+      "rtw-standing-housing-work-pathway",
+      "friends-outside-standing-reentry-housing",
+      "friends-outside-standing-housing-pillar",
+      "rtw-standing-employer-partner",
+      "friends-outside-standing-donate-reentry",
+      "canine-2024-chcf-prison-puppy"
+    ],
+    "most_useful_now": {
+      "label": "Support the housing-and-work pathways that help people rebuild after incarceration.",
+      "action_ids": [
+        "hire-ready-to-work",
+        "support-ready-to-work",
+        "support-friends-outside-reentry"
+      ],
+      "confidence": "high",
+      "basis_record_ids": [
+        "rtw-standing-housing-work-pathway",
+        "rtw-standing-employer-partner",
+        "friends-outside-standing-reentry-housing"
+      ]
+    },
+    "responder_roles": [
+      {
+        "organization_id": "ready-to-work-sjc",
+        "label": "Transitional housing, paid work, case management, training, and permanent-housing support.",
+        "current_role": "Providing a structured housing-and-employment pathway for eligible men rebuilding after homelessness or incarceration.",
+        "basis_record_ids": [
+          "rtw-standing-housing-work-pathway",
+          "rtw-standing-employer-partner"
+        ],
+        "updated_at": "2026-08-22T16:08:00-07:00"
+      },
+      {
+        "organization_id": "friends-outside",
+        "label": "Reentry case management, housing and basic-needs assistance, employment readiness, and family connection.",
+        "current_role": "Helping people returning to Stockton address housing, work, basic needs, family reunification, and other barriers through individualized reentry support.",
+        "basis_record_ids": [
+          "friends-outside-standing-reentry-housing",
+          "friends-outside-standing-housing-pillar"
+        ],
+        "updated_at": "2026-08-22T16:08:00-07:00"
+      }
+    ],
+    "latest_change": {
+      "record_id": "rtw-standing-employer-partner",
+      "label": "Ready To Work currently invites local employers to hire or contract with program participants."
+    }
+  },
+  {
+    "id": "low-barrier-housing-pathways",
+    "slug": "people-still-need-low-barrier-paths-from-homelessness-to-housing",
+    "title": "People still need low-barrier paths from homelessness to housing",
+    "status": "improving",
+    "active": true,
+    "rank": 5,
+    "summary": "Stockton still faces substantial homelessness, but new low-barrier shelter and navigation capacity is creating more direct paths from the street toward stable housing.",
+    "what_we_are_seeing": [
+      "St. Mary’s opened Pathways Neighborhood in June 2026, adding 268 beds of modular transitional housing with on-site supportive services.",
+      "The Pathways model is explicitly focused on low-barrier shelter, case management, wraparound services, and movement toward permanent housing.",
+      "The Zeiter Navigation Center is another major St. Mary’s housing-navigation asset in downtown Stockton.",
+      "Stockton leaders still identify homelessness as a major city challenge even as this new capacity comes online."
+    ],
+    "contributing_factors": [
+      "Persistent homelessness and housing instability",
+      "Need for low-barrier shelter options",
+      "Need for case management and housing navigation",
+      "Behavioral and physical health needs",
+      "Shortage of stable and affordable permanent housing"
+    ],
+    "organization_ids": [
+      "st-marys-dining-room"
+    ],
+    "action_ids": [
+      "support-st-marys-housing-work"
+    ],
+    "story_ids": [
+      "pathways-opened-268-beds"
+    ],
+    "sources": [
+      {
+        "title": "St. Mary’s Community Services holds Pathways Neighborhood open house",
+        "publisher": "The Stockton Record / Blue Water Healthy Living",
+        "url": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/",
+        "published_at": "2026-06-23",
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "Pathways Neighborhood operational funding",
+        "publisher": "City of Stockton",
+        "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=B3930ED4-FB4A-4D5A-A677-10E02CD33945&ID=7648142",
+        "published_at": "2025-09-09",
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "government"
+      },
+      {
+        "title": "2026 State of the City",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/local-government/2026/05/20/stockton-is-ready-mayor-fugazi-proclaims-at-state-of-the-city/",
+        "published_at": "2026-05-20",
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "local_reporting"
+      },
+      {
+        "title": "St. Mary’s Community Services",
+        "publisher": "St. Mary’s Community Services",
+        "url": "https://smcares.org/",
+        "published_at": null,
+        "checked_at": "2026-08-22T16:08:00-07:00",
+        "type": "organization"
+      }
+    ],
+    "artwork": "/images/reality/low-barrier-housing-hero.jpg",
+    "first_seen": "2026-08-22",
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "current_state": "The gap is improving: Pathways Neighborhood has added major low-barrier transitional capacity, while homelessness and the need for permanent housing pathways remain significant.",
+    "current_state_items": [
+      {
+        "label": "Pathways capacity",
+        "value": "268 beds",
+        "detail": "New modular transitional housing",
+        "record_ids": [
+          "smcs-2026-06-17-pathways-268-beds"
+        ]
+      },
+      {
+        "label": "Low-barrier pathway",
+        "value": "Expanded",
+        "detail": "Shelter plus case management and housing support",
+        "record_ids": [
+          "smcs-2026-06-17-pathways-268-beds",
+          "stockton-2025-pathways-operating-funds"
+        ]
+      },
+      {
+        "label": "Overall direction",
+        "value": "Improving",
+        "detail": "New capacity is online; homelessness remains a city challenge",
+        "record_ids": [
+          "smcs-2026-06-17-pathways-268-beds",
+          "stockton-2026-05-20-homelessness-still-challenge"
+        ]
+      }
+    ],
+    "record_ids": [
+      "smcs-2026-06-17-pathways-268-beds",
+      "stockton-2025-pathways-operating-funds",
+      "stockton-2026-05-20-homelessness-still-challenge",
+      "smcs-standing-housing-outcomes"
+    ],
+    "most_useful_now": {
+      "label": "Support the local pathways that move people from shelter toward stable housing.",
+      "action_ids": [
+        "support-st-marys-housing-work"
+      ],
+      "confidence": "medium",
+      "basis_record_ids": [
+        "smcs-2026-06-17-pathways-268-beds",
+        "smcs-standing-housing-outcomes"
+      ]
+    },
+    "responder_roles": [
+      {
+        "organization_id": "st-marys-dining-room",
+        "label": "Low-barrier shelter, navigation, case management, meals, health care, and housing support.",
+        "current_role": "Operating a growing shelter-and-navigation system centered on Pathways Neighborhood and movement toward stable housing.",
+        "basis_record_ids": [
+          "smcs-2026-06-17-pathways-268-beds",
+          "stockton-2025-pathways-operating-funds",
+          "smcs-standing-housing-outcomes"
+        ],
+        "updated_at": "2026-08-22T16:08:00-07:00"
+      }
+    ],
+    "latest_change": {
+      "record_id": "smcs-2026-06-17-pathways-268-beds",
+      "label": "St. Mary’s opened Pathways Neighborhood, adding 268 beds and on-site support aimed at transitions to permanent housing."
+    }
+  }
+]

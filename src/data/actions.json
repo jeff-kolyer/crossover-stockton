@@ -1,0 +1,372 @@
+[
+  {
+    "id": "foster-a-dog",
+    "slug": "foster-a-dog",
+    "title": "Foster a dog",
+    "summary": "Open your home temporarily to a dog that needs safe placement.",
+    "organization_id": "stockton-street-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "source_url": "https://linktr.ee/streetdogsanctuary",
+    "source_label": "Stockton Street Dogs",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "when_label": "Whenever · temporary commitment",
+    "location_label": "Stockton Street Dogs",
+    "distance_label": "",
+    "priority": "high",
+    "priority_basis": [
+      "ssd-standing-foster-adopt",
+      "sas-2026-01-13-spay-neuter-capacity"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "transport-a-dog",
+    "slug": "transport-a-dog",
+    "title": "Transport a dog",
+    "summary": "Help move a dog to veterinary care, foster placement, or another safe destination.",
+    "organization_id": "stockton-street-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "source_url": "",
+    "source_label": "Stockton Street Dogs",
+    "featured": false,
+    "active": true,
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "when_label": "As needed",
+    "location_label": "Stockton Street Dogs",
+    "distance_label": "",
+    "priority": "supporting",
+    "priority_basis": [],
+    "currentness": "unverified",
+    "last_supported_at": null
+  },
+  {
+    "id": "donate-dog-supplies",
+    "slug": "donate-dog-supplies",
+    "title": "Donate dog supplies",
+    "summary": "Provide food or other currently requested supplies for dogs being served in the field.",
+    "organization_id": "stockton-street-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "source_url": "https://streetdogsanctuary.com/",
+    "source_label": "Stockton Street Dogs",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "when_label": "Anytime",
+    "location_label": "Stockton Street Dogs",
+    "distance_label": "",
+    "priority": "supporting",
+    "priority_basis": [
+      "ssd-standing-food-supplies"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "support-pet-inclusive-shelter",
+    "slug": "support-pet-inclusive-shelter",
+    "title": "Support pet-inclusive shelter",
+    "summary": "Support low-barrier shelter capacity that allows people to remain with companion animals.",
+    "organization_id": "st-marys-dining-room",
+    "gap_ids": [
+      "pet-inclusive-shelter"
+    ],
+    "source_url": "https://smcares.org/",
+    "source_label": "St. Mary's Community Services",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T20:54:00-07:00",
+    "when_label": "Ongoing",
+    "location_label": "St. Mary's Community Services",
+    "distance_label": "",
+    "priority": "medium",
+    "priority_basis": [
+      "smcs-2026-06-17-pathways-open",
+      "smcs-standing-pathways-pet-inclusive",
+      "ssd-2026-06-08-safe-grounds"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "donate-pet-supplies",
+    "slug": "donate-pet-supplies",
+    "title": "Donate pet supplies",
+    "summary": "Provide crates, food, bedding, leashes, or other currently requested pet-support items.",
+    "organization_id": "stockton-street-dogs",
+    "gap_ids": [
+      "pet-inclusive-shelter",
+      "dogs-safe-placement"
+    ],
+    "source_url": "https://streetdogsanctuary.com/",
+    "source_label": "Stockton Street Dogs",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T20:54:00-07:00",
+    "when_label": "Current wishlists",
+    "location_label": "Stockton Street Dogs",
+    "distance_label": "",
+    "priority": "medium",
+    "priority_basis": [
+      "ssd-standing-food-supplies"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "help-food-distribution",
+    "slug": "help-food-distribution",
+    "title": "Help with food distribution",
+    "summary": "Volunteer with packing, loading, setup, or neighborhood distribution when help is requested.",
+    "organization_id": "bread-of-life",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "source_url": "https://www.breadoflifeca.org/volunteer",
+    "source_label": "Bread of Life",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T21:42:00-07:00",
+    "when_label": "Current volunteer opportunities",
+    "location_label": "Bread of Life",
+    "distance_label": "",
+    "priority": "high",
+    "priority_basis": [
+      "bol-standing-volunteer",
+      "bol-2026-08-06-cold-storage-overflow"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "donate-food-supplies",
+    "slug": "donate-food-supplies",
+    "title": "Donate food or supplies",
+    "summary": "Contribute currently requested food, storage, or distribution supplies.",
+    "organization_id": "bread-of-life",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "source_url": "https://www.breadoflifeca.org/donate-food",
+    "source_label": "Bread of Life",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T21:42:00-07:00",
+    "when_label": "Coordinate with Bread of Life",
+    "location_label": "Bread of Life",
+    "distance_label": "",
+    "priority": "medium",
+    "priority_basis": [
+      "bol-standing-donate-food"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "adopt-a-dog",
+    "slug": "adopt-a-dog",
+    "title": "Adopt a dog",
+    "summary": "Give an available dog a permanent home and create space for another animal to move through the local rescue and shelter system.",
+    "organization_id": "stockton-street-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "source_url": "https://linktr.ee/streetdogsanctuary",
+    "source_label": "Stockton Street Dogs",
+    "featured": true,
+    "active": true,
+    "priority": "high",
+    "priority_basis": [
+      "ssd-standing-foster-adopt"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21",
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "when_label": "Current adoptable dogs",
+    "location_label": "Stockton Street Dogs",
+    "distance_label": ""
+  },
+  {
+    "id": "doggie-day-out",
+    "slug": "doggie-day-out",
+    "title": "Take a shelter dog out",
+    "summary": "Give a Stockton shelter dog time outside the shelter, community exposure, and a better chance to meet a foster or adopter.",
+    "organization_id": "stockton-animal-services",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "source_url": "https://www.hardluckawa.org/events",
+    "source_label": "Hard Luck AWA / Stockton Animal Services",
+    "featured": true,
+    "active": true,
+    "priority": "medium",
+    "priority_basis": [
+      "sas-standing-doggie-day-out"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21",
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "when_label": "Check current availability",
+    "location_label": "Stockton Animal Services",
+    "distance_label": "",
+    "modal_title": "Doggie Day Out",
+    "why_it_helps": "A few hours outside the shelter can reduce stress, create community visibility, and help a dog connect with potential fosters or adopters.",
+    "provider_label": "Stockton Animal Services · Hard Luck Animal Welfare Advocates",
+    "handoff_label": "Check Doggie Day Out"
+  },
+  {
+    "id": "volunteer-with-streetdogs",
+    "slug": "volunteer-with-streetdogs",
+    "title": "Volunteer with Stockton Streetdogs",
+    "summary": "Join the organization's volunteer program supporting street outreach, dog care, rescue, and placement work.",
+    "organization_id": "stockton-street-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "source_url": "https://linktr.ee/streetdogsanctuary",
+    "source_label": "Stockton Street Dogs",
+    "featured": false,
+    "active": true,
+    "priority": "supporting",
+    "priority_basis": [
+      "ssd-standing-volunteer-rescue-partner"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-21",
+    "updated_at": "2026-08-21T17:07:00-07:00",
+    "when_label": "Ongoing",
+    "location_label": "Stockton Street Dogs",
+    "distance_label": ""
+  },
+  {
+    "id": "support-food-storage-capacity",
+    "slug": "support-food-storage-capacity",
+    "title": "Support cold-storage capacity",
+    "summary": "Help Bread of Life expand the storage and distribution capacity needed to accept large perishable-food donations.",
+    "organization_id": "bread-of-life",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "source_url": "https://www.breadoflifeca.org/donate",
+    "source_label": "Bread of Life",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-21T21:42:00-07:00",
+    "when_label": "Current need",
+    "location_label": "Bread of Life",
+    "distance_label": "",
+    "priority": "high",
+    "priority_basis": [
+      "bol-2026-08-06-freezer-expansion-need",
+      "bol-standing-donate-funds"
+    ],
+    "currentness": "recent",
+    "last_supported_at": "2026-08-21"
+  },
+  {
+    "id": "support-ready-to-work",
+    "slug": "support-ready-to-work",
+    "title": "Support Ready To Work",
+    "summary": "Support transitional housing, case management, paid work, training, and permanent-housing pathways for men rebuilding after homelessness or incarceration.",
+    "organization_id": "ready-to-work-sjc",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "source_url": "https://www.readytoworksjc.org/donate-today/",
+    "source_label": "Ready To Work San Joaquin",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "when_label": "Ongoing",
+    "location_label": "Ready To Work San Joaquin",
+    "distance_label": "",
+    "priority": "medium",
+    "priority_basis": [
+      "rtw-standing-housing-work-pathway"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-22"
+  },
+  {
+    "id": "hire-ready-to-work",
+    "slug": "hire-ready-to-work",
+    "title": "Hire or partner with Ready To Work",
+    "summary": "Businesses and organizations can contract with RTW crews or hire participants directly into longer-term employment pathways.",
+    "organization_id": "ready-to-work-sjc",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "source_url": "https://www.readytoworksjc.org/get-involved/",
+    "source_label": "Ready To Work San Joaquin",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "when_label": "Current employer partnerships",
+    "location_label": "San Joaquin County",
+    "distance_label": "",
+    "priority": "high",
+    "priority_basis": [
+      "rtw-standing-employer-partner"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-22"
+  },
+  {
+    "id": "support-friends-outside-reentry",
+    "slug": "support-friends-outside-reentry",
+    "title": "Support reentry clients",
+    "summary": "Help Friends Outside provide practical reentry support such as work transportation, supplies, classes, case management, and housing assistance.",
+    "organization_id": "friends-outside",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "source_url": "https://friendsoutside.org/donate/donate",
+    "source_label": "Friends Outside",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "when_label": "Ongoing",
+    "location_label": "Friends Outside",
+    "distance_label": "",
+    "priority": "medium",
+    "priority_basis": [
+      "friends-outside-standing-reentry-housing",
+      "friends-outside-standing-donate-reentry"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-22"
+  },
+  {
+    "id": "support-st-marys-housing-work",
+    "slug": "support-st-marys-housing-work",
+    "title": "Support St. Mary’s housing work",
+    "summary": "Support the low-barrier shelter, case management, meals, and housing pathways St. Mary’s uses to help people move toward stable housing.",
+    "organization_id": "st-marys-dining-room",
+    "gap_ids": [
+      "low-barrier-housing-pathways"
+    ],
+    "source_url": "https://smcares.org/",
+    "source_label": "St. Mary’s Community Services",
+    "featured": true,
+    "active": true,
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "when_label": "Ongoing",
+    "location_label": "St. Mary’s Community Services",
+    "distance_label": "",
+    "priority": "medium",
+    "priority_basis": [
+      "smcs-2026-06-17-pathways-268-beds",
+      "smcs-standing-housing-outcomes"
+    ],
+    "currentness": "standing",
+    "last_supported_at": "2026-08-22"
+  }
+]

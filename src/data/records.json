@@ -1,0 +1,825 @@
+[
+  {
+    "id": "sas-2026-01-13-spay-neuter-capacity",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-01-13",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "capacity_intervention",
+    "trust": "government",
+    "title": "City contracted for high-volume spay and neuter services",
+    "summary": "Stockton said stray animal intakes regularly exceed shelter capacity and that its standard operations could not clear the sterilization backlog, prompting a three-month contract for at least 200 spay/neuter procedures.",
+    "source": {
+      "publisher": "City of Stockton",
+      "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+      "type": "government"
+    },
+    "supports": [
+      "animal-overpopulation",
+      "spay-neuter-capacity",
+      "shelter-capacity-pressure"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "sas-2026-03-05-cat-transfer",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-03-05",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "outcome",
+    "trust": "source_supported",
+    "title": "34 cats and kittens were transferred out of Stockton because of overcrowding",
+    "summary": "The Stockton Animal Shelter transferred 34 cats and kittens to the San Diego Humane Society after months of overcrowding and a respiratory-disease outbreak.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/state-news/2026/03/05/stockton-animal-shelter-cats-san-diego-overcrowding/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "shelter-capacity-pressure",
+      "rescue-transfer-capacity"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "sas-2026-05-05-overpopulation-report",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-05-05",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "condition",
+    "trust": "source_supported",
+    "title": "Local officials described a severe pet overpopulation problem",
+    "summary": "Local reporting documented shelter overcrowding, abandonment, and insufficient space for unwanted animals across San Joaquin County, while officials considered stronger spay/neuter requirements.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "animal-overpopulation",
+      "shelter-capacity-pressure",
+      "abandonment-and-stray-intake"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "stockton-2026-05-11-stray-dog-report",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs",
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-05-11",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "condition",
+    "trust": "source_supported",
+    "title": "Reporting documented continued stray-dog pressure in Stockton",
+    "summary": "Stocktonia reported continued abandoned and roaming dogs in the city and quoted local advocates describing overpopulation, abandonment, lack of veterinary access, and limited community resources as root causes.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "street-dog-presence",
+      "animal-overpopulation",
+      "veterinary-access",
+      "abandonment-and-stray-intake"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "sas-2026-05-21-intake-adoption-pause",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-05-21",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "operational_change",
+    "trust": "source_supported",
+    "title": "Shelter temporarily halted stray intake and adoptions",
+    "summary": "Stockton Animal Shelter temporarily stopped stray intake and adoptions after a strep-zoo case, reducing immediate placement and intake options during the quarantine.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/community/2026/05/21/stockton-animal-shelter-halts-intakes-adoptions-after-strep-zoo-case/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "shelter-capacity-pressure",
+      "veterinary-and-health-pressure"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "ssd-2026-06-08-street-response",
+    "gap_ids": [
+      "dogs-safe-placement",
+      "pet-inclusive-shelter"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": "2026-06-08",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "response",
+    "trust": "source_supported",
+    "title": "Streetdogs reported expanded rescue response and a Safe Grounds proposal",
+    "summary": "CBS Sacramento reported Stockton Streetdogs' ongoing street response and plans for a pet-friendly temporary campground intended to support people experiencing homelessness and their companion animals.",
+    "source": {
+      "publisher": "CBS Sacramento",
+      "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "street-outreach",
+      "pet-inclusive-shelter",
+      "rescue-response"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "hlawa-2026-06-09-contract-extension",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "hard-luck-awa",
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-06-09",
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "capacity_intervention",
+    "trust": "government",
+    "title": "City extended Hard Luck veterinary-services partnership",
+    "summary": "Stockton approved a one-year extension with Hard Luck Animal Welfare Advocates and added four positions, reinforcing veterinary and animal-care capacity connected to Animal Services.",
+    "source": {
+      "publisher": "City of Stockton",
+      "url": "https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A",
+      "type": "government"
+    },
+    "supports": [
+      "veterinary-capacity",
+      "animal-care-capacity"
+    ],
+    "action_signals": []
+  },
+  {
+    "id": "sas-standing-doggie-day-out",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services",
+      "hard-luck-awa"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Doggie Day Out invites the public to give shelter dogs community exposure",
+    "summary": "Hard Luck's current events page says members of the public can take a Stockton shelter dog out for a visit, giving the dog a break from the shelter, community exposure, and a chance to meet a potential adopter or foster.",
+    "source": {
+      "publisher": "Hard Luck Animal Welfare Advocates",
+      "url": "https://www.hardluckawa.org/events",
+      "type": "organization"
+    },
+    "supports": [
+      "placement-capacity",
+      "adoption-exposure"
+    ],
+    "action_signals": [
+      "doggie-day-out"
+    ]
+  },
+  {
+    "id": "ssd-standing-foster-adopt",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Stockton Streetdogs maintains foster and adoption applications",
+    "summary": "Stockton Streetdogs currently links directly to adoptable dogs and an application to foster or adopt, while describing 2026 as an expansion of rescue and placement efforts.",
+    "source": {
+      "publisher": "Stockton Streetdogs",
+      "url": "https://linktr.ee/streetdogsanctuary",
+      "type": "organization"
+    },
+    "supports": [
+      "foster-placement-need",
+      "adoption-placement"
+    ],
+    "action_signals": [
+      "foster-a-dog",
+      "adopt-a-dog"
+    ]
+  },
+  {
+    "id": "ssd-standing-volunteer-rescue-partner",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Stockton Streetdogs invites volunteers and rescue partners",
+    "summary": "The organization's current public links include a volunteer program and a rescue-partner application.",
+    "source": {
+      "publisher": "Stockton Streetdogs",
+      "url": "https://linktr.ee/streetdogsanctuary",
+      "type": "organization"
+    },
+    "supports": [
+      "street-outreach",
+      "rescue-transfer-capacity"
+    ],
+    "action_signals": [
+      "volunteer-with-streetdogs"
+    ]
+  },
+  {
+    "id": "ssd-standing-food-supplies",
+    "gap_ids": [
+      "dogs-safe-placement",
+      "pet-inclusive-shelter"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T17:07:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Stockton Streetdogs requests food and supplies",
+    "summary": "The organization's current site says food donations go directly toward dogs in need and links to Amazon and Walmart wishlists for essential supplies.",
+    "source": {
+      "publisher": "Stockton Streetdogs",
+      "url": "https://streetdogsanctuary.com/",
+      "type": "organization"
+    },
+    "supports": [
+      "street-care",
+      "supply-needs"
+    ],
+    "action_signals": [
+      "donate-dog-supplies"
+    ]
+  },
+  {
+    "id": "bol-2026-08-06-cold-storage-overflow",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "published_at": "2026-08-06",
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "capacity_constraint",
+    "trust": "source_supported",
+    "title": "A large frozen-food donation exceeded Bread of Life's cold-storage capacity",
+    "summary": "A Grocery Outlet donation of roughly three semitruck loads of frozen meat exceeded Bread of Life's two existing freezers. Local partners supplied refrigerated transportation and temporary cold storage so the food could still be distributed.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "cold-storage-capacity",
+      "refrigerated-transportation",
+      "distribution-capacity"
+    ],
+    "action_signals": [
+      "support-food-storage-capacity",
+      "help-food-distribution"
+    ],
+    "role_signals": [
+      "food_rescue",
+      "cold_storage_coordination",
+      "refrigerated_transport_coordination",
+      "large_scale_distribution"
+    ]
+  },
+  {
+    "id": "bol-2026-08-06-freezer-expansion-need",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "published_at": "2026-08-06",
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "current_need",
+    "trust": "source_supported",
+    "title": "Bread of Life estimated another freezer would cost about $38,000",
+    "summary": "Bread of Life said its two existing freezers were full, that warehouse space was available for another freezer, and that purchasing one would cost an estimated $38,000.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "cold-storage-capacity",
+      "freezer-expansion"
+    ],
+    "action_signals": [
+      "support-food-storage-capacity"
+    ],
+    "role_signals": [
+      "cold_storage_coordination",
+      "distribution_capacity"
+    ]
+  },
+  {
+    "id": "bol-standing-distribution-scale",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "current_service",
+    "trust": "organization_source",
+    "title": "Bread of Life distributes through more than 33 locations and reports serving about 7,000 people per month",
+    "summary": "Bread of Life's current site says it distributes groceries through more than 33 locations in San Joaquin County and serves an average of about 2,000 households and 7,000 people per month.",
+    "source": {
+      "publisher": "Bread of Life",
+      "url": "https://www.breadoflifeca.org/",
+      "type": "organization"
+    },
+    "supports": [
+      "distribution-scale",
+      "household-demand",
+      "multi-site-network"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "multi_site_distribution",
+      "food_rescue",
+      "household_food_support"
+    ]
+  },
+  {
+    "id": "bol-standing-volunteer",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Bread of Life currently invites individuals and groups to volunteer",
+    "summary": "Bread of Life's current volunteer page says it needs volunteers and offers multiple opportunities for individuals and groups to help families access nutritious food.",
+    "source": {
+      "publisher": "Bread of Life",
+      "url": "https://www.breadoflifeca.org/volunteer",
+      "type": "organization"
+    },
+    "supports": [
+      "distribution-labor",
+      "volunteer-capacity"
+    ],
+    "action_signals": [
+      "help-food-distribution"
+    ],
+    "role_signals": [
+      "volunteer_coordination",
+      "distribution_support"
+    ]
+  },
+  {
+    "id": "bol-standing-donate-food",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Bread of Life currently accepts grocery-rescue and large-scale food donations",
+    "summary": "Bread of Life coordinates grocery-rescue pickups and accepts large-scale food donations from local companies for distribution to food-insecure households.",
+    "source": {
+      "publisher": "Bread of Life",
+      "url": "https://www.breadoflifeca.org/donate-food",
+      "type": "organization"
+    },
+    "supports": [
+      "food-rescue",
+      "food-supply"
+    ],
+    "action_signals": [
+      "donate-food-supplies"
+    ],
+    "role_signals": [
+      "food_rescue",
+      "donation_coordination"
+    ]
+  },
+  {
+    "id": "bol-standing-donate-funds",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Bread of Life currently accepts direct financial support",
+    "summary": "Bread of Life's current donation page accepts online, check, and ACH gifts to support its food-distribution work.",
+    "source": {
+      "publisher": "Bread of Life",
+      "url": "https://www.breadoflifeca.org/donate",
+      "type": "organization"
+    },
+    "supports": [
+      "distribution-capacity",
+      "organizational-support"
+    ],
+    "action_signals": [
+      "support-food-storage-capacity"
+    ],
+    "role_signals": []
+  },
+  {
+    "id": "cpf-standing-food-access",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "community-partnership-families"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-21T21:42:00-07:00",
+    "record_type": "current_service",
+    "trust": "organization_source",
+    "title": "Community Partnership's Family Resource Centers provide neighborhood food access",
+    "summary": "Community Partnership for Families currently lists food distribution, mobile farmers markets, senior commodities, and fresh-produce events among the core services available through its Family Resource Centers.",
+    "source": {
+      "publisher": "Community Partnership for Families of San Joaquin County",
+      "url": "https://cpfsj.org/family-resource-centers/",
+      "type": "organization"
+    },
+    "supports": [
+      "neighborhood-food-access",
+      "distribution-network",
+      "fresh-produce-access"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "neighborhood_food_access",
+      "food_distribution",
+      "resource_navigation"
+    ]
+  },
+  {
+    "id": "rtw-standing-housing-work-pathway",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [
+      "ready-to-work-sjc"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "current_service",
+    "trust": "organization_source",
+    "title": "Ready To Work currently combines transitional housing, paid work, case management, and permanent-housing support",
+    "summary": "Ready To Work says eligible men can receive transitional housing, meals, paid community-improvement work, case management, education or training support, and links to permanent housing. Its program is designed as a pathway from homelessness and incarceration toward employment and stable housing.",
+    "source": {
+      "publisher": "Ready To Work San Joaquin",
+      "url": "https://www.readytoworksjc.org/get-help/",
+      "type": "organization"
+    },
+    "supports": [
+      "transitional-housing",
+      "employment-pathway",
+      "case-management",
+      "permanent-housing-transition"
+    ],
+    "action_signals": [
+      "support-ready-to-work",
+      "hire-ready-to-work"
+    ],
+    "role_signals": [
+      "transitional_housing",
+      "paid_work",
+      "case_management",
+      "permanent_housing_support"
+    ]
+  },
+  {
+    "id": "friends-outside-standing-reentry-housing",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [
+      "friends-outside"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "current_service",
+    "trust": "organization_source",
+    "title": "Friends Outside currently provides housing and basic-needs assistance as part of reentry case management",
+    "summary": "Friends Outside’s Stockton reentry program currently lists housing and rental assistance, employment readiness, basic-needs support, case management, education, family reunification, and referrals among the services available to people returning from incarceration.",
+    "source": {
+      "publisher": "Friends Outside",
+      "url": "https://friendsoutside.org/Programs-Services/Reentry-Services",
+      "type": "organization"
+    },
+    "supports": [
+      "reentry-housing",
+      "rental-assistance",
+      "basic-needs",
+      "employment-readiness",
+      "family-reconnection"
+    ],
+    "action_signals": [
+      "support-friends-outside-reentry"
+    ],
+    "role_signals": [
+      "reentry_case_management",
+      "housing_assistance",
+      "employment_readiness",
+      "family_reconnection"
+    ]
+  },
+  {
+    "id": "friends-outside-standing-housing-pillar",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [
+      "friends-outside"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "condition",
+    "trust": "organization_source",
+    "title": "Friends Outside identifies housing as one of the three pillars of successful reentry",
+    "summary": "Friends Outside currently describes housing, education, and employment as the three pillars of a successful second chance for formerly incarcerated Californians.",
+    "source": {
+      "publisher": "Friends Outside",
+      "url": "https://www.friendsoutside.org/",
+      "type": "organization"
+    },
+    "supports": [
+      "housing-as-reentry-pillar",
+      "employment",
+      "education"
+    ],
+    "action_signals": [],
+    "role_signals": []
+  },
+  {
+    "id": "rtw-standing-employer-partner",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [
+      "ready-to-work-sjc"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Ready To Work currently invites employers to hire or contract with program participants",
+    "summary": "Ready To Work’s current Get Involved page invites businesses and organizations to contract with RTW crews or directly hire participants into longer-term employment pathways.",
+    "source": {
+      "publisher": "Ready To Work San Joaquin",
+      "url": "https://www.readytoworksjc.org/get-involved/",
+      "type": "organization"
+    },
+    "supports": [
+      "employment-pathway",
+      "employer-partnership"
+    ],
+    "action_signals": [
+      "hire-ready-to-work"
+    ],
+    "role_signals": [
+      "employment_partnership",
+      "workforce_development"
+    ]
+  },
+  {
+    "id": "friends-outside-standing-donate-reentry",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [
+      "friends-outside"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "current_ask",
+    "trust": "organization_source",
+    "title": "Friends Outside currently accepts support for reentry clients",
+    "summary": "Friends Outside says donations can help people returning from incarceration with needs such as work transportation, work supplies, skills classes, and general reentry support.",
+    "source": {
+      "publisher": "Friends Outside",
+      "url": "https://friendsoutside.org/donate/donate",
+      "type": "organization"
+    },
+    "supports": [
+      "reentry-support",
+      "employment-transition",
+      "transportation"
+    ],
+    "action_signals": [
+      "support-friends-outside-reentry"
+    ],
+    "role_signals": []
+  },
+  {
+    "id": "canine-2024-chcf-prison-puppy",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [],
+    "published_at": "2025-06-01",
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "outcome",
+    "trust": "organization_source",
+    "title": "California Health Care Facility in Stockton remains part of Canine Companions’ prison puppy-raising program",
+    "summary": "Canine Companions reported incarcerated handlers at California Health Care Facility in Stockton caring for and training future service dogs. Its reporting describes the program as creating purpose, responsibility, community contribution, and preparation for life beyond incarceration.",
+    "source": {
+      "publisher": "Canine Companions",
+      "url": "https://canine.org/wp-content/uploads/2025/06/CC25_AnnualReport2024-lists-ADA.pdf",
+      "type": "organization"
+    },
+    "supports": [
+      "pre-release-development",
+      "responsibility",
+      "service",
+      "connection"
+    ],
+    "action_signals": [],
+    "role_signals": []
+  },
+  {
+    "id": "smcs-2026-06-17-pathways-268-beds",
+    "gap_ids": [
+      "low-barrier-housing-pathways",
+      "pet-inclusive-shelter"
+    ],
+    "organization_ids": [
+      "st-marys-dining-room"
+    ],
+    "published_at": "2026-06-23",
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "capacity_intervention",
+    "trust": "source_supported",
+    "title": "St. Mary’s celebrated the opening of Pathways Neighborhood with 268 beds",
+    "summary": "St. Mary’s Community Services held a June 17 open house for Pathways Neighborhood, an $18 million modular transitional-housing project reported to provide 268 beds plus on-site supportive services intended to help residents move toward permanent housing.",
+    "source": {
+      "publisher": "The Stockton Record / Blue Water Healthy Living",
+      "url": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "low-barrier-shelter-capacity",
+      "transitional-housing",
+      "supportive-services",
+      "permanent-housing-pathway"
+    ],
+    "action_signals": [
+      "support-st-marys-housing-work"
+    ],
+    "role_signals": [
+      "low_barrier_shelter",
+      "transitional_housing",
+      "case_management",
+      "housing_navigation"
+    ]
+  },
+  {
+    "id": "stockton-2025-pathways-operating-funds",
+    "gap_ids": [
+      "low-barrier-housing-pathways"
+    ],
+    "organization_ids": [
+      "st-marys-dining-room"
+    ],
+    "published_at": "2025-09-09",
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "capacity_intervention",
+    "trust": "government",
+    "title": "Stockton allocated $1.244 million for Pathways Neighborhood operations",
+    "summary": "The Stockton City Council approved $1.244 million in HHAP funding for St. Mary’s Pathways operations, with the project focused on low-barrier shelter, case management, wraparound services, and obtaining and sustaining permanent housing.",
+    "source": {
+      "publisher": "City of Stockton",
+      "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=B3930ED4-FB4A-4D5A-A677-10E02CD33945&ID=7648142",
+      "type": "government"
+    },
+    "supports": [
+      "low-barrier-shelter",
+      "case-management",
+      "permanent-housing-pathway",
+      "operational-funding"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "low_barrier_shelter",
+      "housing_navigation"
+    ]
+  },
+  {
+    "id": "stockton-2026-05-20-homelessness-still-challenge",
+    "gap_ids": [
+      "low-barrier-housing-pathways"
+    ],
+    "organization_ids": [],
+    "published_at": "2026-05-20",
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "condition",
+    "trust": "source_supported",
+    "title": "Stockton continued to identify homelessness as a major city challenge in 2026",
+    "summary": "At the 2026 State of the City, local leaders highlighted the Zeiter Navigation Center as a city asset while also acknowledging homelessness as one of Stockton’s continuing major challenges.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/local-government/2026/05/20/stockton-is-ready-mayor-fugazi-proclaims-at-state-of-the-city/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "homelessness-continues",
+      "navigation-center",
+      "system-response"
+    ],
+    "action_signals": [],
+    "role_signals": []
+  },
+  {
+    "id": "smcs-standing-housing-outcomes",
+    "gap_ids": [
+      "low-barrier-housing-pathways"
+    ],
+    "organization_ids": [
+      "st-marys-dining-room"
+    ],
+    "published_at": null,
+    "checked_at": "2026-08-22T16:08:00-07:00",
+    "record_type": "current_service",
+    "trust": "organization_source",
+    "title": "St. Mary’s defines its work around pathways out of homelessness",
+    "summary": "St. Mary’s describes its core outcomes as safe and stable housing, physical and mental wellbeing, education and employment, and permanent connections, with services intended to support movement toward independence and self-sufficiency.",
+    "source": {
+      "publisher": "St. Mary’s Community Services",
+      "url": "https://smcares.org/",
+      "type": "organization"
+    },
+    "supports": [
+      "housing-stability",
+      "wellbeing",
+      "employment",
+      "permanent-connections"
+    ],
+    "action_signals": [
+      "support-st-marys-housing-work"
+    ],
+    "role_signals": [
+      "housing_navigation",
+      "case_management",
+      "supportive_services"
+    ]
+  }
+]

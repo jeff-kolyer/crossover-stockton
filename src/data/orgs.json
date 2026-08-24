@@ -1,0 +1,112 @@
+[
+  {
+    "id": "stockton-street-dogs",
+    "slug": "stockton-street-dogs",
+    "name": "Stockton Street Dogs",
+    "summary": "Street-level feeding, rescue, fostering, adoption, and advocacy for abandoned dogs and pets living with unhoused people.",
+    "website": "https://streetdogsanctuary.com/",
+    "source_url": "https://linktr.ee/streetdogsanctuary",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "hard-luck-awa",
+    "slug": "hard-luck-animal-welfare-advocates",
+    "name": "Hard Luck Animal Welfare Advocates",
+    "summary": "Compassionate veterinary and medical support for vulnerable and shelter animals in Stockton.",
+    "website": "https://www.hardluckawa.org/",
+    "source_url": "https://www.hardluckawa.org/",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "stockton-animal-services",
+    "slug": "stockton-animal-services",
+    "name": "Stockton Animal Services",
+    "summary": "Municipal animal services for Stockton, including shelter intake, animal care, foster and adoption pathways, veterinary services, and rescue coordination.",
+    "website": "https://www.stocktonca.gov/government/departments/police/animal-services/",
+    "source_url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "st-marys-dining-room",
+    "slug": "st-marys-dining-room",
+    "name": "St. Mary's Community Services",
+    "summary": "Low-barrier shelter, meals, hygiene, health care, and housing support for people experiencing poverty and homelessness.",
+    "website": "https://smcares.org/",
+    "source_url": "https://smcares.org/",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "bread-of-life",
+    "slug": "bread-of-life",
+    "name": "Bread of Life",
+    "summary": "Food rescue and multi-site grocery distribution serving families and individuals across Stockton and San Joaquin County.",
+    "website": "https://www.breadoflifeca.org/",
+    "source_url": "https://www.breadoflifeca.org/",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "community-partnership-families",
+    "slug": "community-partnership-for-families",
+    "name": "Community Partnership for Families of San Joaquin",
+    "summary": "Neighborhood resource centers connecting families to food, utilities, housing support, youth services, and other basic needs.",
+    "website": "https://cpfsj.org/",
+    "source_url": "https://cpfsj.org/",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "ready-to-work-sjc",
+    "slug": "ready-to-work-san-joaquin",
+    "name": "Ready to Work San Joaquin",
+    "summary": "Transitional housing, paid work crews, case management, and reentry support for formerly homeless and incarcerated men.",
+    "website": "https://www.readytoworksjc.org/",
+    "source_url": "https://www.readytoworksjc.org/",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "prevail",
+    "slug": "prevail",
+    "name": "PREVAIL",
+    "summary": "Emergency shelter, crisis response, advocacy, and youth services for people facing violence, exploitation, and homelessness.",
+    "website": "https://weshallprevail.org/",
+    "source_url": "https://weshallprevail.org/youth-services",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "friends-outside",
+    "slug": "friends-outside",
+    "name": "Friends Outside",
+    "summary": "Reentry, family connection, housing and basic-needs assistance, employment readiness, and support for families affected by incarceration.",
+    "website": "https://friendsoutside.org/",
+    "source_url": "https://friendsoutside.org/Programs-Services/Reentry-Services",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "little-manila-rising",
+    "slug": "little-manila-rising",
+    "name": "Little Manila Rising",
+    "summary": "South Stockton community work spanning environmental health, urban forestry, public health, cultural preservation, and community resilience.",
+    "website": "https://littlemanila.org/",
+    "source_url": "https://littlemanila.org/",
+    "active": true,
+    "tracked": true
+  },
+  {
+    "id": "haven-of-peace",
+    "slug": "haven-of-peace",
+    "name": "Haven of Peace",
+    "summary": "Emergency shelter and practical support for homeless women and children in San Joaquin County.",
+    "website": "https://havenofpeaceinc.org/",
+    "source_url": "https://havenofpeaceinc.org/",
+    "active": true,
+    "tracked": true
+  }
+]

@@ -1,0 +1,5135 @@
+{
+    "schema_version": "crossover-schema-0.1-sample-data",
+    "feed_id": "stockton-ca-schema-test-50-records",
+    "demo_notice": "Synthetic demo data for schema and renderer testing only. Not verified live Stockton information.",
+    "city": {
+        "city_id": "stockton-ca",
+        "city_name": "Stockton",
+        "state": "CA",
+        "country": "US",
+        "timezone": "America/Los_Angeles",
+        "map_center": {
+            "lat": 37.9577,
+            "lng": -121.2908
+        },
+        "default_zoom": 12
+    },
+    "feed_refreshed_at": "2026-05-04T12:00:00-07:00",
+    "active_mode": "signals",
+    "selected_tag_ids": [],
+    "tag_registry": {
+        "tags": [
+            {
+                "id": "food",
+                "label": "Food",
+                "family": "support",
+                "description": "Food access, meals, groceries, pantry support, and related food infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 20,
+                "filter_priority": 10,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "meal_service",
+                    "pantry",
+                    "grocery_distribution",
+                    "hot_meal",
+                    "sack_lunch",
+                    "baby_food"
+                ],
+                "suggested_tag_ids": [
+                    "free",
+                    "walk_ins_accepted",
+                    "open_now",
+                    "needs_recheck"
+                ]
+            },
+            {
+                "id": "shelter",
+                "label": "Shelter",
+                "family": "support",
+                "description": "Overnight shelter, emergency shelter, temporary shelter, intake, capacity, and related shelter infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 21,
+                "filter_priority": 20,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "capacity_gap",
+                    "full",
+                    "waitlist",
+                    "intake_required",
+                    "tonight",
+                    "families_accepted",
+                    "couples_accepted"
+                ]
+            },
+            {
+                "id": "safe_parking",
+                "label": "Safe parking",
+                "family": "support",
+                "description": "Parking support for people living in vehicles, including safe lots, overnight parking, rules, access, and enforcement risk.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 22,
+                "filter_priority": 30,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "safe_parking_lot",
+                    "overnight_parking",
+                    "people_in_vehicles",
+                    "rv_residents",
+                    "tow_risk",
+                    "policy_gap"
+                ]
+            },
+            {
+                "id": "hygiene",
+                "label": "Hygiene",
+                "family": "support",
+                "description": "Showers, laundry, hygiene supplies, sanitation, and related personal-care infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 23,
+                "filter_priority": 40,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "mobile_shower",
+                    "laundry",
+                    "restrooms",
+                    "water"
+                ]
+            },
+            {
+                "id": "cooling",
+                "label": "Cooling",
+                "family": "support",
+                "description": "Cooling centers, shade, heat relief, hydration, misting, and other hot-weather support.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 24,
+                "filter_priority": 50,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "cooling_center",
+                    "weather_triggered",
+                    "today",
+                    "hydration_station",
+                    "misting_station"
+                ]
+            },
+            {
+                "id": "water",
+                "label": "Water",
+                "family": "support",
+                "description": "Drinking water, hydration access, water distribution, and related water infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 25,
+                "filter_priority": 60,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "hydration_station",
+                    "water_nearby",
+                    "weather_triggered"
+                ]
+            },
+            {
+                "id": "restrooms",
+                "label": "Restrooms",
+                "family": "support",
+                "description": "Public restroom access, restroom closures, portable toilets, sanitation availability, and restroom-related gaps.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 26,
+                "filter_priority": 70,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "restroom_nearby",
+                    "access_gap",
+                    "verification_gap"
+                ]
+            },
+            {
+                "id": "heating",
+                "label": "Heating",
+                "family": "support",
+                "description": "Warming centers, cold-weather support, blankets, winter shelter support, and heat access.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 27,
+                "filter_priority": 80,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "warming_center",
+                    "weather_triggered",
+                    "overnight",
+                    "tonight"
+                ]
+            },
+            {
+                "id": "family_support",
+                "label": "Family support",
+                "family": "support",
+                "description": "Broad support infrastructure related to families, caregivers, children, and household needs.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 28,
+                "filter_priority": 90,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "baby_food",
+                    "families",
+                    "families_accepted"
+                ]
+            },
+            {
+                "id": "charging",
+                "label": "Charging",
+                "family": "support",
+                "description": "Phone charging, device charging, battery access, power access, and related energy support.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 29,
+                "filter_priority": 100,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "connectivity",
+                    "open_now",
+                    "capacity_gap"
+                ]
+            },
+            {
+                "id": "transportation",
+                "label": "Transportation",
+                "family": "support",
+                "description": "Transit, rides, shuttles, route access, mobility support, and transportation barriers.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 30,
+                "filter_priority": 110,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "transit_accessible",
+                    "mobility_gap"
+                ]
+            },
+            {
+                "id": "health",
+                "label": "Health",
+                "family": "support",
+                "description": "Medical services, clinics, health access, urgent health support, and related public health infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 31,
+                "filter_priority": 120,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "appointment_required",
+                    "referral_required",
+                    "low_barrier"
+                ]
+            },
+            {
+                "id": "mental_health",
+                "label": "Mental health",
+                "family": "support",
+                "description": "Mental-health support, crisis response, counseling, behavioral-health services, and related support infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 32,
+                "filter_priority": 130,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "referral_required",
+                    "appointment_required",
+                    "low_barrier"
+                ]
+            },
+            {
+                "id": "substance_use_support",
+                "label": "Substance-use support",
+                "family": "support",
+                "description": "Harm reduction, recovery support, treatment access, outreach, and substance-use related services or gaps.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 33,
+                "filter_priority": 140,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "outreach",
+                    "referral_required",
+                    "low_barrier"
+                ]
+            },
+            {
+                "id": "connectivity",
+                "label": "Connectivity",
+                "family": "support",
+                "description": "Internet access, Wi-Fi, phones, communication access, and related connectivity infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 34,
+                "filter_priority": 150,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "charging",
+                    "access_gap"
+                ]
+            },
+            {
+                "id": "storage",
+                "label": "Storage",
+                "family": "support",
+                "description": "Belongings storage, storage lockers, safe storage access, and related storage gaps.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 35,
+                "filter_priority": 160,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "storage_locker",
+                    "access_gap"
+                ]
+            },
+            {
+                "id": "id_service",
+                "label": "ID service",
+                "family": "support",
+                "description": "Identification replacement, documents, paperwork support, and ID-related access help.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 36,
+                "filter_priority": 170,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "id_replacement",
+                    "legal_clinic",
+                    "benefits_enrollment",
+                    "people_without_id"
+                ]
+            },
+            {
+                "id": "benefits",
+                "label": "Benefits",
+                "family": "support",
+                "description": "Enrollment or support for public benefits, assistance programs, and benefit access.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 37,
+                "filter_priority": 180,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "benefits_enrollment",
+                    "appointment_required",
+                    "low_barrier"
+                ]
+            },
+            {
+                "id": "legal",
+                "label": "Legal",
+                "family": "support",
+                "description": "Legal aid, legal clinics, rights support, documentation, and related legal-access infrastructure.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 38,
+                "filter_priority": 190,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "legal_clinic",
+                    "appointment_required",
+                    "referral_required"
+                ]
+            },
+            {
+                "id": "housing_help",
+                "label": "Housing help",
+                "family": "support",
+                "description": "Housing navigation, housing application help, placement support, and housing-related assistance.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 39,
+                "filter_priority": 200,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "appointment_required",
+                    "referral_required",
+                    "intake_required"
+                ]
+            },
+            {
+                "id": "safety",
+                "label": "Safety",
+                "family": "support",
+                "description": "Safety concerns, safe locations, violence risk, environmental safety, and immediate personal safety issues.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 40,
+                "filter_priority": 210,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "safety_gap",
+                    "critical",
+                    "now"
+                ]
+            },
+            {
+                "id": "pets",
+                "label": "Pets",
+                "family": "support",
+                "description": "Pet-related access, pet-friendly services, animal support, and service barriers related to pets.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 41,
+                "filter_priority": 220,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "pets_allowed",
+                    "people_with_pets"
+                ]
+            },
+            {
+                "id": "accessibility",
+                "label": "Accessibility",
+                "family": "support",
+                "description": "Disability access, accessible locations, mobility support, and accessibility barriers.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 42,
+                "filter_priority": 230,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "wheelchair_accessible",
+                    "people_with_disabilities"
+                ]
+            },
+            {
+                "id": "meal_service",
+                "label": "Meal service",
+                "family": "service_type",
+                "description": "A service or support pattern involving prepared meals.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 30,
+                "filter_priority": 10,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food"
+                ],
+                "related_tag_ids": [
+                    "hot_meal",
+                    "to_go_meal",
+                    "sack_lunch"
+                ]
+            },
+            {
+                "id": "pantry",
+                "label": "Pantry",
+                "family": "service_type",
+                "description": "Pantry access, pantry pickup, and pantry-based food distribution.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 31,
+                "filter_priority": 20,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food"
+                ],
+                "related_tag_ids": [
+                    "groceries",
+                    "pantry_box"
+                ]
+            },
+            {
+                "id": "grocery_distribution",
+                "label": "Grocery distribution",
+                "family": "service_type",
+                "description": "Grocery boxes, food distribution events, and take-home food supplies.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 32,
+                "filter_priority": 30,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food"
+                ],
+                "related_tag_ids": [
+                    "groceries",
+                    "pantry_box"
+                ]
+            },
+            {
+                "id": "cooling_center",
+                "label": "Cooling center",
+                "family": "service_type",
+                "description": "A place opened for cooling, heat relief, and hot-weather refuge.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 33,
+                "filter_priority": 40,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "cooling"
+                ],
+                "related_tag_ids": [
+                    "weather_triggered",
+                    "hydration_station"
+                ]
+            },
+            {
+                "id": "safe_parking_lot",
+                "label": "Safe parking lot",
+                "family": "service_type",
+                "description": "A specific lot or program offering safer parking access.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 34,
+                "filter_priority": 50,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "safe_parking"
+                ],
+                "related_tag_ids": [
+                    "overnight_parking",
+                    "people_in_vehicles"
+                ]
+            },
+            {
+                "id": "warming_center",
+                "label": "Warming center",
+                "family": "service_type",
+                "description": "A place opened for cold-weather refuge and warming support.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 35,
+                "filter_priority": 60,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "heating"
+                ],
+                "related_tag_ids": [
+                    "weather_triggered",
+                    "overnight"
+                ]
+            },
+            {
+                "id": "mobile_shower",
+                "label": "Mobile shower",
+                "family": "service_type",
+                "description": "Mobile shower service, shower truck, or temporary shower access.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 36,
+                "filter_priority": 70,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "hygiene"
+                ]
+            },
+            {
+                "id": "laundry",
+                "label": "Laundry",
+                "family": "service_type",
+                "description": "Laundry service, laundry access, or clothes-washing support.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 37,
+                "filter_priority": 80,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "hygiene"
+                ]
+            },
+            {
+                "id": "id_replacement",
+                "label": "ID replacement",
+                "family": "service_type",
+                "description": "Help replacing or obtaining identification documents.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 38,
+                "filter_priority": 90,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "id_service"
+                ]
+            },
+            {
+                "id": "legal_clinic",
+                "label": "Legal clinic",
+                "family": "service_type",
+                "description": "Legal clinic, legal aid session, or scheduled legal support.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 39,
+                "filter_priority": 100,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "legal"
+                ]
+            },
+            {
+                "id": "benefits_enrollment",
+                "label": "Benefits enrollment",
+                "family": "service_type",
+                "description": "Enrollment help for public benefits or assistance programs.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 40,
+                "filter_priority": 110,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "benefits"
+                ]
+            },
+            {
+                "id": "overnight_parking",
+                "label": "Overnight parking",
+                "family": "service_type",
+                "description": "Parking support specifically available overnight.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 41,
+                "filter_priority": 120,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "safe_parking"
+                ]
+            },
+            {
+                "id": "storage_locker",
+                "label": "Storage locker",
+                "family": "service_type",
+                "description": "Locker or secure storage offering for belongings.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 42,
+                "filter_priority": 130,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "storage"
+                ]
+            },
+            {
+                "id": "open_now",
+                "label": "Open now",
+                "family": "availability",
+                "description": "The service is currently usable, or a signal confirms current availability.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 10,
+                "filter_priority": 10,
+                "show_in_filter_default": true,
+                "conflicts_with_tag_ids": [
+                    "closed_now",
+                    "opening_soon",
+                    "temporarily_unavailable",
+                    "full"
+                ]
+            },
+            {
+                "id": "opening_soon",
+                "label": "Opening soon",
+                "family": "availability",
+                "description": "The service is expected to become usable soon.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 11,
+                "filter_priority": 20,
+                "show_in_filter_default": true,
+                "conflicts_with_tag_ids": [
+                    "open_now",
+                    "closed_now",
+                    "temporarily_unavailable",
+                    "full"
+                ]
+            },
+            {
+                "id": "limited_availability",
+                "label": "Limited availability",
+                "family": "availability",
+                "description": "The service exists but access is limited by capacity, supply, time, staffing, or other constraints.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 12,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "full",
+                "label": "Full",
+                "family": "availability",
+                "description": "The service or resource is at capacity.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 13,
+                "filter_priority": 40,
+                "show_in_filter_default": true,
+                "conflicts_with_tag_ids": [
+                    "open_now",
+                    "available"
+                ]
+            },
+            {
+                "id": "waitlist",
+                "label": "Waitlist",
+                "family": "availability",
+                "description": "Access requires joining or checking a waitlist.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 14,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "closing_soon",
+                "label": "Closing soon",
+                "family": "availability",
+                "description": "The service is currently usable but expected to close soon.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 15,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "closed_now",
+                "label": "Closed now",
+                "family": "availability",
+                "description": "The service is not currently usable because its service window is closed.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 16,
+                "filter_priority": 70,
+                "show_in_filter_default": false,
+                "conflicts_with_tag_ids": [
+                    "open_now",
+                    "opening_soon"
+                ]
+            },
+            {
+                "id": "available",
+                "label": "Available",
+                "family": "availability",
+                "description": "The service, resource, slot, or support appears available, but not necessarily open right now.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 17,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "temporarily_unavailable",
+                "label": "Temporarily unavailable",
+                "family": "availability",
+                "description": "The service exists but is temporarily unavailable.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 18,
+                "filter_priority": 90,
+                "show_in_filter_default": false,
+                "conflicts_with_tag_ids": [
+                    "open_now",
+                    "available",
+                    "opening_soon"
+                ]
+            },
+            {
+                "id": "unknown_status",
+                "label": "Unknown status",
+                "family": "availability",
+                "description": "Current availability is unknown or cannot be verified.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 19,
+                "filter_priority": 100,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "free",
+                "label": "Free",
+                "family": "access",
+                "description": "The service is free to use.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 40,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "low_barrier",
+                "label": "Low barrier",
+                "family": "access",
+                "description": "The service has fewer access restrictions than typical services.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 41,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "walk_ins_accepted",
+                "label": "Walk-ins accepted",
+                "family": "access",
+                "description": "People may use the service without making an appointment first.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 42,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "no_id_required",
+                "label": "No ID required",
+                "family": "access",
+                "description": "Identification is not required for access.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 43,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "transit_accessible",
+                "label": "Transit accessible",
+                "family": "access",
+                "description": "The service is reachable by transit or is located near usable transit.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 44,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "low_cost",
+                "label": "Low cost",
+                "family": "access",
+                "description": "The service has a cost but is relatively low-cost.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 45,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "appointment_required",
+                "label": "Appointment required",
+                "family": "access",
+                "description": "An appointment is required to use the service.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 46,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "referral_required",
+                "label": "Referral required",
+                "family": "access",
+                "description": "A referral is required to use the service.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 47,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "intake_required",
+                "label": "Intake required",
+                "family": "access",
+                "description": "People must complete intake before using the service.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 48,
+                "filter_priority": 90,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "id_required",
+                "label": "ID required",
+                "family": "access",
+                "description": "Identification is required to use the service.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 49,
+                "filter_priority": 100,
+                "show_in_filter_default": false,
+                "conflicts_with_tag_ids": [
+                    "no_id_required"
+                ]
+            },
+            {
+                "id": "first_come_first_served",
+                "label": "First come, first served",
+                "family": "access",
+                "description": "Access is provided in order of arrival until capacity is reached.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 50,
+                "filter_priority": 110,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "wheelchair_accessible",
+                "label": "Wheelchair accessible",
+                "family": "access",
+                "description": "The service or location is wheelchair accessible.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 51,
+                "filter_priority": 120,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "pets_allowed",
+                "label": "Pets allowed",
+                "family": "access",
+                "description": "Pets are allowed or accommodated.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 52,
+                "filter_priority": 130,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "couples_accepted",
+                "label": "Couples accepted",
+                "family": "access",
+                "description": "Couples may use the service together or are accommodated.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 53,
+                "filter_priority": 140,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "families_accepted",
+                "label": "Families accepted",
+                "family": "access",
+                "description": "Families or caregivers with children may use the service together or are accommodated.",
+                "applies_to_record_kinds": [
+                    "service",
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 54,
+                "filter_priority": 150,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "availability_gap",
+                "label": "Availability gap",
+                "family": "gap_pattern",
+                "description": "Support exists somewhere, but not enough is available when needed.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 40,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "capacity_gap",
+                "label": "Capacity gap",
+                "family": "gap_pattern",
+                "description": "Demand appears to exceed available capacity.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 41,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "coverage_gap",
+                "label": "Coverage gap",
+                "family": "gap_pattern",
+                "description": "Support is missing or thin in a geographic area or for a relevant population.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 42,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "time_gap",
+                "label": "Time gap",
+                "family": "gap_pattern",
+                "description": "Support exists, but not during the time it is needed.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 43,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "access_gap",
+                "label": "Access gap",
+                "family": "gap_pattern",
+                "description": "Support exists, but access requirements, location, cost, eligibility, or other barriers prevent practical use.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 44,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "mobility_gap",
+                "label": "Mobility gap",
+                "family": "gap_pattern",
+                "description": "People cannot practically reach support because of transportation, distance, route, or mobility barriers.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 45,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "information_gap",
+                "label": "Information gap",
+                "family": "gap_pattern",
+                "description": "Needed information is missing, confusing, conflicting, stale, or hard to find.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 46,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "verification_gap",
+                "label": "Verification gap",
+                "family": "gap_pattern",
+                "description": "A record, service, or claim needs verification before people should rely on it.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal",
+                    "work"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 47,
+                "filter_priority": 80,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "needs_recheck",
+                    "verification_work"
+                ]
+            },
+            {
+                "id": "safety_gap",
+                "label": "Safety gap",
+                "family": "gap_pattern",
+                "description": "A condition creates or reflects a personal safety, environmental safety, or access safety issue.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 48,
+                "filter_priority": 90,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "continuity_gap",
+                "label": "Continuity gap",
+                "family": "gap_pattern",
+                "description": "Support is interrupted, inconsistent, short-lived, or not continuous enough to meet the need.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 49,
+                "filter_priority": 100,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "coordination_gap",
+                "label": "Coordination gap",
+                "family": "gap_pattern",
+                "description": "Support efforts exist but are poorly coordinated or not aligned across providers, teams, or systems.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal",
+                    "work"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 50,
+                "filter_priority": 110,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "policy_gap",
+                "label": "Policy gap",
+                "family": "gap_pattern",
+                "description": "Policy, rules, enforcement, eligibility, or legal constraints are creating or worsening a support gap.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 51,
+                "filter_priority": 120,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "critical",
+                "label": "Critical",
+                "family": "severity",
+                "description": "A serious condition or gap requiring urgent attention.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 8,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "high",
+                "label": "High",
+                "family": "severity",
+                "description": "A high-severity condition or gap that should be prioritized.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 9,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "moderate",
+                "label": "Moderate",
+                "family": "severity",
+                "description": "A meaningful condition or gap, but not currently high or critical.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 10,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "low",
+                "label": "Low",
+                "family": "severity",
+                "description": "A low-severity condition or gap.",
+                "applies_to_record_kinds": [
+                    "gap",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 11,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "now",
+                "label": "Now",
+                "family": "urgency",
+                "description": "The issue matters immediately.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 20,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "today",
+                "label": "Today",
+                "family": "urgency",
+                "description": "The issue matters today.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 21,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "tonight",
+                "label": "Tonight",
+                "family": "urgency",
+                "description": "The issue matters tonight or during the evening/overnight period.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 22,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "next_24_hours",
+                "label": "Next 24 hours",
+                "family": "urgency",
+                "description": "The issue matters within the next day.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 23,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "this_week",
+                "label": "This week",
+                "family": "urgency",
+                "description": "The issue matters during the current week.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 24,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "monitor",
+                "label": "Monitor",
+                "family": "urgency",
+                "description": "The issue should be watched, but may not require immediate action.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 25,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "morning",
+                "label": "Morning",
+                "family": "time",
+                "description": "The record matters during the morning period.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 60,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "afternoon",
+                "label": "Afternoon",
+                "family": "time",
+                "description": "The record matters during the afternoon period.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 61,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "evening",
+                "label": "Evening",
+                "family": "time",
+                "description": "The record matters during the evening period.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 62,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "overnight",
+                "label": "Overnight",
+                "family": "time",
+                "description": "The record matters overnight.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 63,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "after_hours",
+                "label": "After hours",
+                "family": "time",
+                "description": "The record matters outside common daytime service hours.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 64,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "weekday",
+                "label": "Weekday",
+                "family": "time",
+                "description": "The record matters on weekdays.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 65,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "weekend",
+                "label": "Weekend",
+                "family": "time",
+                "description": "The record matters on weekends.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 66,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "weather_triggered",
+                "label": "Weather-triggered",
+                "family": "time",
+                "description": "The record becomes relevant because of weather conditions.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 67,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "temporary",
+                "label": "Temporary",
+                "family": "time",
+                "description": "The service, condition, or record is temporary.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 68,
+                "filter_priority": 90,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "recurring",
+                "label": "Recurring",
+                "family": "time",
+                "description": "The service, condition, or event recurs.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 69,
+                "filter_priority": 100,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "one_time",
+                "label": "One time",
+                "family": "time",
+                "description": "The service, event, condition, or post applies once.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 70,
+                "filter_priority": 110,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "verified",
+                "label": "Verified",
+                "family": "trust",
+                "description": "Crossover has verified the record through a trusted source, partner update, field observation, or other verification process.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 10,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "needs_recheck",
+                "label": "Needs recheck",
+                "family": "trust",
+                "description": "The record should be checked again before being relied on.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 50,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "source_supported",
+                "label": "Source-supported",
+                "family": "trust",
+                "description": "The record is supported by at least one source, but may not be fully verified.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 51,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "partner_update",
+                "label": "Partner update",
+                "family": "trust",
+                "description": "The record is based on an update from a partner or provider.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 52,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "human_reported",
+                "label": "Human reported",
+                "family": "trust",
+                "description": "The record is based on a human or community report.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 53,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "field_observation",
+                "label": "Field observation",
+                "family": "trust",
+                "description": "The record is based on a field observation.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 54,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "model_inferred",
+                "label": "Model inferred",
+                "family": "trust",
+                "description": "The record is based on AI inference and must not be presented as verified.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 55,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "conflicting",
+                "label": "Conflicting",
+                "family": "trust",
+                "description": "Sources or observations conflict.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 56,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "stale",
+                "label": "Stale",
+                "family": "trust",
+                "description": "The record may be out of date.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 57,
+                "filter_priority": 90,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "unverified",
+                "label": "Unverified",
+                "family": "trust",
+                "description": "The record has not been verified.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 58,
+                "filter_priority": 100,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "in_progress",
+                "label": "In progress",
+                "family": "work_stage",
+                "description": "Work is actively underway.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 20,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "planned",
+                "label": "Planned",
+                "family": "work_stage",
+                "description": "Work is planned but not yet underway.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 21,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "blocked",
+                "label": "Blocked",
+                "family": "work_stage",
+                "description": "Work is blocked by a dependency, missing information, lack of owner, constraint, or unresolved decision.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal",
+                    "gap"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 22,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "needs_owner",
+                "label": "Needs owner",
+                "family": "work_stage",
+                "description": "Work exists but needs an owner or responsible party.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal",
+                    "gap"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 23,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "completed",
+                "label": "Completed",
+                "family": "work_stage",
+                "description": "Work has been completed.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 24,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "paused",
+                "label": "Paused",
+                "family": "work_stage",
+                "description": "Work is paused.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 25,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "verification_work",
+                "label": "Verification work",
+                "family": "work_stage",
+                "description": "Work is focused on checking, confirming, calling, visiting, or otherwise verifying a record or condition.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal",
+                    "gap"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 26,
+                "filter_priority": 70,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "needs_recheck",
+                    "verification_gap"
+                ]
+            },
+            {
+                "id": "delivery",
+                "label": "Delivery",
+                "family": "work_stage",
+                "description": "Work involves delivering supplies, support, resources, or services.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 27,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "setup",
+                "label": "Setup",
+                "family": "work_stage",
+                "description": "Work involves setting up a location, service, station, event, or support operation.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 28,
+                "filter_priority": 90,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "repair",
+                "label": "Repair",
+                "family": "work_stage",
+                "description": "Work involves repair, restoration, or fixing a broken support condition.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 29,
+                "filter_priority": 100,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "coordination",
+                "label": "Coordination",
+                "family": "work_stage",
+                "description": "Work involves coordinating partners, teams, providers, volunteers, or systems.",
+                "applies_to_record_kinds": [
+                    "work",
+                    "signal"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 30,
+                "filter_priority": 110,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "request",
+                "label": "Request",
+                "family": "post_type",
+                "description": "A person or group is requesting help, resources, information, or action.",
+                "applies_to_record_kinds": [
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 20,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "offer",
+                "label": "Offer",
+                "family": "post_type",
+                "description": "A person or group is offering help, resources, rides, supplies, labor, or information.",
+                "applies_to_record_kinds": [
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 21,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "report",
+                "label": "Report",
+                "family": "post_type",
+                "description": "A person or group is reporting a condition, change, concern, or observation.",
+                "applies_to_record_kinds": [
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 22,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "discussion",
+                "label": "Discussion",
+                "family": "post_type",
+                "description": "A discussion or exchange about a civic need, service, gap, work item, or condition.",
+                "applies_to_record_kinds": [
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 23,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "donation_need",
+                "label": "Donation need",
+                "family": "post_type",
+                "description": "A need for donated supplies, funds, goods, or other resources.",
+                "applies_to_record_kinds": [
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 24,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "community_note",
+                "label": "Community note",
+                "family": "post_type",
+                "description": "A contextual note from the community that may help explain local conditions, needs, or services.",
+                "applies_to_record_kinds": [
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 25,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "volunteer_need",
+                "label": "Volunteer need",
+                "family": "post_type",
+                "description": "A need for volunteers, volunteer labor, volunteer coordination, or volunteer support.",
+                "applies_to_record_kinds": [
+                    "post",
+                    "work"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 26,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "citywide",
+                "label": "Citywide",
+                "family": "area",
+                "description": "The record applies citywide.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 70,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "central_core",
+                "label": "Central Core",
+                "family": "area",
+                "description": "The record applies to the Central Core area.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 71,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "downtown",
+                "label": "Downtown",
+                "family": "area",
+                "description": "The record applies to Downtown.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 72,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "south_stockton",
+                "label": "South Stockton",
+                "family": "area",
+                "description": "The record applies to South Stockton.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 73,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "east_corridor",
+                "label": "East Corridor",
+                "family": "area",
+                "description": "The record applies to the East Corridor.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 74,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "north_edge",
+                "label": "North Edge",
+                "family": "area",
+                "description": "The record applies to the North Edge.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 75,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "families",
+                "label": "Families",
+                "family": "population_fit",
+                "description": "The record is especially relevant to families or caregivers.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 60,
+                "filter_priority": 10,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "family_support",
+                    "baby_food",
+                    "families_accepted"
+                ]
+            },
+            {
+                "id": "people_in_vehicles",
+                "label": "People in vehicles",
+                "family": "population_fit",
+                "description": "The record is especially relevant to people living in or relying on vehicles.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 61,
+                "filter_priority": 20,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "safe_parking",
+                    "overnight_parking",
+                    "safe_parking_lot"
+                ]
+            },
+            {
+                "id": "people_without_id",
+                "label": "People without ID",
+                "family": "population_fit",
+                "description": "The record is especially relevant to people who do not have identification.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 62,
+                "filter_priority": 30,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "no_id_required",
+                    "id_required",
+                    "id_service",
+                    "id_replacement"
+                ]
+            },
+            {
+                "id": "people_with_pets",
+                "label": "People with pets",
+                "family": "population_fit",
+                "description": "The record is especially relevant to people with pets.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 63,
+                "filter_priority": 40,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "pets",
+                    "pets_allowed"
+                ]
+            },
+            {
+                "id": "people_with_disabilities",
+                "label": "People with disabilities",
+                "family": "population_fit",
+                "description": "The record is especially relevant to people with disabilities or accessibility needs.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 64,
+                "filter_priority": 50,
+                "show_in_filter_default": true,
+                "related_tag_ids": [
+                    "accessibility",
+                    "wheelchair_accessible"
+                ]
+            },
+            {
+                "id": "youth",
+                "label": "Youth",
+                "family": "population_fit",
+                "description": "The record is especially relevant to youth.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 65,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "seniors",
+                "label": "Seniors",
+                "family": "population_fit",
+                "description": "The record is especially relevant to seniors.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 66,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "veterans",
+                "label": "Veterans",
+                "family": "population_fit",
+                "description": "The record is especially relevant to veterans.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 67,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "rv_residents",
+                "label": "RV residents",
+                "family": "population_fit",
+                "description": "The record is especially relevant to people living in or relying on RVs.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 68,
+                "filter_priority": 90,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "safe_parking",
+                    "overnight_parking",
+                    "tow_risk"
+                ]
+            },
+            {
+                "id": "spanish_speakers",
+                "label": "Spanish speakers",
+                "family": "population_fit",
+                "description": "The record is especially relevant to Spanish speakers or includes Spanish-language access.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 69,
+                "filter_priority": 100,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "partner_update_source",
+                "label": "Partner update",
+                "family": "source_type",
+                "description": "The source is a partner or provider update.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 80,
+                "filter_priority": 10,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "city_notice",
+                "label": "City notice",
+                "family": "source_type",
+                "description": "The source is a city notice or city-published information.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 81,
+                "filter_priority": 20,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "provider_website",
+                "label": "Provider website",
+                "family": "source_type",
+                "description": "The source is a provider website.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 82,
+                "filter_priority": 30,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "public_directory",
+                "label": "Public directory",
+                "family": "source_type",
+                "description": "The source is a public directory.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 83,
+                "filter_priority": 40,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "field_observation_source",
+                "label": "Field observation",
+                "family": "source_type",
+                "description": "The source is a field observation.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 84,
+                "filter_priority": 50,
+                "show_in_filter_default": true
+            },
+            {
+                "id": "human_report_source",
+                "label": "Human report",
+                "family": "source_type",
+                "description": "The source is a human report.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 85,
+                "filter_priority": 60,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "manual_note",
+                "label": "Manual note",
+                "family": "source_type",
+                "description": "The source is a manual note entered by a trusted operator or contributor.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 86,
+                "filter_priority": 70,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "model_output_source",
+                "label": "Model output",
+                "family": "source_type",
+                "description": "The source is model output and should not be treated as verified by itself.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 87,
+                "filter_priority": 80,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "demo_placeholder",
+                "label": "Demo placeholder",
+                "family": "source_type",
+                "description": "The source is a placeholder used for demos or prototypes.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": false,
+                "show_in_detail": true,
+                "display_priority": 88,
+                "filter_priority": 90,
+                "show_in_filter_default": false
+            },
+            {
+                "id": "hot_meal",
+                "label": "Hot meal",
+                "family": "related",
+                "description": "The record involves hot meals.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 90,
+                "filter_priority": 10,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food",
+                    "meal_service"
+                ]
+            },
+            {
+                "id": "to_go_meal",
+                "label": "To-go meal",
+                "family": "related",
+                "description": "The record involves meals available to go.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 91,
+                "filter_priority": 20,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food",
+                    "meal_service"
+                ]
+            },
+            {
+                "id": "sack_lunch",
+                "label": "Sack lunch",
+                "family": "related",
+                "description": "The record involves sack lunches.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 92,
+                "filter_priority": 30,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food",
+                    "meal_service"
+                ]
+            },
+            {
+                "id": "groceries",
+                "label": "Groceries",
+                "family": "related",
+                "description": "The record involves groceries or take-home food.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 93,
+                "filter_priority": 40,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food"
+                ]
+            },
+            {
+                "id": "baby_food",
+                "label": "Baby food",
+                "family": "related",
+                "description": "The record involves baby food, formula, or infant food support.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 94,
+                "filter_priority": 50,
+                "show_in_filter_default": true,
+                "parent_tag_ids": [
+                    "food",
+                    "family_support"
+                ]
+            },
+            {
+                "id": "pantry_box",
+                "label": "Pantry box",
+                "family": "related",
+                "description": "The record involves a pantry box or boxed food distribution.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 95,
+                "filter_priority": 60,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "food",
+                    "pantry"
+                ]
+            },
+            {
+                "id": "hydration_station",
+                "label": "Hydration station",
+                "family": "related",
+                "description": "The record involves drinking water or hydration access at a station or location.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 96,
+                "filter_priority": 70,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "water",
+                    "cooling"
+                ]
+            },
+            {
+                "id": "misting_station",
+                "label": "Misting station",
+                "family": "related",
+                "description": "The record involves misting or spray-based heat relief.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 97,
+                "filter_priority": 80,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "cooling"
+                ]
+            },
+            {
+                "id": "tow_risk",
+                "label": "Tow risk",
+                "family": "related",
+                "description": "The record involves possible towing, enforcement, or vehicle displacement risk.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 98,
+                "filter_priority": 90,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "safe_parking",
+                    "safety"
+                ]
+            },
+            {
+                "id": "restroom_nearby",
+                "label": "Restroom nearby",
+                "family": "related",
+                "description": "A restroom appears nearby or is relevant to the record.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 99,
+                "filter_priority": 100,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "restrooms"
+                ]
+            },
+            {
+                "id": "water_nearby",
+                "label": "Water nearby",
+                "family": "related",
+                "description": "Drinking water appears nearby or is relevant to the record.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 100,
+                "filter_priority": 110,
+                "show_in_filter_default": false,
+                "parent_tag_ids": [
+                    "water"
+                ]
+            },
+            {
+                "id": "hours_conflict",
+                "label": "Hours conflict",
+                "family": "related",
+                "description": "Available hours conflict across sources or need clarification.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 101,
+                "filter_priority": 120,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "conflicting",
+                    "needs_recheck"
+                ]
+            },
+            {
+                "id": "capacity_unknown",
+                "label": "Capacity unknown",
+                "family": "related",
+                "description": "Capacity is unknown or unconfirmed.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 102,
+                "filter_priority": 130,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "unknown_status",
+                    "needs_recheck"
+                ]
+            },
+            {
+                "id": "needs_phone_call",
+                "label": "Needs phone call",
+                "family": "related",
+                "description": "A phone call is likely needed to verify or clarify the record.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 103,
+                "filter_priority": 140,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "needs_recheck",
+                    "verification_work"
+                ]
+            },
+            {
+                "id": "needs_field_check",
+                "label": "Needs field check",
+                "family": "related",
+                "description": "A field check is likely needed to verify or clarify the record.",
+                "applies_to_record_kinds": [
+                    "signal",
+                    "service",
+                    "gap",
+                    "work",
+                    "post"
+                ],
+                "filterable": true,
+                "show_on_card": true,
+                "show_in_detail": true,
+                "display_priority": 104,
+                "filter_priority": 150,
+                "show_in_filter_default": false,
+                "related_tag_ids": [
+                    "needs_recheck",
+                    "verification_work"
+                ]
+            }
+        ]
+    },
+    "records": [
+        {
+            "id": "sig_st_marys_open",
+            "record_kind": "signal",
+            "title": "St. Mary’s meal service is open",
+            "summary": "Partner update confirms afternoon meal service is active.",
+            "tag_ids": [
+                "food",
+                "meal_service",
+                "hot_meal",
+                "open_now",
+                "partner_update",
+                "today",
+                "afternoon",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:49:00-07:00",
+                "source_checked_at": "2026-05-04T11:49:00-07:00",
+                "expires_at": "2026-05-04T15:49:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.94,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "St. Mary’s meal service is open",
+                "lat": 37.9499,
+                "lng": -121.3034
+            }
+        },
+        {
+            "id": "sig_pantry_hours_changed",
+            "record_kind": "signal",
+            "title": "Southside pantry hours changed today",
+            "summary": "Directory and provider page disagree about today’s pantry window.",
+            "tag_ids": [
+                "food",
+                "pantry",
+                "groceries",
+                "hours_conflict",
+                "needs_recheck",
+                "today",
+                "south_stockton",
+                "conflicting"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:58:00-07:00",
+                "source_checked_at": "2026-05-04T11:58:00-07:00",
+                "expires_at": "2026-05-04T15:58:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.72,
+                "tag_ids": [
+                    "conflicting"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Southside pantry hours changed today",
+                "lat": 37.925,
+                "lng": -121.288
+            }
+        },
+        {
+            "id": "sig_restroom_closure",
+            "record_kind": "signal",
+            "title": "Downtown restroom closure reported",
+            "summary": "Human report says public restroom is temporarily unavailable.",
+            "tag_ids": [
+                "restrooms",
+                "public_restroom",
+                "temporarily_unavailable",
+                "human_reported",
+                "today",
+                "downtown",
+                "needs_field_check"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:07:00-07:00",
+                "source_checked_at": "2026-05-04T12:07:00-07:00",
+                "expires_at": "2026-05-04T16:07:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.78,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Downtown restroom closure reported",
+                "lat": 37.9607,
+                "lng": -121.2908
+            }
+        },
+        {
+            "id": "sig_cooling_confirmed",
+            "record_kind": "signal",
+            "title": "Cooling center confirmed for tonight",
+            "summary": "City notice confirms cooling center hours for evening heat relief.",
+            "tag_ids": [
+                "cooling",
+                "cooling_center",
+                "open_now",
+                "tonight",
+                "weather_triggered",
+                "verified",
+                "north_edge"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:16:00-07:00",
+                "source_checked_at": "2026-05-04T12:16:00-07:00",
+                "expires_at": "2026-05-04T16:16:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.91,
+                "tag_ids": [
+                    "verified"
+                ]
+            },
+            "sources": [
+                "src_city_notice"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Cooling center confirmed for tonight",
+                "lat": 38.011,
+                "lng": -121.302
+            }
+        },
+        {
+            "id": "sig_safe_parking_recheck",
+            "record_kind": "signal",
+            "title": "Safe parking rules need recheck",
+            "summary": "Overnight parking rules have not been confirmed this week.",
+            "tag_ids": [
+                "safe_parking",
+                "overnight_parking",
+                "tow_risk",
+                "needs_recheck",
+                "this_week",
+                "citywide"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:25:00-07:00",
+                "source_checked_at": "2026-05-04T12:25:00-07:00",
+                "expires_at": "2026-05-04T16:25:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.68,
+                "tag_ids": [
+                    "needs_recheck"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "sig_mobile_shower_arriving",
+            "record_kind": "signal",
+            "title": "Mobile shower unit arriving soon",
+            "summary": "Outreach partner reports mobile shower setup near Central Core.",
+            "tag_ids": [
+                "hygiene",
+                "mobile_shower",
+                "opening_soon",
+                "partner_update",
+                "today",
+                "setup",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:34:00-07:00",
+                "source_checked_at": "2026-05-04T12:34:00-07:00",
+                "expires_at": "2026-05-04T16:34:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.89,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Mobile shower unit arriving soon",
+                "lat": 37.9499,
+                "lng": -121.2884
+            }
+        },
+        {
+            "id": "sig_charging_limited",
+            "record_kind": "signal",
+            "title": "Charging access limited at library",
+            "summary": "Field observation found several outlets unavailable.",
+            "tag_ids": [
+                "charging",
+                "phone_charging",
+                "limited_availability",
+                "field_observation",
+                "today",
+                "east_corridor",
+                "capacity_unknown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:43:00-07:00",
+                "source_checked_at": "2026-05-04T12:43:00-07:00",
+                "expires_at": "2026-05-04T16:43:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.82,
+                "tag_ids": [
+                    "field_observation"
+                ]
+            },
+            "sources": [
+                "src_field_observation"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Charging access limited at library",
+                "lat": 37.9654,
+                "lng": -121.2411
+            }
+        },
+        {
+            "id": "sig_id_clinic_full",
+            "record_kind": "signal",
+            "title": "ID clinic reached capacity",
+            "summary": "Walk-in ID clinic is full for the current window.",
+            "tag_ids": [
+                "id_service",
+                "id_replacement",
+                "full",
+                "walk_ins_accepted",
+                "partner_update",
+                "today",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:52:00-07:00",
+                "source_checked_at": "2026-05-04T12:52:00-07:00",
+                "expires_at": "2026-05-04T16:52:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.88,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "ID clinic reached capacity",
+                "lat": 37.9607,
+                "lng": -121.2968
+            }
+        },
+        {
+            "id": "sig_water_station_active",
+            "record_kind": "signal",
+            "title": "Hydration station active near park",
+            "summary": "Field observation confirms bottled water distribution is active.",
+            "tag_ids": [
+                "water",
+                "open_now",
+                "field_observation",
+                "today",
+                "south_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:01:00-07:00",
+                "source_checked_at": "2026-05-04T13:01:00-07:00",
+                "expires_at": "2026-05-04T17:01:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.86,
+                "tag_ids": [
+                    "field_observation"
+                ]
+            },
+            "sources": [
+                "src_field_observation"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Hydration station active near park",
+                "lat": 37.931,
+                "lng": -121.288
+            }
+        },
+        {
+            "id": "sig_shelter_waitlist",
+            "record_kind": "signal",
+            "title": "Shelter waitlist started early",
+            "summary": "Shelter intake remains open but waitlist began before evening.",
+            "tag_ids": [
+                "shelter",
+                "emergency_shelter",
+                "waitlist",
+                "limited_availability",
+                "partner_update",
+                "evening",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:10:00-07:00",
+                "source_checked_at": "2026-05-04T13:10:00-07:00",
+                "expires_at": "2026-05-04T17:10:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.84,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Shelter waitlist started early",
+                "lat": 37.9517,
+                "lng": -121.2908
+            }
+        },
+        {
+            "id": "svc_st_marys_meal_service",
+            "record_kind": "service",
+            "title": "St. Mary’s meal service",
+            "summary": "Hot meals and to-go meals during active meal windows.",
+            "tag_ids": [
+                "food",
+                "meal_service",
+                "hot_meal",
+                "free",
+                "walk_ins_accepted",
+                "low_barrier",
+                "open_now",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:19:00-07:00",
+                "source_checked_at": "2026-05-04T13:19:00-07:00",
+                "expires_at": "2026-05-04T17:19:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.94,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "St. Mary’s meal service",
+                "lat": 37.9499,
+                "lng": -121.2944
+            }
+        },
+        {
+            "id": "svc_southside_pantry",
+            "record_kind": "service",
+            "title": "Southside pantry",
+            "summary": "Grocery pantry with weekly distribution windows.",
+            "tag_ids": [
+                "food",
+                "pantry",
+                "groceries",
+                "free",
+                "id_required",
+                "appointment_required",
+                "needs_recheck",
+                "south_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:28:00-07:00",
+                "source_checked_at": "2026-05-04T13:28:00-07:00",
+                "expires_at": "2026-05-04T17:28:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.71,
+                "tag_ids": [
+                    "needs_recheck"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Southside pantry",
+                "lat": 37.925,
+                "lng": -121.279
+            }
+        },
+        {
+            "id": "svc_north_cooling_center",
+            "record_kind": "service",
+            "title": "North Edge cooling center",
+            "summary": "Cooling space with water, restrooms, and phone charging.",
+            "tag_ids": [
+                "cooling",
+                "cooling_center",
+                "water",
+                "restrooms",
+                "charging",
+                "open_now",
+                "free",
+                "wheelchair_accessible",
+                "verified",
+                "north_edge"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:37:00-07:00",
+                "source_checked_at": "2026-05-04T13:37:00-07:00",
+                "expires_at": "2026-05-04T17:37:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.93,
+                "tag_ids": [
+                    "verified"
+                ]
+            },
+            "sources": [
+                "src_city_notice"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "North Edge cooling center",
+                "lat": 38.008,
+                "lng": -121.296
+            }
+        },
+        {
+            "id": "svc_mobile_hygiene_unit",
+            "record_kind": "service",
+            "title": "Mobile hygiene unit",
+            "summary": "Mobile showers, hygiene supplies, and restroom access.",
+            "tag_ids": [
+                "hygiene",
+                "mobile_shower",
+                "restrooms",
+                "opening_soon",
+                "free",
+                "low_barrier",
+                "partner_update",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:46:00-07:00",
+                "source_checked_at": "2026-05-04T13:46:00-07:00",
+                "expires_at": "2026-05-04T17:46:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.88,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Mobile hygiene unit",
+                "lat": 37.9589,
+                "lng": -121.3064
+            }
+        },
+        {
+            "id": "svc_downtown_id_clinic",
+            "record_kind": "service",
+            "title": "Downtown ID clinic",
+            "summary": "Document help and ID replacement support.",
+            "tag_ids": [
+                "id_service",
+                "id_replacement",
+                "document_help",
+                "free",
+                "walk_ins_accepted",
+                "full",
+                "today",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:55:00-07:00",
+                "source_checked_at": "2026-05-04T13:55:00-07:00",
+                "expires_at": "2026-05-04T17:55:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.87,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Downtown ID clinic",
+                "lat": 37.9517,
+                "lng": -121.2968
+            }
+        },
+        {
+            "id": "svc_legal_benefits_help",
+            "record_kind": "service",
+            "title": "Legal and benefits help desk",
+            "summary": "Legal clinic with benefits enrollment support.",
+            "tag_ids": [
+                "legal",
+                "benefits",
+                "appointment_required",
+                "free",
+                "source_supported",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:04:00-07:00",
+                "source_checked_at": "2026-05-04T10:04:00-07:00",
+                "expires_at": "2026-05-04T14:04:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.79,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_provider_website"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Legal and benefits help desk",
+                "lat": 37.9547,
+                "lng": -121.2938
+            }
+        },
+        {
+            "id": "svc_safe_parking_lot_a",
+            "record_kind": "service",
+            "title": "Safe parking Lot A",
+            "summary": "Overnight parking resource with unclear RV rules.",
+            "tag_ids": [
+                "safe_parking",
+                "overnight_parking",
+                "people_in_vehicles",
+                "tow_risk",
+                "unknown_status",
+                "needs_recheck",
+                "west_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:13:00-07:00",
+                "source_checked_at": "2026-05-04T10:13:00-07:00",
+                "expires_at": "2026-05-04T14:13:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.66,
+                "tag_ids": [
+                    "needs_recheck"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Safe parking Lot A",
+                "lat": 37.954,
+                "lng": -121.345
+            }
+        },
+        {
+            "id": "svc_storage_locker_program",
+            "record_kind": "service",
+            "title": "Storage locker program",
+            "summary": "Short-term personal storage lockers.",
+            "tag_ids": [
+                "storage",
+                "storage_locker",
+                "appointment_required",
+                "source_supported",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:22:00-07:00",
+                "source_checked_at": "2026-05-04T10:22:00-07:00",
+                "expires_at": "2026-05-04T14:22:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.77,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_provider_website"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Storage locker program",
+                "lat": 37.9559,
+                "lng": -121.2944
+            }
+        },
+        {
+            "id": "svc_mobile_clinic",
+            "record_kind": "service",
+            "title": "Mobile health clinic",
+            "summary": "Basic medical care, wound care, and referrals.",
+            "tag_ids": [
+                "health",
+                "free",
+                "walk_ins_accepted",
+                "open_now",
+                "field_observation",
+                "east_corridor"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:31:00-07:00",
+                "source_checked_at": "2026-05-04T10:31:00-07:00",
+                "expires_at": "2026-05-04T14:31:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.83,
+                "tag_ids": [
+                    "field_observation"
+                ]
+            },
+            "sources": [
+                "src_field_observation"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Mobile health clinic",
+                "lat": 37.9714,
+                "lng": -121.2261
+            }
+        },
+        {
+            "id": "svc_harm_reduction_table",
+            "record_kind": "service",
+            "title": "Harm reduction table",
+            "summary": "Naloxone and safer-use supplies.",
+            "tag_ids": [
+                "substance_use_support",
+                "free",
+                "walk_ins_accepted",
+                "open_now",
+                "human_reported",
+                "south_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:40:00-07:00",
+                "source_checked_at": "2026-05-04T10:40:00-07:00",
+                "expires_at": "2026-05-04T14:40:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.74,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Harm reduction table",
+                "lat": 37.919,
+                "lng": -121.276
+            }
+        },
+        {
+            "id": "svc_laundry_voucher",
+            "record_kind": "service",
+            "title": "Laundry voucher desk",
+            "summary": "Limited laundry vouchers while supplies last.",
+            "tag_ids": [
+                "hygiene",
+                "limited_availability",
+                "free",
+                "source_supported",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:49:00-07:00",
+                "source_checked_at": "2026-05-04T10:49:00-07:00",
+                "expires_at": "2026-05-04T14:49:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.76,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_provider_website"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Laundry voucher desk",
+                "lat": 37.9547,
+                "lng": -121.2998
+            }
+        },
+        {
+            "id": "svc_family_shelter",
+            "record_kind": "service",
+            "title": "Family shelter intake",
+            "summary": "Family shelter intake by referral.",
+            "tag_ids": [
+                "shelter",
+                "families",
+                "families_accepted",
+                "referral_required",
+                "limited_availability",
+                "partner_update",
+                "north_edge"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:58:00-07:00",
+                "source_checked_at": "2026-05-04T10:58:00-07:00",
+                "expires_at": "2026-05-04T14:58:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.85,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Family shelter intake",
+                "lat": 38.005,
+                "lng": -121.311
+            }
+        },
+        {
+            "id": "svc_mail_address",
+            "record_kind": "service",
+            "title": "Mail address enrollment",
+            "summary": "Mail address support for documents and benefits.",
+            "tag_ids": [
+                "id_service",
+                "document_help",
+                "appointment_required",
+                "free",
+                "source_supported",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:07:00-07:00",
+                "source_checked_at": "2026-05-04T11:07:00-07:00",
+                "expires_at": "2026-05-04T15:07:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.78,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_provider_website"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Mail address enrollment",
+                "lat": 37.9559,
+                "lng": -121.3004
+            }
+        },
+        {
+            "id": "svc_wifi_charging",
+            "record_kind": "service",
+            "title": "Wi‑Fi and charging access",
+            "summary": "Public Wi‑Fi and limited phone charging access.",
+            "tag_ids": [
+                "connectivity",
+                "charging",
+                "phone_charging",
+                "open_now",
+                "free",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:16:00-07:00",
+                "source_checked_at": "2026-05-04T11:16:00-07:00",
+                "expires_at": "2026-05-04T15:16:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.73,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Wi‑Fi and charging access",
+                "lat": 37.9637,
+                "lng": -121.2908
+            }
+        },
+        {
+            "id": "svc_pet_food_table",
+            "record_kind": "service",
+            "title": "Pet food table",
+            "summary": "Pet food distribution this weekend.",
+            "tag_ids": [
+                "pets",
+                "food",
+                "sack_lunch",
+                "weekend",
+                "free",
+                "human_reported",
+                "east_corridor"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:25:00-07:00",
+                "source_checked_at": "2026-05-04T11:25:00-07:00",
+                "expires_at": "2026-05-04T15:25:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.7,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Pet food table",
+                "lat": 37.9594,
+                "lng": -121.2291
+            }
+        },
+        {
+            "id": "gap_food_after_hours",
+            "record_kind": "gap",
+            "title": "Food access drops after 7 PM in south Stockton",
+            "summary": "Known meal and pantry options close before evening needs rise.",
+            "tag_ids": [
+                "food",
+                "meal_service",
+                "pantry",
+                "time_gap",
+                "coverage_gap",
+                "after_hours",
+                "tonight",
+                "high",
+                "source_supported",
+                "south_stockton",
+                "needs_partner_update"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:34:00-07:00",
+                "source_checked_at": "2026-05-04T11:34:00-07:00",
+                "expires_at": "2026-05-04T15:34:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.82,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_model_output"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_restroom_downtown",
+            "record_kind": "gap",
+            "title": "Downtown restroom access needs recheck",
+            "summary": "Public restroom information is stale and field reports conflict.",
+            "tag_ids": [
+                "restrooms",
+                "public_restroom",
+                "verification_gap",
+                "information_gap",
+                "needs_recheck",
+                "stale",
+                "moderate",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:43:00-07:00",
+                "source_checked_at": "2026-05-04T11:43:00-07:00",
+                "expires_at": "2026-05-04T15:43:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.69,
+                "tag_ids": [
+                    "stale"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_shelter_capacity",
+            "record_kind": "gap",
+            "title": "Shelter capacity is tight tonight",
+            "summary": "Emergency shelter intake shows waitlist and limited availability.",
+            "tag_ids": [
+                "shelter",
+                "emergency_shelter",
+                "capacity_gap",
+                "tonight",
+                "high",
+                "partner_update",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:52:00-07:00",
+                "source_checked_at": "2026-05-04T11:52:00-07:00",
+                "expires_at": "2026-05-04T15:52:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.86,
+                "tag_ids": [
+                    "partner_update"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_safe_parking_policy",
+            "record_kind": "gap",
+            "title": "Safe parking rules remain unclear",
+            "summary": "Overnight parking rules may expose vehicle residents to tow risk.",
+            "tag_ids": [
+                "safe_parking",
+                "overnight_parking",
+                "policy_gap",
+                "information_gap",
+                "tow_risk",
+                "people_in_vehicles",
+                "needs_recheck",
+                "citywide",
+                "high"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:01:00-07:00",
+                "source_checked_at": "2026-05-04T12:01:00-07:00",
+                "expires_at": "2026-05-04T16:01:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.67,
+                "tag_ids": [
+                    "needs_recheck"
+                ]
+            },
+            "sources": [
+                "src_public_directory"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_charging_east",
+            "record_kind": "gap",
+            "title": "Charging coverage thin in East Corridor",
+            "summary": "Only one known public charging point appears active nearby.",
+            "tag_ids": [
+                "charging",
+                "phone_charging",
+                "coverage_gap",
+                "capacity_gap",
+                "today",
+                "moderate",
+                "field_observation",
+                "east_corridor"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:10:00-07:00",
+                "source_checked_at": "2026-05-04T12:10:00-07:00",
+                "expires_at": "2026-05-04T16:10:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.8,
+                "tag_ids": [
+                    "field_observation"
+                ]
+            },
+            "sources": [
+                "src_field_observation"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_cooling_transport",
+            "record_kind": "gap",
+            "title": "Cooling center reachable only with transport",
+            "summary": "Cooling support exists but is hard to reach after bus frequency drops.",
+            "tag_ids": [
+                "cooling",
+                "cooling_center",
+                "transportation",
+                "mobility_gap",
+                "tonight",
+                "weather_triggered",
+                "high",
+                "north_edge"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:19:00-07:00",
+                "source_checked_at": "2026-05-04T12:19:00-07:00",
+                "expires_at": "2026-05-04T16:19:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.75,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_model_output"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_id_no_walkin",
+            "record_kind": "gap",
+            "title": "No walk-in ID help remains today",
+            "summary": "ID services are full or require appointments after midday.",
+            "tag_ids": [
+                "id_service",
+                "id_replacement",
+                "access_gap",
+                "time_gap",
+                "today",
+                "moderate",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:28:00-07:00",
+                "source_checked_at": "2026-05-04T12:28:00-07:00",
+                "expires_at": "2026-05-04T16:28:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.79,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_partner_update"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_storage_waitlist",
+            "record_kind": "gap",
+            "title": "Storage options are waitlisted",
+            "summary": "Known storage support has limited capacity and appointment bottlenecks.",
+            "tag_ids": [
+                "storage",
+                "storage_locker",
+                "capacity_gap",
+                "access_gap",
+                "waitlist",
+                "this_week",
+                "moderate",
+                "central_core"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:37:00-07:00",
+                "source_checked_at": "2026-05-04T12:37:00-07:00",
+                "expires_at": "2026-05-04T16:37:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.72,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_provider_website"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_baby_food",
+            "record_kind": "gap",
+            "title": "Baby food supply gap this weekend",
+            "summary": "Community posts and pantry notes indicate baby food may run short.",
+            "tag_ids": [
+                "food",
+                "baby_food",
+                "pantry",
+                "capacity_gap",
+                "weekend",
+                "high",
+                "human_reported",
+                "south_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:46:00-07:00",
+                "source_checked_at": "2026-05-04T12:46:00-07:00",
+                "expires_at": "2026-05-04T16:46:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.7,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "gap_wound_care",
+            "record_kind": "gap",
+            "title": "Wound care coverage limited after clinic closes",
+            "summary": "Mobile clinic availability does not cover evening needs.",
+            "tag_ids": [
+                "health",
+                "time_gap",
+                "coverage_gap",
+                "evening",
+                "moderate",
+                "east_corridor"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T12:55:00-07:00",
+                "source_checked_at": "2026-05-04T12:55:00-07:00",
+                "expires_at": "2026-05-04T16:55:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.74,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_model_output"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "work_verify_pantry_hours",
+            "record_kind": "work",
+            "title": "Verify pantry hours",
+            "summary": "Call and field-check pantry hours after source conflict.",
+            "tag_ids": [
+                "food",
+                "pantry",
+                "verification_work",
+                "in_progress",
+                "needs_phone_call",
+                "needs_field_check",
+                "today",
+                "south_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:04:00-07:00",
+                "source_checked_at": "2026-05-04T13:04:00-07:00",
+                "expires_at": "2026-05-04T17:04:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.9,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_manual_note"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "work_cooling_setup",
+            "record_kind": "work",
+            "title": "Cooling station setup underway",
+            "summary": "Crew setting up water and shade support before evening heat.",
+            "tag_ids": [
+                "cooling",
+                "water",
+                "setup",
+                "in_progress",
+                "weather_triggered",
+                "today",
+                "north_edge"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:13:00-07:00",
+                "source_checked_at": "2026-05-04T13:13:00-07:00",
+                "expires_at": "2026-05-04T17:13:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.86,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_manual_note"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Cooling station setup underway",
+                "lat": 38.005,
+                "lng": -121.308
+            }
+        },
+        {
+            "id": "work_restroom_recheck",
+            "record_kind": "work",
+            "title": "Restroom field recheck assigned",
+            "summary": "Volunteer assigned to confirm downtown restroom access.",
+            "tag_ids": [
+                "restrooms",
+                "public_restroom",
+                "verification_work",
+                "planned",
+                "needs_field_check",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:22:00-07:00",
+                "source_checked_at": "2026-05-04T13:22:00-07:00",
+                "expires_at": "2026-05-04T17:22:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.83,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_manual_note"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "work_shelter_coordination",
+            "record_kind": "work",
+            "title": "Shelter placement coordination",
+            "summary": "Partners coordinating options for people on waitlist.",
+            "tag_ids": [
+                "shelter",
+                "emergency_shelter",
+                "coordination",
+                "in_progress",
+                "tonight",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:31:00-07:00",
+                "source_checked_at": "2026-05-04T13:31:00-07:00",
+                "expires_at": "2026-05-04T17:31:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.82,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_manual_note"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "work_safe_parking_policy_call",
+            "record_kind": "work",
+            "title": "Safe parking policy call needed",
+            "summary": "Contact city or lot operator to confirm overnight parking rules.",
+            "tag_ids": [
+                "safe_parking",
+                "overnight_parking",
+                "policy_gap",
+                "needs_phone_call",
+                "needs_owner",
+                "citywide"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:40:00-07:00",
+                "source_checked_at": "2026-05-04T13:40:00-07:00",
+                "expires_at": "2026-05-04T17:40:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.76,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_manual_note"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "work_charging_repair",
+            "record_kind": "work",
+            "title": "Charging point repair reported",
+            "summary": "Repair work reported for public charging outlet cluster.",
+            "tag_ids": [
+                "charging",
+                "phone_charging",
+                "repair",
+                "planned",
+                "east_corridor"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:49:00-07:00",
+                "source_checked_at": "2026-05-04T13:49:00-07:00",
+                "expires_at": "2026-05-04T17:49:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.64,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Charging point repair reported",
+                "lat": 37.9624,
+                "lng": -121.2231
+            }
+        },
+        {
+            "id": "work_baby_food_delivery",
+            "record_kind": "work",
+            "title": "Baby food delivery planned",
+            "summary": "Community group plans delivery to south pantry this weekend.",
+            "tag_ids": [
+                "food",
+                "baby_food",
+                "delivery",
+                "planned",
+                "weekend",
+                "south_stockton"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T13:58:00-07:00",
+                "source_checked_at": "2026-05-04T13:58:00-07:00",
+                "expires_at": "2026-05-04T17:58:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.72,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            },
+            "location": {
+                "label": "Baby food delivery planned",
+                "lat": 37.925,
+                "lng": -121.294
+            }
+        },
+        {
+            "id": "work_id_clinic_followup",
+            "record_kind": "work",
+            "title": "ID clinic overflow follow-up",
+            "summary": "Partner checking whether second walk-in window can open.",
+            "tag_ids": [
+                "id_service",
+                "id_replacement",
+                "coordination",
+                "blocked",
+                "today",
+                "downtown"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:07:00-07:00",
+                "source_checked_at": "2026-05-04T10:07:00-07:00",
+                "expires_at": "2026-05-04T14:07:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.78,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_manual_note"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_baby_food_request",
+            "record_kind": "post",
+            "title": "Baby food requested for weekend pantry",
+            "summary": "Community post requests formula and baby food donations.",
+            "tag_ids": [
+                "food",
+                "baby_food",
+                "pantry",
+                "donation_need",
+                "request",
+                "weekend",
+                "south_stockton",
+                "human_reported"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:16:00-07:00",
+                "source_checked_at": "2026-05-04T10:16:00-07:00",
+                "expires_at": "2026-05-04T14:16:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.65,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_ride_offer_id_clinic",
+            "record_kind": "post",
+            "title": "Volunteer offers rides to ID clinic",
+            "summary": "Community member offers limited rides to downtown ID clinic.",
+            "tag_ids": [
+                "transportation",
+                "id_service",
+                "offer",
+                "volunteer_need",
+                "today",
+                "downtown",
+                "human_reported"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:25:00-07:00",
+                "source_checked_at": "2026-05-04T10:25:00-07:00",
+                "expires_at": "2026-05-04T14:25:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.62,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_restroom_report",
+            "record_kind": "post",
+            "title": "Resident reports restroom locked",
+            "summary": "Post says downtown restroom was locked during posted hours.",
+            "tag_ids": [
+                "restrooms",
+                "public_restroom",
+                "report",
+                "needs_field_check",
+                "today",
+                "downtown",
+                "human_reported"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:34:00-07:00",
+                "source_checked_at": "2026-05-04T10:34:00-07:00",
+                "expires_at": "2026-05-04T14:34:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.68,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_safe_parking_discussion",
+            "record_kind": "post",
+            "title": "Safe parking discussion continues",
+            "summary": "Community discussion asks which lots are safe overnight.",
+            "tag_ids": [
+                "safe_parking",
+                "overnight_parking",
+                "discussion",
+                "tow_risk",
+                "people_in_vehicles",
+                "citywide"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:43:00-07:00",
+                "source_checked_at": "2026-05-04T10:43:00-07:00",
+                "expires_at": "2026-05-04T14:43:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.58,
+                "tag_ids": [
+                    "source_supported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_pet_food_offer",
+            "record_kind": "post",
+            "title": "Pet food offered near East Corridor",
+            "summary": "Community member offers pet food supplies this afternoon.",
+            "tag_ids": [
+                "pets",
+                "food",
+                "offer",
+                "afternoon",
+                "east_corridor",
+                "human_reported"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T10:52:00-07:00",
+                "source_checked_at": "2026-05-04T10:52:00-07:00",
+                "expires_at": "2026-05-04T14:52:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.6,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_laundry_request",
+            "record_kind": "post",
+            "title": "Laundry vouchers requested",
+            "summary": "Post asks where laundry vouchers are available today.",
+            "tag_ids": [
+                "hygiene",
+                "request",
+                "today",
+                "central_core",
+                "human_reported"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:01:00-07:00",
+                "source_checked_at": "2026-05-04T11:01:00-07:00",
+                "expires_at": "2026-05-04T15:01:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.59,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        },
+        {
+            "id": "post_cooling_question",
+            "record_kind": "post",
+            "title": "Question about cooling center transit",
+            "summary": "Post asks which bus reaches the North Edge cooling center tonight.",
+            "tag_ids": [
+                "cooling",
+                "transportation",
+                "discussion",
+                "tonight",
+                "north_edge",
+                "human_reported"
+            ],
+            "time": {
+                "last_observed_at": "2026-05-04T11:10:00-07:00",
+                "source_checked_at": "2026-05-04T11:10:00-07:00",
+                "expires_at": "2026-05-04T15:10:00-07:00"
+            },
+            "trust": {
+                "confidence": 0.61,
+                "tag_ids": [
+                    "human_reported"
+                ]
+            },
+            "sources": [
+                "src_human_report"
+            ],
+            "current_relevance": {
+                "is_currently_relevant": true,
+                "reason": "Synthetic record is currently relevant for schema and renderer testing."
+            }
+        }
+    ],
+    "entities": [],
+    "observations": [],
+    "sources": [
+        {
+            "id": "src_partner_update",
+            "type": "partner_update",
+            "title": "Partner update feed",
+            "publisher": "Crossover demo partner",
+            "retrieved_at": "2026-05-04T11:46:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_city_notice",
+            "type": "city_notice",
+            "title": "City notice feed",
+            "publisher": "Demo city notice",
+            "retrieved_at": "2026-05-04T11:42:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_provider_website",
+            "type": "provider_website",
+            "title": "Provider website check",
+            "publisher": "Demo provider site",
+            "retrieved_at": "2026-05-04T11:25:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_public_directory",
+            "type": "public_directory",
+            "title": "Public directory record",
+            "publisher": "Demo public directory",
+            "retrieved_at": "2026-04-27T12:00:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_field_observation",
+            "type": "field_observation",
+            "title": "Field observation note",
+            "publisher": "Demo field observer",
+            "retrieved_at": "2026-05-04T11:15:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_human_report",
+            "type": "human_report",
+            "title": "Community report",
+            "publisher": "Demo human report",
+            "retrieved_at": "2026-05-04T11:32:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_manual_note",
+            "type": "manual_note",
+            "title": "Crossover work note",
+            "publisher": "Crossover demo",
+            "retrieved_at": "2026-05-04T11:40:00-07:00",
+            "public": true
+        },
+        {
+            "id": "src_model_output",
+            "type": "model_output",
+            "title": "Crossover model output",
+            "publisher": "Crossover demo model",
+            "retrieved_at": "2026-05-04T11:52:00-07:00",
+            "public": true
+        }
+    ]
+}

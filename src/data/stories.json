@@ -1,0 +1,225 @@
+[
+  {
+    "id": "streetdogs-fed-70-animals",
+    "slug": "streetdogs-fed-about-70-animals",
+    "title": "200 lbs of food reached about 70 animals.",
+    "summary": "Stockton Street Dogs reported distributing roughly 200 pounds of food to about 70 animals at a Church Street encampment.",
+    "body": "A direct street-level response connected food, outreach, people living outside, and companion animals in one concrete act.",
+    "image": "/images/connection/dog_food.jpg",
+    "gap_ids": [
+      "dogs-safe-placement",
+      "pet-inclusive-shelter"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
+    "source_label": "CBS Sacramento",
+    "source_published_at": "2026-06-08",
+    "featured": true,
+    "active": true,
+    "published_at": "2026-06-08",
+    "updated_at": "2026-08-20T18:28:00-07:00",
+    "sign_of_being": "Food and care reached animals living outside because people went directly to where they were needed.",
+    "connection": [
+      "Donated food and supplies",
+      "Street-level volunteers",
+      "People and companion animals living outside"
+    ],
+    "fruit": [
+      "Roughly 200 pounds of food was distributed.",
+      "About 70 animals were reached.",
+      "Support reached animals directly at a Church Street encampment."
+    ],
+    "moments": [],
+    "evidence": [
+      {
+        "label": "CBS Sacramento",
+        "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
+        "published_at": "2026-06-08"
+      }
+    ]
+  },
+  {
+    "id": "truckloads-of-food-reached-families",
+    "slug": "truckloads-of-food-reached-stockton-families",
+    "title": "Truckloads of food reached Stockton families.",
+    "summary": "Bread of Life organized a special Weber Square giveaway after a large frozen-food donation exceeded its available freezer space.",
+    "body": "Volunteers moved frozen meat, produce, bread, and other groceries directly to residents through drive-through and walk-up lines, with local partners helping provide refrigerated transportation and temporary storage.",
+    "image": "/images/connection/food_bank.jpg",
+    "gap_ids": [
+      "food-distribution-capacity"
+    ],
+    "organization_ids": [
+      "bread-of-life"
+    ],
+    "source_url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
+    "source_label": "Stocktonia",
+    "source_published_at": "2026-08-06",
+    "featured": true,
+    "active": true,
+    "published_at": "2026-08-06",
+    "updated_at": "2026-08-20T18:28:00-07:00",
+    "sign_of_being": "Food that exceeded one organization’s storage capacity was moved through a local network and reached families instead of being lost.",
+    "connection": [
+      "Surplus donated food",
+      "Bread of Life and local partners",
+      "Stockton families"
+    ],
+    "fruit": [
+      "Frozen meat, produce, bread, and other groceries reached residents.",
+      "Refrigerated transportation and temporary storage expanded what could be distributed.",
+      "A storage problem became a direct food distribution."
+    ],
+    "moments": [],
+    "evidence": [
+      {
+        "label": "Stocktonia",
+        "url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
+        "published_at": "2026-08-06"
+      }
+    ]
+  },
+  {
+    "id": "cats-transferred-out-of-overcrowding",
+    "slug": "34-cats-moved-out-of-overcrowding",
+    "title": "34 cats moved out of overcrowding.",
+    "summary": "Thirty-four cats and kittens were transferred from Stockton to the San Diego Humane Society during a period of severe local animal overcrowding.",
+    "body": "The transfer is a concrete example of organizations crossing geographic boundaries to create placement capacity when the local system is strained.",
+    "image": "/images/connection/cat_overcrowding.jpg",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "hard-luck-awa"
+    ],
+    "source_url": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
+    "source_label": "Stocktonia",
+    "source_published_at": "2026-05-05",
+    "featured": false,
+    "active": true,
+    "published_at": "2026-05-05",
+    "updated_at": "2026-08-20T18:28:00-07:00",
+    "sign_of_being": "Thirty-four animals moved from a system without enough room into one with capacity to care for them.",
+    "connection": [
+      "Overcrowded local animal system",
+      "Rescue and transfer coordination",
+      "San Diego Humane Society capacity"
+    ],
+    "fruit": [
+      "Thirty-four cats and kittens were transferred out of local overcrowding.",
+      "Placement capacity was created across geographic boundaries.",
+      "Local shelter pressure was reduced for the animals that remained."
+    ],
+    "moments": [],
+    "evidence": [
+      {
+        "label": "Stocktonia",
+        "url": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
+        "published_at": "2026-05-05"
+      }
+    ]
+  },
+  {
+    "id": "prison-puppy-program",
+    "slug": "a-prison-puppy-program-keeps-changing-lives",
+    "title": "A prison puppy program keeps changing lives.",
+    "summary": "At California Health Care Facility in Stockton, incarcerated handlers help raise future service dogs while practicing responsibility, patience, service, and connection.",
+    "body": "Canine Companions’ Stockton prison puppy-raising work is a supporting reentry pathway rather than a housing program: handlers care for and train future service dogs, contributing to another person’s independence while building purpose and responsibility before release.",
+    "image": "/images/connection/prison_puppy.jpg",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [],
+    "source_url": "https://canine.org/wp-content/uploads/2025/06/CC25_AnnualReport2024-lists-ADA.pdf",
+    "source_label": "Canine Companions",
+    "source_published_at": "2025-06-01",
+    "featured": true,
+    "active": true,
+    "published_at": "2026-08-20",
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "sign_of_being": "A person living inside a prison is helping prepare another living being to give someone else greater independence.",
+    "connection": [
+      "Incarcerated puppy raiser",
+      "Future service dog",
+      "Person who may receive greater independence"
+    ],
+    "fruit": [
+      "Future service dogs receive sustained daily care, socialization, and training.",
+      "Incarcerated handlers practice responsibility, patience, service, and connection.",
+      "Dogs that complete the program can move toward professional training and eventual placement with people who need assistance."
+    ],
+    "moments": [
+      {
+        "title": "Robert gave back.",
+        "text": "Robert, an incarcerated puppy raiser at California Health Care Facility in Stockton, donated $100 of his prison wages to Canine Companions after raising a puppy named Nashi. The organization later reported that a matching campaign built around his gift raised $10,000, and Robert subsequently donated another $100.",
+        "source_label": "Canine Companions",
+        "source_url": "https://canine.org/story/generosity-above-and-beyond/"
+      },
+      {
+        "title": "Tisha got another chance.",
+        "text": "Tisha, a Canine Companions puppy who was not yet ready for advanced training, was placed in the California Health Care Facility puppy program for additional development. CDCR reported in March 2026 that after several months she showed improved discipline and confidence and earned the opportunity to continue advanced training.",
+        "source_label": "California Department of Corrections and Rehabilitation",
+        "source_url": "https://www.cdcr.ca.gov/insidecdcr/2026/03/20/week-in-review-march-20-2026/"
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Canine Companions — 2024 Annual Report",
+        "url": "https://canine.org/wp-content/uploads/2025/06/CC25_AnnualReport2024-lists-ADA.pdf",
+        "published_at": "2025-06-01"
+      },
+      {
+        "label": "Canine Companions — Prison Puppy Raising",
+        "url": "https://canine.org/get-involved/ways-to-volunteer/become-a-volunteer-puppy-raiser/prison-puppy-raising/",
+        "published_at": null
+      },
+      {
+        "label": "CDCR — CHCF puppy earns second chance at service training",
+        "url": "https://www.cdcr.ca.gov/insidecdcr/2026/03/20/week-in-review-march-20-2026/",
+        "published_at": "2026-03-20"
+      }
+    ]
+  },
+  {
+    "id": "pathways-opened-268-beds",
+    "slug": "pathways-neighborhood-opened-with-268-beds",
+    "title": "Pathways opened with 268 beds.",
+    "summary": "St. Mary’s Community Services opened Pathways Neighborhood, adding modular transitional housing and on-site support for people moving out of homelessness.",
+    "body": "The opening is a concrete sign that Stockton’s low-barrier housing pathway is gaining capacity: private modular housing is paired with supportive services intended to help residents transition toward permanent housing.",
+    "image": "/images/connection/pathways-neighborhood.jpg",
+    "gap_ids": [
+      "low-barrier-housing-pathways",
+      "pet-inclusive-shelter"
+    ],
+    "organization_ids": [
+      "st-marys-dining-room"
+    ],
+    "source_url": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/",
+    "source_label": "The Stockton Record",
+    "source_published_at": "2026-06-23",
+    "featured": true,
+    "active": true,
+    "published_at": "2026-06-23",
+    "updated_at": "2026-08-22T16:08:00-07:00",
+    "sign_of_being": "New physical space became a real pathway out of homelessness when housing and support were created together.",
+    "connection": [
+      "People moving out of homelessness",
+      "Pathways Neighborhood",
+      "Transitional housing and on-site support"
+    ],
+    "fruit": [
+      "268 transitional housing beds were added.",
+      "Private modular housing was paired with supportive services.",
+      "Stockton gained additional capacity for people moving toward permanent housing."
+    ],
+    "moments": [],
+    "evidence": [
+      {
+        "label": "The Stockton Record",
+        "url": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/",
+        "published_at": "2026-06-23"
+      }
+    ]
+  }
+]
