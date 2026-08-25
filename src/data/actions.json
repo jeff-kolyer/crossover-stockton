@@ -22,7 +22,7 @@
       "sas-2026-01-13-spay-neuter-capacity"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-24"
   },
   {
     "id": "transport-a-dog",
@@ -68,7 +68,7 @@
       "ssd-standing-food-supplies"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-24"
   },
   {
     "id": "support-pet-inclusive-shelter",
@@ -119,7 +119,7 @@
       "ssd-standing-food-supplies"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-24"
   },
   {
     "id": "help-food-distribution",
@@ -144,7 +144,7 @@
       "bol-2026-08-06-cold-storage-overflow"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-24"
   },
   {
     "id": "donate-food-supplies",
@@ -168,7 +168,7 @@
       "bol-standing-donate-food"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-24"
   },
   {
     "id": "adopt-a-dog",
@@ -188,7 +188,7 @@
       "ssd-standing-foster-adopt"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21",
+    "last_supported_at": "2026-08-24",
     "updated_at": "2026-08-21T17:07:00-07:00",
     "when_label": "Current adoptable dogs",
     "location_label": "Stockton Street Dogs",
@@ -240,7 +240,7 @@
       "ssd-standing-volunteer-rescue-partner"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21",
+    "last_supported_at": "2026-08-24",
     "updated_at": "2026-08-21T17:07:00-07:00",
     "when_label": "Ongoing",
     "location_label": "Stockton Street Dogs",
@@ -367,6 +367,6 @@
       "smcs-standing-housing-outcomes"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22"
+    "last_supported_at": "2026-08-24"
   }
 ]

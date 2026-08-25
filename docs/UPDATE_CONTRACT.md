@@ -177,6 +177,13 @@ Instead, distinguish:
 
 When newer evidence contradicts older evidence, preserve the source history while updating the current picture.
 
+`checked_at` and `updated_at` mean different things.
+
+* `checked_at` records when Crossover successfully re-checked the underlying public evidence.
+* `updated_at` records when Crossover's actual content or interpretation changed.
+
+A routine verification should update `checked_at` without changing `updated_at`. Do not make unchanged information appear newly updated simply because a source was re-checked.
+
 ---
 
 # 7. Never silently erase history

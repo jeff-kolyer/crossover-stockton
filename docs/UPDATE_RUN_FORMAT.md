@@ -90,9 +90,14 @@ For each item include:
 **Source checked:** URL or source name
 **Result:** Confirmed / Changed / No longer found / Unclear
 **Checked:** Date
-**Recommended change:** Update `checked_at`, revise record, mark stale, or no change
+**Recommended change:** Refresh `checked_at`, revise content, mark stale, investigate, or no change
+**Content changed:** Yes / No
+
+If No, do not change `updated_at`.
 
 Refreshing evidence is useful even when nothing substantively changed.
+
+When a source is confirmed but its meaning has not changed, update `checked_at` only. Update `updated_at` only when the public-facing content or interpretation actually changes.
 
 ---
 
