@@ -3,6 +3,7 @@ import {
   Apple,
   ArrowRight,
   Building2,
+  CalendarDays,
   CheckCircle2,
   ChevronDown,
   ChevronRight,
@@ -18,6 +19,7 @@ import {
   ShoppingBasket,
   Sun,
   Truck,
+  Users,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
@@ -90,6 +92,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
   const isHome = page === "home";
   const copy = pageCopy[page];
   const visibleActions = isHome ? featuredActions.slice(0, 4) : featuredActions;
+  const visibleGaps = isHome ? activeGaps.filter((gap) => gap.status !== "watch").slice(0, 4) : activeGaps;
   const visibleStories = isHome ? featuredStories.slice(0, 3) : activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
 
@@ -165,19 +168,43 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           <small><CheckCircle2 size={16} /> Updated from public records and organizations we follow.</small>
         </div>
         <div className="gap-card-grid">
-          {activeGaps.map((gap) => {
+          {visibleGaps.map((gap) => {
             const Icon = getGapIcon(gap.status);
-            const organizations = orgNames(gap.organization_ids);
             const useful = actionTitles(gap.action_ids);
+            const thumbnailImage = gap.thumbnail_image || gap.artwork;
+            const thumbnailSrc = thumbnailImage ? `${thumbnailImage}?v=${encodeURIComponent(gap.updated_at || gap.id)}` : "";
+            const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
             return (
             <button className={`gap-card is-${gap.status}`} key={gap.id} type="button" onClick={() => onOpenGap(gap.slug)}>
-              <span className="gap-level"><Icon size={17} /> {formatStatus(gap.status)}</span>
+              {thumbnailImage && (
+                <span className="gap-card-image-frame" aria-hidden="true">
+                  <img
+                    src={thumbnailSrc}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    onError={(event) => {
+                      if (gap.artwork && event.currentTarget.src !== new URL(gap.artwork, window.location.origin).href) {
+                        event.currentTarget.src = gap.artwork;
+                      }
+                    }}
+                  />
+                </span>
+              )}
               <h3>{gap.title}</h3>
+              <span className="gap-level"><Icon size={17} /> {formatStatus(gap.status)}</span>
               <p>{gap.summary}</p>
-              <small>Who's responding</small>
-              <p>{organizations || "Local responders"}</p>
-              <small>Useful now</small>
-              <p>{useful || "Learn what would help now."}</p>
+              <span className="gap-card-meta">
+                <span><Users size={15} /> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
+                {gap.updated_at && <span><CalendarDays size={14} /> Updated {formatShortDate(gap.updated_at)}</span>}
+              </span>
+              <span className="gap-card-action">
+                <span>
+                  <small>USEFUL NOW</small>
+                  <strong>{compactUsefulNow(gap, useful)}</strong>
+                </span>
+                <ArrowRight size={18} />
+              </span>
             </button>
             );
           })}
@@ -326,13 +353,6 @@ function getOrgIcon(index: number) {
   return [PawPrint, HandHeart, ShieldCheck, Home, Building2][index % 5];
 }
 
-function orgNames(ids: string[]) {
-  return ids
-    .map((id) => orgs.find((org) => org.id === id)?.name)
-    .filter((name): name is string => Boolean(name))
-    .join(", ");
-}
-
 function actionTitles(ids: string[]) {
   return ids
     .map((id) => actions.find((action) => action.id === id)?.title)
@@ -340,11 +360,31 @@ function actionTitles(ids: string[]) {
     .join(". ");
 }
 
+function compactUsefulNow(gap: GapRecord, fallback: string) {
+  const label = gap.most_useful_now?.label || fallback || "Learn what would help now.";
+  return label
+    .replace("Create placement capacity by fostering or adopting.", "Foster. Adopt. Take a shelter dog out.")
+    .replace("Help people stay with their pets while they move toward housing.", "Support pet-inclusive shelter.")
+    .replace("Help people stay with their pets while they move toward stable housing.", "Support pet-inclusive shelter.")
+    .replace("Help expand the capacity to store and move donated food while it is available.", "Donate food or supplies.")
+    .replace("Support cold storage and food movement.", "Donate food or supplies.")
+    .replace("Foster, adopt, or take a shelter dog out.", "Foster. Adopt. Take a shelter dog out.")
+    .replace("Support the local pathways that move people from shelter toward stable housing.", "Support St. Mary's housing work.")
+    .replace("Support low-barrier paths from homelessness to housing.", "Support St. Mary's housing work.");
+}
+
 function formatDate(value?: string) {
   if (!value) return "";
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(date);
+}
+
+function formatShortDate(value?: string) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(date);
 }
 
 function dateTime(value?: string) {

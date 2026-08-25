@@ -163,6 +163,7 @@ export interface GapRecord {
   updates?: Array<{ date: string; text: string }>;
   sources: Array<{ url?: string; label?: string }>;
   artwork?: string;
+  thumbnail_image?: string;
   first_seen?: string;
   updated_at?: string;
   current_state?: string;

@@ -96,6 +96,7 @@
       }
     ],
     "artwork": "/images/reality/dog-street-hero.jpg",
+"thumbnail_image": "/images/reality/dog-thumb.jpg",
     "first_seen": "2026-08-20",
     "updated_at": "2026-08-21T17:07:00-07:00",
     "current_state": "Stockton continues to report pet overpopulation and stray-animal intake pressure beyond normal shelter capacity.",
@@ -268,6 +269,7 @@
       }
     ],
     "artwork": "/images/reality/pet-inclusive-shelter-hero.jpg",
+"thumbnail_image": "/images/reality/people-pets-thumb.jpg",
     "first_seen": "2026-08-20",
     "updated_at": "2026-08-21T20:48:00-07:00",
     "current_state": "Pets remain a measurable shelter-access factor in San Joaquin County, while new pet-accommodating capacity such as St. Mary's Pathways is expanding the available response.",
@@ -430,6 +432,7 @@
       }
     ],
     "artwork": "/images/reality/food-distribution-capacity.jpg",
+"thumbnail_image": "/images/reality/food-distribution-thumb.jpg",
     "first_seen": "2026-08-20",
     "updated_at": "2026-08-21T21:42:00-07:00",
     "current_state": "Bread of Life is moving food at significant scale, but a recent donation exceeded its cold-storage capacity and exposed a concrete need for additional freezer and refrigerated-distribution capacity.",
@@ -579,6 +582,7 @@
       }
     ],
     "artwork": "/images/reality/reentry-housing-hero.jpg",
+"thumbnail_image": "/images/reality/reentry-housing-thumb.jpg",
     "first_seen": "2026-08-22",
     "updated_at": "2026-08-22T16:08:00-07:00",
     "current_state": "Stockton has active housing-and-work reentry programs, but those programs themselves continue to treat stable housing as a central condition for successful reintegration.",
@@ -723,6 +727,7 @@
       }
     ],
     "artwork": "/images/reality/low-barrier-housing-hero.jpg",
+"thumbnail_image": "/images/reality/low-barrier-housing-thumb.jpg",
     "first_seen": "2026-08-22",
     "updated_at": "2026-08-22T16:08:00-07:00",
     "current_state": "The gap is improving: Pathways Neighborhood has added major low-barrier transitional capacity, while homelessness and the need for permanent housing pathways remain significant.",

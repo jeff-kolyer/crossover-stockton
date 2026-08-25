@@ -113,9 +113,6 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenAction }: G
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <div className="gap-refined-hero-grid">
           <div className="gap-detail-copy gap-refined-copy">
-            <button className="gap-back-link" type="button" onClick={() => onNavigate("reality")}>
-              <ArrowLeft size={16} /> Back to all gaps
-            </button>
             <p className="gap-severity">{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</p>
             <h1>{gap.title}</h1>
             <p>{gap.summary}</p>
@@ -126,6 +123,9 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenAction }: G
               <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
               {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
             </div>
+            <button className="gap-back-link" type="button" onClick={() => onNavigate("reality")}>
+              <ArrowLeft size={16} /> Back to all gaps
+            </button>
           </div>
           <div className="gap-refined-photo">
             <img src={gap.artwork || heroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
@@ -159,7 +159,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenAction }: G
 
           {relatedOrgs.length > 0 && (
             <section className="gap-refined-card">
-              <h2>Who is responding</h2>
+              <h2>Who's responding</h2>
               <div className="gap-refined-org-list">
                 {relatedOrgs.map((org, index) => {
                   const Icon = getOrgIcon(index);

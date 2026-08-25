@@ -60,16 +60,15 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
       <PublicStoryNav onNavigate={onNavigate} />
 
       <article className="story-detail-shell">
-        <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
-          <ArrowLeft size={16} /> Back to stories
-        </button>
-
         <section className="story-opening">
           <div className="story-opening-copy">
             <p className="story-kicker">Signs of Being</p>
             <h1>{story.title}</h1>
             <p className="story-summary">{story.summary}</p>
             {story.sign_of_being && <p className="story-sign-line">{story.sign_of_being}</p>}
+            <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
+              <ArrowLeft size={16} /> Back to stories
+            </button>
           </div>
           <img src={image} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         </section>
