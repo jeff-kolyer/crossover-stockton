@@ -220,8 +220,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             );
           })}
         </div>
-        <button className="center-link" type="button" onClick={() => onNavigate("reality")}>
-          {page === "home" ? "Explore all needs" : "Back to needs"} <ArrowRight size={16} />
+        <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "reality" : "home")}>
+          {page === "home" ? "Explore all needs" : "Back to home"} <ArrowRight size={16} />
         </button>
       </section>}
 
@@ -230,8 +230,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           <p>What Reality Looks Like</p>
           <h2>Signs of Being</h2>
           <span>Fruit is the evidence. These are real changes happening in Stockton.</span>
-          <button type="button" onClick={() => onNavigate("connection")}>
-            {page === "home" ? "See more stories" : "Back to stories"} <ArrowRight size={16} />
+          <button type="button" onClick={() => onNavigate(page === "home" ? "connection" : "action")}>
+            {page === "home" ? "See more stories" : "Take an action"} <ArrowRight size={16} />
           </button>
         </div>
         <div className="story-grid">
@@ -299,8 +299,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             })}
           </div>
         </div>
-        <button className="center-link" type="button" onClick={() => onNavigate("action")}>
-          {page === "home" ? "See more ways to help" : "Back to action"} <ArrowRight size={16} />
+        <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "action" : "home")}>
+          {page === "home" ? "See more ways to help" : "Back to home"} <ArrowRight size={16} />
         </button>
       </section>}
 
