@@ -4059,7 +4059,7 @@ p {
   align-items: center;
   margin-top: 18px;
   color: #1c251f;
-  font-size: 0.8rem;
+  font-size: var(--gap-meta-size, 0.78rem);
   line-height: 1.25;
 }
 
@@ -6132,6 +6132,13 @@ p {
   --gap-tone: #c83326;
   --gap-tone-strong: #d80000;
   --gap-tone-soft: #fdebe8;
+  --gap-eyebrow-size: 0.78rem;
+  --gap-card-title-size: 0.88rem;
+  --gap-body-size: 0.82rem;
+  --gap-meta-size: 0.76rem;
+  --gap-link-size: 0.78rem;
+  --gap-body-line: 1.45;
+  --gap-link-green: #245130;
   background: #fffdf9;
 }
 
@@ -6181,8 +6188,8 @@ p {
 .gap-refined-copy > p:not(.gap-severity) {
   max-width: 610px;
   color: #26302a;
-  font-size: 0.92rem;
-  line-height: 1.42;
+  font-size: 0.94rem;
+  line-height: 1.45;
 }
 
 .gap-refined-photo {
@@ -6256,9 +6263,10 @@ p {
 .gap-refined-sources h2 {
   margin: 0;
   color: var(--section-label-color);
-  font-size: var(--section-label-size);
-  font-weight: var(--section-label-weight);
-  letter-spacing: var(--section-label-spacing);
+  font-size: var(--gap-eyebrow-size);
+  font-weight: 760;
+  letter-spacing: 0.055em;
+  line-height: 1.15;
   text-transform: uppercase;
 }
 
@@ -6305,9 +6313,9 @@ p {
 .gap-update-compact strong,
 .gap-refined-action-card strong {
   color: #151b16;
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.18;
+  font-size: var(--gap-card-title-size);
+  font-weight: 720;
+  line-height: 1.2;
 }
 
 .gap-state-item small,
@@ -6315,8 +6323,8 @@ p {
 .gap-refined-story-card small,
 .gap-refined-source-row small {
   color: #535c56;
-  font-size: 0.8rem;
-  line-height: 1.38;
+  font-size: var(--gap-body-size);
+  line-height: var(--gap-body-line);
 }
 
 .gap-state-item b {
@@ -6329,7 +6337,7 @@ p {
 
 .gap-card-date {
   color: #6b736d;
-  font-size: 0.72rem;
+  font-size: var(--gap-meta-size);
   line-height: 1.35;
 }
 
@@ -6364,14 +6372,6 @@ p {
   padding: 8px;
 }
 
-.gap-refined-org-row > svg:last-child {
-  grid-column: 2;
-  grid-row: 2;
-  align-self: center;
-  justify-self: start;
-  margin-left: 89px;
-}
-
 .gap-refined-org-row span,
 .gap-refined-story-card span,
 .gap-refined-source-row span {
@@ -6383,25 +6383,33 @@ p {
   grid-column: 2 / 4;
 }
 
-.gap-refined-org-row em {
+.gap-refined-org-link {
   grid-column: 2;
   grid-row: 2;
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
   align-self: center;
   justify-self: start;
-  color: #245130;
-  font-size: 0.74rem;
+  color: var(--gap-link-green);
+  font-size: var(--gap-link-size);
+  font-weight: 740;
+  line-height: 1.2;
+}
+
+.gap-refined-org-row em {
   font-style: normal;
-  font-weight: 760;
   white-space: nowrap;
 }
 
 .gap-responder-current-role {
-  color: #26302a;
+  color: var(--gap-link-green);
+  font-size: var(--gap-meta-size);
 }
 
 .gap-responder-current-role b {
-  color: #172117;
-  font-weight: 760;
+  color: inherit;
+  font-weight: 740;
 }
 
 .gap-update-compact {
@@ -6441,7 +6449,7 @@ p {
   gap: 1px;
   justify-self: end;
   color: #5f6761;
-  font-size: 0.72rem;
+  font-size: var(--gap-meta-size);
   line-height: 1.08;
   text-align: right;
   white-space: nowrap;
@@ -6449,7 +6457,7 @@ p {
 
 .gap-update-compact span small {
   color: #7a817c;
-  font-size: 0.72rem;
+  font-size: var(--gap-meta-size);
   line-height: 1;
 }
 
@@ -6463,8 +6471,10 @@ p {
   align-items: center;
   gap: 8px;
   justify-self: start;
-  color: #245130;
-  font-weight: 760;
+  color: var(--gap-link-green);
+  font-size: var(--gap-link-size);
+  font-weight: 740;
+  line-height: 1.2;
   text-decoration: none;
 }
 
@@ -6529,8 +6539,8 @@ p {
 
 .gap-refined-action-card span {
   color: #424b44;
-  font-size: 0.8rem;
-  line-height: 1.38;
+  font-size: var(--gap-body-size);
+  line-height: var(--gap-body-line);
 }
 
 .gap-refined-action-card small {
@@ -6538,9 +6548,10 @@ p {
   align-items: center;
   gap: 6px;
   align-self: end;
-  color: #245130;
-  font-size: 0.76rem;
-  font-weight: 760;
+  color: var(--gap-link-green);
+  font-size: var(--gap-link-size);
+  font-weight: 740;
+  line-height: 1.2;
 }
 
 .gap-refined-lower-row {
@@ -6568,7 +6579,8 @@ p {
   background: #ffffff;
   color: #26302a;
   padding: 9px 12px;
-  font-size: 0.88rem;
+  font-size: var(--gap-body-size);
+  line-height: 1.35;
 }
 
 .gap-factor-pills svg {
@@ -6613,7 +6625,8 @@ p {
 
 .gap-refined-story-card em {
   color: #6b736d;
-  font-size: 0.72rem;
+  font-size: var(--gap-meta-size);
+  line-height: 1.35;
   font-style: normal;
 }
 

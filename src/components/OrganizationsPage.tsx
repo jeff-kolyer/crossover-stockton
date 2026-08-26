@@ -82,7 +82,7 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
                   <p>{org.summary}</p>
                   {href && (
                     <a href={href} target="_blank" rel="noreferrer">
-                      Visit their website ↗
+                      Visit their website <ArrowRight size={15} />
                     </a>
                   )}
                 </div>
