@@ -1,8 +1,9 @@
-import { ArrowRight, ExternalLink, HandHeart, Heart, Send, Users, X } from "lucide-react";
+import { ArrowRight, CalendarDays, CheckCircle2, Clock3, ExternalLink, Heart, Info, Tag, Users, X } from "lucide-react";
 import type { MouseEvent } from "react";
 import { useEffect, useRef } from "react";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
+import { getActionIcon } from "../lib/actionIcons";
 import type { GapRecord, OrgRecord, PublicActionRecord } from "../types";
 
 interface ActionModalProps {
@@ -18,8 +19,22 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const relatedGap = gaps.find((gap) => gap.id === action.gap_ids[0]);
+  const org = orgs.find((item) => item.id === action.organization_id);
   const provider = providerLabel(action);
   const sourceDate = formatSourceDate(action.last_supported_at);
+  const ActionIcon = getActionIcon(action);
+  const glanceItems = [
+    { label: "What it is", value: action.at_a_glance?.what, icon: Tag },
+    { label: "Time", value: action.at_a_glance?.time, icon: Clock3 },
+    { label: "Why it matters", value: action.at_a_glance?.why, icon: Heart },
+    { label: "Availability", value: action.at_a_glance?.availability, icon: CalendarDays },
+  ].filter((item) => item.value);
+  const currentDetails = [
+    action.when_label,
+    currentnessLabel(action.currentness),
+    sourceDate ? `Checked ${sourceDate}` : "",
+    action.location_label,
+  ].filter(Boolean);
 
   useEffect(() => {
     const previouslyFocused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
@@ -88,55 +103,102 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
         </button>
 
         <div className="action-modal-hero">
-          <span className="action-modal-icon"><HandHeart size={34} /></span>
-          <h2 id="action-modal-title">{action.modal_title ?? action.title}</h2>
-          <p>{action.summary}</p>
+          <span className="action-modal-icon"><ActionIcon size={42} /></span>
+          <div>
+            <p>ACTION</p>
+            <h2 id="action-modal-title">{action.modal_title ?? action.title}</h2>
+            <span>{action.summary}</span>
+          </div>
         </div>
 
-        <div className="action-modal-sections">
-          {action.why_it_helps && (
-            <section className="action-modal-section">
-              <span><Heart size={22} /></span>
-              <div>
+        {glanceItems.length > 0 && (
+          <div className="action-modal-glance" aria-label="Action at a glance">
+            {glanceItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <span key={item.label}>
+                  <Icon size={26} />
+                  <small>{item.label}</small>
+                  <strong>{item.value}</strong>
+                </span>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="action-modal-content">
+          <div className="action-modal-main">
+            {action.why_it_helps && (
+              <section className="action-modal-copy-block">
                 <h3>Why this helps</h3>
                 <p>{action.why_it_helps}</p>
+              </section>
+            )}
+
+            <section className="action-modal-copy-block">
+              <h3>What to expect</h3>
+              {action.what_to_expect?.length ? (
+                <ul className="action-modal-expect-list">
+                  {action.what_to_expect.map((item) => (
+                    <li key={item}><CheckCircle2 size={17} /> {item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p>You&apos;ll leave Crossover to view the provider&apos;s latest instructions and availability.</p>
+              )}
+            </section>
+          </div>
+
+          <div className="action-modal-side">
+            <section className="action-modal-copy-block">
+              <h3>Who offers it</h3>
+              <div className="action-modal-provider">
+                <span><Users size={28} /></span>
+                <p>
+                  <strong>{provider}</strong>
+                  {org?.summary && <small>{org.summary}</small>}
+                </p>
               </div>
             </section>
-          )}
 
-          <section className="action-modal-section">
-            <span><Users size={22} /></span>
-            <div>
-              <h3>Who offers it</h3>
-              <p>{provider}</p>
-            </div>
-          </section>
-
-          <section className="action-modal-section">
-            <span><Send size={22} /></span>
-            <div>
-              <h3>What happens next</h3>
-              <p>You&apos;ll leave Crossover and view the provider&apos;s latest instructions and availability.</p>
-            </div>
-          </section>
+            {currentDetails.length > 0 && (
+              <section className="action-modal-current">
+                <h3>Current details</h3>
+                <ul>
+                  {currentDetails.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </section>
+            )}
+          </div>
         </div>
 
         <button className="action-modal-primary" type="button" onClick={handleHandoff} disabled={!action.source_url}>
-          {action.handoff_label ?? "Go to organization"} <ArrowRight size={18} />
+          {action.handoff_label ?? "Go to organization"} <ArrowRight size={21} />
         </button>
 
-        <p className="action-modal-freshness">
-          {sourceDate ? <>Source checked {sourceDate} <span aria-hidden="true">·</span> Availability can change</> : "Availability can change"}
-        </p>
+        <section className="action-modal-field-reports">
+          <h3>Field Reports</h3>
+          <div>
+            <Info size={19} />
+            <span>
+              <strong>No field reports yet.</strong>
+              <small>We&apos;ll add notes here as this action is checked in the field.</small>
+            </span>
+          </div>
+        </section>
 
-        {relatedGap && (
-          <p className="action-modal-related">
-            Related need:
-            <button type="button" onClick={handleRelatedNeed}>
-              {relatedGap.title} <ExternalLink size={14} />
-            </button>
-          </p>
-        )}
+        <div className="action-modal-footer-meta">
+          <span><CheckCircle2 size={16} /> {sourceDate ? `Source checked ${sourceDate}` : "Source check pending"}</span>
+          <span><Clock3 size={16} /> {currentnessLabel(action.currentness) || "Availability can change"}</span>
+          {relatedGap && (
+            <span>
+              Related need:
+              <button type="button" onClick={handleRelatedNeed}>
+                {relatedGap.title} <ExternalLink size={14} />
+              </button>
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -158,6 +220,14 @@ function formatSourceDate(value?: string | null) {
 
   if (Number.isNaN(date.getTime())) return value;
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(date);
+}
+
+function currentnessLabel(value?: PublicActionRecord["currentness"]) {
+  if (value === "standing") return "Standing opportunity";
+  if (value === "recent") return "Recent need";
+  if (value === "dated") return "Check before acting";
+  if (value === "unverified") return "Needs verification";
+  return "";
 }
 
 function focusableElements(container: HTMLElement | null) {

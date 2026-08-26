@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   AlertTriangle,
   Apple,
@@ -13,19 +14,17 @@ import {
   MapPin,
   Menu,
   PawPrint,
-  Phone,
   Search,
   ShieldCheck,
-  ShoppingBasket,
   Sun,
-  Truck,
   Users,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import storiesData from "../data/stories.json";
-import type { GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
+import { getActionIcon } from "../lib/actionIcons";
+import type { ActionTag, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
 interface HomePageProps {
   page: "home" | "reality" | "connection" | "action";
@@ -87,11 +86,27 @@ const featuredStories = stories
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
 const featuredActions = actions.filter((action) => action.active && action.featured);
 const activeOrgs = orgs.filter((org) => org.active).slice(0, 5);
+const actionTagOrder: ActionTag[] = ["dogs", "today", "volunteer", "donate", "food", "housing", "reentry", "foster-adopt"];
+const actionTagLabels: Record<ActionTag, string> = {
+  dogs: "Dogs",
+  today: "Today",
+  volunteer: "Volunteer",
+  donate: "Donate",
+  food: "Food",
+  housing: "Housing",
+  reentry: "Reentry",
+  "foster-adopt": "Foster / Adopt",
+};
 
 export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory, onOpenAction }: HomePageProps) {
+  const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
   const isHome = page === "home";
   const copy = pageCopy[page];
   const visibleActions = isHome ? featuredActions.slice(0, 4) : featuredActions;
+  const availableActionTags = actionTagOrder.filter((tag) => visibleActions.some((action) => action.tags?.includes(tag)));
+  const filteredActions = page === "action" && selectedActionTag
+    ? visibleActions.filter((action) => action.tags?.includes(selectedActionTag))
+    : visibleActions;
   const visibleGaps = isHome ? activeGaps.filter((gap) => gap.status !== "watch").slice(0, 4) : activeGaps;
   const visibleStories = isHome ? featuredStories.slice(0, 3) : activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
@@ -241,24 +256,52 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
       {(page === "home" || page === "action") && <section id="action" className="public-band public-action-band">
         <div className="section-intro">
           <p>How Can I Help Today?</p>
-          <h2>Take a real step.</h2>
+          <h2>Find your way in.</h2>
           <span>Start somewhere with something real you can do today.</span>
         </div>
-        <div className="action-grid">
-          {visibleActions.map((action) => {
-            const Icon = getActionIcon(action);
-            return (
-            <button className="action-card" key={action.id} type="button" onClick={() => onOpenAction(action)}>
-              <Icon size={24} />
-              <strong>{action.title}</strong>
-              <p>{action.summary}</p>
-              <span className="action-meta">
-                {[action.when_label, action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
-              </span>
-              <ArrowRight size={17} />
-            </button>
-            );
-          })}
+        <div className="action-browser">
+          {page === "action" && (
+            <div className="action-filter-row" aria-label="Action filters">
+              <button
+                className={selectedActionTag === null ? "is-active" : ""}
+                type="button"
+                onClick={() => setSelectedActionTag(null)}
+              >
+                All
+              </button>
+              {availableActionTags.map((tag) => (
+                <button
+                  className={selectedActionTag === tag ? "is-active" : ""}
+                  type="button"
+                  onClick={() => setSelectedActionTag(tag)}
+                  key={tag}
+                >
+                  {actionTagLabels[tag]}
+                </button>
+              ))}
+            </div>
+          )}
+          <div className="action-grid">
+            {filteredActions.map((action) => {
+              const Icon = getActionIcon(action);
+              return (
+              <button
+                className="action-card"
+                key={action.id}
+                type="button"
+                onClick={() => onOpenAction(action)}
+              >
+                <Icon size={24} />
+                <strong>{action.title}</strong>
+                <p>{action.summary}</p>
+                <span className="action-meta">
+                  {[action.when_label, action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
+                </span>
+                <ArrowRight size={17} />
+              </button>
+              );
+            })}
+          </div>
         </div>
         <button className="center-link" type="button" onClick={() => onNavigate("action")}>
           {page === "home" ? "See more ways to help" : "Back to action"} <ArrowRight size={16} />
@@ -339,14 +382,6 @@ function getGapIcon(status: GapRecord["status"]) {
   if (status === "improving") return CheckCircle2;
   if (status === "watch") return ShieldCheck;
   return AlertTriangle;
-}
-
-function getActionIcon(action: PublicActionRecord) {
-  const text = `${action.id} ${action.title}`.toLowerCase();
-  if (text.includes("transport")) return Truck;
-  if (text.includes("donate") || text.includes("suppl")) return ShoppingBasket;
-  if (text.includes("call")) return Phone;
-  return PawPrint;
 }
 
 function getOrgIcon(index: number) {

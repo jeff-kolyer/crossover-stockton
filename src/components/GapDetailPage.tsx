@@ -16,10 +16,8 @@ import {
   Menu,
   PawPrint,
   ShieldCheck,
-  ShoppingBasket,
   Stethoscope,
   Sun,
-  Truck,
   Users,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
@@ -27,6 +25,7 @@ import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
 import storiesData from "../data/stories.json";
+import { getActionIcon } from "../lib/actionIcons";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "about" | "organizations";
@@ -36,6 +35,7 @@ interface GapDetailPageProps {
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
 }
 
@@ -68,7 +68,7 @@ const storyFallbackImages = ["/images/about/background_about.png", "/images/abou
 const stateIcons = [AlertCircle, BarChart3, Home];
 const updateIcons = [AlertCircle, Gauge, CheckCircle2];
 
-export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -246,14 +246,14 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenAction }: G
               <h2>Signs of change</h2>
               <div className="gap-refined-story-row">
                 {relatedStories.map((story, index) => (
-                  <article className="gap-refined-story-card" key={story.id}>
+                  <button className="gap-refined-story-card" type="button" onClick={() => onOpenStory(story.slug)} key={story.id}>
                     <img src={story.image || storyFallbackImages[index % storyFallbackImages.length]} alt="" aria-hidden="true" loading="lazy" decoding="async" />
                     <span>
                       <strong>{story.title}</strong>
                       <small>{story.summary}</small>
                       <em>{formatDate(story.published_at)} · {story.source_label || "Source"}</em>
                     </span>
-                  </article>
+                  </button>
                 ))}
               </div>
             </section>
@@ -433,15 +433,9 @@ function formatStatus(status: GapRecord["status"]) {
 }
 
 function renderStatusIcon(status: GapRecord["status"]) {
+  if (status === "improving") return <CheckCircle2 size={18} />;
   if (status === "high") return <AlertTriangle size={18} />;
   return <AlertCircle size={18} />;
-}
-
-function getActionIcon(action: PublicActionRecord) {
-  const text = `${action.id} ${action.title}`.toLowerCase();
-  if (text.includes("transport") || text.includes("out")) return Truck;
-  if (text.includes("donate") || text.includes("suppl")) return ShoppingBasket;
-  return PawPrint;
 }
 
 function getOrgIcon(index: number) {

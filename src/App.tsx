@@ -131,6 +131,7 @@ export default function App() {
           onNavigate={showPage}
           onOpenAbout={() => showPage("about")}
           onOpenGap={showGap}
+          onOpenStory={showStory}
           onOpenAction={setSelectedAction}
         />
       )}

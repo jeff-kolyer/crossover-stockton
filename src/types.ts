@@ -209,6 +209,13 @@ export interface PublicActionRecord {
   slug: string;
   title: string;
   summary: string;
+  tags?: ActionTag[];
+  at_a_glance?: {
+    what?: string;
+    time?: string;
+    why?: string;
+    availability?: string;
+  };
   organization_id?: string;
   gap_ids: string[];
   source_url?: string;
@@ -225,9 +232,12 @@ export interface PublicActionRecord {
   last_supported_at?: string | null;
   modal_title?: string;
   why_it_helps?: string;
+  what_to_expect?: string[];
   provider_label?: string;
   handoff_label?: string;
 }
+
+export type ActionTag = "dogs" | "today" | "volunteer" | "donate" | "food" | "housing" | "reentry" | "foster-adopt";
 
 export interface StoryRecord {
   id: string;

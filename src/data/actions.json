@@ -8,6 +8,10 @@
     "gap_ids": [
       "dogs-safe-placement"
     ],
+    "tags": [
+      "dogs",
+      "foster-adopt"
+    ],
     "source_url": "https://linktr.ee/streetdogsanctuary",
     "source_label": "Stockton Street Dogs",
     "featured": true,
@@ -22,7 +26,20 @@
       "sas-2026-01-13-spay-neuter-capacity"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24"
+    "last_supported_at": "2026-08-24",
+    "at_a_glance": {
+      "what": "Temporary foster home",
+      "time": "Temporary commitment",
+      "why": "Creates safe placement",
+      "availability": "Ask about current need"
+    },
+    "why_it_helps": "Opening your home gives a dog a safe place to land while rescue partners work toward longer-term placement. Each foster can also create room for another dog to be helped.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Stockton Street Dogs’ current foster information and contact options.",
+      "The length and needs of a foster placement can vary by dog.",
+      "The provider can walk you through current needs and next steps."
+    ],
+    "handoff_label": "Check current foster needs"
   },
   {
     "id": "transport-a-dog",
@@ -32,6 +49,10 @@
     "organization_id": "stockton-street-dogs",
     "gap_ids": [
       "dogs-safe-placement"
+    ],
+    "tags": [
+      "dogs",
+      "volunteer"
     ],
     "source_url": "",
     "source_label": "Stockton Street Dogs",
@@ -44,7 +65,20 @@
     "priority": "supporting",
     "priority_basis": [],
     "currentness": "unverified",
-    "last_supported_at": null
+    "last_supported_at": null,
+    "at_a_glance": {
+      "what": "Dog transportation",
+      "time": "As needed",
+      "why": "Helps dogs reach care",
+      "availability": "Needs verification"
+    },
+    "why_it_helps": "Transportation can be the missing link between a dog and veterinary care, foster placement, rescue transfer, or another safe destination.",
+    "what_to_expect": [
+      "Transport needs depend on current rescue activity and may not be available at all times.",
+      "Confirm the destination, timing, and any handling instructions before committing.",
+      "This action is currently marked unverified in Crossover, so check directly with the provider."
+    ],
+    "handoff_label": "Check transport needs"
   },
   {
     "id": "donate-dog-supplies",
@@ -54,6 +88,11 @@
     "organization_id": "stockton-street-dogs",
     "gap_ids": [
       "dogs-safe-placement"
+    ],
+    "tags": [
+      "dogs",
+      "donate",
+      "today"
     ],
     "source_url": "https://streetdogsanctuary.com/",
     "source_label": "Stockton Street Dogs",
@@ -68,7 +107,20 @@
       "ssd-standing-food-supplies"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24"
+    "last_supported_at": "2026-08-24",
+    "at_a_glance": {
+      "what": "Requested dog supplies",
+      "time": "Anytime",
+      "why": "Supports dogs in the field",
+      "availability": "Check current requests"
+    },
+    "why_it_helps": "Food and other requested supplies help local rescuers care for dogs being served in the field and reduce the practical burden of ongoing rescue work.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view the provider’s latest information.",
+      "Requested items can change, so check what is useful before purchasing or dropping anything off.",
+      "Follow the provider’s current instructions for delivery or donation."
+    ],
+    "handoff_label": "Check current supply needs"
   },
   {
     "id": "support-pet-inclusive-shelter",
@@ -78,6 +130,11 @@
     "organization_id": "st-marys-dining-room",
     "gap_ids": [
       "pet-inclusive-shelter"
+    ],
+    "tags": [
+      "dogs",
+      "housing",
+      "donate"
     ],
     "source_url": "https://smcares.org/",
     "source_label": "St. Mary's Community Services",
@@ -94,7 +151,20 @@
       "ssd-2026-06-08-safe-grounds"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-21",
+    "at_a_glance": {
+      "what": "Pet-inclusive shelter support",
+      "time": "Ongoing",
+      "why": "Keeps people with pets",
+      "availability": "Current program support"
+    },
+    "why_it_helps": "Pet-inclusive shelter capacity removes a major barrier for people who may otherwise remain outside rather than separate from a companion animal.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view St. Mary’s current programs and support options.",
+      "Support may contribute to shelter, case management, and housing pathways rather than a single pet-specific activity.",
+      "Check the provider’s latest information before deciding how to help."
+    ],
+    "handoff_label": "See current ways to support"
   },
   {
     "id": "donate-pet-supplies",
@@ -105,6 +175,11 @@
     "gap_ids": [
       "pet-inclusive-shelter",
       "dogs-safe-placement"
+    ],
+    "tags": [
+      "dogs",
+      "donate",
+      "today"
     ],
     "source_url": "https://streetdogsanctuary.com/",
     "source_label": "Stockton Street Dogs",
@@ -119,7 +194,20 @@
       "ssd-standing-food-supplies"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24"
+    "last_supported_at": "2026-08-24",
+    "at_a_glance": {
+      "what": "Pet-support supplies",
+      "time": "Current wishlists",
+      "why": "Supports people and pets",
+      "availability": "Check current requests"
+    },
+    "why_it_helps": "Crates, food, bedding, leashes, and other requested items can help people keep companion animals safe while local organizations work on shelter and placement needs.",
+    "what_to_expect": [
+      "You’ll leave Crossover to check the provider’s latest requested items.",
+      "Wishlists can change, so confirm what is currently useful.",
+      "Follow the provider’s current donation or drop-off instructions."
+    ],
+    "handoff_label": "Check current wishlist"
   },
   {
     "id": "help-food-distribution",
@@ -129,6 +217,10 @@
     "organization_id": "bread-of-life",
     "gap_ids": [
       "food-distribution-capacity"
+    ],
+    "tags": [
+      "food",
+      "volunteer"
     ],
     "source_url": "https://www.breadoflifeca.org/volunteer",
     "source_label": "Bread of Life",
@@ -144,7 +236,20 @@
       "bol-2026-08-06-cold-storage-overflow"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24"
+    "last_supported_at": "2026-08-24",
+    "at_a_glance": {
+      "what": "Food distribution help",
+      "time": "Volunteer opportunities",
+      "why": "Moves food into neighborhoods",
+      "availability": "Check current openings"
+    },
+    "why_it_helps": "Packing, loading, setup, and neighborhood distribution help turn donated food into meals and groceries that actually reach people.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Bread of Life’s current volunteer opportunities.",
+      "Tasks and schedules can vary by distribution day and current need.",
+      "Confirm the latest shift details directly with the provider."
+    ],
+    "handoff_label": "Check volunteer opportunities"
   },
   {
     "id": "donate-food-supplies",
@@ -154,6 +259,11 @@
     "organization_id": "bread-of-life",
     "gap_ids": [
       "food-distribution-capacity"
+    ],
+    "tags": [
+      "food",
+      "donate",
+      "today"
     ],
     "source_url": "https://www.breadoflifeca.org/donate-food",
     "source_label": "Bread of Life",
@@ -168,7 +278,20 @@
       "bol-standing-donate-food"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24"
+    "last_supported_at": "2026-08-24",
+    "at_a_glance": {
+      "what": "Food or distribution supplies",
+      "time": "Coordinate first",
+      "why": "Supports food distribution",
+      "availability": "Check current needs"
+    },
+    "why_it_helps": "Useful food, storage, and distribution supplies strengthen the system that moves groceries into the community.",
+    "what_to_expect": [
+      "You’ll leave Crossover to see Bread of Life’s current donation information.",
+      "Needs can change, especially for perishable food and storage-related items.",
+      "Coordinate with the provider before making a large or unusual donation."
+    ],
+    "handoff_label": "Check current donation needs"
   },
   {
     "id": "adopt-a-dog",
@@ -178,6 +301,10 @@
     "organization_id": "stockton-street-dogs",
     "gap_ids": [
       "dogs-safe-placement"
+    ],
+    "tags": [
+      "dogs",
+      "foster-adopt"
     ],
     "source_url": "https://linktr.ee/streetdogsanctuary",
     "source_label": "Stockton Street Dogs",
@@ -192,7 +319,20 @@
     "updated_at": "2026-08-21T17:07:00-07:00",
     "when_label": "Current adoptable dogs",
     "location_label": "Stockton Street Dogs",
-    "distance_label": ""
+    "distance_label": "",
+    "at_a_glance": {
+      "what": "Permanent dog adoption",
+      "time": "Long-term commitment",
+      "why": "Creates shelter capacity",
+      "availability": "See adoptable dogs"
+    },
+    "why_it_helps": "Adoption gives one dog a permanent home while creating space for another animal to move through the local rescue and shelter system.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view current adoption information.",
+      "Available dogs and adoption requirements can change.",
+      "The provider can explain the process and help determine whether a particular dog is a good fit."
+    ],
+    "handoff_label": "See current adoptable dogs"
   },
   {
     "id": "doggie-day-out",
@@ -202,6 +342,11 @@
     "organization_id": "stockton-animal-services",
     "gap_ids": [
       "dogs-safe-placement"
+    ],
+    "tags": [
+      "dogs",
+      "volunteer",
+      "today"
     ],
     "source_url": "https://www.hardluckawa.org/events",
     "source_label": "Hard Luck AWA / Stockton Animal Services",
@@ -220,7 +365,18 @@
     "modal_title": "Doggie Day Out",
     "why_it_helps": "A few hours outside the shelter can reduce stress, create community visibility, and help a dog connect with potential fosters or adopters.",
     "provider_label": "Stockton Animal Services · Hard Luck Animal Welfare Advocates",
-    "handoff_label": "Check Doggie Day Out"
+    "handoff_label": "Check current availability",
+    "at_a_glance": {
+      "what": "Shelter dog outing",
+      "time": "A few hours",
+      "why": "Helps dogs get exposure",
+      "availability": "Changes often"
+    },
+    "what_to_expect": [
+      "You’ll leave Crossover and view the provider’s latest instructions, availability, and next steps.",
+      "Outings are usually a few hours.",
+      "Someone will walk you through the details and help you feel ready."
+    ]
   },
   {
     "id": "volunteer-with-streetdogs",
@@ -230,6 +386,10 @@
     "organization_id": "stockton-street-dogs",
     "gap_ids": [
       "dogs-safe-placement"
+    ],
+    "tags": [
+      "dogs",
+      "volunteer"
     ],
     "source_url": "https://linktr.ee/streetdogsanctuary",
     "source_label": "Stockton Street Dogs",
@@ -244,7 +404,20 @@
     "updated_at": "2026-08-21T17:07:00-07:00",
     "when_label": "Ongoing",
     "location_label": "Stockton Street Dogs",
-    "distance_label": ""
+    "distance_label": "",
+    "at_a_glance": {
+      "what": "Rescue volunteering",
+      "time": "Ongoing",
+      "why": "Supports street-dog work",
+      "availability": "Check current needs"
+    },
+    "why_it_helps": "Volunteer help expands the people available for outreach, dog care, rescue, transportation, and placement work.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Stockton Street Dogs’ current volunteer information.",
+      "Roles can vary with current rescue needs.",
+      "Contact the provider for current opportunities and expectations."
+    ],
+    "handoff_label": "Check volunteer opportunities"
   },
   {
     "id": "support-food-storage-capacity",
@@ -254,6 +427,10 @@
     "organization_id": "bread-of-life",
     "gap_ids": [
       "food-distribution-capacity"
+    ],
+    "tags": [
+      "food",
+      "donate"
     ],
     "source_url": "https://www.breadoflifeca.org/donate",
     "source_label": "Bread of Life",
@@ -269,7 +446,20 @@
       "bol-standing-donate-funds"
     ],
     "currentness": "recent",
-    "last_supported_at": "2026-08-21"
+    "last_supported_at": "2026-08-21",
+    "at_a_glance": {
+      "what": "Cold-storage support",
+      "time": "Current need",
+      "why": "Lets more food be accepted",
+      "availability": "Recent need"
+    },
+    "why_it_helps": "More cold-storage capacity can allow Bread of Life to accept and distribute larger perishable-food donations instead of losing food for lack of storage.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Bread of Life’s current support options.",
+      "This is infrastructure support rather than a one-time volunteer shift.",
+      "Check the latest provider information before contributing."
+    ],
+    "handoff_label": "Support current storage needs"
   },
   {
     "id": "support-ready-to-work",
@@ -279,6 +469,11 @@
     "organization_id": "ready-to-work-sjc",
     "gap_ids": [
       "reentry-housing-instability"
+    ],
+    "tags": [
+      "reentry",
+      "housing",
+      "donate"
     ],
     "source_url": "https://www.readytoworksjc.org/donate-today/",
     "source_label": "Ready To Work San Joaquin",
@@ -293,7 +488,20 @@
       "rtw-standing-housing-work-pathway"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22"
+    "last_supported_at": "2026-08-22",
+    "at_a_glance": {
+      "what": "Reentry program support",
+      "time": "Ongoing",
+      "why": "Supports housing and work",
+      "availability": "Current support"
+    },
+    "why_it_helps": "Support helps sustain transitional housing, case management, paid work, training, and pathways toward permanent housing for people rebuilding after homelessness or incarceration.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Ready To Work San Joaquin’s current donation information.",
+      "Support contributes to a broader reentry and housing pathway rather than one isolated service.",
+      "Use the provider’s latest information for current giving options."
+    ],
+    "handoff_label": "Support Ready To Work"
   },
   {
     "id": "hire-ready-to-work",
@@ -303,6 +511,9 @@
     "organization_id": "ready-to-work-sjc",
     "gap_ids": [
       "reentry-housing-instability"
+    ],
+    "tags": [
+      "reentry"
     ],
     "source_url": "https://www.readytoworksjc.org/get-involved/",
     "source_label": "Ready To Work San Joaquin",
@@ -317,7 +528,20 @@
       "rtw-standing-employer-partner"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22"
+    "last_supported_at": "2026-08-22",
+    "at_a_glance": {
+      "what": "Hire or contract crews",
+      "time": "Employer partnership",
+      "why": "Creates employment pathways",
+      "availability": "Current partnerships"
+    },
+    "why_it_helps": "Hiring participants or contracting with crews creates real paid-work opportunities that can support longer-term stability after homelessness or incarceration.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Ready To Work San Joaquin’s employer and partnership information.",
+      "Businesses and organizations can explore crew contracts or direct hiring.",
+      "The provider can explain current partnership options and requirements."
+    ],
+    "handoff_label": "Explore employer partnerships"
   },
   {
     "id": "support-friends-outside-reentry",
@@ -327,6 +551,11 @@
     "organization_id": "friends-outside",
     "gap_ids": [
       "reentry-housing-instability"
+    ],
+    "tags": [
+      "reentry",
+      "housing",
+      "donate"
     ],
     "source_url": "https://friendsoutside.org/donate/donate",
     "source_label": "Friends Outside",
@@ -342,7 +571,20 @@
       "friends-outside-standing-donate-reentry"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22"
+    "last_supported_at": "2026-08-22",
+    "at_a_glance": {
+      "what": "Practical reentry support",
+      "time": "Ongoing",
+      "why": "Helps people stabilize",
+      "availability": "Current support"
+    },
+    "why_it_helps": "Transportation, supplies, classes, case management, and housing assistance can remove practical barriers that make reentry harder.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view Friends Outside’s current donation information.",
+      "Support may fund several forms of practical reentry assistance.",
+      "Check the provider’s latest information for current giving options."
+    ],
+    "handoff_label": "Support reentry clients"
   },
   {
     "id": "support-st-marys-housing-work",
@@ -352,6 +594,10 @@
     "organization_id": "st-marys-dining-room",
     "gap_ids": [
       "low-barrier-housing-pathways"
+    ],
+    "tags": [
+      "housing",
+      "donate"
     ],
     "source_url": "https://smcares.org/",
     "source_label": "St. Mary’s Community Services",
@@ -367,6 +613,19 @@
       "smcs-standing-housing-outcomes"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24"
+    "last_supported_at": "2026-08-24",
+    "at_a_glance": {
+      "what": "Shelter and housing support",
+      "time": "Ongoing",
+      "why": "Supports housing pathways",
+      "availability": "Current support"
+    },
+    "why_it_helps": "Support helps sustain low-barrier shelter, meals, case management, and housing pathways for people working toward greater stability.",
+    "what_to_expect": [
+      "You’ll leave Crossover to view St. Mary’s current programs and support options.",
+      "Your support may contribute across shelter, meals, case management, and housing work.",
+      "Use the provider’s latest information for current ways to help."
+    ],
+    "handoff_label": "Support St. Mary’s housing work"
   }
 ]
