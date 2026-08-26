@@ -16,7 +16,6 @@ import {
   PawPrint,
   Search,
   ShieldCheck,
-  Sun,
   Users,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
@@ -139,13 +138,10 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
             <button type="button" onClick={onOpenAbout}>About</button>
           </nav>
-          <button className="location-pill" type="button" onClick={() => onNavigate("reality")}>
+          <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
             <MapPin size={16} />
             Stockton, CA
             <ChevronDown size={15} />
-          </button>
-          <button className="sun-button" type="button" aria-label="Theme">
-            <Sun size={18} />
           </button>
         </header>
 

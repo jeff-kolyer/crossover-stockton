@@ -10,7 +10,6 @@ import {
   PawPrint,
   Search,
   ShieldCheck,
-  Sun,
 } from "lucide-react";
 import orgsData from "../data/orgs.json";
 import type { OrgRecord } from "../types";
@@ -48,13 +47,10 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
             <button type="button" className="is-active">Organizations</button>
             <button type="button" onClick={() => onNavigate("about")}>About</button>
           </nav>
-          <button className="location-pill" type="button" onClick={() => onNavigate("reality")}>
+          <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
             <MapPin size={16} />
             Stockton, CA
             <ChevronDown size={15} />
-          </button>
-          <button className="sun-button" type="button" aria-label="Theme">
-            <Sun size={18} />
           </button>
         </header>
 

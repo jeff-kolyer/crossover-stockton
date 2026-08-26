@@ -2641,8 +2641,7 @@ p {
   text-underline-offset: 7px;
 }
 
-.location-pill,
-.sun-button {
+.location-pill {
   display: inline-flex;
   height: 34px;
   align-items: center;
@@ -2654,12 +2653,6 @@ p {
   color: #ffffff;
   padding: 0 12px;
   backdrop-filter: blur(10px);
-}
-
-.sun-button {
-  width: 34px;
-  border-radius: 999px;
-  padding: 0;
 }
 
 .public-mobile-menu {
@@ -5081,8 +5074,7 @@ p {
     letter-spacing: 0.19em;
   }
 
-  .public-nav nav,
-  .sun-button {
+  .public-nav nav {
     display: none;
   }
 

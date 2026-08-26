@@ -12,7 +12,6 @@ import {
   Menu,
   Search,
   Sprout,
-  Sun,
   TrendingUp,
   UserRound,
 } from "lucide-react";
@@ -50,13 +49,10 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
             <button type="button" className="is-active">About</button>
           </nav>
-          <button className="location-pill" type="button" onClick={() => onNavigate("reality")}>
+          <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
             <MapPin size={16} />
             Stockton, CA
             <ChevronDown size={15} />
-          </button>
-          <button className="sun-button" type="button" aria-label="Theme">
-            <Sun size={18} />
           </button>
         </header>
 

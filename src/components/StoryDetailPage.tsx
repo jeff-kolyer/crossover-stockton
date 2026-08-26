@@ -15,7 +15,6 @@ import {
   PawPrint,
   Search,
   Sprout,
-  Sun,
   UserRound,
 } from "lucide-react";
 import storiesData from "../data/stories.json";
@@ -193,13 +192,10 @@ function PublicStoryNav({ onNavigate }: { onNavigate: (page: PublicRoute) => voi
         <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
         <button type="button" onClick={() => onNavigate("about")}>About</button>
       </nav>
-      <button className="location-pill" type="button" onClick={() => onNavigate("reality")}>
+      <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
         <MapPin size={16} />
         Stockton, CA
         <ChevronDown size={15} />
-      </button>
-      <button className="sun-button" type="button" aria-label="Theme">
-        <Sun size={18} />
       </button>
     </header>
   );
