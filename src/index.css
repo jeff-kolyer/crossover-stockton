@@ -6931,6 +6931,14 @@ p {
   background: #829084;
 }
 
+.action-modal-handoff-note {
+  margin: -12px 0 0;
+  color: #566159;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
 .action-modal-field-reports {
   display: grid;
   gap: 16px;

@@ -175,6 +175,7 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
         <button className="action-modal-primary" type="button" onClick={handleHandoff} disabled={!action.source_url}>
           {action.handoff_label ?? "Go to organization"} <ArrowRight size={21} />
         </button>
+        <p className="action-modal-handoff-note">Opens the organization&apos;s website.</p>
 
         <section className="action-modal-field-reports">
           <h3>Field Reports</h3>

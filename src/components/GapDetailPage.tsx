@@ -176,8 +176,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOp
                           </small>
                         )}
                       </span>
-                      <em>How they help</em>
-                      <ArrowRight size={16} />
+                      <em>Visit their website ↗</em>
                     </button>
                   );
                 })}
