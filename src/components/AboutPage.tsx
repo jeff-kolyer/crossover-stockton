@@ -143,10 +143,10 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <img src={awarenessConnectionImage} alt="" aria-hidden="true" loading="lazy" decoding="async" />
           <div>
             <h2>Awareness.<br />Connection.<br />Care.<br />Action.</h2>
-            <strong>That's the crossover.</strong>
+            <strong>That's the Crossover.</strong>
           </div>
           <div className="about-closing-copy">
-            <p>As technology takes on more of the work machines can do, we have more opportunity to do the work only people can do.</p>
+            <p className="about-closing-thought">As technology takes on more of the work machines can do, we have more opportunity to do the work only people can do.</p>
             <em>We are here to serve what is real.</em>
           </div>
         </section>
