@@ -60,10 +60,8 @@ const orgs = orgsData as OrgRecord[];
 const actions = actionsData as PublicActionRecord[];
 const records = recordsData as EvidenceRecord[];
 const stories = storiesData as StoryRecord[];
-const heroImage = "/images/about/background_stockton.png";
 const logoDark = "/images/logo_dark.png";
 const logoLight = "/images/logo_light.png";
-const storyFallbackImages = ["/images/about/background_about.png", "/images/about/background_gaps.png", "/images/about/background_updates.png"];
 const stateIcons = [AlertCircle, BarChart3, Home];
 const updateIcons = [AlertCircle, Gauge, CheckCircle2];
 
@@ -127,7 +125,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOp
             </button>
           </div>
           <div className="gap-refined-photo">
-            <img src={gap.artwork || heroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
+            {gap.artwork && <img src={gap.artwork} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />}
           </div>
         </div>
       </section>
@@ -246,9 +244,9 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOp
             <section className="gap-card-section">
               <h2>Signs of change</h2>
               <div className="gap-refined-story-row">
-                {relatedStories.map((story, index) => (
-                  <button className="gap-refined-story-card" type="button" onClick={() => onOpenStory(story.slug)} key={story.id}>
-                    <img src={story.image || storyFallbackImages[index % storyFallbackImages.length]} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                {relatedStories.map((story) => (
+                  <button className={`gap-refined-story-card ${story.image ? "" : "has-no-image"}`} type="button" onClick={() => onOpenStory(story.slug)} key={story.id}>
+                    {story.image && <img src={story.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />}
                     <span>
                       <strong>{story.title}</strong>
                       <small>{story.summary}</small>

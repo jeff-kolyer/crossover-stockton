@@ -183,14 +183,13 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             const Icon = getGapIcon(gap.status);
             const useful = actionTitles(gap.action_ids);
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
-            const thumbnailSrc = thumbnailImage ? `${thumbnailImage}?v=${encodeURIComponent(gap.updated_at || gap.id)}` : "";
             const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
             return (
             <button className={`gap-card is-${gap.status}`} key={gap.id} type="button" onClick={() => onOpenGap(gap.slug)}>
               {thumbnailImage && (
                 <span className="gap-card-image-frame" aria-hidden="true">
                   <img
-                    src={thumbnailSrc}
+                    src={thumbnailImage}
                     alt=""
                     loading="lazy"
                     decoding="async"

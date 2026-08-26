@@ -2562,12 +2562,7 @@ p {
   height: 100%;
   object-fit: cover;
   object-position: center 50%;
-  opacity: 0;
   transform: scale(1.03);
-}
-
-.public-hero-image.is-active {
-  opacity: 1;
 }
 
 .public-hero-shade {
@@ -6604,6 +6599,10 @@ p {
   cursor: pointer;
   padding: 0;
   text-align: left;
+}
+
+.gap-refined-story-card.has-no-image {
+  grid-template-columns: 1fr;
 }
 
 .gap-refined-story-card:hover {
