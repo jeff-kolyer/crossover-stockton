@@ -98,7 +98,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
-  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 3);
+  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 5);
   const actionCards = visibleActions(gap);
   const relatedStories = gap.story_ids
     .map((id) => stories.find((story) => story.id === id && story.active))
@@ -388,19 +388,17 @@ function roleForOrg(gap: GapRecord, organizationId: string): ResponderRole | und
 }
 
 function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
-  const preferredByGap: Record<string, string[]> = {
-    "dogs-safe-placement": ["sas-standing-doggie-day-out", "ssd-standing-foster-adopt"],
-    "pet-inclusive-shelter": ["ssd-2026-06-08-safe-grounds", "stockton-2026-05-15-pit-pet-question"],
-  };
-  const preferredIds = [gap.latest_change?.record_id, ...(preferredByGap[gap.id] ?? [])].filter((id): id is string => Boolean(id));
-  const preferred = new Set(preferredIds);
-  const picked = preferredIds
+  const latestChangeIds = [gap.latest_change?.record_id].filter((id): id is string => Boolean(id));
+  const latestChange = latestChangeIds
     .map((id) => recordsForCurrentGap.find((record) => record.id === id))
     .filter((record): record is EvidenceRecord => Boolean(record));
-  const remaining = recordsForCurrentGap
-    .filter((record) => !preferred.has(record.id))
+  const updateRecords = recordsForCurrentGap
+    .filter((record) => record.record_type === "update" && !latestChangeIds.includes(record.id))
     .sort((a, b) => recordTime(b) - recordTime(a));
-  return [...picked, ...remaining].filter((record, index, all) => all.findIndex((item) => item.id === record.id) === index);
+  const remaining = recordsForCurrentGap
+    .filter((record) => record.record_type !== "update" && !latestChangeIds.includes(record.id))
+    .sort((a, b) => recordTime(b) - recordTime(a));
+  return [...latestChange, ...updateRecords, ...remaining];
 }
 
 function representativeSourcesForGap(gap: GapRecord, sourceList: SourceLike[], recordsForCurrentGap: EvidenceRecord[]) {
