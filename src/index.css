@@ -3113,6 +3113,32 @@ p {
   font-size: 0.86rem;
 }
 
+.is-home-page .public-story-band .story-card {
+  background: #202422;
+  min-height: 404px;
+}
+
+.is-home-page .public-story-band .story-card img {
+  height: calc(100% - 184px);
+}
+
+.is-home-page .public-story-band .story-card::after {
+  inset: auto 0 0;
+  height: 184px;
+  background: #1d2220;
+}
+
+.is-home-page .public-story-band .story-card div {
+  top: calc(100% - 184px);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: grid;
+  align-content: start;
+  background: #1d2220;
+  padding: 14px 18px 24px;
+}
+
 .story-detail-page {
   background: #fffdf9;
 }
