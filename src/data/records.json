@@ -1,5 +1,34 @@
 [
   {
+    "id": "crossover-2026-08-28-why-we-stopped-caring-video",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": "2026-08-28",
+    "checked_at": "2026-08-28T12:00:00-07:00",
+    "record_type": "update",
+    "trust": "crossover_source",
+    "title": "Crossover publishes Why We Stopped Caring And How to Start Again",
+    "summary": "Crossover published a short video reframing Stockton's dog-placement gap as a systems problem: dogs and willing caregivers may already exist, but cost, time, housing, veterinary risk, and rigid adoption models keep them apart. The video argues that AI and automation should reduce the logistical burden around care rather than replace the human relationship.",
+    "source": {
+      "publisher": "YouTube",
+      "url": "http://www.youtube.com/watch?v=OAf_cfeIegg",
+      "type": "video"
+    },
+    "supports": [
+      "placement-system-mapping",
+      "foster-adoption-barriers",
+      "care-logistics"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "public_explanation",
+      "systems_framing",
+      "care_logistics"
+    ]
+  },
+  {
     "id": "crossover-2026-08-27-dog-placement-field-investigation",
     "gap_ids": [
       "dogs-safe-placement"

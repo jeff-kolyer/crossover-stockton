@@ -98,9 +98,10 @@
     "artwork": "/images/reality/dog-street-hero.jpg",
 "thumbnail_image": "/images/reality/dog-thumb.jpg",
     "first_seen": "2026-08-20",
-    "updated_at": "2026-08-27T12:00:00-07:00",
+    "updated_at": "2026-08-28T12:00:00-07:00",
     "current_state": "Stockton continues to report pet overpopulation and stray-animal intake pressure beyond normal shelter capacity.",
     "record_ids": [
+      "crossover-2026-08-28-why-we-stopped-caring-video",
       "crossover-2026-08-27-dog-placement-field-investigation",
       "sas-2026-01-13-spay-neuter-capacity",
       "sas-2026-03-05-cat-transfer",
@@ -165,8 +166,8 @@
       }
     ],
     "latest_change": {
-      "record_id": "crossover-2026-08-27-dog-placement-field-investigation",
-      "label": "Crossover began direct field investigation into where dogs enter, get stuck, and what blocks foster or adoption."
+      "record_id": "crossover-2026-08-28-why-we-stopped-caring-video",
+      "label": "Crossover published a video framing dog placement as a systems problem of care, cost, time, housing, veterinary risk, and adoption friction."
     },
     "current_state_items": [
       {
