@@ -162,7 +162,7 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
         <p>Reality. Connection. Action.</p>
         <button type="button" onClick={() => onNavigate("about")}>About</button>
         <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <a href="https://www.linkedin.com/in/jeff-kolyer-53003a21/" target="_blank" rel="noreferrer">Contact</a>
+        <a href="http://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noreferrer">Contact</a>
       </footer>
 
       <nav className="public-bottom-nav" aria-label="Mobile primary">

@@ -163,7 +163,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <p>Reality. Connection. Action.</p>
         <button type="button" className="is-active">About</button>
         <button type="button" onClick={onPrimaryAction}>Action</button>
-        <a href="https://www.linkedin.com/in/jeff-kolyer-53003a21/" target="_blank" rel="noreferrer">Contact</a>
+        <a href="http://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noreferrer">Contact</a>
       </footer>
 
       <nav className="public-bottom-nav" aria-label="Mobile primary">
