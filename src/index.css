@@ -3113,22 +3113,22 @@ p {
   font-size: 0.86rem;
 }
 
-.is-home-page .public-story-band .story-card {
+.public-story-band .story-card {
   background: #202422;
   min-height: 404px;
 }
 
-.is-home-page .public-story-band .story-card img {
+.public-story-band .story-card img {
   height: calc(100% - 184px);
 }
 
-.is-home-page .public-story-band .story-card::after {
+.public-story-band .story-card::after {
   inset: auto 0 0;
   height: 184px;
   background: #1d2220;
 }
 
-.is-home-page .public-story-band .story-card div {
+.public-story-band .story-card div {
   top: calc(100% - 184px);
   right: 0;
   bottom: 0;
