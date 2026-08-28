@@ -2940,8 +2940,8 @@ p {
 .gap-card p {
   margin: 0;
   color: #202b24;
-  font-size: 0.9rem;
-  line-height: 1.34;
+  font-size: 0.96rem;
+  line-height: 1.42;
 }
 
 .gap-card > p:first-of-type {
