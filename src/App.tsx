@@ -3,6 +3,7 @@ import gapsData from "./data/gaps.json";
 import { ActionModal } from "./components/ActionModal";
 import { AboutPage } from "./components/AboutPage";
 import { GapDetailPage } from "./components/GapDetailPage";
+import { GapSourcesPage } from "./components/GapSourcesPage";
 import { GapUpdatesPage } from "./components/GapUpdatesPage";
 import { HomePage } from "./components/HomePage";
 import { OrganizationsPage } from "./components/OrganizationsPage";
@@ -15,7 +16,7 @@ import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 
-type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
+type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface RouteState {
   page: AppRoute;
@@ -23,7 +24,7 @@ interface RouteState {
   storySlug?: string;
 }
 
-const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "storyDetail">, string> = {
+const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">, string> = {
   home: "/",
   reality: "/reality",
   connection: "/connection",
@@ -47,6 +48,10 @@ function routeFromPathname(pathname: string): RouteState {
   if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
     const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
     return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
+  }
+  if (normalized.startsWith("/reality/") && normalized.endsWith("/sources")) {
+    const gapSlug = normalized.replace("/reality/", "").replace(/\/sources$/, "");
+    return { page: "gapSources", gapSlug: decodeURIComponent(gapSlug) };
   }
   if (normalized.startsWith("/reality/")) {
     return { page: "gapDetail", gapSlug: decodeURIComponent(normalized.replace("/reality/", "")) };
@@ -87,7 +92,7 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  async function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "storyDetail">) {
+  async function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">) {
     const nextPath = ROUTE_PATHS[page];
     await warmImage(pageHeroImages[page]);
     if (window.location.pathname !== nextPath) {
@@ -113,6 +118,15 @@ export default function App() {
       window.history.pushState({}, "", nextPath);
     }
     setRoute({ page: "gapUpdates", gapSlug: slug });
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+  }
+
+  async function showGapSources(slug: string) {
+    const nextPath = `/reality/${slug}/sources`;
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState({}, "", nextPath);
+    }
+    setRoute({ page: "gapSources", gapSlug: slug });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
@@ -148,6 +162,7 @@ export default function App() {
           onOpenAbout={() => showPage("about")}
           onOpenGap={showGap}
           onOpenUpdates={showGapUpdates}
+          onOpenSources={showGapSources}
           onOpenStory={showStory}
           onOpenAction={setSelectedAction}
         />
@@ -155,6 +170,15 @@ export default function App() {
 
       {route.page === "gapUpdates" && (
         <GapUpdatesPage
+          slug={route.gapSlug ?? firstGapSlug}
+          onNavigate={showPage}
+          onOpenAbout={() => showPage("about")}
+          onOpenGap={showGap}
+        />
+      )}
+
+      {route.page === "gapSources" && (
+        <GapSourcesPage
           slug={route.gapSlug ?? firstGapSlug}
           onNavigate={showPage}
           onOpenAbout={() => showPage("about")}

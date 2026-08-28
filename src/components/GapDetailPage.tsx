@@ -35,6 +35,7 @@ interface GapDetailPageProps {
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
   onOpenUpdates: (slug: string) => void;
+  onOpenSources: (slug: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
 }
@@ -66,7 +67,7 @@ const logoLight = "/images/logo_light.png";
 const stateIcons = [AlertCircle, BarChart3, Home];
 const updateIcons = [AlertCircle, Gauge, CheckCircle2];
 
-export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenStory, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -116,7 +117,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
             <p>{gap.summary}</p>
             <div className="gap-detail-meta" aria-label="Gap record metadata">
               <span><FileText size={17} /> {gap.sources.length} sources</span>
-              <a href="#gap-sources"><ExternalLink size={16} /> View sources</a>
+              <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
               <span><Users size={18} /> {relatedOrgs.length} organizations</span>
               <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
               {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
@@ -267,7 +268,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
                 </a>
               ))}
             </div>
-            <a className="gap-card-link" href="#gap-sources">View all sources <ArrowRight size={15} /></a>
+            <button className="gap-card-link" type="button" onClick={() => onOpenSources(gap.slug)}>View all sources <ArrowRight size={15} /></button>
           </section>
         )}
       </section>
