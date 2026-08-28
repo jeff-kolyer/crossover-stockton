@@ -2623,6 +2623,7 @@ p {
 
 .public-nav a,
 .public-nav nav button,
+.public-footer a,
 .public-footer button {
   border: 0;
   background: transparent;
@@ -3903,7 +3904,7 @@ p {
 
 .public-footer {
   display: grid;
-  grid-template-columns: 180px auto minmax(0, 1fr) auto auto;
+  grid-template-columns: 180px auto minmax(0, 1fr) auto auto auto;
   gap: 24px;
   align-items: center;
   width: 100%;
@@ -3931,6 +3932,7 @@ p {
 
 .public-footer span,
 .public-footer p,
+.public-footer a,
 .public-footer button {
   margin: 0;
   color: rgba(255, 255, 255, 0.86);
@@ -5527,11 +5529,13 @@ p {
 
   .public-footer > span,
   .public-footer p,
+  .public-footer a,
   .public-footer button {
     justify-self: start;
     color: #2b302b;
   }
 
+  .public-footer a,
   .public-footer button {
     display: none;
   }

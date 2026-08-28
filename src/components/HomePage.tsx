@@ -355,6 +355,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
         <p>Reality. Connection. Action.</p>
         <button type="button" onClick={onOpenAbout}>About</button>
         <button type="button" onClick={() => onNavigate("action")}>Action</button>
+        <a href="https://www.linkedin.com/in/jeff-kolyer-53003a21/" target="_blank" rel="noreferrer">Contact</a>
       </footer>
 
       <nav className="public-bottom-nav" aria-label="Mobile primary">
