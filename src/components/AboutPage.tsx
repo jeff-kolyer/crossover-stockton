@@ -11,6 +11,7 @@ import {
   MapPin,
   Menu,
   Search,
+  Stars,
   Sprout,
   TrendingUp,
   UserRound,
@@ -59,7 +60,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
 
         <div className="about-hero-copy">
           <h1>About Crossover</h1>
-          <h2>Pay attention to what is real.</h2>
+          <h2>See what matters. Find a real way to help.</h2>
           <p>Crossover uses AI to help us see what our community needs, what is getting better, and where we can actually help.</p>
           <button className="section-back-link about-hero-back" type="button" onClick={() => onNavigate("home")}>
             <ArrowRight size={16} /> Back to home
@@ -76,9 +77,9 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           </div>
           <div className="about-question-grid">
             <article>
-              <Search size={34} />
+              <Stars size={34} />
               <h3>What needs attention?</h3>
-              <p>We surface important unmet needs.</p>
+              <p>AI helps us surface important unmet needs.</p>
             </article>
             <article>
               <TrendingUp size={34} />
