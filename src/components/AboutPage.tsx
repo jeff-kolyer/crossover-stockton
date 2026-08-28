@@ -73,13 +73,13 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <div className="about-section-heading">
             <h2>What we do</h2>
             <p>We use AI to follow a limited set of local organizations and public sources, looking for a simple picture of reality.</p>
-            <span className="about-see-note">It helps us see <ArrowRight size={26} /></span>
+            <span className="about-see-note">AI helps us see <ArrowRight size={26} /></span>
           </div>
           <div className="about-question-grid">
             <article>
               <Stars size={34} />
               <h3>What needs attention?</h3>
-              <p>AI helps us surface important unmet needs.</p>
+              <p>We surface important unmet needs.</p>
             </article>
             <article>
               <TrendingUp size={34} />
