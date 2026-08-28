@@ -289,10 +289,14 @@ export interface EvidenceRecord {
   checked_at?: string;
   record_type:
     | "condition"
+    | "capacity_constraint"
     | "capacity_intervention"
     | "operational_change"
+    | "current_need"
     | "current_ask"
     | "current_service"
+    | "field_investigation"
+    | "update"
     | "measurement_change"
     | "response"
     | "outcome";

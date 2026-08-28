@@ -1,5 +1,38 @@
 [
   {
+    "id": "crossover-2026-08-27-dog-placement-field-investigation",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs",
+      "stockton-animal-services",
+      "hard-luck-awa"
+    ],
+    "published_at": "2026-08-27",
+    "checked_at": "2026-08-28T12:00:00-07:00",
+    "record_type": "update",
+    "trust": "crossover_source",
+    "title": "Crossover begins field investigation into Stockton's dog-placement gap",
+    "summary": "We completed the first public-source pass on the gap and started defining the next phase: direct conversations and field work with Stockton Streetdogs, Stockton Animal Services, and Hard Luck. The focus is shifting from simply documenting overcrowding to understanding the full system - where dogs enter, where they get stuck, and what keeps willing people from being able to foster or adopt.",
+    "source": {
+      "publisher": "LinkedIn / Jeff Kolyer",
+      "url": "https://lnkd.in/p/eqweAdnW",
+      "type": "social_post"
+    },
+    "supports": [
+      "field-investigation",
+      "placement-system-mapping",
+      "foster-adoption-barriers"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "direct_conversations",
+      "field_work",
+      "system_mapping"
+    ]
+  },
+  {
     "id": "sas-2026-01-13-spay-neuter-capacity",
     "gap_ids": [
       "dogs-safe-placement"

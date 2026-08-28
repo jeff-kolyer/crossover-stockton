@@ -34,6 +34,7 @@ interface GapDetailPageProps {
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenUpdates: (slug: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
 }
@@ -65,7 +66,7 @@ const logoLight = "/images/logo_light.png";
 const stateIcons = [AlertCircle, BarChart3, Home];
 const updateIcons = [AlertCircle, Gauge, CheckCircle2];
 
-export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -193,18 +194,11 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOp
                   const Icon = updateIcons[index % updateIcons.length];
                   const dateLabel = recordDateLabel(record);
                   return (
-                    <a className={`gap-update-compact is-${record.record_type}`} href={record.source.url} target="_blank" rel="noreferrer" key={record.id}>
-                      <Icon size={22} />
-                      <strong>{record.title}</strong>
-                      <span>
-                        {dateLabel.context && <small>{dateLabel.context}</small>}
-                        <time>{dateLabel.date}</time>
-                      </span>
-                    </a>
+                    <RecentUpdateItem record={record} Icon={Icon} dateLabel={dateLabel} key={record.id} />
                   );
                 })}
               </div>
-              <a className="gap-card-link" href="#gap-sources">View all updates <ArrowRight size={15} /></a>
+              <button className="gap-card-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View update history <ArrowRight size={15} /></button>
             </section>
           )}
         </div>
@@ -290,6 +284,43 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenStory, onOp
       </footer>
     </main>
   );
+}
+
+function RecentUpdateItem({
+  record,
+  Icon,
+  dateLabel,
+}: {
+  record: EvidenceRecord;
+  Icon: typeof AlertCircle;
+  dateLabel: { context?: string; date: string };
+}) {
+  const content = (
+    <>
+      <Icon size={22} />
+      <strong>{record.title}</strong>
+      <span>
+        {dateLabel.context && <small>{dateLabel.context}</small>}
+        <time>{dateLabel.date}</time>
+      </span>
+    </>
+  );
+
+  if (record.source.url) {
+    const isInternalUrl = record.source.url.startsWith("/");
+    return (
+      <a
+        className={`gap-update-compact is-${record.record_type}`}
+        href={record.source.url}
+        target={isInternalUrl ? undefined : "_blank"}
+        rel={isInternalUrl ? undefined : "noreferrer"}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return <div className={`gap-update-compact is-${record.record_type}`}>{content}</div>;
 }
 
 function PublicNav({ onNavigate, onOpenAbout }: Pick<GapDetailPageProps, "onNavigate" | "onOpenAbout">) {

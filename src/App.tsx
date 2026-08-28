@@ -3,6 +3,7 @@ import gapsData from "./data/gaps.json";
 import { ActionModal } from "./components/ActionModal";
 import { AboutPage } from "./components/AboutPage";
 import { GapDetailPage } from "./components/GapDetailPage";
+import { GapUpdatesPage } from "./components/GapUpdatesPage";
 import { HomePage } from "./components/HomePage";
 import { OrganizationsPage } from "./components/OrganizationsPage";
 import { StoryDetailPage } from "./components/StoryDetailPage";
@@ -13,7 +14,7 @@ import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 
-type AppRoute = "home" | "reality" | "gapDetail" | "storyDetail" | "connection" | "action" | "about" | "organizations";
+type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "storyDetail" | "connection" | "action" | "about" | "organizations";
 
 interface RouteState {
   page: AppRoute;
@@ -21,7 +22,7 @@ interface RouteState {
   storySlug?: string;
 }
 
-const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "storyDetail">, string> = {
+const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "storyDetail">, string> = {
   home: "/",
   reality: "/reality",
   connection: "/connection",
@@ -41,6 +42,10 @@ const pageHeroImages: Partial<Record<AppRoute, string>> = {
 
 function routeFromPathname(pathname: string): RouteState {
   const normalized = pathname.replace(/\/+$/, "") || "/";
+  if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
+    const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
+    return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
+  }
   if (normalized.startsWith("/reality/")) {
     return { page: "gapDetail", gapSlug: decodeURIComponent(normalized.replace("/reality/", "")) };
   }
@@ -79,7 +84,7 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  async function showPage(page: Exclude<AppRoute, "gapDetail" | "storyDetail">) {
+  async function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "storyDetail">) {
     const nextPath = ROUTE_PATHS[page];
     await warmImage(pageHeroImages[page]);
     if (window.location.pathname !== nextPath) {
@@ -96,6 +101,15 @@ export default function App() {
       window.history.pushState({}, "", nextPath);
     }
     setRoute({ page: "gapDetail", gapSlug: slug });
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+  }
+
+  async function showGapUpdates(slug: string) {
+    const nextPath = `/reality/${slug}/updates`;
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState({}, "", nextPath);
+    }
+    setRoute({ page: "gapUpdates", gapSlug: slug });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
@@ -130,8 +144,18 @@ export default function App() {
           onNavigate={showPage}
           onOpenAbout={() => showPage("about")}
           onOpenGap={showGap}
+          onOpenUpdates={showGapUpdates}
           onOpenStory={showStory}
           onOpenAction={setSelectedAction}
+        />
+      )}
+
+      {route.page === "gapUpdates" && (
+        <GapUpdatesPage
+          slug={route.gapSlug ?? firstGapSlug}
+          onNavigate={showPage}
+          onOpenAbout={() => showPage("about")}
+          onOpenGap={showGap}
         />
       )}
 

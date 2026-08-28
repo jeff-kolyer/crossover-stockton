@@ -98,9 +98,10 @@
     "artwork": "/images/reality/dog-street-hero.jpg",
 "thumbnail_image": "/images/reality/dog-thumb.jpg",
     "first_seen": "2026-08-20",
-    "updated_at": "2026-08-21T17:07:00-07:00",
+    "updated_at": "2026-08-27T12:00:00-07:00",
     "current_state": "Stockton continues to report pet overpopulation and stray-animal intake pressure beyond normal shelter capacity.",
     "record_ids": [
+      "crossover-2026-08-27-dog-placement-field-investigation",
       "sas-2026-01-13-spay-neuter-capacity",
       "sas-2026-03-05-cat-transfer",
       "sas-2026-05-05-overpopulation-report",
@@ -164,8 +165,8 @@
       }
     ],
     "latest_change": {
-      "record_id": "hlawa-2026-06-09-contract-extension",
-      "label": "Stockton extended its Hard Luck veterinary-services partnership and added four positions."
+      "record_id": "crossover-2026-08-27-dog-placement-field-investigation",
+      "label": "Crossover began direct field investigation into where dogs enter, get stuck, and what blocks foster or adoption."
     },
     "current_state_items": [
       {
