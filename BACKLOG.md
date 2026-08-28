@@ -57,19 +57,17 @@ Possible outreach note:
 - [ ] Feed verified findings back into the critical gap page
 
 ### Gap investigation
-- [ ] Map the major causes of dogs ending up on the street
-- [ ] Identify the major bottlenecks in the street → shelter/foster/rescue → home pipeline
-- [ ] Separate problems of intake from problems of throughput
-- [ ] Understand the role of pet-friendly housing and homelessness
-- [ ] Identify what already works well
-- [ ] Identify what could work better with more resources
+- [ ] Ask where dogs are getting stuck right now: street, shelter intake, medical care, foster, rescue transfer, adoption, or staying with their owners
+- [ ] Identify the biggest constraint on safe placement
+- [ ] Ask what would change if that constraint disappeared tomorrow
+- [ ] Understand what prevents willing people from fostering, adopting, or otherwise caring for dogs
+- [ ] Identify what people doing the work think the public misunderstands about the problem
 
 ### Post-scarcity questions
-- [ ] Ask why the people doing the real work do not have dramatically more resources
-- [ ] Identify work that should be automated because it is drudgery
-- [ ] Identify human connection that should *not* be automated
+- [ ] Separate the human care that should be protected from the surrounding labor that technology could remove
+- [ ] Identify barriers around care that could be reduced with more time, money, housing flexibility, veterinary support, training, transportation, or backup help
 - [ ] Look for ways AI can reduce coordination, paperwork, scheduling, matching, and information friction
 - [ ] Ask how existing successful approaches could scale rather than inventing new wheels
-- [ ] Explore the idea of distributed sanctuary capacity
+- [ ] Explore ways to unlock unused human capacity to care, including flexible foster/adoption models and distributed sanctuary capacity
 - [ ] Keep the principle: **Automate the labor. Preserve the connection.**
-- [ ] More robots. More yard time.
+- [ ] Keep the larger goal in view: **redesign society for care.**
