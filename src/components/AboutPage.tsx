@@ -16,7 +16,7 @@ import {
   UserRound,
 } from "lucide-react";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
 const aboutHeroImage = "/images/about/about-crossover-hero.jpg";
 const awarenessConnectionImage = "/images/about/awareness-connection-hero.jpg";
@@ -46,6 +46,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
             <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
             <button type="button" onClick={() => onNavigate("action")}>Action</button>
+            <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
             <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
             <button type="button" className="is-active">About</button>
           </nav>

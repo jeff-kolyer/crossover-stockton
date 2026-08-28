@@ -27,7 +27,7 @@ import type { ActionTag, GapRecord, OrgRecord, PublicActionRecord, StoryRecord }
 
 interface HomePageProps {
   page: "home" | "reality" | "connection" | "action";
-  onNavigate: (page: "home" | "reality" | "connection" | "action" | "about" | "organizations") => void;
+  onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
   onOpenStory: (slug: string) => void;
@@ -135,6 +135,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}>Needs</button>
             <button type="button" className={page === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}>Stories</button>
             <button type="button" className={page === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}>Action</button>
+            <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
             <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
             <button type="button" onClick={onOpenAbout}>About</button>
           </nav>

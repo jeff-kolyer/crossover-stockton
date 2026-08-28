@@ -6542,7 +6542,7 @@ p {
 }
 
 .gap-history-header p {
-  max-width: 620px;
+  max-width: 860px;
   margin: 0;
   color: #29352f;
   font-size: 1.05rem;
@@ -6638,7 +6638,8 @@ p {
 }
 
 .gap-history-item a,
-.gap-history-item small {
+.gap-history-item small,
+.gap-history-actions button {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -6648,6 +6649,20 @@ p {
   font-weight: 720;
   line-height: 1.2;
   text-decoration: none;
+}
+
+.gap-history-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+}
+
+.gap-history-actions button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
 }
 
 .gap-refined-action-band {

@@ -14,7 +14,7 @@ import {
 import orgsData from "../data/orgs.json";
 import type { OrgRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface OrganizationsPageProps {
   onNavigate: (page: PublicRoute) => void;
@@ -44,6 +44,7 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
             <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
             <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
             <button type="button" onClick={() => onNavigate("action")}>Action</button>
+            <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
             <button type="button" className="is-active">Organizations</button>
             <button type="button" onClick={() => onNavigate("about")}>About</button>
           </nav>

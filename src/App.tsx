@@ -7,6 +7,7 @@ import { GapUpdatesPage } from "./components/GapUpdatesPage";
 import { HomePage } from "./components/HomePage";
 import { OrganizationsPage } from "./components/OrganizationsPage";
 import { StoryDetailPage } from "./components/StoryDetailPage";
+import { UpdatesPage } from "./components/UpdatesPage";
 import { warmImage } from "./lib/preloadImages";
 import storiesData from "./data/stories.json";
 import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
@@ -14,7 +15,7 @@ import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 
-type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "storyDetail" | "connection" | "action" | "about" | "organizations";
+type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface RouteState {
   page: AppRoute;
@@ -27,6 +28,7 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "storyD
   reality: "/reality",
   connection: "/connection",
   action: "/action",
+  updates: "/updates",
   about: "/about",
   organizations: "/organizations",
 };
@@ -55,6 +57,7 @@ function routeFromPathname(pathname: string): RouteState {
   if (normalized === "/reality") return { page: "reality" };
   if (normalized === "/connection") return { page: "connection" };
   if (normalized === "/action") return { page: "action" };
+  if (normalized === "/updates") return { page: "updates" };
   if (normalized === "/about") return { page: "about" };
   if (normalized === "/organizations") return { page: "organizations" };
   return { page: "home" };
@@ -163,6 +166,13 @@ export default function App() {
         <AboutPage
           onNavigate={showPage}
           onPrimaryAction={() => showPage("action")}
+        />
+      )}
+
+      {route.page === "updates" && (
+        <UpdatesPage
+          onNavigate={showPage}
+          onOpenGap={showGap}
         />
       )}
 

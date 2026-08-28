@@ -20,7 +20,7 @@ import {
 import storiesData from "../data/stories.json";
 import type { StoryEvidence, StoryRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface StoryDetailPageProps {
   slug?: string;
@@ -189,6 +189,7 @@ function PublicStoryNav({ onNavigate }: { onNavigate: (page: PublicRoute) => voi
         <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
         <button type="button" className="is-active" onClick={() => onNavigate("connection")}>Stories</button>
         <button type="button" onClick={() => onNavigate("action")}>Action</button>
+        <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
         <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
         <button type="button" onClick={() => onNavigate("about")}>About</button>
       </nav>
