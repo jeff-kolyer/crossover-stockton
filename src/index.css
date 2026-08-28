@@ -2879,7 +2879,15 @@ p {
   min-height: 506px;
   overflow: hidden;
   padding: 0 14px 14px;
-  border-top: 4px solid var(--gap-tone, #2f7a55);
+}
+
+.gap-card::before {
+  display: block;
+  flex: 0 0 6px;
+  height: 6px;
+  margin: 0 -14px;
+  background: var(--gap-tone, #2f7a55);
+  content: "";
 }
 
 .gap-card.is-critical { --gap-tone: #c83326; }
@@ -2912,9 +2920,9 @@ p {
   display: block;
   flex: 0 0 150px;
   height: 150px;
-  margin: 7px -7px 0;
+  margin: -11px -14px 0;
   overflow: hidden;
-  border-radius: 7px;
+  border-radius: 0;
   background: #efe8db;
 }
 
