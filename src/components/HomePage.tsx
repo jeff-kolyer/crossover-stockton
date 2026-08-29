@@ -353,9 +353,9 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
         </div>
         <span>© 2026 Crossover Stockton</span>
         <p>Reality. Connection. Action.</p>
+        <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}>Needs</button>
+        <button type="button" className={page === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}>Action</button>
         <button type="button" onClick={onOpenAbout}>About</button>
-        <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <a href="http://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noreferrer">Contact</a>
       </footer>
 
       <nav className="public-bottom-nav" aria-label="Mobile primary">

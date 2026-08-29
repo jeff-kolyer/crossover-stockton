@@ -280,9 +280,9 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
         </div>
         <span>© 2026 Crossover Stockton</span>
         <p>Reality. Connection. Action.</p>
-        <button type="button" onClick={onOpenAbout}>About</button>
+        <button type="button" className="is-active" onClick={() => onNavigate("reality")}>Needs</button>
         <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <a href="http://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noreferrer">Contact</a>
+        <button type="button" onClick={onOpenAbout}>About</button>
       </footer>
     </main>
   );

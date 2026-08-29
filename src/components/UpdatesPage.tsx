@@ -83,9 +83,9 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
         </div>
         <span>© 2026 Crossover Stockton</span>
         <p>Reality. Connection. Action.</p>
-        <button type="button" onClick={() => onNavigate("about")}>About</button>
+        <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
         <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <a href="http://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noreferrer">Contact</a>
+        <button type="button" onClick={() => onNavigate("about")}>About</button>
       </footer>
     </main>
   );

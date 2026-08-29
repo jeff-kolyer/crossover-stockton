@@ -8,6 +8,7 @@ import {
   Hand,
   Heart,
   Home as HomeIcon,
+  Linkedin,
   MapPin,
   Menu,
   Search,
@@ -23,6 +24,7 @@ const aboutHeroImage = "/images/about/about-crossover-hero.jpg";
 const awarenessConnectionImage = "/images/about/awareness-connection-hero.jpg";
 const logoDark = "/images/logo_dark.png";
 const logoLight = "/images/logo_light.png";
+const linkedInUrl = "http://www.linkedin.com/in/jeff-kolyer";
 
 interface AboutPageProps {
   onNavigate: (page: PublicRoute) => void;
@@ -150,8 +152,14 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <div className="about-closing-copy">
             <p className="about-closing-thought">As technology takes on more of the work machines can do, we have more opportunity to do the work only people can do.</p>
             <em>We are here to serve what is real.</em>
+            <p className="about-closing-network">Want to join the network? Connect with us on LinkedIn.</p>
+            <a className="linkedin-button about-closing-linkedin" href={linkedInUrl} target="_blank" rel="noreferrer">
+              <Linkedin size={17} aria-hidden="true" />
+              <span>Connect on LinkedIn</span>
+            </a>
           </div>
         </section>
+
       </section>
 
       <footer className="public-footer">
@@ -161,9 +169,9 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         </div>
         <span>© 2026 Crossover Stockton</span>
         <p>Reality. Connection. Action.</p>
-        <button type="button" className="is-active">About</button>
+        <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
         <button type="button" onClick={onPrimaryAction}>Action</button>
-        <a href="http://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noreferrer">Contact</a>
+        <button type="button" className="is-active">About</button>
       </footer>
 
       <nav className="public-bottom-nav" aria-label="Mobile primary">
