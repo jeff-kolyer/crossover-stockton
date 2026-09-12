@@ -1,5 +1,38 @@
 [
   {
+    "id": "crossover-2026-09-11-dog-crisis-cost-of-living",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": "2026-09-11",
+    "checked_at": "2026-09-11T16:29:50-07:00",
+    "record_type": "update",
+    "trust": "crossover_source",
+    "title": "The Dog Crisis Starts With the Cost of Living",
+    "summary": "Crossover published a LinkedIn article connecting broader shelter placement pressure to upstream cost-of-living forces. The article cites San Diego Humane Society reporting that dog adoptions are down and dogs are staying in shelters far longer, then traces the pressure to housing, veterinary costs, and the rising cost of care.",
+    "source": {
+      "publisher": "LinkedIn / Jeff Kolyer",
+      "url": "https://www.linkedin.com/pulse/dog-crisis-starts-cost-living-jeff-kolyer-xhn3c",
+      "type": "article"
+    },
+    "supports": [
+      "foster-adoption-barriers",
+      "placement-system-mapping",
+      "care-logistics"
+    ],
+    "action_signals": [
+      "foster-a-dog",
+      "adopt-a-dog"
+    ],
+    "role_signals": [
+      "public_explanation",
+      "systems_framing",
+      "economic_barriers",
+      "care_logistics"
+    ]
+  },
+  {
     "id": "crossover-2026-08-28-why-we-stopped-caring-video",
     "gap_ids": [
       "dogs-safe-placement"
