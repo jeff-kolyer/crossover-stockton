@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
+import { sourceLinkLabel } from "../lib/sourceLinks";
 import type { EvidenceRecord, GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -78,7 +79,7 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
               <p>{record.summary}</p>
               {record.source.url ? (
                 <a href={record.source.url} target="_blank" rel="noreferrer">
-                  View source <ExternalLink size={15} />
+                  {sourceLinkLabel(record.source)} <ExternalLink size={15} />
                 </a>
               ) : (
                 <small><FileText size={15} /> {record.source.publisher || "Field note"}</small>

@@ -6390,8 +6390,32 @@ p {
   text-transform: uppercase;
 }
 
+.gap-card-heading {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.gap-card-heading p {
+  max-width: 250px;
+  margin: 0;
+  color: #535c56;
+  font-size: var(--gap-meta-size);
+  line-height: 1.45;
+}
+
 .gap-state-card {
   border-top: 6px solid var(--gap-tone-strong);
+}
+
+.gap-state-description {
+  margin: 0 0 4px;
+  color: #141914;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.16rem, 1.28vw, 1.32rem);
+  font-weight: 700;
+  line-height: 1.18;
 }
 
 .gap-state-list,
@@ -6482,27 +6506,26 @@ p {
 
 .gap-refined-org-row {
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr) 16px;
-  gap: 8px 12px;
-  align-items: start;
-  min-height: 72px;
-  padding: 10px 12px;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 98px;
+  padding: 14px 16px;
   text-align: left;
 }
 
 .gap-detail-page .gap-refined-org-row {
-  min-height: 84px;
-  padding: 12px 13px;
+  min-height: 108px;
+  padding: 15px 17px;
 }
 
 .gap-refined-org-row > svg:first-child {
-  grid-row: 1 / span 2;
-  width: 48px;
-  height: 48px;
+  width: 58px;
+  height: 58px;
   border-radius: 8px;
   background: #edf5e8;
   color: #2d6636;
-  padding: 8px;
+  padding: 12px;
 }
 
 .gap-refined-org-row span,
@@ -6513,7 +6536,7 @@ p {
 }
 
 .gap-refined-org-row > span {
-  grid-column: 2 / 4;
+  grid-column: 2;
 }
 
 .gap-refined-org-link {
@@ -6531,8 +6554,15 @@ p {
 }
 
 .gap-refined-org-row em {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-self: start;
+  color: var(--gap-link-green);
+  font-size: var(--gap-link-size);
+  font-weight: 740;
   font-style: normal;
-  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .gap-responder-current-role {
@@ -6547,16 +6577,16 @@ p {
 
 .gap-update-compact {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) 48px;
-  gap: 10px;
-  align-items: center;
+  grid-template-columns: 44px minmax(0, 1fr) max-content;
+  gap: 14px;
+  align-items: start;
   border-width: 0 0 1px;
   border-radius: 0;
-  padding: 11px 0;
+  padding: 13px 0;
 }
 
 .gap-detail-page .gap-update-compact {
-  padding: 13px 0;
+  padding: 15px 0;
 }
 
 .gap-update-compact:last-child {
@@ -6569,12 +6599,12 @@ p {
 }
 
 .gap-update-compact svg {
-  width: 26px;
-  height: 26px;
+  width: 38px;
+  height: 38px;
   border-radius: 999px;
   background: #d80000;
   color: #ffffff;
-  padding: 6px;
+  padding: 9px;
 }
 
 .gap-update-compact.is-current_ask svg {
@@ -6586,30 +6616,48 @@ p {
   background: #155c2a;
 }
 
-.gap-update-compact span {
+.gap-update-copy {
   display: grid;
-  gap: 1px;
-  justify-self: end;
-  color: #5f6761;
-  font-size: var(--gap-meta-size);
-  line-height: 1.08;
-  text-align: right;
-  white-space: nowrap;
+  gap: 5px;
+  min-width: 0;
 }
 
-.gap-detail-page .gap-update-compact span {
-  line-height: 1.16;
+.gap-update-copy p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin: 0;
+  color: #465048;
+  font-size: var(--gap-body-size);
+  line-height: 1.38;
 }
 
-.gap-update-compact span small {
-  color: #7a817c;
-  font-size: var(--gap-meta-size);
-  line-height: 1;
+.gap-update-copy small {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-self: start;
+  color: var(--gap-link-green);
+  font-size: var(--gap-link-size);
+  font-weight: 740;
+  line-height: 1.2;
+}
+
+.gap-update-copy small svg {
+  width: 14px;
+  height: 14px;
+  border-radius: 0;
+  background: transparent;
+  color: currentColor;
+  padding: 0;
 }
 
 .gap-update-compact time {
-  font: inherit;
-  color: inherit;
+  color: #68716b;
+  font-size: var(--gap-meta-size);
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .gap-card-link {
@@ -7494,19 +7542,20 @@ p {
   }
 
   .gap-refined-org-row {
-    grid-template-columns: 48px minmax(0, 1fr) 16px;
+    grid-template-columns: 58px minmax(0, 1fr);
   }
 
   .gap-refined-org-row em {
-    display: inline;
+    display: inline-flex;
   }
 
   .gap-update-compact {
-    grid-template-columns: 34px minmax(0, 1fr) 48px;
+    grid-template-columns: 38px minmax(0, 1fr);
   }
 
-  .gap-update-compact span {
-    justify-self: end;
+  .gap-update-compact time {
+    grid-column: 2;
+    justify-self: start;
   }
 
 }
