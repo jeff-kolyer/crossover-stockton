@@ -10,6 +10,7 @@ import {
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
+import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
 import type { EvidenceRecord, GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -37,8 +38,8 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
           <ArrowLeft size={16} /> Back to home
         </button>
         <span className="gap-history-kicker">Updates</span>
-        <h1>The Latest</h1>
-        <p>A running view of what Crossover Stockton is learning, what local organizations are doing, and where the gaps are moving.</p>
+        <h1>Updates Across the Gaps</h1>
+        <p>Cross-project updates on what Crossover Stockton is learning, what local organizations are doing, and where the gaps are moving.</p>
         <div className="gap-history-meta">
           {lastUpdated && <span><FileText size={16} /> Last updated {formatDate(lastUpdated)}</span>}
         </div>
@@ -48,28 +49,32 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
         {updateRecords.map((record) => {
           const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));
           const primaryGap = relatedGaps[0];
+          const Icon = updateIcon(record);
           return (
             <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
               <time>{formatDate(record.published_at || record.checked_at)}</time>
-              <div>
-                <span>{relatedGaps.map((gap) => gap.title).join(" / ") || formatRecordType(record.record_type)}</span>
-                <h2>{record.title}</h2>
-                <p>{record.summary}</p>
-                <div className="gap-history-actions">
-                  {record.source.url && (
-                    <a
-                      href={record.source.url}
-                      target={record.source.url.startsWith("/") ? undefined : "_blank"}
-                      rel={record.source.url.startsWith("/") ? undefined : "noreferrer"}
-                    >
-                      {sourceLinkLabel(record.source)} <ExternalLink size={15} />
-                    </a>
-                  )}
-                  {primaryGap && (
-                    <button type="button" onClick={() => onOpenGap(primaryGap.slug)}>
-                      Current state <ArrowRight size={15} />
-                    </button>
-                  )}
+              <div className="gap-history-record">
+                <Icon className="gap-history-type-icon" size={22} aria-hidden="true" />
+                <div>
+                  <span>{relatedGaps.map((gap) => gap.title).join(" / ") || updateTypeLabel(record)}</span>
+                  <h2>{record.title}</h2>
+                  <p>{record.summary}</p>
+                  <div className="gap-history-actions">
+                    {record.source.url && (
+                      <a
+                        href={record.source.url}
+                        target={record.source.url.startsWith("/") ? undefined : "_blank"}
+                        rel={record.source.url.startsWith("/") ? undefined : "noreferrer"}
+                      >
+                        {sourceLinkLabel(record.source)} <ExternalLink size={15} />
+                      </a>
+                    )}
+                    {primaryGap && (
+                      <button type="button" onClick={() => onOpenGap(primaryGap.slug)}>
+                        Current state <ArrowRight size={15} />
+                      </button>
+                    )}
+                  </div>
                 </div>
               </div>
             </article>
@@ -165,10 +170,6 @@ function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
 function recordTime(record: EvidenceRecord) {
   const time = dateValue(record.published_at || record.checked_at);
   return Number.isNaN(time) ? 0 : time;
-}
-
-function formatRecordType(type: EvidenceRecord["record_type"]) {
-  return type.replace(/_/g, " ");
 }
 
 function formatDate(value?: string | null) {

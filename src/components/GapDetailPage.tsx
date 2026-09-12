@@ -26,6 +26,7 @@ import recordsData from "../data/records.json";
 import storiesData from "../data/stories.json";
 import { getActionIcon } from "../lib/actionIcons";
 import { sourceLinkLabel } from "../lib/sourceLinks";
+import { updateIcon } from "../lib/updatePresentation";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -66,7 +67,6 @@ const stories = storiesData as StoryRecord[];
 const logoDark = "/images/logo_dark.png";
 const logoLight = "/images/logo_light.png";
 const stateIcons = [AlertCircle, BarChart3, Home];
-const updateIcons = [AlertCircle, Gauge, CheckCircle2];
 
 export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
@@ -165,8 +165,8 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
                 <button className="gap-card-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View all updates <ArrowRight size={15} /></button>
               </div>
               <div className="gap-update-list">
-                {recentUpdates.map((record, index) => {
-                  const Icon = updateIcons[index % updateIcons.length];
+                {recentUpdates.map((record) => {
+                  const Icon = updateIcon(record);
                   const dateLabel = recordDateLabel(record);
                   return (
                     <RecentUpdateItem record={record} Icon={Icon} dateLabel={dateLabel} key={record.id} />
@@ -298,7 +298,7 @@ function RecentUpdateItem({
 }) {
   const content = (
     <>
-      <Icon size={22} />
+      <Icon className="gap-update-type-icon" size={22} />
       <span className="gap-update-copy">
         <strong>{record.title}</strong>
         <p>{record.summary}</p>

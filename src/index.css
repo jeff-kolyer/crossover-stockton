@@ -6598,21 +6598,22 @@ p {
   text-decoration: none;
 }
 
-.gap-update-compact svg {
+.gap-update-compact > .gap-update-type-icon {
   width: 38px;
   height: 38px;
   border-radius: 999px;
   background: #d80000;
   color: #ffffff;
+  overflow: visible;
   padding: 9px;
 }
 
-.gap-update-compact.is-current_ask svg {
+.gap-update-compact.is-current_ask > .gap-update-type-icon {
   background: #e78a13;
 }
 
-.gap-update-compact.is-capacity_intervention svg,
-.gap-update-compact.is-outcome svg {
+.gap-update-compact.is-capacity_intervention > .gap-update-type-icon,
+.gap-update-compact.is-outcome > .gap-update-type-icon {
   background: #155c2a;
 }
 
@@ -6692,7 +6693,7 @@ p {
 
 .gap-history-header {
   display: grid;
-  gap: 13px;
+  gap: 11px;
   width: min(1040px, calc(100vw - 64px));
   margin: 0 auto;
   padding: 40px 0 30px;
@@ -6729,10 +6730,14 @@ p {
   margin: 0;
   color: #111814;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.8rem, 4.5vw, 4.45rem);
+  font-size: clamp(2.48rem, 4vw, 3.75rem);
   font-weight: 440;
   letter-spacing: 0;
   line-height: 1.02;
+}
+
+.gap-specific-history-header h1 {
+  font-size: clamp(2.1rem, 3.25vw, 3rem);
 }
 
 .gap-history-header p {
@@ -6784,7 +6789,7 @@ p {
 .gap-history-item {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
-  gap: 28px;
+  gap: 26px;
   border-bottom: 1px solid #ded7cc;
   padding: 30px 0;
 }
@@ -6803,8 +6808,30 @@ p {
   gap: 9px;
 }
 
+.gap-history-record {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.gap-history-record > div {
+  display: grid;
+  gap: 8px;
+}
+
+.gap-history-type-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #eaf2e6;
+  color: #245130;
+  overflow: visible;
+  padding: 7px;
+}
+
 .gap-history-item span {
-  color: #17211b;
+  color: #245130;
   font-size: 0.74rem;
   font-weight: 840;
   letter-spacing: 0.09em;
@@ -6816,7 +6843,7 @@ p {
   margin: 0;
   color: #121813;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.32rem, 2vw, 1.72rem);
+  font-size: clamp(1.28rem, 1.8vw, 1.62rem);
   font-weight: 520;
   letter-spacing: 0;
   line-height: 1.13;

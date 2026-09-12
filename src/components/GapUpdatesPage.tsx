@@ -14,6 +14,7 @@ import {
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
+import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
 import type { EvidenceRecord, GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -55,12 +56,12 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
     <main className={`gap-updates-page gap-refined-page is-${gap.status}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
 
-      <section className="gap-history-header">
+      <section className="gap-history-header gap-specific-history-header">
         <button className="gap-history-back" type="button" onClick={() => onOpenGap(gap.slug)}>
-          <ArrowLeft size={16} /> {gap.title}
+          <ArrowLeft size={16} /> Back to gap
         </button>
         <span className="gap-history-kicker">Updates</span>
-        <h1>The Latest</h1>
+        <h1>Updates: {gap.title}</h1>
         <p>A running history of what changed, what we learned, and what happened around this gap.</p>
         <div className="gap-history-meta">
           <span>{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
@@ -70,23 +71,29 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
       </section>
 
       <section className="gap-history-timeline" aria-label={`Update history for ${gap.title}`}>
-        {relatedRecords.map((record) => (
-          <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
-            <time>{formatDate(record.published_at || record.checked_at)}</time>
-            <div>
-              <span>{formatRecordType(record.record_type)}</span>
-              <h2>{record.title}</h2>
-              <p>{record.summary}</p>
-              {record.source.url ? (
-                <a href={record.source.url} target="_blank" rel="noreferrer">
-                  {sourceLinkLabel(record.source)} <ExternalLink size={15} />
-                </a>
-              ) : (
-                <small><FileText size={15} /> {record.source.publisher || "Field note"}</small>
-              )}
-            </div>
-          </article>
-        ))}
+        {relatedRecords.map((record) => {
+          const Icon = updateIcon(record);
+          return (
+            <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
+              <time>{formatDate(record.published_at || record.checked_at)}</time>
+              <div className="gap-history-record">
+                <Icon className="gap-history-type-icon" size={22} aria-hidden="true" />
+                <div>
+                  <span>{updateTypeLabel(record)}</span>
+                  <h2>{record.title}</h2>
+                  <p>{record.summary}</p>
+                  {record.source.url ? (
+                    <a href={record.source.url} target="_blank" rel="noreferrer">
+                      {sourceLinkLabel(record.source)} <ExternalLink size={15} />
+                    </a>
+                  ) : (
+                    <small><FileText size={15} /> {record.source.publisher || "Field note"}</small>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </section>
 
       <footer className="public-footer">
@@ -115,10 +122,10 @@ function PublicNav({ onNavigate, onOpenAbout }: Pick<GapUpdatesPageProps, "onNav
         <span>Crossover</span>
       </button>
       <nav aria-label="Primary">
-        <button type="button" className="is-active" onClick={() => onNavigate("reality")}>Needs</button>
+        <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
         <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
         <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
+        <button type="button" className="is-active" onClick={() => onNavigate("updates")}>Updates</button>
         <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
         <button type="button" onClick={onOpenAbout}>About</button>
       </nav>
@@ -164,10 +171,6 @@ function latestCheckedDate(recordsForCurrentGap: EvidenceRecord[]) {
 function recordTime(record: EvidenceRecord) {
   const time = dateValue(record.published_at || record.checked_at);
   return Number.isNaN(time) ? 0 : time;
-}
-
-function formatRecordType(type: EvidenceRecord["record_type"]) {
-  return type.replace(/_/g, " ");
 }
 
 function formatStatus(status: GapRecord["status"]) {
