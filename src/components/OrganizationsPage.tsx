@@ -1,4 +1,5 @@
 import {
+  ArrowLeft,
   ArrowRight,
   Building2,
   ChevronDown,
@@ -59,9 +60,6 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
           <span className="public-page-eyebrow">Organizations</span>
           <h1>Who Crossover follows.</h1>
           <p>We track a limited set of organizations closely so Crossover can keep a current picture of what's real.</p>
-          <button className="section-back-link" type="button" onClick={() => onNavigate("home")}>
-            <ArrowRight size={16} /> Back to home
-          </button>
         </div>
       </section>
 
@@ -92,6 +90,12 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
           })}
         </div>
       </section>
+
+      <div className="page-bottom-back-row">
+        <button className="page-bottom-back" type="button" onClick={() => onNavigate("home")}>
+          <ArrowLeft size={16} /> Back to home
+        </button>
+      </div>
 
       <footer className="public-footer">
         <div className="footer-logo" aria-label="Crossover">

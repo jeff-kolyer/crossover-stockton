@@ -174,13 +174,14 @@ function recordTime(record: EvidenceRecord) {
 }
 
 function formatStatus(status: GapRecord["status"]) {
+  if (status === "high_priority") return "High Priority";
   if (status === "watch") return "Watch";
   return status[0].toUpperCase() + status.slice(1);
 }
 
 function renderStatusIcon(status: GapRecord["status"]) {
   if (status === "improving") return <CheckCircle2 size={18} />;
-  if (status === "high") return <AlertTriangle size={18} />;
+  if (status === "high_priority") return <AlertTriangle size={18} />;
   if (status === "watch") return <ShieldCheck size={18} />;
   return <AlertCircle size={18} />;
 }

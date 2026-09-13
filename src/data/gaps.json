@@ -2,7 +2,7 @@
   {
     "id": "dogs-safe-placement",
     "slug": "too-many-dogs-still-lack-safe-placement",
-    "title": "Too many dogs still lack safe placement",
+    "title": "Too many dogs. Too few safe placements.",
     "status": "critical",
     "active": true,
     "rank": 1,
@@ -200,8 +200,8 @@
   {
     "id": "pet-inclusive-shelter",
     "slug": "people-with-pets-still-face-barriers-to-safe-shelter",
-    "title": "People with pets still face barriers to safe shelter",
-    "status": "high",
+    "title": "Too few shelter options welcome pets.",
+    "status": "high_priority",
     "active": true,
     "rank": 2,
     "summary": "Pet ownership remains a documented barrier to some shelter and housing options, even as Stockton adds low-barrier capacity designed to keep people with their companion animals.",
@@ -354,8 +354,8 @@
   {
     "id": "food-distribution-capacity",
     "slug": "food-distribution-capacity-isnt-keeping-up-with-need",
-    "title": "Food distribution capacity isn't keeping up with need",
-    "status": "high",
+    "title": "Food distribution can't keep up with need.",
+    "status": "high_priority",
     "active": true,
     "rank": 3,
     "summary": "Large food donations and strong community demand are colliding with limited cold storage, refrigerated transport, and the logistics needed to move food quickly across Stockton and San Joaquin County.",
@@ -520,7 +520,7 @@
   {
     "id": "reentry-housing-instability",
     "slug": "people-leaving-incarceration-still-face-unstable-reentry-housing",
-    "title": "People leaving incarceration still face unstable reentry housing",
+    "title": "Too few stable housing options after incarceration.",
     "status": "watch",
     "active": true,
     "rank": 4,
@@ -668,7 +668,7 @@
   {
     "id": "low-barrier-housing-pathways",
     "slug": "people-still-need-low-barrier-paths-from-homelessness-to-housing",
-    "title": "People still need low-barrier paths from homelessness to housing",
+    "title": "Too few accessible paths into housing.",
     "status": "improving",
     "active": true,
     "rank": 5,

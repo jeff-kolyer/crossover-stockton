@@ -145,7 +145,7 @@ export interface CrossoverFeed {
   sources: CivicSource[];
 }
 
-export type GapStatus = "critical" | "high" | "watch" | "improving";
+export type GapStatus = "critical" | "high_priority" | "watch" | "improving";
 
 export interface GapRecord {
   id: string;

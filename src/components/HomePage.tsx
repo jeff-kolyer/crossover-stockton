@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   AlertTriangle,
   Apple,
+  ArrowLeft,
   ArrowRight,
   Building2,
   CalendarDays,
@@ -150,7 +151,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           {!isHome && <span className="public-page-eyebrow">{copy.eyebrow}</span>}
           <h1>{isHome ? <>See clearly.<br />Act locally.</> : copy.title}</h1>
           <p>{copy.text}</p>
-          {isHome ? (
+          {isHome && (
             <>
               <button className="hero-search" type="button" onClick={() => onNavigate("action")}>
                 <Search size={22} />
@@ -164,10 +165,6 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                 <button type="button" onClick={() => onNavigate("connection")}>See the fruit <ArrowRight size={16} /></button>
               </div>
             </>
-          ) : (
-            <button className="section-back-link" type="button" onClick={() => onNavigate("home")}>
-              <ArrowRight size={16} /> Back to home
-            </button>
           )}
         </div>
       </section>
@@ -202,8 +199,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                   />
                 </span>
               )}
-              <h3>{gap.title}</h3>
               <span className="gap-level"><Icon size={17} /> {formatStatus(gap.status)}</span>
+              <h3>{gap.title}</h3>
               <p>{gap.summary}</p>
               <span className="gap-card-meta">
                 <span><Users size={15} /> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
@@ -214,14 +211,14 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                   <small>USEFUL NOW</small>
                   <strong>{compactUsefulNow(gap, useful)}</strong>
                 </span>
-                <ArrowRight size={18} />
               </span>
+              <span className="gap-card-link-cue">Explore this gap <ArrowRight size={16} /></span>
             </button>
             );
           })}
         </div>
         <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "reality" : "home")}>
-          {page === "home" ? "Explore all needs" : "Back to home"} <ArrowRight size={16} />
+          {page === "home" ? <>Explore all needs <ArrowRight size={16} /></> : <><ArrowLeft size={16} /> Back to home</>}
         </button>
       </section>}
 
@@ -247,6 +244,11 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             </button>
           ))}
         </div>
+        {page === "connection" && (
+          <button className="center-link" type="button" onClick={() => onNavigate("home")}>
+            <ArrowLeft size={16} /> Back to home
+          </button>
+        )}
       </section>}
 
       {(page === "home" || page === "action") && <section id="action" className="public-band public-action-band">
@@ -300,7 +302,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           </div>
         </div>
         <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "action" : "home")}>
-          {page === "home" ? "See more ways to help" : "Back to home"} <ArrowRight size={16} />
+          {page === "home" ? <>See more ways to help <ArrowRight size={16} /></> : <><ArrowLeft size={16} /> Back to home</>}
         </button>
       </section>}
 
@@ -370,6 +372,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
 }
 
 function formatStatus(status: GapRecord["status"]) {
+  if (status === "high_priority") return "High Priority";
   if (status === "watch") return "Watch";
   return status[0].toUpperCase() + status.slice(1);
 }

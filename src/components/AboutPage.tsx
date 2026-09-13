@@ -1,5 +1,6 @@
 import {
   AlertTriangle,
+  ArrowLeft,
   ArrowRight,
   Ban,
   CheckCircle2,
@@ -64,9 +65,6 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <h1>About Crossover</h1>
           <h2>See what matters. Find a real way to help.</h2>
           <p>Crossover uses AI to help us see what our community needs, what is getting better, and where we can actually help.</p>
-          <button className="section-back-link about-hero-back" type="button" onClick={() => onNavigate("home")}>
-            <ArrowRight size={16} /> Back to home
-          </button>
         </div>
       </section>
 
@@ -161,6 +159,12 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         </section>
 
       </section>
+
+      <div className="page-bottom-back-row">
+        <button className="page-bottom-back" type="button" onClick={() => onNavigate("home")}>
+          <ArrowLeft size={16} /> Back to home
+        </button>
+      </div>
 
       <footer className="public-footer">
         <div className="footer-logo" aria-label="Crossover">

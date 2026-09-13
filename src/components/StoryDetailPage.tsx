@@ -40,12 +40,12 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
       <main className="story-detail-page public-home">
         <PublicStoryNav onNavigate={onNavigate} />
         <section className="story-detail-shell story-not-found">
-          <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
-            <ArrowLeft size={16} /> Back to stories
-          </button>
           <p className="story-kicker">Signs of Being</p>
           <h1>We could not find that story.</h1>
           <p>This story may have moved, been retired, or not been added to the public data yet.</p>
+          <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
+            <ArrowLeft size={16} /> Back to stories
+          </button>
         </section>
       </main>
     );
@@ -65,9 +65,6 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
             <h1>{story.title}</h1>
             <p className="story-summary">{story.summary}</p>
             {story.sign_of_being && <p className="story-sign-line">{story.sign_of_being}</p>}
-            <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
-              <ArrowLeft size={16} /> Back to stories
-            </button>
           </div>
           <img src={image} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         </section>
@@ -152,6 +149,12 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
           </button>
         </section>
       </article>
+
+      <div className="page-bottom-back-row">
+        <button className="page-bottom-back" type="button" onClick={() => onNavigate("connection")}>
+          <ArrowLeft size={16} /> Back to stories
+        </button>
+      </div>
 
       <footer className="public-footer">
         <div className="footer-logo" aria-label="Crossover">

@@ -77,12 +77,12 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
         <section className="gap-refined-hero">
           <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
           <div className="gap-detail-copy gap-refined-copy">
-            <button className="gap-back-link" type="button" onClick={() => onNavigate("reality")}>
-              <ArrowLeft size={16} /> Back to all gaps
-            </button>
             <p className="gap-severity"><AlertCircle size={18} /> Gap not found</p>
             <h1>We could not find that gap.</h1>
             <p>This record may have moved, been retired, or not been added to the public data yet.</p>
+            <button className="gap-back-link" type="button" onClick={() => onNavigate("reality")}>
+              <ArrowLeft size={16} /> Back to all gaps
+            </button>
           </div>
         </section>
       </main>
@@ -123,9 +123,6 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
               <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
               {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
             </div>
-            <button className="gap-back-link" type="button" onClick={() => onNavigate("reality")}>
-              <ArrowLeft size={16} /> Back to all gaps
-            </button>
           </div>
           <div className="gap-refined-photo">
             {gap.artwork && <img src={gap.artwork} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />}
@@ -271,6 +268,12 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
           </section>
         )}
       </section>
+
+      <div className="page-bottom-back-row">
+        <button className="page-bottom-back" type="button" onClick={() => onNavigate("reality")}>
+          <ArrowLeft size={16} /> Back to all gaps
+        </button>
+      </div>
 
       <footer className="public-footer">
         <div className="footer-logo" aria-label="Crossover">
@@ -456,13 +459,14 @@ function openExternal(url?: string) {
 }
 
 function formatStatus(status: GapRecord["status"]) {
+  if (status === "high_priority") return "High Priority";
   if (status === "watch") return "Watch";
   return status[0].toUpperCase() + status.slice(1);
 }
 
 function renderStatusIcon(status: GapRecord["status"]) {
   if (status === "improving") return <CheckCircle2 size={18} />;
-  if (status === "high") return <AlertTriangle size={18} />;
+  if (status === "high_priority") return <AlertTriangle size={18} />;
   return <AlertCircle size={18} />;
 }
 
