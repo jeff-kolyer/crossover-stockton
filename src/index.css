@@ -2992,13 +2992,13 @@ p {
 .gap-card h3 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.66rem;
+  font-size: 1.6rem;
   font-weight: 760;
   line-height: 1.08;
 }
 
 .gap-card.is-critical h3 {
-  font-size: 1.76rem;
+  font-size: 1.7rem;
 }
 
 .gap-card p {
