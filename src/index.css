@@ -2934,7 +2934,7 @@ p {
   gap: 11px;
   min-height: 506px;
   overflow: hidden;
-  padding: 0 14px 14px;
+  padding: 0 14px 20px;
 }
 
 .gap-card::before {
