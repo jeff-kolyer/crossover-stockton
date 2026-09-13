@@ -107,7 +107,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
   const filteredActions = page === "action" && selectedActionTag
     ? visibleActions.filter((action) => action.tags?.includes(selectedActionTag))
     : visibleActions;
-  const visibleGaps = isHome ? activeGaps.filter((gap) => gap.status !== "watch").slice(0, 4) : activeGaps;
+  const visibleGaps = isHome ? activeGaps.filter((gap) => gap.status !== "monitored").slice(0, 4) : activeGaps;
   const visibleStories = isHome ? featuredStories.slice(0, 3) : activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
 
@@ -373,14 +373,14 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
 
 function formatStatus(status: GapRecord["status"]) {
   if (status === "high_priority") return "High Priority";
-  if (status === "watch") return "Watch";
+  if (status === "monitored") return "Monitored";
   return status[0].toUpperCase() + status.slice(1);
 }
 
 function getGapIcon(status: GapRecord["status"]) {
   if (status === "critical") return CircleAlert;
   if (status === "improving") return CheckCircle2;
-  if (status === "watch") return ShieldCheck;
+  if (status === "monitored") return ShieldCheck;
   return AlertTriangle;
 }
 

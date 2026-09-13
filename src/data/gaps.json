@@ -521,7 +521,7 @@
     "id": "reentry-housing-instability",
     "slug": "people-leaving-incarceration-still-face-unstable-reentry-housing",
     "title": "Too few stable housing options after incarceration.",
-    "status": "watch",
+    "status": "monitored",
     "active": true,
     "rank": 4,
     "summary": "Housing, work, and basic stability have to come together after incarceration. Stockton has active reentry pathways, but stable housing remains one of the core conditions for a successful second chance.",

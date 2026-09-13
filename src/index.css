@@ -2947,7 +2947,7 @@ p {
 
 .gap-card.is-critical { --gap-tone: #c83326; }
 .gap-card.is-high_priority { --gap-tone: #e87518; }
-.gap-card.is-watch { --gap-tone: #d4a417; }
+.gap-card.is-monitored { --gap-tone: #d4a417; }
 .gap-card.is-improving { --gap-tone: #2f7a3d; }
 
 .gap-level {
@@ -6319,6 +6319,12 @@ p {
   --gap-tone: #e87518;
   --gap-tone-strong: #e87518;
   --gap-tone-soft: #fff0dd;
+}
+
+.gap-refined-page.is-monitored {
+  --gap-tone: #b98913;
+  --gap-tone-strong: #d4a417;
+  --gap-tone-soft: #fff7df;
 }
 
 .gap-refined-page.is-improving {
