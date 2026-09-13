@@ -3751,6 +3751,11 @@ p {
   align-items: start;
 }
 
+.public-org-band .section-intro h2 {
+  font-size: 1.62rem;
+  line-height: 1.12;
+}
+
 .org-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
