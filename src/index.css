@@ -2873,7 +2873,7 @@ p {
 .section-intro > p {
   margin: 0;
   color: #17211b;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   font-weight: 840;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2881,23 +2881,24 @@ p {
 
 .section-intro h2 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.18rem;
   line-height: 1.05;
   color: #191711;
 }
 
 .section-intro span {
   color: #29332c;
+  font-size: 1.02rem;
   line-height: 1.52;
 }
 
 .section-intro small {
   display: inline-flex;
-  max-width: 180px;
+  max-width: 205px;
   align-items: flex-start;
   gap: 8px;
   color: #304237;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
   line-height: 1.38;
 }
 
@@ -2952,12 +2953,12 @@ p {
 
 .gap-level {
   display: inline-flex;
-  height: 20px;
+  min-height: 22px;
   width: max-content;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   color: var(--gap-tone);
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   font-weight: 820;
   letter-spacing: 0.055em;
   line-height: 1.12;
@@ -2965,8 +2966,8 @@ p {
 }
 
 .gap-level svg {
-  width: 17px;
-  height: 17px;
+  width: 19px;
+  height: 19px;
   flex: 0 0 auto;
   stroke-width: 3;
 }
@@ -2991,19 +2992,19 @@ p {
 .gap-card h3 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.52rem;
+  font-size: 1.66rem;
   font-weight: 760;
-  line-height: 1.01;
+  line-height: 0.99;
 }
 
 .gap-card.is-critical h3 {
-  font-size: 1.62rem;
+  font-size: 1.76rem;
 }
 
 .gap-card p {
   margin: 0;
   color: #202b24;
-  font-size: 0.96rem;
+  font-size: 1.02rem;
   line-height: 1.42;
 }
 
@@ -3013,14 +3014,14 @@ p {
 
 .gap-card-meta {
   display: flex;
-  flex: 0 0 24px;
-  height: 24px;
+  flex: 0 0 26px;
+  height: 26px;
   flex-wrap: nowrap;
   align-items: center;
   gap: 7px 10px;
   margin-top: auto;
   color: #405047;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   line-height: 1.2;
   white-space: nowrap;
 }
@@ -3075,7 +3076,7 @@ p {
 
 .gap-card-action strong {
   color: #111912;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 560;
   line-height: 1.22;
 }
@@ -3087,7 +3088,7 @@ p {
   gap: 7px;
   border-bottom: 1px solid currentColor;
   color: #245130;
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   font-weight: 760;
   line-height: 1.2;
 }
