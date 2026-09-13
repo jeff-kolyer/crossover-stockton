@@ -2723,7 +2723,7 @@ p {
   position: relative;
   z-index: 1;
   width: min(760px, calc(100vw - 104px));
-  margin: 52px 0 0 max(52px, calc((100vw - 1720px) / 2));
+  margin: 32px 0 0 max(52px, calc((100vw - 1720px) / 2));
   padding-bottom: 42px;
 }
 
