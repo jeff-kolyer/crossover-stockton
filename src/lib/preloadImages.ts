@@ -11,14 +11,15 @@ export function warmImage(src?: string) {
   const image = new Image();
   image.decoding = "async";
   image.loading = "eager";
-  image.src = src;
 
-  const promise = (typeof image.decode === "function"
-    ? image.decode()
-    : new Promise<void>((resolve, reject) => {
-        image.onload = () => resolve();
-        image.onerror = () => reject(new Error(`Unable to preload ${src}`));
-      }))
+  const promise = new Promise<void>((resolve, reject) => {
+    image.onload = () => resolve();
+    image.onerror = () => reject(new Error(`Unable to preload ${src}`));
+    image.src = src;
+
+    if (image.complete && image.naturalWidth > 0) resolve();
+  })
+    .then(() => (typeof image.decode === "function" ? image.decode() : undefined))
     .then(() => {
       decodedImages.set(src, image);
       pendingImages.delete(src);

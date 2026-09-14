@@ -5,7 +5,6 @@ import {
   FileText,
   Gauge,
   Landmark,
-  Linkedin,
   LinkIcon,
   Newspaper,
   Youtube,
@@ -42,8 +41,8 @@ export function updateIcon(record: EvidenceRecord) {
     return ClipboardList;
   }
   if (type.includes("video") || publisher.includes("youtube") || hostname.includes("youtube.com") || hostname.includes("youtu.be")) return Youtube;
-  if (publisher.includes("linkedin") || hostname.includes("linkedin.com")) return Linkedin;
   if (type.includes("article") || type.includes("local_reporting") || publisher.includes("stocktonia") || publisher.includes("cbs")) return Newspaper;
+  if (publisher.includes("linkedin") || hostname.includes("linkedin.com")) return Newspaper;
   if (type.includes("organization") || type.includes("service") || type.includes("program") || record.record_type === "current_service") return LinkIcon;
   if (type.includes("pdf") || type.includes("report")) return FileText;
   if (record.trust === "government" || type.includes("government")) return Landmark;

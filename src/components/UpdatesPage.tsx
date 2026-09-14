@@ -1,6 +1,5 @@
 import {
   ArrowLeft,
-  ArrowRight,
   ChevronDown,
   ExternalLink,
   FileText,
@@ -48,7 +47,6 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
       <section className="gap-history-timeline" aria-label="Crossover update history">
         {updateRecords.map((record) => {
           const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));
-          const primaryGap = relatedGaps[0];
           const Icon = updateIcon(record);
           return (
             <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
@@ -56,9 +54,22 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
               <div className="gap-history-record">
                 <Icon className="gap-history-type-icon" size={22} aria-hidden="true" />
                 <div>
-                  <span>{relatedGaps.map((gap) => gap.title).join(" / ") || updateTypeLabel(record)}</span>
+                  <span>{updateTypeLabel(record)}</span>
                   <h2>{record.title}</h2>
                   <p>{record.summary}</p>
+                  {relatedGaps.length > 0 && (
+                    <div className="gap-history-related-gaps">
+                      <strong>Related gaps:</strong>
+                      {relatedGaps.map((gap, index) => (
+                        <span className="gap-history-related-gap" key={gap.id}>
+                          <button type="button" onClick={() => onOpenGap(gap.slug)}>
+                            {shortGapTitle(gap.title)}
+                          </button>
+                          {index < relatedGaps.length - 1 && <em>·</em>}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                   <div className="gap-history-actions">
                     {record.source.url && (
                       <a
@@ -68,11 +79,6 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
                       >
                         {sourceLinkLabel(record.source)} <ExternalLink size={15} />
                       </a>
-                    )}
-                    {primaryGap && (
-                      <button type="button" onClick={() => onOpenGap(primaryGap.slug)}>
-                        Current state <ArrowRight size={15} />
-                      </button>
                     )}
                   </div>
                 </div>
@@ -95,6 +101,10 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
       </footer>
     </main>
   );
+}
+
+function shortGapTitle(title: string) {
+  return title.replace(/\.$/, "");
 }
 
 function updateRecordsFromGaps() {
