@@ -3379,7 +3379,7 @@ p {
 
 .story-opening h1 {
   max-width: 680px;
-  font-size: clamp(3rem, 4.4vw, 4.45rem);
+  font-size: clamp(2.7rem, 3.85vw, 3.9rem);
   font-weight: 500;
   line-height: 1.02;
 }
@@ -3388,16 +3388,16 @@ p {
   max-width: 630px;
   margin: 0;
   color: #60635d;
-  font-size: 1.2rem;
-  line-height: 1.5;
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  line-height: 1.48;
 }
 
 .story-sign-line {
   max-width: 620px;
   margin: 0;
   color: #20251f;
-  font-size: 1.05rem;
-  line-height: 1.58;
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  line-height: 1.48;
 }
 
 .story-opening img {
@@ -5233,7 +5233,7 @@ p {
   }
 
   .story-opening h1 {
-    font-size: clamp(3rem, 7vw, 4rem);
+    font-size: clamp(2.7rem, 6.4vw, 3.65rem);
   }
 
   .story-action-band {
@@ -5813,11 +5813,11 @@ p {
   }
 
   .story-opening h1 {
-    font-size: clamp(2.35rem, 11vw, 3.1rem);
+    font-size: clamp(2.15rem, 10vw, 2.85rem);
   }
 
   .story-summary {
-    font-size: 1.04rem;
+    font-size: 1rem;
   }
 
   .story-opening img {
@@ -6466,7 +6466,7 @@ p {
 .gap-refined-copy h1 {
   max-width: 720px;
   margin-bottom: 32px;
-  font-size: clamp(3rem, 4vw, 4.2rem);
+  font-size: clamp(2.7rem, 3.85vw, 3.9rem);
   font-weight: 500;
   line-height: 1.02;
 }
@@ -6490,7 +6490,7 @@ p {
   border: 1px solid #ddd7cc;
   border-left: 8px solid var(--gap-tone-strong);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.88);
+  background: #FFFEFC;
   overflow: hidden;
   padding: 22px 28px;
   box-shadow: 0 12px 30px rgba(58, 45, 28, 0.045);
@@ -6508,9 +6508,9 @@ p {
   max-width: 620px;
   margin: 0;
   color: #40536a;
-  font-size: clamp(1.06rem, 1.12vw, 1.16rem);
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
   font-weight: 460;
-  line-height: 1.45;
+  line-height: 1.48;
 }
 
 .gap-hero-summary-card .gap-detail-meta {
@@ -6553,6 +6553,7 @@ p {
 
 @media (min-width: 1281px) {
   .gap-refined-hero-grid .gap-learning-card {
+    border-top-color: #e4ddd1;
     padding: 18px 20px;
   }
 
@@ -6590,12 +6591,42 @@ p {
     padding: 24px 0 0;
   }
 
+  .gap-refined-hero-grid .gap-stuck-section .gap-card-heading span {
+    display: none;
+  }
+
   .gap-refined-hero-grid .gap-stuck-section .gap-card-heading h2 {
-    font-size: clamp(1.55rem, 1.75vw, 2rem);
+    font-size: 1.875rem;
+    font-weight: 560;
+    line-height: 1.18;
   }
 
   .gap-refined-hero-grid .gap-stuck-flow {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .gap-refined-hero-grid .gap-stuck-card {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 8px 18px;
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .gap-refined-hero-grid .gap-stuck-card b {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+  }
+
+  .gap-refined-hero-grid .gap-stuck-card h3,
+  .gap-refined-hero-grid .gap-stuck-card p,
+  .gap-refined-hero-grid .gap-stuck-card dl,
+  .gap-refined-hero-grid .gap-stuck-card ul {
+    grid-column: 2;
+  }
+
+  .gap-refined-hero-grid .gap-stuck-card dl,
+  .gap-refined-hero-grid .gap-stuck-card ul {
+    margin-top: 12px;
   }
 }
 
@@ -6622,7 +6653,7 @@ p {
 }
 
 .gap-refined-hero-grid .gap-stuck-flow {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .gap-refined-content {
@@ -6756,7 +6787,7 @@ p {
   gap: 16px;
   border: 1px solid #e4ddd1;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.54);
+  background: #FFFEFC;
   box-shadow: none;
   padding: 20px;
 }
@@ -6770,9 +6801,9 @@ p {
 .gap-learning-card .gap-card-heading h2 {
   color: var(--section-label-color);
   font-family: inherit;
-  font-size: var(--section-label-size);
-  font-weight: var(--section-label-weight);
-  letter-spacing: var(--section-label-spacing);
+  font-size: var(--gap-eyebrow-size);
+  font-weight: 760;
+  letter-spacing: 0.055em;
   line-height: 1.15;
   text-transform: uppercase;
   white-space: nowrap;
@@ -8428,7 +8459,7 @@ p {
   }
 
   .gap-refined-copy h1 {
-    font-size: clamp(2.05rem, 10vw, 2.65rem);
+    font-size: clamp(2.15rem, 10vw, 2.85rem);
   }
 
   .gap-refined-photo {
