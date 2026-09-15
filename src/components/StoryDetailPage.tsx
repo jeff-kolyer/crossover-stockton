@@ -40,7 +40,7 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
       <main className="story-detail-page public-home">
         <PublicStoryNav onNavigate={onNavigate} />
         <section className="story-detail-shell story-not-found">
-          <p className="story-kicker">Signs of Being</p>
+          <button className="story-kicker" type="button" onClick={() => onNavigate("connection")}>Signs of Being</button>
           <h1>We could not find that story.</h1>
           <p>This story may have moved, been retired, or not been added to the public data yet.</p>
           <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
@@ -61,7 +61,7 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
       <article className="story-detail-shell">
         <section className="story-opening">
           <div className="story-opening-copy">
-            <p className="story-kicker">Signs of Being</p>
+            <button className="story-kicker" type="button" onClick={() => onNavigate("connection")}>Signs of Being</button>
             <h1>{story.title}</h1>
             <p className="story-summary">{story.summary}</p>
             {story.sign_of_being && <p className="story-sign-line">{story.sign_of_being}</p>}

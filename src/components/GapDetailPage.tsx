@@ -15,6 +15,7 @@ import {
   MapPin,
   Menu,
   PawPrint,
+  Plus,
   ShieldCheck,
   Stethoscope,
   Users,
@@ -66,7 +67,7 @@ const records = recordsData as EvidenceRecord[];
 const stories = storiesData as StoryRecord[];
 const logoDark = "/images/logo_dark.png";
 const logoLight = "/images/logo_light.png";
-const stateIcons = [Home, Stethoscope, Users];
+const stateIcons = [Home, Plus, Users];
 
 export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
@@ -114,19 +115,19 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <div className="gap-refined-hero-grid">
           <div className="gap-detail-copy gap-refined-copy">
-            <button className="gap-back-link gap-refined-top-back" type="button" onClick={() => onNavigate("reality")}>
-              <ArrowLeft size={16} /> Back to gaps
-            </button>
-            <p className="gap-severity">{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</p>
+            <button className="gap-detail-kicker" type="button" onClick={() => onNavigate("reality")}>Current gaps</button>
             <h1>{gap.title}</h1>
-            <p>{gap.summary}</p>
-            <div className="gap-detail-meta" aria-label="Gap record metadata">
-              <span><FileText size={17} /> {gap.sources.length} sources</span>
-              <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
-              <span><Users size={18} /> {relatedOrgs.length} organizations</span>
-              <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
-              {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
-            </div>
+            <section className="gap-hero-summary-card" aria-label="Gap summary">
+              <span className="gap-level">{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
+              <p>{gap.summary}</p>
+              <div className="gap-detail-meta" aria-label="Gap record metadata">
+                <span><FileText size={17} /> {gap.sources.length} sources</span>
+                <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
+                <span><Users size={18} /> {relatedOrgs.length} organizations</span>
+                <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
+                {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
+              </div>
+            </section>
           </div>
           <div className="gap-refined-photo">
             {gap.artwork && <img src={gap.artwork} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />}
@@ -151,10 +152,11 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
           )}
 
           {stateItems.length > 0 && (
-            <section className="gap-refined-card gap-state-card">
-              <h2>Status report</h2>
-              <p className="gap-state-headline">{stateReport.headline}</p>
-              <p className="gap-state-description">{stateReport.summary}</p>
+            <section className="gap-state-card">
+              <div className="gap-state-copy">
+                <h2 className="gap-state-headline">Why this gap exists</h2>
+                <p className="gap-state-description">{stateReport.summary}</p>
+              </div>
               <div className="gap-state-list">
                 {stateItems.map((item, index) => {
                   const Icon = stateIcons[index % stateIcons.length];
@@ -179,27 +181,24 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
       </section>
 
       <section className="gap-refined-content">
-        {actionCards.length > 0 && (
-          <section className="gap-refined-action-band">
+        <div className="gap-refined-lower-columns">
+          {actionCards.length > 0 && (
+          <section className="gap-refined-column gap-refined-action-band">
             <div className="gap-refined-action-copy">
               <h2>What can I do right now?</h2>
-              {gap.most_useful_now ? (
-                <p>Most useful right now: <strong>{gap.most_useful_now.label}</strong></p>
-              ) : (
-                <p>Use the strongest currently supported actions from public sources.</p>
-              )}
+              <p>Here are the most useful ways to help right now.</p>
             </div>
             <div className="gap-refined-action-grid">
               {actionCards.map((action) => <ActionCard action={action} onOpenAction={onOpenAction} key={action.id} />)}
             </div>
           </section>
-        )}
+          )}
 
-        {relatedOrgs.length > 0 && (
-          <section className="gap-refined-card gap-refined-action-band gap-responding-card">
+          {relatedOrgs.length > 0 && (
+          <section className="gap-refined-column gap-refined-action-band gap-responding-card">
             <div className="gap-refined-action-copy gap-responding-copy">
               <h2>Who's responding</h2>
-              <p>These organizations are working on the front lines to meet <strong>immediate needs and build longer-term solutions.</strong></p>
+              <p>These organizations are helping address this gap.</p>
             </div>
             <div className="gap-refined-org-list">
               {relatedOrgs.map((org, index) => {
@@ -219,26 +218,12 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
               })}
             </div>
           </section>
-        )}
-
-        <div className="gap-refined-lower-row">
-          {gap.contributing_factors.length > 0 && (
-            <section className="gap-card-section">
-              <h2>What seems to be contributing</h2>
-              <ul className="gap-factor-pills">
-                {gap.contributing_factors.slice(0, 6).map((item, index) => {
-                  const Icon = factorIcon(index);
-                  return (
-                    <li key={item}><Icon size={17} /> {compactFactor(item)}</li>
-                  );
-                })}
-              </ul>
-            </section>
           )}
 
           {relatedStories.length > 0 && (
-            <section className="gap-card-section">
+            <section className="gap-refined-column gap-change-column">
               <h2>Signs of change</h2>
+              <p>Recent updates show where things are improving.</p>
               <div className="gap-refined-story-row">
                 {relatedStories.map((story) => (
                   <button className={`gap-refined-story-card ${story.image ? "" : "has-no-image"}`} type="button" onClick={() => onOpenStory(story.slug)} key={story.id}>
@@ -308,11 +293,11 @@ function RecentUpdateItem({
     <>
       <Icon className="gap-update-type-icon" size={22} />
       <span className="gap-update-copy">
+        <strong>{record.title}</strong>
         <span className="gap-update-kicker">
           <em>{updateTypeLabel(record)}</em>
           <time>{dateLabel.context ? `${dateLabel.context} ${dateLabel.date}` : dateLabel.date}</time>
         </span>
-        <strong>{record.title}</strong>
         <p>{record.summary}</p>
         <small>{record.source.url ? sourceLinkLabel(record.source) : "Current state"} <ExternalLink size={14} /></small>
       </span>

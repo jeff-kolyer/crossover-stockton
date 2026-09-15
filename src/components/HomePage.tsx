@@ -200,8 +200,12 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                 </span>
               )}
               <span className="gap-level"><Icon size={17} /> {formatStatus(gap.status)}</span>
-              <h3>{gap.title}</h3>
-              <p>{gap.summary}</p>
+              <span className="gap-card-body">
+                <span className="gap-card-copy">
+                  <h3>{gap.title}</h3>
+                  <p>{gap.summary}</p>
+                </span>
+              </span>
               <span className="gap-card-meta">
                 <span><Users size={15} /> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
                 {gap.updated_at && <span><CalendarDays size={14} /> Updated {formatShortDate(gap.updated_at)}</span>}
