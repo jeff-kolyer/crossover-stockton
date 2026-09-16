@@ -2736,6 +2736,7 @@ p {
   background: transparent;
   color: #fff;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .has-public-menu {
@@ -5993,6 +5994,12 @@ p {
     height: 26px;
   }
 
+  .public-footer .footer-logo {
+    justify-self: center;
+    justify-content: center;
+    min-width: 0;
+  }
+
   .public-footer .footer-logo span {
     color: #161c18;
   }
@@ -6001,8 +6008,9 @@ p {
   .public-footer p,
   .public-footer a,
   .public-footer button {
-    justify-self: start;
+    justify-self: center;
     color: #2b302b;
+    text-align: center;
   }
 
   .public-footer a,
@@ -6481,6 +6489,12 @@ p {
 
   .about-hero-image {
     object-position: 62% center;
+  }
+
+  .about-hero-shade {
+    background:
+      linear-gradient(180deg, rgba(6, 8, 7, 0.78) 0%, rgba(6, 8, 7, 0.5) 76px, rgba(255, 253, 249, 0.72) 77px, rgba(255, 253, 249, 0.82) 100%),
+      linear-gradient(90deg, rgba(255, 253, 249, 0.72) 0%, rgba(255, 253, 249, 0.58) 56%, rgba(255, 253, 249, 0.34) 100%);
   }
 
   .about-hero-copy {
