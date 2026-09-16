@@ -13,7 +13,6 @@ import {
   HandHeart,
   Home,
   MapPin,
-  Menu,
   PawPrint,
   Search,
   ShieldCheck,
@@ -24,6 +23,7 @@ import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import storiesData from "../data/stories.json";
 import { getActionIcon } from "../lib/actionIcons";
+import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { ActionTag, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
 interface HomePageProps {
@@ -112,7 +112,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
 
   return (
-    <main className={`public-home ${isHome ? "is-home-page" : "is-section-page"}`}>
+    <main className={`public-home ${isHome ? "is-home-page" : "is-section-page"} is-${page}-page`}>
       <section className={`public-hero ${isHome ? "" : "is-compact"}`}>
         <img
           className="public-hero-image is-active"
@@ -125,9 +125,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
         />
         <div className="public-hero-shade" />
         <header className="public-nav">
-          <button className="public-mobile-menu" type="button" aria-label="Open navigation">
-            <Menu size={24} />
-          </button>
+          <PublicMobileMenu active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
           <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
             <img src={logoLight} alt="" />
             <span>Crossover</span>
@@ -216,7 +214,6 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                   <strong>{compactUsefulNow(gap, useful)}</strong>
                 </span>
               </span>
-              <span className="gap-card-link-cue">Explore this gap <ArrowRight size={16} /></span>
             </button>
             );
           })}

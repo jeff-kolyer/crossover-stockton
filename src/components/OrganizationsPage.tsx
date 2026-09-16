@@ -7,12 +7,12 @@ import {
   HandHeart,
   Home,
   MapPin,
-  Menu,
   PawPrint,
   Search,
   ShieldCheck,
 } from "lucide-react";
 import orgsData from "../data/orgs.json";
+import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { OrgRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -34,9 +34,7 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
         <img className="public-hero-image is-active" src={heroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         <div className="public-hero-shade" />
         <header className="public-nav">
-          <button className="public-mobile-menu" type="button" aria-label="Open navigation">
-            <Menu size={24} />
-          </button>
+          <PublicMobileMenu active="organizations" onNavigate={onNavigate} />
           <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
             <img src={logoLight} alt="" decoding="async" />
             <span>Crossover</span>

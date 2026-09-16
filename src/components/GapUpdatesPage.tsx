@@ -8,13 +8,13 @@ import {
   ExternalLink,
   FileText,
   MapPin,
-  Menu,
   ShieldCheck,
 } from "lucide-react";
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
+import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { EvidenceRecord, GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -117,9 +117,7 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
 function PublicNav({ onNavigate, onOpenAbout }: Pick<GapUpdatesPageProps, "onNavigate" | "onOpenAbout">) {
   return (
     <header className="public-nav gap-history-nav">
-      <button className="public-mobile-menu" type="button" aria-label="Open navigation">
-        <Menu size={24} />
-      </button>
+      <PublicMobileMenu active="updates" onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
       <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
         <img src={logoLight} alt="" decoding="async" />
         <span>Crossover</span>

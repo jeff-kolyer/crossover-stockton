@@ -11,13 +11,13 @@ import {
   Home as HomeIcon,
   Linkedin,
   MapPin,
-  Menu,
   Search,
   Stars,
   Sprout,
   TrendingUp,
   UserRound,
 } from "lucide-react";
+import { PublicMobileMenu } from "./PublicMobileMenu";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -39,9 +39,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <img className="about-hero-image" src={aboutHeroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         <div className="about-hero-shade" />
         <header className="public-nav">
-          <button className="public-mobile-menu" type="button" aria-label="Open navigation">
-            <Menu size={24} />
-          </button>
+          <PublicMobileMenu active="about" onNavigate={onNavigate} />
           <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
             <img src={logoLight} alt="" decoding="async" />
             <span>Crossover</span>

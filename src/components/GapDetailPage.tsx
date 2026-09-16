@@ -13,7 +13,6 @@ import {
   Heart,
   Home,
   MapPin,
-  Menu,
   PawPrint,
   Plus,
   ShieldCheck,
@@ -28,6 +27,7 @@ import storiesData from "../data/stories.json";
 import { getActionIcon } from "../lib/actionIcons";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
+import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -327,9 +327,7 @@ function RecentUpdateItem({
 function PublicNav({ onNavigate, onOpenAbout }: Pick<GapDetailPageProps, "onNavigate" | "onOpenAbout">) {
   return (
     <header className="public-nav gap-detail-nav">
-      <button className="public-mobile-menu" type="button" aria-label="Open navigation">
-        <Menu size={24} />
-      </button>
+      <PublicMobileMenu active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
       <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
         <img src={logoLight} alt="" decoding="async" />
         <span>Crossover</span>
