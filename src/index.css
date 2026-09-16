@@ -2323,7 +2323,7 @@ p {
 
 .about-product-row .is-needs strong,
 .about-product-row .is-needs > svg {
-  color: #bd2727;
+  color: #d10000;
 }
 
 .about-product-row .is-being strong,
@@ -6738,7 +6738,7 @@ p {
   width: max-content;
   border: 0;
   background: transparent;
-  color: #40536a;
+  color: #d10000;
   font: inherit;
   font-size: 0.78rem;
   font-weight: 860;
