@@ -366,11 +366,13 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
   const factors = gap.contributing_factors.slice(0, 4);
   const steps = [
     {
+      stage: "Input",
       label: gap.id === "dogs-safe-placement" ? "More dogs enter care" : "Need keeps entering the system",
       text: gap.what_we_are_seeing[0] || gap.current_state || gap.summary,
       evidence: gap.current_state_items?.[0],
     },
     {
+      stage: "Bottleneck",
       label: gap.id === "dogs-safe-placement" ? "Placement pathways narrow" : "Available pathways narrow",
       text: factors.length
         ? factors.map(compactFactor).join(". ")
@@ -378,6 +380,7 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
       factors,
     },
     {
+      stage: "Outcome",
       label: gap.id === "dogs-safe-placement" ? "Shelters stay full" : "The gap persists",
       text: gap.what_we_are_seeing[1] || gap.current_state || gap.summary,
       evidence: gap.current_state_items?.[2] || gap.current_state_items?.[1],
@@ -393,24 +396,36 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
       </div>
       <div className="gap-stuck-flow">
         {steps.map((step, index) => (
-          <article className="gap-stuck-card" key={step.label}>
-            <b>{index + 1}</b>
-            <h3>{step.label}</h3>
-            <p>{step.text}</p>
-            {step.evidence && (
-              <dl>
-                <div>
-                  <dt>{step.evidence.label}</dt>
-                  <dd>{step.evidence.value}</dd>
-                </div>
-              </dl>
-            )}
-            {step.factors && step.factors.length > 0 && (
-              <ul>
-                {step.factors.map((factor) => (
-                  <li key={factor}>{compactFactor(factor)}</li>
-                ))}
-              </ul>
+          <article className={`gap-stuck-card ${index === 1 ? "is-bottleneck" : ""}`} key={step.label}>
+            <div className="gap-stuck-step-heading">
+              <b>{index + 1}</b>
+              <span>{step.stage}</span>
+            </div>
+            <div className="gap-stuck-main">
+              <h3>{step.label}</h3>
+              <p>{step.text}</p>
+            </div>
+            {(step.evidence || (step.factors && step.factors.length > 0)) && (
+              <div className="gap-stuck-evidence">
+                {step.evidence && (
+                  <dl>
+                    <div>
+                      <dt>{step.evidence.label}</dt>
+                      <dd>{step.evidence.value}</dd>
+                    </div>
+                  </dl>
+                )}
+                {step.factors && step.factors.length > 0 && (
+                  <>
+                    <strong>{step.factors.length} constraints</strong>
+                    <ul>
+                      {step.factors.slice(0, 4).map((factor) => (
+                        <li key={factor}>{compactFactor(factor)}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
             )}
           </article>
         ))}
