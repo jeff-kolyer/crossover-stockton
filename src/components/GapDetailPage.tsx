@@ -267,7 +267,10 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
 
       <footer className="public-footer">
         <div className="footer-logo" aria-label="Crossover">
-          <img src={logoDark} alt="" decoding="async" />
+          <picture>
+            <source media="(max-width: 760px)" srcSet={logoDark} />
+            <img src={logoLight} alt="" decoding="async" />
+          </picture>
           <span>Crossover</span>
         </div>
         <span>© 2026 Crossover Stockton</span>

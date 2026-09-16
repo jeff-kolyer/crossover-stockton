@@ -354,7 +354,10 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
 
       <footer className="public-footer">
         <div className="footer-logo" aria-label="Crossover">
-          <img src={logoDark} alt="" />
+          <picture>
+            <source media="(max-width: 760px)" srcSet={logoDark} />
+            <img src={logoLight} alt="" />
+          </picture>
           <span>Crossover</span>
         </div>
         <span>© 2026 Crossover Stockton</span>
