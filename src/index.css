@@ -9091,7 +9091,7 @@ p {
   .gap-detail-page .gap-state-item {
     border-left: 0;
     border-top: 1px solid #e4ddd1;
-    padding: 18px 0 0;
+    padding: 18px 0 14px;
   }
 
 }
