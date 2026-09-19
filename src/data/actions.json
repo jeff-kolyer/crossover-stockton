@@ -26,7 +26,7 @@
       "sas-2026-01-13-spay-neuter-capacity"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24",
+    "last_supported_at": "2026-09-18",
     "at_a_glance": {
       "what": "Temporary foster home",
       "time": "Temporary commitment",
@@ -107,7 +107,7 @@
       "ssd-standing-food-supplies"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24",
+    "last_supported_at": "2026-09-18",
     "at_a_glance": {
       "what": "Requested dog supplies",
       "time": "Anytime",
@@ -236,7 +236,7 @@
       "bol-2026-08-06-cold-storage-overflow"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24",
+    "last_supported_at": "2026-09-18",
     "at_a_glance": {
       "what": "Food distribution help",
       "time": "Volunteer opportunities",
@@ -315,7 +315,7 @@
       "ssd-standing-foster-adopt"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-24",
+    "last_supported_at": "2026-09-18",
     "updated_at": "2026-08-21T17:07:00-07:00",
     "when_label": "Current adoptable dogs",
     "location_label": "Stockton Street Dogs",
@@ -357,7 +357,7 @@
       "sas-standing-doggie-day-out"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-21",
+    "last_supported_at": "2026-09-18",
     "updated_at": "2026-08-21T17:07:00-07:00",
     "when_label": "Check current availability",
     "location_label": "Stockton Animal Services",
@@ -488,7 +488,7 @@
       "rtw-standing-housing-work-pathway"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22",
+    "last_supported_at": "2026-09-18",
     "at_a_glance": {
       "what": "Reentry program support",
       "time": "Ongoing",
@@ -528,7 +528,7 @@
       "rtw-standing-employer-partner"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22",
+    "last_supported_at": "2026-09-18",
     "at_a_glance": {
       "what": "Hire or contract crews",
       "time": "Employer partnership",
@@ -571,7 +571,7 @@
       "friends-outside-standing-donate-reentry"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-08-22",
+    "last_supported_at": "2026-09-18",
     "at_a_glance": {
       "what": "Practical reentry support",
       "time": "Ongoing",

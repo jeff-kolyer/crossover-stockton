@@ -287,7 +287,7 @@
       "hard-luck-awa"
     ],
     "published_at": null,
-    "checked_at": "2026-08-21T17:07:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
     "title": "Doggie Day Out invites the public to give shelter dogs community exposure",
@@ -314,7 +314,7 @@
       "stockton-street-dogs"
     ],
     "published_at": null,
-    "checked_at": "2026-08-24T19:16:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
     "title": "Stockton Streetdogs maintains foster and adoption applications",
@@ -370,7 +370,7 @@
       "stockton-street-dogs"
     ],
     "published_at": null,
-    "checked_at": "2026-08-24T19:16:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
     "title": "Stockton Streetdogs requests food and supplies",
@@ -494,7 +494,7 @@
       "bread-of-life"
     ],
     "published_at": null,
-    "checked_at": "2026-08-24T19:16:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
     "title": "Bread of Life currently invites individuals and groups to volunteer",
@@ -615,7 +615,7 @@
       "ready-to-work-sjc"
     ],
     "published_at": null,
-    "checked_at": "2026-08-22T16:08:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_service",
     "trust": "organization_source",
     "title": "Ready To Work currently combines transitional housing, paid work, case management, and permanent-housing support",
@@ -651,7 +651,7 @@
       "friends-outside"
     ],
     "published_at": null,
-    "checked_at": "2026-08-22T16:08:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_service",
     "trust": "organization_source",
     "title": "Friends Outside currently provides housing and basic-needs assistance as part of reentry case management",
@@ -714,7 +714,7 @@
       "ready-to-work-sjc"
     ],
     "published_at": null,
-    "checked_at": "2026-08-22T16:08:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
     "title": "Ready To Work currently invites employers to hire or contract with program participants",
@@ -745,7 +745,7 @@
       "friends-outside"
     ],
     "published_at": null,
-    "checked_at": "2026-08-22T16:08:00-07:00",
+    "checked_at": "2026-09-18T18:28:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
     "title": "Friends Outside currently accepts support for reentry clients",
@@ -915,6 +915,73 @@
       "housing_navigation",
       "case_management",
       "supportive_services"
+    ]
+  },
+  {
+    "id": "stocktonia-2026-09-13-reentry-outcomes",
+    "gap_ids": [
+      "reentry-housing-instability"
+    ],
+    "organization_ids": [
+      "friends-outside",
+      "ready-to-work-sjc"
+    ],
+    "published_at": "2026-09-13",
+    "checked_at": "2026-09-18T18:28:00-07:00",
+    "record_type": "outcome",
+    "trust": "source_supported",
+    "title": "Local reporting documented housing, work, and education outcomes after incarceration",
+    "summary": "Stocktonia documented several formerly incarcerated Stockton-area residents rebuilding through housing, employment, education, and community support. Friends Outside assisted Floyd Henley with housing and rental support before he moved into a Stockton apartment, while Ready To Work provided Jorge Rodriguez an early employment opportunity after incarceration.",
+    "source": {
+      "publisher": "Stocktonia",
+      "url": "https://stocktonia.org/news/public-safety/justice/2026/09/13/life-after-lockup-for-the-formerly-incarcerated-a-long-rebuilding-process/",
+      "type": "local_reporting"
+    },
+    "supports": [
+      "reentry-housing",
+      "employment-pathway",
+      "education-pathway",
+      "reentry-support",
+      "successful-reintegration"
+    ],
+    "action_signals": [
+      "support-friends-outside-reentry",
+      "hire-ready-to-work",
+      "support-ready-to-work"
+    ],
+    "role_signals": [
+      "housing_assistance",
+      "employment_pathway",
+      "education_support",
+      "reentry_case_management"
+    ]
+  },
+  {
+    "id": "stockton-2026-08-17-homeless-options",
+    "gap_ids": [
+      "low-barrier-housing-pathways"
+    ],
+    "organization_ids": [],
+    "published_at": "2026-08-17",
+    "checked_at": "2026-09-18T18:28:00-07:00",
+    "record_type": "planning_update",
+    "trust": "government",
+    "title": "Stockton developed additional homelessness-response options beyond current operations",
+    "summary": "City staff reported that Stockton had completed cost estimates and operational frameworks for additional homelessness responses, including a safe camping site, expansion of current operations, and a tiny-homes complex.",
+    "source": {
+      "publisher": "City of Stockton",
+      "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=F762E922-8829-4D16-8FC7-5748711F3FBF&ID=8172268&Options=&Search=",
+      "type": "government"
+    },
+    "supports": [
+      "homelessness-response-capacity",
+      "additional-shelter-options",
+      "system-planning"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "homelessness_planning",
+      "capacity_expansion"
     ]
   }
 ]
