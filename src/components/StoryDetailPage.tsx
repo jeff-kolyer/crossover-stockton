@@ -28,8 +28,8 @@ interface StoryDetailPageProps {
 }
 
 const stories = storiesData as StoryRecord[];
-const logoDark = "/images/logo_dark.png";
-const logoLight = "/images/logo_light.png";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
 const fallbackImage = "/images/connection/connection_banner.jpg";
 
 export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {

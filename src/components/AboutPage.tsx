@@ -23,8 +23,8 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 const aboutHeroImage = "/images/about/about-crossover-hero.jpg";
 const awarenessConnectionImage = "/images/about/awareness-connection-hero.jpg";
-const logoDark = "/images/logo_dark.png";
-const logoLight = "/images/logo_light.png";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
 const linkedInUrl = "http://www.linkedin.com/in/jeff-kolyer";
 
 interface AboutPageProps {

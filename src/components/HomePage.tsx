@@ -44,8 +44,8 @@ const actionHeroImage = "/images/action/action_banner.jpg";
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
 const heroImage = "/images/home/background_home.jpg";
 const realityHeroImage = "/images/reality/reality_banner.jpg";
-const logoDark = "/images/logo_dark.png";
-const logoLight = "/images/logo_light.png";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
 
 const pageCopy = {
   home: {

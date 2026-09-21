@@ -65,8 +65,8 @@ const orgs = orgsData as OrgRecord[];
 const actions = actionsData as PublicActionRecord[];
 const records = recordsData as EvidenceRecord[];
 const stories = storiesData as StoryRecord[];
-const logoDark = "/images/logo_dark.png";
-const logoLight = "/images/logo_light.png";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
 const stateIcons = [Home, Plus, Users];
 
 export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {

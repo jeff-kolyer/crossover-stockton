@@ -28,8 +28,8 @@ interface GapUpdatesPageProps {
 
 const gaps = gapsData as GapRecord[];
 const records = recordsData as EvidenceRecord[];
-const logoDark = "/images/logo_dark.png";
-const logoLight = "/images/logo_light.png";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
 
 export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: GapUpdatesPageProps) {
   const gap = gaps.find((item) => item.slug === slug);

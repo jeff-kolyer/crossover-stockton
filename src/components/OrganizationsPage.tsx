@@ -24,8 +24,8 @@ interface OrganizationsPageProps {
 const orgs = orgsData as OrgRecord[];
 const trackedOrgs = orgs.filter((org) => org.active && org.tracked !== false);
 const heroImage = "/images/organizations/organizations-we-follow-hero.jpg";
-const logoDark = "/images/logo_dark.png";
-const logoLight = "/images/logo_light.png";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
 
 export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
   return (
