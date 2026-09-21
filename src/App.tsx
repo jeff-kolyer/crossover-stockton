@@ -25,12 +25,12 @@ interface RouteState {
 
 const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">, string> = {
   home: "/",
-  reality: "/reality",
-  connection: "/connection",
-  action: "/action",
-  updates: "/updates",
-  about: "/about",
-  organizations: "/organizations",
+  reality: "/reality/",
+  connection: "/connection/",
+  action: "/action/",
+  updates: "/updates/",
+  about: "/about/",
+  organizations: "/organizations/",
 };
 
 function routeFromPathname(pathname: string): RouteState {
@@ -58,13 +58,27 @@ function routeFromPathname(pathname: string): RouteState {
   return { page: "home" };
 }
 
+function canonicalPathname(pathname: string) {
+  return pathname === "/" || pathname.endsWith("/") ? pathname : `${pathname}/`;
+}
+
 export default function App() {
   const [route, setRoute] = useState<RouteState>(() => routeFromPathname(window.location.pathname));
   const [selectedAction, setSelectedAction] = useState<PublicActionRecord | null>(null);
 
   useEffect(() => {
+    function ensureCanonicalPath() {
+      const pathname = canonicalPathname(window.location.pathname);
+      if (pathname !== window.location.pathname) {
+        window.history.replaceState({}, "", `${pathname}${window.location.search}${window.location.hash}`);
+      }
+      return pathname;
+    }
+
+    ensureCanonicalPath();
+
     function handlePopState() {
-      setRoute(routeFromPathname(window.location.pathname));
+      setRoute(routeFromPathname(ensureCanonicalPath()));
       requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
     }
 
@@ -82,7 +96,7 @@ export default function App() {
   }
 
   function showGap(slug: string) {
-    const nextPath = `/reality/${slug}`;
+    const nextPath = `/reality/${slug}/`;
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
@@ -91,7 +105,7 @@ export default function App() {
   }
 
   function showGapUpdates(slug: string) {
-    const nextPath = `/reality/${slug}/updates`;
+    const nextPath = `/reality/${slug}/updates/`;
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
@@ -100,7 +114,7 @@ export default function App() {
   }
 
   function showGapSources(slug: string) {
-    const nextPath = `/reality/${slug}/sources`;
+    const nextPath = `/reality/${slug}/sources/`;
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
@@ -109,7 +123,7 @@ export default function App() {
   }
 
   function showStory(slug: string) {
-    const nextPath = `/stories/${slug}`;
+    const nextPath = `/stories/${slug}/`;
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
