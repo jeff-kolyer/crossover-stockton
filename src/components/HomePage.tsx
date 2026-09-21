@@ -235,7 +235,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
         <div className="story-grid">
           {visibleStories.map((story, index) => (
             <button className="story-card" key={story.id} type="button" onClick={() => onOpenStory(story.slug)}>
-              <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading={index < 3 ? "eager" : "lazy"} decoding="sync" />
+              <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading={page === "connection" && index < 3 ? "eager" : "lazy"} decoding="sync" />
               <span>Fruit</span>
               <div>
                 <h3>{story.title}</h3>
