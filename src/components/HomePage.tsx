@@ -175,7 +175,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           <small><CheckCircle2 size={16} /> Updated from public records and organizations we follow.</small>
         </div>
         <div className="gap-card-grid">
-          {visibleGaps.map((gap) => {
+          {visibleGaps.map((gap, index) => {
             const Icon = getGapIcon(gap.status);
             const useful = actionTitles(gap.action_ids);
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
@@ -187,8 +187,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                   <img
                     src={thumbnailImage}
                     alt=""
-                    loading="lazy"
-                    decoding="async"
+                    loading={index < 4 ? "eager" : "lazy"}
+                    decoding="sync"
                     onError={(event) => {
                       if (gap.artwork && event.currentTarget.src !== new URL(gap.artwork, window.location.origin).href) {
                         event.currentTarget.src = gap.artwork;
@@ -233,9 +233,9 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           </button>
         </div>
         <div className="story-grid">
-          {visibleStories.map((story) => (
+          {visibleStories.map((story, index) => (
             <button className="story-card" key={story.id} type="button" onClick={() => onOpenStory(story.slug)}>
-              <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+              <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading={index < 3 ? "eager" : "lazy"} decoding="sync" />
               <span>Fruit</span>
               <div>
                 <h3>{story.title}</h3>

@@ -9,7 +9,6 @@ import { HomePage } from "./components/HomePage";
 import { OrganizationsPage } from "./components/OrganizationsPage";
 import { StoryDetailPage } from "./components/StoryDetailPage";
 import { UpdatesPage } from "./components/UpdatesPage";
-import { warmImage } from "./lib/preloadImages";
 import storiesData from "./data/stories.json";
 import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
 
@@ -32,15 +31,6 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSou
   updates: "/updates",
   about: "/about",
   organizations: "/organizations",
-};
-
-const pageHeroImages: Partial<Record<AppRoute, string>> = {
-  home: "/images/home/background_home.jpg",
-  reality: "/images/reality/reality_banner.jpg",
-  connection: "/images/connection/connection_banner.jpg",
-  action: "/images/action/action_banner.jpg",
-  about: "/images/about/about-crossover-hero.jpg",
-  organizations: "/images/organizations/organizations-we-follow-hero.jpg",
 };
 
 function routeFromPathname(pathname: string): RouteState {
@@ -73,16 +63,6 @@ export default function App() {
   const [selectedAction, setSelectedAction] = useState<PublicActionRecord | null>(null);
 
   useEffect(() => {
-    const routeImage = route.page === "gapDetail"
-      ? gaps.find((gap) => gap.slug === route.gapSlug)?.artwork
-      : route.page === "storyDetail"
-        ? stories.find((story) => story.slug === route.storySlug)?.image
-        : pageHeroImages[route.page];
-
-    void warmImage(routeImage);
-  }, [route]);
-
-  useEffect(() => {
     function handlePopState() {
       setRoute(routeFromPathname(window.location.pathname));
       requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
@@ -92,9 +72,8 @@ export default function App() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  async function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">) {
+  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">) {
     const nextPath = ROUTE_PATHS[page];
-    await warmImage(pageHeroImages[page]);
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
@@ -102,9 +81,8 @@ export default function App() {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  async function showGap(slug: string) {
+  function showGap(slug: string) {
     const nextPath = `/reality/${slug}`;
-    await warmImage(gaps.find((gap) => gap.slug === slug)?.artwork);
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
@@ -112,7 +90,7 @@ export default function App() {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  async function showGapUpdates(slug: string) {
+  function showGapUpdates(slug: string) {
     const nextPath = `/reality/${slug}/updates`;
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
@@ -121,7 +99,7 @@ export default function App() {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  async function showGapSources(slug: string) {
+  function showGapSources(slug: string) {
     const nextPath = `/reality/${slug}/sources`;
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
@@ -130,9 +108,8 @@ export default function App() {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  async function showStory(slug: string) {
+  function showStory(slug: string) {
     const nextPath = `/stories/${slug}`;
-    await warmImage(stories.find((story) => story.slug === slug)?.image);
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
