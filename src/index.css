@@ -2642,6 +2642,11 @@ p {
     linear-gradient(180deg, rgba(6, 8, 7, 0.2), rgba(6, 8, 7, 0.02) 45%, rgba(6, 8, 7, 0.18));
 }
 
+.public-home.is-home-page .public-hero-shade {
+  background:
+    linear-gradient(90deg, rgba(6, 8, 7, 0.8) 0%, rgba(6, 8, 7, 0.5) 34%, rgba(6, 8, 7, 0) 70%),
+    linear-gradient(180deg, rgba(6, 8, 7, 0.2), rgba(6, 8, 7, 0.02) 45%, rgba(6, 8, 7, 0.18));
+}
 .public-nav {
   position: relative;
   z-index: 2;
