@@ -2892,6 +2892,30 @@ p {
   color: #ffffff;
 }
 
+@media (min-width: 1401px) {
+  .public-home.is-home-page .public-hero {
+    min-height: 500px;
+  }
+
+  .public-home.is-home-page .public-hero-copy {
+    padding-bottom: 24px;
+  }
+  .public-hero:not(.is-compact) .public-hero-copy {
+    width: min(840px, var(--public-rail-width));
+  }
+
+  .public-hero:not(.is-compact) h1 {
+    font-size: clamp(3rem, 4.6vw, 4.3rem);
+  }
+
+  .public-hero:not(.is-compact) .public-hero-copy > p {
+    max-width: 560px;
+  }
+
+  .public-hero:not(.is-compact) .hero-search {
+    width: clamp(300px, 30vw, 380px);
+  }
+}
 .hero-link-row {
   display: flex;
   flex-wrap: wrap;
