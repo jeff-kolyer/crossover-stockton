@@ -17,6 +17,7 @@ export function updateTypeLabel(record: EvidenceRecord) {
   const hostname = sourceHostname(record.source.url);
   const roleSignals = record.role_signals ?? [];
 
+  if (type.includes("news")) return "News";
   if (roleSignals.some((signal) => ["direct_conversations", "field_work", "field_report", "field_investigation"].includes(signal))) {
     return "Project update";
   }
@@ -37,6 +38,7 @@ export function updateIcon(record: EvidenceRecord) {
   const hostname = sourceHostname(record.source.url);
   const roleSignals = record.role_signals ?? [];
 
+  if (type.includes("news")) return Newspaper;
   if (roleSignals.some((signal) => ["direct_conversations", "field_work", "field_report", "field_investigation"].includes(signal))) {
     return ClipboardList;
   }

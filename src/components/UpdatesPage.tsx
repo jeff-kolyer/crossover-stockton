@@ -166,16 +166,9 @@ function recordsForGap(gap: GapRecord) {
 }
 
 function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
-  const preferredIds = [gap.latest_change?.record_id].filter((id): id is string => Boolean(id));
-  const preferred = new Set(preferredIds);
-  const picked = preferredIds
-    .map((id) => recordsForCurrentGap.find((record) => record.id === id))
-    .filter((record): record is EvidenceRecord => Boolean(record));
-  const remaining = recordsForCurrentGap
-    .filter((record) => !preferred.has(record.id))
-    .sort((a, b) => recordTime(b) - recordTime(a));
-
-  return [...picked, ...remaining].filter((record, index, all) => all.findIndex((item) => item.id === record.id) === index);
+  return [...recordsForCurrentGap]
+    .sort((a, b) => recordTime(b) - recordTime(a))
+    .filter((record, index, all) => all.findIndex((item) => item.id === record.id) === index);
 }
 
 function recordTime(record: EvidenceRecord) {

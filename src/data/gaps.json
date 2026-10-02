@@ -8,7 +8,7 @@
     "rank": 1,
     "summary": "Dogs continue entering a local animal-welfare system constrained by shelter space, veterinary capacity, foster and rescue placement, and access to spay/neuter services.",
     "what_we_are_seeing": [
-      "Stray and abandoned dogs continue to be reported across Stockton.",
+      "Stray and abandoned dogs continue to be reported across Stockton, with Stockton Street Dogs reporting a recent surge in dumped dogs.",
       "City records say stray animal intakes regularly exceed shelter capacity.",
       "The local response includes street outreach, sheltering, veterinary treatment, foster and adoption, rescue transfers, and spay/neuter work."
     ],
@@ -38,6 +38,13 @@
       "cats-transferred-out-of-overcrowding"
     ],
     "sources": [
+      {
+        "title": "Stockton Street Dogs reports surge in dumped dogs",
+        "publisher": "Stockton Street Dogs / video source",
+        "url": "https://www.youtube.com/watch?v=XZlwttXFXEc",
+        "published_at": "2026-09-29",
+        "type": "news"
+      },
       {
         "title": "A Stockton woman was mauled by wild dogs. Here's how to avoid becoming a target",
         "publisher": "Stocktonia",
@@ -98,9 +105,10 @@
     "artwork": "/images/reality/dog-street-hero.jpg",
     "thumbnail_image": "/images/reality/dog-thumb.jpg",
     "first_seen": "2026-08-20",
-    "updated_at": "2026-09-11T16:29:50-07:00",
-    "current_state": "Stockton continues to report pet overpopulation and stray-animal intake pressure beyond normal shelter capacity.",
+    "updated_at": "2026-09-29",
+    "current_state": "Dumped and stray dogs continue to exceed Stockton’s available rescue and placement capacity. Stockton Street Dogs reports that dumped-dog encounters have risen from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity.",
     "record_ids": [
+      "ssd-2026-09-29-dumped-dogs-surge",
       "crossover-2026-09-11-dog-crisis-cost-of-living",
       "crossover-2026-08-28-why-we-stopped-caring-video",
       "crossover-2026-08-27-dog-placement-field-investigation",
@@ -167,8 +175,8 @@
       }
     ],
     "latest_change": {
-      "record_id": "crossover-2026-09-11-dog-crisis-cost-of-living",
-      "label": "The dog crisis may start with the cost of living."
+      "record_id": "ssd-2026-09-29-dumped-dogs-surge",
+      "label": "Stockton Street Dogs reports a surge in dumped dogs."
     },
     "current_state_items": [
       {

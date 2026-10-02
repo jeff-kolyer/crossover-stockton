@@ -100,7 +100,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
-  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 5);
+  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 6);
   const actionCards = visibleActions(gap);
   const stateReport = stateReportCopy(gap);
   const relatedStories = gap.story_ids
@@ -136,7 +136,11 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
           {recentUpdates.length > 0 && (
             <section className="gap-refined-card gap-learning-card" id="recent-updates">
               <div className="gap-card-heading">
-                <h2>Latest updates</h2>
+                <div>
+                  <h2>Latest updates</h2>
+                  <p>What’s happening now</p>
+                  <span>New evidence, activity, and changes around this gap.</span>
+                </div>
                 <button className="gap-card-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View all updates <ArrowRight size={15} /></button>
               </div>
               <div className="gap-update-list">
@@ -292,34 +296,33 @@ function RecentUpdateItem({
   Icon: typeof AlertCircle;
   dateLabel: { context?: string; date: string };
 }) {
+  const sourceAction = record.source.url ? (
+    <a
+      className="gap-update-source-link"
+      href={record.source.url}
+      target={record.source.url.startsWith("/") ? undefined : "_blank"}
+      rel={record.source.url.startsWith("/") ? undefined : "noreferrer"}
+    >
+      <small>{sourceLinkLabel(record.source)} <ExternalLink size={14} /></small>
+    </a>
+  ) : (
+    <small>Current state</small>
+  );
+
   const content = (
     <>
-      <Icon className="gap-update-type-icon" size={22} />
-      <span className="gap-update-copy">
-        <strong>{record.title}</strong>
+      <time className="gap-update-date">{dateLabel.date}</time>
+      <span className="gap-update-card-body">
         <span className="gap-update-kicker">
+          <Icon className="gap-update-type-icon" size={18} />
           <em>{updateTypeLabel(record)}</em>
-          <time>{dateLabel.context ? `${dateLabel.context} ${dateLabel.date}` : dateLabel.date}</time>
         </span>
+        <strong>{record.title}</strong>
         <p>{record.summary}</p>
-        <small>{record.source.url ? sourceLinkLabel(record.source) : "Current state"} <ExternalLink size={14} /></small>
+        {sourceAction}
       </span>
     </>
   );
-
-  if (record.source.url) {
-    const isInternalUrl = record.source.url.startsWith("/");
-    return (
-      <a
-        className={`gap-update-compact is-${record.record_type}`}
-        href={record.source.url}
-        target={isInternalUrl ? undefined : "_blank"}
-        rel={isInternalUrl ? undefined : "noreferrer"}
-      >
-        {content}
-      </a>
-    );
-  }
 
   return <div className={`gap-update-compact is-${record.record_type}`}>{content}</div>;
 }
@@ -514,17 +517,7 @@ function roleForOrg(gap: GapRecord, organizationId: string): ResponderRole | und
 }
 
 function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
-  const latestChangeIds = [gap.latest_change?.record_id].filter((id): id is string => Boolean(id));
-  const latestChange = latestChangeIds
-    .map((id) => recordsForCurrentGap.find((record) => record.id === id))
-    .filter((record): record is EvidenceRecord => Boolean(record));
-  const updateRecords = recordsForCurrentGap
-    .filter((record) => record.record_type === "update" && !latestChangeIds.includes(record.id))
-    .sort((a, b) => recordTime(b) - recordTime(a));
-  const remaining = recordsForCurrentGap
-    .filter((record) => record.record_type !== "update" && !latestChangeIds.includes(record.id))
-    .sort((a, b) => recordTime(b) - recordTime(a));
-  return [...latestChange, ...updateRecords, ...remaining];
+  return [...recordsForCurrentGap].sort((a, b) => recordTime(b) - recordTime(a));
 }
 
 function representativeSourcesForGap(gap: GapRecord, sourceList: SourceLike[], recordsForCurrentGap: EvidenceRecord[]) {

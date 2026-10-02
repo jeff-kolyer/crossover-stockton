@@ -957,6 +957,35 @@
     ]
   },
   {
+    "id": "ssd-2026-09-29-dumped-dogs-surge",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": "2026-09-29",
+    "record_type": "update",
+    "trust": "source_supported",
+    "title": "Stockton Street Dogs reports surge in dumped dogs",
+    "summary": "Stockton Street Dogs reports a sharp increase in dumped dogs across Stockton, from roughly one dog per week around this time last year to approximately three to ten per week now. District 5 is seeing notable activity, while local rescue organizations say they are struggling to keep up. The organization identifies affordable spay/neuter access as a major upstream need and is working toward expanded and mobile veterinary services.",
+    "source": {
+      "publisher": "Stockton Street Dogs / video source",
+      "url": "https://www.youtube.com/watch?v=XZlwttXFXEc",
+      "type": "news"
+    },
+    "supports": [
+      "dumped-dog-intake-pressure",
+      "rescue-capacity-pressure",
+      "affordable-spay-neuter",
+      "mobile-veterinary-services"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "field_report"
+    ]
+  },
+  {
     "id": "stockton-2026-08-17-homeless-options",
     "gap_ids": [
       "low-barrier-housing-pathways"
