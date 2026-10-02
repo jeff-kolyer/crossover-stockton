@@ -6704,7 +6704,7 @@ p {
 .gap-detail-page.gap-refined-page {
   --gap-eyebrow-size: 0.82rem;
   --gap-card-title-size: 0.98rem;
-  --gap-body-size: 0.92rem;
+  --gap-body-size: 0.98rem;
   --gap-meta-size: 0.84rem;
   --gap-link-size: 0.88rem;
   --gap-body-line: 1.52;
@@ -6795,7 +6795,7 @@ p {
 }
 
 .gap-detail-page .gap-refined-copy > p:not(.gap-detail-kicker) {
-  font-size: clamp(1.05rem, 1.22vw, 1.18rem);
+  font-size: 0.98rem;
   line-height: 1.35;
 }
 
@@ -6824,7 +6824,7 @@ p {
   max-width: 680px;
   margin: 0;
   color: #40536a;
-  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  font-size: 0.98rem;
   font-weight: 460;
   line-height: 1.48;
 }
@@ -9752,6 +9752,14 @@ p {
   padding: 0;
 }
 
+.gap-detail-page .public-nav nav button {
+  font-size: 1rem;
+}
+
+.gap-detail-page .gap-page-back {
+  font-size: 0.92rem;
+}
+
 .gap-page-back {
   gap: 7px;
   text-decoration: underline;
@@ -9767,7 +9775,7 @@ p {
 .gap-page-selector > span {
   margin-right: 7px;
   color: #465048;
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   font-weight: 650;
 }
 
@@ -9803,6 +9811,13 @@ p {
 
 .gap-refined-hero-grid .gap-stuck-section .gap-card-heading p {
   max-width: none;
+}
+
+.gap-refined-hero-grid .gap-state-description,
+.gap-refined-hero-grid .gap-stuck-section .gap-card-heading > p,
+.gap-refined-hero-grid .gap-learning-card .gap-update-copy p {
+  color: #465048;
+  font-size: var(--gap-body-size);
 }
 
 .gap-refined-hero-grid .gap-stuck-card,
@@ -9841,6 +9856,77 @@ p {
   font-size: 1.28rem;
   font-weight: 760;
   line-height: 1.2;
+}
+
+/* Story detail typography: one calmer editorial system. */
+.story-detail-page .story-detail-shell {
+  gap: 34px;
+}
+
+.story-detail-page .story-opening-copy {
+  gap: 20px;
+}
+
+.story-detail-page .story-opening h1 {
+  color: #26332e;
+  font-weight: 450;
+}
+
+.story-detail-page .story-summary,
+.story-detail-page .story-sign-line,
+.story-detail-page .story-body-block p,
+.story-detail-page .story-moment-card p,
+.story-detail-page .story-action-band p {
+  font-family: inherit;
+}
+
+.story-detail-page .story-summary,
+.story-detail-page .story-sign-line {
+  color: #465048;
+  font-family: inherit;
+  font-size: 1.08rem;
+  line-height: 1.48;
+}
+
+.story-detail-page .story-body-block h2,
+.story-detail-page .story-connection-block h2 {
+  color: #151712;
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.story-detail-page .story-body-block p {
+  color: #465048;
+  font-size: 0.98rem;
+}
+
+.story-detail-page .story-connection-flow strong {
+  font-family: inherit;
+}
+
+.story-detail-page .story-moment-card strong {
+  color: #171d18;
+  font-family: inherit;
+  font-size: 0.94rem;
+  font-weight: 760;
+}
+
+.story-detail-page .story-moment-card p {
+  color: #465048;
+  font-size: 0.86rem;
+}
+
+.story-detail-page .story-source-list strong,
+.story-detail-page .story-source-list small {
+  font-family: inherit;
+}
+
+@media (min-width: 768px) {
+  .story-detail-page .story-meaning-row {
+    gap: 52px;
+    padding-top: 32px;
+  }
 }
 
 @media (min-width: 1281px) {
