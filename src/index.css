@@ -8858,8 +8858,7 @@ p {
   .gap-refined-top-row,
   .gap-refined-action-band,
   .gap-refined-lower-row,
-  .gap-refined-lower-columns,
-  .gap-refined-sources {
+  .gap-refined-lower-columns {
     grid-template-columns: 1fr;
   }
 
@@ -8913,11 +8912,6 @@ p {
     grid-column: 1;
   }
 
-  .gap-hero-summary-card .gap-detail-meta {
-    display: grid;
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
 }
 
 @media (max-width: 1280px) {
@@ -9530,7 +9524,7 @@ p {
 
 .gap-refined-hero-grid .gap-learning-card .gap-update-kicker {
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .gap-refined-hero-grid .gap-learning-card .gap-update-kicker time,
@@ -9555,6 +9549,11 @@ p {
 .gap-refined-hero-grid .gap-learning-card .gap-update-type-icon {
   flex: 0 0 auto;
   color: #0c6b3b;
+}
+
+.gap-refined-hero-grid .gap-learning-card .gap-update-kicker em {
+  line-height: 1.25;
+  padding-top: 2px;
 }
 
 @media (max-width: 1280px) {

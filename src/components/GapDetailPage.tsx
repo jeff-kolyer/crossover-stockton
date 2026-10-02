@@ -314,7 +314,7 @@ function RecentUpdateItem({
       <time className="gap-update-date">{dateLabel.date}</time>
       <span className="gap-update-card-body">
         <span className="gap-update-kicker">
-          <Icon className="gap-update-type-icon" size={18} />
+          <Icon className="gap-update-type-icon" size={22} />
           <em>{updateTypeLabel(record)}</em>
         </span>
         <strong>{record.title}</strong>
