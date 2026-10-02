@@ -65,11 +65,12 @@ const orgs = orgsData as OrgRecord[];
 const actions = actionsData as PublicActionRecord[];
 const records = recordsData as EvidenceRecord[];
 const stories = storiesData as StoryRecord[];
+const activeGaps = gaps.filter((item) => item.active).sort((a, b) => a.rank - b.rank);
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
 const stateIcons = [Home, Plus, Users];
 
-export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -108,17 +109,27 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenUpdates, on
     .filter((story): story is StoryRecord => Boolean(story))
     .slice(0, 3);
   const representativeSources = representativeSourcesForGap(gap, sourceList, relatedRecords);
+  const gapIndex = activeGaps.findIndex((item) => item.id === gap.id);
+  const previousGap = gapIndex > 0 ? activeGaps[gapIndex - 1] : undefined;
+  const nextGap = gapIndex >= 0 && gapIndex < activeGaps.length - 1 ? activeGaps[gapIndex + 1] : undefined;
 
   return (
     <main className={`gap-detail-page gap-refined-page is-${gap.status}`}>
       <section className="gap-refined-hero">
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
+        <GapPageToolbar
+          onNavigate={onNavigate}
+          onOpenGap={onOpenGap}
+          currentIndex={gapIndex}
+          total={activeGaps.length}
+          previousGap={previousGap}
+          nextGap={nextGap}
+        />
         <div className="gap-refined-hero-grid">
           <div className="gap-detail-copy gap-refined-copy">
-            <button className="gap-detail-kicker" type="button" onClick={() => onNavigate("reality")}>Current gaps</button>
-            <h1>{gap.title}</h1>
             <section className="gap-hero-summary-card" aria-label="Gap summary">
               <span className="gap-level">{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
+              <h1>{gap.title}</h1>
               <p>{gap.summary}</p>
               <div className="gap-detail-meta" aria-label="Gap record metadata">
                 <span><FileText size={17} /> {gap.sources.length} sources</span>
@@ -327,6 +338,41 @@ function RecentUpdateItem({
   return <div className={`gap-update-compact is-${record.record_type}`}>{content}</div>;
 }
 
+function GapPageToolbar({
+  onNavigate,
+  onOpenGap,
+  currentIndex,
+  total,
+  previousGap,
+  nextGap,
+}: {
+  onNavigate: (page: PublicRoute) => void;
+  onOpenGap: (slug: string) => void;
+  currentIndex: number;
+  total: number;
+  previousGap?: GapRecord;
+  nextGap?: GapRecord;
+}) {
+  return (
+    <div className="gap-page-toolbar">
+      <div className="gap-page-toolbar-inner">
+        <button className="gap-page-back" type="button" onClick={() => onNavigate("reality")}>
+          <ArrowLeft size={15} /> Back to all gaps
+        </button>
+        <div className="gap-page-selector" aria-label="Gap navigation">
+          <span>Gap {currentIndex >= 0 ? currentIndex + 1 : "—"} of {total}</span>
+          <button type="button" aria-label="Previous gap" disabled={!previousGap} onClick={() => previousGap && onOpenGap(previousGap.slug)}>
+            <ArrowLeft size={16} />
+          </button>
+          <button type="button" aria-label="Next gap" disabled={!nextGap} onClick={() => nextGap && onOpenGap(nextGap.slug)}>
+            <ArrowRight size={16} />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function PublicNav({ onNavigate, onOpenAbout }: Pick<GapDetailPageProps, "onNavigate" | "onOpenAbout">) {
   return (
     <header className="public-nav gap-detail-nav">
@@ -366,7 +412,7 @@ function ActionCard({ action, onOpenAction }: { action: PublicActionRecord; onOp
 
 function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
   const title = gap.id === "dogs-safe-placement" ? "How dogs get stuck" : "How this gap gets stuck";
-  const factors = gap.contributing_factors.slice(0, 4);
+  const factors = gap.contributing_factors;
   const steps = [
     {
       stage: "Input",
@@ -378,7 +424,7 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
       stage: "Bottleneck",
       label: gap.id === "dogs-safe-placement" ? "Placement pathways narrow" : "Available pathways narrow",
       text: factors.length
-        ? factors.map(compactFactor).join(". ")
+        ? `${factors.map(compactFactor).join(". ")}.`
         : gap.what_we_are_seeing[1] || gap.summary,
       factors,
     },
@@ -422,7 +468,7 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
                   <>
                     <strong>{step.factors.length} constraints</strong>
                     <ul>
-                      {step.factors.slice(0, 4).map((factor) => (
+                      {step.factors.map((factor) => (
                         <li key={factor}>{compactFactor(factor)}</li>
                       ))}
                     </ul>

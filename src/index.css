@@ -1644,7 +1644,7 @@ p {
 
 .recommended-action strong {
   color: #10243a;
-  font-size: 1.08rem;
+  font-size: 1.45rem;
   font-weight: 780;
   line-height: 1.22;
 }
@@ -7267,7 +7267,7 @@ p {
 .gap-state-item strong {
   grid-column: 2;
   grid-row: 1;
-  color: #40536a;
+  color: #293a4d;
   font-size: 0.72rem;
   font-weight: 860;
   letter-spacing: 0.075em;
@@ -9720,5 +9720,159 @@ p {
     display: block;
     -webkit-line-clamp: unset;
     overflow: visible;
+  }
+}
+
+/* Gap detail navigation and compact hero treatment. */
+.gap-page-toolbar {
+  border-bottom: 1px solid #e4ddd1;
+  background: #f1eee6;
+}
+
+.gap-page-toolbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: var(--public-rail-width);
+  min-height: 58px;
+  margin: 0 auto;
+}
+
+.gap-page-back,
+.gap-page-selector button {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: #17211b;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 720;
+  line-height: 1.2;
+  padding: 0;
+}
+
+.gap-page-back {
+  gap: 7px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.gap-page-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.gap-page-selector > span {
+  margin-right: 7px;
+  color: #465048;
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.gap-page-selector button {
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #d9d2c6;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.gap-page-selector button:disabled {
+  color: #b3ada2;
+  cursor: default;
+  opacity: 0.72;
+}
+
+.gap-refined-hero-grid {
+  padding-top: 18px;
+}
+
+.gap-hero-summary-card h1 {
+  max-width: 680px;
+  margin: 0;
+  color: #111b20;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.2rem, 3.2vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.03;
+}
+
+.gap-refined-hero-grid .gap-stuck-section .gap-card-heading p {
+  max-width: none;
+}
+
+.gap-refined-hero-grid .gap-stuck-card,
+.gap-refined-hero-grid .gap-stuck-main,
+.gap-refined-hero-grid .gap-stuck-card p {
+  height: auto;
+  width: auto;
+  max-height: none;
+  overflow: visible;
+  white-space: normal;
+}
+
+.gap-refined-hero-grid .gap-stuck-card {
+  min-height: 236px;
+}
+
+.gap-refined-hero-grid .gap-stuck-main {
+  min-width: 0;
+}
+
+.gap-refined-hero-grid .gap-stuck-card p {
+  min-height: 0;
+}
+
+.gap-refined-hero-grid .gap-stuck-card.is-bottleneck .gap-stuck-main p {
+  display: block;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  white-space: normal;
+}
+
+.gap-refined-hero-grid .gap-state-item b {
+  color: var(--gap-tone-strong);
+  font-family: inherit;
+  font-size: 1.28rem;
+  font-weight: 760;
+  line-height: 1.2;
+}
+
+@media (min-width: 1281px) {
+  .gap-refined-photo {
+    aspect-ratio: 1.95 / 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .gap-page-toolbar-inner {
+    min-height: 52px;
+  }
+
+  .gap-page-selector > span {
+    margin-right: 0;
+  }
+
+  .gap-page-selector button {
+    width: 31px;
+    height: 31px;
+  }
+
+  .gap-page-back,
+  .gap-page-selector > span {
+    font-size: 0.74rem;
+  }
+
+  .gap-refined-hero-grid {
+    padding-top: 18px;
+  }
+
+  .gap-hero-summary-card h1 {
+    font-size: clamp(2rem, 8.6vw, 2.7rem);
   }
 }
