@@ -156,6 +156,23 @@ export interface GapRecord {
   rank: number;
   summary: string;
   what_we_are_seeing: string[];
+  why_icons?: Array<
+    | "Dog"
+    | "Stethoscope"
+    | "HeartHandshake"
+    | "PawPrint"
+    | "House"
+    | "DoorClosed"
+    | "ClipboardList"
+    | "PackageOpen"
+    | "Refrigerator"
+    | "Truck"
+    | "DoorOpen"
+    | "Users"
+    | "BedSingle"
+    | "Route"
+    | "KeyRound"
+  >;
   contributing_factors: string[];
   organization_ids: string[];
   action_ids: string[];
@@ -174,6 +191,7 @@ export interface GapRecord {
     record_ids?: string[];
   }>;
   record_ids?: string[];
+  work_ids?: string[];
   most_useful_now?: {
     label: string;
     action_ids: string[];
@@ -191,6 +209,23 @@ export interface GapRecord {
     basis_record_ids?: string[];
     updated_at?: string;
   }>;
+}
+
+export type WorkStatus = "completed" | "in_progress" | "next";
+export type WorkType = "research" | "investigation" | "field_work";
+
+export interface WorkRecord {
+  id: string;
+  gap_id: string;
+  title: string;
+  summary: string;
+  status: WorkStatus;
+  type: WorkType;
+  started_at?: string;
+  completed_at?: string;
+  updated_at?: string;
+  next_step?: string;
+  record_ids: string[];
 }
 
 export interface OrgRecord {

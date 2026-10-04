@@ -1,0 +1,228 @@
+/*
+ * Crossover design system
+ *
+ * This file is the single source for shared visual primitives. Route-specific
+ * files should compose these primitives instead of redefining card geometry.
+ */
+:root {
+  --ds-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ds-font-serif: Georgia, "Times New Roman", serif;
+  --ds-color-canvas: #fcfbf9;
+  --ds-color-surface: #ffffff;
+  --ds-color-ink: #171917;
+  --ds-color-body: #4b504d;
+  --ds-color-link: #17633c;
+  --ds-color-line: #e4ddd1;
+  --ds-color-soft-green: #e7f0e1;
+  --ds-color-feature: #f1f8ed;
+  --ds-label-size: 0.76rem;
+  --ds-label-weight: 720;
+  --ds-label-tracking: 0.075em;
+  --ds-body-size: 0.86rem;
+  --ds-body-leading: 1.25;
+  --ds-strong-size: 0.95rem;
+  --ds-strong-weight: 740;
+  --ds-link-size: 0.84rem;
+  --ds-link-weight: 740;
+  --ds-card-padding: 16px;
+  --ds-card-column-gap: 16px;
+  --ds-card-row-gap: 8px;
+  --ds-card-icon-size: 56px;
+  --ds-card-min-height: 148px;
+}
+
+/* Shared Info Card primitive. */
+.gap-info-card {
+  display: grid;
+  grid-template-columns: var(--ds-card-icon-size) minmax(0, 1fr);
+  column-gap: var(--ds-card-column-gap);
+  row-gap: var(--ds-card-row-gap);
+  align-content: start;
+  align-items: start;
+  min-height: var(--ds-card-min-height);
+  padding: var(--ds-card-padding);
+  text-align: left;
+}
+
+.gap-info-card > svg:first-child {
+  grid-row: 1 / span 3;
+  width: var(--ds-card-icon-size);
+  height: var(--ds-card-icon-size);
+  align-self: start;
+  border-radius: 999px;
+  background: var(--ds-color-soft-green);
+  color: var(--ds-color-link);
+  padding: 13px;
+}
+
+.gap-info-card strong {
+  color: var(--ds-color-ink);
+  font-size: var(--ds-strong-size) !important;
+  font-weight: var(--ds-strong-weight);
+  line-height: 1.18;
+}
+
+.gap-info-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--ds-color-link);
+  font-size: var(--ds-link-size);
+  font-style: normal;
+  font-weight: var(--ds-link-weight);
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+/*
+ * The two Info Card data shapes are intentionally different in markup:
+ * organization cards wrap their title/body/link in one span, while action
+ * cards expose those three pieces as direct grid children. Normalize the
+ * roles here so the markup shape cannot create a second visual style.
+ */
+.gap-refined-left-column .gap-responding-rail .gap-info-card > span {
+  display: grid;
+  gap: var(--ds-card-row-gap);
+  color: var(--ds-color-body) !important;
+  font-size: var(--ds-body-size);
+  line-height: var(--ds-body-leading);
+}
+
+.gap-refined-secondary-actions .gap-info-card > span {
+  display: block;
+  margin: 0;
+}
+
+.gap-refined-left-column .gap-responding-rail .gap-info-card > span > small,
+.gap-refined-secondary-actions .gap-info-card > span {
+  color: var(--ds-color-body);
+  font-size: var(--ds-body-size);
+  font-weight: 400;
+  line-height: var(--ds-body-leading);
+}
+
+.gap-refined-left-column .gap-responding-rail .gap-info-card strong,
+.gap-refined-secondary-actions .gap-info-card strong {
+  color: var(--ds-color-ink) !important;
+  font-size: var(--ds-strong-size) !important;
+  font-weight: var(--ds-strong-weight);
+  line-height: 1.15 !important;
+}
+
+.gap-refined-left-column .gap-responding-rail .gap-info-card .gap-info-card-link,
+.gap-refined-secondary-actions .gap-info-card .gap-info-card-link {
+  align-self: start;
+  margin: 0;
+  color: var(--ds-color-link);
+  gap: 7px;
+  font-size: var(--ds-link-size);
+  font-weight: var(--ds-link-weight);
+  line-height: 1.2;
+}
+
+.gap-refined-secondary-actions .gap-info-card > strong,
+.gap-refined-secondary-actions .gap-info-card > span,
+.gap-refined-secondary-actions .gap-info-card > .gap-info-card-link {
+  grid-column: 2;
+}
+
+/* Keep legacy route selectors from creating a second Info Card size. */
+.gap-refined-left-column .gap-responding-rail .gap-info-card,
+.gap-refined-secondary-actions .gap-info-card {
+  min-height: var(--ds-card-min-height) !important;
+}
+
+.gap-refined-left-column .gap-responding-rail .gap-info-card > span > small {
+  color: var(--ds-color-body) !important;
+}
+
+/* Shared section label and link roles. */
+.gap-refined-section-heading h2,
+.gap-card-heading h2 {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-label-size);
+  font-weight: var(--ds-label-weight);
+  letter-spacing: var(--ds-label-tracking);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.gap-card-heading > .gap-info-card-link {
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* Shared Evidence Strip primitive. */
+.gap-refined-sources {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  min-height: 72px;
+  border: 0;
+  border-radius: 8px;
+  background: #f1f6f4;
+  box-shadow: none;
+  padding: 10px 16px;
+}
+
+.gap-refined-sources .gap-refined-section-heading {
+  display: none;
+}
+
+.gap-refined-sources-main {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.gap-refined-sources-main > svg {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--ds-color-soft-green);
+  color: var(--ds-color-link);
+  padding: 13px;
+}
+
+.gap-refined-sources-main span {
+  display: grid;
+  gap: 3px;
+}
+
+.gap-refined-sources-main strong {
+  color: var(--ds-color-ink);
+  font-size: 1rem;
+  font-weight: var(--ds-strong-weight);
+  line-height: 1.2;
+}
+
+.gap-refined-sources-main small {
+  color: var(--ds-color-body);
+  font-size: var(--ds-body-size);
+  line-height: var(--ds-body-leading);
+}
+
+.gap-refined-sources > .gap-card-link {
+  justify-self: end;
+  margin: 0;
+  white-space: nowrap;
+  color: var(--ds-color-link);
+  font-size: var(--ds-link-size);
+  font-weight: var(--ds-link-weight);
+  line-height: 1.2;
+}
+
+@media (max-width: 760px) {
+  .gap-refined-sources {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    min-height: 0;
+    padding: 14px 16px;
+  }
+
+  .gap-refined-sources > .gap-card-link {
+    justify-self: start;
+  }
+}

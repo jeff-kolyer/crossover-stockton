@@ -8,7 +8,7 @@ import {
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
-import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
+import { updateTypeLabel } from "../lib/updatePresentation";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { EvidenceRecord, GapRecord } from "../types";
 
@@ -45,17 +45,21 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
       </section>
 
       <section className="gap-history-timeline" aria-label="Crossover update history">
-        {updateRecords.map((record) => {
-          const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));
-          const Icon = updateIcon(record);
-          return (
-            <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
-              <time>{formatDate(record.published_at || record.checked_at)}</time>
-              <div className="gap-history-record">
-                <Icon className="gap-history-type-icon" size={22} aria-hidden="true" />
-                <div>
-                  <span>{updateTypeLabel(record)}</span>
-                  <h2>{record.title}</h2>
+        <div className="gap-history-feed-card">
+          <div className="gap-history-feed-heading">
+            <h2>All updates</h2>
+            <span>Newest first</span>
+          </div>
+          <div className="gap-history-feed-list">
+            {updateRecords.map((record) => {
+              const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));
+              return (
+                <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
+                  <div className="gap-history-feed-meta">
+                    <time>{formatDate(record.published_at || record.checked_at)}</time>
+                    <span>{updateTypeLabel(record)}</span>
+                  </div>
+                  <h3>{record.title}</h3>
                   <p>{record.summary}</p>
                   {relatedGaps.length > 0 && (
                     <div className="gap-history-related-gaps">
@@ -81,11 +85,11 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
                       </a>
                     )}
                   </div>
-                </div>
-              </div>
-            </article>
-          );
-        })}
+                </article>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       <footer className="public-footer">

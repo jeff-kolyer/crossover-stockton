@@ -1,19 +1,14 @@
 import {
-  AlertCircle,
-  AlertTriangle,
   ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
   ChevronDown,
   ExternalLink,
   FileText,
   MapPin,
-  ShieldCheck,
 } from "lucide-react";
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
-import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
+import { updateTypeLabel } from "../lib/updatePresentation";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { EvidenceRecord, GapRecord } from "../types";
 
@@ -50,8 +45,6 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
   }
 
   const relatedRecords = latestUpdates(gap, recordsForGap(gap));
-  const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
-
   return (
     <main className={`gap-updates-page gap-refined-page is-${gap.status}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
@@ -60,40 +53,37 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
         <button className="gap-history-back" type="button" onClick={() => onOpenGap(gap.slug)}>
           <ArrowLeft size={16} /> Back to gap
         </button>
-        <span className="gap-history-kicker">Updates</span>
-        <h1>Updates: {gap.title}</h1>
-        <p>A running history of what changed, what we learned, and what happened around this gap.</p>
-        <div className="gap-history-meta">
-          <span>{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
-          {currentAsOf && <span><CheckCircle2 size={16} /> Last updated {formatDate(currentAsOf)}</span>}
-          <button type="button" onClick={() => onOpenGap(gap.slug)}>Current state <ArrowRight size={15} /></button>
-        </div>
+        <span className="gap-history-kicker">Gap updates</span>
+        <h1>{gap.title}</h1>
+        <p>What changed, what we learned, and what happened around this gap.</p>
       </section>
 
-      <section className="gap-history-timeline" aria-label={`Update history for ${gap.title}`}>
-        {relatedRecords.map((record) => {
-          const Icon = updateIcon(record);
-          return (
-            <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
-              <time>{formatDate(record.published_at || record.checked_at)}</time>
-              <div className="gap-history-record">
-                <Icon className="gap-history-type-icon" size={22} aria-hidden="true" />
-                <div>
+      <section className="gap-history-timeline gap-specific-history-timeline" aria-label={`Update history for ${gap.title}`}>
+        <div className="gap-history-feed-card">
+          <div className="gap-history-feed-heading">
+            <h2>All updates</h2>
+            <span>Newest first</span>
+          </div>
+          <div className="gap-history-feed-list">
+            {relatedRecords.map((record) => (
+              <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
+                <div className="gap-history-feed-meta">
+                  <time>{formatDate(record.published_at || record.checked_at)}</time>
                   <span>{updateTypeLabel(record)}</span>
-                  <h2>{record.title}</h2>
-                  <p>{record.summary}</p>
-                  {record.source.url ? (
-                    <a href={record.source.url} target="_blank" rel="noreferrer">
-                      {sourceLinkLabel(record.source)} <ExternalLink size={15} />
-                    </a>
-                  ) : (
-                    <small><FileText size={15} /> {record.source.publisher || "Field note"}</small>
-                  )}
                 </div>
-              </div>
-            </article>
-          );
-        })}
+                <h3>{record.title}</h3>
+                <p>{record.summary}</p>
+                {record.source.url ? (
+                  <a href={record.source.url} target="_blank" rel="noreferrer">
+                    {sourceLinkLabel(record.source)} <ExternalLink size={15} />
+                  </a>
+                ) : (
+                  <small><FileText size={15} /> {record.source.publisher || "Field note"}</small>
+                )}
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <footer className="public-footer">
@@ -162,29 +152,9 @@ function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
   return [...picked, ...remaining].filter((record, index, all) => all.findIndex((item) => item.id === record.id) === index);
 }
 
-function latestCheckedDate(recordsForCurrentGap: EvidenceRecord[]) {
-  return recordsForCurrentGap
-    .map((record) => record.checked_at)
-    .filter((value): value is string => Boolean(value))
-    .sort((a, b) => dateValue(b) - dateValue(a))[0];
-}
-
 function recordTime(record: EvidenceRecord) {
   const time = dateValue(record.published_at || record.checked_at);
   return Number.isNaN(time) ? 0 : time;
-}
-
-function formatStatus(status: GapRecord["status"]) {
-  if (status === "high_priority") return "High Priority";
-  if (status === "monitored") return "Monitored";
-  return status[0].toUpperCase() + status.slice(1);
-}
-
-function renderStatusIcon(status: GapRecord["status"]) {
-  if (status === "improving") return <CheckCircle2 size={18} />;
-  if (status === "high_priority") return <AlertTriangle size={18} />;
-  if (status === "monitored") return <ShieldCheck size={18} />;
-  return <AlertCircle size={18} />;
 }
 
 function formatDate(value?: string | null) {

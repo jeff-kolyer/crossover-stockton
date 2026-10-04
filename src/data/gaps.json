@@ -2,16 +2,17 @@
   {
     "id": "dogs-safe-placement",
     "slug": "too-many-dogs-still-lack-safe-placement",
-    "title": "Too many dogs. Too few safe placements.",
+    "title": "Too many dogs still on the street",
     "status": "critical",
     "active": true,
     "rank": 1,
-    "summary": "Dogs continue entering a local animal-welfare system constrained by shelter space, veterinary capacity, foster and rescue placement, and access to spay/neuter services.",
+    "summary": "Limited shelter space, spay/neuter backlog, and limited placement options are keeping pressure high across Stockton’s animal-welfare system.",
     "what_we_are_seeing": [
       "Stray and abandoned dogs continue to be reported across Stockton, with Stockton Street Dogs reporting a recent surge in dumped dogs.",
       "City records say stray animal intakes regularly exceed shelter capacity.",
       "The local response includes street outreach, sheltering, veterinary treatment, foster and adoption, rescue transfers, and spay/neuter work."
     ],
+    "why_icons": ["Dog", "Stethoscope", "House"],
     "contributing_factors": [
       "Animal overpopulation and unplanned litters",
       "Limited spay and neuter capacity",
@@ -124,6 +125,11 @@
       "ssd-standing-volunteer-rescue-partner",
       "ssd-standing-food-supplies"
     ],
+    "work_ids": [
+      "dogs-public-source-review",
+      "dogs-map-placement-barriers",
+      "dogs-direct-field-work"
+    ],
     "most_useful_now": {
       "label": "Create placement capacity by fostering or adopting.",
       "action_ids": [
@@ -219,6 +225,7 @@
       "St. Mary's Pathways now provides low-barrier shelter options designed to accommodate people with pets, partners, family, or belongings.",
       "Stockton Streetdogs is also pursuing a Safe Grounds model intended to keep unhoused people and companion animals together while they move toward housing."
     ],
+    "why_icons": ["PawPrint", "DoorClosed", "ClipboardList"],
     "contributing_factors": [
       "Pet restrictions in some shelter and housing settings",
       "Limited pet-inclusive shelter and transitional capacity",
@@ -292,6 +299,9 @@
       "smcs-2026-06-17-pathways-open",
       "smcs-standing-pathways-pet-inclusive",
       "ssd-standing-food-supplies"
+    ],
+    "work_ids": [
+      "pet-shelter-public-source-review"
     ],
     "most_useful_now": {
       "label": "Help people stay with their pets while they move toward housing.",
@@ -373,6 +383,7 @@
       "Bread of Life currently reports distributing through more than 33 locations and serving about 7,000 people per month.",
       "Community Partnership for Families also provides neighborhood food distribution and fresh-food access through its Family Resource Centers."
     ],
+    "why_icons": ["PackageOpen", "Refrigerator", "Truck"],
     "contributing_factors": [
       "Limited cold-storage capacity",
       "Need for refrigerated transportation and temporary overflow storage",
@@ -455,6 +466,9 @@
       "bol-standing-donate-food",
       "bol-standing-donate-funds",
       "cpf-standing-food-access"
+    ],
+    "work_ids": [
+      "food-distribution-public-source-review"
     ],
     "most_useful_now": {
       "label": "Help expand the capacity to store and move donated food while it is available.",
@@ -539,6 +553,7 @@
       "Friends Outside identifies housing alongside education and employment as one of the three pillars of successful reentry.",
       "The prison puppy-raising program at California Health Care Facility in Stockton provides a related pre-release pathway centered on responsibility, service, and connection."
     ],
+    "why_icons": ["DoorOpen", "House", "Users"],
     "contributing_factors": [
       "Difficulty securing stable housing after incarceration",
       "Employment and income instability during reentry",
@@ -642,6 +657,9 @@
       "friends-outside-standing-donate-reentry",
       "canine-2024-chcf-prison-puppy"
     ],
+    "work_ids": [
+      "reentry-housing-public-source-review"
+    ],
     "most_useful_now": {
       "label": "Support reentry housing and work.",
       "action_ids": [
@@ -697,6 +715,7 @@
       "The Zeiter Navigation Center is another major St. Mary’s housing-navigation asset in downtown Stockton.",
       "Stockton leaders still identify homelessness as a major city challenge even as this new capacity comes online."
     ],
+    "why_icons": ["BedSingle", "DoorClosed", "KeyRound"],
     "contributing_factors": [
       "Persistent homelessness and housing instability",
       "Need for low-barrier shelter options",
@@ -794,6 +813,9 @@
       "stockton-2026-05-20-homelessness-still-challenge",
       "smcs-standing-housing-outcomes",
       "stockton-2026-08-17-homeless-options"
+    ],
+    "work_ids": [
+      "housing-pathways-public-source-review"
     ],
     "most_useful_now": {
       "label": "Support the local pathways that move people from shelter toward stable housing.",

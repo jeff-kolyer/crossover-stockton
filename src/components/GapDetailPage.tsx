@@ -5,18 +5,30 @@ import {
   ArrowRight,
   BarChart3,
   Building2,
+  BedSingle,
   CheckCircle2,
   ChevronDown,
+  ClipboardList,
+  Dog,
+  DoorClosed,
+  DoorOpen,
   ExternalLink,
   FileText,
   Gauge,
   Heart,
+  HeartHandshake,
   Home,
+  House,
+  KeyRound,
   MapPin,
+  PackageOpen,
   PawPrint,
   Plus,
+  Refrigerator,
+  Route,
   ShieldCheck,
   Stethoscope,
+  Truck,
   Users,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
@@ -24,11 +36,13 @@ import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
 import storiesData from "../data/stories.json";
+import workData from "../data/work.json";
+import type { LucideIcon } from "lucide-react";
 import { getActionIcon } from "../lib/actionIcons";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
 import { PublicMobileMenu } from "./PublicMobileMenu";
-import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
+import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -65,10 +79,28 @@ const orgs = orgsData as OrgRecord[];
 const actions = actionsData as PublicActionRecord[];
 const records = recordsData as EvidenceRecord[];
 const stories = storiesData as StoryRecord[];
+const work = workData as WorkRecord[];
 const activeGaps = gaps.filter((item) => item.active).sort((a, b) => a.rank - b.rank);
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
-const stateIcons = [Home, Plus, Users];
+const stateIcons = [BarChart3, Stethoscope, Users];
+const whyIconRegistry: Record<NonNullable<GapRecord["why_icons"]>[number], LucideIcon> = {
+  Dog,
+  Stethoscope,
+  House,
+  HeartHandshake,
+  PawPrint,
+  DoorClosed,
+  ClipboardList,
+  PackageOpen,
+  Refrigerator,
+  Truck,
+  DoorOpen,
+  Users,
+  BedSingle,
+  Route,
+  KeyRound,
+};
 
 export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
@@ -101,9 +133,13 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
-  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 6);
+  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 5);
   const actionCards = visibleActions(gap);
+  const orderedActionCards = orderActionsForBottom(actionCards, gap);
   const stateReport = stateReportCopy(gap);
+  const workItems = (gap.work_ids ?? [])
+    .map((id) => work.find((item) => item.id === id))
+    .filter((item): item is WorkRecord => Boolean(item));
   const relatedStories = gap.story_ids
     .map((id) => stories.find((story) => story.id === id && story.active))
     .filter((story): story is StoryRecord => Boolean(story))
@@ -126,126 +162,119 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
           nextGap={nextGap}
         />
         <div className="gap-refined-hero-grid">
-          <div className="gap-detail-copy gap-refined-copy">
-            <section className="gap-hero-summary-card" aria-label="Gap summary">
-              <span className="gap-level">{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
-              <h1>{gap.title}</h1>
-              <p>{gap.summary}</p>
-              <div className="gap-detail-meta" aria-label="Gap record metadata">
-                <span><FileText size={17} /> {gap.sources.length} sources</span>
-                <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
-                <span><Users size={18} /> {relatedOrgs.length} organizations</span>
-                <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
-                {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
-              </div>
-            </section>
-          </div>
-          <div className="gap-refined-photo">
-            {gap.artwork && <img src={gap.artwork} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />}
-          </div>
-
-          {recentUpdates.length > 0 && (
-            <section className="gap-refined-card gap-learning-card" id="recent-updates">
-              <div className="gap-card-heading">
-                <div>
-                  <h2>Latest updates</h2>
-                  <p>What’s happening now</p>
-                  <span>New evidence, activity, and changes around this gap.</span>
+          <div className="gap-refined-hero-intro">
+            <div className="gap-detail-copy gap-refined-copy">
+              <section className="gap-hero-summary-card" aria-label="Gap summary">
+                <span className="gap-level">{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
+                <h1>{gap.title}</h1>
+                <p className="gap-mobile-body">{gap.summary}</p>
+                <div className="gap-detail-meta" aria-label="Gap record metadata">
+                  <span><FileText size={17} /> {gap.sources.length} sources</span>
+                  <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
+                  <span><Users size={18} /> {relatedOrgs.length} organizations</span>
+                  <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
+                  {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
                 </div>
-                <button className="gap-card-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View all updates <ArrowRight size={15} /></button>
-              </div>
-              <div className="gap-update-list">
-                {recentUpdates.map((record) => {
-                  const Icon = updateIcon(record);
-                  const dateLabel = recordDateLabel(record);
-                  return (
-                    <RecentUpdateItem record={record} Icon={Icon} dateLabel={dateLabel} key={record.id} />
-                  );
-                })}
-              </div>
-            </section>
-          )}
+              </section>
+            </div>
+            <div className="gap-refined-photo">
+              {gap.artwork && <img src={gap.artwork} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />}
+            </div>
+          </div>
 
-          {stateItems.length > 0 && (
-            <section className="gap-state-card">
-              <div className="gap-state-copy">
-                <h2 className="gap-state-headline">Why this gap exists</h2>
-                <p className="gap-state-description">{stateReport.summary}</p>
-              </div>
-              <div className="gap-state-list">
-                {stateItems.map((item, index) => {
-                  const Icon = stateIcons[index % stateIcons.length];
-                  return (
-                    <article className="gap-state-item" key={item.label}>
-                      <Icon size={24} />
-                      <span>
-                        <strong>{item.label}</strong>
-                        <small>{item.detail}</small>
-                      </span>
-                      <b>{item.value}</b>
-                    </article>
-                  );
-                })}
-              </div>
-              {currentAsOf && <small className="gap-card-date">Data current as of {formatDate(currentAsOf)}</small>}
-            </section>
-          )}
+          <div className="gap-refined-left-column">
+            <div className="gap-refined-main-column">
+              <GapFlowSection gap={gap} />
+              {workItems.length > 0 && <WorkSection items={workItems} gap={gap} />}
+            </div>
 
-          <HowGapGetsStuck gap={gap} />
+            {relatedOrgs.length > 0 && (
+              <section className="gap-refined-card gap-responding-rail">
+                <div className="gap-card-heading">
+                  <div>
+                    <h2>Who's responding</h2>
+                    <p className="gap-mobile-body">Organizations working on this gap.</p>
+                  </div>
+                  <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("organizations")}>See all <ArrowRight size={14} /></button>
+                </div>
+                <div className="gap-refined-org-list">
+                  {relatedOrgs.map((org, index) => {
+                    const Icon = getOrgIcon(index);
+                    const href = org.website || org.source_url;
+                    const responderRole = roleForOrg(gap, org.id);
+                    return (
+                      <a className="gap-refined-org-row gap-info-card" href={href || undefined} target={href ? "_blank" : undefined} rel={href ? "noreferrer" : undefined} key={org.id}>
+                        <Icon size={28} />
+                        <span>
+                          <strong>{org.name}</strong>
+                          <small className="gap-mobile-body">{responderRole?.label || org.summary}</small>
+                          <em className="gap-info-card-link">Visit their website <ArrowRight size={14} /></em>
+                        </span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </section>
+            )}
+          </div>
+
+          <aside className="gap-refined-side-column">
+            {recentUpdates.length > 0 && (
+              <section className="gap-refined-card gap-learning-card" id="recent-updates">
+                <div className="gap-card-heading">
+                  <div>
+                    <h2>Latest updates</h2>
+                    <p className="gap-mobile-body">What’s happening now</p>
+                    <span>New evidence, activity, and changes around this gap.</span>
+                  </div>
+                </div>
+                <div className="gap-update-list">
+                  {recentUpdates.map((record) => {
+                    const Icon = updateIcon(record);
+                    const dateLabel = recordDateLabel(record);
+                    return (
+                      <RecentUpdateItem record={record} Icon={Icon} dateLabel={dateLabel} key={record.id} />
+                    );
+                  })}
+                </div>
+                <button className="gap-card-link gap-updates-footer-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View all updates <ArrowRight size={15} /></button>
+              </section>
+            )}
+
+          </aside>
         </div>
       </section>
 
       <section className="gap-refined-content">
         <div className="gap-refined-lower-columns">
-          {actionCards.length > 0 && (
-          <section className="gap-refined-column gap-refined-action-band">
-            <div className="gap-refined-action-copy">
-              <h2>What can I do right now?</h2>
-              <p>Here are the most useful ways to help right now.</p>
-            </div>
-            <div className="gap-refined-action-grid">
-              {actionCards.map((action) => <ActionCard action={action} onOpenAction={onOpenAction} key={action.id} />)}
-            </div>
-          </section>
-          )}
-
-          {relatedOrgs.length > 0 && (
-          <section className="gap-refined-column gap-refined-action-band gap-responding-card">
-            <div className="gap-refined-action-copy gap-responding-copy">
-              <h2>Who's responding</h2>
-              <p>These organizations are helping address this gap.</p>
-            </div>
-            <div className="gap-refined-org-list">
-              {relatedOrgs.map((org, index) => {
-                const Icon = getOrgIcon(index);
-                const href = org.website || org.source_url;
-                const responderRole = roleForOrg(gap, org.id);
-                return (
-                  <button className="gap-refined-org-row" type="button" key={org.id} onClick={() => openExternal(href)}>
-                    <Icon size={30} />
-                    <span>
-                      <strong>{org.name}</strong>
-                      <small>{responderRole?.label || org.summary}</small>
-                      <em>Visit their website <ArrowRight size={15} /></em>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </section>
+          {orderedActionCards.length > 0 && (
+            <section className="gap-refined-column gap-refined-action-band">
+              <div className="gap-refined-section-heading">
+                <h2>What can I do right now?</h2>
+                <p className="gap-mobile-body">Here are the most useful ways to help right now.</p>
+              </div>
+              <div className="gap-refined-action-grid">
+                <FeaturedActionCard action={orderedActionCards[0]} gap={gap} onOpenAction={onOpenAction} />
+                <div className="gap-refined-secondary-actions">
+                  {orderedActionCards.slice(1, 4).map((action) => <ActionCard action={action} onOpenAction={onOpenAction} key={action.id} />)}
+                </div>
+              </div>
+            </section>
           )}
 
           {relatedStories.length > 0 && (
             <section className="gap-refined-column gap-change-column">
-              <h2>Signs of change</h2>
-              <p>Recent updates show where things are improving.</p>
+              <div className="gap-refined-section-heading">
+                <h2>Signs of change</h2>
+                <p className="gap-mobile-body">Recent updates show where things are improving.</p>
+              </div>
               <div className="gap-refined-story-row">
                 {relatedStories.map((story) => (
                   <button className={`gap-refined-story-card ${story.image ? "" : "has-no-image"}`} type="button" onClick={() => onOpenStory(story.slug)} key={story.id}>
                     {story.image && <img src={story.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />}
                     <span>
                       <strong>{story.title}</strong>
-                      <small>{story.summary}</small>
+                      <small className="gap-mobile-body">{story.summary}</small>
                       <em>{formatDate(story.published_at)} · {story.source_label || "Source"}</em>
                     </span>
                   </button>
@@ -257,17 +286,15 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
 
         {representativeSources.length > 0 && (
           <section className="gap-refined-sources" id="gap-sources">
-            <h2>Evidence & sources</h2>
-            <div className="gap-refined-source-row">
-              {representativeSources.map((source) => (
-                <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
-                  <FileText size={28} />
-                  <span>
-                    <strong>{source.title || source.publisher || "Source"}</strong>
-                    <small>{formatSourceDate(source)} · {source.publisher || "Public source"}</small>
-                  </span>
-                </a>
-              ))}
+            <div className="gap-refined-section-heading">
+              <h2>Sources &amp; evidence</h2>
+            </div>
+            <div className="gap-refined-sources-main">
+              <FileText size={30} aria-hidden="true" />
+              <span>
+                <strong>Sources and evidence</strong>
+                <small className="gap-mobile-body">{gap.sources.length} sources inform this gap, including local reports, organizational updates, and news coverage.</small>
+              </span>
             </div>
             <button className="gap-card-link" type="button" onClick={() => onOpenSources(gap.slug)}>View all sources <ArrowRight size={15} /></button>
           </section>
@@ -322,14 +349,16 @@ function RecentUpdateItem({
 
   const content = (
     <>
-      <time className="gap-update-date">{dateLabel.date}</time>
-      <span className="gap-update-card-body">
+      <span className="gap-update-meta">
+        <time className="gap-update-date">{dateLabel.date}</time>
         <span className="gap-update-kicker">
           <Icon className="gap-update-type-icon" size={22} />
           <em>{updateTypeLabel(record)}</em>
         </span>
+      </span>
+      <span className="gap-update-card-body">
         <strong>{record.title}</strong>
-        <p>{record.summary}</p>
+                      <p className="gap-mobile-body">{record.summary}</p>
         {sourceAction}
       </span>
     </>
@@ -401,86 +430,156 @@ function PublicNav({ onNavigate, onOpenAbout }: Pick<GapDetailPageProps, "onNavi
 function ActionCard({ action, onOpenAction }: { action: PublicActionRecord; onOpenAction: (action: PublicActionRecord) => void }) {
   const Icon = getActionIcon(action);
   return (
-    <button className="gap-refined-action-card" type="button" onClick={() => onOpenAction(action)}>
+    <button className="gap-refined-action-card gap-info-card action-card" type="button" onClick={() => onOpenAction(action)}>
       <Icon size={32} />
       <strong>{shortActionTitle(action.title)}</strong>
-      <span>{action.summary}</span>
-      <small>{action.source_url ? actionLinkLabel(action) : "Source not verified" } <ArrowRight size={14} /></small>
+      <span className="gap-mobile-body">{action.summary}</span>
+      <small className="gap-info-card-link">{action.source_url ? actionLinkLabel(action) : "Source not verified" } <ArrowRight size={14} /></small>
     </button>
   );
 }
 
+function FeaturedActionCard({
+  action,
+  gap,
+  onOpenAction,
+}: {
+  action: PublicActionRecord;
+  gap: GapRecord;
+  onOpenAction: (action: PublicActionRecord) => void;
+}) {
+  return (
+    <button className="gap-refined-featured-action" type="button" onClick={() => onOpenAction(action)}>
+      <img src={gap.thumbnail_image || gap.artwork} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      <span className="gap-refined-featured-action-copy">
+        <small>Featured action</small>
+        <strong>{shortActionTitle(action.title)}</strong>
+        <span className="gap-mobile-body">{action.summary} Fostering gives a dog a safe place to be while they wait for a permanent home.</span>
+        <em>{shortActionTitle(action.title)} <ArrowRight size={15} /></em>
+      </span>
+    </button>
+  );
+}
+
+function WorkSection({ items, gap }: { items: WorkRecord[]; gap: GapRecord }) {
+  return (
+    <section className="gap-work-section">
+      <div className="gap-work-heading">
+        <span>Crossover's work</span>
+        <h2>What we're doing</h2>
+        <p className="gap-mobile-body">We're researching the causes, listening to local experts, and identifying practical ways to help close this gap.</p>
+      </div>
+      <div className="gap-work-list">
+        {items.map((item, index) => {
+          const Icon = workIcon(item.type);
+          return (
+            <article className="gap-work-item" key={item.id}>
+              <span className="gap-work-icon"><Icon size={22} /></span>
+              <div>
+                <strong>{item.title}</strong>
+                <p className="gap-mobile-body">{item.summary}</p>
+              </div>
+              <span className={`gap-work-status is-${item.status}`}>{workStatusLabel(item.status)}</span>
+              <span className="gap-work-index" aria-hidden="true">{index + 1}</span>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function workIcon(type: WorkRecord["type"]) {
+  if (type === "investigation") return MapPin;
+  if (type === "field_work") return Users;
+  return FileText;
+}
+
+function workStatusLabel(status: WorkRecord["status"]) {
+  if (status === "in_progress") return "In progress";
+  if (status === "next") return "Next";
+  return "Completed";
+}
+
 function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
-  const title = gap.id === "dogs-safe-placement" ? "How dogs get stuck" : "How this gap gets stuck";
+  const icons = [Home, Stethoscope, PawPrint, Heart];
+  const steps = gap.what_we_are_seeing.slice(0, 4).map((point, index) => {
+    const parts = point.split(/,\s+|:\s+/);
+    const label = parts.length > 1 ? `${parts[0]}.` : compactInsightTitle(point);
+    const text = parts.length > 1 ? parts.slice(1).join(", ") : point;
+    return { icon: icons[index] ?? Heart, label, text };
+  });
+
+  return (
+    <section className="gap-stuck-section">
+      <div className="gap-card-heading">
+        <span>What we're seeing</span>
+      </div>
+      <div className="gap-stuck-flow">
+        {steps.map((step, index) => (
+          <article className="gap-stuck-card" key={step.label}>
+            <step.icon size={32} aria-hidden="true" />
+            <div className="gap-stuck-main">
+              <h3>{step.label}</h3>
+              <p className="gap-mobile-body">{step.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function GapFlowSection({ gap }: { gap: GapRecord }) {
   const factors = gap.contributing_factors;
+  const fallbackIcons = ["Dog", "Stethoscope", "HeartHandshake"] as const;
   const steps = [
     {
-      stage: "Input",
-      label: gap.id === "dogs-safe-placement" ? "More dogs enter care" : "Need keeps entering the system",
+      icon: whyIconRegistry[gap.why_icons?.[0] ?? fallbackIcons[0]],
+      label: gap.id === "dogs-safe-placement" ? "More dogs keep arriving" : "Need keeps entering the system",
       text: gap.what_we_are_seeing[0] || gap.current_state || gap.summary,
       evidence: gap.current_state_items?.[0],
     },
     {
-      stage: "Bottleneck",
-      label: gap.id === "dogs-safe-placement" ? "Placement pathways narrow" : "Available pathways narrow",
+      icon: whyIconRegistry[gap.why_icons?.[1] ?? fallbackIcons[1]],
+      label: gap.id === "dogs-safe-placement" ? "Care and foster space are limited" : "Available pathways narrow",
       text: factors.length
         ? `${factors.map(compactFactor).join(". ")}.`
         : gap.what_we_are_seeing[1] || gap.summary,
       factors,
     },
     {
-      stage: "Outcome",
-      label: gap.id === "dogs-safe-placement" ? "Shelters stay full" : "The gap persists",
+      icon: whyIconRegistry[gap.why_icons?.[2] ?? fallbackIcons[2]],
+      label: gap.id === "dogs-safe-placement" ? "Safe placements cannot keep up" : "The gap persists",
       text: gap.what_we_are_seeing[1] || gap.current_state || gap.summary,
       evidence: gap.current_state_items?.[2] || gap.current_state_items?.[1],
     },
   ];
 
   return (
-    <section className="gap-stuck-section">
-      <div className="gap-card-heading">
-        <span>How it works</span>
-        <h2>{title}</h2>
-        <p>{gap.current_state || gap.summary}</p>
+    <section className="gap-flow-section">
+      <div className="gap-flow-heading">
+        <span>{gap.id === "dogs-safe-placement" ? "Why dogs get stuck" : "Why this gap gets stuck"}</span>
       </div>
-      <div className="gap-stuck-flow">
-        {steps.map((step, index) => (
-          <article className={`gap-stuck-card ${index === 1 ? "is-bottleneck" : ""}`} key={step.label}>
-            <div className="gap-stuck-step-heading">
-              <b>{index + 1}</b>
-              <span>{step.stage}</span>
+      <div className="gap-flow-steps">
+        {steps.map((step) => (
+          <article key={step.label}>
+            <step.icon className="gap-flow-icon" size={30} aria-hidden="true" />
+            <div>
+              <strong>{step.label}</strong>
+              <p className="gap-mobile-body">{step.text}</p>
             </div>
-            <div className="gap-stuck-main">
-              <h3>{step.label}</h3>
-              <p>{step.text}</p>
-            </div>
-            {(step.evidence || (step.factors && step.factors.length > 0)) && (
-              <div className="gap-stuck-evidence">
-                {step.evidence && (
-                  <dl>
-                    <div>
-                      <dt>{step.evidence.label}</dt>
-                      <dd>{step.evidence.value}</dd>
-                    </div>
-                  </dl>
-                )}
-                {step.factors && step.factors.length > 0 && (
-                  <>
-                    <strong>{step.factors.length} constraints</strong>
-                    <ul>
-                      {step.factors.map((factor) => (
-                        <li key={factor}>{compactFactor(factor)}</li>
-                      ))}
-                    </ul>
-                  </>
-                )}
-              </div>
-            )}
           </article>
         ))}
       </div>
     </section>
   );
+}
+
+function compactInsightTitle(text: string) {
+  const words = text.replace(/[.!?]+$/, "").split(/\s+/);
+  if (words.length <= 7) return text.replace(/[.!?]+$/, "");
+  return `${words.slice(0, 7).join(" ")}…`;
 }
 
 function stateReportCopy(gap: GapRecord) {
@@ -556,6 +655,12 @@ function visibleActions(gap: GapRecord) {
   const primary = relatedActions.filter((action) => primaryIds.has(action.id));
   const supporting = relatedActions.filter((action) => !primaryIds.has(action.id) && action.currentness !== "unverified" && action.featured);
   return [...primary, ...supporting].slice(0, 4);
+}
+
+function orderActionsForBottom(actionCards: PublicActionRecord[], gap: GapRecord) {
+  if (gap.id !== "dogs-safe-placement") return actionCards;
+  const preferredOrder = ["foster-a-dog", "doggie-day-out", "adopt-a-dog", "donate-dog-supplies"];
+  return [...actionCards].sort((a, b) => preferredOrder.indexOf(a.id) - preferredOrder.indexOf(b.id));
 }
 
 function roleForOrg(gap: GapRecord, organizationId: string): ResponderRole | undefined {

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "dogs-public-source-review",
+    "gap_id": "dogs-safe-placement",
+    "title": "Public-source review",
+    "summary": "We reviewed local reports and organizational information to understand the gap.",
+    "status": "completed",
+    "type": "research",
+    "started_at": "2026-08-20",
+    "completed_at": "2026-08-27",
+    "updated_at": "2026-08-27",
+    "record_ids": [
+      "crossover-2026-08-27-dog-placement-field-investigation"
+    ]
+  },
+  {
+    "id": "dogs-map-placement-barriers",
+    "gap_id": "dogs-safe-placement",
+    "title": "Map barriers to fostering and adoption",
+    "summary": "We're tracing the housing, cost, veterinary, and care constraints that keep willing people from helping.",
+    "status": "in_progress",
+    "type": "investigation",
+    "started_at": "2026-08-27",
+    "updated_at": "2026-09-11",
+    "record_ids": [
+      "crossover-2026-09-11-dog-crisis-cost-of-living"
+    ]
+  },
+  {
+    "id": "dogs-direct-field-work",
+    "gap_id": "dogs-safe-placement",
+    "title": "Direct conversations and field visits",
+    "summary": "Speak with local organizations and see where the practical barriers occur.",
+    "status": "next",
+    "type": "field_work",
+    "updated_at": "2026-10-02",
+    "record_ids": []
+  },
+  {
+    "id": "pet-shelter-public-source-review",
+    "gap_id": "pet-inclusive-shelter",
+    "title": "Public-source review",
+    "summary": "We'll review local reports and organizational information to understand the gap.",
+    "status": "next",
+    "type": "research",
+    "record_ids": []
+  },
+  {
+    "id": "food-distribution-public-source-review",
+    "gap_id": "food-distribution-capacity",
+    "title": "Public-source review",
+    "summary": "We'll review local reports and organizational information to understand the gap.",
+    "status": "next",
+    "type": "research",
+    "record_ids": []
+  },
+  {
+    "id": "reentry-housing-public-source-review",
+    "gap_id": "reentry-housing-instability",
+    "title": "Public-source review",
+    "summary": "We'll review local reports and organizational information to understand the gap.",
+    "status": "next",
+    "type": "research",
+    "record_ids": []
+  },
+  {
+    "id": "housing-pathways-public-source-review",
+    "gap_id": "low-barrier-housing-pathways",
+    "title": "Public-source review",
+    "summary": "We'll review local reports and organizational information to understand the gap.",
+    "status": "next",
+    "type": "research",
+    "record_ids": []
+  }
+]
