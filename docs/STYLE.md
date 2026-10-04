@@ -165,7 +165,7 @@ Body copy should generally not become smaller simply because it appears inside a
 
 At full-width desktop sizes, gap-detail pages use the following shared type scale:
 
-- Hero description: `1.15rem` with approximately `1.45` line-height.
+- Hero description: `1.1rem` with approximately `1.45` line-height.
 - Ordinary gap-page body copy: `0.95rem` with approximately `1.45` line-height.
 - UI Strong titles in Why, What, and Who cards: `1rem` with approximately `1.2` line-height.
 - Update summaries and action descriptions use the same `0.95rem` Body treatment in the full-width layout.

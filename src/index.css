@@ -12824,7 +12824,7 @@ p {
    The updates rail intentionally keeps its denser editorial scale. */
 @media (min-width: 1281px) {
   .gap-detail-page .gap-hero-summary-card p {
-    font-size: 1.15rem !important;
+    font-size: 1.1rem !important;
     line-height: 1.45 !important;
   }
 
@@ -12839,7 +12839,7 @@ p {
   }
 
   .gap-detail-page .gap-refined-copy .gap-hero-summary-card p {
-    font-size: 1.15rem !important;
+    font-size: 1.1rem !important;
     line-height: 1.45 !important;
   }
 
