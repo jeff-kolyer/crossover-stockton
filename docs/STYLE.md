@@ -161,6 +161,18 @@ Default explanatory copy.
 
 Body copy should generally not become smaller simply because it appears inside a card.
 
+### Gap Detail Full-Width Type
+
+At full-width desktop sizes, gap-detail pages use the following shared type scale:
+
+- Hero description: `1.15rem` with approximately `1.45` line-height.
+- Ordinary gap-page body copy: `0.95rem` with approximately `1.45` line-height.
+- UI Strong titles in Why, What, and Who cards: `1rem` with approximately `1.2` line-height.
+- Update summaries and action descriptions use the same `0.95rem` Body treatment in the full-width layout.
+- The compact desktop updates rail may retain its denser presentation only when it is intentionally a compact sidebar; it should not establish a smaller general paragraph role.
+
+These values are semantic roles, not section-specific exceptions. The hero description, explanatory cards, work rows, responding-card descriptions, update summaries, and action descriptions should remain visually coherent.
+
 ### Mobile Body Consistency
 
 At narrow / mobile widths, normal explanatory copy should converge on one shared Body treatment rather than shrinking independently by component.

@@ -12745,6 +12745,11 @@ p {
   padding: 16px 20px 18px;
 }
 
+/* The Why panel should transition directly into the work section. */
+.gap-refined-hero-grid .gap-work-section {
+  border-top: 0;
+}
+
 .gap-refined-hero-grid .gap-flow-heading {
   border: 0 !important;
   border-bottom: 0 !important;
@@ -12808,6 +12813,51 @@ p {
   color: #4b5560 !important;
   font-size: var(--type-body-size);
   line-height: 1.4;
+}
+
+/* Use the full-size paragraph treatment in the desktop/full layout. */
+.gap-refined-hero-grid .gap-flow-steps p {
+  font-size: 0.95rem;
+}
+
+/* Full-width gap pages use one consistent body size in the main content column.
+   The updates rail intentionally keeps its denser editorial scale. */
+@media (min-width: 1281px) {
+  .gap-detail-page .gap-hero-summary-card p {
+    font-size: 1.15rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .gap-detail-page .gap-refined-left-column .gap-mobile-body,
+  .gap-detail-page .gap-refined-copy .gap-mobile-body,
+  .gap-detail-page .gap-refined-left-column .gap-work-item p,
+  .gap-detail-page .gap-learning-card .gap-update-compact p,
+  .gap-detail-page .gap-refined-featured-action-copy span,
+  .gap-detail-page .gap-refined-action-card span {
+    font-size: 0.95rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .gap-detail-page .gap-refined-copy .gap-hero-summary-card p {
+    font-size: 1.15rem !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Card titles share the same emphasis across Why, What, and Who. */
+  .gap-detail-page .gap-work-item strong,
+  .gap-detail-page .gap-refined-org-row strong,
+  .gap-detail-page .gap-refined-left-column .gap-responding-rail .gap-info-card > span > strong {
+    font-size: 1rem !important;
+    font-weight: 760 !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Section descriptions use the same body treatment in the main column. */
+  .gap-detail-page .gap-refined-responding-rail .gap-card-heading p,
+  .gap-detail-page .gap-work-heading p {
+    font-size: 0.95rem !important;
+    line-height: 1.45 !important;
+  }
 }
 
 @media (max-width: 900px) {
