@@ -44,6 +44,8 @@ React components import that data directly, transform it into view models, and r
 * `src/lib/` — shared utilities for filtering, image preloading, scroll effects, and other helpers
 * `src/types.ts` — shared TypeScript types for records, gaps, stories, organizations, tags, and actions
 * `src/index.css` — site-wide styling
+* `src/styles/design-system.css` — shared card and typography primitives
+* `docs/STYLE.md` — the authoritative visual and typography rules
 * `public/images/` — hero images, organization assets, logos, and page-specific imagery
 
 Static assets are referenced with root-relative paths such as:
@@ -53,6 +55,27 @@ Static assets are referenced with root-relative paths such as:
 ```
 
 Files placed in `public/` are copied directly into the production build by Vite.
+
+## Styling rules
+
+The site uses plain CSS with shared semantic tokens. Inter is bundled locally so the
+sans-serif typography is consistent across platforms, with
+Georgia reserved for editorial display headings.
+
+Ordinary body text is always `1rem` / `16px`, regular weight, `1.5` line-height, and
+`#292D2A`. Headings and strong UI text use `#171917`; secondary metadata uses
+`#4B504D`; borders use `#E2E7E4`. The canonical font weights are `400`, `500`, `600`,
+and `700`.
+
+Hero body copy is intentionally larger on larger screens. At mobile widths it may use
+the shared body size for readability. The gap pages retain their semantic status colors
+and explanatory blue treatment; those are intentional exceptions, not alternate body
+text colors.
+
+When changing styles, update the shared token or semantic component rule rather than
+appending a late override. Ordinary paragraphs must not receive page-specific font
+sizes, colors, or line-heights. See [`docs/STYLE.md`](docs/STYLE.md) for the complete
+role and component specification.
 
 ## Development
 

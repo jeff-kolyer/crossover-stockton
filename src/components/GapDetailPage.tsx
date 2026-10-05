@@ -107,7 +107,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
 
   if (!gap) {
     return (
-      <main className="gap-detail-page gap-refined-page">
+      <main className="gap-detail-page gap-page">
         <section className="gap-refined-hero">
           <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
           <div className="gap-detail-copy gap-refined-copy">
@@ -150,7 +150,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
   const nextGap = gapIndex >= 0 && gapIndex < activeGaps.length - 1 ? activeGaps[gapIndex + 1] : undefined;
 
   return (
-    <main className={`gap-detail-page gap-refined-page is-${gap.status}`}>
+    <main className={`gap-detail-page gap-page is-${gap.status}`}>
       <section className="gap-refined-hero">
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <GapPageToolbar
@@ -207,7 +207,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                         <Icon size={28} />
                         <span>
                           <strong>{org.name}</strong>
-                          <small className="gap-mobile-body">{responderRole?.label || org.summary}</small>
+                          <span className="gap-mobile-body">{responderRole?.label || org.summary}</span>
                           <em className="gap-info-card-link">Visit their website <ArrowRight size={14} /></em>
                         </span>
                       </a>
@@ -274,7 +274,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                     {story.image && <img src={story.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />}
                     <span>
                       <strong>{story.title}</strong>
-                      <small className="gap-mobile-body">{story.summary}</small>
+                      <span className="gap-mobile-body">{story.summary}</span>
                       <em>{formatDate(story.published_at)} · {story.source_label || "Source"}</em>
                     </span>
                   </button>
@@ -293,7 +293,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
               <FileText size={30} aria-hidden="true" />
               <span>
                 <strong>Sources and evidence</strong>
-                <small className="gap-mobile-body">{gap.sources.length} sources inform this gap, including local reports, organizational updates, and news coverage.</small>
+                <span className="gap-mobile-body">{gap.sources.length} sources inform this gap, including local reports, organizational updates, and news coverage.</span>
               </span>
             </div>
             <button className="gap-card-link" type="button" onClick={() => onOpenSources(gap.slug)}>View all sources <ArrowRight size={15} /></button>

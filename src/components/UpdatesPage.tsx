@@ -29,7 +29,7 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
   const lastUpdated = latestCheckedDate(updateRecords);
 
   return (
-    <main className="gap-updates-page gap-refined-page">
+    <main className="gap-updates-page gap-page">
       <PublicNav onNavigate={onNavigate} />
 
       <section className="gap-history-header">

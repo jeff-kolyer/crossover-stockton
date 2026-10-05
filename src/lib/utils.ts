@@ -1,10 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 import { MODES } from "../constants";
 import type { FeedRecord, ModeId, RecordKind, TagDefinition } from "../types";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return clsx(inputs);
 }
 
 export function modeToKind(mode: ModeId): RecordKind {

@@ -139,7 +139,7 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
             <ActionIcon kind={recommendedAction.kind} />
             <span>
               <strong>{recommendedAction.label}</strong>
-              <small>{recommendedAction.summary}</small>
+              <span className="crossover-body">{recommendedAction.summary}</span>
               <em>{formatActionMeta(recommendedAction)}</em>
             </span>
           </button>
@@ -176,7 +176,7 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
                   <CheckCircle2 size={17} />
                   <span>
                     <strong>{outcome.label}</strong>
-                    {outcome.note && <small>{outcome.note}</small>}
+                    {outcome.note && <span className="crossover-body">{outcome.note}</span>}
                   </span>
                 </div>
               ))}

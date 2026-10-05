@@ -6,6 +6,11 @@ Do not style text or components based on the specific words being displayed. Cho
 
 The goal is a recognizable Crossover system: editorial where it should feel human and civic, functional where it should help people scan and act, and restrained enough that status colors and real content retain meaning.
 
+The implementation uses the locally bundled Inter variable font for sans-serif text and
+Georgia for editorial serif display text. Shared values live in `src/index.css`; the
+shared component primitives live in `src/styles/design-system.css`. Do not add a new
+typography token when an existing semantic role fits.
+
 ---
 
 ## Typography
@@ -19,6 +24,8 @@ The largest editorial headline on a page. Used for main page heroes and page tit
 - Display Serif
 
 - Bold / strong weight
+
+- Use the shared `700` bold weight
 
 - Used sparingly
 
@@ -43,6 +50,8 @@ Small uppercase text that establishes context for the heading below it.
 - Sans serif
 
 - Bold
+
+- Use the shared `700` bold weight
 
 - Uppercase
 
@@ -80,6 +89,8 @@ Primary heading for a content section.
 - Sans serif
 
 - Bold
+
+- Use the shared `700` bold weight
 
 - Large
 
@@ -119,6 +130,8 @@ Strong titles inside cards, rows, lists, and feed items.
 
 - Semibold or bold
 
+- Use the shared `600` semibold or `700` bold weight
+
 - Normal capitalization
 
 **Examples**
@@ -145,7 +158,13 @@ Default explanatory copy.
 
 - Regular
 
-- Approximately `1rem`
+- Use the shared `400` regular weight
+
+- Exactly `1rem` / `16px` on desktop and mobile
+
+- Color `#292D2A`
+
+- Line-height `1.5`
 
 - Comfortable line height
 
@@ -161,14 +180,42 @@ Default explanatory copy.
 
 Body copy should generally not become smaller simply because it appears inside a card.
 
+All ordinary paragraphs share this Body treatment across every route. Component, card,
+and breakpoint styles must not introduce alternate paragraph sizes or colors.
+
+Use normal paragraph or span markup for ordinary prose. Reserve the HTML `<small>`
+element for genuinely secondary metadata, labels, dates, counts, and source details;
+do not use it for organization descriptions, story summaries, or explanations.
+
+### Hero Body
+
+Hero explanatory copy is the intentional larger exception to the shared Body role.
+
+- Sans serif
+
+- Regular
+
+- `1.18rem`
+
+- Line-height `1.45`
+
+- White on image-based hero sections
+
+- Gap-detail hero copy may use the intentional gap blue treatment instead of white
+
+- At mobile widths, hero summaries may converge to the shared `1rem` Body size so
+  the layout remains readable; the hero role remains distinct on larger screens.
+
+Hero Body is used for hero summaries only. It is not a general paragraph override.
+
 ### Gap Detail Full-Width Type
 
 At full-width desktop sizes, gap-detail pages use the following shared type scale:
 
-- Hero description: `1.1rem` with approximately `1.45` line-height.
-- Ordinary gap-page body copy: `0.95rem` with approximately `1.45` line-height.
+- Hero description: Hero Body treatment, `1.18rem` with `1.45` line-height.
+- Ordinary gap-page body copy: shared Body treatment, `1rem` with `1.5` line-height.
 - UI Strong titles in Why, What, and Who cards: `1rem` with approximately `1.2` line-height.
-- Update summaries and action descriptions use the same `0.95rem` Body treatment in the full-width layout.
+- Update summaries and action descriptions use the same `1rem` Body treatment in the full-width layout.
 - The compact desktop updates rail may retain its denser presentation only when it is intentionally a compact sidebar; it should not establish a smaller general paragraph role.
 
 These values are semantic roles, not section-specific exceptions. The hero description, explanatory cards, work rows, responding-card descriptions, update summaries, and action descriptions should remain visually coherent.
@@ -208,7 +255,9 @@ At narrow / mobile widths, normal explanatory copy should converge on one shared
 
 A mobile component may change layout, spacing, truncation, or card treatment, but it should not create a smaller paragraph style.
 
-The hero summary is ordinary explanatory copy, not a special display subtitle. On mobile it should therefore use the shared Body treatment.
+The hero summary is the one intentional larger body role on larger screens. On mobile,
+it may use the shared Body size for readability and layout stability; it must still use
+the shared body family, weight, color treatment, and line-height rules.
 
 ---
 
@@ -376,6 +425,21 @@ NEWS · SEP 29, 2026
 
 Color should communicate role, not merely decorate the page.
 
+### Neutral Text and Surface Colors
+
+These are the authoritative neutral colors for the site:
+
+- Dark ink / headings / strong UI text: `#171917`
+- Ordinary Body text: `#292D2A`
+- Muted metadata and supporting text: `#4B504D`
+- Borders and dividers: `#E2E7E4`
+
+Ordinary paragraphs must use `#292D2A` regardless of the section or component where
+they appear. Use `#4B504D` for genuinely secondary metadata such as dates, counts,
+source labels, and timestamps. Hero Body text is an intentional exception: it uses
+white over image backgrounds, or the established gap blue treatment on gap-detail
+heroes. Text on dark image/story surfaces may also use white for contrast.
+
 ### Status Colors
 
 Reserved for urgency or state.
@@ -424,7 +488,8 @@ This color is intentionally non-committal. It adds enough visual structure to ma
 
 - Space below icon circle: approximately `12px`
 
-Barely Blue has **no status meaning**.
+Barely Blue has **no status meaning**. It remains an intentional gap-page color for
+explanatory structure and system mechanics.
 
 Do not extend Barely Blue to ordinary links, buttons, status labels, or unrelated cards. Its meaning should remain: **explanation / system mechanics**.
 
@@ -837,3 +902,19 @@ The renderer / CSS should implement these roles as reusable tokens or shared cla
 Shared sizing relationships must be implemented through the same tokens or shared classes: work-status pills use button-label typography; work-row icons use contextual organization-icon sizing; section headings, row titles, and descriptions use Section Title, UI Strong, and Body respectively. Do not duplicate matching values in section-specific rules.
 
 At mobile breakpoints, do not create component-specific paragraph sizes. A single shared mobile Body token should drive hero summaries, explanatory paragraphs, update summaries, organization descriptions, action descriptions, work descriptions, and story / sign descriptions. Component media queries may change layout and spacing, but ordinary Body copy should remain typographically consistent.
+
+### CSS Maintenance Rule
+
+- Use the canonical weight scale only: `400` regular, `500` medium, `600` semibold,
+  and `700` bold.
+- Use `--type-body-size`, `--type-body-color`, and `--type-body-leading` for ordinary
+  prose. Do not create page- or component-specific body aliases.
+- Use `--type-hero-body-size` only for large-screen hero summaries. Use the shared Body
+  role at mobile widths when the layout requires it.
+- Use `#4B504D` only for genuinely secondary metadata; ordinary paragraphs use
+  `#292D2A`.
+- Keep gap severity colors and the explanatory gap blue treatment; those colors carry
+  meaning and are not part of the neutral paragraph system.
+- Remove superseded declarations instead of appending correction blocks. Layout rules
+  may remain component-specific, but recurring typography must come from shared roles.
+- Keep keyboard focus visible with the shared `:focus-visible` treatment.

@@ -31,7 +31,7 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
 
   if (!gap) {
     return (
-      <main className="gap-updates-page gap-refined-page">
+      <main className="gap-updates-page gap-page">
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <section className="gap-history-header">
           <button className="gap-history-back" type="button" onClick={() => onNavigate("reality")}>
@@ -46,7 +46,7 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
 
   const relatedRecords = latestUpdates(gap, recordsForGap(gap));
   return (
-    <main className={`gap-updates-page gap-refined-page is-${gap.status}`}>
+    <main className={`gap-updates-page gap-page is-${gap.status}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
 
       <section className="gap-history-header gap-specific-history-header">

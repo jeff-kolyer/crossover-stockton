@@ -35,7 +35,7 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
 
   if (!gap) {
     return (
-      <main className="gap-updates-page gap-refined-page">
+      <main className="gap-updates-page gap-page">
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <section className="gap-history-header">
           <button className="gap-history-back" type="button" onClick={() => onNavigate("reality")}>
@@ -52,7 +52,7 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
 
   return (
-    <main className={`gap-updates-page gap-refined-page is-${gap.status}`}>
+    <main className={`gap-updates-page gap-page is-${gap.status}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
 
       <section className="gap-history-header">

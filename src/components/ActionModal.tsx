@@ -156,7 +156,7 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
                 <span><Users size={28} /></span>
                 <p>
                   <strong>{provider}</strong>
-                  {org?.summary && <small>{org.summary}</small>}
+                  {org?.summary && <span className="crossover-body">{org.summary}</span>}
                 </p>
               </div>
             </section>
@@ -183,7 +183,7 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
             <Info size={19} />
             <span>
               <strong>No field reports yet.</strong>
-              <small>We&apos;ll add notes here as this action is checked in the field.</small>
+              <span className="crossover-body">We&apos;ll add notes here as this action is checked in the field.</span>
             </span>
           </div>
         </section>

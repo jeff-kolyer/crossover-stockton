@@ -62,6 +62,28 @@ function canonicalPathname(pathname: string) {
   return pathname === "/" || pathname.endsWith("/") ? pathname : `${pathname}/`;
 }
 
+function titleForRoute(route: RouteState) {
+  if (route.page === "gapDetail" || route.page === "gapUpdates" || route.page === "gapSources") {
+    const gap = gaps.find((item) => item.slug === route.gapSlug);
+    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : "Reality";
+    return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
+  }
+  if (route.page === "storyDetail") {
+    const story = stories.find((item) => item.slug === route.storySlug);
+    return story ? `${story.title} | Crossover Stockton` : "Stories | Crossover Stockton";
+  }
+  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">, string> = {
+    home: "Crossover Stockton",
+    reality: "Reality | Crossover Stockton",
+    connection: "Connection | Crossover Stockton",
+    action: "Action | Crossover Stockton",
+    updates: "Updates | Crossover Stockton",
+    about: "About | Crossover Stockton",
+    organizations: "Organizations | Crossover Stockton",
+  };
+  return titles[route.page];
+}
+
 export default function App() {
   const [route, setRoute] = useState<RouteState>(() => routeFromPathname(window.location.pathname));
   const [selectedAction, setSelectedAction] = useState<PublicActionRecord | null>(null);
@@ -85,6 +107,10 @@ export default function App() {
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
+
+  useEffect(() => {
+    document.title = titleForRoute(route);
+  }, [route]);
 
   function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">) {
     const nextPath = ROUTE_PATHS[page];
