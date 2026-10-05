@@ -10250,9 +10250,10 @@ p {
 
 .gap-page-selector > span {
   margin-right: 7px;
-  color: #465048;
-  font-size: 0.92rem;
-  font-weight: 600;
+  color: var(--type-body-color);
+  font-size: var(--type-link-size);
+  font-weight: var(--type-link-weight);
+  line-height: var(--type-link-leading);
 }
 
 .gap-page-selector button {
@@ -10456,7 +10457,8 @@ p {
 
   .gap-page-back,
   .gap-page-selector > span {
-    font-size: 0.74rem;
+    font-size: var(--type-link-size);
+    line-height: var(--type-link-leading);
   }
 
   .gap-refined-hero-grid {
