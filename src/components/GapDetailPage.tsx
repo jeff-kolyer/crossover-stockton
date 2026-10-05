@@ -133,7 +133,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
-  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 5);
+  const recentUpdates = latestUpdates(gap, relatedRecords).slice(0, 6);
   const actionCards = visibleActions(gap);
   const orderedActionCards = orderActionsForBottom(actionCards, gap);
   const stateReport = stateReportCopy(gap);
