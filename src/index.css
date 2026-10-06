@@ -3208,8 +3208,7 @@ p {
   margin: 0 -14px 2px;
   overflow: hidden;
   border-radius: 0;
-  /* Keep the cold-load state visually continuous with the white card. */
-  background: transparent;
+  background: #efe8db;
 }
 
 .gap-card-image-frame img {
