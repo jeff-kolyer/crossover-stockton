@@ -188,6 +188,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                     src={thumbnailImage}
                     alt=""
                     loading={index < 4 ? "eager" : "lazy"}
+                    fetchPriority={index < 4 ? "high" : "auto"}
                     decoding="sync"
                     onError={(event) => {
                       if (gap.artwork && event.currentTarget.src !== new URL(gap.artwork, window.location.origin).href) {
