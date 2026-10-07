@@ -318,7 +318,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
           {activeOrgs.map((org, index) => {
             const Icon = getOrgIcon(index);
             return (
-            <button className="org-card" key={org.id} type="button" onClick={onOpenAbout}>
+            <button className="org-card" key={org.id} type="button" onClick={() => onNavigate("organizations")}>
               <Icon size={34} />
               <strong>{org.name}</strong>
               <span>{org.summary}</span>
