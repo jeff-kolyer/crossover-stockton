@@ -1012,5 +1012,65 @@
       "homelessness_planning",
       "capacity_expansion"
     ]
+  },
+  {
+    "id": "ssd-2026-07-30-canine-campus-proposal",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": "2026-07-30",
+    "record_type": "planning_update",
+    "trust": "source_supported",
+    "title": "Stockton Street Dogs proposes a Canine Campus",
+    "summary": "Stockton Street Dogs is working with city officials on a proposed Canine Campus that could provide a safe haven for hundreds of stray dogs at a time. The proposal describes overflow capacity for Stockton Animal Services, dedicated spay/neuter recovery and sick-dog care, 24/7 staffing, and selected volunteer opportunities.",
+    "source": {
+      "publisher": "Stockton Street Dogs / KCRA video",
+      "url": "https://www.youtube.com/watch?v=I68lU4UuJ-A",
+      "type": "news"
+    },
+    "supports": [
+      "rescue-capacity-pressure",
+      "safe-placement-capacity",
+      "affordable-spay-neuter",
+      "mobile-veterinary-services"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "capacity_expansion",
+      "field_response"
+    ]
+  },
+  {
+    "id": "ssd-2026-10-07-canine-campus-details",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": null,
+    "checked_at": "2026-10-07T12:00:00-07:00",
+    "record_type": "organization_update",
+    "trust": "source_supported",
+    "title": "Canine Campus proposal describes planned overflow and recovery capacity",
+    "summary": "Stockton Street Dogs’ Canine Campus proposal describes a safe place off the streets for hundreds of stray dogs at a time, with overflow support for Stockton Animal Services, dedicated spay/neuter recovery, care for sick and recovering dogs, 24/7 staffing, and selected volunteer opportunities. The page describes a proposal rather than an operating facility.",
+    "source": {
+      "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+      "url": "https://streetdogsanctuary.com/canine-campus",
+      "type": "organization"
+    },
+    "supports": [
+      "rescue-capacity-pressure",
+      "safe-placement-capacity",
+      "affordable-spay-neuter"
+    ],
+    "action_signals": [],
+    "role_signals": [
+      "capacity_expansion",
+      "field_response"
+    ]
   }
 ]

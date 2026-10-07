@@ -46,6 +46,21 @@
         "published_at": "2026-09-29",
         "type": "news"
       },
+    {
+      "title": "Stockton Street Dogs proposes a Canine Campus",
+      "publisher": "Stockton Street Dogs / KCRA video",
+      "url": "https://www.youtube.com/watch?v=I68lU4UuJ-A",
+      "published_at": "2026-07-30",
+      "type": "news"
+    },
+    {
+      "title": "Canine Campus proposal describes planned overflow and recovery capacity",
+      "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+      "url": "https://streetdogsanctuary.com/canine-campus",
+      "published_at": null,
+      "checked_at": "2026-10-07T12:00:00-07:00",
+      "type": "organization"
+    },
       {
         "title": "A Stockton woman was mauled by wild dogs. Here's how to avoid becoming a target",
         "publisher": "Stocktonia",
@@ -106,10 +121,12 @@
     "artwork": "/images/reality/dog-street-hero.jpg",
     "thumbnail_image": "/images/reality/dog-thumb.jpg",
     "first_seen": "2026-08-20",
-    "updated_at": "2026-09-29",
-    "current_state": "Dumped and stray dogs continue to exceed Stockton’s available rescue and placement capacity. Stockton Street Dogs reports that dumped-dog encounters have risen from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity.",
+  "updated_at": "2026-10-07",
+  "current_state": "Dumped and stray dogs continue to exceed Stockton’s available rescue and placement capacity. Stockton Street Dogs reports that dumped-dog encounters have risen from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity. The organization is also working with city officials on a proposed Canine Campus that could house hundreds of stray dogs and add overflow, veterinary recovery, and volunteer-supported care capacity; it is a proposal, not yet an operating facility.",
     "record_ids": [
       "ssd-2026-09-29-dumped-dogs-surge",
+    "ssd-2026-07-30-canine-campus-proposal",
+    "ssd-2026-10-07-canine-campus-details",
       "crossover-2026-09-11-dog-crisis-cost-of-living",
       "crossover-2026-08-28-why-we-stopped-caring-video",
       "crossover-2026-08-27-dog-placement-field-investigation",
@@ -181,8 +198,8 @@
       }
     ],
     "latest_change": {
-      "record_id": "ssd-2026-09-29-dumped-dogs-surge",
-      "label": "Stockton Street Dogs reports a surge in dumped dogs."
+    "record_id": "ssd-2026-10-07-canine-campus-details",
+    "label": "Canine Campus proposal describes planned overflow and recovery capacity."
     },
     "current_state_items": [
       {

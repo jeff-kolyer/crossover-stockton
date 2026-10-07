@@ -71,7 +71,7 @@
   --micro-label-size: 0.72rem;
   --micro-label-weight: 700;
   --micro-label-spacing: 0.045em;
-  --public-rail-max: 1500px;
+  --public-rail-max: 1600px;
   --public-rail-gutter: 52px;
   --public-rail-width: min(var(--public-rail-max), calc(100% - (var(--public-rail-gutter) * 2)));
   --public-rail-start: max(var(--public-rail-gutter), calc((100% - var(--public-rail-max)) / 2));
@@ -5141,7 +5141,7 @@ p {
 
 @media (max-width: 1400px) {
   :root {
-    --public-rail-max: 1500px;
+    --public-rail-max: 1600px;
     --public-rail-gutter: 48px;
   }
 
@@ -9847,7 +9847,7 @@ p {
 
 @media (min-width: 1200px) and (max-width: 1400px) {
   :root {
-    --public-rail-max: 1500px;
+    --public-rail-max: 1600px;
     --public-rail-gutter: 48px;
   }
 }
