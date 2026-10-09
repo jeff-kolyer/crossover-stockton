@@ -13182,7 +13182,7 @@ p {
 .work-record-list{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
 @media(max-width:760px){.work-record-list{grid-template-columns:1fr}}
 .work-thread-list details[open] summary{margin-bottom:10px}
-.work-switcher button{font-weight:700}
+.work-switcher button{font-size:.84rem;font-weight:700;line-height:1}
 .work-page .work-content-heading h2,.work-page .work-questions h2{font-family:var(--font-sans);font-size:var(--type-section-title-size);font-weight:var(--type-section-title-weight);letter-spacing:var(--type-section-title-tracking);line-height:var(--type-section-title-leading);text-transform:none}
 .work-page .work-page-header{max-width:none}
 .work-page .work-page-header h1,.work-page .work-page-header p{max-width:none}
