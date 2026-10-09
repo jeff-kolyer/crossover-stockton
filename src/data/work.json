@@ -8,33 +8,177 @@
     "type": "research",
     "started_at": "2026-08-20",
     "completed_at": "2026-08-27",
-    "updated_at": "2026-08-27",
+    "updated_at": "2026-10-08",
     "record_ids": [
       "crossover-2026-08-27-dog-placement-field-investigation"
-    ]
+    ],
+    "page_kind": "research",
+    "next_step": {
+      "title": "Refresh the public-source review",
+      "summary": "Use AI to review new local evidence when it becomes available, retaining sources and distinguishing proposals from operating services."
+    },
+    "open_questions": [
+      "What new local evidence changes the starting picture?"
+    ],
+    "learning_record_ids": [],
+    "activity_record_ids": []
   },
   {
     "id": "dogs-map-placement-barriers",
     "gap_id": "dogs-safe-placement",
-    "title": "Map barriers to fostering and adoption",
-    "summary": "We're tracing the housing, cost, veterinary, and care constraints that keep willing people from helping.",
+    "title": "Investigate barriers to fostering and adoption",
+    "summary": "We're investigating the housing, cost, veterinary, and care constraints that keep willing people from helping.",
     "status": "in_progress",
     "type": "investigation",
     "started_at": "2026-08-27",
-    "updated_at": "2026-09-11",
+    "updated_at": "2026-10-08",
     "record_ids": [
-      "crossover-2026-09-11-dog-crisis-cost-of-living"
-    ]
+      "crossover-2026-09-11-dog-crisis-cost-of-living",
+      "crossover-2026-10-08-initial-barrier-care-space",
+      "sas-2026-05-05-overpopulation-report",
+      "ssd-standing-foster-adopt",
+      "ssd-2026-10-07-canine-campus-details",
+      "crossover-2026-10-08-initial-barrier-veterinary-access",
+      "stockton-2026-05-11-stray-dog-report",
+      "sas-2026-01-13-spay-neuter-capacity",
+      "hlawa-2026-06-09-contract-extension",
+      "crossover-2026-10-08-initial-barrier-pet-housing",
+      "ssd-2026-06-08-street-response",
+      "crossover-2026-10-08-initial-barrier-care-logistics",
+      "crossover-2026-08-28-why-we-stopped-caring-video",
+      "crossover-2026-10-08-initial-barrier-opportunity-matching",
+      "ssd-standing-volunteer-rescue-partner",
+      "sas-standing-doggie-day-out"
+    ],
+    "page_kind": "investigation",
+    "next_step": {
+      "title": "Test the initial barrier map",
+      "summary": "Use responder accounts and firsthand evidence to identify which barriers matter most locally and what would make helping practical."
+    },
+    "open_questions": [
+      "Which barriers most often prevent willing Stockton residents from fostering or adopting?",
+      "How do street outreach, the proposed Canine Campus, veterinary care, and pet-inclusive housing fit together?",
+      "Where could AI or automation reduce a practical burden, and how would we test whether it helps?"
+    ],
+    "initial_map": {
+      "status": "completed",
+      "summary": "AI organized public evidence into an initial barrier map. Fieldwork will test and refine it."
+    },
+    "threads": [
+      {
+        "id": "care-space",
+        "title": "Limited foster and indoor care space",
+        "summary": "Public evidence points to constrained shelter and placement capacity. Suitable temporary care and recovery space is an initial barrier to investigate.",
+        "open_questions": [
+          "What suitable foster or recovery space is missing?",
+          "Which constraints could the proposed Canine Campus address, and which would remain?"
+        ],
+        "record_ids": [
+          "crossover-2026-10-08-initial-barrier-care-space",
+          "sas-2026-05-05-overpopulation-report",
+          "ssd-standing-foster-adopt",
+          "ssd-2026-10-07-canine-campus-details"
+        ]
+      },
+      {
+        "id": "veterinary-access",
+        "title": "Veterinary costs and access",
+        "summary": "Public evidence identifies veterinary access and sterilization capacity as pressures. Costs, appointments, transport, and recovery care need local investigation.",
+        "open_questions": [
+          "Where do cost or appointment availability block care or placement?",
+          "What happens between a spay/neuter appointment and a safe recovery placement?"
+        ],
+        "record_ids": [
+          "crossover-2026-10-08-initial-barrier-veterinary-access",
+          "stockton-2026-05-11-stray-dog-report",
+          "sas-2026-01-13-spay-neuter-capacity",
+          "hlawa-2026-06-09-contract-extension",
+          "crossover-2026-09-11-dog-crisis-cost-of-living"
+        ]
+      },
+      {
+        "id": "pet-housing",
+        "title": "Housing and shelter restrictions",
+        "summary": "Public-source framing identifies housing constraints, while the Safe Grounds proposal connects shelter access with companion animals. Specific local restrictions and their effects remain to be verified.",
+        "open_questions": [
+          "Which housing or shelter rules prevent people and dogs from staying together?",
+          "How does proposed pet-inclusive housing relate to the Canine Campus?"
+        ],
+        "record_ids": [
+          "crossover-2026-10-08-initial-barrier-pet-housing",
+          "crossover-2026-09-11-dog-crisis-cost-of-living",
+          "ssd-2026-06-08-street-response"
+        ]
+      },
+      {
+        "id": "care-logistics",
+        "title": "Time and care commitments",
+        "summary": "Crossover’s public-source framing identifies time and care logistics as potential barriers. Training, transport, and backup-care burdens are questions for firsthand investigation.",
+        "open_questions": [
+          "What time, training, transport, or backup support would make fostering practical?",
+          "Which burdens could shared support or automation reduce?"
+        ],
+        "record_ids": [
+          "crossover-2026-10-08-initial-barrier-care-logistics",
+          "crossover-2026-08-28-why-we-stopped-caring-video",
+          "crossover-2026-09-11-dog-crisis-cost-of-living"
+        ]
+      },
+      {
+        "id": "opportunity-matching",
+        "title": "Connecting willing people with opportunities",
+        "summary": "Public information lists participation routes. Whether unclear roles, application friction, or matching prevent participation is a hypothesis to test, not an established local finding.",
+        "open_questions": [
+          "Can a willing person find a suitable role and get started?",
+          "Where does onboarding or matching stall, if it does?"
+        ],
+        "record_ids": [
+          "crossover-2026-10-08-initial-barrier-opportunity-matching",
+          "ssd-standing-volunteer-rescue-partner",
+          "ssd-standing-foster-adopt",
+          "sas-standing-doggie-day-out"
+        ]
+      }
+    ],
+    "learning_record_ids": [
+      "crossover-2026-10-08-initial-barrier-care-space",
+      "crossover-2026-10-08-initial-barrier-veterinary-access",
+      "crossover-2026-10-08-initial-barrier-pet-housing",
+      "crossover-2026-10-08-initial-barrier-care-logistics",
+      "crossover-2026-10-08-initial-barrier-opportunity-matching"
+    ],
+    "activity_record_ids": []
   },
   {
     "id": "dogs-direct-field-work",
     "gap_id": "dogs-safe-placement",
     "title": "Direct conversations and field visits",
-    "summary": "Speak with local organizations and see where the practical barriers occur.",
-    "status": "next",
+    "summary": "We're contacting local responders and trying ways to help firsthand.",
+    "status": "in_progress",
     "type": "field_work",
-    "updated_at": "2026-10-02",
-    "record_ids": []
+    "updated_at": "2026-10-08",
+    "record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application"
+    ],
+    "page_kind": "activity",
+    "started_at": "2026-10-07",
+    "next_step": {
+      "title": "Try Doggie Day Out",
+      "summary": "Check participation requirements and apply or register as needed.",
+      "action_id": "doggie-day-out"
+    },
+    "open_questions": [
+      "What does getting started require?",
+      "What work is most useful to responders?",
+      "What prevents willing people from participating?"
+    ],
+    "activity_record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application"
+    ],
+    "learning_record_ids": [],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ]
   },
   {
     "id": "pet-shelter-public-source-review",

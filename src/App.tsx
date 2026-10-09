@@ -5,6 +5,7 @@ import { AboutPage } from "./components/AboutPage";
 import { GapDetailPage } from "./components/GapDetailPage";
 import { GapSourcesPage } from "./components/GapSourcesPage";
 import { GapUpdatesPage } from "./components/GapUpdatesPage";
+import { WorkPage } from "./components/WorkPage";
 import { HomePage } from "./components/HomePage";
 import { OrganizationsPage } from "./components/OrganizationsPage";
 import { StoryDetailPage } from "./components/StoryDetailPage";
@@ -15,15 +16,16 @@ import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 
-type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
+type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface RouteState {
   page: AppRoute;
   gapSlug?: string;
   storySlug?: string;
+  workId?: string;
 }
 
-const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">, string> = {
+const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail">, string> = {
   home: "/",
   reality: "/reality/",
   connection: "/connection/",
@@ -42,6 +44,9 @@ function routeFromPathname(pathname: string): RouteState {
   if (normalized.startsWith("/reality/") && normalized.endsWith("/sources")) {
     const gapSlug = normalized.replace("/reality/", "").replace(/\/sources$/, "");
     return { page: "gapSources", gapSlug: decodeURIComponent(gapSlug) };
+  }
+  if (normalized.startsWith("/work/")) {
+    return { page: "work", workId: decodeURIComponent(normalized.replace("/work/", "")) };
   }
   if (normalized.startsWith("/reality/")) {
     return { page: "gapDetail", gapSlug: decodeURIComponent(normalized.replace("/reality/", "")) };
@@ -68,11 +73,12 @@ function titleForRoute(route: RouteState) {
     const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : "Reality";
     return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
+  if (route.page === "work") return "Crossover work | Crossover Stockton";
   if (route.page === "storyDetail") {
     const story = stories.find((item) => item.slug === route.storySlug);
     return story ? `${story.title} | Crossover Stockton` : "Stories | Crossover Stockton";
   }
-  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">, string> = {
+  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail">, string> = {
     home: "Crossover Stockton",
     reality: "Reality | Crossover Stockton",
     connection: "Connection | Crossover Stockton",
@@ -112,7 +118,7 @@ export default function App() {
     document.title = titleForRoute(route);
   }, [route]);
 
-  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "storyDetail">) {
+  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail">) {
     const nextPath = ROUTE_PATHS[page];
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
@@ -148,6 +154,13 @@ export default function App() {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
+  function showWork(workId: string) {
+    const nextPath = `/work/${workId}/`;
+    if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
+    setRoute({ page: "work", workId });
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+  }
+
   function showStory(slug: string) {
     const nextPath = `/stories/${slug}/`;
     if (window.location.pathname !== nextPath) {
@@ -180,6 +193,7 @@ export default function App() {
           onOpenGap={showGap}
           onOpenUpdates={showGapUpdates}
           onOpenSources={showGapSources}
+          onOpenWork={showWork}
           onOpenStory={showStory}
           onOpenAction={setSelectedAction}
         />
@@ -200,6 +214,16 @@ export default function App() {
           onNavigate={showPage}
           onOpenAbout={() => showPage("about")}
           onOpenGap={showGap}
+        />
+      )}
+
+      {route.page === "work" && (
+        <WorkPage
+          workId={route.workId}
+          onNavigate={showPage}
+          onOpenGap={showGap}
+          onOpenWork={showWork}
+          onOpenAbout={() => showPage("about")}
         />
       )}
 

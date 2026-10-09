@@ -171,6 +171,7 @@ function recordsForGap(gap: GapRecord) {
 
 function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
   return [...recordsForCurrentGap]
+    .filter((record) => record.record_type !== "activity" && record.record_type !== "finding")
     .sort((a, b) => recordTime(b) - recordTime(a))
     .filter((record, index, all) => all.findIndex((item) => item.id === record.id) === index);
 }

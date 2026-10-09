@@ -146,6 +146,7 @@ function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
     .map((id) => recordsForCurrentGap.find((record) => record.id === id))
     .filter((record): record is EvidenceRecord => Boolean(record));
   const remaining = recordsForCurrentGap
+    .filter((record) => record.record_type !== "activity" && record.record_type !== "finding")
     .filter((record) => !preferred.has(record.id))
     .sort((a, b) => recordTime(b) - recordTime(a));
 

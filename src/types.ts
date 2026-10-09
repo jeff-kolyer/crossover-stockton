@@ -224,7 +224,22 @@ export interface WorkRecord {
   started_at?: string;
   completed_at?: string;
   updated_at?: string;
-  next_step?: string;
+  page_kind?: "research" | "investigation" | "activity";
+  next_step?: string | { title: string; summary: string; action_id?: string };
+  open_questions?: string[];
+  threads?: WorkThread[];
+  initial_map?: { status: "completed" | "in_progress"; summary: string };
+  activity_record_ids?: string[];
+  learning_record_ids?: string[];
+  organization_ids?: string[];
+  record_ids: string[];
+}
+
+export interface WorkThread {
+  id: string;
+  title: string;
+  summary: string;
+  open_questions?: string[];
   record_ids: string[];
 }
 
@@ -334,11 +349,23 @@ export interface EvidenceRecord {
     | "update"
     | "measurement_change"
     | "response"
-    | "outcome";
+    | "outcome"
+    | "planning_update"
+    | "organization_update"
+    | "finding"
+    | "activity";
   trust: string;
   title: string;
   summary: string;
   source: SourceRecord;
+  recorded_at?: string;
+  occurred_at?: string;
+  work_id?: string;
+  thread_id?: string;
+  evidence_status?: "initial_assessment" | "self_reported" | string;
+  basis_record_ids?: string[];
+  outcome?: { status: string; summary: string; as_of: string };
+  report_record_ids?: string[];
   supports?: string[];
   action_signals?: string[];
   role_signals?: string[];

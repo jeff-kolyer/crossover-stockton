@@ -385,3 +385,7 @@ The public site should never be changed merely because an AI scan found somethin
 # Guiding Rule
 
 **An update run is successful when Crossover becomes more accurate — even when the correct update is no update at all.**
+
+## Work-page additions
+
+When a user reports an action, add a dated `activity` record with `occurred_at`, `recorded_at`, `work_id`, `evidence_status: self_reported`, and a dated `outcome` when one is known. For AI synthesis, add a `finding` with `recorded_at`, `work_id`, optional `thread_id`, `basis_record_ids`, and `evidence_status: initial_assessment`. Keep selected IDs in the owning work item and in any matching thread selections. These records belong to the work page; publish a separate deliberate update only when a human-reviewed change merits the general Updates feed.

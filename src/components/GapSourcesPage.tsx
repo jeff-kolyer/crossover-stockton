@@ -157,7 +157,7 @@ function sourceRecordsForGap(gap: GapRecord) {
       .filter((record): record is EvidenceRecord => Boolean(record))
     : records.filter((record) => record.gap_ids.includes(gap.id));
 
-  return relatedRecords.sort((a, b) => recordTime(b) - recordTime(a));
+  return relatedRecords.filter((record) => record.record_type !== "activity" && record.record_type !== "finding").sort((a, b) => recordTime(b) - recordTime(a));
 }
 
 function latestCheckedDate(recordsForCurrentGap: EvidenceRecord[]) {

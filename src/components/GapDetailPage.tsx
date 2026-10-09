@@ -53,6 +53,7 @@ interface GapDetailPageProps {
   onOpenGap: (slug: string) => void;
   onOpenUpdates: (slug: string) => void;
   onOpenSources: (slug: string) => void;
+  onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
 }
@@ -102,7 +103,7 @@ const whyIconRegistry: Record<NonNullable<GapRecord["why_icons"]>[number], Lucid
   KeyRound,
 };
 
-export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenStory, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -185,7 +186,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
           <div className="gap-refined-left-column">
             <div className="gap-refined-main-column">
               <GapFlowSection gap={gap} />
-              {workItems.length > 0 && <WorkSection items={workItems} gap={gap} />}
+              {workItems.length > 0 && <WorkSection items={workItems} gap={gap} onOpenWork={onOpenWork} />}
             </div>
 
             {relatedOrgs.length > 0 && (
@@ -461,7 +462,7 @@ function FeaturedActionCard({
   );
 }
 
-function WorkSection({ items, gap }: { items: WorkRecord[]; gap: GapRecord }) {
+function WorkSection({ items, gap, onOpenWork }: { items: WorkRecord[]; gap: GapRecord; onOpenWork: (workId: string) => void }) {
   return (
     <section className="gap-work-section">
       <div className="gap-work-heading">
@@ -473,7 +474,7 @@ function WorkSection({ items, gap }: { items: WorkRecord[]; gap: GapRecord }) {
         {items.map((item, index) => {
           const Icon = workIcon(item.type);
           return (
-            <article className="gap-work-item" key={item.id}>
+            <button className="gap-work-item" type="button" key={item.id} onClick={() => onOpenWork(item.id)}>
               <span className="gap-work-icon"><Icon size={22} /></span>
               <div>
                 <strong>{item.title}</strong>
@@ -481,7 +482,7 @@ function WorkSection({ items, gap }: { items: WorkRecord[]; gap: GapRecord }) {
               </div>
               <span className={`gap-work-status is-${item.status}`}>{workStatusLabel(item.status)}</span>
               <span className="gap-work-index" aria-hidden="true">{index + 1}</span>
-            </article>
+            </button>
           );
         })}
       </div>
@@ -668,7 +669,11 @@ function roleForOrg(gap: GapRecord, organizationId: string): ResponderRole | und
 }
 
 function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
-  return [...recordsForCurrentGap].sort((a, b) => recordTime(b) - recordTime(a));
+  return [...recordsForCurrentGap].filter(isGeneralFeedRecord).sort((a, b) => recordTime(b) - recordTime(a));
+}
+
+function isGeneralFeedRecord(record: EvidenceRecord) {
+  return record.record_type !== "activity" && record.record_type !== "finding";
 }
 
 function representativeSourcesForGap(gap: GapRecord, sourceList: SourceLike[], recordsForCurrentGap: EvidenceRecord[]) {
