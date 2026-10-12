@@ -15,6 +15,7 @@ The governing question is: **What happened to the gap because Crossover showed u
 ## This week's priorities — October 12–18, 2026
 
 - [x] **October 12:** Send the initial Doggie Day Out inquiry through the [official Stockton Animal Services volunteer page](https://www.stocktonca.gov/services/animal_services/volunteer.php). Asked about sign-up, requirements, paperwork, and orientation. Awaiting response.
+- [ ] Complete and submit the Stockton Animal Services volunteer application; record the submission date and outcome.
 - [ ] Complete Doggie Day Out registration and orientation once requirements are confirmed.
 - [ ] Arrange and complete the earliest feasible outing; record the actual route and any friction.
 - [ ] Track the inquiry response this week. If no reply arrives by the October 18 review, send one concise follow-up; record the reply and replace the pending next step with the confirmed action and date.
@@ -111,7 +112,7 @@ Desk work supports field action; it is not evidence that the gap improved.
 
 - [x] Send initial Doggie Day Out inquiry — October 12, 2026
 - [ ] Record the response and confirmed next action; follow up if unanswered at the October 18 review
-- [ ] Complete the volunteer application
+- [ ] Complete and submit the Stockton Animal Services volunteer application; record the submission date and outcome
 - [ ] Complete Doggie Day Out orientation
 - [ ] Try Doggie Day Out
 - [ ] Learn how the foster program works in practice

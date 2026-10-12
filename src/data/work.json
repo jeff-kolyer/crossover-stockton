@@ -164,8 +164,8 @@
     "page_kind": "activity",
     "started_at": "2026-10-07",
     "next_step": {
-      "title": "Confirm Doggie Day Out registration and orientation",
-      "summary": "We’ve asked about participation requirements and orientation. Once confirmed, we’ll complete the required steps and arrange an outing.",
+      "title": "Submit the Stockton Animal Services volunteer application",
+      "summary": "We’ll complete and submit the volunteer application. We’re awaiting a reply to our Doggie Day Out inquiry about requirements, paperwork, and orientation.",
       "action_id": "doggie-day-out"
     },
     "open_questions": [
