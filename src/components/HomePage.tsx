@@ -84,7 +84,13 @@ const activeStories = stories
 const featuredStories = stories
   .filter((story) => story.active && story.featured)
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
-const featuredActions = actions.filter((action) => action.active && action.featured);
+const featuredActions = actions
+  .filter((action) => action.active && action.featured)
+  .sort((a, b) => {
+    if (a.id === "doggie-day-out") return -1;
+    if (b.id === "doggie-day-out") return 1;
+    return 0;
+  });
 const activeOrgs = orgs.filter((org) => org.active).slice(0, 5);
 const actionTagOrder: ActionTag[] = ["dogs", "today", "volunteer", "donate", "food", "housing", "reentry", "foster-adopt"];
 const actionTagLabels: Record<ActionTag, string> = {

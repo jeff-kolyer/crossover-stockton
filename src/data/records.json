@@ -283,19 +283,18 @@
       "dogs-safe-placement"
     ],
     "organization_ids": [
-      "stockton-animal-services",
-      "hard-luck-awa"
+      "stockton-animal-services"
     ],
     "published_at": null,
-    "checked_at": "2026-09-18T18:28:00-07:00",
+    "checked_at": "2026-10-12T00:00:00-07:00",
     "record_type": "current_ask",
     "trust": "organization_source",
-    "title": "Doggie Day Out invites the public to give shelter dogs community exposure",
-    "summary": "Hard Luck's current events page says members of the public can take a Stockton shelter dog out for a visit, giving the dog a break from the shelter, community exposure, and a chance to meet a potential adopter or foster.",
+    "title": "Stockton Animal Services invites volunteers to join Doggie Day Out",
+    "summary": "The City of Stockton Animal Services volunteer page says people can sign up, attend a brief orientation, and take a shelter dog on a walk, car ride, or quality-time outing.",
     "source": {
-      "publisher": "Hard Luck Animal Welfare Advocates",
-      "url": "https://www.hardluckawa.org/events",
-      "type": "organization"
+      "publisher": "City of Stockton Animal Services",
+      "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php",
+      "type": "government"
     },
     "supports": [
       "placement-capacity",
@@ -1231,6 +1230,32 @@
       "status": "awaiting_response",
       "summary": "Awaiting a response as of October 8, 2026.",
       "as_of": "2026-10-08"
+    },
+    "work_id": "dogs-direct-field-work",
+    "report_record_ids": [],
+    "supports": [],
+    "action_signals": []
+  },
+  {
+    "id": "crossover-2026-10-12-doggie-day-out-inquiry",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": null,
+    "occurred_at": "2026-10-12",
+    "recorded_at": "2026-10-12",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Emailed Stockton Animal Services about Doggie Day Out",
+    "summary": "Emailed Stockton Animal Services asking about sign-up, requirements, paperwork, and orientation for Doggie Day Out.",
+    "source": {
+      "publisher": "Crossover Stockton / Jeff Kolyer",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "outcome": {
+      "status": "awaiting_response",
+      "summary": "Awaiting response. No field report yet.",
+      "as_of": "2026-10-12"
     },
     "work_id": "dogs-direct-field-work",
     "report_record_ids": [],

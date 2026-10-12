@@ -12,6 +12,21 @@ A living list of gaps to investigate, verify, try, and move toward **IMPROVING**
 
 The governing question is: **What happened to the gap because Crossover showed up?**
 
+## This week's priorities — October 12–18, 2026
+
+- [x] **October 12:** Send the initial Doggie Day Out inquiry through the [official Stockton Animal Services volunteer page](https://www.stocktonca.gov/services/animal_services/volunteer.php). Asked about sign-up, requirements, paperwork, and orientation. Awaiting response.
+- [ ] Complete Doggie Day Out registration and orientation once requirements are confirmed.
+- [ ] Arrange and complete the earliest feasible outing; record the actual route and any friction.
+- [ ] Track the inquiry response this week. If no reply arrives by the October 18 review, send one concise follow-up; record the reply and replace the pending next step with the confirmed action and date.
+- [ ] **By October 14:** Check the Stockton Street Dogs volunteer-application outcome. If there is no reply, send one concise follow-up asking how to begin a useful volunteer activity.
+- [ ] **This week:** Complete one firsthand activity, if available. If access is blocked, document the attempt precisely and identify the next reachable action.
+- [ ] **This week:** Obtain one responder-grounded answer about which barrier most limits help now and what specific support would release capacity. Include how the Canine Campus and pet-inclusive housing connect.
+- [ ] **By October 18:** Write one field report and update one investigation thread. Record what happened, what remains uncertain, and one small technology-assisted intervention worth testing.
+
+### Contact log
+
+- **October 12, 2026 — Stockton Animal Services / Doggie Day Out:** Emailed asking about sign-up, requirements, paperwork, and orientation. **Status:** Awaiting response. No field report yet. **Next action:** Record the reply, confirm registration and orientation steps, then arrange the earliest feasible outing. Check at the October 18 review and follow up if unanswered. **Activity record:** `crossover-2026-10-12-doggie-day-out-inquiry` in Direct conversations and field visits.
+
 ## Critical gap: too many dogs still on the street
 
 ### What we know so far
@@ -94,7 +109,10 @@ Desk work supports field action; it is not evidence that the gap improved.
 
 ## Stockton Animal Services
 
+- [x] Send initial Doggie Day Out inquiry — October 12, 2026
+- [ ] Record the response and confirmed next action; follow up if unanswered at the October 18 review
 - [ ] Complete the volunteer application
+- [ ] Complete Doggie Day Out orientation
 - [ ] Try Doggie Day Out
 - [ ] Learn how the foster program works in practice
 - [ ] Ask what currently limits shelter capacity most

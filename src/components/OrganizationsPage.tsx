@@ -1,18 +1,15 @@
 import {
   ArrowLeft,
-  ArrowRight,
   Building2,
   ChevronDown,
   CircleAlert,
-  HandHeart,
   Home,
   MapPin,
-  PawPrint,
   Search,
-  ShieldCheck,
 } from "lucide-react";
 import orgsData from "../data/orgs.json";
 import { PublicMobileMenu } from "./PublicMobileMenu";
+import { OrganizationCard } from "./OrganizationCard";
 import type { OrgRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -68,24 +65,7 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
           <span>These are the public sources Crossover is using for the first MVP picture.</span>
         </div>
         <div className="organizations-grid">
-          {trackedOrgs.map((org, index) => {
-            const Icon = getOrgIcon(index);
-            const href = org.website || org.source_url;
-            return (
-              <article className="organization-card" key={org.id}>
-                <Icon size={34} />
-                <div>
-                  <h3>{org.name}</h3>
-                  <p>{org.summary}</p>
-                  {href && (
-                    <a href={href} target="_blank" rel="noreferrer">
-                      Visit their website <ArrowRight size={15} />
-                    </a>
-                  )}
-                </div>
-              </article>
-            );
-          })}
+          {trackedOrgs.map((org) => <OrganizationCard org={org} key={org.id} />)}
         </div>
       </section>
 
@@ -119,8 +99,4 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
       </nav>
     </main>
   );
-}
-
-function getOrgIcon(index: number) {
-  return [PawPrint, HandHeart, ShieldCheck, Home, Building2][index % 5];
 }

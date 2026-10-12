@@ -6,6 +6,7 @@ import workData from "../data/work.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, WorkRecord } from "../types";
 import type { ReactNode } from "react";
 import { PublicMobileMenu } from "./PublicMobileMenu";
+import { OrganizationCard } from "./OrganizationCard";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -67,7 +68,7 @@ function WorkContent({ item }: { item: WorkRecord }) {
 
   if (item.page_kind === "research") return <div className="work-page-content"><WorkSection title="Review records" icon={<FileText size={20} />}><RecordList records={evidence} /></WorkSection><Questions questions={item.open_questions} /></div>;
   if (item.page_kind === "investigation") return <div className="work-page-content"><WorkSection title="Initial map" icon={<MapPin size={20} />}><div className="work-map-note"><CheckCircle2 size={20} /><span className="gap-mobile-body">{item.initial_map?.summary}</span></div></WorkSection><WorkSection title="Barrier threads" icon={<MessageCircle size={20} />}><div className="work-thread-list">{(item.threads ?? []).map((thread) => <details key={thread.id}><summary>{thread.title}</summary><p className="gap-mobile-body">{thread.summary}</p><Questions questions={thread.open_questions} /><RecordList records={selected(thread.record_ids)} /></details>)}</div></WorkSection><WorkSection title="Learning" icon={<ClipboardList size={20} />}><RecordList records={learning} /></WorkSection><Questions questions={item.open_questions} /><EvidenceSection records={evidence} /></div>;
-  return <div className="work-page-content"><WorkSection title="Progress" icon={<ClipboardList size={20} />}><ActivityTable records={activity} /></WorkSection>{orgs.length > 0 && <WorkSection title="Organizations contacted" icon={<Users size={20} />}><div className="work-org-list">{orgs.map((org) => <div key={org.id}><strong>{org.name}</strong><span className="gap-mobile-body">{org.summary}</span></div>)}</div></WorkSection>}{learning.length > 0 && <WorkSection title="Learning" icon={<MessageCircle size={20} />}><RecordList records={learning} /></WorkSection>}<Questions questions={item.open_questions} /></div>;
+  return <div className="work-page-content"><WorkSection title="Progress" icon={<ClipboardList size={20} />}><ActivityTable records={activity} /></WorkSection>{orgs.length > 0 && <WorkSection title="Organizations contacted" icon={<Users size={20} />}><div className="organizations-grid">{orgs.map((org) => <OrganizationCard org={org} key={org.id} />)}</div></WorkSection>}{learning.length > 0 && <WorkSection title="Learning" icon={<MessageCircle size={20} />}><RecordList records={learning} /></WorkSection>}<Questions questions={item.open_questions} /></div>;
 }
 
 function WorkSection({ title, icon, children }: { title: string; icon: ReactNode; children: ReactNode }) { return <section className="work-content-section gap-refined-card"><div className="work-content-heading">{icon}<h2>{title}</h2></div>{children}</section>; }

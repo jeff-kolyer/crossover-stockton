@@ -338,7 +338,7 @@
     "id": "doggie-day-out",
     "slug": "doggie-day-out",
     "title": "Take a shelter dog out",
-    "summary": "Give a Stockton shelter dog time outside the shelter, community exposure, and a better chance to meet a foster or adopter.",
+    "summary": "Sign up to give a Stockton shelter dog a break from shelter life through a walk, car ride, or quality time with a caring person.",
     "organization_id": "stockton-animal-services",
     "gap_ids": [
       "dogs-safe-placement"
@@ -348,8 +348,8 @@
       "volunteer",
       "today"
     ],
-    "source_url": "https://www.hardluckawa.org/events",
-    "source_label": "Hard Luck AWA / Stockton Animal Services",
+    "source_url": "https://www.stocktonca.gov/services/animal_services/volunteer.php",
+    "source_label": "City of Stockton Animal Services",
     "featured": true,
     "active": true,
     "priority": "medium",
@@ -357,25 +357,27 @@
       "sas-standing-doggie-day-out"
     ],
     "currentness": "standing",
-    "last_supported_at": "2026-09-18",
-    "updated_at": "2026-08-21T17:07:00-07:00",
-    "when_label": "Check current availability",
+    "last_supported_at": "2026-10-12",
+    "updated_at": "2026-10-12T00:00:00-07:00",
+    "when_label": "Sign up + brief orientation",
     "location_label": "Stockton Animal Services",
     "distance_label": "",
     "modal_title": "Doggie Day Out",
     "why_it_helps": "A few hours outside the shelter can reduce stress, create community visibility, and help a dog connect with potential fosters or adopters.",
-    "provider_label": "Stockton Animal Services · Hard Luck Animal Welfare Advocates",
-    "handoff_label": "Check current availability",
+    "provider_label": "City of Stockton Animal Services",
+    "handoff_label": "Sign up with Stockton Animal Services",
     "at_a_glance": {
       "what": "Shelter dog outing",
-      "time": "A few hours",
-      "why": "Helps dogs get exposure",
-      "availability": "Changes often"
+      "time": "A day outing",
+      "why": "Gives dogs a break and community exposure",
+      "availability": "Sign up and attend orientation"
     },
     "what_to_expect": [
-      "You’ll leave Crossover and view the provider’s latest instructions, availability, and next steps.",
-      "Outings are usually a few hours.",
-      "Someone will walk you through the details and help you feel ready."
+      "Sign up through the City of Stockton Animal Services volunteer page.",
+      "Volunteers must be 16 or older; ages 16–17 need written parent or guardian approval.",
+      "Attend a brief orientation before choosing a dog.",
+      "Take your dog on a walk, car ride, or quality-time outing, then return them to the shelter.",
+      "For questions, email SASVolunteers@stocktonca.gov or call (209) 937-7445 during normal business hours."
     ]
   },
   {
