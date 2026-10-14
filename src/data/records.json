@@ -1095,7 +1095,7 @@
       "ssd-2026-10-07-canine-campus-details"
     ],
     "work_id": "dogs-map-placement-barriers",
-    "thread_id": "care-space",
+    "thread_id": "shelter-foster-capacity",
     "supports": [],
     "action_signals": []
   },
@@ -1149,7 +1149,7 @@
       "ssd-2026-06-08-street-response"
     ],
     "work_id": "dogs-map-placement-barriers",
-    "thread_id": "pet-housing",
+    "thread_id": "housing-prevention",
     "supports": [],
     "action_signals": []
   },
@@ -1175,7 +1175,7 @@
       "crossover-2026-09-11-dog-crisis-cost-of-living"
     ],
     "work_id": "dogs-map-placement-barriers",
-    "thread_id": "care-logistics",
+    "thread_id": "shelter-foster-capacity",
     "supports": [],
     "action_signals": []
   },
@@ -1202,7 +1202,7 @@
       "sas-standing-doggie-day-out"
     ],
     "work_id": "dogs-map-placement-barriers",
-    "thread_id": "opportunity-matching",
+    "thread_id": "public-access-coordination",
     "supports": [],
     "action_signals": []
   },

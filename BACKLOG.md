@@ -2,7 +2,14 @@
 
 A living list of gaps to investigate, verify, try, and move toward **IMPROVING**.
 
-## Current focus: move from research into the field
+## Current focus: October 14 shelter visit and field report
+
+- [ ] **October 14:** Visit Stockton Animal Services, submit the volunteer application, ask about Doggie Day Out, and learn how dogs move from street response and intake to safe placement.
+- [ ] Record who we spoke with, what we directly observed, what staff said, and what remains unverified. Keep public complaints separate from confirmed findings.
+- [ ] Publish one firsthand field report after the visit, including any access or coordination friction. Add an October 14 activity record and link the report only after the visit happens.
+- [ ] Use the report to update the six investigation threads and identify one responder-confirmed constraint worth addressing.
+
+The activity page records what Crossover did; the investigation page records what we learned about the system and what could improve it.
 
 - [x] Submit the Stockton Street Dogs volunteer application — October 7, 2026
 - [ ] Record their response, named contact, and any next step
@@ -15,14 +22,14 @@ The governing question is: **What happened to the gap because Crossover showed u
 ## This week's priorities — October 12–18, 2026
 
 - [x] **October 12:** Send the initial Doggie Day Out inquiry through the [official Stockton Animal Services volunteer page](https://www.stocktonca.gov/services/animal_services/volunteer.php). Asked about sign-up, requirements, paperwork, and orientation. Awaiting response.
-- [ ] Complete and submit the Stockton Animal Services volunteer application; record the submission date and outcome.
+- [ ] During the October 14 visit, complete and submit the Stockton Animal Services volunteer application; record the submission date and outcome.
 - [ ] Complete Doggie Day Out registration and orientation once requirements are confirmed.
 - [ ] Arrange and complete the earliest feasible outing; record the actual route and any friction.
 - [ ] Track the inquiry response this week. If no reply arrives by the October 18 review, send one concise follow-up; record the reply and replace the pending next step with the confirmed action and date.
 - [ ] **By October 14:** Check the Stockton Street Dogs volunteer-application outcome. If there is no reply, send one concise follow-up asking how to begin a useful volunteer activity.
 - [ ] **This week:** Complete one firsthand activity, if available. If access is blocked, document the attempt precisely and identify the next reachable action.
 - [ ] **This week:** Obtain one responder-grounded answer about which barrier most limits help now and what specific support would release capacity. Include how the Canine Campus and pet-inclusive housing connect.
-- [ ] **By October 18:** Write one field report and update one investigation thread. Record what happened, what remains uncertain, and one small technology-assisted intervention worth testing.
+- [ ] **By October 18:** Publish the October 14 field report and update the investigation threads it informs. Record what happened, what remains uncertain, and one practical intervention to test only if evidence supports it.
 
 ### Contact log
 

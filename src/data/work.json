@@ -26,16 +26,17 @@
   {
     "id": "dogs-map-placement-barriers",
     "gap_id": "dogs-safe-placement",
-    "title": "Investigate barriers to fostering and adoption",
-    "summary": "We're investigating the housing, cost, veterinary, and care constraints that keep willing people from helping.",
+    "title": "Investigating why dogs get stuck",
+    "summary": "We're examining what prevents dogs in Stockton from reaching safe care—from street response and shelter intake to veterinary treatment, fostering, rescue, and adoption.",
     "status": "in_progress",
     "type": "investigation",
     "started_at": "2026-08-27",
-    "updated_at": "2026-10-08",
+    "updated_at": "2026-10-13",
     "record_ids": [
       "crossover-2026-09-11-dog-crisis-cost-of-living",
       "crossover-2026-10-08-initial-barrier-care-space",
       "sas-2026-05-05-overpopulation-report",
+      "sas-2026-05-21-intake-adoption-pause",
       "ssd-standing-foster-adopt",
       "ssd-2026-10-07-canine-campus-details",
       "crossover-2026-10-08-initial-barrier-veterinary-access",
@@ -52,38 +53,54 @@
     ],
     "page_kind": "investigation",
     "next_step": {
-      "title": "Test the initial barrier map",
-      "summary": "Use responder accounts and firsthand evidence to identify which barriers matter most locally and what would make helping practical."
+      "title": "Investigate animal-care bottlenecks at Stockton Animal Services",
+      "summary": "Review public reports about intake, response, communication, and shelter capacity. Visit Stockton Animal Services to learn how the system operates, identify its most significant constraints, and explore whether technology or better coordination could help."
     },
     "open_questions": [
-      "Which barriers most often prevent willing Stockton residents from fostering or adopting?",
-      "How do street outreach, the proposed Canine Campus, veterinary care, and pet-inclusive housing fit together?",
-      "Where could AI or automation reduce a practical burden, and how would we test whether it helps?"
+      "Where do dogs get stuck between a street report and safe placement, and why?",
+      "How do street response, shelter capacity, veterinary care, rescue, and pet-inclusive housing fit together?",
+      "Where could technology, intelligence, or better coordination remove a practical constraint so more dogs receive care?"
     ],
     "initial_map": {
       "status": "completed",
-      "summary": "AI organized public evidence into an initial barrier map. Fieldwork will test and refine it."
+      "summary": "What we're investigating now: whether residents can reach the right people and obtain help; which shelter, foster, and veterinary constraints limit safe care; and whether communication, scheduling, volunteer onboarding, or placement coordination can improve. These are preliminary questions. Fieldwork and verified data will test them."
     },
     "threads": [
       {
-        "id": "care-space",
-        "title": "Limited foster and indoor care space",
-        "summary": "Public evidence points to constrained shelter and placement capacity. Suitable temporary care and recovery space is an initial barrier to investigate.",
+        "id": "street-response-intake",
+        "title": "Street response and intake",
+        "summary": "Follow what happens when someone reports or finds a stray dog, from the first request for help to a safe intake or other response.",
         "open_questions": [
-          "What suitable foster or recovery space is missing?",
+          "How are stray-dog reports received, prioritized, and resolved?",
+          "When a dog cannot enter care, what happens next and why?"
+        ],
+        "record_ids": [
+          "stockton-2026-05-11-stray-dog-report",
+          "ssd-2026-06-08-street-response",
+          "sas-2026-05-21-intake-adoption-pause"
+        ]
+      },
+      {
+        "id": "shelter-foster-capacity",
+        "title": "Shelter and foster capacity",
+        "summary": "Examine where dogs wait for safe care and how shelter space, foster homes, recovery space, and everyday care affect movement through the system.",
+        "open_questions": [
+          "Where are dogs waiting, and what suitable foster or recovery space is missing?",
           "Which constraints could the proposed Canine Campus address, and which would remain?"
         ],
         "record_ids": [
           "crossover-2026-10-08-initial-barrier-care-space",
+          "crossover-2026-10-08-initial-barrier-care-logistics",
           "sas-2026-05-05-overpopulation-report",
           "ssd-standing-foster-adopt",
-          "ssd-2026-10-07-canine-campus-details"
+          "ssd-2026-10-07-canine-campus-details",
+          "crossover-2026-08-28-why-we-stopped-caring-video"
         ]
       },
       {
         "id": "veterinary-access",
-        "title": "Veterinary costs and access",
-        "summary": "Public evidence identifies veterinary access and sterilization capacity as pressures. Costs, appointments, transport, and recovery care need local investigation.",
+        "title": "Veterinary care",
+        "summary": "Investigate how sterilization, treatment, appointment availability, transport, cost, and recovery capacity affect safe placement.",
         "open_questions": [
           "Where do cost or appointment availability block care or placement?",
           "What happens between a spay/neuter appointment and a safe recovery placement?"
@@ -97,46 +114,45 @@
         ]
       },
       {
-        "id": "pet-housing",
-        "title": "Housing and shelter restrictions",
-        "summary": "Public-source framing identifies housing constraints, while the Safe Grounds proposal connects shelter access with companion animals. Specific local restrictions and their effects remain to be verified.",
+        "id": "public-access-coordination",
+        "title": "Public access and coordination",
+        "summary": "Test whether residents and volunteers can reach the right people, get clear instructions, and participate. Communication or onboarding friction remains a hypothesis until verified.",
+        "open_questions": [
+          "Can residents obtain timely guidance when they report or find a dog?",
+          "Where, if anywhere, do volunteer onboarding, scheduling, or coordination stall?"
+        ],
+        "record_ids": [
+          "crossover-2026-10-08-initial-barrier-opportunity-matching",
+          "ssd-standing-volunteer-rescue-partner",
+          "sas-standing-doggie-day-out"
+        ]
+      },
+      {
+        "id": "rescue-reunification-adoption",
+        "title": "Rescue, reunification, and adoption",
+        "summary": "Trace what helps or delays dogs leaving shelter care for reunification, rescue transfer, foster care, or adoption.",
+        "open_questions": [
+          "What delays a dog that is ready for a safe placement?",
+          "Which handoffs between the shelter, rescues, fosters, and adopters need support?"
+        ],
+        "record_ids": [
+          "ssd-standing-foster-adopt",
+          "ssd-standing-volunteer-rescue-partner",
+          "sas-2026-05-21-intake-adoption-pause"
+        ]
+      },
+      {
+        "id": "housing-prevention",
+        "title": "Housing and prevention",
+        "summary": "Investigate whether pet-inclusive housing and other practical support can keep people and dogs together and prevent a crisis.",
         "open_questions": [
           "Which housing or shelter rules prevent people and dogs from staying together?",
-          "How does proposed pet-inclusive housing relate to the Canine Campus?"
+          "Which supports could prevent dogs from entering crisis?"
         ],
         "record_ids": [
           "crossover-2026-10-08-initial-barrier-pet-housing",
           "crossover-2026-09-11-dog-crisis-cost-of-living",
           "ssd-2026-06-08-street-response"
-        ]
-      },
-      {
-        "id": "care-logistics",
-        "title": "Time and care commitments",
-        "summary": "Crossover’s public-source framing identifies time and care logistics as potential barriers. Training, transport, and backup-care burdens are questions for firsthand investigation.",
-        "open_questions": [
-          "What time, training, transport, or backup support would make fostering practical?",
-          "Which burdens could shared support or automation reduce?"
-        ],
-        "record_ids": [
-          "crossover-2026-10-08-initial-barrier-care-logistics",
-          "crossover-2026-08-28-why-we-stopped-caring-video",
-          "crossover-2026-09-11-dog-crisis-cost-of-living"
-        ]
-      },
-      {
-        "id": "opportunity-matching",
-        "title": "Connecting willing people with opportunities",
-        "summary": "Public information lists participation routes. Whether unclear roles, application friction, or matching prevent participation is a hypothesis to test, not an established local finding.",
-        "open_questions": [
-          "Can a willing person find a suitable role and get started?",
-          "Where does onboarding or matching stall, if it does?"
-        ],
-        "record_ids": [
-          "crossover-2026-10-08-initial-barrier-opportunity-matching",
-          "ssd-standing-volunteer-rescue-partner",
-          "ssd-standing-foster-adopt",
-          "sas-standing-doggie-day-out"
         ]
       }
     ],
@@ -156,7 +172,7 @@
     "summary": "We're contacting local responders and trying ways to help firsthand.",
     "status": "in_progress",
     "type": "field_work",
-    "updated_at": "2026-10-12",
+    "updated_at": "2026-10-13",
     "record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application",
       "crossover-2026-10-12-doggie-day-out-inquiry"
@@ -164,9 +180,8 @@
     "page_kind": "activity",
     "started_at": "2026-10-07",
     "next_step": {
-      "title": "Submit the Stockton Animal Services volunteer application",
-      "summary": "We’ll complete and submit the volunteer application. We’re awaiting a reply to our Doggie Day Out inquiry about requirements, paperwork, and orientation.",
-      "action_id": "doggie-day-out"
+      "title": "Visit Stockton Animal Services and document what we find",
+      "summary": "On October 14, we'll visit Stockton Animal Services to submit a volunteer application, learn about Doggie Day Out, and investigate the obstacles affecting animal care and placement. We'll document the visit in a firsthand field report."
     },
     "open_questions": [
       "What does getting started require?",
