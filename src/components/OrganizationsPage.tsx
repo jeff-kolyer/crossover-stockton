@@ -16,6 +16,7 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 interface OrganizationsPageProps {
   onNavigate: (page: PublicRoute) => void;
+  onOpenReport: (id: string) => void;
 }
 
 const orgs = orgsData as OrgRecord[];
@@ -24,7 +25,7 @@ const heroImage = "/images/organizations/organizations-we-follow-hero.jpg";
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
 
-export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
+export function OrganizationsPage({ onNavigate, onOpenReport }: OrganizationsPageProps) {
   return (
     <main className="public-home organizations-page is-section-page">
       <section className="public-hero is-compact">
@@ -65,7 +66,7 @@ export function OrganizationsPage({ onNavigate }: OrganizationsPageProps) {
           <span>These are the public sources Crossover is using for the first MVP picture.</span>
         </div>
         <div className="organizations-grid">
-          {trackedOrgs.map((org) => <OrganizationCard org={org} key={org.id} />)}
+          {trackedOrgs.map((org) => <OrganizationCard org={org} key={org.id} onOpenReport={onOpenReport} />)}
         </div>
       </section>
 

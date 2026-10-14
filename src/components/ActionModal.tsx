@@ -3,19 +3,22 @@ import type { MouseEvent } from "react";
 import { useEffect, useRef } from "react";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
+import recordsData from "../data/records.json";
 import { getActionIcon } from "../lib/actionIcons";
-import type { GapRecord, OrgRecord, PublicActionRecord } from "../types";
+import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord } from "../types";
 
 interface ActionModalProps {
   action: PublicActionRecord;
   onClose: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenReport: (id: string) => void;
 }
 
 const gaps = gapsData as GapRecord[];
 const orgs = orgsData as OrgRecord[];
+const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 
-export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
+export function ActionModal({ action, onClose, onOpenGap, onOpenReport }: ActionModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const relatedGap = gaps.find((gap) => gap.id === action.gap_ids[0]);
@@ -23,6 +26,7 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
   const provider = providerLabel(action);
   const sourceDate = formatSourceDate(action.last_supported_at);
   const ActionIcon = getActionIcon(action);
+  const actionReports = reports.filter((report) => report.action_ids?.includes(action.id)).sort((a, b) => (b.occurred_at ?? b.published_at ?? "").localeCompare(a.occurred_at ?? a.published_at ?? ""));
   const glanceItems = [
     { label: "What it is", value: action.at_a_glance?.what, icon: Tag },
     { label: "Time", value: action.at_a_glance?.time, icon: Clock3 },
@@ -179,13 +183,16 @@ export function ActionModal({ action, onClose, onOpenGap }: ActionModalProps) {
 
         <section className="action-modal-field-reports">
           <h3>Field Reports</h3>
-          <div>
+          {actionReports.length ? actionReports.map((report) => <div key={report.id}>
+            <CalendarDays size={19} />
+            <span><small>{formatSourceDate(report.occurred_at ?? report.published_at)}</small><strong>{report.title}</strong><small>{report.summary}</small><a href={`/reports/${report.id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(report.id); }}>Read field report <ArrowRight size={14} /></a></span>
+          </div>) : <div>
             <Info size={19} />
             <span>
               <strong>No field reports yet.</strong>
               <span className="crossover-body">We&apos;ll add notes here as this action is checked in the field.</span>
             </span>
-          </div>
+          </div>}
         </section>
 
         <div className="action-modal-footer-meta">

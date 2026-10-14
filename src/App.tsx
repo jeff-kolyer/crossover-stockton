@@ -6,26 +6,30 @@ import { GapDetailPage } from "./components/GapDetailPage";
 import { GapSourcesPage } from "./components/GapSourcesPage";
 import { GapUpdatesPage } from "./components/GapUpdatesPage";
 import { WorkPage } from "./components/WorkPage";
+import { FieldReportPage } from "./components/FieldReportPage";
 import { HomePage } from "./components/HomePage";
 import { OrganizationsPage } from "./components/OrganizationsPage";
 import { StoryDetailPage } from "./components/StoryDetailPage";
 import { UpdatesPage } from "./components/UpdatesPage";
 import storiesData from "./data/stories.json";
-import type { GapRecord, PublicActionRecord, StoryRecord } from "./types";
+import recordsData from "./data/records.json";
+import type { EvidenceRecord, GapRecord, PublicActionRecord, StoryRecord } from "./types";
 
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
+const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 
-type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
+type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface RouteState {
   page: AppRoute;
   gapSlug?: string;
   storySlug?: string;
   workId?: string;
+  reportId?: string;
 }
 
-const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail">, string> = {
+const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail">, string> = {
   home: "/",
   reality: "/reality/",
   connection: "/connection/",
@@ -47,6 +51,9 @@ function routeFromPathname(pathname: string): RouteState {
   }
   if (normalized.startsWith("/work/")) {
     return { page: "work", workId: decodeURIComponent(normalized.replace("/work/", "")) };
+  }
+  if (normalized.startsWith("/reports/")) {
+    return { page: "report", reportId: decodeURIComponent(normalized.replace("/reports/", "")) };
   }
   if (normalized.startsWith("/reality/")) {
     return { page: "gapDetail", gapSlug: decodeURIComponent(normalized.replace("/reality/", "")) };
@@ -74,11 +81,15 @@ function titleForRoute(route: RouteState) {
     return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
   if (route.page === "work") return "Crossover work | Crossover Stockton";
+  if (route.page === "report") {
+    const report = reports.find((item) => item.id === route.reportId);
+    return report ? `${report.title} | Crossover Stockton` : "Field report not found | Crossover Stockton";
+  }
   if (route.page === "storyDetail") {
     const story = stories.find((item) => item.slug === route.storySlug);
     return story ? `${story.title} | Crossover Stockton` : "Stories | Crossover Stockton";
   }
-  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail">, string> = {
+  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail">, string> = {
     home: "Crossover Stockton",
     reality: "Reality | Crossover Stockton",
     connection: "Connection | Crossover Stockton",
@@ -118,7 +129,7 @@ export default function App() {
     document.title = titleForRoute(route);
   }, [route]);
 
-  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "storyDetail">) {
+  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail">) {
     const nextPath = ROUTE_PATHS[page];
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
@@ -161,6 +172,14 @@ export default function App() {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
+  function showReport(reportId: string) {
+    const nextPath = `/reports/${encodeURIComponent(reportId)}/`;
+    if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
+    setSelectedAction(null);
+    setRoute({ page: "report", reportId });
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+  }
+
   function showStory(slug: string) {
     const nextPath = `/stories/${slug}/`;
     if (window.location.pathname !== nextPath) {
@@ -199,6 +218,16 @@ export default function App() {
         />
       )}
 
+      {route.page === "report" && (
+        <FieldReportPage
+          reportId={route.reportId}
+          onNavigate={showPage}
+          onOpenGap={showGap}
+          onOpenWork={showWork}
+          onOpenAction={setSelectedAction}
+        />
+      )}
+
       {route.page === "gapUpdates" && (
         <GapUpdatesPage
           slug={route.gapSlug ?? firstGapSlug}
@@ -223,6 +252,7 @@ export default function App() {
           onNavigate={showPage}
           onOpenGap={showGap}
           onOpenWork={showWork}
+          onOpenReport={showReport}
           onOpenAbout={() => showPage("about")}
         />
       )}
@@ -251,6 +281,7 @@ export default function App() {
       {route.page === "organizations" && (
         <OrganizationsPage
           onNavigate={showPage}
+          onOpenReport={showReport}
         />
       )}
 
@@ -259,6 +290,7 @@ export default function App() {
           action={selectedAction}
           onClose={() => setSelectedAction(null)}
           onOpenGap={showGap}
+          onOpenReport={showReport}
         />
       )}
     </div>

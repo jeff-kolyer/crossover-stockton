@@ -230,6 +230,7 @@ export interface WorkRecord {
   threads?: WorkThread[];
   initial_map?: { status: "completed" | "in_progress"; summary: string };
   activity_record_ids?: string[];
+  report_record_ids?: string[];
   learning_record_ids?: string[];
   organization_ids?: string[];
   record_ids: string[];
@@ -353,11 +354,16 @@ export interface EvidenceRecord {
     | "planning_update"
     | "organization_update"
     | "finding"
-    | "activity";
+    | "activity"
+    | "field_report";
   trust: string;
   title: string;
   summary: string;
   source: SourceRecord;
+  context_sources?: SourceRecord[];
+  image?: string;
+  image_alt?: string;
+  image_caption?: string;
   recorded_at?: string;
   occurred_at?: string;
   work_id?: string;
@@ -366,6 +372,9 @@ export interface EvidenceRecord {
   basis_record_ids?: string[];
   outcome?: { status: string; summary: string; as_of: string };
   report_record_ids?: string[];
+  action_ids?: string[];
+  location?: string;
+  sections?: Array<{ title: string; body: string }>;
   supports?: string[];
   action_signals?: string[];
   role_signals?: string[];

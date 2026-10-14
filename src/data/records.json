@@ -1,5 +1,97 @@
 [
   {
+    "id": "crossover-2026-10-14-sas-volunteer-application",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": null,
+    "occurred_at": "2026-10-14",
+    "recorded_at": "2026-10-14",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Visited Stockton Animal Services and submitted a volunteer application",
+    "summary": "Visited Stockton Animal Services and submitted a volunteer application.",
+    "source": {
+      "publisher": "Crossover Stockton / Jeff Kolyer",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "outcome": {
+      "status": "submitted",
+      "summary": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities.",
+      "as_of": "2026-10-14"
+    },
+    "work_id": "dogs-direct-field-work",
+    "report_record_ids": [
+      "crossover-2026-10-14-sas-first-visit"
+    ],
+    "supports": [],
+    "action_signals": []
+  },
+  {
+    "id": "crossover-2026-10-14-sas-first-visit",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "action_ids": [
+      "doggie-day-out"
+    ],
+    "published_at": "2026-10-14",
+    "occurred_at": "2026-10-14",
+    "recorded_at": "2026-10-14",
+    "record_type": "field_report",
+    "trust": "crossover_source",
+    "evidence_status": "self_reported",
+    "title": "Our first visit to Stockton Animal Services",
+    "summary": "We visited Stockton Animal Services, submitted a volunteer application, observed the public facilities, and spoke briefly with staff.",
+    "image": "/images/reports/stockton-animal-services-first-visit.webp",
+    "image_alt": "AI-generated reconstruction of Stockton Animal Services and the shelter expansion, based on January 2026 Street View imagery",
+    "image_caption": "AI-generated reconstruction of Stockton Animal Services and the shelter expansion, based on January 2026 Street View imagery.",
+    "location": "Stockton Animal Services, 1575 S. Lincoln Street, Stockton, California",
+    "source": {
+      "publisher": "Crossover Stockton / Jeff Kolyer",
+      "type": "firsthand_account"
+    },
+    "context_sources": [
+      {
+        "publisher": "City of Stockton",
+        "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Public%20Works/Bid%20Flash%20SEB/P023001RFP/P023001_RFP_ConstructionManagement%20-%20Animal%20Shelter.pdf",
+        "type": "government"
+      }
+    ],
+    "work_id": "dogs-direct-field-work",
+    "sections": [
+      {
+        "title": "Why we went",
+        "body": "We visited Stockton Animal Services to submit a volunteer application, learn about participating in Doggie Day Out, introduce Crossover, and begin understanding the challenges facing dogs in Stockton."
+      },
+      {
+        "title": "What happened",
+        "body": "We delivered the volunteer application and briefly explained Crossover’s investigation into why so many dogs remain without safe placement. We asked staff about the biggest problems facing the shelter. We also provided our contact information and asked that it be passed along to Stockton Street Dogs."
+      },
+      {
+        "title": "What we observed",
+        "body": "The shelter entrance was difficult to locate within the surrounding industrial area and nearby construction activity.\n\nThe public lobby was very cramped and congested during our visit. We estimated the space at approximately five to six feet wide and twelve feet long. A conversation immediately inside the entrance made it difficult for others to enter and move around.\n\nStaff appeared busy. We also observed someone bringing in a dog reportedly because of behavioral difficulties. We did not establish the details of that situation."
+      },
+      {
+        "title": "What staff told us",
+        "body": "When asked about the biggest problem facing the shelter, a staff member identified irresponsible ownership. The staff member also confirmed that abandoned or dumped dogs are a significant issue.\n\nThese statements reflect a brief conversation, not a comprehensive or independently verified explanation of shelter intake patterns."
+      },
+      {
+        "title": "Additional context",
+        "body": "A major expansion of Stockton Animal Services is under construction. City project plans include an expanded public adoption lobby, veterinary facilities, and other improvements.\n\nThe existing cramped lobby may therefore be a temporary condition that the construction is intended to address.\n\nThe shelter remains in an industrial area with limited obvious opportunities for pleasant off-site dog walking nearby. For Doggie Day Out, transportation to another location may be an important practical consideration. Program transportation requirements have not yet been verified."
+      }
+    ],
+    "supports": [],
+    "action_signals": []
+  },
+  {
     "id": "crossover-2026-09-11-dog-crisis-cost-of-living",
     "gap_ids": [
       "dogs-safe-placement"
