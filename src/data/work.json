@@ -31,7 +31,15 @@
     "status": "in_progress",
     "type": "investigation",
     "started_at": "2026-08-27",
-    "updated_at": "2026-10-14",
+    "updated_at": "2026-10-15",
+    "project_ids": [
+      "canine-campus",
+      "stockton-animal-shelter-renovation",
+      "stockton-pet-wellness-adoption-center",
+      "animal-balance-spay-neuter-contract-2026",
+      "hard-luck-veterinary-staffing-2026",
+      "pathways-neighborhood"
+    ],
     "record_ids": [
       "crossover-2026-09-11-dog-crisis-cost-of-living",
       "crossover-2026-10-08-initial-barrier-care-space",
@@ -62,7 +70,10 @@
     "open_questions": [
       "Where do dogs get stuck between a street report and safe placement, and why?",
       "How do street response, shelter capacity, veterinary care, rescue, and pet-inclusive housing fit together?",
-      "Where could technology, intelligence, or better coordination remove a practical constraint so more dogs receive care?"
+      "Where could technology, intelligence, or better coordination remove a practical constraint so more dogs receive care?",
+      "What new capacity is actually becoming available, and when will it become operational?",
+      "Which barriers will each project relieve, and which will remain?",
+      "What practical help is needed to accelerate or operate each project?"
     ],
     "initial_map": {
       "status": "completed",
@@ -87,6 +98,7 @@
         "id": "shelter-foster-capacity",
         "title": "Shelter and foster capacity",
         "summary": "Examine where dogs wait for safe care and how shelter space, foster homes, recovery space, and everyday care affect movement through the system.",
+        "project_ids": ["canine-campus", "stockton-animal-shelter-renovation"],
         "open_questions": [
           "Where are dogs waiting, and what suitable foster or recovery space is missing?",
           "Which constraints could the proposed Canine Campus address, and which would remain?"
@@ -104,6 +116,7 @@
         "id": "veterinary-access",
         "title": "Veterinary care",
         "summary": "Investigate how sterilization, treatment, appointment availability, transport, cost, and recovery capacity affect safe placement.",
+        "project_ids": ["canine-campus", "stockton-animal-shelter-renovation", "stockton-pet-wellness-adoption-center", "animal-balance-spay-neuter-contract-2026", "hard-luck-veterinary-staffing-2026"],
         "open_questions": [
           "Where do cost or appointment availability block care or placement?",
           "What happens between a spay/neuter appointment and a safe recovery placement?"
@@ -120,6 +133,7 @@
         "id": "public-access-coordination",
         "title": "Public access and coordination",
         "summary": "Test whether residents and volunteers can reach the right people, get clear instructions, and participate. Communication or onboarding friction remains a hypothesis until verified.",
+        "project_ids": ["canine-campus", "stockton-animal-shelter-renovation", "stockton-pet-wellness-adoption-center"],
         "open_questions": [
           "Can residents obtain timely guidance when they report or find a dog?",
           "Where, if anywhere, do volunteer onboarding, scheduling, or coordination stall?"
@@ -134,6 +148,7 @@
         "id": "rescue-reunification-adoption",
         "title": "Rescue, reunification, and adoption",
         "summary": "Trace what helps or delays dogs leaving shelter care for reunification, rescue transfer, foster care, or adoption.",
+        "project_ids": ["stockton-pet-wellness-adoption-center"],
         "open_questions": [
           "What delays a dog that is ready for a safe placement?",
           "Which handoffs between the shelter, rescues, fosters, and adopters need support?",
@@ -149,6 +164,7 @@
         "id": "housing-prevention",
         "title": "Housing and prevention",
         "summary": "Investigate whether pet-inclusive housing and other practical support can keep people and dogs together and prevent a crisis.",
+        "project_ids": ["pathways-neighborhood"],
         "open_questions": [
           "Which housing or shelter rules prevent people and dogs from staying together?",
           "Which supports could prevent dogs from entering crisis?",
@@ -203,6 +219,22 @@
     "organization_ids": [
       "stockton-street-dogs",
       "stockton-animal-services"
+    ],
+    "contact_questions": [
+      {
+        "organization_id": "stockton-street-dogs",
+        "status": "to_ask",
+        "questions": [
+          "What is the current status of Canine Campus?",
+          "Has a location been secured?",
+          "What are the next milestones and obstacles?",
+          "What other major developments are underway?",
+          "What help is most needed right now?",
+          "Are there specific approved tasks with a location, schedule, supplies, and participation requirements?",
+          "If five new volunteers were available tomorrow, what could they actually do?",
+          "What coordination problems prevent willing people from helping?"
+        ]
+      }
     ]
   },
   {

@@ -233,6 +233,8 @@ export interface WorkRecord {
   report_record_ids?: string[];
   learning_record_ids?: string[];
   organization_ids?: string[];
+  project_ids?: string[];
+  contact_questions?: Array<{ organization_id: string; status: "to_ask"; questions: string[] }>;
   record_ids: string[];
 }
 
@@ -241,7 +243,32 @@ export interface WorkThread {
   title: string;
   summary: string;
   open_questions?: string[];
+  project_ids?: string[];
   record_ids: string[];
+}
+
+export type ProjectStage = "proposed" | "funded" | "under_development" | "operational" | "completed" | "unknown";
+export type ProjectOperationalStatus = "operational" | "partially_operational" | "not_operational" | "unknown";
+
+export interface CapacityProject {
+  id: string;
+  title: string;
+  description: string;
+  intended_outcome: string;
+  gap_ids: string[];
+  organization_ids: string[];
+  location: { address: string; verified_by: string } | null;
+  development_stage: ProjectStage;
+  operational_status: ProjectOperationalStatus;
+  expected_capacity_or_benefit: { description: string; status: "proposed" | "reported" | "verified"; evidence_record_ids: string[] } | null;
+  milestones: Array<{ date: string | null; status: "planned" | "in_progress" | "reported_complete" | "verified_complete" | "unknown"; description: string; evidence_record_ids: string[] }>;
+  procedure_tracking?: { planned: number | null; completed: number | null; capacity_change: string | null; period: string | null };
+  barrier_thread_ids: string[];
+  evidence_record_ids: string[];
+  source_urls?: string[];
+  last_verified_at: string | null;
+  open_questions: string[];
+  next_verification_step: string;
 }
 
 export interface OrgRecord {

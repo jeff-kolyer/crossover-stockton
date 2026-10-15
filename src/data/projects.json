@@ -1,0 +1,148 @@
+[
+  {
+    "id": "canine-campus",
+    "title": "Canine Campus",
+    "description": "Stockton Street Dogs / Street Dog Sanctuary proposes a campus for dogs without safe placement, including overflow and recovery care.",
+    "intended_outcome": "Increase safe dog-care and placement capacity, including space for dogs recovering from veterinary treatment.",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-street-dogs"],
+    "location": null,
+    "development_stage": "proposed",
+    "operational_status": "not_operational",
+    "expected_capacity_or_benefit": {
+      "description": "The proposal describes capacity for hundreds of dogs at a time; no funded or operating capacity is verified.",
+      "status": "proposed",
+      "evidence_record_ids": ["ssd-2026-10-07-canine-campus-details"]
+    },
+    "milestones": [],
+    "barrier_thread_ids": ["shelter-foster-capacity", "veterinary-access", "public-access-coordination"],
+    "evidence_record_ids": ["ssd-2026-07-30-canine-campus-proposal", "ssd-2026-10-07-canine-campus-details"],
+    "last_verified_at": "2026-10-07",
+    "open_questions": ["Has a site been secured?", "What funding and approvals exist?", "What are the next milestones and realistic opening dates?", "Which volunteer roles would be approved and actionable?"],
+    "next_verification_step": "Ask Stockton Street Dogs for the current site, funding, milestone, and participation status."
+  },
+  {
+    "id": "stockton-animal-shelter-renovation",
+    "title": "Stockton Animal Shelter expansion",
+    "description": "City renovation and expansion of the Stockton Animal Shelter, including planned care and public-access improvements.",
+    "intended_outcome": "Improve animal care, veterinary facilities, and adoption access; the net change in dog placement capacity is not yet established.",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "location": { "address": "1575 S. Lincoln Street, Stockton, CA", "verified_by": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C3BD8622-09D8-4C7A-8B67-A9D0A5948B42&ID=5654844" },
+    "development_stage": "under_development",
+    "operational_status": "not_operational",
+    "expected_capacity_or_benefit": {
+      "description": "Planned medical, isolation, rehabilitation, adoption-lobby, and other facility improvements; additional dog-care places have not been quantified.",
+      "status": "proposed",
+      "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"]
+    },
+    "milestones": [
+      { "date": "2026-10-14", "status": "in_progress", "description": "Crossover field visit observed the expansion under construction; this does not verify completion.", "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"] }
+    ],
+    "barrier_thread_ids": ["shelter-foster-capacity", "veterinary-access", "public-access-coordination"],
+    "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"],
+    "source_urls": ["https://stockton.legistar.com/LegislationDetail.aspx?GUID=C3BD8622-09D8-4C7A-8B67-A9D0A5948B42&ID=5654844", "https://stockton.legistar.com/LegislationDetail.aspx?GUID=1BC3D57E-04D3-4E09-9024-B1F3031D0131&ID=7743230"],
+    "last_verified_at": "2026-10-14",
+    "open_questions": ["What construction work remains and when will it be accepted?", "When will each new space open for use?", "How many additional dogs, if any, can be cared for at once?", "What staffing and operating resources are required?"],
+    "next_verification_step": "Request the latest construction schedule and operational capacity plan from Stockton Animal Services."
+  },
+  {
+    "id": "stockton-pet-wellness-adoption-center",
+    "title": "Pet Wellness & Adoption Center",
+    "description": "City of Stockton satellite animal resource center with Hard Luck Animal Welfare Advocates as a veterinary-services partner.",
+    "intended_outcome": "Expand access to veterinary, wellness, and off-site adoption services.",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services", "hard-luck-awa"],
+    "location": { "address": "1661 W. Fremont Street, Stockton, CA", "verified_by": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=5C3A1CB2-BC5A-4CA2-AE4C-95A1EC70C708&ID=7442543" },
+    "development_stage": "completed",
+    "operational_status": "unknown",
+    "expected_capacity_or_benefit": {
+      "description": "City plans describe expanded veterinary services and a calmer off-site adoption space; current service volume is unverified.",
+      "status": "proposed",
+      "evidence_record_ids": ["hlawa-2026-06-09-contract-extension"]
+    },
+    "milestones": [
+      { "date": "2025-11-12", "status": "reported_complete", "description": "City reported a grand-opening ceremony; this does not establish which services are currently available.", "evidence_record_ids": [] }
+    ],
+    "barrier_thread_ids": ["veterinary-access", "rescue-reunification-adoption", "public-access-coordination"],
+    "evidence_record_ids": ["hlawa-2026-06-09-contract-extension"],
+    "source_urls": ["https://stockton.legistar.com/LegislationDetail.aspx?GUID=5C3A1CB2-BC5A-4CA2-AE4C-95A1EC70C708&ID=7442543", "https://stockton.legistar.com/LegislationDetail.aspx?GUID=40A2C068-BCBD-48E6-B8FE-408575DC3141&ID=7662161", "https://www.linkedin.com/posts/city-of-stockton_2025-fremont-st-animal-wellness-center-ribbon-activity-7399143281156292608-gMAE"],
+    "last_verified_at": "2026-10-15",
+    "open_questions": ["Which wellness, surgery, and adoption services are currently available?", "What are the hours, eligibility, appointment rules, and actual service volumes?", "What additional capacity is attributable to this center rather than existing contracts?"],
+    "next_verification_step": "Confirm current services, schedules, staffing, and completed procedures with Stockton Animal Services and Hard Luck."
+  },
+  {
+    "id": "animal-balance-spay-neuter-contract-2026",
+    "title": "Animal Balance spay/neuter contract",
+    "description": "Separate three-month City contract with Animal Balance for high-volume shelter spay/neuter services.",
+    "intended_outcome": "Reduce the shelter sterilization backlog and shorten delays before safe placement.",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "location": null,
+    "development_stage": "funded",
+    "operational_status": "unknown",
+    "expected_capacity_or_benefit": {
+      "description": "Contract called for at least 200 procedures in three months; procedures completed and sustained capacity are unknown.",
+      "status": "proposed",
+      "evidence_record_ids": ["sas-2026-01-13-spay-neuter-capacity"]
+    },
+    "procedure_tracking": { "planned": 200, "completed": null, "capacity_change": null, "period": "Three-month contract approved 2026-01-13" },
+    "milestones": [
+      { "date": "2026-01-13", "status": "reported_complete", "description": "City approved a three-month Animal Balance agreement; delivery remains unverified.", "evidence_record_ids": ["sas-2026-01-13-spay-neuter-capacity"] }
+    ],
+    "barrier_thread_ids": ["veterinary-access", "shelter-foster-capacity"],
+    "evidence_record_ids": ["sas-2026-01-13-spay-neuter-capacity"],
+    "last_verified_at": "2026-08-21",
+    "open_questions": ["How many procedures were completed, by date and species?", "Did the agreement clear any backlog?", "Was capacity retained after the three-month term?"],
+    "next_verification_step": "Obtain the Animal Balance contract performance report and reconcile planned versus completed procedures."
+  },
+  {
+    "id": "hard-luck-veterinary-staffing-2026",
+    "title": "Hard Luck veterinary staffing expansion",
+    "description": "City extension of its Hard Luck Animal Welfare Advocates agreement, with four additional positions; separate from the Animal Balance procedure contract.",
+    "intended_outcome": "Increase veterinary and animal-care staffing available to Stockton Animal Services and related services.",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services", "hard-luck-awa"],
+    "location": null,
+    "development_stage": "funded",
+    "operational_status": "unknown",
+    "expected_capacity_or_benefit": {
+      "description": "Four additional contract positions were authorized; filled positions, procedure counts, and net capacity remain unknown.",
+      "status": "proposed",
+      "evidence_record_ids": ["hlawa-2026-06-09-contract-extension"]
+    },
+    "procedure_tracking": { "planned": null, "completed": null, "capacity_change": null, "period": "One-year extension approved 2026-06-09" },
+    "milestones": [
+      { "date": "2026-06-09", "status": "reported_complete", "description": "City approved a one-year extension and four additional positions; hiring and service delivery remain unverified.", "evidence_record_ids": ["hlawa-2026-06-09-contract-extension"] }
+    ],
+    "barrier_thread_ids": ["veterinary-access", "shelter-foster-capacity"],
+    "evidence_record_ids": ["hlawa-2026-06-09-contract-extension"],
+    "last_verified_at": "2026-08-21",
+    "open_questions": ["Were all four positions filled, and when?", "Which services and locations gained capacity?", "How many additional spay/neuter procedures or treatment appointments resulted?"],
+    "next_verification_step": "Confirm staffing and service outputs with the City and Hard Luck, keeping them separate from Animal Balance totals."
+  },
+  {
+    "id": "pathways-neighborhood",
+    "title": "Pathways Neighborhood",
+    "description": "Existing St. Mary's Community Services modular transitional-housing project, tracked here because housing access may affect whether people can remain with dogs.",
+    "intended_outcome": "Provide transitional housing and supportive services that help residents move toward permanent housing; Pathways pet admission is unverified.",
+    "gap_ids": ["dogs-safe-placement", "pet-inclusive-shelter", "low-barrier-housing-pathways"],
+    "organization_ids": ["st-marys-dining-room"],
+    "location": { "address": "545 W. Sonora Street, Stockton, CA", "verified_by": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/" },
+    "development_stage": "operational",
+    "operational_status": "operational",
+    "expected_capacity_or_benefit": {
+      "description": "Reported 268 transitional-housing beds and on-site support; the number of pet-inclusive placements, if any, is unknown.",
+      "status": "reported",
+      "evidence_record_ids": ["smcs-2026-06-17-pathways-268-beds"]
+    },
+    "milestones": [
+      { "date": "2026-06-17", "status": "reported_complete", "description": "St. Mary's held a Pathways open house and described the project as up and running.", "evidence_record_ids": ["smcs-2026-06-17-pathways-268-beds"] }
+    ],
+    "barrier_thread_ids": ["housing-prevention"],
+    "evidence_record_ids": ["smcs-2026-06-17-pathways-268-beds", "stockton-2025-pathways-operating-funds"],
+    "last_verified_at": "2026-08-22",
+    "open_questions": ["Does Pathways itself admit residents with dogs, and under what rules?", "Are there breed, size, vaccination, or behavior restrictions?", "How many residents with dogs have been served?"],
+    "next_verification_step": "Ask St. Mary's for Pathways-specific pet policy and actual pet-inclusive placements; do not infer them from campus-wide pet care."
+  }
+]
