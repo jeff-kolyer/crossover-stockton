@@ -13207,6 +13207,13 @@ p {
 .report-body section { border-top: 1px solid #dfe5df; padding-top: 24px; }
 .report-body h2, .report-related h2 { margin: 0 0 12px; color: #213228; font-family: var(--font-sans); font-size: var(--type-section-title-size); line-height: var(--type-section-title-leading); }
 .report-body p { margin: 0 0 13px; color: var(--type-body-color); font-size: 1.04rem; line-height: 1.72; }
+.report-visit { margin-top: 30px; }
+.report-visit > .gap-mobile-body { margin: 0; }
+.report-visit-notes { display: grid; gap: 16px; margin: 16px 0; }
+.report-visit-notes dt { color: #213228; font-weight: 700; }
+.report-visit-notes dd { margin: 4px 0 0; color: var(--type-body-color); line-height: var(--type-body-leading); }
+.report-visit-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.report-visit-context { display: block; margin-top: 14px; color: #647067; line-height: 1.5; }
 .report-related { display: grid; gap: 13px; border-top: 1px solid #dfe5df; margin-top: 30px; padding-top: 24px; }
 .report-related > div { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; }
 .report-related strong { min-width: 115px; color: #536157; font-size: .82rem; text-transform: uppercase; letter-spacing: .05em; }

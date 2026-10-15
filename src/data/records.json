@@ -53,7 +53,26 @@
     "image": "/images/reports/stockton-animal-services-first-visit.webp",
     "image_alt": "AI-generated reconstruction of Stockton Animal Services and the shelter expansion, based on January 2026 Street View imagery",
     "image_caption": "AI-generated reconstruction of Stockton Animal Services and the shelter expansion, based on January 2026 Street View imagery.",
-    "location": "Stockton Animal Services, 1575 S. Lincoln Street, Stockton, California",
+    "location": "Stockton Animal Services, 1575 S. Lincoln Street, Stockton, CA 95206",
+    "map_url": "https://www.google.com/maps/search/?api=1&query=1575%20S.%20Lincoln%20Street%2C%20Stockton%2C%20CA%2095206",
+    "visit_notes": [
+      {
+        "title": "Parking",
+        "body": "We parked on the street, where plenty of spaces were available during our visit. We left the shelter's parking spaces available for visitors arriving with animals."
+      },
+      {
+        "title": "Finding the entrance",
+        "body": "The public shelter entrance was difficult to locate. It is tucked beside the construction area, with access from the parking lot."
+      },
+      {
+        "title": "Arriving with a dog",
+        "body": "Posted instructions directed visitors to keep their dog in the car and enter the shelter first. Check with staff before bringing an animal inside. Do not leave an animal unattended in a vehicle when heat or other conditions could make it unsafe; call ahead for guidance."
+      },
+      {
+        "title": "Inside the shelter",
+        "body": "The lobby was cramped and congested during our visit. City plans include a new public adoption lobby as part of the ongoing expansion."
+      }
+    ],
     "source": {
       "publisher": "Crossover Stockton / Jeff Kolyer",
       "type": "firsthand_account"

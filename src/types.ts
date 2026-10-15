@@ -374,6 +374,8 @@ export interface EvidenceRecord {
   report_record_ids?: string[];
   action_ids?: string[];
   location?: string;
+  map_url?: string;
+  visit_notes?: Array<{ title: string; body: string }>;
   sections?: Array<{ title: string; body: string }>;
   supports?: string[];
   action_signals?: string[];
