@@ -136,7 +136,8 @@
         "summary": "Trace what helps or delays dogs leaving shelter care for reunification, rescue transfer, foster care, or adoption.",
         "open_questions": [
           "What delays a dog that is ready for a safe placement?",
-          "Which handoffs between the shelter, rescues, fosters, and adopters need support?"
+          "Which handoffs between the shelter, rescues, fosters, and adopters need support?",
+          "How often do behavioral problems contribute to dog surrenders, and what training, assessment, or other support could prevent surrender or enable safe placement?"
         ],
         "record_ids": [
           "ssd-standing-foster-adopt",
@@ -150,7 +151,8 @@
         "summary": "Investigate whether pet-inclusive housing and other practical support can keep people and dogs together and prevent a crisis.",
         "open_questions": [
           "Which housing or shelter rules prevent people and dogs from staying together?",
-          "Which supports could prevent dogs from entering crisis?"
+          "Which supports could prevent dogs from entering crisis?",
+          "How often do housing and insurance breed restrictions prevent people from keeping or adopting dogs in Stockton?"
         ],
         "record_ids": [
           "crossover-2026-10-08-initial-barrier-pet-housing",
