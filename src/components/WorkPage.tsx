@@ -7,6 +7,7 @@ import type { EvidenceRecord, GapRecord, OrgRecord, WorkRecord } from "../types"
 import type { ReactNode } from "react";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import { OrganizationCard } from "./OrganizationCard";
+import { DogsResearchContent } from "./DogsResearchContent";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -48,7 +49,7 @@ export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenRepo
               <span className="work-page-kicker">{pageKindLabel(item)}</span>
               <h1>{item.title}</h1>
               <p className="gap-mobile-body">{item.summary}</p>
-              <div className="work-page-meta"><span className={`gap-work-status is-${item.status}`}>{workStatusLabel(item.status)}</span>{item.updated_at && <span>Updated {formatDate(item.updated_at)}</span>}</div>
+              <div className="work-page-meta"><span className={`gap-work-status is-${item.status}`}>{item.page_kind === "research" && item.status === "in_progress" ? "Ongoing" : workStatusLabel(item.status)}</span>{item.page_kind === "research" && item.last_reviewed_at ? <span>Last reviewed {formatDate(item.last_reviewed_at)}</span> : item.updated_at && <span>Updated {formatDate(item.updated_at)}</span>}</div>
             </div>
             {nextStep && <section className="work-next-step"><strong>Next step: {nextStep.title}</strong><p className="gap-mobile-body">{nextStep.summary}</p></section>}
           </section>
@@ -68,7 +69,7 @@ function WorkContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (
   const fieldReports = selected(item.report_record_ids).filter((record) => record.record_type === "field_report");
   const orgs = (item.organization_ids ?? []).map((id) => organizations.find((org) => org.id === id)).filter((org): org is OrgRecord => Boolean(org));
 
-  if (item.page_kind === "research") return <div className="work-page-content"><WorkSection title="Review records" icon={<FileText size={20} />}><RecordList records={evidence} /></WorkSection><Questions questions={item.open_questions} /></div>;
+  if (item.page_kind === "research") return <DogsResearchContent item={item} onOpenReport={onOpenReport} />;
   if (item.page_kind === "investigation") return <div className="work-page-content"><WorkSection title="Initial map" icon={<MapPin size={20} />}><div className="work-map-note"><CheckCircle2 size={20} /><span className="gap-mobile-body">{item.initial_map?.summary}</span></div></WorkSection>{fieldReports.length > 0 && <WorkSection title="Firsthand field reports" icon={<FileText size={20} />}><p className="gap-mobile-body">The October 14 visit informs our questions about street response and intake, shelter and foster capacity, and public access and coordination. It does not establish a systemic finding.</p><RecordList records={fieldReports} onOpenReport={onOpenReport} /></WorkSection>}<WorkSection title="Barrier threads" icon={<MessageCircle size={20} />}><div className="work-thread-list">{(item.threads ?? []).map((thread) => <details key={thread.id}><summary>{thread.title}</summary><p className="gap-mobile-body">{thread.summary}</p><Questions questions={thread.open_questions} /><RecordList records={selected(thread.record_ids)} onOpenReport={onOpenReport} /></details>)}</div></WorkSection><WorkSection title="Learning" icon={<ClipboardList size={20} />}><RecordList records={learning} /></WorkSection><Questions questions={item.open_questions} /><EvidenceSection records={evidence} /></div>;
   return <div className="work-page-content"><WorkSection title="Progress" icon={<ClipboardList size={20} />}><ActivityTable records={activity} onOpenReport={onOpenReport} /></WorkSection>{orgs.length > 0 && <WorkSection title="Organizations contacted" icon={<Users size={20} />}><div className="organizations-grid">{orgs.map((org) => <OrganizationCard org={org} key={org.id} />)}</div></WorkSection>}{learning.length > 0 && <WorkSection title="Learning" icon={<MessageCircle size={20} />}><RecordList records={learning} /></WorkSection>}<Questions questions={item.open_questions} /></div>;
 }
