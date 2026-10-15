@@ -1,183 +1,57 @@
 # Crossover Stockton — Backlog
 
-A living list of gaps to investigate, verify, try, and move toward **IMPROVING**.
+Practical tasks for investigating unmet needs and taking real-world action.
 
-## Current focus: October 14 shelter visit and field report
+## Next actions
 
-- [ ] **October 14:** Visit Stockton Animal Services, submit the volunteer application, ask about Doggie Day Out, and learn how dogs move from street response and intake to safe placement.
-- [ ] Record who we spoke with, what we directly observed, what staff said, and what remains unverified. Keep public complaints separate from confirmed findings.
-- [ ] Publish one firsthand field report after the visit, including any access or coordination friction. Add an October 14 activity record and link the report only after the visit happens.
-- [ ] Use the report to update the six investigation threads and identify one responder-confirmed constraint worth addressing.
+### 1. Stockton Street Dogs — street outreach
 
-The activity page records what Crossover did; the investigation page records what we learned about the system and what could improve it.
+- [x] Submit volunteer application — October 7, 2026.
+- [ ] Follow up on the application and ask to join an experienced street feeding or outreach activity.
+- [ ] Ask what help is most useful now, including whether volunteers can assist with feeding, supplies, transportation, or other direct care.
+- [ ] Arrange a first activity with Stockton Street Dogs.
+- [ ] Ask whether the dog food already purchased would be useful and coordinate a handoff if appropriate.
+- [ ] Document the activity or any obstacle preventing participation.
 
-- [x] Submit the Stockton Street Dogs volunteer application — October 7, 2026
-- [ ] Record their response, named contact, and any next step
-- [ ] If there is no response, send one brief follow-up after 7 days
-- [ ] Make one firsthand attempt: volunteer shift, outreach run, Canine Campus visit, supply handoff, or another activity they recommend
-- [ ] Turn the attempt—including friction or failure—into the first field report
+### 2. Stockton Animal Services — Doggie Day Out
 
-The governing question is: **What happened to the gap because Crossover showed up?**
+- [x] Send initial volunteer inquiry — October 12, 2026.
+- [x] Visit Stockton Animal Services and submit volunteer application — October 14, 2026.
+- [x] Publish first field report — October 14, 2026.
+- [ ] Follow up if no response arrives by the October 18 review.
+- [ ] Confirm Doggie Day Out registration, orientation, and participation requirements.
+- [ ] Arrange and complete the first Doggie Day Out activity.
+- [ ] Document the experience and any participation barriers.
 
-## This week's priorities — October 12–18, 2026
+Field report: https://crossoverstockton.org/reports/crossover-2026-10-14-sas-first-visit/
 
-- [x] **October 12:** Send the initial Doggie Day Out inquiry through the [official Stockton Animal Services volunteer page](https://www.stocktonca.gov/services/animal_services/volunteer.php). Asked about sign-up, requirements, paperwork, and orientation. Awaiting response.
-- [ ] During the October 14 visit, complete and submit the Stockton Animal Services volunteer application; record the submission date and outcome.
-- [ ] Complete Doggie Day Out registration and orientation once requirements are confirmed.
-- [ ] Arrange and complete the earliest feasible outing; record the actual route and any friction.
-- [ ] Track the inquiry response this week. If no reply arrives by the October 18 review, send one concise follow-up; record the reply and replace the pending next step with the confirmed action and date.
-- [ ] **By October 14:** Check the Stockton Street Dogs volunteer-application outcome. If there is no reply, send one concise follow-up asking how to begin a useful volunteer activity.
-- [ ] **This week:** Complete one firsthand activity, if available. If access is blocked, document the attempt precisely and identify the next reachable action.
-- [ ] **This week:** Obtain one responder-grounded answer about which barrier most limits help now and what specific support would release capacity. Include how the Canine Campus and pet-inclusive housing connect.
-- [ ] **By October 18:** Publish the October 14 field report and update the investigation threads it informs. Record what happened, what remains uncertain, and one practical intervention to test only if evidence supports it.
+### 3. Stockton Animal Services — shelter expansion
 
-### Contact log
+- [ ] Verify the current construction schedule and expected opening.
+- [ ] Confirm what additional shelter, veterinary, and public-access capacity the expansion will provide.
+- [ ] Identify which constraints may remain after completion.
+- [ ] Record meaningful changes in the investigation.
 
-- **October 12, 2026 — Stockton Animal Services / Doggie Day Out:** Emailed asking about sign-up, requirements, paperwork, and orientation. **Status:** Awaiting response. No field report yet. **Next action:** Record the reply, confirm registration and orientation steps, then arrange the earliest feasible outing. Check at the October 18 review and follow up if unanswered. **Activity record:** `crossover-2026-10-12-doggie-day-out-inquiry` in Direct conversations and field visits.
+### 4. Investigation follow-ups
 
-## Critical gap: too many dogs still on the street
+- [ ] Ask Stockton Street Dogs which constraint currently most limits their work.
+- [ ] Verify the current status and intended role of the Canine Campus.
+- [ ] Obtain updated Stockton Animal Services intake, outcome, and capacity figures.
+- [ ] Identify one small intervention that a responding organization actually needs and Crossover can attempt.
 
-### What we know so far
+## Later
 
-- [x] Research Stockton Street Dogs
-- [x] Research Stockton Animal Services
-- [x] Research Hard Luck Animal Welfare Advocates
-- [x] Identify the proposed Canine Campus as a potentially important part of the response
-- [x] Recognize spay/neuter and veterinary access as a healthcare-access problem: cost, appointments, transportation, recovery space, and fragmented services
-- [ ] Verify the current status, timeline, funding, capacity, and operating model of the Canine Campus
-- [ ] Verify the status and role of any planned mobile veterinary clinic
+- [ ] Arrange a firsthand visit or activity with Hard Luck Animal Welfare Advocates.
+- [ ] Investigate practical barriers to veterinary and spay/neuter access.
+- [ ] Investigate pet-inclusive housing and shelter barriers.
+- [ ] Explore a Key Entities approach for important organizations, starting with Stockton Animal Services and Stockton Street Dogs. Define the information needed before creating new pages.
+- [ ] Test a specific AI or automation opportunity only after a responder identifies a real coordination burden.
 
-### Complete the system map
+## Working rules
 
-Track these as one connected investigation, not as separate projects. For each thread, record: current state, responsible organization, evidence, open question, next action, and last contact.
-
-- [ ] Street outreach and immediate safety
-- [ ] Canine Campus and overflow capacity
-- [ ] Spay/neuter and veterinary access
-- [ ] Volunteer coordination and public participation
-- [ ] Foster, rescue transfer, reunification, and adoption
-- [ ] Pet-inclusive homeless housing and Safe Grounds
-
-### Questions that can reveal the real constraint
-
-- [ ] Where are dogs getting stuck now: the street, shelter intake, veterinary care, recovery, foster, rescue transfer, reunification, adoption, or staying with their people?
-- [ ] What single constraint most limits safe placement?
-- [ ] What would change tomorrow if that constraint disappeared?
-- [ ] What prevents willing people from fostering, adopting, volunteering, or providing temporary care?
-- [ ] What do responders track that the public does not see?
-- [ ] What would responders themselves accept as evidence that the gap is **IMPROVING**?
-
-## Stockton Street Dogs
-
-### Awaiting response
-
-- [x] Submit volunteer application
-- [ ] Ask whether it is possible to observe or join a street-dog feeding or outreach run
-- [ ] Ask what help is useful for a new volunteer right now
-- [ ] Ask where dogs listed for adoption are physically housed
-- [ ] Ask what resource or capacity is currently most scarce
-- [ ] Arrange the handoff of the dog food already purchased, based on their guidance
-
-### Canine Campus and housing connection
-
-- [ ] Ask how the Canine Campus is intended to function day to day
-- [ ] Confirm whether it will provide overflow, spay/neuter recovery, medical recovery, rescue networking, continuous staffing, and public volunteer opportunities
-- [ ] Ask which parts are funded, permitted, under construction, or still conceptual
-- [ ] Ask how the Canine Campus relates to Safe Grounds, homeless housing work, and people who cannot enter housing or shelter with their dogs
-- [ ] Ask whether a shared site or coordinated model could keep people and animals together while connecting both to care
-- [ ] Identify one useful role Crossover could test without duplicating existing work
-
-## Direct field work
-
-- [ ] Complete one SSD activity or precisely document why it could not be completed
-- [ ] Make one firsthand attempt through Stockton Animal Services: Doggie Day Out, dog walking, fostering, or another available action
-- [ ] Attend or observe one Hard Luck / Stockton Animal Services community activity
-- [ ] Speak with at least one responder about the present bottleneck
-- [ ] Complete one small, responder-confirmed intervention and record the result
-
-## Supporting desk work
-
-Desk work supports field action; it is not evidence that the gap improved.
-
-### Evidence and records
-
-- [ ] Create a contact/activity log with date, organization, person, request, response, commitment, follow-up date, and evidence link
-- [ ] Add or verify current Stockton Animal Services kennel, intake, outcome, and capacity statistics
-- [ ] Document unanswered contacts and unsuccessful attempts, not only successes
-- [ ] Save receipts, observations, responder statements, photos when appropriate, and source links
-- [ ] Feed verified findings back into the gap page
-
-### Publishing and site
-
-- [ ] Publish the first field report: what we tried, what happened, what was difficult, what surprised us, and what comes next
-- [ ] Refine each responding organization’s role only when new evidence changes the picture
-- [ ] Surface current events or volunteer opportunities when they create a concrete public action
-- [ ] Make only site changes needed to display field evidence or fix broken information
-- [ ] Do not redesign the site while the field investigation is the priority
-
-## Stockton Animal Services
-
-- [x] Send initial Doggie Day Out inquiry — October 12, 2026
-- [ ] Record the response and confirmed next action; follow up if unanswered at the October 18 review
-- [ ] Complete and submit the Stockton Animal Services volunteer application; record the submission date and outcome
-- [ ] Complete Doggie Day Out orientation
-- [ ] Try Doggie Day Out
-- [ ] Learn how the foster program works in practice
-- [ ] Ask what currently limits shelter capacity most
-- [ ] Ask how rescue transfers work and where those dogs go
-- [ ] Understand what happens when owner surrenders are paused
-
-## Hard Luck Animal Welfare Advocates
-
-- [ ] Watch for the next public event or Pup Pick of the Week
-- [ ] Learn more about Hard Luck’s veterinary role inside the municipal shelter system
-- [ ] Ask what veterinary capacity is still scarce
-- [ ] Observe whether off-site exposure leads to foster, adoption, or faster placement
-
-## Post-scarcity technology investigation
-
-Crossover is exploring how intelligence, automation, and abundant capacity can relieve the burden around care so people have more time to connect. The aim is to **close the distance between people who want to help and the good that needs to be done**.
-
-- [ ] Map preventable surrender causes: food, veterinary bills, housing rules, short-term boarding, behavior help, transportation, and crisis support
-- [ ] Explore a distributed foster network with better matching and support for food, veterinary care, transport, training, insurance, and backup coverage
-- [ ] Explore faster reunification through shared records, microchips, visual matching, and coordinated lost-and-found information
-- [ ] Explore mobile or low-cost spay/neuter capacity, scheduling, transport, and recovery support
-- [ ] Explore regional capacity coordination across shelters, rescues, fosters, veterinary providers, and sanctuaries
-- [ ] Test whether AI can reduce intake paperwork, scheduling, matching, follow-up, public communication, and other coordination friction
-- [ ] Explore a public “dog commons” model: walks, visits, day outings, training, short-term fostering, and low-barrier connection around the Canine Campus
-- [ ] Use intake patterns and responder knowledge to identify hotspots and intervene before animals enter crisis
-- [ ] Separate the human care that should be protected from surrounding labor that technology can remove
-- [ ] Ask how successful existing approaches can scale before inventing something new
-
-Keep the principles:
-
-- **Automate the labor. Preserve the connection.**
-- **Meet reality, not legacy assumptions.**
-- **Redesign systems for care.**
-
-## Evidence required for IMPROVING
-
-Activity alone—research, page changes, applications, donations, or publicity—does not change the status. Look for verified movement such as:
-
-- [ ] Fewer dogs remaining on the street or entering crisis
-- [ ] More accessible spay/neuter or veterinary appointments
-- [ ] More usable foster, recovery, shelter, or sanctuary capacity
-- [ ] Shorter time from intake to reunification, foster, transfer, or adoption
-- [ ] Fewer people separated from animals because housing or shelter excludes pets
-- [ ] A responder-confirmed constraint removed for a sustained period
-
-## Near-term priorities
-
-1. Track the Stockton Street Dogs application response and secure one concrete next step.
-2. Conduct one firsthand field activity or document the exact barrier that prevents it.
-3. Ask how the Canine Campus, veterinary access, and pet-inclusive homeless housing fit together.
-4. Create the six-thread system map and contact/activity log.
-5. Publish one concise field report based on reality encountered, not plans alone.
-
-## Decisions and follow-ups not to miss
-
-- Decide which field action receives a real calendar commitment.
-- Set the follow-up date for Stockton Street Dogs if no response arrives.
-- Decide whether the dogs gap needs a more precise sub-gap once the actual bottleneck is known.
-- Do not present the Canine Campus features or timeline as settled until directly verified.
-- Define the first measurable status-change signal with a responder, then track it consistently.
+- Prioritize direct participation and firsthand evidence.
+- Record what happened, including unanswered requests and unsuccessful attempts.
+- Keep detailed investigation findings in the investigation and evidence records, not this backlog.
+- Publish field reports when an activity produces useful firsthand information.
+- Do not treat completed activity as proof that a gap is improving.
+- Avoid unnecessary website work while field activities are the priority.
