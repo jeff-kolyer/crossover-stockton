@@ -307,3 +307,9 @@ The goal is a system where **more of reality can be seen without losing accounta
 Work pages may include `activity` records for user-reported actions and dated outcomes, and `finding` records for initial AI-assisted synthesis. Activities use `occurred_at`, `recorded_at`, `work_id`, optional `outcome`, and `evidence_status: self_reported`. Findings use `recorded_at`, `work_id`, optional `thread_id`, `basis_record_ids`, and `evidence_status: initial_assessment`.
 
 These records are internal work history and do not enter the general Updates feed automatically. Initial assessments must be labeled as such, retain their supporting record IDs, and must not be presented as firsthand verification or evidence that a gap is improving. Internal sources such as `ai_assisted_synthesis` and `firsthand_account` do not require a URL. A dated awaiting-response outcome describes the state as of its stated date; it must not be rolled forward automatically.
+
+## Work-page next steps
+
+An **Activity** next step is a concrete action Crossover commits to do, with an observable outcome. Write it as something we will do, not an aspiration, a list of possibilities, or an activity that depends on an unconfirmed invitation. Track pending replies and participation requirements separately. If the action is blocked, record the attempt and what prevented completion.
+
+An **Investigation** next step should name a bounded evidence task and the result it aims to produce. Distinguish proposed, approved, under-construction, and operating improvements. Estimate future capacity or combined effects only when evidence supports them; a plan is not an outcome.
