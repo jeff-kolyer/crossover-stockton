@@ -25,6 +25,9 @@ for (const project of projects) {
   if (!operationalStatuses.has(project.operational_status)) errors.push(`${project.id}: invalid operational status`);
   if (!fundingStatuses.has(project.funding_status)) errors.push(`${project.id}: invalid funding status`);
   if (!project.last_verified_at) errors.push(`${project.id}: missing verification date`);
+  for (const field of ["headline", "how_it_helps", "not_yet_verified"]) {
+    if (typeof project.capacity_summary?.[field] !== "string" || !project.capacity_summary[field].trim()) errors.push(`${project.id}: missing capacity summary ${field}`);
+  }
   references(project.id, project.gap_ids, gapIds, "gap");
   references(project.id, project.organization_ids, orgIds, "organization");
   references(project.id, project.evidence_record_ids, recordIds, "record");

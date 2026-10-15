@@ -1,4 +1,4 @@
-import { ArrowRight, FileText, Sparkles } from "lucide-react";
+import { ArrowRight, ChartNoAxesColumnIncreasing, FileText, HardHat, Network, Sparkles } from "lucide-react";
 import researchData from "../data/dogs-research.json";
 import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
@@ -62,10 +62,16 @@ function HorizontalChart({ title, categories }: { title: string; categories: Arr
 }
 
 function ProjectStatus({ project }: { project: CapacityProject }) {
-  const stage = project.development_stage.replace(/_/g, " ");
-  if (project.development_stage === "operational" && project.operational_status === "operational") return <span className="research-project-status">Operational</span>;
-  const operation = project.operational_status === "unknown" ? "Services unverified" : project.operational_status === "not_operational" ? "Not operational" : project.operational_status === "partially_operational" ? "Partly operational" : "Operational";
-  return <span className="research-project-status">{stage} · {operation}</span>;
+  let label: string;
+  let tone: "is-neutral" | "is-in-progress" | "is-operational" = "is-neutral";
+  if (project.operational_status === "operational") { label = "Operating"; tone = "is-operational"; }
+  else if (project.development_stage === "proposed") label = "Proposed";
+  else if (project.development_stage === "under_development") { label = "Under construction"; tone = "is-in-progress"; }
+  else if (project.development_stage === "completed") label = "Services unverified";
+  else if (project.development_stage === "funded" && project.procedure_tracking?.planned != null && project.procedure_tracking.completed == null) label = "Delivery unverified";
+  else if (project.development_stage === "funded") label = "Authorized";
+  else label = "Services unverified";
+  return <span className={`research-project-status ${tone}`}>{label}</span>;
 }
 
 function ProjectSources({ project, onOpenReport }: { project: CapacityProject; onOpenReport: (id: string) => void }) {
@@ -86,8 +92,14 @@ function ProjectSources({ project, onOpenReport }: { project: CapacityProject; o
 
 function ProjectRow({ project, onOpenReport }: { project: CapacityProject; onOpenReport: (id: string) => void }) {
   const milestone = [...project.milestones].filter((entry) => entry.date).sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))[0];
-  const benefitLabel = project.development_stage === "funded" ? "Authorized target" : project.expected_capacity_or_benefit?.status === "proposed" ? "Proposed benefit" : "Reported benefit";
-  return <article className="research-project"><div className="research-project-top"><h3>{project.title}</h3><ProjectStatus project={project} /></div>{project.expected_capacity_or_benefit && <p className="research-project-quantity"><span>{benefitLabel}</span>{project.expected_capacity_or_benefit.description}</p>}<p className="gap-mobile-body">{project.demand_contribution || project.intended_outcome}</p>{milestone && <p className="research-project-milestone"><strong>Latest milestone · {formatDate(milestone.date)}:</strong> {milestone.description}</p>}<p className="research-project-actual"><strong>Delivered capacity:</strong> {project.actual_additional_capacity?.description || "Additional capacity or service output has not been verified."}</p><ProjectSources project={project} onOpenReport={onOpenReport} /></article>;
+  return <article className="research-project">
+    <div className="research-project-top"><h3>{project.title}</h3><ProjectStatus project={project} /></div>
+    <p className="research-project-headline">{project.capacity_summary.headline}</p>
+    <p className="research-project-how gap-mobile-body">{project.capacity_summary.how_it_helps}</p>
+    <p className="research-project-unverified"><strong>Not yet verified:</strong> {project.capacity_summary.not_yet_verified}</p>
+    {milestone && <p className="research-project-milestone"><strong>Latest milestone · {formatDate(milestone.date)}:</strong> {milestone.description}</p>}
+    <ProjectSources project={project} onOpenReport={onOpenReport} />
+  </article>;
 }
 
 export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
@@ -106,12 +118,12 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
   const selectedProjects = research.planned_improvements.project_ids.map((id) => projects.find((project) => project.id === id)).filter((project): project is CapacityProject => Boolean(project));
 
   return <div className="work-page-content research-content">
-    <Section title="What's New" icon={<Sparkles size={21} aria-hidden="true" />}>
+    <Section title="What's New" icon={<Sparkles size={20} aria-hidden="true" />}>
       <p className="research-section-intro gap-mobile-body">Meaningful changes found in the latest research review.</p>
       {research.latest_findings.length ? <div className="research-findings">{research.latest_findings.map((finding) => <article key={finding.id}><div className="research-finding-meta">Discovered {formatDate(finding.discovered_at)}</div><h3>{finding.finding}</h3><p className="gap-mobile-body">{finding.what_changed}</p><p className="research-finding-why">{finding.why_it_matters}</p><div className="research-sources">{finding.evidence_record_ids.map((id) => <SourceLink key={id} recordId={id} label="View supporting source" />)}</div></article>)}</div> : <p className="gap-mobile-body">No significant changes were found in the latest review.</p>}
     </Section>
 
-    <Section title="The Need in Detail">
+    <Section title="The Need in Detail" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />}>
       <p className="research-section-intro gap-mobile-body">The shelter's annual intake report shows the scale and mix of dogs entering its care.</p>
       <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
       <MetricSummary items={[{ label: "Total dog intake events", value: intakeTotal?.value }, { label: "Stray intake events", value: stray?.value }, { label: "Owner-surrender events", value: measurement("owner_surrender_intake")?.value }]} />
@@ -122,7 +134,7 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       {signal && <aside className="research-signal"><h3>More recent demand signal</h3><p className="gap-mobile-body">In {signal.reporting_period}, Stockton Streetdogs reported approximately {signal.current_range[0]}–{signal.current_range[1]} dumped-dog encounters per week, compared with roughly {signal.comparison_value_approximate} per week {signal.comparison_period}. This is an organizational report, not a citywide count, and is separate from shelter intake.</p><SourceLink recordId={signal.source_record_id} label="View Stockton Streetdogs report" /></aside>}
     </Section>
 
-    <Section title="The Current System">
+    <Section title="The Current System" icon={<Network size={20} aria-hidden="true" />}>
       <p className="research-section-intro gap-mobile-body">Reported dispositions show what happened to dogs leaving shelter care during the year.</p>
       <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
       <MetricSummary items={[{ label: "Rescue transfers", value: measurement("rescue_or_transfer")?.value }, { label: "Adoptions", value: measurement("adoption")?.value }, { label: "Returns to owners", value: measurement("return_to_owner")?.value }]} />
@@ -132,7 +144,7 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       <p className="research-limitation gap-mobile-body">Latest comparable 2025–2026 results, current shelter occupancy, and broader rescue-network outcomes have not yet been verified.</p>
     </Section>
 
-    <Section title="Improvements Underway">
+    <Section title="Improvements Underway" icon={<HardHat size={20} aria-hidden="true" />}>
       <p className="research-section-intro gap-mobile-body">These facilities and programs could increase care or prevent dogs from losing placement. Their stages and delivered results remain distinct.</p>
       <div className="research-project-list">{selectedProjects.map((project) => <ProjectRow key={project.id} project={project} onOpenReport={onOpenReport} />)}</div>
     </Section>

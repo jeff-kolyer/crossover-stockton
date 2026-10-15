@@ -11,6 +11,11 @@
     "operational_status": "not_operational",
     "funding_status": "unknown",
     "actual_additional_capacity": null,
+    "capacity_summary": {
+      "headline": "Potential capacity: Hundreds of dogs",
+      "how_it_helps": "Could provide overflow sheltering and recovery care for dogs waiting for safe placement.",
+      "not_yet_verified": "Site, funding, opening date, and usable operating capacity."
+    },
     "demand_contribution": "Could give dogs awaiting placement, shelter overflow, or medical recovery a safe care setting; none of that capacity is confirmed available.",
     "expected_capacity_or_benefit": {
       "description": "The proposal describes capacity for hundreds of dogs at a time; no funded or operating capacity is verified.",
@@ -37,6 +42,11 @@
     "funding_status": "contract_awarded",
     "funding_source_urls": ["https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"],
     "actual_additional_capacity": null,
+    "capacity_summary": {
+      "headline": "Planned: Expanded treatment and recovery facilities",
+      "how_it_helps": "New treatment, isolation, and rehabilitation space could improve care and help dogs move toward adoption.",
+      "not_yet_verified": "Completion and opening dates, net additional dog-care places, and effect on outcomes."
+    },
     "demand_contribution": "New treatment, isolation, rehabilitation, and public-access space could improve care and movement to adoption; net dog-place capacity and changed outcomes are unmeasured.",
     "expected_capacity_or_benefit": {
       "description": "Planned medical, isolation, rehabilitation, adoption-lobby, and other facility improvements; additional dog-care places have not been quantified.",
@@ -67,6 +77,11 @@
     "funding_status": "authorized",
     "funding_source_urls": ["https://stockton.legistar.com/LegislationDetail.aspx?GUID=5C3A1CB2-BC5A-4CA2-AE4C-95A1EC70C708&ID=7442543"],
     "actual_additional_capacity": null,
+    "capacity_summary": {
+      "headline": "Planned benefit: More veterinary and adoption services",
+      "how_it_helps": "Wellness care could help owners keep dogs, while off-site adoption space could help dogs leave shelter care.",
+      "not_yet_verified": "Services now available and additional veterinary or adoption output."
+    },
     "demand_contribution": "Accessible veterinary care could prevent avoidable surrender, while off-site adoptions could help dogs leave care; actual incremental service volume is unverified.",
     "expected_capacity_or_benefit": {
       "description": "City plans describe expanded veterinary services and a calmer off-site adoption space; current service volume is unverified.",
@@ -96,6 +111,11 @@
     "funding_status": "authorized",
     "funding_source_urls": ["https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search="],
     "actual_additional_capacity": null,
+    "capacity_summary": {
+      "headline": "Contract target: Approximately 200 pets",
+      "how_it_helps": "Completed sterilizations could reduce treatment backlogs and placement delays.",
+      "not_yet_verified": "Completed procedures, dog/cat split, and lasting capacity change."
+    },
     "demand_contribution": "If delivered, additional sterilizations could reduce backlog and future unplanned litters; completed procedures and effects on intake are unknown.",
     "expected_capacity_or_benefit": {
       "description": "Contract targeted approximately 200 pets across three clinic events; completed procedures and sustained capacity are unknown.",
@@ -125,6 +145,11 @@
     "funding_status": "authorized",
     "funding_source_urls": ["https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A"],
     "actual_additional_capacity": null,
+    "capacity_summary": {
+      "headline": "Authorized: 4 additional positions",
+      "how_it_helps": "Filled veterinary and animal-care positions could expand treatment and sterilization capacity.",
+      "not_yet_verified": "Whether positions were filled and how much additional care was delivered."
+    },
     "demand_contribution": "Filled veterinary positions could expand treatment and sterilization throughput, reducing delays before placement; filled posts and output are unknown.",
     "expected_capacity_or_benefit": {
       "description": "Four additional contract positions were authorized; filled positions, procedure counts, and net capacity remain unknown.",
@@ -154,6 +179,11 @@
     "funding_status": "operating_funds_allocated",
     "funding_source_urls": ["https://stockton.granicus.com/MinutesViewer.php?clip_id=9173&view_id=48"],
     "actual_additional_capacity": { "description": "Reported 268 transitional-housing beds; dog-inclusive placements and eligible dog capacity are unknown.", "status": "reported", "evidence_record_ids": ["smcs-2026-06-17-pathways-268-beds"] },
+    "capacity_summary": {
+      "headline": "Reported capacity: 268 housing beds",
+      "how_it_helps": "Transitional housing could help people remain with dogs if Pathways admits pets.",
+      "not_yet_verified": "Pathways dog-admission rules, dog-inclusive capacity, and actual placements."
+    },
     "demand_contribution": "Could help people and dogs remain together only if Pathways itself admits dogs; that policy and actual dog-inclusive placements are unverified.",
     "expected_capacity_or_benefit": {
       "description": "Provide transitional housing and on-site support toward permanent housing; pet-inclusive benefit remains unverified.",

@@ -266,6 +266,7 @@ export interface CapacityProject {
   funding_source_urls?: string[];
   expected_capacity_or_benefit: { description: string; status: "proposed" | "reported" | "verified"; evidence_record_ids: string[] } | null;
   actual_additional_capacity?: { description: string; status: "reported" | "verified"; evidence_record_ids: string[] } | null;
+  capacity_summary: { headline: string; how_it_helps: string; not_yet_verified: string };
   demand_contribution?: string;
   milestones: Array<{ date: string | null; status: "planned" | "in_progress" | "reported_complete" | "verified_complete" | "unknown"; description: string; evidence_record_ids: string[] }>;
   procedure_tracking?: { planned: number | null; completed: number | null; capacity_change: string | null; period: string | null };
