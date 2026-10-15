@@ -224,6 +224,8 @@ export interface WorkRecord {
   started_at?: string;
   completed_at?: string;
   updated_at?: string;
+  last_reviewed_at?: string;
+  research_data_id?: string;
   page_kind?: "research" | "investigation" | "activity";
   next_step?: string | { title: string; summary: string; action_id?: string };
   open_questions?: string[];
@@ -260,7 +262,11 @@ export interface CapacityProject {
   location: { address: string; verified_by: string } | null;
   development_stage: ProjectStage;
   operational_status: ProjectOperationalStatus;
+  funding_status?: "unknown" | "authorized" | "contract_awarded" | "operating_funds_allocated";
+  funding_source_urls?: string[];
   expected_capacity_or_benefit: { description: string; status: "proposed" | "reported" | "verified"; evidence_record_ids: string[] } | null;
+  actual_additional_capacity?: { description: string; status: "reported" | "verified"; evidence_record_ids: string[] } | null;
+  demand_contribution?: string;
   milestones: Array<{ date: string | null; status: "planned" | "in_progress" | "reported_complete" | "verified_complete" | "unknown"; description: string; evidence_record_ids: string[] }>;
   procedure_tracking?: { planned: number | null; completed: number | null; capacity_change: string | null; period: string | null };
   barrier_thread_ids: string[];
@@ -269,6 +275,43 @@ export interface CapacityProject {
   last_verified_at: string | null;
   open_questions: string[];
   next_verification_step: string;
+}
+
+export interface ResearchMeasurement {
+  id: string;
+  domain: "demand" | "current_results";
+  measure: string;
+  value: number;
+  unit: string;
+  species: "dog" | "cat" | "all_animals";
+  period_start: string;
+  period_end: string;
+  coverage_id: string;
+  evidence_status: "official_reported_actual" | "calculated_from_official" | "self_reported" | "planned_authorized" | "estimate";
+  source_record_id: string;
+  verified_at: string;
+  note?: string;
+}
+
+export interface DogsResearchBaseline {
+  id: string;
+  work_id: string;
+  gap_id: string;
+  last_reviewed_at: string;
+  report_path: string;
+  coverage: Record<string, string>;
+  latest_findings: Array<{
+    id: string;
+    finding: string;
+    discovered_at: string;
+    what_changed: string;
+    previous_state: string | null;
+    current_verified_state: string;
+    evidence_record_ids: string[];
+    why_it_matters: string;
+  }>;
+  measurements: ResearchMeasurement[];
+  planned_improvements: { project_ids: string[]; note: string };
 }
 
 export interface OrgRecord {

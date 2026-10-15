@@ -206,6 +206,25 @@
     ]
   },
   {
+    "id": "sas-2024-kennel-statistics",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": null,
+    "checked_at": "2026-10-15",
+    "record_type": "update",
+    "trust": "government",
+    "title": "City 2024 kennel report provides dog intake and outcome counts",
+    "summary": "Stockton Animal Services reports 3,786 dog intakes, including 3,106 stray intakes, and 3,742 dog dispositions in calendar 2024 across its multi-jurisdiction service area. These are period flows, not a count of dogs currently lacking placement; beginning and ending dog populations are not supplied.",
+    "source": {
+      "publisher": "City of Stockton Animal Services",
+      "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
+      "type": "government"
+    },
+    "work_id": "dogs-public-source-review",
+    "supports": ["dog-intake-demand", "dog-outcomes"],
+    "action_signals": []
+  },
+  {
     "id": "sas-2026-01-13-spay-neuter-capacity",
     "gap_ids": [
       "dogs-safe-placement"
@@ -218,7 +237,7 @@
     "record_type": "capacity_intervention",
     "trust": "government",
     "title": "City contracted for high-volume spay and neuter services",
-    "summary": "Stockton said stray animal intakes regularly exceed shelter capacity and that its standard operations could not clear the sterilization backlog, prompting a three-month contract for at least 200 spay/neuter procedures.",
+    "summary": "Stockton said stray animal intakes regularly exceed shelter capacity and that its standard operations could not clear the sterilization backlog, prompting a three-month Animal Balance contract designed for approximately 200 pets across three clinic events. Completed procedures were not reported.",
     "source": {
       "publisher": "City of Stockton",
       "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",

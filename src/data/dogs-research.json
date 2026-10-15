@@ -1,0 +1,96 @@
+{
+  "id": "dogs-research-baseline-2026-10",
+  "work_id": "dogs-public-source-review",
+  "gap_id": "dogs-safe-placement",
+  "last_reviewed_at": "2026-10-15",
+  "report_path": "docs/research/dogs-research-baseline-2026-10.md",
+  "coverage": {
+    "sas-service-area-2024": "Stockton Animal Services report covers County, Escalon, Lathrop, Lodi, Manteca, Out Of County, Ripon, Stockton, and Tracy; it is not a Stockton-city-only count."
+  },
+  "latest_findings": [
+    {
+      "id": "dogs-2026-10-15-official-2024-baseline",
+      "finding": "Official dog-specific intake and outcome counts are now captured for calendar 2024.",
+      "discovered_at": "2026-10-15",
+      "what_changed": "The research dataset moves from qualitative shelter-pressure evidence to an official annual baseline; this is a change in available research evidence, not a demonstrated 2026 change in shelter demand.",
+      "previous_state": "Existing dog-gap records described overcrowding but did not hold a reconciled dog-specific annual intake and outcome table.",
+      "current_verified_state": "The City report lists 3,786 dog intakes and 3,742 dog dispositions for 2024 across the shelter's multi-jurisdiction service area. These flows cannot establish year-end population or unmet citywide demand.",
+      "evidence_record_ids": ["sas-2024-kennel-statistics"],
+      "why_it_matters": "Research can now describe documented shelter throughput while keeping unmet need, geographic coverage, and newer trends separate."
+    },
+    {
+      "id": "dogs-2026-10-15-animal-balance-target-correction",
+      "finding": "The Animal Balance contract target is approximate and covers pets, not a verified number of completed dog surgeries.",
+      "discovered_at": "2026-10-15",
+      "what_changed": "Crossover's prior summary said at least 200 procedures; the City source describes approximately 200 pets across three clinic events.",
+      "previous_state": "The existing evidence summary characterized the target as at least 200 procedures.",
+      "current_verified_state": "City contract material specifies an approximate 200-pet target. Completed procedures and species split remain unknown.",
+      "evidence_record_ids": ["sas-2026-01-13-spay-neuter-capacity"],
+      "why_it_matters": "A planned mixed-species target cannot be presented as a completed or dog-only result."
+    }
+  ],
+  "measurements": [
+    { "id": "sas-2024-dog-intake-total", "domain": "demand", "measure": "all_reported_intakes", "value": 3786, "unit": "dog intake events", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "Includes 76 spay/neuter service intakes; not all intakes indicate a need for placement." },
+    { "id": "sas-2024-dog-intake-stray", "domain": "demand", "measure": "stray_intake", "value": 3106, "unit": "dog intake events", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-intake-owner-surrender", "domain": "demand", "measure": "owner_surrender_intake", "value": 203, "unit": "dog intake events", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-intake-confiscate", "domain": "demand", "measure": "confiscated_intake", "value": 251, "unit": "dog intake events", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-intake-spay-service", "domain": "demand", "measure": "spay_neuter_service_intake", "value": 76, "unit": "dog intake events", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "Service intake category, not proof that 76 surgeries were completed." },
+    { "id": "sas-2024-dog-intake-other", "domain": "demand", "measure": "other_intake_categories_combined", "value": 150, "unit": "dog intake events", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "calculated_from_official", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "Sum of adoption returns 35, born in care 40, euthanasia requests 29, rabies quarantine 43, and transfers in 3." },
+    { "id": "sas-2024-dog-outcome-total", "domain": "current_results", "measure": "all_reported_dispositions", "value": 3742, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "Includes boarding, return-to-owner-surrender, and spay/neuter release categories excluded from the report's percentage chart." },
+    { "id": "sas-2024-dog-outcome-adopted", "domain": "current_results", "measure": "adoption", "value": 1003, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-outcome-rescue-transfer", "domain": "current_results", "measure": "rescue_or_transfer", "value": 1507, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "May overlap with a receiving rescue's later adoption total; do not add across organizations." },
+    { "id": "sas-2024-dog-outcome-return-owner", "domain": "current_results", "measure": "return_to_owner", "value": 514, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "The report separately lists 57 RTOWSURR dispositions; they are not added here." },
+    { "id": "sas-2024-dog-outcome-euthanasia", "domain": "current_results", "measure": "euthanasia", "value": 514, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-outcome-died", "domain": "current_results", "measure": "died", "value": 50, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-outcome-missing", "domain": "current_results", "measure": "missing", "value": 53, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "official_reported_actual", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15" },
+    { "id": "sas-2024-dog-outcome-other", "domain": "current_results", "measure": "other_disposition_categories_combined", "value": 101, "unit": "dog outcome dispositions", "species": "dog", "period_start": "2024-01-01", "period_end": "2024-12-31", "coverage_id": "sas-service-area-2024", "evidence_status": "calculated_from_official", "source_record_id": "sas-2024-kennel-statistics", "verified_at": "2026-10-15", "note": "Sum of boarding 8, RTOWSURR 57, and spay/neuter release 36; reported separately from the six principal final-outcome categories." }
+  ],
+  "reported_signals": [
+    {
+      "id": "ssd-2026-09-dumped-encounters",
+      "measure": "dumped_dog_encounters_per_week",
+      "current_range": [3, 10],
+      "comparison_value_approximate": 1,
+      "comparison_period": "around September 2025",
+      "reporting_period": "September 2026",
+      "geography": "Stockton Street Dogs' reported field encounters in Stockton, with District 5 noted; not a citywide census",
+      "species": "dog",
+      "unit": "organization-reported encounters per week",
+      "evidence_status": "self_reported",
+      "source_record_id": "ssd-2026-09-29-dumped-dogs-surge",
+      "verified_at": "2026-10-15",
+      "note": "Do not add these encounters to shelter intake; dogs may overlap with shelter or rescue counts."
+    }
+  ],
+  "shelter_flow_reconciliation": {
+    "period_start": "2024-01-01",
+    "period_end": "2024-12-31",
+    "coverage_id": "sas-service-area-2024",
+    "intake_events": 3786,
+    "outcome_dispositions": 3742,
+    "beginning_dogs_in_care": null,
+    "ending_dogs_in_care": null,
+    "status": "not_reconcilable_from_published_report",
+    "reason": "The report lacks beginning and ending dog population and includes service intakes and non-placement dispositions. Intake and outcome cohorts differ within the year."
+  },
+  "planned_improvements": {
+    "project_ids": ["canine-campus", "stockton-animal-shelter-renovation", "stockton-pet-wellness-adoption-center", "animal-balance-spay-neuter-contract-2026", "hard-luck-veterinary-staffing-2026", "pathways-neighborhood"],
+    "note": "Project stage, funding, expected benefit, and delivered capacity live in projects.json; do not infer output from approval or ribbon cutting."
+  },
+  "research_records": [
+    { "record_id": "sas-2024-kennel-statistics", "origin": "public_official", "role": "quantitative baseline" },
+    { "record_id": "ssd-2026-09-29-dumped-dogs-surge", "origin": "organization_self_report", "role": "field-demand signal, not census" },
+    { "record_id": "crossover-2026-08-27-dog-placement-field-investigation", "origin": "crossover_firsthand", "role": "historical investigation context, not public-source count" }
+  ],
+  "missing_measurements": [
+    { "id": "monthly-2025-2026-dog-flow", "need": "Monthly 2025–2026 dog intakes and outcomes by category and service jurisdiction", "why": "Without comparable recent periods, current direction and seasonality cannot be verified." },
+    { "id": "shelter-dog-stock-capacity", "need": "Beginning and ending dogs in care, usable dog kennels, occupancy, foster population, and length of stay", "why": "Annual flows do not show current crowding or reconcile the dog population." },
+    { "id": "veterinary-actual-output", "need": "Completed dog/cat spay-neuter procedures, other treatments, appointment slots, waits, and filled veterinary positions by program", "why": "Contracts and authorized positions do not establish delivered treatment capacity." },
+    { "id": "rescue-unique-dogs", "need": "Unique dogs assisted, rescued, fostered, transferred, adopted, or treated by each rescue with handoff identifiers", "why": "Without linked counts, shelter transfers can be double-counted as rescue outcomes." },
+    { "id": "dog-inclusive-housing", "need": "Pathways-specific pet rules, usable dog-inclusive places, and actual people-with-dog placements", "why": "Total housing beds cannot be treated as dog-inclusive capacity." },
+    { "id": "project-incremental-output", "need": "Opening dates, net usable dog places, completed contract procedures, filled posts, and incremental service volumes for all six projects", "why": "Planned capacity cannot yet be compared with documented demand." }
+  ],
+  "source_access_notes": [
+    { "source_url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/", "checked_at": "2026-10-15", "result": "Both the embedded and direct Power BI views displayed 'This content isn't available' in the research environment; no 2025–2026 monthly figures were extracted." }
+  ]
+}

@@ -9,6 +9,9 @@
     "location": null,
     "development_stage": "proposed",
     "operational_status": "not_operational",
+    "funding_status": "unknown",
+    "actual_additional_capacity": null,
+    "demand_contribution": "Could give dogs awaiting placement, shelter overflow, or medical recovery a safe care setting; none of that capacity is confirmed available.",
     "expected_capacity_or_benefit": {
       "description": "The proposal describes capacity for hundreds of dogs at a time; no funded or operating capacity is verified.",
       "status": "proposed",
@@ -31,12 +34,17 @@
     "location": { "address": "1575 S. Lincoln Street, Stockton, CA", "verified_by": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C3BD8622-09D8-4C7A-8B67-A9D0A5948B42&ID=5654844" },
     "development_stage": "under_development",
     "operational_status": "not_operational",
+    "funding_status": "contract_awarded",
+    "funding_source_urls": ["https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"],
+    "actual_additional_capacity": null,
+    "demand_contribution": "New treatment, isolation, rehabilitation, and public-access space could improve care and movement to adoption; net dog-place capacity and changed outcomes are unmeasured.",
     "expected_capacity_or_benefit": {
       "description": "Planned medical, isolation, rehabilitation, adoption-lobby, and other facility improvements; additional dog-care places have not been quantified.",
       "status": "proposed",
       "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"]
     },
     "milestones": [
+      { "date": "2024-11-20", "status": "planned", "description": "City scheduled a groundbreaking after awarding the construction contract; the later field visit confirms work proceeded.", "evidence_record_ids": [] },
       { "date": "2026-10-14", "status": "in_progress", "description": "Crossover field visit observed the expansion under construction; this does not verify completion.", "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"] }
     ],
     "barrier_thread_ids": ["shelter-foster-capacity", "veterinary-access", "public-access-coordination"],
@@ -56,6 +64,10 @@
     "location": { "address": "1661 W. Fremont Street, Stockton, CA", "verified_by": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=5C3A1CB2-BC5A-4CA2-AE4C-95A1EC70C708&ID=7442543" },
     "development_stage": "completed",
     "operational_status": "unknown",
+    "funding_status": "authorized",
+    "funding_source_urls": ["https://stockton.legistar.com/LegislationDetail.aspx?GUID=5C3A1CB2-BC5A-4CA2-AE4C-95A1EC70C708&ID=7442543"],
+    "actual_additional_capacity": null,
+    "demand_contribution": "Accessible veterinary care could prevent avoidable surrender, while off-site adoptions could help dogs leave care; actual incremental service volume is unverified.",
     "expected_capacity_or_benefit": {
       "description": "City plans describe expanded veterinary services and a calmer off-site adoption space; current service volume is unverified.",
       "status": "proposed",
@@ -81,12 +93,16 @@
     "location": null,
     "development_stage": "funded",
     "operational_status": "unknown",
+    "funding_status": "authorized",
+    "funding_source_urls": ["https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search="],
+    "actual_additional_capacity": null,
+    "demand_contribution": "If delivered, additional sterilizations could reduce backlog and future unplanned litters; completed procedures and effects on intake are unknown.",
     "expected_capacity_or_benefit": {
-      "description": "Contract called for at least 200 procedures in three months; procedures completed and sustained capacity are unknown.",
+      "description": "Contract targeted approximately 200 pets across three clinic events; completed procedures and sustained capacity are unknown.",
       "status": "proposed",
       "evidence_record_ids": ["sas-2026-01-13-spay-neuter-capacity"]
     },
-    "procedure_tracking": { "planned": 200, "completed": null, "capacity_change": null, "period": "Three-month contract approved 2026-01-13" },
+    "procedure_tracking": { "planned": 200, "completed": null, "capacity_change": null, "period": "Approximate target across three events under the three-month contract approved 2026-01-13" },
     "milestones": [
       { "date": "2026-01-13", "status": "reported_complete", "description": "City approved a three-month Animal Balance agreement; delivery remains unverified.", "evidence_record_ids": ["sas-2026-01-13-spay-neuter-capacity"] }
     ],
@@ -106,6 +122,10 @@
     "location": null,
     "development_stage": "funded",
     "operational_status": "unknown",
+    "funding_status": "authorized",
+    "funding_source_urls": ["https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A"],
+    "actual_additional_capacity": null,
+    "demand_contribution": "Filled veterinary positions could expand treatment and sterilization throughput, reducing delays before placement; filled posts and output are unknown.",
     "expected_capacity_or_benefit": {
       "description": "Four additional contract positions were authorized; filled positions, procedure counts, and net capacity remain unknown.",
       "status": "proposed",
@@ -131,8 +151,12 @@
     "location": { "address": "545 W. Sonora Street, Stockton, CA", "verified_by": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/" },
     "development_stage": "operational",
     "operational_status": "operational",
+    "funding_status": "operating_funds_allocated",
+    "funding_source_urls": ["https://stockton.granicus.com/MinutesViewer.php?clip_id=9173&view_id=48"],
+    "actual_additional_capacity": { "description": "Reported 268 transitional-housing beds; dog-inclusive placements and eligible dog capacity are unknown.", "status": "reported", "evidence_record_ids": ["smcs-2026-06-17-pathways-268-beds"] },
+    "demand_contribution": "Could help people and dogs remain together only if Pathways itself admits dogs; that policy and actual dog-inclusive placements are unverified.",
     "expected_capacity_or_benefit": {
-      "description": "Reported 268 transitional-housing beds and on-site support; the number of pet-inclusive placements, if any, is unknown.",
+      "description": "Provide transitional housing and on-site support toward permanent housing; pet-inclusive benefit remains unverified.",
       "status": "reported",
       "evidence_record_ids": ["smcs-2026-06-17-pathways-268-beds"]
     },

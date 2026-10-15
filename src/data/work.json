@@ -4,13 +4,16 @@
     "gap_id": "dogs-safe-placement",
     "title": "Public-source review",
     "summary": "We reviewed local reports and organizational information to understand the gap.",
-    "status": "completed",
+    "status": "in_progress",
     "type": "research",
     "started_at": "2026-08-20",
     "completed_at": "2026-08-27",
-    "updated_at": "2026-10-08",
+    "updated_at": "2026-10-15",
+    "last_reviewed_at": "2026-10-15",
+    "research_data_id": "dogs-research-baseline-2026-10",
     "record_ids": [
-      "crossover-2026-08-27-dog-placement-field-investigation"
+      "crossover-2026-08-27-dog-placement-field-investigation",
+      "sas-2024-kennel-statistics"
     ],
     "page_kind": "research",
     "next_step": {
