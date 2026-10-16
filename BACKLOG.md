@@ -32,7 +32,15 @@ Field report: https://crossoverstockton.org/reports/crossover-2026-10-14-sas-fir
 - [ ] Identify which constraints may remain after completion.
 - [ ] Record meaningful changes in the investigation.
 
-### 4. Investigation follow-ups
+### 4. Street-dog welfare triage — first active investigation
+
+- [ ] Review existing reports and feeding outreach to identify a suitable publicly reported area for safe observation.
+- [ ] Visit a safe, publicly accessible location; document visible dog conditions and distinguish firsthand observations from secondhand accounts.
+- [ ] Speak voluntarily with residents, caregivers, or outreach workers willing to discuss existing food, water, and emergency care.
+- [ ] Determine whether additional feeding, supplies, transport, or veterinary support is needed. Confirm any practical opportunity with the responsible caregivers or organizations.
+- [ ] Publish a field report documenting findings, uncertainties, and any unmet needs. Link it to the active investigation.
+
+### 5. Investigation follow-ups
 
 - [ ] Ask Stockton Street Dogs which constraint currently most limits their work.
 - [ ] Verify the current status and intended role of the Canine Campus.
