@@ -11,6 +11,7 @@
     {
       "id": "dogs-2026-10-15-official-2024-baseline",
       "finding": "Official dog-specific intake and outcome counts are now captured for calendar 2024.",
+      "short_update": "2024 dog intake and outcome figures added",
       "discovered_at": "2026-10-15",
       "what_changed": "The research dataset moves from qualitative shelter-pressure evidence to an official annual baseline; this is a change in available research evidence, not a demonstrated 2026 change in shelter demand.",
       "previous_state": "Existing dog-gap records described overcrowding but did not hold a reconciled dog-specific annual intake and outcome table.",

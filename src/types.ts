@@ -219,6 +219,7 @@ export interface WorkRecord {
   gap_id: string;
   title: string;
   summary: string;
+  gap_summary?: string;
   status: WorkStatus;
   type: WorkType;
   started_at?: string;
@@ -273,6 +274,7 @@ export interface ActiveInvestigation {
   related_project_ids: string[];
   verified_finding_ids: string[];
   last_updated_at: string;
+  short_focus?: string;
   next_verification_step: string;
 }
 
@@ -350,6 +352,7 @@ export interface DogsResearchBaseline {
   latest_findings: Array<{
     id: string;
     finding: string;
+    short_update?: string;
     discovered_at: string;
     what_changed: string;
     previous_state: string | null;
@@ -475,6 +478,7 @@ export interface EvidenceRecord {
     | "field_report";
   trust: string;
   title: string;
+  work_update_label?: string;
   summary: string;
   source: SourceRecord;
   context_sources?: SourceRecord[];

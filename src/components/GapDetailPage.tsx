@@ -39,7 +39,7 @@ import storiesData from "../data/stories.json";
 import workData from "../data/work.json";
 import type { LucideIcon } from "lucide-react";
 import { getActionIcon } from "../lib/actionIcons";
-import { gapUpdatedAt } from "../lib/gapUpdatedAt";
+import { gapWorkSummary } from "../lib/gapWorkSummary";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
 import { PublicMobileMenu } from "./PublicMobileMenu";
@@ -132,7 +132,6 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
     .map((id) => orgs.find((org) => org.id === id))
     .filter((org): org is OrgRecord => Boolean(org));
   const relatedRecords = recordsForGap(gap);
-  const updatedAt = gapUpdatedAt(gap);
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
@@ -176,7 +175,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                   <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
                   <span><Users size={18} /> {relatedOrgs.length} organizations</span>
                   <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
-                  {updatedAt && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(updatedAt)}</strong></span>}
+                  {gap.updated_at && <span><CheckCircle2 size={18} /> Gap assessment updated <strong>{formatDate(gap.updated_at)}</strong></span>}
                 </div>
               </section>
             </div>
@@ -470,19 +469,21 @@ function WorkSection({ items, gap, onOpenWork }: { items: WorkRecord[]; gap: Gap
       <div className="gap-work-heading">
         <span>Crossover's work</span>
         <h2>What we're doing</h2>
-        <p className="gap-mobile-body">We're researching the causes, listening to local experts, and identifying practical ways to help close this gap.</p>
+        <p className="gap-mobile-body">We're reviewing evidence, investigating unmet needs, and documenting what happens when we take action.</p>
       </div>
       <div className="gap-work-list">
         {items.map((item, index) => {
           const Icon = workIcon(item.type);
+          const { description, progress } = gapWorkSummary(item);
           return (
             <button className="gap-work-item" type="button" key={item.id} onClick={() => onOpenWork(item.id)}>
               <span className="gap-work-icon"><Icon size={22} /></span>
               <div>
                 <strong>{item.title}</strong>
-                <p className="gap-mobile-body">{item.summary}</p>
+                <p className="gap-mobile-body">{description}</p>
+                {progress && <small className="gap-work-progress"><span className="gap-work-progress-label">{progress.label}:</span> {progress.text}{progress.date && <> · {formatDate(progress.date)}</>}</small>}
               </div>
-              <span className={`gap-work-status is-${item.status}`}>{workStatusLabel(item.status)}</span>
+              <span className={`gap-work-status is-${item.status}`}>{item.page_kind === "research" && item.status === "in_progress" ? "Ongoing" : workStatusLabel(item.status)}</span>
               <span className="gap-work-index" aria-hidden="true">{index + 1}</span>
             </button>
           );

@@ -11008,6 +11008,18 @@ p {
   line-height: var(--type-body-leading);
 }
 
+.gap-work-item .gap-work-progress {
+  display: block;
+  margin-top: 5px;
+  color: var(--type-muted-color, #64716a);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+}
+
+.gap-work-item .gap-work-progress-label {
+  font-weight: 600;
+}
+
 .gap-work-status {
   display: inline-flex;
   min-width: 82px;
@@ -13194,7 +13206,7 @@ p {
 .work-record-list{grid-template-columns:repeat(auto-fit,minmax(360px,1fr))}
 @media(max-width:760px){.work-record-list{grid-template-columns:1fr}}
 .work-thread-list details[open] summary{margin-bottom:10px}
-.work-switcher button{font-size:.84rem;font-weight:700;line-height:1}
+.work-switcher button{font-size:.925rem;font-weight:700;line-height:1;padding:10px 16px}
 .work-page .work-content-heading h2,.work-page .work-questions h2{font-family:var(--font-sans);font-size:var(--type-section-title-size);font-weight:var(--type-section-title-weight);letter-spacing:var(--type-section-title-tracking);line-height:var(--type-section-title-leading);text-transform:none}
 .work-page .work-page-header{max-width:none}
 .work-page .work-page-header h1,.work-page .work-page-header p{max-width:none}
