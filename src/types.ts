@@ -226,6 +226,7 @@ export interface WorkRecord {
   updated_at?: string;
   last_reviewed_at?: string;
   research_data_id?: string;
+  investigation_data_id?: string;
   page_kind?: "research" | "investigation" | "activity";
   next_step?: string | { title: string; summary: string; action_id?: string };
   open_questions?: string[];
@@ -247,6 +248,50 @@ export interface WorkThread {
   open_questions?: string[];
   project_ids?: string[];
   record_ids: string[];
+}
+
+export interface ActiveInvestigation {
+  id: string;
+  gap_id: string;
+  title: string;
+  status: "preparing_fieldwork" | "in_progress" | "completed";
+  introduction: string;
+  purpose: string;
+  questions: Array<{ id: string; icon: "HeartPulse" | "Utensils" | "Users"; title: string; description: string }>;
+  method_summary: string;
+  methods: string[];
+  safeguards: string[];
+  evidence_record_ids: string[];
+  known_so_far: string;
+  evidence_context: Array<{ label: string; summary: string; record_id: string | null }>;
+  uncertainties: string[];
+  possible_outcomes: string[];
+  illustrative_outcome: { title: string; description: string; status: "illustrative_only" };
+  opportunity_rule: string;
+  related_barrier_thread_ids: string[];
+  related_project_ids: string[];
+  verified_finding_ids: string[];
+  last_updated_at: string;
+  next_verification_step: string;
+}
+
+export interface EstablishedInvestigationFinding {
+  id: string;
+  title: string;
+  summary: string;
+  evidence_kind: "crossover_firsthand" | "official_public_record" | "organization_report";
+  evidence_record_ids: string[];
+  observed_at: string;
+  related_barrier_thread_ids: string[];
+  related_project_ids: string[];
+}
+
+export interface DogsInvestigationData {
+  id: string;
+  work_id: string;
+  gap_id: string;
+  active_investigations: ActiveInvestigation[];
+  established_findings: EstablishedInvestigationFinding[];
 }
 
 export type ProjectStage = "proposed" | "funded" | "under_development" | "operational" | "completed" | "unknown";

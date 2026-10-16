@@ -1,0 +1,114 @@
+{
+  "id": "dogs-investigations-2026-10",
+  "work_id": "dogs-map-placement-barriers",
+  "gap_id": "dogs-safe-placement",
+  "active_investigations": [
+    {
+      "id": "street-dog-immediate-welfare",
+      "gap_id": "dogs-safe-placement",
+      "title": "Are street dogs getting enough help to survive?",
+      "status": "preparing_fieldwork",
+      "introduction": "We're investigating how severe conditions are for dogs living on Stockton's streets, what immediate assistance they're receiving, and where additional help may be needed.",
+      "purpose": "Not every dog can immediately be rescued or placed in a home. Until that happens, food, water, emergency medical attention, and people willing to monitor their wellbeing can prevent suffering and potentially save lives.",
+      "questions": [
+        {
+          "id": "severity-of-suffering",
+          "icon": "HeartPulse",
+          "title": "How severe is the suffering?",
+          "description": "Are dogs visibly emaciated, seriously injured, ill, or dying? How often are these conditions reported?"
+        },
+        {
+          "id": "food-and-water",
+          "icon": "Utensils",
+          "title": "Are they being fed and given water?",
+          "description": "Who already provides food and water? Is that assistance regular, reliable, and reaching the dogs that need it?"
+        },
+        {
+          "id": "additional-help",
+          "icon": "Users",
+          "title": "Is more help needed?",
+          "description": "Would additional people feeding, delivering supplies, transporting animals, or supporting existing caregivers make a real difference?"
+        }
+      ],
+      "method_summary": "Review existing street-outreach evidence, visit reported areas safely, and talk with people willing to share what they know. Distinguish observed conditions from accounts provided by residents and rescuers.",
+      "methods": [
+        "Review reports and existing outreach evidence; identify publicly reported areas worth checking.",
+        "Observe conditions from safe, publicly accessible places and speak voluntarily with residents, caregivers, and outreach workers.",
+        "Identify existing feeding, water, and veterinary assistance; record firsthand observations separately from secondhand accounts.",
+        "Confirm any practical volunteer or supply need with the responsible caregiver or organization."
+      ],
+      "safeguards": [
+        "Do not publish precise locations of vulnerable people or animals without a specific reason and consideration of their safety.",
+        "Do not assume dogs accompanying unhoused people are stray, abandoned, or neglected.",
+        "Do not approach or feed unfamiliar dogs without appropriate safety precautions and coordination."
+      ],
+      "evidence_record_ids": [
+        "ssd-2026-09-29-dumped-dogs-surge",
+        "ssd-2026-06-08-street-response"
+      ],
+      "known_so_far": "Stockton Streetdogs reports increased dumped-dog encounters and conducts street-level assistance. We do not yet have a reliable local picture of severe suffering, mortality, regular feeding coverage, or unmet feeding needs.",
+      "evidence_context": [
+        {
+          "label": "Organization report",
+          "summary": "Stockton Streetdogs reports more dumped-dog encounters; this is not a citywide census or a survey of animal condition.",
+          "record_id": "ssd-2026-09-29-dumped-dogs-surge"
+        },
+        {
+          "label": "Published local report",
+          "summary": "CBS Sacramento describes Stockton Streetdogs' street response, but does not measure feeding coverage.",
+          "record_id": "ssd-2026-06-08-street-response"
+        },
+        {
+          "label": "Official public data",
+          "summary": "No verified local count of severe street-dog suffering, mortality, or feeding coverage is available in this investigation.",
+          "record_id": null
+        },
+        {
+          "label": "Crossover firsthand",
+          "summary": "No street-condition observation has been completed for this investigation.",
+          "record_id": null
+        }
+      ],
+      "uncertainties": [
+        "How often dogs on the street are severely underweight, injured, ill, or dying.",
+        "Which dogs receive reliable food, water, monitoring, or emergency veterinary care.",
+        "Whether responsible caregivers need more coordinated people, supplies, or transport."
+      ],
+      "possible_outcomes": [
+        "Additional feeding or water assistance",
+        "Supply deliveries to existing caregivers",
+        "Veterinary referrals or transport",
+        "Rescue coordination",
+        "Better coverage of particular areas",
+        "Evidence that existing assistance meets immediate needs"
+      ],
+      "illustrative_outcome": {
+        "title": "Possible result: Additional feeding assistance needed",
+        "description": "An authorized rescue or caregiver confirms that additional people are needed to support a regular feeding route.",
+        "status": "illustrative_only"
+      },
+      "opportunity_rule": "Practical opportunities should be published only after the responsible organization or caregiver confirms the need, requirements, and appropriate coordination.",
+      "related_barrier_thread_ids": [
+        "street-response-intake",
+        "veterinary-access",
+        "public-access-coordination"
+      ],
+      "related_project_ids": [],
+      "verified_finding_ids": [],
+      "last_updated_at": "2026-10-15",
+      "next_verification_step": "Review reported areas and existing feeding efforts, then plan safe firsthand observation with local caregivers."
+    }
+  ],
+  "established_findings": [
+    {
+      "id": "shelter-expansion-construction-observed-2026-10-14",
+      "title": "Shelter expansion construction was underway on October 14, 2026.",
+      "summary": "Crossover observed construction during its field visit. Completion, usable additional dog-care capacity, and resulting outcomes remain unverified.",
+      "evidence_kind": "crossover_firsthand",
+      "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"],
+      "observed_at": "2026-10-14",
+      "related_barrier_thread_ids": ["shelter-foster-capacity"],
+      "related_project_ids": ["stockton-animal-shelter-renovation"]
+    }
+  ]
+}

@@ -43,8 +43,8 @@ function formatDate(value?: string | null) {
   return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
 }
 
-function Section({ title, icon, children }: { title: string; icon?: ReactNode; children: ReactNode }) {
-  return <section className="research-section"><div className="research-section-heading">{icon}<h2>{title}</h2></div>{children}</section>;
+function Section({ title, icon, children, card = false, inCard = false }: { title: string; icon?: ReactNode; children: ReactNode; card?: boolean; inCard?: boolean }) {
+  return <section className={`research-section${card ? " work-content-section gap-refined-card is-card" : ""}${inCard ? " is-in-card" : ""}`}><div className={`research-section-heading${card || inCard ? " work-content-heading" : ""}`}>{icon}<h2>{title}</h2></div>{children}</section>;
 }
 
 function SourceLink({ recordId, label }: { recordId: string; label?: string }) {
@@ -123,7 +123,8 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       {research.latest_findings.length ? <div className="research-findings">{research.latest_findings.map((finding) => <article key={finding.id}><div className="research-finding-meta">Discovered {formatDate(finding.discovered_at)}</div><h3>{finding.finding}</h3><p className="gap-mobile-body">{finding.what_changed}</p><p className="research-finding-why">{finding.why_it_matters}</p><div className="research-sources">{finding.evidence_record_ids.map((id) => <SourceLink key={id} recordId={id} label="View supporting source" />)}</div></article>)}</div> : <p className="gap-mobile-body">No significant changes were found in the latest review.</p>}
     </Section>
 
-    <Section title="The Need in Detail" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />}>
+    <div className="work-content-section gap-refined-card research-evidence-card">
+    <Section title="The Need in Detail" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} inCard>
       <p className="research-section-intro gap-mobile-body">The shelter's annual intake report shows the scale and mix of dogs entering its care.</p>
       <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
       <MetricSummary items={[{ label: "Total dog intake events", value: intakeTotal?.value }, { label: "Stray intake events", value: stray?.value }, { label: "Owner-surrender events", value: measurement("owner_surrender_intake")?.value }]} />
@@ -134,7 +135,7 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       {signal && <aside className="research-signal"><h3>More recent demand signal</h3><p className="gap-mobile-body">In {signal.reporting_period}, Stockton Streetdogs reported approximately {signal.current_range[0]}–{signal.current_range[1]} dumped-dog encounters per week, compared with roughly {signal.comparison_value_approximate} per week {signal.comparison_period}. This is an organizational report, not a citywide count, and is separate from shelter intake.</p><SourceLink recordId={signal.source_record_id} label="View Stockton Streetdogs report" /></aside>}
     </Section>
 
-    <Section title="The Current System" icon={<Network size={20} aria-hidden="true" />}>
+    <Section title="The Current System" icon={<Network size={20} aria-hidden="true" />} inCard>
       <p className="research-section-intro gap-mobile-body">Reported dispositions show what happened to dogs leaving shelter care during the year.</p>
       <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
       <MetricSummary items={[{ label: "Rescue transfers", value: measurement("rescue_or_transfer")?.value }, { label: "Adoptions", value: measurement("adoption")?.value }, { label: "Returns to owners", value: measurement("return_to_owner")?.value }]} />
@@ -143,8 +144,9 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       {outcomeTotal && <SourceLink recordId={outcomeTotal.source_record_id} label="Official kennel report" />}
       <p className="research-limitation gap-mobile-body">Latest comparable 2025–2026 results, current shelter occupancy, and broader rescue-network outcomes have not yet been verified.</p>
     </Section>
+    </div>
 
-    <Section title="Improvements Underway" icon={<HardHat size={20} aria-hidden="true" />}>
+    <Section title="Improvements Underway" icon={<HardHat size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">These facilities and programs could increase care or prevent dogs from losing placement. Their stages and delivered results remain distinct.</p>
       <div className="research-project-list">{selectedProjects.map((project) => <ProjectRow key={project.id} project={project} onOpenReport={onOpenReport} />)}</div>
     </Section>

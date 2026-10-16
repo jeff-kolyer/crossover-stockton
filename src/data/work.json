@@ -63,12 +63,13 @@
       "sas-standing-doggie-day-out"
     ],
     "page_kind": "investigation",
+    "investigation_data_id": "dogs-investigations-2026-10",
     "report_record_ids": [
       "crossover-2026-10-14-sas-first-visit"
     ],
     "next_step": {
-      "title": "Document coming improvements to dog-care capacity",
-      "summary": "Identify and verify planned improvements—including the Stockton Animal Services expansion, the proposed Canine Campus, spay/neuter initiatives, and changes to local requirements. Determine what additional capacity each could provide, when it may become available, and whether the combined improvements could substantially reduce the gap."
+      "title": "Investigate immediate suffering among street dogs",
+      "summary": "Review reported locations and existing feeding efforts, then safely observe conditions firsthand. Determine whether dogs face urgent unmet needs and whether additional help is needed."
     },
     "open_questions": [
       "Where do dogs get stuck between a street report and safe placement, and why?",

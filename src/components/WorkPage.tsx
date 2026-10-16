@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronDown, ClipboardList, FileText, MapPin, MessageCircle, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronDown, ClipboardList, MapPin, MessageCircle, Users } from "lucide-react";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
@@ -8,6 +8,7 @@ import type { ReactNode } from "react";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import { OrganizationCard } from "./OrganizationCard";
 import { DogsResearchContent } from "./DogsResearchContent";
+import { DogsInvestigationContent } from "./DogsInvestigationContent";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -63,20 +64,17 @@ export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenRepo
 
 function WorkContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
   const selected = (ids: string[] | undefined) => (ids ?? []).map((id) => records.find((record) => record.id === id)).filter((record): record is EvidenceRecord => Boolean(record));
-  const evidence = selected(item.record_ids).filter((record) => record.record_type !== "finding" && record.record_type !== "activity");
   const learning = selected(item.learning_record_ids);
   const activity = selected(item.activity_record_ids);
-  const fieldReports = selected(item.report_record_ids).filter((record) => record.record_type === "field_report");
   const orgs = (item.organization_ids ?? []).map((id) => organizations.find((org) => org.id === id)).filter((org): org is OrgRecord => Boolean(org));
 
   if (item.page_kind === "research") return <DogsResearchContent item={item} onOpenReport={onOpenReport} />;
-  if (item.page_kind === "investigation") return <div className="work-page-content"><WorkSection title="Initial map" icon={<MapPin size={20} />}><div className="work-map-note"><CheckCircle2 size={20} /><span className="gap-mobile-body">{item.initial_map?.summary}</span></div></WorkSection>{fieldReports.length > 0 && <WorkSection title="Firsthand field reports" icon={<FileText size={20} />}><p className="gap-mobile-body">The October 14 visit informs our questions about street response and intake, shelter and foster capacity, and public access and coordination. It does not establish a systemic finding.</p><RecordList records={fieldReports} onOpenReport={onOpenReport} /></WorkSection>}<WorkSection title="Barrier threads" icon={<MessageCircle size={20} />}><div className="work-thread-list">{(item.threads ?? []).map((thread) => <details key={thread.id}><summary>{thread.title}</summary><p className="gap-mobile-body">{thread.summary}</p><Questions questions={thread.open_questions} /><RecordList records={selected(thread.record_ids)} onOpenReport={onOpenReport} /></details>)}</div></WorkSection><WorkSection title="Learning" icon={<ClipboardList size={20} />}><RecordList records={learning} /></WorkSection><Questions questions={item.open_questions} /><EvidenceSection records={evidence} /></div>;
+  if (item.page_kind === "investigation") return <DogsInvestigationContent item={item} onOpenReport={onOpenReport} />;
   return <div className="work-page-content"><WorkSection title="Progress" icon={<ClipboardList size={20} />}><ActivityTable records={activity} onOpenReport={onOpenReport} /></WorkSection>{orgs.length > 0 && <WorkSection title="Organizations contacted" icon={<Users size={20} />}><div className="organizations-grid">{orgs.map((org) => <OrganizationCard org={org} key={org.id} />)}</div></WorkSection>}{learning.length > 0 && <WorkSection title="Learning" icon={<MessageCircle size={20} />}><RecordList records={learning} /></WorkSection>}<Questions questions={item.open_questions} /></div>;
 }
 
 function WorkSection({ title, icon, children }: { title: string; icon: ReactNode; children: ReactNode }) { return <section className="work-content-section gap-refined-card"><div className="work-content-heading">{icon}<h2>{title}</h2></div>{children}</section>; }
 function Questions({ questions }: { questions?: string[] }) { return questions?.length ? <section className="work-questions"><h2>Open questions</h2><ul>{questions.map((question) => <li key={question}>{question}</li>)}</ul></section> : null; }
-function EvidenceSection({ records: evidence }: { records: EvidenceRecord[] }) { return evidence.length ? <WorkSection title="Evidence" icon={<FileText size={20} />}><RecordList records={evidence} /></WorkSection> : null; }
 function RecordList({ records: items, empty = "No records selected.", onOpenReport }: { records: EvidenceRecord[]; empty?: string; onOpenReport?: (id: string) => void }) { return items.length ? <div className="work-record-list">{items.map((record) => <article key={record.id}><div className="work-record-meta">{formatDate(record.published_at || record.checked_at || record.recorded_at)}<span>{record.record_type.replace(/_/g, " ")}</span></div><h3>{record.title}</h3><p className="gap-mobile-body">{record.summary}</p>{record.evidence_status && <small>Evidence label: {record.evidence_status.replace(/_/g, " ")}</small>}{record.record_type === "field_report" ? <a href={`/reports/${record.id}/`} onClick={(event) => { if (onOpenReport) { event.preventDefault(); onOpenReport(record.id); } }}>Read field report <ArrowRight size={14} /></a> : record.source.url ? <a href={record.source.url} target="_blank" rel="noreferrer">View source <ArrowRight size={14} /></a> : <small>Source: {record.source.publisher || record.source.type || "Internal record"}</small>}</article>)}</div> : <p className="work-empty gap-mobile-body">{empty}</p>; }
 function ActivityTable({ records: items, onOpenReport }: { records: EvidenceRecord[]; onOpenReport: (id: string) => void }) { return items.length ? <div className="work-activity-table"><div className="work-activity-row work-activity-head"><span>Date</span><span>What we did</span><span>What happened</span><span>Report</span></div>{items.map((record) => <div className="work-activity-row" key={record.id}><time>{formatDate(record.occurred_at)}</time><strong>{record.title}</strong><span>{record.outcome?.summary || record.summary}</span><span>{record.report_record_ids?.length ? record.report_record_ids.map((id) => { const report = records.find((item) => item.id === id && item.record_type === "field_report"); return report ? <a key={id} href={`/reports/${id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(id); }}>{report.title}</a> : null; }) : "—"}</span></div>)}</div> : <p className="work-empty">No activity recorded yet.</p>; }
 function pageKindLabel(item: WorkRecord) { return item.page_kind === "activity" ? "Activity" : item.page_kind === "investigation" ? "Investigation" : "Research"; }
