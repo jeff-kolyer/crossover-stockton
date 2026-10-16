@@ -10961,7 +10961,7 @@ p {
 }
 
 .gap-work-heading p {
-  max-width: 760px;
+  max-width: none;
   margin: 0;
   color: var(--type-body-color);
   font-size: var(--type-body-size);
@@ -13331,6 +13331,25 @@ p {
 .investigation-record-references article{padding:13px 0;border-bottom:1px solid #e4eae6}
 .investigation-record-references h4{margin:0 0 4px;color:#111b20;font-size:.92rem}
 .investigation-record-references p{margin:0;color:#5b6862!important;font-size:.86rem!important}
+
+/* Let Work page prose use the card width; charts keep their own measured width. */
+.work-page .work-next-step,
+.research-section-intro,
+.research-interpretation,
+.research-coverage,
+.research-findings p,
+.research-signal,
+.research-limitation,
+.research-project p,
+.research-review-list p,
+.investigation-section.is-card > p.gap-mobile-body,
+.investigation-evidence-context,
+.investigation-unresolved,
+.investigation-findings p,
+.investigation-thread-body {
+  max-width: none;
+}
+
 @media(max-width:760px){.investigation-section:not(.is-card){padding:26px 0 32px}.investigation-active-top{display:block}.investigation-active-top h3{font-size:1.22rem}.investigation-status{margin-top:9px}.investigation-question-grid{grid-template-columns:1fr;gap:16px;margin:12px 0 0}.investigation-question{padding-top:15px}.investigation-outcomes{grid-template-columns:1fr}}
 .report-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 16px 0 24px; color: #536157; font-size: .95rem; }
 .report-figure { margin: 0 0 30px; }
