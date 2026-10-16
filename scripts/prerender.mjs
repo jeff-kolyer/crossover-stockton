@@ -26,7 +26,7 @@ const pages = [
   ...stories.filter((story) => story.active).map((story) => [
     `/stories/${story.slug}/`, `${story.title} | Crossover Stockton`, story.summary,
   ]),
-  ...work.map((item) => [`/work/${item.id}/`, "Crossover work | Crossover Stockton", item.summary ?? item.title ?? "Crossover Stockton's work in the community."]),
+  ...work.map((item) => [`/work/${item.id}/`, `${item.title} | Crossover Stockton`, item.summary ?? item.title ?? "Crossover Stockton's work in the community."]),
   ...records.filter((record) => record.record_type === "field_report").map((record) => [
     `/reports/${encodeURIComponent(record.id)}/`, `${record.title} | Crossover Stockton`, record.summary ?? record.title,
   ]),
@@ -36,6 +36,40 @@ function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
   })[char]);
+}
+
+function decodeHtml(value) {
+  const named = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
+  return value.replace(/&(#(?:x[0-9a-f]+|[0-9]+)|[a-z]+);/gi, (entity, code) => {
+    if (code.startsWith("#")) {
+      const numeric = code[1].toLowerCase() === "x"
+        ? Number.parseInt(code.slice(2), 16)
+        : Number.parseInt(code.slice(1), 10);
+      return Number.isSafeInteger(numeric) && numeric >= 0 && numeric <= 0x10ffff
+        ? String.fromCodePoint(numeric)
+        : entity;
+    }
+    return named[code.toLowerCase()] ?? entity;
+  });
+}
+
+function plainTextFromHtml(markup) {
+  const main = markup.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? markup;
+  const links = [...main.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)]
+    .map(([, href, label]) => `${decodeHtml(label.replace(/<[^>]+>/g, "").trim())}: ${new URL(decodeHtml(href), origin).href}`)
+    .filter((line) => !line.startsWith(":"));
+  const body = decodeHtml(main
+    .replace(/<svg\b[\s\S]*?<\/svg>/gi, "")
+    .replace(/<(?:br|hr)\b[^>]*\/?>/gi, "\n")
+    .replace(/<(?:h[1-6]|p|li|section|article|div)\b[^>]*>/gi, "\n")
+    .replace(/<\/(?:h[1-6]|p|li|section|article|div|header|footer|aside|ul|ol|button|a|span)>/gi, "\n")
+    .replace(/<\/strong>/gi, " ")
+    .replace(/<[^>]+>/g, "")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n[ \t]+/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim());
+  return `${body}${links.length ? `\n\nLinks\n${[...new Set(links)].join("\n")}` : ""}`;
 }
 
 const vite = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
@@ -56,17 +90,19 @@ try {
       .replace(/(<meta property="og:url" content=")[^"]*(" \/>)/, `$1${url}$2`)
       .replace(/(<meta name="twitter:title" content=")[^"]*(" \/>)/, `$1${safeTitle}$2`)
       .replace(/(<meta name="twitter:description" content=")[^"]*(" \/>)/, `$1${safeDescription}$2`)
-      .replace("</head>", `    <link rel="canonical" href="${url}" />\n  </head>`)
+      .replace("</head>", `    <link rel="canonical" href="${url}" />\n    <link rel="alternate" type="text/plain" title="Plain text" href="${url}page.txt" />\n  </head>`)
       .replace('<div id="root"></div>', `<div id="root" data-prerendered="true">${content}</div>`);
     const target = new URL(`.${path}index.html`, dist);
     await mkdir(new URL(`.${path}`, dist), { recursive: true });
     await writeFile(target, html);
+    await writeFile(new URL(`.${path}page.txt`, dist), `${title}\n${url}\n\n${plainTextFromHtml(content)}\n`);
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([path]) => `  <url><loc>${origin}${escapeHtml(path)}</loc></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(new URL("sitemap.xml", dist), sitemap);
   await writeFile(new URL("robots.txt", dist), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
-  console.log(`Prerendered ${pages.length} pages and wrote sitemap.xml and robots.txt`);
+  await writeFile(new URL("llms.txt", dist), `# Crossover Stockton\n\nPublic, plain-text versions of the site's pages. These files are generated from the same content as the HTML pages.\n\n${pages.map(([path, title, description]) => `- [${title}](${origin}${path}page.txt): ${description}`).join("\n")}\n`);
+  console.log(`Prerendered ${pages.length} pages with plain-text versions, sitemap.xml, robots.txt, and llms.txt`);
 } finally {
   await vite.close();
 }

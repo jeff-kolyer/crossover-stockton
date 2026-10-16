@@ -36,6 +36,13 @@ The app currently uses local JSON files in `src/data/` as its content layer. The
 
 React components import that data directly, transform it into view models, and render the site without a backend service.
 
+The production build also prerenders each public route to HTML, creates a plain-text
+`page.txt` alongside it, and publishes `llms.txt`, `sitemap.xml`, and `robots.txt`.
+Each HTML page advertises its text version with a `rel="alternate"` link. For
+example, `/work/dogs-map-placement-barriers/page.txt` contains the investigation
+text without requiring JavaScript. The development server remains a client-rendered
+preview; use `npm run build` to verify the published output in `dist/`.
+
 ### Main source structure
 
 * `src/App.tsx` — top-level routing and application state

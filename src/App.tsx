@@ -12,11 +12,13 @@ import { OrganizationsPage } from "./components/OrganizationsPage";
 import { StoryDetailPage } from "./components/StoryDetailPage";
 import { UpdatesPage } from "./components/UpdatesPage";
 import storiesData from "./data/stories.json";
+import workData from "./data/work.json";
 import recordsData from "./data/records.json";
 import type { EvidenceRecord, GapRecord, PublicActionRecord, StoryRecord } from "./types";
 
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
+const work = workData as { id: string; title: string }[];
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 
 type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -80,7 +82,10 @@ function titleForRoute(route: RouteState) {
     const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : "Reality";
     return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
-  if (route.page === "work") return "Crossover work | Crossover Stockton";
+  if (route.page === "work") {
+    const item = work.find((entry) => entry.id === route.workId);
+    return item ? `${item.title} | Crossover Stockton` : "Crossover work | Crossover Stockton";
+  }
   if (route.page === "report") {
     const report = reports.find((item) => item.id === route.reportId);
     return report ? `${report.title} | Crossover Stockton` : "Field report not found | Crossover Stockton";
