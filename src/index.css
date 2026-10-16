@@ -13286,7 +13286,8 @@ p {
 .investigation-subsection>p{margin:11px 0;max-width:900px}
 .investigation-methods,.investigation-outcomes{margin:12px 0 16px;padding-left:21px;color:var(--type-body-color);line-height:1.55}
 .investigation-methods li,.investigation-outcomes li{padding-left:3px;margin:6px 0}
-.investigation-safeguards,.investigation-unresolved,.investigation-opportunity-rule{color:#5b6862!important;font-size:.88rem!important;line-height:1.55!important}
+.investigation-approach,.investigation-unresolved,.investigation-opportunity-rule{color:#5b6862!important;font-size:.88rem!important;line-height:1.55!important}
+.investigation-approach strong{color:#42554c}
 .investigation-evidence-context{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;border-top:1px solid #e4eae6;margin:18px 0}
 .investigation-evidence-context>div{padding:14px 0;border-bottom:1px solid #e4eae6}
 .investigation-evidence-context strong,.investigation-evidence-context span{display:block}

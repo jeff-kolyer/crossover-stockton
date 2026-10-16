@@ -24,6 +24,7 @@ for (const investigation of investigationData.active_investigations) {
   if (investigation.gap_id !== investigationData.gap_id) errors.push(`${investigation.id}: gap mismatch`);
   if (!["preparing_fieldwork", "in_progress", "completed"].includes(investigation.status)) errors.push(`${investigation.id}: invalid status`);
   if (!investigation.last_updated_at || !investigation.next_verification_step) errors.push(`${investigation.id}: missing update or verification step`);
+  if (!investigation.public_approach?.trim() || !investigation.safeguards?.length) errors.push(`${investigation.id}: missing public approach or detailed safeguards`);
   if (new Set(investigation.questions.map((question) => question.id)).size !== investigation.questions.length) errors.push(`${investigation.id}: duplicate question ID`);
   for (const question of investigation.questions) if (!["HeartPulse", "Utensils", "Users"].includes(question.icon)) errors.push(`${investigation.id}: unsupported question icon ${question.icon}`);
   references(investigation.id, investigation.evidence_record_ids, recordIds, "evidence record");

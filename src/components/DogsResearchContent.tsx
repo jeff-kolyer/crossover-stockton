@@ -118,9 +118,9 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
   const selectedProjects = research.planned_improvements.project_ids.map((id) => projects.find((project) => project.id === id)).filter((project): project is CapacityProject => Boolean(project));
 
   return <div className="work-page-content research-content">
-    <Section title="What's New" icon={<Sparkles size={20} aria-hidden="true" />}>
+    <Section title="What's New" icon={<Sparkles size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">Meaningful changes found in the latest research review.</p>
-      {research.latest_findings.length ? <div className="research-findings">{research.latest_findings.map((finding) => <article key={finding.id}><div className="research-finding-meta">Discovered {formatDate(finding.discovered_at)}</div><h3>{finding.finding}</h3><p className="gap-mobile-body">{finding.what_changed}</p><p className="research-finding-why">{finding.why_it_matters}</p><div className="research-sources">{finding.evidence_record_ids.map((id) => <SourceLink key={id} recordId={id} label="View supporting source" />)}</div></article>)}</div> : <p className="gap-mobile-body">No significant changes were found in the latest review.</p>}
+      {research.latest_findings.length ? <div className="research-findings">{research.latest_findings.map((finding) => <article key={finding.id}><div className="research-finding-meta">Identified in review · {formatDate(finding.discovered_at)}</div><h3>{finding.finding}</h3><p className="gap-mobile-body">{finding.what_changed}</p><p className="research-finding-why">{finding.why_it_matters}</p><div className="research-sources">{finding.evidence_record_ids.map((id) => <SourceLink key={id} recordId={id} label="View supporting source" />)}</div></article>)}</div> : <p className="gap-mobile-body">No significant changes were found in the latest review.</p>}
     </Section>
 
     <div className="work-content-section gap-refined-card research-evidence-card">

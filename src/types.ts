@@ -261,6 +261,7 @@ export interface ActiveInvestigation {
   method_summary: string;
   methods: string[];
   safeguards: string[];
+  public_approach: string;
   evidence_record_ids: string[];
   known_so_far: string;
   evidence_context: Array<{ label: string; summary: string; record_id: string | null }>;

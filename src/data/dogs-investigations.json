@@ -42,6 +42,7 @@
         "Do not assume dogs accompanying unhoused people are stray, abandoned, or neglected.",
         "Do not approach or feed unfamiliar dogs without appropriate safety precautions and coordination."
       ],
+      "public_approach": "We protect the locations and privacy of vulnerable people and animals. We don't assume dogs accompanying unhoused people are abandoned or neglected. We approach unfamiliar dogs only with appropriate safety precautions and coordination.",
       "evidence_record_ids": [
         "ssd-2026-09-29-dumped-dogs-surge",
         "ssd-2026-06-08-street-response"
