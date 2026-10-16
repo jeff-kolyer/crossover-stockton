@@ -11,6 +11,12 @@ const projects = projectsData as CapacityProject[];
 const recordById = new Map(records.map((record) => [record.id, record]));
 const projectById = new Map(projects.map((project) => [project.id, project]));
 const questionIcons = { HeartPulse, Utensils, Users };
+const evidenceLabels: Record<string, string> = {
+  "Organization report": "Organization reports",
+  "Published local report": "Published reporting",
+  "Official public data": "Official data",
+  "Crossover firsthand": "Our observations",
+};
 
 function InvestigationSection({ title, icon, children, card = false }: { title: string; icon: ReactNode; children: ReactNode; card?: boolean }) {
   return <section className={`investigation-section${card ? " work-content-section gap-refined-card is-card" : ""}`}><div className={`investigation-section-heading${card ? " work-content-heading" : ""}`}>{icon}<h2>{title}</h2></div>{children}</section>;
@@ -31,22 +37,36 @@ function RecordReferences({ ids, onOpenReport }: { ids: string[]; onOpenReport: 
 
 function ActiveInvestigationView({ investigation, onOpenReport }: { investigation: ActiveInvestigation; onOpenReport: (id: string) => void }) {
   const statusLabel = investigation.status === "preparing_fieldwork" ? "Preparing fieldwork" : investigation.status === "in_progress" ? "In progress" : "Completed";
-  return <article className="investigation-active">
-    <div className="investigation-active-top"><h3>{investigation.title}</h3><span className={`investigation-status ${investigation.status === "completed" ? "is-completed" : "is-in-progress"}`}>{statusLabel}</span></div>
-    <p className="investigation-intro gap-mobile-body">{investigation.introduction}</p>
-    <p className="investigation-purpose gap-mobile-body"><strong>Why this matters.</strong> {investigation.purpose}</p>
+  return <>
+    <InvestigationSection title="What we're investigating" icon={<CircleHelp size={20} aria-hidden="true" />} card>
+      <div className="investigation-active-top"><h3>{investigation.title}</h3><span className={`investigation-status ${investigation.status === "completed" ? "is-completed" : "is-in-progress"}`}>{statusLabel}</span></div>
+      <p className="investigation-intro gap-mobile-body">{investigation.introduction}</p>
+      <p className="investigation-purpose gap-mobile-body"><strong>Why this matters.</strong> {investigation.purpose}</p>
+      <div className="investigation-question-grid">{investigation.questions.map((question) => {
+        const Icon = questionIcons[question.icon];
+        return <div className="investigation-question" key={question.id}><div className="investigation-question-heading"><Icon size={20} aria-hidden="true" /><h4>{question.title}</h4></div><p className="gap-mobile-body">{question.description}</p></div>;
+      })}</div>
+    </InvestigationSection>
 
-    <div className="investigation-question-grid">{investigation.questions.map((question) => {
-      const Icon = questionIcons[question.icon];
-      return <div className="investigation-question" key={question.id}><div className="investigation-question-heading"><Icon size={20} aria-hidden="true" /><h4>{question.title}</h4></div><p className="gap-mobile-body">{question.description}</p></div>;
-    })}</div>
+    <InvestigationSection title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
+      <p className="gap-mobile-body">{investigation.method_summary}</p>
+      <ul className="investigation-methods">{investigation.methods.map((method) => <li key={method}>{method}</li>)}</ul>
+      <p className="investigation-approach gap-mobile-body"><strong>Our approach</strong> {investigation.public_approach}</p>
+    </InvestigationSection>
 
-    <div className="investigation-subsection"><div className="investigation-subheading"><Search size={20} aria-hidden="true" /><h4>How we'll investigate</h4></div><p className="gap-mobile-body">{investigation.method_summary}</p><ul className="investigation-methods">{investigation.methods.map((method) => <li key={method}>{method}</li>)}</ul><p className="investigation-approach gap-mobile-body"><strong>Our approach</strong> {investigation.public_approach}</p></div>
+    <InvestigationSection title="What we know so far" icon={<FileSearch size={20} aria-hidden="true" />} card>
+      <p className="gap-mobile-body">{investigation.known_so_far}</p>
+      <div className="investigation-evidence-context">{investigation.evidence_context.map((entry) => <article key={entry.label}><h3>{evidenceLabels[entry.label] ?? entry.label}</h3><p className="gap-mobile-body">{entry.summary}</p>{entry.record_id && <EvidenceLink recordId={entry.record_id} onOpenReport={onOpenReport} />}</article>)}</div>
+      <div className="investigation-unresolved"><h3>Still to establish</h3><ul>{investigation.uncertainties.map((uncertainty) => <li key={uncertainty}>{uncertainty}</li>)}</ul></div>
+    </InvestigationSection>
 
-    <div className="investigation-subsection"><div className="investigation-subheading"><FileSearch size={20} aria-hidden="true" /><h4>What we know so far</h4></div><p className="gap-mobile-body">{investigation.known_so_far}</p><div className="investigation-evidence-context">{investigation.evidence_context.map((entry) => <div key={entry.label}><strong>{entry.label}</strong><span>{entry.summary}</span>{entry.record_id && <EvidenceLink recordId={entry.record_id} onOpenReport={onOpenReport} />}</div>)}</div><p className="investigation-unresolved gap-mobile-body"><strong>Still unresolved:</strong> {investigation.uncertainties.join(" ")}</p></div>
-
-    <div className="investigation-subsection"><div className="investigation-subheading"><Route size={20} aria-hidden="true" /><h4>What this could lead to</h4></div><p className="gap-mobile-body">The answer could point to one or more of these outcomes:</p><ul className="investigation-outcomes">{investigation.possible_outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul><div className="investigation-example"><span>Illustrative outcome</span><strong>{investigation.illustrative_outcome.title}</strong><p className="gap-mobile-body">{investigation.illustrative_outcome.description}</p></div><p className="investigation-opportunity-rule gap-mobile-body">{investigation.opportunity_rule}</p></div>
-  </article>;
+    <InvestigationSection title="What this could lead to" icon={<Route size={20} aria-hidden="true" />} card>
+      <p className="gap-mobile-body">The answer could point to one or more of these outcomes:</p>
+      <ul className="investigation-outcomes">{investigation.possible_outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul>
+      <div className="investigation-example"><span>Illustrative outcome</span><strong>{investigation.illustrative_outcome.title}</strong><p className="gap-mobile-body">{investigation.illustrative_outcome.description}</p></div>
+      <p className="investigation-opportunity-rule gap-mobile-body">{investigation.opportunity_rule}</p>
+    </InvestigationSection>
+  </>;
 }
 
 export function DogsInvestigationContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
@@ -56,9 +76,7 @@ export function DogsInvestigationContent({ item, onOpenReport }: { item: WorkRec
   const additionalRecordIds = [...new Set([...(item.record_ids ?? []), ...(item.learning_record_ids ?? []), ...(item.report_record_ids ?? [])])].filter((id) => !threadRecordIds.has(id) && !findingRecordIds.has(id));
 
   return <div className="work-page-content investigation-content">
-    <InvestigationSection title="What we're investigating" icon={<CircleHelp size={20} aria-hidden="true" />} card>
-      {data.active_investigations.map((investigation) => <ActiveInvestigationView key={investigation.id} investigation={investigation} onOpenReport={onOpenReport} />)}
-    </InvestigationSection>
+    {data.active_investigations.map((investigation) => <ActiveInvestigationView key={investigation.id} investigation={investigation} onOpenReport={onOpenReport} />)}
 
     <InvestigationSection title="What we've established" icon={<CheckCircle2 size={20} aria-hidden="true" />} card>
       <div className="investigation-findings">{data.established_findings.map((finding) => <article key={finding.id}><span className="investigation-finding-kind">{finding.evidence_kind === "crossover_firsthand" ? "Crossover firsthand observation" : finding.evidence_kind.replace(/_/g, " ")}</span><h3>{finding.title}</h3><p className="gap-mobile-body">{finding.summary}</p><div className="investigation-source-links">{finding.evidence_record_ids.map((id) => <EvidenceLink key={id} recordId={id} onOpenReport={onOpenReport} />)}</div></article>)}</div>
