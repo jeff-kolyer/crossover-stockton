@@ -13236,7 +13236,7 @@ p {
 .research-findings article{padding:16px 0;border-top:1px solid #e5ebe7}
 .research-findings article:first-child{border-top:0;padding-top:3px}
 .research-finding-meta,.research-review-list time{color:#66736d;font-size:.78rem;letter-spacing:.02em}
-.research-findings h3,.research-review-list h3{margin:6px 0 7px;color:#243d52;font-family:var(--font-sans);font-size:1.08rem;line-height:1.4}
+.research-findings h3,.research-review-list h3{margin:6px 0 7px;color:#111b20;font-family:var(--font-sans);font-size:1.08rem;line-height:1.4}
 .research-findings p{max-width:850px;margin:0 0 8px}
 .research-finding-why{font-size:.91rem;line-height:1.55;color:#58665e}
 .research-sources{display:flex;flex-wrap:wrap;gap:8px 20px}
@@ -13247,10 +13247,10 @@ p {
 .research-project-list{border-top:1px solid #dce3df}
 .research-project{padding:22px 0;border-bottom:1px solid #dce3df}
 .research-project-top{display:flex;align-items:center;justify-content:space-between;gap:10px 24px}
-.research-project h3{margin:0;color:#243d52;font-size:1.13rem;line-height:1.35}
+.research-project h3{margin:0;color:#111b20;font-size:1.13rem;line-height:1.35}
 .research-project-status{display:inline-flex;align-items:center;flex:none;padding:5px 11px;border:1px solid transparent;border-radius:999px;font-size:.78rem;font-weight:700;line-height:1.35;white-space:nowrap}
 .research-project p{max-width:900px;margin:7px 0;line-height:1.55}
-.research-project .research-project-headline{margin-top:14px;color:#26415c;font-size:1.06rem;font-weight:700;line-height:1.4}
+.research-project .research-project-headline{margin-top:14px;color:#111b20;font-size:1.06rem;font-weight:700;line-height:1.4}
 .research-project .research-project-how{margin-top:8px}
 .research-project .research-project-unverified{color:#5b6862;font-size:.88rem;line-height:1.5}
 .research-project-milestone{font-size:.81rem;color:#66736d}
@@ -13270,7 +13270,7 @@ p {
 .investigation-section.is-card .investigation-section-heading{margin-bottom:17px}
 .investigation-section-heading h2{margin:0;color:#213228;font-family:var(--font-sans);font-size:var(--type-section-title-size);font-weight:var(--type-section-title-weight);line-height:var(--type-section-title-leading);letter-spacing:var(--type-section-title-tracking)}
 .investigation-active-top{display:flex;align-items:center;justify-content:space-between;gap:12px 24px}
-.investigation-active-top h3{margin:0;color:#243d52;font-family:var(--font-sans);font-size:1.35rem;line-height:1.35}
+.investigation-active-top h3{margin:0;color:#111b20;font-family:var(--font-sans);font-size:1.35rem;line-height:1.35}
 .investigation-status{display:inline-flex;align-items:center;flex:none;padding:6px 12px;border-radius:999px;font-size:.78rem;font-weight:700;line-height:1.35;white-space:nowrap}
 .investigation-intro{max-width:900px;margin:12px 0 0}
 .investigation-purpose{max-width:900px;margin:13px 0 0}
@@ -13278,10 +13278,10 @@ p {
 .investigation-question{border-top:2px solid #dce3df;padding-top:17px;min-width:0}
 .investigation-question-heading{display:flex;align-items:flex-start;gap:10px;color:#26415c}
 .investigation-question-heading svg{flex:none;margin-top:2px}
-.investigation-question h4{margin:0;color:#243d52;font-family:var(--font-sans);font-size:1.03rem;line-height:1.4}
+.investigation-question h4{margin:0;color:#111b20;font-family:var(--font-sans);font-size:1rem;font-weight:var(--type-heading-weight);line-height:1.2}
 .investigation-question p{margin:9px 0 0;line-height:1.55}
 .investigation-subsection{max-width:1020px;border-top:1px solid #dce3df;padding:22px 0 4px;margin-top:23px}
-.investigation-subheading h4{margin:0;color:#243d52;font-family:var(--font-sans);font-size:1.08rem;line-height:1.4}
+.investigation-subheading h4{margin:0;color:#111b20;font-family:var(--font-sans);font-size:1.08rem;line-height:1.4}
 .investigation-subsection>p{margin:11px 0;max-width:900px}
 .investigation-methods,.investigation-outcomes{margin:12px 0 16px;padding-left:21px;color:var(--type-body-color);line-height:1.55}
 .investigation-methods li,.investigation-outcomes li{padding-left:3px;margin:6px 0}
@@ -13304,12 +13304,12 @@ p {
 .investigation-findings article{border-top:1px solid #dce3df;padding-top:18px}
 .investigation-section.is-card .investigation-findings article:first-child{border-top:0;padding-top:0}
 .investigation-finding-kind{color:#66736d;font-size:.78rem;font-weight:700}
-.investigation-findings h3{margin:7px 0;color:#243d52;font-family:var(--font-sans);font-size:1.08rem;line-height:1.4}
+.investigation-findings h3{margin:7px 0;color:#111b20;font-family:var(--font-sans);font-size:1.08rem;line-height:1.4}
 .investigation-findings p{max-width:900px;margin:0 0 6px}
 .investigation-source-links{display:flex;flex-wrap:wrap;gap:8px 18px}
 .investigation-records-intro{margin:0 0 18px}
 .investigation-thread-list details,.investigation-earlier-records{border-top:1px solid #dce3df}
-.investigation-thread-list summary,.investigation-earlier-records summary{cursor:pointer;padding:17px 2px;color:#243d52;font-size:1rem;font-weight:700;line-height:1.4}
+.investigation-thread-list summary,.investigation-earlier-records summary{cursor:pointer;padding:17px 2px;color:#111b20;font-size:1rem;font-weight:700;line-height:1.4}
 .investigation-thread-body{max-width:1000px;padding:0 2px 22px}
 .investigation-thread-body>p{margin:0 0 14px}
 .investigation-thread-questions h4{margin:0 0 5px;color:#26415c;font-size:.9rem}
@@ -13318,7 +13318,7 @@ p {
 .investigation-related-projects{color:#5b6862;font-size:.88rem;line-height:1.5}
 .investigation-record-references{border-top:1px solid #e4eae6;margin-top:16px}
 .investigation-record-references article{padding:13px 0;border-bottom:1px solid #e4eae6}
-.investigation-record-references h4{margin:0 0 4px;color:#243d52;font-size:.92rem}
+.investigation-record-references h4{margin:0 0 4px;color:#111b20;font-size:.92rem}
 .investigation-record-references p{margin:0;color:#5b6862!important;font-size:.86rem!important}
 @media(max-width:760px){.investigation-section:not(.is-card){padding:26px 0 32px}.investigation-active-top{display:block}.investigation-active-top h3{font-size:1.22rem}.investigation-status{margin-top:9px}.investigation-question-grid{grid-template-columns:1fr;gap:16px;margin:25px 0}.investigation-question{padding-top:15px}.investigation-evidence-context,.investigation-outcomes{grid-template-columns:1fr}}
 .report-meta { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 16px 0 24px; color: #536157; font-size: .95rem; }
