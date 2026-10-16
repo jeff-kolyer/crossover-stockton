@@ -39,6 +39,7 @@ import storiesData from "../data/stories.json";
 import workData from "../data/work.json";
 import type { LucideIcon } from "lucide-react";
 import { getActionIcon } from "../lib/actionIcons";
+import { gapUpdatedAt } from "../lib/gapUpdatedAt";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
 import { PublicMobileMenu } from "./PublicMobileMenu";
@@ -131,6 +132,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
     .map((id) => orgs.find((org) => org.id === id))
     .filter((org): org is OrgRecord => Boolean(org));
   const relatedRecords = recordsForGap(gap);
+  const updatedAt = gapUpdatedAt(gap);
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
@@ -174,7 +176,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                   <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
                   <span><Users size={18} /> {relatedOrgs.length} organizations</span>
                   <span><ShieldCheck size={18} /> Confidence: <strong>{gap.most_useful_now?.confidence ?? "High"}</strong></span>
-                  {gap.updated_at && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(gap.updated_at)}</strong></span>}
+                  {updatedAt && <span><CheckCircle2 size={18} /> Last updated <strong>{formatDate(updatedAt)}</strong></span>}
                 </div>
               </section>
             </div>

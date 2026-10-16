@@ -23,6 +23,7 @@ import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import storiesData from "../data/stories.json";
 import { getActionIcon } from "../lib/actionIcons";
+import { gapUpdatedAt } from "../lib/gapUpdatedAt";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { ActionTag, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
@@ -183,6 +184,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
         <div className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
             const Icon = getGapIcon(gap.status);
+            const updatedAt = gapUpdatedAt(gap);
             const useful = actionTitles(gap.action_ids);
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
             const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
@@ -213,7 +215,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
               </span>
               <span className="gap-card-meta">
                 <span><Users size={15} /> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
-                {gap.updated_at && <span><CalendarDays size={14} /> Updated {formatShortDate(gap.updated_at)}</span>}
+                {updatedAt && <span><CalendarDays size={14} /> Updated {formatShortDate(updatedAt)}</span>}
               </span>
               <span className="gap-card-action">
                 <span>
