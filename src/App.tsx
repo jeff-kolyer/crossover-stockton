@@ -101,8 +101,8 @@ function titleForRoute(route: RouteState) {
   return titles[route.page];
 }
 
-export default function App() {
-  const [route, setRoute] = useState<RouteState>(() => routeFromPathname(window.location.pathname));
+export default function App({ initialPath }: { initialPath?: string }) {
+  const [route, setRoute] = useState<RouteState>(() => routeFromPathname(initialPath ?? window.location.pathname));
   const [selectedAction, setSelectedAction] = useState<PublicActionRecord | null>(null);
 
   useEffect(() => {
