@@ -24,6 +24,7 @@ import orgsData from "../data/orgs.json";
 import storiesData from "../data/stories.json";
 import { getActionIcon } from "../lib/actionIcons";
 import { latestGapActivity } from "../lib/gapActivity";
+import { navigateInternalLink } from "../lib/internalLink";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { ActionTag, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
 
@@ -189,7 +190,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
             const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
             return (
-            <button className={`gap-card is-${gap.status}`} key={gap.id} type="button" onClick={() => onOpenGap(gap.slug)}>
+            <a className={`gap-card is-${gap.status}`} key={gap.id} href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>
               {thumbnailImage && (
                 <span className="gap-card-image-frame" aria-hidden="true">
                   <img
@@ -223,7 +224,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
                   <strong>{compactUsefulNow(gap, useful)}</strong>
                 </span>
               </span>
-            </button>
+            </a>
             );
           })}
         </div>

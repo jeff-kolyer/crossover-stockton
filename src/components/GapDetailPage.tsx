@@ -41,6 +41,7 @@ import type { LucideIcon } from "lucide-react";
 import { getActionIcon } from "../lib/actionIcons";
 import { gapWorkSummary } from "../lib/gapWorkSummary";
 import { sourceLinkLabel } from "../lib/sourceLinks";
+import { navigateInternalLink } from "../lib/internalLink";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
@@ -476,7 +477,7 @@ function WorkSection({ items, gap, onOpenWork }: { items: WorkRecord[]; gap: Gap
           const Icon = workIcon(item.type);
           const { description, progress } = gapWorkSummary(item);
           return (
-            <button className="gap-work-item" type="button" key={item.id} onClick={() => onOpenWork(item.id)}>
+            <a className="gap-work-item" href={`/work/${item.id}/`} key={item.id} onClick={(event) => navigateInternalLink(event, () => onOpenWork(item.id))}>
               <span className="gap-work-icon"><Icon size={22} /></span>
               <div>
                 <strong>{item.title}</strong>
@@ -485,7 +486,7 @@ function WorkSection({ items, gap, onOpenWork }: { items: WorkRecord[]; gap: Gap
               </div>
               <span className={`gap-work-status is-${item.status}`}>{item.page_kind === "research" && item.status === "in_progress" ? "Ongoing" : workStatusLabel(item.status)}</span>
               <span className="gap-work-index" aria-hidden="true">{index + 1}</span>
-            </button>
+            </a>
           );
         })}
       </div>

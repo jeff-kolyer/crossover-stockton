@@ -5,6 +5,7 @@ const origin = "https://crossoverstockton.org";
 const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const robots = await readFile(new URL("robots.txt", dist), "utf8");
 const llms = await readFile(new URL("llms.txt", dist), "utf8");
+const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 
 if (!urls.length || !robots.includes(`Sitemap: ${origin}/sitemap.xml`)) {
@@ -34,6 +35,21 @@ for (const url of urls) {
   }
   if (!html.includes(`href="${textUrl}"`) || !llms.includes(`](${textUrl})`)) {
     throw new Error(`Plain-text discovery link missing for ${url}`);
+  }
+}
+
+const homeHtml = await readFile(new URL("index.html", dist), "utf8");
+const featuredGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
+if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) {
+  throw new Error("The homepage does not link to the active dog-placement gap.");
+}
+
+for (const gap of gaps.filter((item) => item.active && item.work_ids?.length)) {
+  const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");
+  for (const workId of gap.work_ids) {
+    if (!gapHtml.includes(`href="/work/${workId}/"`)) {
+      throw new Error(`The gap page does not link to work item ${workId}.`);
+    }
   }
 }
 

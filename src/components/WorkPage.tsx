@@ -10,6 +10,7 @@ import { OrganizationCard } from "./OrganizationCard";
 import { DogsResearchContent } from "./DogsResearchContent";
 import { DogsInvestigationContent } from "./DogsInvestigationContent";
 import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
+import { navigateInternalLink } from "../lib/internalLink";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -71,7 +72,7 @@ export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenRepo
           <section className="work-page-shell">
             <button className="gap-history-back" type="button" onClick={() => onOpenGap(gap.slug)}><ArrowLeft size={16} /> {gap.title}</button>
             <nav className="work-switcher" aria-label="Work for this gap">
-              {siblingWorks.map((work) => <button key={work.id} type="button" className={work.id === item.id ? "is-selected" : ""} aria-current={work.id === item.id ? "page" : undefined} onClick={() => onOpenWork(work.id)}>{pageKindLabel(work)}</button>)}
+              {siblingWorks.map((work) => <a key={work.id} href={`/work/${work.id}/`} className={work.id === item.id ? "is-selected" : ""} aria-current={work.id === item.id ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => onOpenWork(work.id))}>{pageKindLabel(work)}</a>)}
             </nav>
             <div className="work-page-header gap-detail-copy">
               <span className="work-page-kicker">{pageKindLabel(item)}</span>
