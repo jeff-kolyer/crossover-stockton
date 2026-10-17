@@ -53,10 +53,10 @@ function decodeHtml(value) {
   });
 }
 
-function plainTextFromHtml(markup) {
+function plainTextFromHtml(markup, pageUrl) {
   const main = markup.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? markup;
   const links = [...main.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)]
-    .map(([, href, label]) => `${decodeHtml(label.replace(/<[^>]+>/g, "").trim())}: ${new URL(decodeHtml(href), origin).href}`)
+    .map(([, href, label]) => `${decodeHtml(label.replace(/<[^>]+>/g, "").trim())}: ${new URL(decodeHtml(href), pageUrl).href}`)
     .filter((line) => !line.startsWith(":"));
   const body = decodeHtml(main
     .replace(/<svg\b[\s\S]*?<\/svg>/gi, "")
@@ -95,7 +95,7 @@ try {
     const target = new URL(`.${path}index.html`, dist);
     await mkdir(new URL(`.${path}`, dist), { recursive: true });
     await writeFile(target, html);
-    await writeFile(new URL(`.${path}page.txt`, dist), `${title}\n${url}\n\n${plainTextFromHtml(content)}\n`);
+    await writeFile(new URL(`.${path}page.txt`, dist), `${title}\n${url}\n\n${plainTextFromHtml(content, url)}\n`);
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([path]) => `  <url><loc>${origin}${escapeHtml(path)}</loc></url>`).join("\n")}\n</urlset>\n`;

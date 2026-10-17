@@ -4,6 +4,7 @@ import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
 import type { ActiveInvestigation, CapacityProject, DogsInvestigationData, EvidenceRecord, WorkRecord } from "../types";
 import type { ReactNode } from "react";
+import { InvestigationLocations } from "./InvestigationLocations";
 
 const data = investigationsData as DogsInvestigationData;
 const records = recordsData as EvidenceRecord[];
@@ -18,8 +19,8 @@ const evidenceLabels: Record<string, string> = {
   "Crossover firsthand": "Our observations",
 };
 
-function InvestigationSection({ title, icon, children, card = false }: { title: string; icon: ReactNode; children: ReactNode; card?: boolean }) {
-  return <section className={`investigation-section${card ? " work-content-section gap-refined-card is-card" : ""}`}><div className={`investigation-section-heading${card ? " work-content-heading" : ""}`}>{icon}<h2>{title}</h2></div>{children}</section>;
+function InvestigationSection({ id, title, icon, children, card = false }: { id?: string; title: string; icon: ReactNode; children: ReactNode; card?: boolean }) {
+  return <section id={id} className={`investigation-section${card ? " work-content-section gap-refined-card is-card" : ""}`}><div className={`investigation-section-heading${card ? " work-content-heading" : ""}`}>{icon}<h2>{title}</h2></div>{children}</section>;
 }
 
 function EvidenceLink({ recordId, onOpenReport, label }: { recordId: string; onOpenReport: (id: string) => void; label?: string }) {
@@ -35,10 +36,10 @@ function RecordReferences({ ids, onOpenReport }: { ids: string[]; onOpenReport: 
   return selected.length ? <div className="investigation-record-references">{selected.map((record) => <article key={record.id}><h4>{record.title}</h4><p className="gap-mobile-body">{record.summary}</p><EvidenceLink recordId={record.id} onOpenReport={onOpenReport} /></article>)}</div> : null;
 }
 
-function ActiveInvestigationView({ investigation, onOpenReport }: { investigation: ActiveInvestigation; onOpenReport: (id: string) => void }) {
+function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { investigation: ActiveInvestigation; onOpenReport: (id: string) => void; showMap: boolean }) {
   const statusLabel = investigation.status === "preparing_fieldwork" ? "Preparing fieldwork" : investigation.status === "in_progress" ? "In progress" : "Completed";
   return <>
-    <InvestigationSection title="What we're investigating" icon={<CircleHelp size={20} aria-hidden="true" />} card>
+    <InvestigationSection id="investigation-questions" title="What we're investigating" icon={<CircleHelp size={20} aria-hidden="true" />} card>
       <div className="investigation-active-top"><h3>{investigation.title}</h3><span className={`investigation-status ${investigation.status === "completed" ? "is-completed" : "is-in-progress"}`}>{statusLabel}</span></div>
       <p className="investigation-intro gap-mobile-body">{investigation.introduction}</p>
       <p className="investigation-purpose gap-mobile-body"><strong>Why this matters.</strong> {investigation.purpose}</p>
@@ -48,19 +49,21 @@ function ActiveInvestigationView({ investigation, onOpenReport }: { investigatio
       })}</div>
     </InvestigationSection>
 
-    <InvestigationSection title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
+    {showMap && <InvestigationLocations investigationId={investigation.id} onOpenReport={onOpenReport} />}
+
+    <InvestigationSection id="investigation-methods" title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body">{investigation.method_summary}</p>
       <ul className="investigation-methods">{investigation.methods.map((method) => <li key={method}>{method}</li>)}</ul>
       <p className="investigation-approach gap-mobile-body"><strong>Our approach</strong> {investigation.public_approach}</p>
     </InvestigationSection>
 
-    <InvestigationSection title="What we know so far" icon={<FileSearch size={20} aria-hidden="true" />} card>
+    <InvestigationSection id="investigation-knowledge" title="What we know so far" icon={<FileSearch size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body">{investigation.known_so_far}</p>
       <div className="investigation-evidence-context">{investigation.evidence_context.map((entry) => <article key={entry.label}><h3>{evidenceLabels[entry.label] ?? entry.label}</h3><p className="gap-mobile-body">{entry.summary}</p>{entry.record_id && <EvidenceLink recordId={entry.record_id} onOpenReport={onOpenReport} />}</article>)}</div>
       <div className="investigation-unresolved"><h3>Still to establish</h3><ul>{investigation.uncertainties.map((uncertainty) => <li key={uncertainty}>{uncertainty}</li>)}</ul></div>
     </InvestigationSection>
 
-    <InvestigationSection title="What this could lead to" icon={<Route size={20} aria-hidden="true" />} card>
+    <InvestigationSection id="investigation-outcomes" title="What this could lead to" icon={<Route size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body">The answer could point to one or more of these outcomes:</p>
       <ul className="investigation-outcomes">{investigation.possible_outcomes.map((outcome) => <li key={outcome}>{outcome}</li>)}</ul>
       <div className="investigation-example"><span>Illustrative outcome</span><strong>{investigation.illustrative_outcome.title}</strong><p className="gap-mobile-body">{investigation.illustrative_outcome.description}</p></div>
@@ -76,13 +79,13 @@ export function DogsInvestigationContent({ item, onOpenReport }: { item: WorkRec
   const additionalRecordIds = [...new Set([...(item.record_ids ?? []), ...(item.learning_record_ids ?? []), ...(item.report_record_ids ?? [])])].filter((id) => !threadRecordIds.has(id) && !findingRecordIds.has(id));
 
   return <div className="work-page-content investigation-content">
-    {data.active_investigations.map((investigation) => <ActiveInvestigationView key={investigation.id} investigation={investigation} onOpenReport={onOpenReport} />)}
+    {data.active_investigations.map((investigation, index) => <ActiveInvestigationView key={investigation.id} investigation={investigation} onOpenReport={onOpenReport} showMap={index === 0} />)}
 
-    <InvestigationSection title="What we've established" icon={<CheckCircle2 size={20} aria-hidden="true" />} card>
+    <InvestigationSection id="investigation-findings" title="What we've established" icon={<CheckCircle2 size={20} aria-hidden="true" />} card>
       <div className="investigation-findings">{data.established_findings.map((finding) => <article key={finding.id}><span className="investigation-finding-kind">{finding.evidence_kind === "crossover_firsthand" ? "Crossover firsthand observation" : finding.evidence_kind.replace(/_/g, " ")}</span><h3>{finding.title}</h3><p className="gap-mobile-body">{finding.summary}</p><div className="investigation-source-links">{finding.evidence_record_ids.map((id) => <EvidenceLink key={id} recordId={id} onOpenReport={onOpenReport} />)}</div></article>)}</div>
     </InvestigationSection>
 
-    <InvestigationSection title="Investigation records" icon={<Archive size={20} aria-hidden="true" />}>
+    <InvestigationSection id="investigation-records" title="Investigation records" icon={<Archive size={20} aria-hidden="true" />}>
       <p className="investigation-records-intro gap-mobile-body">Earlier barrier threads and evidence remain available for deeper review.</p>
       <div className="investigation-thread-list">{(item.threads ?? []).map((thread) => <details key={thread.id}><summary>{thread.title}</summary><div className="investigation-thread-body"><p className="gap-mobile-body">{thread.summary}</p>{thread.open_questions?.length ? <div className="investigation-thread-questions"><h4>Open questions</h4><ul>{thread.open_questions.map((question) => <li key={question}>{question}</li>)}</ul></div> : null}{thread.project_ids?.length ? <p className="investigation-related-projects">Related projects: {thread.project_ids.map((id) => projectById.get(id)?.title || id).join(", ")}.</p> : null}<RecordReferences ids={thread.record_ids} onOpenReport={onOpenReport} /></div></details>)}</div>
       <details className="investigation-earlier-records"><summary>Earlier framing and cross-cutting questions</summary><div className="investigation-thread-body">{item.initial_map?.summary && <p className="gap-mobile-body">{item.initial_map.summary}</p>}{item.open_questions?.length ? <div className="investigation-thread-questions"><h4>Open questions</h4><ul>{item.open_questions.map((question) => <li key={question}>{question}</li>)}</ul></div> : null}<RecordReferences ids={additionalRecordIds} onOpenReport={onOpenReport} /></div></details>

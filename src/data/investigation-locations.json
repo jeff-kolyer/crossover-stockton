@@ -1,0 +1,63 @@
+[
+  {
+    "id": "weston-ranch-carrie-street",
+    "investigation_id": "street-dog-immediate-welfare",
+    "name": "Weston Ranch — Carrie Street levee",
+    "area": "800 block of Carrie Street / levee",
+    "coordinates": [37.914, -121.301],
+    "coordinate_note": "Generalized Carrie Street neighborhood reference, informed by public street geography; not the attack site.",
+    "coordinate_reference_url": "https://callejero-california.openalfa.com/calles/carrie-street-weston-ranch-ca-carrie-street",
+    "evidence_date": "2026-04-23",
+    "evidence_type": "Published local report",
+    "status": "reported",
+    "description": "Stocktonia reported an April 23, 2026 roaming-dog attack near the levee and said at least six dogs were subsequently captured.",
+    "unknown": "Current dog presence, ownership, and animal-welfare conditions are unverified.",
+    "source_url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
+    "evidence_record_id": "stockton-2026-05-11-stray-dog-report"
+  },
+  {
+    "id": "south-lincoln-crosstown",
+    "investigation_id": "street-dog-immediate-welfare",
+    "name": "South Lincoln Street — Crosstown Freeway",
+    "area": "Near the DMV beneath the Crosstown Freeway",
+    "coordinates": [37.951, -121.298],
+    "coordinate_note": "Generalized public DMV-area reference; not an encampment or animal location.",
+    "coordinate_reference_url": "https://www.dmv.ca.gov/portal/field-office/stockton/",
+    "evidence_date": "2025-02-28",
+    "evidence_type": "Published local report",
+    "status": "reported",
+    "description": "Stocktonia documented Hungry Tailz Rescue's February 2025 visit, including puppies, adult dogs, and animal-care needs.",
+    "unknown": "Current residents, dogs, and care needs are unverified.",
+    "source_url": "https://stocktonia.org/news/community/2025/03/10/puppy-love-spurs-stockton-group-to-offer-homeless-pets-a-lifeline/"
+  },
+  {
+    "id": "trinity-bear-creek",
+    "investigation_id": "street-dog-immediate-welfare",
+    "name": "Trinity Parkway — Bear Creek levee",
+    "area": "Trinity Parkway / McAuliffe Road vicinity",
+    "coordinates": [38.048, -121.37],
+    "coordinate_note": "Generalized Trinity Parkway corridor reference based on public road geography; not an encampment location.",
+    "coordinate_reference_url": "https://mapcarta.com/W287547354",
+    "evidence_date": "2025-07-23",
+    "evidence_type": "Published local report",
+    "status": "reported",
+    "description": "July 2025 reporting documented residents with dogs and puppies, pet-related shelter barriers, and subsequent encampment removal.",
+    "unknown": "Conditions following the encampment removal, including any current animal-care needs, are unverified.",
+    "source_url": "https://stocktonia.org/news/homeless/2025/07/23/city-cleans-up-trinity-parkway-dozens-of-homeless-displaced/"
+  },
+  {
+    "id": "country-club-i5",
+    "investigation_id": "street-dog-immediate-welfare",
+    "name": "Country Club — I-5 vicinity",
+    "area": "Country Club Boulevard / Interstate 5",
+    "coordinates": [37.963, -121.336],
+    "coordinate_note": "Generalized public interchange reference; not an encampment location.",
+    "coordinate_reference_url": "https://dot.ca.gov/-/media/dot-media/programs/safety-programs/documents/exit/f0017888-5.pdf",
+    "evidence_date": "2025-03-05",
+    "evidence_type": "County report",
+    "status": "exploratory",
+    "description": "A county report documented encampment outreach in the area, but identified no specific animal-welfare need.",
+    "unknown": "Whether dogs were present, and any current dog-related conditions, are unverified.",
+    "source_url": "https://sjcprobation.org/2025/03/05/san-joaquin-county-probation-and-local-law-enforcement-join-forces-to-address-community-concerns-regarding-homeless-encampment-in-stockton"
+  }
+]

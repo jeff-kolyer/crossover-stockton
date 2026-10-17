@@ -1,9 +1,10 @@
-import { ArrowRight, ChartNoAxesColumnIncreasing, FileText, HardHat, Network, Sparkles } from "lucide-react";
+import { ArrowRight, ChartNoAxesColumnIncreasing, FileText, HardHat, Network, PawPrint, Sparkles } from "lucide-react";
 import researchData from "../data/dogs-research.json";
 import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
 import type { CapacityProject, EvidenceRecord, WorkRecord } from "../types";
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
+import { navigateToWorkSection } from "./WorkSectionNav";
 
 const research = researchData;
 const projects = projectsData as CapacityProject[];
@@ -43,8 +44,8 @@ function formatDate(value?: string | null) {
   return Number.isNaN(date.getTime()) ? value : new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(date);
 }
 
-function Section({ title, icon, children, card = false }: { title: string; icon?: ReactNode; children: ReactNode; card?: boolean }) {
-  return <section className={`research-section${card ? " work-content-section gap-refined-card is-card" : ""}`}><div className={`research-section-heading${card ? " work-content-heading" : ""}`}>{icon}<h2>{title}</h2></div>{children}</section>;
+function Section({ id, title, icon, children, card = false }: { id?: string; title: string; icon?: ReactNode; children: ReactNode; card?: boolean }) {
+  return <section id={id} className={`research-section${card ? " work-content-section gap-refined-card is-card" : ""}`}><div className={`research-section-heading${card ? " work-content-heading" : ""}`}>{icon}<h2>{title}</h2></div>{children}</section>;
 }
 
 function SourceLink({ recordId, label }: { recordId: string; label?: string }) {
@@ -52,16 +53,16 @@ function SourceLink({ recordId, label }: { recordId: string; label?: string }) {
   return source ? <a className="research-source" href={source.url} target="_blank" rel="noreferrer">{label || source.label} <ArrowRight size={14} aria-hidden="true" /></a> : null;
 }
 
-function MetricSummary({ items }: { items: Array<{ label: string; value: number | undefined }> }) {
-  return <div className="research-metrics">{items.map(({ label, value }) => <div className="research-metric" key={label}><strong>{value === undefined ? "Unknown" : number.format(value)}</strong><span>{label}</span></div>)}</div>;
+function MetricSummary({ items, compact = false }: { items: Array<{ label: string; value: number | undefined }>; compact?: boolean }) {
+  return <div className={`research-metrics${compact ? " is-compact" : ""}`}>{items.map(({ label, value }) => <div className="research-metric" key={label}><strong>{value === undefined ? "Unknown" : number.format(value)}</strong><span>{label}</span></div>)}</div>;
 }
 
 function HorizontalChart({ title, categories }: { title: string; categories: Array<{ label: string; value: number }> }) {
   const max = Math.max(...categories.map((category) => category.value), 1);
-  return <figure className="research-chart" aria-label={title}><figcaption>{title}</figcaption><ul>{categories.map(({ label, value }) => <li key={label}><div className="research-chart-line"><span>{label}</span><strong>{number.format(value)}</strong></div><div className="research-chart-track" aria-hidden="true"><div className="research-chart-bar" style={{ width: `${(value / max) * 100}%` }} /></div></li>)}</ul></figure>;
+  return <figure className="research-chart" aria-label={title}><figcaption>{title}</figcaption><ul>{categories.map(({ label, value }) => <li key={label}><span className="research-chart-label">{label}</span><div className="research-chart-track" aria-hidden="true"><div className="research-chart-bar" style={{ width: `${(value / max) * 100}%` }} /></div><strong>{number.format(value)}</strong></li>)}</ul></figure>;
 }
 
-function ProjectStatus({ project }: { project: CapacityProject }) {
+function projectStatus(project: CapacityProject) {
   let label: string;
   let tone: "is-neutral" | "is-in-progress" | "is-operational" = "is-neutral";
   if (project.operational_status === "operational") { label = "Operating"; tone = "is-operational"; }
@@ -71,6 +72,11 @@ function ProjectStatus({ project }: { project: CapacityProject }) {
   else if (project.development_stage === "funded" && project.procedure_tracking?.planned != null && project.procedure_tracking.completed == null) label = "Delivery unverified";
   else if (project.development_stage === "funded") label = "Authorized";
   else label = "Services unverified";
+  return { label, tone };
+}
+
+function ProjectStatus({ project }: { project: CapacityProject }) {
+  const { label, tone } = projectStatus(project);
   return <span className={`research-project-status ${tone}`}>{label}</span>;
 }
 
@@ -117,40 +123,67 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
   const reviewRecords = (item.record_ids ?? []).map((id) => recordById.get(id)).filter((record): record is EvidenceRecord => Boolean(record)).sort((a, b) => (b.checked_at || b.recorded_at || b.published_at || "").localeCompare(a.checked_at || a.recorded_at || a.published_at || ""));
   const selectedProjects = research.planned_improvements.project_ids.map((id) => projects.find((project) => project.id === id)).filter((project): project is CapacityProject => Boolean(project));
 
+  const intakeMetrics = [{ label: "Total dog intake events", value: intakeTotal?.value }, { label: "Stray intake events", value: stray?.value }, { label: "Owner-surrender events", value: measurement("owner_surrender_intake")?.value }];
+  const outcomeMetrics = [{ label: "Rescue transfers", value: measurement("rescue_or_transfer")?.value }, { label: "Adoptions", value: measurement("adoption")?.value }, { label: "Returns to owners", value: measurement("return_to_owner")?.value }];
+  const jump = (event: MouseEvent<HTMLAnchorElement>, id: string) => { event.preventDefault(); navigateToWorkSection(id); };
+
   return <div className="work-page-content research-content">
-    <Section title="What's New" icon={<Sparkles size={20} aria-hidden="true" />} card>
-      <p className="research-section-intro gap-mobile-body">Meaningful changes found in the latest research review.</p>
+    <Section title="At a glance" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
+      <p className="research-section-intro gap-mobile-body">A quick view of the problem, how the system handles it now, and what could change.</p>
+      <div className="research-glance-grid">
+        <a className="research-glance-panel is-problem" href="#research-need" onClick={(event) => jump(event, "research-need")}>
+          <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><div><h3>The problem</h3><p>Stray intake dominates.</p></div></div>
+          <MetricSummary items={intakeMetrics} compact />
+          <span className="research-glance-link">Explore the need <ArrowRight size={15} aria-hidden="true" /></span>
+        </a>
+        <a className="research-glance-panel is-system" href="#research-system" onClick={(event) => jump(event, "research-system")}>
+          <div className="research-glance-heading"><Network size={29} aria-hidden="true" /><div><h3>The current system</h3><p>Many dogs are transferred or adopted, while significant numbers have other outcomes.</p></div></div>
+          <MetricSummary items={outcomeMetrics} compact />
+          <span className="research-glance-link">Explore outcomes <ArrowRight size={15} aria-hidden="true" /></span>
+        </a>
+        <a className="research-glance-panel is-improvements" href="#research-improvements" onClick={(event) => jump(event, "research-improvements")}>
+          <div className="research-glance-heading"><HardHat size={29} aria-hidden="true" /><div><h3>Coming improvements</h3><p>New facilities and programs could increase care and prevent dogs from losing placement.</p></div></div>
+          <ul className="research-glance-projects">{selectedProjects.map((project) => <li key={project.id}>{project.title} <span>({projectStatus(project).label.toLowerCase()})</span></li>)}</ul>
+          <span className="research-glance-link">Explore projects <ArrowRight size={15} aria-hidden="true" /></span>
+        </a>
+      </div>
+      <p className="research-glance-scope">Figures are {period.toLowerCase()} events and dispositions across the Stockton Animal Services multi-jurisdiction service area. Project stages do not establish added dog-care capacity.</p>
+    </Section>
+
+    <Section id="research-whats-new" title="What's New" icon={<Sparkles size={20} aria-hidden="true" />} card>
+      <p className="research-section-intro gap-mobile-body">New findings and meaningful changes in what we know.</p>
       {research.latest_findings.length ? <div className="research-findings">{research.latest_findings.map((finding) => <article key={finding.id}><div className="research-finding-meta">Identified in review · {formatDate(finding.discovered_at)}</div><h3>{finding.finding}</h3><p className="gap-mobile-body">{finding.what_changed}</p><p className="research-finding-why">{finding.why_it_matters}</p><div className="research-sources">{finding.evidence_record_ids.map((id) => <SourceLink key={id} recordId={id} label="View supporting source" />)}</div></article>)}</div> : <p className="gap-mobile-body">No significant changes were found in the latest review.</p>}
     </Section>
 
-    <Section title="The Need in Detail" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
+    <Section id="research-need" title="The Need in Detail" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">The shelter's annual intake report shows the scale and mix of dogs entering its care.</p>
-      <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
-      <MetricSummary items={[{ label: "Total dog intake events", value: intakeTotal?.value }, { label: "Stray intake events", value: stray?.value }, { label: "Owner-surrender events", value: measurement("owner_surrender_intake")?.value }]} />
-      <HorizontalChart title="Dog intake by reported category" categories={intake} />
-      {intakeTotal && stray && <p className="research-interpretation gap-mobile-body">About {Math.round((stray.value / intakeTotal.value) * 100)}% of recorded intake events were classified as strays. That does not tell us how many dogs were abandoned or are currently roaming Stockton.</p>}
-      {coverage && <p className="research-coverage">Geographic coverage: {coverage}</p>}
-      {intakeTotal && <SourceLink recordId={intakeTotal.source_record_id} label="Official kennel report" />}
+      <div className="research-detail-grid"><div className="research-detail-copy">
+        <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
+        <MetricSummary items={intakeMetrics} />
+        {intakeTotal && stray && <p className="research-interpretation gap-mobile-body">About {Math.round((stray.value / intakeTotal.value) * 100)}% of recorded intake events were classified as strays. That does not tell us how many dogs were abandoned or are currently roaming Stockton.</p>}
+        {coverage && <p className="research-coverage">Geographic coverage: {coverage}</p>}
+        {intakeTotal && <SourceLink recordId={intakeTotal.source_record_id} label="Official kennel report" />}
+      </div><HorizontalChart title="Dog intake by reported category" categories={intake} /></div>
+      {signal && <aside className="research-signal"><h3>More recent demand signal</h3><p className="gap-mobile-body">In {signal.reporting_period}, Stockton Streetdogs reported approximately {signal.current_range[0]}–{signal.current_range[1]} dumped-dog encounters per week, compared with roughly {signal.comparison_value_approximate} per week {signal.comparison_period}. This is an organizational report, not a citywide count, and is separate from shelter intake.</p><SourceLink recordId={signal.source_record_id} label="View Stockton Streetdogs report" /></aside>}
     </Section>
 
-    {signal && <aside className="research-signal"><h3>More recent demand signal</h3><p className="gap-mobile-body">In {signal.reporting_period}, Stockton Streetdogs reported approximately {signal.current_range[0]}–{signal.current_range[1]} dumped-dog encounters per week, compared with roughly {signal.comparison_value_approximate} per week {signal.comparison_period}. This is an organizational report, not a citywide count, and is separate from shelter intake.</p><SourceLink recordId={signal.source_record_id} label="View Stockton Streetdogs report" /></aside>}
-
-    <Section title="The Current System" icon={<Network size={20} aria-hidden="true" />} card>
+    <Section id="research-system" title="The Current System" icon={<Network size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">Reported dispositions show what happened to dogs leaving shelter care during the year.</p>
-      <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
-      <MetricSummary items={[{ label: "Rescue transfers", value: measurement("rescue_or_transfer")?.value }, { label: "Adoptions", value: measurement("adoption")?.value }, { label: "Returns to owners", value: measurement("return_to_owner")?.value }]} />
-      <HorizontalChart title={`Reported dog dispositions · ${outcomeTotal ? number.format(outcomeTotal.value) : "total unknown"} total`} categories={outcomes} />
-      <p className="research-interpretation gap-mobile-body">Rescue transfers were the largest documented outcome category. Receiving rescues are therefore an important part of the care system, but transfer does not necessarily mean final adoption. Dogs leaving care during a calendar year need not be the same dogs who entered that year. The difference between annual intake and disposition totals cannot measure how many dogs remained in care.</p>
-      {outcomeTotal && <SourceLink recordId={outcomeTotal.source_record_id} label="Official kennel report" />}
-      <p className="research-limitation gap-mobile-body">Latest comparable 2025–2026 results, current shelter occupancy, and broader rescue-network outcomes have not yet been verified.</p>
+      <div className="research-detail-grid"><div className="research-detail-copy">
+        <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
+        <MetricSummary items={outcomeMetrics} />
+        <p className="research-interpretation gap-mobile-body">Rescue transfers were the largest documented outcome category. Receiving rescues are therefore an important part of the care system, but transfer does not necessarily mean final adoption. Dogs leaving care during a calendar year need not be the same dogs who entered that year. The difference between annual intake and disposition totals cannot measure how many dogs remained in care.</p>
+        {outcomeTotal && <SourceLink recordId={outcomeTotal.source_record_id} label="Official kennel report" />}
+        <p className="research-limitation gap-mobile-body">Latest comparable 2025–2026 results, current shelter occupancy, and broader rescue-network outcomes have not yet been verified.</p>
+      </div><HorizontalChart title={`Reported dog dispositions · ${outcomeTotal ? number.format(outcomeTotal.value) : "total unknown"} total`} categories={outcomes} /></div>
     </Section>
 
-    <Section title="Improvements Underway" icon={<HardHat size={20} aria-hidden="true" />} card>
+    <Section id="research-improvements" title="Improvements Underway" icon={<HardHat size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">These facilities and programs could increase care or prevent dogs from losing placement. Their stages and delivered results remain distinct.</p>
       <div className="research-project-list">{selectedProjects.map((project) => <ProjectRow key={project.id} project={project} onOpenReport={onOpenReport} />)}</div>
     </Section>
 
-    <Section title="Research & Sources" icon={<FileText size={20} aria-hidden="true" />}>
+    <Section id="research-sources" title="Research & Sources" icon={<FileText size={20} aria-hidden="true" />}>
       <p className="research-section-intro gap-mobile-body">Source reviews are retained here, newest first. The original review remains part of the record.</p>
       <div className="research-review-list">{reviewRecords.map((record) => <article key={record.id}><time>{formatDate(record.published_at || record.recorded_at || record.checked_at)}</time><h3>{record.title}</h3><p className="gap-mobile-body">{record.summary}</p>{record.source.url ? <SourceLink recordId={record.id} label="View source" /> : <span>{record.source.publisher || "Internal record"}</span>}</article>)}</div>
     </Section>
