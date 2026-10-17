@@ -132,17 +132,20 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       <p className="research-section-intro gap-mobile-body">A quick view of the problem, how the system handles it now, and what could change.</p>
       <div className="research-glance-grid">
         <a className="research-glance-panel is-problem" href="#research-need" onClick={(event) => jump(event, "research-need")}>
-          <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><div><h3>The problem</h3><p>Stray intake dominates.</p></div></div>
+          <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><h3>The problem</h3></div>
+          <p className="research-glance-description">Stray intake dominates.</p>
           <MetricSummary items={intakeMetrics} compact />
           <span className="research-glance-link">Explore the need <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
         <a className="research-glance-panel is-system" href="#research-system" onClick={(event) => jump(event, "research-system")}>
-          <div className="research-glance-heading"><Network size={29} aria-hidden="true" /><div><h3>The current system</h3><p>Many dogs are transferred or adopted, while significant numbers have other outcomes.</p></div></div>
+          <div className="research-glance-heading"><Network size={29} aria-hidden="true" /><h3>The current system</h3></div>
+          <p className="research-glance-description">Many dogs are transferred or adopted, while significant numbers have other outcomes.</p>
           <MetricSummary items={outcomeMetrics} compact />
           <span className="research-glance-link">Explore outcomes <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
         <a className="research-glance-panel is-improvements" href="#research-improvements" onClick={(event) => jump(event, "research-improvements")}>
-          <div className="research-glance-heading"><HardHat size={29} aria-hidden="true" /><div><h3>Coming improvements</h3><p>New facilities and programs could increase care and prevent dogs from losing placement.</p></div></div>
+          <div className="research-glance-heading"><HardHat size={29} aria-hidden="true" /><h3>Coming improvements</h3></div>
+          <p className="research-glance-description">New facilities and programs could increase care and prevent dogs from losing placement.</p>
           <ul className="research-glance-projects">{selectedProjects.map((project) => <li key={project.id}>{project.title} <span>({projectStatus(project).label.toLowerCase()})</span></li>)}</ul>
           <span className="research-glance-link">Explore projects <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
