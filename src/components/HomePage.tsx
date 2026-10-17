@@ -20,19 +20,26 @@ import {
 } from "lucide-react";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
+import investigationsData from "../data/dogs-investigations.json";
+import investigationLocationsData from "../data/investigation-locations.json";
 import orgsData from "../data/orgs.json";
+import recordsData from "../data/records.json";
 import storiesData from "../data/stories.json";
+import workData from "../data/work.json";
 import { getActionIcon } from "../lib/actionIcons";
 import { latestGapActivity } from "../lib/gapActivity";
 import { navigateInternalLink } from "../lib/internalLink";
+import { workIcon } from "../lib/workIcon";
 import { PublicMobileMenu } from "./PublicMobileMenu";
-import type { ActionTag, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "../types";
+import type { ActionTag, EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
 
 interface HomePageProps {
   page: "home" | "reality" | "connection" | "action";
   onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenWork: (workId: string) => void;
+  onOpenReport: (reportId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
 }
@@ -41,6 +48,20 @@ const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 const actions = actionsData as PublicActionRecord[];
 const orgs = orgsData as OrgRecord[];
+const work = workData as WorkRecord[];
+const records = recordsData as EvidenceRecord[];
+const dogWorkOrder = ["research", "investigation", "activity"];
+const currentDogWork = work
+  .filter((item) => item.gap_id === "dogs-safe-placement" && item.status === "in_progress")
+  .sort((a, b) => dogWorkOrder.indexOf(a.page_kind ?? "") - dogWorkOrder.indexOf(b.page_kind ?? ""));
+const currentDogInvestigation = investigationsData.active_investigations[0];
+const historicalReferenceCount = investigationLocationsData.filter((location) => location.investigation_id === currentDogInvestigation?.id).length;
+const investigationWork = currentDogWork.find((item) => item.page_kind === "investigation");
+const activityWork = currentDogWork.find((item) => item.page_kind === "activity");
+const contactedOrganizations = (activityWork?.organization_ids ?? [])
+  .map((id) => orgs.find((org) => org.id === id)?.name)
+  .filter((name): name is string => Boolean(name));
+const firstFieldReport = records.find((record) => record.record_type === "field_report" && investigationWork?.report_record_ids?.includes(record.id));
 
 const actionHeroImage = "/images/action/action_banner.jpg";
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
@@ -106,7 +127,7 @@ const actionTagLabels: Record<ActionTag, string> = {
   "foster-adopt": "Foster / Adopt",
 };
 
-export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory, onOpenAction }: HomePageProps) {
+export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: HomePageProps) {
   const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
   const isHome = page === "home";
   const copy = pageCopy[page];
@@ -231,6 +252,46 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenStory
         <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "reality" : "home")}>
           {page === "home" ? <>Explore all needs <ArrowRight size={16} /></> : <><ArrowLeft size={16} /> Back to home</>}
         </button>
+      </section>}
+
+      {isHome && currentDogInvestigation && investigationWork && <section className="public-band public-work-band" aria-labelledby="home-work-title">
+        <div className="section-intro">
+          <p>Crossover's work</p>
+          <h2 id="home-work-title">What we're doing now</h2>
+          <span>We are researching Stockton's dog-placement gap, investigating immediate welfare needs, and documenting firsthand activity.</span>
+        </div>
+        <div className="home-work-content">
+          <a className="home-work-focus" href={`/work/${investigationWork.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork(investigationWork.id))}>
+            <span>Current investigation question</span>
+            <h3>{currentDogInvestigation.title}</h3>
+            <p>{currentDogInvestigation.introduction}</p>
+            <p className="home-work-uncertainty">Current street conditions and unmet care needs still need field verification.</p>
+          </a>
+          <div className="home-work-grid">
+            {currentDogWork.map((item) => {
+              const nextStep = typeof item.next_step === "string" ? item.next_step : item.next_step?.title;
+              const Icon = workIcon(item.type);
+              return <article className="home-work-card" key={item.id}>
+                <div className="home-work-card-heading">
+                  <span className="gap-work-icon" aria-hidden="true"><Icon size={22} /></span>
+                  <div>
+                    <span className="home-work-kind">{item.page_kind}</span>
+                    <h3>{item.title}</h3>
+                  </div>
+                </div>
+                <p>{item.gap_summary || item.summary}</p>
+                {item.page_kind === "investigation" && historicalReferenceCount > 0 && <p className="home-work-report">The field map shows {historicalReferenceCount} approximate historical reference areas. It does not confirm current animal locations.</p>}
+                {item.page_kind === "activity" && contactedOrganizations.length > 0 && <p className="home-work-report">Organizations contacted: {contactedOrganizations.join(" and ")}.</p>}
+                {item.page_kind === "activity" && firstFieldReport && <p className="home-work-report">Firsthand report: {firstFieldReport.summary}</p>}
+                {nextStep && <p className="home-work-next"><strong>Next step:</strong> {nextStep}</p>}
+                <div className="home-work-links">
+                  <a className="home-work-primary" href={`/work/${item.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork(item.id))}>View {item.page_kind} <ArrowRight size={15} /></a>
+                  {item.page_kind === "activity" && firstFieldReport && <a className="home-work-secondary" href={`/reports/${firstFieldReport.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenReport(firstFieldReport.id))}>Field report <ArrowRight size={15} /></a>}
+                </div>
+              </article>;
+            })}
+          </div>
+        </div>
       </section>}
 
       {(page === "home" || page === "connection") && <section id="connection" className="public-band public-story-band">

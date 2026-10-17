@@ -6,6 +6,8 @@ const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const robots = await readFile(new URL("robots.txt", dist), "utf8");
 const llms = await readFile(new URL("llms.txt", dist), "utf8");
 const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
+const dogInvestigation = JSON.parse(await readFile(new URL("../src/data/dogs-investigations.json", import.meta.url), "utf8"));
+const records = JSON.parse(await readFile(new URL("../src/data/records.json", import.meta.url), "utf8"));
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 
 if (!urls.length || !robots.includes(`Sitemap: ${origin}/sitemap.xml`)) {
@@ -39,9 +41,20 @@ for (const url of urls) {
 }
 
 const homeHtml = await readFile(new URL("index.html", dist), "utf8");
+const homeText = await readFile(new URL("page.txt", dist), "utf8");
 const featuredGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
 if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) {
   throw new Error("The homepage does not link to the active dog-placement gap.");
+}
+const currentQuestion = dogInvestigation.active_investigations[0]?.title;
+const fieldReport = records.find((record) => record.id === "crossover-2026-10-14-sas-first-visit");
+if (!currentQuestion || !fieldReport || !homeHtml.includes(currentQuestion) || !homeText.includes(currentQuestion) || !homeText.includes(fieldReport.summary) || !homeText.includes("approximate historical reference areas") || !homeText.includes("Organizations contacted:")) {
+  throw new Error("The homepage does not describe the active investigation and firsthand work.");
+}
+for (const workId of featuredGap.work_ids ?? []) {
+  if (!homeHtml.includes(`href="/work/${workId}/"`) || !homeText.includes(`${origin}/work/${workId}/`)) {
+    throw new Error(`The homepage does not link to work item ${workId}.`);
+  }
 }
 
 for (const gap of gaps.filter((item) => item.active && item.work_ids?.length)) {

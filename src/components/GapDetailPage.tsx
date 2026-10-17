@@ -40,6 +40,7 @@ import workData from "../data/work.json";
 import type { LucideIcon } from "lucide-react";
 import { getActionIcon } from "../lib/actionIcons";
 import { gapWorkSummary } from "../lib/gapWorkSummary";
+import { workIcon } from "../lib/workIcon";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { navigateInternalLink } from "../lib/internalLink";
 import { updateIcon, updateTypeLabel } from "../lib/updatePresentation";
@@ -492,12 +493,6 @@ function WorkSection({ items, gap, onOpenWork }: { items: WorkRecord[]; gap: Gap
       </div>
     </section>
   );
-}
-
-function workIcon(type: WorkRecord["type"]) {
-  if (type === "investigation") return MapPin;
-  if (type === "field_work") return Users;
-  return FileText;
 }
 
 function workStatusLabel(status: WorkRecord["status"]) {
