@@ -1087,6 +1087,63 @@
     ]
   },
   {
+    "id": "stockton-2026-10-19-animal-services-ordinance-agenda",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": "2026-10-14",
+    "checked_at": "2026-10-19",
+    "record_type": "planning_update",
+    "trust": "government",
+    "title": "City schedules Animal Services ordinance review for October 19",
+    "summary": "The posted Council Legislation/Environmental Committee agenda lists item 26-1161 for October 19, 2026. Stockton Police Department is scheduled to update the committee on its review of the Animal Services Ordinance and proposed amendments. The agenda does not establish that amendments were adopted; proposal text and meeting outcome remain to be verified.",
+    "source": {
+      "publisher": "City of Stockton / Council Legislation/Environmental Committee",
+      "url": "https://stockton.granicus.com/GeneratedAgendaViewer.php?event_id=3210&view_id=48",
+      "type": "government"
+    },
+    "work_id": "dogs-public-source-review",
+    "supports": ["animal-services-policy-review"],
+    "action_signals": []
+  },
+  {
+    "id": "kcra-2026-09-24-stockton-stray-dog-report",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-street-dogs"],
+    "published_at": "2026-09-24",
+    "checked_at": "2026-10-19",
+    "record_type": "update",
+    "trust": "source_supported",
+    "title": "KCRA reports Stockton Street Dogs' rising stray-dog encounters",
+    "summary": "KCRA reported that Stockton Street Dogs founder Jesse Mejia described more stray- and dumped-dog encounters than a year earlier, with particular concern in District 5. These are organization-reported observations in local news, not an official Stockton-wide census or Crossover firsthand verification.",
+    "source": {
+      "publisher": "KCRA 3",
+      "url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921",
+      "type": "news"
+    },
+    "work_id": "dogs-public-source-review",
+    "supports": ["dumped-dog-intake-pressure", "rescue-capacity-pressure"],
+    "action_signals": []
+  },
+  {
+    "id": "ssd-2026-07-31-canine-campus-fundraiser",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-street-dogs"],
+    "published_at": "2026-07-31",
+    "checked_at": "2026-10-19",
+    "record_type": "organization_update",
+    "trust": "source_supported",
+    "title": "Stockton Streetdogs opens Canine Campus construction fundraiser",
+    "summary": "Stockton Streetdogs' fundraising page, dated July 31, 2026, requests support for construction costs of its proposed Canine Campus. It documents fundraising activity, not full funding, approval, construction, operational capacity, or an opening date.",
+    "source": {
+      "publisher": "Stockton Streetdogs / GoFundMe",
+      "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus",
+      "type": "organization"
+    },
+    "work_id": "dogs-public-source-review",
+    "supports": ["safe-placement-capacity"],
+    "action_signals": []
+  },
+  {
     "id": "ssd-2026-09-29-dumped-dogs-surge",
     "gap_ids": [
       "dogs-safe-placement"

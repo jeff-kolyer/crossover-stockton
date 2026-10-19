@@ -10,11 +10,12 @@
     "development_stage": "proposed",
     "operational_status": "not_operational",
     "funding_status": "unknown",
+    "funding_source_urls": ["https://www.gofundme.com/f/help-us-create-stocktons-canine-campus"],
     "actual_additional_capacity": null,
     "capacity_summary": {
       "headline": "Potential capacity: Hundreds of dogs",
       "how_it_helps": "Could provide overflow sheltering and recovery care for dogs waiting for safe placement.",
-      "not_yet_verified": "Site, funding, opening date, and usable operating capacity."
+      "not_yet_verified": "A fundraiser is documented; full funding, site, approvals, opening date, and usable operating capacity remain unverified."
     },
     "demand_contribution": "Could give dogs awaiting placement, shelter overflow, or medical recovery a safe care setting; none of that capacity is confirmed available.",
     "expected_capacity_or_benefit": {
@@ -22,12 +23,14 @@
       "status": "proposed",
       "evidence_record_ids": ["ssd-2026-10-07-canine-campus-details"]
     },
-    "milestones": [],
+    "milestones": [
+      { "date": "2026-07-31", "status": "in_progress", "description": "Stockton Streetdogs opened a construction fundraising campaign for the proposed Canine Campus; this does not establish full funding or an operating facility.", "evidence_record_ids": ["ssd-2026-07-31-canine-campus-fundraiser"] }
+    ],
     "barrier_thread_ids": ["shelter-foster-capacity", "veterinary-access", "public-access-coordination"],
-    "evidence_record_ids": ["ssd-2026-07-30-canine-campus-proposal", "ssd-2026-10-07-canine-campus-details"],
-    "last_verified_at": "2026-10-07",
-    "open_questions": ["Has a site been secured?", "What funding and approvals exist?", "What are the next milestones and realistic opening dates?", "Which volunteer roles would be approved and actionable?"],
-    "next_verification_step": "Ask Stockton Street Dogs for the current site, funding, milestone, and participation status."
+    "evidence_record_ids": ["ssd-2026-10-07-canine-campus-details", "ssd-2026-07-31-canine-campus-fundraiser", "ssd-2026-07-30-canine-campus-proposal"],
+    "last_verified_at": "2026-10-19",
+    "open_questions": ["Has a suitable site been secured?", "How much funding is committed, and how much is still required?", "Are permits or other approvals needed, and have they been obtained?", "Is there a realistic construction and opening timeline?", "What would the initial usable capacity be?", "What staffing and operating support will be required?", "Which volunteer roles would be approved and actionable?"],
+    "next_verification_step": "Request current project milestones, funding commitments and remaining needs, and site status directly from Stockton Street Dogs."
   },
   {
     "id": "stockton-animal-shelter-renovation",

@@ -9,12 +9,15 @@
     "type": "research",
     "started_at": "2026-08-20",
     "completed_at": "2026-08-27",
-    "updated_at": "2026-10-15",
-    "last_reviewed_at": "2026-10-15",
+    "updated_at": "2026-10-19",
+    "last_reviewed_at": "2026-10-19",
     "research_data_id": "dogs-research-baseline-2026-10",
     "record_ids": [
       "crossover-2026-08-27-dog-placement-field-investigation",
-      "sas-2024-kennel-statistics"
+      "sas-2024-kennel-statistics",
+      "stockton-2026-10-19-animal-services-ordinance-agenda",
+      "kcra-2026-09-24-stockton-stray-dog-report",
+      "ssd-2026-07-31-canine-campus-fundraiser"
     ],
     "page_kind": "research",
     "next_step": {
@@ -36,7 +39,7 @@
     "status": "in_progress",
     "type": "investigation",
     "started_at": "2026-08-27",
-    "updated_at": "2026-10-15",
+    "updated_at": "2026-10-19",
     "project_ids": [
       "canine-campus",
       "stockton-animal-shelter-renovation",

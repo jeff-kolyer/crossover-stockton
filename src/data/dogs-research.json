@@ -2,12 +2,32 @@
   "id": "dogs-research-baseline-2026-10",
   "work_id": "dogs-public-source-review",
   "gap_id": "dogs-safe-placement",
-  "last_reviewed_at": "2026-10-15",
+  "last_reviewed_at": "2026-10-19",
   "report_path": "docs/research/dogs-research-baseline-2026-10.md",
   "coverage": {
     "sas-service-area-2024": "Stockton Animal Services report covers County, Escalon, Lathrop, Lodi, Manteca, Out Of County, Ripon, Stockton, and Tracy; it is not a Stockton-city-only count."
   },
   "latest_findings": [
+    {
+      "id": "dogs-2026-10-19-animal-services-ordinance-review",
+      "finding": "Stockton is reviewing proposed changes to Animal Services operations.",
+      "discovered_at": "2026-10-19",
+      "what_changed": "The City scheduled a Legislation/Environmental Committee discussion of proposed Animal Services ordinance amendments (item 26-1161) for October 19, 2026. The agenda does not establish enacted policy.",
+      "previous_state": "No outcome or enacted change from this committee item was established in the research record.",
+      "current_verified_state": "The posted agenda calls for a Stockton Police Department update on its ordinance review. The amendment text, committee discussion, and any subsequent action have not been verified; the agenda is not an enacted ordinance.",
+      "evidence_record_ids": ["stockton-2026-10-19-animal-services-ordinance-agenda"],
+      "why_it_matters": "The review could affect animal-services operations, but the provisions and any effect on roaming-dog response require the actual documents and meeting outcome."
+    },
+    {
+      "id": "dogs-2026-10-19-kcra-stray-dog-report",
+      "finding": "Advocates report increasing stray-dog activity in Stockton.",
+      "discovered_at": "2026-10-19",
+      "what_changed": "KCRA reported on September 24 that Stockton Street Dogs describes more stray-dog encounters, particularly in District 5. These are organization-reported observations, not a citywide count or Crossover firsthand verification.",
+      "previous_state": "The research already tracked Stockton Street Dogs' organization-reported encounter signal, without this published KCRA source.",
+      "current_verified_state": "KCRA published the organization's observations. They are not an official citywide census or Crossover firsthand verification, and do not establish a citywide population trend.",
+      "evidence_record_ids": ["kcra-2026-09-24-stockton-stray-dog-report"],
+      "why_it_matters": "The report indicates continuing street-dog needs despite existing response efforts; comparable local data are needed to test whether activity is rising citywide or concentrated in particular areas."
+    },
     {
       "id": "dogs-2026-10-15-official-2024-baseline",
       "finding": "Official dog-specific intake and outcome counts are now captured for calendar 2024.",
@@ -80,8 +100,11 @@
   },
   "research_records": [
     { "record_id": "sas-2024-kennel-statistics", "origin": "public_official", "role": "quantitative baseline" },
+    { "record_id": "stockton-2026-10-19-animal-services-ordinance-agenda", "origin": "public_official", "role": "scheduled ordinance review, not enacted policy" },
+    { "record_id": "kcra-2026-09-24-stockton-stray-dog-report", "origin": "published_local_reporting", "role": "organization-attributed street-dog observations, not census" },
     { "record_id": "ssd-2026-09-29-dumped-dogs-surge", "origin": "organization_self_report", "role": "field-demand signal, not census" },
-    { "record_id": "crossover-2026-08-27-dog-placement-field-investigation", "origin": "crossover_firsthand", "role": "historical investigation context, not public-source count" }
+    { "record_id": "crossover-2026-08-27-dog-placement-field-investigation", "origin": "crossover_firsthand", "role": "historical investigation context, not public-source count" },
+    { "record_id": "ssd-2026-07-31-canine-campus-fundraiser", "origin": "organization_self_report", "role": "fundraising evidence, not full funding or operating capacity" }
   ],
   "missing_measurements": [
     { "id": "monthly-2025-2026-dog-flow", "need": "Monthly 2025–2026 dog intakes and outcomes by category and service jurisdiction", "why": "Without comparable recent periods, current direction and seasonality cannot be verified." },
@@ -89,6 +112,7 @@
     { "id": "veterinary-actual-output", "need": "Completed dog/cat spay-neuter procedures, other treatments, appointment slots, waits, and filled veterinary positions by program", "why": "Contracts and authorized positions do not establish delivered treatment capacity." },
     { "id": "rescue-unique-dogs", "need": "Unique dogs assisted, rescued, fostered, transferred, adopted, or treated by each rescue with handoff identifiers", "why": "Without linked counts, shelter transfers can be double-counted as rescue outcomes." },
     { "id": "dog-inclusive-housing", "need": "Pathways-specific pet rules, usable dog-inclusive places, and actual people-with-dog placements", "why": "Total housing beds cannot be treated as dog-inclusive capacity." },
+    { "id": "shine-sjc-pet-inclusive-services", "need": "Does SHINE SJC track pets or help unhoused residents identify shelter and services that accommodate their dogs?", "why": "Dog-specific functionality has not been verified; do not treat the program as a confirmed dog-rescue intervention." },
     { "id": "project-incremental-output", "need": "Opening dates, net usable dog places, completed contract procedures, filled posts, and incremental service volumes for all six projects", "why": "Planned capacity cannot yet be compared with documented demand." }
   ],
   "source_access_notes": [

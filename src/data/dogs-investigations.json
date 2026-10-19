@@ -73,7 +73,9 @@
       "uncertainties": [
         "How often dogs on the street are severely underweight, injured, ill, or dying.",
         "Which dogs receive reliable food, water, monitoring, or emergency veterinary care.",
-        "Whether responsible caregivers need more coordinated people, supplies, or transport."
+        "Whether responsible caregivers need more coordinated people, supplies, or transport.",
+        "How quickly does Stockton Animal Services respond to reports of roaming dogs, and how are urgent cases prioritized?",
+        "Are repeated roaming-dog reports concentrated in particular areas, and what prevents dogs from receiving timely assistance?"
       ],
       "possible_outcomes": [
         "Additional feeding or water assistance",
@@ -96,7 +98,7 @@
       ],
       "related_project_ids": [],
       "verified_finding_ids": [],
-      "last_updated_at": "2026-10-15",
+      "last_updated_at": "2026-10-19",
       "short_focus": "Preparing the first street observation",
       "next_verification_step": "Review reported areas and existing feeding efforts, then plan safe firsthand observation with local caregivers."
     }
