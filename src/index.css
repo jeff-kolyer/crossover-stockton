@@ -13612,7 +13612,7 @@ p {
 /* Research uses the shared Work workspace and section navigation. */
 .research-content{padding-top:0}
 .research-content .research-section.is-card{margin:10px 0;padding:20px;border-radius:11px}
-.research-content .research-section-heading h2{font-size:1.35rem}
+.research-content .research-section-heading h2,.investigation-page-main .investigation-section-heading h2,.activity-page-main .work-content-heading h2,.activity-page-main .work-questions h2{font-size:1.35rem}
 .research-content .research-section-intro{margin-bottom:14px;color:#5a685f}
 .research-section[id]{scroll-margin-top:94px}
 .research-glance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
