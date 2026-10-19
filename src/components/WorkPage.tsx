@@ -30,25 +30,25 @@ const organizations = orgsData as OrgRecord[];
 const logoLight = "/images/logo_light.webp";
 const logoDark = "/images/logo_dark.webp";
 const investigationNavItems: WorkSectionNavItem[] = [
-  { id: "investigation-questions", label: "What we're investigating", icon: Search },
-  { id: "field-observation-map", label: "Field observation map", icon: MapPin },
-  { id: "investigation-methods", label: "How we'll investigate", icon: ListFilter },
-  { id: "investigation-knowledge", label: "What we know so far", icon: ChartNoAxesColumnIncreasing },
-  { id: "investigation-outcomes", label: "What this could lead to", icon: Route },
-  { id: "investigation-findings", label: "What we've established", icon: CheckCircle2 },
-  { id: "investigation-records", label: "Investigation records", icon: FileText },
+  { id: "investigation-questions", label: "Focus", icon: Search },
+  { id: "field-observation-map", label: "Map", icon: MapPin },
+  { id: "investigation-methods", label: "Method", icon: ListFilter },
+  { id: "investigation-knowledge", label: "Evidence", icon: ChartNoAxesColumnIncreasing },
+  { id: "investigation-outcomes", label: "Outcomes", icon: Route },
+  { id: "investigation-findings", label: "Findings", icon: CheckCircle2 },
+  { id: "investigation-records", label: "Records", icon: FileText },
 ];
 const researchNavItems: WorkSectionNavItem[] = [
   { id: "research-whats-new", label: "What's New", icon: Sparkles },
-  { id: "research-need", label: "The Need in Detail", icon: ChartNoAxesColumnIncreasing },
-  { id: "research-system", label: "The Current System", icon: Network },
-  { id: "research-improvements", label: "Improvements Underway", icon: HardHat },
-  { id: "research-sources", label: "Research & Sources", icon: FileText },
+  { id: "research-need", label: "The Need", icon: ChartNoAxesColumnIncreasing },
+  { id: "research-system", label: "System", icon: Network },
+  { id: "research-improvements", label: "Improvements", icon: HardHat },
+  { id: "research-sources", label: "Sources", icon: FileText },
 ];
 const activityNavItems: WorkSectionNavItem[] = [
   { id: "activity-progress", label: "Progress", icon: ClipboardList },
-  { id: "activity-organizations", label: "Organizations contacted", icon: Users },
-  { id: "activity-questions", label: "Open questions", icon: Search },
+  { id: "activity-organizations", label: "Contacts", icon: Users },
+  { id: "activity-questions", label: "Questions", icon: Search },
 ];
 
 export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenReport, onOpenAbout }: WorkPageProps) {
