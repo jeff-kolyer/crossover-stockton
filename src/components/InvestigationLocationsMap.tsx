@@ -30,12 +30,39 @@ function MapFocus({ locations, selectedId }: { locations: InvestigationLocation[
   return null;
 }
 
-export function InvestigationLocationsMap({ locations, selectedId, onSelect }: { locations: InvestigationLocation[]; selectedId: string; onSelect: (id: string) => void }) {
+function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: InvestigationLocation[] }) {
+  const map = useMap();
+  const wasFullscreen = useRef(wheelZoom);
+  useEffect(() => {
+    let resizeFrame = 0;
+    if (wheelZoom) map.scrollWheelZoom.enable();
+    else {
+      map.scrollWheelZoom.disable();
+      if (wasFullscreen.current) {
+        resizeFrame = requestAnimationFrame(() => {
+          map.invalidateSize();
+          map.fitBounds(L.latLngBounds(locations.map(({ coordinates }) => coordinates)), { padding: [46, 46], maxZoom: 11 });
+        });
+      }
+    }
+    wasFullscreen.current = wheelZoom;
+    return () => cancelAnimationFrame(resizeFrame);
+  }, [map, wheelZoom, locations]);
+  useEffect(() => {
+    const observer = new ResizeObserver(() => map.invalidateSize());
+    observer.observe(map.getContainer());
+    return () => observer.disconnect();
+  }, [map]);
+  return null;
+}
+
+export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom }: { locations: InvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean }) {
   const tileFailures = useRef(0);
   const [tilesUnavailable, setTilesUnavailable] = useState(false);
   const icons = useMemo(() => new Map(locations.map((location) => [location.id, locationIcon(location, selectedId === location.id)])), [locations, selectedId]);
   return <div className="investigation-map-frame"><MapContainer center={[37.98, -121.33]} zoom={10} scrollWheelZoom={false} className="investigation-leaflet-shell">
     {!tilesUnavailable && <TileLayer attribution='&copy; OpenStreetMap contributors' url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" eventHandlers={{ tileload: () => { tileFailures.current = 0; }, tileerror: () => { tileFailures.current += 1; if (tileFailures.current >= 3) setTilesUnavailable(true); } }} />}
+    <MapViewport wheelZoom={wheelZoom} locations={locations} />
     <MapFocus locations={locations} selectedId={selectedId} />
     {locations.map((location) => <Marker key={location.id} position={location.coordinates} icon={icons.get(location.id)} title={`${location.name} — historical reference area`} eventHandlers={{
       click: () => onSelect(location.id),
