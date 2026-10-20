@@ -6,9 +6,9 @@
     {
       "id": "street-dog-immediate-welfare",
       "gap_id": "dogs-safe-placement",
-      "title": "Are street dogs getting enough help to survive?",
+      "title": "Does the response to reported street dogs work?",
       "status": "in_progress",
-      "introduction": "We're investigating how severe conditions are for dogs living on Stockton's streets, what immediate assistance they're receiving, and where additional help may be needed.",
+      "introduction": "We're checking where dogs are reported, which reports can be verified, what happens after a report, and whether actual care reaches animals with unmet needs.",
       "purpose": "Not every dog can immediately be rescued or placed in a home. Until that happens, food, water, emergency medical attention, and people willing to monitor their wellbeing can prevent suffering and potentially save lives.",
       "questions": [
         {
@@ -36,12 +36,13 @@
           "description": "Which specific people, supplies, transport, or coordination needs do responders confirm?"
         }
       ],
-      "method_summary": "Begin safe firsthand checks of reported public areas, then compare observations with public reports and Animal Services records when received. Distinguish what was seen from what residents or rescuers reported.",
+      "method_summary": "Begin safe firsthand checks of reported public areas, then compare observations with public reports and Animal Services records when received. Ask Stockton Animal Services and Stockton Streetdogs what they offer and what happened in specific cases. Separate direct observations, organizational claims, published records, and unanswered questions.",
       "methods": [
         "Review reports and existing outreach evidence; identify publicly reported areas worth checking.",
         "Observe conditions from safe, publicly accessible places and speak voluntarily with residents, caregivers, and outreach workers.",
         "Identify existing feeding, water, and veterinary assistance; record firsthand observations separately from secondhand accounts.",
-        "Confirm any practical volunteer or supply need with the responsible caregiver or organization."
+        "Confirm any practical volunteer or supply need with the responsible caregiver or organization.",
+        "Track each attempted contact separately from any answer, assistance delivered, reunification, or verified resolution."
       ],
       "fieldwork_plan": {
         "activity_record_id": "crossover-2026-10-20-reported-location-check-plan",
@@ -93,7 +94,10 @@
           "Who can evaluate medical urgency and arrange veterinary referrals?",
           "Are there geographic or scheduling gaps that additional volunteers could cover?",
           "Can volunteers transport animals or supplies, provide temporary care, or foster? What qualifications or approvals are required, and how long does onboarding take?",
-          "What prevents a willing resident from contributing to established care?",
+          "What prevents a willing resident from contributing to established care, and how long does participation take?",
+          "What do Stockton Streetdogs and Stockton Animal Services say they provide, and what can be confirmed through direct contact or case evidence?",
+          "Can temporary care, reunification, transport, veterinary coordination, and lawful placement be arranged through qualified responders?",
+          "What evidence would show that a specific need was resolved rather than only reported or acted upon?",
           "How can people help safely without attracting dogs into traffic, disrupting caregivers, or approaching unfamiliar dogs?"
         ],
         "decentralized_protocol_concept": {
@@ -101,8 +105,19 @@
           "steps": ["Reported need", "Evidence checked", "Safe assistance identified", "Qualified volunteer matched", "Outcome recorded"],
           "note": "This is a proposed workflow, not an operating service. No public live animal-location pins, public claimable rescue assignments, volunteer dispatch, or unattended automated rescue decisions are proposed for this investigation."
         },
+        "potential_capabilities": ["Sighting and reporting", "Field verification and triage", "Temporary care and reunification", "Supplies and resource coordination", "Transport and veterinary coordination", "Long-term placement or transfer"],
+        "capability_note": "These are proposed capabilities that may operate concurrently, not required steps or staffed services. Animal reporting, ownership, holding, safety, and veterinary requirements still apply.",
         "potential_outcome": "Publish an organization-verified guide to helping street dogs once responders confirm needs, contacts, safe instructions, and any participation requirements."
       },
+      "participation_roles": [
+        { "name": "Spotter", "purpose": "Report a dated sighting through an official channel", "state": "available", "action_id": "report-a-stray-dog" },
+        { "name": "Field Responder", "purpose": "Check a reported area safely and record what was observed", "state": "available", "action_id": "check-reported-stray-dog-area" },
+        { "name": "Investigator", "purpose": "Verify services, responses, and unresolved questions", "state": "available", "action_id": "verify-a-dog-care-service" },
+        { "name": "Care Host", "purpose": "Provide authorized temporary care through a responsible organization", "state": "investigating" },
+        { "name": "Supply Neighbor", "purpose": "Provide supplies requested by a confirmed care coordinator", "state": "investigating" },
+        { "name": "Transport Neighbor", "purpose": "Move animals or supplies through an approved arrangement", "state": "investigating" },
+        { "name": "Care Coordinator", "purpose": "Coordinate lawful reunification, veterinary care, or placement", "state": "proposed" }
+      ],
       "safeguards": [
         "Do not publish precise locations of vulnerable people or animals without a specific reason and consideration of their safety.",
         "Do not assume dogs accompanying unhoused people are stray, abandoned, or neglected.",
@@ -114,7 +129,7 @@
         "ssd-2026-06-08-street-response",
         "cbs-2026-04-06-stockton-abandoned-dogs"
       ],
-      "known_so_far": "Stockton Streetdogs reports increased dumped-dog encounters and conducts street-level assistance. We do not yet have a reliable local picture of severe suffering, mortality, regular feeding coverage, or unmet feeding needs.",
+      "known_so_far": "Stockton Streetdogs reports increased dumped-dog encounters and conducts street-level assistance. Stockton Animal Services publishes reporting routes. Neither source alone establishes what happened after a particular report. We do not yet have a reliable local picture of severe suffering, mortality, care coverage, or resolved needs.",
       "evidence_context": [
         {
           "label": "Organization report",

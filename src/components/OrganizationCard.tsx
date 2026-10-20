@@ -6,6 +6,7 @@ import type { EvidenceRecord, OrgRecord } from "../types";
 const trackedOrgs = (orgsData as OrgRecord[]).filter((org) => org.active && org.tracked !== false);
 const icons = [PawPrint, HandHeart, ShieldCheck, Home, Building2];
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
+const evidenceById = new Map((recordsData as EvidenceRecord[]).map((record) => [record.id, record]));
 
 export function OrganizationCard({ org, onOpenReport }: { org: OrgRecord; onOpenReport?: (id: string) => void }) {
   const index = trackedOrgs.findIndex((item) => item.id === org.id);
@@ -18,7 +19,10 @@ export function OrganizationCard({ org, onOpenReport }: { org: OrgRecord; onOpen
       <Icon size={34} aria-hidden="true" />
       <div>
         <h3>{org.name}</h3>
-        <p>{org.summary}</p>
+        <p><strong>Publicly described work:</strong> {org.summary}</p>
+        <p>We check stated services against dated sources and firsthand evidence. A service that has not been directly verified is not a failed service.</p>
+        {!org.verification && <p><strong>Crossover verification:</strong> Direct capability check not yet recorded.</p>}
+        {org.verification && <div className="organization-field-reports"><strong>Verification · {org.verification.checked_at}</strong><span>{org.verification.direct_check}</span>{org.verification.evidence_record_ids.map((id) => { const record = evidenceById.get(id); return record?.source.url ? <a key={id} href={record.source.url} target="_blank" rel="noreferrer">{record.title} <ArrowRight size={15} aria-hidden="true" /></a> : null; })}<strong>Still to check</strong>{org.verification.open_questions.map((question) => <span key={question}>{question}</span>)}</div>}
         {href && (
           <a href={href} target="_blank" rel="noreferrer">
             Visit their website <ArrowRight size={15} aria-hidden="true" />

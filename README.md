@@ -52,6 +52,7 @@ preview; use `npm run build` to verify the published output in `dist/`.
 * `src/types.ts` — shared TypeScript types for records, gaps, stories, organizations, tags, and actions
 * `src/index.css` — site-wide styling
 * `src/styles/design-system.css` — shared card and typography primitives
+* [`docs/ABOUT.md`](docs/ABOUT.md) — Crossover's ground-up infrastructure of care vision and starting principles
 * `docs/STYLE.md` — the authoritative visual and typography rules
 * `public/images/` — hero images, organization assets, logos, and page-specific imagery
 

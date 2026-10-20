@@ -29,6 +29,9 @@
     "action_ids": [
       "check-reported-stray-dog-area",
       "report-a-stray-dog",
+      "document-dog-response-attempt",
+      "verify-a-dog-care-service",
+      "identify-missing-dog-care-capability",
       "help-feed-street-dogs",
       "foster-a-dog",
       "adopt-a-dog",
@@ -151,13 +154,14 @@
       "dogs-direct-field-work"
     ],
     "most_useful_now": {
-      "label": "Create placement capacity by fostering or adopting.",
+      "label": "Check reported conditions and help create placement capacity through established programs.",
       "action_ids": [
         "foster-a-dog",
         "adopt-a-dog"
       ],
       "confidence": "medium",
       "basis_record_ids": [
+        "cbs-2026-04-06-stockton-abandoned-dogs",
         "ssd-standing-foster-adopt",
         "sas-2026-05-05-overpopulation-report",
         "sas-2026-01-13-spay-neuter-capacity"

@@ -460,7 +460,7 @@ function FeaturedActionCard({
       <span className="gap-refined-featured-action-copy">
         <small>Featured action</small>
         <strong>{shortActionTitle(action.title)}</strong>
-        <span className="gap-mobile-body">{action.summary} Fostering gives a dog a safe place to be while they wait for a permanent home.</span>
+        <span className="gap-mobile-body">{action.summary}</span>
         <em>{shortActionTitle(action.title)} <ArrowRight size={15} /></em>
       </span>
     </button>
@@ -653,6 +653,7 @@ function visibleActions(gap: GapRecord) {
   const relatedActions = gap.action_ids
     .map((id) => actions.find((action) => action.id === id && action.active))
     .filter((action): action is PublicActionRecord => Boolean(action));
+  if (gap.id === "dogs-safe-placement") return relatedActions.filter((action) => ["check-reported-stray-dog-area", "doggie-day-out", "foster-a-dog", "adopt-a-dog"].includes(action.id));
   const primaryIds = new Set(gap.most_useful_now?.action_ids ?? []);
   const primary = relatedActions.filter((action) => primaryIds.has(action.id));
   const supporting = relatedActions.filter((action) =>
@@ -666,8 +667,9 @@ function visibleActions(gap: GapRecord) {
 
 function orderActionsForBottom(actionCards: PublicActionRecord[], gap: GapRecord) {
   if (gap.id !== "dogs-safe-placement") return actionCards;
-  const preferredOrder = ["foster-a-dog", "doggie-day-out", "adopt-a-dog", "donate-dog-supplies"];
-  return [...actionCards].sort((a, b) => preferredOrder.indexOf(a.id) - preferredOrder.indexOf(b.id));
+  const preferredOrder = ["check-reported-stray-dog-area", "report-a-stray-dog", "doggie-day-out", "foster-a-dog", "adopt-a-dog", "donate-dog-supplies"];
+  const rank = (id: string) => { const index = preferredOrder.indexOf(id); return index === -1 ? preferredOrder.length : index; };
+  return [...actionCards].sort((a, b) => rank(a.id) - rank(b.id));
 }
 
 function roleForOrg(gap: GapRecord, organizationId: string): ResponderRole | undefined {

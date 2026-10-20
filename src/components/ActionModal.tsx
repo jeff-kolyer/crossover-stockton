@@ -36,6 +36,7 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenRepo
   ].filter((item) => item.value);
   const currentDetails = [
     action.action_type ? `Type: ${action.action_type}` : "",
+    ...(action.participation_roles?.map((role) => `${role.name}: ${role.state}`) ?? []),
     action.when_label,
     action.availability_status,
     currentnessLabel(action.currentness),

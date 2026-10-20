@@ -89,7 +89,7 @@ const pageCopy = {
   action: {
     eyebrow: "Action",
     title: "Take a real step",
-    text: "Practical ways to help today, from calls and rides to supplies, delivery, and steady local support.",
+    text: "Investigate a need, use a verified participation route, or check with a provider before helping.",
   },
 };
 
@@ -129,7 +129,7 @@ const actionTagLabels: Record<ActionTag, string> = {
 };
 
 function dogActionRank(id: string) {
-  const immediate = ["check-reported-stray-dog-area", "report-a-stray-dog", "help-feed-street-dogs"];
+  const immediate = ["check-reported-stray-dog-area", "report-a-stray-dog", "document-dog-response-attempt", "verify-a-dog-care-service", "identify-missing-dog-care-capability", "help-feed-street-dogs"];
   const index = immediate.indexOf(id);
   return index === -1 ? immediate.length : index;
 }
@@ -337,7 +337,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>How Can I Help Today?</p>
           <h2>Find your way in.</h2>
-          <span>Start somewhere with something real you can do today.</span>
+          <span>Checking a report or service is useful work. An attempted action does not mean a need was resolved.</span>
         </div>
         <div className="action-browser">
           {page === "action" && (
@@ -374,6 +374,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
                 <Icon size={24} />
                 <strong>{action.title}</strong>
                 <p>{action.summary}</p>
+                {action.participation_roles?.length ? <span className="action-meta">{action.participation_roles.map((role) => `${role.name} · ${role.state}`).join(" / ")}</span> : null}
                 <span className="action-meta">
                   {[action.estimated_time || action.when_label, action.availability_status || action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
                 </span>

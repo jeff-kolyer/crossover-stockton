@@ -61,8 +61,8 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
 
         <div className="about-hero-copy">
           <h1>About Crossover</h1>
-          <h2>See what matters. Find a real way to help.</h2>
-          <p>Crossover uses AI to help us see what our community needs, what is getting better, and where we can actually help.</p>
+          <h2>Building a ground-up infrastructure of care.</h2>
+          <p>We investigate unmet needs, check what help actually reaches people and animals, and make room for neighbors to respond.</p>
         </div>
       </section>
 
@@ -70,24 +70,26 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <section className="about-what-we-do">
           <div className="about-section-heading">
             <h2>What we do</h2>
-            <p>We use AI to follow a limited set of local organizations and public sources, looking for a simple picture of reality.</p>
+            <p>Technology gives us extraordinary capacity, yet local needs persist. AI helps us follow public evidence and find questions worth checking in the field.</p>
             <span className="about-see-note">AI helps us see <ArrowRight size={26} /></span>
+            <p><strong>Observe → Verify → Respond → Confirm</strong></p>
+            <p>Nothing is assumed to work. Everything can be investigated. Anything that works can be strengthened. Anything missing can become an opportunity to build.</p>
           </div>
           <div className="about-question-grid">
             <article>
               <Stars size={34} />
               <h3>What needs attention?</h3>
-              <p>We surface important unmet needs.</p>
+              <p>We observe conditions and distinguish reports from verified needs.</p>
             </article>
             <article>
               <TrendingUp size={34} />
               <h3>What is changing?</h3>
-              <p>We follow real progress and the people making it happen.</p>
+              <p>We check whether a response reached someone and what changed.</p>
             </article>
             <article>
               <UserRound size={34} />
               <h3>What can I do?</h3>
-              <p>We point to practical ways to respond.</p>
+              <p>We use effective services when available and help develop missing capabilities.</p>
             </article>
           </div>
         </section>
@@ -113,7 +115,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <p>We spend much of our lives absorbed in thought - our plans, identities, worries, wants, and distractions.</p>
             <p>Meanwhile, reality is right here.</p>
             <p><strong>The deeper problem is unconsciousness: not seeing what is in front of us, or what it asks of us.</strong></p>
-            <p>Crossover is one small attempt to pay attention.</p>
+            <p>Crossover is one small attempt to pay attention, test what works, and act on what is missing.</p>
             <blockquote>What would happen if we saw clearly - and then did the next real thing?</blockquote>
             <div className="about-small-truths">
               <span><UserRound size={26} /> No identity is required.</span>
@@ -124,7 +126,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
 
           <article className="about-editorial-panel about-ai-panel">
             <h2>Why AI?</h2>
-            <p>There is already more public information than any person could reasonably follow. AI can help watch it, connect it, and keep a current picture of what is happening locally.</p>
+            <p>There is already more public information than any person could reasonably follow. AI can help discover needs, connect resources, and remove friction. People still verify conditions and decide how to respond.</p>
             <ul>
               <li><CheckCircle2 size={17} /> It watches public sources.</li>
               <li><CheckCircle2 size={17} /> It notices changes.</li>
@@ -146,7 +148,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <strong>That's the Crossover.</strong>
           </div>
           <div className="about-closing-copy">
-            <p className="about-closing-thought">As technology takes on more of the work machines can do, we have more opportunity to do the work only people can do.</p>
+            <p className="about-closing-thought">As technology takes on more work, human participation can become more like vocation than compulsory employment. Results in reality matter more than promises or activity.</p>
             <em>We are here to serve what is real.</em>
             <p className="about-closing-network">Want to join the network? Connect with us on LinkedIn.</p>
             <a className="linkedin-button about-closing-linkedin" href={linkedInUrl} target="_blank" rel="noreferrer">

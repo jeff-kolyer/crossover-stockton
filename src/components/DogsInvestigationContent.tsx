@@ -76,8 +76,14 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       <div className="investigation-source-links">{investigation.care_coordination.public_source_review.sources.map((source) => <a className="investigation-source" key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.label} <ArrowRight size={14} aria-hidden="true" /></a>)}</div>
       <ul className="investigation-methods">{investigation.care_coordination.questions.map((question) => <li key={question}>{question}</li>)}</ul>
       <p className="gap-mobile-body"><strong>Proposed decentralized care protocol — concept only:</strong> {investigation.care_coordination.decentralized_protocol_concept.steps.join(" → ")}. {investigation.care_coordination.decentralized_protocol_concept.note}</p>
+      {investigation.care_coordination.potential_capabilities?.length ? <><p className="gap-mobile-body"><strong>Potential capabilities, not a required sequence:</strong> {investigation.care_coordination.capability_note}</p><ul className="investigation-methods">{investigation.care_coordination.potential_capabilities.map((capability) => <li key={capability}>{capability}</li>)}</ul></> : null}
       <p className="gap-mobile-body"><strong>Potential outcome:</strong> {investigation.care_coordination.potential_outcome}</p>
     </InvestigationSection>}
+
+    {investigation.participation_roles?.length ? <InvestigationSection title="Ways neighbors might participate" icon={<Users size={20} aria-hidden="true" />} card>
+      <p className="gap-mobile-body">Available means a public action route exists. Investigating means the coordination or requirements are being checked. Proposed means no working role has been established. An available action does not confirm that a dog received care.</p>
+      <ul className="investigation-methods">{investigation.participation_roles.map((role) => <li key={role.name}><strong>{role.name} · {role.state[0].toUpperCase() + role.state.slice(1)}</strong> — {role.purpose}{role.action_id ? <> · <a href="/action/">See actions</a></> : null}</li>)}</ul>
+    </InvestigationSection> : null}
 
     <InvestigationSection id="investigation-methods" title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body">{investigation.method_summary}</p>
@@ -89,6 +95,7 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       <p className="gap-mobile-body">{investigation.known_so_far}</p>
       <div className="investigation-evidence-context">{investigation.evidence_context.map((entry) => <article key={entry.label}><h3>{evidenceLabels[entry.label] ?? entry.label}</h3><p className="gap-mobile-body">{entry.summary}</p>{entry.record_id && <EvidenceLink recordId={entry.record_id} onOpenReport={onOpenReport} />}</article>)}</div>
       <div className="investigation-unresolved"><h3>Still to establish</h3><ul>{investigation.uncertainties.map((uncertainty) => <li key={uncertainty}>{uncertainty}</li>)}</ul></div>
+      <p className="gap-mobile-body"><strong>Track the result:</strong> A report submitted, a sighting checked, a request made, a response received, an animal given care, a reunion, and a resolved need are distinct findings. Where the outcome is unknown, we say so.</p>
     </InvestigationSection>
 
     <InvestigationSection id="investigation-outcomes" title="What this could lead to" icon={<Route size={20} aria-hidden="true" />} card>

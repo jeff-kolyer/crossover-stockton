@@ -33,9 +33,9 @@
   {
     "id": "dogs-map-placement-barriers",
     "gap_id": "dogs-safe-placement",
-    "title": "Investigating why dogs get stuck",
-    "summary": "We're examining what prevents dogs in Stockton from reaching safe care—from street response and shelter intake to veterinary treatment, fostering, rescue, and adoption.",
-    "gap_summary": "Investigating how severely street dogs are suffering, what care already reaches them, and whether more help is needed.",
+    "title": "Investigating the response to street dogs",
+    "summary": "We're checking what happens from a street-dog report to actual care, reunification, or safe placement—and where the response remains unverified or breaks down.",
+    "gap_summary": "Testing reported conditions, actual care, response gaps, and safe ways neighbors can participate.",
     "status": "in_progress",
     "type": "investigation",
     "started_at": "2026-08-27",
