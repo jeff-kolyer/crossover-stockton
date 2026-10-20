@@ -1,5 +1,24 @@
 [
   {
+    "id": "stockton-animal-services-2026-10-20-reporting-guidance",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": null,
+    "checked_at": "2026-10-20",
+    "record_type": "current_service",
+    "trust": "source_supported",
+    "title": "Stockton Animal Services reporting and found-dog guidance",
+    "summary": "The City directs animal complaints, including animals at large and injured or sick strays, to its online report under Animals → Animals - other. It lists (209) 937-7445 for injured, sick, or aggressive animals and for scheduling a found-dog drop-off appointment during business hours, (209) 937-8377 for after-hours emergencies, and 911 for an animal attack in progress.",
+    "source": { "publisher": "City of Stockton Animal Services", "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php", "type": "official_service" },
+    "context_sources": [
+      { "publisher": "City of Stockton Animal Services", "url": "https://www.stocktonca.gov/services/animal_services/index.php", "type": "official_service" },
+      { "publisher": "City of Stockton Animal Services", "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php", "type": "official_service" }
+    ],
+    "action_ids": ["report-a-stray-dog"],
+    "supports": [],
+    "action_signals": []
+  },
+  {
     "id": "cbs-2026-04-06-stockton-abandoned-dogs",
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": ["stockton-street-dogs"],

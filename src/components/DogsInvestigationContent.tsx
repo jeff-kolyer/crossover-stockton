@@ -5,6 +5,7 @@ import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
 import type { ActiveInvestigation, CapacityProject, DogsInvestigationData, EvidenceRecord, WorkRecord } from "../types";
 import type { ReactNode } from "react";
+import { useEffect } from "react";
 import { InvestigationLocations } from "./InvestigationLocations";
 
 const data = investigationsData as DogsInvestigationData;
@@ -53,7 +54,7 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
 
     {investigation.fieldwork_plan && (() => {
       const plan = recordById.get(investigation.fieldwork_plan.activity_record_id);
-      return <InvestigationSection title="Field verification plan" icon={<Route size={20} aria-hidden="true" />} card>
+      return <InvestigationSection id="field-observation-procedure" title="Field verification plan" icon={<Route size={20} aria-hidden="true" />} card>
         <p className="gap-mobile-body"><strong>Planned for October 20, 2026.</strong> These visits have not been completed, and no firsthand street-condition finding has been recorded.</p>
         {plan?.planned_sites?.length ? <ol className="investigation-field-sites">{plan.planned_sites.map((site) => <li key={site.label}><strong>{site.label}</strong><p className="gap-mobile-body">{site.reason} {site.condition}</p>{site.location_id && mapSourceById.get(site.location_id) && <a className="investigation-source" href={mapSourceById.get(site.location_id)} target="_blank" rel="noreferrer">View original report <ArrowRight size={14} aria-hidden="true" /></a>}</li>)}</ol> : null}
         <details className="investigation-field-template"><summary>Observation record template</summary><p className="gap-mobile-body">Record one visit at a time. Do not treat a dog outdoors as stray, abandoned, or neglected based on location alone.</p><ul>{investigation.fieldwork_plan.observation_fields.map((field) => <li key={field}>{field}</li>)}</ul><h3>Supported results</h3><ul>{investigation.fieldwork_plan.result_options.map((result) => <li key={result}>{result}</li>)}</ul><p className="gap-mobile-body">{investigation.fieldwork_plan.report_outline}</p></details>
@@ -100,6 +101,11 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
 }
 
 export function DogsInvestigationContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
+  useEffect(() => {
+    if (window.location.hash !== "#field-observation-procedure") return;
+    const frame = window.requestAnimationFrame(() => document.getElementById("field-observation-procedure")?.scrollIntoView());
+    return () => window.cancelAnimationFrame(frame);
+  }, [item.id]);
   if (item.investigation_data_id !== data.id) return <div className="work-page-content"><p className="work-empty">Investigation data is not available for this work item.</p></div>;
   const threadRecordIds = new Set((item.threads ?? []).flatMap((thread) => thread.record_ids));
   const findingRecordIds = new Set(data.established_findings.flatMap((finding) => finding.evidence_record_ids));

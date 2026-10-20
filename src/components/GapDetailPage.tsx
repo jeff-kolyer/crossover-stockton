@@ -263,6 +263,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                   {orderedActionCards.slice(1, 4).map((action) => <ActionCard action={action} onOpenAction={onOpenAction} key={action.id} />)}
                 </div>
               </div>
+              <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("action")}>See all actions <ArrowRight size={14} /></button>
             </section>
           )}
 
@@ -284,6 +285,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                   </button>
                 ))}
               </div>
+              <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("connection")}>See all <ArrowRight size={14} /></button>
             </section>
           )}
         </div>
@@ -653,7 +655,12 @@ function visibleActions(gap: GapRecord) {
     .filter((action): action is PublicActionRecord => Boolean(action));
   const primaryIds = new Set(gap.most_useful_now?.action_ids ?? []);
   const primary = relatedActions.filter((action) => primaryIds.has(action.id));
-  const supporting = relatedActions.filter((action) => !primaryIds.has(action.id) && action.currentness !== "unverified" && action.featured);
+  const supporting = relatedActions.filter((action) =>
+    !primaryIds.has(action.id) &&
+    action.currentness !== "unverified" &&
+    action.featured &&
+    (gap.id !== "dogs-safe-placement" || ["doggie-day-out", "donate-dog-supplies"].includes(action.id))
+  );
   return [...primary, ...supporting].slice(0, 4);
 }
 

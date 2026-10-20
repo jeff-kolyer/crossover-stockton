@@ -27,6 +27,9 @@
       "hard-luck-awa"
     ],
     "action_ids": [
+      "check-reported-stray-dog-area",
+      "report-a-stray-dog",
+      "help-feed-street-dogs",
       "foster-a-dog",
       "adopt-a-dog",
       "doggie-day-out",

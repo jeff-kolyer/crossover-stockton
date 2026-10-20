@@ -409,6 +409,17 @@ export interface PublicActionRecord {
   what_to_expect?: string[];
   provider_label?: string;
   handoff_label?: string;
+  action_type?: "investigation" | "direct action" | "direct care" | "organizational opportunity";
+  estimated_time?: string;
+  requirements?: string[];
+  evidence_record_ids?: string[];
+  evidence_url?: string;
+  evidence_label?: string;
+  last_verified_at?: string;
+  availability_status?: string;
+  related_work_id?: string;
+  related_anchor?: string;
+  next_url?: string;
 }
 
 export type ActionTag = "dogs" | "today" | "volunteer" | "donate" | "food" | "housing" | "reentry" | "foster-adopt";

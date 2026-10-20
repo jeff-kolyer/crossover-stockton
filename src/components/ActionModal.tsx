@@ -11,6 +11,7 @@ interface ActionModalProps {
   action: PublicActionRecord;
   onClose: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenWork: (workId: string) => void;
   onOpenReport: (id: string) => void;
 }
 
@@ -18,7 +19,7 @@ const gaps = gapsData as GapRecord[];
 const orgs = orgsData as OrgRecord[];
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 
-export function ActionModal({ action, onClose, onOpenGap, onOpenReport }: ActionModalProps) {
+export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenReport }: ActionModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const relatedGap = gaps.find((gap) => gap.id === action.gap_ids[0]);
@@ -34,9 +35,11 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenReport }: Action
     { label: "Availability", value: action.at_a_glance?.availability, icon: CalendarDays },
   ].filter((item) => item.value);
   const currentDetails = [
+    action.action_type ? `Type: ${action.action_type}` : "",
     action.when_label,
+    action.availability_status,
     currentnessLabel(action.currentness),
-    sourceDate ? `Checked ${sourceDate}` : "",
+    action.last_verified_at ? `Details checked ${formatSourceDate(action.last_verified_at)}` : sourceDate ? `Source checked ${sourceDate}` : "",
     action.location_label,
   ].filter(Boolean);
 
@@ -83,8 +86,17 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenReport }: Action
   }
 
   function handleHandoff() {
-    if (!action.source_url) return;
-    window.open(action.source_url, "_blank", "noopener,noreferrer");
+    if (action.related_work_id) {
+      onClose();
+      if (action.related_anchor && action.next_url) {
+        window.location.assign(action.next_url);
+        return;
+      }
+      onOpenWork(action.related_work_id);
+      return;
+    }
+    const url = action.next_url || action.source_url;
+    if (url) window.open(url, "_blank", "noopener,noreferrer");
   }
 
   function handleRelatedNeed() {
@@ -151,6 +163,20 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenReport }: Action
                 <p>You&apos;ll leave Crossover to view the provider&apos;s latest instructions and availability.</p>
               )}
             </section>
+            {action.requirements?.length ? (
+              <section className="action-modal-copy-block">
+                <h3>Requirements</h3>
+                <ul className="action-modal-expect-list">
+                  {action.requirements.map((item) => <li key={item}><CheckCircle2 size={17} /> {item}</li>)}
+                </ul>
+              </section>
+            ) : null}
+            {action.evidence_url && (
+              <section className="action-modal-copy-block">
+                <h3>Evidence</h3>
+                <a href={action.evidence_url} target="_blank" rel="noreferrer">{action.evidence_label || "Read source"} <ExternalLink size={14} /></a>
+              </section>
+            )}
           </div>
 
           <div className="action-modal-side">
@@ -176,10 +202,10 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenReport }: Action
           </div>
         </div>
 
-        <button className="action-modal-primary" type="button" onClick={handleHandoff} disabled={!action.source_url}>
+        <button className="action-modal-primary" type="button" onClick={handleHandoff} disabled={!action.related_work_id && !action.next_url && !action.source_url}>
           {action.handoff_label ?? "Go to organization"} <ArrowRight size={21} />
         </button>
-        <p className="action-modal-handoff-note">Opens the organization&apos;s website.</p>
+        <p className="action-modal-handoff-note">{action.related_work_id ? "Opens the related Crossover investigation." : "Opens the provider or official website in a new tab."}</p>
 
         <section className="action-modal-field-reports">
           <h3>Field Reports</h3>

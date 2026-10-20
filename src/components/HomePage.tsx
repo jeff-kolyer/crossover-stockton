@@ -114,6 +114,7 @@ const featuredActions = actions
     if (b.id === "doggie-day-out") return 1;
     return 0;
   });
+const newDogActionIds = new Set(["check-reported-stray-dog-area", "report-a-stray-dog", "help-feed-street-dogs"]);
 const activeOrgs = orgs.filter((org) => org.active).slice(0, 5);
 const actionTagOrder: ActionTag[] = ["dogs", "today", "volunteer", "donate", "food", "housing", "reentry", "foster-adopt"];
 const actionTagLabels: Record<ActionTag, string> = {
@@ -127,15 +128,24 @@ const actionTagLabels: Record<ActionTag, string> = {
   "foster-adopt": "Foster / Adopt",
 };
 
+function dogActionRank(id: string) {
+  const immediate = ["check-reported-stray-dog-area", "report-a-stray-dog", "help-feed-street-dogs"];
+  const index = immediate.indexOf(id);
+  return index === -1 ? immediate.length : index;
+}
+
 export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: HomePageProps) {
   const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
   const isHome = page === "home";
   const copy = pageCopy[page];
-  const visibleActions = isHome ? featuredActions.slice(0, 4) : featuredActions;
+  const visibleActions = isHome ? featuredActions.filter((action) => !newDogActionIds.has(action.id)).slice(0, 4) : actions.filter((action) => action.active);
   const availableActionTags = actionTagOrder.filter((tag) => visibleActions.some((action) => action.tags?.includes(tag)));
   const filteredActions = page === "action" && selectedActionTag
     ? visibleActions.filter((action) => action.tags?.includes(selectedActionTag))
     : visibleActions;
+  const orderedActions = selectedActionTag === "dogs"
+    ? [...filteredActions].sort((a, b) => dogActionRank(a.id) - dogActionRank(b.id))
+    : filteredActions;
   const visibleGaps = isHome ? activeGaps.filter((gap) => gap.status !== "monitored").slice(0, 4) : activeGaps;
   const visibleStories = isHome ? featuredStories.slice(0, 3) : activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
@@ -352,7 +362,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
             </div>
           )}
           <div className="action-grid">
-            {filteredActions.map((action) => {
+            {orderedActions.map((action) => {
               const Icon = getActionIcon(action);
               return (
               <button
@@ -365,7 +375,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
                 <strong>{action.title}</strong>
                 <p>{action.summary}</p>
                 <span className="action-meta">
-                  {[action.when_label, action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
+                  {[action.estimated_time || action.when_label, action.availability_status || action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
                 </span>
                 <ArrowRight size={17} />
               </button>

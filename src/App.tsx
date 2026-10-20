@@ -297,6 +297,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           action={selectedAction}
           onClose={() => setSelectedAction(null)}
           onOpenGap={showGap}
+          onOpenWork={showWork}
           onOpenReport={showReport}
         />
       )}

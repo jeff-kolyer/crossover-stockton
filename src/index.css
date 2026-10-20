@@ -12813,7 +12813,7 @@ p {
 .gap-refined-secondary-actions .gap-info-card strong {
   color: #171917;
   font-size: 0.9rem;
-  font-weight: var(--type-heading-weight);
+  font-weight: 700;
   line-height: 1.15;
 }
 
@@ -13096,6 +13096,7 @@ p {
   /* Card titles share the same emphasis across Why, What, and Who. */
   .gap-detail-page .gap-work-item strong,
   .gap-detail-page .gap-refined-org-row strong,
+  .gap-detail-page .gap-refined-secondary-actions .gap-info-card > strong,
   .gap-detail-page .gap-refined-left-column .gap-responding-rail .gap-info-card > span > strong {
     font-size: 1rem !important;
     font-weight: 700 !important;
