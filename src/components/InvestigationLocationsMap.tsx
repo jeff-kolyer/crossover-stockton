@@ -8,7 +8,7 @@ import type { InvestigationLocation } from "./InvestigationLocations";
 function locationIcon(location: InvestigationLocation, selected: boolean) {
   const Icon = location.status === "exploratory" ? MapPin : Dog;
   return L.divIcon({
-    className: `investigation-map-marker${selected ? " is-selected" : ""}${location.status === "exploratory" ? " is-exploratory" : ""}`,
+    className: `investigation-map-marker${selected ? " is-selected" : ""}${location.status === "exploratory" ? " is-exploratory" : ""}${location.category === "recent_public_report" ? " is-recent" : ""}`,
     html: renderToStaticMarkup(<Icon size={18} strokeWidth={2.3} aria-hidden="true" />),
     iconSize: [32, 32],
     iconAnchor: [16, 16],
@@ -64,7 +64,7 @@ export function InvestigationLocationsMap({ locations, selectedId, onSelect, whe
     {!tilesUnavailable && <TileLayer attribution='&copy; OpenStreetMap contributors' url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" eventHandlers={{ tileload: () => { tileFailures.current = 0; }, tileerror: () => { tileFailures.current += 1; if (tileFailures.current >= 3) setTilesUnavailable(true); } }} />}
     <MapViewport wheelZoom={wheelZoom} locations={locations} />
     <MapFocus locations={locations} selectedId={selectedId} />
-    {locations.map((location) => <Marker key={location.id} position={location.coordinates} icon={icons.get(location.id)} title={`${location.name} — historical reference area`} eventHandlers={{
+    {locations.map((location) => <Marker key={location.id} position={location.coordinates} icon={icons.get(location.id)} title={`${location.name} — generalized evidence area`} eventHandlers={{
       click: () => onSelect(location.id),
       keydown: (event) => {
         const keyboardEvent = event.originalEvent as KeyboardEvent;

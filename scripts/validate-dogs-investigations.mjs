@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 const data = (name) => JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
 const investigationData = data("dogs-investigations");
 const locations = data("investigation-locations");
+const maintenance = data("investigation-map-maintenance");
 const work = data("work").find((item) => item.id === investigationData.work_id);
 const gapIds = new Set(data("gaps").map((gap) => gap.id));
 const recordIds = new Set(data("records").map((record) => record.id));
@@ -27,6 +28,8 @@ for (const investigation of investigationData.active_investigations) {
   if (!["preparing_fieldwork", "in_progress", "completed"].includes(investigation.status)) errors.push(`${investigation.id}: invalid status`);
   if (!investigation.last_updated_at || !investigation.next_verification_step) errors.push(`${investigation.id}: missing update or verification step`);
   if (!investigation.public_approach?.trim() || !investigation.safeguards?.length) errors.push(`${investigation.id}: missing public approach or detailed safeguards`);
+  if (investigation.records_request && (!investigation.records_request.submitted_at || !investigation.records_request.review_plan?.trim())) errors.push(`${investigation.id}: incomplete records request`);
+  if (investigation.care_coordination && (!investigation.care_coordination.questions?.length || !investigation.care_coordination.potential_outcome?.trim() || !investigation.care_coordination.public_source_review?.checked_at || !investigation.care_coordination.public_source_review?.sources?.length)) errors.push(`${investigation.id}: incomplete care coordination thread`);
   if (new Set(investigation.questions.map((question) => question.id)).size !== investigation.questions.length) errors.push(`${investigation.id}: duplicate question ID`);
   for (const question of investigation.questions) if (!["HeartPulse", "Utensils", "Users"].includes(question.icon)) errors.push(`${investigation.id}: unsupported question icon ${question.icon}`);
   references(investigation.id, investigation.evidence_record_ids, recordIds, "evidence record");
@@ -54,13 +57,23 @@ for (const location of locations) {
     if (location.coordinates.some((value) => String(value).split(".")[1]?.length > 3)) errors.push(`${location.id}: coordinates are too precise for public reference markers`);
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(location.evidence_date) || Number.isNaN(Date.parse(location.evidence_date))) errors.push(`${location.id}: invalid evidence date`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(location.source_reviewed_at ?? "") && location.source_reviewed_at !== null) errors.push(`${location.id}: invalid source review date`);
+  if (!location.verification_status?.trim() || !location.last_known_outcome?.trim()) errors.push(`${location.id}: missing verification or outcome`);
+  if (!["historical_published_report", "recent_public_report", "official_animal_services_record", "crossover_firsthand"].includes(location.category)) errors.push(`${location.id}: invalid category`);
+  if (location.category === "recent_public_report" && !location.source_reviewed_at) errors.push(`${location.id}: recent public report lacks review date`);
   if (!["reported", "exploratory"].includes(location.status)) errors.push(`${location.id}: invalid status`);
-  if (!["Published local report", "County report"].includes(location.evidence_type)) errors.push(`${location.id}: invalid evidence type`);
+  if (!["Published local report", "County report", "Public PawBoost report", "Official Animal Services record", "Crossover firsthand observation"].includes(location.evidence_type)) errors.push(`${location.id}: invalid evidence type`);
   try { if (new URL(location.source_url).protocol !== "https:") throw new Error(); } catch { errors.push(`${location.id}: invalid source URL`); }
   try { if (new URL(location.coordinate_reference_url).protocol !== "https:") throw new Error(); } catch { errors.push(`${location.id}: invalid coordinate reference URL`); }
   if (location.evidence_record_id && recordById.get(location.evidence_record_id)?.source?.url !== location.source_url) errors.push(`${location.id}: evidence record URL mismatch`);
   if (location.field_report_id && recordById.get(location.field_report_id)?.record_type !== "field_report") errors.push(`${location.id}: field report reference does not resolve`);
 }
+
+for (const field of ["last_sources_checked", "last_map_updated", "next_scheduled_review"]) {
+  if (maintenance[field] !== null && (!/^\d{4}-\d{2}-\d{2}$/.test(maintenance[field] ?? "") || Number.isNaN(Date.parse(maintenance[field])))) errors.push(`Map maintenance: invalid ${field}`);
+}
+if (!maintenance.review_policy?.trim()) errors.push("Map maintenance: missing review policy");
+if (maintenance.last_sources_checked && locations.some((location) => location.source_reviewed_at && location.source_reviewed_at > maintenance.last_sources_checked)) errors.push("Map maintenance: source check predates a map record review");
 
 if (errors.length) {
   console.error(errors.join("\n"));

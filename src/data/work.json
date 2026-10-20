@@ -39,7 +39,7 @@
     "status": "in_progress",
     "type": "investigation",
     "started_at": "2026-08-27",
-    "updated_at": "2026-10-19",
+    "updated_at": "2026-10-20",
     "project_ids": [
       "canine-campus",
       "stockton-animal-shelter-renovation",
@@ -73,8 +73,8 @@
       "crossover-2026-10-14-sas-first-visit"
     ],
     "next_step": {
-      "title": "Investigate immediate suffering among street dogs",
-      "summary": "Review reported locations and existing feeding efforts, then safely observe conditions firsthand. Determine whether dogs face urgent unmet needs and whether additional help is needed."
+      "title": "Review Animal Services field-call records",
+      "summary": "Await the requested records, then examine general geographic patterns, repeat calls, categories, pickups, unresolved calls, and other dispositions. Compare with published reports and safe firsthand observations."
     },
     "open_questions": [
       "Where do dogs get stuck between a street report and safe placement, and why?",
@@ -203,11 +203,12 @@
     "gap_summary": "Contacting responders, participating firsthand, and documenting what we learn.",
     "status": "in_progress",
     "type": "field_work",
-    "updated_at": "2026-10-14",
+    "updated_at": "2026-10-20",
     "record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application",
       "crossover-2026-10-12-doggie-day-out-inquiry",
-      "crossover-2026-10-14-sas-volunteer-application"
+      "crossover-2026-10-14-sas-volunteer-application",
+      "crossover-2026-10-20-sas-field-call-records-request"
     ],
     "page_kind": "activity",
     "started_at": "2026-10-07",
@@ -218,12 +219,16 @@
     "open_questions": [
       "What does getting started require?",
       "What work is most useful to responders?",
-      "What prevents willing people from participating?"
+      "What prevents willing people from participating?",
+      "Which organizations coordinate feeding and water, and do they publish safe instructions?",
+      "Can residents join existing routes or deliver useful supplies without duplicating work?",
+      "Who can assess medical urgency and arrange veterinary referrals?"
     ],
     "activity_record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application",
       "crossover-2026-10-12-doggie-day-out-inquiry",
-      "crossover-2026-10-14-sas-volunteer-application"
+      "crossover-2026-10-14-sas-volunteer-application",
+      "crossover-2026-10-20-sas-field-call-records-request"
     ],
     "learning_record_ids": [],
     "organization_ids": [
@@ -242,7 +247,9 @@
           "What help is most needed right now?",
           "Are there specific approved tasks with a location, schedule, supplies, and participation requirements?",
           "If five new volunteers were available tomorrow, what could they actually do?",
-          "What coordination problems prevent willing people from helping?"
+          "What coordination problems prevent willing people from helping?",
+          "Do you coordinate feeding or water, and can residents join an established route?",
+          "What supplies are useful, where should they be delivered, and who handles veterinary referrals?"
         ]
       }
     ]

@@ -51,6 +51,20 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
 
     {showMap && <InvestigationLocations investigationId={investigation.id} onOpenReport={onOpenReport} />}
 
+    {investigation.records_request && <InvestigationSection title="Animal Services records request" icon={<FileSearch size={20} aria-hidden="true" />} card>
+      <p className="gap-mobile-body"><strong>{investigation.records_request.status}</strong> · {investigation.records_request.submitted_at}</p>
+      <p className="gap-mobile-body">{investigation.records_request.summary}</p>
+      <p className="gap-mobile-body"><strong>Next: Review Animal Services field-call records.</strong> Awaiting response. {investigation.records_request.review_plan}</p>
+    </InvestigationSection>}
+
+    {investigation.care_coordination && <InvestigationSection title={investigation.care_coordination.title} icon={<Utensils size={20} aria-hidden="true" />} card>
+      <p className="gap-mobile-body">We are checking how residents can participate in care already being provided. Feeding coverage and unmet needs have not been established.</p>
+      <p className="gap-mobile-body"><strong>Public pages checked {investigation.care_coordination.public_source_review.checked_at}:</strong> {investigation.care_coordination.public_source_review.summary}</p>
+      <div className="investigation-source-links">{investigation.care_coordination.public_source_review.sources.map((source) => <a className="investigation-source" key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.label} <ArrowRight size={14} aria-hidden="true" /></a>)}</div>
+      <ul className="investigation-methods">{investigation.care_coordination.questions.map((question) => <li key={question}>{question}</li>)}</ul>
+      <p className="gap-mobile-body"><strong>Potential outcome:</strong> {investigation.care_coordination.potential_outcome}</p>
+    </InvestigationSection>}
+
     <InvestigationSection id="investigation-methods" title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body">{investigation.method_summary}</p>
       <ul className="investigation-methods">{investigation.methods.map((method) => <li key={method}>{method}</li>)}</ul>

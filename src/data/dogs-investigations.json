@@ -20,23 +20,57 @@
         {
           "id": "food-and-water",
           "icon": "Utensils",
-          "title": "Are they being fed and given water?",
-          "description": "Who already provides food and water? Is that assistance regular, reliable, and reaching the dogs that need it?"
+          "title": "What care already reaches them?",
+          "description": "Who provides food, water, monitoring, or medical help? How regular is that care?"
+        },
+        {
+          "id": "response-barriers",
+          "icon": "Users",
+          "title": "Where does response break down?",
+          "description": "What happens after a report, and which practical barriers delay or prevent safe care?"
         },
         {
           "id": "additional-help",
           "icon": "Users",
-          "title": "Is more help needed?",
-          "description": "Would additional people feeding, delivering supplies, transporting animals, or supporting existing caregivers make a real difference?"
+          "title": "What additional help changes outcomes?",
+          "description": "Which specific people, supplies, transport, or coordination needs do responders confirm?"
         }
       ],
-      "method_summary": "Review existing street-outreach evidence, visit reported areas safely, and talk with people willing to share what they know. Distinguish observed conditions from accounts provided by residents and rescuers.",
+      "method_summary": "Review public reports and Animal Services records when received, visit reported areas safely, and talk with people willing to share what they know. Distinguish observed conditions from accounts provided by residents and rescuers.",
       "methods": [
         "Review reports and existing outreach evidence; identify publicly reported areas worth checking.",
         "Observe conditions from safe, publicly accessible places and speak voluntarily with residents, caregivers, and outreach workers.",
         "Identify existing feeding, water, and veterinary assistance; record firsthand observations separately from secondhand accounts.",
         "Confirm any practical volunteer or supply need with the responsible caregiver or organization."
       ],
+      "records_request": {
+        "submitted_at": "2026-10-20",
+        "status": "Submitted — awaiting response",
+        "summary": "Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include dates, general areas, complaint categories, response dispositions, and closure statuses where maintained.",
+        "review_plan": "When records arrive, examine concentrations and repeat reports by general area; separate confirmed pickups, unresolved calls, and other dispositions; compare them with published reports and field observations; and cite any generalized map locations. Availability of requested fields is unknown."
+      },
+      "care_coordination": {
+        "title": "Can residents help feed and care for street dogs?",
+        "public_source_review": {
+          "checked_at": "2026-10-20",
+          "summary": "The reviewed public pages describe existing feeding and care, donation wishlists, and volunteer or contact entry points. This limited review did not establish a public feeding route, resident safety protocol, supply drop site, or a current request for additional route volunteers. Confirm these directly with responders before publishing instructions.",
+          "sources": [
+            { "label": "Stockton Streetdogs mission and donations", "url": "https://streetdogsanctuary.com/" },
+            { "label": "Stockton Streetdogs official volunteer links", "url": "https://linktr.ee/streetdogsanctuary" },
+            { "label": "Hungry Tailz Rescue care and contact", "url": "https://www.hungrytailzrescue.com/" },
+            { "label": "Hungry Tailz Rescue donations", "url": "https://www.hungrytailzrescue.com/donation" }
+          ]
+        },
+        "questions": [
+          "Which responding organizations coordinate food and water, and do they publish instructions for residents?",
+          "Can residents join established feeding or supply routes without duplicating existing work?",
+          "What supplies are useful, and where should they be delivered?",
+          "Who can evaluate medical urgency and arrange veterinary referrals?",
+          "Are there geographic or scheduling gaps that additional volunteers could cover?",
+          "How can people help safely without attracting dogs into traffic, disrupting caregivers, or approaching unfamiliar dogs?"
+        ],
+        "potential_outcome": "Publish an organization-verified guide to helping street dogs once responders confirm needs, contacts, safe instructions, and any participation requirements."
+      },
       "safeguards": [
         "Do not publish precise locations of vulnerable people or animals without a specific reason and consideration of their safety.",
         "Do not assume dogs accompanying unhoused people are stray, abandoned, or neglected.",
@@ -73,7 +107,7 @@
       "uncertainties": [
         "How often dogs on the street are severely underweight, injured, ill, or dying.",
         "Which dogs receive reliable food, water, monitoring, or emergency veterinary care.",
-        "Whether responsible caregivers need more coordinated people, supplies, or transport.",
+        "Whether responsible caregivers need more coordinated people, supplies, or transport, and whether residents can find clear instructions for participating.",
         "How quickly does Stockton Animal Services respond to reports of roaming dogs, and how are urgent cases prioritized?",
         "Are repeated roaming-dog reports concentrated in particular areas, and what prevents dogs from receiving timely assistance?"
       ],
@@ -98,9 +132,9 @@
       ],
       "related_project_ids": [],
       "verified_finding_ids": [],
-      "last_updated_at": "2026-10-19",
-      "short_focus": "Preparing the first street observation",
-      "next_verification_step": "Review reported areas and existing feeding efforts, then plan safe firsthand observation with local caregivers."
+      "last_updated_at": "2026-10-20",
+      "short_focus": "Awaiting field-call records and checking care coordination",
+      "next_verification_step": "Review field-call records when delivered; ask responders how residents can safely support confirmed care needs."
     }
   ],
   "established_findings": [

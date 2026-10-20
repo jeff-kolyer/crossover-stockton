@@ -261,6 +261,8 @@ export interface ActiveInvestigation {
   questions: Array<{ id: string; icon: "HeartPulse" | "Utensils" | "Users"; title: string; description: string }>;
   method_summary: string;
   methods: string[];
+  records_request?: { submitted_at: string; status: string; summary: string; review_plan: string };
+  care_coordination?: { title: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; potential_outcome: string };
   safeguards: string[];
   public_approach: string;
   evidence_record_ids: string[];

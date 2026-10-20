@@ -1,5 +1,24 @@
 [
   {
+    "id": "crossover-2026-10-20-sas-field-call-records-request",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": null,
+    "occurred_at": "2026-10-20",
+    "recorded_at": "2026-10-20",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Requested Stockton Animal Services field-call records",
+    "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. Records have not yet been received or analyzed.",
+    "source": { "publisher": "Crossover Stockton", "type": "firsthand_account" },
+    "evidence_status": "self_reported",
+    "outcome": { "status": "submitted", "summary": "Submitted October 20, 2026. Awaiting response; no data received or analyzed.", "as_of": "2026-10-20" },
+    "work_id": "dogs-direct-field-work",
+    "report_record_ids": [],
+    "supports": [],
+    "action_signals": []
+  },
+  {
     "id": "crossover-2026-10-14-sas-volunteer-application",
     "gap_ids": [
       "dogs-safe-placement"
