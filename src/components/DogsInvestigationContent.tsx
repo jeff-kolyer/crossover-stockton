@@ -1,5 +1,6 @@
 import { Archive, ArrowRight, CheckCircle2, CircleHelp, FileSearch, HeartPulse, Route, Search, Users, Utensils } from "lucide-react";
 import investigationsData from "../data/dogs-investigations.json";
+import locationsData from "../data/investigation-locations.json";
 import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
 import type { ActiveInvestigation, CapacityProject, DogsInvestigationData, EvidenceRecord, WorkRecord } from "../types";
@@ -11,6 +12,7 @@ const records = recordsData as EvidenceRecord[];
 const projects = projectsData as CapacityProject[];
 const recordById = new Map(records.map((record) => [record.id, record]));
 const projectById = new Map(projects.map((project) => [project.id, project]));
+const mapSourceById = new Map(locationsData.map((location) => [location.id, location.source_url]));
 const questionIcons = { HeartPulse, Utensils, Users };
 const evidenceLabels: Record<string, string> = {
   "Organization report": "Organization reports",
@@ -49,6 +51,15 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       })}</div>
     </InvestigationSection>
 
+    {investigation.fieldwork_plan && (() => {
+      const plan = recordById.get(investigation.fieldwork_plan.activity_record_id);
+      return <InvestigationSection title="Field verification plan" icon={<Route size={20} aria-hidden="true" />} card>
+        <p className="gap-mobile-body"><strong>Planned for October 20, 2026.</strong> These visits have not been completed, and no firsthand street-condition finding has been recorded.</p>
+        {plan?.planned_sites?.length ? <ol className="investigation-field-sites">{plan.planned_sites.map((site) => <li key={site.label}><strong>{site.label}</strong><p className="gap-mobile-body">{site.reason} {site.condition}</p>{site.location_id && mapSourceById.get(site.location_id) && <a className="investigation-source" href={mapSourceById.get(site.location_id)} target="_blank" rel="noreferrer">View original report <ArrowRight size={14} aria-hidden="true" /></a>}</li>)}</ol> : null}
+        <details className="investigation-field-template"><summary>Observation record template</summary><p className="gap-mobile-body">Record one visit at a time. Do not treat a dog outdoors as stray, abandoned, or neglected based on location alone.</p><ul>{investigation.fieldwork_plan.observation_fields.map((field) => <li key={field}>{field}</li>)}</ul><h3>Supported results</h3><ul>{investigation.fieldwork_plan.result_options.map((result) => <li key={result}>{result}</li>)}</ul><p className="gap-mobile-body">{investigation.fieldwork_plan.report_outline}</p></details>
+      </InvestigationSection>;
+    })()}
+
     {showMap && <InvestigationLocations investigationId={investigation.id} onOpenReport={onOpenReport} />}
 
     {investigation.records_request && <InvestigationSection title="Animal Services records request" icon={<FileSearch size={20} aria-hidden="true" />} card>
@@ -58,10 +69,12 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
     </InvestigationSection>}
 
     {investigation.care_coordination && <InvestigationSection title={investigation.care_coordination.title} icon={<Utensils size={20} aria-hidden="true" />} card>
-      <p className="gap-mobile-body">We are checking how residents can participate in care already being provided. Feeding coverage and unmet needs have not been established.</p>
+      <p className="gap-mobile-body"><strong>Central question:</strong> {investigation.care_coordination.central_question}</p>
+      <p className="gap-mobile-body">{investigation.care_coordination.participation_scope} Feeding coverage and unmet needs have not been established.</p>
       <p className="gap-mobile-body"><strong>Public pages checked {investigation.care_coordination.public_source_review.checked_at}:</strong> {investigation.care_coordination.public_source_review.summary}</p>
       <div className="investigation-source-links">{investigation.care_coordination.public_source_review.sources.map((source) => <a className="investigation-source" key={source.url} href={source.url} target="_blank" rel="noreferrer">{source.label} <ArrowRight size={14} aria-hidden="true" /></a>)}</div>
       <ul className="investigation-methods">{investigation.care_coordination.questions.map((question) => <li key={question}>{question}</li>)}</ul>
+      <p className="gap-mobile-body"><strong>Proposed decentralized care protocol — concept only:</strong> {investigation.care_coordination.decentralized_protocol_concept.steps.join(" → ")}. {investigation.care_coordination.decentralized_protocol_concept.note}</p>
       <p className="gap-mobile-body"><strong>Potential outcome:</strong> {investigation.care_coordination.potential_outcome}</p>
     </InvestigationSection>}
 

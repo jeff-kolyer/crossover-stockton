@@ -229,7 +229,7 @@ export interface WorkRecord {
   research_data_id?: string;
   investigation_data_id?: string;
   page_kind?: "research" | "investigation" | "activity";
-  next_step?: string | { title: string; summary: string; action_id?: string };
+  next_step?: string | { title: string; summary: string; action_id?: string; status?: "planned" | "awaiting_response"; planned_for?: string };
   open_questions?: string[];
   threads?: WorkThread[];
   initial_map?: { status: "completed" | "in_progress"; summary: string };
@@ -261,8 +261,9 @@ export interface ActiveInvestigation {
   questions: Array<{ id: string; icon: "HeartPulse" | "Utensils" | "Users"; title: string; description: string }>;
   method_summary: string;
   methods: string[];
+  fieldwork_plan?: { activity_record_id: string; observation_fields: string[]; result_options: string[]; report_outline: string };
   records_request?: { submitted_at: string; status: string; summary: string; review_plan: string };
-  care_coordination?: { title: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; potential_outcome: string };
+  care_coordination?: { title: string; central_question: string; participation_scope: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; decentralized_protocol_concept: { status: "concept_only"; steps: string[]; note: string }; potential_outcome: string };
   safeguards: string[];
   public_approach: string;
   evidence_record_ids: string[];
@@ -489,6 +490,8 @@ export interface EvidenceRecord {
   image_caption?: string;
   recorded_at?: string;
   occurred_at?: string;
+  planned_for?: string;
+  planned_sites?: Array<{ label: string; location_id?: string; reason: string; condition?: string }>;
   work_id?: string;
   thread_id?: string;
   evidence_status?: "initial_assessment" | "self_reported" | string;

@@ -1,5 +1,54 @@
 [
   {
+    "id": "cbs-2026-04-06-stockton-abandoned-dogs",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-street-dogs"],
+    "published_at": "2026-04-06",
+    "checked_at": "2026-10-20",
+    "record_type": "update",
+    "trust": "source_supported",
+    "title": "CBS Sacramento reports abandoned-dog concerns around Louis Park, Stanislaus Street, and Highway 4",
+    "summary": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report.",
+    "source": { "publisher": "CBS Sacramento", "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/", "type": "local_reporting" },
+    "supports": [],
+    "action_signals": []
+  },
+  {
+    "id": "crossover-2026-10-20-reported-location-check-plan",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": [],
+    "published_at": null,
+    "planned_for": "2026-10-20",
+    "recorded_at": "2026-10-20",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Check reported stray-dog locations",
+    "summary": "Plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. Locations may change with safe access or current evidence. No visit or observation is recorded yet.",
+    "source": { "publisher": "Crossover Stockton", "type": "fieldwork_plan" },
+    "evidence_status": "planned_not_observed",
+    "outcome": { "status": "planned", "summary": "Planned for October 20, 2026. Proposed visits only; no field findings or report yet.", "as_of": "2026-10-20" },
+    "planned_sites": [
+      {
+        "label": "Priority 1 — Louis Park",
+        "location_id": "louis-park-pixie-woods-2026-04-06",
+        "reason": "CBS Sacramento reported a councilmember's concern about abandoned and unaltered dogs particularly around Louis Park. Observe accessible public areas without assuming current dog presence."
+      },
+      {
+        "label": "Priority 2 — Stanislaus Street corridor",
+        "location_id": "stanislaus-street-corridor-2026-04-06",
+        "reason": "CBS Sacramento described a resident helping abandoned dogs off Stanislaus Street, without identifying a block. Reconnoiter only safe, publicly accessible parts of the corridor."
+      },
+      {
+        "label": "Route adjustment",
+        "reason": "Change or defer either stop if safe access or current evidence warrants it; select any additional area only from corroborated evidence."
+      }
+    ],
+    "work_id": "dogs-direct-field-work",
+    "report_record_ids": [],
+    "supports": [],
+    "action_signals": []
+  },
+  {
     "id": "crossover-2026-10-20-sas-field-call-records-request",
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": ["stockton-animal-services"],

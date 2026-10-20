@@ -3,9 +3,9 @@ import { Dog, MapPin } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { MapContainer, Marker, TileLayer, Tooltip, useMap } from "react-leaflet";
-import type { InvestigationLocation } from "./InvestigationLocations";
+import type { MappedInvestigationLocation } from "./InvestigationLocations";
 
-function locationIcon(location: InvestigationLocation, selected: boolean) {
+function locationIcon(location: MappedInvestigationLocation, selected: boolean) {
   const Icon = location.status === "exploratory" ? MapPin : Dog;
   return L.divIcon({
     className: `investigation-map-marker${selected ? " is-selected" : ""}${location.status === "exploratory" ? " is-exploratory" : ""}${location.category === "recent_public_report" ? " is-recent" : ""}`,
@@ -15,7 +15,7 @@ function locationIcon(location: InvestigationLocation, selected: boolean) {
   });
 }
 
-function MapFocus({ locations, selectedId }: { locations: InvestigationLocation[]; selectedId: string }) {
+function MapFocus({ locations, selectedId }: { locations: MappedInvestigationLocation[]; selectedId: string }) {
   const map = useMap();
   const previousSelectedId = useRef(selectedId);
   useEffect(() => {
@@ -30,7 +30,7 @@ function MapFocus({ locations, selectedId }: { locations: InvestigationLocation[
   return null;
 }
 
-function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: InvestigationLocation[] }) {
+function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: MappedInvestigationLocation[] }) {
   const map = useMap();
   const wasFullscreen = useRef(wheelZoom);
   useEffect(() => {
@@ -56,7 +56,7 @@ function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: 
   return null;
 }
 
-export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom }: { locations: InvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean }) {
+export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean }) {
   const tileFailures = useRef(0);
   const [tilesUnavailable, setTilesUnavailable] = useState(false);
   const icons = useMemo(() => new Map(locations.map((location) => [location.id, locationIcon(location, selectedId === location.id)])), [locations, selectedId]);
