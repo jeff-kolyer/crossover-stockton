@@ -80,12 +80,12 @@ const pageCopy = {
   reality: {
     eyebrow: "Reality",
     title: "Current gaps",
-    text: "What reality needs now: the unmet local needs Crossover is tracking from selected Stockton organizations.",
+    text: "Reported needs from public sources and research. These are not all active Crossover investigations or independently verified current conditions.",
   },
   connection: {
     eyebrow: "Connection",
     title: "Signs of being",
-    text: "Fruit is the evidence. These are changes, signals, and stories showing where people are responding.",
+    text: "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations.",
   },
   action: {
     eyebrow: "Action",
@@ -206,16 +206,16 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
           <p>{copy.text}</p>
           {isHome && (
             <>
-              <button className="hero-search" type="button" onClick={() => onNavigate("action")}>
+              <button className="hero-search" type="button" onClick={() => onOpenWork(investigationWork?.id ?? "dogs-map-placement-barriers")}>
                 <Search size={22} />
-                <span>What can I do today?</span>
+                <span>Explore our current investigation</span>
                 <strong>
                   <ArrowRight size={23} />
                 </strong>
               </button>
               <div className="hero-link-row">
-                <span>Genuine connection bears visible fruit.</span>
-                <button type="button" onClick={() => onNavigate("connection")}>See the fruit <ArrowRight size={16} /></button>
+                <span>Discover what needs doing. Explore what technology and people could change.</span>
+                <button type="button" onClick={() => onNavigate("connection")}>See reported progress <ArrowRight size={16} /></button>
               </div>
             </>
           )}
@@ -224,10 +224,10 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
 
       {(page === "home" || page === "reality") && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">
-          <p>What Reality Needs Now</p>
+          <p>Needs identified in research</p>
           <h2>Current Gaps</h2>
-          <span>These are today's unmet needs, real problems with real consequences.</span>
-          <small><CheckCircle2 size={16} /> Updated from public records and organizations we follow.</small>
+          <span>These issues appear in public reports and research. Their current conditions have not all been independently verified.</span>
+          <small><CheckCircle2 size={16} /> Based on dated public sources and documented findings.</small>
         </div>
         <div className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
@@ -284,7 +284,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>Crossover's work</p>
           <h2 id="home-work-title">What we're doing now</h2>
-          <span>We are researching Stockton's dog-placement gap, investigating immediate welfare needs, and documenting firsthand activity.</span>
+          <span>We're investigating what Stockton's street dogs actually need, how the current response works, and where emerging technology and human participation might help.</span>
         </div>
         <div className="home-work-content">
           <a className="home-work-focus" href={`/work/${investigationWork.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork(investigationWork.id))}>
@@ -324,7 +324,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>What Reality Looks Like</p>
           <h2>Signs of Being</h2>
-          <span>Fruit is the evidence. These are real changes happening in Stockton.</span>
+          <span>{page === "connection" ? "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations." : "Examples of positive developments reported by local sources, not necessarily outcomes of Crossover's investigations."}</span>
           <button type="button" onClick={() => onNavigate(page === "home" ? "connection" : "action")}>
             {page === "home" ? "See more stories" : "Take an action"} <ArrowRight size={16} />
           </button>
@@ -353,7 +353,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>How Can I Help Today?</p>
           <h2>Find your way in.</h2>
-          <span>{page === "action" ? "Help us establish what's real, discover what assistance is needed, and investigate how emerging technology and willing people could make a difference." : "Checking a report or service is useful work. An attempted action does not mean a need was resolved."}</span>
+          <span>Help us establish what's real, discover what assistance is needed, and investigate how emerging technology and willing people could make a difference.</span>
         </div>
         <div className="action-browser">
           {page === "action" && (
@@ -453,9 +453,9 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
 
       {isHome && <section className="public-band public-org-band">
         <div className="section-intro">
-          <p>Who We Follow</p>
-          <h2>We follow a limited set of crossover-ish organizations.</h2>
-          <button type="button" onClick={onOpenAbout}>Why these? <ArrowRight size={16} /></button>
+          <p>Organizations in our research</p>
+          <h2>Organizations mentioned in our investigations and sources.</h2>
+          <button type="button" onClick={onOpenAbout}>Our approach <ArrowRight size={16} /></button>
         </div>
         <div className="org-grid">
           {activeOrgs.map((org, index) => {
@@ -471,7 +471,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
           })}
         </div>
         <div className="org-note">
-          <span>We track these organizations closely. Our AI keeps the picture current so you can act on what's real.</span>
+          <span>These descriptions come from public sources. Inclusion does not mean we've independently verified current services or established a working relationship.</span>
           <button type="button" onClick={() => onNavigate("organizations")}>See all organizations <ArrowRight size={15} /></button>
         </div>
       </section>}
