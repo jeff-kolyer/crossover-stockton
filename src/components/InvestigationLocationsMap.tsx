@@ -49,6 +49,29 @@ function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: 
     return () => cancelAnimationFrame(resizeFrame);
   }, [map, wheelZoom, locations]);
   useEffect(() => {
+    if (wheelZoom) return;
+    const container = map.getContainer();
+    let accumulatedDelta = 0;
+    let lastWheelAt = 0;
+    const onWheel = (event: WheelEvent) => {
+      if (!event.ctrlKey) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const now = performance.now();
+      if (now - lastWheelAt > 250) accumulatedDelta = 0;
+      lastWheelAt = now;
+      const pixels = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? container.clientHeight : 1);
+      accumulatedDelta -= pixels;
+      const zoomSteps = Math.trunc(accumulatedDelta / 80);
+      if (!zoomSteps) return;
+      accumulatedDelta -= zoomSteps * 80;
+      map.setZoomAround(map.mouseEventToContainerPoint(event), map.getZoom() + zoomSteps);
+    };
+    container.addEventListener("wheel", onWheel, { capture: true, passive: false });
+    return () => container.removeEventListener("wheel", onWheel, true);
+  }, [map, wheelZoom]);
+  useEffect(() => {
     const observer = new ResizeObserver(() => map.invalidateSize());
     observer.observe(map.getContainer());
     return () => observer.disconnect();

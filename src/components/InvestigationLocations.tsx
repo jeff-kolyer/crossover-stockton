@@ -99,7 +99,7 @@ export function InvestigationLocations({ investigationId, onOpenReport }: { inve
 
   return <section id="field-observation-map" className="investigation-locations investigation-section" aria-labelledby="investigation-locations-title">
     <div className="investigation-section-heading"><span className="investigation-locations-heading-icon"><MapPin size={22} aria-hidden="true" /></span><h2 id="investigation-locations-title">Field observation map</h2></div>
-    <p className="investigation-locations-intro gap-mobile-body">Markers show generalized areas from historical reporting and recent public reports. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot.</p>
+    <p className="investigation-locations-intro gap-mobile-body">Markers show generalized areas from historical reporting and recent public reports. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p>
     <div className="investigation-map-filters" role="group" aria-label="Map evidence categories"><button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All records</button>{(Object.keys(categoryLabels) as InvestigationLocation["category"][]).map((category) => <button type="button" key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{categoryLabels[category]} ({entries.filter((entry) => entry.category === category).length})</button>)}</div>
     {visibleEntries.length ? <>
     <div ref={workspaceRef} className="investigation-map-workspace">
