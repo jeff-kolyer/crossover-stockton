@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AlertTriangle,
   Apple,
@@ -6,6 +6,7 @@ import {
   ArrowRight,
   Building2,
   CalendarDays,
+  Check,
   CheckCircle2,
   ChevronDown,
   ChevronRight,
@@ -136,12 +137,27 @@ function dogActionRank(id: string) {
 
 export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: HomePageProps) {
   const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
+  const [selectedRole, setSelectedRole] = useState("");
+  const [roleMenuOpen, setRoleMenuOpen] = useState(false);
+  const roleFilterRef = useRef<HTMLDivElement>(null);
+  const roleTriggerRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!roleMenuOpen) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (!roleFilterRef.current?.contains(event.target as Node)) setRoleMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    return () => document.removeEventListener("pointerdown", closeOutside);
+  }, [roleMenuOpen]);
   const isHome = page === "home";
   const copy = pageCopy[page];
   const visibleActions = isHome ? featuredActions.filter((action) => !newDogActionIds.has(action.id)).slice(0, 4) : actions.filter((action) => action.active);
   const availableActionTags = actionTagOrder.filter((tag) => visibleActions.some((action) => action.tags?.includes(tag)));
-  const filteredActions = page === "action" && selectedActionTag
-    ? visibleActions.filter((action) => action.tags?.includes(selectedActionTag))
+  const availableRoles = [...new Set(visibleActions.flatMap((action) => action.participation_roles?.map((role) => role.name) ?? []))].sort((a, b) => a.localeCompare(b));
+  const filteredActions = page === "action"
+    ? visibleActions.filter((action) =>
+      (!selectedActionTag || action.tags?.includes(selectedActionTag)) &&
+      (!selectedRole || action.participation_roles?.some((role) => role.name === selectedRole)))
     : visibleActions;
   const orderedActions = selectedActionTag === "dogs"
     ? [...filteredActions].sort((a, b) => dogActionRank(a.id) - dogActionRank(b.id))
@@ -342,23 +358,69 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="action-browser">
           {page === "action" && (
             <div className="action-filter-row" aria-label="Action filters">
-              <button
-                className={selectedActionTag === null ? "is-active" : ""}
-                type="button"
-                onClick={() => setSelectedActionTag(null)}
-              >
-                All
-              </button>
-              {availableActionTags.map((tag) => (
+              <div className="action-topic-filters" aria-label="Topic filters">
                 <button
-                  className={selectedActionTag === tag ? "is-active" : ""}
+                  className={selectedActionTag === null ? "is-active" : ""}
                   type="button"
-                  onClick={() => setSelectedActionTag(tag)}
-                  key={tag}
+                  onClick={() => setSelectedActionTag(null)}
                 >
-                  {actionTagLabels[tag]}
+                  All
                 </button>
-              ))}
+                {availableActionTags.map((tag) => (
+                  <button
+                    className={selectedActionTag === tag ? "is-active" : ""}
+                    type="button"
+                    onClick={() => setSelectedActionTag(tag)}
+                    key={tag}
+                  >
+                    {actionTagLabels[tag]}
+                  </button>
+                ))}
+              </div>
+              <div className="action-role-filter" ref={roleFilterRef} onKeyDown={(event) => {
+                if (event.key === "Escape" && roleMenuOpen) {
+                  setRoleMenuOpen(false);
+                  roleTriggerRef.current?.focus();
+                }
+              }}>
+                <button
+                  className="action-role-trigger"
+                  type="button"
+                  ref={roleTriggerRef}
+                  aria-label={`Filter by role: ${selectedRole || "All roles"}`}
+                  aria-expanded={roleMenuOpen}
+                  aria-controls="action-role-options"
+                  onClick={() => setRoleMenuOpen((open) => !open)}
+                >
+                  <span>{selectedRole || "All roles"}</span>
+                  <ChevronDown size={20} aria-hidden="true" />
+                </button>
+                {roleMenuOpen && <div className="action-role-menu" id="action-role-options" role="group" aria-label="Role options">
+                  {["", ...availableRoles].map((role) => (
+                    <button
+                      type="button"
+                      className={selectedRole === role ? "is-active" : ""}
+                      aria-pressed={selectedRole === role}
+                      key={role || "all"}
+                      onClick={() => {
+                        setSelectedRole(role);
+                        setRoleMenuOpen(false);
+                        roleTriggerRef.current?.focus();
+                      }}
+                    >
+                      <Check size={18} aria-hidden="true" />
+                      <span>{role || "All roles"}</span>
+                    </button>
+                  ))}
+                </div>}
+              </div>
+            </div>
+          )}
+          {page === "action" && orderedActions.length === 0 && (
+            <div className="action-empty-state" role="status">
+              <strong>No actions match these filters.</strong>
+              <p>Try another topic or role to see more ways to help.</p>
+              <button type="button" onClick={() => { setSelectedActionTag(null); setSelectedRole(""); }}>Clear filters</button>
             </div>
           )}
           <div className="action-grid">
@@ -374,8 +436,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
                 <Icon size={24} />
                 <strong>{action.title}</strong>
                 <p>{action.summary}</p>
-                {action.participation_roles?.length ? <span className="action-meta">{action.participation_roles.map((role) => `${role.name} · ${role.state}`).join(" / ")}</span> : null}
                 <span className="action-meta">
+                  {action.participation_roles?.length ? <span>{action.participation_roles.map((role) => `${role.name} · ${role.state}`).join(" / ")}</span> : null}
                   {[action.estimated_time || action.when_label, action.availability_status || action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
                 </span>
                 <ArrowRight size={17} />
