@@ -90,7 +90,7 @@ const pageCopy = {
   action: {
     eyebrow: "Action",
     title: "Take a real step",
-    text: "Investigate a need, use a verified participation route, or check with a provider before helping.",
+    text: "Investigate a need, explore an existing participation route, or check with a provider before helping.",
   },
 };
 
