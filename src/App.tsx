@@ -274,6 +274,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <AboutPage
           onNavigate={showPage}
           onPrimaryAction={() => showPage("action")}
+          onOpenWork={showWork}
         />
       )}
 

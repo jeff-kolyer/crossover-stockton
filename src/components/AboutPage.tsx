@@ -23,22 +23,24 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 const aboutHeroImage = "/images/about/about-crossover-hero.jpg";
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
-const linkedInUrl = "http://www.linkedin.com/in/jeff-kolyer";
+const linkedInUrl = "https://www.linkedin.com/in/jeff-kolyer";
 const aboutNavItems: WorkSectionNavItem[] = [
   { id: "welcome", label: "Welcome", icon: FileText },
   { id: "what-we-do", label: "What we do", icon: Search },
   { id: "how-it-works", label: "How it works", icon: Settings },
   { id: "from-working-to-being", label: "From working to being", icon: Sprout },
   { id: "why-ai", label: "Why AI?", icon: Sparkles },
-  { id: "connect", label: "Connect", icon: Users },
+  { id: "founder", label: "About the founder", icon: Users },
+  { id: "connect", label: "Get involved", icon: ArrowRight },
 ];
 
 interface AboutPageProps {
   onNavigate: (page: PublicRoute) => void;
   onPrimaryAction: () => void;
+  onOpenWork: (workId: string) => void;
 }
 
-export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
+export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork }: AboutPageProps) {
   return (
     <main className="public-home about-page">
       <header className="public-nav gap-detail-nav">
@@ -66,8 +68,8 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <section className="about-welcome" id="welcome">
             <div className="about-welcome-copy">
               <p className="about-eyebrow">About Crossover Stockton</p>
-              <h1>Connecting emerging technology to real-world needs.</h1>
-              <p>AI agents, self-driving vehicles, and robotics are transforming work. Crossover investigates where these emerging capabilities — and the freedom they may create for people — could help meet real needs.</p>
+              <h1>Before we can change reality with technology, we must first understand it.</h1>
+              <p>AI, robotics, and emerging post-scarcity capabilities are expanding what's possible. Crossover investigates real-world needs to discover where those capabilities—and willing people—could make a difference.</p>
             </div>
             <div className="about-welcome-photo"><img src={aboutHeroImage} alt="AI-generated illustration of a waterfront promenade and downtown skyline at sunset" loading="eager" decoding="async" fetchPriority="high" /></div>
           </section>
@@ -75,60 +77,75 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <section className="about-content-section about-what" id="what-we-do">
             <div>
               <h2>What we do</h2>
-              <p>We investigate real-world needs to discover where emerging technology and willing people could make a difference.</p>
-              <p>Before proposing solutions, we examine available evidence, question assumptions, and investigate what is actually happening and what prevents needs from being met.</p>
-              <p>Our own attempts to help can reveal barriers in the systems meant to provide care.</p>
+              <p>AI can identify potential problems and suggest solutions. But public information doesn't always tell us what actually happens in the real world.</p>
+              <p>We begin by investigating, rather than assuming we already know the answers.</p>
+              <p><strong>We ask questions like:</strong></p>
+              <ul className="about-question-list">
+                <li>What actually happens when someone tries to volunteer?</li>
+                <li>Which barriers are real, and which are assumptions?</li>
+                <li>Which attempts to help succeed, fail, or lead nowhere?</li>
+              </ul>
+              <p>Our own attempts to help become part of the evidence. We document what happens, discover barriers to care, and explore what could change.</p>
             </div>
             <aside className="about-needs-panel">
               <Sprout size={28} aria-hidden="true" />
               <div>
                 <h3>Real people. Real needs.</h3>
-                <p>We begin with real situations in Stockton, starting with dogs on the street, to discover what intelligence, technology, and human care could accomplish.</p>
+                <p>We're starting in Stockton by investigating street dogs and access to care—examining reported conditions, existing responses, and what prevents people from helping.</p>
+                <a className="about-needs-link" href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Explore the investigation <ArrowRight size={16} aria-hidden="true" /></a>
               </div>
             </aside>
           </section>
 
           <section className="about-content-section about-method" id="how-it-works">
             <h2>How Crossover works</h2>
-            <p>We follow a simple process to understand a problem, identify constraints, and explore what new capabilities could change.</p>
+            <p>We follow a simple process to move from public information to real-world understanding.</p>
             <ol className="about-step-grid">
-              <li><span className="about-step-number">1</span><div><Eye size={28} aria-hidden="true" /><h3>Observe</h3><p>Examine reports and firsthand conditions to understand what's actually happening.</p></div></li>
-              <li><span className="about-step-number">2</span><div><Search size={28} aria-hidden="true" /><h3>Verify</h3><p>Check sources, investigate claims, and establish which needs remain unmet.</p></div></li>
-              <li><span className="about-step-number">3</span><div><Users size={28} aria-hidden="true" /><h3>Respond</h3><p>Explore how technology, resources, and willing people could address a verified need.</p></div></li>
-              <li><span className="about-step-number">4</span><div><ChartNoAxesColumnIncreasing size={28} aria-hidden="true" /><h3>Confirm</h3><p>Test possible responses, document outcomes, and learn what actually improves.</p></div></li>
+              <li><span className="about-step-number">1</span><div><Eye size={28} aria-hidden="true" /><h3>Observe</h3><p>Examine public reports, listen to people, and observe firsthand conditions.</p></div></li>
+              <li><span className="about-step-number">2</span><div><Search size={28} aria-hidden="true" /><h3>Verify</h3><p>Question assumptions, check evidence, and distinguish what's known from what remains uncertain.</p></div></li>
+              <li><span className="about-step-number">3</span><div><Users size={28} aria-hidden="true" /><h3>Respond</h3><p>Try ways to help, investigate barriers, and explore how willing people and emerging technology could make a difference.</p></div></li>
+              <li><span className="about-step-number">4</span><div><ChartNoAxesColumnIncreasing size={28} aria-hidden="true" /><h3>Confirm</h3><p>Document what happened, what worked, what didn't, and what still needs attention.</p></div></li>
             </ol>
           </section>
 
           <div className="about-philosophy-grid">
             <section className="about-content-section" id="from-working-to-being">
               <h2>From working to being</h2>
-              <p>As AI and robotics perform more necessary work, people may gain greater freedom from compulsory employment and more opportunities to pursue meaningful vocations.</p>
-              <p>That freedom could mean more time for caring, creating, restoring the environment, helping animals, and connecting with the world around us.</p>
-              <p>Crossover explores how this technological transition could connect people and new capabilities to needs that remain unmet today.</p>
+              <p>As AI and robotics take on more necessary work, people may gain greater freedom to pursue meaningful vocations rather than working primarily to earn a living.</p>
+              <p>That could mean more time for caring for animals, helping neighbors, restoring the environment, creating, and connecting with the world around us.</p>
+              <p>Crossover explores how this potential shift from compulsory work to meaningful participation could help meet real needs.</p>
             </section>
             <section className="about-content-section" id="why-ai">
               <h2>Why AI?</h2>
-              <p>AI already helps us research and analyze complex problems. Emerging agents, autonomous vehicles, and robotics could eventually help us act on what we discover.</p>
-              <ul>
-                <li>Surface possible needs for investigation.</li>
-                <li>Analyze evidence.</li>
-                <li>Connect people and resources.</li>
-                <li>Reduce the friction between a problem and its solution.</li>
-              </ul>
-              <p className="about-ai-conclusion">Understand the need. Explore the technology. Test what works.</p>
+              <p>AI helps us research public information, examine evidence, identify possible needs, and ask better questions.</p>
+              <p>Emerging agents, robotics, and automation may eventually help us act on what we discover.</p>
+              <p>But <strong>AI-generated answers aren't the same as firsthand knowledge.</strong> That's why we investigate, test responses, and publish what we learn.</p>
+              <p className="about-ai-conclusion">Observe. Verify. Respond. Confirm.</p>
             </section>
           </div>
+
+          <section className="about-founder" id="founder">
+            <span className="about-founder-mark" aria-hidden="true"><img src={logoDark} alt="" /></span>
+            <div className="about-founder-content">
+              <p className="about-eyebrow">About the founder</p>
+              <h2>Jeff Kolyer</h2>
+              <p className="about-founder-role">Founder, Crossover Stockton</p>
+              <p>A former Silicon Valley technology founder, Jeff is exploring how AI, robotics, and emerging post-scarcity capabilities could address real-world problems.</p>
+              <p>Rather than starting another technology company, Jeff is investigating those problems firsthand—testing ways to help and documenting what actually happens.</p>
+              <p className="about-founder-principle">Examine reality before assuming we know what needs to be done.</p>
+              <a className="linkedin-button" href={linkedInUrl} target="_blank" rel="noreferrer"><Linkedin size={17} aria-hidden="true" /><span>Connect on LinkedIn</span></a>
+            </div>
+          </section>
 
           <section className="about-connect" id="connect">
             <Users size={28} aria-hidden="true" />
             <div className="about-connect-copy">
               <h2>Get involved</h2>
-              <p>Explore our current investigation, help establish what's real, or connect with Crossover to share firsthand knowledge.</p>
+              <p>Explore what we're investigating, follow our findings, or help establish what's actually happening.</p>
             </div>
             <div className="about-connect-actions">
               <a className="about-connect-primary" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs <ArrowRight size={17} aria-hidden="true" /></a>
               <a className="about-connect-secondary" href="/action/" onClick={(event) => navigateInternalLink(event, onPrimaryAction)}>Take a real step <ArrowRight size={17} aria-hidden="true" /></a>
-              <a className="linkedin-button" href={linkedInUrl} target="_blank" rel="noreferrer"><Linkedin size={17} aria-hidden="true" /><span>Connect on LinkedIn</span></a>
             </div>
           </section>
         </div>
