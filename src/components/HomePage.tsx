@@ -80,7 +80,7 @@ const pageCopy = {
   },
   reality: {
     eyebrow: "Reality",
-    title: "Potential unmet needs",
+    title: "Needs we're investigating",
     text: "AI surfaced these possibilities through public information. Crossover is investigating street dog care first; the assumptions and severity of the other needs have not been independently established.",
   },
   connection: {
