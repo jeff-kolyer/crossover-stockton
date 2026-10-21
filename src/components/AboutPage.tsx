@@ -109,10 +109,10 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <h3>How Crossover works</h3>
             <p>We start with reality, not assumptions. Every action is an opportunity to learn what actually works.</p>
             <ol>
-              <li><span aria-hidden="true">1</span>Observe</li>
-              <li><span aria-hidden="true">2</span>Verify</li>
-              <li><span aria-hidden="true">3</span>Respond</li>
-              <li><span aria-hidden="true">4</span>Confirm</li>
+              <li><span aria-hidden="true">1</span><div><strong>Observe</strong><p>We look at what is actually happening in people's lives and communities.</p></div></li>
+              <li><span aria-hidden="true">2</span><div><strong>Verify</strong><p>We investigate, check what works, and separate signal from noise.</p></div></li>
+              <li><span aria-hidden="true">3</span><div><strong>Respond</strong><p>We find practical ways to help and connect people with resources.</p></div></li>
+              <li><span aria-hidden="true">4</span><div><strong>Confirm</strong><p>We follow up, learn from results, and adjust based on what works.</p></div></li>
             </ol>
           </div>
         </section>
