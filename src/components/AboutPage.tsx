@@ -67,14 +67,26 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
       </section>
 
       <section className="about-main">
+        <section className="about-product-row" aria-label="Crossover sections">
+          <button type="button" className="is-needs" onClick={() => onNavigate("reality")}>
+            <Heart size={34} />
+            <span><strong>Needs</strong> show where reality is asking something of us.</span>
+          </button>
+          <button type="button" className="is-being" onClick={() => onNavigate("connection")}>
+            <Sprout size={34} />
+            <span><strong>Signs of Being</strong> show what happens when people respond.</span>
+          </button>
+          <button type="button" className="is-actions" onClick={onPrimaryAction}>
+            <Hand size={34} />
+            <span><strong>Actions</strong> give us a way to participate in what really matters.</span>
+          </button>
+        </section>
+
         <section className="about-what-we-do">
           <div className="about-section-heading">
             <h2>What we do</h2>
             <p>We use AI and firsthand investigation to discover unmet needs, verify what actually works, and find practical ways to help.</p>
             <p>We don't assume a service is effective simply because it exists. We investigate what is happening, what's missing, and what can be done.</p>
-            <span className="about-see-note">AI helps us see <ArrowRight size={26} /></span>
-            <p><strong>How Crossover works: Observe → Verify → Respond → Confirm</strong></p>
-            <p>We start with reality, not assumptions. Every action is an opportunity to learn what actually works.</p>
           </div>
           <div className="about-question-grid">
             <article>
@@ -93,21 +105,10 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
               <p>We help people investigate, respond, and build what's missing.</p>
             </article>
           </div>
-        </section>
-
-        <section className="about-product-row" aria-label="Crossover sections">
-          <button type="button" className="is-needs" onClick={() => onNavigate("reality")}>
-            <Heart size={34} />
-            <span><strong>Needs</strong> show where reality is asking something of us.</span>
-          </button>
-          <button type="button" className="is-being" onClick={() => onNavigate("connection")}>
-            <Sprout size={34} />
-            <span><strong>Signs of Being</strong> show what happens when people respond.</span>
-          </button>
-          <button type="button" className="is-actions" onClick={onPrimaryAction}>
-            <Hand size={34} />
-            <span><strong>Actions</strong> give us a way to participate in what really matters.</span>
-          </button>
+          <div className="about-process-row">
+            <p><strong>How Crossover works: Observe → Verify → Respond → Confirm</strong></p>
+            <p>We start with reality, not assumptions. Every action is an opportunity to learn what actually works.</p>
+          </div>
         </section>
 
         <section className="about-editorial-grid">
