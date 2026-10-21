@@ -2,11 +2,12 @@
   {
     "id": "dogs-safe-placement",
     "slug": "too-many-dogs-still-lack-safe-placement",
-    "title": "Too many dogs still on the street",
+    "title": "Street dogs and access to care",
     "status": "critical",
+    "investigation_status": "investigating",
     "active": true,
     "rank": 1,
-    "summary": "Limited shelter space, spay/neuter backlog, and limited placement options are keeping pressure high across Stockton’s animal-welfare system.",
+    "summary": "Public sources report stray and abandoned dogs and pressure on shelter capacity. Crossover is investigating where care becomes difficult to access and what helps.",
     "what_we_are_seeing": [
       "Stray and abandoned dogs continue to be reported across Stockton, with Stockton Street Dogs reporting a recent surge in dumped dogs.",
       "City records say stray animal intakes regularly exceed shelter capacity.",
@@ -238,11 +239,12 @@
   {
     "id": "pet-inclusive-shelter",
     "slug": "people-with-pets-still-face-barriers-to-safe-shelter",
-    "title": "Too few shelter options welcome pets.",
+    "title": "People with pets and shelter access",
     "status": "high_priority",
+    "investigation_status": "identified",
     "active": true,
     "rank": 2,
-    "summary": "Pet ownership remains a documented barrier to some shelter and housing options, even as Stockton adds low-barrier capacity designed to keep people with their companion animals.",
+    "summary": "Public sources describe pet restrictions and new pet-inclusive shelter capacity. Crossover has not yet checked where pet ownership currently blocks access.",
     "what_we_are_seeing": [
       "San Joaquin County's 2024 survey found 34% of unhoused respondents had a pet, and 45% of pet-owning respondents had two or more pets.",
       "The 2026 homelessness count added a specific question to measure whether pets are preventing people from entering shelter.",
@@ -396,11 +398,12 @@
   {
     "id": "food-distribution-capacity",
     "slug": "food-distribution-capacity-isnt-keeping-up-with-need",
-    "title": "Food distribution can't keep up with need.",
+    "title": "Food distribution capacity",
     "status": "high_priority",
+    "investigation_status": "identified",
     "active": true,
     "rank": 3,
-    "summary": "Large food donations and strong community demand are colliding with limited cold storage, refrigerated transport, and the logistics needed to move food quickly across Stockton and San Joaquin County.",
+    "summary": "A reported large donation exceeded one provider's cold storage in 2026. Crossover has not yet investigated how often storage, transport, or coordination limit food distribution.",
     "what_we_are_seeing": [
       "A roughly three-semitruck frozen-food donation exceeded Bread of Life's two existing freezers in August 2026.",
       "Bread of Life relied on local partners for refrigerated transportation and temporary cold storage so the donation could still reach residents.",
@@ -566,11 +569,12 @@
   {
     "id": "reentry-housing-instability",
     "slug": "people-leaving-incarceration-still-face-unstable-reentry-housing",
-    "title": "Too few stable housing options after incarceration.",
+    "title": "Housing access after incarceration",
     "status": "monitored",
+    "investigation_status": "identified",
     "active": true,
     "rank": 4,
-    "summary": "Housing, work, and basic stability have to come together after incarceration. Stockton has active reentry pathways, but stable housing remains one of the core conditions for a successful second chance.",
+    "summary": "Public sources describe local reentry programs that combine housing, work, and case management. Crossover has not yet investigated where people still have trouble reaching stable housing.",
     "what_we_are_seeing": [
       "Ready To Work currently combines transitional housing, paid work, case management, training, and links to permanent housing for eligible men.",
       "Friends Outside currently provides housing and rental assistance, employment readiness, basic-needs support, and case management for people returning from incarceration.",
@@ -728,11 +732,12 @@
   {
     "id": "low-barrier-housing-pathways",
     "slug": "people-still-need-low-barrier-paths-from-homelessness-to-housing",
-    "title": "Too few accessible paths into housing.",
+    "title": "Paths from homelessness to housing",
     "status": "improving",
+    "investigation_status": "identified",
     "active": true,
     "rank": 5,
-    "summary": "Stockton still faces substantial homelessness, but new low-barrier shelter and navigation capacity is creating more direct paths from the street toward stable housing.",
+    "summary": "Published reports describe new low-barrier shelter and navigation capacity in Stockton. Crossover has not yet investigated who can use these pathways or what outcomes follow.",
     "what_we_are_seeing": [
       "St. Mary’s opened Pathways Neighborhood in June 2026, adding 268 beds of modular transitional housing with on-site supportive services.",
       "The Pathways model is explicitly focused on low-barrier shelter, case management, wraparound services, and movement toward permanent housing.",

@@ -67,7 +67,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <div className="about-welcome-copy">
               <p className="about-eyebrow">About Crossover Stockton</p>
               <h1>Connecting emerging technology to real-world needs.</h1>
-              <p>AI agents, self-driving vehicles, and robotics are transforming work. Crossover investigates how these emerging capabilities — and the freedom they may create for people — can solve real problems.</p>
+              <p>AI agents, self-driving vehicles, and robotics are transforming work. Crossover investigates where these emerging capabilities — and the freedom they may create for people — could help meet real needs.</p>
             </div>
             <div className="about-welcome-photo"><img src={aboutHeroImage} alt="AI-generated illustration of a waterfront promenade and downtown skyline at sunset" loading="eager" decoding="async" fetchPriority="high" /></div>
           </section>
@@ -77,6 +77,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
               <h2>What we do</h2>
               <p>We investigate real-world needs to discover where emerging technology and willing people could make a difference.</p>
               <p>Before proposing solutions, we examine available evidence, question assumptions, and investigate what is actually happening and what prevents needs from being met.</p>
+              <p>Our own attempts to help can reveal barriers in the systems meant to provide care.</p>
             </div>
             <aside className="about-needs-panel">
               <Sprout size={28} aria-hidden="true" />
@@ -109,7 +110,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
               <h2>Why AI?</h2>
               <p>AI already helps us research and analyze complex problems. Emerging agents, autonomous vehicles, and robotics could eventually help us act on what we discover.</p>
               <ul>
-                <li>Identify what needs attention.</li>
+                <li>Surface possible needs for investigation.</li>
                 <li>Analyze evidence.</li>
                 <li>Connect people and resources.</li>
                 <li>Reduce the friction between a problem and its solution.</li>

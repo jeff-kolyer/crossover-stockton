@@ -29,6 +29,7 @@ import storiesData from "../data/stories.json";
 import workData from "../data/work.json";
 import { getActionIcon } from "../lib/actionIcons";
 import { latestGapActivity } from "../lib/gapActivity";
+import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
 import { workIcon } from "../lib/workIcon";
 import { PublicMobileMenu } from "./PublicMobileMenu";
@@ -75,12 +76,12 @@ const pageCopy = {
   home: {
     eyebrow: "",
     title: "See clearly. Act locally.",
-    text: "Crossover investigates how emerging AI, robotics, and human participation can solve real-world problems. We're starting in Stockton, learning what actually needs attention.",
+    text: "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs. We're starting in Stockton, learning what actually needs attention.",
   },
   reality: {
     eyebrow: "Reality",
-    title: "Current gaps",
-    text: "Reported needs from public sources and research. These are not all active Crossover investigations or independently verified current conditions.",
+    title: "Potential unmet needs",
+    text: "AI surfaced these possibilities through public information. Crossover is investigating street dog care first; the assumptions and severity of the other needs have not been independently established.",
   },
   connection: {
     eyebrow: "Connection",
@@ -90,7 +91,7 @@ const pageCopy = {
   action: {
     eyebrow: "Action",
     title: "Take a real step",
-    text: "Investigate a need, explore an existing participation route, or check with a provider before helping.",
+    text: "These are possible ways to help or learn what's needed. We're testing how accessible and effective they are, and documenting what happens.",
   },
 };
 
@@ -206,13 +207,17 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
           <p>{copy.text}</p>
           {isHome && (
             <>
-              <button className="hero-search" type="button" onClick={() => onOpenWork(investigationWork?.id ?? "dogs-map-placement-barriers")}>
-                <Search size={22} />
-                <span>Explore our current investigation</span>
-                <strong>
-                  <ArrowRight size={23} />
-                </strong>
-              </button>
+              <div className="hero-action-row">
+                <button className="hero-investigation-button" type="button" onClick={() => onOpenWork(investigationWork?.id ?? "dogs-map-placement-barriers")}>
+                  <Search size={20} aria-hidden="true" />
+                  <span>Explore the investigation</span>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </button>
+                <button className="hero-learn-button" type="button" onClick={onOpenAbout}>
+                  <span>Learn more</span>
+                  <ArrowRight size={18} aria-hidden="true" />
+                </button>
+              </div>
               <div className="hero-link-row">
                 <span>Discover what needs doing. Explore what technology and people could change.</span>
                 <button type="button" onClick={() => onNavigate("connection")}>See reported progress <ArrowRight size={16} /></button>
@@ -224,20 +229,19 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
 
       {(page === "home" || page === "reality") && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">
-          <p>Needs identified in research</p>
-          <h2>Current Gaps</h2>
-          <span>These issues appear in public reports and research. Their current conditions have not all been independently verified.</span>
-          <small><CheckCircle2 size={16} /> Based on dated public sources and documented findings.</small>
+          <p>AI surfaced through public information</p>
+          <h2>Potential unmet needs</h2>
+          <span>AI has surfaced potential unmet needs in Stockton through public information. We're investigating street dog care first: what's actually happening, what prevents care, and what people can do about it. We have not verified every assumption or determined each need's severity.</span>
+          <small className="gap-status-guide"><span><InvestigationStatusIcon status="investigating" size={16} /> Investigating: active Crossover work.</span><span><InvestigationStatusIcon status="identified" size={16} /> Identified: not yet investigated by Crossover.</span></small>
         </div>
         <div className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
-            const Icon = getGapIcon(gap.status);
             const latestActivity = latestGapActivity(gap);
             const useful = actionTitles(gap.action_ids);
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
             const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
             return (
-            <a className={`gap-card is-${gap.status}`} key={gap.id} href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>
+            <a className={`gap-card is-${gap.investigation_status}`} key={gap.id} href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>
               {thumbnailImage && (
                 <span className="gap-card-image-frame" aria-hidden="true">
                   <img
@@ -254,7 +258,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
                   />
                 </span>
               )}
-              <span className="gap-level"><Icon size={17} /> {formatStatus(gap.status)}</span>
+              <span className="gap-level"><InvestigationStatusIcon status={gap.investigation_status} size={17} /> {investigationStatusLabel(gap.investigation_status)}</span>
               <span className="gap-card-body">
                 <span className="gap-card-copy">
                   <h3>{gap.title}</h3>
@@ -267,7 +271,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
               </span>
               <span className="gap-card-action">
                 <span>
-                  <small>USEFUL NOW</small>
+                  <small>POSSIBLE NEXT STEP</small>
                   <strong>{compactUsefulNow(gap, useful)}</strong>
                 </span>
               </span>
@@ -353,7 +357,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>How Can I Help Today?</p>
           <h2>Find your way in.</h2>
-          <span>Help us establish what's real, discover what assistance is needed, and investigate how emerging technology and willing people could make a difference.</span>
+          <span>These are possible ways to help or learn what's needed. We're testing how accessible and effective they are, and documenting what happens.</span>
         </div>
         <div className="action-browser">
           {page === "action" && (
@@ -437,6 +441,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
                 <strong>{action.title}</strong>
                 <p>{action.summary}</p>
                 <span className="action-meta">
+                  <span>{action.action_type === "investigation" ? "Investigation activity" : action.currentness === "unverified" ? "Participation not verified" : action.source_url ? "Published route; confirm availability" : "Check with provider"}</span>
                   {action.participation_roles?.length ? <span>{action.participation_roles.map((role) => `${role.name} · ${role.state}`).join(" / ")}</span> : null}
                   {[action.estimated_time || action.when_label, action.availability_status || action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
                 </span>
@@ -517,19 +522,6 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
       </nav>
     </main>
   );
-}
-
-function formatStatus(status: GapRecord["status"]) {
-  if (status === "high_priority") return "High Priority";
-  if (status === "monitored") return "Monitored";
-  return status[0].toUpperCase() + status.slice(1);
-}
-
-function getGapIcon(status: GapRecord["status"]) {
-  if (status === "critical") return CircleAlert;
-  if (status === "improving") return CheckCircle2;
-  if (status === "monitored") return ShieldCheck;
-  return AlertTriangle;
 }
 
 function getOrgIcon(index: number) {

@@ -147,7 +147,7 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenRepo
           <div className="action-modal-main">
             {action.why_it_helps && (
               <section className="action-modal-copy-block">
-                <h3>Why this helps</h3>
+                <h3>Why this might help</h3>
                 <p>{action.why_it_helps}</p>
               </section>
             )}

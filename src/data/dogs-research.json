@@ -30,6 +30,7 @@
     },
     {
       "id": "dogs-2026-10-15-official-2024-baseline",
+      "show_in_gap_updates": true,
       "finding": "Official dog-specific intake and outcome counts are now captured for calendar 2024.",
       "short_update": "2024 dog intake and outcome figures added",
       "discovered_at": "2026-10-15",
@@ -41,6 +42,7 @@
     },
     {
       "id": "dogs-2026-10-15-animal-balance-target-correction",
+      "show_in_gap_updates": true,
       "finding": "The Animal Balance contract target is approximate and covers pets, not a verified number of completed dog surgeries.",
       "discovered_at": "2026-10-15",
       "what_changed": "Crossover's prior summary said at least 200 procedures; the City source describes approximately 200 pets across three clinic events.",

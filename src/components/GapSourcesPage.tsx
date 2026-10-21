@@ -13,6 +13,7 @@ import {
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
+import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { EvidenceRecord, GapRecord } from "../types";
 
@@ -52,7 +53,7 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
 
   return (
-    <main className={`gap-updates-page gap-page is-${gap.status}`}>
+    <main className={`gap-updates-page gap-page is-${gap.investigation_status}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
 
       <section className="gap-history-header">
@@ -61,11 +62,11 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
         </button>
         <span className="gap-history-kicker">Sources</span>
         <h1>Evidence & Sources</h1>
-        <p>The records and public sources Crossover is using to understand the current state of this gap.</p>
+        <p>The records and public sources Crossover is using to examine this potential need. Public source findings do not establish current conditions on their own.</p>
         <div className="gap-history-meta">
-          <span>{renderStatusIcon(gap.status)} {formatStatus(gap.status)} gap</span>
+          <span><InvestigationStatusIcon status={gap.investigation_status} /> {investigationStatusLabel(gap.investigation_status)}</span>
           {currentAsOf && <span><CheckCircle2 size={16} /> Last checked {formatDate(currentAsOf)}</span>}
-          <button type="button" onClick={() => onOpenGap(gap.slug)}>Current state <ArrowRight size={15} /></button>
+          <button type="button" onClick={() => onOpenGap(gap.slug)}>Need overview <ArrowRight size={15} /></button>
         </div>
       </section>
 
@@ -174,19 +175,6 @@ function recordTime(record: EvidenceRecord) {
 
 function formatRecordType(value: string) {
   return value.replace(/_/g, " ");
-}
-
-function formatStatus(status: GapRecord["status"]) {
-  if (status === "high_priority") return "High Priority";
-  if (status === "monitored") return "Monitored";
-  return status[0].toUpperCase() + status.slice(1);
-}
-
-function renderStatusIcon(status: GapRecord["status"]) {
-  if (status === "improving") return <CheckCircle2 size={18} />;
-  if (status === "high_priority") return <AlertTriangle size={18} />;
-  if (status === "monitored") return <ShieldCheck size={18} />;
-  return <AlertCircle size={18} />;
 }
 
 function formatDate(value?: string | null) {

@@ -170,11 +170,14 @@ export default function App({ initialPath }: { initialPath?: string }) {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  function showWork(workId: string) {
-    const nextPath = `/work/${workId}/`;
-    if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
+  function showWork(workId: string, anchor?: string) {
+    const nextPath = `/work/${workId}/${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
+    if (`${window.location.pathname}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
     setRoute({ page: "work", workId });
-    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+    requestAnimationFrame(() => {
+      if (anchor) document.getElementById(anchor)?.scrollIntoView();
+      else window.scrollTo({ top: 0, left: 0 });
+    });
   }
 
   function showReport(reportId: string) {
@@ -220,6 +223,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenUpdates={showGapUpdates}
           onOpenSources={showGapSources}
           onOpenWork={showWork}
+          onOpenReport={showReport}
           onOpenStory={showStory}
           onOpenAction={setSelectedAction}
         />
@@ -241,6 +245,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onNavigate={showPage}
           onOpenAbout={() => showPage("about")}
           onOpenGap={showGap}
+          onOpenWork={showWork}
+          onOpenReport={showReport}
         />
       )}
 

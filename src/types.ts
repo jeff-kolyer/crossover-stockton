@@ -146,12 +146,14 @@ export interface CrossoverFeed {
 }
 
 export type GapStatus = "critical" | "high_priority" | "monitored" | "improving";
+export type GapInvestigationStatus = "investigating" | "identified";
 
 export interface GapRecord {
   id: string;
   slug: string;
   title: string;
   status: GapStatus;
+  investigation_status: GapInvestigationStatus;
   active: boolean;
   rank: number;
   summary: string;
@@ -357,6 +359,7 @@ export interface DogsResearchBaseline {
     id: string;
     finding: string;
     short_update?: string;
+    show_in_gap_updates?: boolean;
     discovered_at: string;
     what_changed: string;
     previous_state: string | null;

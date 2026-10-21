@@ -6,11 +6,10 @@ import {
   MapPin,
 } from "lucide-react";
 import gapsData from "../data/gaps.json";
-import recordsData from "../data/records.json";
-import { sourceLinkLabel } from "../lib/sourceLinks";
-import { updateTypeLabel } from "../lib/updatePresentation";
+import { gapUpdateHref, gapUpdates } from "../lib/gapUpdates";
+import { navigateInternalLink } from "../lib/internalLink";
 import { PublicMobileMenu } from "./PublicMobileMenu";
-import type { EvidenceRecord, GapRecord } from "../types";
+import type { GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -19,14 +18,15 @@ interface GapUpdatesPageProps {
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenWork: (workId: string, anchor?: string) => void;
+  onOpenReport: (reportId: string) => void;
 }
 
 const gaps = gapsData as GapRecord[];
-const records = recordsData as EvidenceRecord[];
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
 
-export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: GapUpdatesPageProps) {
+export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpenWork, onOpenReport }: GapUpdatesPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -44,9 +44,9 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
     );
   }
 
-  const relatedRecords = latestUpdates(gap, recordsForGap(gap));
+  const relatedUpdates = gapUpdates(gap);
   return (
-    <main className={`gap-updates-page gap-page is-${gap.status}`}>
+    <main className={`gap-updates-page gap-page is-${gap.investigation_status}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
 
       <section className="gap-history-header gap-specific-history-header">
@@ -55,7 +55,7 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
         </button>
         <span className="gap-history-kicker">Gap updates</span>
         <h1>{gap.title}</h1>
-        <p>What changed, what we learned, and what happened around this gap.</p>
+        <p>Reported developments, Crossover activity where available, and what remains to be checked about this potential need.</p>
       </section>
 
       <section className="gap-history-timeline gap-specific-history-timeline" aria-label={`Update history for ${gap.title}`}>
@@ -65,23 +65,33 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
             <span>Newest first</span>
           </div>
           <div className="gap-history-feed-list">
-            {relatedRecords.map((record) => (
-              <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
+            {relatedUpdates.map((update) => {
+              const destination = update.destination;
+              const href = gapUpdateHref(destination);
+              return <article className={`gap-history-item${update.crossover ? " is-crossover" : ""}`} key={update.id}>
                 <div className="gap-history-feed-meta">
-                  <time>{formatDate(record.published_at || record.checked_at)}</time>
-                  <span>{updateTypeLabel(record)}</span>
+                  <time dateTime={update.date}>{update.dateContext ? `${update.dateContext} ` : ""}{formatDate(update.date)}</time>
+                  <span>{update.typeLabel}</span>
                 </div>
-                <h3>{record.title}</h3>
-                <p>{record.summary}</p>
-                {record.source.url ? (
-                  <a href={record.source.url} target="_blank" rel="noreferrer">
-                    {sourceLinkLabel(record.source)} <ExternalLink size={15} />
+                <h3>{update.title}</h3>
+                <p>{update.summary}</p>
+                {href ? (
+                  <a href={href}
+                    target={destination?.kind === "external" && !href.startsWith("/") ? "_blank" : undefined}
+                    rel={destination?.kind === "external" && !href.startsWith("/") ? "noreferrer" : undefined}
+                    onClick={destination?.kind === "report"
+                      ? (event) => navigateInternalLink(event, () => onOpenReport(destination.id))
+                      : destination?.kind === "work"
+                        ? (event) => navigateInternalLink(event, () => onOpenWork(destination.id, destination.anchor))
+                        : undefined}
+                  >
+                    {update.linkLabel} <ExternalLink size={15} />
                   </a>
                 ) : (
-                  <small><FileText size={15} /> {record.source.publisher || "Field note"}</small>
+                  <small><FileText size={15} /> Source link unavailable</small>
                 )}
-              </article>
-            ))}
+              </article>;
+            })}
           </div>
         </div>
       </section>
@@ -129,35 +139,6 @@ function PublicNav({ onNavigate, onOpenAbout }: Pick<GapUpdatesPageProps, "onNav
   );
 }
 
-function recordsForGap(gap: GapRecord) {
-  if (gap.record_ids?.length) {
-    return gap.record_ids
-      .map((id) => records.find((record) => record.id === id))
-      .filter((record): record is EvidenceRecord => Boolean(record));
-  }
-
-  return records.filter((record) => record.gap_ids.includes(gap.id));
-}
-
-function latestUpdates(gap: GapRecord, recordsForCurrentGap: EvidenceRecord[]) {
-  const preferredIds = [gap.latest_change?.record_id].filter((id): id is string => Boolean(id));
-  const preferred = new Set(preferredIds);
-  const picked = preferredIds
-    .map((id) => recordsForCurrentGap.find((record) => record.id === id))
-    .filter((record): record is EvidenceRecord => Boolean(record));
-  const remaining = recordsForCurrentGap
-    .filter((record) => record.record_type !== "activity" && record.record_type !== "finding")
-    .filter((record) => !preferred.has(record.id))
-    .sort((a, b) => recordTime(b) - recordTime(a));
-
-  return [...picked, ...remaining].filter((record, index, all) => all.findIndex((item) => item.id === record.id) === index);
-}
-
-function recordTime(record: EvidenceRecord) {
-  const time = dateValue(record.published_at || record.checked_at);
-  return Number.isNaN(time) ? 0 : time;
-}
-
 function formatDate(value?: string | null) {
   if (!value) return "Undated";
   const date = parseDisplayDate(value);
@@ -172,9 +153,4 @@ function parseDisplayDate(value: string) {
   }
 
   return new Date(value);
-}
-
-function dateValue(value?: string | null) {
-  if (!value) return 0;
-  return parseDisplayDate(value).getTime();
 }
