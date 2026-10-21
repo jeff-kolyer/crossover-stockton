@@ -70,26 +70,27 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <section className="about-what-we-do">
           <div className="about-section-heading">
             <h2>What we do</h2>
-            <p>Technology gives us extraordinary capacity, yet local needs persist. AI helps us follow public evidence and find questions worth checking in the field.</p>
+            <p>We use AI and firsthand investigation to discover unmet needs, verify what actually works, and find practical ways to help.</p>
+            <p>We don't assume a service is effective simply because it exists. We investigate what is happening, what's missing, and what can be done.</p>
             <span className="about-see-note">AI helps us see <ArrowRight size={26} /></span>
-            <p><strong>Observe → Verify → Respond → Confirm</strong></p>
-            <p>Nothing is assumed to work. Everything can be investigated. Anything that works can be strengthened. Anything missing can become an opportunity to build.</p>
+            <p><strong>How Crossover works: Observe → Verify → Respond → Confirm</strong></p>
+            <p>We start with reality, not assumptions. Every action is an opportunity to learn what actually works.</p>
           </div>
           <div className="about-question-grid">
             <article>
               <Stars size={34} />
               <h3>What needs attention?</h3>
-              <p>We observe conditions and distinguish reports from verified needs.</p>
+              <p>We identify and investigate unmet needs.</p>
             </article>
             <article>
               <TrendingUp size={34} />
               <h3>What is changing?</h3>
-              <p>We check whether a response reached someone and what changed.</p>
+              <p>We verify what is working and what remains unresolved.</p>
             </article>
             <article>
               <UserRound size={34} />
               <h3>What can I do?</h3>
-              <p>We use effective services when available and help develop missing capabilities.</p>
+              <p>We help people investigate, respond, and build what's missing.</p>
             </article>
           </div>
         </section>
@@ -115,6 +116,8 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <p>We spend much of our lives absorbed in thought - our plans, identities, worries, wants, and distractions.</p>
             <p>Meanwhile, reality is right here.</p>
             <p><strong>The deeper problem is unconsciousness: not seeing what is in front of us, or what it asks of us.</strong></p>
+            <p>As AI and robots take on more necessary work, we have an opportunity to move from compulsory employment toward meaningful vocation.</p>
+            <p>Instead of organizing our lives around working, we can increasingly organize them around being: caring, creating, investigating, and connecting with reality.</p>
             <p>Crossover is one small attempt to pay attention, test what works, and act on what is missing.</p>
             <blockquote>What would happen if we saw clearly - and then did the next real thing?</blockquote>
             <div className="about-small-truths">
@@ -126,16 +129,17 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
 
           <article className="about-editorial-panel about-ai-panel">
             <h2>Why AI?</h2>
-            <p>There is already more public information than any person could reasonably follow. AI can help discover needs, connect resources, and remove friction. People still verify conditions and decide how to respond.</p>
+            <p>There is already more public information than any person could reasonably follow. AI gives us unprecedented ability to investigate needs, analyze evidence, connect people and resources, and reduce the friction between a problem and its solution.</p>
+            <p>Technology can help build a seamless infrastructure of care.</p>
             <ul>
-              <li><CheckCircle2 size={17} /> It watches public sources.</li>
-              <li><CheckCircle2 size={17} /> It notices changes.</li>
-              <li><CheckCircle2 size={17} /> It connects scattered information.</li>
-              <li><CheckCircle2 size={17} /> It helps maintain a current picture of local need.</li>
+              <li><CheckCircle2 size={17} /> It follows public sources.</li>
+              <li><CheckCircle2 size={17} /> It helps investigate changes.</li>
+              <li><CheckCircle2 size={17} /> It connects evidence, people, and resources.</li>
+              <li><CheckCircle2 size={17} /> It helps turn findings into practical action.</li>
             </ul>
             <div className="about-human-card">
               <Heart size={22} />
-              <strong>Then the human part begins.</strong>
+              <strong>But the human part remains essential.</strong>
               <p>To notice. To care. To verify. To show up.</p>
             </div>
           </article>
