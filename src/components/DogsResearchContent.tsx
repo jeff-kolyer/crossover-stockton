@@ -129,7 +129,7 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
 
   return <div className="work-page-content research-content">
     <Section title="At a glance" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
-      <p className="research-section-intro gap-mobile-body">A quick view of the problem, how the system handles it now, and what could change.</p>
+      <p className="research-section-intro gap-mobile-body">We're investigating how emerging technology could help Stockton's street dogs. First, we're examining the problem, the current response, and what needs to change.</p>
       <div className="research-glance-grid">
         <a className="research-glance-panel is-problem" href="#research-need" onClick={(event) => jump(event, "research-need")}>
           <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><h3>The problem</h3></div>

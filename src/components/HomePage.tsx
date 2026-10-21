@@ -75,7 +75,7 @@ const pageCopy = {
   home: {
     eyebrow: "",
     title: "See clearly. Act locally.",
-    text: "Crossover follows selected Stockton organizations to show what reality needs, who is responding, and how you can help today.",
+    text: "Crossover investigates how emerging AI, robotics, and human participation can solve real-world problems. We're starting in Stockton, learning what actually needs attention.",
   },
   reality: {
     eyebrow: "Reality",
@@ -353,7 +353,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>How Can I Help Today?</p>
           <h2>Find your way in.</h2>
-          <span>Checking a report or service is useful work. An attempted action does not mean a need was resolved.</span>
+          <span>{page === "action" ? "Help us establish what's real, discover what assistance is needed, and investigate how emerging technology and willing people could make a difference." : "Checking a report or service is useful work. An attempted action does not mean a need was resolved."}</span>
         </div>
         <div className="action-browser">
           {page === "action" && (

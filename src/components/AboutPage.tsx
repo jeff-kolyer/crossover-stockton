@@ -66,8 +66,8 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <section className="about-welcome" id="welcome">
             <div className="about-welcome-copy">
               <p className="about-eyebrow">About Crossover Stockton</p>
-              <h1>A better way to care for our community.</h1>
-              <p>We're starting in Stockton. We use AI, investigation, and human participation to understand what needs attention — and do something about it.</p>
+              <h1>Connecting emerging technology to real-world needs.</h1>
+              <p>AI agents, self-driving vehicles, and robotics are transforming work. Crossover investigates how these emerging capabilities — and the freedom they may create for people — can solve real problems.</p>
             </div>
             <div className="about-welcome-photo"><img src={aboutHeroImage} alt="AI-generated illustration of a waterfront promenade and downtown skyline at sunset" loading="eager" decoding="async" fetchPriority="high" /></div>
           </section>
@@ -75,46 +75,46 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
           <section className="about-content-section about-what" id="what-we-do">
             <div>
               <h2>What we do</h2>
-              <p>We investigate unmet needs, verify what actually works, and find practical ways to help.</p>
-              <p>We don't assume a service is effective simply because it exists. We look at what is happening, what's missing, and what can be done.</p>
+              <p>We investigate real-world needs to discover where emerging technology and willing people could make a difference.</p>
+              <p>Before proposing solutions, we examine available evidence, question assumptions, and investigate what is actually happening and what prevents needs from being met.</p>
             </div>
             <aside className="about-needs-panel">
               <Sprout size={28} aria-hidden="true" />
               <div>
                 <h3>Real people. Real needs.</h3>
-                <p>We focus on real situations in Stockton — people, animals, and neighborhoods — not just policies or plans.</p>
+                <p>We begin with real situations in Stockton, starting with dogs on the street, to discover what intelligence, technology, and human care could accomplish.</p>
               </div>
             </aside>
           </section>
 
           <section className="about-content-section about-method" id="how-it-works">
             <h2>How Crossover works</h2>
-            <p>We follow a simple, repeatable process to move from understanding to real-world impact.</p>
+            <p>We follow a simple process to understand a problem, identify constraints, and explore what new capabilities could change.</p>
             <ol className="about-step-grid">
-              <li><span className="about-step-number">1</span><div><Eye size={28} aria-hidden="true" /><h3>Observe</h3><p>We look at what is actually happening in people's lives and communities.</p></div></li>
-              <li><span className="about-step-number">2</span><div><Search size={28} aria-hidden="true" /><h3>Verify</h3><p>We investigate, check what works, and separate signal from noise.</p></div></li>
-              <li><span className="about-step-number">3</span><div><Users size={28} aria-hidden="true" /><h3>Respond</h3><p>We find practical ways to help and connect people with resources.</p></div></li>
-              <li><span className="about-step-number">4</span><div><ChartNoAxesColumnIncreasing size={28} aria-hidden="true" /><h3>Confirm</h3><p>We follow up, learn from results, and adjust based on what works.</p></div></li>
+              <li><span className="about-step-number">1</span><div><Eye size={28} aria-hidden="true" /><h3>Observe</h3><p>Examine reports and firsthand conditions to understand what's actually happening.</p></div></li>
+              <li><span className="about-step-number">2</span><div><Search size={28} aria-hidden="true" /><h3>Verify</h3><p>Check sources, investigate claims, and establish which needs remain unmet.</p></div></li>
+              <li><span className="about-step-number">3</span><div><Users size={28} aria-hidden="true" /><h3>Respond</h3><p>Explore how technology, resources, and willing people could address a verified need.</p></div></li>
+              <li><span className="about-step-number">4</span><div><ChartNoAxesColumnIncreasing size={28} aria-hidden="true" /><h3>Confirm</h3><p>Test possible responses, document outcomes, and learn what actually improves.</p></div></li>
             </ol>
           </section>
 
           <div className="about-philosophy-grid">
             <section className="about-content-section" id="from-working-to-being">
               <h2>From working to being</h2>
-              <p>As AI and robotics take on more necessary work, human life can increasingly be about meaningful vocation rather than compulsory employment.</p>
-              <p>We have an opportunity to move from a culture of overwork and distraction to one of caring, creating, investigating, and connecting with reality.</p>
-              <p>Crossover is one way to practice that shift in real life, starting here at home.</p>
+              <p>As AI and robotics perform more necessary work, people may gain greater freedom from compulsory employment and more opportunities to pursue meaningful vocations.</p>
+              <p>That freedom could mean more time for caring, creating, restoring the environment, helping animals, and connecting with the world around us.</p>
+              <p>Crossover explores how this technological transition could connect people and new capabilities to needs that remain unmet today.</p>
             </section>
             <section className="about-content-section" id="why-ai">
               <h2>Why AI?</h2>
-              <p>There is already more public information than any person could reasonably follow. AI gives us an unprecedented ability to:</p>
+              <p>AI already helps us research and analyze complex problems. Emerging agents, autonomous vehicles, and robotics could eventually help us act on what we discover.</p>
               <ul>
                 <li>Identify what needs attention.</li>
                 <li>Analyze evidence.</li>
                 <li>Connect people and resources.</li>
                 <li>Reduce the friction between a problem and its solution.</li>
               </ul>
-              <p className="about-ai-conclusion">AI helps us see. People make it real.</p>
+              <p className="about-ai-conclusion">Understand the need. Explore the technology. Test what works.</p>
             </section>
           </div>
 
@@ -122,7 +122,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <Users size={28} aria-hidden="true" />
             <div className="about-connect-copy">
               <h2>Get involved</h2>
-              <p>See what needs attention, find a meaningful way to help, or connect with Crossover.</p>
+              <p>Explore our current investigation, help establish what's real, or connect with Crossover to share firsthand knowledge.</p>
             </div>
             <div className="about-connect-actions">
               <a className="about-connect-primary" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs <ArrowRight size={17} aria-hidden="true" /></a>
