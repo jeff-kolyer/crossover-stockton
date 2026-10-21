@@ -271,7 +271,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
               </span>
               <span className="gap-card-action">
                 <span>
-                  <small>POSSIBLE NEXT STEP</small>
+                  <small>{gap.investigation_status === "investigating" ? "CURRENT FOCUS" : "POSSIBLE WAY TO HELP"}</small>
                   <strong>{compactUsefulNow(gap, useful)}</strong>
                 </span>
               </span>
