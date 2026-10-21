@@ -13428,15 +13428,15 @@ p {
 .about-welcome .about-eyebrow{margin:0 0 14px;color:#55656a;font-size:.76rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
 .about-welcome h1{max-width:600px;margin:0 0 14px;font-size:clamp(2.6rem,3.5vw,3.45rem);line-height:1.02}
 .about-welcome-copy>p:last-child{font-family:var(--font-serif);font-size:1.22rem;line-height:1.32}
-.about-welcome-photo{height:235px;overflow:hidden;border-radius:8px}
-.about-welcome img{display:block;width:100%;height:100%;object-fit:cover;object-position:70% center;transform:scale(1.35);transform-origin:70% center}
+.about-welcome-photo{height:265px;overflow:hidden;border-radius:8px}
+.about-welcome img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 15%;transform:scale(1.08);transform-origin:center top}
 .about-content-section{border-top:1px solid #dfe5df;padding:18px 0 0;margin-top:0}
 .about-what{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(260px,1fr);gap:34px;align-items:center}
 .about-what>div>p{max-width:730px}
 .about-needs-panel{display:flex;align-items:flex-start;gap:16px;border:1px solid #e0e9df;border-radius:8px;background:#f5f9f3;padding:16px}
 .about-needs-panel>svg,.about-connect>svg{flex:none;width:48px;height:48px;border-radius:50%;background:#e7f0e1;color:#1f6b34;padding:11px}
 .about-needs-panel h3{margin:0 0 6px;color:#174831;font-size:1rem;line-height:1.25}
-.about-needs-panel p{font-size:.9rem;line-height:1.4}
+.about-needs-panel p{font-size:1rem;line-height:1.55}
 .about-method{margin-top:16px}
 .about-method>p{margin-bottom:14px}
 .about-step-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:36px;margin:0;padding:0;list-style:none}

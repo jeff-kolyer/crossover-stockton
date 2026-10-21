@@ -37,7 +37,7 @@ export function gapWorkSummary(item: WorkRecord): { description: string; progres
 
   if (item.page_kind === "activity") {
     const activity = records
-      .filter((record) => record.work_id === item.id && (record.record_type === "field_report" || record.record_type === "activity"))
+      .filter((record) => record.work_id === item.id && (record.record_type === "field_report" || record.record_type === "activity") && record.outcome?.status !== "planned")
       .sort((a, b) => {
         const dateOrder = (b.occurred_at ?? b.recorded_at ?? "").localeCompare(a.occurred_at ?? a.recorded_at ?? "");
         return dateOrder || Number(b.record_type === "field_report") - Number(a.record_type === "field_report");

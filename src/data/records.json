@@ -37,15 +37,14 @@
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": [],
     "published_at": null,
-    "planned_for": "2026-10-20",
     "recorded_at": "2026-10-20",
     "record_type": "activity",
     "trust": "crossover_source",
     "title": "Check reported stray-dog locations",
-    "summary": "Plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. Locations may change with safe access or current evidence. No visit or observation is recorded yet.",
+    "summary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented.",
     "source": { "publisher": "Crossover Stockton", "type": "fieldwork_plan" },
     "evidence_status": "planned_not_observed",
-    "outcome": { "status": "planned", "summary": "Planned for October 20, 2026. Proposed visits only; no field findings or report yet.", "as_of": "2026-10-20" },
+    "outcome": { "status": "planned", "summary": "Plan recorded October 20, 2026; visit date to be confirmed. Proposed visits only; no completed observation or field report is documented.", "as_of": "2026-10-20" },
     "planned_sites": [
       {
         "label": "Priority 1 — Louis Park",

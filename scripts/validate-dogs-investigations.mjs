@@ -33,7 +33,8 @@ for (const investigation of investigationData.active_investigations) {
   if (investigation.care_coordination?.decentralized_protocol_concept?.status !== "concept_only" || investigation.care_coordination?.decentralized_protocol_concept?.steps?.length !== 5) errors.push(`${investigation.id}: decentralized care protocol must remain a five-step concept`);
   if (investigation.fieldwork_plan) {
     const plan = recordById.get(investigation.fieldwork_plan.activity_record_id);
-    if (plan?.outcome?.status !== "planned" || !plan.planned_for || plan.occurred_at) errors.push(`${investigation.id}: fieldwork plan must be planned, not observed`);
+    if (plan?.outcome?.status !== "planned" || plan?.occurred_at || plan?.report_record_ids?.length) errors.push(`${investigation.id}: fieldwork plan must be planned, not observed`);
+    if (plan?.planned_for && (!/^\d{4}-\d{2}-\d{2}$/.test(plan.planned_for) || Number.isNaN(Date.parse(plan.planned_for)))) errors.push(`${investigation.id}: invalid planned visit date`);
     if (!work?.record_ids?.includes(plan?.id) && !data("work").some((item) => item.activity_record_ids?.includes(plan?.id))) errors.push(`${investigation.id}: fieldwork plan not connected to a work page`);
     if (!investigation.fieldwork_plan.observation_fields?.length || !investigation.fieldwork_plan.result_options?.includes("No dogs observed") || !investigation.fieldwork_plan.report_outline?.trim()) errors.push(`${investigation.id}: incomplete observation template`);
     for (const site of plan?.planned_sites ?? []) if (site.location_id && !locations.some((location) => location.id === site.location_id)) errors.push(`${investigation.id}: unknown planned site ${site.location_id}`);

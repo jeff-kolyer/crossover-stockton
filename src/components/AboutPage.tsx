@@ -69,7 +69,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
               <h1>A better way to care for our community.</h1>
               <p>We're starting in Stockton. We use AI, investigation, and human participation to understand what needs attention — and do something about it.</p>
             </div>
-            <div className="about-welcome-photo"><img src={aboutHeroImage} alt="A volunteer sharing groceries with a neighbor on a tree-lined street" loading="eager" decoding="async" fetchPriority="high" /></div>
+            <div className="about-welcome-photo"><img src={aboutHeroImage} alt="Two neighbors looking at a tablet with a dog beside them on a sunlit residential street" loading="eager" decoding="async" fetchPriority="high" /></div>
           </section>
 
           <section className="about-content-section about-what" id="what-we-do">

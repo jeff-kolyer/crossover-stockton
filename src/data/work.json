@@ -9,7 +9,7 @@
     "type": "research",
     "started_at": "2026-08-20",
     "completed_at": "2026-08-27",
-    "updated_at": "2026-10-19",
+    "updated_at": "2026-10-20",
     "last_reviewed_at": "2026-10-19",
     "research_data_id": "dogs-research-baseline-2026-10",
     "record_ids": [
@@ -21,8 +21,8 @@
     ],
     "page_kind": "research",
     "next_step": {
-      "title": "Refresh the public-source review",
-      "summary": "Use AI to review new local evidence when it becomes available, retaining sources and distinguishing proposals from operating services."
+      "title": "Check source context for the first field visit",
+      "summary": "Review the published Louis Park and Stanislaus Street accounts and recent map sightings before selecting a safe public observation area. Treat these reports as leads, not verified current conditions."
     },
     "open_questions": [
       "What new local evidence changes the starting picture?"
@@ -76,8 +76,7 @@
     "next_step": {
       "title": "Visit reported locations",
       "status": "planned",
-      "planned_for": "2026-10-20",
-      "summary": "Prioritize safe public-area checks around Louis Park and the Stanislaus Street corridor. Adjust locations based on access and current evidence. Observe conditions, document any animals encountered, and publish firsthand findings only after a visit."
+      "summary": "First confirm whether the October 20 visit occurred; no completed street-condition observation is documented. Review the Louis Park and Stanislaus Street reports and recent unverified sightings, choose safe public areas, and record what is and is not observed. Schedule a visit when ready and publish firsthand findings only after it occurs."
     },
     "open_questions": [
       "Where do dogs get stuck between a street report and safe placement, and why?",
@@ -219,8 +218,7 @@
     "next_step": {
       "title": "Check reported stray-dog locations",
       "status": "planned",
-      "planned_for": "2026-10-20",
-      "summary": "Prioritize public-area observation around Louis Park and reconnaissance along the Stanislaus Street corridor. Change locations if safe access or current evidence warrants it. Record observations without assuming any dog outdoors is stray or neglected."
+      "summary": "Confirm whether the October 20 visit occurred before marking any fieldwork complete. If it did not, schedule safe public-area observation around Louis Park and the Stanislaus Street corridor after checking current evidence. Record findings, including no dogs observed, without assuming any dog outdoors is stray or neglected."
     },
     "open_questions": [
       "What does getting started require?",
