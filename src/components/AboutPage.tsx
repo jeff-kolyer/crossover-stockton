@@ -106,8 +106,14 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             </article>
           </div>
           <div className="about-process-row">
-            <p><strong>How Crossover works: Observe → Verify → Respond → Confirm</strong></p>
+            <h3>How Crossover works</h3>
             <p>We start with reality, not assumptions. Every action is an opportunity to learn what actually works.</p>
+            <ol>
+              <li><span aria-hidden="true">1</span>Observe</li>
+              <li><span aria-hidden="true">2</span>Verify</li>
+              <li><span aria-hidden="true">3</span>Respond</li>
+              <li><span aria-hidden="true">4</span>Confirm</li>
+            </ol>
           </div>
         </section>
 
