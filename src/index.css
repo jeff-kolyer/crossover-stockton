@@ -13251,7 +13251,7 @@ p {
 .investigation-locations .investigation-section-heading{display:flex;align-items:center;gap:14px;margin-bottom:10px}
 .investigation-locations .investigation-section-heading h2{margin:0;color:var(--map-navy)}
 .investigation-locations-heading-icon{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:50%;background:#eaf5fc;color:var(--map-blue)}
-.investigation-locations-intro{max-width:850px;margin:0 0 20px;color:#4f6070;font-size:var(--type-body-size);line-height:var(--type-body-leading)}
+.investigation-locations-intro{margin:0 0 20px;color:#4f6070;font-size:var(--type-body-size);line-height:var(--type-body-leading)}
 .investigation-locations-map{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,27%);gap:12px;min-width:0}
 .investigation-map-canvas{position:relative;min-width:0}
 .investigation-map-frame{position:relative;overflow:hidden;border:1px solid #e1e9e8;border-radius:12px;background:#f1f5e7}
