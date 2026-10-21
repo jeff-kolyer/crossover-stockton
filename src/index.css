@@ -2391,7 +2391,7 @@ p {
 .about-process-row li:not(:last-child)::after {
   position: absolute;
   top: 8px;
-  right: -25px;
+  right: -12px;
   color: #1f6b34;
   content: "→";
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
