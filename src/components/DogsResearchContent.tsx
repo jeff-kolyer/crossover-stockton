@@ -129,10 +129,10 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
 
   return <div className="work-page-content research-content">
     <Section title="At a glance" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
-      <p className="research-section-intro gap-mobile-body">We're investigating how emerging technology could help Stockton's street dogs. First, we're examining the problem, the current response, and what needs to change.</p>
+      <p className="research-section-intro gap-mobile-body">We're investigating how emerging technology could help Stockton's street dogs. First, we're examining reported conditions, the current response, and what remains uncertain.</p>
       <div className="research-glance-grid">
         <a className="research-glance-panel is-problem" href="#research-need" onClick={(event) => jump(event, "research-need")}>
-          <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><h3>The problem</h3></div>
+          <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><h3>What public sources report</h3></div>
           <p className="research-glance-description">Stray intake dominates.</p>
           <MetricSummary items={intakeMetrics} compact />
           <span className="research-glance-link">Explore the need <ArrowRight size={15} aria-hidden="true" /></span>
