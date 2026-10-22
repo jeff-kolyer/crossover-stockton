@@ -77,8 +77,9 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork }: AboutPage
           <section className="about-content-section about-what" id="what-we-do">
             <div>
               <h2>What we do</h2>
-              <p>AI can identify potential problems and suggest solutions. But public information doesn't always reveal what's actually happening—or what's needed.</p>
-              <p>Even with extraordinary technology and resources, we may not know where or how to apply them.</p>
+              <p><strong>We investigate problems so we can engineer solutions.</strong></p>
+              <p>Crossover uses AI, public information, firsthand investigation, and human participation to understand unmet needs and the barriers preventing them from being addressed.</p>
+              <p>By making those barriers visible and verifiable, we can develop practical solutions, test whether they work, and improve them until real needs are met.</p>
               <p><strong>Consider Stockton's street dogs.</strong></p>
               <ul className="about-question-list">
                 <li>If we had unlimited resources to help, would we know which dogs need care and where they are?</li>
