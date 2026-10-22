@@ -113,7 +113,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork }: AboutPage
               <h2>From working to being</h2>
               <p>As AI and robotics take on more necessary work, people may gain greater freedom to pursue meaningful vocations rather than working primarily to earn a living.</p>
               <p>That could mean more time for caring for animals, helping neighbors, restoring the environment, creating, and connecting with the world around us.</p>
-              <p>Crossover explores how this potential shift from compulsory work to meaningful participation could help meet real needs.</p>
+              <p>Crossover explores how the shift from compulsory work to meaningful participation could help meet real needs—by removing the barriers between people who want to care and those who need care.</p>
             </section>
             <section className="about-content-section" id="why-ai">
               <h2>Why AI?</h2>
