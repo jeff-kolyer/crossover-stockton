@@ -120,6 +120,7 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
   const coverage = intakeTotal && research.coverage[intakeTotal.coverage_id as keyof typeof research.coverage];
   const period = intakeTotal ? `Calendar year ${intakeTotal.period_start.slice(0, 4)}` : "Reporting period unknown";
   const publisher = intakeTotal ? recordById.get(intakeTotal.source_record_id)?.source.publisher : undefined;
+  const recordsRequest = recordById.get("crossover-2026-10-20-sas-field-call-records-request");
   const reviewRecords = (item.record_ids ?? []).map((id) => recordById.get(id)).filter((record): record is EvidenceRecord => Boolean(record)).sort((a, b) => (b.checked_at || b.recorded_at || b.published_at || "").localeCompare(a.checked_at || a.recorded_at || a.published_at || ""));
   const selectedProjects = research.planned_improvements.project_ids.map((id) => projects.find((project) => project.id === id)).filter((project): project is CapacityProject => Boolean(project));
 
@@ -133,7 +134,7 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       <div className="research-glance-grid">
         <a className="research-glance-panel is-problem" href="#research-need" onClick={(event) => jump(event, "research-need")}>
           <div className="research-glance-heading"><PawPrint size={29} aria-hidden="true" /><h3>What public sources report</h3></div>
-          <p className="research-glance-description">Stray intake dominates.</p>
+          <p className="research-glance-description">Most documented intake events were classified as stray; the current street population is unknown.</p>
           <MetricSummary items={intakeMetrics} compact />
           <span className="research-glance-link">Explore the need <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
@@ -160,6 +161,18 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
 
     <Section id="research-need" title="The Need in Detail" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">The shelter's annual intake report shows the scale and mix of dogs entering its care.</p>
+      <aside className="research-signal research-measurement">
+        <h3>Can we measure the need?</h3>
+        <MetricSummary items={[{ label: "2024 stray intake events · SAS multi-jurisdiction service area", value: stray?.value }, { label: "Dogs currently on Stockton streets · no verified population estimate", value: undefined }]} />
+        <p className="gap-mobile-body">Shelter intake events are not a Stockton-city-only count or an estimate of dogs currently on the streets.</p>
+        <p className="gap-mobile-body"><strong>What we're trying to establish:</strong> Can Animal Services field calls, rescue records, and repeated firsthand observations show where dogs need care and how often requests are resolved?</p>
+        {recordsRequest && <p className="gap-mobile-body">Field-call records requested {formatDate(recordsRequest.occurred_at)}. {recordsRequest.outcome?.summary}</p>}
+        <div className="research-sources">
+          {stray && <SourceLink recordId={stray.source_record_id} label="Official 2024 kennel report" />}
+          {recordsRequest?.work_id && <a className="research-source" href={`/work/${recordsRequest.work_id}/#${recordsRequest.id}`}>View request activity <ArrowRight size={14} aria-hidden="true" /></a>}
+          <a className="research-source" href="/work/dogs-map-placement-barriers/#investigation-questions">Explore the investigation <ArrowRight size={14} aria-hidden="true" /></a>
+        </div>
+      </aside>
       <div className="research-detail-grid"><div className="research-detail-copy">
         <p className="research-scope">{publisher || "Stockton Animal Services"} · {period} · Multi-jurisdiction service area</p>
         <MetricSummary items={intakeMetrics} />

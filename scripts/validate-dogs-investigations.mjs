@@ -29,6 +29,11 @@ for (const investigation of investigationData.active_investigations) {
   if (!investigation.last_updated_at || !investigation.next_verification_step) errors.push(`${investigation.id}: missing update or verification step`);
   if (!investigation.public_approach?.trim() || !investigation.safeguards?.length) errors.push(`${investigation.id}: missing public approach or detailed safeguards`);
   if (investigation.records_request && (!investigation.records_request.submitted_at || !investigation.records_request.review_plan?.trim())) errors.push(`${investigation.id}: incomplete records request`);
+  if (investigation.records_request) {
+    const request = recordById.get(investigation.records_request.activity_record_id);
+    const activityPage = data("work").find((item) => item.id === request?.work_id && item.activity_record_ids?.includes(request.id));
+    if (request?.record_type !== "activity" || !activityPage) errors.push(`${investigation.id}: records request must link to a published activity record`);
+  }
   if (investigation.care_coordination && (!investigation.care_coordination.central_question?.trim() || !investigation.care_coordination.participation_scope?.trim() || !investigation.care_coordination.questions?.length || !investigation.care_coordination.potential_outcome?.trim() || !investigation.care_coordination.public_source_review?.checked_at || !investigation.care_coordination.public_source_review?.sources?.length)) errors.push(`${investigation.id}: incomplete care coordination thread`);
   if (investigation.care_coordination?.decentralized_protocol_concept?.status !== "concept_only" || investigation.care_coordination?.decentralized_protocol_concept?.steps?.length !== 5) errors.push(`${investigation.id}: decentralized care protocol must remain a five-step concept`);
   if (investigation.fieldwork_plan) {
@@ -40,7 +45,7 @@ for (const investigation of investigationData.active_investigations) {
     for (const site of plan?.planned_sites ?? []) if (site.location_id && !locations.some((location) => location.id === site.location_id)) errors.push(`${investigation.id}: unknown planned site ${site.location_id}`);
   }
   if (new Set(investigation.questions.map((question) => question.id)).size !== investigation.questions.length) errors.push(`${investigation.id}: duplicate question ID`);
-  for (const question of investigation.questions) if (!["HeartPulse", "Utensils", "Users"].includes(question.icon)) errors.push(`${investigation.id}: unsupported question icon ${question.icon}`);
+  for (const question of investigation.questions) if (!["HeartPulse", "Search", "Utensils", "Users"].includes(question.icon)) errors.push(`${investigation.id}: unsupported question icon ${question.icon}`);
   references(investigation.id, investigation.evidence_record_ids, recordIds, "evidence record");
   references(investigation.id, investigation.related_barrier_thread_ids, threadIds, "thread");
   references(investigation.id, investigation.related_project_ids, projectIds, "project");

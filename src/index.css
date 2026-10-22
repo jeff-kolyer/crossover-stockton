@@ -13186,6 +13186,7 @@ p {
 .research-signal{max-width:840px;margin:18px 0;padding:18px 20px;background:#f6f8f7;border-left:3px solid #9bb1a8}
 .research-signal h3{margin:0 0 7px;font-size:1rem;color:#111b20}
 .research-signal p{margin:0 0 10px}
+.research-measurement .research-metrics{grid-template-columns:repeat(2,minmax(0,1fr));margin:6px 0 14px}
 .research-limitation{max-width:800px;margin:22px 0 0;color:#66736d!important;font-size:.88rem!important}
 .research-project-list{border-top:1px solid #dce3df}
 .research-project{padding:22px 0;border-bottom:1px solid #dce3df}

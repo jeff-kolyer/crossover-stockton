@@ -97,7 +97,7 @@
       "why": "Checks whether reported conditions persist",
       "availability": "Observation activity available"
     },
-    "why_it_helps": "A short, documented visit can distinguish a past report from current conditions and identify what remains uncertain.",
+    "why_it_helps": "Checking a dated report tests whether it reflects current conditions and identifies what remains uncertain; one visit cannot measure neighborhood-wide need.",
     "what_to_expect": [
       "Choose a previously reported general area using the dogs investigation and its field observation procedure.",
       "Observe from a safe public location. Do not approach, pursue, or handle dogs.",
@@ -186,7 +186,7 @@
     "why_it_helps": "Stockton Streetdogs' feeding operation is documented, but Crossover has not established public participation instructions, supply needs, or safe volunteer roles.",
     "what_to_expect": [
       "Review the investigation's Community Care Coordination questions and the published account of Stockton Streetdogs' feeding work.",
-      "Ask responders what food and water support already operates, what supplies are useful, and whether residents can safely join established work.",
+      "Ask responders whether a willing resident can find a verified, safe way to help with existing feeding or water care, and what information, coordination, or capacity is missing if they cannot.",
       "Independent feeding sites, new routes, and volunteer assignments are not currently verified opportunities."
     ],
     "provider_label": "Crossover community care investigation",

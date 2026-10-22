@@ -35,7 +35,7 @@ export function WorkSectionNav({ items }: { items: WorkSectionNavItem[] }) {
         if (!clickedSectionReached.current) return;
         clickedId.current = null;
       }
-      const threshold = Math.min(window.innerHeight * 0.2, 160);
+      const threshold = Math.min(window.innerHeight * 0.4, 360);
       const atBottom = window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 2;
       const current = atBottom ? sections[sections.length - 1] : sections.filter((section) => section.getBoundingClientRect().top <= threshold).at(-1) ?? sections[0];
       setActiveId(current.id);

@@ -8,9 +8,15 @@
       "gap_id": "dogs-safe-placement",
       "title": "Does the response to reported street dogs work?",
       "status": "in_progress",
-      "introduction": "We're checking where dogs are reported, which reports can be verified, what happens after a report, and whether actual care reaches animals with unmet needs.",
+      "introduction": "Before we can determine whether dogs are receiving adequate care, we need to establish where they are, which reports reflect current conditions, and what happens when someone tries to help. We're investigating both the visibility of the need and the response to it.",
       "purpose": "Not every dog can immediately be rescued or placed in a home. Until that happens, food, water, emergency medical attention, and people willing to monitor their wellbeing can prevent suffering and potentially save lives.",
       "questions": [
+        {
+          "id": "where-dogs-need-help",
+          "icon": "Search",
+          "title": "Where are the dogs that need help?",
+          "description": "Can we establish how many free-roaming dogs there are, where they are reported, which reports are current, and whether their needs are already being met? Examine Animal Services field calls, public reports, responder knowledge, and repeated firsthand observations."
+        },
         {
           "id": "severity-of-suffering",
           "icon": "HeartPulse",
@@ -68,6 +74,7 @@
         "report_outline": "After a visit, publish a short field report stating the general areas visited, what was and was not seen, what was learned, what remains uncertain, and the next action. A single visit does not establish neighborhood-wide conditions. No dogs observed is a valid finding."
       },
       "records_request": {
+        "activity_record_id": "crossover-2026-10-20-sas-field-call-records-request",
         "submitted_at": "2026-10-20",
         "status": "Submitted — awaiting response",
         "summary": "Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include dates, general areas, complaint categories, response dispositions, and closure statuses where maintained.",
@@ -88,7 +95,8 @@
           ]
         },
         "questions": [
-          "Which responding organizations coordinate food and water, and do they publish instructions for residents?",
+          "If a resident wants to help feed street dogs, can anyone direct them to a verified, safe, existing opportunity? If not, what information, coordination, or capacity is missing?",
+        "Which responding organizations coordinate food and water, and do they publish instructions for residents?",
           "Can residents join established feeding or supply routes without duplicating existing work?",
           "What supplies are useful, and where should they be delivered?",
           "Who can evaluate medical urgency and arrange veterinary referrals?",

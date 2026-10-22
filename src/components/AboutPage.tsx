@@ -77,15 +77,15 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork }: AboutPage
           <section className="about-content-section about-what" id="what-we-do">
             <div>
               <h2>What we do</h2>
-              <p>AI can identify potential problems and suggest solutions. But public information doesn't always tell us what actually happens in the real world.</p>
-              <p>We begin by investigating, rather than assuming we already know the answers.</p>
-              <p><strong>We ask questions like:</strong></p>
+              <p>AI can identify potential problems and suggest solutions. But public information doesn't always reveal what's actually happening—or what's needed.</p>
+              <p>Even with extraordinary technology and resources, we may not know where or how to apply them.</p>
+              <p><strong>Consider Stockton's street dogs.</strong></p>
               <ul className="about-question-list">
-                <li>What actually happens when someone tries to volunteer?</li>
-                <li>Which barriers are real, and which are assumptions?</li>
-                <li>Which attempts to help succeed, fail, or lead nowhere?</li>
+                <li>If we had unlimited resources to help, would we know which dogs need care and where they are?</li>
+                <li>If that information exists, who has it, and can willing people use it?</li>
+                <li>If it doesn't exist, what's preventing us from finding out?</li>
               </ul>
-              <p>Our own attempts to help become part of the evidence. We document what happens, discover barriers to care, and explore what could change.</p>
+              <p><strong>Either way, the investigation produces valuable knowledge.</strong> Our own attempts to help become part of the evidence, revealing what works, what remains unknown, and where care may break down.</p>
             </div>
             <aside className="about-needs-panel">
               <Sprout size={28} aria-hidden="true" />

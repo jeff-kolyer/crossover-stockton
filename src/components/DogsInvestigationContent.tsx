@@ -14,7 +14,7 @@ const projects = projectsData as CapacityProject[];
 const recordById = new Map(records.map((record) => [record.id, record]));
 const projectById = new Map(projects.map((project) => [project.id, project]));
 const mapSourceById = new Map(locationsData.map((location) => [location.id, location.source_url]));
-const questionIcons = { HeartPulse, Utensils, Users };
+const questionIcons = { HeartPulse, Search, Utensils, Users };
 const evidenceLabels: Record<string, string> = {
   "Organization report": "Organization reports",
   "Published local report": "Published reporting",
@@ -67,9 +67,10 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       <p className="gap-mobile-body"><strong>{investigation.records_request.status}</strong> · {investigation.records_request.submitted_at}</p>
       <p className="gap-mobile-body">{investigation.records_request.summary}</p>
       <p className="gap-mobile-body"><strong>Next: Review Animal Services field-call records.</strong> Awaiting response. {investigation.records_request.review_plan}</p>
+      {recordById.get(investigation.records_request.activity_record_id) && <a className="investigation-source" href={`/work/dogs-direct-field-work/#${investigation.records_request.activity_record_id}`}>View records request activity <ArrowRight size={14} aria-hidden="true" /></a>}
     </InvestigationSection>}
 
-    {investigation.care_coordination && <InvestigationSection title={investigation.care_coordination.title} icon={<Utensils size={20} aria-hidden="true" />} card>
+    {investigation.care_coordination && <InvestigationSection id="investigation-methods" title={investigation.care_coordination.title} icon={<Utensils size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body"><strong>Central question:</strong> {investigation.care_coordination.central_question}</p>
       <p className="gap-mobile-body">{investigation.care_coordination.participation_scope} Feeding coverage and unmet needs have not been established.</p>
       <p className="gap-mobile-body"><strong>Public pages checked {investigation.care_coordination.public_source_review.checked_at}:</strong> {investigation.care_coordination.public_source_review.summary}</p>
@@ -85,7 +86,7 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       <ul className="investigation-methods">{investigation.participation_roles.map((role) => <li key={role.name}><strong>{role.name} · {role.state[0].toUpperCase() + role.state.slice(1)}</strong> — {role.purpose}{role.action_id ? <> · <a href="/action/">See actions</a></> : null}</li>)}</ul>
     </InvestigationSection> : null}
 
-    <InvestigationSection id="investigation-methods" title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
+    <InvestigationSection title="How we'll investigate" icon={<Search size={20} aria-hidden="true" />} card>
       <p className="gap-mobile-body">{investigation.method_summary}</p>
       <ul className="investigation-methods">{investigation.methods.map((method) => <li key={method}>{method}</li>)}</ul>
       <p className="investigation-approach gap-mobile-body"><strong>Our approach</strong> {investigation.public_approach}</p>

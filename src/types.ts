@@ -260,11 +260,11 @@ export interface ActiveInvestigation {
   status: "preparing_fieldwork" | "in_progress" | "completed";
   introduction: string;
   purpose: string;
-  questions: Array<{ id: string; icon: "HeartPulse" | "Utensils" | "Users"; title: string; description: string }>;
+  questions: Array<{ id: string; icon: "HeartPulse" | "Search" | "Utensils" | "Users"; title: string; description: string }>;
   method_summary: string;
   methods: string[];
   fieldwork_plan?: { activity_record_id: string; observation_fields: string[]; result_options: string[]; report_outline: string };
-  records_request?: { submitted_at: string; status: string; summary: string; review_plan: string };
+  records_request?: { activity_record_id: string; submitted_at: string; status: string; summary: string; review_plan: string };
   care_coordination?: { title: string; central_question: string; participation_scope: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; decentralized_protocol_concept: { status: "concept_only"; steps: string[]; note: string }; potential_capabilities?: string[]; capability_note?: string; potential_outcome: string };
   participation_roles?: Array<{ name: string; purpose: string; state: "available" | "investigating" | "proposed"; action_id?: string }>;
   safeguards: string[];
