@@ -27,6 +27,16 @@ for (const investigation of investigationData.active_investigations) {
   if (investigation.gap_id !== investigationData.gap_id) errors.push(`${investigation.id}: gap mismatch`);
   if (!["preparing_fieldwork", "in_progress", "completed"].includes(investigation.status)) errors.push(`${investigation.id}: invalid status`);
   if (!investigation.last_updated_at || !investigation.next_verification_step) errors.push(`${investigation.id}: missing update or verification step`);
+  if (investigation.verification_avenues?.length !== 4 || investigation.verification_avenues.some((avenue) => !avenue.title?.trim() || !avenue.description?.trim())) errors.push(`${investigation.id}: expected four complete verification avenues`);
+  if (investigation.contact_plan) {
+    const contacts = investigation.contact_plan.organizations ?? [];
+    if (!investigation.contact_plan.intro?.trim() || !investigation.contact_plan.shared_checks?.length || contacts.length !== 4 || new Set(contacts.map((contact) => contact.name)).size !== contacts.length) errors.push(`${investigation.id}: incomplete contact plan`);
+    for (const contact of contacts) {
+      if (!contact.name?.trim() || !contact.status?.trim() || !contact.questions?.length || !contact.source_links?.length) errors.push(`${investigation.id}: incomplete contact entry ${contact.name}`);
+      references(contact.name, contact.record_ids, recordIds, "contact record");
+      for (const source of contact.source_links ?? []) try { if (new URL(source.url).protocol !== "https:") throw new Error(); } catch { errors.push(`${contact.name}: invalid source URL`); }
+    }
+  } else errors.push(`${investigation.id}: missing contact plan`);
   if (!investigation.public_approach?.trim() || !investigation.safeguards?.length) errors.push(`${investigation.id}: missing public approach or detailed safeguards`);
   if (investigation.records_request && (!investigation.records_request.submitted_at || !investigation.records_request.review_plan?.trim())) errors.push(`${investigation.id}: incomplete records request`);
   if (investigation.records_request) {

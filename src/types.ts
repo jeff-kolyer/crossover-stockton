@@ -261,9 +261,9 @@ export interface ActiveInvestigation {
   introduction: string;
   purpose: string;
   questions: Array<{ id: string; icon: "ClipboardList" | "HeartPulse" | "MapPin" | "Package" | "Users"; title: string; description: string }>;
-  method_summary: string;
-  methods: string[];
+  verification_avenues: Array<{ title: string; description: string }>;
   fieldwork_plan?: { activity_record_id: string; observation_fields: string[]; result_options: string[]; report_outline: string };
+  contact_plan?: { intro: string; shared_checks: string[]; organizations: Array<{ name: string; status: string; questions: string[]; record_ids: string[]; source_links: Array<{ label: string; url: string }> }> };
   records_request?: { activity_record_id: string; submitted_at: string; status: string; summary: string; review_plan: string };
   care_coordination?: { title: string; central_question: string; participation_scope: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; decentralized_protocol_concept: { status: "concept_only"; steps: string[]; note: string }; potential_capabilities?: string[]; capability_note?: string; potential_outcome: string };
   participation_roles?: Array<{ name: string; purpose: string; state: "available" | "investigating" | "proposed"; action_id?: string }>;

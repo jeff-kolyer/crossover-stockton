@@ -2,7 +2,7 @@
   {
     "id": "dogs-public-source-review",
     "gap_id": "dogs-safe-placement",
-    "title": "Research review",
+    "title": "Public Sources Overview",
     "summary": "Publicly available evidence about the dog-placement gap.",
     "gap_summary": "Reviewing shelter data, rescue outcomes, and improvements that could expand care.",
     "status": "in_progress",
@@ -33,8 +33,8 @@
   {
     "id": "dogs-map-placement-barriers",
     "gap_id": "dogs-safe-placement",
-    "title": "Evidence, Mapping & Field Verification",
-    "summary": "We're tracing reported street-dog needs from first signal to firsthand verification, response, and care.",
+    "title": "Understanding the Need",
+    "summary": "We're checking public reports against records, field observations, and conversations to understand street dogs' needs and the care available.",
     "gap_summary": "Checking which reports reflect current needs, how care reaches dogs, and where the response breaks down.",
     "status": "in_progress",
     "type": "investigation",
@@ -200,7 +200,7 @@
   {
     "id": "dogs-direct-field-work",
     "gap_id": "dogs-safe-placement",
-    "title": "Direct conversations and field visits",
+    "title": "Direct Conversations and Field Visits",
     "summary": "We're contacting local responders and trying ways to help firsthand.",
     "gap_summary": "Contacting responders, participating firsthand, and documenting what we learn.",
     "status": "in_progress",

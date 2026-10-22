@@ -32,12 +32,15 @@ const logoLight = "/images/logo_light.webp";
 const logoDark = "/images/logo_dark.webp";
 const investigationNavItems: WorkSectionNavItem[] = [
   { id: "investigation-questions", label: "Focus", icon: Search },
+  { id: "investigation-methods", label: "Approach", icon: ListFilter },
+  { id: "field-observation-procedure", label: "Fieldwork", icon: Route },
+  { id: "investigation-contacts", label: "Contacts", icon: Users },
+  { id: "investigation-records-request", label: "Records request", icon: FileText },
   { id: "field-observation-map", label: "Map", icon: MapPin },
-  { id: "investigation-methods", label: "Method", icon: ListFilter },
   { id: "investigation-knowledge", label: "Evidence", icon: ChartNoAxesColumnIncreasing },
-  { id: "investigation-outcomes", label: "Outcomes", icon: Route },
   { id: "investigation-findings", label: "Findings", icon: CheckCircle2 },
-  { id: "investigation-records", label: "Records", icon: FileText },
+  { id: "investigation-outcomes", label: "Responses", icon: Network },
+  { id: "investigation-records", label: "Archive", icon: ClipboardList },
 ];
 const researchNavItems: WorkSectionNavItem[] = [
   { id: "research-whats-new", label: "What's New", icon: Sparkles },
