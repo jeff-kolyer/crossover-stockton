@@ -231,7 +231,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         <div className="section-intro">
           <p>AI surfaced through public information</p>
           <h2>Potential unmet needs</h2>
-          <span>AI has surfaced potential unmet needs in Stockton through public information. We're investigating street dog care first: what's actually happening, what prevents care, and what people can do about it. We have not verified every assumption or determined each need's severity.</span>
+          <span>AI has surfaced potential unmet needs in Stockton through public information. We have not verified every assumption or determined each need's severity.</span>
           <small className="gap-status-guide"><span><InvestigationStatusIcon status="investigating" size={16} /> Investigating: active Crossover work.</span><span><InvestigationStatusIcon status="identified" size={16} /> Identified: not yet investigated by Crossover.</span></small>
         </div>
         <div className="gap-card-grid">
