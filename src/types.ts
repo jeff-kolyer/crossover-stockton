@@ -260,7 +260,7 @@ export interface ActiveInvestigation {
   status: "preparing_fieldwork" | "in_progress" | "completed";
   introduction: string;
   purpose: string;
-  questions: Array<{ id: string; icon: "HeartPulse" | "Search" | "Utensils" | "Users"; title: string; description: string }>;
+  questions: Array<{ id: string; icon: "ClipboardList" | "HeartPulse" | "MapPin" | "Package" | "Users"; title: string; description: string }>;
   method_summary: string;
   methods: string[];
   fieldwork_plan?: { activity_record_id: string; observation_fields: string[]; result_options: string[]; report_outline: string };

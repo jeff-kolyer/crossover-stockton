@@ -45,7 +45,7 @@ for (const investigation of investigationData.active_investigations) {
     for (const site of plan?.planned_sites ?? []) if (site.location_id && !locations.some((location) => location.id === site.location_id)) errors.push(`${investigation.id}: unknown planned site ${site.location_id}`);
   }
   if (new Set(investigation.questions.map((question) => question.id)).size !== investigation.questions.length) errors.push(`${investigation.id}: duplicate question ID`);
-  for (const question of investigation.questions) if (!["HeartPulse", "Search", "Utensils", "Users"].includes(question.icon)) errors.push(`${investigation.id}: unsupported question icon ${question.icon}`);
+  for (const question of investigation.questions) if (!["ClipboardList", "HeartPulse", "MapPin", "Package", "Users"].includes(question.icon)) errors.push(`${investigation.id}: unsupported question icon ${question.icon}`);
   references(investigation.id, investigation.evidence_record_ids, recordIds, "evidence record");
   references(investigation.id, investigation.related_barrier_thread_ids, threadIds, "thread");
   references(investigation.id, investigation.related_project_ids, projectIds, "project");

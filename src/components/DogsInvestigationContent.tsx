@@ -1,4 +1,4 @@
-import { Archive, ArrowRight, CheckCircle2, CircleHelp, FileSearch, HeartPulse, Route, Search, Users, Utensils } from "lucide-react";
+import { Archive, ArrowRight, CheckCircle2, CircleHelp, ClipboardList, FileSearch, HeartPulse, MapPin, Package, Route, Search, Users, Utensils } from "lucide-react";
 import investigationsData from "../data/dogs-investigations.json";
 import locationsData from "../data/investigation-locations.json";
 import projectsData from "../data/projects.json";
@@ -14,7 +14,7 @@ const projects = projectsData as CapacityProject[];
 const recordById = new Map(records.map((record) => [record.id, record]));
 const projectById = new Map(projects.map((project) => [project.id, project]));
 const mapSourceById = new Map(locationsData.map((location) => [location.id, location.source_url]));
-const questionIcons = { HeartPulse, Search, Utensils, Users };
+const questionIcons = { ClipboardList, HeartPulse, MapPin, Package, Users };
 const evidenceLabels: Record<string, string> = {
   "Organization report": "Organization reports",
   "Published local report": "Published reporting",

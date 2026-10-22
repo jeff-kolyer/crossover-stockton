@@ -6,40 +6,40 @@
     {
       "id": "street-dog-immediate-welfare",
       "gap_id": "dogs-safe-placement",
-      "title": "Does the response to reported street dogs work?",
+      "title": "What would it take to understand the need?",
       "status": "in_progress",
-      "introduction": "Before we can determine whether dogs are receiving adequate care, we need to establish where they are, which reports reflect current conditions, and what happens when someone tries to help. We're investigating both the visibility of the need and the response to it.",
+      "introduction": "Before we can determine whether dogs are receiving adequate care, we need reliable information about how many there are, where they are, and what help they're already receiving. We're investigating how to obtain and verify that information.",
       "purpose": "Not every dog can immediately be rescued or placed in a home. Until that happens, food, water, emergency medical attention, and people willing to monitor their wellbeing can prevent suffering and potentially save lives.",
       "questions": [
         {
           "id": "where-dogs-need-help",
-          "icon": "Search",
-          "title": "Where are the dogs that need help?",
-          "description": "Can we establish how many free-roaming dogs there are, where they are reported, which reports are current, and whether their needs are already being met? Examine Animal Services field calls, public reports, responder knowledge, and repeated firsthand observations."
+          "icon": "MapPin",
+          "title": "Where are the stray dogs, and how many are there?",
+          "description": "Can we obtain reliable population estimates and identify where dogs are likely to be found? How current and accurate are the available reports?"
         },
         {
           "id": "severity-of-suffering",
           "icon": "HeartPulse",
-          "title": "How severe is the suffering?",
-          "description": "Are dogs visibly emaciated, seriously injured, ill, or dying? How often are these conditions reported?"
+          "title": "What condition are they in?",
+          "description": "Are dogs healthy, hungry, injured, or seriously ill? Can we determine how many need immediate attention?"
         },
         {
           "id": "food-and-water",
-          "icon": "Utensils",
-          "title": "What care already reaches them?",
-          "description": "Who provides food, water, monitoring, or medical help? How regular is that care?"
+          "icon": "Users",
+          "title": "Who is already caring for them?",
+          "description": "What care do Stockton Streetdogs, Animal Services, and others provide? Can we establish which dogs are receiving help and which aren't?"
         },
         {
           "id": "response-barriers",
-          "icon": "Users",
-          "title": "Where does response break down?",
-          "description": "What happens after a report, and which practical barriers delay or prevent safe care?"
+          "icon": "ClipboardList",
+          "title": "What happens when someone reports a dog?",
+          "description": "Who receives the report, what action follows, and can we establish what ultimately happens to the animal?"
         },
         {
           "id": "additional-help",
-          "icon": "Users",
-          "title": "What additional help changes outcomes?",
-          "description": "Which specific people, supplies, transport, or coordination needs do responders confirm?"
+          "icon": "Package",
+          "title": "What would it take to meet their needs?",
+          "description": "Do we need more rescue capacity, veterinary care, feeding, transport, or volunteers? What evidence would tell us where additional resources should go?"
         }
       ],
       "method_summary": "Begin safe firsthand checks of reported public areas, then compare observations with public reports and Animal Services records when received. Ask Stockton Animal Services and Stockton Streetdogs what they offer and what happened in specific cases. Separate direct observations, organizational claims, published records, and unanswered questions.",
