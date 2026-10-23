@@ -275,6 +275,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onNavigate={showPage}
           onPrimaryAction={() => showPage("action")}
           onOpenWork={showWork}
+          onOpenGap={showGap}
         />
       )}
 
