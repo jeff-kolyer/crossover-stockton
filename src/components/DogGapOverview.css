@@ -1,0 +1,93 @@
+.gap-detail-grid-wrap{display:contents}
+.dog-equation-page .gap-refined-hero-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"hero" "main" "side"!important;gap:18px;align-items:start;width:100%;min-width:0;margin:0;padding:24px 0 32px}
+.dog-equation-page .gap-refined-hero-intro{grid-area:hero!important;min-width:0}
+.dog-equation-page .gap-refined-left-column{display:block!important;grid-area:main!important;min-width:0;width:100%;order:initial}
+.dog-equation-page .gap-refined-side-column{display:block!important;grid-area:side!important;width:100%;height:auto;margin:0;padding:0;border:0;order:initial}
+.dog-equation-page .gap-refined-side-column .gap-learning-card{width:100%;margin:0}
+.dog-equation-page [id]{scroll-margin-top:92px}
+.dog-equation-eyebrow{color:#55656a;font-size:.76rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.dog-equation-content{min-width:0}
+.dog-equation-content h2,.dog-equation-content h3,.dog-equation-content h4,.dog-equation-content p{margin:0}
+.dog-care-model{border:1px solid #e0e9df;border-radius:8px;background:#fff;overflow:hidden}
+.dog-care-model-heading{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;border-bottom:1px solid #dfe5df;background:#f5f9f3;padding:28px 32px}
+.dog-care-model-heading>div{max-width:850px}
+.dog-equation-eyebrow{margin:0 0 12px!important;color:#174831}
+.dog-care-model-heading h2{color:#101b17;font-family:var(--font-serif);font-size:clamp(2rem,2.8vw,2.65rem);font-weight:500;letter-spacing:-.02em;line-height:1.08}
+.dog-care-model-heading p:not(.dog-equation-eyebrow){margin-top:14px;color:#37443e;font-size:1rem;line-height:1.55}
+.dog-care-model-heading p.dog-care-model-secondary{margin-top:5px;color:#52626b;font-size:1rem}
+.dog-care-model-disclaimer{align-self:end;border:1px solid #dfe5df;border-radius:20px;background:#fff;padding:7px 11px;color:#174831;font-size:.8rem;font-weight:700;line-height:1.3}
+.dog-care-model-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr)}
+.dog-care-factors,.dog-care-outcome{min-width:0;padding:28px 32px}
+.dog-care-factors{border-right:1px solid #dfe5df}
+.dog-care-column-heading{display:flex;align-items:start;justify-content:space-between;gap:14px;margin-bottom:20px}
+.dog-care-column-heading h3{color:#174831;font-family:var(--font-sans);font-size:1.08rem;font-weight:700;line-height:1.3}
+.dog-care-column-heading p{margin-top:4px;color:#52626b;font-size:1rem;line-height:1.55}
+.dog-care-reset{display:inline-flex;align-items:center;gap:5px;flex:none;border:1px solid #dfe5df;border-radius:6px;background:#fff;padding:7px 12px;color:#174831;font-size:1rem;font-weight:700;cursor:pointer}
+.dog-care-reset:hover{background:#f5f9f3}
+.dog-care-reset:focus-visible,.dog-equation-content a:focus-visible,.dog-equation-preview button:focus-visible{outline:2px solid #1f6b34;outline-offset:3px}
+.dog-care-factor{border-top:1px solid #e2e7e4;padding:17px 0 15px}
+.dog-care-factor-label{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.dog-care-factor label{color:#174831;font-size:1rem;font-weight:600;line-height:1.35}
+.dog-care-factor output{flex:none;color:#174831;font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums}
+.dog-care-factor p{margin:5px 0 10px;color:#52626b;font-size:1rem;line-height:1.55}
+.dog-care-factor input{display:block;width:100%;height:22px;margin:0;accent-color:#1f6b34;cursor:pointer}
+.dog-care-mobile-result{display:none}
+.dog-care-totals{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:10px}
+.dog-care-total{border-radius:8px;padding:17px 18px}
+.dog-care-total span{display:block;font-size:1rem;font-weight:700;line-height:1.35}
+.dog-care-total strong{display:block;margin-top:9px;font-size:2.2rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.dog-care-total-without strong{font-size:2.75rem}
+.dog-care-total small{font-size:1rem;font-weight:700}
+.dog-care-total-without{background:#fbf2f0;color:#a64f42}
+.dog-care-total-receiving{background:#f0f7f2;color:#236a47}
+.dog-care-dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:4px;margin:23px 0 11px}
+.dog-care-dots span{display:block;width:100%;aspect-ratio:1;border-radius:50%}
+.dog-care-dots .is-without{background:#b75c4b}
+.dog-care-dots .is-receiving{background:#6aa87c}
+.dog-care-dot-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:25px;color:#4f6155;font-size:1rem;line-height:1.4}
+.dog-care-dot-legend span{display:inline-flex;align-items:center;gap:7px}
+.dog-care-dot-legend i{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%}
+.dog-care-dot-legend i.is-without{background:#b75c4b}
+.dog-care-dot-legend i.is-receiving{background:#6aa87c}
+.dog-care-flow h4{color:#1b2d23;font-size:1rem;font-weight:750}
+.dog-care-flow h4 span{color:#64746a;font-weight:500}
+.dog-care-prevention,.dog-care-flow-note{margin:7px 0 14px!important;color:#607067;font-size:1rem;line-height:1.55}
+.dog-care-flow-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;border-top:1px solid #e7ece7;padding-top:16px}
+.dog-care-stage{display:grid;align-content:start;gap:5px;min-width:0}
+.dog-care-stage strong{color:#203126;font-size:1rem;line-height:1.3}
+.dog-care-stage small{min-height:34px;color:#65756b;font-size:1rem;line-height:1.4}
+.dog-care-stage b{color:#174831;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.dog-care-stage-track{display:block;height:7px;border-radius:5px;background:#e4eae5;overflow:hidden}
+.dog-care-stage-track span{display:block;height:100%;border-radius:5px;background:#4d9b6e}
+.dog-care-constraint{border-left:3px solid #1f6b34;background:#f5f9f3;margin-top:22px;padding:16px 18px}
+.dog-care-constraint>span{display:block;color:#52715d;font-size:.72rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase}
+.dog-care-constraint strong{display:block;margin-top:4px;color:#193a28;font-size:1rem}
+.dog-care-constraint p{margin-top:5px;color:#55695c;font-size:1rem;line-height:1.55}
+.dog-care-assumptions{border-top:1px solid #e7ece7;padding:14px 32px;color:#69766d;font-size:1rem;line-height:1.55}
+.dog-equation-previews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.dog-equation-preview{display:flex;flex-direction:column;min-width:0;border:1px solid #e1e6e1;border-radius:8px;background:#fff;padding:18px}
+.dog-equation-preview-heading{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.dog-equation-preview-heading svg{flex:none;color:#1f7650}
+.dog-equation-preview-heading h2{color:#1a2b20;font-size:1.08rem;font-weight:700;line-height:1.3}
+.dog-equation-preview p,.dog-equation-preview li{color:#53635a;font-size:1rem;line-height:1.55}
+.dog-equation-preview p+p{margin-top:7px}
+.dog-equation-preview strong{color:#1d3023}
+.dog-equation-preview a,.dog-equation-preview button,.dog-equation-journey a{display:inline-flex;align-items:center;gap:5px;align-self:flex-start;border:0;background:transparent;margin-top:auto;padding:11px 0 0;color:#17633c;font-family:inherit;font-size:1rem;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.dog-equation-preview button{margin-top:1px;padding-top:3px}
+.dog-equation-pathways,.dog-equation-projects{display:grid;gap:6px;list-style:none;margin:0 0 9px;padding:0}
+.dog-equation-pathways li,.dog-equation-projects li{display:grid;gap:1px;border-bottom:1px solid #edf0ed;padding-bottom:5px}
+.dog-equation-pathways span,.dog-equation-projects span{color:#607067;font-size:1rem}
+.dog-equation-map{position:relative;overflow:hidden;border:1px solid #dce5dc;border-radius:6px;background:#f4f8f3;margin-top:9px}
+.dog-equation-map svg{display:block;width:100%;height:95px}
+.dog-equation-map small{display:block;border-top:1px solid #dce5dc;padding:6px 8px;color:#607067;font-size:.875rem}
+.dog-equation-journey{display:flex;align-items:center;justify-content:space-between;gap:18px;border-top:1px solid #dce3dc;margin-top:17px;padding:16px 2px}
+.dog-equation-journey h2{color:#16251b;font-family:var(--font-serif);font-size:1.45rem;font-weight:500;line-height:1.1}
+.dog-equation-journey p:not(.dog-equation-eyebrow){margin-top:6px;color:#59695f;font-size:1rem;line-height:1.55}
+.dog-equation-journey a{flex:none;margin:0;padding:0;white-space:nowrap}
+.dog-equation-journey-links{display:grid;justify-items:start;gap:9px;flex:none}
+.dog-equation-closing{display:flex;flex-wrap:wrap;gap:4px 10px;border-top:1px solid #dce3dc;padding:14px 2px;color:#244432;font-size:1rem;line-height:1.55}
+.dog-equation-closing strong{font-weight:750}
+@media(min-width:821px) and (max-width:1279px){.dog-equation-page .gap-refined-hero-intro{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+@media(max-width:820px){.dog-equation-page .dog-page-grid{display:block;padding:0}.dog-equation-page .gap-refined-hero-grid{padding-top:18px}.dog-care-model-grid{grid-template-columns:1fr}.dog-care-factors{border-right:0;border-bottom:1px solid #e3e8e3}.dog-care-factor-list{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.dog-care-mobile-result{display:block;border-radius:6px;background:#f3f8f3;margin:0 0 8px;padding:10px 12px;color:#2b5a3c;font-size:1rem;line-height:1.5}.dog-care-mobile-result span{color:#8a9a8d}}
+@media(max-width:600px){.dog-care-model-heading,.dog-care-factors,.dog-care-outcome{padding:21px 18px}.dog-care-model-heading h2{font-size:2rem}.dog-care-model-disclaimer{align-self:start}.dog-care-factor-list{grid-template-columns:1fr}.dog-care-mobile-result{position:sticky;top:72px;z-index:2;box-shadow:0 2px 8px #dbe7db}.dog-care-dots{gap:3px}.dog-care-flow-stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px}.dog-care-stage small{min-height:0}.dog-care-assumptions{padding:14px 18px}.dog-equation-previews{grid-template-columns:1fr}.dog-equation-journey{display:block}.dog-equation-journey-links{margin-top:10px}.dog-equation-journey a{white-space:normal}}
+@media(max-width:420px){.dog-care-totals{grid-template-columns:1fr}.dog-care-total{padding:14px 16px}.dog-care-dot-legend{gap:7px 14px}}

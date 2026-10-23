@@ -8,6 +8,7 @@ import {
   BedSingle,
   CheckCircle2,
   ChevronDown,
+  Clock3,
   ClipboardList,
   Dog,
   DoorClosed,
@@ -26,10 +27,12 @@ import {
   Plus,
   Refrigerator,
   Route,
+  Search,
   ShieldCheck,
   Stethoscope,
   Truck,
   Users,
+  Wrench,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
@@ -45,6 +48,8 @@ import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInv
 import { workIcon } from "../lib/workIcon";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicMobileMenu } from "./PublicMobileMenu";
+import { DogGapOverview } from "./DogGapOverview";
+import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -56,7 +61,7 @@ interface GapDetailPageProps {
   onOpenGap: (slug: string) => void;
   onOpenUpdates: (slug: string) => void;
   onOpenSources: (slug: string) => void;
-  onOpenWork: (workId: string) => void;
+  onOpenWork: (workId: string, anchor?: string) => void;
   onOpenReport: (reportId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
@@ -89,6 +94,16 @@ const activeGaps = gaps.filter((item) => item.active).sort((a, b) => a.rank - b.
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
 const stateIcons = [BarChart3, Stethoscope, Users];
+const dogGapNavItems: WorkSectionNavItem[] = [
+  { id: "gap-overview", label: "Overview", icon: Search },
+  { id: "system-model", label: "System model", icon: Gauge },
+  { id: "dog-evidence", label: "Evidence", icon: FileText },
+  { id: "dog-pathways", label: "Pathways", icon: Route },
+  { id: "dog-solutions", label: "Solutions", icon: Wrench },
+  { id: "dog-locations", label: "Locations map", icon: MapPin },
+  { id: "dog-journey", label: "Journey", icon: ClipboardList },
+  { id: "recent-updates", label: "Updates", icon: Clock3 },
+];
 const whyIconRegistry: Record<NonNullable<GapRecord["why_icons"]>[number], LucideIcon> = {
   Dog,
   Stethoscope,
@@ -138,7 +153,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
   const sourceList = uniqueSources(gap.sources as SourceLike[], relatedRecords);
   const stateItems = gap.current_state_items ?? [];
   const currentAsOf = latestCheckedDate(relatedRecords) || gap.updated_at;
-  const recentUpdates = gapUpdates(gap).slice(0, 8);
+  const recentUpdates = gapUpdates(gap).slice(0, gap.id === "dogs-safe-placement" ? 5 : 8);
   const actionCards = visibleActions(gap);
   const orderedActionCards = orderActionsForBottom(actionCards, gap);
   const stateReport = stateReportCopy(gap);
@@ -153,9 +168,10 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
   const gapIndex = activeGaps.findIndex((item) => item.id === gap.id);
   const previousGap = gapIndex > 0 ? activeGaps[gapIndex - 1] : undefined;
   const nextGap = gapIndex >= 0 && gapIndex < activeGaps.length - 1 ? activeGaps[gapIndex + 1] : undefined;
+  const isDogGap = gap.id === "dogs-safe-placement";
 
   return (
-    <main className={`gap-detail-page gap-page is-${gap.investigation_status}`}>
+    <main className={`gap-detail-page gap-page is-${gap.investigation_status}${isDogGap ? " dog-equation-page" : ""}`}>
       <section className="gap-refined-hero">
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <GapPageToolbar
@@ -166,10 +182,12 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
           previousGap={previousGap}
           nextGap={nextGap}
         />
+        <div className={isDogGap ? "work-page-grid dog-page-grid" : "gap-detail-grid-wrap"}>
+          {isDogGap && <WorkSectionNav items={dogGapNavItems} />}
         <div className="gap-refined-hero-grid">
           <div className="gap-refined-hero-intro">
             <div className="gap-detail-copy gap-refined-copy">
-              <section className="gap-hero-summary-card" aria-label="Gap summary">
+              <section className="gap-hero-summary-card" id={isDogGap ? "gap-overview" : undefined} aria-label="Gap summary">
                 <span className="gap-level"><InvestigationStatusIcon status={gap.investigation_status} /> {investigationStatusLabel(gap.investigation_status)}</span>
                 <h1>{gap.title}</h1>
                 <p className="gap-mobile-body">{gap.summary}</p>
@@ -186,7 +204,9 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
             </div>
           </div>
 
-          <div className="gap-refined-left-column">
+          {isDogGap ? (
+            <div className="gap-refined-left-column"><DogGapOverview onOpenWork={onOpenWork} onOpenSources={() => onOpenSources(gap.slug)} /></div>
+          ) : <div className="gap-refined-left-column">
             <div className="gap-refined-main-column">
               <GapFlowSection gap={gap} />
               {workItems.length > 0 && <WorkSection items={workItems} gap={gap} onOpenWork={onOpenWork} />}
@@ -220,7 +240,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
                 </div>
               </section>
             )}
-          </div>
+          </div>}
 
           <aside className="gap-refined-side-column">
             {recentUpdates.length > 0 && (
@@ -241,9 +261,10 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
 
           </aside>
         </div>
+        </div>
       </section>
 
-      <section className="gap-refined-content">
+      {!isDogGap && <section className="gap-refined-content">
         <div className="gap-refined-lower-columns">
           {orderedActionCards.length > 0 && (
             <section className="gap-refined-column gap-refined-action-band">
@@ -299,7 +320,7 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
             <button className="gap-card-link" type="button" onClick={() => onOpenSources(gap.slug)}>View all sources <ArrowRight size={15} /></button>
           </section>
         )}
-      </section>
+      </section>}
 
       <div className="page-bottom-back-row">
         <button className="page-bottom-back" type="button" onClick={() => onNavigate("reality")}>
