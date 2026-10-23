@@ -2,8 +2,8 @@
   {
     "id": "dogs-public-source-review",
     "gap_id": "dogs-safe-placement",
-    "title": "Public Sources Overview",
-    "summary": "Publicly available evidence about the dog-placement gap.",
+    "title": "Evidence",
+    "summary": "What do we know about the problem? Public records, reported conditions, and the measurements still missing from the picture.",
     "gap_summary": "Reviewing shelter data, rescue outcomes, and improvements that could expand care.",
     "status": "in_progress",
     "type": "research",
@@ -33,8 +33,8 @@
   {
     "id": "dogs-map-placement-barriers",
     "gap_id": "dogs-safe-placement",
-    "title": "Understanding the Need",
-    "summary": "We're checking public reports against records, field observations, and conversations to understand street dogs' needs and the care available.",
+    "title": "Pathways",
+    "summary": "How does a dog actually reach care? We are testing the available routes and documenting where outcomes remain unknown.",
     "gap_summary": "Checking which reports reflect current needs, how care reaches dogs, and where the response breaks down.",
     "status": "in_progress",
     "type": "investigation",
@@ -198,10 +198,33 @@
     "activity_record_ids": []
   },
   {
+    "id": "dogs-solutions",
+    "gap_id": "dogs-safe-placement",
+    "title": "Solutions",
+    "summary": "What could change the outcome? Track proposed and underway improvements, the factors they may affect, and the results still to verify.",
+    "status": "in_progress",
+    "type": "investigation",
+    "page_kind": "solutions",
+    "updated_at": "2026-10-20",
+    "project_ids": ["stockton-animal-shelter-renovation", "canine-campus", "stockton-pet-wellness-adoption-center", "animal-balance-spay-neuter-contract-2026", "hard-luck-veterinary-staffing-2026", "pathways-neighborhood"],
+    "record_ids": []
+  },
+  {
+    "id": "dogs-locations-map",
+    "gap_id": "dogs-safe-placement",
+    "title": "Locations map",
+    "summary": "Historical reports, generalized locations, and firsthand verification status. These markers are not live sightings.",
+    "status": "in_progress",
+    "type": "investigation",
+    "page_kind": "map",
+    "updated_at": "2026-10-20",
+    "record_ids": []
+  },
+  {
     "id": "dogs-direct-field-work",
     "gap_id": "dogs-safe-placement",
-    "title": "Direct Conversations and Field Visits",
-    "summary": "We're contacting local responders and trying ways to help firsthand.",
+    "title": "Journey / Activity Log",
+    "summary": "Dated inquiries, applications, visits, records requests, and what happened next.",
     "gap_summary": "Contacting responders, participating firsthand, and documenting what we learn.",
     "status": "in_progress",
     "type": "field_work",

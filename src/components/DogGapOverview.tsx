@@ -13,6 +13,8 @@ interface DogGapOverviewProps {
 
 const researchHref = "/work/dogs-public-source-review/";
 const investigationHref = "/work/dogs-map-placement-barriers/";
+const solutionsHref = "/work/dogs-solutions/";
+const mapHref = "/work/dogs-locations-map/";
 const fieldworkHref = "/work/dogs-direct-field-work/";
 const measurements = dogsResearch.measurements;
 const measure = (id: string) => measurements.find((item) => item.id === id)?.value.toLocaleString() ?? "—";
@@ -62,7 +64,7 @@ export function DogGapOverview({ onOpenWork, onOpenSources }: DogGapOverviewProp
             <li><strong>Doggie Day Out</strong><span>Inquiry sent; response and access unconfirmed</span></li>
             <li><strong>Foster or adoption</strong><span>Publicly advertised; current availability to verify</span></li>
           </ul>
-          <a href={fieldworkHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-direct-field-work"))}>See firsthand activity <ArrowRight size={15} aria-hidden="true" /></a>
+          <a href={investigationHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Explore the pathways <ArrowRight size={15} aria-hidden="true" /></a>
         </section>
 
         <section className="dog-equation-preview" id="dog-solutions">
@@ -72,14 +74,14 @@ export function DogGapOverview({ onOpenWork, onOpenSources }: DogGapOverviewProp
             <li><strong>{project("canine-campus")?.title ?? "Canine Campus"}</strong><span>Proposed; no operating capacity verified</span></li>
             <li><strong>Spay-neuter and veterinary access</strong><span>Plans and contracts documented; delivered output unverified</span></li>
           </ul>
-          <a href={researchHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>Explore documented improvements <ArrowRight size={15} aria-hidden="true" /></a>
+          <a href={solutionsHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-solutions"))}>Explore documented improvements <ArrowRight size={15} aria-hidden="true" /></a>
         </section>
 
         <section className="dog-equation-preview" id="dog-locations">
           <div className="dog-equation-preview-heading"><MapPin size={21} aria-hidden="true" /><h2>Locations map</h2></div>
           <p>Review generalized areas from dated public reports. Pins are not live sightings or verified current needs.</p>
           <PreviewMap />
-          <a href={`${investigationHref}#field-observation-map`} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers", "field-observation-map"))}>Open the full map <ArrowRight size={15} aria-hidden="true" /></a>
+          <a href={mapHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open the full map <ArrowRight size={15} aria-hidden="true" /></a>
         </section>
       </div>
 

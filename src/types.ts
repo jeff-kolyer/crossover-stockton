@@ -230,7 +230,7 @@ export interface WorkRecord {
   last_reviewed_at?: string;
   research_data_id?: string;
   investigation_data_id?: string;
-  page_kind?: "research" | "investigation" | "activity";
+  page_kind?: "research" | "investigation" | "activity" | "solutions" | "map";
   next_step?: string | { title: string; summary: string; action_id?: string; status?: "planned" | "awaiting_response"; planned_for?: string };
   open_questions?: string[];
   threads?: WorkThread[];

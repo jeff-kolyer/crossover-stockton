@@ -108,7 +108,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                   <div className="about-spotlight-answer" id="about-question-1" hidden={openQuestion !== 1}>
                     <p>Public records document 3,106 stray-dog intakes in 2024 across the Stockton Animal Services service area. But historical intake figures don't establish how many dogs currently need help on Stockton streets.</p>
                     <p>We're examining public records and local reports to understand what is documented, what remains uncertain, and where assistance may be needed.</p>
-                    <div className="about-step-links"><a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See the research <ArrowRight size={16} aria-hidden="true" /></a><a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a></div>
+                    <div className="about-step-links"><a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See the research <ArrowRight size={16} aria-hidden="true" /></a><a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a></div>
                   </div>
                 </div>
                 <div className="about-spotlight-question">
@@ -117,7 +117,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                     <p>We're testing publicly advertised ways to help rather than simply recommending them.</p>
                     <p>We've submitted volunteer inquiries and visited Stockton Animal Services in person. These attempts have produced firsthand observations, but successful volunteer participation has not yet been confirmed.</p>
                     <p>We're documenting what happens so others can make better-informed attempts to help.</p>
-                    <div className="about-step-links"><a href="/work/dogs-direct-field-work/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-direct-field-work"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a></div>
+                    <div className="about-step-links"><a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a></div>
                   </div>
                 </div>
                 <div className="about-spotlight-question">
@@ -126,7 +126,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                     <p>Not yet. We need a clearer understanding of where dogs currently need assistance, what care is already available, and which barriers prevent help from reaching them.</p>
                     <p>We're examining existing improvements and exploring how additional people, better coordination, AI, robotics, and other emerging capabilities could make care more effective.</p>
                     <p>We distinguish promising ideas from solutions that have actually been tested.</p>
-                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/" onClick={(event) => navigateInternalLink(event, () => onOpenGap("too-many-dogs-still-lack-safe-placement"))}>Explore improvements and potential solutions <ArrowRight size={16} aria-hidden="true" /></a></div>
+                    <div className="about-step-links"><a href="/work/dogs-solutions/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-solutions"))}>Explore improvements and potential solutions <ArrowRight size={16} aria-hidden="true" /></a></div>
                   </div>
                 </div>
               </div>
@@ -147,7 +147,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                   <p>We gather public records, news reports, and organizational claims. AI helps us compare sources, question assumptions, and distinguish what we know from what remains uncertain.</p>
                   <div className="about-step-links">
                     <a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See research <ArrowRight size={16} aria-hidden="true" /></a>
-                    <a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
+                    <a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
                   </div>
                 </div>
               </li>
@@ -158,7 +158,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                   <h3>Test the pathways</h3>
                   <p>We don't just recommend ways to help. <strong>We try them ourselves</strong>—contacting organizations, submitting applications, visiting in person, and documenting what actually happens.</p>
                   <div className="about-step-links">
-                    <a href="/work/dogs-direct-field-work/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-direct-field-work"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
+                    <a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
                   </div>
                 </div>
               </li>

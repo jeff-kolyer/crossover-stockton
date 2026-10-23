@@ -120,7 +120,7 @@ function PotentialResponses({ investigation }: { investigation: ActiveInvestigat
   </InvestigationSection>;
 }
 
-export function DogsInvestigationContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
+export function DogsInvestigationContent({ item, onOpenReport, includeMap = true }: { item: WorkRecord; onOpenReport: (id: string) => void; includeMap?: boolean }) {
   useEffect(() => {
     if (window.location.hash !== "#field-observation-procedure") return;
     const frame = window.requestAnimationFrame(() => document.getElementById("field-observation-procedure")?.scrollIntoView());
@@ -132,7 +132,7 @@ export function DogsInvestigationContent({ item, onOpenReport }: { item: WorkRec
   const additionalRecordIds = [...new Set([...(item.record_ids ?? []), ...(item.learning_record_ids ?? []), ...(item.report_record_ids ?? [])])].filter((id) => !threadRecordIds.has(id) && !findingRecordIds.has(id));
 
   return <div className="work-page-content investigation-content">
-    {data.active_investigations.map((investigation, index) => <ActiveInvestigationView key={investigation.id} investigation={investigation} onOpenReport={onOpenReport} showMap={index === 0} />)}
+    {data.active_investigations.map((investigation, index) => <ActiveInvestigationView key={investigation.id} investigation={investigation} onOpenReport={onOpenReport} showMap={includeMap && index === 0} />)}
 
     <InvestigationSection id="investigation-findings" title="What we've established" icon={<CheckCircle2 size={20} aria-hidden="true" />}>
       <div className="investigation-findings">{data.established_findings.map((finding) => <article key={finding.id}><span className="investigation-finding-kind">{finding.evidence_kind === "crossover_firsthand" ? "Crossover firsthand observation" : finding.evidence_kind.replace(/_/g, " ")}</span><h3>{finding.title}</h3><p className="gap-mobile-body">{finding.summary}</p><div className="investigation-source-links">{finding.evidence_record_ids.map((id) => <EvidenceLink key={id} recordId={id} onOpenReport={onOpenReport} />)}</div></article>)}</div>

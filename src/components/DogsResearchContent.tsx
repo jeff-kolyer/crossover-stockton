@@ -1,13 +1,11 @@
-import { ArrowRight, ChartNoAxesColumnIncreasing, FileText, HardHat, Network, PawPrint, Sparkles } from "lucide-react";
+import { ArrowRight, ChartNoAxesColumnIncreasing, FileText, Network, PawPrint, Search, Sparkles } from "lucide-react";
 import researchData from "../data/dogs-research.json";
-import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
-import type { CapacityProject, EvidenceRecord, WorkRecord } from "../types";
+import type { EvidenceRecord, WorkRecord } from "../types";
 import type { MouseEvent, ReactNode } from "react";
 import { navigateToWorkSection } from "./WorkSectionNav";
 
 const research = researchData;
-const projects = projectsData as CapacityProject[];
 const records = recordsData as EvidenceRecord[];
 const recordById = new Map(records.map((record) => [record.id, record]));
 const number = new Intl.NumberFormat("en-US");
@@ -62,53 +60,7 @@ function HorizontalChart({ title, categories }: { title: string; categories: Arr
   return <figure className="research-chart" aria-label={title}><figcaption>{title}</figcaption><ul>{categories.map(({ label, value }) => <li key={label}><span className="research-chart-label">{label}</span><div className="research-chart-track" aria-hidden="true"><div className="research-chart-bar" style={{ width: `${(value / max) * 100}%` }} /></div><strong>{number.format(value)}</strong></li>)}</ul></figure>;
 }
 
-function projectStatus(project: CapacityProject) {
-  let label: string;
-  let tone: "is-neutral" | "is-in-progress" | "is-operational" = "is-neutral";
-  if (project.operational_status === "operational") { label = "Operating"; tone = "is-operational"; }
-  else if (project.development_stage === "proposed") label = "Proposed";
-  else if (project.development_stage === "under_development") { label = "Under construction"; tone = "is-in-progress"; }
-  else if (project.development_stage === "completed") label = "Services unverified";
-  else if (project.development_stage === "funded" && project.procedure_tracking?.planned != null && project.procedure_tracking.completed == null) label = "Delivery unverified";
-  else if (project.development_stage === "funded") label = "Authorized";
-  else label = "Services unverified";
-  return { label, tone };
-}
-
-function ProjectStatus({ project }: { project: CapacityProject }) {
-  const { label, tone } = projectStatus(project);
-  return <span className={`research-project-status ${tone}`}>{label}</span>;
-}
-
-function ProjectSources({ project, onOpenReport }: { project: CapacityProject; onOpenReport: (id: string) => void }) {
-  const seen = new Set<string>();
-  const links: Array<{ url: string; label: string; reportId?: string }> = [];
-  for (const id of project.evidence_record_ids) {
-    const record = recordById.get(id);
-    if (!record) continue;
-    const url = record.record_type === "field_report" ? `/reports/${id}/` : record.source.url;
-    if (url && !seen.has(url)) { links.push({ url, label: record.record_type === "field_report" ? "Crossover field report" : record.source.publisher || "Source", reportId: record.record_type === "field_report" ? id : undefined }); seen.add(url); }
-  }
-  const additionalUrls = project.development_stage === "completed" ? [...(project.source_urls ?? [])].reverse() : [...(project.source_urls ?? []), ...(project.funding_source_urls ?? [])];
-  for (const url of additionalUrls) {
-    if (!seen.has(url)) { links.push({ url, label: new URL(url).hostname.replace(/^www\./, ""), }); seen.add(url); }
-  }
-  return <div className="research-project-sources">{links.slice(0, 2).map((link) => <a key={link.url} href={link.url} target={link.reportId ? undefined : "_blank"} rel={link.reportId ? undefined : "noreferrer"} onClick={link.reportId ? (event) => { event.preventDefault(); onOpenReport(link.reportId!); } : undefined}>{link.label} <ArrowRight size={13} aria-hidden="true" /></a>)}</div>;
-}
-
-function ProjectRow({ project, onOpenReport }: { project: CapacityProject; onOpenReport: (id: string) => void }) {
-  const milestone = [...project.milestones].filter((entry) => entry.date).sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""))[0];
-  return <article className="research-project">
-    <div className="research-project-top"><h3>{project.title}</h3><ProjectStatus project={project} /></div>
-    <p className="research-project-headline">{project.capacity_summary.headline}</p>
-    <p className="research-project-how gap-mobile-body">{project.capacity_summary.how_it_helps}</p>
-    <p className="research-project-unverified"><strong>Not yet verified:</strong> {project.capacity_summary.not_yet_verified}</p>
-    {milestone && <p className="research-project-milestone"><strong>Latest milestone · {formatDate(milestone.date)}:</strong> {milestone.description}</p>}
-    <ProjectSources project={project} onOpenReport={onOpenReport} />
-  </article>;
-}
-
-export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
+export function DogsResearchContent({ item }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
   if (item.research_data_id !== research.id) return <div className="work-page-content"><p className="work-empty">Research data is not available for this work item.</p></div>;
 
   const intakeTotal = measurement("all_reported_intakes");
@@ -122,7 +74,6 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
   const publisher = intakeTotal ? recordById.get(intakeTotal.source_record_id)?.source.publisher : undefined;
   const recordsRequest = recordById.get("crossover-2026-10-20-sas-field-call-records-request");
   const reviewRecords = (item.record_ids ?? []).map((id) => recordById.get(id)).filter((record): record is EvidenceRecord => Boolean(record)).sort((a, b) => (b.checked_at || b.recorded_at || b.published_at || "").localeCompare(a.checked_at || a.recorded_at || a.published_at || ""));
-  const selectedProjects = research.planned_improvements.project_ids.map((id) => projects.find((project) => project.id === id)).filter((project): project is CapacityProject => Boolean(project));
 
   const intakeMetrics = [{ label: "Total dog intake events", value: intakeTotal?.value }, { label: "Stray intake events", value: stray?.value }, { label: "Owner-surrender events", value: measurement("owner_surrender_intake")?.value }];
   const outcomeMetrics = [{ label: "Rescue transfers", value: measurement("rescue_or_transfer")?.value }, { label: "Adoptions", value: measurement("adoption")?.value }, { label: "Returns to owners", value: measurement("return_to_owner")?.value }];
@@ -144,14 +95,13 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
           <MetricSummary items={outcomeMetrics} compact />
           <span className="research-glance-link">Explore outcomes <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
-        <a className="research-glance-panel is-improvements" href="#research-improvements" onClick={(event) => jump(event, "research-improvements")}>
-          <div className="research-glance-heading"><HardHat size={29} aria-hidden="true" /><h3>Coming improvements</h3></div>
-          <p className="research-glance-description">New facilities and programs could increase care and prevent dogs from losing placement.</p>
-          <ul className="research-glance-projects">{selectedProjects.map((project) => <li key={project.id}>{project.title} <span>({projectStatus(project).label.toLowerCase()})</span></li>)}</ul>
-          <span className="research-glance-link">Explore projects <ArrowRight size={15} aria-hidden="true" /></span>
+        <a className="research-glance-panel is-improvements" href="#research-factors" onClick={(event) => jump(event, "research-factors")}>
+          <div className="research-glance-heading"><Search size={29} aria-hidden="true" /><h3>What remains unknown</h3></div>
+          <p className="research-glance-description">Public figures establish some intake and outcome counts. They do not measure the current street population or show where each help route gets stuck.</p>
+          <span className="research-glance-link">Explore missing measurements <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
       </div>
-      <p className="research-glance-scope">Figures are {period.toLowerCase()} events and dispositions across the Stockton Animal Services multi-jurisdiction service area. Project stages do not establish added dog-care capacity.</p>
+      <p className="research-glance-scope">Figures are {period.toLowerCase()} events and dispositions across the Stockton Animal Services multi-jurisdiction service area.</p>
     </Section>
 
     <Section id="research-whats-new" title="What's New" icon={<Sparkles size={20} aria-hidden="true" />} card>
@@ -194,9 +144,21 @@ export function DogsResearchContent({ item, onOpenReport }: { item: WorkRecord; 
       </div><HorizontalChart title={`Reported dog dispositions · ${outcomeTotal ? number.format(outcomeTotal.value) : "total unknown"} total`} categories={outcomes} /></div>
     </Section>
 
-    <Section id="research-improvements" title="Improvements Underway" icon={<HardHat size={20} aria-hidden="true" />} card>
-      <p className="research-section-intro gap-mobile-body">These facilities and programs could increase care or prevent dogs from losing placement. Their stages and delivered results remain distinct.</p>
-      <div className="research-project-list">{selectedProjects.map((project) => <ProjectRow key={project.id} project={project} onOpenReport={onOpenReport} />)}</div>
+    <Section id="research-factors" title="What the evidence cannot yet tell us" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
+      <div className="research-factor-list">
+        <p className="gap-mobile-body"><strong>Dogs entering street need.</strong> The 2024 report counts stray intake events across a multi-jurisdiction area; a current Stockton street population is unknown.</p>
+        <p className="gap-mobile-body"><strong>Observation and reporting.</strong> Published reports describe sightings and encounters; the share of dogs identified and reported is unknown. <a href="/work/dogs-locations-map/">Review the historical map</a>.</p>
+        <p className="gap-mobile-body"><strong>Response to reports.</strong> Field-call records have been requested. The number of reports that lead to a response or resolved need is unknown.</p>
+        <p className="gap-mobile-body"><strong>Shelter capacity.</strong> Annual intakes and dispositions establish past throughput; current open places, staffing, and time waiting are unknown.</p>
+        <p className="gap-mobile-body"><strong>Foster and rescue capacity.</strong> The report records rescue transfers, but current available places and outcomes after transfer are unknown.</p>
+        <p className="gap-mobile-body"><strong>Adoption and reunification.</strong> Historical adoption and return counts are available; current access, delays, and outcomes for individual dogs are unknown.</p>
+        <p className="gap-mobile-body"><strong>Prevention.</strong> Spay/neuter service events are reported, but current access and any effect on future placement need are unknown.</p>
+      </div>
+      <p className="gap-mobile-body"><a className="research-source" href="/work/dogs-map-placement-barriers/">See pathway evaluations <ArrowRight size={14} aria-hidden="true" /></a></p>
+    </Section>
+
+    <Section id="research-improvements" title="Improvements under review" card>
+      <p className="gap-mobile-body">The full inventory of facilities, contracts, and programs is now tracked in <a href="/work/dogs-solutions/#solutions-improvements">Solutions <ArrowRight size={14} aria-hidden="true" /></a>. Project stages do not establish delivered care.</p>
     </Section>
 
     <Section id="research-sources" title="Research & Sources" icon={<FileText size={20} aria-hidden="true" />}>
