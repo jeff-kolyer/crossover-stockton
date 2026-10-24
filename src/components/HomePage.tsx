@@ -31,7 +31,6 @@ import { getActionIcon } from "../lib/actionIcons";
 import { latestGapActivity } from "../lib/gapActivity";
 import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
-import { workIcon } from "../lib/workIcon";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import type { ActionTag, EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
 
@@ -40,8 +39,8 @@ interface HomePageProps {
   onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenGapSection: (slug: string, section: "our-findings" | "ways-to-help") => void;
   onOpenWork: (workId: string) => void;
-  onOpenReport: (reportId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
 }
@@ -52,17 +51,10 @@ const actions = actionsData as PublicActionRecord[];
 const orgs = orgsData as OrgRecord[];
 const work = workData as WorkRecord[];
 const records = recordsData as EvidenceRecord[];
-const dogWorkOrder = ["research", "investigation", "activity"];
-const currentDogWork = work
-  .filter((item) => item.gap_id === "dogs-safe-placement" && item.status === "in_progress")
-  .sort((a, b) => dogWorkOrder.indexOf(a.page_kind ?? "") - dogWorkOrder.indexOf(b.page_kind ?? ""));
+const currentDogGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
 const currentDogInvestigation = investigationsData.active_investigations[0];
 const historicalReferenceCount = investigationLocationsData.filter((location) => location.investigation_id === currentDogInvestigation?.id).length;
-const investigationWork = currentDogWork.find((item) => item.page_kind === "investigation");
-const activityWork = currentDogWork.find((item) => item.page_kind === "activity");
-const contactedOrganizations = (activityWork?.organization_ids ?? [])
-  .map((id) => orgs.find((org) => org.id === id)?.name)
-  .filter((name): name is string => Boolean(name));
+const investigationWork = work.find((item) => item.gap_id === "dogs-safe-placement" && item.page_kind === "investigation");
 const firstFieldReport = records.find((record) => record.record_type === "field_report" && investigationWork?.report_record_ids?.includes(record.id));
 
 const actionHeroImage = "/images/action/action_banner.jpg";
@@ -136,7 +128,7 @@ function dogActionRank(id: string) {
   return index === -1 ? immediate.length : index;
 }
 
-export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: HomePageProps) {
+export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenAction }: HomePageProps) {
   const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
   const [selectedRole, setSelectedRole] = useState("");
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
@@ -284,42 +276,25 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
         </button>
       </section>}
 
-      {isHome && currentDogInvestigation && investigationWork && <section className="public-band public-work-band" aria-labelledby="home-work-title">
+      {isHome && currentDogGap && currentDogInvestigation && investigationWork && <section className="public-band public-work-band" aria-labelledby="home-work-title">
         <div className="section-intro">
           <p>Crossover's work</p>
           <h2 id="home-work-title">What we're doing now</h2>
-          <span>We're investigating what Stockton's street dogs actually need, how the current response works, and where emerging technology and human participation might help.</span>
         </div>
         <div className="home-work-content">
-          <a className="home-work-focus" href={`/work/${investigationWork.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork(investigationWork.id))}>
-            <span>Current investigation question</span>
-            <h3>{currentDogInvestigation.title}</h3>
-            <p>{currentDogInvestigation.introduction}</p>
-            <p className="home-work-uncertainty">Current street conditions and unmet care needs still need field verification.</p>
-          </a>
+          <div className="home-work-focus">
+            <span>Current investigation · Dogs on the street</span>
+            <h3>Where does care break down?</h3>
+            <p>We're investigating where street dogs are being reported, what happens when someone tries to help, and which barriers prevent dogs from reaching care.</p>
+            <div className="home-work-summary-grid">
+              <div><strong>What we've done</strong><p>Reviewed public sources and mapped {historicalReferenceCount} dated, generalized report areas{firstFieldReport ? "; documented an initial Animal Services visit" : ""}.</p></div>
+              <div><strong>What's next</strong><p>Confirm whether the planned location check occurred, then document what is and is not observed from safe public areas.</p></div>
+            </div>
+          </div>
           <div className="home-work-grid">
-            {currentDogWork.map((item) => {
-              const nextStep = typeof item.next_step === "string" ? item.next_step : item.next_step?.title;
-              const Icon = workIcon(item.type);
-              return <article className="home-work-card" key={item.id}>
-                <div className="home-work-card-heading">
-                  <span className="gap-work-icon" aria-hidden="true"><Icon size={22} /></span>
-                  <div>
-                    <span className="home-work-kind">{item.page_kind}</span>
-                    <h3>{item.title}</h3>
-                  </div>
-                </div>
-                <p>{item.gap_summary || item.summary}</p>
-                {item.page_kind === "investigation" && historicalReferenceCount > 0 && <p className="home-work-report">The field map shows {historicalReferenceCount} approximate historical reference areas. It does not confirm current animal locations.</p>}
-                {item.page_kind === "activity" && contactedOrganizations.length > 0 && <p className="home-work-report">Organizations contacted: {contactedOrganizations.join(" and ")}.</p>}
-                {item.page_kind === "activity" && firstFieldReport && <p className="home-work-report">Firsthand report: {firstFieldReport.summary}</p>}
-                {nextStep && <p className="home-work-next"><strong>Next step:</strong> {nextStep}</p>}
-                <div className="home-work-links">
-                  <a className="home-work-primary" href={`/work/${item.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork(item.id))}>View {item.page_kind} <ArrowRight size={15} /></a>
-                  {item.page_kind === "activity" && firstFieldReport && <a className="home-work-secondary" href={`/reports/${firstFieldReport.id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenReport(firstFieldReport.id))}>Field report <ArrowRight size={15} /></a>}
-                </div>
-              </article>;
-            })}
+            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><Search size={22} /></span><h3>Our Findings</h3></div><p>Read the questions we're testing, what the evidence shows, and what remains unverified.</p><div className="home-work-links"><a className="home-work-primary" href={`/reality/${currentDogGap.slug}/our-findings/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(currentDogGap.slug, "our-findings"))}>Explore findings <ArrowRight size={15} /></a></div></article>
+            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><MapPin size={22} /></span><h3>Explore the Map</h3></div><p>Explore dated, generalized report areas. They do not show where dogs are now.</p><div className="home-work-links"><a className="home-work-primary" href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={15} /></a></div></article>
+            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><HandHeart size={22} /></span><h3>Ways to Help</h3></div><p>See possible routes to care and what is still unverified about access and outcomes.</p><div className="home-work-links"><a className="home-work-primary" href={`/reality/${currentDogGap.slug}/ways-to-help/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(currentDogGap.slug, "ways-to-help"))}>Explore ways to help <ArrowRight size={15} /></a></div></article>
           </div>
         </div>
       </section>}

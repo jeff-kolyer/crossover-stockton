@@ -2669,17 +2669,7 @@ p {
   display: block;
   border-left: 3px solid #2f7a55;
   background: #f2f7f2;
-  padding: 18px 22px;
-  text-decoration: none;
-}
-
-.home-work-focus:hover {
-  background: #ebf3ec;
-}
-
-.home-work-focus:focus-visible {
-  outline: 3px solid #91b4a0;
-  outline-offset: 3px;
+  padding: 16px 20px;
 }
 
 .home-work-focus > span,
@@ -2692,7 +2682,7 @@ p {
 }
 
 .home-work-focus h3 {
-  margin: 7px 0 8px;
+  margin: 5px 0 6px;
   color: #17211b;
   font-size: 1.35rem;
 }
@@ -2708,6 +2698,30 @@ p {
 .home-work-focus .home-work-uncertainty {
   margin-top: 8px;
   color: var(--type-muted-color);
+}
+
+.home-work-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 20px;
+  margin-top: 13px;
+  border-top: 1px solid #d9e8dc;
+  padding-top: 11px;
+}
+
+.home-work-summary-grid strong {
+  display: block;
+  margin-bottom: 3px;
+  color: #23633f;
+  font-size: var(--type-label-size);
+  font-weight: 700;
+  letter-spacing: var(--type-label-tracking);
+  text-transform: uppercase;
+}
+
+.home-work-summary-grid p {
+  font-size: .9rem;
+  line-height: 1.4;
 }
 
 .home-work-grid {
@@ -2807,13 +2821,18 @@ p {
   outline-offset: 3px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1100px) {
   .home-work-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 760px) {
+  .home-work-grid,
+  .home-work-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
   .home-work-focus,
   .home-work-card {
     padding: 16px;
