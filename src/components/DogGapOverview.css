@@ -35,7 +35,8 @@
 .dog-care-factor-title-button svg{color:#52626b}
 .dog-care-factor-title-button:focus-visible,.dog-care-improvement button:focus-visible,.dog-care-factor-detail-link:focus-visible{outline:2px solid #1f6b34;outline-offset:3px}
 .dog-care-factor-values{display:inline-flex;align-items:baseline;justify-content:flex-end;gap:9px;flex:none}
-.dog-care-applied-gain{border:1px solid #d2e9d9;border-radius:999px;background:#e8f4eb;padding:4px 8px;color:#1f6b41;font-size:.75rem;font-weight:700;line-height:1.2;white-space:nowrap}
+.dog-care-applied-gain{display:inline-grid;place-items:center;box-sizing:border-box;width:90px;height:25px;border:1px solid #d2e9d9;border-radius:999px;background:#e8f4eb;padding:0 6px;color:#1f6b41;font-size:.76rem;font-weight:700;line-height:1;white-space:nowrap}
+.dog-care-applied-gain[data-visible="false"]{visibility:hidden}
 .dog-care-factor-details[hidden]{display:none}
 .dog-care-factor-details{padding:16px 0 5px}
 .dog-care-factor .dog-care-factor-details>p{margin:0 0 12px;color:#52626b;font-size:.93rem;line-height:1.5}
@@ -54,7 +55,7 @@
 .dog-care-factor .dog-care-factor-details>.dog-care-improvement-note{margin:9px 0 0;color:#64736a;font-size:.77rem;line-height:1.45}
 .dog-care-factor-detail-link{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;box-sizing:border-box;border:1px solid #d5ddd6;border-radius:999px;background:#f8faf8;margin-top:14px;padding:9px 14px;color:#294233;font-size:.86rem;font-weight:700;text-align:center;text-decoration:none}
 .dog-care-factor-detail-link:hover{background:#eef4ef}
-@media(max-width:600px){.dog-care-factor-values{display:grid;gap:1px;text-align:right}.dog-care-improvement{align-items:start}.dog-care-improvement button{margin-top:1px}}
+@media(max-width:600px){.dog-care-factor-title-button{align-items:start}.dog-care-factor-values{display:grid;gap:1px;text-align:right}.dog-care-factor-values output{grid-row:1}.dog-care-applied-gain{grid-row:2}.dog-care-improvement{align-items:start}.dog-care-improvement button{margin-top:1px}}
 .dog-care-factor output{flex:none;color:#174831;font-size:1.05rem;font-weight:700;font-variant-numeric:tabular-nums}
 .dog-care-factor p{margin:5px 0 10px;color:#52626b;font-size:1rem;line-height:1.55}
 .dog-care-factor input{display:block;width:100%;height:22px;margin:0;accent-color:#1f6b34;cursor:pointer}

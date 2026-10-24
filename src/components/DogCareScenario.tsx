@@ -69,11 +69,12 @@ export function DogCareScenario({ heading = "What determines how many dogs are o
               const expanded = expandedFactor === factor.key;
               const relevant = modeledImprovements.filter((item) => item.adjustments[factor.key] !== undefined);
               const appliedGain = settings[factor.key] - Math.max(0, Math.min(100, manualSettings[factor.key]));
+              const hasAppliedImprovement = selectedImprovements.some((id) => relevant.some((item) => item.id === id));
               return <div className="dog-care-factor" key={factor.key}>
                 <div className="dog-care-factor-label">
                   <button className="dog-care-factor-title-button" type="button" aria-expanded={expanded} aria-controls={`dog-care-detail-${factor.key}`} aria-label={`${expanded ? "Collapse" : "Expand"} ${factor.label}${relevant.length ? `, ${relevant.length} related improvement${relevant.length === 1 ? "" : "s"}` : ""}`} onClick={() => setExpandedFactor(expanded ? null : factor.key)}>
                     <span className="dog-care-factor-heading"><span className="dog-care-factor-name">{factor.label}</span>{relevant.length > 0 && <span className="dog-care-improvement-count" role="img" aria-label={`${relevant.length} related improvement${relevant.length === 1 ? "" : "s"}`} title={`${relevant.length} related improvement${relevant.length === 1 ? "" : "s"}`}>{relevant.length}</span>}</span>
-                    <span className="dog-care-factor-values">{selectedImprovements.some((id) => modeledImprovements.some((item) => item.id === id && item.adjustments[factor.key] !== undefined)) && <span className="dog-care-applied-gain">+{appliedGain} applied</span>}<output htmlFor={`dog-care-${factor.key}`}>{settings[factor.key]} / 100</output></span>
+                    <span className="dog-care-factor-values">{relevant.length > 0 && <span className="dog-care-applied-gain" aria-hidden={!hasAppliedImprovement} data-visible={hasAppliedImprovement}>{hasAppliedImprovement ? `+${appliedGain} applied` : "+100 applied"}</span>}<output htmlFor={`dog-care-${factor.key}`}>{settings[factor.key]} / 100</output></span>
                     {expanded ? <ChevronUp size={17} aria-hidden="true" /> : <ChevronDown size={17} aria-hidden="true" />}
                   </button>
                 </div>
