@@ -216,3 +216,12 @@
     padding: 16px 18px;
   }
 }
+
+@media (min-width: 1101px) {
+  .dog-gap-layout {
+    width: var(--public-rail-width);
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}

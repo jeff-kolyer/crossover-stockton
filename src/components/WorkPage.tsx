@@ -105,7 +105,7 @@ export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenRepo
       ) : (
         <div className={isWorkspace ? `work-page-grid${isMap ? " map-work-grid" : ""}` : undefined}>
           {isWorkspace && (isMap ? <div className="map-work-sidebar">
-            <a className="gap-history-back map-work-back" href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}><ArrowLeft size={16} /> {gap.title}</a>
+            <a className="gap-history-back map-work-back" href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}><ArrowLeft size={17} aria-hidden="true" /> Back to gap</a>
             <WorkSectionNav items={navItems} />
           </div> : <WorkSectionNav items={navItems} />)}
           <div className={isWorkspace ? `work-page-main ${isResearch ? "research-page-main" : isActivity ? "activity-page-main" : "investigation-page-main"}` : undefined}>

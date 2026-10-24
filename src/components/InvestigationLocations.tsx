@@ -32,7 +32,6 @@ const maintenance = maintenanceData;
 export type MappedInvestigationLocation = InvestigationLocation & { coordinates: [number, number] };
 type MapProps = { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean };
 
-function shortName(location: InvestigationLocation) { return location.name.split(" — ")[0]; }
 function monthYear(date: string) { return new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`)); }
 function fullDate(date: string) { return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`)); }
 const categoryLabels: Record<InvestigationLocation["category"], string> = {
@@ -41,12 +40,18 @@ const categoryLabels: Record<InvestigationLocation["category"], string> = {
   official_animal_services_record: "Official Animal Services records",
   crossover_firsthand: "Crossover firsthand observations",
 };
+const categoryRowLabels: Record<InvestigationLocation["category"], string> = {
+  historical_published_report: "Historical published report",
+  recent_public_report: "Recent public report",
+  official_animal_services_record: "Animal Services record",
+  crossover_firsthand: "Crossover observation",
+};
 
 function InvestigationLocationSelector({ location, selected, onSelect }: { location: InvestigationLocation; selected: boolean; onSelect: (id: string) => void }) {
   const Icon = location.status === "exploratory" ? MapPin : Dog;
-  return <button type="button" className={`investigation-location-selector${selected ? " is-selected" : ""}`} aria-pressed={selected} onClick={() => onSelect(location.id)}>
+  return <button type="button" className={`investigation-location-selector${selected ? " is-selected" : ""}${location.status === "exploratory" ? " is-exploratory" : ""}${location.category === "recent_public_report" ? " is-recent" : ""}`} aria-pressed={selected} onClick={() => onSelect(location.id)}>
     <span className={`investigation-location-selector-icon${location.status === "exploratory" ? " is-exploratory" : ""}${location.category === "recent_public_report" ? " is-recent" : ""}`}><Icon size={19} aria-hidden="true" /></span>
-    <span className="investigation-location-selector-copy"><strong>{shortName(location)}</strong><small>{monthYear(location.evidence_date)}{!location.coordinates && " · broad area, no pin"}</small></span>
+    <span className="investigation-location-selector-copy"><strong>{location.name}</strong><small>{monthYear(location.evidence_date)} · {categoryRowLabels[location.category]}{!location.coordinates && " · No pin"}</small></span>
     <ChevronRight className="investigation-location-selector-chevron" size={18} aria-hidden="true" />
   </button>;
 }
@@ -100,15 +105,22 @@ export function InvestigationLocations({ investigationId, onOpenReport }: { inve
   return <section id="field-observation-map" className="investigation-locations investigation-section" aria-labelledby="investigation-locations-title">
     <div className="investigation-section-heading"><span className="investigation-locations-heading-icon"><MapPin size={22} aria-hidden="true" /></span><h2 id="investigation-locations-title">Field observation map</h2></div>
     <p className="investigation-locations-intro gap-mobile-body">Markers show generalized areas from historical reporting and recent public reports. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p>
-    <div className="investigation-map-filters" role="group" aria-label="Map evidence categories"><button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All records</button>{(Object.keys(categoryLabels) as InvestigationLocation["category"][]).map((category) => <button type="button" key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{categoryLabels[category]} ({entries.filter((entry) => entry.category === category).length})</button>)}</div>
+    <div className="investigation-map-filters" role="group" aria-label="Map evidence categories"><button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All records ({entries.length})</button>{(Object.keys(categoryLabels) as InvestigationLocation["category"][]).map((category) => <button type="button" key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{categoryLabels[category]} ({entries.filter((entry) => entry.category === category).length})</button>)}</div>
     {visibleEntries.length ? <>
     <div ref={workspaceRef} className="investigation-map-workspace">
       <div className="investigation-locations-map" role="group" aria-label="Map of approximate historical reference areas">
         <div className="investigation-map-canvas">
           {mappedEntries.length ? (Map ? <Map locations={mappedEntries} selectedId={selected.id} onSelect={setSelectedId} wheelZoom={isFullscreen} /> : <div className="investigation-map-loading">Loading map…</div>) : <div className="investigation-map-loading">These broad reports have no map pin.</div>}
+          {mappedEntries.length > 0 && <div className="investigation-map-legend" aria-label="Map marker legend">
+            {mappedEntries.some((location) => location.status === "reported" && location.category === "historical_published_report") && <span><i className="is-reported"><Dog size={12} aria-hidden="true" /></i> Historical published report</span>}
+            {mappedEntries.some((location) => location.category === "recent_public_report") && <span><i className="is-recent"><Dog size={12} aria-hidden="true" /></i> Recent public report</span>}
+            {mappedEntries.some((location) => location.status === "reported" && (location.category === "official_animal_services_record" || location.category === "crossover_firsthand")) && <span><i className="is-reported"><Dog size={12} aria-hidden="true" /></i> Other record</span>}
+            {mappedEntries.some((location) => location.status === "exploratory") && <span><i className="is-exploratory"><MapPin size={12} aria-hidden="true" /></i> Context only</span>}
+            <span><i className="is-selected" /> Selected marker</span>
+          </div>}
           <button type="button" className="investigation-map-fullscreen" onClick={toggleFullscreen} aria-label={isFullscreen ? "Exit fullscreen map" : "View map fullscreen"} aria-pressed={isFullscreen} title={isFullscreen ? "Exit fullscreen map" : "View map fullscreen"}>{isFullscreen ? <Shrink size={17} aria-hidden="true" /> : <Expand size={17} aria-hidden="true" />}<span>{isFullscreen ? "Exit fullscreen" : "Fullscreen"}</span></button>
         </div>
-        <div className="investigation-location-selectors" role="group" aria-label="Map evidence records">{visibleEntries.map((location) => <InvestigationLocationSelector key={location.id} location={location} selected={location.id === selected.id} onSelect={setSelectedId} />)}</div>
+        <div className="investigation-location-list"><div className="investigation-location-list-heading"><h3>Reported locations</h3><span>{visibleEntries.length} {visibleEntries.length === 1 ? "location" : "locations"}</span></div><div className="investigation-location-selectors" role="group" aria-label="Map evidence records">{visibleEntries.map((location) => <InvestigationLocationSelector key={location.id} location={location} selected={location.id === selected.id} onSelect={setSelectedId} />)}</div></div>
       </div>
       <InvestigationLocationDetails location={selected} onOpenReport={onOpenReport} />
     </div></> : <p className="investigation-map-empty">No records in this category yet.</p>}
