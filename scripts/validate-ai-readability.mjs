@@ -55,6 +55,13 @@ for (const path of [`/reality/${featuredGap.slug}/our-findings/`, "/work/dogs-lo
 
 for (const gap of gaps.filter((item) => item.active && item.work_ids?.length)) {
   const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");
+  if (gap.id === "dogs-safe-placement") {
+    for (const path of ["research/", "ways-to-help/", "improvements/", "our-findings/", "/work/dogs-locations-map/"]) {
+      const href = path.startsWith("/") ? path : `/reality/${gap.slug}/${path}`;
+      if (!gapHtml.includes(`href="${href}"`)) throw new Error(`The dog gap page does not link to ${href}.`);
+    }
+    continue;
+  }
   for (const workId of gap.work_ids) {
     if (!gapHtml.includes(`href="/work/${workId}/"`)) {
       throw new Error(`The gap page does not link to work item ${workId}.`);

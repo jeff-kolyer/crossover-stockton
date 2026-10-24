@@ -1,5 +1,9 @@
-import { RotateCcw } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, ChevronUp, RotateCcw } from "lucide-react";
 import { useState } from "react";
+import { navigateInternalLink } from "../lib/internalLink";
+import projectsData from "../data/projects.json";
+import type { CapacityProject } from "../types";
+import { effectiveCareSettings, factorExplanations, improvementAdjustments, modeledImprovements } from "../lib/dogCareImprovements";
 import {
   calculateDogCareScenario,
   defaultDogCareSettings,
@@ -8,13 +12,24 @@ import {
   type DogCareSettings,
 } from "../lib/dogCareScenario";
 
-export function DogCareScenario({ heading = "What determines how many dogs are on the street without adequate care?", compactHeader = false }: { heading?: string; compactHeader?: boolean }) {
-  const [settings, setSettings] = useState<DogCareSettings>({ ...defaultDogCareSettings });
+const projects = projectsData as CapacityProject[];
+const projectStage = (project: CapacityProject) => project.development_stage.replace(/_/g, " ").replace(/^./, (letter) => letter.toUpperCase());
+
+export function DogCareScenario({ heading = "What determines how many dogs are on the street without adequate care?", compactHeader = false, factorHref, onOpenFactor, improvementHref, onOpenImprovement }: { heading?: string; compactHeader?: boolean; factorHref?: (key: DogCareFactor) => string; onOpenFactor?: (key: DogCareFactor) => void; improvementHref?: (id: string) => string; onOpenImprovement?: (id: string) => void }) {
+  const [manualSettings, setManualSettings] = useState<DogCareSettings>({ ...defaultDogCareSettings });
+  const [selectedImprovements, setSelectedImprovements] = useState<string[]>([]);
+  const [expandedFactor, setExpandedFactor] = useState<DogCareFactor | null>(null);
+  const adjustments = improvementAdjustments(selectedImprovements);
+  const settings = effectiveCareSettings(manualSettings, selectedImprovements);
   const result = calculateDogCareScenario(settings);
 
   const update = (key: DogCareFactor, value: number) => {
-    setSettings((current) => ({ ...current, [key]: value }));
+    // Keep the user's chosen displayed value while retaining selected improvements.
+    setManualSettings((current) => ({ ...current, [key]: value - adjustments[key] }));
   };
+
+  const toggleImprovement = (id: string) => setSelectedImprovements((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  const reset = () => { setManualSettings({ ...defaultDogCareSettings }); setSelectedImprovements([]); };
 
   const stages = [
     { label: "Detected", detail: "of those needing response", value: result.detected },
@@ -46,19 +61,26 @@ export function DogCareScenario({ heading = "What determines how many dogs are o
               <h3>The factors that affect this gap</h3>
               <p>Relative levels, not measured Stockton rates.</p>
             </div>
-            <button className="dog-care-reset" type="button" onClick={() => setSettings({ ...defaultDogCareSettings })}><RotateCcw size={14} aria-hidden="true" /> Reset</button>
+            <button className="dog-care-reset" type="button" onClick={reset}><RotateCcw size={14} aria-hidden="true" /> Reset</button>
           </div>
           <div className="dog-care-mobile-result" aria-live="polite"><strong>{result.withoutAdequateCare} of 100</strong> without adequate care <span>·</span> <strong>{result.receivingCare} receiving care</strong></div>
           <div className="dog-care-factor-list">
-            {dogCareFactors.map((factor) => (
-              <div className="dog-care-factor" key={factor.key}>
+            {dogCareFactors.map((factor) => {
+              const expanded = expandedFactor === factor.key;
+              const relevant = modeledImprovements.filter((item) => item.adjustments[factor.key] !== undefined);
+              const appliedGain = settings[factor.key] - Math.max(0, Math.min(100, manualSettings[factor.key]));
+              return <div className="dog-care-factor" key={factor.key}>
                 <div className="dog-care-factor-label">
-                  <label htmlFor={`dog-care-${factor.key}`}>{factor.label}</label>
-                  <output htmlFor={`dog-care-${factor.key}`}>{settings[factor.key]} / 100</output>
+                  <button className="dog-care-factor-title-button" type="button" aria-expanded={expanded} aria-controls={`dog-care-detail-${factor.key}`} aria-label={`${expanded ? "Collapse" : "Expand"} ${factor.label}${relevant.length ? `, ${relevant.length} related improvement${relevant.length === 1 ? "" : "s"}` : ""}`} onClick={() => setExpandedFactor(expanded ? null : factor.key)}>
+                    <span className="dog-care-factor-heading"><span className="dog-care-factor-name">{factor.label}</span>{relevant.length > 0 && <span className="dog-care-improvement-count" role="img" aria-label={`${relevant.length} related improvement${relevant.length === 1 ? "" : "s"}`} title={`${relevant.length} related improvement${relevant.length === 1 ? "" : "s"}`}>{relevant.length}</span>}</span>
+                    <span className="dog-care-factor-values">{selectedImprovements.some((id) => modeledImprovements.some((item) => item.id === id && item.adjustments[factor.key] !== undefined)) && <span className="dog-care-applied-gain">+{appliedGain} applied</span>}<output htmlFor={`dog-care-${factor.key}`}>{settings[factor.key]} / 100</output></span>
+                    {expanded ? <ChevronUp size={17} aria-hidden="true" /> : <ChevronDown size={17} aria-hidden="true" />}
+                  </button>
                 </div>
                 <p>{factor.description}</p>
                 <input
                   id={`dog-care-${factor.key}`}
+                  aria-label={factor.label}
                   type="range"
                   min="0"
                   max="100"
@@ -67,8 +89,26 @@ export function DogCareScenario({ heading = "What determines how many dogs are o
                   aria-valuetext={`${settings[factor.key]} out of 100, illustrative relative level`}
                   onChange={(event) => update(factor.key, Number(event.target.value))}
                 />
+                <div className="dog-care-factor-details" id={`dog-care-detail-${factor.key}`} hidden={!expanded}>
+                  <p>{factorExplanations[factor.key]}</p>
+                  {relevant.length > 0 && <>
+                    <h4>Coming and proposed improvements</h4>
+                    <div className="dog-care-improvement-list">{relevant.map((improvement) => {
+                      const project = projects.find((item) => item.id === improvement.projectId);
+                      if (!project) return null;
+                      const applied = selectedImprovements.includes(improvement.id);
+                      const effect = Object.entries(improvement.adjustments).map(([key, value]) => `+${value} ${dogCareFactors.find((item) => item.key === key)?.label.toLowerCase()}`).join(" · ");
+                      return <div className="dog-care-improvement" key={improvement.id}>
+                        <div><strong>{project.title}</strong><p>{project.capacity_summary.how_it_helps}</p><small>{projectStage(project)} · Illustrative model effect: {effect}</small>{improvementHref && onOpenImprovement && <a href={improvementHref(project.id)} onClick={(event) => navigateInternalLink(event, () => onOpenImprovement(project.id))}>Project details <ArrowRight size={13} aria-hidden="true" /></a>}</div>
+                        <button type="button" aria-pressed={applied} onClick={() => toggleImprovement(improvement.id)}>{applied && <Check size={15} aria-hidden="true" />}{applied ? "Applied" : "Apply"}</button>
+                      </div>;
+                    })}</div>
+                    <p className="dog-care-improvement-note">Applying a project changes this illustrative scenario only. These point effects are assumptions, not delivered capacity, measured outcomes, or official projections.</p>
+                  </>}
+                  {factorHref && onOpenFactor && <a className="dog-care-factor-detail-link" href={factorHref(factor.key)} onClick={(event) => navigateInternalLink(event, () => onOpenFactor(factor.key))}>Explore this key factor <ArrowRight size={15} aria-hidden="true" /></a>}
+                </div>
               </div>
-            ))}
+            })}
           </div>
         </div>
 

@@ -12,6 +12,7 @@ interface ActionModalProps {
   onClose: () => void;
   onOpenGap: (slug: string) => void;
   onOpenWork: (workId: string) => void;
+  onOpenDogSection: (section: "ways-to-help" | "our-findings", anchor?: string) => void;
   onOpenReport: (id: string) => void;
 }
 
@@ -19,7 +20,7 @@ const gaps = gapsData as GapRecord[];
 const orgs = orgsData as OrgRecord[];
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 
-export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenReport }: ActionModalProps) {
+export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogSection, onOpenReport }: ActionModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const relatedGap = gaps.find((gap) => gap.id === action.gap_ids[0]);
@@ -89,6 +90,11 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenRepo
   function handleHandoff() {
     if (action.related_work_id) {
       onClose();
+      const dogDestination = action.next_url?.match(/^\/reality\/too-many-dogs-still-lack-safe-placement\/(ways-to-help|our-findings)\/(?:#(.+))?$/);
+      if (dogDestination) {
+        onOpenDogSection(dogDestination[1] as "ways-to-help" | "our-findings", dogDestination[2]);
+        return;
+      }
       if (action.related_anchor && action.next_url) {
         window.location.assign(action.next_url);
         return;

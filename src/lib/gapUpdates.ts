@@ -5,6 +5,7 @@ import workData from "../data/work.json";
 import type { DogsResearchBaseline, EvidenceRecord, GapRecord, WorkRecord } from "../types";
 import { sourceLinkLabel } from "./sourceLinks";
 import { updateIcon, updateTypeLabel } from "./updatePresentation";
+import { dogGapDestinationHref, legacyDogWorkDestination } from "./dogGapLegacy";
 
 export type GapUpdateDestination =
   | { kind: "report"; id: string }
@@ -118,5 +119,7 @@ export function gapUpdateHref(destination?: GapUpdateDestination) {
   if (!destination) return undefined;
   if (destination.kind === "external") return destination.url;
   if (destination.kind === "report") return `/reports/${destination.id}/`;
+  const dogDestination = legacyDogWorkDestination(destination.id, destination.anchor);
+  if (dogDestination) return dogGapDestinationHref(dogDestination);
   return `/work/${destination.id}/#${destination.anchor}`;
 }

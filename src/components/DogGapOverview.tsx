@@ -11,11 +11,12 @@ interface DogGapOverviewProps {
   onOpenSources: () => void;
 }
 
-const researchHref = "/work/dogs-public-source-review/";
-const investigationHref = "/work/dogs-map-placement-barriers/";
-const solutionsHref = "/work/dogs-solutions/";
-const mapHref = "/work/dogs-locations-map/";
-const fieldworkHref = "/work/dogs-direct-field-work/";
+const researchHref = "/reality/too-many-dogs-still-lack-safe-placement/research/";
+const investigationHref = "/reality/too-many-dogs-still-lack-safe-placement/our-findings/";
+const pathwaysHref = "/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/";
+const solutionsHref = "/reality/too-many-dogs-still-lack-safe-placement/improvements/";
+const mapHref = "/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/";
+const fieldworkHref = "/reality/too-many-dogs-still-lack-safe-placement/our-findings/";
 const measurements = dogsResearch.measurements;
 const measure = (id: string) => measurements.find((item) => item.id === id)?.value.toLocaleString() ?? "—";
 const projects = projectsData.filter((project) => project.gap_ids.includes("dogs-safe-placement"));
@@ -64,7 +65,7 @@ export function DogGapOverview({ onOpenWork, onOpenSources }: DogGapOverviewProp
             <li><strong>Doggie Day Out</strong><span>Inquiry sent; response and access unconfirmed</span></li>
             <li><strong>Foster or adoption</strong><span>Publicly advertised; current availability to verify</span></li>
           </ul>
-          <a href={investigationHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Explore the pathways <ArrowRight size={15} aria-hidden="true" /></a>
+          <a href={pathwaysHref} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers", "pathways-overview"))}>Explore the pathways <ArrowRight size={15} aria-hidden="true" /></a>
         </section>
 
         <section className="dog-equation-preview" id="dog-solutions">

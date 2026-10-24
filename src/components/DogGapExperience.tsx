@@ -16,13 +16,14 @@ import { DogsSolutionsContent } from "./DogsSolutionsContent";
 import { DogsInvestigationContent } from "./DogsInvestigationContent";
 import { DogsResearchContent } from "./DogsResearchContent";
 import { GenericGapImprovements, GenericGapOverview, GenericGapResearchIntro, GenericGapWaysToHelp } from "./GenericGapSections";
+import { KeyFactorsPage } from "./KeyFactorsPage";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 import "./DogGapOverview.css";
 import "./DogGapExperience.css";
 
-type Section = "overview" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+type Section = "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
 const tabs: { id: Section; label: string }[] = [
-  { id: "overview", label: "Overview" }, { id: "ways-to-help", label: "Ways to Help" },
+  { id: "overview", label: "Overview" }, { id: "key-factors", label: "Key Factors" }, { id: "ways-to-help", label: "Ways to Help" },
   { id: "improvements", label: "Improvements" }, { id: "our-findings", label: "Our Findings" },
   { id: "research", label: "Research" }, { id: "updates", label: "Updates" },
 ];
@@ -31,6 +32,10 @@ const sectionMenus = {
     { id: "summary", label: "Summary", Icon: FileText },
     { id: "system-model", label: "System model", Icon: BarChart3 },
     { id: "reported-locations", label: "Reported locations", Icon: MapPin },
+  ],
+  "key-factors": [
+    { id: "key-factors-intro", label: "Key factors", Icon: FileText },
+    { id: "key-factors-list", label: "Explore factors", Icon: BarChart3 },
   ],
   "ways-to-help": [
     { id: "pathways-overview", label: "How care is reached", Icon: FileText },
@@ -82,6 +87,7 @@ const genericSectionMenus = {
     { id: "reported-evidence", label: "What is documented", Icon: FileText },
     { id: "related-records", label: "Detailed records", Icon: FileText },
   ],
+  "key-factors": sectionMenus["key-factors"],
   "ways-to-help": [
     { id: "ways-intro", label: "Ways to help", Icon: FileText },
     { id: "ways-actions", label: "Current options", Icon: Users },
@@ -125,7 +131,7 @@ function DogGapOverviewMap() {
 }
 
 export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNavigate, onOpenWork, onOpenReport, onOpenAction }: {
-  gap: GapRecord; section: Section; onOpenSection: (section: Section) => void;
+  gap: GapRecord; section: Section; onOpenSection: (section: Section, anchor?: string) => void;
   onOpenGap: (slug: string) => void; onNavigate: (page: "reality") => void;
   onOpenWork: (id: string, anchor?: string) => void; onOpenReport: (id: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
@@ -173,19 +179,20 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
         {gap.artwork && <img className="dog-gap-photo" src={gap.artwork} alt={isDogGap ? "Dog related to the street dogs and access to care investigation" : gap.title} />}
       </section>
       <nav className="dog-gap-tabs" aria-label="Need sections">{tabs.filter((tab) => isDogGap || tab.id !== "our-findings").map((tab) => <a key={tab.id} href={tabLink(tab.id)} aria-current={section === tab.id ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => onOpenSection(tab.id))}>{tab.label}</a>)}</nav>
-      {section === "overview" && !isDogGap && <GenericGapOverview gap={gap} onOpenWork={onOpenWork} />}
+      {section === "overview" && !isDogGap && <GenericGapOverview gap={gap} onOpenWork={onOpenWork} onOpenKeyFactors={() => onOpenSection("key-factors")} />}
       {section === "overview" && isDogGap && <div className="dog-gap-overview">
         <section className="dog-gap-summary dog-gap-card" id="summary">
           <div><p className="dog-gap-eyebrow">Overview</p><h2>What is happening in Stockton?</h2><p>Public records establish substantial stray-dog intake, but do not tell us how many dogs currently need care, where they are, or what prevents them from reaching it.</p></div>
           <div className="dog-gap-kpis"><div><strong>{intake}</strong><b>Stray intakes</b><small>2024 · Animal Services multi-jurisdiction service area</small></div><div><strong>Unknown</strong><b>On streets now</b><small>No verified current census</small></div><div><strong>2</strong><b>Capacity projects</b><small>Shelter expansion and proposed Canine Campus · different stages</small></div></div>
         </section>
-        <div className="dog-gap-model-wrap"><DogCareScenario heading="Understand the issue" compactHeader />{localLink("improvements", "Explore related improvements", "dog-gap-model-link")}</div>
+        <div className="dog-gap-model-wrap"><DogCareScenario heading="Understanding the issue" compactHeader factorHref={(key) => `${tabLink("key-factors")}#factor-${key}`} onOpenFactor={(key) => onOpenSection("key-factors", `factor-${key}`)} improvementHref={(id) => `${tabLink("improvements")}#${id}`} onOpenImprovement={(id) => onOpenSection("improvements", id)} />{localLink("key-factors", "Explore all key factors", "dog-gap-model-link")}</div>
         <section className="dog-gap-locations dog-gap-card" id="reported-locations">
-          <div><p className="dog-gap-eyebrow">Reported locations</p><h2>Where dogs are being reported</h2><p>These dated, generalized public references help guide verification. They are not live dog locations or a count of dogs on the street.</p><ol>{locations.slice(0, 3).map((location) => <li key={location.id}><strong>{location.name}</strong><span>{fmt(location.evidence_date)} · {location.verification_status}</span></li>)}</ol><a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={16} /></a></div>
+          <div><p className="dog-gap-eyebrow">Reported locations</p><h2>Where dogs are being reported</h2><p>These dated, generalized public references help guide verification. They are not live dog locations or a count of dogs on the street.</p><ol>{locations.slice(0, 3).map((location) => <li key={location.id}><strong>{location.name}</strong><span>{fmt(location.evidence_date)} · {location.verification_status}</span></li>)}</ol><a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={16} /></a></div>
           <DogGapOverviewMap />
         </section>
-        <section className="dog-gap-related dog-gap-card" aria-label="Detailed investigation records"><p className="dog-gap-eyebrow">Detailed records</p><div>{(gap.work_ids ?? []).map((id) => { const item = getWork(id); return item && <a key={id} href={`/work/${id}/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork(id))}>{item.title} <ArrowRight size={15} /></a>; })}</div></section>
+        <section className="dog-gap-related dog-gap-card" aria-label="Detailed investigation records"><p className="dog-gap-eyebrow">Explore the investigation</p><div>{(["research", "ways-to-help", "improvements", "our-findings"] as const).map((destination) => <a key={destination} href={tabLink(destination)} onClick={(event) => navigateInternalLink(event, () => onOpenSection(destination))}>{{ research: "Research", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings" }[destination]} <ArrowRight size={15} /></a>)}<a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Locations map <ArrowRight size={15} /></a></div></section>
       </div>}
+      {section === "key-factors" && <KeyFactorsPage gap={gap} onOpenSection={onOpenSection} onOpenMap={() => onOpenWork("dogs-locations-map")} />}
       {section === "ways-to-help" && !isDogGap && <GenericGapWaysToHelp gap={gap} onOpenAction={onOpenAction} />}
       {section === "ways-to-help" && isDogGap && <div className="dog-gap-tab-content"><div className="dog-gap-tab-heading"><p className="dog-gap-eyebrow">Pathways to care</p><h2>Ways to Help</h2><p>Explore documented routes to care and participation. Each record separates an advertised opportunity, an attempted route, and a confirmed outcome.</p></div>{getWork("dogs-map-placement-barriers") && <DogsPathwaysContent item={getWork("dogs-map-placement-barriers")!} onOpenReport={onOpenReport} />}</div>}
       {section === "improvements" && !isDogGap && <GenericGapImprovements gap={gap} />}

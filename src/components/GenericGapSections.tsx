@@ -11,7 +11,7 @@ const orgs = orgsData as OrgRecord[];
 const projects = projectsData as CapacityProject[];
 const work = workData as WorkRecord[];
 
-export function GenericGapOverview({ gap, onOpenWork }: { gap: GapRecord; onOpenWork: (id: string) => void }) {
+export function GenericGapOverview({ gap, onOpenWork, onOpenKeyFactors }: { gap: GapRecord; onOpenWork: (id: string) => void; onOpenKeyFactors: () => void }) {
   const state = gap.current_state_items ?? [];
   return <div className="dog-gap-overview">
     <section className="dog-gap-summary dog-gap-card" id="summary">
@@ -25,6 +25,7 @@ export function GenericGapOverview({ gap, onOpenWork }: { gap: GapRecord; onOpen
         <div><h3><BarChart3 size={19} /> What public sources report</h3><ul>{gap.what_we_are_seeing.map((item) => <li key={item}>{item}</li>)}</ul></div>
         <div><h3><FileText size={19} /> Barriers to examine</h3><ul>{gap.contributing_factors.map((item) => <li key={item}>{item}</li>)}</ul></div>
       </div>
+      <a className="generic-gap-key-link" href={`/reality/${gap.slug}/key-factors/`} onClick={(event) => navigateInternalLink(event, onOpenKeyFactors)}>Explore key factors <ArrowRight size={16} aria-hidden="true" /></a>
     </section>
     <section className="dog-gap-card generic-gap-evidence" id="reported-evidence">
       <p className="dog-gap-eyebrow">Evidence so far</p><h2>What is documented?</h2>

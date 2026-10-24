@@ -200,7 +200,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
           {isHome && (
             <>
               <div className="hero-action-row">
-                <button className="hero-investigation-button" type="button" onClick={() => onOpenWork(investigationWork?.id ?? "dogs-map-placement-barriers")}>
+                <button className="hero-investigation-button" type="button" onClick={() => onOpenGapSection("too-many-dogs-still-lack-safe-placement", "our-findings")}>
                   <Search size={20} aria-hidden="true" />
                   <span>Explore the investigation</span>
                   <ArrowRight size={18} aria-hidden="true" />
@@ -293,7 +293,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
           </div>
           <div className="home-work-grid">
             <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><Search size={22} /></span><h3>Our Findings</h3></div><p>Read the questions we're testing, what the evidence shows, and what remains unverified.</p><div className="home-work-links"><a className="home-work-primary" href={`/reality/${currentDogGap.slug}/our-findings/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(currentDogGap.slug, "our-findings"))}>Explore findings <ArrowRight size={15} /></a></div></article>
-            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><MapPin size={22} /></span><h3>Explore the Map</h3></div><p>Explore dated, generalized report areas. They do not show where dogs are now.</p><div className="home-work-links"><a className="home-work-primary" href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={15} /></a></div></article>
+            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><MapPin size={22} /></span><h3>Explore the Map</h3></div><p>Explore dated, generalized report areas. They do not show where dogs are now.</p><div className="home-work-links"><a className="home-work-primary" href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={15} /></a></div></article>
             <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><HandHeart size={22} /></span><h3>Ways to Help</h3></div><p>See possible routes to care and what is still unverified about access and outcomes.</p><div className="home-work-links"><a className="home-work-primary" href={`/reality/${currentDogGap.slug}/ways-to-help/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(currentDogGap.slug, "ways-to-help"))}>Explore ways to help <ArrowRight size={15} /></a></div></article>
           </div>
         </div>

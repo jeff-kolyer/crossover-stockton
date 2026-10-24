@@ -42,9 +42,11 @@ interface AboutPageProps {
   onPrimaryAction: () => void;
   onOpenWork: (workId: string) => void;
   onOpenGap: (slug: string) => void;
+  onOpenResearch: () => void;
+  onOpenFindings: () => void;
 }
 
-export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }: AboutPageProps) {
+export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap, onOpenResearch, onOpenFindings }: AboutPageProps) {
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
 
   return (
@@ -91,8 +93,8 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                   <h3>Examine the evidence</h3>
                   <p>We gather public records, news reports, and organizational claims. AI helps us compare sources, question assumptions, and distinguish what we know from what remains uncertain.</p>
                   <div className="about-step-links">
-                    <a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See research <ArrowRight size={16} aria-hidden="true" /></a>
-                    <a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
+                    <a href="/reality/too-many-dogs-still-lack-safe-placement/research/" onClick={(event) => navigateInternalLink(event, onOpenResearch)}>See research <ArrowRight size={16} aria-hidden="true" /></a>
+                    <a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
                   </div>
                 </div>
               </li>
@@ -103,7 +105,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
                   <h3>Test the pathways</h3>
                   <p>We don't just recommend ways to help. <strong>We try them ourselves</strong>—contacting organizations, submitting applications, visiting in person, and documenting what actually happens.</p>
                   <div className="about-step-links">
-                    <a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
+                    <a href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
                   </div>
                 </div>
               </li>
@@ -126,29 +128,29 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
               <p>We're examining reports about Stockton's street dogs and what it actually takes to help. These three questions guide our work as we gather evidence, test existing pathways, and explore practical solutions.</p>
               <div className="about-spotlight-questions">
                 <div className="about-spotlight-question">
-                  <h3><button type="button" aria-expanded={openQuestion === 1} aria-controls="about-question-1" onClick={() => setOpenQuestion(openQuestion === 1 ? null : 1)}><span className="about-step-number">1</span><span>Are the reported needs real, and what does the evidence establish?</span>{openQuestion === 1 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
+                  <h3><button type="button" aria-expanded={openQuestion === 1} aria-controls="about-question-1" onClick={() => setOpenQuestion(openQuestion === 1 ? null : 1)}><span className="about-step-number">1</span><span>What's actually happening?</span>{openQuestion === 1 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
                   <div className="about-spotlight-answer" id="about-question-1" hidden={openQuestion !== 1}>
                     <p>Public records document 3,106 stray-dog intakes in 2024 across the Stockton Animal Services service area. But historical intake figures don't establish how many dogs currently need help on Stockton streets.</p>
                     <p>We're examining public records and local reports to understand what is documented, what remains uncertain, and where assistance may be needed.</p>
-                    <div className="about-step-links"><a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See the research <ArrowRight size={16} aria-hidden="true" /></a><a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a></div>
+                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/research/" onClick={(event) => navigateInternalLink(event, onOpenResearch)}>See the research <ArrowRight size={16} aria-hidden="true" /></a><a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a></div>
                   </div>
                 </div>
                 <div className="about-spotlight-question">
-                  <h3><button type="button" aria-expanded={openQuestion === 2} aria-controls="about-question-2" onClick={() => setOpenQuestion(openQuestion === 2 ? null : 2)}><span className="about-step-number">2</span><span>Can someone who wants to help actually find a working pathway?</span>{openQuestion === 2 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
+                  <h3><button type="button" aria-expanded={openQuestion === 2} aria-controls="about-question-2" onClick={() => setOpenQuestion(openQuestion === 2 ? null : 2)}><span className="about-step-number">2</span><span>What happens when someone tries to help?</span>{openQuestion === 2 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
                   <div className="about-spotlight-answer" id="about-question-2" hidden={openQuestion !== 2}>
                     <p>We're testing publicly advertised ways to help rather than simply recommending them.</p>
                     <p>We've submitted volunteer inquiries and visited Stockton Animal Services in person. These attempts have produced firsthand observations, but successful volunteer participation has not yet been confirmed.</p>
                     <p>We're documenting what happens so others can make better-informed attempts to help.</p>
-                    <div className="about-step-links"><a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a></div>
+                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a></div>
                   </div>
                 </div>
                 <div className="about-spotlight-question">
-                  <h3><button type="button" aria-expanded={openQuestion === 3} aria-controls="about-question-3" onClick={() => setOpenQuestion(openQuestion === 3 ? null : 3)}><span className="about-step-number">3</span><span>If we had unlimited resources and technology, would we know how to apply them effectively?</span>{openQuestion === 3 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
+                  <h3><button type="button" aria-expanded={openQuestion === 3} aria-controls="about-question-3" onClick={() => setOpenQuestion(openQuestion === 3 ? null : 3)}><span className="about-step-number">3</span><span>What would it take to solve the problem?</span>{openQuestion === 3 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
                   <div className="about-spotlight-answer" id="about-question-3" hidden={openQuestion !== 3}>
-                    <p>Not yet. We need a clearer understanding of where dogs currently need assistance, what care is already available, and which barriers prevent help from reaching them.</p>
+                    <p>We don't know yet. We need a clearer understanding of where dogs currently need assistance, what care is already available, and which barriers prevent help from reaching them.</p>
                     <p>We're examining existing improvements and exploring how additional people, better coordination, AI, robotics, and other emerging capabilities could make care more effective.</p>
                     <p>We distinguish promising ideas from solutions that have actually been tested.</p>
-                    <div className="about-step-links"><a href="/work/dogs-solutions/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-solutions"))}>Explore improvements and potential solutions <ArrowRight size={16} aria-hidden="true" /></a></div>
+                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/improvements/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-solutions"))}>Explore improvements and potential solutions <ArrowRight size={16} aria-hidden="true" /></a></div>
                   </div>
                 </div>
               </div>
@@ -169,7 +171,7 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
               <p className="about-eyebrow"><MapPin size={18} aria-hidden="true" /> Stockton, CA</p>
               <h3>Real people. Real needs.</h3>
               <p>We're starting in Stockton by investigating street dogs and access to care—examining reported conditions, existing responses, and what prevents people from helping.</p>
-              <a className="about-needs-link" href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Explore the investigation <ArrowRight size={16} aria-hidden="true" /></a>
+              <a className="about-needs-link" href="/reality/too-many-dogs-still-lack-safe-placement/" onClick={(event) => navigateInternalLink(event, () => onOpenGap("too-many-dogs-still-lack-safe-placement"))}>Explore the investigation <ArrowRight size={16} aria-hidden="true" /></a>
             </aside>
           </section>
 

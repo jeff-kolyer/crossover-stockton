@@ -9,6 +9,13 @@ const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.m
 const stories = JSON.parse(await readFile(new URL("../src/data/stories.json", import.meta.url), "utf8"));
 const work = JSON.parse(await readFile(new URL("../src/data/work.json", import.meta.url), "utf8"));
 const records = JSON.parse(await readFile(new URL("../src/data/records.json", import.meta.url), "utf8"));
+const dogGapBase = "/reality/too-many-dogs-still-lack-safe-placement/";
+const legacyDogWorkSections = {
+  "dogs-public-source-review": "research",
+  "dogs-map-placement-barriers": "our-findings",
+  "dogs-solutions": "improvements",
+  "dogs-direct-field-work": "our-findings",
+};
 
 const pages = [
   ["/", "Crossover Stockton", "See what Stockton needs, who is responding, and practical ways to help."],
@@ -21,6 +28,7 @@ const pages = [
   ...gaps.filter((gap) => gap.active).flatMap((gap) => [
     [`/reality/${gap.slug}/`, `${gap.title} — Reality | Crossover Stockton`, gap.summary],
     [`/reality/${gap.slug}/ways-to-help/`, `${gap.title} — Ways to Help | Crossover Stockton`, `Ways to help with ${gap.title.toLowerCase()}.`],
+    [`/reality/${gap.slug}/key-factors/`, `${gap.title} — Key Factors | Crossover Stockton`, `Factors affecting ${gap.title.toLowerCase()}.`],
     [`/reality/${gap.slug}/improvements/`, `${gap.title} — Improvements | Crossover Stockton`, `Projects and possibilities related to ${gap.title.toLowerCase()}.`],
     ...(gap.investigation_status === "investigating" ? [[`/reality/${gap.slug}/our-findings/`, `${gap.title} — Our Findings | Crossover Stockton`, `Crossover's investigation of ${gap.title.toLowerCase()}.`]] : []),
     [`/reality/${gap.slug}/research/`, `${gap.title} — Research | Crossover Stockton`, `Research and evidence for ${gap.title.toLowerCase()}.`],
@@ -30,7 +38,7 @@ const pages = [
   ...stories.filter((story) => story.active).map((story) => [
     `/stories/${story.slug}/`, `${story.title} | Crossover Stockton`, story.summary,
   ]),
-  ...work.map((item) => [`/work/${item.id}/`, `${item.title} | Crossover Stockton`, item.summary ?? item.title ?? "Crossover Stockton's work in the community."]),
+  ...work.filter((item) => !legacyDogWorkSections[item.id]).map((item) => [`/work/${item.id}/`, `${item.title} | Crossover Stockton`, item.summary ?? item.title ?? "Crossover Stockton's work in the community."]),
   ...records.filter((record) => record.record_type === "field_report").map((record) => [
     `/reports/${encodeURIComponent(record.id)}/`, `${record.title} | Crossover Stockton`, record.summary ?? record.title,
   ]),
@@ -100,6 +108,14 @@ try {
     await mkdir(new URL(`.${path}`, dist), { recursive: true });
     await writeFile(target, html);
     await writeFile(new URL(`.${path}page.txt`, dist), `${title}\n${url}\n\n${plainTextFromHtml(content, url)}\n`);
+  }
+
+  for (const [workId, section] of Object.entries(legacyDogWorkSections)) {
+    const path = `/work/${workId}/`;
+    const target = `${dogGapBase}${section}/`;
+    const redirect = `<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="robots" content="noindex" /><meta http-equiv="refresh" content="0; url=${target}" /><link rel="canonical" href="${origin}${target}" /><title>Moved | Crossover Stockton</title><script>const anchor=decodeURIComponent(location.hash.slice(1));let path=${JSON.stringify(target)};let hash="";if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor==="field-observation-map"){path="/work/dogs-locations-map/";hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor.startsWith("pathways-")){path=${JSON.stringify(`${dogGapBase}ways-to-help/`)};hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&(anchor.startsWith("investigation-")||anchor==="field-observation-procedure")){hash=anchor}else if(${JSON.stringify(workId)}==="dogs-direct-field-work"&&anchor){hash=anchor.includes("records-request")?"investigation-records-request":"investigation-records"}else if(anchor){hash=anchor}location.replace(path+location.search+(hash?"#"+encodeURIComponent(hash):""))</script></head><body><p>This page moved to <a href="${target}">${target}</a>.</p></body></html>`;
+    await mkdir(new URL(`.${path}`, dist), { recursive: true });
+    await writeFile(new URL(`.${path}index.html`, dist), redirect);
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([path]) => `  <url><loc>${origin}${escapeHtml(path)}</loc></url>`).join("\n")}\n</urlset>\n`;

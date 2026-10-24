@@ -71,7 +71,7 @@ export function DogsSolutionsContent({ item, onOpenReport }: { item: WorkRecord;
       <div className="research-section-heading work-content-heading"><h2>Ideas to test</h2></div>
       <p className="gap-mobile-body">These are hypotheses, not operating programs or demonstrated solutions. Pathway testing will show which barriers need a response.</p>
       <ul className="solution-ideas"><li><strong>Make a help route easier to follow.</strong> If volunteer inquiries stall, clearer requirements and response tracking may help. First verify where the current route breaks.</li><li><strong>Make report outcomes visible.</strong> If field-call records show unresolved handoffs, a documented status trail may help people coordinate. First verify what the records establish.</li></ul>
-      <p className="gap-mobile-body"><a href="/work/dogs-map-placement-barriers/">See pathway evaluations <ArrowRight size={15} aria-hidden="true" /></a></p>
+      <p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/">See pathway evaluations <ArrowRight size={15} aria-hidden="true" /></a></p>
     </section>
   </div>;
 }

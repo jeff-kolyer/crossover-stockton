@@ -119,8 +119,8 @@ export function DogsResearchContent({ item }: { item: WorkRecord; onOpenReport: 
         {recordsRequest && <p className="gap-mobile-body">Field-call records requested {formatDate(recordsRequest.occurred_at)}. {recordsRequest.outcome?.summary}</p>}
         <div className="research-sources">
           {stray && <SourceLink recordId={stray.source_record_id} label="Official 2024 kennel report" />}
-          {recordsRequest?.work_id && <a className="research-source" href={`/work/${recordsRequest.work_id}/#${recordsRequest.id}`}>View request activity <ArrowRight size={14} aria-hidden="true" /></a>}
-          <a className="research-source" href="/work/dogs-map-placement-barriers/#investigation-questions">Explore the investigation <ArrowRight size={14} aria-hidden="true" /></a>
+          {recordsRequest?.work_id && <a className="research-source" href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records-request">View request activity <ArrowRight size={14} aria-hidden="true" /></a>}
+          <a className="research-source" href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-questions">Explore the investigation <ArrowRight size={14} aria-hidden="true" /></a>
         </div>
       </aside>
       <div className="research-detail-grid"><div className="research-detail-copy">
@@ -147,18 +147,18 @@ export function DogsResearchContent({ item }: { item: WorkRecord; onOpenReport: 
     <Section id="research-factors" title="What the evidence cannot yet tell us" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
       <div className="research-factor-list">
         <p className="gap-mobile-body"><strong>Dogs entering street need.</strong> The 2024 report counts stray intake events across a multi-jurisdiction area; a current Stockton street population is unknown.</p>
-        <p className="gap-mobile-body"><strong>Observation and reporting.</strong> Published reports describe sightings and encounters; the share of dogs identified and reported is unknown. <a href="/work/dogs-locations-map/">Review the historical map</a>.</p>
+        <p className="gap-mobile-body"><strong>Observation and reporting.</strong> Published reports describe sightings and encounters; the share of dogs identified and reported is unknown. <a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/">Review the historical map</a>.</p>
         <p className="gap-mobile-body"><strong>Response to reports.</strong> Field-call records have been requested. The number of reports that lead to a response or resolved need is unknown.</p>
         <p className="gap-mobile-body"><strong>Shelter capacity.</strong> Annual intakes and dispositions establish past throughput; current open places, staffing, and time waiting are unknown.</p>
         <p className="gap-mobile-body"><strong>Foster and rescue capacity.</strong> The report records rescue transfers, but current available places and outcomes after transfer are unknown.</p>
         <p className="gap-mobile-body"><strong>Adoption and reunification.</strong> Historical adoption and return counts are available; current access, delays, and outcomes for individual dogs are unknown.</p>
         <p className="gap-mobile-body"><strong>Prevention.</strong> Spay/neuter service events are reported, but current access and any effect on future placement need are unknown.</p>
       </div>
-      <p className="gap-mobile-body"><a className="research-source" href="/work/dogs-map-placement-barriers/">See pathway evaluations <ArrowRight size={14} aria-hidden="true" /></a></p>
+      <p className="gap-mobile-body"><a className="research-source" href="/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/">See pathway evaluations <ArrowRight size={14} aria-hidden="true" /></a></p>
     </Section>
 
     <Section id="research-improvements" title="Improvements under review" card>
-      <p className="gap-mobile-body">The full inventory of facilities, contracts, and programs is now tracked in <a href="/work/dogs-solutions/#solutions-improvements">Solutions <ArrowRight size={14} aria-hidden="true" /></a>. Project stages do not establish delivered care.</p>
+      <p className="gap-mobile-body">The full inventory of facilities, contracts, and programs is now tracked in <a href="/reality/too-many-dogs-still-lack-safe-placement/improvements/#solutions-improvements">Improvements <ArrowRight size={14} aria-hidden="true" /></a>. Project stages do not establish delivered care.</p>
     </Section>
 
     <Section id="research-sources" title="Research & Sources" icon={<FileText size={20} aria-hidden="true" />}>

@@ -30,7 +30,7 @@ function EvidenceLink({ recordId, onOpenReport, label }: { recordId: string; onO
   const record = recordById.get(recordId);
   if (!record) return null;
   if (record.record_type === "field_report") return <a className="investigation-source" href={`/reports/${recordId}/`} onClick={(event) => { event.preventDefault(); onOpenReport(recordId); }}>{label || "Read Crossover field report"} <ArrowRight size={14} aria-hidden="true" /></a>;
-  if (record.record_type === "activity" && record.work_id) return <a className="investigation-source" href={`/work/${record.work_id}/#${recordId}`}>{label || `Activity: ${record.title}`} <ArrowRight size={14} aria-hidden="true" /></a>;
+  if (record.record_type === "activity" && record.work_id) return <a className="investigation-source" href={`/reality/too-many-dogs-still-lack-safe-placement/our-findings/#${recordId.includes("records-request") ? "investigation-records-request" : "investigation-records"}`}>{label || `Activity: ${record.title}`} <ArrowRight size={14} aria-hidden="true" /></a>;
   if (record.source.url) return <a className="investigation-source" href={record.source.url} target="_blank" rel="noreferrer">{label || `View source: ${record.source.publisher || record.title}`} <ArrowRight size={14} aria-hidden="true" /></a>;
   return <span className="investigation-source-note">Source: {record.source.publisher || "Internal Crossover record"}</span>;
 }
@@ -83,7 +83,7 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       <p className="gap-mobile-body"><strong>{investigation.records_request.status}</strong> · {investigation.records_request.submitted_at}</p>
       <p className="gap-mobile-body">{investigation.records_request.summary}</p>
       <p className="gap-mobile-body"><strong>Next: Review Animal Services field-call records.</strong> Awaiting response. {investigation.records_request.review_plan}</p>
-      {recordById.get(investigation.records_request.activity_record_id) && <a className="investigation-source" href={`/work/dogs-direct-field-work/#${investigation.records_request.activity_record_id}`}>View records request activity <ArrowRight size={14} aria-hidden="true" /></a>}
+      {recordById.get(investigation.records_request.activity_record_id) && <a className="investigation-source" href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records-request">View records request activity <ArrowRight size={14} aria-hidden="true" /></a>}
     </InvestigationSection>}
 
     {showMap && <InvestigationLocations investigationId={investigation.id} onOpenReport={onOpenReport} />}

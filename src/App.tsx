@@ -15,6 +15,7 @@ import storiesData from "./data/stories.json";
 import workData from "./data/work.json";
 import recordsData from "./data/records.json";
 import type { EvidenceRecord, GapRecord, PublicActionRecord, StoryRecord } from "./types";
+import { dogGapBase, dogGapSlug, dogMapPath, legacyDogWorkDestination } from "./lib/dogGapLegacy";
 
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
@@ -26,7 +27,7 @@ type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" |
 interface RouteState {
   page: AppRoute;
   gapSlug?: string;
-  gapSection?: "overview" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+  gapSection?: "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   storySlug?: string;
   workId?: string;
   reportId?: string;
@@ -44,13 +45,14 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSou
 
 function routeFromPathname(pathname: string): RouteState {
   const normalized = pathname.replace(/\/+$/, "") || "/";
-  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(ways-to-help|improvements|our-findings|research|sources|updates)$/);
+  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(key-factors|ways-to-help|improvements|our-findings|research|sources|updates)$/);
   if (gapSection) {
     const gapSlug = decodeURIComponent(gapSection[1]);
     const gap = gaps.find((item) => item.slug === gapSlug);
     const requestedSection = gapSection[2] === "sources" ? "research" : gapSection[2];
     return { page: "gapDetail", gapSlug, gapSection: requestedSection === "our-findings" && gap?.investigation_status !== "investigating" ? "overview" : requestedSection as RouteState["gapSection"] };
   }
+  if (normalized === dogMapPath.replace(/\/$/, "")) return { page: "work", workId: "dogs-locations-map" };
   if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
     const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
     return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
@@ -60,7 +62,9 @@ function routeFromPathname(pathname: string): RouteState {
     return { page: "gapSources", gapSlug: decodeURIComponent(gapSlug) };
   }
   if (normalized.startsWith("/work/")) {
-    return { page: "work", workId: decodeURIComponent(normalized.replace("/work/", "")) };
+    const workId = decodeURIComponent(normalized.replace("/work/", ""));
+    const destination = legacyDogWorkDestination(workId);
+    return destination ? { page: "gapDetail", gapSlug: dogGapSlug, gapSection: destination.section } : { page: "work", workId };
   }
   if (normalized.startsWith("/reports/")) {
     return { page: "report", reportId: decodeURIComponent(normalized.replace("/reports/", "")) };
@@ -80,7 +84,15 @@ function routeFromPathname(pathname: string): RouteState {
   return { page: "home" };
 }
 
-function canonicalPathname(pathname: string) {
+function canonicalPathname(pathname: string, hash = "") {
+  const legacyWork = pathname.match(/^\/work\/([^/]+)\/?$/);
+  if (legacyWork) {
+    const workId = decodeURIComponent(legacyWork[1]);
+    const anchor = decodeURIComponent(hash.slice(1));
+    if (workId === "dogs-locations-map" || workId === "dogs-map-placement-barriers" && anchor === "field-observation-map") return `${dogMapPath}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
+    const destination = legacyDogWorkDestination(workId, anchor);
+    if (destination) return `${dogGapBase}${destination.section}/${destination.anchor ? `#${encodeURIComponent(destination.anchor)}` : ""}`;
+  }
   const sourceAlias = pathname.match(/^\/reality\/([^/]+)\/sources\/?$/);
   if (sourceAlias) return `/reality/${sourceAlias[1]}/research/`;
   const findings = pathname.match(/^\/reality\/([^/]+)\/our-findings\/?$/);
@@ -91,7 +103,7 @@ function canonicalPathname(pathname: string) {
 function titleForRoute(route: RouteState) {
   if (route.page === "gapDetail" || route.page === "gapUpdates" || route.page === "gapSources") {
     const gap = gaps.find((item) => item.slug === route.gapSlug);
-    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "Overview", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
+    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "Overview", "key-factors": "Key Factors", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
     return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
   if (route.page === "work") {
@@ -124,18 +136,33 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   useEffect(() => {
     function ensureCanonicalPath() {
-      const pathname = canonicalPathname(window.location.pathname);
-      if (pathname !== window.location.pathname) {
-        window.history.replaceState({}, "", `${pathname}${window.location.search}${window.location.hash}`);
+      const path = canonicalPathname(window.location.pathname, window.location.hash);
+      const [pathname, redirectedHash] = path.split("#");
+      if (pathname !== window.location.pathname || redirectedHash !== undefined) {
+        window.history.replaceState({}, "", `${pathname}${window.location.search}${redirectedHash === undefined ? window.location.hash : `#${redirectedHash}`}`);
       }
       return pathname;
     }
 
-    ensureCanonicalPath();
+    setRoute(routeFromPathname(ensureCanonicalPath()));
+    if (window.location.hash) requestAnimationFrame(() => requestAnimationFrame(() => {
+      const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+      if (target instanceof HTMLDetailsElement) target.open = true;
+      target?.scrollIntoView({ block: "start" });
+    }));
 
     function handlePopState() {
       setRoute(routeFromPathname(ensureCanonicalPath()));
-      requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+      requestAnimationFrame(() => {
+        const anchor = decodeURIComponent(window.location.hash.slice(1));
+        if (!anchor) {
+          window.scrollTo({ top: 0, left: 0 });
+          return;
+        }
+        const target = document.getElementById(anchor);
+        if (target instanceof HTMLDetailsElement) target.open = true;
+        target?.scrollIntoView({ block: "start" });
+      });
     }
 
     window.addEventListener("popstate", handlePopState);
@@ -164,11 +191,18 @@ export default function App({ initialPath }: { initialPath?: string }) {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  function showGapSection(slug: string, section: NonNullable<RouteState["gapSection"]>) {
-    const nextPath = `/reality/${slug}/${section === "overview" ? "" : `${section}/`}`;
-    if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
+  function showGapSection(slug: string, section: NonNullable<RouteState["gapSection"]>, anchor?: string) {
+    const nextPath = `/reality/${slug}/${section === "overview" ? "" : `${section}/`}${anchor ? `#${anchor}` : ""}`;
+    if (`${window.location.pathname}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
     setRoute({ page: "gapDetail", gapSlug: slug, gapSection: section });
-    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+    requestAnimationFrame(() => {
+      if (!anchor) window.scrollTo({ top: 0, left: 0 });
+      else {
+        const target = document.getElementById(anchor);
+        if (target instanceof HTMLDetailsElement) target.open = true;
+        target?.scrollIntoView({ block: "start" });
+      }
+    });
   }
 
   function showGapUpdates(slug: string) {
@@ -180,7 +214,16 @@ export default function App({ initialPath }: { initialPath?: string }) {
   }
 
   function showWork(workId: string, anchor?: string) {
-    const nextPath = `/work/${workId}/${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
+    if (workId === "dogs-map-placement-barriers" && anchor === "field-observation-map") {
+      showWork("dogs-locations-map", anchor);
+      return;
+    }
+    const destination = legacyDogWorkDestination(workId, anchor);
+    if (destination) {
+      showGapSection(dogGapSlug, destination.section, destination.anchor);
+      return;
+    }
+    const nextPath = `${workId === "dogs-locations-map" ? dogMapPath : `/work/${workId}/`}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
     if (`${window.location.pathname}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
     setRoute({ page: "work", workId });
     requestAnimationFrame(() => {
@@ -287,6 +330,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onPrimaryAction={() => showPage("action")}
           onOpenWork={showWork}
           onOpenGap={showGap}
+          onOpenResearch={() => showGapSection("too-many-dogs-still-lack-safe-placement", "research")}
+          onOpenFindings={() => showGapSection("too-many-dogs-still-lack-safe-placement", "our-findings")}
         />
       )}
 
@@ -317,6 +362,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onClose={() => setSelectedAction(null)}
           onOpenGap={showGap}
           onOpenWork={showWork}
+          onOpenDogSection={(section, anchor) => showGapSection(dogGapSlug, section, anchor)}
           onOpenReport={showReport}
         />
       )}

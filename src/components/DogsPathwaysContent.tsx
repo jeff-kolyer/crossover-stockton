@@ -11,7 +11,7 @@ const pathways = [
     tested: "We requested Animal Services field-call records on October 20, 2026; a response and outcome analysis are pending.",
     unknown: "How many reports lead to contact, care, reunification, or a documented resolution?",
     next: "Review the requested call records, then compare reported locations and outcomes with firsthand observations.",
-    links: [{ label: "See request activity", href: "/work/dogs-direct-field-work/#crossover-2026-10-20-sas-field-call-records-request" }, { label: "Open locations map", href: "/work/dogs-locations-map/#field-observation-map" }],
+    links: [{ label: "See request activity", href: "/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records-request" }, { label: "Open locations map", href: "/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/#field-observation-map" }],
   },
   {
     id: "pathways-shelter", title: "Enter shelter care", factor: "Shelter capacity",
@@ -21,7 +21,7 @@ const pathways = [
     tested: "A Crossover visit to Stockton Animal Services documented the public facility and a conversation with staff; it did not establish current available capacity.",
     unknown: "What space, eligibility, and staffing are available when a dog needs care now?",
     next: "Verify current intake requirements, occupancy, and the result of a complete help attempt.",
-    links: [{ label: "See shelter evidence", href: "/work/dogs-public-source-review/#research-system" }, { label: "See visit activity", href: "/work/dogs-direct-field-work/" }],
+    links: [{ label: "See shelter evidence", href: "/reality/too-many-dogs-still-lack-safe-placement/research/#research-system" }, { label: "See visit activity", href: "/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records" }],
   },
   {
     id: "pathways-rescue", title: "Reach a foster or rescue partner", factor: "Foster and rescue capacity",
@@ -31,7 +31,7 @@ const pathways = [
     tested: "We are reviewing public routes and contact requirements; no completed placement through this pathway has been verified by Crossover.",
     unknown: "Which partners can take a dog, under what conditions, and how quickly?",
     next: "Contact partners about referral steps and document a real response and outcome.",
-    links: [{ label: "See disposition evidence", href: "/work/dogs-public-source-review/#research-system" }],
+    links: [{ label: "See disposition evidence", href: "/reality/too-many-dogs-still-lack-safe-placement/research/#research-system" }],
   },
   {
     id: "pathways-volunteering", title: "Volunteer or join Doggie Day Out", factor: "Human participation · Temporary support",
@@ -41,7 +41,7 @@ const pathways = [
     tested: "Stockton Street Dogs application submitted October 7; no later response is confirmed in the available record. Doggie Day Out inquiry sent October 12; response unconfirmed. A shelter volunteer application was delivered October 14. None establishes completed participation.",
     unknown: "Where do applicants get stuck, and what happens after approval?",
     next: "Follow up on the submitted attempts and document each response and completed step.",
-    links: [{ label: "Street Dogs application", href: "/work/dogs-direct-field-work/#crossover-2026-10-07-street-dogs-volunteer-application" }, { label: "Doggie Day Out inquiry", href: "/work/dogs-direct-field-work/#crossover-2026-10-12-doggie-day-out-inquiry" }, { label: "Full activity log", href: "/work/dogs-direct-field-work/" }],
+    links: [{ label: "Street Dogs application", href: "/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records" }, { label: "Doggie Day Out inquiry", href: "/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records" }, { label: "Full activity log", href: "/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records" }],
   },
   {
     id: "pathways-adoption", title: "Adoption or reunification", factor: "Adoption and reunification",
@@ -51,7 +51,7 @@ const pathways = [
     tested: "Crossover has not verified a complete adoption or reunion journey firsthand.",
     unknown: "Which steps, delays, and requirements determine whether a dog reaches a lasting home?",
     next: "Trace an actual public pathway from first inquiry through the documented outcome.",
-    links: [{ label: "See reported outcomes", href: "/work/dogs-public-source-review/#research-system" }],
+    links: [{ label: "See reported outcomes", href: "/reality/too-many-dogs-still-lack-safe-placement/research/#research-system" }],
   },
   {
     id: "pathways-support", title: "Street care, supplies, or transport", factor: "Access to care · Community response",
@@ -61,7 +61,7 @@ const pathways = [
     tested: "No complete Crossover help journey through supplies or transport has been verified.",
     unknown: "Who can provide safe support, and when does it lead to veterinary care or placement?",
     next: "Identify an actual request route, contact a provider, and document the outcome.",
-    links: [{ label: "Open locations map", href: "/work/dogs-locations-map/#field-observation-map" }],
+    links: [{ label: "Open locations map", href: "/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/#field-observation-map" }],
   },
   {
     id: "pathways-verification", title: "Veterinary care and prevention", factor: "Prevention and spay/neuter support",
@@ -71,7 +71,7 @@ const pathways = [
     tested: "Crossover has not verified access or an outcome for a specific dog through this route.",
     unknown: "Can people reach affordable, timely services, and do those services change the need for placement?",
     next: "Check current service eligibility, scheduling, and completed access before assessing effects.",
-    links: [{ label: "See proposed improvements", href: "/work/dogs-solutions/#solutions-improvements" }],
+    links: [{ label: "See proposed improvements", href: "/reality/too-many-dogs-still-lack-safe-placement/improvements/#solutions-improvements" }],
   },
 ] as const;
 
@@ -100,7 +100,7 @@ export function DogsPathwaysContent({ item, onOpenReport }: { item: WorkRecord; 
         <summary>Read the full investigation record</summary>
         <DogsInvestigationContent item={item} onOpenReport={onOpenReport} includeMap={false} />
       </details>
-      <p className="gap-mobile-body"><a href="/work/dogs-direct-field-work/">Journey / Activity Log <ArrowRight size={15} aria-hidden="true" /></a> · <a href="/work/dogs-locations-map/#field-observation-map">Locations map <ArrowRight size={15} aria-hidden="true" /></a></p>
+      <p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records">Investigation records <ArrowRight size={15} aria-hidden="true" /></a> · <a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/#field-observation-map">Locations map <ArrowRight size={15} aria-hidden="true" /></a></p>
     </section>
   </div>;
 }
