@@ -258,7 +258,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenWork,
                   />
                 </span>
               )}
-              <span className="gap-level"><InvestigationStatusIcon status={gap.investigation_status} size={17} /> {investigationStatusLabel(gap.investigation_status)}</span>
+              <span className="gap-level investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} /> {investigationStatusLabel(gap.investigation_status)}</span>
               <span className="gap-card-body">
                 <span className="gap-card-copy">
                   <h3>{gap.title}</h3>

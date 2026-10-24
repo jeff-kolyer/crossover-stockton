@@ -80,7 +80,7 @@ export function DogsResearchContent({ item }: { item: WorkRecord; onOpenReport: 
   const jump = (event: MouseEvent<HTMLAnchorElement>, id: string) => { event.preventDefault(); navigateToWorkSection(id); };
 
   return <div className="work-page-content research-content">
-    <Section title="At a glance" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
+    <Section id="research-at-a-glance" title="At a glance" icon={<ChartNoAxesColumnIncreasing size={20} aria-hidden="true" />} card>
       <p className="research-section-intro gap-mobile-body">We're investigating how emerging technology could help Stockton's street dogs. First, we're examining reported conditions, the current response, and what remains uncertain.</p>
       <div className="research-glance-grid">
         <a className="research-glance-panel is-problem" href="#research-need" onClick={(event) => jump(event, "research-need")}>

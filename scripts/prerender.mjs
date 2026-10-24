@@ -20,6 +20,10 @@ const pages = [
   ["/organizations/", "Organizations | Crossover Stockton", "Local organizations followed by Crossover Stockton."],
   ...gaps.filter((gap) => gap.active).flatMap((gap) => [
     [`/reality/${gap.slug}/`, `${gap.title} — Reality | Crossover Stockton`, gap.summary],
+    [`/reality/${gap.slug}/ways-to-help/`, `${gap.title} — Ways to Help | Crossover Stockton`, `Ways to help with ${gap.title.toLowerCase()}.`],
+    [`/reality/${gap.slug}/improvements/`, `${gap.title} — Improvements | Crossover Stockton`, `Projects and possibilities related to ${gap.title.toLowerCase()}.`],
+    ...(gap.investigation_status === "investigating" ? [[`/reality/${gap.slug}/our-findings/`, `${gap.title} — Our Findings | Crossover Stockton`, `Crossover's investigation of ${gap.title.toLowerCase()}.`]] : []),
+    [`/reality/${gap.slug}/research/`, `${gap.title} — Research | Crossover Stockton`, `Research and evidence for ${gap.title.toLowerCase()}.`],
     [`/reality/${gap.slug}/updates/`, `${gap.title} — Updates | Crossover Stockton`, `Updates on ${gap.title.toLowerCase()}.`],
     [`/reality/${gap.slug}/sources/`, `${gap.title} — Sources | Crossover Stockton`, `Sources and evidence for ${gap.title.toLowerCase()}.`],
   ]),

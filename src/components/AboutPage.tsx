@@ -13,7 +13,6 @@ import {
   Search,
   Settings,
   Sparkles,
-  Sprout,
   Users,
   Wrench,
 } from "lucide-react";
@@ -24,17 +23,17 @@ import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
 const aboutHeroImage = "/images/about/about-crossover-hero.jpg";
+const founderImage = "/images/about/about-the-founder.jpg";
 const spotlightDogImage = "/images/reality/dog-thumb.jpg";
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
 const linkedInUrl = "https://www.linkedin.com/in/jeff-kolyer";
 const aboutNavItems: WorkSectionNavItem[] = [
   { id: "welcome", label: "Welcome", icon: FileText },
-  { id: "what-we-do", label: "What we do", icon: Search },
-  { id: "street-dogs", label: "Street dogs and access to care", icon: PawPrint },
   { id: "how-it-works", label: "How it works", icon: Settings },
+  { id: "street-dogs", label: "Street dogs and access to care", icon: PawPrint },
+  { id: "what-we-do", label: "Our continuing mission", icon: Search },
   { id: "founder", label: "About the founder", icon: Users },
-  { id: "bigger-picture", label: "Why we're doing this", icon: Sprout },
   { id: "connect", label: "Get involved", icon: ArrowRight },
 ];
 
@@ -75,26 +74,49 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
           <section className="about-welcome" id="welcome">
             <div className="about-welcome-copy">
               <p className="about-eyebrow">About Crossover Stockton</p>
-              <h1>Before we can change reality with technology, we must first understand it.</h1>
-              <p>AI, robotics, and emerging post-scarcity capabilities are expanding what's possible. Crossover investigates real-world needs to discover where those capabilities—and willing people—could make a difference.</p>
+              <h1>Before we can change reality, we must understand it.</h1>
+              <p>We combine AI research with real-world investigation to discover what works, what doesn't, and what people can actually do to help.</p>
             </div>
             <div className="about-welcome-photo"><img src={aboutHeroImage} alt="AI-generated illustration of a waterfront promenade and downtown skyline at sunset" loading="eager" decoding="async" fetchPriority="high" /></div>
           </section>
 
-          <section className="about-content-section about-what" id="what-we-do">
-            <div>
-              <h2>What we do</h2>
-              <p><strong>We investigate problems so we can engineer solutions.</strong></p>
-              <p>Crossover uses AI, public information, firsthand investigation, and human participation to understand reported needs, determine what's actually happening, and identify the barriers that may prevent people from helping.</p>
-              <p>We don't just examine existing services or recommend ways to help. <strong>We try them ourselves</strong>—contacting organizations, submitting applications, visiting in person, and documenting what actually happens.</p>
-              <p>By making those experiences and barriers visible and verifiable, we can develop practical solutions, test whether they work, and continually improve how technology and willing people address real needs.</p>
-            </div>
-            <aside className="about-needs-panel">
-              <p className="about-eyebrow"><MapPin size={18} aria-hidden="true" /> Stockton, CA</p>
-              <h3>Real people. Real needs.</h3>
-              <p>We're starting in Stockton by investigating street dogs and access to care—examining reported conditions, existing responses, and what prevents people from helping.</p>
-              <a className="about-needs-link" href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Explore the investigation <ArrowRight size={16} aria-hidden="true" /></a>
-            </aside>
+          <section className="about-content-section about-method" id="how-it-works">
+            <h2>How Crossover works</h2>
+            <p>We examine the evidence, test ways to help firsthand, and use what we learn to engineer better solutions, so anyone can take a real step toward helping.</p>
+            <ol className="about-step-grid">
+              <li>
+                <span className="about-step-number">1</span>
+                <div>
+                  <Search size={28} aria-hidden="true" />
+                  <h3>Examine the evidence</h3>
+                  <p>We gather public records, news reports, and organizational claims. AI helps us compare sources, question assumptions, and distinguish what we know from what remains uncertain.</p>
+                  <div className="about-step-links">
+                    <a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See research <ArrowRight size={16} aria-hidden="true" /></a>
+                    <a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <span className="about-step-number">2</span>
+                <div>
+                  <Footprints size={28} aria-hidden="true" />
+                  <h3>Test the pathways</h3>
+                  <p>We don't just recommend ways to help. <strong>We try them ourselves</strong>—contacting organizations, submitting applications, visiting in person, and documenting what actually happens.</p>
+                  <div className="about-step-links">
+                    <a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <span className="about-step-number">3</span>
+                <div>
+                  <Wrench size={28} aria-hidden="true" />
+                  <h3>Engineer better ways to help</h3>
+                  <p>We use what we learn to identify barriers and develop practical solutions that combine emerging technology with human participation.</p>
+                  <p>We examine existing improvements, propose new approaches, and test whether they actually work. <strong>Every result helps us improve what we do next.</strong></p>
+                </div>
+              </li>
+            </ol>
           </section>
 
           <section className="about-spotlight" id="street-dogs">
@@ -135,61 +157,35 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap }
             <p className="about-spotlight-closing"><strong>Every attempt adds to what we know.</strong> Whether something works, fails, or raises new questions, the results become evidence we can use to engineer better ways to help.</p>
           </section>
 
-          <section className="about-content-section about-method" id="how-it-works">
-            <h2>How Crossover works</h2>
-            <p>We examine the evidence, test ways to help firsthand, and use what we learn to engineer better solutions.</p>
-            <ol className="about-step-grid">
-              <li>
-                <span className="about-step-number">1</span>
-                <div>
-                  <Search size={28} aria-hidden="true" />
-                  <h3>Examine the evidence</h3>
-                  <p>We gather public records, news reports, and organizational claims. AI helps us compare sources, question assumptions, and distinguish what we know from what remains uncertain.</p>
-                  <div className="about-step-links">
-                    <a href="/work/dogs-public-source-review/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-public-source-review"))}>See research <ArrowRight size={16} aria-hidden="true" /></a>
-                    <a href="/work/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <span className="about-step-number">2</span>
-                <div>
-                  <Footprints size={28} aria-hidden="true" />
-                  <h3>Test the pathways</h3>
-                  <p>We don't just recommend ways to help. <strong>We try them ourselves</strong>—contacting organizations, submitting applications, visiting in person, and documenting what actually happens.</p>
-                  <div className="about-step-links">
-                    <a href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <span className="about-step-number">3</span>
-                <div>
-                  <Wrench size={28} aria-hidden="true" />
-                  <h3>Engineer better ways to help</h3>
-                  <p>We use what we learn to identify barriers and develop practical solutions that combine emerging technology with human participation.</p>
-                  <p>We examine existing improvements, propose new approaches, and test whether they actually work. <strong>Every result helps us improve what we do next.</strong></p>
-                </div>
-              </li>
-            </ol>
+          <section className="about-content-section about-what" id="what-we-do">
+            <div>
+              <h2>Our continuing mission</h2>
+              <p><strong>Turn what we learn about reality into better ways to care for it.</strong></p>
+              <p>AI and robotics are creating extraordinary new possibilities. As technology takes on more necessary work, people could have greater freedom to care for animals, help neighbors, and pursue meaningful lives.</p>
+              <p>Crossover uses AI, public information, firsthand investigation, and human participation to understand reported needs, determine what's actually happening, and identify the barriers that may prevent people from helping.</p>
+              <p>By making those experiences and barriers visible and verifiable, we can develop practical solutions, test whether they work, and continually improve how technology and willing people address real needs.</p>
+            </div>
+            <aside className="about-needs-panel">
+              <p className="about-eyebrow"><MapPin size={18} aria-hidden="true" /> Stockton, CA</p>
+              <h3>Real people. Real needs.</h3>
+              <p>We're starting in Stockton by investigating street dogs and access to care—examining reported conditions, existing responses, and what prevents people from helping.</p>
+              <a className="about-needs-link" href="/work/dogs-map-placement-barriers/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-map-placement-barriers"))}>Explore the investigation <ArrowRight size={16} aria-hidden="true" /></a>
+            </aside>
           </section>
 
-          <div className="about-bigger-picture">
-            <section id="founder">
+          <section className="about-founder" id="founder">
+            <div className="about-founder-copy">
               <p className="about-eyebrow">About the founder</p>
               <h2>Jeff Kolyer</h2>
               <p>Former Silicon Valley technology founder exploring how emerging technology can address real-world problems.</p>
-              <p>Starting in Stockton, testing ways to help firsthand rather than assuming the solutions are obvious.</p>
+              <p>Starting in Stockton, we're testing ways to help, learning in public, and applying technology to make a real difference for people, animals, and communities.</p>
+            </div>
+            <div className="about-founder-quote">
+              <blockquote>Technology is most meaningful when it helps real people with real problems.</blockquote>
               <a className="linkedin-button" href={linkedInUrl} target="_blank" rel="noreferrer"><Linkedin size={15} aria-hidden="true" /><span>Connect on LinkedIn</span></a>
-            </section>
-            <section id="bigger-picture">
-              <p className="about-eyebrow">The bigger picture</p>
-              <h2>Why we're doing this</h2>
-              <p>AI and robotics are creating extraordinary new possibilities. As technology takes on more necessary work, people could have greater freedom to care for animals, help neighbors, and pursue meaningful lives.</p>
-              <p>But technology alone doesn't tell us where help is needed or what actually works.</p>
-              <p>That's why Crossover starts with reality.</p>
-            </section>
-          </div>
+            </div>
+            <img className="about-founder-photo" src={founderImage} alt="Jeff Kolyer by a waterfront promenade" loading="lazy" decoding="async" />
+          </section>
 
           <section className="about-connect" id="connect">
             <Users size={28} aria-hidden="true" />

@@ -8,7 +8,7 @@ import {
   type DogCareSettings,
 } from "../lib/dogCareScenario";
 
-export function DogCareScenario() {
+export function DogCareScenario({ heading = "What determines how many dogs are on the street without adequate care?", compactHeader = false }: { heading?: string; compactHeader?: boolean }) {
   const [settings, setSettings] = useState<DogCareSettings>({ ...defaultDogCareSettings });
   const result = calculateDogCareScenario(settings);
 
@@ -28,11 +28,16 @@ export function DogCareScenario() {
       <div className="dog-care-model-heading">
         <div>
           <p className="dog-equation-eyebrow">The Equation of Care</p>
-          <h2 id="dog-care-model-title">What determines how many dogs are on the street without adequate care?</h2>
-          <p>We can model the problem as a system of inputs, capacity, flows, and outcomes.</p>
-          <p className="dog-care-model-secondary">Change the factors to explore what might improve care—and where help gets stuck.</p>
+          <h2 id="dog-care-model-title">{heading}</h2>
+          {compactHeader ? <>
+            <p>Adjust the factors to explore what might improve care.</p>
+            <span className="dog-care-model-disclaimer">Illustrative scenario · Not actual Stockton population data</span>
+          </> : <>
+            <p>We can model the problem as a system of inputs, capacity, flows, and outcomes.</p>
+            <p className="dog-care-model-secondary">Change the factors to explore what might improve care—and where help gets stuck.</p>
+          </>}
         </div>
-        <span className="dog-care-model-disclaimer">Illustrative scenario · Not a Stockton population estimate</span>
+        {!compactHeader && <span className="dog-care-model-disclaimer">Illustrative scenario · Not a Stockton population estimate</span>}
       </div>
       <div className="dog-care-model-grid">
         <div className="dog-care-factors">

@@ -49,6 +49,7 @@ import { workIcon } from "../lib/workIcon";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicMobileMenu } from "./PublicMobileMenu";
 import { DogGapOverview } from "./DogGapOverview";
+import { DogGapExperience } from "./DogGapExperience";
 import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
 
@@ -56,6 +57,8 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 interface GapDetailPageProps {
   slug?: string;
+  section?: "overview" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+  onOpenSection?: (slug: string, section: NonNullable<GapDetailPageProps["section"]>) => void;
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
@@ -122,7 +125,7 @@ const whyIconRegistry: Record<NonNullable<GapRecord["why_icons"]>[number], Lucid
   KeyRound,
 };
 
-export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, section = "overview", onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -169,6 +172,12 @@ export function GapDetailPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpen
   const previousGap = gapIndex > 0 ? activeGaps[gapIndex - 1] : undefined;
   const nextGap = gapIndex >= 0 && gapIndex < activeGaps.length - 1 ? activeGaps[gapIndex + 1] : undefined;
   const isDogGap = gap.id === "dogs-safe-placement";
+
+  if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}`}>
+    <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
+    <DogGapExperience gap={gap} section={section} onOpenSection={(next) => onOpenSection(gap.slug, next)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} />
+    <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>
+  </main>;
 
   return (
     <main className={`gap-detail-page gap-page is-${gap.investigation_status}${isDogGap ? " dog-equation-page" : ""}`}>

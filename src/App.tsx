@@ -26,6 +26,7 @@ type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" |
 interface RouteState {
   page: AppRoute;
   gapSlug?: string;
+  gapSection?: "overview" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   storySlug?: string;
   workId?: string;
   reportId?: string;
@@ -43,6 +44,13 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSou
 
 function routeFromPathname(pathname: string): RouteState {
   const normalized = pathname.replace(/\/+$/, "") || "/";
+  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(ways-to-help|improvements|our-findings|research|sources|updates)$/);
+  if (gapSection) {
+    const gapSlug = decodeURIComponent(gapSection[1]);
+    const gap = gaps.find((item) => item.slug === gapSlug);
+    const requestedSection = gapSection[2] === "sources" ? "research" : gapSection[2];
+    return { page: "gapDetail", gapSlug, gapSection: requestedSection === "our-findings" && gap?.investigation_status !== "investigating" ? "overview" : requestedSection as RouteState["gapSection"] };
+  }
   if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
     const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
     return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
@@ -73,13 +81,17 @@ function routeFromPathname(pathname: string): RouteState {
 }
 
 function canonicalPathname(pathname: string) {
+  const sourceAlias = pathname.match(/^\/reality\/([^/]+)\/sources\/?$/);
+  if (sourceAlias) return `/reality/${sourceAlias[1]}/research/`;
+  const findings = pathname.match(/^\/reality\/([^/]+)\/our-findings\/?$/);
+  if (findings && gaps.find((gap) => gap.slug === decodeURIComponent(findings[1]))?.investigation_status !== "investigating") return `/reality/${findings[1]}/`;
   return pathname === "/" || pathname.endsWith("/") ? pathname : `${pathname}/`;
 }
 
 function titleForRoute(route: RouteState) {
   if (route.page === "gapDetail" || route.page === "gapUpdates" || route.page === "gapSources") {
     const gap = gaps.find((item) => item.slug === route.gapSlug);
-    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : "Reality";
+    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "Overview", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
     return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
   if (route.page === "work") {
@@ -148,26 +160,23 @@ export default function App({ initialPath }: { initialPath?: string }) {
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
-    setRoute({ page: "gapDetail", gapSlug: slug });
+    setRoute({ page: "gapDetail", gapSlug: slug, gapSection: "overview" });
+    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+  }
+
+  function showGapSection(slug: string, section: NonNullable<RouteState["gapSection"]>) {
+    const nextPath = `/reality/${slug}/${section === "overview" ? "" : `${section}/`}`;
+    if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
+    setRoute({ page: "gapDetail", gapSlug: slug, gapSection: section });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
   function showGapUpdates(slug: string) {
-    const nextPath = `/reality/${slug}/updates/`;
-    if (window.location.pathname !== nextPath) {
-      window.history.pushState({}, "", nextPath);
-    }
-    setRoute({ page: "gapUpdates", gapSlug: slug });
-    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+    showGapSection(slug, "updates");
   }
 
   function showGapSources(slug: string) {
-    const nextPath = `/reality/${slug}/sources/`;
-    if (window.location.pathname !== nextPath) {
-      window.history.pushState({}, "", nextPath);
-    }
-    setRoute({ page: "gapSources", gapSlug: slug });
-    requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
+    showGapSection(slug, "research");
   }
 
   function showWork(workId: string, anchor?: string) {
@@ -217,6 +226,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
       {route.page === "gapDetail" && (
         <GapDetailPage
           slug={route.gapSlug ?? firstGapSlug}
+          section={route.gapSection ?? "overview"}
+          onOpenSection={showGapSection}
           onNavigate={showPage}
           onOpenAbout={() => showPage("about")}
           onOpenGap={showGap}
