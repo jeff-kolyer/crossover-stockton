@@ -9,6 +9,7 @@ const legacy = new Map([
   ["dogs-map-placement-barriers", "our-findings"],
   ["dogs-solutions", "improvements"],
   ["dogs-direct-field-work", "our-findings"],
+  ["dogs-locations-map", "dogs-locations-map"],
 ]);
 const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const paths = [...sitemap.matchAll(/<loc>https:\/\/crossoverstockton\.org([^<]+)<\/loc>/g)].map((match) => match[1]);
@@ -34,4 +35,5 @@ for (const path of paths) {
   }
 }
 
-console.log(`Verified four legacy Work redirects and links across ${paths.length} public pages.`);
+assert.ok(paths.includes(`${base}dogs-locations-map/`), "The map's new gap URL is missing from the sitemap");
+console.log(`Verified five legacy Work redirects and links across ${paths.length} public pages.`);

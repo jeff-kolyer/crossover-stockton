@@ -15,6 +15,7 @@ const legacyDogWorkSections = {
   "dogs-map-placement-barriers": "our-findings",
   "dogs-solutions": "improvements",
   "dogs-direct-field-work": "our-findings",
+  "dogs-locations-map": "dogs-locations-map",
 };
 
 const pages = [
@@ -34,6 +35,7 @@ const pages = [
     [`/reality/${gap.slug}/research/`, `${gap.title} — Research | Crossover Stockton`, `Research and evidence for ${gap.title.toLowerCase()}.`],
     [`/reality/${gap.slug}/updates/`, `${gap.title} — Updates | Crossover Stockton`, `Updates on ${gap.title.toLowerCase()}.`],
     [`/reality/${gap.slug}/sources/`, `${gap.title} — Sources | Crossover Stockton`, `Sources and evidence for ${gap.title.toLowerCase()}.`],
+    ...(gap.id === "dogs-safe-placement" ? [[`${dogGapBase}dogs-locations-map/`, "Field observation map | Crossover Stockton", "Generalized historical dog reports and field observation records for Stockton."]] : []),
   ]),
   ...stories.filter((story) => story.active).map((story) => [
     `/stories/${story.slug}/`, `${story.title} | Crossover Stockton`, story.summary,
@@ -113,7 +115,7 @@ try {
   for (const [workId, section] of Object.entries(legacyDogWorkSections)) {
     const path = `/work/${workId}/`;
     const target = `${dogGapBase}${section}/`;
-    const redirect = `<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="robots" content="noindex" /><meta http-equiv="refresh" content="0; url=${target}" /><link rel="canonical" href="${origin}${target}" /><title>Moved | Crossover Stockton</title><script>const anchor=decodeURIComponent(location.hash.slice(1));let path=${JSON.stringify(target)};let hash="";if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor==="field-observation-map"){path="/work/dogs-locations-map/";hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor.startsWith("pathways-")){path=${JSON.stringify(`${dogGapBase}ways-to-help/`)};hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&(anchor.startsWith("investigation-")||anchor==="field-observation-procedure")){hash=anchor}else if(${JSON.stringify(workId)}==="dogs-direct-field-work"&&anchor){hash=anchor.includes("records-request")?"investigation-records-request":"investigation-records"}else if(anchor){hash=anchor}location.replace(path+location.search+(hash?"#"+encodeURIComponent(hash):""))</script></head><body><p>This page moved to <a href="${target}">${target}</a>.</p></body></html>`;
+    const redirect = `<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="robots" content="noindex" /><meta http-equiv="refresh" content="0; url=${target}" /><link rel="canonical" href="${origin}${target}" /><title>Moved | Crossover Stockton</title><script>const anchor=decodeURIComponent(location.hash.slice(1));let path=${JSON.stringify(target)};let hash="";if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor==="field-observation-map"){path=${JSON.stringify(`${dogGapBase}dogs-locations-map/`)};hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor.startsWith("pathways-")){path=${JSON.stringify(`${dogGapBase}ways-to-help/`)};hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&(anchor.startsWith("investigation-")||anchor==="field-observation-procedure")){hash=anchor}else if(${JSON.stringify(workId)}==="dogs-direct-field-work"&&anchor){hash=anchor.includes("records-request")?"investigation-records-request":"investigation-records"}else if(anchor){hash=anchor}location.replace(path+location.search+(hash?"#"+encodeURIComponent(hash):""))</script></head><body><p>This page moved to <a href="${target}">${target}</a>.</p></body></html>`;
     await mkdir(new URL(`.${path}`, dist), { recursive: true });
     await writeFile(new URL(`.${path}index.html`, dist), redirect);
   }

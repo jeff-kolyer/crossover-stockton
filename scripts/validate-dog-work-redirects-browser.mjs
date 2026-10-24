@@ -60,9 +60,9 @@ await waitFor(base + "ways-to-help/");
 assert.equal(await evaluate("location.hash"), "#pathways-shelter");
 await send("Page.navigate", { url: "http://localhost:5173/work/dogs-locations-map/" });
 for (let attempt = 0; attempt < 80; attempt++) {
-  if (await evaluate("location.pathname === '/work/dogs-locations-map/' && !!document.querySelector('.map-work-grid')")) break;
-  if (attempt === 79) throw new Error("The locations map no longer loads at its Work URL");
+  if (await evaluate("location.pathname === '/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/' && !!document.querySelector('.map-work-grid')")) break;
+  if (attempt === 79) throw new Error("The old map URL did not redirect to the new gap URL");
   await new Promise((resolve) => setTimeout(resolve, 100));
 }
-console.log("Legacy redirects, contextual pathway anchor, and retained map route passed.");
+console.log("Legacy redirects, contextual pathway anchor, and renamed map route passed.");
 socket.close();

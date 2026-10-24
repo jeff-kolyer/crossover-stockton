@@ -47,7 +47,7 @@ if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) 
 if (!homeHtml.includes("Where does care break down?") || !homeText.includes("What we've done") || !homeText.includes("What's next") || !homeText.includes("generalized report areas")) {
   throw new Error("The homepage does not summarize the active investigation.");
 }
-for (const path of [`/reality/${featuredGap.slug}/our-findings/`, "/work/dogs-locations-map/", `/reality/${featuredGap.slug}/ways-to-help/`]) {
+for (const path of [`/reality/${featuredGap.slug}/our-findings/`, `/reality/${featuredGap.slug}/dogs-locations-map/`, `/reality/${featuredGap.slug}/ways-to-help/`]) {
   if (!homeHtml.includes(`href="${path}"`) || !homeText.includes(`${origin}${path}`)) {
     throw new Error(`The homepage investigation card does not link to ${path}.`);
   }
@@ -56,7 +56,7 @@ for (const path of [`/reality/${featuredGap.slug}/our-findings/`, "/work/dogs-lo
 for (const gap of gaps.filter((item) => item.active && item.work_ids?.length)) {
   const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");
   if (gap.id === "dogs-safe-placement") {
-    for (const path of ["research/", "ways-to-help/", "improvements/", "our-findings/", "/work/dogs-locations-map/"]) {
+    for (const path of ["research/", "ways-to-help/", "improvements/", "our-findings/", "dogs-locations-map/"]) {
       const href = path.startsWith("/") ? path : `/reality/${gap.slug}/${path}`;
       if (!gapHtml.includes(`href="${href}"`)) throw new Error(`The dog gap page does not link to ${href}.`);
     }
