@@ -38,8 +38,6 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
             <p>Self-driving vehicles are operating today. AI can tackle increasingly complex problems. Robots are beginning to perform useful physical work.</p>
             <p>As these technologies advance, they could free people from more compulsory labor and create extraordinary new possibilities.</p>
             <p><strong>But what will we do with that freedom?</strong></p>
-            <p>What if more people could spend their lives caring for animals, helping neighbors, comforting those who suffer, and doing work that gives their lives meaning?</p>
-            <p>Technology could make much of this possible. But technology alone cannot tell us what needs doing.</p>
           </div>
           <img className="about-redesign-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
         </section>
