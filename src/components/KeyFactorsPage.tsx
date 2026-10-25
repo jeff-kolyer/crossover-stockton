@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, HeartHandshake, House, MapPin, PhoneCall, Search, Stethoscope, Users, type LucideIcon } from "lucide-react";
 import research from "../data/dogs-research.json";
 import { dogCareFactors, type DogCareFactor } from "../lib/dogCareScenario";
@@ -65,7 +65,7 @@ const dogDetails: Record<DogCareFactor, FactorDetail> = {
 
 const linkNames: Record<Destination, string> = { research: "Research", improvements: "Improvements", "ways-to-help": "Ways to Help", "our-findings": "Our Findings" };
 
-export function KeyFactorsPage({ gap, onOpenSection, onOpenMap }: { gap: GapRecord; onOpenSection: (section: Destination) => void; onOpenMap: () => void }) {
+export function KeyFactorsPage({ gap, onOpenSection, onOpenMap, model }: { gap: GapRecord; onOpenSection: (section: Destination) => void; onOpenMap: () => void; model?: ReactNode }) {
   const dogs = gap.id === "dogs-safe-placement";
   useEffect(() => {
     const reveal = () => {
@@ -89,8 +89,9 @@ export function KeyFactorsPage({ gap, onOpenSection, onOpenMap }: { gap: GapReco
       <p className="dog-gap-eyebrow">Understanding the need</p><h2>Key Factors</h2>
       <p className="key-factors-question">{dogs ? "What affects whether dogs reach care?" : `What affects ${gap.title.toLowerCase()}?`}</p>
       <p>{dogs ? "Explore the six parts of the care system, what available evidence tells us about each, and what could improve them." : "Explore the barriers named in this need's public record and the questions that still need investigation."}</p>
-      {dogs && <p className="key-factors-note">The Overview model is an illustrative scenario. Its slider values are not measurements of Stockton.</p>}
+      {dogs && <p className="key-factors-note">The model below is an illustrative scenario. Its slider values are not measurements of Stockton.</p>}
     </div>
+    {model}
     {!dogs && <section className="dog-gap-card key-factors-evidence" aria-labelledby="key-factors-evidence-title"><p className="dog-gap-eyebrow">Public record</p><h2 id="key-factors-evidence-title">What has been reported</h2><ul>{gap.what_we_are_seeing.map((item) => <li key={item}>{item}</li>)}</ul><p>These points provide context for the factors below. They do not measure the effect of any single barrier.</p></section>}
     <div className="key-factors-list" id="key-factors-list">
       {dogs ? dogCareFactors.map((factor) => {

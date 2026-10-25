@@ -1,10 +1,10 @@
-import { ArrowLeft, ChevronDown, ExternalLink, MapPin } from "lucide-react";
+import { ArrowLeft, ExternalLink, MapPin } from "lucide-react";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord } from "../types";
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicSiteNav } from "./PublicSiteNav";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -32,12 +32,7 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
 
   return (
     <main className="work-page report-page gap-page">
-      <header className="public-nav gap-detail-nav">
-        <PublicMobileMenu active="reality" onNavigate={onNavigate} onOpenAbout={() => onNavigate("about")} />
-        <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}><img src={logoLight} alt="" /><span>Crossover</span></button>
-        <nav aria-label="Primary"><button type="button" className="is-active" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("connection")}>Stories</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={() => onNavigate("updates")}>Updates</button><button type="button" onClick={() => onNavigate("organizations")}>Organizations</button><button type="button" onClick={() => onNavigate("about")}>About</button></nav>
-        <button className="location-pill" type="button" onClick={() => onNavigate("home")}><MapPin size={16} />Stockton, CA<ChevronDown size={15} /></button>
-      </header>
+      <PublicSiteNav active="reality" onNavigate={onNavigate} variant="dark" />
 
       <div className="work-page-shell report-shell">
         <button className="gap-history-back" type="button" onClick={() => report?.work_id ? onOpenWork(report.work_id) : onNavigate("reality")}><ArrowLeft size={16} /> {report?.work_id ? "Back to activity" : "Back to needs"}</button>

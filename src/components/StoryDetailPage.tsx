@@ -3,7 +3,6 @@ import {
   ArrowRight,
   Building2,
   CheckCircle2,
-  ChevronDown,
   CircleAlert,
   ExternalLink,
   FileText,
@@ -17,7 +16,7 @@ import {
   UserRound,
 } from "lucide-react";
 import storiesData from "../data/stories.json";
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicSiteNav } from "./PublicSiteNav";
 import type { StoryEvidence, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -183,28 +182,7 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
 }
 
 function PublicStoryNav({ onNavigate }: { onNavigate: (page: PublicRoute) => void }) {
-  return (
-    <header className="public-nav story-detail-nav">
-      <PublicMobileMenu active="connection" onNavigate={onNavigate} />
-      <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
-        <img src={logoLight} alt="" decoding="async" />
-        <span>Crossover</span>
-      </button>
-      <nav aria-label="Primary">
-        <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
-        <button type="button" className="is-active" onClick={() => onNavigate("connection")}>Stories</button>
-        <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
-        <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
-        <button type="button" onClick={() => onNavigate("about")}>About</button>
-      </nav>
-      <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-        <MapPin size={16} />
-        Stockton, CA
-        <ChevronDown size={15} />
-      </button>
-    </header>
-  );
+  return <PublicSiteNav active="connection" onNavigate={onNavigate} variant="story" />;
 }
 
 function ConnectionFlow({ items }: { items: string[] }) {

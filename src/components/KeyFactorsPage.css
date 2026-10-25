@@ -1,4 +1,4 @@
-.key-factors-page .key-factors-question{font-family:var(--font-serif);font-size:clamp(1.2rem,1.8vw,1.55rem);color:var(--ink);margin:2px 0 4px!important}
+.key-factors-page .key-factors-question{font-family:var(--font-sans);font-size:clamp(1.1rem,1.5vw,1.3rem);font-weight:600;color:var(--ink);margin:2px 0 4px!important}
 .key-factors-page .key-factors-note{font-size:.83rem!important;margin-top:9px!important}
 .key-factors-list{display:grid;gap:9px}
 .key-factors-evidence ul{margin:8px 0 10px;padding-left:20px;color:#45574b;font-size:.89rem;line-height:1.5}

@@ -7,7 +7,6 @@ import {
   Building2,
   BedSingle,
   CheckCircle2,
-  ChevronDown,
   Clock3,
   ClipboardList,
   Dog,
@@ -47,7 +46,7 @@ import { gapUpdateHref, gapUpdates, type GapUpdateEntry } from "../lib/gapUpdate
 import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { workIcon } from "../lib/workIcon";
 import { navigateInternalLink } from "../lib/internalLink";
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicSiteNav } from "./PublicSiteNav";
 import { DogGapOverview } from "./DogGapOverview";
 import { DogGapExperience } from "./DogGapExperience";
 import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
@@ -132,7 +131,7 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
     return (
       <main className="gap-detail-page gap-page">
         <section className="gap-refined-hero">
-          <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
+          <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />
           <div className="gap-detail-copy gap-refined-copy">
             <p className="gap-severity"><AlertCircle size={18} /> Gap not found</p>
             <h1>We could not find that gap.</h1>
@@ -173,8 +172,8 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
   const nextGap = gapIndex >= 0 && gapIndex < activeGaps.length - 1 ? activeGaps[gapIndex + 1] : undefined;
   const isDogGap = gap.id === "dogs-safe-placement";
 
-  if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}`}>
-    <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
+  if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}${isDogGap ? " is-dog-investigation" : ""}`}>
+    <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />
     <DogGapExperience gap={gap} section={section} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} />
     <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>
   </main>;
@@ -182,7 +181,7 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
   return (
     <main className={`gap-detail-page gap-page is-${gap.investigation_status}${isDogGap ? " dog-equation-page" : ""}`}>
       <section className="gap-refined-hero">
-        <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
+        <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />
         <GapPageToolbar
           onNavigate={onNavigate}
           onOpenGap={onOpenGap}
@@ -434,31 +433,6 @@ function GapPageToolbar({
         </div>
       </div>
     </div>
-  );
-}
-
-function PublicNav({ onNavigate, onOpenAbout }: Pick<GapDetailPageProps, "onNavigate" | "onOpenAbout">) {
-  return (
-    <header className="public-nav gap-detail-nav">
-      <PublicMobileMenu active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
-      <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
-        <img src={logoLight} alt="" decoding="async" />
-        <span>Crossover</span>
-      </button>
-      <nav aria-label="Primary">
-        <button type="button" className="is-active" onClick={() => onNavigate("reality")}>Needs</button>
-        <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
-        <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
-        <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
-        <button type="button" onClick={onOpenAbout}>About</button>
-      </nav>
-      <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-        <MapPin size={16} />
-        Stockton, CA
-        <ChevronDown size={15} />
-      </button>
-    </header>
   );
 }
 

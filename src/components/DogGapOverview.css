@@ -66,16 +66,16 @@
 .dog-care-total strong{display:block;margin-top:9px;font-size:2.2rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
 .dog-care-total-without strong{font-size:2.75rem}
 .dog-care-total small{font-size:1rem;font-weight:700}
-.dog-care-total-without{background:#fbf2f0;color:#a64f42}
-.dog-care-total-receiving{background:#f0f7f2;color:#236a47}
+.dog-care-total-without{background:var(--evidence-danger-bg);color:var(--evidence-danger-ink)}
+.dog-care-total-receiving{background:var(--evidence-positive-bg);color:var(--evidence-positive-ink)}
 .dog-care-dots{display:grid;grid-template-columns:repeat(20,minmax(0,1fr));gap:4px;margin:23px 0 11px}
 .dog-care-dots span{display:block;width:100%;aspect-ratio:1;border-radius:50%}
-.dog-care-dots .is-without{background:#b75c4b}
+.dog-care-dots .is-without{background:var(--evidence-danger-accent)}
 .dog-care-dots .is-receiving{background:#6aa87c}
 .dog-care-dot-legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-bottom:25px;color:#4f6155;font-size:1rem;line-height:1.4}
 .dog-care-dot-legend span{display:inline-flex;align-items:center;gap:7px}
 .dog-care-dot-legend i{display:inline-block;flex:none;width:12px;height:12px;border-radius:50%}
-.dog-care-dot-legend i.is-without{background:#b75c4b}
+.dog-care-dot-legend i.is-without{background:var(--evidence-danger-accent)}
 .dog-care-dot-legend i.is-receiving{background:#6aa87c}
 .dog-care-flow h4{color:#1b2d23;font-size:1rem;font-weight:750}
 .dog-care-flow h4 span{color:#64746a;font-weight:500}

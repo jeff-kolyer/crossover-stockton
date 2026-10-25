@@ -4,32 +4,25 @@ import { readFile } from "node:fs/promises";
 const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
 const base = new URL("../dist/reality/too-many-dogs-still-lack-safe-placement/", import.meta.url);
 const sections = [
-  ["", "Overview", "What is happening in Stockton?", 3],
-  ["key-factors/", "Key Factors", "What affects whether dogs reach care?", 2],
-  ["ways-to-help/", "Ways to Help", "How care is reached", 9],
-  ["improvements/", "Improvements", "Ideas to test", 3],
-  ["our-findings/", "Our Findings", "What we&#x27;re investigating", 9],
-  ["research/", "Research", "At a glance", 9],
-  ["updates/", "Updates", "Need activity", 2],
+  ["", "Overview", "What is happening in Stockton?"],
+  ["key-factors/", "Key Factors", "What affects whether dogs reach care?"],
+  ["ways-to-help/", "Ways to Help", "How care is reached"],
+  ["improvements/", "Improvements", "Ideas to test"],
+  ["our-findings/", "Our Findings", "What we&#x27;re investigating"],
+  ["research/", "Sources", "At a glance"],
+  ["updates/", "Updates", "Need activity"],
 ];
 
-for (const [path, label, content, minimumAnchors] of sections) {
+for (const [path, label, content] of sections) {
   const html = await readFile(new URL(`${path}index.html`, base), "utf8");
   const href = `/reality/too-many-dogs-still-lack-safe-placement/${path}`;
-  assert.ok(html.includes(`href="${href}" aria-current="page"`), `${label}: active tab or route missing`);
+  assert.ok(html.includes(`href="${href}" aria-current="page"`), `${label}: active page link missing`);
   assert.ok(html.includes(content), `${label}: section content missing`);
-  const sidebar = html.match(/<aside class="dog-gap-sidebar"[\s\S]*?<\/aside>/)?.[0] ?? "";
-  const anchors = [...sidebar.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
-  assert.ok(anchors.length >= minimumAnchors, `${label}: left menu entries missing`);
-  for (const anchor of anchors) {
-    const count = [...html.matchAll(new RegExp(`\\bid="${anchor}"`, "g"))].length;
-    assert.equal(count, 1, `${label}: #${anchor} must have exactly one destination`);
-  }
-  assert.ok(html.includes("dog-gap-identity"), `${label}: need identity missing`);
-  const identity = html.match(/<section class="dog-gap-identity"[\s\S]*?<\/section>/)?.[0] ?? "";
-  assert.ok(identity, `${label}: identity card missing`);
-  assert.ok(!identity.includes("Crossover Stockton / Current need"), `${label}: obsolete identity label returned`);
-  assert.ok(!identity.includes("View sources") && !identity.includes("Our findings"), `${label}: identity actions returned`);
+  const sidebar = html.match(/<aside class="dog-gap-sidebar dog-gap-section-sidebar"[\s\S]*?<\/aside>/)?.[0] ?? "";
+  assert.ok(sidebar.includes("Back to needs") && sidebar.includes("Dogs on the street"), `${label}: persistent desktop identity missing`);
+  assert.ok(sidebar.includes(`href="${href}" aria-current="page"`), `${label}: desktop active page missing`);
+  assert.ok(html.includes('class="dog-gap-mobile-identity"') && html.includes('id="dog-gap-identity-links"'), `${label}: mobile identity navigation missing`);
+  assert.equal(html.includes('class="dog-gap-overview-hero"'), path === "", `${label}: overview hero placement incorrect`);
   assert.ok(html.includes("dog-gap-page is-investigating"), `${label}: investigation color state missing`);
 }
 
@@ -38,8 +31,14 @@ const keyFactors = await readFile(new URL("key-factors/index.html", base), "utf8
 const dogOverview = await readFile(new URL("index.html", base), "utf8");
 for (const key of ["shelter", "foster", "response", "reporting", "prevention", "placement"]) {
   assert.ok(keyFactors.includes(`id="factor-${key}"`), `Key Factors: ${key} missing`);
-  assert.ok(dogOverview.includes(`href="/reality/too-many-dogs-still-lack-safe-placement/key-factors/#factor-${key}"`), `Overview: ${key} deep link missing`);
 }
+assert.equal((dogOverview.match(/type="range"/g) ?? []).length, 3, "Overview: three-factor model missing");
+assert.equal((keyFactors.match(/type="range"/g) ?? []).length, 6, "Key Factors: full model missing");
+for (const heading of ["Understanding the issue", "Where dogs are being reported", "Ways to help", "What we&#x27;re finding", "Latest activity"]) {
+  assert.ok(dogOverview.includes(heading), `Overview: ${heading} preview missing`);
+}
+assert.ok(dogOverview.includes("Illustrative scenario"), "Overview: model disclaimer missing");
+assert.ok(dogOverview.includes("dog-gap-real-map"), "Overview: real map preview missing");
 const research = await readFile(new URL("research/index.html", base), "utf8");
 const legacySources = await readFile(new URL("sources/index.html", base), "utf8");
 assert.ok(!findings.includes('id="research-at-a-glance"'), "Our Findings still contains the research introduction");
@@ -72,7 +71,8 @@ for (const gap of gaps.filter((item) => item.active && item.investigation_status
       const count = [...html.matchAll(new RegExp(`\\bid="${anchor}"`, "g"))].length;
       assert.equal(count, 1, `${gap.slug} ${label}: #${anchor} must have exactly one destination`);
     }
-    assert.ok(html.includes("Back to needs") && html.includes("Browse needs"), `${gap.slug} ${label}: browse controls missing`);
+    assert.ok(html.includes('class="dog-gap-topbar"') && html.includes("Back to needs") && html.includes('aria-label="Gap navigation"'), `${gap.slug} ${label}: top gap navigation missing`);
+    assert.ok(html.includes('class="dog-gap-mobile-menus"'), `${gap.slug} ${label}: mobile menus missing`);
   }
   const legacy = await readFile(new URL("sources/index.html", directory), "utf8");
   assert.ok(legacy.includes('id="research-intro"'), `${gap.slug}: legacy Sources link no longer reaches Research`);

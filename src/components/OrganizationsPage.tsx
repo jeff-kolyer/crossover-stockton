@@ -1,14 +1,13 @@
 import {
   ArrowLeft,
   Building2,
-  ChevronDown,
   CircleAlert,
   Home,
   MapPin,
   Search,
 } from "lucide-react";
 import orgsData from "../data/orgs.json";
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicSiteNav } from "./PublicSiteNav";
 import { OrganizationCard } from "./OrganizationCard";
 import type { OrgRecord } from "../types";
 
@@ -31,26 +30,7 @@ export function OrganizationsPage({ onNavigate, onOpenReport }: OrganizationsPag
       <section className="public-hero is-compact">
         <img className="public-hero-image is-active" src={heroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         <div className="public-hero-shade" />
-        <header className="public-nav">
-          <PublicMobileMenu active="organizations" onNavigate={onNavigate} />
-          <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
-            <img src={logoLight} alt="" decoding="async" />
-            <span>Crossover</span>
-          </button>
-          <nav aria-label="Primary">
-            <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
-            <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
-            <button type="button" onClick={() => onNavigate("action")}>Action</button>
-            <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
-            <button type="button" className="is-active">Organizations</button>
-            <button type="button" onClick={() => onNavigate("about")}>About</button>
-          </nav>
-          <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-            <MapPin size={16} />
-            Stockton, CA
-            <ChevronDown size={15} />
-          </button>
-        </header>
+        <PublicSiteNav active="organizations" onNavigate={onNavigate} />
 
         <div className="public-hero-copy">
           <span className="public-page-eyebrow">Organizations</span>

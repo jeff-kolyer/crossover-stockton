@@ -79,11 +79,11 @@ function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: 
   return null;
 }
 
-export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean }) {
+export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean }) {
   const tileFailures = useRef(0);
   const [tilesUnavailable, setTilesUnavailable] = useState(false);
   const icons = useMemo(() => new Map(locations.map((location) => [location.id, locationIcon(location, selectedId === location.id)])), [locations, selectedId]);
-  return <div className="investigation-map-frame"><MapContainer center={[37.98, -121.33]} zoom={10} scrollWheelZoom={false} className="investigation-leaflet-shell">
+  return <div className="investigation-map-frame"><MapContainer center={[37.98, -121.33]} zoom={10} zoomControl={!preview} scrollWheelZoom={false} className="investigation-leaflet-shell">
     {!tilesUnavailable && <TileLayer attribution='&copy; OpenStreetMap contributors' url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" eventHandlers={{ tileload: () => { tileFailures.current = 0; }, tileerror: () => { tileFailures.current += 1; if (tileFailures.current >= 3) setTilesUnavailable(true); } }} />}
     <MapViewport wheelZoom={wheelZoom} locations={locations} />
     <MapFocus locations={locations} selectedId={selectedId} />

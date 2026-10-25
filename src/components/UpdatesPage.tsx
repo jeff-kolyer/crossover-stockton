@@ -1,15 +1,13 @@
 import {
   ArrowLeft,
-  ChevronDown,
   ExternalLink,
   FileText,
-  MapPin,
 } from "lucide-react";
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateTypeLabel } from "../lib/updatePresentation";
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicSiteNav } from "./PublicSiteNav";
 import type { EvidenceRecord, GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -128,28 +126,7 @@ function updateRecordsFromGaps() {
 }
 
 function PublicNav({ onNavigate }: { onNavigate: (page: PublicRoute) => void }) {
-  return (
-    <header className="public-nav gap-history-nav">
-      <PublicMobileMenu active="updates" onNavigate={onNavigate} />
-      <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
-        <img src={logoLight} alt="" decoding="async" />
-        <span>Crossover</span>
-      </button>
-      <nav aria-label="Primary">
-        <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
-        <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
-        <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <button type="button" className="is-active" onClick={() => onNavigate("updates")}>Updates</button>
-        <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
-        <button type="button" onClick={() => onNavigate("about")}>About</button>
-      </nav>
-      <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-        <MapPin size={16} />
-        Stockton, CA
-        <ChevronDown size={15} />
-      </button>
-    </header>
-  );
+  return <PublicSiteNav active="updates" onNavigate={onNavigate} variant="history" />;
 }
 
 function latestCheckedDate(recordsForUpdates: EvidenceRecord[]) {

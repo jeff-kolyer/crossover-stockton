@@ -15,7 +15,7 @@ export function legacyDogWorkDestination(workId: string, anchor?: string): DogGa
     return { section: "our-findings", anchor: anchor?.startsWith("investigation-") || anchor === "field-observation-procedure" ? anchor : undefined };
   }
   if (workId === "dogs-direct-field-work") {
-    return { section: "our-findings", anchor: anchor?.includes("records-request") ? "investigation-records-request" : anchor ? "investigation-records" : undefined };
+    return { section: "our-findings", anchor: anchor?.includes("records-request") ? "investigation-records-request" : "activity-log" };
   }
   return null;
 }

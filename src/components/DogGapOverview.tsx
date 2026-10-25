@@ -16,7 +16,7 @@ const investigationHref = "/reality/too-many-dogs-still-lack-safe-placement/our-
 const pathwaysHref = "/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/";
 const solutionsHref = "/reality/too-many-dogs-still-lack-safe-placement/improvements/";
 const mapHref = "/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/";
-const fieldworkHref = "/reality/too-many-dogs-still-lack-safe-placement/our-findings/";
+const fieldworkHref = "/reality/too-many-dogs-still-lack-safe-placement/our-findings/#activity-log";
 const measurements = dogsResearch.measurements;
 const measure = (id: string) => measurements.find((item) => item.id === id)?.value.toLocaleString() ?? "—";
 const projects = projectsData.filter((project) => project.gap_ids.includes("dogs-safe-placement"));

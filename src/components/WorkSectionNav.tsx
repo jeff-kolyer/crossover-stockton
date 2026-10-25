@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 
 export interface WorkSectionNavItem {
@@ -13,9 +13,10 @@ export function navigateToWorkSection(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-export function WorkSectionNav({ items }: { items: WorkSectionNavItem[] }) {
+export function WorkSectionNav({ items, className }: { items: WorkSectionNavItem[]; className?: string }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? "");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileLinksId = useId();
   const clickedId = useRef<string | null>(null);
   const clickedSectionReached = useRef(false);
 
@@ -79,8 +80,8 @@ export function WorkSectionNav({ items }: { items: WorkSectionNavItem[] }) {
 
   const links = items.map(({ id, label, icon: Icon, description }) => <a key={id} className={activeId === id ? "is-active" : undefined} href={`#${id}`} aria-current={activeId === id ? "location" : undefined} onClick={(event) => { event.preventDefault(); clickedId.current = id; clickedSectionReached.current = false; setActiveId(id); setMobileOpen(false); navigateToWorkSection(id); }}><Icon size={20} aria-hidden="true" /><span><span className="work-section-nav-label">{label}</span>{description && <small>{description}</small>}</span></a>);
 
-  return <aside className="work-section-nav">
+  return <aside className={`work-section-nav${className ? ` ${className}` : ""}`}>
     <nav className="work-section-nav-desktop" aria-label="On this page"><h2>On this page</h2>{links}</nav>
-    <div className="work-section-nav-mobile"><button type="button" aria-expanded={mobileOpen} aria-controls="work-section-nav-mobile-links" onClick={() => setMobileOpen((open) => !open)}>On this page <span aria-hidden="true">{mobileOpen ? "−" : "+"}</span></button><nav id="work-section-nav-mobile-links" aria-label="On this page" hidden={!mobileOpen}>{links}</nav></div>
+    <div className="work-section-nav-mobile"><button type="button" aria-expanded={mobileOpen} aria-controls={mobileLinksId} onClick={() => setMobileOpen((open) => !open)}>On this page <span aria-hidden="true">{mobileOpen ? "−" : "+"}</span></button><nav id={mobileLinksId} aria-label="On this page" hidden={!mobileOpen}>{links}</nav></div>
   </aside>;
 }

@@ -17,7 +17,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { navigateInternalLink } from "../lib/internalLink";
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicSiteNav } from "./PublicSiteNav";
 import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -51,36 +51,21 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap, 
 
   return (
     <main className="public-home about-page">
-      <header className="public-nav gap-detail-nav">
-        <PublicMobileMenu active="about" onNavigate={onNavigate} />
-        <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
-          <img src={logoLight} alt="" decoding="async" />
-          <span>Crossover</span>
-        </button>
-        <nav aria-label="Primary">
-          <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
-          <button type="button" onClick={() => onNavigate("connection")}>Stories</button>
-          <button type="button" onClick={() => onNavigate("action")}>Action</button>
-          <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
-          <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
-          <button type="button" className="is-active" aria-current="page">About</button>
-        </nav>
-        <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-          <MapPin size={16} /> Stockton, CA <ChevronDown size={15} />
-        </button>
-      </header>
+      <PublicSiteNav active="about" onNavigate={onNavigate} variant="dark" />
 
       <div className="work-page-grid about-page-grid">
-        <WorkSectionNav items={aboutNavItems} />
+        <WorkSectionNav items={aboutNavItems} className="about-nav-desktop" />
         <div className="about-content">
           <section className="about-welcome" id="welcome">
             <div className="about-welcome-copy">
               <p className="about-eyebrow">About Crossover Stockton</p>
               <h1>Before we can change reality, we must understand it.</h1>
-              <p>We combine AI research with real-world investigation to discover what works, what doesn't, and what people can actually do to help.</p>
+              <p>We use AI to understand a real-world problem, identify what's preventing it from being solved, and connect people and emerging capabilities to the work that needs doing.</p>
             </div>
             <div className="about-welcome-photo"><img src={aboutHeroImage} alt="AI-generated illustration of a waterfront promenade and downtown skyline at sunset" loading="eager" decoding="async" fetchPriority="high" /></div>
           </section>
+
+          <WorkSectionNav items={aboutNavItems} className="about-nav-below-hero" />
 
           <section className="about-content-section about-method" id="how-it-works">
             <h2>How Crossover works</h2>

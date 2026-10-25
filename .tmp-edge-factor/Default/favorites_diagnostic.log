@@ -1,0 +1,39 @@
+2026-10-24 20:39:04.116: [INFO] CurrentProfilePath: C:\dev\crossover-stockton\.tmp-edge-factor\Default
+2026-10-24 20:39:04.116: [INFO] Profiles total count: 1
+2026-10-24 20:39:04.116: [INFO] Profile: name=Profile 1 path=C:\dev\crossover-stockton\.tmp-edge-factor\Default lastActive=2026-10-24T20:39:04.062Z
+2026-10-24 20:39:04.116: [INFO] LastUsedProfileDir: C:\dev\crossover-stockton\.tmp-edge-factor\Default
+2026-10-24 20:39:04.116: [INFO] MostRecentlyActiveProfile: name=Profile 1 path=C:\dev\crossover-stockton\.tmp-edge-factor\Default lastActive=2026-10-24T20:39:04.062Z
+2026-10-24 20:39:04.116: [INFO] OnDoneLoading sync enabled: 0
+2026-10-24 20:39:04.116: [INFO] BookmarkModelLoaded, ids_reassigned: 0
+2026-10-24 20:39:04.116: [INFO] BookmarksLoadDropped droppedNodes=0
+2026-10-24 20:39:04.116: [INFO] BookmarksSnapshot Startup total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1
+2026-10-24 20:39:04.118: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-10-24 20:39:08.201: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-10-24 20:39:08.205: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:08.210: [INFO] Primary account changed.
+2026-10-24 20:39:08.210: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-10-24 20:39:09.488: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.732: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.733: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.734: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.749: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.750: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.751: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-10-24 20:39:09.752: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 5
+2026-10-24 20:39:09.754: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 5
+2026-10-24 20:39:10.049: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 5
+2026-10-24 20:39:10.081: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 5
+2026-10-24 20:39:10.241: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 5
+2026-10-24 20:39:10.366: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 5
+2026-10-24 20:39:10.368: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:10.371: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:10.763: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:10.765: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:10.974: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:24.797: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:25.153: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:31.094: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:31.439: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:32.104: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:32.440: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 6
+2026-10-24 20:39:43.294: [INFO] BookmarksSnapshot Shutdown total=0 bar=0 other=0 mobile=0 showBar=0 showBarNTP=1

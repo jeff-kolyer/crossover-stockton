@@ -95,7 +95,7 @@ export function DogsResearchContent({ item }: { item: WorkRecord; onOpenReport: 
           <MetricSummary items={outcomeMetrics} compact />
           <span className="research-glance-link">Explore outcomes <ArrowRight size={15} aria-hidden="true" /></span>
         </a>
-        <a className="research-glance-panel is-improvements" href="#research-factors" onClick={(event) => jump(event, "research-factors")}>
+        <a className="research-glance-panel is-unknown" href="#research-factors" onClick={(event) => jump(event, "research-factors")}>
           <div className="research-glance-heading"><Search size={29} aria-hidden="true" /><h3>What remains unknown</h3></div>
           <p className="research-glance-description">Public figures establish some intake and outcome counts. They do not measure the current street population or show where each help route gets stuck.</p>
           <span className="research-glance-link">Explore missing measurements <ArrowRight size={15} aria-hidden="true" /></span>

@@ -3,13 +3,17 @@ import investigationsData from "../data/dogs-investigations.json";
 import locationsData from "../data/investigation-locations.json";
 import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
+import workData from "../data/work.json";
 import type { ActiveInvestigation, CapacityProject, DogsInvestigationData, EvidenceRecord, WorkRecord } from "../types";
 import type { ReactNode } from "react";
 import { useEffect } from "react";
 import { InvestigationLocations } from "./InvestigationLocations";
+import { ActivityLog } from "./ActivityLog";
 
 const data = investigationsData as DogsInvestigationData;
 const records = recordsData as EvidenceRecord[];
+const activityWork = (workData as WorkRecord[]).find((work) => work.id === "dogs-direct-field-work");
+const activityRecords = (activityWork?.activity_record_ids ?? []).map((id) => records.find((record) => record.id === id)).filter((record): record is EvidenceRecord => Boolean(record));
 const projects = projectsData as CapacityProject[];
 const recordById = new Map(records.map((record) => [record.id, record]));
 const projectById = new Map(projects.map((project) => [project.id, project]));
@@ -30,7 +34,7 @@ function EvidenceLink({ recordId, onOpenReport, label }: { recordId: string; onO
   const record = recordById.get(recordId);
   if (!record) return null;
   if (record.record_type === "field_report") return <a className="investigation-source" href={`/reports/${recordId}/`} onClick={(event) => { event.preventDefault(); onOpenReport(recordId); }}>{label || "Read Crossover field report"} <ArrowRight size={14} aria-hidden="true" /></a>;
-  if (record.record_type === "activity" && record.work_id) return <a className="investigation-source" href={`/reality/too-many-dogs-still-lack-safe-placement/our-findings/#${recordId.includes("records-request") ? "investigation-records-request" : "investigation-records"}`}>{label || `Activity: ${record.title}`} <ArrowRight size={14} aria-hidden="true" /></a>;
+  if (record.record_type === "activity" && record.work_id) return <a className="investigation-source" href={`/reality/too-many-dogs-still-lack-safe-placement/our-findings/#${record.id}`}>{label || `Activity: ${record.title}`} <ArrowRight size={14} aria-hidden="true" /></a>;
   if (record.source.url) return <a className="investigation-source" href={record.source.url} target="_blank" rel="noreferrer">{label || `View source: ${record.source.publisher || record.title}`} <ArrowRight size={14} aria-hidden="true" /></a>;
   return <span className="investigation-source-note">Source: {record.source.publisher || "Internal Crossover record"}</span>;
 }
@@ -83,7 +87,7 @@ function ActiveInvestigationView({ investigation, onOpenReport, showMap }: { inv
       <p className="gap-mobile-body"><strong>{investigation.records_request.status}</strong> · {investigation.records_request.submitted_at}</p>
       <p className="gap-mobile-body">{investigation.records_request.summary}</p>
       <p className="gap-mobile-body"><strong>Next: Review Animal Services field-call records.</strong> Awaiting response. {investigation.records_request.review_plan}</p>
-      {recordById.get(investigation.records_request.activity_record_id) && <a className="investigation-source" href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/#investigation-records-request">View records request activity <ArrowRight size={14} aria-hidden="true" /></a>}
+      {recordById.get(investigation.records_request.activity_record_id) && <a className="investigation-source" href={`/reality/too-many-dogs-still-lack-safe-placement/our-findings/#${investigation.records_request.activity_record_id}`}>View records request activity <ArrowRight size={14} aria-hidden="true" /></a>}
     </InvestigationSection>}
 
     {showMap && <InvestigationLocations investigationId={investigation.id} onOpenReport={onOpenReport} />}
@@ -139,6 +143,11 @@ export function DogsInvestigationContent({ item, onOpenReport, includeMap = true
     </InvestigationSection>
 
     {data.active_investigations.map((investigation) => <PotentialResponses key={investigation.id} investigation={investigation} />)}
+
+    <InvestigationSection id="activity-log" title="Journey / Activity Log" icon={<ClipboardList size={20} aria-hidden="true" />}>
+      <p className="gap-mobile-body">{activityWork?.summary} A recorded attempt or plan does not confirm a response or a completed visit.</p>
+      <ActivityLog records={activityRecords} onOpenReport={onOpenReport} />
+    </InvestigationSection>
 
     <InvestigationSection id="investigation-records" title="Investigation records" icon={<Archive size={20} aria-hidden="true" />}>
       <p className="investigation-records-intro gap-mobile-body">Earlier barrier threads and evidence remain available for deeper review.</p>

@@ -1,38 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import {
   AlertTriangle,
-  Apple,
   ArrowLeft,
   ArrowRight,
-  Building2,
   CalendarDays,
   Check,
-  CheckCircle2,
   ChevronDown,
-  ChevronRight,
   CircleAlert,
-  HandHeart,
   Home,
   MapPin,
-  PawPrint,
   Search,
-  ShieldCheck,
   Users,
 } from "lucide-react";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
-import investigationsData from "../data/dogs-investigations.json";
-import investigationLocationsData from "../data/investigation-locations.json";
-import orgsData from "../data/orgs.json";
-import recordsData from "../data/records.json";
 import storiesData from "../data/stories.json";
-import workData from "../data/work.json";
 import { getActionIcon } from "../lib/actionIcons";
 import { latestGapActivity } from "../lib/gapActivity";
 import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
-import { PublicMobileMenu } from "./PublicMobileMenu";
-import type { ActionTag, EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord, WorkRecord } from "../types";
+import { PublicSiteNav } from "./PublicSiteNav";
+import { HomeLanding } from "./HomeLanding";
+import type { ActionTag, GapRecord, PublicActionRecord, StoryRecord } from "../types";
 
 interface HomePageProps {
   page: "home" | "reality" | "connection" | "action";
@@ -48,14 +37,6 @@ interface HomePageProps {
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 const actions = actionsData as PublicActionRecord[];
-const orgs = orgsData as OrgRecord[];
-const work = workData as WorkRecord[];
-const records = recordsData as EvidenceRecord[];
-const currentDogGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
-const currentDogInvestigation = investigationsData.active_investigations[0];
-const historicalReferenceCount = investigationLocationsData.filter((location) => location.investigation_id === currentDogInvestigation?.id).length;
-const investigationWork = work.find((item) => item.gap_id === "dogs-safe-placement" && item.page_kind === "investigation");
-const firstFieldReport = records.find((record) => record.record_type === "field_report" && investigationWork?.report_record_ids?.includes(record.id));
 
 const actionHeroImage = "/images/action/action_banner.jpg";
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
@@ -68,7 +49,7 @@ const pageCopy = {
   home: {
     eyebrow: "",
     title: "See clearly. Act locally.",
-    text: "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs. We're starting in Stockton, learning what actually needs attention.",
+    text: "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs in Stockton.",
   },
   reality: {
     eyebrow: "Reality",
@@ -98,18 +79,6 @@ const activeGaps = gaps.filter((gap) => gap.active).sort((a, b) => a.rank - b.ra
 const activeStories = stories
   .filter((story) => story.active)
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
-const featuredStories = stories
-  .filter((story) => story.active && story.featured)
-  .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
-const featuredActions = actions
-  .filter((action) => action.active && action.featured)
-  .sort((a, b) => {
-    if (a.id === "doggie-day-out") return -1;
-    if (b.id === "doggie-day-out") return 1;
-    return 0;
-  });
-const newDogActionIds = new Set(["check-reported-stray-dog-area", "report-a-stray-dog", "help-feed-street-dogs"]);
-const activeOrgs = orgs.filter((org) => org.active).slice(0, 5);
 const actionTagOrder: ActionTag[] = ["dogs", "today", "volunteer", "donate", "food", "housing", "reentry", "foster-adopt"];
 const actionTagLabels: Record<ActionTag, string> = {
   dogs: "Dogs",
@@ -144,7 +113,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
   }, [roleMenuOpen]);
   const isHome = page === "home";
   const copy = pageCopy[page];
-  const visibleActions = isHome ? featuredActions.filter((action) => !newDogActionIds.has(action.id)).slice(0, 4) : actions.filter((action) => action.active);
+  const visibleActions = actions.filter((action) => action.active);
   const availableActionTags = actionTagOrder.filter((tag) => visibleActions.some((action) => action.tags?.includes(tag)));
   const availableRoles = [...new Set(visibleActions.flatMap((action) => action.participation_roles?.map((role) => role.name) ?? []))].sort((a, b) => a.localeCompare(b));
   const filteredActions = page === "action"
@@ -155,12 +124,14 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
   const orderedActions = selectedActionTag === "dogs"
     ? [...filteredActions].sort((a, b) => dogActionRank(a.id) - dogActionRank(b.id))
     : filteredActions;
-  const visibleGaps = isHome ? activeGaps.filter((gap) => gap.status !== "monitored").slice(0, 4) : activeGaps;
-  const visibleStories = isHome ? featuredStories.slice(0, 3) : activeStories;
+  const visibleGaps = activeGaps;
+  const visibleStories = activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
+  const navigation = <PublicSiteNav active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant={isHome ? "dark" : "overlay"} />;
 
   return (
     <main className={`public-home ${isHome ? "is-home-page" : "is-section-page"} is-${page}-page`}>
+      {isHome && navigation}
       <section className={`public-hero ${isHome ? "" : "is-compact"}`}>
         <img
           className="public-hero-image is-active"
@@ -172,54 +143,23 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
           fetchPriority="high"
         />
         <div className="public-hero-shade" />
-        <header className="public-nav">
-          <PublicMobileMenu active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
-          <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
-            <img src={logoLight} alt="" />
-            <span>Crossover</span>
-          </button>
-          <nav aria-label="Primary">
-            <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}>Needs</button>
-            <button type="button" className={page === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}>Stories</button>
-            <button type="button" className={page === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}>Action</button>
-            <button type="button" onClick={() => onNavigate("updates")}>Updates</button>
-            <button type="button" onClick={() => onNavigate("organizations")}>Organizations</button>
-            <button type="button" onClick={onOpenAbout}>About</button>
-          </nav>
-          <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-            <MapPin size={16} />
-            Stockton, CA
-            <ChevronDown size={15} />
-          </button>
-        </header>
+        {!isHome && navigation}
 
         <div className="public-hero-copy">
           {!isHome && <span className="public-page-eyebrow">{copy.eyebrow}</span>}
           <h1>{isHome ? <>See clearly.<br />Act locally.</> : copy.title}</h1>
           <p>{copy.text}</p>
           {isHome && (
-            <>
-              <div className="hero-action-row">
-                <button className="hero-investigation-button" type="button" onClick={() => onOpenGapSection("too-many-dogs-still-lack-safe-placement", "our-findings")}>
-                  <Search size={20} aria-hidden="true" />
-                  <span>Explore the investigation</span>
-                  <ArrowRight size={18} aria-hidden="true" />
-                </button>
-                <button className="hero-learn-button" type="button" onClick={onOpenAbout}>
-                  <span>Learn more</span>
-                  <ArrowRight size={18} aria-hidden="true" />
-                </button>
-              </div>
-              <div className="hero-link-row">
-                <span>Discover what needs doing. Explore what technology and people could change.</span>
-                <button type="button" onClick={() => onNavigate("connection")}>See reported progress <ArrowRight size={16} /></button>
-              </div>
-            </>
+            <div className="hero-action-row">
+              <a className="hero-investigation-button" href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>Find out how you can help <ArrowRight size={18} aria-hidden="true" /></a>
+            </div>
           )}
         </div>
       </section>
 
-      {(page === "home" || page === "reality") && <section id="reality" className="public-band public-gap-band">
+      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenAction={onOpenAction} />}
+
+      {page === "reality" && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">
           <p>AI surfaced through public information</p>
           <h2>Potential unmet needs</h2>
@@ -271,41 +211,18 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
             );
           })}
         </div>
-        <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "reality" : "home")}>
-          {page === "home" ? <>Explore all needs <ArrowRight size={16} /></> : <><ArrowLeft size={16} /> Back to home</>}
+        <button className="center-link" type="button" onClick={() => onNavigate("home")}>
+          <ArrowLeft size={16} /> Back to home
         </button>
       </section>}
 
-      {isHome && currentDogGap && currentDogInvestigation && investigationWork && <section className="public-band public-work-band" aria-labelledby="home-work-title">
-        <div className="section-intro">
-          <p>Crossover's work</p>
-          <h2 id="home-work-title">What we're doing now</h2>
-        </div>
-        <div className="home-work-content">
-          <div className="home-work-focus">
-            <span>Current investigation · Dogs on the street</span>
-            <h3>Where does care break down?</h3>
-            <p>We're investigating where street dogs are being reported, what happens when someone tries to help, and which barriers prevent dogs from reaching care.</p>
-            <div className="home-work-summary-grid">
-              <div><strong>What we've done</strong><p>Reviewed public sources and mapped {historicalReferenceCount} dated, generalized report areas{firstFieldReport ? "; documented an initial Animal Services visit" : ""}.</p></div>
-              <div><strong>What's next</strong><p>Confirm whether the planned location check occurred, then document what is and is not observed from safe public areas.</p></div>
-            </div>
-          </div>
-          <div className="home-work-grid">
-            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><Search size={22} /></span><h3>Our Findings</h3></div><p>Read the questions we're testing, what the evidence shows, and what remains unverified.</p><div className="home-work-links"><a className="home-work-primary" href={`/reality/${currentDogGap.slug}/our-findings/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(currentDogGap.slug, "our-findings"))}>Explore findings <ArrowRight size={15} /></a></div></article>
-            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><MapPin size={22} /></span><h3>Explore the Map</h3></div><p>Explore dated, generalized report areas. They do not show where dogs are now.</p><div className="home-work-links"><a className="home-work-primary" href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={15} /></a></div></article>
-            <article className="home-work-card"><div className="home-work-card-heading"><span className="gap-work-icon" aria-hidden="true"><HandHeart size={22} /></span><h3>Ways to Help</h3></div><p>See possible routes to care and what is still unverified about access and outcomes.</p><div className="home-work-links"><a className="home-work-primary" href={`/reality/${currentDogGap.slug}/ways-to-help/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(currentDogGap.slug, "ways-to-help"))}>Explore ways to help <ArrowRight size={15} /></a></div></article>
-          </div>
-        </div>
-      </section>}
-
-      {(page === "home" || page === "connection") && <section id="connection" className="public-band public-story-band">
+      {page === "connection" && <section id="connection" className="public-band public-story-band">
         <div className="section-intro">
           <p>What Reality Looks Like</p>
           <h2>Signs of Being</h2>
-          <span>{page === "connection" ? "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations." : "Examples of positive developments reported by local sources, not necessarily outcomes of Crossover's investigations."}</span>
-          <button type="button" onClick={() => onNavigate(page === "home" ? "connection" : "action")}>
-            {page === "home" ? "See more stories" : "Take an action"} <ArrowRight size={16} />
+          <span>Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations.</span>
+          <button type="button" onClick={() => onNavigate("action")}>
+            Take an action <ArrowRight size={16} />
           </button>
         </div>
         <div className="story-grid">
@@ -328,7 +245,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         )}
       </section>}
 
-      {(page === "home" || page === "action") && <section id="action" className="public-band public-action-band">
+      {page === "action" && <section id="action" className="public-band public-action-band">
         <div className="section-intro">
           <p>How Can I Help Today?</p>
           <h2>Find your way in.</h2>
@@ -426,51 +343,9 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
             })}
           </div>
         </div>
-        <button className="center-link" type="button" onClick={() => onNavigate(page === "home" ? "action" : "home")}>
-          {page === "home" ? <>See more ways to help <ArrowRight size={16} /></> : <><ArrowLeft size={16} /> Back to home</>}
+        <button className="center-link" type="button" onClick={() => onNavigate("home")}>
+          <ArrowLeft size={16} /> Back to home
         </button>
-      </section>}
-
-      {isHome && <section className="public-band public-org-band">
-        <div className="section-intro">
-          <p>Organizations in our research</p>
-          <h2>Organizations mentioned in our investigations and sources.</h2>
-          <button type="button" onClick={onOpenAbout}>Our approach <ArrowRight size={16} /></button>
-        </div>
-        <div className="org-grid">
-          {activeOrgs.map((org, index) => {
-            const Icon = getOrgIcon(index);
-            return (
-            <button className="org-card" key={org.id} type="button" onClick={() => onNavigate("organizations")}>
-              <Icon size={34} />
-              <strong>{org.name}</strong>
-              <span>{org.summary}</span>
-              <ChevronRight size={18} />
-            </button>
-            );
-          })}
-        </div>
-        <div className="org-note">
-          <span>These descriptions come from public sources. Inclusion does not mean we've independently verified current services or established a working relationship.</span>
-          <button type="button" onClick={() => onNavigate("organizations")}>See all organizations <ArrowRight size={15} /></button>
-        </div>
-      </section>}
-
-      {isHome && <section className="public-quote">
-        <div className="quote-main">
-          <span aria-hidden="true">“</span>
-          <blockquote>Awareness is the greatest agent for change.</blockquote>
-          <cite>
-            <a href="https://www.goodreads.com/work/quotes/2567181-a-new-earth-awakening-to-your-life-s-purpose?page=1" target="_blank" rel="noreferrer">
-              - Eckhart Tolle, A New Earth
-            </a>
-          </cite>
-        </div>
-        <div className="quote-fruit">
-          <p>Not identity.<br />Not belief.<br />Show me the fruit.</p>
-          <Apple size={34} aria-hidden="true" />
-        </div>
-        <span><span className="quote-definition-lead">From thinking to being.</span><strong>From egoic identity toward connection with reality.</strong></span>
       </section>}
 
       <footer className="public-footer">
@@ -490,17 +365,13 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
 
       <nav className="public-bottom-nav" aria-label="Mobile primary">
         <button type="button" className={page === "home" ? "is-active" : ""} onClick={() => onNavigate("home")}><Home size={21} /><span>Home</span></button>
+        <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}><Search size={21} /><span>Needs</span></button>
         <button type="button" className={page === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}><MapPin size={21} /><span>Stories</span></button>
-        <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}><Search size={21} /><span>Reality</span></button>
         <button type="button" className={page === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}><AlertTriangle size={21} /><span>Action</span></button>
         <button type="button" onClick={onOpenAbout}><CircleAlert size={21} /><span>About</span></button>
       </nav>
     </main>
   );
-}
-
-function getOrgIcon(index: number) {
-  return [PawPrint, HandHeart, ShieldCheck, Home, Building2][index % 5];
 }
 
 function actionTitles(ids: string[]) {

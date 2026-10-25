@@ -1,0 +1,5 @@
+2026/10/24-13:39:08.000 1cd4 Creating DB C:\dev\crossover-stockton\.tmp-edge-factor\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/10/24-13:39:08.057 1cd4 Reusing MANIFEST C:\dev\crossover-stockton\.tmp-edge-factor\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/10/24-13:39:10.839 23a0 Level-0 table #5: started
+2026/10/24-13:39:10.845 23a0 Level-0 table #5: 683273 bytes OK
+2026/10/24-13:39:10.848 23a0 Delete type=0 #3

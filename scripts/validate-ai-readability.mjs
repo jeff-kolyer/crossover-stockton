@@ -44,7 +44,7 @@ const featuredGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
 if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) {
   throw new Error("The homepage does not link to the active dog-placement gap.");
 }
-if (!homeHtml.includes("Where does care break down?") || !homeText.includes("What we've done") || !homeText.includes("What's next") || !homeText.includes("generalized report areas")) {
+if (!homeHtml.includes("Why do so many dogs struggle to reach care?") || !homeText.includes("Stockton's animal shelter reports regular overcrowding.") || !homeText.includes("Explore what we're learning")) {
   throw new Error("The homepage does not summarize the active investigation.");
 }
 for (const path of [`/reality/${featuredGap.slug}/our-findings/`, `/reality/${featuredGap.slug}/dogs-locations-map/`, `/reality/${featuredGap.slug}/ways-to-help/`]) {
