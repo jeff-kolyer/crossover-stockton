@@ -88,12 +88,13 @@
   .home-landing-need-body > strong { padding: 0; font-size: .88rem; }
   .home-landing-need-summary { display: none; }
   .home-landing-need-arrow { position: static; }
-  .home-landing-investigation { grid-template-columns: 95px minmax(0, 1fr); gap: 13px; margin: 22px 0; padding: 12px; }
-  .home-landing-investigation > img { min-height: 0; height: 130px; }
-  .home-landing-investigation-copy { padding: 0; }
+  .home-landing-investigation { grid-template-columns: minmax(0, 1fr); gap: 13px; margin: 22px 0; padding: 12px; }
+  .home-landing-investigation > img { display: block; width: 100%; height: auto; min-height: 0; aspect-ratio: 16 / 9; object-fit: cover; }
+  .home-landing-investigation-copy { min-width: 0; padding: 0; }
   .home-landing-investigation-copy h2 { font-size: 1.45rem; }
-  .home-landing-investigation-copy > span { font-size: .83rem; }
-  .home-landing-investigation-links { display: grid; grid-template-columns: 1fr; padding: 6px 0 0; }
+  .home-landing-investigation-copy > span { max-width: none; font-size: .9rem; }
+  .public-home.is-home-page .home-landing-primary { display: flex; width: 100%; min-height: 44px; }
+  .home-landing-investigation-links { display: grid; grid-column: auto; grid-template-columns: minmax(0, 1fr); min-width: 0; padding: 6px 0 0; }
   .home-landing-investigation-links a { min-height: 55px; border-right: 0; border-bottom: 1px solid #dce5dc; padding: 0 3px; }
   .home-landing-investigation-links a:last-child { border-bottom: 0; }
   .home-landing-stories { grid-template-columns: 1fr; gap: 8px; }
@@ -110,9 +111,5 @@
   .home-landing { padding: 18px 16px 115px; }
   .home-landing-section-heading { align-items: start; flex-direction: column; gap: 2px; margin-bottom: 10px; }
   .home-landing-section-heading > a { min-height: 38px; }
-  .home-landing-investigation { grid-template-columns: 86px minmax(0, 1fr); gap: 10px; }
-  .home-landing-investigation > img { height: 110px; }
-  .home-landing-investigation-copy h2 { font-size: 1.2rem; }
-  .home-landing-investigation-copy > span { font-size: .76rem; }
-  .home-landing-primary { width: 100%; margin-top: 12px; }
+  .home-landing-investigation { gap: 12px; }
 }

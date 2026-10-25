@@ -1,41 +1,9 @@
-import { useState } from "react";
-import {
-  AlertTriangle,
-  ArrowRight,
-  ChevronDown,
-  ChevronUp,
-  FileText,
-  Footprints,
-  Home as HomeIcon,
-  Linkedin,
-  MapPin,
-  PawPrint,
-  Search,
-  Settings,
-  Sparkles,
-  Users,
-  Wrench,
-} from "lucide-react";
+import { AlertTriangle, ArrowRight, Home as HomeIcon, Linkedin, MapPin, Search, Sparkles } from "lucide-react";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
-import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
+import "./AboutPage.css";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
-
-const aboutHeroImage = "/images/about/about-crossover-hero.jpg";
-const founderImage = "/images/about/about-the-founder.jpg";
-const spotlightDogImage = "/images/reality/dog-thumb.jpg";
-const logoDark = "/images/logo_dark.webp";
-const logoLight = "/images/logo_light.webp";
-const linkedInUrl = "https://www.linkedin.com/in/jeff-kolyer";
-const aboutNavItems: WorkSectionNavItem[] = [
-  { id: "welcome", label: "Welcome", icon: FileText },
-  { id: "how-it-works", label: "How it works", icon: Settings },
-  { id: "street-dogs", label: "Street dogs and access to care", icon: PawPrint },
-  { id: "what-we-do", label: "Our continuing mission", icon: Search },
-  { id: "founder", label: "About the founder", icon: Users },
-  { id: "connect", label: "Get involved", icon: ArrowRight },
-];
 
 interface AboutPageProps {
   onNavigate: (page: PublicRoute) => void;
@@ -46,146 +14,77 @@ interface AboutPageProps {
   onOpenFindings: () => void;
 }
 
-export function AboutPage({ onNavigate, onPrimaryAction, onOpenWork, onOpenGap, onOpenResearch, onOpenFindings }: AboutPageProps) {
-  const [openQuestion, setOpenQuestion] = useState<number | null>(null);
+const ideas = [
+  { title: "Technology", description: "New capabilities can help meet real needs. But they still need us to steer them toward what matters.", image: "/images/about/techno.jpg", alt: "Industrial robotic arms working in a modern factory" },
+  { title: "Vocation", description: "Post-scarcity technology could free us to discover our true purpose, and give us the tools to pursue it.", image: "/images/about/guy-dog.jpg", alt: "A man sitting with a dog and looking toward the sunset" },
+  { title: "Investigation", description: "Learning what is real by showing up and testing assumptions. We'll bring the dog food.", image: "/images/about/notebook.jpg", alt: "Open field notebook with handwritten observations and a pen" },
+  { title: "Compassion", description: "Recognizing our shared unconsciousness and seeing beyond ego, judgment, and division.", image: "/images/about/hands.jpg", alt: "Two hands reaching toward one another in warm sunlight" },
+];
 
+const linkedInUrl = "https://www.linkedin.com/in/jeff-kolyer";
+const logoDark = "/images/logo_dark.webp";
+const logoLight = "/images/logo_light.webp";
+
+export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
   return (
-    <main className="public-home about-page">
+    <main className="public-home about-page about-redesign">
       <PublicSiteNav active="about" onNavigate={onNavigate} variant="dark" />
 
-      <div className="work-page-grid about-page-grid">
-        <WorkSectionNav items={aboutNavItems} className="about-nav-desktop" />
-        <div className="about-content">
-          <section className="about-welcome" id="welcome">
-            <div className="about-welcome-copy">
-              <p className="about-eyebrow">About Crossover Stockton</p>
-              <h1>Before we can change reality, we must understand it.</h1>
-              <p>We use AI to understand a real-world problem, identify what's preventing it from being solved, and connect people and emerging capabilities to the work that needs doing.</p>
-            </div>
-            <div className="about-welcome-photo"><img src={aboutHeroImage} alt="AI-generated illustration of a waterfront promenade and downtown skyline at sunset" loading="eager" decoding="async" fetchPriority="high" /></div>
-          </section>
+      <div className="about-redesign-canvas">
+        <section className="about-redesign-hero" aria-labelledby="about-redesign-title">
+          <div className="about-redesign-hero-copy">
+            <p className="about-redesign-eyebrow">About Crossover Stockton</p>
+            <h1 id="about-redesign-title">How can emerging post-scarcity technology solve real problems?</h1>
+            <p>Self-driving vehicles are operating today. AI can tackle increasingly complex problems. Robots are beginning to perform useful physical work.</p>
+            <p>As these technologies advance, they could free people from more compulsory labor and create extraordinary new possibilities.</p>
+            <p><strong>But what will we do with that freedom?</strong></p>
+            <p>What if more people could spend their lives caring for animals, helping neighbors, comforting those who suffer, and doing work that gives their lives meaning?</p>
+            <p>Technology could make much of this possible. But technology alone cannot tell us what needs doing.</p>
+          </div>
+          <img className="about-redesign-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
+        </section>
 
-          <WorkSectionNav items={aboutNavItems} className="about-nav-below-hero" />
+        <section className="about-redesign-ideas" aria-labelledby="about-redesign-ideas-title">
+          <h2 id="about-redesign-ideas-title">The ideas behind Crossover</h2>
+          <div className="about-redesign-ideas-grid">
+            {ideas.map((idea) => <article className="about-redesign-idea" key={idea.title}>
+              <img src={idea.image} alt={idea.alt} width="760" height="304" loading="lazy" decoding="async" />
+              <div><h3>{idea.title}</h3><p>{idea.description}</p></div>
+            </article>)}
+          </div>
+        </section>
 
-          <section className="about-content-section about-method" id="how-it-works">
-            <h2>How Crossover works</h2>
-            <p>We examine the evidence, test ways to help firsthand, and use what we learn to engineer better solutions, so anyone can take a real step toward helping.</p>
-            <ol className="about-step-grid">
-              <li>
-                <span className="about-step-number">1</span>
-                <div>
-                  <Search size={28} aria-hidden="true" />
-                  <h3>Examine the evidence</h3>
-                  <p>We gather public records, news reports, and organizational claims. AI helps us compare sources, question assumptions, and distinguish what we know from what remains uncertain.</p>
-                  <div className="about-step-links">
-                    <a href="/reality/too-many-dogs-still-lack-safe-placement/research/" onClick={(event) => navigateInternalLink(event, onOpenResearch)}>See research <ArrowRight size={16} aria-hidden="true" /></a>
-                    <a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>See map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <span className="about-step-number">2</span>
-                <div>
-                  <Footprints size={28} aria-hidden="true" />
-                  <h3>Test the pathways</h3>
-                  <p>We don't just recommend ways to help. <strong>We try them ourselves</strong>—contacting organizations, submitting applications, visiting in person, and documenting what actually happens.</p>
-                  <div className="about-step-links">
-                    <a href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <span className="about-step-number">3</span>
-                <div>
-                  <Wrench size={28} aria-hidden="true" />
-                  <h3>Engineer better ways to help</h3>
-                  <p>We use what we learn to identify barriers and develop practical solutions that combine emerging technology with human participation.</p>
-                  <p>We examine existing improvements, propose new approaches, and test whether they actually work. <strong>Every result helps us improve what we do next.</strong></p>
-                </div>
-              </li>
-            </ol>
-          </section>
+        <section className="about-redesign-reality" aria-labelledby="about-redesign-reality-title">
+          <img src="/images/about/growing.jpg" alt="Watercolor seedling with visible roots beside the Stockton waterfront" width="1774" height="887" loading="lazy" decoding="async" />
+          <div>
+            <h2 id="about-redesign-reality-title">We have to connect with reality.</h2>
+            <p>Not just read about problems. Not assume we know the solutions. Actually encounter the people, animals, and circumstances that need our attention.</p>
+            <p>That means showing up. Trying to help. Discovering the barriers. Sometimes finding that what seemed simple is surprisingly difficult. And sometimes being changed by the experience.</p>
+            <p><strong>That's what Crossover is exploring. We're starting in Stockton.</strong></p>
+          </div>
+        </section>
 
-          <section className="about-spotlight" id="street-dogs">
-            <div className="about-spotlight-main">
-              <p className="about-eyebrow">Spotlight</p>
-              <h2>Street dogs and access to care</h2>
-              <p>We're examining reports about Stockton's street dogs and what it actually takes to help. These three questions guide our work as we gather evidence, test existing pathways, and explore practical solutions.</p>
-              <div className="about-spotlight-questions">
-                <div className="about-spotlight-question">
-                  <h3><button type="button" aria-expanded={openQuestion === 1} aria-controls="about-question-1" onClick={() => setOpenQuestion(openQuestion === 1 ? null : 1)}><span className="about-step-number">1</span><span>What's actually happening?</span>{openQuestion === 1 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
-                  <div className="about-spotlight-answer" id="about-question-1" hidden={openQuestion !== 1}>
-                    <p>Public records document 3,106 stray-dog intakes in 2024 across the Stockton Animal Services service area. But historical intake figures don't establish how many dogs currently need help on Stockton streets.</p>
-                    <p>We're examining public records and local reports to understand what is documented, what remains uncertain, and where assistance may be needed.</p>
-                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/research/" onClick={(event) => navigateInternalLink(event, onOpenResearch)}>See the research <ArrowRight size={16} aria-hidden="true" /></a><a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Map &amp; reports <ArrowRight size={16} aria-hidden="true" /></a></div>
-                  </div>
-                </div>
-                <div className="about-spotlight-question">
-                  <h3><button type="button" aria-expanded={openQuestion === 2} aria-controls="about-question-2" onClick={() => setOpenQuestion(openQuestion === 2 ? null : 2)}><span className="about-step-number">2</span><span>What happens when someone tries to help?</span>{openQuestion === 2 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
-                  <div className="about-spotlight-answer" id="about-question-2" hidden={openQuestion !== 2}>
-                    <p>We're testing publicly advertised ways to help rather than simply recommending them.</p>
-                    <p>We've submitted volunteer inquiries and visited Stockton Animal Services in person. These attempts have produced firsthand observations, but successful volunteer participation has not yet been confirmed.</p>
-                    <p>We're documenting what happens so others can make better-informed attempts to help.</p>
-                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See firsthand activity <ArrowRight size={16} aria-hidden="true" /></a></div>
-                  </div>
-                </div>
-                <div className="about-spotlight-question">
-                  <h3><button type="button" aria-expanded={openQuestion === 3} aria-controls="about-question-3" onClick={() => setOpenQuestion(openQuestion === 3 ? null : 3)}><span className="about-step-number">3</span><span>What would it take to solve the problem?</span>{openQuestion === 3 ? <ChevronUp size={18} aria-hidden="true" /> : <ChevronDown size={18} aria-hidden="true" />}</button></h3>
-                  <div className="about-spotlight-answer" id="about-question-3" hidden={openQuestion !== 3}>
-                    <p>We don't know yet. We need a clearer understanding of where dogs currently need assistance, what care is already available, and which barriers prevent help from reaching them.</p>
-                    <p>We're examining existing improvements and exploring how additional people, better coordination, AI, robotics, and other emerging capabilities could make care more effective.</p>
-                    <p>We distinguish promising ideas from solutions that have actually been tested.</p>
-                    <div className="about-step-links"><a href="/reality/too-many-dogs-still-lack-safe-placement/improvements/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-solutions"))}>Explore improvements and potential solutions <ArrowRight size={16} aria-hidden="true" /></a></div>
-                  </div>
-                </div>
-              </div>
+        <section className="about-redesign-founder" aria-labelledby="about-redesign-founder-title">
+          <div className="about-redesign-founder-copy">
+            <p className="about-redesign-eyebrow">About the founder</p>
+            <div className="about-redesign-founder-name">
+              <h2 id="about-redesign-founder-title">Jeff Kolyer</h2>
+              <p className="about-redesign-founder-meta">Founder · Stockton, California</p>
             </div>
-            <img className="about-spotlight-photo" src={spotlightDogImage} alt="Portrait of a dog" loading="lazy" decoding="async" />
-            <p className="about-spotlight-closing"><strong>Every attempt adds to what we know.</strong> Whether something works, fails, or raises new questions, the results become evidence we can use to engineer better ways to help.</p>
-          </section>
+            <p>Crossover Stockton began with Jeff Kolyer, a former Silicon Valley technology founder exploring how emerging technology can help people live more meaningful lives.</p>
+            <p>After decades working in technology, the question is no longer simply what we can build, but what kind of lives those capabilities can help us live.</p>
+            <a className="about-redesign-linkedin" href={linkedInUrl} target="_blank" rel="noreferrer"><Linkedin size={18} aria-hidden="true" /> Connect on LinkedIn</a>
+          </div>
+          <img src="/images/about/about-the-founder.jpg" alt="Jeff Kolyer by a waterfront promenade" width="1535" height="1024" loading="lazy" decoding="async" />
+        </section>
 
-          <section className="about-content-section about-what" id="what-we-do">
-            <div>
-              <h2>Our continuing mission</h2>
-              <p><strong>Turn what we learn about reality into better ways to care for it.</strong></p>
-              <p>AI and robotics are creating extraordinary new possibilities. As technology takes on more necessary work, people could have greater freedom to care for animals, help neighbors, and pursue meaningful lives.</p>
-              <p>Crossover uses AI, public information, firsthand investigation, and human participation to understand reported needs, determine what's actually happening, and identify the barriers that may prevent people from helping.</p>
-              <p>By making those experiences and barriers visible and verifiable, we can develop practical solutions, test whether they work, and continually improve how technology and willing people address real needs.</p>
-            </div>
-            <aside className="about-needs-panel">
-              <p className="about-eyebrow"><MapPin size={18} aria-hidden="true" /> Stockton, CA</p>
-              <h3>Real people. Real needs.</h3>
-              <p>We're starting in Stockton by investigating street dogs and access to care—examining reported conditions, existing responses, and what prevents people from helping.</p>
-              <a className="about-needs-link" href="/reality/too-many-dogs-still-lack-safe-placement/" onClick={(event) => navigateInternalLink(event, () => onOpenGap("too-many-dogs-still-lack-safe-placement"))}>Explore the investigation <ArrowRight size={16} aria-hidden="true" /></a>
-            </aside>
-          </section>
-
-          <section className="about-founder" id="founder">
-            <div className="about-founder-copy">
-              <p className="about-eyebrow">About the founder</p>
-              <h2>Jeff Kolyer</h2>
-              <p>Former Silicon Valley technology founder exploring how emerging technology can address real-world problems.</p>
-              <p>Starting in Stockton, we're testing ways to help, learning in public, and applying technology to make a real difference for people, animals, and communities.</p>
-            </div>
-            <div className="about-founder-quote">
-              <blockquote>Technology is most meaningful when it helps real people with real problems.</blockquote>
-              <a className="linkedin-button" href={linkedInUrl} target="_blank" rel="noreferrer"><Linkedin size={15} aria-hidden="true" /><span>Connect on LinkedIn</span></a>
-            </div>
-            <img className="about-founder-photo" src={founderImage} alt="Jeff Kolyer by a waterfront promenade" loading="lazy" decoding="async" />
-          </section>
-
-          <section className="about-connect" id="connect">
-            <Users size={28} aria-hidden="true" />
-            <div className="about-connect-copy">
-              <h2>Get involved</h2>
-              <p>Explore what we're investigating, follow our findings, or help establish what's actually happening.</p>
-            </div>
-            <div className="about-connect-actions">
-              <a className="about-connect-primary" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs <ArrowRight size={17} aria-hidden="true" /></a>
-              <a className="about-connect-secondary" href="/action/" onClick={(event) => navigateInternalLink(event, onPrimaryAction)}>Take a real step <ArrowRight size={17} aria-hidden="true" /></a>
-            </div>
-          </section>
-        </div>
+        <section className="about-redesign-cta" aria-labelledby="about-redesign-cta-title">
+          <div><h2 id="about-redesign-cta-title">Take a real step.</h2><p>There's no need to wait for the future to begin participating.</p></div>
+          <div className="about-redesign-cta-actions">
+            <a className="about-redesign-cta-primary" href="/action/" onClick={(event) => navigateInternalLink(event, onPrimaryAction)}>Find out how you can help <ArrowRight size={17} aria-hidden="true" /></a>
+            <a className="about-redesign-cta-secondary" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs <ArrowRight size={17} aria-hidden="true" /></a>
+          </div>
+        </section>
       </div>
 
       <footer className="public-footer">
