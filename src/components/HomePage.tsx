@@ -32,6 +32,7 @@ interface HomePageProps {
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
+  onOpenActionDetail: () => void;
 }
 
 const gaps = gapsData as GapRecord[];
@@ -40,7 +41,7 @@ const actions = actionsData as PublicActionRecord[];
 
 const actionHeroImage = "/images/action/action_banner.jpg";
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
-const heroImage = "/images/home/background_home.jpg";
+const heroImage = "/images/home/home-hero-wide.jpg";
 const realityHeroImage = "/images/reality/reality_banner.jpg";
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
@@ -97,7 +98,7 @@ function dogActionRank(id: string) {
   return index === -1 ? immediate.length : index;
 }
 
-export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenAction }: HomePageProps) {
+export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenAction, onOpenActionDetail }: HomePageProps) {
   const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
   const [selectedRole, setSelectedRole] = useState("");
   const [roleMenuOpen, setRoleMenuOpen] = useState(false);
@@ -133,21 +134,20 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
     <main className={`public-home ${isHome ? "is-home-page" : "is-section-page"} is-${page}-page`}>
       {isHome && navigation}
       <section className={`public-hero ${isHome ? "" : "is-compact"}`}>
-        <img
-          className="public-hero-image is-active"
-          src={currentHeroImage}
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          decoding="sync"
-          fetchPriority="high"
-        />
+        {isHome ? (
+          <picture className="public-hero-picture">
+            <source media="(max-width: 820px)" srcSet="/images/home/home-hero.jpg" />
+            <img className="public-hero-image is-active" src={heroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
+          </picture>
+        ) : (
+          <img className="public-hero-image is-active" src={currentHeroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
+        )}
         <div className="public-hero-shade" />
         {!isHome && navigation}
 
         <div className="public-hero-copy">
           {!isHome && <span className="public-page-eyebrow">{copy.eyebrow}</span>}
-          <h1>{isHome ? <>See clearly.<br />Act locally.</> : copy.title}</h1>
+          <h1>{isHome ? <>See clearly.<br className="home-hero-title-break" /> Act locally.</> : copy.title}</h1>
           <p>{copy.text}</p>
           {isHome && (
             <div className="hero-action-row">
@@ -157,7 +157,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         </div>
       </section>
 
-      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenAction={onOpenAction} />}
+      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenActionDetail={onOpenActionDetail} />}
 
       {page === "reality" && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">

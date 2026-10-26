@@ -5,6 +5,7 @@ import locationsData from "../data/investigation-locations.json";
 import maintenanceData from "../data/investigation-map-maintenance.json";
 import { dogGapBase } from "../lib/dogGapLegacy";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
+import { InvestigationPageHeader } from "./InvestigationPageHeader";
 import "./DogsLocationsMapPage.css";
 
 type Category = "all" | InvestigationLocation["category"];
@@ -89,11 +90,7 @@ export function DogsLocationsMapPage({ investigationId, onOpenReport }: { invest
   if (!entries.length) return null;
 
   return <div className="dogs-map-page">
-    <header className="dogs-map-header">
-      <p className="dogs-map-eyebrow">Dogs in Stockton</p>
-      <h1>Reported locations</h1>
-      <p className="dogs-map-intro">Explore reports of roaming dogs in Stockton. Locations are approximate and do not confirm dogs are currently present.</p>
-    </header>
+    <InvestigationPageHeader title="Reported locations" description="Explore reports of roaming dogs in Stockton. Locations are approximate and do not confirm dogs are currently present." />
 
     <div className="dogs-map-filters" role="group" aria-label="Map evidence categories">
       {filters.map(({ value, label }) => <button key={value} type="button" aria-pressed={filter === value} onClick={() => changeFilter(value)}>{label} ({value === "all" ? entries.length : entries.filter((entry) => entry.category === value).length})</button>)}

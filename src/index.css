@@ -90,6 +90,13 @@
   --public-rail-start: max(var(--public-rail-gutter), calc((100% - var(--public-rail-max)) / 2));
 }
 
+@media (min-width: 1700px) {
+  :root {
+    --type-page-title-size: 3rem;
+    --type-section-title-size: 2rem;
+  }
+}
+
 * {
   box-sizing: border-box;
 }

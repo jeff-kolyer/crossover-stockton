@@ -71,6 +71,13 @@
 .about-redesign-cta-secondary:hover { background: #e1efe3; }
 .about-redesign-canvas a:focus-visible { outline: 3px solid #2b7749; outline-offset: 3px; }
 
+@media (min-width: 1700px) {
+  .about-redesign-ideas h2,
+  .about-redesign-reality h2,
+  .about-redesign-founder h2,
+  .about-redesign-cta h2 { font-size: var(--type-section-title-size); }
+}
+
 @media (max-width: 1000px) {
   .about-redesign-hero { grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 28px; }
   .about-redesign-hero h1 { font-size: clamp(2.15rem, 3.5vw, 2.8rem); }

@@ -66,12 +66,6 @@ export function DogGapOverviewLanding({ gap, map, onOpenSection, onOpenWork, onO
         {mapLink}
       </section>
 
-      <section className="dog-landing-section dog-landing-participation" id="ways-preview" aria-labelledby="dog-ways-title">
-        <div className="dog-landing-heading"><div><h2 id="dog-ways-title">Show up with us</h2><p>Help us investigate what's happening in Stockton by taking part in real activities.</p></div></div>
-        <div className="dog-landing-rows">{activeCrossoverActions.map((action) => <a key={action.id} href={action.href} onClick={action.id === dogStreetActionId ? (event) => navigateInternalLink(event, onOpenActionDetail) : undefined}><MapPin size={18} aria-hidden="true" /><span><strong>{action.title}</strong><small>{action.overviewSummary}</small></span><ChevronRight size={17} aria-hidden="true" /></a>)}</div>
-        <a className="dog-landing-more" href="/action/" onClick={(event) => navigateInternalLink(event, onOpenActionIndex)}>See Crossover actions <ArrowRight size={17} aria-hidden="true" /></a>
-      </section>
-
       <section className="dog-landing-section" id="findings-preview" aria-labelledby="dog-findings-title">
         <div className="dog-landing-heading"><div><h2 id="dog-findings-title">What we're finding</h2><p>Published evidence, firsthand checks, and questions still under investigation.</p></div></div>
         <div className="dog-landing-rows">
@@ -79,6 +73,12 @@ export function DogGapOverviewLanding({ gap, map, onOpenSection, onOpenWork, onO
           {research.latest_findings.filter((finding) => ["dogs-2026-10-19-kcra-stray-dog-report", "dogs-2026-10-15-official-2024-baseline"].includes(finding.id)).map((finding) => <a key={finding.id} href={`/reality/${gap.slug}/research/#research-whats-new`} onClick={(event) => navigateInternalLink(event, () => onOpenSection("research", "research-whats-new"))}><FileText size={18} aria-hidden="true" /><span><small>{finding.id.includes("kcra") ? "Organization report in published coverage" : "Official public data"}</small><strong>{finding.finding}</strong></span><ChevronRight size={17} aria-hidden="true" /></a>)}
         </div>
         {sectionLink("our-findings", "See all findings", undefined, "dog-landing-more")}
+      </section>
+
+      <section className="dog-landing-section dog-landing-participation" id="ways-preview" aria-labelledby="dog-ways-title">
+        <div className="dog-landing-heading"><div><h2 id="dog-ways-title">Take a real step</h2><p>Help us investigate what happens when we look for dogs on Stockton's streets.</p></div></div>
+        <div className="dog-landing-rows">{activeCrossoverActions.filter((action) => action.id === dogStreetActionId).map((action) => <a key={action.id} href={action.href} onClick={(event) => navigateInternalLink(event, onOpenActionDetail)}><MapPin size={18} aria-hidden="true" /><span><strong>{action.title}</strong><small>{action.overviewSummary}</small></span><ChevronRight size={17} aria-hidden="true" /></a>)}</div>
+        <a className="dog-landing-more" href="/action/" onClick={(event) => navigateInternalLink(event, onOpenActionIndex)}>See Crossover actions <ArrowRight size={17} aria-hidden="true" /></a>
       </section>
 
       <section className="dog-landing-section" id="activity-preview" aria-labelledby="dog-activity-title">

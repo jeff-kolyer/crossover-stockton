@@ -4,6 +4,7 @@ import research from "../data/dogs-research.json";
 import { dogCareFactors, type DogCareFactor } from "../lib/dogCareScenario";
 import { navigateInternalLink } from "../lib/internalLink";
 import type { GapRecord } from "../types";
+import { InvestigationPageHeader } from "./InvestigationPageHeader";
 import "./KeyFactorsPage.css";
 
 type Destination = "research" | "improvements" | "ways-to-help" | "our-findings";
@@ -84,13 +85,13 @@ export function KeyFactorsPage({ gap, onOpenSection, onOpenMap, model }: { gap: 
 
   const sectionLink = (destination: Destination) => <a key={destination} href={`/reality/${gap.slug}/${destination}/`} onClick={(event) => navigateInternalLink(event, () => onOpenSection(destination))}>{linkNames[destination]} <ArrowRight size={14} aria-hidden="true" /></a>;
 
-  return <div className="dog-gap-tab-content key-factors-page">
-    <div className="dog-gap-tab-heading" id="key-factors-intro">
+  return <div className={`dog-gap-tab-content key-factors-page${dogs ? " is-investigation-subpage" : ""}`}>
+    {dogs ? <InvestigationPageHeader id="key-factors-intro" title="Key Factors" description="What affects whether dogs reach care? Explore the six parts of the care system, what available evidence tells us about each, and what could improve them." /> : <div className="dog-gap-tab-heading" id="key-factors-intro">
       <p className="dog-gap-eyebrow">Understanding the need</p><h2>Key Factors</h2>
-      <p className="key-factors-question">{dogs ? "What affects whether dogs reach care?" : `What affects ${gap.title.toLowerCase()}?`}</p>
-      <p>{dogs ? "Explore the six parts of the care system, what available evidence tells us about each, and what could improve them." : "Explore the barriers named in this need's public record and the questions that still need investigation."}</p>
-      {dogs && <p className="key-factors-note">The model below is an illustrative scenario. Its slider values are not measurements of Stockton.</p>}
-    </div>
+      <p className="key-factors-question">{`What affects ${gap.title.toLowerCase()}?`}</p>
+      <p>Explore the barriers named in this need's public record and the questions that still need investigation.</p>
+    </div>}
+    {dogs && <p className="key-factors-note">The model below is an illustrative scenario. Its slider values are not measurements of Stockton.</p>}
     {model}
     {!dogs && <section className="dog-gap-card key-factors-evidence" aria-labelledby="key-factors-evidence-title"><p className="dog-gap-eyebrow">Public record</p><h2 id="key-factors-evidence-title">What has been reported</h2><ul>{gap.what_we_are_seeing.map((item) => <li key={item}>{item}</li>)}</ul><p>These points provide context for the factors below. They do not measure the effect of any single barrier.</p></section>}
     <div className="key-factors-list" id="key-factors-list">

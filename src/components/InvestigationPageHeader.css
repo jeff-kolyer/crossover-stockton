@@ -1,0 +1,8 @@
+.investigation-page-header { display: grid; gap: 8px; min-width: 0; margin: 0 0 20px; border-bottom: 1px solid #dce3df; padding-bottom: 16px; }
+.investigation-page-header .investigation-page-title { margin: 0; color: #142018; font-family: var(--font-sans); font-size: 3rem; font-weight: 700; line-height: 1.1; letter-spacing: -.04em; }
+.investigation-page-header .investigation-page-description { max-width: 950px; margin: 0; color: #5a6860; font-family: var(--font-sans); font-size: .98rem; font-weight: 400; line-height: 1.5; }
+
+@media (max-width: 820px) {
+  .investigation-page-header { margin-bottom: 20px; }
+  .investigation-page-header .investigation-page-title { font-size: clamp(2rem, 7vw, 3rem); }
+}

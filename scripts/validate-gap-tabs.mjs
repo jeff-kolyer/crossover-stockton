@@ -10,7 +10,7 @@ const sections = [
   ["improvements/", "Improvements", "Ideas to test"],
   ["our-findings/", "Our Findings", "What we&#x27;re investigating"],
   ["research/", "Sources", "At a glance"],
-  ["updates/", "Updates", "Need activity"],
+  ["updates/", "Updates", "Research, fieldwork, requests, announcements"],
 ];
 
 for (const [path, label, content] of sections) {
@@ -37,7 +37,7 @@ for (const key of ["shelter", "foster", "response", "reporting", "prevention", "
 }
 assert.equal((dogOverview.match(/type="range"/g) ?? []).length, 3, "Overview: three-factor model missing");
 assert.equal((keyFactors.match(/type="range"/g) ?? []).length, 6, "Key Factors: full model missing");
-for (const heading of ["Understanding the issue", "Where dogs are being reported", "Show up with us", "What we&#x27;re finding", "Latest activity"]) {
+for (const heading of ["Understanding the issue", "Where dogs are being reported", "Take a real step", "What we&#x27;re finding", "Latest activity"]) {
   assert.ok(dogOverview.includes(heading), `Overview: ${heading} preview missing`);
 }
 assert.ok(dogOverview.includes("Illustrative scenario"), "Overview: model disclaimer missing");

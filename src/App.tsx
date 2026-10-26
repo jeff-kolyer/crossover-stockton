@@ -276,6 +276,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenWork={showWork}
           onOpenStory={showStory}
           onOpenAction={setSelectedAction}
+          onOpenActionDetail={showActionDetail}
         />
       )}
 

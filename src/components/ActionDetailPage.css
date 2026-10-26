@@ -129,3 +129,8 @@
   .action-detail-map-legend { max-width: 112px; }
   .action-detail-control { gap: 10px; }
 }
+
+@media (min-width: 1700px) {
+  .action-detail-section-heading h2,
+  .action-detail-reports h2 { font-size: var(--type-section-title-size); }
+}
