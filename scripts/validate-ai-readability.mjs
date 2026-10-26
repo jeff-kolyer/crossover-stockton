@@ -47,7 +47,7 @@ if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) 
 if (!homeHtml.includes("Why do so many dogs struggle to reach care?") || !homeText.includes("Stockton's animal shelter reports regular overcrowding.") || !homeText.includes("Explore what we're learning")) {
   throw new Error("The homepage does not summarize the active investigation.");
 }
-for (const path of [`/reality/${featuredGap.slug}/our-findings/`, `/reality/${featuredGap.slug}/dogs-locations-map/`, `/reality/${featuredGap.slug}/ways-to-help/`]) {
+for (const path of [`/reality/${featuredGap.slug}/our-findings/`, `/reality/${featuredGap.slug}/dogs-locations-map/`, "/action/"]) {
   if (!homeHtml.includes(`href="${path}"`) || !homeText.includes(`${origin}${path}`)) {
     throw new Error(`The homepage investigation card does not link to ${path}.`);
   }

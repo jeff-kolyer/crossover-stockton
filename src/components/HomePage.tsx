@@ -28,7 +28,7 @@ interface HomePageProps {
   onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
-  onOpenGapSection: (slug: string, section: "our-findings" | "ways-to-help") => void;
+  onOpenGapSection: (slug: string, section: "our-findings") => void;
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;

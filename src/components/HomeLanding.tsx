@@ -14,7 +14,7 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 interface HomeLandingProps {
   onNavigate: (page: PublicRoute) => void;
   onOpenGap: (slug: string) => void;
-  onOpenGapSection: (slug: string, section: "our-findings" | "ways-to-help") => void;
+  onOpenGapSection: (slug: string, section: "our-findings") => void;
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
@@ -57,7 +57,7 @@ export function HomeLanding({ onNavigate, onOpenGap, onOpenGapSection, onOpenWor
       <nav className="home-landing-investigation-links" aria-label="Explore the investigation">
         <a href={`/reality/${dogGap.slug}/our-findings/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}><FileText size={20} aria-hidden="true" /><span>Explore our findings<small>What the evidence shows</small></span><ChevronRight size={17} aria-hidden="true" /></a>
         <a href={`/reality/${dogGap.slug}/dogs-locations-map/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}><MapPin size={20} aria-hidden="true" /><span>View the map<small>Where dogs have been reported</small></span><ChevronRight size={17} aria-hidden="true" /></a>
-        <a href={`/reality/${dogGap.slug}/ways-to-help/`} onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "ways-to-help"))}><Heart size={20} aria-hidden="true" /><span>See ways to help<small>What you can do now</small></span><ChevronRight size={17} aria-hidden="true" /></a>
+        <a href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}><Heart size={20} aria-hidden="true" /><span>See ways to help<small>What you can do now</small></span><ChevronRight size={17} aria-hidden="true" /></a>
       </nav>
     </section>}
 
