@@ -16,7 +16,10 @@
   --type-label-weight: var(--weight-bold);
   --type-label-tracking: 0.075em;
   --type-label-leading: 1.2;
-  --type-body-size: 1rem;
+  --type-body-size: 0.98rem;
+  --type-secondary-size: 0.9rem;
+  --type-card-title-size: 1.1rem;
+  --type-page-title-size: clamp(2.4rem, 3.5vw, 3.65rem);
   --type-body-weight: var(--weight-regular);
   --type-body-leading: 1.5;
   --type-body-color: #292D2A;

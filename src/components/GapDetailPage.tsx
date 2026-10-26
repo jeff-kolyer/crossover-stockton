@@ -67,6 +67,7 @@ interface GapDetailPageProps {
   onOpenReport: (reportId: string) => void;
   onOpenStory: (slug: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
+  onOpenActionDetail: () => void;
 }
 
 interface SourceLike {
@@ -124,7 +125,7 @@ const whyIconRegistry: Record<NonNullable<GapRecord["why_icons"]>[number], Lucid
   KeyRound,
 };
 
-export function GapDetailPage({ slug, section = "overview", onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction }: GapDetailPageProps) {
+export function GapDetailPage({ slug, section = "overview", onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction, onOpenActionDetail }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -174,7 +175,7 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
 
   if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}${isDogGap ? " is-dog-investigation" : ""}`}>
     <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />
-    <DogGapExperience gap={gap} section={section} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} />
+    <DogGapExperience gap={gap} section={section} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} onOpenActionDetail={onOpenActionDetail} />
     <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>
   </main>;
 

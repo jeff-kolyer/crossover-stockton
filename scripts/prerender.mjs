@@ -23,6 +23,7 @@ const pages = [
   ["/reality/", "Reality | Crossover Stockton", "Follow needs in Stockton and the evidence behind them."],
   ["/connection/", "Connection | Crossover Stockton", "Stories of local people and organizations responding to Stockton's needs."],
   ["/action/", "Action | Crossover Stockton", "Find practical ways to help in Stockton."],
+  ["/action/look-for-dogs-on-the-street/", "Look for dogs on the street | Crossover Stockton", "Help verify reports of roaming dogs in Stockton and document what we find."],
   ["/updates/", "Updates | Crossover Stockton", "Recent updates on Stockton's needs and community response."],
   ["/about/", "About | Crossover Stockton", "Learn how Crossover Stockton connects local reality, response, and action."],
   ["/organizations/", "Organizations | Crossover Stockton", "Local organizations followed by Crossover Stockton."],

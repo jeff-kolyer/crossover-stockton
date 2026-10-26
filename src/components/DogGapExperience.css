@@ -270,3 +270,70 @@
   .dog-gap-mobile-menu nav a:hover,.dog-gap-mobile-menu nav a[aria-current="page"] { background: var(--dog-accent-soft); }
   .dog-gap-tabs { display: none; }
 }
+
+/* Match the overview's semantic colors and two-panel model treatment. */
+.key-factors-page .dog-care-model {
+  --evidence-danger-bg: #fbf0ec;
+  --evidence-danger-ink: #b13218;
+  --evidence-danger-accent: #d34d2d;
+  --evidence-positive-bg: #e7f2ea;
+  --evidence-positive-ink: #1d7b42;
+  --dog-positive-accent: #3c9658;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.key-factors-page .dog-care-model-heading { margin-bottom: 12px; border: 1px solid #d9e6f0; border-radius: 8px; background: var(--evidence-info-bg); padding: 18px 20px; }
+.key-factors-page .dog-care-model-grid { align-items: start; gap: 12px; padding: 0; }
+.key-factors-page .dog-care-factors { border: 0; border-radius: 8px; background: #f1f8f2; padding: 20px; }
+.key-factors-page .dog-care-outcome { border: 1px solid #dce7df; border-radius: 8px; background: #fff; padding: 20px; }
+.key-factors-page .dog-care-column-heading { margin-bottom: 10px; }
+.key-factors-page .dog-care-factor { padding: 11px 0 9px; }
+.key-factors-page .dog-care-factor > p { margin: 4px 0 7px; }
+.key-factors-page .dog-care-totals { gap: 6px; }
+.key-factors-page .dog-care-total { padding: 13px; }
+.key-factors-page .dog-care-total strong { margin-top: 5px; }
+.key-factors-page .dog-care-dots { margin: 12px 0; }
+.key-factors-page .dog-care-dot-legend { margin-bottom: 14px; }
+.key-factors-page .dog-care-flow-stages { padding-top: 12px; }
+.key-factors-page .dog-care-constraint { margin-top: 14px; padding: 12px 14px; }
+.key-factors-page .dog-care-factor input { accent-color: var(--dog-positive-accent); }
+.key-factors-page .dog-care-dots .is-receiving,
+.key-factors-page .dog-care-dot-legend i.is-receiving,
+.key-factors-page .dog-care-stage-track span { background: var(--dog-positive-accent); }
+.key-factors-page .dog-care-constraint { border-left-color: var(--dog-positive-accent); }
+.key-factors-page .dog-care-mobile-result { background: var(--evidence-positive-bg); color: var(--evidence-positive-ink); }
+
+.key-factors-page .dog-care-model-heading h2 { font-family: var(--font-sans); font-size: clamp(1.4375rem, 1.85vw, 1.625rem); font-weight: 750; line-height: 1.15; letter-spacing: -.025em; }
+.key-factors-page .dog-care-model-heading p:not(.dog-equation-eyebrow) { margin-top: 8px; font-size: var(--type-body-size); line-height: var(--type-body-leading); }
+.key-factors-page .dog-care-model-heading p.dog-care-model-secondary { margin-top: 4px; }
+.key-factors-page .dog-care-column-heading h3,
+.key-factors-page .dog-care-factors .dog-care-column-heading h3 { font-size: 1.06rem; font-weight: 750; line-height: 1.25; }
+.key-factors-page .dog-care-column-heading p { font-size: var(--type-secondary-size); }
+.key-factors-page .dog-care-reset { font-size: .76rem; }
+.key-factors-page .dog-care-factor-title-button { font-size: var(--type-body-size); }
+.key-factors-page .dog-care-factor output { font-size: .82rem; }
+.key-factors-page .dog-care-factor > p { font-size: var(--type-secondary-size); line-height: 1.4; }
+.key-factors-page .dog-care-total span { font-size: var(--type-secondary-size); }
+.key-factors-page .dog-care-total strong,
+.key-factors-page .dog-care-total-without strong { font-size: 2.5rem; }
+.key-factors-page .dog-care-total small { font-size: .8rem; }
+.key-factors-page .dog-care-dot-legend { font-size: .75rem; }
+.key-factors-page .dog-care-flow h4 { font-size: .9rem; }
+.key-factors-page .dog-care-prevention,
+.key-factors-page .dog-care-flow-note { font-size: var(--type-secondary-size); line-height: 1.45; }
+.key-factors-page .dog-care-stage strong { font-size: var(--type-secondary-size); }
+.key-factors-page .dog-care-stage small { font-size: var(--type-secondary-size); }
+.key-factors-page .dog-care-stage b { font-size: 1.25rem; }
+.key-factors-page .dog-care-constraint strong,
+.key-factors-page .dog-care-constraint p { font-size: var(--type-secondary-size); line-height: 1.45; }
+.key-factors-page .dog-care-assumptions { padding: 14px 0; font-size: .78rem; line-height: 1.45; }
+
+@media (max-width: 820px) {
+  .key-factors-page .dog-care-model-grid { align-items: stretch; }
+}
+@media (max-width: 600px) {
+  .key-factors-page .dog-care-factors,
+  .key-factors-page .dog-care-outcome { padding: 16px; }
+  .key-factors-page .dog-care-model-heading { padding: 16px; }
+}

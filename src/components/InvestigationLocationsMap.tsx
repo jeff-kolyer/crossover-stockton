@@ -15,22 +15,33 @@ function locationIcon(location: MappedInvestigationLocation, selected: boolean) 
   });
 }
 
-function MapFocus({ locations, selectedId }: { locations: MappedInvestigationLocation[]; selectedId: string }) {
+function MapFocus({ locations, selectedId, followSelection }: { locations: MappedInvestigationLocation[]; selectedId: string; followSelection: boolean }) {
   const map = useMap();
-  const previousSelectedId = useRef(selectedId);
+  const previous = useRef<{ locations: MappedInvestigationLocation[]; selectedId: string } | null>(null);
   useEffect(() => {
-    map.fitBounds(L.latLngBounds(locations.map(({ coordinates }) => coordinates)), { padding: [46, 46], maxZoom: 11 });
-  }, [map, locations]);
-  useEffect(() => {
-    if (previousSelectedId.current === selectedId) return;
-    previousSelectedId.current = selectedId;
+    const last = previous.current;
+    previous.current = { locations, selectedId };
+    const frameLocations = (animate: boolean) => {
+      if (locations.length) {
+        const bounds = L.latLngBounds(locations.map(({ coordinates }) => coordinates));
+        const options = { padding: [46, 46] as [number, number], maxZoom: 11 };
+        if (animate) map.flyToBounds(bounds, { ...options, duration: 0.65 });
+        else map.fitBounds(bounds, options);
+      } else if (animate) {
+        map.flyTo([37.98, -121.33], 10, { duration: 0.65 });
+      }
+    };
+    if (!last) { frameLocations(false); return; }
+    if (last.locations !== locations) { frameLocations(true); return; }
+    if (!followSelection || last.selectedId === selectedId) return;
     const location = locations.find(({ id }) => id === selectedId);
-    if (location) map.flyTo(location.coordinates, Math.max(map.getZoom(), 11), { duration: 0.45 });
-  }, [map, locations, selectedId]);
+    if (location) map.flyTo(location.coordinates, 15, { duration: 0.65 });
+    else if (last.selectedId) frameLocations(true);
+  }, [map, locations, selectedId, followSelection]);
   return null;
 }
 
-function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: MappedInvestigationLocation[] }) {
+function MapViewport({ wheelZoom }: { wheelZoom: boolean }) {
   const map = useMap();
   const wasFullscreen = useRef(wheelZoom);
   useEffect(() => {
@@ -41,13 +52,12 @@ function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: 
       if (wasFullscreen.current) {
         resizeFrame = requestAnimationFrame(() => {
           map.invalidateSize();
-          map.fitBounds(L.latLngBounds(locations.map(({ coordinates }) => coordinates)), { padding: [46, 46], maxZoom: 11 });
         });
       }
     }
     wasFullscreen.current = wheelZoom;
     return () => cancelAnimationFrame(resizeFrame);
-  }, [map, wheelZoom, locations]);
+  }, [map, wheelZoom]);
   useEffect(() => {
     if (wheelZoom) return;
     const container = map.getContainer();
@@ -79,14 +89,14 @@ function MapViewport({ wheelZoom, locations }: { wheelZoom: boolean; locations: 
   return null;
 }
 
-export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean }) {
+export function InvestigationLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false, followSelection = true }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean; followSelection?: boolean }) {
   const tileFailures = useRef(0);
   const [tilesUnavailable, setTilesUnavailable] = useState(false);
   const icons = useMemo(() => new Map(locations.map((location) => [location.id, locationIcon(location, selectedId === location.id)])), [locations, selectedId]);
   return <div className="investigation-map-frame"><MapContainer center={[37.98, -121.33]} zoom={10} zoomControl={!preview} scrollWheelZoom={false} className="investigation-leaflet-shell">
     {!tilesUnavailable && <TileLayer attribution='&copy; OpenStreetMap contributors' url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" eventHandlers={{ tileload: () => { tileFailures.current = 0; }, tileerror: () => { tileFailures.current += 1; if (tileFailures.current >= 3) setTilesUnavailable(true); } }} />}
-    <MapViewport wheelZoom={wheelZoom} locations={locations} />
-    <MapFocus locations={locations} selectedId={selectedId} />
+    <MapViewport wheelZoom={wheelZoom} />
+    <MapFocus locations={locations} selectedId={selectedId} followSelection={followSelection} />
     {locations.map((location) => <Marker key={location.id} position={location.coordinates} icon={icons.get(location.id)} title={`${location.name} — generalized evidence area`} eventHandlers={{
       click: () => onSelect(location.id),
       keydown: (event) => {

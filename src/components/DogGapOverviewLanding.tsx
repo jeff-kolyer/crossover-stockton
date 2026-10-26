@@ -1,13 +1,13 @@
-import { ArrowRight, Building2, ChartNoAxesColumnIncreasing, ChevronRight, CircleHelp, FileText, Heart, MapPin, PawPrint } from "lucide-react";
+import { ArrowRight, Building2, ChartNoAxesColumnIncreasing, ChevronRight, CircleHelp, FileText, MapPin, PawPrint } from "lucide-react";
 import type { ReactNode } from "react";
-import actionsData from "../data/actions.json";
+import { activeCrossoverActions, dogStreetActionId } from "../data/crossoverActions";
 import investigationsData from "../data/dogs-investigations.json";
 import researchData from "../data/dogs-research.json";
 import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
 import workData from "../data/work.json";
 import { navigateInternalLink } from "../lib/internalLink";
-import type { CapacityProject, DogsInvestigationData, EvidenceRecord, GapRecord, PublicActionRecord, WorkRecord } from "../types";
+import type { CapacityProject, DogsInvestigationData, EvidenceRecord, GapRecord, WorkRecord } from "../types";
 import { DogCarePreview } from "./DogCarePreview";
 
 type Section = "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
@@ -16,7 +16,8 @@ type Props = {
   map: ReactNode;
   onOpenSection: (section: Section, anchor?: string) => void;
   onOpenWork: (id: string) => void;
-  onOpenAction: (action: PublicActionRecord) => void;
+  onOpenActionDetail: () => void;
+  onOpenActionIndex: () => void;
 };
 
 const research = researchData;
@@ -28,9 +29,6 @@ const activity = (work?.activity_record_ids ?? [])
   .filter((record): record is EvidenceRecord => Boolean(record))
   .sort((a, b) => (b.recorded_at || b.occurred_at || "").localeCompare(a.recorded_at || a.occurred_at || ""))
   .slice(0, 3);
-const actions = ["report-a-stray-dog", "foster-a-dog", "doggie-day-out"]
-  .map((id) => (actionsData as PublicActionRecord[]).find((action) => action.id === id && action.active))
-  .filter((action): action is PublicActionRecord => Boolean(action));
 const capacityProjectIds = ["stockton-animal-shelter-renovation", "canine-campus"];
 const capacityProjects = (projectsData as CapacityProject[]).filter((project) => capacityProjectIds.includes(project.id) && project.gap_ids.includes("dogs-safe-placement"));
 const measure = (id: string) => research.measurements.find((item) => item.id === id)?.value;
@@ -39,7 +37,7 @@ const allIntakes = measure("sas-2024-dog-intake-total");
 const strayShare = strayIntakes !== undefined && allIntakes ? Math.round(strayIntakes / allIntakes * 100) : undefined;
 const formatDate = (value?: string | null) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value.length === 10 ? `${value}T12:00:00` : value)) : "Date not recorded";
 
-export function DogGapOverviewLanding({ gap, map, onOpenSection, onOpenWork, onOpenAction }: Props) {
+export function DogGapOverviewLanding({ gap, map, onOpenSection, onOpenWork, onOpenActionDetail, onOpenActionIndex }: Props) {
   const sectionLink = (section: Section, label: string, anchor?: string, className?: string) => <a className={className} href={`/reality/${gap.slug}/${section === "overview" ? "" : `${section}/`}${anchor ? `#${anchor}` : ""}`} onClick={(event) => navigateInternalLink(event, () => onOpenSection(section, anchor))}>{label}<ArrowRight size={17} aria-hidden="true" /></a>;
   const mapLink = <a href={`/reality/${gap.slug}/dogs-locations-map/`} onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}>Open full map <ArrowRight size={16} aria-hidden="true" /></a>;
 
@@ -68,10 +66,10 @@ export function DogGapOverviewLanding({ gap, map, onOpenSection, onOpenWork, onO
         {mapLink}
       </section>
 
-      <section className="dog-landing-section" id="ways-preview" aria-labelledby="dog-ways-title">
-        <div className="dog-landing-heading"><div><h2 id="dog-ways-title">Ways to help</h2><p>Existing actions and participation routes. Availability varies by provider.</p></div></div>
-        <div className="dog-landing-rows">{actions.map((action) => <button type="button" key={action.id} onClick={() => onOpenAction(action)}><Heart size={18} aria-hidden="true" /><span><strong>{action.title}</strong><small>{action.availability_status || action.summary}</small></span><ChevronRight size={17} aria-hidden="true" /></button>)}</div>
-        {sectionLink("ways-to-help", "See all ways to help", undefined, "dog-landing-more")}
+      <section className="dog-landing-section dog-landing-participation" id="ways-preview" aria-labelledby="dog-ways-title">
+        <div className="dog-landing-heading"><div><h2 id="dog-ways-title">Show up with us</h2><p>Help us investigate what's happening in Stockton by taking part in real activities.</p></div></div>
+        <div className="dog-landing-rows">{activeCrossoverActions.map((action) => <a key={action.id} href={action.href} onClick={action.id === dogStreetActionId ? (event) => navigateInternalLink(event, onOpenActionDetail) : undefined}><MapPin size={18} aria-hidden="true" /><span><strong>{action.title}</strong><small>{action.overviewSummary}</small></span><ChevronRight size={17} aria-hidden="true" /></a>)}</div>
+        <a className="dog-landing-more" href="/action/" onClick={(event) => navigateInternalLink(event, onOpenActionIndex)}>See Crossover actions <ArrowRight size={17} aria-hidden="true" /></a>
       </section>
 
       <section className="dog-landing-section" id="findings-preview" aria-labelledby="dog-findings-title">

@@ -56,7 +56,7 @@ for (const path of [`/reality/${featuredGap.slug}/our-findings/`, `/reality/${fe
 for (const gap of gaps.filter((item) => item.active && item.work_ids?.length)) {
   const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");
   if (gap.id === "dogs-safe-placement") {
-    for (const path of ["research/", "ways-to-help/", "improvements/", "our-findings/", "dogs-locations-map/"]) {
+    for (const path of ["research/", "improvements/", "our-findings/", "dogs-locations-map/", "/action/look-for-dogs-on-the-street/"]) {
       const href = path.startsWith("/") ? path : `/reality/${gap.slug}/${path}`;
       if (!gapHtml.includes(`href="${href}"`)) throw new Error(`The dog gap page does not link to ${href}.`);
     }

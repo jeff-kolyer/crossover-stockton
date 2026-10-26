@@ -12,11 +12,14 @@ import { DogsResearchContent } from "./DogsResearchContent";
 import { DogsInvestigationContent } from "./DogsInvestigationContent";
 import { DogsPathwaysContent } from "./DogsPathwaysContent";
 import { DogsSolutionsContent } from "./DogsSolutionsContent";
-import { InvestigationLocations } from "./InvestigationLocations";
+import { DogsLocationsMapPage } from "./DogsLocationsMapPage";
+import { DogInvestigationMobileNav, DogInvestigationSidebar, type DogInvestigationPage } from "./DogInvestigationNav";
 import investigationsData from "../data/dogs-investigations.json";
 import { WorkSectionNav, type WorkSectionNavItem } from "./WorkSectionNav";
 import { navigateInternalLink } from "../lib/internalLink";
 import { ActivityLog } from "./ActivityLog";
+import "./DogGapExperience.css";
+import "./DogGapLanding.css";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -24,6 +27,7 @@ interface WorkPageProps {
   workId?: string;
   onNavigate: (page: PublicRoute) => void;
   onOpenGap: (slug: string) => void;
+  onOpenGapSection: (slug: string, section: Exclude<DogInvestigationPage, "locations-map">) => void;
   onOpenWork: (workId: string, anchor?: string) => void;
   onOpenReport: (reportId: string) => void;
   onOpenAbout: () => void;
@@ -67,14 +71,13 @@ const solutionNavItems: WorkSectionNavItem[] = [
   { id: "solutions-improvements", label: "Tracked projects", icon: ChartNoAxesColumnIncreasing },
   { id: "solutions-ideas", label: "Ideas to test", icon: Sparkles },
 ];
-const mapNavItems: WorkSectionNavItem[] = [{ id: "field-observation-map", label: "Locations map", icon: MapPin }];
 const activityNavItems: WorkSectionNavItem[] = [
   { id: "activity-progress", label: "Progress", icon: ClipboardList },
   { id: "activity-organizations", label: "Contacts", icon: Users },
   { id: "activity-questions", label: "Questions", icon: Search },
 ];
 
-export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenReport, onOpenAbout }: WorkPageProps) {
+export function WorkPage({ workId, onNavigate, onOpenGap, onOpenGapSection, onOpenWork, onOpenReport, onOpenAbout }: WorkPageProps) {
   useEffect(() => {
     const anchor = decodeURIComponent(window.location.hash.slice(1));
     if (workId === "dogs-map-placement-barriers" && anchor === "field-observation-map") {
@@ -92,23 +95,27 @@ export function WorkPage({ workId, onNavigate, onOpenGap, onOpenWork, onOpenRepo
   const gap = item && gaps.find((candidate) => candidate.id === item.gap_id);
   const siblingWorks = gap ? (gap.id === "dogs-safe-placement" ? ["dogs-public-source-review", "dogs-map-placement-barriers", "dogs-solutions"] : (gap.work_ids ?? [])).map((id) => works.find((work) => work.id === id)).filter((work): work is WorkRecord => Boolean(work)) : [];
   const nextStep = item?.next_step ? (typeof item.next_step === "string" ? { title: "Next step", summary: item.next_step } : item.next_step) : undefined;
-  const isWorkspace = item?.page_kind === "investigation" || item?.page_kind === "research" || item?.page_kind === "activity" || item?.page_kind === "solutions" || item?.page_kind === "map";
+  const isWorkspace = item?.page_kind === "investigation" || item?.page_kind === "research" || item?.page_kind === "activity" || item?.page_kind === "solutions";
   const isResearch = item?.page_kind === "research";
   const isActivity = item?.page_kind === "activity";
   const isMap = item?.page_kind === "map";
-  const navItems = isResearch ? researchNavItems : isActivity ? activityNavItems : item?.page_kind === "solutions" ? solutionNavItems : item?.page_kind === "map" ? mapNavItems : item?.id === "dogs-map-placement-barriers" ? pathwayNavItems : investigationNavItems;
+  const openDogPage = (page: DogInvestigationPage) => page === "locations-map" ? onOpenWork("dogs-locations-map") : page === "overview" ? onOpenGap(gap!.slug) : onOpenGapSection(gap!.slug, page);
+  const navItems = isResearch ? researchNavItems : isActivity ? activityNavItems : item?.page_kind === "solutions" ? solutionNavItems : item?.id === "dogs-map-placement-barriers" ? pathwayNavItems : investigationNavItems;
 
   return (
-    <main className="work-page gap-page">
+    <main className={`work-page gap-page${isMap ? " map-redesign dog-gap-page dog-map-gap-page" : ""}`}>
       <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
-      {!item || !gap ? (
+      {isMap && item && gap ? (<>
+        <DogInvestigationMobileNav active="locations-map" onSelect={openDogPage} />
+        <div className="dog-gap-layout is-dog-redesign">
+          <DogInvestigationSidebar active="locations-map" onSelect={openDogPage} onNeeds={() => onNavigate("reality")} />
+          <div className="dog-gap-main"><DogsLocationsMapPage investigationId={investigationsData.active_investigations[0].id} onOpenReport={onOpenReport} /></div>
+        </div>
+      </>) : !item || !gap ? (
         <section className="work-page-shell"><button className="gap-history-back" type="button" onClick={() => onNavigate("reality")}><ArrowLeft size={16} /> Back to needs</button><h1>Work item not found</h1><p>This work record may have moved or not been added to the public data yet.</p></section>
       ) : (
-        <div className={isWorkspace ? `work-page-grid${isMap ? " map-work-grid" : ""}` : undefined}>
-          {isWorkspace && (isMap ? <div className="map-work-sidebar">
-            <a className="gap-history-back map-work-back" href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}><ArrowLeft size={17} aria-hidden="true" /> Back to gap</a>
-            <WorkSectionNav items={navItems} />
-          </div> : <WorkSectionNav items={navItems} />)}
+        <div className={isWorkspace ? "work-page-grid" : undefined}>
+          {isWorkspace && <WorkSectionNav items={navItems} />}
           <div className={isWorkspace ? `work-page-main ${isResearch ? "research-page-main" : isActivity ? "activity-page-main" : "investigation-page-main"}` : undefined}>
           {!isMap && <section className="work-page-shell">
             <button className="gap-history-back" type="button" onClick={() => onOpenGap(gap.slug)}><ArrowLeft size={16} /> {gap.title}</button>
@@ -141,7 +148,6 @@ function WorkContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (
   if (item.page_kind === "research") return <DogsResearchContent item={item} onOpenReport={onOpenReport} />;
   if (item.page_kind === "investigation") return item.id === "dogs-map-placement-barriers" ? <DogsPathwaysContent item={item} onOpenReport={onOpenReport} /> : <DogsInvestigationContent item={item} onOpenReport={onOpenReport} />;
   if (item.page_kind === "solutions") return <DogsSolutionsContent item={item} onOpenReport={onOpenReport} />;
-  if (item.page_kind === "map") return <div className="work-page-content investigation-content"><InvestigationLocations investigationId={investigationsData.active_investigations[0].id} onOpenReport={onOpenReport} /><p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/">Explore the pathways</a> · <a href="/reality/too-many-dogs-still-lack-safe-placement/our-findings/">View the investigation records</a></p></div>;
   return <div className="work-page-content"><WorkSection id="activity-progress" title="Progress" icon={<ClipboardList size={20} />}><ActivityLog records={activity} onOpenReport={onOpenReport} /></WorkSection>{orgs.length > 0 && <WorkSection id="activity-organizations" title="Organizations contacted" icon={<Users size={20} />}><div className="organizations-grid">{orgs.map((org) => <OrganizationCard org={org} key={org.id} />)}</div></WorkSection>}{learning.length > 0 && <WorkSection title="Learning" icon={<MessageCircle size={20} />}><RecordList records={learning} /></WorkSection>}<Questions id="activity-questions" questions={item.open_questions} /></div>;
 }
 

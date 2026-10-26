@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, BarChart3, Bell, ChevronDown, ChevronLeft, Chevr
 import { useEffect, useState, type ComponentType } from "react";
 import gapsData from "../data/gaps.json";
 import projectsData from "../data/projects.json";
+import { activeCrossoverActions, dogStreetActionId } from "../data/crossoverActions";
 import locations from "../data/investigation-locations.json";
 import recordsData from "../data/records.json";
 import workData from "../data/work.json";
@@ -11,7 +12,7 @@ import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInv
 import { navigateInternalLink } from "../lib/internalLink";
 import { DogCareScenario } from "./DogCareScenario";
 import { DogGapOverviewLanding } from "./DogGapOverviewLanding";
-import { DogsPathwaysContent } from "./DogsPathwaysContent";
+import { DogInvestigationMobileNav, DogInvestigationSidebar, type DogInvestigationPage } from "./DogInvestigationNav";
 import { DogsSolutionsContent } from "./DogsSolutionsContent";
 import { DogsInvestigationContent } from "./DogsInvestigationContent";
 import { DogsResearchContent } from "./DogsResearchContent";
@@ -21,6 +22,7 @@ import type { InvestigationLocation, MappedInvestigationLocation } from "./Inves
 import "./DogGapOverview.css";
 import "./DogGapExperience.css";
 import "./DogGapLanding.css";
+import "./ActionIndexPage.css";
 
 type Section = "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
 const tabs: { id: Section; label: string; Icon: LucideIcon }[] = [
@@ -132,11 +134,12 @@ function DogGapOverviewMap() {
   </div>;
 }
 
-export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNavigate, onOpenWork, onOpenReport, onOpenAction }: {
+export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNavigate, onOpenWork, onOpenReport, onOpenAction, onOpenActionDetail }: {
   gap: GapRecord; section: Section; onOpenSection: (section: Section, anchor?: string) => void;
-  onOpenGap: (slug: string) => void; onNavigate: (page: "reality") => void;
+  onOpenGap: (slug: string) => void; onNavigate: (page: "reality" | "action") => void;
   onOpenWork: (id: string, anchor?: string) => void; onOpenReport: (id: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
+  onOpenActionDetail: () => void;
 }) {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [pageMenuOpen, setPageMenuOpen] = useState(false);
@@ -149,6 +152,7 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
   const updates = gapUpdates(gap);
   const latest = updates.find((item) => item.crossover && item.destination) || updates.find((item) => item.destination);
   const tabLink = (id: Section) => `/reality/${gap.slug}/${id === "overview" ? "" : `${id}/`}`;
+  const openDogTab = (id: DogInvestigationPage) => id === "locations-map" ? onOpenWork("dogs-locations-map") : onOpenSection(id);
   const openUpdate = (update: typeof updates[number]) => {
     const destination = update.destination;
     if (destination?.kind === "work") onOpenWork(destination.id, destination.anchor);
@@ -170,26 +174,19 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
         <button type="button" aria-label="Next gap" disabled={!nextGap} onClick={() => nextGap && onOpenGap(nextGap.slug)}><ChevronRight size={22} aria-hidden="true" /></button>
       </nav>
     </div>}
-    {isDogGap && <div className="dog-gap-mobile-identity">
-      <a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}><ArrowLeft size={17} aria-hidden="true" /> Back to needs</a>
-      <div className="dog-gap-identity-menu"><button type="button" aria-expanded={exploreOpen} aria-controls="dog-gap-identity-links" onClick={() => setExploreOpen((open) => !open)}>Dogs on the street <ChevronDown size={16} aria-hidden="true" /></button>
-        <nav id="dog-gap-identity-links" aria-label="Explore Dogs on the street" hidden={!exploreOpen}>{tabs.map((tab) => <a key={tab.id} href={tabLink(tab.id)} aria-current={section === tab.id ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => { setExploreOpen(false); onOpenSection(tab.id); })}>{tab.label}</a>)}</nav>
-      </div>
-    </div>}
+    {isDogGap && <DogInvestigationMobileNav active={section === "ways-to-help" ? undefined : section} onSelect={openDogTab} />}
   <div className={`dog-gap-layout ${isDogGap ? "is-dog-redesign" : ""}`}>
-    {isDogGap ? <aside className="dog-gap-sidebar dog-gap-section-sidebar" aria-label="Dogs on the street pages">
-      <a className="dog-gap-sidebar-back" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}><ArrowLeft size={17} aria-hidden="true" /> Back to needs</a>
-      <span>Dogs on the street</span>
-      <nav>{tabs.map((tab) => <a key={tab.id} href={tabLink(tab.id)} aria-current={section === tab.id ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => onOpenSection(tab.id))}><tab.Icon size={18} strokeWidth={1.9} aria-hidden="true" />{tab.label}</a>)}</nav>
-    </aside> : <aside className="dog-gap-sidebar" aria-label="On this page">
+    {isDogGap ? <DogInvestigationSidebar active={section === "ways-to-help" ? undefined : section} onSelect={openDogTab} onNeeds={() => onNavigate("reality")} /> : <aside className="dog-gap-sidebar" aria-label="On this page">
       <span>On this page</span>
       {pageMenu.map(({ id, label, Icon }) => <a href={`#${id}`} key={id}><Icon size={19} aria-hidden="true" /> {label}</a>)}
     </aside>}
     <div className="dog-gap-main">
       {isDogGap && section === "overview" && <section className="dog-gap-overview-hero" aria-label="Dogs on the street investigation">
-        <div className="dog-gap-hero-copy"><span className="dog-gap-status investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} />{investigationStatusLabel(gap.investigation_status)}</span><h1>{gap.title}</h1><p>Investigating how dogs reach care in Stockton, where that process breaks down, and what could improve it.</p></div>
+        <div className="dog-gap-hero-content">
+          <div className="dog-gap-hero-copy"><span className="dog-gap-status investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} />{investigationStatusLabel(gap.investigation_status)}</span><h1>{gap.title}</h1><p>Investigating how dogs reach care in Stockton, where that process breaks down, and what could improve it.</p></div>
+          <div className="dog-gap-meta"><span><FileText size={17} /> {gap.sources.length} sources</span><span><Users size={17} /> {gap.organization_ids.length} organizations</span>{gap.updated_at && <span><Clock3 size={17} /> Updated {fmt(gap.updated_at)}</span>}</div>
+        </div>
         {gap.artwork && <img src={gap.artwork} alt="Dog related to the street dogs and access to care investigation" />}
-        <div className="dog-gap-meta"><span><FileText size={17} /> {gap.sources.length} sources</span><span><Users size={17} /> {gap.organization_ids.length} organizations</span>{gap.updated_at && <span><Clock3 size={17} /> Updated {fmt(gap.updated_at)}</span>}</div>
       </section>}
       {!isDogGap && <section className="dog-gap-identity" aria-label="Current need">
         <div className="dog-gap-identity-copy"><span className="dog-gap-status investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} />{investigationStatusLabel(gap.investigation_status)}</span><h1>{gap.title}</h1><p className="dog-gap-deck">{gap.summary}</p><div className="dog-gap-meta"><span><FileText size={17} /> {gap.sources.length} sources</span><span><Users size={17} /> {gap.organization_ids.length} organizations</span>{gap.updated_at && <span><Clock3 size={17} /> Record updated {fmt(gap.updated_at)}</span>}</div></div>
@@ -208,10 +205,20 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
       </div>}
       {!isDogGap && <nav className="dog-gap-tabs" aria-label="Need sections">{tabs.filter((tab) => isDogGap || tab.id !== "our-findings").map((tab) => <a key={tab.id} href={tabLink(tab.id)} aria-current={section === tab.id ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => onOpenSection(tab.id))}>{tab.label}</a>)}</nav>}
       {section === "overview" && !isDogGap && <GenericGapOverview gap={gap} onOpenWork={onOpenWork} onOpenKeyFactors={() => onOpenSection("key-factors")} />}
-      {section === "overview" && isDogGap && <DogGapOverviewLanding gap={gap} map={<DogGapOverviewMap />} onOpenSection={onOpenSection} onOpenWork={onOpenWork} onOpenAction={onOpenAction} />}
+      {section === "overview" && isDogGap && <DogGapOverviewLanding gap={gap} map={<DogGapOverviewMap />} onOpenSection={onOpenSection} onOpenWork={onOpenWork} onOpenActionDetail={onOpenActionDetail} onOpenActionIndex={() => onNavigate("action")} />}
       {section === "key-factors" && <KeyFactorsPage gap={gap} onOpenSection={onOpenSection} onOpenMap={() => onOpenWork("dogs-locations-map")} model={isDogGap ? <DogCareScenario heading="Explore the full care model" factorHref={(key) => `#factor-${key}`} onOpenFactor={(key) => onOpenSection("key-factors", `factor-${key}`)} improvementHref={(id) => `${tabLink("improvements")}#${id}`} onOpenImprovement={(id) => onOpenSection("improvements", id)} /> : undefined} />}
       {section === "ways-to-help" && !isDogGap && <GenericGapWaysToHelp gap={gap} onOpenAction={onOpenAction} />}
-      {section === "ways-to-help" && isDogGap && <div className="dog-gap-tab-content"><div className="dog-gap-tab-heading"><p className="dog-gap-eyebrow">Pathways to care</p><h2>Ways to Help</h2><p>Explore documented routes to care and participation. Each record separates an advertised opportunity, an attempted route, and a confirmed outcome.</p></div>{getWork("dogs-map-placement-barriers") && <DogsPathwaysContent item={getWork("dogs-map-placement-barriers")!} onOpenReport={onOpenReport} />}</div>}
+      {section === "ways-to-help" && isDogGap && <div className="dog-gap-tab-content dog-gap-participation">
+        <div className="dog-gap-tab-heading"><p className="dog-gap-eyebrow">Crossover actions</p><h2>Show Up With Us</h2><p>We're investigating how dogs reach care in Stockton by showing up, testing available pathways, and documenting what happens. Here's how you can participate.</p></div>
+        <div className="dog-gap-participation-list">{activeCrossoverActions.map((action) => <article className="action-index-feature dog-gap-participation-card" key={action.id}>
+          <img className="action-index-image" src={action.image.src} alt={action.image.alt} width={action.image.width} height={action.image.height} decoding="async" />
+          <div className="action-index-feature-copy">
+            <div><h3>{action.title}</h3><p>{action.summary}</p></div>
+            <dl className="action-index-status" aria-label="Fieldwork status">{action.status.map(({ value, label }) => <div className="action-index-status-item" key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+            <a className="action-index-button" href={action.href} onClick={action.id === dogStreetActionId ? (event) => navigateInternalLink(event, onOpenActionDetail) : undefined}>{action.buttonLabel} <ArrowRight size={19} aria-hidden="true" /></a>
+          </div>
+        </article>)}</div>
+      </div>}
       {section === "improvements" && !isDogGap && <GenericGapImprovements gap={gap} />}
       {section === "improvements" && isDogGap && <div className="dog-gap-tab-content"><div className="dog-gap-tab-heading"><p className="dog-gap-eyebrow">Projects and proposals</p><h2>Improvements</h2><p>Project stages and possible effects come from the existing evidence records. Delivered capacity and impact remain unverified unless stated.</p></div>{getWork("dogs-solutions") && <DogsSolutionsContent item={getWork("dogs-solutions")!} onOpenReport={onOpenReport} />}</div>}
       {section === "our-findings" && isDogGap && <div className="dog-gap-tab-content"><div className="dog-gap-tab-heading"><h2>Our Findings</h2></div>{getWork("dogs-map-placement-barriers") && <DogsInvestigationContent item={getWork("dogs-map-placement-barriers")!} onOpenReport={onOpenReport} includeMap={false} />}</div>}

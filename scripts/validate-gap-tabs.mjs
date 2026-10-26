@@ -6,7 +6,7 @@ const base = new URL("../dist/reality/too-many-dogs-still-lack-safe-placement/",
 const sections = [
   ["", "Overview", "What is happening in Stockton?"],
   ["key-factors/", "Key Factors", "What affects whether dogs reach care?"],
-  ["ways-to-help/", "Ways to Help", "How care is reached"],
+  ["ways-to-help/", "Show Up With Us", "Look for dogs on the street"],
   ["improvements/", "Improvements", "Ideas to test"],
   ["our-findings/", "Our Findings", "What we&#x27;re investigating"],
   ["research/", "Sources", "At a glance"],
@@ -16,12 +16,15 @@ const sections = [
 for (const [path, label, content] of sections) {
   const html = await readFile(new URL(`${path}index.html`, base), "utf8");
   const href = `/reality/too-many-dogs-still-lack-safe-placement/${path}`;
-  assert.ok(html.includes(`href="${href}" aria-current="page"`), `${label}: active page link missing`);
+  if (path !== "ways-to-help/") assert.ok(html.includes(`href="${href}" aria-current="page"`), `${label}: active page link missing`);
   assert.ok(html.includes(content), `${label}: section content missing`);
   const sidebar = html.match(/<aside class="dog-gap-sidebar dog-gap-section-sidebar"[\s\S]*?<\/aside>/)?.[0] ?? "";
-  assert.ok(sidebar.includes("Back to needs") && sidebar.includes("Dogs on the street"), `${label}: persistent desktop identity missing`);
-  assert.ok(sidebar.includes(`href="${href}" aria-current="page"`), `${label}: desktop active page missing`);
+  assert.ok(sidebar.includes("All needs") && sidebar.includes("Dogs on the street") && sidebar.includes("/images/reality/dog-thumb.jpg"), `${label}: persistent desktop identity missing`);
+  assert.ok(!sidebar.includes("Show Up With Us"), `${label}: removed destination remains in desktop navigation`);
+  if (path !== "ways-to-help/") assert.ok(sidebar.includes(`href="${href}" aria-current="page"`), `${label}: desktop active page missing`);
   assert.ok(html.includes('class="dog-gap-mobile-identity"') && html.includes('id="dog-gap-identity-links"'), `${label}: mobile identity navigation missing`);
+  const mobileNav = html.match(/<nav id="dog-gap-identity-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
+  assert.ok(!mobileNav.includes("Show Up With Us") && !html.includes("Back to needs"), `${label}: removed mobile navigation remains`);
   assert.equal(html.includes('class="dog-gap-overview-hero"'), path === "", `${label}: overview hero placement incorrect`);
   assert.ok(html.includes("dog-gap-page is-investigating"), `${label}: investigation color state missing`);
 }
@@ -34,7 +37,7 @@ for (const key of ["shelter", "foster", "response", "reporting", "prevention", "
 }
 assert.equal((dogOverview.match(/type="range"/g) ?? []).length, 3, "Overview: three-factor model missing");
 assert.equal((keyFactors.match(/type="range"/g) ?? []).length, 6, "Key Factors: full model missing");
-for (const heading of ["Understanding the issue", "Where dogs are being reported", "Ways to help", "What we&#x27;re finding", "Latest activity"]) {
+for (const heading of ["Understanding the issue", "Where dogs are being reported", "Show up with us", "What we&#x27;re finding", "Latest activity"]) {
   assert.ok(dogOverview.includes(heading), `Overview: ${heading} preview missing`);
 }
 assert.ok(dogOverview.includes("Illustrative scenario"), "Overview: model disclaimer missing");
