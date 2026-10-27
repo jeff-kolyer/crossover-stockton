@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, BarChart3, Bell, ChevronDown, ChevronLeft, ChevronRight, Clock3, FileText, HeartHandshake, MapPin, Search, Users, Wrench, type LucideIcon } from "lucide-react";
-import { useEffect, useState, type ComponentType } from "react";
+import { useEffect, useMemo, useRef, useState, type ComponentType, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
 import gapsData from "../data/gaps.json";
 import projectsData from "../data/projects.json";
 import { activeCrossoverActions, dogStreetActionId } from "../data/crossoverActions";
@@ -12,7 +12,8 @@ import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInv
 import { navigateInternalLink } from "../lib/internalLink";
 import { DogCareScenario } from "./DogCareScenario";
 import { DogGapOverviewLanding } from "./DogGapOverviewLanding";
-import { DogInvestigationMobileNav, DogInvestigationSidebar, type DogInvestigationPage } from "./DogInvestigationNav";
+import { CrossoverLocationDetails } from "./CrossoverLocationDetails";
+import { PlainActionButton } from "./PlainActionButton";
 import { DogsSolutionsContent } from "./DogsSolutionsContent";
 import { DogsInvestigationContent } from "./DogsInvestigationContent";
 import { DogsResearchContent } from "./DogsResearchContent";
@@ -25,7 +26,7 @@ import "./DogGapExperience.css";
 import "./DogGapLanding.css";
 import "./ActionIndexPage.css";
 
-type Section = "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+type Section = "overview" | "reports" | "map" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
 const tabs: { id: Section; label: string; Icon: LucideIcon }[] = [
   { id: "overview", label: "Overview", Icon: FileText }, { id: "key-factors", label: "Key Factors", Icon: BarChart3 },
   { id: "improvements", label: "Improvements", Icon: Wrench }, { id: "our-findings", label: "Our Findings", Icon: Search },
@@ -118,10 +119,8 @@ const getWork = (id: string) => works.find((item) => item.id === id);
 const fmt = (value?: string | null) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value.length === 10 ? `${value}T12:00:00` : value)) : "Date not recorded";
 const mappedLocations = (locations as InvestigationLocation[]).filter((item): item is MappedInvestigationLocation => item.coordinates !== null);
 
-function DogGapOverviewMap() {
-  const [Map, setMap] = useState<ComponentType<{ locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean }> | null>(null);
-  const [selectedId, setSelectedId] = useState(mappedLocations[0]?.id ?? "");
-  const selected = mappedLocations.find((item) => item.id === selectedId);
+function DogGapOverviewMap({ locations, selectedId, onSelect }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void }) {
+  const [Map, setMap] = useState<ComponentType<{ locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean; followSelection?: boolean }> | null>(null);
   useEffect(() => {
     let active = true;
     import("./InvestigationLocationsMap").then(({ InvestigationLocationsMap }) => {
@@ -130,30 +129,85 @@ function DogGapOverviewMap() {
     return () => { active = false; };
   }, []);
   return <div className="dog-gap-real-map" aria-label="Map of generalized historical and public report areas">
-    {Map ? <Map locations={mappedLocations} selectedId={selectedId} onSelect={setSelectedId} wheelZoom={false} preview /> : <div className="dog-gap-map-loading" role="status">Loading map…</div>}
-    <div className="dog-gap-map-caption"><strong>{selected?.name || "Stockton area"}</strong><span>{selected ? `${fmt(selected.evidence_date)} · ${selected.verification_status}` : "Generalized evidence areas"}</span><small>Historical and public reports; current animal locations are unknown.</small></div>
+    {Map ? <Map locations={locations} selectedId={selectedId} onSelect={onSelect} wheelZoom={false} followSelection={false} /> : <div className="dog-gap-map-loading" role="status">Loading map…</div>}
   </div>;
 }
 
 export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNavigate, onOpenWork, onOpenReport, onOpenAction, onOpenActionDetail }: {
   gap: GapRecord; section: Section; onOpenSection: (section: Section, anchor?: string) => void;
-  onOpenGap: (slug: string) => void; onNavigate: (page: "reality" | "action") => void;
+  onOpenGap: (slug: string) => void; onNavigate: (page: "home" | "reality" | "action" | "organizations") => void;
   onOpenWork: (id: string, anchor?: string) => void; onOpenReport: (id: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
   onOpenActionDetail: () => void;
 }) {
   const [exploreOpen, setExploreOpen] = useState(false);
   const [pageMenuOpen, setPageMenuOpen] = useState(false);
+  const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">(section === "map" ? "collapsed" : "expanded");
+  const [dragTop, setDragTop] = useState<number | null>(null);
+  const workspaceRef = useRef<HTMLDivElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{ pointerId: number; startY: number; startTop: number; height: number } | null>(null);
+  const [selectedLocationId, setSelectedLocationId] = useState("");
+  const [locationFilter, setLocationFilter] = useState<"all" | InvestigationLocation["category"]>("all");
+  const visibleLocations = useMemo(() => locationFilter === "all" ? mappedLocations : mappedLocations.filter((location) => location.category === locationFilter), [locationFilter]);
+  const selectedLocation = mappedLocations.find((location) => location.id === selectedLocationId);
   const isDogGap = gap.id === "dogs-safe-placement";
   const gapIndex = activeGaps.findIndex((item) => item.id === gap.id);
   const previousGap = gapIndex > 0 ? activeGaps[gapIndex - 1] : undefined;
   const nextGap = gapIndex >= 0 ? activeGaps[gapIndex + 1] : undefined;
   const hasProjects = (projectsData as CapacityProject[]).some((project) => project.gap_ids.includes(gap.id));
-  const pageMenu = isDogGap ? sectionMenus[section] : section === "our-findings" ? genericSectionMenus.overview : genericSectionMenus[section].filter((item) => item.id !== "improvements-projects" || hasProjects);
+  const pageMenu = isDogGap ? sectionMenus[section as keyof typeof sectionMenus] ?? sectionMenus.overview : section === "our-findings" ? genericSectionMenus.overview : (genericSectionMenus[section as keyof typeof genericSectionMenus] ?? genericSectionMenus.overview).filter((item) => item.id !== "improvements-projects" || hasProjects);
   const updates = gapUpdates(gap);
   const latest = updates.find((item) => item.crossover && item.destination) || updates.find((item) => item.destination);
   const tabLink = (id: Section) => `/reality/${gap.slug}/${id === "overview" ? "" : `${id}/`}`;
-  const openDogTab = (id: DogInvestigationPage) => id === "locations-map" ? onOpenWork("dogs-locations-map") : onOpenSection(id);
+  const primaryTab = section === "reports" ? "reports" : section === "map" ? "map" : section === "overview" ? "overview" : "more";
+  const openPrimary = (tab: "overview" | "reports" | "map" | "more") => { setSheetState(tab === "map" ? "collapsed" : "expanded"); onOpenSection(tab); };
+  const selectLocation = (id: string) => {
+    setSelectedLocationId(id);
+    setSheetState("partial");
+    sheetRef.current?.scrollTo({ top: 0 });
+    if (section !== "map") onOpenSection("map");
+  };
+  const backToLocations = () => {
+    setSelectedLocationId("");
+    sheetRef.current?.scrollTo({ top: 0 });
+  };
+  const changeLocationFilter = (filter: typeof locationFilter) => {
+    setLocationFilter(filter);
+    setSelectedLocationId("");
+  };
+  const sheetPositions = ["expanded", "partial", "collapsed"] as const;
+  function startSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
+    if (!window.matchMedia("(max-width: 760px)").matches) return;
+    const workspace = workspaceRef.current;
+    if (!workspace) return;
+    const height = workspace.clientHeight;
+    dragRef.current = { pointerId: event.pointerId, startY: event.clientY, startTop: event.currentTarget.parentElement!.getBoundingClientRect().top - workspace.getBoundingClientRect().top, height };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+  function moveSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    setDragTop(Math.max(0, Math.min(drag.height * .78, drag.startTop + event.clientY - drag.startY)));
+  }
+  function endSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const top = Math.max(0, Math.min(drag.height * .78, drag.startTop + event.clientY - drag.startY));
+    const snapTops = [0, drag.height * .42, drag.height * .78];
+    const nearest = snapTops.reduce((best, value, index) => Math.abs(top - value) < Math.abs(top - snapTops[best]) ? index : best, 0);
+    setSheetState(sheetPositions[nearest]);
+    setDragTop(null);
+    dragRef.current = null;
+  }
+  function moveSheetWithKeyboard(event: ReactKeyboardEvent<HTMLButtonElement>) {
+    const index = sheetPositions.indexOf(sheetState);
+    if (event.key === "ArrowUp") { event.preventDefault(); setSheetState(sheetPositions[Math.max(0, index - 1)]); }
+    if (event.key === "ArrowDown") { event.preventDefault(); setSheetState(sheetPositions[Math.min(2, index + 1)]); }
+    if (event.key === "Home") { event.preventDefault(); setSheetState("expanded"); }
+    if (event.key === "End") { event.preventDefault(); setSheetState("collapsed"); }
+  }
+  const reportRecords = records.filter((record) => record.record_type === "field_report" && record.gap_ids.includes(gap.id));
   const openUpdate = (update: typeof updates[number]) => {
     const destination = update.destination;
     if (destination?.kind === "work") onOpenWork(destination.id, destination.anchor);
@@ -167,6 +221,15 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
   };
 
   return <>
+    {isDogGap && <div className="crossover-investigation-header">
+      <div className="crossover-brand-row"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>CROSSOVER</a><a href="/about/">About</a></div>
+      <h1>Dogs on the street in Stockton</h1><p>Investigating · Stockton, California</p>
+      <nav className="crossover-primary-tabs" aria-label="Investigation sections">{(["overview", "reports", "map", "more"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={primaryTab === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{tab[0].toUpperCase() + tab.slice(1)}</a>)}</nav>
+    </div>}
+    <div ref={workspaceRef} className={`${isDogGap ? `crossover-map-workspace ${section === "map" ? "is-map-view" : "is-content-view"}` : ""} is-${sheetState}`}>
+      {isDogGap && <div className="crossover-shared-map"><DogGapOverviewMap locations={visibleLocations} selectedId={selectedLocationId} onSelect={selectLocation} /></div>}
+      <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
+        {isDogGap && <button type="button" className="crossover-sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>}
     {!isDogGap && <div className="dog-gap-topbar">
       <a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}><ArrowLeft size={18} aria-hidden="true" /> Back to needs</a>
       <nav className="dog-gap-topbar-switcher" aria-label="Gap navigation">
@@ -175,23 +238,12 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
         <button type="button" aria-label="Next gap" disabled={!nextGap} onClick={() => nextGap && onOpenGap(nextGap.slug)}><ChevronRight size={22} aria-hidden="true" /></button>
       </nav>
     </div>}
-    {isDogGap && <DogInvestigationMobileNav active={section === "ways-to-help" ? undefined : section} onSelect={openDogTab} />}
   <div className={`dog-gap-layout ${isDogGap ? "is-dog-redesign" : ""}`}>
-    {isDogGap ? <DogInvestigationSidebar active={section === "ways-to-help" ? undefined : section} onSelect={openDogTab} onNeeds={() => onNavigate("reality")} /> : <aside className="dog-gap-sidebar" aria-label="On this page">
+    {!isDogGap && <aside className="dog-gap-sidebar" aria-label="On this page">
       <span>On this page</span>
       {pageMenu.map(({ id, label, Icon }) => <a href={`#${id}`} key={id}><Icon size={19} aria-hidden="true" /> {label}</a>)}
     </aside>}
     <div className="dog-gap-main">
-      {isDogGap && section === "overview" && <section className="dog-gap-overview-hero" aria-label="Dogs on the street investigation">
-        <div className="dog-gap-hero-content">
-          <div className="dog-gap-hero-copy"><span className="dog-gap-status investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} />{investigationStatusLabel(gap.investigation_status)}</span><h1>{gap.title}</h1><p>Investigating how dogs reach care in Stockton, where that process breaks down, and what could improve it.</p></div>
-          <div className="dog-gap-meta"><span><FileText size={17} /> {gap.sources.length} sources</span><span><Users size={17} /> {gap.organization_ids.length} organizations</span>{gap.updated_at && <span><Clock3 size={17} /> Updated {fmt(gap.updated_at)}</span>}</div>
-        </div>
-        <picture>
-          <source media="(max-width: 820px)" srcSet="/images/reality/dog-street-hero.jpg" />
-          <img src="/images/reality/dog-street-hero-wide.jpg" alt="Dog related to the street dogs and access to care investigation" />
-        </picture>
-      </section>}
       {!isDogGap && <section className="dog-gap-identity" aria-label="Current need">
         <div className="dog-gap-identity-copy"><span className="dog-gap-status investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} />{investigationStatusLabel(gap.investigation_status)}</span><h1>{gap.title}</h1><p className="dog-gap-deck">{gap.summary}</p><div className="dog-gap-meta"><span><FileText size={17} /> {gap.sources.length} sources</span><span><Users size={17} /> {gap.organization_ids.length} organizations</span>{gap.updated_at && <span><Clock3 size={17} /> Record updated {fmt(gap.updated_at)}</span>}</div></div>
         {latest && <div className="dog-gap-latest"><span className="dog-gap-eyebrow">Latest activity</span><strong>{latest.title}</strong><p>{latest.summary}</p><time dateTime={latest.date}>{fmt(latest.date)}</time>{updateLink(latest)}</div>}
@@ -209,7 +261,12 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
       </div>}
       {!isDogGap && <nav className="dog-gap-tabs" aria-label="Need sections">{tabs.filter((tab) => isDogGap || tab.id !== "our-findings").map((tab) => <a key={tab.id} href={tabLink(tab.id)} aria-current={section === tab.id ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => onOpenSection(tab.id))}>{tab.label}</a>)}</nav>}
       {section === "overview" && !isDogGap && <GenericGapOverview gap={gap} onOpenWork={onOpenWork} onOpenKeyFactors={() => onOpenSection("key-factors")} />}
-      {section === "overview" && isDogGap && <DogGapOverviewLanding gap={gap} map={<DogGapOverviewMap />} onOpenSection={onOpenSection} onOpenWork={onOpenWork} onOpenActionDetail={onOpenActionDetail} onOpenActionIndex={() => onNavigate("action")} />}
+      {section === "overview" && isDogGap && <DogGapOverviewLanding gap={gap} map={null} onOpenSection={onOpenSection} onOpenWork={onOpenWork} onOpenActionDetail={onOpenActionDetail} onOpenActionIndex={() => onNavigate("action")} />}
+      {section === "reports" && isDogGap && <div className="crossover-simple-section"><h2>Field reports</h2><p>Firsthand visits and observations from this investigation.</p><PlainActionButton onClick={onOpenActionDetail}>Explore field reporting</PlainActionButton><div className="crossover-report-list">{reportRecords.map((report) => <button type="button" key={report.id} onClick={() => onOpenReport(report.id)}><strong>{report.title}</strong><small>{fmt(report.occurred_at)} · {report.location || "Stockton"}</small><span>{report.summary}</span></button>)}</div></div>}
+      {section === "map" && isDogGap && (selectedLocation
+        ? <CrossoverLocationDetails location={selectedLocation} records={records} onBack={backToLocations} onOpenReport={onOpenReport} onOpenActionDetail={onOpenActionDetail} />
+        : <div className="crossover-simple-section crossover-map-content"><h2>Reported locations</h2><p>Markers indicate generalized evidence areas. They do not show where dogs are now.</p><div className="crossover-map-filters" role="group" aria-label="Map evidence filters"><button type="button" aria-pressed={locationFilter === "all"} onClick={() => changeLocationFilter("all")}>All</button><button type="button" aria-pressed={locationFilter === "historical_published_report"} onClick={() => changeLocationFilter("historical_published_report")}>Historical</button><button type="button" aria-pressed={locationFilter === "recent_public_report"} onClick={() => changeLocationFilter("recent_public_report")}>Recent</button><button type="button" aria-pressed={locationFilter === "official_animal_services_record"} onClick={() => changeLocationFilter("official_animal_services_record")}>Official</button><button type="button" aria-pressed={locationFilter === "crossover_firsthand"} onClick={() => changeLocationFilter("crossover_firsthand")}>Firsthand</button></div><div className="crossover-location-list">{visibleLocations.map((location) => <button type="button" key={location.id} onClick={() => selectLocation(location.id)}><strong>{location.name}</strong><small>{fmt(location.evidence_date)} · {location.verification_status}</small></button>)}</div></div>)}
+      {section === "more" && isDogGap && <div className="crossover-simple-section"><h2>Explore the investigation</h2><div className="crossover-more-list"><button type="button" onClick={() => onNavigate("organizations")}>Organizations <ArrowRight size={16} /></button><button type="button" onClick={() => onOpenSection("ways-to-help")}>Pathways to care <ArrowRight size={16} /></button><button type="button" onClick={() => onOpenSection("improvements")}>Improvements <ArrowRight size={16} /></button><button type="button" onClick={() => onOpenSection("key-factors")}>System model <ArrowRight size={16} /></button><button type="button" onClick={() => onOpenSection("our-findings")}>Findings <ArrowRight size={16} /></button><button type="button" onClick={() => onOpenSection("research")}>Sources <ArrowRight size={16} /></button><button type="button" onClick={() => onOpenSection("updates")}>Updates <ArrowRight size={16} /></button></div></div>}
       {section === "key-factors" && <KeyFactorsPage gap={gap} onOpenSection={onOpenSection} onOpenMap={() => onOpenWork("dogs-locations-map")} model={isDogGap ? <DogCareScenario heading="Explore the full care model" factorHref={(key) => `#factor-${key}`} onOpenFactor={(key) => onOpenSection("key-factors", `factor-${key}`)} improvementHref={(id) => `${tabLink("improvements")}#${id}`} onOpenImprovement={(id) => onOpenSection("improvements", id)} /> : undefined} />}
       {section === "ways-to-help" && !isDogGap && <GenericGapWaysToHelp gap={gap} onOpenAction={onOpenAction} />}
       {section === "ways-to-help" && isDogGap && <div className="dog-gap-tab-content dog-gap-participation">
@@ -229,5 +286,5 @@ export function DogGapExperience({ gap, section, onOpenSection, onOpenGap, onNav
       {section === "research" && <div className={`dog-gap-tab-content${isDogGap ? " is-investigation-subpage" : ""}`}>{isDogGap && <InvestigationPageHeader title="Sources" description="Explore the public records and source material behind this investigation." />}{isDogGap ? getWork("dogs-public-source-review") && <DogsResearchContent item={getWork("dogs-public-source-review")!} onOpenReport={onOpenReport} /> : <GenericGapResearchIntro gap={gap} />}<div className="dog-gap-tab-heading" id="sources-intro"><p className="dog-gap-eyebrow">Evidence index</p><h2>Source index</h2><p>Source dates and limitations remain attached to the underlying records.</p></div><div className="dog-gap-source-list" id="sources-records">{records.filter((record) => record.gap_ids.includes(gap.id) && record.source?.url).map((record) => <article className="dog-gap-card" key={record.id}><span>{record.record_type.replace(/_/g, " ")} · {fmt(record.published_at || record.checked_at)}</span><h3>{record.title}</h3><p>{record.summary}</p><small>{record.source.publisher || record.source.type} · {record.evidence_status?.replace(/_/g, " ") || "Evidence record"}</small><a href={record.source.url} target="_blank" rel="noreferrer">View source <ArrowRight size={15} /></a></article>)}{gap.sources.filter((source) => source.url && !records.some((record) => record.gap_ids.includes(gap.id) && record.source?.url === source.url)).map((source, index) => <article className="dog-gap-card" id={index === 0 ? "sources-additional" : undefined} key={source.url}><span>Gap source · Date not recorded</span><h3>{source.label || "Additional source"}</h3><p>This source is listed on the need record; no separate evidence record or verification date is available.</p><a href={source.url} target="_blank" rel="noreferrer">View source <ArrowRight size={15} /></a></article>)}</div></div>}
       {section === "updates" && <div className={`dog-gap-tab-content${isDogGap ? " is-investigation-subpage" : ""}`}>{isDogGap ? <InvestigationPageHeader id="updates-intro" title="Updates" description="Research, fieldwork, requests, announcements, and project milestones related to this need." /> : <div className="dog-gap-tab-heading" id="updates-intro"><p className="dog-gap-eyebrow">Need activity</p><h2>Updates</h2><p>Research, fieldwork, requests, announcements, and project milestones related to this need.</p></div>}<div className="dog-gap-update-list" id="updates-list">{updates.map((update) => <article className="dog-gap-card" key={update.id}><span>{update.typeLabel} · <time dateTime={update.date}>{fmt(update.date)}</time></span><h3>{update.title}</h3><p>{update.summary}</p>{updateLink(update)}</article>)}</div></div>}
     </div>
-  </div></>;
+  </div></div></div></>;
 }

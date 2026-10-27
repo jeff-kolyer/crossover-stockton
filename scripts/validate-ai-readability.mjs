@@ -44,14 +44,10 @@ const featuredGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
 if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) {
   throw new Error("The homepage does not link to the active dog-placement gap.");
 }
-if (!homeHtml.includes("Why do so many dogs struggle to reach care?") || !homeText.includes("Stockton's animal shelter reports regular overcrowding.") || !homeText.includes("Explore what we're learning")) {
+if (!homeHtml.includes("Dogs on the street in Stockton") || !homeText.includes("Field reports, locations, pathways to care, and current findings")) {
   throw new Error("The homepage does not summarize the active investigation.");
 }
-for (const path of [`/reality/${featuredGap.slug}/our-findings/`, `/reality/${featuredGap.slug}/dogs-locations-map/`, "/action/"]) {
-  if (!homeHtml.includes(`href="${path}"`) || !homeText.includes(`${origin}${path}`)) {
-    throw new Error(`The homepage investigation card does not link to ${path}.`);
-  }
-}
+if (!homeText.includes(`${origin}/reality/${featuredGap.slug}/`)) throw new Error("The investigation index lacks its workspace link.");
 
 for (const gap of gaps.filter((item) => item.active && item.work_ids?.length)) {
   const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");

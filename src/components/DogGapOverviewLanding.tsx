@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, ChartNoAxesColumnIncreasing, ChevronRight, CircleHelp, FileText, MapPin, PawPrint } from "lucide-react";
+import { ArrowRight, ChevronRight, FileText, MapPin } from "lucide-react";
 import type { ReactNode } from "react";
 import { activeCrossoverActions, dogStreetActionId } from "../data/crossoverActions";
 import investigationsData from "../data/dogs-investigations.json";
@@ -45,10 +45,10 @@ export function DogGapOverviewLanding({ gap, map, onOpenSection, onOpenWork, onO
     <section className="dog-landing-section dog-landing-evidence" id="summary" aria-labelledby="dog-evidence-title">
       <div className="dog-landing-heading"><div><h2 id="dog-evidence-title">What is happening in Stockton?</h2><p>Public records establish substantial stray-dog intake, but do not tell us how many dogs currently need care, where they are, or what prevents them from reaching it.</p></div></div>
       <div className="dog-landing-stats">
-        <div className="is-danger"><PawPrint aria-hidden="true" /><strong>{strayIntakes?.toLocaleString() ?? "Unknown"}</strong><span>Stray intake events</span><small>2024 · Animal Services multi-jurisdiction service area</small></div>
-        <div className="is-caution"><CircleHelp aria-hidden="true" /><strong>Unknown</strong><span>Dogs on the streets now</span><small>No verified current census</small></div>
-        <div className="is-info"><Building2 aria-hidden="true" /><strong>{capacityProjects.length}</strong><span>Capacity projects</span><small>Shelter expansion and proposed Canine Campus; different stages</small></div>
-        <div className="is-danger"><ChartNoAxesColumnIncreasing aria-hidden="true" /><strong>{strayShare === undefined ? "Unknown" : `${strayShare}%`}</strong><span>Approximate stray intake share</span><small>Of 2024 dog intake in the same service area</small></div>
+        <div className="is-danger"><strong>{strayIntakes?.toLocaleString() ?? "Unknown"}</strong><span>Stray intake events</span><small>2024 · Animal Services multi-jurisdiction service area</small></div>
+        <div className="is-caution"><strong>Unknown</strong><span>Dogs on the streets now</span><small>No verified current census</small></div>
+        <div className="is-info"><strong>{capacityProjects.length}</strong><span>Capacity projects</span><small>Shelter expansion and proposed Canine Campus; different stages</small></div>
+        <div className="is-danger"><strong>{strayShare === undefined ? "Unknown" : `${strayShare}%`}</strong><span>Approximate stray intake share</span><small>Of 2024 dog intake in the same service area</small></div>
       </div>
       <p className="dog-landing-source-note">Intake figures describe events across Animal Services’ service area, not the number of dogs currently on Stockton streets. {sectionLink("research", "See sources", "research-at-a-glance")}</p>
     </section>

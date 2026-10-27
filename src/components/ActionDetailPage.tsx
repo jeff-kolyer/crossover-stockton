@@ -25,7 +25,7 @@ function fullDate(date: string) {
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
 }
 
-export function ActionDetailPage({ onNavigate, onOpenInstructions, onOpenMap, onOpenReport }: { onNavigate: (page: PublicRoute) => void; onOpenInstructions: () => void; onOpenMap: () => void; onOpenReport: (id: string) => void }) {
+export function ActionDetailPage({ onNavigate, onOpenInstructions, onOpenMap, onOpenReport, onOpenInvestigationReports }: { onNavigate: (page: PublicRoute) => void; onOpenInstructions: () => void; onOpenMap: () => void; onOpenReport: (id: string) => void; onOpenInvestigationReports: () => void }) {
   const [Map, setMap] = useState<ComponentType<MapProps> | null>(null);
   const [selectedId, setSelectedId] = useState("");
   const panelRef = useRef<HTMLDivElement>(null);
@@ -54,7 +54,7 @@ export function ActionDetailPage({ onNavigate, onOpenInstructions, onOpenMap, on
     <PublicSiteNav active="action" onNavigate={onNavigate} variant="dark" />
     <div className="action-detail-canvas">
       <div className="action-detail-content">
-        <a className="action-detail-back" href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}><ArrowLeft size={17} aria-hidden="true" /> Back to actions</a>
+        <a className="action-detail-back" href="/reality/too-many-dogs-still-lack-safe-placement/reports/" onClick={(event) => navigateInternalLink(event, onOpenInvestigationReports)}><ArrowLeft size={17} aria-hidden="true" /> Back to reports</a>
 
         <header className="action-detail-intro">
           <p className="action-detail-eyebrow">Crossover actions</p>

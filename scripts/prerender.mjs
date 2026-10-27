@@ -37,6 +37,7 @@ const pages = [
     [`/reality/${gap.slug}/updates/`, `${gap.title} — Updates | Crossover Stockton`, `Updates on ${gap.title.toLowerCase()}.`],
     [`/reality/${gap.slug}/sources/`, `${gap.title} — Sources | Crossover Stockton`, `Sources and evidence for ${gap.title.toLowerCase()}.`],
     ...(gap.id === "dogs-safe-placement" ? [[`${dogGapBase}dogs-locations-map/`, "Field observation map | Crossover Stockton", "Generalized historical dog reports and field observation records for Stockton."]] : []),
+    ...(gap.id === "dogs-safe-placement" ? [[`${dogGapBase}reports/`, "Field reports | Crossover Stockton", "Firsthand visits and observations in the dog investigation."], [`${dogGapBase}map/`, "Reported locations | Crossover Stockton", "Generalized evidence areas in Stockton."], [`${dogGapBase}more/`, "Explore the investigation | Crossover Stockton", "Organizations, pathways, improvements, findings, sources, and updates."]] : []),
   ]),
   ...stories.filter((story) => story.active).map((story) => [
     `/stories/${story.slug}/`, `${story.title} | Crossover Stockton`, story.summary,

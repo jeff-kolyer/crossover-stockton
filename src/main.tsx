@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "@fontsource-variable/inter";
 import "leaflet/dist/leaflet.css";
 import "./index.css";
 import "./styles/design-system.css";
+import "./styles/investigation-app.css";
 import App from "./App";
 
 const root = document.getElementById("root")!;

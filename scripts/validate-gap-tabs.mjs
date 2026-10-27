@@ -16,20 +16,21 @@ const sections = [
 for (const [path, label, content] of sections) {
   const html = await readFile(new URL(`${path}index.html`, base), "utf8");
   const href = `/reality/too-many-dogs-still-lack-safe-placement/${path}`;
-  if (path !== "ways-to-help/") assert.ok(html.includes(`href="${href}" aria-current="page"`), `${label}: active page link missing`);
+  if (path === "") assert.ok(html.includes(`href="${href}" aria-current="page"`), `${label}: active page link missing`);
   assert.ok(html.includes(content), `${label}: section content missing`);
-  const sidebar = html.match(/<aside class="dog-gap-sidebar dog-gap-section-sidebar"[\s\S]*?<\/aside>/)?.[0] ?? "";
-  assert.ok(sidebar.includes("All needs") && sidebar.includes("Dogs on the street") && sidebar.includes("/images/reality/dog-thumb.jpg"), `${label}: persistent desktop identity missing`);
-  assert.ok(!sidebar.includes("Show Up With Us"), `${label}: removed destination remains in desktop navigation`);
-  if (path !== "ways-to-help/") assert.ok(sidebar.includes(`href="${href}" aria-current="page"`), `${label}: desktop active page missing`);
-  assert.ok(html.includes('class="dog-gap-mobile-identity"') && html.includes('id="dog-gap-identity-links"'), `${label}: mobile identity navigation missing`);
-  const mobileNav = html.match(/<nav id="dog-gap-identity-links"[\s\S]*?<\/nav>/)?.[0] ?? "";
-  assert.ok(!mobileNav.includes("Show Up With Us") && !html.includes("Back to needs"), `${label}: removed mobile navigation remains`);
-  assert.equal(html.includes('class="dog-gap-overview-hero"'), path === "", `${label}: overview hero placement incorrect`);
+  assert.ok(html.includes('Dogs on the street in Stockton') && html.includes('aria-label="Investigation sections"'), `${label}: investigation identity missing`);
+  for (const tab of ["Overview", "Reports", "Map", "More"]) assert.ok(html.includes(`>${tab}</a>`), `${label}: ${tab} tab missing`);
+  assert.ok(!html.includes('dog-gap-section-sidebar'), `${label}: obsolete sidebar remains`);
   assert.ok(html.includes("dog-gap-page is-investigating"), `${label}: investigation color state missing`);
 }
 
 const findings = await readFile(new URL("our-findings/index.html", base), "utf8");
+for (const [path, heading, active] of [["reports/", "Field reports", "Reports"], ["map/", "Reported locations", "Map"], ["more/", "Explore the investigation", "More"]]) {
+  const html = await readFile(new URL(`${path}index.html`, base), "utf8");
+  assert.ok(html.includes(heading), `${path}: content missing`);
+  assert.ok(html.includes(`href="/reality/too-many-dogs-still-lack-safe-placement/${path}" aria-current="page"`), `${path}: active ${active} tab missing`);
+  assert.ok(html.includes('crossover-shared-map'), `${path}: shared map missing`);
+}
 const keyFactors = await readFile(new URL("key-factors/index.html", base), "utf8");
 const dogOverview = await readFile(new URL("index.html", base), "utf8");
 for (const key of ["shelter", "foster", "response", "reporting", "prevention", "placement"]) {

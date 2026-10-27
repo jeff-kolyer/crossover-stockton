@@ -14,6 +14,7 @@ interface FieldReportPageProps {
   onOpenGap: (slug: string) => void;
   onOpenWork: (id: string) => void;
   onOpenAction: (action: PublicActionRecord) => void;
+  onOpenInvestigationReports: () => void;
 }
 
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
@@ -23,7 +24,7 @@ const actions = actionsData as PublicActionRecord[];
 const logoLight = "/images/logo_light.webp";
 const logoDark = "/images/logo_dark.webp";
 
-export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, onOpenAction }: FieldReportPageProps) {
+export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, onOpenAction, onOpenInvestigationReports }: FieldReportPageProps) {
   const report = reports.find((item) => item.id === reportId);
   const relatedGaps = (report?.gap_ids ?? []).map((id) => gaps.find((gap) => gap.id === id)).filter((gap): gap is GapRecord => Boolean(gap));
   const relatedOrgs = (report?.organization_ids ?? []).map((id) => orgs.find((org) => org.id === id)).filter((org): org is OrgRecord => Boolean(org));
@@ -35,7 +36,7 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
       <PublicSiteNav active="reality" onNavigate={onNavigate} variant="dark" />
 
       <div className="work-page-shell report-shell">
-        <button className="gap-history-back" type="button" onClick={() => report?.work_id ? onOpenWork(report.work_id) : onNavigate("reality")}><ArrowLeft size={16} /> {report?.work_id ? "Back to activity" : "Back to needs"}</button>
+        <button className="gap-history-back" type="button" onClick={() => relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? onOpenInvestigationReports() : report?.work_id ? onOpenWork(report.work_id) : onNavigate("reality")}><ArrowLeft size={16} /> {relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? "Back to reports" : report?.work_id ? "Back to activity" : "Back to needs"}</button>
         {!report ? (
           <div className="work-page-header"><span className="work-page-kicker">Field report</span><h1>Field report not found</h1><p>This report ID does not match a published field report.</p></div>
         ) : (

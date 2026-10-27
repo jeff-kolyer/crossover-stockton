@@ -56,7 +56,7 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 interface GapDetailPageProps {
   slug?: string;
-  section?: "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+  section?: "overview" | "reports" | "map" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   onOpenSection?: (slug: string, section: NonNullable<GapDetailPageProps["section"]>, anchor?: string) => void;
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout: () => void;
@@ -174,9 +174,9 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
   const isDogGap = gap.id === "dogs-safe-placement";
 
   if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}${isDogGap ? " is-dog-investigation" : ""}`}>
-    <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />
+    {!isDogGap && <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />}
     <DogGapExperience gap={gap} section={section} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} onOpenActionDetail={onOpenActionDetail} />
-    <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>
+    {!isDogGap && <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>}
   </main>;
 
   return (

@@ -29,7 +29,7 @@ type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" |
 interface RouteState {
   page: AppRoute;
   gapSlug?: string;
-  gapSection?: "overview" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+  gapSection?: "overview" | "reports" | "map" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   storySlug?: string;
   workId?: string;
   reportId?: string;
@@ -48,14 +48,14 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSou
 function routeFromPathname(pathname: string): RouteState {
   const normalized = pathname.replace(/\/+$/, "") || "/";
   if (normalized === "/action/look-for-dogs-on-the-street") return { page: "actionDetail" };
-  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(key-factors|ways-to-help|improvements|our-findings|research|sources|updates)$/);
+  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(reports|map|more|key-factors|ways-to-help|improvements|our-findings|research|sources|updates)$/);
   if (gapSection) {
     const gapSlug = decodeURIComponent(gapSection[1]);
     const gap = gaps.find((item) => item.slug === gapSlug);
     const requestedSection = gapSection[2] === "sources" ? "research" : gapSection[2];
     return { page: "gapDetail", gapSlug, gapSection: requestedSection === "our-findings" && gap?.investigation_status !== "investigating" ? "overview" : requestedSection as RouteState["gapSection"] };
   }
-  if (normalized === dogMapPath.replace(/\/$/, "")) return { page: "work", workId: "dogs-locations-map" };
+  if (normalized === dogMapPath.replace(/\/$/, "")) return { page: "gapDetail", gapSlug: dogGapSlug, gapSection: "map" };
   if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
     const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
     return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
@@ -107,7 +107,7 @@ function titleForRoute(route: RouteState) {
   if (route.page === "actionDetail") return "Look for dogs on the street | Crossover Stockton";
   if (route.page === "gapDetail" || route.page === "gapUpdates" || route.page === "gapSources") {
     const gap = gaps.find((item) => item.slug === route.gapSlug);
-    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "Overview", "key-factors": "Key Factors", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
+    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "Overview", reports: "Reports", map: "Map", more: "More", "key-factors": "Key Factors", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
     return gap ? `${gap.title} — ${gap.id === "dogs-safe-placement" && route.gapSection === "ways-to-help" ? "Show Up With Us" : suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
   if (route.page === "work") {
@@ -238,7 +238,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     if (`${window.location.pathname}${window.location.hash}` !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
-    setRoute({ page: "work", workId });
+    setRoute(workId === "dogs-locations-map" ? { page: "gapDetail", gapSlug: dogGapSlug, gapSection: "map" } : { page: "work", workId });
     requestAnimationFrame(() => {
       if (anchor) document.getElementById(anchor)?.scrollIntoView();
       else window.scrollTo({ top: 0, left: 0 });
@@ -266,7 +266,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   return (
     <div className="app-shell">
-      {(route.page === "home" || route.page === "reality" || route.page === "connection") && (
+      {route.page === "home" && <main className="crossover-index"><header><strong>CROSSOVER</strong><button type="button" onClick={() => showPage("about")}>About</button></header><div className="crossover-index-body"><span>Investigations</span><h1>Investigations</h1><p>Explore what we are learning in Stockton.</p><a href={dogGapBase} className="crossover-investigation-card" onClick={(event) => { event.preventDefault(); showGap(dogGapSlug); }}><span className="crossover-card-icon" aria-hidden="true">●</span><span><strong>Dogs on the street in Stockton</strong><small>Investigating · Stockton, California</small><span>Field reports, locations, pathways to care, and current findings</span></span><span aria-hidden="true">→</span></a></div></main>}
+      {(route.page === "reality" || route.page === "connection") && (
         <HomePage
           page={route.page}
           onNavigate={showPage}
@@ -293,6 +294,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenInstructions={() => showGapSection(dogGapSlug, "our-findings", "field-observation-procedure")}
           onOpenMap={() => showWork("dogs-locations-map")}
           onOpenReport={showReport}
+          onOpenInvestigationReports={() => showGapSection(dogGapSlug, "reports")}
         />
       )}
 
@@ -321,6 +323,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenGap={showGap}
           onOpenWork={showWork}
           onOpenAction={setSelectedAction}
+          onOpenInvestigationReports={() => showGapSection(dogGapSlug, "reports")}
         />
       )}
 
