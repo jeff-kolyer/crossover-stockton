@@ -183,6 +183,14 @@ html:has(.public-site) {
   margin: 0 0 40px;
 }
 
+.about-simple .about-simple-purpose {
+  margin-bottom: 24px;
+}
+
+.about-simple .about-simple-stockton .about-simple-hero-image {
+  margin-bottom: 20px;
+}
+
 .about-simple .about-simple-philosophy {
   border-bottom: 1px solid #dadce0;
   padding-bottom: 32px;

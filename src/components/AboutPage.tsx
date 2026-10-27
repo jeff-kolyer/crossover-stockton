@@ -26,15 +26,15 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
   return <main className="public-site about-simple">
     <PublicSiteNav active="about" onNavigate={onNavigate} />
     <div className="about-simple-content">
-      <section className="about-simple-section" aria-labelledby="about-purpose-title">
+      <section className="about-simple-section about-simple-purpose" aria-labelledby="about-purpose-title">
         <h1 id="about-purpose-title">How can emerging post-scarcity technology solve real problems?</h1>
         <p>Self-driving vehicles are operating today. AI can tackle increasingly complex problems. Robots are beginning to perform useful physical work.</p>
         <p>As these technologies advance, they could free people from more compulsory labor and create extraordinary new possibilities.</p>
         <p><strong>But what will we do with that freedom?</strong></p>
-        <img className="about-simple-wide-image about-simple-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
       </section>
 
-      <section className="about-simple-section" aria-labelledby="about-stockton-title">
+      <section className="about-simple-section about-simple-stockton" aria-labelledby="about-stockton-title">
+        <img className="about-simple-wide-image about-simple-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
         <h2 id="about-stockton-title">Starting in Stockton with the stray dogs epidemic</h2>
         <p>As AI and automation take over administrative drudgery, animal welfare shifts from underpaid bureaucratic labor to <strong>human vocation</strong>—where people could spend 100% of their time calming, training, fostering, and rehabilitating animals while tech handles the logistics.</p>
         <p><a href="/work/dogs/">Open the dog investigation</a></p>
