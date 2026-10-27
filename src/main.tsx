@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "leaflet/dist/leaflet.css";
-import "./index.css";
-import "./styles/design-system.css";
-import "./styles/investigation-app.css";
+import "./styles/app.css";
+import "./styles/public.css";
+import "./styles/public-chrome.css";
 import App from "./App";
 
 const root = document.getElementById("root")!;

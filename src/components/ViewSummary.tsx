@@ -1,4 +1,4 @@
-import { Activity, Clock3, MapPin, Sparkles, TrendingUp, Utensils, type LucideIcon } from "lucide-react";
+
 import { MODES } from "../constants";
 import { formatFeedFreshness } from "../lib/utils";
 import type { FeedRecord, RecordKind, TagDefinition, TagFamily } from "../types";
@@ -15,7 +15,6 @@ interface ViewSummaryProps {
 interface SummaryChip {
   label: string;
   tone?: "red" | "blue" | "green" | "gold";
-  icon?: "activity" | "clock" | "map" | "trend" | "utensils";
 }
 
 const KIND_LABELS: Record<RecordKind, string> = {
@@ -39,7 +38,7 @@ export function ViewSummary({ records, selectedRecordKinds, selectedTagIds, tags
           <h2>{summary.headline}</h2>
           <span className="summary-badge">
             AI summary
-            <Sparkles size={15} />
+            
           </span>
         </div>
         <p className="summary-meta">AI summary &middot; {freshness}</p>
@@ -47,7 +46,7 @@ export function ViewSummary({ records, selectedRecordKinds, selectedTagIds, tags
         <div className="summary-chip-row" aria-label="Summary counts">
           {summary.chips.map((chip) => (
             <span className={`summary-chip ${chip.tone ? `is-${chip.tone}` : ""}`} key={chip.label}>
-              <SummaryChipIcon icon={chip.icon} tone={chip.tone} />
+              
               {chip.label}
             </span>
           ))}
@@ -175,22 +174,22 @@ function buildChips(records: FeedRecord[], tagsById: Map<string, TagDefinition>,
   const tonightCount = countRecordsWithAny(records, ["tonight"]);
   const openCount = countRecordsWithAny(records, ["open_now"]);
 
-  if (singleKind && kindCounts[singleKind]) chips.push({ label: `${kindCounts[singleKind]} ${KIND_LABELS[singleKind]}`, tone: kindChipTone(singleKind), icon: singleKind === "gap" ? "trend" : "activity" });
+  if (singleKind && kindCounts[singleKind]) chips.push({ label: `${kindCounts[singleKind]} ${KIND_LABELS[singleKind]}`, tone: kindChipTone(singleKind) });
   if (!singleKind && kinds.length) {
     kinds.slice(0, 2).forEach((kind) => {
       if (kindCounts[kind]) chips.push({ label: `${kindCounts[kind]} ${KIND_LABELS[kind]}` });
     });
   }
-  if (highCount) chips.push({ label: `${highCount} high-priority`, tone: "red", icon: "trend" });
-  if (openCount) chips.push({ label: `${openCount} open now`, tone: "green", icon: "clock" });
-  if (tonightCount) chips.push({ label: `${tonightCount} tonight`, tone: "gold", icon: "clock" });
+  if (highCount) chips.push({ label: `${highCount} high-priority`, tone: "red" });
+  if (openCount) chips.push({ label: `${openCount} open now`, tone: "green" });
+  if (tonightCount) chips.push({ label: `${tonightCount} tonight`, tone: "gold" });
 
   for (const family of FAMILY_PRIORITY) {
     const top = topLabels(records, tagsById, family, 1)[0];
     if (!top) continue;
     const count = records.filter((record) => recordHasTagLabel(record, tagsById, top, family)).length;
     const label = `${count} ${top.toLowerCase()}`;
-    if (!chips.some((chip) => chip.label.toLowerCase() === label.toLowerCase())) chips.push({ label, tone: family === "area" ? "blue" : undefined, icon: chipIconForTag(family, top) });
+    if (!chips.some((chip) => chip.label.toLowerCase() === label.toLowerCase())) chips.push({ label, tone: family === "area" ? "blue" : undefined });
     if (chips.length >= 4) break;
   }
 
@@ -198,24 +197,10 @@ function buildChips(records: FeedRecord[], tagsById: Map<string, TagDefinition>,
   return chips.slice(0, 4);
 }
 
-function SummaryChipIcon({ icon, tone }: { icon?: SummaryChip["icon"]; tone?: SummaryChip["tone"] }) {
-  const Icon: LucideIcon =
-    icon === "clock" ? Clock3 : icon === "map" ? MapPin : icon === "trend" ? TrendingUp : icon === "utensils" ? Utensils : tone === "red" ? TrendingUp : Activity;
-  return <Icon size={16} />;
-}
-
 function kindChipTone(kind: RecordKind): SummaryChip["tone"] {
   if (kind === "gap") return "red";
   if (kind === "service" || kind === "signal") return "green";
   return "blue";
-}
-
-function chipIconForTag(family: TagFamily, label: string): SummaryChip["icon"] {
-  const value = label.toLowerCase();
-  if (family === "area") return "map";
-  if (value.includes("food") || value.includes("meal") || value.includes("pantry")) return "utensils";
-  if (value.includes("open") || value.includes("tonight") || value.includes("today")) return "clock";
-  return "activity";
 }
 
 function firstSelectedOrTop(records: FeedRecord[], selectedTags: TagDefinition[], tagsById: Map<string, TagDefinition>, family: TagFamily) {

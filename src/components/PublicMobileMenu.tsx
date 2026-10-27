@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
+import "./PublicMobileMenu.layout.css";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -70,7 +70,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout }: PublicMobileMenuPr
           setIsOpen(true);
         }}
       >
-        <Menu size={24} />
+        Menu
       </button>
 
       {isOpen && (
@@ -85,7 +85,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout }: PublicMobileMenuPr
             <div className="public-menu-header">
               <span>Menu</span>
               <button type="button" aria-label="Close navigation" onClick={() => setIsOpen(false)}>
-                <X size={22} />
+                Close
               </button>
             </div>
 

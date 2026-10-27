@@ -1,10 +1,8 @@
 import { useEffect, useId, useRef, useState } from "react";
-import type { LucideIcon } from "lucide-react";
 
 export interface WorkSectionNavItem {
   id: string;
   label: string;
-  icon: LucideIcon;
   description?: string;
 }
 
@@ -78,7 +76,7 @@ export function WorkSectionNav({ items, className }: { items: WorkSectionNavItem
     };
   }, [items]);
 
-  const links = items.map(({ id, label, icon: Icon, description }) => <a key={id} className={activeId === id ? "is-active" : undefined} href={`#${id}`} aria-current={activeId === id ? "location" : undefined} onClick={(event) => { event.preventDefault(); clickedId.current = id; clickedSectionReached.current = false; setActiveId(id); setMobileOpen(false); navigateToWorkSection(id); }}><Icon size={20} aria-hidden="true" /><span><span className="work-section-nav-label">{label}</span>{description && <small>{description}</small>}</span></a>);
+  const links = items.map(({ id, label, description }) => <a key={id} className={activeId === id ? "is-active" : undefined} href={`#${id}`} aria-current={activeId === id ? "location" : undefined} onClick={(event) => { event.preventDefault(); clickedId.current = id; clickedSectionReached.current = false; setActiveId(id); setMobileOpen(false); navigateToWorkSection(id); }}><span><span className="work-section-nav-label">{label}</span>{description && <small>{description}</small>}</span></a>);
 
   return <aside className={`work-section-nav${className ? ` ${className}` : ""}`}>
     <nav className="work-section-nav-desktop" aria-label="On this page"><h2>On this page</h2>{links}</nav>

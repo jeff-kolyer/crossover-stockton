@@ -1,4 +1,4 @@
-import { ArrowRight, BarChart3, FileText, HeartHandshake, Users } from "lucide-react";
+
 import actionsData from "../data/actions.json";
 import orgsData from "../data/orgs.json";
 import projectsData from "../data/projects.json";
@@ -22,17 +22,17 @@ export function GenericGapOverview({ gap, onOpenWork, onOpenKeyFactors }: { gap:
       <p className="dog-gap-eyebrow">The system behind the need</p><h2>Understand the issue</h2>
       <p>These reported conditions and possible barriers show where further investigation could focus.</p>
       <div className="generic-gap-two-columns">
-        <div><h3><BarChart3 size={19} /> What public sources report</h3><ul>{gap.what_we_are_seeing.map((item) => <li key={item}>{item}</li>)}</ul></div>
-        <div><h3><FileText size={19} /> Barriers to examine</h3><ul>{gap.contributing_factors.map((item) => <li key={item}>{item}</li>)}</ul></div>
+        <div><h3> What public sources report</h3><ul>{gap.what_we_are_seeing.map((item) => <li key={item}>{item}</li>)}</ul></div>
+        <div><h3> Barriers to examine</h3><ul>{gap.contributing_factors.map((item) => <li key={item}>{item}</li>)}</ul></div>
       </div>
-      <a className="generic-gap-key-link" href={`/reality/${gap.slug}/key-factors/`} onClick={(event) => navigateInternalLink(event, onOpenKeyFactors)}>Explore key factors <ArrowRight size={16} aria-hidden="true" /></a>
+      <a className="generic-gap-key-link" href={`/reality/${gap.slug}/key-factors/`} onClick={(event) => navigateInternalLink(event, onOpenKeyFactors)}>Explore key factors </a>
     </section>
     <section className="dog-gap-card generic-gap-evidence" id="reported-evidence">
       <p className="dog-gap-eyebrow">Evidence so far</p><h2>What is documented?</h2>
       <p>These points come from published sources and organization reports. Crossover has identified this need but has not established independent findings about its current extent or outcomes.</p>
       <ul>{gap.what_we_are_seeing.slice(0, 3).map((item) => <li key={item}>{item}</li>)}</ul>
     </section>
-    {(gap.work_ids ?? []).length > 0 && <section className="dog-gap-related dog-gap-card" id="related-records"><p className="dog-gap-eyebrow">Detailed records</p><div>{(gap.work_ids ?? []).map((id) => { const item = work.find((entry) => entry.id === id); return item && <a href={`/work/${id}/`} key={id} onClick={(event) => navigateInternalLink(event, () => onOpenWork(id))}>{item.title} <ArrowRight size={15} /></a>; })}</div></section>}
+    {(gap.work_ids ?? []).length > 0 && <section className="dog-gap-related dog-gap-card" id="related-records"><p className="dog-gap-eyebrow">Detailed records</p><div>{(gap.work_ids ?? []).map((id) => { const item = work.find((entry) => entry.id === id); return item && <a href={`/work/${id}/`} key={id} onClick={(event) => navigateInternalLink(event, () => onOpenWork(id))}>{item.title} </a>; })}</div></section>}
   </div>;
 }
 
@@ -41,8 +41,8 @@ export function GenericGapWaysToHelp({ gap, onOpenAction }: { gap: GapRecord; on
   const relevantOrgs = gap.organization_ids.map((id) => orgs.find((item) => item.id === id)).filter((item): item is OrgRecord => Boolean(item));
   return <div className="dog-gap-tab-content">
     <div className="dog-gap-tab-heading" id="ways-intro"><p className="dog-gap-eyebrow">Ways to help</p><h2>Take a real step</h2><p>These opportunities are described by the organizations involved. Check current details with each provider before you act.</p></div>
-    <section className="dog-gap-card" id="ways-actions"><p className="dog-gap-eyebrow">Current options</p><h2>Ways to participate</h2><div className="generic-gap-item-grid">{relevantActions.map((action) => <article className="generic-gap-item" key={action.id}><span>{action.when_label || "Current option"}</span><h3>{action.title}</h3><p>{action.summary}</p><button type="button" onClick={() => onOpenAction(action)}>Explore this action <ArrowRight size={16} /></button></article>)}</div></section>
-    <section className="dog-gap-card" id="ways-organizations"><p className="dog-gap-eyebrow">Local response</p><h2>Organizations involved</h2><div className="generic-gap-item-grid">{relevantOrgs.map((org) => <article className="generic-gap-item" key={org.id}><Users size={20} aria-hidden="true" /><h3>{org.name}</h3><p>{org.summary}</p>{(org.website || org.source_url) && <a href={org.website || org.source_url} target="_blank" rel="noreferrer">Visit organization <ArrowRight size={16} /></a>}</article>)}</div></section>
+    <section className="dog-gap-card" id="ways-actions"><p className="dog-gap-eyebrow">Current options</p><h2>Ways to participate</h2><div className="generic-gap-item-grid">{relevantActions.map((action) => <article className="generic-gap-item" key={action.id}><span>{action.when_label || "Current option"}</span><h3>{action.title}</h3><p>{action.summary}</p><button type="button" onClick={() => onOpenAction(action)}>Explore this action </button></article>)}</div></section>
+    <section className="dog-gap-card" id="ways-organizations"><p className="dog-gap-eyebrow">Local response</p><h2>Organizations involved</h2><div className="generic-gap-item-grid">{relevantOrgs.map((org) => <article className="generic-gap-item" key={org.id}><h3>{org.name}</h3><p>{org.summary}</p>{(org.website || org.source_url) && <a href={org.website || org.source_url} target="_blank" rel="noreferrer">Visit organization </a>}</article>)}</div></section>
   </div>;
 }
 
@@ -51,7 +51,7 @@ export function GenericGapImprovements({ gap }: { gap: GapRecord }) {
   return <div className="dog-gap-tab-content">
     <div className="dog-gap-tab-heading" id="improvements-intro"><p className="dog-gap-eyebrow">Improvements</p><h2>What could improve the outcome?</h2><p>Existing efforts and possible capacity needs are shown separately. A reported or proposed improvement is not evidence of a measured result.</p></div>
     {relatedProjects.length > 0 && <section className="dog-gap-card" id="improvements-projects"><p className="dog-gap-eyebrow">Tracked projects</p><h2>Work underway</h2><div className="generic-gap-item-grid">{relatedProjects.map((project) => <article className="generic-gap-item" key={project.id}><span>{project.development_stage.replace(/_/g, " ")}</span><h3>{project.title}</h3><p>{project.capacity_summary.how_it_helps || project.description}</p><small>{project.capacity_summary.not_yet_verified}</small></article>)}</div></section>}
-    <section className="dog-gap-card" id="improvements-barriers"><p className="dog-gap-eyebrow">Where better capacity may help</p><h2>Barriers to address</h2><p>These are factors surfaced in the public record. Their relative impact has not been independently measured.</p><ul className="generic-gap-factor-list">{gap.contributing_factors.map((factor) => <li key={factor}><HeartHandshake size={18} aria-hidden="true" />{factor}</li>)}</ul></section>
+    <section className="dog-gap-card" id="improvements-barriers"><p className="dog-gap-eyebrow">Where better capacity may help</p><h2>Barriers to address</h2><p>These are factors surfaced in the public record. Their relative impact has not been independently measured.</p><ul className="generic-gap-factor-list">{gap.contributing_factors.map((factor) => <li key={factor}>{factor}</li>)}</ul></section>
   </div>;
 }
 

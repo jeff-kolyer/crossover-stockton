@@ -16,7 +16,7 @@ export const crossoverActions: CrossoverAction[] = [
   {
     id: dogStreetActionId,
     title: "Look for dogs on the street",
-    href: "/action/look-for-dogs-on-the-street/",
+    href: "/work/dogs/",
     summary: "Help us verify reports of roaming dogs in Stockton and document what we find.",
     overviewSummary: "Explore reported areas, look for roaming dogs, and document what you find.",
     buttonLabel: "Look for dogs",

@@ -1,10 +1,9 @@
-import { ArrowRight, CalendarDays, CheckCircle2, Clock3, ExternalLink, Heart, Info, Tag, Users, X } from "lucide-react";
+
 import type { MouseEvent } from "react";
 import { useEffect, useRef } from "react";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
-import { getActionIcon } from "../lib/actionIcons";
 import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord } from "../types";
 
 interface ActionModalProps {
@@ -27,13 +26,12 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
   const org = orgs.find((item) => item.id === action.organization_id);
   const provider = providerLabel(action);
   const sourceDate = formatSourceDate(action.last_supported_at);
-  const ActionIcon = getActionIcon(action);
   const actionReports = reports.filter((report) => report.action_ids?.includes(action.id)).sort((a, b) => (b.occurred_at ?? b.published_at ?? "").localeCompare(a.occurred_at ?? a.published_at ?? ""));
   const glanceItems = [
-    { label: "What it is", value: action.at_a_glance?.what, icon: Tag },
-    { label: "Time", value: action.at_a_glance?.time, icon: Clock3 },
-    { label: "Why it matters", value: action.at_a_glance?.why, icon: Heart },
-    { label: "Availability", value: action.at_a_glance?.availability, icon: CalendarDays },
+    { label: "What it is", value: action.at_a_glance?.what },
+    { label: "Time", value: action.at_a_glance?.time },
+    { label: "Why it matters", value: action.at_a_glance?.why },
+    { label: "Availability", value: action.at_a_glance?.availability },
   ].filter((item) => item.value);
   const currentDetails = [
     action.action_type ? `Type: ${action.action_type}` : "",
@@ -122,11 +120,10 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
         ref={dialogRef}
       >
         <button className="action-modal-close" type="button" aria-label="Close action details" onClick={onClose} ref={closeButtonRef}>
-          <X size={20} />
+          Close
         </button>
 
         <div className="action-modal-hero">
-          <span className="action-modal-icon"><ActionIcon size={42} /></span>
           <div>
             <p>ACTION</p>
             <h2 id="action-modal-title">{action.modal_title ?? action.title}</h2>
@@ -137,10 +134,8 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
         {glanceItems.length > 0 && (
           <div className="action-modal-glance" aria-label="Action at a glance">
             {glanceItems.map((item) => {
-              const Icon = item.icon;
               return (
                 <span key={item.label}>
-                  <Icon size={26} />
                   <small>{item.label}</small>
                   <strong>{item.value}</strong>
                 </span>
@@ -163,7 +158,7 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
               {action.what_to_expect?.length ? (
                 <ul className="action-modal-expect-list">
                   {action.what_to_expect.map((item) => (
-                    <li key={item}><CheckCircle2 size={17} /> {item}</li>
+                    <li key={item}> {item}</li>
                   ))}
                 </ul>
               ) : (
@@ -174,14 +169,14 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
               <section className="action-modal-copy-block">
                 <h3>Requirements</h3>
                 <ul className="action-modal-expect-list">
-                  {action.requirements.map((item) => <li key={item}><CheckCircle2 size={17} /> {item}</li>)}
+                  {action.requirements.map((item) => <li key={item}> {item}</li>)}
                 </ul>
               </section>
             ) : null}
             {action.evidence_url && (
               <section className="action-modal-copy-block">
                 <h3>Evidence</h3>
-                <a href={action.evidence_url} target="_blank" rel="noreferrer">{action.evidence_label || "Read source"} <ExternalLink size={14} /></a>
+                <a href={action.evidence_url} target="_blank" rel="noreferrer">{action.evidence_label || "Read source"} </a>
               </section>
             )}
           </div>
@@ -190,7 +185,6 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
             <section className="action-modal-copy-block">
               <h3>Who offers it</h3>
               <div className="action-modal-provider">
-                <span><Users size={28} /></span>
                 <p>
                   <strong>{provider}</strong>
                   {org?.summary && <span className="crossover-body">{org.summary}</span>}
@@ -210,17 +204,17 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
         </div>
 
         <button className="action-modal-primary" type="button" onClick={handleHandoff} disabled={!action.related_work_id && !action.next_url && !action.source_url}>
-          {action.handoff_label ?? "Go to organization"} <ArrowRight size={21} />
+          {action.handoff_label ?? "Go to organization"} 
         </button>
         <p className="action-modal-handoff-note">{action.related_work_id ? "Opens the related Crossover investigation." : "Opens the provider or official website in a new tab."}</p>
 
         <section className="action-modal-field-reports">
           <h3>Field Reports</h3>
           {actionReports.length ? actionReports.map((report) => <div key={report.id}>
-            <CalendarDays size={19} />
-            <span><small>{formatSourceDate(report.occurred_at ?? report.published_at)}</small><strong>{report.title}</strong><small>{report.summary}</small><a href={`/reports/${report.id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(report.id); }}>Read field report <ArrowRight size={14} /></a></span>
+            
+            <span><small>{formatSourceDate(report.occurred_at ?? report.published_at)}</small><strong>{report.title}</strong><small>{report.summary}</small><a href={`/reports/${report.id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(report.id); }}>Read field report </a></span>
           </div>) : <div>
-            <Info size={19} />
+            
             <span>
               <strong>No field reports yet.</strong>
               <span className="crossover-body">We&apos;ll add notes here as this action is checked in the field.</span>
@@ -229,13 +223,13 @@ export function ActionModal({ action, onClose, onOpenGap, onOpenWork, onOpenDogS
         </section>
 
         <div className="action-modal-footer-meta">
-          <span><CheckCircle2 size={16} /> {sourceDate ? `Source checked ${sourceDate}` : "Source check pending"}</span>
-          <span><Clock3 size={16} /> {currentnessLabel(action.currentness) || "Availability can change"}</span>
+          <span> {sourceDate ? `Source checked ${sourceDate}` : "Source check pending"}</span>
+          <span> {currentnessLabel(action.currentness) || "Availability can change"}</span>
           {relatedGap && (
             <span>
               Related need:
               <button type="button" onClick={handleRelatedNeed}>
-                {relatedGap.title} <ExternalLink size={14} />
+                {relatedGap.title} 
               </button>
             </span>
           )}

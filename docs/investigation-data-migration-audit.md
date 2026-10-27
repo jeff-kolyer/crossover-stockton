@@ -1,0 +1,79 @@
+# Investigation data migration audit
+
+Local repository audit, October 26, 2026. This is a proposal only. No data, routes, screens, or styles have been migrated or removed.
+
+> Phase 1 refinement approved and implemented later on October 26: `records.json` remains the single Activity ledger; there is no `activities.json`. The four actual Crossover Activity records retain their IDs, while the October 20 location-check plan is typed `planning_update`. `tasks.json`, `findings.json`, and `investigation-questions.json` now hold distinct linked records. Legacy public routes and data remain. The sections below document the original audit proposal and migration rationale.
+
+## 1. Current dependency inventory
+
+The current working investigation uses `street-dog-immediate-welfare` as its investigation ID in `dogs-investigations.json` and `investigation-locations.json`. The four tabs exist, but they do not yet have four canonical data collections.
+
+| Data | Current contents | Current consumers and role |
+| --- | --- | --- |
+| `src/data/work.json` | 9 work pages, 5 for dogs. Mixes page hierarchy, next steps, contact questions, activity IDs, reports, projects, and research threads. | `App.tsx`, `DogGapExperience`, `DogGapOverviewLanding`, `DogsInvestigationContent`, `GenericGapSections`, `GapDetailPage`, `OrganizationsPage`, `WorkPage`, `gapActivity`, `gapUpdates`, and prerendering. The current Tasks tab derives two cards from `next_step` on `dogs-map-placement-barriers` and `dogs-direct-field-work`; contact questions come from the latter. |
+| `src/data/records.json` | 53 evidence records: 5 typed `activity`, 1 detailed `field_report`, 5 preliminary `finding`, plus public sources, services, measurements, updates, and outcomes. | Activity and field-report views, location details, organization history, research, updates, work pages, gap pages, and prerendering. The October 20 planned location check is incorrectly typed `activity`, but has `evidence_status: planned_not_observed` and no `occurred_at`. |
+| `src/data/investigation-locations.json` | 10 generalized dog-investigation areas, 8 with map coordinates. Each has a source URL; 4 have `evidence_record_id`. | `DogGapExperience`, `InvestigationLocations`, `DogsLocationsMapPage`, `ActionDetailPage`, `DogGapOverview`, and `DogsInvestigationContent`. The shared Google map in `DogGapExperience` is mounted across tab changes. |
+| `src/data/investigation-map-maintenance.json` | Map source-review dates and policy. | `InvestigationLocations` and `DogsLocationsMapPage`; retain as map metadata. |
+| `src/data/orgs.json` | 11 researched organizations. `tracked` does not mean Crossover contacted them. | Organization pages, gap/action/work pages, field reports, and the working investigation. `OrganizationsPage` already filters to direct, non-planned Crossover records; this currently yields Stockton Street Dogs and Stockton Animal Services. |
+| `src/data/projects.json` | 6 proposed, funded, developing, completed, or operational improvements. | Overview/model, solutions, investigation analysis, and generic gap pages. Keep project stage distinct from delivered capacity and impact. |
+| `src/data/dogs-investigations.json` | 1 active investigation, many questions/plans, and 1 established firsthand finding. | `DogGapOverviewLanding`, `DogsInvestigationContent`, `ActionDetailPage`, `gapActivity`, and `gapWorkSummary`. The current Findings tab renders `DogsInvestigationContent` through a `work.json` entry. |
+| `src/data/dogs-research.json` | 4 source-backed research updates, 14 measurements, coverage and missing-measurement notes. | `DogGapOverview`, `DogGapOverviewLanding`, `DogsResearchContent`, `KeyFactorsPage`, `gapUpdates`, and `gapWorkSummary`. Retain as supporting analysis; do not automatically promote every update to an established finding. |
+| `src/data/gaps.json` | 5 public need records. | `App.tsx`, `DogGapExperience`, `HomePage`, `HomeLanding`, `GapDetailPage`, `GapSourcesPage`, `GapUpdatesPage`, `FieldReportPage`, `ActionModal`, `GenericGapSections`, `WorkPage`, and prerender/validation scripts. The working dog investigation still receives a `GapRecord` as its root prop. |
+| `src/data/actions.json` and `src/data/crossoverActions.ts` | 21 public action-catalog entries and 1 separate dog-spotting mission. | `actions.json`: `HomePage`, `FieldReportPage`, `GapDetailPage`, `GenericGapSections`. `crossoverActions.ts`: `DogGapExperience`, `DogGapOverviewLanding`, `ActionIndexPage`. These are not a task ledger. |
+| `src/data/stories.json` | 6 public story cards with source URLs. | `App.tsx`, `HomePage`, `HomeLanding`, `GapDetailPage`, `StoryDetailPage`, and prerendering. All six source URLs have corresponding URLs in `records.json`, though the stories' wording and evidence still need review before archiving. |
+
+The shared types in `src/types.ts` are `GapRecord`, `WorkRecord`, `DogsInvestigationData`, `EvidenceRecord`, `OrgRecord`, `CapacityProject`, `PublicActionRecord`, and `StoryRecord`. The map's `InvestigationLocation` type currently lives in `src/components/InvestigationLocations.tsx`. There is no canonical `Task`, `Activity`, or cross-view `Finding` type. In `DogGapExperience`, Activity derives from `work.activity_record_ids` while excluding `planned*` evidence; Tasks derives from `work.next_step`; Map uses location records; Findings uses the investigation/work hierarchy.
+
+## 2. Proposed canonical records
+
+Keep manually maintained JSON. Use the existing `street-dog-immediate-welfare` ID; do not create another identifier for the same investigation. Define types in a focused module such as `src/types/investigation.ts` and validate them at build time.
+
+| File and type | Required fields | Optional fields and rule |
+| --- | --- | --- |
+| `src/data/tasks.json` / `Task` | `id`, `investigation_id`, `title`, `status` (`open`, `waiting`, `done`, `cancelled`), `type`, `instructions`, `location_ids`, `organization_ids`, `basis_record_ids` | A task is an intended action. `completed_at` only for `done`; its completion must have a linked actual Activity. `waiting` means a follow-up is pending, not that an application was approved. Do not store an `activity_ids` mirror; derive linked activities from `Activity.task_id`. |
+| `src/data/activities.json` / `Activity` | `id`, `investigation_id`, `occurred_at`, `type`, `task_id` (nullable), `location_ids`, `organization_ids`, `evidence_record_ids` | Thin index of actual Crossover actions. Optional `significance` can explain relevance without copying the detailed record. Derive title, notes, and outcome from the linked evidence record where possible. A public article and a plan without an occurrence date cannot enter this collection. |
+| `src/data/findings.json` / `Finding` | `id`, `investigation_id`, `title`, `status` (`established`, `developing`, `contradicted`, `insufficient_evidence`), `statement`, `supporting_record_ids`, `contradicting_record_ids`, `limitations`, `last_reviewed_at` | Optional `related_task_ids`, `related_project_ids`, and `location_ids`. Status describes the evidence for the statement, not a color or map-pin state. An unresolved question can use `insufficient_evidence` only when its statement and evidentiary limits are explicit. |
+
+Keep `records.json` as the evidence and detailed field-report collection. Keep `investigation-locations.json` as the only coordinate source; derive its related tasks and activities by filtering their `location_ids`. Keep `orgs.json`, `projects.json`, `dogs-research.json`, and map-maintenance metadata. Avoid reverse relationship arrays in these files. The existing location `source_url` remains usable where no evidence record exists; adding a record ID requires a genuine corresponding record, not a fabricated citation.
+
+## 3. Exact initial migration mapping
+
+New IDs below are proposed stable IDs. Existing evidence IDs and dates must be copied exactly. The existing records are Crossover's self-reported documentation unless a separate source establishes more.
+
+| Existing record / fact | Proposed Task | Proposed Activity | Evidence and limits |
+| --- | --- | --- | --- |
+| Oct 7 Stockton Street Dogs application | `task-ssd-volunteer-application-2026-10-07`, `done`, organization `stockton-street-dogs` | `activity-ssd-volunteer-application-2026-10-07`, occurred Oct 7 | `crossover-2026-10-07-street-dogs-volunteer-application`. Application submitted; response was still awaited as of Oct 8. No approval or onboarding claim. |
+| Oct 12 Doggie Day Out inquiry | `task-sas-doggie-day-out-inquiry-2026-10-12`, `done`, organization `stockton-animal-services` | `activity-sas-doggie-day-out-inquiry-2026-10-12`, occurred Oct 12 | `crossover-2026-10-12-doggie-day-out-inquiry`. Email sent; no response or participation established. |
+| Oct 14 shelter visit/application | `task-sas-visit-application-2026-10-14`, `done`, organization `stockton-animal-services` | `activity-sas-visit-application-2026-10-14`, occurred Oct 14 | Link both `crossover-2026-10-14-sas-volunteer-application` and the detailed `crossover-2026-10-14-sas-first-visit` field report. The visit and application occurred; orientation and approval remain unknown. No generalized street-dog map location should be invented for the shelter visit. |
+| Oct 20 field-call records request | `task-sas-field-call-request-2026-10-20`, `done`; add `task-sas-field-call-follow-up`, `waiting` | `activity-sas-field-call-request-2026-10-20`, occurred Oct 20; no follow-up Activity yet | `crossover-2026-10-20-sas-field-call-records-request`. Request submitted. Records not received or analyzed. Follow-up task is linked to the submitted request as its basis. |
+| Oct 20 planned location check | `dogs-check-louis-park`, `open`, type `field_observation`, `location_ids: ["louis-park-pixie-woods-2026-04-06"]` | None | `crossover-2026-10-20-reported-location-check-plan` is a plan, not performed fieldwork. `cbs-2026-04-06-stockton-abandoned-dogs` supports the historical Louis Park lead, not current conditions. The plan also names the Stanislaus Street corridor as a possible second stop; retain that candidate in task instructions or create a separate task only if it becomes a distinct committed action. Confirm the proposed visit date before scheduling it. |
+
+The October 20 plan should ultimately be retyped or otherwise marked as a planning record in `records.json`; do this only after all consumers use Tasks and after confirming no completed visit was documented elsewhere. Do not infer zero dogs observed from the absence of a report. Completed application/inquiry tasks describe completion of those narrow actions, not success of the underlying care program.
+
+First Findings migration candidates: migrate `shelter-expansion-construction-observed-2026-10-14` from `dogs-investigations.json` as `established`, citing `crossover-2026-10-14-sas-first-visit`. Add `finding-street-population-unknown` as `insufficient_evidence`, citing `sas-2024-kennel-statistics`: intake is a period flow, not a current street-population count. Review the five October 8 preliminary barrier records and the four research updates individually; keep hypotheses `developing` or as open questions, and do not turn them into established findings merely because their `record_type` says `finding`.
+
+## 4. Planned file and route changes (not performed)
+
+1. **Add:** `tasks.json`, `activities.json`, `findings.json`, their focused TypeScript types, and a cross-reference validator. Do not add duplicate coordinates, report narratives, or organization contact histories.
+2. **Change:** `DogGapExperience` Tasks/Activity/Findings to read these collections. Map continues reading `investigation-locations.json`, with related task/activity links derived from IDs; keep the shared map mounted and its sheet handlers intact. Update `OrganizationsPage` to derive engaged organizations and dated history from Activities plus evidence records. Review `CrossoverLocationDetails` for related tasks and actual activities.
+3. **Preserve and refine:** `records.json`, locations, organizations, projects, research, and map-maintenance data. Move the planned check out of actual Activity semantics. Fill location evidence links only when a corresponding source record exists. Keep project proposals separate from verified operations and outcomes.
+4. **Retire after migration:** public Stories screens/routes (`StoryDetailPage`, story portions of `HomePage`/`HomeLanding`/`GapDetailPage`), public Actions screens/routes (`ActionIndexPage`, `ActionModal`, public action catalog, `crossoverActions.ts`), old Work pages/routes (`WorkPage`, work-derived tabs), and gap-page navigation no longer needed by the working investigation. Reconcile `App.tsx`, `PublicSiteNav`, `AboutPage` action CTA, `src/types.ts`, and the prerender/AI-readability/tab/redirect validators. Preserve `/about/`, report/source URLs, and any useful reference pages.
+5. **Delete only after route replacement and verification:** unused legacy data, interfaces, components, and CSS. Preserve source URLs and historical evidence in `records.json`; all six Stories have matching source URLs there, but check claims and imagery before removing the story data. Map each bookmarked `/stories/`, `/action/`, `/work/`, and legacy `/reality/` URL to a relevant investigation, source, report, or archive destination rather than a blanket redirect.
+
+## 5. Validation rules
+
+- IDs are unique within each collection; `investigation_id` resolves to the existing investigation; every task/activity/finding location, organization, project, task, and evidence ID resolves to its canonical collection.
+- Every `Activity` has a real `occurred_at`, at least one existing Crossover evidence record, and no `planned_not_observed` evidence as proof of occurrence. Its date agrees with the primary evidence record. `task_id` may be null, but if set it resolves to a task in the same investigation.
+- A `done` Task has a linked actual Activity with evidence; `open` and `waiting` Tasks do not assert a completed visit or approved application. Keep completion date separate from outcome/approval.
+- Every Finding has at least one supporting or contradicting record, a review date, a stated limitation, and a status that matches the evidence. `established` requires evidence sufficient for its exact claim. Missing contradictory evidence means “none recorded,” not “none exists.”
+- Coordinates occur only in `investigation-locations.json`; location-linked Tasks and Activities do not create new pins. A no-sighting visit does not change a location's historical source or automatically clear it.
+- Organization engagement requires an actual linked Activity, not `tracked: true`, a public source, or a proposed task. Projects retain their separate proposed/operational/verified-capacity distinctions.
+- Run cross-reference validation, TypeScript, production build, route redirects/prerender checks, and 412px/desktop map-and-sheet interaction tests before deleting any legacy consumer.
+
+## 6. Recommended implementation order
+
+1. Freeze the IDs and verify source records, especially the five October actions/plans and the existing field report. Add schemas and validation first.
+2. Add the three JSON collections with only the defensible initial records above. Audit the disputed October 20 visit date before any completion entry.
+3. Switch Tasks, Activity, Findings, location details, and Organizations to canonical ID joins while keeping the current map component mounted. Test task-to-location-to-evidence navigation and sheet dragging.
+4. Replace legacy public routes one group at a time, with explicit redirects and preserved source/report links. Update prerendering and validators alongside each route change.
+5. Only then remove unused old data/code/CSS. Keep a restorable Git checkpoint and run the full build and browser checks before cleanup.

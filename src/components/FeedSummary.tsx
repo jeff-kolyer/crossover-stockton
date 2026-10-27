@@ -1,6 +1,6 @@
-import { CheckCircle2, ChevronLeft, ChevronRight, ClipboardCheck, ExternalLink, HandHeart, MapPin, Phone, Route, X } from "lucide-react";
+
 import { FAMILY_LABELS } from "../constants";
-import type { ActionKind, ActionOption, CivicSource, FeedRecord, OutcomeEvent, ResourceMatch, TagDefinition } from "../types";
+import type { ActionOption, CivicSource, FeedRecord, OutcomeEvent, ResourceMatch, TagDefinition } from "../types";
 import { formatTimeLabel, getRecordTags } from "../lib/utils";
 
 interface FeedSummaryProps {
@@ -44,13 +44,13 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
     <section className="detail-pane">
       <div className="detail-nav-row">
         <button className="back-button" type="button" onClick={onBack}>
-          <ChevronLeft size={16} />
+          
           Back to feed
         </button>
         {sequence && sequence.total > 1 && (
           <nav className="detail-sequence-inline" aria-label="Record navigation">
             <button type="button" onClick={() => sequence.previous && sequence.onNavigate(sequence.previous)} disabled={!sequence.previous}>
-              <ChevronLeft size={16} />
+              
               Previous
             </button>
             <span>
@@ -58,13 +58,11 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
             </span>
             <button type="button" onClick={() => sequence.next && sequence.onNavigate(sequence.next)} disabled={!sequence.next}>
               Next
-              <ChevronRight size={16} />
+              
             </button>
           </nav>
         )}
-        <button className="detail-close-button" type="button" onClick={onBack} aria-label="Close detail">
-          <X size={18} />
-        </button>
+        <button className="detail-close-button" type="button" onClick={onBack} aria-label="Close detail">Close</button>
       </div>
 
       <div className="detail-content">
@@ -136,7 +134,7 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
         <section className="detail-section action-section">
           <h3>Recommended next action</h3>
           <button className={`recommended-action is-${recommendedAction.kind}`} type="button" onClick={() => onRecordAction?.(record, `Task taken: ${recommendedAction.label}`, recommendedAction.summary)}>
-            <ActionIcon kind={recommendedAction.kind} />
+            
             <span>
               <strong>{recommendedAction.label}</strong>
               <span className="crossover-body">{recommendedAction.summary}</span>
@@ -173,7 +171,7 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
             <div className="outcome-list">
               {outcomes.map((outcome) => (
                 <div className="outcome-row" key={outcome.id}>
-                  <CheckCircle2 size={17} />
+                  
                   <span>
                     <strong>{outcome.label}</strong>
                     {outcome.note && <span className="crossover-body">{outcome.note}</span>}
@@ -215,7 +213,7 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
         <section className="detail-section">
           <h3>Location</h3>
           <p>
-            <MapPin size={16} />
+            
             {record.location.label ?? record.location.address}
           </p>
         </section>
@@ -243,7 +241,7 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
                 {source.publisher && <span>{source.publisher}</span>}
                 {source.type && <span>{source.type}</span>}
               </div>
-              {source.url && <ExternalLink size={15} />}
+              
             </div>
           ))}
         </section>
@@ -263,11 +261,6 @@ export function FeedSummary({ record, tagsById, sources, relatedRecords, onBack,
       </div>
     </section>
   );
-}
-
-function ActionIcon({ kind }: { kind: ActionKind }) {
-  const Icon = kind === "call" ? Phone : kind === "ride" ? Route : kind === "verify" ? ClipboardCheck : HandHeart;
-  return <Icon size={19} />;
 }
 
 function inferStatus(record: FeedRecord) {

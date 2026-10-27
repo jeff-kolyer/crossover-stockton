@@ -1,8 +1,4 @@
-import {
-  ArrowLeft,
-  ExternalLink,
-  FileText,
-} from "lucide-react";
+
 import gapsData from "../data/gaps.json";
 import { gapUpdateHref, gapUpdates } from "../lib/gapUpdates";
 import { navigateInternalLink } from "../lib/internalLink";
@@ -33,7 +29,7 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpe
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <section className="gap-history-header">
           <button className="gap-history-back" type="button" onClick={() => onNavigate("reality")}>
-            <ArrowLeft size={16} /> Back to needs
+             Back to needs
           </button>
           <h1>Updates</h1>
           <p>This gap record may have moved, been retired, or not been added to the public data yet.</p>
@@ -49,9 +45,8 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpe
 
       <section className="gap-history-header gap-specific-history-header">
         <button className="gap-history-back" type="button" onClick={() => onOpenGap(gap.slug)}>
-          <ArrowLeft size={16} /> Back to gap
+           Back to gap
         </button>
-        <span className="gap-history-kicker">Gap updates</span>
         <h1>{gap.title}</h1>
         <p>Reported developments, Crossover activity where available, and what remains to be checked about this potential need.</p>
       </section>
@@ -83,10 +78,10 @@ export function GapUpdatesPage({ slug, onNavigate, onOpenAbout, onOpenGap, onOpe
                         ? (event) => navigateInternalLink(event, () => onOpenWork(destination.id, destination.anchor))
                         : undefined}
                   >
-                    {update.linkLabel} <ExternalLink size={15} />
+                    {update.linkLabel} 
                   </a>
                 ) : (
-                  <small><FileText size={15} /> Source link unavailable</small>
+                  <small> Source link unavailable</small>
                 )}
               </article>;
             })}

@@ -1,0 +1,339 @@
+/* Layout for public reference pages. The Work workspace and homepage are separate. */
+
+html:has(.public-site) {
+  scrollbar-gutter: stable;
+}
+
+.public-site .public-primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 45px;
+  border: 1px solid #1f6b34;
+  border-radius: 6px;
+  background: #1f6b34;
+  padding: 0 17px;
+  box-shadow: none;
+  color: #fff;
+  font: 700 .9rem/1.5 Inter, Roboto, Arial, sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.public-site .public-primary-action:hover {
+  border-color: #17562a;
+  background: #17562a;
+}
+
+.public-site .public-primary-action:focus-visible {
+  outline: 3px solid #2b7749;
+  outline-offset: 3px;
+}
+
+.is-section-page .public-hero-image,
+.is-section-page .public-hero-shade {
+  display: none;
+}
+
+.is-section-page .public-hero-copy,
+.is-section-page .public-band,
+.action-index-page .action-index-canvas,
+.action-detail-page .action-detail-canvas,
+.story-detail-page .story-detail-shell,
+.gap-updates-page > section {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 24px 32px;
+}
+
+.is-section-page .public-hero-copy {
+  position: static;
+}
+
+.is-section-page .public-hero-copy h1,
+.about-simple-content h1,
+.gap-reference-article h1,
+.action-index-intro h1,
+.action-detail-intro h1,
+.story-detail-shell h1,
+.gap-history-header h1,
+.organizations-page .crossover-index-body > h1 {
+  font-size: 28px;
+  line-height: 1.25;
+}
+
+.is-section-page .public-hero-copy h1,
+.is-section-page .public-hero-copy p {
+  max-width: 760px;
+}
+
+.is-section-page .public-band {
+  padding-top: 8px;
+}
+
+.is-section-page .section-intro {
+  max-width: 760px;
+  margin-bottom: 24px;
+}
+
+:is(.about-simple, .gap-reference-page) .public-entry,
+.is-reality-page .gap-card,
+.is-connection-page .story-card,
+.action-index-page .action-index-feature,
+.story-detail-page .story-opening {
+  display: grid;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  gap: 24px;
+  align-items: start;
+}
+
+:is(.about-simple, .gap-reference-page) .public-entry > *,
+.is-reality-page .gap-card > *,
+.is-connection-page .story-card > *,
+.action-index-page .action-index-feature > *,
+.story-detail-page .story-opening > * {
+  min-width: 0;
+}
+
+:is(.about-simple, .gap-reference-page) .public-entry img,
+.is-reality-page .gap-card img,
+.is-connection-page .story-card img,
+.action-index-page .action-index-feature img,
+.story-detail-page .story-opening img,
+.gap-reference-page .gap-reference-lead img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.is-reality-page .gap-card-grid,
+.is-connection-page .story-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.is-reality-page .gap-card {
+  column-gap: 24px;
+  row-gap: 4px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #dadce0;
+  text-decoration: none;
+}
+
+.is-reality-page .gap-card-image-frame {
+  grid-column: 1;
+  grid-row: 1 / span 4;
+}
+
+.is-reality-page .gap-level,
+.is-reality-page .gap-card-body,
+.is-reality-page .gap-card-meta,
+.is-reality-page .gap-card-action {
+  grid-column: 2;
+}
+
+.is-reality-page .gap-card-body h3,
+.is-connection-page .story-card h3 {
+  margin-bottom: 4px;
+}
+
+.is-reality-page .gap-card-body p,
+.is-connection-page .story-card p {
+  margin-bottom: 8px;
+}
+
+.is-reality-page .gap-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.is-reality-page .gap-card-action small,
+.is-reality-page .gap-card-action strong {
+  display: block;
+}
+
+.is-connection-page .story-card {
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  border: 0;
+  background: none;
+  padding: 0 0 24px;
+  border-bottom: 1px solid #dadce0;
+}
+
+.about-simple .about-simple-content,
+.gap-reference-page .gap-reference-article {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 24px 32px;
+}
+
+.about-simple .about-simple-section {
+  max-width: 760px;
+  margin: 0 0 40px;
+}
+
+.about-simple .about-simple-philosophy {
+  border-bottom: 1px solid #dadce0;
+  padding-bottom: 32px;
+  margin-bottom: 32px;
+}
+
+.about-simple .about-simple-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.gap-reference-page .gap-reference-article > section {
+  max-width: 760px;
+  margin: 0 auto 40px;
+}
+
+.about-simple .about-simple-ideas {
+  display: grid;
+  gap: 24px;
+}
+
+.about-simple .about-simple-wide-image {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+}
+
+.about-simple .about-simple-founder-image {
+  aspect-ratio: 4 / 3;
+  object-position: center top;
+}
+
+.gap-reference-page .gap-reference-article > nav {
+  margin-bottom: 24px;
+}
+
+.gap-reference-page .gap-reference-lead {
+  margin-bottom: 40px;
+}
+
+.action-index-page .action-index-feature {
+  margin-bottom: 32px;
+}
+
+.action-index-page .action-index-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.action-index-page .action-index-status dd {
+  margin: 0;
+}
+
+.story-detail-page .story-opening img {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.story-detail-page .story-opening-copy {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.story-detail-page .story-detail-shell > :not(.story-opening),
+.organizations-page .crossover-index-body {
+  max-width: 760px;
+  margin-inline: auto;
+}
+
+.story-detail-page .story-detail-shell > section,
+.organizations-page .crossover-index-body > article {
+  margin-bottom: 32px;
+}
+
+.gap-updates-page .gap-history-feed-list {
+  display: grid;
+  gap: 24px;
+}
+
+.gap-updates-page .gap-history-header {
+  padding-bottom: 0;
+}
+
+.gap-updates-page .gap-history-header p {
+  margin-bottom: 0;
+}
+
+.gap-updates-page .gap-history-timeline {
+  padding-top: 24px;
+}
+
+.gap-updates-page .gap-history-feed-meta {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.gap-updates-page .gap-history-item h2 {
+  margin-bottom: 8px;
+}
+
+.gap-updates-page .gap-history-item + .gap-history-item {
+  border-top: 1px solid #dadce0;
+  padding-top: 24px;
+}
+
+.gap-updates-page .gap-history-related-gaps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+
+.gap-updates-page .gap-history-related-gaps + .gap-history-actions {
+  margin-top: 5px;
+}
+
+@media (max-width: 720px) {
+  :is(.about-simple, .gap-reference-page) .public-entry,
+  .is-reality-page .gap-card,
+  .is-connection-page .story-card,
+  .action-index-page .action-index-feature,
+  .story-detail-page .story-opening {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .is-reality-page .gap-card-image-frame,
+  .is-reality-page .gap-level,
+  .is-reality-page .gap-card-body,
+  .is-reality-page .gap-card-meta,
+  .is-reality-page .gap-card-action,
+  .story-detail-page .story-opening img,
+  .story-detail-page .story-opening-copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .story-detail-page .story-opening img {
+    grid-row: 1;
+  }
+
+  .is-section-page .public-hero-copy,
+  .is-section-page .public-band,
+  .action-index-page .action-index-canvas,
+  .action-detail-page .action-detail-canvas,
+  .story-detail-page .story-detail-shell,
+  .gap-updates-page > section,
+  .about-simple .about-simple-content,
+  .gap-reference-page .gap-reference-article {
+    padding: 20px;
+  }
+
+}

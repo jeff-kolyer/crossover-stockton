@@ -1,4 +1,4 @@
-import { ArrowLeft, ExternalLink, MapPin } from "lucide-react";
+
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
@@ -36,7 +36,7 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
       <PublicSiteNav active="reality" onNavigate={onNavigate} variant="dark" />
 
       <div className="work-page-shell report-shell">
-        <button className="gap-history-back" type="button" onClick={() => relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? onOpenInvestigationReports() : report?.work_id ? onOpenWork(report.work_id) : onNavigate("reality")}><ArrowLeft size={16} /> {relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? "Back to reports" : report?.work_id ? "Back to activity" : "Back to needs"}</button>
+        <button className="gap-history-back" type="button" onClick={() => relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? onOpenInvestigationReports() : report?.work_id ? onOpenWork(report.work_id) : onNavigate("reality")}> {relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? "Back to reports" : report?.work_id ? "Back to activity" : "Back to needs"}</button>
         {!report ? (
           <div className="work-page-header"><span className="work-page-kicker">Field report</span><h1>Field report not found</h1><p>This report ID does not match a published field report.</p></div>
         ) : (
@@ -52,10 +52,10 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
               {report.sections?.map((section) => <section key={section.title}><h2>{section.title}</h2>{section.body.split("\n\n").map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</section>)}
             </div>
             {(report.visit_notes?.length || report.map_url) && <section className="work-content-section gap-refined-card report-visit" aria-labelledby="report-visit-title">
-              <div className="work-content-heading"><MapPin size={20} /><h2 id="report-visit-title">Visiting {relatedOrgs.length === 1 ? relatedOrgs[0].name : report.location?.split(",")[0] ?? "this location"}</h2></div>
+              <div className="work-content-heading"><h2 id="report-visit-title">Visiting {relatedOrgs.length === 1 ? relatedOrgs[0].name : report.location?.split(",")[0] ?? "this location"}</h2></div>
               {report.location && <p className="gap-mobile-body">{report.location}</p>}
               {report.visit_notes?.length ? <dl className="report-visit-notes">{report.visit_notes.map((note) => <div key={note.title}><dt>{note.title}</dt><dd>{note.body}</dd></div>)}</dl> : null}
-              {(report.map_url || visitWebsite) && <div className="report-visit-links">{report.map_url && <a className="gap-history-back" href={report.map_url} target="_blank" rel="noreferrer">View location in Google Maps <ExternalLink size={15} /></a>}{visitWebsite && <a className="gap-history-back" href={visitWebsite} target="_blank" rel="noreferrer">Shelter website <ExternalLink size={15} /></a>}</div>}
+              {(report.map_url || visitWebsite) && <div className="report-visit-links">{report.map_url && <a className="gap-history-back" href={report.map_url} target="_blank" rel="noreferrer">View location in OpenStreetMap </a>}{visitWebsite && <a className="gap-history-back" href={visitWebsite} target="_blank" rel="noreferrer">Shelter website </a>}</div>}
               <small className="report-visit-context">Firsthand visitor observations · {formatDate(report.occurred_at)}. Parking, entry procedures, and construction conditions may change.</small>
             </section>}
             <div className="report-related">

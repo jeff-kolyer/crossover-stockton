@@ -1,24 +1,14 @@
 import { useEffect, type ReactNode } from "react";
-import { ArrowRight, ChevronDown, HeartHandshake, House, MapPin, PhoneCall, Search, Stethoscope, Users, type LucideIcon } from "lucide-react";
 import research from "../data/dogs-research.json";
 import { dogCareFactors, type DogCareFactor } from "../lib/dogCareScenario";
 import { navigateInternalLink } from "../lib/internalLink";
 import type { GapRecord } from "../types";
 import { InvestigationPageHeader } from "./InvestigationPageHeader";
-import "./KeyFactorsPage.css";
 
 type Destination = "research" | "improvements" | "ways-to-help" | "our-findings";
 type FactorDetail = { means: string; evidence: string; unknown: string; change: string; links: Destination[]; map?: boolean };
 
 const measurement = (id: string) => research.measurements.find((item) => item.id === id)?.value.toLocaleString("en-US") ?? "Unknown";
-const dogFactorIcons: Record<DogCareFactor, LucideIcon> = {
-  shelter: House,
-  foster: HeartHandshake,
-  response: PhoneCall,
-  reporting: MapPin,
-  prevention: Stethoscope,
-  placement: Users,
-};
 const dogDetails: Record<DogCareFactor, FactorDetail> = {
   shelter: {
     means: "Usable shelter space and the ability to hold dogs safely while they receive care or wait for placement.",
@@ -83,7 +73,7 @@ export function KeyFactorsPage({ gap, onOpenSection, onOpenMap, model }: { gap: 
     return () => window.removeEventListener("hashchange", reveal);
   }, [gap.slug]);
 
-  const sectionLink = (destination: Destination) => <a key={destination} href={`/reality/${gap.slug}/${destination}/`} onClick={(event) => navigateInternalLink(event, () => onOpenSection(destination))}>{linkNames[destination]} <ArrowRight size={14} aria-hidden="true" /></a>;
+  const sectionLink = (destination: Destination) => <a key={destination} href={`/reality/${gap.slug}/${destination}/`} onClick={(event) => navigateInternalLink(event, () => onOpenSection(destination))}>{linkNames[destination]} </a>;
 
   return <div className={`dog-gap-tab-content key-factors-page${dogs ? " is-investigation-subpage" : ""}`}>
     {dogs ? <InvestigationPageHeader id="key-factors-intro" title="Key Factors" description="What affects whether dogs reach care? Explore the six parts of the care system, what available evidence tells us about each, and what could improve them." /> : <div className="dog-gap-tab-heading" id="key-factors-intro">
@@ -97,19 +87,18 @@ export function KeyFactorsPage({ gap, onOpenSection, onOpenMap, model }: { gap: 
     <div className="key-factors-list" id="key-factors-list">
       {dogs ? dogCareFactors.map((factor) => {
         const detail = dogDetails[factor.key];
-        const Icon = dogFactorIcons[factor.key];
         return <details className="dog-gap-card key-factor" id={`factor-${factor.key}`} key={factor.key}>
-          <summary><span className="key-factor-main"><Icon className="key-factor-icon" size={22} strokeWidth={1.8} aria-hidden="true" /><span className="key-factor-copy"><strong>{factor.label}</strong><small>{factor.description}</small></span></span><ChevronDown size={20} aria-hidden="true" /></summary>
+          <summary><span className="key-factor-main"><span className="key-factor-copy"><strong>{factor.label}</strong><small>{factor.description}</small></span></span></summary>
           <div className="key-factor-details">
             <div><h3>What it means</h3><p>{detail.means}</p></div>
             <div><h3>What the evidence shows</h3><p>{detail.evidence}</p></div>
             <div><h3>What we don't know</h3><p>{detail.unknown}</p></div>
             <div><h3>What could change it</h3><p>{detail.change}</p></div>
-            <nav aria-label={`Related pages for ${factor.label}`}>{detail.links.map(sectionLink)}{detail.map && <a href="/reality/too-many-dogs-still-lack-safe-placement/dogs-locations-map/" onClick={(event) => navigateInternalLink(event, onOpenMap)}>Reported locations map <ArrowRight size={14} aria-hidden="true" /></a>}</nav>
+            <nav aria-label={`Related pages for ${factor.label}`}>{detail.links.map(sectionLink)}{detail.map && <a href="/work/dogs/map/" onClick={(event) => navigateInternalLink(event, onOpenMap)}>Reported locations map </a>}</nav>
           </div>
         </details>;
       }) : gap.contributing_factors.map((factor, index) => <details className="dog-gap-card key-factor" id={`factor-${index + 1}`} key={factor}>
-        <summary><span className="key-factor-main"><Search className="key-factor-icon" size={22} strokeWidth={1.8} aria-hidden="true" /><span className="key-factor-copy"><strong>{factor}</strong><small>A reported barrier to examine</small></span></span><ChevronDown size={20} aria-hidden="true" /></summary>
+        <summary><span className="key-factor-main"><span className="key-factor-copy"><strong>{factor}</strong><small>A reported barrier to examine</small></span></span></summary>
         <div className="key-factor-details">
           <div><h3>What it means</h3><p>This factor is named in the current need record as something that may affect access or outcomes.</p></div>
           <div><h3>What the evidence shows</h3><p>The public record identifies this possible barrier. The Research page keeps the underlying sources and their dates together.</p></div>

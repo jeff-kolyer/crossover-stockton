@@ -1,25 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import {
-  AlertTriangle,
-  ArrowLeft,
-  ArrowRight,
-  CalendarDays,
-  Check,
-  ChevronDown,
-  CircleAlert,
-  Home,
-  MapPin,
-  Search,
-  Users,
-} from "lucide-react";
+import "../styles/home.css";
+import { PublicPrimaryAction } from "./PublicPrimaryAction";
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import storiesData from "../data/stories.json";
-import { getActionIcon } from "../lib/actionIcons";
 import { latestGapActivity } from "../lib/gapActivity";
-import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
+import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
+import { PublicFooter } from "./PublicFooter";
 import { HomeLanding } from "./HomeLanding";
 import type { ActionTag, GapRecord, PublicActionRecord, StoryRecord } from "../types";
 
@@ -43,8 +32,6 @@ const actionHeroImage = "/images/action/action_banner.jpg";
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
 const heroImage = "/images/home/home-hero-wide.jpg";
 const realityHeroImage = "/images/reality/reality_banner.jpg";
-const logoDark = "/images/logo_dark.webp";
-const logoLight = "/images/logo_light.webp";
 
 const pageCopy = {
   home: {
@@ -54,12 +41,12 @@ const pageCopy = {
   },
   reality: {
     eyebrow: "Reality",
-    title: "Needs we're investigating",
+    title: "Needs in Stockton",
     text: "AI surfaced these possibilities through public information. Crossover is investigating street dog care first; the assumptions and severity of the other needs have not been independently established.",
   },
   connection: {
     eyebrow: "Connection",
-    title: "Signs of being",
+    title: "Signs of Being",
     text: "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations.",
   },
   action: {
@@ -131,7 +118,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
   const navigation = <PublicSiteNav active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant={isHome ? "dark" : "overlay"} />;
 
   return (
-    <main className={`public-home ${isHome ? "is-home-page" : "is-section-page"} is-${page}-page`}>
+    <main className={`public-site public-home ${isHome ? "crossover-home is-home-page" : "is-section-page"} is-${page}-page`}>
       {isHome && navigation}
       <section className={`public-hero ${isHome ? "" : "is-compact"}`}>
         {isHome ? (
@@ -146,12 +133,11 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         {!isHome && navigation}
 
         <div className="public-hero-copy">
-          {!isHome && <span className="public-page-eyebrow">{copy.eyebrow}</span>}
           <h1>{isHome ? <>See clearly.<br className="home-hero-title-break" /> Act locally.</> : copy.title}</h1>
           <p>{copy.text}</p>
           {isHome && (
             <div className="hero-action-row">
-              <a className="hero-investigation-button" href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>Find out how you can help <ArrowRight size={18} aria-hidden="true" /></a>
+              <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>Find out how you can help</PublicPrimaryAction>
             </div>
           )}
         </div>
@@ -161,10 +147,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
 
       {page === "reality" && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">
-          <p>AI surfaced through public information</p>
-          <h2>Potential unmet needs</h2>
-          <span>AI has surfaced potential unmet needs in Stockton through public information. We have not verified every assumption or determined each need's severity.</span>
-          <small className="gap-status-guide"><span><InvestigationStatusIcon status="investigating" size={16} /> Investigating: active Crossover work.</span><span><InvestigationStatusIcon status="identified" size={16} /> Identified: not yet investigated by Crossover.</span></small>
+          <small className="gap-status-guide"><span> Investigating: active Crossover work.</span><span> Identified: not yet investigated by Crossover.</span></small>
         </div>
         <div className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
@@ -190,7 +173,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                   />
                 </span>
               )}
-              <span className="gap-level investigation-status-pill"><InvestigationStatusIcon status={gap.investigation_status} size={14} /> {investigationStatusLabel(gap.investigation_status)}</span>
+              <span className="gap-level investigation-status-pill"> {investigationStatusLabel(gap.investigation_status)}</span>
               <span className="gap-card-body">
                 <span className="gap-card-copy">
                   <h3>{gap.title}</h3>
@@ -198,8 +181,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                 </span>
               </span>
               <span className="gap-card-meta">
-                <span><Users size={15} /> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
-                {latestActivity && <span><CalendarDays size={14} /> {latestActivity.kind === "work" ? "Work updated" : "Assessment updated"} {formatShortDate(latestActivity.date)}</span>}
+                <span> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
+                {latestActivity && <span> {latestActivity.kind === "work" ? "Work updated" : "Assessment updated"} {formatShortDate(latestActivity.date)}</span>}
               </span>
               <span className="gap-card-action">
                 <span>
@@ -212,35 +195,26 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
           })}
         </div>
         <button className="center-link" type="button" onClick={() => onNavigate("home")}>
-          <ArrowLeft size={16} /> Back to home
+           Back to home
         </button>
       </section>}
 
       {page === "connection" && <section id="connection" className="public-band public-story-band">
-        <div className="section-intro">
-          <p>What Reality Looks Like</p>
-          <h2>Signs of Being</h2>
-          <span>Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations.</span>
-          <button type="button" onClick={() => onNavigate("action")}>
-            Take an action <ArrowRight size={16} />
-          </button>
-        </div>
         <div className="story-grid">
           {visibleStories.map((story, index) => (
-            <button className="story-card" key={story.id} type="button" onClick={() => onOpenStory(story.slug)}>
+            <a className="story-card" key={story.id} href={`/stories/${story.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenStory(story.slug))}>
               <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading={page === "connection" && index < 3 ? "eager" : "lazy"} decoding="sync" />
-              <span>Fruit</span>
               <div>
                 <h3>{story.title}</h3>
                 <p>{story.summary}</p>
                 <small>{formatDate(story.published_at) || "Story"}</small>
               </div>
-            </button>
+            </a>
           ))}
         </div>
         {page === "connection" && (
           <button className="center-link" type="button" onClick={() => onNavigate("home")}>
-            <ArrowLeft size={16} /> Back to home
+             Back to home
           </button>
         )}
       </section>}
@@ -289,7 +263,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                   onClick={() => setRoleMenuOpen((open) => !open)}
                 >
                   <span>{selectedRole || "All roles"}</span>
-                  <ChevronDown size={20} aria-hidden="true" />
+                  
                 </button>
                 {roleMenuOpen && <div className="action-role-menu" id="action-role-options" role="group" aria-label="Role options">
                   {["", ...availableRoles].map((role) => (
@@ -304,7 +278,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                         roleTriggerRef.current?.focus();
                       }}
                     >
-                      <Check size={18} aria-hidden="true" />
+                      
                       <span>{role || "All roles"}</span>
                     </button>
                   ))}
@@ -321,7 +295,6 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
           )}
           <div className="action-grid">
             {orderedActions.map((action) => {
-              const Icon = getActionIcon(action);
               return (
               <button
                 className="action-card"
@@ -329,7 +302,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                 type="button"
                 onClick={() => onOpenAction(action)}
               >
-                <Icon size={24} />
+                
                 <strong>{action.title}</strong>
                 <p>{action.summary}</p>
                 <span className="action-meta">
@@ -337,39 +310,18 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                   {action.participation_roles?.length ? <span>{action.participation_roles.map((role) => `${role.name} · ${role.state}`).join(" / ")}</span> : null}
                   {[action.estimated_time || action.when_label, action.availability_status || action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
                 </span>
-                <ArrowRight size={17} />
+                
               </button>
               );
             })}
           </div>
         </div>
         <button className="center-link" type="button" onClick={() => onNavigate("home")}>
-          <ArrowLeft size={16} /> Back to home
+           Back to home
         </button>
       </section>}
 
-      <footer className="public-footer">
-        <div className="footer-logo" aria-label="Crossover">
-          <picture>
-            <source media="(max-width: 760px)" srcSet={logoDark} />
-            <img src={logoLight} alt="" />
-          </picture>
-          <span>Crossover</span>
-        </div>
-        <span>© 2026 Crossover Stockton</span>
-        <p>Reality. Connection. Action.</p>
-        <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}>Needs</button>
-        <button type="button" className={page === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}>Action</button>
-        <button type="button" onClick={onOpenAbout}>About</button>
-      </footer>
-
-      <nav className="public-bottom-nav" aria-label="Mobile primary">
-        <button type="button" className={page === "home" ? "is-active" : ""} onClick={() => onNavigate("home")}><Home size={21} /><span>Home</span></button>
-        <button type="button" className={page === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}><Search size={21} /><span>Needs</span></button>
-        <button type="button" className={page === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}><MapPin size={21} /><span>Stories</span></button>
-        <button type="button" className={page === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}><AlertTriangle size={21} /><span>Action</span></button>
-        <button type="button" onClick={onOpenAbout}><CircleAlert size={21} /><span>About</span></button>
-      </nav>
+      <PublicFooter active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
     </main>
   );
 }

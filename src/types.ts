@@ -474,6 +474,7 @@ export interface SourceRecord {
 
 export interface EvidenceRecord {
   id: string;
+  investigation_id?: string;
   gap_ids: string[];
   organization_ids: string[];
   published_at?: string | null;

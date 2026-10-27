@@ -1,10 +1,10 @@
-import { ClipboardList, FileText, Search, type LucideIcon } from "lucide-react";
+
 import researchData from "../data/dogs-research.json";
 import recordsData from "../data/records.json";
 import workData from "../data/work.json";
 import type { DogsResearchBaseline, EvidenceRecord, GapRecord, WorkRecord } from "../types";
 import { sourceLinkLabel } from "./sourceLinks";
-import { updateIcon, updateTypeLabel } from "./updatePresentation";
+import { updateTypeLabel } from "./updatePresentation";
 import { dogGapDestinationHref, legacyDogWorkDestination } from "./dogGapLegacy";
 
 export type GapUpdateDestination =
@@ -19,7 +19,6 @@ export interface GapUpdateEntry {
   title: string;
   summary: string;
   typeLabel: string;
-  Icon: LucideIcon;
   crossover: boolean;
   destination?: GapUpdateDestination;
   linkLabel?: string;
@@ -51,7 +50,6 @@ export function gapUpdates(gap: GapRecord): GapUpdateEntry[] {
     title: finding.short_update ?? finding.finding,
     summary: finding.what_changed,
     typeLabel: "Crossover · Research",
-    Icon: FileText,
     crossover: true,
     destination: { kind: "work", id: research.work_id, anchor: finding.id },
     linkLabel: "Read research finding",
@@ -94,7 +92,6 @@ function recordEntry(record: EvidenceRecord): GapUpdateEntry | null {
     title: planned ? "Field observation plan recorded" : record.work_update_label || record.title,
     summary: `${record.summary}${status}`,
     typeLabel,
-    Icon: crossover ? planned ? Search : record.record_type === "field_report" ? ClipboardList : record.record_type === "activity" ? ClipboardList : updateIcon(record) : updateIcon(record),
     crossover,
     destination,
     linkLabel: destination?.kind === "report" ? "Read field report"
@@ -119,6 +116,9 @@ export function gapUpdateHref(destination?: GapUpdateDestination) {
   if (!destination) return undefined;
   if (destination.kind === "external") return destination.url;
   if (destination.kind === "report") return `/reports/${destination.id}/`;
+  if (destination.id === "dogs-direct-field-work") return `/work/dogs/activity/#${encodeURIComponent(destination.anchor)}`;
+  if (destination.id === "dogs-map-placement-barriers") return "/work/dogs/findings/";
+  if (destination.id === "dogs-locations-map") return "/work/dogs/map/";
   const dogDestination = legacyDogWorkDestination(destination.id, destination.anchor);
   if (dogDestination) return dogGapDestinationHref(dogDestination);
   return `/work/${destination.id}/#${destination.anchor}`;

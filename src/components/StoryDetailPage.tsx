@@ -1,22 +1,9 @@
-import {
-  ArrowLeft,
-  ArrowRight,
-  Building2,
-  CheckCircle2,
-  CircleAlert,
-  ExternalLink,
-  FileText,
-  HandHeart,
-  Heart,
-  Home,
-  MapPin,
-  PawPrint,
-  Search,
-  Sprout,
-  UserRound,
-} from "lucide-react";
+
 import storiesData from "../data/stories.json";
+import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
+import { PublicFooter } from "./PublicFooter";
+import { PublicPrimaryAction } from "./PublicPrimaryAction";
 import type { StoryEvidence, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -27,8 +14,6 @@ interface StoryDetailPageProps {
 }
 
 const stories = storiesData as StoryRecord[];
-const logoDark = "/images/logo_dark.webp";
-const logoLight = "/images/logo_light.webp";
 const fallbackImage = "/images/connection/connection_banner.jpg";
 
 export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
@@ -36,16 +21,13 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
 
   if (!story) {
     return (
-      <main className="story-detail-page public-home">
+      <main className="public-site story-detail-page public-home">
         <PublicStoryNav onNavigate={onNavigate} />
         <section className="story-detail-shell story-not-found">
-          <button className="story-kicker" type="button" onClick={() => onNavigate("connection")}>Signs of Being</button>
           <h1>We could not find that story.</h1>
           <p>This story may have moved, been retired, or not been added to the public data yet.</p>
-          <button className="story-back-link" type="button" onClick={() => onNavigate("connection")}>
-            <ArrowLeft size={16} /> Back to stories
-          </button>
         </section>
+        <PublicFooter active="connection" onNavigate={onNavigate} />
       </main>
     );
   }
@@ -54,13 +36,12 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
   const image = story.image || fallbackImage;
 
   return (
-    <main className="story-detail-page public-home">
+    <main className="public-site story-detail-page public-home">
       <PublicStoryNav onNavigate={onNavigate} />
 
       <article className="story-detail-shell">
         <section className="story-opening">
           <div className="story-opening-copy">
-            <button className="story-kicker" type="button" onClick={() => onNavigate("connection")}>Signs of Being</button>
             <h1>{story.title}</h1>
             <p className="story-summary">{story.summary}</p>
             {story.sign_of_being && <p className="story-sign-line">{story.sign_of_being}</p>}
@@ -89,10 +70,10 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
         <section className="story-lower-grid">
           {story.fruit && story.fruit.length > 0 && (
             <section className="story-panel story-fruit-panel">
-              <h2><Sprout size={34} /> The fruit</h2>
+              <h2> The fruit</h2>
               <ul>
                 {story.fruit.map((item) => (
-                  <li key={item}><CheckCircle2 size={17} /> {item}</li>
+                  <li key={item}> {item}</li>
                 ))}
               </ul>
             </section>
@@ -104,12 +85,12 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
               <div className="story-moment-grid">
                 {story.moments.map((moment) => (
                   <article className="story-moment-card" key={`${moment.title}-${moment.source_url ?? ""}`}>
-                    <Heart size={28} />
+                    
                     <strong>{moment.title}</strong>
                     <p>{moment.text}</p>
                     {moment.source_url && (
                       <a href={moment.source_url} target="_blank" rel="noreferrer">
-                        {moment.source_label || "Source"} <ExternalLink size={14} />
+                        {moment.source_label || "Source"} 
                       </a>
                     )}
                   </article>
@@ -124,12 +105,12 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
               <div className="story-source-list">
                 {evidence.map((source) => (
                   <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
-                    <FileText size={18} />
+                    
                     <span>
                       <strong>{source.label}</strong>
                       {source.published_at && <small>{formatDate(source.published_at)}</small>}
                     </span>
-                    <ExternalLink size={15} />
+                    
                   </a>
                 ))}
               </div>
@@ -138,45 +119,15 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
         </section>
 
         <section className="story-action-band">
-          <span><HandHeart size={42} /></span>
           <div>
             <h2>Small acts of care can cross unlikely boundaries.</h2>
             <p>Your attention, time, and support help real work keep moving forward.</p>
           </div>
-          <button type="button" onClick={() => onNavigate("action")}>
-            Take a real step <ArrowRight size={18} />
-          </button>
+          <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>Take a real step</PublicPrimaryAction>
         </section>
       </article>
 
-      <div className="page-bottom-back-row">
-        <button className="page-bottom-back" type="button" onClick={() => onNavigate("connection")}>
-          <ArrowLeft size={16} /> Back to stories
-        </button>
-      </div>
-
-      <footer className="public-footer">
-        <div className="footer-logo" aria-label="Crossover">
-          <picture>
-            <source media="(max-width: 760px)" srcSet={logoDark} />
-            <img src={logoLight} alt="" decoding="async" />
-          </picture>
-          <span>Crossover</span>
-        </div>
-        <span>© 2026 Crossover Stockton</span>
-        <p>Reality. Connection. Action.</p>
-        <button type="button" onClick={() => onNavigate("reality")}>Needs</button>
-        <button type="button" onClick={() => onNavigate("action")}>Action</button>
-        <button type="button" onClick={() => onNavigate("about")}>About</button>
-      </footer>
-
-      <nav className="public-bottom-nav" aria-label="Mobile primary">
-        <button type="button" onClick={() => onNavigate("home")}><Home size={21} /><span>Home</span></button>
-        <button type="button" className="is-active" onClick={() => onNavigate("connection")}><MapPin size={21} /><span>Stories</span></button>
-        <button type="button" onClick={() => onNavigate("reality")}><Search size={21} /><span>Needs</span></button>
-        <button type="button" onClick={() => onNavigate("organizations")}><Building2 size={21} /><span>Orgs</span></button>
-        <button type="button" onClick={() => onNavigate("about")}><CircleAlert size={21} /><span>About</span></button>
-      </nav>
+      <PublicFooter active="connection" onNavigate={onNavigate} />
     </main>
   );
 }
@@ -189,20 +140,14 @@ function ConnectionFlow({ items }: { items: string[] }) {
   return (
     <ol className="story-connection-flow">
       {items.map((item, index) => {
-        const Icon = connectionIcon(index);
         return (
           <li key={`${item}-${index}`}>
-            <span><Icon size={28} /></span>
             <strong>{item}</strong>
           </li>
         );
       })}
     </ol>
   );
-}
-
-function connectionIcon(index: number) {
-  return [UserRound, PawPrint, Heart, HandHeart][index % 4];
 }
 
 function resolvedEvidence(story: StoryRecord): StoryEvidence[] {

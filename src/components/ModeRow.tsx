@@ -13,7 +13,6 @@ export function ModeRow({ activeMode, counts, onModeChange, variant = "row" }: M
   return (
     <div className={cn("mode-row", variant === "rail" && "mode-row-rail")} role="tablist" aria-label="Record modes">
       {MODES.map((mode) => {
-        const Icon = mode.icon;
         return (
           <button
             key={mode.id}
@@ -21,7 +20,6 @@ export function ModeRow({ activeMode, counts, onModeChange, variant = "row" }: M
             onClick={() => onModeChange(mode.id)}
             type="button"
           >
-            <Icon size={16} />
             <span>{mode.label}</span>
             <strong>{counts[mode.kind] ?? 0}</strong>
           </button>

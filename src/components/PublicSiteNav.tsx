@@ -1,5 +1,6 @@
-import { ChevronDown, MapPin } from "lucide-react";
+
 import { PublicMobileMenu } from "./PublicMobileMenu";
+import { navigateInternalLink } from "../lib/internalLink";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 interface PublicSiteNavProps {
@@ -16,10 +17,10 @@ export function PublicSiteNav({ active, onNavigate, onOpenAbout, variant = "over
   return (
     <header className={`public-nav${variantClass[variant] ? ` ${variantClass[variant]}` : ""}`}>
       <PublicMobileMenu active={active} onNavigate={onNavigate} onOpenAbout={openAbout} />
-      <button className="public-logo" type="button" aria-label="Crossover home" onClick={() => onNavigate("home")}>
+      <a className="public-logo" href="/" aria-label="Crossover home" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>
         <img src="/images/logo_light.webp" alt="" decoding="async" />
         <span>Crossover</span>
-      </button>
+      </a>
       <nav aria-label="Primary">
         <button type="button" className={active === "reality" ? "is-active" : ""} onClick={() => onNavigate("reality")}>Needs</button>
         <button type="button" className={active === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}>Stories</button>
@@ -29,9 +30,9 @@ export function PublicSiteNav({ active, onNavigate, onOpenAbout, variant = "over
         <button type="button" className={active === "about" ? "is-active" : ""} aria-current={active === "about" ? "page" : undefined} onClick={openAbout}>About</button>
       </nav>
       <button className="location-pill" type="button" onClick={() => onNavigate("home")}>
-        <MapPin size={16} />
+        
         Stockton, CA
-        <ChevronDown size={15} />
+        
       </button>
     </header>
   );

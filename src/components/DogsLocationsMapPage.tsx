@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, BookOpen, CalendarDays, ChevronDown, Dog, Expand, ExternalLink, FileText, Info, MapPin, Shrink, X } from "lucide-react";
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType } from "react";
 import locationsData from "../data/investigation-locations.json";
@@ -6,7 +6,6 @@ import maintenanceData from "../data/investigation-map-maintenance.json";
 import { dogGapBase } from "../lib/dogGapLegacy";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 import { InvestigationPageHeader } from "./InvestigationPageHeader";
-import "./DogsLocationsMapPage.css";
 
 type Category = "all" | InvestigationLocation["category"];
 type MapProps = {
@@ -99,46 +98,39 @@ export function DogsLocationsMapPage({ investigationId, onOpenReport }: { invest
       <select aria-label="Map evidence category" value={filter} onChange={(event) => changeFilter(event.target.value as Category)}>
         {filters.map(({ value, label }) => <option key={value} value={value}>{label} ({value === "all" ? entries.length : entries.filter((entry) => entry.category === value).length})</option>)}
       </select>
-      <ChevronDown size={18} aria-hidden="true" />
+      
     </div>
 
     <div ref={workspaceRef} className="dogs-map-workspace">
       <div className="dogs-map-canvas" role="group" aria-label="Map of approximate reported locations">
         {Map ? <Map locations={mappedEntries} selectedId={selectedId} onSelect={setSelectedId} wheelZoom={isFullscreen} followSelection={true} /> : <div className="dogs-map-loading">Loading map…</div>}
-        <div className="dogs-map-legend" aria-label="Map marker legend">
-          {mappedEntries.some((location) => location.status === "reported" && location.category === "historical_published_report") && <span><i className="is-historical"><Dog size={13} aria-hidden="true" /></i> Historical report</span>}
-          {mappedEntries.some((location) => location.category === "recent_public_report") && <span><i className="is-recent"><Dog size={13} aria-hidden="true" /></i> Recent public report</span>}
-          {mappedEntries.some((location) => location.status === "reported" && (location.category === "official_animal_services_record" || location.category === "crossover_firsthand")) && <span><i className="is-other"><Dog size={13} aria-hidden="true" /></i> Other record</span>}
-          {mappedEntries.some((location) => location.status === "exploratory") && <span><i className="is-exploratory"><MapPin size={13} aria-hidden="true" /></i> Context only</span>}
-          <span><i className="is-selected" /> Selected marker</span>
-        </div>
-        <button type="button" className="dogs-map-fullscreen" onClick={toggleFullscreen} aria-label={isFullscreen ? "Exit fullscreen map" : "View map fullscreen"} aria-pressed={isFullscreen} title={isFullscreen ? "Exit fullscreen map" : "View map fullscreen"}>{isFullscreen ? <Shrink size={17} aria-hidden="true" /> : <Expand size={17} aria-hidden="true" />}<span>{isFullscreen ? "Exit fullscreen" : "Fullscreen"}</span></button>
+        <button type="button" className="dogs-map-fullscreen" onClick={toggleFullscreen} aria-label={isFullscreen ? "Exit fullscreen map" : "View map fullscreen"} aria-pressed={isFullscreen} title={isFullscreen ? "Exit fullscreen map" : "View map fullscreen"}><span>{isFullscreen ? "Exit fullscreen" : "Fullscreen"}</span></button>
       </div>
 
       <aside className={`dogs-map-panel${selected ? " is-details" : ""}`} aria-label={selected ? "Location details" : "Reported locations"}>
         {selected ? <article ref={detailsRef} tabIndex={-1} className="dogs-map-details" aria-live="polite">
-          <div className="dogs-map-panel-top"><button type="button" onClick={closeDetails}><ArrowLeft size={16} aria-hidden="true" /> Back to locations</button><button type="button" className="dogs-map-close" onClick={closeDetails} aria-label="Close location details"><X size={18} aria-hidden="true" /></button></div>
+          <div className="dogs-map-panel-top"><button type="button" onClick={closeDetails}>Back to locations</button><button type="button" className="dogs-map-close" onClick={closeDetails} aria-label="Close location details">Close</button></div>
           <p className="dogs-map-panel-eyebrow">Location details</p>
           <h2>{selected.name}</h2>
           <p className="dogs-map-area">{selected.area}</p>
           <span className={`dogs-map-status${selected.status === "exploratory" ? " is-exploratory" : ""}`}>{selected.verification_status}</span>
-          <div className="dogs-map-meta"><span><CalendarDays size={15} aria-hidden="true" /> {selected.date_label} {fullDate(selected.evidence_date)} · {categorySingular[selected.category]}</span><span><FileText size={15} aria-hidden="true" /> {selected.evidence_type}</span><small>Source reviewed {selected.source_reviewed_at ? fullDate(selected.source_reviewed_at) : "not yet recorded"}</small></div>
+          <div className="dogs-map-meta"><span> {selected.date_label} {fullDate(selected.evidence_date)} · {categorySingular[selected.category]}</span><span> {selected.evidence_type}</span><small>Source reviewed {selected.source_reviewed_at ? fullDate(selected.source_reviewed_at) : "not yet recorded"}</small></div>
           <section><h3>What was reported</h3><p>{selected.description}</p>{!selected.coordinates && <p>This broad report has no map pin.</p>}</section>
           <section><h3>Last known outcome</h3><p>{selected.last_known_outcome}</p></section>
-          <div className="dogs-map-unknown"><Info size={18} aria-hidden="true" /><div><h3>What remains unknown</h3><p>{selected.unknown}</p></div></div>
+          <div className="dogs-map-unknown"><div><h3>What remains unknown</h3><p>{selected.unknown}</p></div></div>
           {selected.coordinates && <p className="dogs-map-coordinate-note">{selected.coordinate_note}</p>}
-          <div className="dogs-map-links"><a href={selected.source_url} target="_blank" rel="noreferrer"><ExternalLink size={16} aria-hidden="true" /> Read supporting source</a>{selected.coordinates && <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.coordinates.join(","))}`} target="_blank" rel="noreferrer"><MapPin size={16} aria-hidden="true" /> Explore generalized area in Google Maps</a>}{selected.coordinate_reference_url && <a href={selected.coordinate_reference_url} target="_blank" rel="noreferrer"><ExternalLink size={16} aria-hidden="true" /> Location reference</a>}{selected.field_report_id && <a href={`/reports/${selected.field_report_id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(selected.field_report_id!); }}><FileText size={16} aria-hidden="true" /> Read field report</a>}</div>
-        </article> : <div ref={listRef} tabIndex={-1} className="dogs-map-list"><div className="dogs-map-list-heading"><h2>Reported locations</h2><span>{visibleEntries.length} {visibleEntries.length === 1 ? "location" : "locations"}</span></div>{visibleEntries.length ? <div className="dogs-map-list-items">{visibleEntries.map((location) => <button type="button" key={location.id} onClick={() => setSelectedId(location.id)}><span className={`dogs-map-list-icon${location.category === "recent_public_report" ? " is-recent" : ""}${location.status === "exploratory" ? " is-exploratory" : ""}`}>{location.status === "exploratory" ? <MapPin size={17} aria-hidden="true" /> : <Dog size={17} aria-hidden="true" />}</span><span><strong>{location.name}</strong><small>{monthYear(location.evidence_date)} · {categorySingular[location.category]}{!location.coordinates && " · No pin"}</small></span><ChevronDown size={16} aria-hidden="true" /></button>)}</div> : <p className="dogs-map-empty">No records in this category yet.</p>}</div>}
+          <div className="dogs-map-links"><a href={selected.source_url} target="_blank" rel="noreferrer"> Read supporting source</a>{selected.coordinates && <a href={`https://www.openstreetmap.org/?mlat=${selected.coordinates[0]}&mlon=${selected.coordinates[1]}#map=15/${selected.coordinates[0]}/${selected.coordinates[1]}`} target="_blank" rel="noreferrer"> Explore generalized area in OpenStreetMap</a>}{selected.coordinate_reference_url && <a href={selected.coordinate_reference_url} target="_blank" rel="noreferrer"> Location reference</a>}{selected.field_report_id && <a href={`/reports/${selected.field_report_id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(selected.field_report_id!); }}> Read field report</a>}</div>
+        </article> : <div ref={listRef} tabIndex={-1} className="dogs-map-list"><div className="dogs-map-list-heading"><h2>Reported locations</h2><span>{visibleEntries.length} {visibleEntries.length === 1 ? "location" : "locations"}</span></div>{visibleEntries.length ? <div className="dogs-map-list-items">{visibleEntries.map((location) => <button type="button" key={location.id} onClick={() => setSelectedId(location.id)}><span><strong>{location.name}</strong><small>{monthYear(location.evidence_date)} · {categorySingular[location.category]}{!location.coordinates && " · No pin"}</small></span></button>)}</div> : <p className="dogs-map-empty">No records in this category yet.</p>}</div>}
       </aside>
     </div>
 
     <nav className="dogs-map-resources" aria-label="Field resources">
-      <span className="dogs-map-resource-unavailable" aria-disabled="true"><FileText size={16} aria-hidden="true" /> Submit a field report <small>Coming soon</small></span>
-      <a href={`${dogGapBase}our-findings/#field-observation-procedure`}><BookOpen size={16} aria-hidden="true" /> Field instructions <ArrowRight size={15} aria-hidden="true" /></a>
+      <span className="dogs-map-resource-unavailable" aria-disabled="true"> Submit a field report <small>Coming soon</small></span>
+      <a href={`${dogGapBase}our-findings/#field-observation-procedure`}> Field instructions </a>
     </nav>
 
     <details className="dogs-map-about">
-      <summary><Info size={20} aria-hidden="true" /><span>About this map</span><ChevronDown size={18} aria-hidden="true" /></summary>
+      <summary><span>About this map</span></summary>
       <p>This map uses published reports, public records, and Crossover's firsthand observations when available. Locations are generalized to nearby public landmarks for context. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot.</p>
       <div className="dogs-map-about-more"><p>Currently only published reports are mapped. {maintenance.review_policy} Historical records remain visible with their limitations. Broad reports without a supported point are listed without pins. These are not directions to a person, animal, or current encampment. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p><dl><div><dt>Last sources reviewed</dt><dd>{maintenance.last_sources_checked ? fullDate(maintenance.last_sources_checked) : "Not yet recorded"}</dd></div><div><dt>Last map updated</dt><dd>{maintenance.last_map_updated ? fullDate(maintenance.last_map_updated) : "Not yet recorded"}</dd></div><div><dt>Next planned review</dt><dd>{fullDate(maintenance.next_scheduled_review)}</dd></div></dl><h3>All evidence sources</h3><ol>{entries.map((location) => <li key={location.id}><strong>{location.name}</strong> ({monthYear(location.evidence_date)}): {location.description} {location.unknown} <a href={location.source_url} target="_blank" rel="noreferrer">Supporting source</a></li>)}</ol></div>
     </details>

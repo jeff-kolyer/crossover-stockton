@@ -1,0 +1,32 @@
+[
+  {
+    "id": "shelter-expansion-construction-observed-2026-10-14",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Shelter expansion construction was underway on October 14, 2026",
+    "status": "established",
+    "statement": "Crossover observed construction activity during its October 14 visit to Stockton Animal Services.",
+    "supporting_record_ids": ["crossover-2026-10-14-sas-first-visit"],
+    "contradicting_record_ids": [],
+    "related_question_ids": ["additional-help"],
+    "related_task_ids": ["task-sas-visit-application-2026-10-14"],
+    "related_project_ids": ["stockton-animal-shelter-renovation"],
+    "location_ids": [],
+    "limitations": "Construction observed during one visit does not establish a completion date, delivered animal-care capacity, or operational impact.",
+    "last_reviewed_at": "2026-10-26"
+  },
+  {
+    "id": "finding-street-population-unknown",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Current street-dog population is not established",
+    "status": "insufficient_evidence",
+    "statement": "The reviewed shelter intake figures do not establish the current number of free-roaming dogs in Stockton.",
+    "supporting_record_ids": ["sas-2024-kennel-statistics"],
+    "contradicting_record_ids": [],
+    "related_question_ids": ["where-dogs-need-help"],
+    "related_task_ids": ["task-sas-field-call-follow-up", "dogs-check-louis-park"],
+    "related_project_ids": [],
+    "location_ids": [],
+    "limitations": "Shelter intake is a period flow over a multi-jurisdiction service area. A current Stockton street-population estimate requires an appropriate observation and estimation method.",
+    "last_reviewed_at": "2026-10-26"
+  }
+]

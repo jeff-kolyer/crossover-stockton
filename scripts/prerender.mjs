@@ -9,40 +9,57 @@ const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.m
 const stories = JSON.parse(await readFile(new URL("../src/data/stories.json", import.meta.url), "utf8"));
 const work = JSON.parse(await readFile(new URL("../src/data/work.json", import.meta.url), "utf8"));
 const records = JSON.parse(await readFile(new URL("../src/data/records.json", import.meta.url), "utf8"));
+const organizations = JSON.parse(await readFile(new URL("../src/data/orgs.json", import.meta.url), "utf8"));
+const engagedOrganizationIds = new Set(records.filter((record) => record.source.publisher?.startsWith("Crossover Stockton") && (record.record_type === "activity" || record.record_type === "field_report" || record.record_type === "field_investigation") && !record.evidence_status?.startsWith("planned")).flatMap((record) => record.organization_ids ?? []));
 const dogGapBase = "/reality/too-many-dogs-still-lack-safe-placement/";
 const legacyDogWorkSections = {
   "dogs-public-source-review": "research",
-  "dogs-map-placement-barriers": "our-findings",
+  "dogs-map-placement-barriers": "findings",
   "dogs-solutions": "improvements",
-  "dogs-direct-field-work": "our-findings",
-  "dogs-locations-map": "dogs-locations-map",
+  "dogs-direct-field-work": "activity",
+  "dogs-locations-map": "map",
+};
+const legacyDogRoutes = {
+  about: dogGapBase,
+  tasks: "/work/dogs/",
+  activity: "/work/dogs/activity/",
+  reports: "/work/dogs/activity/",
+  map: "/work/dogs/map/",
+  "dogs-locations-map": "/work/dogs/map/",
+  findings: "/work/dogs/findings/",
+  "our-findings": "/work/dogs/findings/",
+  more: dogGapBase,
+};
+const legacyReferenceSections = {
+  about: "",
+  more: "",
+  "key-factors": "gap-unknown",
+  "ways-to-help": "gap-responders",
+  improvements: "gap-known",
+  research: "gap-sources",
+  sources: "gap-sources",
+  updates: "gap-known",
 };
 
 const pages = [
   ["/", "Crossover Stockton", "See what Stockton needs, who is responding, and practical ways to help."],
+  ["/work/", "Investigations | Crossover Stockton", "Explore current Crossover investigations."],
+  ["/work/dogs/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
+  ["/work/dogs/tasks/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
+  ["/work/dogs/activity/", "Activity | Crossover Stockton", "Documented work in the Stockton dog investigation."],
+  ["/work/dogs/map/", "Map | Crossover Stockton", "Locations and field observations in the Stockton dog investigation."],
+  ["/work/dogs/findings/", "Findings | Crossover Stockton", "Evidence-backed findings in the Stockton dog investigation."],
   ["/reality/", "Reality | Crossover Stockton", "Follow needs in Stockton and the evidence behind them."],
   ["/connection/", "Connection | Crossover Stockton", "Stories of local people and organizations responding to Stockton's needs."],
   ["/action/", "Action | Crossover Stockton", "Find practical ways to help in Stockton."],
-  ["/action/look-for-dogs-on-the-street/", "Look for dogs on the street | Crossover Stockton", "Help verify reports of roaming dogs in Stockton and document what we find."],
   ["/updates/", "Updates | Crossover Stockton", "Recent updates on Stockton's needs and community response."],
   ["/about/", "About | Crossover Stockton", "Learn how Crossover Stockton connects local reality, response, and action."],
-  ["/organizations/", "Organizations | Crossover Stockton", "Local organizations followed by Crossover Stockton."],
-  ...gaps.filter((gap) => gap.active).flatMap((gap) => [
-    [`/reality/${gap.slug}/`, `${gap.title} — Reality | Crossover Stockton`, gap.summary],
-    [`/reality/${gap.slug}/ways-to-help/`, `${gap.title} — Ways to Help | Crossover Stockton`, `Ways to help with ${gap.title.toLowerCase()}.`],
-    [`/reality/${gap.slug}/key-factors/`, `${gap.title} — Key Factors | Crossover Stockton`, `Factors affecting ${gap.title.toLowerCase()}.`],
-    [`/reality/${gap.slug}/improvements/`, `${gap.title} — Improvements | Crossover Stockton`, `Projects and possibilities related to ${gap.title.toLowerCase()}.`],
-    ...(gap.investigation_status === "investigating" ? [[`/reality/${gap.slug}/our-findings/`, `${gap.title} — Our Findings | Crossover Stockton`, `Crossover's investigation of ${gap.title.toLowerCase()}.`]] : []),
-    [`/reality/${gap.slug}/research/`, `${gap.title} — Research | Crossover Stockton`, `Research and evidence for ${gap.title.toLowerCase()}.`],
-    [`/reality/${gap.slug}/updates/`, `${gap.title} — Updates | Crossover Stockton`, `Updates on ${gap.title.toLowerCase()}.`],
-    [`/reality/${gap.slug}/sources/`, `${gap.title} — Sources | Crossover Stockton`, `Sources and evidence for ${gap.title.toLowerCase()}.`],
-    ...(gap.id === "dogs-safe-placement" ? [[`${dogGapBase}dogs-locations-map/`, "Field observation map | Crossover Stockton", "Generalized historical dog reports and field observation records for Stockton."]] : []),
-    ...(gap.id === "dogs-safe-placement" ? [[`${dogGapBase}reports/`, "Field reports | Crossover Stockton", "Firsthand visits and observations in the dog investigation."], [`${dogGapBase}map/`, "Reported locations | Crossover Stockton", "Generalized evidence areas in Stockton."], [`${dogGapBase}more/`, "Explore the investigation | Crossover Stockton", "Organizations, pathways, improvements, findings, sources, and updates."]] : []),
-  ]),
+  ["/organizations/", "Organizations | Crossover Stockton", "Organizations Crossover has contacted or visited."],
+  ...organizations.filter((org) => org.active && engagedOrganizationIds.has(org.id)).map((org) => [`/organizations/${org.slug}/`, `${org.name} | Crossover Stockton`, `Crossover's recorded involvement with ${org.name}.`]),
+  ...gaps.filter((gap) => gap.active).map((gap) => [`/reality/${gap.slug}/`, `${gap.title} — Reality | Crossover Stockton`, gap.summary]),
   ...stories.filter((story) => story.active).map((story) => [
     `/stories/${story.slug}/`, `${story.title} | Crossover Stockton`, story.summary,
   ]),
-  ...work.filter((item) => !legacyDogWorkSections[item.id]).map((item) => [`/work/${item.id}/`, `${item.title} | Crossover Stockton`, item.summary ?? item.title ?? "Crossover Stockton's work in the community."]),
   ...records.filter((record) => record.record_type === "field_report").map((record) => [
     `/reports/${encodeURIComponent(record.id)}/`, `${record.title} | Crossover Stockton`, record.summary ?? record.title,
   ]),
@@ -114,10 +131,21 @@ try {
     await writeFile(new URL(`.${path}page.txt`, dist), `${title}\n${url}\n\n${plainTextFromHtml(content, url)}\n`);
   }
 
-  for (const [workId, section] of Object.entries(legacyDogWorkSections)) {
-    const path = `/work/${workId}/`;
-    const target = `${dogGapBase}${section}/`;
-    const redirect = `<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="robots" content="noindex" /><meta http-equiv="refresh" content="0; url=${target}" /><link rel="canonical" href="${origin}${target}" /><title>Moved | Crossover Stockton</title><script>const anchor=decodeURIComponent(location.hash.slice(1));let path=${JSON.stringify(target)};let hash="";if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor==="field-observation-map"){path=${JSON.stringify(`${dogGapBase}dogs-locations-map/`)};hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&anchor.startsWith("pathways-")){path=${JSON.stringify(`${dogGapBase}ways-to-help/`)};hash=anchor}else if(${JSON.stringify(workId)}==="dogs-map-placement-barriers"&&(anchor.startsWith("investigation-")||anchor==="field-observation-procedure")){hash=anchor}else if(${JSON.stringify(workId)}==="dogs-direct-field-work"&&anchor){hash=anchor.includes("records-request")?"investigation-records-request":"investigation-records"}else if(anchor){hash=anchor}location.replace(path+location.search+(hash?"#"+encodeURIComponent(hash):""))</script></head><body><p>This page moved to <a href="${target}">${target}</a>.</p></body></html>`;
+  const legacyRedirects = [
+    ...gaps.filter((gap) => gap.active).flatMap((gap) => [
+      ...Object.entries(legacyReferenceSections).map(([section, anchor]) => [`/reality/${gap.slug}/${section}/`, `/reality/${gap.slug}/#${anchor}`]),
+      ...(gap.id === "dogs-safe-placement" ? [] : [[`/reality/${gap.slug}/our-findings/`, `/reality/${gap.slug}/#gap-known`]]),
+    ]),
+    ...Object.entries(legacyDogRoutes).map(([section, target]) => [`${dogGapBase}${section ? `${section}/` : ""}`, target]),
+    ...Object.entries(legacyDogWorkSections).map(([workId, section]) => [`/work/${workId}/`, section === "research" ? `${dogGapBase}#gap-sources` : section === "improvements" ? `${dogGapBase}#gap-known` : `/work/dogs/${section}/`]),
+    ...work.filter((item) => !legacyDogWorkSections[item.id] && item.id.endsWith("-public-source-review")).map((item) => {
+      const gap = gaps.find((entry) => entry.work_ids?.includes(item.id));
+      return [`/work/${item.id}/`, gap ? `/reality/${gap.slug}/#gap-sources` : "/reality/"];
+    }),
+  ];
+  for (const [path, target] of legacyRedirects) {
+    const [destinationPath, destinationFragment] = target.split("#");
+    const redirect = `<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="robots" content="noindex" /><meta http-equiv="refresh" content="0; url=${target}" /><link rel="canonical" href="${origin}${destinationPath}" /><title>Moved | Crossover Stockton</title><script>let anchor=${JSON.stringify(destinationFragment ? `#${destinationFragment}` : "")}||location.hash;let path=${JSON.stringify(destinationPath)};const source=${JSON.stringify(path)};if(source==="/work/dogs-map-placement-barriers/"&&anchor==="#field-observation-map"){path="/work/dogs/map/";anchor=""}if(source==="/work/dogs-map-placement-barriers/"&&anchor.startsWith("#pathways-")){path=${JSON.stringify(dogGapBase)};anchor="#gap-responders"}if((source==="/work/dogs-map-placement-barriers/"||source==="/work/dogs-direct-field-work/"||source===${JSON.stringify(`${dogGapBase}our-findings/`)})&&anchor.includes("records-request")){path="/work/dogs/activity/";anchor="#crossover-2026-10-20-sas-field-call-records-request"}if(source===${JSON.stringify(`${dogGapBase}our-findings/`)}&&(anchor==="#investigation-records"||anchor==="#activity-log")){path="/work/dogs/activity/";anchor=""}if((source==="/work/dogs-map-placement-barriers/"||source===${JSON.stringify(`${dogGapBase}our-findings/`)})&&anchor==="#field-observation-procedure"){path="/work/dogs/tasks/";anchor="#dogs-check-louis-park"}location.replace(path+location.search+anchor)</script></head><body><p>This page moved to <a href="${target}">${target}</a>.</p></body></html>`;
     await mkdir(new URL(`.${path}`, dist), { recursive: true });
     await writeFile(new URL(`.${path}index.html`, dist), redirect);
   }

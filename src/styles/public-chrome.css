@@ -1,0 +1,155 @@
+/* Shared public header, menu, and footer. The Work application has no .public-site root. */
+.public-site .public-nav {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: none;
+  height: 74px;
+  margin: 0;
+  padding: 0 max(38px, calc((100% - 1600px) / 2));
+  background: #08110f;
+  color: #fff;
+}
+
+.public-site .public-logo,
+.public-site .footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.public-site .public-logo img { width: 35px; height: 35px; object-fit: contain; }
+.public-site .footer-logo img { width: 26px; height: 26px; object-fit: contain; }
+.public-site .public-logo span,
+.public-site .footer-logo span {
+  font-family: "Avenir Next", Montserrat, Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.public-site .public-nav nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: clamp(12px, 2vw, 28px);
+  min-width: 0;
+  border-left: 1px solid #ffffff40;
+  padding-left: 30px;
+}
+
+.public-site .public-nav nav button,
+.public-site .location-pill,
+.public-site .public-mobile-menu {
+  border: 0;
+  background: none;
+  color: #fff;
+  font-weight: 700;
+}
+
+.public-site .public-nav nav button {
+  min-height: 44px;
+  padding: 0;
+  white-space: nowrap;
+}
+.public-site .public-nav nav button.is-active,
+.public-site .public-nav nav button[aria-current="page"] { text-decoration: underline; text-underline-offset: 7px; }
+.public-site .location-pill {
+  min-height: 34px;
+  border: 1px solid #ffffff47;
+  border-radius: 999px;
+  padding: 0 12px;
+  white-space: nowrap;
+}
+.public-site .public-mobile-menu { display: none; }
+
+.public-site .public-footer {
+  display: grid;
+  grid-template-columns: 190px auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  min-height: 78px;
+  margin: 40px 0 0;
+  padding: 16px max(38px, calc((100% - 1600px) / 2));
+  background: #10181b;
+  color: #fff;
+}
+.public-site .public-footer .footer-logo span { font-size: .78rem; }
+.public-site .public-footer > span,
+.public-site .public-footer p,
+.public-site .public-footer nav a { margin: 0; color: #ffffffdb; font-size: .82rem; }
+.public-site .public-footer p { justify-self: center; }
+.public-site .public-footer nav { display: flex; gap: 24px; }
+.public-site .public-footer nav a { text-decoration: none; }
+.public-site .public-footer nav a:hover { text-decoration: underline; }
+.public-site .public-bottom-nav { display: none; }
+
+.public-site .public-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: start center;
+  background: #050c0a8a;
+  padding: 18px;
+}
+.public-site .public-menu-modal {
+  width: min(390px, 100%);
+  border-radius: 8px;
+  background: #fff;
+  color: #17211b;
+  overflow: hidden;
+}
+.public-site .public-menu-header,
+.public-site .public-menu-location { padding: 14px 20px; border-bottom: 1px solid #ddd; }
+.public-site .public-menu-header span { font-weight: 700; }
+.public-site .public-menu-header button { border: 0; background: none; }
+.public-site .public-menu-list { padding: 8px; }
+.public-site .public-menu-list button { min-height: 48px; border: 0; background: none; text-align: left; }
+.public-site .public-menu-list button:hover,
+.public-site .public-menu-list button:focus-visible { background: #fff; }
+
+@media (max-width: 900px) {
+  .public-site .public-nav { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; padding: 0 20px; }
+  .public-site .public-mobile-menu { display: block; min-width: 44px; min-height: 44px; padding: 0; text-align: left; }
+  .public-site .public-logo { justify-self: center; min-width: 0; }
+  .public-site .public-logo img { width: 28px; height: 28px; }
+  .public-site .public-logo span { font-size: .76rem; letter-spacing: .17em; }
+  .public-site .public-nav nav { display: none; }
+  .public-site .public-nav .location-pill { display: block; border: 0; border-radius: 0; padding: 0; font-size: .82rem; font-weight: 400; }
+  .public-site .public-footer { grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 24px 20px; text-align: center; }
+  .public-site .public-footer p { justify-self: center; }
+  .public-site .public-bottom-nav {
+    position: fixed;
+    z-index: 20;
+    inset: auto 0 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    min-height: 62px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+  }
+  .public-site .public-bottom-nav a {
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    min-height: 62px;
+    color: #17221b;
+    font-size: .8rem;
+    text-decoration: none;
+  }
+  .public-site .public-bottom-nav a[aria-current="page"] { color: #1f6b34; font-weight: 700; }
+  .public-site { padding-bottom: 62px; }
+}
+
+@media (max-width: 520px) {
+  .public-site .public-nav { padding: 0 16px; }
+  .public-site .location-pill { font-size: .72rem; }
+  .public-site .public-logo { gap: 6px; }
+}

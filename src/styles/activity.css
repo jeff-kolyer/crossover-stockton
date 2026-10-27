@@ -1,0 +1,105 @@
+/* Shared record rows in the Work sheet. */
+
+.is-dog-investigation .plain-action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 7px 12px;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  background: #fff;
+  color: #202124;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.is-dog-investigation .plain-action-button:hover {
+  background: #f7f7f7;
+}
+
+.is-dog-investigation .plain-action-button.is-filter {
+  min-height: 32px;
+  padding: 5px 9px;
+  font-size: 13px;
+}
+
+.is-dog-investigation .plain-action-button.is-filter[aria-pressed="true"] {
+  background: #e8eaed;
+}
+
+.is-dog-investigation .plain-action-button:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+.is-dog-investigation .plain-action-button.is-compact {
+  min-width: 36px;
+  padding: 5px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.crossover-detail-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.crossover-detail-heading > div,
+.crossover-detail-heading > h2 {
+  min-width: 0;
+}
+
+.is-dog-investigation .crossover-record-list {
+  display: grid;
+  margin: 8px 0 16px;
+}
+
+.is-dog-investigation .crossover-record-list button {
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  min-height: 54px;
+  padding: 9px 2px;
+  border: 0;
+  border-bottom: 1px solid #e2e4e6;
+  background: #fff;
+  color: #202124;
+  text-align: left;
+}
+
+.is-dog-investigation .crossover-record-list button:first-child {
+  border-top: 1px solid #e2e4e6;
+}
+
+.is-dog-investigation .crossover-record-list button:hover {
+  background: #f7f7f7;
+}
+
+.is-dog-investigation .crossover-record-list strong {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.is-dog-investigation .crossover-record-list small,
+.is-dog-investigation .crossover-record-list span {
+  display: block;
+  color: #5f6368;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.is-dog-investigation .crossover-simple-section p button,
+.is-dog-investigation .crossover-simple-section li button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  text-align: left;
+  text-decoration: underline;
+}

@@ -34,11 +34,12 @@
   },
   {
     "id": "crossover-2026-10-20-reported-location-check-plan",
+    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": [],
     "published_at": null,
     "recorded_at": "2026-10-20",
-    "record_type": "activity",
+    "record_type": "planning_update",
     "trust": "crossover_source",
     "title": "Check reported stray-dog locations",
     "summary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented.",
@@ -68,6 +69,7 @@
   },
   {
     "id": "crossover-2026-10-20-sas-field-call-records-request",
+    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": ["stockton-animal-services"],
     "published_at": null,
@@ -87,6 +89,7 @@
   },
   {
     "id": "crossover-2026-10-14-sas-volunteer-application",
+    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -119,6 +122,7 @@
   },
   {
     "id": "crossover-2026-10-14-sas-first-visit",
+    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -141,7 +145,7 @@
     "image_alt": "AI-generated reconstruction of Stockton Animal Services and the shelter expansion, based on January 2026 Street View imagery",
     "image_caption": "AI-generated illustration. Based on January 2026 Street View imagery.",
     "location": "Stockton Animal Services, 1575 S. Lincoln Street, Stockton, CA 95206",
-    "map_url": "https://www.google.com/maps/search/?api=1&query=1575%20S.%20Lincoln%20Street%2C%20Stockton%2C%20CA%2095206",
+    "map_url": "https://www.openstreetmap.org/search?query=1575%20S.%20Lincoln%20Street%2C%20Stockton%2C%20CA%2095206",
     "visit_notes": [
       {
         "title": "Parking",
@@ -1482,6 +1486,7 @@
   },
   {
     "id": "crossover-2026-10-07-street-dogs-volunteer-application",
+    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -1512,6 +1517,7 @@
   },
   {
     "id": "crossover-2026-10-12-doggie-day-out-inquiry",
+    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": ["stockton-animal-services"],
     "published_at": null,

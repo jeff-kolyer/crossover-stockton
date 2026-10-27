@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import gapsData from "./data/gaps.json";
 import { ActionModal } from "./components/ActionModal";
 import { ActionIndexPage } from "./components/ActionIndexPage";
-import { ActionDetailPage } from "./components/ActionDetailPage";
 import { AboutPage } from "./components/AboutPage";
 import { GapDetailPage } from "./components/GapDetailPage";
+import { GapReferencePage } from "./components/GapReferencePage";
 import { GapSourcesPage } from "./components/GapSourcesPage";
 import { GapUpdatesPage } from "./components/GapUpdatesPage";
 import { WorkPage } from "./components/WorkPage";
@@ -16,27 +16,36 @@ import { UpdatesPage } from "./components/UpdatesPage";
 import storiesData from "./data/stories.json";
 import workData from "./data/work.json";
 import recordsData from "./data/records.json";
-import type { EvidenceRecord, GapRecord, PublicActionRecord, StoryRecord } from "./types";
-import { dogGapBase, dogGapSlug, dogMapPath, legacyDogWorkDestination } from "./lib/dogGapLegacy";
+import orgsData from "./data/orgs.json";
+import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "./types";
+import { dogGapBase, dogGapSlug, legacyDogWorkDestination } from "./lib/dogGapLegacy";
 
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
 const work = workData as { id: string; title: string }[];
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
+const organizations = orgsData as OrgRecord[];
 
-type AppRoute = "home" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "connection" | "action" | "actionDetail" | "updates" | "about" | "organizations";
+type AppRoute = "home" | "workIndex" | "workInvestigation" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations" | "organizationDetail";
+type WorkSection = "tasks" | "activity" | "map" | "findings";
+const investigations = [{ slug: "dogs", id: "street-dog-immediate-welfare", gapSlug: dogGapSlug, title: "Dogs on the street in Stockton" }] as const;
+const workSections: WorkSection[] = ["tasks", "activity", "map", "findings"];
 
 interface RouteState {
   page: AppRoute;
   gapSlug?: string;
-  gapSection?: "overview" | "reports" | "map" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+  gapSection?: "overview" | "tasks" | "activity" | "reports" | "map" | "findings" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   storySlug?: string;
   workId?: string;
   reportId?: string;
+  organizationSlug?: string;
+  investigationSlug?: string;
+  workSection?: WorkSection;
 }
 
-const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "actionDetail">, string> = {
+const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "workInvestigation" | "report" | "storyDetail" | "organizationDetail">, string> = {
   home: "/",
+  workIndex: "/work/",
   reality: "/reality/",
   connection: "/connection/",
   action: "/action/",
@@ -47,15 +56,20 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSou
 
 function routeFromPathname(pathname: string): RouteState {
   const normalized = pathname.replace(/\/+$/, "") || "/";
-  if (normalized === "/action/look-for-dogs-on-the-street") return { page: "actionDetail" };
-  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(reports|map|more|key-factors|ways-to-help|improvements|our-findings|research|sources|updates)$/);
+  if (normalized === "/work") return { page: "workIndex" };
+  if (normalized === `${dogGapBase}about`.replace(/\/$/, "")) return { page: "gapDetail", gapSlug: dogGapSlug, gapSection: "overview" };
+  const workInvestigation = normalized.match(/^\/work\/([^/]+)(?:\/(tasks|activity|map|findings))?$/);
+  if (workInvestigation && investigations.some((item) => item.slug === workInvestigation[1])) return { page: "workInvestigation", investigationSlug: workInvestigation[1], workSection: (workInvestigation[2] as WorkSection | undefined) ?? "tasks" };
+  if (normalized === "/action/look-for-dogs-on-the-street") return { page: "workInvestigation", investigationSlug: "dogs", workSection: "tasks" };
+  const organizationDetail = normalized.match(/^\/organizations\/([^/]+)$/);
+  if (organizationDetail) return { page: "organizationDetail", organizationSlug: decodeURIComponent(organizationDetail[1]) };
+  const gapSection = normalized.match(/^\/reality\/([^/]+)\/(tasks|activity|reports|map|findings|more|key-factors|ways-to-help|improvements|our-findings|research|sources|updates)$/);
   if (gapSection) {
     const gapSlug = decodeURIComponent(gapSection[1]);
     const gap = gaps.find((item) => item.slug === gapSlug);
     const requestedSection = gapSection[2] === "sources" ? "research" : gapSection[2];
     return { page: "gapDetail", gapSlug, gapSection: requestedSection === "our-findings" && gap?.investigation_status !== "investigating" ? "overview" : requestedSection as RouteState["gapSection"] };
   }
-  if (normalized === dogMapPath.replace(/\/$/, "")) return { page: "gapDetail", gapSlug: dogGapSlug, gapSection: "map" };
   if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
     const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
     return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
@@ -88,13 +102,40 @@ function routeFromPathname(pathname: string): RouteState {
 }
 
 function canonicalPathname(pathname: string, hash = "") {
+  if (/^\/action\/look-for-dogs-on-the-street\/?$/.test(pathname)) return "/work/dogs/";
+  const oldDogSection = pathname.match(/^\/reality\/too-many-dogs-still-lack-safe-placement\/(tasks|activity|reports|map|findings|our-findings|dogs-locations-map)\/?$/);
+  if (oldDogSection) {
+    if (oldDogSection[1] === "our-findings" && hash === "#field-observation-procedure") return "/work/dogs/tasks/#dogs-check-louis-park";
+    if (oldDogSection[1] === "our-findings" && (hash.startsWith("#investigation-records") || hash === "#activity-log")) return hash.includes("records-request") ? "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request" : "/work/dogs/activity/";
+    return `/work/dogs/${({ reports: "activity", "our-findings": "findings", "dogs-locations-map": "map" } as Record<string, string>)[oldDogSection[1]] ?? oldDogSection[1]}/${hash}`;
+  }
+  if (/^\/reality\/too-many-dogs-still-lack-safe-placement\/(?:about|more)\/?$/.test(pathname)) return `${dogGapBase}${hash}`;
+  const legacyGapReference = pathname.match(/^\/reality\/([^/]+)\/(key-factors|ways-to-help|improvements|research|sources|updates|more|about|our-findings)\/?$/);
+  if (legacyGapReference && gaps.some((gap) => gap.slug === decodeURIComponent(legacyGapReference[1]))) {
+    const section = legacyGapReference[2];
+    const anchor = section === "research" || section === "sources" ? "gap-sources"
+      : section === "key-factors" ? "gap-unknown"
+      : section === "ways-to-help" ? "gap-responders"
+      : section === "improvements" || section === "updates" || section === "our-findings" ? "gap-known" : "";
+    return "/reality/" + legacyGapReference[1] + "/" + (anchor ? "#" + anchor : "");
+  }
   const legacyWork = pathname.match(/^\/work\/([^/]+)\/?$/);
   if (legacyWork) {
     const workId = decodeURIComponent(legacyWork[1]);
     const anchor = decodeURIComponent(hash.slice(1));
-    if (workId === "dogs-locations-map" || workId === "dogs-map-placement-barriers" && anchor === "field-observation-map") return `${dogMapPath}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
+    if (workId === "dogs-locations-map" || workId === "dogs-map-placement-barriers" && anchor === "field-observation-map") return "/work/dogs/map/";
+    if (workId === "dogs-map-placement-barriers" && anchor === "field-observation-procedure") return "/work/dogs/tasks/#dogs-check-louis-park";
+    if (workId === "dogs-map-placement-barriers" && anchor.startsWith("pathways-")) return `${dogGapBase}ways-to-help/${hash}`;
+    if ((workId === "dogs-map-placement-barriers" || workId === "dogs-direct-field-work") && anchor.includes("records-request")) return "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request";
+    if (workId === "dogs-direct-field-work") return `/work/dogs/activity/${anchor.startsWith("crossover-") ? hash : ""}`;
+    if (workId === "dogs-map-placement-barriers") return `/work/dogs/findings/${anchor === "investigation-questions" ? hash : ""}`;
     const destination = legacyDogWorkDestination(workId, anchor);
     if (destination) return `${dogGapBase}${destination.section}/${destination.anchor ? `#${encodeURIComponent(destination.anchor)}` : ""}`;
+    const legacyItem = work.find((item) => item.id === workId);
+    if (legacyItem?.id.endsWith("-public-source-review")) {
+      const gap = gaps.find((item) => item.work_ids?.includes(workId));
+      if (gap) return `/reality/${gap.slug}/research/${hash}`;
+    }
   }
   const sourceAlias = pathname.match(/^\/reality\/([^/]+)\/sources\/?$/);
   if (sourceAlias) return `/reality/${sourceAlias[1]}/research/`;
@@ -104,10 +145,10 @@ function canonicalPathname(pathname: string, hash = "") {
 }
 
 function titleForRoute(route: RouteState) {
-  if (route.page === "actionDetail") return "Look for dogs on the street | Crossover Stockton";
+  if (route.page === "workInvestigation") return `${investigations.find((item) => item.slug === route.investigationSlug)?.title ?? "Investigation"} — ${route.workSection ?? "tasks"} | Crossover Stockton`;
   if (route.page === "gapDetail" || route.page === "gapUpdates" || route.page === "gapSources") {
     const gap = gaps.find((item) => item.slug === route.gapSlug);
-    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "Overview", reports: "Reports", map: "Map", more: "More", "key-factors": "Key Factors", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Our Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
+    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "About the gap", tasks: "Tasks", activity: "Activity", reports: "Activity", map: "Map", findings: "Findings", more: "About the gap", "key-factors": "Key Factors", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
     return gap ? `${gap.title} — ${gap.id === "dogs-safe-placement" && route.gapSection === "ways-to-help" ? "Show Up With Us" : suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
   if (route.page === "work") {
@@ -122,8 +163,13 @@ function titleForRoute(route: RouteState) {
     const story = stories.find((item) => item.slug === route.storySlug);
     return story ? `${story.title} | Crossover Stockton` : "Stories | Crossover Stockton";
   }
-  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "actionDetail">, string> = {
+  if (route.page === "organizationDetail") {
+    const org = organizations.find((item) => item.slug === route.organizationSlug);
+    return org ? `${org.name} | Crossover Stockton` : "Organizations | Crossover Stockton";
+  }
+  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "workInvestigation" | "report" | "storyDetail" | "organizationDetail">, string> = {
     home: "Crossover Stockton",
+    workIndex: "Investigations | Crossover Stockton",
     reality: "Reality | Crossover Stockton",
     connection: "Connection | Crossover Stockton",
     action: "Action | Crossover Stockton",
@@ -177,7 +223,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     document.title = titleForRoute(route);
   }, [route]);
 
-  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "storyDetail" | "actionDetail">) {
+  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "workInvestigation" | "report" | "storyDetail" | "organizationDetail">) {
     const nextPath = ROUTE_PATHS[page];
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
@@ -186,10 +232,26 @@ export default function App({ initialPath }: { initialPath?: string }) {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
+  function showInvestigation(slug: string, section: WorkSection = "tasks", anchor?: string) {
+    const investigation = investigations.find((item) => item.slug === slug);
+    if (!investigation) return;
+    const nextPath = `/work/${slug}/${section === "tasks" ? "" : `${section}/`}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
+    if (`${window.location.pathname}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
+    setRoute({ page: "workInvestigation", investigationSlug: slug, workSection: section });
+    requestAnimationFrame(() => {
+      if (anchor) document.getElementById(anchor)?.scrollIntoView({ block: "start" });
+      else window.scrollTo({ top: 0, left: 0 });
+    });
+  }
+
   function showActionDetail() {
-    const nextPath = "/action/look-for-dogs-on-the-street/";
+    showInvestigation("dogs");
+  }
+
+  function showOrganization(slug: string) {
+    const nextPath = `/organizations/${encodeURIComponent(slug)}/`;
     if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
-    setRoute({ page: "actionDetail" });
+    setRoute({ page: "organizationDetail", organizationSlug: slug });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
@@ -198,18 +260,25 @@ export default function App({ initialPath }: { initialPath?: string }) {
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
-    setRoute({ page: "gapDetail", gapSlug: slug, gapSection: "overview" });
+    setRoute({ page: "gapDetail", gapSlug: slug });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
   function showGapSection(slug: string, section: NonNullable<RouteState["gapSection"]>, anchor?: string) {
-    const nextPath = `/reality/${slug}/${section === "overview" ? "" : `${section}/`}${anchor ? `#${anchor}` : ""}`;
+    if (slug === dogGapSlug && (workSections as string[]).includes(section)) { showInvestigation("dogs", section as WorkSection, anchor); return; }
+    if (slug === dogGapSlug && section === "reports") { showInvestigation("dogs", "activity", anchor); return; }
+    if (slug === dogGapSlug && section === "our-findings") { showInvestigation("dogs", "findings", anchor); return; }
+    const referenceAnchor = section === "research" ? "gap-sources"
+      : section === "key-factors" ? "gap-unknown"
+      : section === "ways-to-help" ? "gap-responders"
+      : section === "improvements" || section === "updates" || section === "our-findings" ? "gap-known" : "";
+    const nextPath = "/reality/" + slug + "/" + (referenceAnchor ? "#" + referenceAnchor : "");
     if (`${window.location.pathname}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
-    setRoute({ page: "gapDetail", gapSlug: slug, gapSection: section });
+    setRoute({ page: "gapDetail", gapSlug: slug });
     requestAnimationFrame(() => {
-      if (!anchor) window.scrollTo({ top: 0, left: 0 });
+      if (!referenceAnchor) window.scrollTo({ top: 0, left: 0 });
       else {
-        const target = document.getElementById(anchor);
+        const target = document.getElementById(referenceAnchor);
         if (target instanceof HTMLDetailsElement) target.open = true;
         target?.scrollIntoView({ block: "start" });
       }
@@ -229,16 +298,22 @@ export default function App({ initialPath }: { initialPath?: string }) {
       showWork("dogs-locations-map", anchor);
       return;
     }
+    if (workId === "dogs-map-placement-barriers" && anchor === "field-observation-procedure") { showInvestigation("dogs", "tasks", "dogs-check-louis-park"); return; }
+    if (workId === "dogs-map-placement-barriers" && anchor?.startsWith("pathways-")) { showGapSection(dogGapSlug, "ways-to-help", anchor); return; }
+    if ((workId === "dogs-map-placement-barriers" || workId === "dogs-direct-field-work") && anchor?.includes("records-request")) { showInvestigation("dogs", "activity", "crossover-2026-10-20-sas-field-call-records-request"); return; }
+    if (workId === "dogs-locations-map") { showInvestigation("dogs", "map", anchor); return; }
+    if (workId === "dogs-direct-field-work") { showInvestigation("dogs", "activity", anchor); return; }
+    if (workId === "dogs-map-placement-barriers") { showInvestigation("dogs", "findings", anchor === "investigation-questions" ? anchor : undefined); return; }
     const destination = legacyDogWorkDestination(workId, anchor);
     if (destination) {
       showGapSection(dogGapSlug, destination.section, destination.anchor);
       return;
     }
-    const nextPath = `${workId === "dogs-locations-map" ? dogMapPath : `/work/${workId}/`}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
+    const nextPath = `/work/${workId}/${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
     if (`${window.location.pathname}${window.location.hash}` !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
-    setRoute(workId === "dogs-locations-map" ? { page: "gapDetail", gapSlug: dogGapSlug, gapSection: "map" } : { page: "work", workId });
+    setRoute({ page: "work", workId });
     requestAnimationFrame(() => {
       if (anchor) document.getElementById(anchor)?.scrollIntoView();
       else window.scrollTo({ top: 0, left: 0 });
@@ -266,8 +341,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   return (
     <div className="app-shell">
-      {route.page === "home" && <main className="crossover-index"><header><strong>CROSSOVER</strong><button type="button" onClick={() => showPage("about")}>About</button></header><div className="crossover-index-body"><span>Investigations</span><h1>Investigations</h1><p>Explore what we are learning in Stockton.</p><a href={dogGapBase} className="crossover-investigation-card" onClick={(event) => { event.preventDefault(); showGap(dogGapSlug); }}><span className="crossover-card-icon" aria-hidden="true">●</span><span><strong>Dogs on the street in Stockton</strong><small>Investigating · Stockton, California</small><span>Field reports, locations, pathways to care, and current findings</span></span><span aria-hidden="true">→</span></a></div></main>}
-      {(route.page === "reality" || route.page === "connection") && (
+      {route.page === "workIndex" && <main className="crossover-index"><header><a href="/" onClick={(event) => { event.preventDefault(); showPage("home"); }}>CROSSOVER</a><button type="button" onClick={() => showPage("about")}>About</button></header><div className="crossover-index-body"><h1>Investigations</h1><p>Explore what we are learning in Stockton.</p><a href="/work/dogs/" className="crossover-investigation-card" onClick={(event) => { event.preventDefault(); showInvestigation("dogs"); }}><span><strong>Dogs on the street in Stockton</strong><small>Investigating · Stockton, California</small><span>Field reports, locations, pathways to care, and current findings.</span></span></a></div></main>}
+      {(route.page === "home" || route.page === "reality" || route.page === "connection") && (
         <HomePage
           page={route.page}
           onNavigate={showPage}
@@ -288,33 +363,26 @@ export default function App({ initialPath }: { initialPath?: string }) {
         />
       )}
 
-      {route.page === "actionDetail" && (
-        <ActionDetailPage
-          onNavigate={showPage}
-          onOpenInstructions={() => showGapSection(dogGapSlug, "our-findings", "field-observation-procedure")}
-          onOpenMap={() => showWork("dogs-locations-map")}
-          onOpenReport={showReport}
-          onOpenInvestigationReports={() => showGapSection(dogGapSlug, "reports")}
-        />
+      {route.page === "gapDetail" && (
+        <GapReferencePage slug={route.gapSlug ?? firstGapSlug} onNavigate={showPage} onOpenGap={showGap} />
       )}
 
-      {route.page === "gapDetail" && (
-        <GapDetailPage
-          slug={route.gapSlug ?? firstGapSlug}
-          section={route.gapSection ?? "overview"}
-          onOpenSection={showGapSection}
-          onNavigate={showPage}
-          onOpenAbout={() => showPage("about")}
-          onOpenGap={showGap}
-          onOpenUpdates={showGapUpdates}
-          onOpenSources={showGapSources}
-          onOpenWork={showWork}
-          onOpenReport={showReport}
-          onOpenStory={showStory}
-          onOpenAction={setSelectedAction}
-          onOpenActionDetail={showActionDetail}
-        />
-      )}
+      {route.page === "workInvestigation" && <GapDetailPage
+        slug={investigations.find((item) => item.slug === route.investigationSlug)?.gapSlug}
+        section={route.workSection ?? "tasks"}
+        workspaceBasePath={`/work/${route.investigationSlug}/`}
+        onOpenSection={showGapSection}
+        onNavigate={showPage}
+        onOpenAbout={() => showPage("about")}
+        onOpenGap={showGap}
+        onOpenUpdates={showGapUpdates}
+        onOpenSources={showGapSources}
+        onOpenWork={showWork}
+        onOpenReport={showReport}
+        onOpenStory={showStory}
+        onOpenAction={setSelectedAction}
+        onOpenActionDetail={showActionDetail}
+      />}
 
       {route.page === "report" && (
         <FieldReportPage
@@ -384,10 +452,12 @@ export default function App({ initialPath }: { initialPath?: string }) {
         />
       )}
 
-      {route.page === "organizations" && (
+      {(route.page === "organizations" || route.page === "organizationDetail") && (
         <OrganizationsPage
           onNavigate={showPage}
           onOpenReport={showReport}
+          selectedSlug={route.organizationSlug}
+          onOpenOrganization={showOrganization}
         />
       )}
 

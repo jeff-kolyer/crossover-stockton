@@ -1,17 +1,8 @@
-import {
-  AlertCircle,
-  AlertTriangle,
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  ExternalLink,
-  FileText,
-  ShieldCheck,
-} from "lucide-react";
+
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
-import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
+import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { PublicSiteNav } from "./PublicSiteNav";
 import type { EvidenceRecord, GapRecord } from "../types";
 
@@ -38,7 +29,7 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
         <PublicNav onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
         <section className="gap-history-header">
           <button className="gap-history-back" type="button" onClick={() => onNavigate("reality")}>
-            <ArrowLeft size={16} /> Back to needs
+             Back to needs
           </button>
           <h1>Sources</h1>
           <p>This gap record may have moved, been retired, or not been added to the public data yet.</p>
@@ -56,15 +47,14 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
 
       <section className="gap-history-header">
         <button className="gap-history-back" type="button" onClick={() => onOpenGap(gap.slug)}>
-          <ArrowLeft size={16} /> {gap.title}
+           {gap.title}
         </button>
-        <span className="gap-history-kicker">Sources</span>
         <h1>Evidence & Sources</h1>
         <p>The records and public sources Crossover is using to examine this potential need. Public source findings do not establish current conditions on their own.</p>
         <div className="gap-history-meta">
-          <span><InvestigationStatusIcon status={gap.investigation_status} /> {investigationStatusLabel(gap.investigation_status)}</span>
-          {currentAsOf && <span><CheckCircle2 size={16} /> Last checked {formatDate(currentAsOf)}</span>}
-          <button type="button" onClick={() => onOpenGap(gap.slug)}>Need overview <ArrowRight size={15} /></button>
+          <span> {investigationStatusLabel(gap.investigation_status)}</span>
+          {currentAsOf && <span> Last checked {formatDate(currentAsOf)}</span>}
+          <button type="button" onClick={() => onOpenGap(gap.slug)}>Need overview </button>
         </div>
       </section>
 
@@ -96,10 +86,10 @@ export function GapSourcesPage({ slug, onNavigate, onOpenAbout, onOpenGap }: Gap
               </dl>
               {record.source.url ? (
                 <a href={record.source.url} target={record.source.url.startsWith("/") ? undefined : "_blank"} rel={record.source.url.startsWith("/") ? undefined : "noreferrer"}>
-                  {sourceLinkLabel(record.source)} <ExternalLink size={15} />
+                  {sourceLinkLabel(record.source)} 
                 </a>
               ) : (
-                <small><FileText size={15} /> {record.source.type || "Source"}</small>
+                <small> {record.source.type || "Source"}</small>
               )}
             </div>
           </article>

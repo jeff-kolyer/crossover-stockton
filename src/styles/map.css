@@ -1,0 +1,276 @@
+/* Functional geometry for the Leaflet investigation workspace. */
+
+.is-dog-investigation {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.crossover-desktop-header {
+  display: none;
+}
+
+.crossover-map-workspace {
+  position: relative;
+  flex: 1;
+  display: grid;
+  --crossover-panel-width: clamp(280px, var(--crossover-expanded-panel-width, min(480px, 42vw)), calc(100% - 320px));
+  grid-template-columns: var(--crossover-panel-width) minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+}
+
+.crossover-map-workspace.is-panel-collapsed {
+  --crossover-panel-width: 72px;
+}
+
+@media (min-width: 1024px) {
+  .is-dog-investigation > .crossover-outer-header {
+    display: none;
+  }
+
+  .crossover-map-workspace {
+    grid-template-rows: max-content minmax(0, 1fr);
+  }
+
+  .crossover-map-workspace > .crossover-desktop-header {
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    border-right: 1px solid #dadce0;
+  }
+
+  .crossover-map-workspace.is-panel-collapsed .crossover-desktop-header {
+    visibility: hidden;
+  }
+}
+
+@media (min-width: 1200px) {
+  .crossover-map-workspace:not(.is-panel-collapsed) {
+    --crossover-panel-width: clamp(600px, var(--crossover-expanded-panel-width, 40%), calc(100% - 600px));
+  }
+}
+
+.crossover-map-workspace .crossover-shared-map,
+.crossover-map-workspace .crossover-sheet {
+  min-width: 0;
+  min-height: 0;
+}
+
+.crossover-map-workspace .dog-gap-real-map,
+.crossover-map-workspace .investigation-map-frame,
+.crossover-map-workspace .investigation-leaflet-shell,
+.crossover-map-workspace .dog-gap-map-loading {
+  width: 100%;
+  height: 100%;
+}
+
+.crossover-map-workspace .crossover-sheet {
+  grid-column: 1;
+  grid-row: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
+  background: #fff;
+  border-right: 1px solid #dadce0;
+}
+
+.crossover-map-workspace .crossover-shared-map {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+@media (min-width: 1024px) {
+  .crossover-map-workspace .crossover-sheet {
+    grid-row: 2;
+  }
+
+  .crossover-map-workspace .crossover-shared-map {
+    grid-row: 1 / 3;
+  }
+}
+
+.crossover-map-workspace.is-panel-collapsed .crossover-sheet {
+  visibility: hidden;
+}
+
+.crossover-panel-toggle {
+  position: absolute;
+  z-index: 1000;
+  left: calc(var(--crossover-panel-width) + 48px);
+  top: 12px;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #dadce0;
+  color: #202124;
+  font-size: 14px;
+}
+
+.crossover-panel-resize-handle {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--crossover-panel-width) - 6px);
+  width: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: col-resize;
+  touch-action: none;
+}
+
+.crossover-mobile-tabs {
+  display: none;
+}
+
+.crossover-desktop-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+}
+
+.is-dog-investigation .crossover-simple-section {
+  padding: 16px 0 24px;
+}
+
+.is-dog-investigation .crossover-simple-section > h2 {
+  margin-bottom: 4px;
+}
+
+.is-dog-investigation .crossover-simple-section > p {
+  margin-bottom: 12px;
+  color: #5f6368;
+  font-size: 14px;
+}
+
+.crossover-sheet-grip {
+  display: none;
+}
+
+.crossover-map-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.crossover-location-list {
+  display: grid;
+  margin-top: 12px;
+}
+
+.crossover-location-list button {
+  width: 100%;
+  text-align: left;
+}
+
+.crossover-location-list button strong,
+.crossover-location-list button small {
+  display: block;
+}
+
+.crossover-reference {
+  margin-top: 32px;
+}
+
+.crossover-reference ul {
+  margin-bottom: 0;
+}
+
+/* Other map surfaces need a definite height. */
+.action-detail-map,
+.dogs-map-canvas,
+.investigation-map-canvas {
+  position: relative;
+  min-height: 320px;
+}
+
+.action-detail-map .investigation-map-frame,
+.dogs-map-canvas .investigation-map-frame,
+.investigation-map-canvas .investigation-map-frame,
+.action-detail-map .investigation-leaflet-shell,
+.dogs-map-canvas .investigation-leaflet-shell,
+.investigation-map-canvas .investigation-leaflet-shell {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+}
+
+@media (max-width: 1023px) {
+  .crossover-mobile-tabs {
+    display: grid;
+  }
+
+  .crossover-desktop-tabs,
+  .crossover-panel-toggle,
+  .crossover-panel-resize-handle {
+    display: none;
+  }
+
+  .crossover-map-workspace {
+    display: block;
+  }
+
+  .crossover-map-workspace .crossover-shared-map {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .crossover-map-workspace .crossover-sheet,
+  .crossover-map-workspace.is-panel-collapsed .crossover-sheet {
+    position: absolute;
+    z-index: 1;
+    inset: 78% 0 0;
+    border-top: 1px solid #dadce0;
+    border-right: 0;
+    border-radius: 12px 12px 0 0;
+    background: #fff;
+    visibility: visible;
+    transition: top 180ms ease;
+  }
+
+  .crossover-map-workspace.is-partial .crossover-sheet {
+    top: 42%;
+  }
+
+  .crossover-map-workspace.is-expanded .crossover-sheet {
+    top: 0;
+  }
+
+  .crossover-map-workspace.is-dragging .crossover-sheet {
+    transition: none;
+  }
+
+  .crossover-sheet-grip {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 32px;
+    border: 0;
+    border-bottom: 1px solid #e2e4e6;
+    border-radius: 12px 12px 0 0;
+    background: #fff;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .crossover-sheet-grip:active {
+    cursor: grabbing;
+  }
+
+  .crossover-sheet-grip span {
+    width: 36px;
+    height: 4px;
+    border-radius: 999px;
+    background: #aaa;
+  }
+}

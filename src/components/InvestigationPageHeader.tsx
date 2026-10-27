@@ -1,4 +1,3 @@
-import "./InvestigationPageHeader.css";
 
 interface InvestigationPageHeaderProps {
   title: string;

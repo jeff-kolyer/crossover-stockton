@@ -2,38 +2,34 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const dist = new URL("../dist/", import.meta.url);
-const origin = "https://crossoverstockton.org";
+const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
 const base = "/reality/too-many-dogs-still-lack-safe-placement/";
-const legacy = new Map([
-  ["dogs-public-source-review", "research"],
-  ["dogs-map-placement-barriers", "our-findings"],
-  ["dogs-solutions", "improvements"],
-  ["dogs-direct-field-work", "our-findings"],
-  ["dogs-locations-map", "dogs-locations-map"],
-]);
 const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const paths = [...sitemap.matchAll(/<loc>https:\/\/crossoverstockton\.org([^<]+)<\/loc>/g)].map((match) => match[1]);
+const oldWork = new Map([
+  ["dogs-public-source-review", `${base}#gap-sources`],
+  ["dogs-map-placement-barriers", "/work/dogs/findings/"],
+  ["dogs-solutions", `${base}#gap-known`],
+  ["dogs-direct-field-work", "/work/dogs/activity/"],
+  ["dogs-locations-map", "/work/dogs/map/"],
+]);
 
-for (const [workId, section] of legacy) {
-  const oldPath = `/work/${workId}/`;
-  const target = `${base}${section}/`;
-  const html = await readFile(new URL(`.${oldPath}index.html`, dist), "utf8");
-  assert.ok(html.includes(`content="0; url=${target}"`), `${oldPath} lacks a redirect`);
-  assert.ok(html.includes(`href="${origin}${target}"`), `${oldPath} lacks the new canonical URL`);
-  assert.ok(!paths.includes(oldPath), `${oldPath} remains in the sitemap`);
-}
-
-for (const path of paths) {
+async function expectRedirect(path, target) {
   const html = await readFile(new URL(`.${path}index.html`, dist), "utf8");
-  for (const workId of legacy.keys()) {
-    assert.ok(!html.includes(`href="/work/${workId}/`), `${path} links to old Work page ${workId}`);
-  }
-  for (const [, href] of html.matchAll(/href="(\/reality\/too-many-dogs-still-lack-safe-placement\/(?:ways-to-help|improvements|our-findings|research)\/#([^"#]+))"/g)) {
-    const url = new URL(href, origin);
-    const target = await readFile(new URL(`.${url.pathname}index.html`, dist), "utf8");
-    assert.ok(target.includes(`id="${decodeURIComponent(url.hash.slice(1))}"`), `${path} links to missing anchor ${href}`);
-  }
+  assert.ok(html.includes(`content="0; url=${target}"`), `${path}: redirect missing`);
+  assert.ok(!paths.includes(path), `${path}: old URL remains in sitemap`);
 }
 
-assert.ok(paths.includes(`${base}dogs-locations-map/`), "The map's new gap URL is missing from the sitemap");
-console.log(`Verified five legacy Work redirects and links across ${paths.length} public pages.`);
+for (const [workId, target] of oldWork) await expectRedirect(`/work/${workId}/`, target);
+for (const gap of gaps.filter((item) => item.active)) {
+  const root = `/reality/${gap.slug}/`;
+  for (const [section, anchor] of Object.entries({ "key-factors": "gap-unknown", "ways-to-help": "gap-responders", improvements: "gap-known", research: "gap-sources", sources: "gap-sources", updates: "gap-known" })) {
+    await expectRedirect(`${root}${section}/`, `${root}#${anchor}`);
+  }
+  if (gap.id !== "dogs-safe-placement") await expectRedirect(`${root}our-findings/`, `${root}#gap-known`);
+}
+await expectRedirect(`${base}our-findings/`, "/work/dogs/findings/");
+await expectRedirect(`${base}map/`, "/work/dogs/map/");
+assert.ok(paths.includes("/work/dogs/map/"), "The map's Work URL is missing from the sitemap");
+console.log("Verified legacy gap and dog Work redirects.");
+

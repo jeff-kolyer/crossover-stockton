@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+
 import projectsData from "../data/projects.json";
 import recordsData from "../data/records.json";
 import type { CapacityProject, EvidenceRecord, WorkRecord } from "../types";
@@ -35,7 +35,7 @@ function stage(project: CapacityProject) {
 function ProjectSources({ project, onOpenReport }: { project: CapacityProject; onOpenReport: (id: string) => void }) {
   const sources = project.evidence_record_ids.map((id) => recordById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
   const extraUrls = [...new Set([...(project.source_urls ?? []), ...(project.funding_source_urls ?? [])])].filter((url) => !sources.some((record) => record.source.url === url));
-  return <div className="research-project-sources">{sources.map((record) => record.record_type === "field_report" ? <a href={`/reports/${record.id}/`} key={record.id} onClick={(event) => { event.preventDefault(); onOpenReport(record.id); }}>{record.title} <ArrowRight size={13} aria-hidden="true" /></a> : record.source.url ? <a href={record.source.url} target="_blank" rel="noreferrer" key={record.id}>{record.source.publisher || record.title} <ArrowRight size={13} aria-hidden="true" /></a> : null)}{extraUrls.map((url) => <a href={url} target="_blank" rel="noreferrer" key={url}>{new URL(url).hostname.replace(/^www\./, "")} <ArrowRight size={13} aria-hidden="true" /></a>)}</div>;
+  return <div className="research-project-sources">{sources.map((record) => record.record_type === "field_report" ? <a href={`/reports/${record.id}/`} key={record.id} onClick={(event) => { event.preventDefault(); onOpenReport(record.id); }}>{record.title} </a> : record.source.url ? <a href={record.source.url} target="_blank" rel="noreferrer" key={record.id}>{record.source.publisher || record.title} </a> : null)}{extraUrls.map((url) => <a href={url} target="_blank" rel="noreferrer" key={url}>{new URL(url).hostname.replace(/^www\./, "")} </a>)}</div>;
 }
 
 export function DogsSolutionsContent({ item, onOpenReport }: { item: WorkRecord; onOpenReport: (id: string) => void }) {
@@ -44,7 +44,7 @@ export function DogsSolutionsContent({ item, onOpenReport }: { item: WorkRecord;
     <section id="solutions-overview" className="research-section work-content-section gap-refined-card is-card">
       <div className="research-section-heading work-content-heading"><h2>What could change the outcome?</h2></div>
       <p className="gap-mobile-body">The projects below are proposed, underway, or operating. A project stage is not evidence that more dogs have received care. We track the intended effect separately from delivered results.</p>
-      <p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/#gap-overview">Explore the Equation of Care <ArrowRight size={15} aria-hidden="true" /></a> to see how capacity, response, and prevention may interact in an illustrative scenario.</p>
+      <p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/#gap-overview">Explore the Equation of Care </a> to see how capacity, response, and prevention may interact in an illustrative scenario.</p>
     </section>
     <section id="solutions-improvements" className="research-section work-content-section gap-refined-card is-card">
       <div className="research-section-heading work-content-heading"><h2>Tracked improvements</h2></div>
@@ -71,7 +71,7 @@ export function DogsSolutionsContent({ item, onOpenReport }: { item: WorkRecord;
       <div className="research-section-heading work-content-heading"><h2>Ideas to test</h2></div>
       <p className="gap-mobile-body">These are hypotheses, not operating programs or demonstrated solutions. Pathway testing will show which barriers need a response.</p>
       <ul className="solution-ideas"><li><strong>Make a help route easier to follow.</strong> If volunteer inquiries stall, clearer requirements and response tracking may help. First verify where the current route breaks.</li><li><strong>Make report outcomes visible.</strong> If field-call records show unresolved handoffs, a documented status trail may help people coordinate. First verify what the records establish.</li></ul>
-      <p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/">See pathway evaluations <ArrowRight size={15} aria-hidden="true" /></a></p>
+      <p className="gap-mobile-body"><a href="/reality/too-many-dogs-still-lack-safe-placement/ways-to-help/">See pathway evaluations </a></p>
     </section>
   </div>;
 }

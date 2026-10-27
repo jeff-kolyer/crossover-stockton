@@ -1,50 +1,13 @@
-import {
-  AlertCircle,
-  AlertTriangle,
-  ArrowLeft,
-  ArrowRight,
-  BarChart3,
-  Building2,
-  BedSingle,
-  CheckCircle2,
-  Clock3,
-  ClipboardList,
-  Dog,
-  DoorClosed,
-  DoorOpen,
-  ExternalLink,
-  FileText,
-  Gauge,
-  Heart,
-  HeartHandshake,
-  Home,
-  House,
-  KeyRound,
-  MapPin,
-  PackageOpen,
-  PawPrint,
-  Plus,
-  Refrigerator,
-  Route,
-  Search,
-  ShieldCheck,
-  Stethoscope,
-  Truck,
-  Users,
-  Wrench,
-} from "lucide-react";
+
 import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
 import storiesData from "../data/stories.json";
 import workData from "../data/work.json";
-import type { LucideIcon } from "lucide-react";
-import { getActionIcon } from "../lib/actionIcons";
 import { gapWorkSummary } from "../lib/gapWorkSummary";
 import { gapUpdateHref, gapUpdates, type GapUpdateEntry } from "../lib/gapUpdates";
-import { InvestigationStatusIcon, investigationStatusLabel } from "../lib/gapInvestigationStatus";
-import { workIcon } from "../lib/workIcon";
+import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { DogGapOverview } from "./DogGapOverview";
@@ -55,8 +18,9 @@ import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRec
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface GapDetailPageProps {
+  workspaceBasePath?: string;
   slug?: string;
-  section?: "overview" | "reports" | "map" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
+  section?: "overview" | "tasks" | "activity" | "reports" | "map" | "findings" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   onOpenSection?: (slug: string, section: NonNullable<GapDetailPageProps["section"]>, anchor?: string) => void;
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout: () => void;
@@ -96,36 +60,18 @@ const work = workData as WorkRecord[];
 const activeGaps = gaps.filter((item) => item.active).sort((a, b) => a.rank - b.rank);
 const logoDark = "/images/logo_dark.webp";
 const logoLight = "/images/logo_light.webp";
-const stateIcons = [BarChart3, Stethoscope, Users];
 const dogGapNavItems: WorkSectionNavItem[] = [
-  { id: "gap-overview", label: "Overview", icon: Search },
-  { id: "system-model", label: "System model", icon: Gauge },
-  { id: "dog-evidence", label: "Evidence", icon: FileText },
-  { id: "dog-pathways", label: "Pathways", icon: Route },
-  { id: "dog-solutions", label: "Solutions", icon: Wrench },
-  { id: "dog-locations", label: "Locations map", icon: MapPin },
-  { id: "dog-journey", label: "Journey", icon: ClipboardList },
-  { id: "recent-updates", label: "Updates", icon: Clock3 },
+  { id: "gap-overview", label: "Overview" },
+  { id: "system-model", label: "System model" },
+  { id: "dog-evidence", label: "Evidence" },
+  { id: "dog-pathways", label: "Pathways" },
+  { id: "dog-solutions", label: "Solutions" },
+  { id: "dog-locations", label: "Locations map" },
+  { id: "dog-journey", label: "Journey" },
+  { id: "recent-updates", label: "Updates" },
 ];
-const whyIconRegistry: Record<NonNullable<GapRecord["why_icons"]>[number], LucideIcon> = {
-  Dog,
-  Stethoscope,
-  House,
-  HeartHandshake,
-  PawPrint,
-  DoorClosed,
-  ClipboardList,
-  PackageOpen,
-  Refrigerator,
-  Truck,
-  DoorOpen,
-  Users,
-  BedSingle,
-  Route,
-  KeyRound,
-};
 
-export function GapDetailPage({ slug, section = "overview", onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction, onOpenActionDetail }: GapDetailPageProps) {
+export function GapDetailPage({ slug, section = "overview", workspaceBasePath, onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction, onOpenActionDetail }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -134,11 +80,11 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
         <section className="gap-refined-hero">
           <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />
           <div className="gap-detail-copy gap-refined-copy">
-            <p className="gap-severity"><AlertCircle size={18} /> Gap not found</p>
+            <p className="gap-severity"> Gap not found</p>
             <h1>We could not find that gap.</h1>
             <p>This record may have moved, been retired, or not been added to the public data yet.</p>
             <button className="gap-back-link" type="button" onClick={() => onNavigate("reality")}>
-              <ArrowLeft size={16} /> Back to all gaps
+               Back to all gaps
             </button>
           </div>
         </section>
@@ -173,9 +119,9 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
   const nextGap = gapIndex >= 0 && gapIndex < activeGaps.length - 1 ? activeGaps[gapIndex + 1] : undefined;
   const isDogGap = gap.id === "dogs-safe-placement";
 
-  if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}${isDogGap ? " is-dog-investigation" : ""}`}>
+  if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}${isDogGap && workspaceBasePath ? " is-dog-investigation" : ""}`}>
     {!isDogGap && <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />}
-    <DogGapExperience gap={gap} section={section} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} onOpenActionDetail={onOpenActionDetail} />
+    <DogGapExperience gap={gap} section={section} workspaceBasePath={workspaceBasePath} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} onOpenActionDetail={onOpenActionDetail} />
     {!isDogGap && <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>}
   </main>;
 
@@ -197,14 +143,14 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
           <div className="gap-refined-hero-intro">
             <div className="gap-detail-copy gap-refined-copy">
               <section className="gap-hero-summary-card" id={isDogGap ? "gap-overview" : undefined} aria-label="Gap summary">
-                <span className="gap-level"><InvestigationStatusIcon status={gap.investigation_status} /> {investigationStatusLabel(gap.investigation_status)}</span>
+                <span className="gap-level"> {investigationStatusLabel(gap.investigation_status)}</span>
                 <h1>{gap.title}</h1>
                 <p className="gap-mobile-body">{gap.summary}</p>
                 <div className="gap-detail-meta" aria-label="Gap record metadata">
-                  <span><FileText size={17} /> {gap.sources.length} sources</span>
-                  <button type="button" onClick={() => onOpenSources(gap.slug)}><ExternalLink size={16} /> View sources</button>
-                  <span><Users size={18} /> {relatedOrgs.length} organizations</span>
-                  {gap.updated_at && <span><CheckCircle2 size={18} /> Record updated <strong>{formatDate(gap.updated_at)}</strong></span>}
+                  <span> {gap.sources.length} sources</span>
+                  <button type="button" onClick={() => onOpenSources(gap.slug)}> View sources</button>
+                  <span> {relatedOrgs.length} organizations</span>
+                  {gap.updated_at && <span> Record updated <strong>{formatDate(gap.updated_at)}</strong></span>}
                 </div>
               </section>
             </div>
@@ -228,20 +174,19 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
                     <h2>Who's responding</h2>
                     <p className="gap-mobile-body">Organizations identified in public sources or Crossover's work.</p>
                   </div>
-                  <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("organizations")}>See all <ArrowRight size={14} /></button>
+                  <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("organizations")}>See all </button>
                 </div>
                 <div className="gap-refined-org-list">
-                  {relatedOrgs.map((org, index) => {
-                    const Icon = getOrgIcon(index);
+                  {relatedOrgs.map((org) => {
                     const href = org.website || org.source_url;
                     const responderRole = roleForOrg(gap, org.id);
                     return (
                       <a className="gap-refined-org-row gap-info-card" href={href || undefined} target={href ? "_blank" : undefined} rel={href ? "noreferrer" : undefined} key={org.id}>
-                        <Icon size={28} />
+                        
                         <span>
                           <strong>{org.name}</strong>
                           <span className="gap-mobile-body">{responderRole?.label || org.summary}</span>
-                          <em className="gap-info-card-link">Visit their website <ArrowRight size={14} /></em>
+                          <em className="gap-info-card-link">Visit their website </em>
                         </span>
                       </a>
                     );
@@ -264,7 +209,7 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
                 <div className="gap-update-list">
                   {recentUpdates.map((update) => <RecentUpdateItem update={update} onOpenWork={onOpenWork} onOpenReport={onOpenReport} key={update.id} />)}
                 </div>
-                <button className="gap-card-link gap-updates-footer-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View all updates <ArrowRight size={15} /></button>
+                <button className="gap-card-link gap-updates-footer-link" type="button" onClick={() => onOpenUpdates(gap.slug)}>View all updates </button>
               </section>
             )}
 
@@ -287,7 +232,7 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
                   {orderedActionCards.slice(1, 4).map((action) => <ActionCard action={action} onOpenAction={onOpenAction} key={action.id} />)}
                 </div>
               </div>
-              <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("action")}>See all actions <ArrowRight size={14} /></button>
+              <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("action")}>See all actions </button>
             </section>
           )}
 
@@ -309,7 +254,7 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
                   </button>
                 ))}
               </div>
-              <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("connection")}>See all <ArrowRight size={14} /></button>
+              <button className="gap-card-link gap-info-card-link" type="button" onClick={() => onNavigate("connection")}>See all </button>
             </section>
           )}
         </div>
@@ -320,20 +265,20 @@ export function GapDetailPage({ slug, section = "overview", onOpenSection, onNav
               <h2>Sources &amp; evidence</h2>
             </div>
             <div className="gap-refined-sources-main">
-              <FileText size={30} aria-hidden="true" />
+              
               <span>
                 <strong>Sources and evidence</strong>
                 <span className="gap-mobile-body">{gap.sources.length} sources inform this gap, including local reports, organizational updates, and news coverage.</span>
               </span>
             </div>
-            <button className="gap-card-link" type="button" onClick={() => onOpenSources(gap.slug)}>View all sources <ArrowRight size={15} /></button>
+            <button className="gap-card-link" type="button" onClick={() => onOpenSources(gap.slug)}>View all sources </button>
           </section>
         )}
       </section>}
 
       <div className="page-bottom-back-row">
         <button className="page-bottom-back" type="button" onClick={() => onNavigate("reality")}>
-          <ArrowLeft size={16} /> Back to gaps
+           Back to gaps
         </button>
       </div>
 
@@ -378,7 +323,7 @@ function RecentUpdateItem({
           ? (event) => navigateInternalLink(event, () => onOpenWork(destination.id, destination.anchor))
           : undefined}
     >
-      <small>{update.linkLabel} <ExternalLink size={14} /></small>
+      <small>{update.linkLabel} </small>
     </a>
   ) : null;
 
@@ -387,7 +332,6 @@ function RecentUpdateItem({
       <span className="gap-update-meta">
         <time className="gap-update-date" dateTime={update.date}>{update.dateContext ? `${update.dateContext} ` : ""}{formatDate(update.date)}</time>
         <span className="gap-update-kicker">
-          <update.Icon className="gap-update-type-icon" size={22} />
           <em>{update.typeLabel}</em>
         </span>
       </span>
@@ -421,16 +365,12 @@ function GapPageToolbar({
     <div className="gap-page-toolbar">
       <div className="gap-page-toolbar-inner">
         <button className="gap-page-back" type="button" onClick={() => onNavigate("reality")}>
-          <ArrowLeft size={15} /> Back to all gaps
+           Back to all gaps
         </button>
         <div className="gap-page-selector" aria-label="Gap navigation">
           <span>Gap {currentIndex >= 0 ? currentIndex + 1 : "—"} of {total}</span>
-          <button type="button" aria-label="Previous gap" disabled={!previousGap} onClick={() => previousGap && onOpenGap(previousGap.slug)}>
-            <ArrowLeft size={16} />
-          </button>
-          <button type="button" aria-label="Next gap" disabled={!nextGap} onClick={() => nextGap && onOpenGap(nextGap.slug)}>
-            <ArrowRight size={16} />
-          </button>
+          <button type="button" aria-label="Previous gap" disabled={!previousGap} onClick={() => previousGap && onOpenGap(previousGap.slug)}>Previous gap</button>
+          <button type="button" aria-label="Next gap" disabled={!nextGap} onClick={() => nextGap && onOpenGap(nextGap.slug)}>Next gap</button>
         </div>
       </div>
     </div>
@@ -438,13 +378,12 @@ function GapPageToolbar({
 }
 
 function ActionCard({ action, onOpenAction }: { action: PublicActionRecord; onOpenAction: (action: PublicActionRecord) => void }) {
-  const Icon = getActionIcon(action);
   return (
     <button className="gap-refined-action-card gap-info-card action-card" type="button" onClick={() => onOpenAction(action)}>
-      <Icon size={32} />
+      
       <strong>{shortActionTitle(action.title)}</strong>
       <span className="gap-mobile-body">{action.summary}</span>
-      <small className="gap-info-card-link">{action.source_url ? actionLinkLabel(action) : "Source not verified" } <ArrowRight size={14} /></small>
+      <small className="gap-info-card-link">{action.source_url ? actionLinkLabel(action) : "Source not verified" } </small>
     </button>
   );
 }
@@ -465,7 +404,7 @@ function FeaturedActionCard({
         <small>Featured action</small>
         <strong>{shortActionTitle(action.title)}</strong>
         <span className="gap-mobile-body">{action.summary}</span>
-        <em>{shortActionTitle(action.title)} <ArrowRight size={15} /></em>
+        <em>{shortActionTitle(action.title)} </em>
       </span>
     </button>
   );
@@ -481,11 +420,9 @@ function WorkSection({ items, gap, onOpenWork }: { items: WorkRecord[]; gap: Gap
       </div>
       <div className="gap-work-list">
         {items.map((item, index) => {
-          const Icon = workIcon(item.type);
           const { description, progress } = gapWorkSummary(item);
           return (
             <a className="gap-work-item" href={`/work/${item.id}/`} key={item.id} onClick={(event) => navigateInternalLink(event, () => onOpenWork(item.id))}>
-              <span className="gap-work-icon"><Icon size={22} /></span>
               <div>
                 <strong>{item.title}</strong>
                 <p className="gap-mobile-body">{description}</p>
@@ -508,12 +445,11 @@ function workStatusLabel(status: WorkRecord["status"]) {
 }
 
 function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
-  const icons = [Home, Stethoscope, PawPrint, Heart];
   const steps = gap.what_we_are_seeing.slice(0, 4).map((point, index) => {
     const parts = point.split(/,\s+|:\s+/);
     const label = parts.length > 1 ? `${parts[0]}.` : compactInsightTitle(point);
     const text = parts.length > 1 ? parts.slice(1).join(", ") : point;
-    return { icon: icons[index] ?? Heart, label, text };
+    return { label, text };
   });
 
   return (
@@ -522,9 +458,9 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
         <span>What we're seeing</span>
       </div>
       <div className="gap-stuck-flow">
-        {steps.map((step, index) => (
+        {steps.map((step) => (
           <article className="gap-stuck-card" key={step.label}>
-            <step.icon size={32} aria-hidden="true" />
+            
             <div className="gap-stuck-main">
               <h3>{step.label}</h3>
               <p className="gap-mobile-body">{step.text}</p>
@@ -538,32 +474,26 @@ function HowGapGetsStuck({ gap }: { gap: GapRecord }) {
 
 function GapFlowSection({ gap }: { gap: GapRecord }) {
   const factors = gap.contributing_factors;
-  const fallbackIcons = ["Dog", "Stethoscope", "HeartHandshake"] as const;
   const steps = gap.id === "dogs-safe-placement" ? [
     {
-      icon: whyIconRegistry[gap.why_icons?.[0] ?? fallbackIcons[0]],
       label: "Are dogs reaching the right responders?",
       text: "Public reports describe stray and abandoned dogs in Stockton. We're checking what happens after a dog is reported and whether care is reached.",
     },
     {
-      icon: whyIconRegistry[gap.why_icons?.[1] ?? fallbackIcons[1]],
       label: "Where does care capacity narrow?",
       text: "City records report shelter intake pressure. We're investigating how shelter space, veterinary care, and foster options affect individual dogs.",
     },
     {
-      icon: whyIconRegistry[gap.why_icons?.[2] ?? fallbackIcons[2]],
       label: "What helps dogs reach safe placement?",
       text: "Public sources describe foster, adoption, and rescue pathways. We're checking their current availability and what happens when people try to use them.",
     },
   ] : [
     {
-      icon: whyIconRegistry[gap.why_icons?.[0] ?? fallbackIcons[0]],
       label: "What public sources report",
       text: gap.what_we_are_seeing[0] || gap.current_state || gap.summary,
       evidence: gap.current_state_items?.[0],
     },
     {
-      icon: whyIconRegistry[gap.why_icons?.[1] ?? fallbackIcons[1]],
       label: "Possible limits on access",
       text: factors.length
         ? `${factors.map(compactFactor).join(". ")}.`
@@ -571,7 +501,6 @@ function GapFlowSection({ gap }: { gap: GapRecord }) {
       factors,
     },
     {
-      icon: whyIconRegistry[gap.why_icons?.[2] ?? fallbackIcons[2]],
       label: "What remains to be checked",
       text: gap.what_we_are_seeing[1] || gap.current_state || gap.summary,
       evidence: gap.current_state_items?.[2] || gap.current_state_items?.[1],
@@ -589,7 +518,7 @@ function GapFlowSection({ gap }: { gap: GapRecord }) {
       <div className="gap-flow-steps">
         {steps.map((step) => (
           <article key={step.label}>
-            <step.icon className="gap-flow-icon" size={30} aria-hidden="true" />
+            
             <div>
               <strong>{step.label}</strong>
               <p className="gap-mobile-body">{step.text}</p>
@@ -757,21 +686,6 @@ function formatStatus(status: GapRecord["status"]) {
   if (status === "high_priority") return "High Priority";
   if (status === "monitored") return "Monitored";
   return status[0].toUpperCase() + status.slice(1);
-}
-
-function renderStatusIcon(status: GapRecord["status"]) {
-  if (status === "improving") return <CheckCircle2 size={18} />;
-  if (status === "high_priority") return <AlertTriangle size={18} />;
-  if (status === "monitored") return <ShieldCheck size={18} />;
-  return <AlertCircle size={18} />;
-}
-
-function getOrgIcon(index: number) {
-  return [PawPrint, Heart, Building2, PawPrint][index % 4];
-}
-
-function factorIcon(index: number) {
-  return [PawPrint, Home, BarChart3, Stethoscope, MapPin, Gauge][index % 6];
 }
 
 function compactFactor(value: string) {

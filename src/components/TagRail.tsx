@@ -1,5 +1,4 @@
 import { useState, type Dispatch, type SetStateAction } from "react";
-import { ChevronDown, Search, Sparkles, X } from "lucide-react";
 import { FAMILY_LABELS, MODES } from "../constants";
 import type { RecordKind, TagDefinition } from "../types";
 import { cn } from "../lib/utils";
@@ -56,9 +55,6 @@ export function TagRail({ tags, selectedTagIds, query, selectedRecordKinds, mode
   return (
     <aside className="tag-rail">
       <section className="rail-callout" hidden>
-        <div>
-          <Sparkles size={18} />
-        </div>
         <h2>See what matters now.</h2>
         <p>Use search and tags to filter this AI feed for real-time services, gaps, and active work.</p>
         <button type="button">How AI helps -&gt;</button>
@@ -72,7 +68,7 @@ export function TagRail({ tags, selectedTagIds, query, selectedRecordKinds, mode
         <section className="tag-family is-view is-static-view" key="view">
           <button className="tag-family-header" type="button" onClick={() => toggleCollapsedFamily("view", setCollapsedFamilies)}>
             <span>View</span>
-            <ChevronDown size={16} className={collapsedFamilies.has("view") ? "is-collapsed" : ""} />
+            
           </button>
           {!collapsedFamilies.has("view") && MODES.map((mode) => (
             <button
@@ -89,7 +85,7 @@ export function TagRail({ tags, selectedTagIds, query, selectedRecordKinds, mode
         </section>
 
         <label className="search-box">
-          <Search size={16} />
+          
           <input value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="Search filters" />
         </label>
 
@@ -103,7 +99,7 @@ export function TagRail({ tags, selectedTagIds, query, selectedRecordKinds, mode
               {activeTags.map((tag) => (
                 <button type="button" key={tag.id} onClick={() => onToggleTag(tag.id)}>
                   {tag.label}
-                  <X size={13} />
+                  
                 </button>
               ))}
             </div>
@@ -124,7 +120,7 @@ export function TagRail({ tags, selectedTagIds, query, selectedRecordKinds, mode
             <section className="tag-family" key={family}>
               <button className="tag-family-header" type="button" onClick={() => toggleCollapsedFamily(family, setCollapsedFamilies)}>
                 <span>{FAMILY_LABELS[family as keyof typeof FAMILY_LABELS] ?? family}</span>
-                <ChevronDown size={16} className={isCollapsed ? "is-collapsed" : ""} />
+                
               </button>
               {!isCollapsed && visibleTags.map((tag) => (
                 <button
@@ -154,7 +150,7 @@ export function TagRail({ tags, selectedTagIds, query, selectedRecordKinds, mode
                     });
                   }}
                 >
-                  <ChevronDown size={14} className={isExpanded ? "is-expanded" : ""} />
+                  
                   {isExpanded ? "Show less" : `${hiddenCount} more`}
                 </button>
               )}

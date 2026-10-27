@@ -1,34 +1,6 @@
 import L from "leaflet";
-import {
-  Baby,
-  BatteryCharging,
-  BriefcaseBusiness,
-  Bus,
-  Car,
-  ClipboardCheck,
-  Droplets,
-  FileBadge,
-  HeartPulse,
-  Home,
-  KeyRound,
-  MapPin,
-  MessageSquareText,
-  PawPrint,
-  Scale,
-  Shield,
-  ShowerHead,
-  Snowflake,
-  Soup,
-  Sparkles,
-  ThermometerSun,
-  Utensils,
-  WashingMachine,
-  Wifi,
-  type LucideIcon,
-} from "lucide-react";
 import { MapContainer, Marker, Polygon, Popup, TileLayer, Tooltip, useMap } from "react-leaflet";
 import { useEffect } from "react";
-import { renderToStaticMarkup } from "react-dom/server";
 import type { FeedRecord, TagDefinition } from "../types";
 import { getRecordTags } from "../lib/utils";
 
@@ -227,7 +199,7 @@ function makeIcon(record: FeedRecord, tagsById: Map<string, TagDefinition>, sele
   const availability = tags.find((tag) => tag.family === "availability")?.id;
   const workStage = tags.find((tag) => tag.family === "work_stage")?.id;
   const iconKey = support !== "default" ? support : serviceType ?? record.record_kind;
-  const icon = renderMarkerIcon(iconKey);
+  const label = iconKey.replaceAll("_", " ").replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]!);
   const classes = [
     "custom-marker",
     record.record_kind === "gap" && "is-gap",
@@ -242,57 +214,6 @@ function makeIcon(record: FeedRecord, tagsById: Map<string, TagDefinition>, sele
     .filter(Boolean)
     .join(" ");
   const rankHtml = rank ? `<span class="marker-rank">${rank}</span>` : "";
-  const html = `<div class="${classes}">${icon}${rankHtml}</div>`;
-  return L.divIcon({ html, className: "marker-shell", iconSize: [44, 44], iconAnchor: [22, 22] });
+  const html = `<div class="${classes}">${label}${rankHtml}</div>`;
+  return L.divIcon({ html, className: "marker-shell", iconSize: [120, 44], iconAnchor: [60, 22] });
 }
-
-function renderMarkerIcon(tagId: string) {
-  const Icon = MARKER_ICONS[tagId] ?? MARKER_ICONS.default;
-  return renderToStaticMarkup(<Icon className="marker-icon" size={23} strokeWidth={2.7} aria-hidden="true" />);
-}
-
-const MARKER_ICONS: Record<string, LucideIcon> = {
-  food: Utensils,
-  meal_service: Utensils,
-  pantry: Soup,
-  grocery_distribution: Soup,
-  shelter: Home,
-  safe_parking: Car,
-  safe_parking_lot: Car,
-  overnight_parking: Car,
-  hygiene: ShowerHead,
-  mobile_shower: ShowerHead,
-  laundry: WashingMachine,
-  cooling: Snowflake,
-  cooling_center: Snowflake,
-  water: Droplets,
-  hydration_station: Droplets,
-  restrooms: MapPin,
-  heating: ThermometerSun,
-  warming_center: ThermometerSun,
-  family_support: Baby,
-  charging: BatteryCharging,
-  transportation: Bus,
-  health: HeartPulse,
-  mental_health: HeartPulse,
-  substance_use_support: Shield,
-  connectivity: Wifi,
-  storage: KeyRound,
-  storage_locker: KeyRound,
-  id_service: FileBadge,
-  id_replacement: FileBadge,
-  benefits: ClipboardCheck,
-  benefits_enrollment: ClipboardCheck,
-  legal: Scale,
-  legal_clinic: Scale,
-  housing_help: Home,
-  safety: Shield,
-  pets: PawPrint,
-  accessibility: HeartPulse,
-  work: BriefcaseBusiness,
-  post: MessageSquareText,
-  signal: Sparkles,
-  gap: Sparkles,
-  service: ClipboardCheck,
-  default: Sparkles,
-};

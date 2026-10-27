@@ -1,1 +1,1 @@
-export { GoogleLocationsMap as InvestigationLocationsMap } from "./GoogleLocationsMap";
+export { LeafletLocationsMap as InvestigationLocationsMap } from "./LeafletLocationsMap";

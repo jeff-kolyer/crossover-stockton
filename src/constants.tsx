@@ -1,13 +1,4 @@
-import {
-  BadgeCheck,
-  BriefcaseBusiness,
-  CircleAlert,
-  HandHeart,
-  MapPin,
-  Megaphone,
-  MessageSquareText,
-  Soup,
-} from "lucide-react";
+
 import type { ModeId, RecordKind, TagFamily } from "./types";
 
 export const MODES: Array<{
@@ -16,13 +7,12 @@ export const MODES: Array<{
   label: string;
   question: string;
   empty: string;
-  icon: typeof Megaphone;
 }> = [
-  { id: "signals", kind: "signal", label: "Signals", question: "What changed?", empty: "No current signals match these filters.", icon: Megaphone },
-  { id: "services", kind: "service", label: "Services", question: "What exists?", empty: "No services match these tags.", icon: HandHeart },
-  { id: "gaps", kind: "gap", label: "Gaps", question: "What is needed?", empty: "No tracked gaps match these tags.", icon: CircleAlert },
-  { id: "work", kind: "work", label: "Work", question: "What is being done?", empty: "No work records match these tags.", icon: BriefcaseBusiness },
-  { id: "posts", kind: "post", label: "Posts", question: "What are people saying?", empty: "No posts match these tags.", icon: MessageSquareText },
+  { id: "signals", kind: "signal", label: "Signals", question: "What changed?", empty: "No current signals match these filters." },
+  { id: "services", kind: "service", label: "Services", question: "What exists?", empty: "No services match these tags." },
+  { id: "gaps", kind: "gap", label: "Gaps", question: "What is needed?", empty: "No tracked gaps match these tags." },
+  { id: "work", kind: "work", label: "Work", question: "What is being done?", empty: "No work records match these tags." },
+  { id: "posts", kind: "post", label: "Posts", question: "What are people saying?", empty: "No posts match these tags." },
 ];
 
 export const DEFAULT_FILTER_FAMILIES: Record<RecordKind, TagFamily[]> = {
@@ -51,13 +41,3 @@ export const FAMILY_LABELS: Record<TagFamily, string> = {
   related: "Related",
 };
 
-export const SUPPORT_ICONS: Record<string, typeof Soup> = {
-  food: Soup,
-  shelter: HandHeart,
-  cooling: BadgeCheck,
-  water: BadgeCheck,
-  restrooms: MapPin,
-  safe_parking: MapPin,
-  id_service: BadgeCheck,
-  transportation: MapPin,
-};

@@ -1,4 +1,4 @@
-import { RotateCcw } from "lucide-react";
+
 import { useState } from "react";
 import { calculateDogCareScenario, defaultDogCareSettings, dogCareFactors, type DogCareFactor, type DogCareSettings } from "../lib/dogCareScenario";
 
@@ -12,7 +12,7 @@ export function DogCarePreview() {
 
   return <div className="dog-preview-model">
     <div className="dog-preview-controls">
-      <div className="dog-preview-controls-heading"><h3>Adjust three factors</h3><button type="button" onClick={() => setSettings({ ...defaultDogCareSettings })}><RotateCcw size={15} aria-hidden="true" /> Reset</button></div>
+      <div className="dog-preview-controls-heading"><h3>Adjust three factors</h3><button type="button" onClick={() => setSettings({ ...defaultDogCareSettings })}> Reset</button></div>
       {previewFactors.map((factor) => <label className="dog-preview-factor" key={factor.key}>
         <span><strong>{factor.label}</strong><output>{settings[factor.key]} / 100</output></span>
         <small>{factor.description}</small>

@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { Bookmark, MoreHorizontal } from "lucide-react";
 import type { FeedRecord, TagDefinition } from "../types";
 import { cn, formatTimeLabel, getRecordTags } from "../lib/utils";
 
@@ -45,10 +44,6 @@ export function FeedCard({ record, rank, tagsById, selected, onSelect }: FeedCar
       </div>
       <div className="feed-item-footer">
         {place && <div className="location-line">{place}</div>}
-        <span className="feed-item-actions" aria-hidden="true">
-          <Bookmark size={18} />
-          <MoreHorizontal size={20} />
-        </span>
       </div>
     </motion.button>
   );
