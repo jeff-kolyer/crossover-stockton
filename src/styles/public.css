@@ -383,8 +383,8 @@ html:has(.public-site) {
     grid-row: 1;
   }
 
-  .action-index-page .action-index-feature-copy > .public-primary-action {
-    width: 100%;
+  .action-index-page .action-index-feature-copy {
+    display: grid;
   }
 
   .is-section-page .public-hero-copy,

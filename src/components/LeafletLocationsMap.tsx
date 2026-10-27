@@ -71,25 +71,81 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
     const basemap = maplibreGL({ style: "https://tiles.openfreemap.org/styles/positron" }).addTo(instance);
     const vectorMap = basemap.getMaplibreMap();
     vectorMap.on("load", () => {
+      if (vectorMap.getSource("openmaptiles") && vectorMap.getLayer("park") && !vectorMap.getLayer("crossover-rural-landcover")) {
+        vectorMap.addLayer({
+          id: "crossover-rural-landcover",
+          type: "fill",
+          source: "openmaptiles",
+          "source-layer": "landcover",
+          filter: ["match", ["get", "class"], ["farmland", "grass", "wetland"], true, false],
+          paint: { "fill-color": "#d7f2df" },
+        }, "park");
+      }
+      if (vectorMap.getLayer("highway_minor") && !vectorMap.getLayer("crossover-minor-street-casing")) {
+        vectorMap.addLayer({
+          id: "crossover-minor-street-casing",
+          type: "line",
+          source: "openmaptiles",
+          "source-layer": "transportation",
+          minzoom: 8,
+          filter: ["all", ["match", ["geometry-type"], ["LineString", "MultiLineString"], true, false], ["match", ["get", "class"], ["minor", "service", "track"], true, false]],
+          layout: { "line-cap": "round", "line-join": "round" },
+          paint: {
+            "line-color": "#e4e9ed",
+            "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.7, 12, 1.6, 15, 3.5, 20, 13],
+          },
+        }, "highway_minor");
+      }
       const colors: Record<string, ["background-color" | "fill-color" | "line-color" | "text-color", string]> = {
-        background: ["background-color", "#f7f5eb"],
-        landuse_residential: ["fill-color", "#f4f1e7"],
-        park: ["fill-color", "#cce9b6"],
-        landcover_wood: ["fill-color", "#d9ebcc"],
-        water: ["fill-color", "#a9d9ef"],
-        waterway: ["line-color", "#87c7e6"],
-        waterway_line_label: ["text-color", "#397ba6"],
-        water_name_line_label: ["text-color", "#397ba6"],
-        water_name_point_label: ["text-color", "#397ba6"],
-        highway_major_casing: ["line-color", "#aebfd3"],
-        highway_major_subtle: ["line-color", "#b7cbe0"],
-        highway_motorway_casing: ["line-color", "#829dbb"],
-        highway_motorway_subtle: ["line-color", "#a2bad1"],
-        highway_motorway_bridge_casing: ["line-color", "#829dbb"],
+        background: ["background-color", "#eeeae1"],
+        landuse_residential: ["fill-color", "#f8f9f8"],
+        park: ["fill-color", "#c7ebd2"],
+        landcover_wood: ["fill-color", "#d7f2df"],
+        water: ["fill-color", "#84d3eb"],
+        waterway_line_label: ["text-color", "#348da4"],
+        water_name_line_label: ["text-color", "#348da4"],
+        water_name_point_label: ["text-color", "#348da4"],
+        highway_minor: ["line-color", "#ffffff"],
+        highway_major_casing: ["line-color", "#9fb3c9"],
+        highway_major_inner: ["line-color", "#d3dae0"],
+        highway_major_subtle: ["line-color", "#d3dae0"],
+        highway_motorway_casing: ["line-color", "#6e88a6"],
+        highway_motorway_inner: ["line-color", "#91a9c3"],
+        highway_motorway_subtle: ["line-color", "#91a9c3"],
+        highway_motorway_bridge_casing: ["line-color", "#6e88a6"],
+        highway_motorway_bridge_inner: ["line-color", "#91a9c3"],
+        tunnel_motorway_casing: ["line-color", "#6e88a6"],
+        tunnel_motorway_inner: ["line-color", "#91a9c3"],
+        label_city: ["text-color", "#202124"],
+        label_city_capital: ["text-color", "#202124"],
+        label_town: ["text-color", "#5f6368"],
+        label_village: ["text-color", "#5f6368"],
+        label_other: ["text-color", "#5f6368"],
+        "highway-name-path": ["text-color", "#5f6368"],
+        "highway-name-minor": ["text-color", "#5f6368"],
+        "highway-name-major": ["text-color", "#5f6368"],
       };
       Object.entries(colors).forEach(([layer, [property, color]]) => {
         if (vectorMap.getLayer(layer)) vectorMap.setPaintProperty(layer, property, color);
       });
+      if (vectorMap.getLayer("waterway")) {
+        vectorMap.setPaintProperty("waterway", "line-color", ["match", ["get", "class"], ["river", "canal"], "#84d3eb", "#bfeaf5"]);
+      }
+      const roadWidths: Record<string, number[]> = {
+        highway_minor: [8, 0.4, 12, 1, 15, 2.7, 20, 11.5],
+        highway_major_casing: [11, 3, 13, 4.2, 16, 7, 20, 18],
+        highway_major_inner: [11, 2, 13, 3, 16, 5.5, 20, 16],
+        highway_motorway_casing: [6, 2, 10, 5, 13, 8, 16, 12, 20, 26],
+        highway_motorway_inner: [6, 1.2, 10, 3.8, 13, 6.6, 16, 10, 20, 23],
+        highway_motorway_bridge_casing: [6, 2.6, 10, 5.8, 13, 9, 16, 13, 20, 28],
+        highway_motorway_bridge_inner: [6, 1.4, 10, 4.4, 13, 7.4, 16, 11, 20, 25],
+        tunnel_motorway_casing: [6, 2, 10, 5, 13, 8, 16, 12, 20, 26],
+        tunnel_motorway_inner: [6, 1.2, 10, 3.8, 13, 6.6, 16, 10, 20, 23],
+      };
+      Object.entries(roadWidths).forEach(([layer, stops]) => {
+        if (vectorMap.getLayer(layer)) vectorMap.setPaintProperty(layer, "line-width", ["interpolate", ["linear"], ["zoom"], ...stops]);
+      });
+      if (vectorMap.getLayer("highway_minor")) vectorMap.setPaintProperty("highway_minor", "line-opacity", 1);
     });
     const resizeObserver = new ResizeObserver(() => instance.invalidateSize({ pan: false, animate: false }));
     resizeObserver.observe(containerRef.current);
