@@ -194,9 +194,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
             );
           })}
         </div>
-        <button className="center-link" type="button" onClick={() => onNavigate("home")}>
-           Back to home
-        </button>
+        <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
       </section>}
 
       {page === "connection" && <section id="connection" className="public-band public-story-band">
@@ -212,11 +210,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
             </a>
           ))}
         </div>
-        {page === "connection" && (
-          <button className="center-link" type="button" onClick={() => onNavigate("home")}>
-             Back to home
-          </button>
-        )}
+        <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
       </section>}
 
       {page === "action" && <section id="action" className="public-band public-action-band">
