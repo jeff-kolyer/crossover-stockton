@@ -182,7 +182,7 @@ html:has(.public-site) {
 .about-simple .about-simple-philosophy {
   border-bottom: 1px solid #dadce0;
   padding-bottom: 32px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .about-simple .about-simple-actions {
@@ -199,7 +199,23 @@ html:has(.public-site) {
 
 .about-simple .about-simple-ideas {
   display: grid;
-  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 24px;
+}
+
+.about-simple .about-simple-ideas .public-entry {
+  grid-template-columns: minmax(0, 36fr) minmax(0, 64fr);
+  gap: 16px;
+}
+
+.about-simple .about-simple-ideas .public-entry img {
+  height: calc(100% - 20px);
+  margin-top: 4px;
+  aspect-ratio: auto;
+}
+
+.about-simple .about-simple-philosophy .public-entry {
+  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
 }
 
 .about-simple .about-simple-wide-image {
@@ -209,8 +225,21 @@ html:has(.public-site) {
   object-fit: cover;
 }
 
-.about-simple .about-simple-founder-image {
-  aspect-ratio: 4 / 3;
+.about-simple .about-simple-hero-image {
+  aspect-ratio: 2.5 / 1;
+  object-fit: cover;
+}
+
+.about-simple .about-simple-founder .public-entry {
+  display: flow-root;
+}
+
+.about-simple .about-simple-founder .about-simple-founder-image {
+  float: left;
+  width: min(31.5%, 127px);
+  height: 132px;
+  margin: 4px 16px 8px 0;
+  aspect-ratio: auto;
   object-position: center top;
 }
 
@@ -301,6 +330,22 @@ html:has(.public-site) {
 }
 
 @media (max-width: 720px) {
+  .about-simple .about-simple-ideas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-simple .about-simple-ideas .public-entry {
+    grid-template-columns: minmax(0, 33fr) minmax(0, 67fr);
+  }
+
+  .about-simple .about-simple-philosophy .public-entry {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-simple .about-simple-philosophy .public-entry img {
+    order: -1;
+  }
+
   :is(.about-simple, .gap-reference-page) .public-entry,
   .is-reality-page .gap-card,
   .is-connection-page .story-card,

@@ -31,12 +31,12 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <p>Self-driving vehicles are operating today. AI can tackle increasingly complex problems. Robots are beginning to perform useful physical work.</p>
         <p>As these technologies advance, they could free people from more compulsory labor and create extraordinary new possibilities.</p>
         <p><strong>But what will we do with that freedom?</strong></p>
-        <img className="about-simple-wide-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
+        <img className="about-simple-wide-image about-simple-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
       </section>
 
       <section className="about-simple-section" aria-labelledby="about-stockton-title">
         <h2 id="about-stockton-title">Starting in Stockton with the stray dogs epidemic</h2>
-        <p>As AI and automation take over administrative drudgery, animal welfare shifts from underpaid bureaucratic labor to <strong>human vocation</strong>—where people spend 100% of their time calming, training, fostering, and rehabilitating animals while tech handles the logistics.</p>
+        <p>As AI and automation take over administrative drudgery, animal welfare shifts from underpaid bureaucratic labor to <strong>human vocation</strong>—where people could spend 100% of their time calming, training, fostering, and rehabilitating animals while tech handles the logistics.</p>
         <p><a href="/work/dogs/">Open the dog investigation</a></p>
       </section>
 
@@ -53,14 +53,13 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
       <section className="about-simple-section about-simple-philosophy" aria-labelledby="about-reality-title">
         <h2 id="about-reality-title">We have to connect with reality.</h2>
         <div className="public-entry">
-          <img className="about-simple-wide-image" src="/images/about/growing.jpg" alt="Watercolor seedling with visible roots beside the Stockton waterfront" width="1774" height="887" loading="lazy" decoding="async" />
           <div><p>Not just read about problems. Not assume we know the solutions. Actually encounter the people, animals, and circumstances that need our attention.</p>
-            <p>That means showing up. Trying to help. Discovering the barriers. Sometimes finding that what seemed simple is surprisingly difficult. And sometimes being changed by the experience.</p>
-            <p><strong>That's what Crossover is exploring. We're starting in Stockton.</strong></p></div>
+            <p>That means showing up. Trying to help. Discovering the barriers. Sometimes finding that what seemed simple is surprisingly difficult. And sometimes being changed by the experience.</p></div>
+          <img className="about-simple-wide-image" src="/images/about/growing.jpg" alt="Watercolor seedling with visible roots beside the Stockton waterfront" width="1774" height="887" loading="lazy" decoding="async" />
         </div>
       </section>
 
-      <section className="about-simple-section" aria-labelledby="about-founder-title">
+      <section className="about-simple-section about-simple-founder" aria-labelledby="about-founder-title">
         <h2 id="about-founder-title">Jeff Kolyer</h2>
         <p className="about-simple-meta">Founder · Stockton, California</p>
         <div className="public-entry">
