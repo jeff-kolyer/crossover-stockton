@@ -19,7 +19,7 @@ export const crossoverActions: CrossoverAction[] = [
     href: "/work/dogs/",
     summary: "Help us verify reports of roaming dogs in Stockton and document what we find.",
     overviewSummary: "Explore reported areas, look for roaming dogs, and document what you find.",
-    buttonLabel: "Look for dogs",
+    buttonLabel: "Help verify conditions",
     image: {
       src: "/images/action/dog-on-street.jpg",
       alt: "Dog sitting beside a Stockton street at sunset",
