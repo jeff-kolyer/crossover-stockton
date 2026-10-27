@@ -24,6 +24,7 @@
 .crossover-home .hero-action-row { gap: 18px; }
 
 @media (min-width: 1200px) {
+  .crossover-home .public-hero h1 { font-size: clamp(3rem, 4.3vw, 4.4rem); }
   .crossover-home .public-hero-copy > p { max-width: 380px; }
 }
 
