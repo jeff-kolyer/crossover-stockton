@@ -1,165 +1,69 @@
 # Crossover Stockton
 
-Crossover Stockton is a local civic-awareness project built around a simple idea:
+**Connecting people who want to do good with the good that needs doing.**
 
-**Pay attention to what is real.**
+[Visit Crossover Stockton](https://crossoverstockton.org)
 
-The site uses AI-assisted research to follow a limited set of Stockton organizations and public sources, helping maintain a current picture of:
+Crossover investigates unmet needs, tests ways to help in the real world, and makes the evidence publicly accessible.
 
-* what needs attention,
-* what is actually getting better,
-* and what a person can do.
+We begin in Stockton, California, investigating dogs on the street: where they may need help, how they reach care, where existing pathways break down, and what could improve.
 
-The goal is not to create more information. It is to make local reality easier to see and respond to.
+## How it works
 
-Crossover organizes that picture into three main ideas:
+**Observe → Verify → Respond → Confirm**
 
-* **Needs** show where reality is asking something of us.
-* **Signs of Being** show what happens when people respond.
-* **Actions** give people practical ways to participate.
+We investigate using public information, firsthand observations, direct conversations, and practical attempts to help.
 
-The project is an experiment in using AI to reduce the distance between public information and meaningful human action. AI can watch sources, notice changes, and connect scattered information. The human part is still the important part: noticing, verifying, caring, and showing up.
+We distinguish plans from completed actions, reports from verified findings, and organizational activity from actual outcomes.
 
-## Site Architecture
+The goal is not to produce more information. It is to discover what works, what doesn't, and how willing people and increasingly capable technology can help meet real needs.
 
-Crossover Stockton is a Vite + React single-page app. The UI is organized around a small set of public-facing views, including:
+## The investigation
 
-* Home
-* Needs / gap listings
-* Signs of Being / stories
-* Actions
-* Organizations
-* About
-* Individual gap and story detail pages
+Our current investigation: **Dogs on the street in Stockton**
 
-The app currently uses local JSON files in `src/data/` as its content layer. These files define gaps, organizations, records, stories, and public actions.
+The working interface has four connected areas:
 
-React components import that data directly, transform it into view models, and render the site without a backend service.
+- **Tasks** — What needs to be done
+- **Activity** — What we actually did
+- **Map** — Generalized locations associated with evidence
+- **Findings** — What the evidence establishes and what remains unknown
 
-The production build also prerenders each public route to HTML, creates a plain-text
-`page.txt` alongside it, and publishes `llms.txt`, `sitemap.xml`, and `robots.txt`.
-Each HTML page advertises its text version with a `rel="alternate"` link. For
-example, `/work/dogs-map-placement-barriers/page.txt` contains the investigation
-text without requiring JavaScript. The development server remains a client-rendered
-preview; use `npm run build` to verify the published output in `dist/`.
+Historical reports are not current sightings. A completed task does not establish that an animal received care. Unverified claims remain labeled as such.
 
-### Main source structure
+## Technology
 
-* `src/App.tsx` — top-level routing and application state
-* `src/components/` — page-level and reusable React components
-* `src/data/` — structured local content used by the site
-* `src/lib/` — shared utilities for filtering, image preloading, scroll effects, and other helpers
-* `src/types.ts` — shared TypeScript types for records, gaps, stories, organizations, tags, and actions
-* `src/index.css` — site-wide styling
-* `src/styles/design-system.css` — shared card and typography primitives
-* [`docs/ABOUT.md`](docs/ABOUT.md) — Crossover's ground-up infrastructure of care vision and starting principles
-* `docs/STYLE.md` — the authoritative visual and typography rules
-* `public/images/` — hero images, organization assets, logos, and page-specific imagery
+- React 19, TypeScript, and Vite
+- Static JSON data and Git version history
+- Interactive geographic mapping
+- Build-time validation and static prerendering
+- Cloudflare Pages hosting
 
-Static assets are referenced with root-relative paths such as:
-
-```text
-/images/home/example.jpg
-```
-
-Files placed in `public/` are copied directly into the production build by Vite.
-
-## Styling rules
-
-The site uses plain CSS with shared semantic tokens. Inter is bundled locally so the
-sans-serif typography is consistent across platforms, with
-Georgia reserved for editorial display headings.
-
-Ordinary body text is always `1rem` / `16px`, regular weight, `1.5` line-height, and
-`#292D2A`. Headings and strong UI text use `#171917`; secondary metadata uses
-`#4B504D`; borders use `#E2E7E4`. The canonical font weights are `400`, `500`, `600`,
-and `700`.
-
-Hero body copy is intentionally larger on larger screens. At mobile widths it may use
-the shared body size for readability. The gap pages retain their semantic status colors
-and explanatory blue treatment; those are intentional exceptions, not alternate body
-text colors.
-
-When changing styles, update the shared token or semantic component rule rather than
-appending a late override. Ordinary paragraphs must not receive page-specific font
-sizes, colors, or line-heights. See [`docs/STYLE.md`](docs/STYLE.md) for the complete
-role and component specification.
+The public site does not require a database to serve its published content.
 
 ## Development
 
-Install dependencies:
-
 ```bash
 npm install
-```
-
-Start the local development server:
-
-```bash
 npm run dev
-```
-
-Create a production build:
-
-```bash
 npm run build
-```
-
-Preview the production build locally:
-
-```bash
 npm run preview
 ```
 
-`npm run build` runs the TypeScript build checks and Vite production build. The generated static site is written to:
+`npm run build` performs validation, TypeScript compilation, production bundling, prerendering, and additional published-output checks.
 
-```text
-dist/
-```
+## Project references
 
-## Publishing
+- [BACKLOG.md](BACKLOG.md) — Current priorities and real-world follow-ups
+- [docs/ABOUT.md](docs/ABOUT.md) — Mission and long-term vision
+- [docs/STYLE.md](docs/STYLE.md) — Design conventions
 
-The production site is hosted with GitHub Pages and deployed through GitHub Actions.
+## The larger idea
 
-The main deployment flow is:
+As AI and automation take on more necessary work, people may gain greater freedom to care for animals, help neighbors, and pursue meaningful lives.
 
-```text
-edit
-→ build
-→ commit
-→ push to main
-→ GitHub Actions
-→ GitHub Pages
-```
+Crossover explores how that possibility can become reality, starting with a specific, observable need.
 
-The canonical public site is:
+**Nothing is assumed to work. Everything can be investigated. Anything that works can be strengthened.**
 
-**https://crossoverstockton.org**
-
-The project uses the custom domain directly, so Vite serves the application from the site root.
-
-## Content Model
-
-The site is intentionally simple at this stage.
-
-Public content lives primarily in structured JSON rather than in a CMS or database. That keeps the content:
-
-* easy to inspect,
-* easy for humans or AI tools to update,
-* versioned through Git,
-* reviewable as normal code changes,
-* and deployable as a fully static website.
-
-Over time, parts of the research and update process may become more automated, but the public site is designed to remain understandable and inspectable.
-
-## Philosophy
-
-Crossover is built around the idea that information is useful only when it helps us reconnect with reality.
-
-We spend much of our lives absorbed in thought, identity, distraction, and abstraction. Meanwhile, real needs, real people, and real opportunities to help remain directly in front of us.
-
-Crossover is one small attempt to pay attention.
-
-**Awareness. Connection. Care. Action.**
-
-We are here to serve what is real.
+*From thinking to being.*
