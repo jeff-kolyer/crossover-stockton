@@ -153,8 +153,19 @@
 
 .crossover-map-filters {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+.crossover-map-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.crossover-map-filters .plain-action-button.is-filter {
+  flex: none;
 }
 
 .crossover-evidence-dot {
