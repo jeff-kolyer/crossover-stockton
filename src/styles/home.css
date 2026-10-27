@@ -23,6 +23,10 @@
 .crossover-home .public-hero-copy > p { max-width: 500px; margin: 0 0 20px; color: #3d4b42; font-size: 1.04rem; line-height: 1.45; }
 .crossover-home .hero-action-row { gap: 18px; }
 
+@media (min-width: 1200px) {
+  .crossover-home .public-hero-copy > p { max-width: 380px; }
+}
+
 .crossover-home .home-landing { --home-pad: 0px; width: var(--public-rail-width); max-width: var(--public-rail-max); margin: 0 auto; background: #fff; padding: 26px var(--home-pad) 0; font-family: var(--font-sans); }
 .crossover-home .home-landing-section { min-width: 0; }
 .crossover-home .home-landing-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px 24px; margin-bottom: 15px; }
