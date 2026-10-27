@@ -157,6 +157,21 @@
   gap: 6px;
 }
 
+.crossover-evidence-dot {
+  display: inline-block;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.crossover-map-filters .plain-action-button.is-filter,
+.crossover-location-list button .crossover-location-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .crossover-location-list {
   display: grid;
   margin-top: 12px;

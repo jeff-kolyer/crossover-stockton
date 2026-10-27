@@ -3,12 +3,10 @@ import * as L from "leaflet";
 import { maplibreGL } from "@maplibre/maplibre-gl-leaflet";
 import { setWorkerUrl } from "maplibre-gl";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
-import markerIconUrl from "leaflet/dist/images/marker-icon.png";
-import markerIconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
-import markerShadowUrl from "leaflet/dist/images/marker-shadow.png";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { MappedInvestigationLocation } from "./InvestigationLocations";
+import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 
 setWorkerUrl(workerUrl);
 
@@ -21,15 +19,25 @@ type LocationsMapProps = {
   followSelection?: boolean;
 };
 
-const defaultPin = L.icon({
-  iconUrl: markerIconUrl,
-  iconRetinaUrl: markerIconRetinaUrl,
-  shadowUrl: markerShadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
+const pinOutline = "M13 1.5 C6.65 1.5 1.5 6.65 1.5 13 C1.5 22 8.5 29.7 13 34.4 C17.5 29.7 24.5 22 24.5 13 C24.5 6.65 19.35 1.5 13 1.5 Z";
+
+function makePin(color: string, selected: boolean) {
+  const width = selected ? 39 : 32;
+  const height = selected ? 53 : 44;
+  const ring = selected ? `<path d="${pinOutline}" fill="${color}" stroke="#263747" stroke-width="3"/>` : "";
+  const pin = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 26 36">${ring}<path d="${pinOutline}" fill="${color}" stroke="#fff" stroke-width="1.5"/><circle cx="13" cy="12.7" r="4.3" fill="#fff"/></svg>`;
+  return L.icon({
+    iconUrl: `data:image/svg+xml,${encodeURIComponent(pin)}`,
+    iconSize: [width, height],
+    iconAnchor: [width / 2, height],
+    popupAnchor: [0, -height + 7],
+  });
+}
+
+const categoryPins = Object.fromEntries(Object.entries(evidenceCategoryColors).map(([category, color]) => [category, {
+  default: makePin(color, false),
+  selected: makePin(color, true),
+}])) as Record<MappedInvestigationLocation["category"], { default: L.Icon; selected: L.Icon }>;
 
 function frameLocations(map: L.Map, locations: MappedInvestigationLocation[]) {
   if (!locations.length) {
@@ -44,6 +52,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
   const containerRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<L.Map | null>(null);
   const previous = useRef<{ locations: MappedInvestigationLocation[]; selectedId: string; followSelection: boolean } | null>(null);
+  const markersRef = useRef(new Map<string, L.Marker>());
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
 
@@ -119,12 +128,27 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
   useEffect(() => {
     if (!map) return;
     const markers = locations.map((location) => L.marker(location.coordinates, {
-      icon: defaultPin,
+      icon: categoryPins[location.category].default,
       title: `${location.name} — generalized evidence area`,
       alt: location.name,
     }).on("click", () => onSelectRef.current(location.id)).addTo(map));
-    return () => { markers.forEach((marker) => marker.remove()); };
+    markersRef.current = new Map(locations.map((location, index) => [location.id, markers[index]]));
+    return () => {
+      markers.forEach((marker) => marker.remove());
+      markersRef.current.clear();
+    };
   }, [map, locations]);
+
+  useEffect(() => {
+    if (!map) return;
+    locations.forEach((location) => {
+      const marker = markersRef.current.get(location.id);
+      if (!marker) return;
+      const selected = location.id === selectedId;
+      marker.setIcon(categoryPins[location.category][selected ? "selected" : "default"]);
+      marker.setZIndexOffset(selected ? 1000 : 0);
+    });
+  }, [map, locations, selectedId]);
 
   return <div className="investigation-map-frame">
     <div ref={containerRef} className="investigation-leaflet-shell" aria-label="Map of generalized historical and public report areas" />
