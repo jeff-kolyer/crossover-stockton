@@ -4,7 +4,7 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Where are the stray dogs, and how many are there?",
     "description": "Can we obtain reliable population estimates and identify where dogs are likely to be found? How current and accurate are the available reports?",
-    "task_ids": ["task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-review-reported-location-sources", "dogs-check-louis-park"],
+    "task_ids": ["task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-review-reported-location-sources", "dogs-check-louis-park", "task-contact-cbs-charlie-lapastora"],
     "activity_record_ids": ["crossover-2026-10-20-sas-field-call-records-request"],
     "evidence_record_ids": ["sas-2024-kennel-statistics","cbs-2026-04-06-stockton-abandoned-dogs","stocktonia-2026-10-20-roaming-dog-distinction"],
     "finding_ids": ["finding-street-population-unknown","finding-roaming-dog-status-uncertain"]
@@ -34,7 +34,7 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "What happens when someone reports a dog?",
     "description": "Who receives the report, what action follows, and can we establish what ultimately happens to the animal?",
-    "task_ids": ["task-sas-visit-application-2026-10-14","task-sas-field-call-request-2026-10-20","task-sas-field-call-follow-up","task-investigate-found-animal-foster-pathway","task-monitor-animal-control-ordinance"],
+    "task_ids": ["task-sas-visit-application-2026-10-14", "task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-investigate-found-animal-foster-pathway", "task-monitor-animal-control-ordinance", "task-contact-cbs-charlie-lapastora"],
     "activity_record_ids": ["crossover-2026-10-14-sas-volunteer-application", "crossover-2026-10-20-sas-field-call-records-request"],
     "evidence_record_ids": ["stockton-animal-services-2026-10-20-reporting-guidance","crossover-2026-10-20-sas-field-call-records-request","stocktonia-2026-10-20-sas-capacity-intake","stocktonia-2026-10-20-roaming-dog-distinction","stocktonia-2026-10-20-found-animal-foster-pathway","stocktonia-2026-10-20-animal-control-proposals"],
     "finding_ids": ["finding-sas-regular-capacity-pressure","finding-sas-intake-priorities","finding-roaming-dog-status-uncertain","finding-found-animal-foster-described"]
@@ -44,7 +44,7 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "What would it take to meet their needs?",
     "description": "Do we need more rescue capacity, veterinary care, feeding, transport, or volunteers? What evidence would tell us where additional resources should go?",
-    "task_ids": ["task-ssd-volunteer-application-2026-10-07","task-sas-doggie-day-out-inquiry-2026-10-12","task-sas-visit-application-2026-10-14","task-ssd-ask-contact-questions","task-sas-volunteer-onboarding-follow-up","task-investigate-found-animal-foster-pathway"],
+    "task_ids": ["task-ssd-volunteer-application-2026-10-07", "task-sas-doggie-day-out-inquiry-2026-10-12", "task-sas-visit-application-2026-10-14", "task-ssd-ask-contact-questions", "task-sas-volunteer-onboarding-follow-up", "task-investigate-found-animal-foster-pathway", "task-contact-cbs-charlie-lapastora"],
     "activity_record_ids": ["crossover-2026-10-07-street-dogs-volunteer-application", "crossover-2026-10-12-doggie-day-out-inquiry", "crossover-2026-10-14-sas-volunteer-application"],
     "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit","stocktonia-2026-10-20-sas-capacity-intake","stocktonia-2026-10-20-found-animal-foster-pathway"],
     "finding_ids": ["shelter-expansion-construction-observed-2026-10-14","finding-sas-regular-capacity-pressure","finding-found-animal-foster-described"]

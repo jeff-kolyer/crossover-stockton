@@ -179,5 +179,32 @@
       "stocktonia-2026-10-20-animal-control-proposals"
     ],
     "activity_record_ids": []
+  },
+  {
+    "id": "task-contact-cbs-charlie-lapastora",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Contact CBS reporter Charlie Lapastora",
+    "status": "open",
+    "type": "organization_contact",
+    "instructions": "Follow up on the April 6 and June 8 CBS Sacramento reports about abandoned dogs in Stockton. Ask what evidence was gathered, what has happened since, and whether the reporter can connect Crossover with firsthand observers with their permission. Record contact or answers only if they actually occur.",
+    "location_ids": [],
+    "organization_ids": [],
+    "question_ids": [
+      "where-dogs-need-help",
+      "response-barriers",
+      "additional-help"
+    ],
+    "basis_record_ids": [
+      "cbs-2026-04-06-stockton-abandoned-dogs",
+      "ssd-2026-06-08-street-response"
+    ],
+    "activity_record_ids": [],
+    "checklist": [
+      "Isabel Guzman was reportedly documenting abandoned dogs near Stanislaus Street for over a year. What was she documenting, and could you introduce us with her permission?",
+      "Did your reporting identify specific areas where dogs were regularly found, beyond the general locations mentioned in the articles?",
+      "What happened to the dogs featured in your April report? Were they rescued, reunited, or otherwise helped?",
+      "How were the estimates of 200–400 street dogs established? Is there underlying documentation?",
+      "Have you learned anything new about the situation, the rescue efforts, or the proposed Safe Grounds project since your reports?"
+    ]
   }
 ]
