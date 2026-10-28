@@ -37,6 +37,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <img className="about-simple-wide-image about-simple-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
         <h2 id="about-stockton-title">Starting in Stockton with the stray dogs epidemic</h2>
         <p>As AI and automation take over administrative drudgery, animal welfare shifts from underpaid bureaucratic labor to <strong>human vocation</strong>—where people could spend 100% of their time calming, training, fostering, and rehabilitating animals while tech handles the logistics.</p>
+        <p>We're examining public reports, checking conditions firsthand, and testing pathways to care—to find out where current systems break down and where post-scarcity technology can help.</p>
         <p><a href="/work/dogs/">Open the dog investigation</a></p>
       </section>
 
