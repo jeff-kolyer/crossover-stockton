@@ -27,10 +27,10 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
     <PublicSiteNav active="about" onNavigate={onNavigate} />
     <div className="about-simple-content">
       <section className="about-simple-section about-simple-purpose" aria-labelledby="about-purpose-title">
-        <h1 id="about-purpose-title">Bringing post-scarcity thinking into the real world.</h1>
-        <p>AI, robotics, and automation are changing what people can accomplish. Work that once required entire organizations can increasingly be done by individuals with powerful tools.</p>
-        <p>As technology takes on more necessary work, we have an opportunity to rethink how we use our time, resources, and abilities.</p>
-        <p><strong>What if we used that freedom to meet real needs?</strong></p>
+        <h1 id="about-purpose-title">How can post-scarcity technology solve real problems?</h1>
+        <p>Self-driving vehicles are operating today. AI can tackle increasingly complex problems. Robots are beginning to perform useful physical work.</p>
+        <p>As these technologies advance, they could free people from more compulsory labor and create extraordinary new possibilities.</p>
+        <p><strong>But what will we do with that freedom?</strong></p>
       </section>
 
       <section className="about-simple-section about-simple-stockton" aria-labelledby="about-stockton-title">
