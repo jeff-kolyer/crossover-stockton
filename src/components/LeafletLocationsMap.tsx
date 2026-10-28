@@ -41,11 +41,12 @@ const categoryPins = Object.fromEntries(Object.entries(evidenceCategoryColors).m
 
 function frameLocations(map: L.Map, locations: MappedInvestigationLocation[]) {
   if (!locations.length) {
-    map.setView([37.98, -121.33], 10, { animate: false });
+    map.setView([37.98, -121.33], 11, { animate: false });
     return;
   }
   const bounds = L.latLngBounds(locations.map(({ coordinates }) => coordinates));
   map.fitBounds(bounds, { padding: [46, 46], maxZoom: 11, animate: false });
+  map.setZoom(map.getZoom() + 1, { animate: false });
 }
 
 export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false, followSelection = true }: LocationsMapProps) {
@@ -106,16 +107,16 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
         water_name_line_label: ["text-color", "#348da4"],
         water_name_point_label: ["text-color", "#348da4"],
         highway_minor: ["line-color", "#ffffff"],
-        highway_major_casing: ["line-color", "#b8cadb"],
-        highway_major_inner: ["line-color", "#d7e0e5"],
-        highway_major_subtle: ["line-color", "#d7e0e5"],
+        highway_major_casing: ["line-color", "#b5c3d6"],
+        highway_major_inner: ["line-color", "#ffffff"],
+        highway_major_subtle: ["line-color", "#ffffff"],
         highway_motorway_casing: ["line-color", "#6e88a6"],
-        highway_motorway_inner: ["line-color", "#9fb3cf"],
-        highway_motorway_subtle: ["line-color", "#9fb3cf"],
+        highway_motorway_inner: ["line-color", "#a6bbd9"],
+        highway_motorway_subtle: ["line-color", "#a6bbd9"],
         highway_motorway_bridge_casing: ["line-color", "#6e88a6"],
-        highway_motorway_bridge_inner: ["line-color", "#9fb3cf"],
+        highway_motorway_bridge_inner: ["line-color", "#a6bbd9"],
         tunnel_motorway_casing: ["line-color", "#6e88a6"],
-        tunnel_motorway_inner: ["line-color", "#9fb3cf"],
+        tunnel_motorway_inner: ["line-color", "#a6bbd9"],
         label_city: ["text-color", "#202124"],
         label_city_capital: ["text-color", "#202124"],
         label_town: ["text-color", "#5f6368"],
