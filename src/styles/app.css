@@ -140,6 +140,9 @@ h3 {
 }
 
 .crossover-primary-tabs a[aria-current="page"] {
+  padding-top: 8px;
+  padding-bottom: 7px;
+  border-bottom-width: 3px;
   border-bottom-color: #1a73e8;
   font-weight: 700;
 }
