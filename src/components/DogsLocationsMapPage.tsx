@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import locationsData from "../data/investigation-locations.json";
 import maintenanceData from "../data/investigation-map-maintenance.json";
 import { dogGapBase } from "../lib/dogGapLegacy";
+import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 import { InvestigationPageHeader } from "./InvestigationPageHeader";
 
@@ -50,7 +51,7 @@ export function DogsLocationsMapPage({ investigationId, onOpenReport }: { invest
   const listRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLElement>(null);
   const visibleEntries = useMemo(() => filter === "all" ? entries : entries.filter((location) => location.category === filter), [entries, filter]);
-  const mappedEntries = useMemo(() => visibleEntries.filter((location): location is MappedInvestigationLocation => location.coordinates !== null), [visibleEntries]);
+  const mappedEntries = useMemo(() => visibleEntries.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleEntries]);
   const selected = visibleEntries.find((location) => location.id === selectedId);
 
   useEffect(() => {
@@ -92,7 +93,7 @@ export function DogsLocationsMapPage({ investigationId, onOpenReport }: { invest
     <InvestigationPageHeader title="Reported locations" description="Explore reports of roaming dogs in Stockton. Locations are approximate and do not confirm dogs are currently present." />
 
     <div className="dogs-map-filters" role="group" aria-label="Map evidence categories">
-      {filters.map(({ value, label }) => <button key={value} type="button" aria-pressed={filter === value} onClick={() => changeFilter(value)}>{label} ({value === "all" ? entries.length : entries.filter((entry) => entry.category === value).length})</button>)}
+      {filters.map(({ value, label }) => <button key={value} type="button" aria-pressed={filter === value} onClick={() => changeFilter(value)}>{value !== "all" && <span className="dogs-map-filter-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label} ({value === "all" ? entries.length : entries.filter((entry) => entry.category === value).length})</button>)}
     </div>
     <div className="dogs-map-filter-select-wrap">
       <select aria-label="Map evidence category" value={filter} onChange={(event) => changeFilter(event.target.value as Category)}>

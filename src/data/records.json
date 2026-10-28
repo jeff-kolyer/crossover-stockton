@@ -4,7 +4,7 @@
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": ["stockton-animal-services"],
     "published_at": null,
-    "checked_at": "2026-10-20",
+    "checked_at": "2026-10-28",
     "record_type": "current_service",
     "trust": "source_supported",
     "title": "Stockton Animal Services reporting and found-dog guidance",
@@ -27,7 +27,7 @@
     "record_type": "update",
     "trust": "source_supported",
     "title": "CBS Sacramento reports abandoned-dog concerns around Louis Park, Stanislaus Street, and Highway 4",
-    "summary": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report.",
+    "summary": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. Founder Jesse Mejia estimated at least 200–300 dogs on Stockton's streets at any given time and up to 400 during puppy season; this is an advocate estimate, not a verified census. The group reported feeding dogs on the streets up to four times a week, while saying it cannot directly rescue or remove dogs. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report.",
     "source": { "publisher": "CBS Sacramento", "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/", "type": "local_reporting" },
     "supports": [],
     "action_signals": []

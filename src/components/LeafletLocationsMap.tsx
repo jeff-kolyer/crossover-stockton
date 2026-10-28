@@ -6,6 +6,7 @@ import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { MappedInvestigationLocation } from "./InvestigationLocations";
+import { evidenceMarkerColors } from "../lib/evidenceCategoryColors";
 import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 
 setWorkerUrl(workerUrl);
@@ -19,25 +20,44 @@ type LocationsMapProps = {
   followSelection?: boolean;
 };
 
-const pinOutline = "M13 1.5 C6.65 1.5 1.5 6.65 1.5 13 C1.5 22 8.5 29.7 13 34.4 C17.5 29.7 24.5 22 24.5 13 C24.5 6.65 19.35 1.5 13 1.5 Z";
+type MarkerKind = MappedInvestigationLocation["marker_kind"];
 
-function makePin(color: string, selected: boolean) {
-  const width = selected ? 39 : 32;
-  const height = selected ? 53 : 44;
-  const ring = selected ? `<path d="${pinOutline}" fill="${color}" stroke="#263747" stroke-width="3"/>` : "";
-  const pin = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 26 36">${ring}<path d="${pinOutline}" fill="${color}" stroke="#fff" stroke-width="1.5"/><circle cx="13" cy="12.7" r="4.3" fill="#fff"/></svg>`;
-  return L.icon({
-    iconUrl: `data:image/svg+xml,${encodeURIComponent(pin)}`,
-    iconSize: [width, height],
-    iconAnchor: [width / 2, height],
-    popupAnchor: [0, -height + 7],
-  });
+const dogIcon = '<path d="M8.3 6.8 6 5 3.7 7v4.2l2 1.4M15.7 6.8 18 5l2.3 2v4.2l-2 1.4M6.2 12.5C6.2 8.7 8.5 6.2 12 6.2s5.8 2.5 5.8 6.3v2.2c0 3.2-2.5 5.3-5.8 5.3s-5.8-2.1-5.8-5.3v-2.2Z"/><path d="M9 12.8h.01M15 12.8h.01" stroke-width="2.5" stroke-linecap="round"/><path d="m10.5 16 1.5 1 1.5-1M12 17v1.2"/>';
+const warningIcon = '<path d="M10.7 4.6a1.5 1.5 0 0 1 2.6 0l8.1 13.8a1.5 1.5 0 0 1-1.3 2.3H3.9a1.5 1.5 0 0 1-1.3-2.3Z"/><path d="M12 9v5M12 17.5h.01" stroke-width="2.2" stroke-linecap="round"/>';
+const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
+
+function makeCircleMarker(kind: MarkerKind, selected: boolean) {
+  const icon = kind === "major_reported_concern" ? warningIcon : kind === "firsthand_observation" ? eyeIcon : dogIcon;
+  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="' + evidenceMarkerColors[kind] + '" stroke="' + (selected ? "#263747" : "#fff") + '" stroke-width="' + (selected ? 3 : 2) + '"/><g transform="translate(8 8)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g></svg>';
+  return L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [40, 40], iconAnchor: [20, 20] });
 }
 
-const categoryPins = Object.fromEntries(Object.entries(evidenceCategoryColors).map(([category, color]) => [category, {
-  default: makePin(color, false),
-  selected: makePin(color, true),
-}])) as Record<MappedInvestigationLocation["category"], { default: L.Icon; selected: L.Icon }>;
+const markerIcons = Object.fromEntries((Object.keys(evidenceMarkerColors) as MarkerKind[]).map((kind) => [kind, {
+  default: makeCircleMarker(kind, false),
+  selected: makeCircleMarker(kind, true),
+}])) as Record<MarkerKind, { default: L.Icon; selected: L.Icon }>;
+
+function labelContent(location: MappedInvestigationLocation) {
+  const label = document.createElement("div");
+  const place = document.createElement("strong");
+  place.textContent = location.map_label.place;
+  const report = document.createElement("span");
+  report.textContent = location.map_label.report;
+  label.append(place, report);
+  if (location.map_label.note) {
+    const note = document.createElement("small");
+    note.textContent = location.map_label.note;
+    label.append(note);
+  }
+  return label;
+}
+
+function shouldShowLabel(location: MappedInvestigationLocation, zoom: number, selectedId: string, locations: MappedInvestigationLocation[]) {
+  if (location.id === selectedId || zoom >= 15) return true;
+  if (zoom >= 14) return location.marker_kind !== "historical_sighting";
+  const newestRecent = locations.filter((item) => item.marker_kind === "reported_sighting").reduce((latest, item) => item.evidence_date > latest ? item.evidence_date : latest, "");
+  return location.marker_kind === "major_reported_concern" || (location.marker_kind === "reported_sighting" && location.evidence_date === newestRecent);
+}
 
 function frameLocations(map: L.Map, locations: MappedInvestigationLocation[]) {
   if (!locations.length) {
@@ -55,7 +75,9 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
   const previous = useRef<{ locations: MappedInvestigationLocation[]; selectedId: string; followSelection: boolean } | null>(null);
   const markersRef = useRef(new Map<string, L.Marker>());
   const onSelectRef = useRef(onSelect);
+  const selectedIdRef = useRef(selectedId);
   onSelectRef.current = onSelect;
+  selectedIdRef.current = selectedId;
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -190,13 +212,33 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
 
   useEffect(() => {
     if (!map) return;
-    const markers = locations.map((location) => L.marker(location.coordinates, {
-      icon: categoryPins[location.category].default,
-      title: `${location.name} — generalized evidence area`,
-      alt: location.name,
-    }).on("click", () => onSelectRef.current(location.id)).addTo(map));
+    const markers = locations.map((location) => {
+      const marker = L.marker(location.coordinates, {
+        icon: markerIcons[location.marker_kind].default,
+        title: location.map_label.place + " — " + location.map_label.report,
+        alt: location.map_label.place,
+      }).on("click", () => onSelectRef.current(location.id)).addTo(map);
+      marker.bindTooltip(labelContent(location), {
+        permanent: true,
+        direction: "auto",
+        offset: L.point(12, 0),
+        opacity: 1,
+        className: "investigation-map-label",
+      });
+      return marker;
+    });
     markersRef.current = new Map(locations.map((location, index) => [location.id, markers[index]]));
+    const refreshLabels = () => locations.forEach((location) => {
+      const marker = markersRef.current.get(location.id);
+      if (!marker) return;
+      const show = shouldShowLabel(location, map.getZoom(), selectedIdRef.current, locations);
+      if (show) marker.openTooltip();
+      else marker.closeTooltip();
+    });
+    map.on("zoomend", refreshLabels);
+    refreshLabels();
     return () => {
+      map.off("zoomend", refreshLabels);
       markers.forEach((marker) => marker.remove());
       markersRef.current.clear();
     };
@@ -208,8 +250,11 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
       const marker = markersRef.current.get(location.id);
       if (!marker) return;
       const selected = location.id === selectedId;
-      marker.setIcon(categoryPins[location.category][selected ? "selected" : "default"]);
+      marker.setIcon(markerIcons[location.marker_kind][selected ? "selected" : "default"]);
       marker.setZIndexOffset(selected ? 1000 : 0);
+      const show = shouldShowLabel(location, map.getZoom(), selectedId, locations);
+      if (show) marker.openTooltip();
+      else marker.closeTooltip();
     });
   }, [map, locations, selectedId]);
 

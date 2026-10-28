@@ -11,7 +11,7 @@ import recordsData from "../data/records.json";
 import workData from "../data/work.json";
 import type { CapacityProject, EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, WorkRecord } from "../types";
 import { gapUpdates, gapUpdateHref } from "../lib/gapUpdates";
-import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
+import { evidenceCategoryColors, evidenceMarkerColors } from "../lib/evidenceCategoryColors";
 import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
 import { investigationActivities, investigationFindings, investigationQuestionById, investigationQuestions, investigationRecordById, investigationTasks } from "../lib/investigationData";
@@ -120,7 +120,8 @@ const records = recordsData as EvidenceRecord[];
 const activeGaps = (gapsData as GapRecord[]).filter((item) => item.active).sort((a, b) => a.rank - b.rank);
 const getWork = (id: string) => works.find((item) => item.id === id);
 const fmt = (value?: string | null) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value.length === 10 ? `${value}T12:00:00` : value)) : "Date not recorded";
-const mappedLocations = (locations as InvestigationLocation[]).filter((item): item is MappedInvestigationLocation => item.coordinates !== null);
+const allLocations = locations as InvestigationLocation[];
+const mappedLocations = allLocations.filter((item): item is MappedInvestigationLocation => item.coordinates !== null && item.marker_kind !== null && item.map_label !== null);
 const locationFilterOptions: { value: "all" | InvestigationLocation["category"]; label: string }[] = [
   { value: "all", label: "All" },
   { value: "historical_published_report", label: "Historical" },
@@ -180,8 +181,9 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     }
   }, [section]);
   const [locationFilter, setLocationFilter] = useState<"all" | InvestigationLocation["category"]>("all");
-  const visibleLocations = useMemo(() => locationFilter === "all" ? mappedLocations : mappedLocations.filter((location) => location.category === locationFilter), [locationFilter]);
-  const selectedLocation = mappedLocations.find((location) => location.id === selectedLocationId);
+  const visibleLocations = useMemo(() => locationFilter === "all" ? allLocations : allLocations.filter((location) => location.category === locationFilter), [locationFilter]);
+  const visibleMappedLocations = useMemo(() => visibleLocations.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleLocations]);
+  const selectedLocation = allLocations.find((location) => location.id === selectedLocationId);
   const selectedTask = investigationTasks.find((task) => task.id === selectedTaskId);
   const isDogGap = gap.id === "dogs-safe-placement";
   const isWorkspace = isDogGap && Boolean(workspaceBasePath);
@@ -344,7 +346,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     {isDogGap && investigationHeader("crossover-outer-header")}
     <div ref={workspaceRef} className={isWorkspace ? `crossover-map-workspace is-${sheetState}${panelCollapsed ? " is-panel-collapsed" : ""}${dragTop === null ? "" : " is-dragging"}` : "dog-gap-layout"} style={isWorkspace && panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
       {isWorkspace && investigationHeader("crossover-desktop-header")}
-      {isWorkspace && <div className="crossover-shared-map"><DogGapOverviewMap locations={visibleLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
+      {isWorkspace && <div className="crossover-shared-map"><DogGapOverviewMap locations={visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
       {isWorkspace && <button type="button" className="crossover-panel-toggle" aria-label={panelCollapsed ? "Expand investigation panel" : "Collapse investigation panel"} aria-expanded={!panelCollapsed} onClick={() => setPanelCollapsed((collapsed) => !collapsed)}>{panelCollapsed ? "Show panel" : "Hide panel"}</button>}
       {isWorkspace && !panelCollapsed && <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />}
       <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
@@ -389,7 +391,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
           {selectedTask.completed_at && <p>Completed {fmt(selectedTask.completed_at)}. Completion of this task does not establish the outcome of an application or inquiry.</p>}
           <p>{selectedTask.instructions}</p>
           {selectedTask.location_ids.length > 0 && <section><h3>Locations</h3><ul>{selectedTask.location_ids.map((id) => {
-            const location = mappedLocations.find((item) => item.id === id);
+            const location = allLocations.find((item) => item.id === id);
             return location ? <li key={id}><button type="button" onClick={() => selectLocation(id, true)}>{location.name}</button></li> : null;
           })}</ul><p>These are generalized evidence areas, not current dog locations.</p></section>}
           {selectedTask.organization_ids.length > 0 && <section><h3>Organizations</h3><ul>{selectedTask.organization_ids.map((id) => {
@@ -405,7 +407,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
           <p>Planned actions and documented completed steps. A planned visit is not a field observation.</p>
           <div className="crossover-record-list crossover-task-list">{[...investigationTasks].sort((a, b) => ({ open: 0, waiting: 1, done: 2, cancelled: 3 })[a.status] - ({ open: 0, waiting: 1, done: 2, cancelled: 3 })[b.status]).map((task) => <button type="button" key={task.id} onClick={() => selectTask(task)}>
             <strong>{task.title}</strong>
-            <small>{task.status === "done" ? `Completed ${fmt(task.completed_at)}` : task.status === "waiting" ? "Waiting for response" : "Open"}{task.location_ids.length > 0 ? ` · ${mappedLocations.find((item) => item.id === task.location_ids[0])?.name ?? "Reported location"}` : ""}</small>
+            <small>{task.status === "done" ? `Completed ${fmt(task.completed_at)}` : task.status === "waiting" ? "Waiting for response" : "Open"}{task.location_ids.length > 0 ? ` · ${allLocations.find((item) => item.id === task.location_ids[0])?.name ?? "Reported location"}` : ""}</small>
           </button>)}</div>
         </>}
       </div>}
@@ -430,7 +432,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
       </div>}
       {section === "map" && isDogGap && (selectedLocation
         ? <CrossoverLocationDetails location={selectedLocation} records={records} tasks={investigationTasks} activities={activityRecords} onBack={backToLocations} onOpenTask={openTaskFromLocation} onOpenReport={onOpenReport} onOpenActionDetail={onOpenActionDetail} />
-        : <div className="crossover-simple-section crossover-map-content"><h2>Reported locations</h2><p>Markers indicate generalized evidence areas. They do not show where dogs are now.</p><div className="crossover-map-filters" role="group" aria-label="Map evidence filters">{locationFilterOptions.map(({ value, label }) => <PlainActionButton key={value} variant="filter" pressed={locationFilter === value} onClick={() => changeLocationFilter(value)}>{value !== "all" && <span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label}</PlainActionButton>)}</div><div className="crossover-record-list crossover-location-list">{visibleLocations.map((location) => <button type="button" key={location.id} onClick={() => selectLocation(location.id, true)}><strong className="crossover-location-title"><span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[location.category] }} aria-hidden="true" />{location.name}</strong><small>{fmt(location.evidence_date)} · {location.verification_status}</small></button>)}</div></div>)}
+        : <div className="crossover-simple-section crossover-map-content"><h2>Reported locations</h2><p>Markers indicate generalized evidence areas. They do not show where dogs are now.</p><div className="crossover-map-filters" role="group" aria-label="Map evidence filters">{locationFilterOptions.map(({ value, label }) => <PlainActionButton key={value} variant="filter" pressed={locationFilter === value} onClick={() => changeLocationFilter(value)}>{value !== "all" && <span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label}</PlainActionButton>)}</div><div className="crossover-record-list crossover-location-list">{visibleLocations.map((location) => <button type="button" key={location.id} onClick={() => selectLocation(location.id, true)}><strong className="crossover-location-title"><span className="crossover-evidence-dot" style={{ backgroundColor: location.marker_kind ? evidenceMarkerColors[location.marker_kind] : evidenceCategoryColors[location.category] }} aria-hidden="true" />{location.name}</strong><small>{fmt(location.evidence_date)} · {location.verification_status}{!location.coordinates && " · No map pin"}</small></button>)}</div></div>)}
       {section === "more" && isDogGap && <DogGapOverviewLanding gap={gap} map={null} onOpenSection={onOpenSection} onOpenWork={onOpenWork} onOpenActionDetail={onOpenActionDetail} onOpenActionIndex={() => onNavigate("action")} />}
       {section === "key-factors" && <KeyFactorsPage gap={gap} onOpenSection={onOpenSection} onOpenMap={() => onOpenWork("dogs-locations-map")} model={isDogGap ? <DogCareScenario heading="Explore the full care model" factorHref={(key) => `#factor-${key}`} onOpenFactor={(key) => onOpenSection("key-factors", `factor-${key}`)} improvementHref={(id) => `${tabLink("improvements")}#${id}`} onOpenImprovement={(id) => onOpenSection("improvements", id)} /> : undefined} />}
       {section === "ways-to-help" && !isDogGap && <GenericGapWaysToHelp gap={gap} onOpenAction={onOpenAction} />}
@@ -456,7 +458,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
           {selectedFinding.contradicting_record_ids.length > 0 && <><h3>Contradicting evidence</h3><ul>{selectedFinding.contradicting_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></>}
           {selectedFinding.related_question_ids.length > 0 && <p>Related question: {selectedFinding.related_question_ids.map((id) => investigationQuestionById.get(id)?.title).join("; ")}</p>}
           {selectedFinding.location_ids.length > 0 && <section><h3>Related locations</h3><ul>{selectedFinding.location_ids.map((id) => {
-            const location = mappedLocations.find((item) => item.id === id);
+            const location = allLocations.find((item) => item.id === id);
             return location ? <li key={id}><button type="button" onClick={() => selectLocation(id, true)}>{location.name}</button></li> : null;
           })}</ul></section>}
         </article> : <>

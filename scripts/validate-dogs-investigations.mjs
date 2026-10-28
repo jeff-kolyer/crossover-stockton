@@ -10,7 +10,8 @@ const recordIds = new Set(data("records").map((record) => record.id));
 const recordById = new Map(data("records").map((record) => [record.id, record]));
 const projectIds = new Set(data("projects").map((project) => project.id));
 const threadIds = new Set((work?.threads ?? []).map((thread) => thread.id));
-const findingIds = new Set(investigationData.established_findings.map((finding) => finding.id));
+const establishedFindingIds = new Set(investigationData.established_findings.map((finding) => finding.id));
+const findingIds = new Set([...establishedFindingIds, ...data("findings").map((finding) => finding.id)]);
 const errors = [];
 
 function references(owner, values, known, label) {
@@ -21,7 +22,7 @@ if (!work) errors.push("Investigation work item not found");
 if (work?.investigation_data_id !== investigationData.id) errors.push("Work item does not reference investigation data");
 if (work?.gap_id !== investigationData.gap_id || !gapIds.has(investigationData.gap_id)) errors.push("Investigation gap mismatch");
 if (new Set(investigationData.active_investigations.map((item) => item.id)).size !== investigationData.active_investigations.length) errors.push("Duplicate active investigation ID");
-if (findingIds.size !== investigationData.established_findings.length) errors.push("Duplicate established finding ID");
+if (establishedFindingIds.size !== investigationData.established_findings.length) errors.push("Duplicate established finding ID");
 
 for (const investigation of investigationData.active_investigations) {
   if (investigation.gap_id !== investigationData.gap_id) errors.push(`${investigation.id}: gap mismatch`);
@@ -88,6 +89,12 @@ for (const location of locations) {
   if (!location.source_reviewed_at) errors.push(`${location.id}: missing source review date`);
   if (!location.verification_status?.trim() || !location.last_known_outcome?.trim()) errors.push(`${location.id}: missing verification or outcome`);
   if (!["historical_published_report", "recent_public_report", "official_animal_services_record", "crossover_firsthand"].includes(location.category)) errors.push(`${location.id}: invalid category`);
+  const markerKinds = ["reported_sighting", "historical_sighting", "major_reported_concern", "firsthand_observation"];
+  if (location.coordinates === null && (location.marker_kind !== null || location.map_label !== null)) errors.push(`${location.id}: unpinned report cannot have marker presentation`);
+  if (location.coordinates !== null && (!markerKinds.includes(location.marker_kind) || !location.map_label?.place?.trim() || !location.map_label?.report?.trim())) errors.push(`${location.id}: mapped report needs a supported marker and concise label`);
+  if (location.marker_kind === "firsthand_observation" && location.category !== "crossover_firsthand") errors.push(`${location.id}: firsthand marker needs firsthand evidence`);
+  if (location.marker_kind === "reported_sighting" && location.category !== "recent_public_report") errors.push(`${location.id}: recent sighting marker needs a recent public report`);
+  if (location.marker_kind === "historical_sighting" && location.category !== "historical_published_report") errors.push(`${location.id}: historical sighting marker needs a historical report`);
   if (location.category === "recent_public_report" && !location.source_reviewed_at) errors.push(`${location.id}: recent public report lacks review date`);
   if (!["reported", "exploratory"].includes(location.status)) errors.push(`${location.id}: invalid status`);
   if (!["Published local report", "County report", "Public PawBoost report", "Official Animal Services record", "Crossover firsthand observation"].includes(location.evidence_type)) errors.push(`${location.id}: invalid evidence type`);

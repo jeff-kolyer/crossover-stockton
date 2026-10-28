@@ -158,6 +158,7 @@ export interface GapRecord {
   rank: number;
   summary: string;
   what_we_are_seeing: string[];
+  unknown_questions?: string[];
   why_icons?: Array<
     | "Dog"
     | "Stethoscope"

@@ -19,7 +19,8 @@
 
 
 .dogs-map-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
-.dogs-map-filters button { min-height: 38px; border: 1px solid #dbe5dd; border-radius: 999px; background: #fff; padding: 7px 14px; color: #173e2b; font: inherit; font-size: .82rem; font-weight: 700; line-height: 1.2; cursor: pointer; }
+.dogs-map-filters button { display: inline-flex; align-items: center; gap: 7px; min-height: 38px; border: 1px solid #dbe5dd; border-radius: 999px; background: #fff; padding: 7px 14px; color: #173e2b; font: inherit; font-size: .82rem; font-weight: 700; line-height: 1.2; cursor: pointer; }
+.dogs-map-filter-dot { display: inline-block; flex: none; width: 9px; height: 9px; border-radius: 50%; }
 .dogs-map-filters button:hover { background: #f0f7f1; }
 .dogs-map-filters button[aria-pressed="true"] { border-color: #1f6b34; background: #1f6b34; color: #fff; }
 .dogs-map-filter-select-wrap { display: none; }

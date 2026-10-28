@@ -209,6 +209,14 @@ html:has(.public-site) {
   margin: 0 auto 40px;
 }
 
+.gap-reference-page [aria-labelledby="gap-sources"] > button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+}
+
 .about-simple .about-simple-ideas {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

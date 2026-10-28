@@ -7,13 +7,19 @@
     "investigation_status": "investigating",
     "active": true,
     "rank": 1,
-    "summary": "Public sources report stray and abandoned dogs and pressure on shelter capacity. Crossover is investigating where care becomes difficult to access and what helps.",
+    "summary": "Animal rescuers estimate that hundreds of dogs may be living on Stockton's streets. The city acknowledges recurring shelter overcrowding, while rescue organizations report increasing abandonment and limited capacity to help. The number of dogs currently on the streets, their conditions, and how many are receiving care remain unverified.",
     "what_we_are_seeing": [
-      "Stray and abandoned dogs continue to be reported across Stockton, with Stockton Street Dogs reporting a recent surge in dumped dogs.",
-      "City records say stray animal intakes regularly exceed shelter capacity.",
-      "The local response includes street outreach, sheltering, veterinary treatment, foster and adoption, rescue transfers, and spay/neuter work."
+      "In April 2026, Stockton Street Dogs founder Jesse Mejia estimated at least 200–300 dogs on Stockton's streets at any given time, potentially reaching 400 during puppy season. This is an advocate's estimate, not a verified census. In September, Stockton Street Dogs reported encountering 3–10 dumped dogs per week, compared with approximately one per week the previous year. Stockton Animal Services reports regularly reaching capacity: sick, injured, aggressive, and confirmed abandonment cases receive priority, while healthy stray intake generally requires appointments. Animal Services also cautions that a roaming dog may be lost or owned rather than abandoned.",
+      "Animal Services reports regularly reaching shelter capacity and prioritizing animals needing immediate attention; healthy stray intake generally requires an appointment.",
+      "The reported response includes Stockton Street Dogs' street feeding and outreach, animal control, veterinary treatment, fostering, adoption, rescue transfers, and spay/neuter services. Stockton Street Dogs reported feeding dogs on the streets multiple times per week.",
+      "At an October 19, 2026 committee meeting, city officials discussed shelter limitations and repeated roaming-animal violations. A Council committee advanced proposed animal-control changes for full City Council consideration; the changes are not enacted.",
+      "On October 20, Crossover requested Animal Services field-call records. The latest recorded status is awaiting a response; no records have been received or analyzed."
     ],
-    "why_icons": ["Dog", "Stethoscope", "House"],
+    "why_icons": [
+      "Dog",
+      "Stethoscope",
+      "House"
+    ],
     "contributing_factors": [
       "Animal overpopulation and unplanned litters",
       "Limited spay and neuter capacity",
@@ -47,27 +53,59 @@
     ],
     "sources": [
       {
+        "title": "Stockton committee advances stricter animal-control rules amid shelter overcrowding",
+        "publisher": "Stocktonia",
+        "url": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+        "published_at": "2026-10-20",
+        "checked_at": "2026-10-28",
+        "type": "local_reporting"
+      },
+      {
+        "title": "Stockton has become a dumping ground for abandoned dogs, advocates say",
+        "publisher": "CBS Sacramento",
+        "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
+        "published_at": "2026-04-06",
+        "checked_at": "2026-10-28",
+        "type": "local_reporting"
+      },
+      {
         "title": "Stockton Street Dogs reports surge in dumped dogs",
         "publisher": "Stockton Street Dogs / video source",
         "url": "https://www.youtube.com/watch?v=XZlwttXFXEc",
         "published_at": "2026-09-29",
         "type": "news"
       },
-    {
-      "title": "Stockton Street Dogs proposes a Canine Campus",
-      "publisher": "Stockton Street Dogs / KCRA video",
-      "url": "https://www.youtube.com/watch?v=I68lU4UuJ-A",
-      "published_at": "2026-07-30",
-      "type": "news"
-    },
-    {
-      "title": "Canine Campus proposal describes planned overflow and recovery capacity",
-      "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
-      "url": "https://streetdogsanctuary.com/canine-campus",
-      "published_at": null,
-      "checked_at": "2026-10-07T12:00:00-07:00",
-      "type": "organization"
-    },
+      {
+        "title": "2024 kennel statistics",
+        "publisher": "City of Stockton Animal Services",
+        "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
+        "published_at": null,
+        "checked_at": "2026-10-15",
+        "type": "government"
+      },
+      {
+        "title": "Stockton Animal Shelter spay and neuter services agreement",
+        "publisher": "City of Stockton",
+        "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+        "published_at": "2026-01-13",
+        "checked_at": "2026-08-21T17:07:00-07:00",
+        "type": "government"
+      },
+      {
+        "title": "Stockton Street Dogs proposes a Canine Campus",
+        "publisher": "Stockton Street Dogs / KCRA video",
+        "url": "https://www.youtube.com/watch?v=I68lU4UuJ-A",
+        "published_at": "2026-07-30",
+        "type": "news"
+      },
+      {
+        "title": "Canine Campus proposal describes planned overflow and recovery capacity",
+        "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+        "url": "https://streetdogsanctuary.com/canine-campus",
+        "published_at": null,
+        "checked_at": "2026-10-07T12:00:00-07:00",
+        "type": "organization"
+      },
       {
         "title": "A Stockton woman was mauled by wild dogs. Here's how to avoid becoming a target",
         "publisher": "Stocktonia",
@@ -101,14 +139,6 @@
         "type": "organization"
       },
       {
-        "title": "Stockton Animal Shelter spay and neuter services agreement",
-        "publisher": "City of Stockton",
-        "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
-        "published_at": "2026-01-13",
-        "checked_at": "2026-08-21T17:07:00-07:00",
-        "type": "government"
-      },
-      {
         "title": "Stockton Animal Shelter halts intakes, adoptions after strep zoo case",
         "publisher": "Stocktonia",
         "url": "https://stocktonia.org/news/community/2026/05/21/stockton-animal-shelter-halts-intakes-adoptions-after-strep-zoo-case/",
@@ -128,12 +158,12 @@
     "artwork": "/images/reality/dog-street-hero.jpg",
     "thumbnail_image": "/images/reality/dog-thumb.jpg",
     "first_seen": "2026-08-20",
-  "updated_at": "2026-10-07",
-  "current_state": "Dumped and stray dogs continue to exceed Stockton’s available rescue and placement capacity. Stockton Street Dogs reports that dumped-dog encounters have risen from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity. The organization is also working with city officials on a proposed Canine Campus that could house hundreds of stray dogs and add overflow, veterinary recovery, and volunteer-supported care capacity; it is a proposal, not yet an operating facility.",
+    "updated_at": "2026-10-28",
+    "current_state": "Dumped and stray dogs continue to exceed Stockton’s available rescue and placement capacity. Stockton Street Dogs reports that dumped-dog encounters have risen from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity. The organization is also working with city officials on a proposed Canine Campus that could house hundreds of stray dogs and add overflow, veterinary recovery, and volunteer-supported care capacity; it is a proposal, not yet an operating facility.",
     "record_ids": [
       "ssd-2026-09-29-dumped-dogs-surge",
-    "ssd-2026-07-30-canine-campus-proposal",
-    "ssd-2026-10-07-canine-campus-details",
+      "ssd-2026-07-30-canine-campus-proposal",
+      "ssd-2026-10-07-canine-campus-details",
       "crossover-2026-09-11-dog-crisis-cost-of-living",
       "crossover-2026-08-27-dog-placement-field-investigation",
       "sas-2026-01-13-spay-neuter-capacity",
@@ -173,7 +203,7 @@
     "responder_roles": [
       {
         "organization_id": "stockton-street-dogs",
-        "label": "Street outreach, rescue, fostering, and placement for dogs living outside.",
+        "label": "Street feeding and outreach, advocacy, and a proposed Canine Campus; its reported feeding work does not establish direct rescue or removal of dogs.",
         "current_role": "Finding safe placements and supporting dogs in the field.",
         "basis_record_ids": [
           "ssd-2026-06-08-street-response",
@@ -185,7 +215,7 @@
       },
       {
         "organization_id": "stockton-animal-services",
-        "label": "Shelter intake, care, adoption, veterinary services, and rescue coordination.",
+        "label": "Animal-control response, shelter intake, treatment, adoption, reunification, and rescue coordination.",
         "current_role": "Managing intake pressure and moving animals through shelter, foster, rescue, and adoption pathways.",
         "basis_record_ids": [
           "sas-2026-01-13-spay-neuter-capacity",
@@ -208,8 +238,8 @@
       }
     ],
     "latest_change": {
-    "record_id": "ssd-2026-10-07-canine-campus-details",
-    "label": "Canine Campus proposal describes planned overflow and recovery capacity."
+      "record_id": "ssd-2026-10-07-canine-campus-details",
+      "label": "Canine Campus proposal describes planned overflow and recovery capacity."
     },
     "current_state_items": [
       {
@@ -236,6 +266,15 @@
           "ssd-standing-foster-adopt"
         ]
       }
+    ],
+    "unknown_questions": [
+      "How many dogs currently live on Stockton's streets, and where?",
+      "What condition are they in, and how many need immediate care?",
+      "How many are already being fed, monitored, or otherwise cared for?",
+      "What happens when someone reports a stray, injured, or abandoned dog?",
+      "How many reported dogs ultimately receive care?",
+      "What prevents willing people and organizations from providing more care?",
+      "Which existing or proposed improvements are actually increasing access to care?"
     ]
   },
   {
@@ -253,7 +292,11 @@
       "St. Mary's Pathways now provides low-barrier shelter options designed to accommodate people with pets, partners, family, or belongings.",
       "Stockton Streetdogs is also pursuing a Safe Grounds model intended to keep unhoused people and companion animals together while they move toward housing."
     ],
-    "why_icons": ["PawPrint", "DoorClosed", "ClipboardList"],
+    "why_icons": [
+      "PawPrint",
+      "DoorClosed",
+      "ClipboardList"
+    ],
     "contributing_factors": [
       "Pet restrictions in some shelter and housing settings",
       "Limited pet-inclusive shelter and transitional capacity",
@@ -412,7 +455,11 @@
       "Bread of Life currently reports distributing through more than 33 locations and serving about 7,000 people per month.",
       "Community Partnership for Families also provides neighborhood food distribution and fresh-food access through its Family Resource Centers."
     ],
-    "why_icons": ["PackageOpen", "Refrigerator", "Truck"],
+    "why_icons": [
+      "PackageOpen",
+      "Refrigerator",
+      "Truck"
+    ],
     "contributing_factors": [
       "Limited cold-storage capacity",
       "Need for refrigerated transportation and temporary overflow storage",
@@ -583,7 +630,11 @@
       "Friends Outside identifies housing alongside education and employment as one of the three pillars of successful reentry.",
       "The prison puppy-raising program at California Health Care Facility in Stockton provides a related pre-release pathway centered on responsibility, service, and connection."
     ],
-    "why_icons": ["DoorOpen", "House", "Users"],
+    "why_icons": [
+      "DoorOpen",
+      "House",
+      "Users"
+    ],
     "contributing_factors": [
       "Difficulty securing stable housing after incarceration",
       "Employment and income instability during reentry",
@@ -746,7 +797,11 @@
       "The Zeiter Navigation Center is another major St. Mary’s housing-navigation asset in downtown Stockton.",
       "Stockton leaders still identify homelessness as a major city challenge even as this new capacity comes online."
     ],
-    "why_icons": ["BedSingle", "DoorClosed", "KeyRound"],
+    "why_icons": [
+      "BedSingle",
+      "DoorClosed",
+      "KeyRound"
+    ],
     "contributing_factors": [
       "Persistent homelessness and housing instability",
       "Need for low-barrier shelter options",

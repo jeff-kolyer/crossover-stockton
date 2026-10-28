@@ -16,6 +16,8 @@ export interface InvestigationLocation {
   date_label: "Occurred" | "Reported occurrence" | "Report published";
   evidence_type: string;
   category: "historical_published_report" | "recent_public_report" | "official_animal_services_record" | "crossover_firsthand";
+  marker_kind: "reported_sighting" | "historical_sighting" | "major_reported_concern" | "firsthand_observation" | null;
+  map_label: { place: string; report: string; note?: string } | null;
   source_reviewed_at: string | null;
   verification_status: string;
   last_known_outcome: string;
@@ -29,7 +31,7 @@ export interface InvestigationLocation {
 
 const locations = locationsData as InvestigationLocation[];
 const maintenance = maintenanceData;
-export type MappedInvestigationLocation = InvestigationLocation & { coordinates: [number, number] };
+export type MappedInvestigationLocation = InvestigationLocation & { coordinates: [number, number]; marker_kind: NonNullable<InvestigationLocation["marker_kind"]>; map_label: NonNullable<InvestigationLocation["map_label"]> };
 type MapProps = { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean };
 
 function monthYear(date: string) { return new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`)); }
@@ -70,7 +72,7 @@ export function InvestigationLocations({ investigationId, onOpenReport }: { inve
   const entries = useMemo(() => locations.filter((location) => location.investigation_id === investigationId), [investigationId]);
   const [filter, setFilter] = useState<"all" | InvestigationLocation["category"]>("all");
   const visibleEntries = useMemo(() => filter === "all" ? entries : entries.filter((location) => location.category === filter), [entries, filter]);
-  const mappedEntries = useMemo(() => visibleEntries.filter((location): location is MappedInvestigationLocation => location.coordinates !== null), [visibleEntries]);
+  const mappedEntries = useMemo(() => visibleEntries.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleEntries]);
   const [selectedId, setSelectedId] = useState(entries[0]?.id ?? "");
   const [Map, setMap] = useState<ComponentType<MapProps> | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
