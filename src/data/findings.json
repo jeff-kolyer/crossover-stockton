@@ -28,5 +28,98 @@
     "location_ids": [],
     "limitations": "Shelter intake is a period flow over a multi-jurisdiction service area. A current Stockton street-population estimate requires an appropriate observation and estimation method.",
     "last_reviewed_at": "2026-10-26"
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "contradicting_record_ids": [],
+    "related_project_ids": [],
+    "location_ids": [],
+    "last_reviewed_at": "2026-10-28",
+    "id": "finding-sas-regular-capacity-pressure",
+    "title": "Animal Services reports regular shelter capacity pressure",
+    "status": "developing",
+    "statement": "Animal Services Manager Ashley Kluza reported that the Stockton shelter is at capacity regularly.",
+    "supporting_record_ids": [
+      "stocktonia-2026-10-20-sas-capacity-intake",
+      "sas-2026-01-13-spay-neuter-capacity"
+    ],
+    "related_question_ids": [
+      "response-barriers",
+      "additional-help"
+    ],
+    "related_task_ids": [
+      "task-sas-field-call-follow-up"
+    ],
+    "limitations": "This is an attributed operating-condition report, not a measured occupancy series or a citywide count of dogs without care."
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "contradicting_record_ids": [],
+    "related_project_ids": [],
+    "location_ids": [],
+    "last_reviewed_at": "2026-10-28",
+    "id": "finding-sas-intake-priorities",
+    "title": "Healthy stray intake differs from urgent and abandonment response",
+    "status": "developing",
+    "statement": "Stocktonia reports that healthy stray intake generally requires appointments, while sick, injured, aggressive, and confirmed abandonment cases receive priority for acceptance or investigation.",
+    "supporting_record_ids": [
+      "stocktonia-2026-10-20-sas-capacity-intake",
+      "stockton-animal-services-2026-10-20-reporting-guidance"
+    ],
+    "related_question_ids": [
+      "response-barriers",
+      "severity-of-suffering"
+    ],
+    "related_task_ids": [
+      "task-sas-field-call-follow-up",
+      "task-investigate-found-animal-foster-pathway"
+    ],
+    "limitations": "The report does not establish appointment wait times, field response rates, case outcomes, or whether every urgent animal received care."
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "contradicting_record_ids": [],
+    "related_project_ids": [],
+    "location_ids": [],
+    "last_reviewed_at": "2026-10-28",
+    "id": "finding-roaming-dog-status-uncertain",
+    "title": "Roaming does not establish that a dog is unowned",
+    "status": "developing",
+    "statement": "Animal Services says roaming dogs can be owned dogs that escaped or were not contained. Lost, abandoned, and genuinely unowned dogs must be distinguished with case-level evidence.",
+    "supporting_record_ids": [
+      "stocktonia-2026-10-20-roaming-dog-distinction",
+      "cbs-2026-04-06-stockton-abandoned-dogs"
+    ],
+    "related_question_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
+    "related_task_ids": [
+      "dogs-check-louis-park",
+      "task-sas-field-call-follow-up"
+    ],
+    "limitations": "Neither source classifies all dogs seen on Stockton streets or gives the current proportions of each category."
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "contradicting_record_ids": [],
+    "related_project_ids": [],
+    "location_ids": [],
+    "last_reviewed_at": "2026-10-28",
+    "id": "finding-found-animal-foster-described",
+    "title": "A temporary found-animal foster pathway has been publicly described",
+    "status": "developing",
+    "statement": "Animal Services described a pathway for residents to temporarily foster found animals while intake or adoption is arranged.",
+    "supporting_record_ids": [
+      "stocktonia-2026-10-20-found-animal-foster-pathway"
+    ],
+    "related_question_ids": [
+      "response-barriers",
+      "additional-help"
+    ],
+    "related_task_ids": [
+      "task-investigate-found-animal-foster-pathway"
+    ],
+    "limitations": "Public description establishes neither current eligibility or capacity nor successful use, reunification, adoption, or other outcomes. Crossover has not tested the pathway."
   }
 ]

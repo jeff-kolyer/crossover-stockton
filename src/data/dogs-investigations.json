@@ -122,14 +122,15 @@
           },
           {
             "name": "Stockton Animal Services",
-            "status": "Doggie Day Out inquiry emailed October 12; a brief staff conversation and volunteer application documented October 14; field-call records requested October 20 and awaiting response in the latest record.",
+            "status": "Doggie Day Out inquiry emailed October 12; volunteer application submitted October 14; field-call records requested October 20. No later volunteer, orientation, or records response is documented. October 20 reporting describes an untested temporary found-animal foster pathway.",
             "questions": [
               "When a dog is reported, who receives the call, how is urgency assessed, and which response and closure details are recorded?",
               "Can field-call records show general areas, repeat reports, pickups, unresolved cases, and outcomes? Which fields are unavailable?",
               "What care, veterinary referral, reunification, or placement follows a report, and how can those outcomes be verified?",
-              "What are the current Doggie Day Out and volunteer requirements, orientation steps, and practical transport needs?"
+              "What are the current Doggie Day Out and volunteer requirements, orientation steps, and practical transport needs?",
+              "How does the temporary found-animal foster pathway work, who can participate, what capacity exists, and how are outcomes documented?"
             ],
-            "record_ids": ["crossover-2026-10-12-doggie-day-out-inquiry", "crossover-2026-10-14-sas-first-visit", "crossover-2026-10-20-sas-field-call-records-request"],
+            "record_ids": ["crossover-2026-10-12-doggie-day-out-inquiry", "crossover-2026-10-14-sas-first-visit", "crossover-2026-10-20-sas-field-call-records-request", "stocktonia-2026-10-20-found-animal-foster-pathway"],
             "source_links": [
               { "label": "Official reporting guidance", "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php" },
               { "label": "Volunteer information", "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php" }
@@ -212,10 +213,29 @@
       "evidence_record_ids": [
         "ssd-2026-09-29-dumped-dogs-surge",
         "ssd-2026-06-08-street-response",
-        "cbs-2026-04-06-stockton-abandoned-dogs"
+        "cbs-2026-04-06-stockton-abandoned-dogs",
+        "stocktonia-2026-10-20-sas-capacity-intake",
+        "stocktonia-2026-10-20-roaming-dog-distinction",
+        "stocktonia-2026-10-20-found-animal-foster-pathway",
+        "stocktonia-2026-10-20-animal-control-proposals"
       ],
-      "known_so_far": "Stockton Streetdogs reports increased dumped-dog encounters and conducts street-level assistance. Stockton Animal Services publishes reporting routes. Neither source alone establishes what happened after a particular report. We do not yet have a reliable local picture of severe suffering, mortality, care coverage, or resolved needs.",
+      "known_so_far": "Stockton Streetdogs reports increased dumped-dog encounters and conducts street-level assistance. Animal Services publishes reporting routes and, according to October 20 reporting, describes regular shelter capacity pressure, appointment-based healthy stray intake, priority for urgent and confirmed abandonment cases, and a temporary found-animal foster option. These are attributed public statements, not Crossover field observations or verified outcome measures. A roaming dog may be owned, lost, abandoned, or unowned. Stockton’s current street-dog population, severe suffering, care coverage, and individual outcomes remain unknown.",
       "evidence_context": [
+        {
+          "label": "October 20 Stocktonia report",
+          "summary": "Animal Services reports regular capacity pressure and different intake handling for healthy strays, urgent cases, and confirmed abandonment. Occupancy and case outcomes are unmeasured here.",
+          "record_id": "stocktonia-2026-10-20-sas-capacity-intake"
+        },
+        {
+          "label": "October 20 Stocktonia report",
+          "summary": "Animal Services describes a temporary found-animal foster pathway, but eligibility, available places, and successful outcomes remain unverified.",
+          "record_id": "stocktonia-2026-10-20-found-animal-foster-pathway"
+        },
+        {
+          "label": "October 20 committee report",
+          "summary": "The committee advanced animal-control proposals for Council consideration; adoption and an effective date are not established.",
+          "record_id": "stocktonia-2026-10-20-animal-control-proposals"
+        },
         {
           "label": "Organization report",
           "summary": "Stockton Streetdogs reports more dumped-dog encounters; this is not a citywide census or a survey of animal condition.",
@@ -269,10 +289,10 @@
         "public-access-coordination"
       ],
       "related_project_ids": [],
-      "verified_finding_ids": [],
-      "last_updated_at": "2026-10-20",
-      "short_focus": "First street-condition observation pending; public location reports remain unverified",
-      "next_verification_step": "Confirm whether the October 20 visit occurred. Review published Louis Park and Stanislaus Street accounts and recent unverified sightings, then select safe public areas for a documented observation. Review Animal Services field-call records separately when received."
+      "verified_finding_ids": ["finding-street-population-unknown", "finding-sas-regular-capacity-pressure", "finding-sas-intake-priorities", "finding-roaming-dog-status-uncertain", "finding-found-animal-foster-described"],
+      "last_updated_at": "2026-10-28",
+      "short_focus": "First street-condition observation pending; reported shelter practices and foster pathway need case-level verification",
+      "next_verification_step": "First confirm whether the October 20 visit occurred; no report is documented. Review dated Louis Park and Stanislaus Street leads, then complete and record a safe public-area observation, including zero dogs if that is what is seen. Separately follow up on field-call records, volunteer applications, the found-animal foster pathway, and Council consideration of the proposed ordinance."
     }
   ],
   "established_findings": [

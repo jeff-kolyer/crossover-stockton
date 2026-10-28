@@ -1511,5 +1511,113 @@
     "report_record_ids": [],
     "supports": [],
     "action_signals": []
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-10-20",
+    "checked_at": "2026-10-28",
+    "trust": "source_supported",
+    "source": {
+      "publisher": "Stocktonia / Andrea Baltodano",
+      "url": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+      "type": "local_reporting"
+    },
+    "evidence_status": "attributed_public_reporting",
+    "work_id": "dogs-public-source-review",
+    "supports": [],
+    "action_signals": [],
+    "id": "stocktonia-2026-10-20-sas-capacity-intake",
+    "record_type": "operational_condition",
+    "title": "Animal Services describes regular capacity pressure and intake priorities",
+    "summary": "Stocktonia reports Animal Services Manager Ashley Kluza told a Council committee the shelter is regularly at capacity. The report says healthy stray intake generally requires appointments, while sick, injured, and aggressive animals continue to be accepted and confirmed abandonment cases are accepted during investigation.",
+    "attribution": "Statements attributed to Stockton Animal Services Manager Ashley Kluza and Stocktonia reporting of shelter practice.",
+    "limitations": "A dated account of reported operating practice, not Crossover observation, a measured occupancy series, a response-time measure, or proof that every urgent case receives timely care."
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-10-20",
+    "checked_at": "2026-10-28",
+    "trust": "source_supported",
+    "source": {
+      "publisher": "Stocktonia / Andrea Baltodano",
+      "url": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+      "type": "local_reporting"
+    },
+    "evidence_status": "attributed_public_reporting",
+    "work_id": "dogs-public-source-review",
+    "supports": [],
+    "action_signals": [],
+    "id": "stocktonia-2026-10-20-roaming-dog-distinction",
+    "record_type": "reported_context",
+    "title": "Animal Services distinguishes roaming dogs from abandoned dogs",
+    "summary": "Kluza told the committee that a dog roaming Stockton streets is not necessarily abandoned: some escape from home and others roam because owners do not contain them. A sighting alone cannot establish ownership, abandonment, or whether a dog is genuinely unowned.",
+    "attribution": "Stocktonia account of Animal Services Manager Ashley Kluza’s committee remarks.",
+    "limitations": "No classification counts or case-level outcomes are provided; each dog’s status requires separate evidence."
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-10-20",
+    "checked_at": "2026-10-28",
+    "trust": "source_supported",
+    "source": {
+      "publisher": "Stocktonia / Andrea Baltodano",
+      "url": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+      "type": "local_reporting"
+    },
+    "evidence_status": "attributed_public_reporting",
+    "work_id": "dogs-public-source-review",
+    "supports": [],
+    "action_signals": [],
+    "id": "stocktonia-2026-10-20-found-animal-foster-pathway",
+    "record_type": "reported_service",
+    "title": "Animal Services describes a temporary found-animal foster pathway",
+    "summary": "Stocktonia reports Kluza described a program allowing residents to temporarily foster found animals while shelter intake or adoption is arranged. Animal Services may provide vaccinations and arrange sterilization for participating animals.",
+    "attribution": "Stocktonia account of Animal Services Manager Ashley Kluza’s committee remarks.",
+    "limitations": "Eligibility, enrollment steps, available places, timing, completed placements, and successful outcomes were not documented or tested by Crossover."
+  },
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": "2026-10-20",
+    "checked_at": "2026-10-28",
+    "trust": "source_supported",
+    "source": {
+      "publisher": "Stocktonia / Andrea Baltodano",
+      "url": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+      "type": "local_reporting"
+    },
+    "evidence_status": "attributed_public_reporting",
+    "work_id": "dogs-public-source-review",
+    "supports": [],
+    "action_signals": [],
+    "id": "stocktonia-2026-10-20-animal-control-proposals",
+    "record_type": "planning_update",
+    "title": "Committee advances proposed animal-control changes amid shelter overcrowding",
+    "summary": "Stocktonia reports that on October 19 the Council Legislation and Environmental Committee advanced proposed changes addressing repeated roaming violations and a conditional fourth household dog or cat. Animal Services also described regular shelter capacity pressure, appointments for healthy stray intake, priority for sick, injured, aggressive, and confirmed abandonment cases, and a temporary found-animal foster pathway. These are reported practices and proposals; the ordinance still requires full City Council consideration before taking effect. For Dogs in Stockton, the report raises questions about how roaming dogs are classified, what happens after an intake request, and whether temporary care leads to verified outcomes. We are following Council action, foster eligibility and outcomes, and the pending field-call records request. The first street observation remains to be documented.",
+    "attribution": "Stocktonia reporting of the October 19 committee meeting and Kluza’s presentation.",
+    "limitations": "Committee referral is not enactment. The final ordinance text, Council calendar, vote, and effective date remain unverified."
   }
 ]

@@ -97,14 +97,14 @@
   {
     "id": "task-ssd-ask-contact-questions",
     "investigation_id": "street-dog-immediate-welfare",
-    "title": "Ask Stockton Street Dogs the recorded follow-up questions",
+    "title": "Follow up with Stockton Street Dogs",
     "status": "open",
     "type": "organization_contact",
-    "instructions": "Use the questions already recorded in the field-work plan. Record any contact and answers as an actual activity when it occurs.",
+    "instructions": "Check whether the October 7 volunteer application received a response. Ask for the current status and evidence of progress on Canine Campus, and identify practical approved volunteer or care opportunities, requirements, schedules, and contacts. Record any reply only when received.",
     "location_ids": [],
     "organization_ids": ["stockton-street-dogs"],
     "question_ids": ["food-and-water", "additional-help"],
-    "basis_record_ids": [],
+    "basis_record_ids": ["crossover-2026-10-07-street-dogs-volunteer-application", "ssd-2026-10-07-canine-campus-details"],
     "activity_record_ids": [],
     "checklist": [
       "What is the current status of Canine Campus?",
@@ -118,5 +118,66 @@
       "Do you coordinate feeding or water, and can residents join an established route?",
       "What supplies are useful, where should they be delivered, and who handles veterinary referrals?"
     ]
+  },
+  {
+    "id": "task-sas-volunteer-onboarding-follow-up",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Follow up with Stockton Animal Services on volunteering",
+    "status": "waiting",
+    "type": "follow_up",
+    "instructions": "Check the status of the October 14 volunteer application and the October 12 Doggie Day Out inquiry. Confirm onboarding, orientation, eligibility, scheduling, and practical transport requirements; document a response only if received.",
+    "location_ids": [],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "additional-help"
+    ],
+    "basis_record_ids": [
+      "crossover-2026-10-14-sas-volunteer-application",
+      "crossover-2026-10-12-doggie-day-out-inquiry",
+      "sas-standing-doggie-day-out"
+    ],
+    "activity_record_ids": []
+  },
+  {
+    "id": "task-investigate-found-animal-foster-pathway",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Investigate the temporary found-animal foster pathway",
+    "status": "open",
+    "type": "source_verification",
+    "instructions": "Ask Animal Services who is eligible, how a resident enrolls, who authorizes care and provides supplies or veterinary services, how many places are available, and how intake, reunification, adoption, or other successful outcomes can be verified. Do not treat the publicly described pathway as tested.",
+    "location_ids": [],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "response-barriers",
+      "additional-help"
+    ],
+    "basis_record_ids": [
+      "stocktonia-2026-10-20-found-animal-foster-pathway"
+    ],
+    "activity_record_ids": []
+  },
+  {
+    "id": "task-monitor-animal-control-ordinance",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Monitor the proposed animal-control ordinance",
+    "status": "open",
+    "type": "policy_monitoring",
+    "instructions": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date. Keep the October 19 committee referral separate from any later Council adoption.",
+    "location_ids": [],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "response-barriers"
+    ],
+    "basis_record_ids": [
+      "stockton-2026-10-19-animal-services-ordinance-agenda",
+      "stocktonia-2026-10-20-animal-control-proposals"
+    ],
+    "activity_record_ids": []
   }
 ]
