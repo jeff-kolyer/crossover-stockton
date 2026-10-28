@@ -68,6 +68,8 @@
   white-space: nowrap;
 }
 .public-site .public-mobile-menu { display: none; }
+.public-site .public-mobile-menu-icon { display: flex; flex-direction: column; gap: 4px; width: 20px; }
+.public-site .public-mobile-menu-icon span { width: 100%; height: 2px; border-radius: 1px; background: currentColor; }
 
 @media (min-width: 901px) {
   .public-site .public-nav { height: 70px; }
@@ -118,7 +120,9 @@
 .public-site .public-menu-header,
 .public-site .public-menu-location { padding: 14px 20px; border-bottom: 1px solid #ddd; }
 .public-site .public-menu-header span { font-weight: 700; }
-.public-site .public-menu-header button { border: 0; background: none; }
+.public-site .public-menu-header button { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font-size: 26px; line-height: 1; }
+.public-site .public-mobile-menu,
+.public-site .public-menu-modal button { -webkit-tap-highlight-color: transparent; }
 .public-site .public-menu-list { padding: 8px; }
 .public-site .public-menu-list button { min-height: 48px; border: 0; background: none; text-align: left; }
 .public-site .public-menu-list button:hover,
@@ -126,7 +130,7 @@
 
 @media (max-width: 900px) {
   .public-site .public-nav { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; padding: 0 20px; }
-  .public-site .public-mobile-menu { display: block; min-width: 44px; min-height: 44px; padding: 0; font-size: .90625rem; text-align: left; }
+  .public-site .public-mobile-menu { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; }
   .public-site .public-logo { justify-self: center; min-width: 0; }
   .public-site .public-logo img { width: 28px; height: 28px; }
   .public-site .public-logo span { font-size: .76rem; letter-spacing: .17em; }

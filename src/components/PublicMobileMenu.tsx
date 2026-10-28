@@ -70,7 +70,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout }: PublicMobileMenuPr
           setIsOpen(true);
         }}
       >
-        Menu
+        <span className="public-mobile-menu-icon" aria-hidden="true"><span /><span /><span /></span>
       </button>
 
       {isOpen && (
@@ -85,7 +85,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout }: PublicMobileMenuPr
             <div className="public-menu-header">
               <span>Menu</span>
               <button type="button" aria-label="Close navigation" onClick={() => setIsOpen(false)}>
-                Close
+                <span aria-hidden="true">×</span>
               </button>
             </div>
 

@@ -92,45 +92,51 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
           filter: ["all", ["match", ["geometry-type"], ["LineString", "MultiLineString"], true, false], ["match", ["get", "class"], ["minor", "service", "track"], true, false]],
           layout: { "line-cap": "round", "line-join": "round" },
           paint: {
-            "line-color": "#e4e9ed",
+            "line-color": "#e2e6ea",
             "line-width": ["interpolate", ["linear"], ["zoom"], 8, 0.7, 12, 1.6, 15, 3.5, 20, 13],
           },
         }, "highway_minor");
       }
       const colors: Record<string, ["background-color" | "fill-color" | "line-color" | "text-color", string]> = {
-        background: ["background-color", "#eeeae1"],
-        landuse_residential: ["fill-color", "#f8f9f8"],
-        park: ["fill-color", "#c7ebd2"],
+        background: ["background-color", "#f0ece3"],
+        landuse_residential: ["fill-color", "#f8f9f6"],
+        building: ["fill-color", "#f0ece3"],
+        road_area_pier: ["fill-color", "#f0ece3"],
+        road_pier: ["line-color", "#f0ece3"],
+        park: ["fill-color", "#d7f2df"],
         landcover_wood: ["fill-color", "#d7f2df"],
-        water: ["fill-color", "#84d3eb"],
+        water: ["fill-color", "#8bd4ea"],
         waterway_line_label: ["text-color", "#348da4"],
         water_name_line_label: ["text-color", "#348da4"],
         water_name_point_label: ["text-color", "#348da4"],
         highway_minor: ["line-color", "#ffffff"],
-        highway_major_casing: ["line-color", "#b5c3d6"],
-        highway_major_inner: ["line-color", "#ffffff"],
-        highway_major_subtle: ["line-color", "#ffffff"],
-        highway_motorway_casing: ["line-color", "#6e88a6"],
-        highway_motorway_inner: ["line-color", "#a6bbd9"],
-        highway_motorway_subtle: ["line-color", "#a6bbd9"],
-        highway_motorway_bridge_casing: ["line-color", "#6e88a6"],
-        highway_motorway_bridge_inner: ["line-color", "#a6bbd9"],
-        tunnel_motorway_casing: ["line-color", "#6e88a6"],
-        tunnel_motorway_inner: ["line-color", "#a6bbd9"],
-        label_city: ["text-color", "#202124"],
-        label_city_capital: ["text-color", "#202124"],
-        label_town: ["text-color", "#5f6368"],
-        label_village: ["text-color", "#5f6368"],
-        label_other: ["text-color", "#5f6368"],
-        "highway-name-path": ["text-color", "#5f6368"],
-        "highway-name-minor": ["text-color", "#5f6368"],
-        "highway-name-major": ["text-color", "#5f6368"],
+        highway_major_casing: ["line-color", "#d0d8e1"],
+        highway_major_inner: ["line-color", "#e9eef3"],
+        highway_major_subtle: ["line-color", "#e9eef3"],
+        highway_motorway_casing: ["line-color", "#9aa7b6"],
+        highway_motorway_inner: ["line-color", "#c6d1dc"],
+        highway_motorway_subtle: ["line-color", "#c6d1dc"],
+        highway_motorway_bridge_casing: ["line-color", "#9aa7b6"],
+        highway_motorway_bridge_inner: ["line-color", "#c6d1dc"],
+        tunnel_motorway_casing: ["line-color", "#9aa7b6"],
+        tunnel_motorway_inner: ["line-color", "#c6d1dc"],
+        label_city: ["text-color", "#1d1d1f"],
+        label_city_capital: ["text-color", "#1d1d1f"],
+        label_town: ["text-color", "#6e6e73"],
+        label_village: ["text-color", "#6e6e73"],
+        label_other: ["text-color", "#6e6e73"],
+        label_state: ["text-color", "#6e6e73"],
+        "highway-name-path": ["text-color", "#6e6e73"],
+        "highway-name-minor": ["text-color", "#6e6e73"],
+        "highway-name-major": ["text-color", "#6e6e73"],
+        airport: ["text-color", "#007aff"],
       };
       Object.entries(colors).forEach(([layer, [property, color]]) => {
         if (vectorMap.getLayer(layer)) vectorMap.setPaintProperty(layer, property, color);
       });
+      if (vectorMap.getLayer("landuse_residential")) vectorMap.setPaintProperty("landuse_residential", "fill-opacity", 1);
       if (vectorMap.getLayer("waterway")) {
-        vectorMap.setPaintProperty("waterway", "line-color", ["match", ["get", "class"], ["river", "canal"], "#84d3eb", "#bfeaf5"]);
+        vectorMap.setPaintProperty("waterway", "line-color", ["match", ["get", "class"], ["river", "canal"], "#8bd4ea", "#bfeaf5"]);
       }
       const roadWidths: Record<string, number[]> = {
         highway_minor: [8, 0.4, 12, 1, 15, 2.7, 20, 11.5],
