@@ -23,7 +23,7 @@
     "supporting_record_ids": ["sas-2024-kennel-statistics"],
     "contradicting_record_ids": [],
     "related_question_ids": ["where-dogs-need-help"],
-    "related_task_ids": ["task-sas-field-call-follow-up", "dogs-check-louis-park"],
+    "related_task_ids": ["task-sas-field-call-follow-up"],
     "related_project_ids": [],
     "location_ids": [],
     "limitations": "Shelter intake is a period flow over a multi-jurisdiction service area. A current Stockton street-population estimate requires an appropriate observation and estimation method.",
@@ -95,7 +95,6 @@
       "response-barriers"
     ],
     "related_task_ids": [
-      "dogs-check-louis-park",
       "task-sas-field-call-follow-up"
     ],
     "limitations": "Neither source classifies all dogs seen on Stockton streets or gives the current proportions of each category."

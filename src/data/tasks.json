@@ -90,7 +90,7 @@
     "instructions": "Visit St. Mary's Community Services to learn from people already caring for dogs. Ask how food, veterinary care, volunteers, and referrals are coordinated, what information would improve Crossover's investigation map, where help encounters obstacles, and what other places or people we should investigate. Record actual observations separately from what people tell us. Do not assume dogs are strays or abandoned; document only what is learned during the visit.",
     "location_ids": ["st-marys-community-services-campus"],
     "organization_ids": ["st-marys-dining-room"],
-    "question_ids": [],
+    "question_ids": ["food-and-water", "additional-help"],
     "basis_record_ids": ["smcs-standing-housing-outcomes"],
     "activity_record_ids": []
   },
