@@ -7,11 +7,8 @@ export const evidenceCategoryColors: Record<InvestigationLocation["category"], s
   crossover_firsthand: "#16836C",
 };
 
-export const evidenceMarkerColors: Record<NonNullable<InvestigationLocation["marker_kind"]>, string> = {
-  reported_sighting: "#E78924",
-  historical_sighting: "#7E858A",
-  major_reported_concern: "#7E858A",
-  firsthand_observation: "#16836C",
-};
+export const openTaskColor = "#15A16E";
 
-export const taskRingColor = "#26C675";
+export function locationMarkerColor(category: InvestigationLocation["category"], hasOpenTask: boolean) {
+  return hasOpenTask ? openTaskColor : evidenceCategoryColors[category];
+}

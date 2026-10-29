@@ -6,7 +6,7 @@ import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { MappedInvestigationLocation } from "./InvestigationLocations";
-import { evidenceMarkerColors } from "../lib/evidenceCategoryColors";
+import { locationMarkerColor } from "../lib/evidenceCategoryColors";
 import { openTaskLocationIds } from "../lib/investigationData";
 
 setWorkerUrl(workerUrl);
@@ -20,21 +20,19 @@ type LocationsMapProps = {
   followSelection?: boolean;
 };
 
-type MarkerKind = MappedInvestigationLocation["marker_kind"];
-
 const dogIcon = '<g transform="translate(1.2 1.2) scale(.9)" stroke-width="2"><path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"/></g>';
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
-const alertBadge = '<g transform="translate(3.5 3.5) scale(.9)"><circle cx="35" cy="35" r="11" fill="#D74B45" stroke="#fff" stroke-width="1.5"/><path d="M35 27.5 42 40H28Z" fill="#fff"/><path d="M35 32v4" stroke="#D74B45" stroke-width="1.8" stroke-linecap="round"/><circle cx="35" cy="38" r="1" fill="#D74B45"/></g>';
+const alertBadge = '<g transform="translate(5.3 5.3) scale(.82)"><circle cx="35" cy="35" r="11" fill="#D74B45" stroke="#fff" stroke-width="1.5"/><path d="M35 27.5 42 40H28Z" fill="#fff"/><path d="M35 32v4" stroke="#D74B45" stroke-width="1.8" stroke-linecap="round"/><circle cx="35" cy="38" r="1" fill="#D74B45"/></g>';
 const labelLineLength = 22;
-const labelOffset = 30;
+const labelOffset = 20;
 
-function makeCircleMarker(kind: MarkerKind, selected: boolean, hasOpenTask: boolean) {
+function makeCircleMarker(location: MappedInvestigationLocation, selected: boolean) {
+  const kind = location.marker_kind;
   const icon = kind === "firsthand_observation" ? eyeIcon : dogIcon;
-  const size = kind === "major_reported_concern" ? 48 : 40;
-  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><circle cx="20" cy="20" r="17" fill="' + evidenceMarkerColors[kind] + '" stroke="' + (selected ? '#000' : '#fff') + '" stroke-width="' + (selected ? 3 : 2.25) + '"/><g transform="translate(8 8)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + (kind === "major_reported_concern" ? alertBadge : '') + '</svg>';
-  return hasOpenTask
-    ? L.divIcon({ html: circle, className: "task-linked-map-marker", iconSize: [size, size], iconAnchor: [20, 20] })
-    : L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [size, size], iconAnchor: [20, 20] });
+  const fill = locationMarkerColor(location.category, openTaskLocationIds.has(location.id));
+  const size = kind === "major_reported_concern" ? 46 : 38;
+  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><circle cx="19" cy="19" r="16" fill="' + fill + '" stroke="' + (selected ? '#000' : '#fff') + '" stroke-width="' + (selected ? 3 : 2.25) + '"/><g transform="translate(7 7)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + (kind === "major_reported_concern" ? alertBadge : '') + '</svg>';
+  return L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [size, size], iconAnchor: [19, 19] });
 }
 
 function balancedLabelLines(place: string) {
@@ -97,49 +95,18 @@ function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[
     const marker = markers.get(location.id);
     const tooltip = marker?.getTooltip();
     if (!marker || !tooltip) continue;
-    const markerRect = marker.getElement()?.getBoundingClientRect();
-    if (!markerRect) continue;
-    const sideSpace = { right: bounds.right - markerRect.right - 8, left: markerRect.left - bounds.left - 8 };
-    let selectedFallback: "left" | "right" | "top" | "bottom" | null = null;
-    for (const direction of ["right", "left", "top", "bottom"] as const) {
-      if ((direction === "right" || direction === "left") && sideSpace[direction] < 70) continue;
-      tooltip.options.direction = direction;
-      tooltip.options.offset = direction === "right" ? L.point(labelOffset, 0)
-        : direction === "left" ? L.point(-labelOffset, 0)
-        : direction === "top" ? L.point(0, -labelOffset)
-        : L.point(0, labelOffset);
-      marker.openTooltip();
-      const element = tooltip.getElement();
-      if (!element) continue;
-      element.style.marginLeft = "0px";
-      element.style.maxWidth = "";
-      tooltip.update();
-      let rect = element.getBoundingClientRect();
-      if (direction === "top" || direction === "bottom") {
-        const horizontalShift = rect.left < bounds.left + 5 ? bounds.left + 5 - rect.left
-          : rect.right > bounds.right - 5 ? bounds.right - 5 - rect.right
-          : 0;
-        if (horizontalShift) {
-          element.style.marginLeft = horizontalShift + "px";
-          rect = element.getBoundingClientRect();
-        }
-      }
-      const fits = rect.left >= bounds.left + 5 && rect.right <= bounds.right - 5 && rect.top >= bounds.top + 5 && rect.bottom <= bounds.bottom - 5;
-      if (fits && !selectedFallback) selectedFallback = direction;
-      if (fits && !labels.some((other) => overlaps(rect, other, 6))
-        && !markerRects.some((other) => other.id !== location.id && other.rect && overlaps(rect, other.rect, 5))) {
-        labels.push(rect);
-        break;
-      }
+    marker.openTooltip();
+    const element = tooltip.getElement();
+    if (!element) continue;
+    tooltip.update();
+    const rect = element.getBoundingClientRect();
+    const fits = rect.left >= bounds.left + 5 && rect.right <= bounds.right - 5 && rect.top >= bounds.top + 5 && rect.bottom <= bounds.bottom - 5;
+    const collides = labels.some((other) => overlaps(rect, other, 6))
+      || markerRects.some((other) => other.id !== location.id && other.rect && overlaps(rect, other.rect, 5));
+    if (fits && (location.id === selectedId || !collides)) {
+      labels.push(rect);
+    } else {
       marker.closeTooltip();
-    }
-    if (location.id === selectedId && !marker.isTooltipOpen() && selectedFallback) {
-      tooltip.options.direction = selectedFallback;
-      tooltip.options.offset = selectedFallback === "right" ? L.point(labelOffset, 0)
-        : selectedFallback === "left" ? L.point(-labelOffset, 0)
-        : selectedFallback === "top" ? L.point(0, -labelOffset)
-        : L.point(0, labelOffset);
-      marker.openTooltip();
     }
   }
 }
@@ -303,18 +270,20 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
     if (!map) return;
     const markers = locations.map((location) => {
       const marker = L.marker(location.coordinates, {
-        icon: makeCircleMarker(location.marker_kind, false, openTaskLocationIds.has(location.id)),
+        icon: makeCircleMarker(location, false),
         title: location.map_label.place,
         alt: location.map_label.place,
       }).on("click", () => onSelectRef.current(selectedIdRef.current === location.id ? "" : location.id)).addTo(map);
       marker.bindTooltip(labelContent(location), {
         permanent: true,
-        direction: "auto",
-        offset: L.point(0, 0),
+        direction: "right",
+        offset: L.point(labelOffset, 0),
         opacity: 1,
-        className: location.marker_kind === "reported_sighting"
-          ? "investigation-map-label investigation-map-label--orange"
-          : "investigation-map-label",
+        className: openTaskLocationIds.has(location.id)
+          ? "investigation-map-label investigation-map-label--task"
+          : location.marker_kind === "reported_sighting"
+            ? "investigation-map-label investigation-map-label--orange"
+            : "investigation-map-label",
       });
       return marker;
     });
@@ -335,7 +304,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
       const marker = markersRef.current.get(location.id);
       if (!marker) return;
       const selected = location.id === selectedId;
-      marker.setIcon(makeCircleMarker(location.marker_kind, selected, openTaskLocationIds.has(location.id)));
+      marker.setIcon(makeCircleMarker(location, selected));
       marker.setZIndexOffset(selected ? 1000 : 0);
 
     });
