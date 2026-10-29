@@ -7,6 +7,9 @@ import type { InvestigationFinding, InvestigationQuestion, InvestigationTask } f
 
 export const dogInvestigationId = "street-dog-immediate-welfare";
 export const investigationTasks = tasksData as InvestigationTask[];
+export const openTaskLocationIds = new Set(investigationTasks
+  .filter((task) => task.status === "open")
+  .flatMap((task) => task.location_ids));
 export const investigationQuestions = questionsData as InvestigationQuestion[];
 export const investigationFindings = findingsData as InvestigationFinding[];
 export const investigationRecords = recordsData as EvidenceRecord[];

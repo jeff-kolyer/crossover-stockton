@@ -40,6 +40,7 @@ export function CrossoverLocationDetails({ location, records, tasks, activities,
     </div>
     <p className="crossover-location-area">{location.area}</p>
     <p className="crossover-location-status">{location.verification_status}</p>
+    {location.marker_kind === "major_reported_concern" && <p>The red dot indicates a safety concern in the source report. It does not establish current danger; current conditions at this generalized area are unknown.</p>}
     <dl className="crossover-location-facts">
       <div><dt>Record</dt><dd>{categoryLabels[location.category]}</dd></div>
       <div><dt>{location.date_label}</dt><dd>{fullDate(location.evidence_date)}</dd></div>

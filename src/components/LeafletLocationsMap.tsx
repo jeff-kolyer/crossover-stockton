@@ -7,7 +7,7 @@ import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { MappedInvestigationLocation } from "./InvestigationLocations";
 import { evidenceMarkerColors } from "../lib/evidenceCategoryColors";
-import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
+import { openTaskLocationIds } from "../lib/investigationData";
 
 setWorkerUrl(workerUrl);
 
@@ -23,40 +23,123 @@ type LocationsMapProps = {
 type MarkerKind = MappedInvestigationLocation["marker_kind"];
 
 const dogIcon = '<path d="M8.3 6.8 6 5 3.7 7v4.2l2 1.4M15.7 6.8 18 5l2.3 2v4.2l-2 1.4M6.2 12.5C6.2 8.7 8.5 6.2 12 6.2s5.8 2.5 5.8 6.3v2.2c0 3.2-2.5 5.3-5.8 5.3s-5.8-2.1-5.8-5.3v-2.2Z"/><path d="M9 12.8h.01M15 12.8h.01" stroke-width="2.5" stroke-linecap="round"/><path d="m10.5 16 1.5 1 1.5-1M12 17v1.2"/>';
-const warningIcon = '<path d="M10.7 4.6a1.5 1.5 0 0 1 2.6 0l8.1 13.8a1.5 1.5 0 0 1-1.3 2.3H3.9a1.5 1.5 0 0 1-1.3-2.3Z"/><path d="M12 9v5M12 17.5h.01" stroke-width="2.2" stroke-linecap="round"/>';
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
+const labelLineLength = 22;
 
-function makeCircleMarker(kind: MarkerKind, selected: boolean) {
-  const icon = kind === "major_reported_concern" ? warningIcon : kind === "firsthand_observation" ? eyeIcon : dogIcon;
-  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="' + evidenceMarkerColors[kind] + '" stroke="' + (selected ? "#263747" : "#fff") + '" stroke-width="' + (selected ? 3 : 2) + '"/><g transform="translate(8 8)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g></svg>';
-  return L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [40, 40], iconAnchor: [20, 20] });
+function makeCircleMarker(kind: MarkerKind, selected: boolean, hasOpenTask: boolean) {
+  const icon = kind === "firsthand_observation" ? eyeIcon : dogIcon;
+  const badge = kind === "major_reported_concern" ? '<circle cx="26" cy="26" r="3.5" fill="#D74B45" stroke="#fff" stroke-width=".75"/>' : '';
+  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="13" fill="' + evidenceMarkerColors[kind] + '" stroke="' + (selected ? "#263747" : "#fff") + '" stroke-width="' + (selected ? 2 : 1.25) + '"/><g transform="translate(8 8) scale(.75)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + badge + '</svg>';
+  return hasOpenTask
+    ? L.divIcon({ html: circle, className: "task-linked-map-marker", iconSize: [34, 34], iconAnchor: [17, 17] })
+    : L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [34, 34], iconAnchor: [17, 17] });
 }
 
-const markerIcons = Object.fromEntries((Object.keys(evidenceMarkerColors) as MarkerKind[]).map((kind) => [kind, {
-  default: makeCircleMarker(kind, false),
-  selected: makeCircleMarker(kind, true),
-}])) as Record<MarkerKind, { default: L.Icon; selected: L.Icon }>;
+function balancedLabelLines(place: string) {
+  if (place.length <= labelLineLength) return [place];
+
+  const conjunction = place.match(/^(.+?)\s+(&|and)\s+(.+)$/i);
+  if (conjunction) return [conjunction[1], `${conjunction[2]} ${conjunction[3]}`];
+
+  const slashGroup = place.match(/^(.+?\s\/)\s+(.+)$/);
+  if (slashGroup) return [slashGroup[1], slashGroup[2]];
+
+  const words = place.split(/\s+/);
+  if (words.length < 3) return [place];
+  let best = [place];
+  let bestScore = Number.POSITIVE_INFINITY;
+  for (let index = 1; index < words.length; index += 1) {
+    const lines = [words.slice(0, index).join(" "), words.slice(index).join(" ")];
+    const longest = Math.max(...lines.map((line) => line.length));
+    const orphanPenalty = index === 1 || index === words.length - 1 ? 8 : 0;
+    const score = longest * 2 + Math.abs(lines[0].length - lines[1].length) + orphanPenalty;
+    if (score < bestScore) {
+      best = lines;
+      bestScore = score;
+    }
+  }
+  return best;
+}
 
 function labelContent(location: MappedInvestigationLocation) {
-  const label = document.createElement("div");
-  const place = document.createElement("strong");
-  place.textContent = location.map_label.place;
-  const report = document.createElement("span");
-  report.textContent = location.map_label.report;
-  label.append(place, report);
-  if (location.map_label.note) {
-    const note = document.createElement("small");
-    note.textContent = location.map_label.note;
-    label.append(note);
-  }
+  const label = document.createElement("span");
+  label.className = "investigation-map-label__content";
+  balancedLabelLines(location.map_label.place).forEach((line) => {
+    const row = document.createElement("span");
+    row.className = "investigation-map-label__line";
+    row.textContent = line;
+    label.append(row);
+  });
   return label;
 }
 
-function shouldShowLabel(location: MappedInvestigationLocation, zoom: number, selectedId: string, locations: MappedInvestigationLocation[]) {
-  if (location.id === selectedId || zoom >= 15) return true;
-  if (zoom >= 14) return location.marker_kind !== "historical_sighting";
-  const newestRecent = locations.filter((item) => item.marker_kind === "reported_sighting").reduce((latest, item) => item.evidence_date > latest ? item.evidence_date : latest, "");
-  return location.marker_kind === "major_reported_concern" || (location.marker_kind === "reported_sighting" && location.evidence_date === newestRecent);
+function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[], markers: Map<string, L.Marker>, selectedId: string) {
+  const containerBounds = map.getContainer().getBoundingClientRect();
+  const bounds = {
+    left: Math.max(containerBounds.left, 0),
+    right: Math.min(containerBounds.right, window.innerWidth),
+    top: Math.max(containerBounds.top, 0),
+    bottom: Math.min(containerBounds.bottom, window.innerHeight),
+  };
+  const markerRects = locations.map((location) => ({ id: location.id, rect: markers.get(location.id)?.getElement()?.getBoundingClientRect() }));
+  const labels: DOMRect[] = [];
+  const overlaps = (a: DOMRect, b: DOMRect, gap = 4) => a.left < b.right + gap && a.right > b.left - gap && a.top < b.bottom + gap && a.bottom > b.top - gap;
+  const candidates = locations.filter((location) => location.id === selectedId || openTaskLocationIds.has(location.id) || location.category === "recent_public_report")
+    .sort((a, b) => Number(b.id === selectedId) - Number(a.id === selectedId)
+      || Number(openTaskLocationIds.has(b.id)) - Number(openTaskLocationIds.has(a.id))
+      || Number(b.category === "recent_public_report") - Number(a.category === "recent_public_report")
+      || b.evidence_date.localeCompare(a.evidence_date));
+
+  locations.forEach((location) => markers.get(location.id)?.closeTooltip());
+  for (const location of candidates) {
+    const marker = markers.get(location.id);
+    const tooltip = marker?.getTooltip();
+    if (!marker || !tooltip) continue;
+    const markerRect = marker.getElement()?.getBoundingClientRect();
+    if (!markerRect) continue;
+    const sideSpace = { right: bounds.right - markerRect.right - 8, left: markerRect.left - bounds.left - 8 };
+    let selectedFallback: "left" | "right" | "top" | "bottom" | null = null;
+    for (const direction of ["right", "left", "top", "bottom"] as const) {
+      if ((direction === "right" || direction === "left") && sideSpace[direction] < 70) continue;
+      tooltip.options.direction = direction;
+      tooltip.options.offset = direction === "right" ? L.point(22, 0)
+        : direction === "left" ? L.point(-22, 0)
+        : direction === "top" ? L.point(0, -22)
+        : L.point(0, 22);
+      marker.openTooltip();
+      const element = tooltip.getElement();
+      if (!element) continue;
+      element.style.marginLeft = "0px";
+      element.style.maxWidth = "";
+      tooltip.update();
+      let rect = element.getBoundingClientRect();
+      if (direction === "top" || direction === "bottom") {
+        const horizontalShift = rect.left < bounds.left + 5 ? bounds.left + 5 - rect.left
+          : rect.right > bounds.right - 5 ? bounds.right - 5 - rect.right
+          : 0;
+        if (horizontalShift) {
+          element.style.marginLeft = horizontalShift + "px";
+          rect = element.getBoundingClientRect();
+        }
+      }
+      const fits = rect.left >= bounds.left + 5 && rect.right <= bounds.right - 5 && rect.top >= bounds.top + 5 && rect.bottom <= bounds.bottom - 5;
+      if (fits && !selectedFallback) selectedFallback = direction;
+      if (fits && !labels.some((other) => overlaps(rect, other, 6))
+        && !markerRects.some((other) => other.id !== location.id && other.rect && overlaps(rect, other.rect, 5))) {
+        labels.push(rect);
+        break;
+      }
+      marker.closeTooltip();
+    }
+    if (location.id === selectedId && !marker.isTooltipOpen() && selectedFallback) {
+      tooltip.options.direction = selectedFallback;
+      tooltip.options.offset = selectedFallback === "right" ? L.point(22, 0)
+        : selectedFallback === "left" ? L.point(-22, 0)
+        : selectedFallback === "top" ? L.point(0, -22)
+        : L.point(0, 22);
+      marker.openTooltip();
+    }
+  }
 }
 
 function frameLocations(map: L.Map, locations: MappedInvestigationLocation[]) {
@@ -214,31 +297,25 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
     if (!map) return;
     const markers = locations.map((location) => {
       const marker = L.marker(location.coordinates, {
-        icon: markerIcons[location.marker_kind].default,
-        title: location.map_label.place + " — " + location.map_label.report,
+        icon: makeCircleMarker(location.marker_kind, false, openTaskLocationIds.has(location.id)),
+        title: location.map_label.place,
         alt: location.map_label.place,
-      }).on("click", () => onSelectRef.current(location.id)).addTo(map);
+      }).on("click", () => onSelectRef.current(selectedIdRef.current === location.id ? "" : location.id)).addTo(map);
       marker.bindTooltip(labelContent(location), {
         permanent: true,
         direction: "auto",
-        offset: L.point(12, 0),
+        offset: L.point(0, 0),
         opacity: 1,
         className: "investigation-map-label",
       });
       return marker;
     });
     markersRef.current = new Map(locations.map((location, index) => [location.id, markers[index]]));
-    const refreshLabels = () => locations.forEach((location) => {
-      const marker = markersRef.current.get(location.id);
-      if (!marker) return;
-      const show = shouldShowLabel(location, map.getZoom(), selectedIdRef.current, locations);
-      if (show) marker.openTooltip();
-      else marker.closeTooltip();
-    });
-    map.on("zoomend", refreshLabels);
+    const refreshLabels = () => updateVisibleLabels(map, locations, markersRef.current, selectedIdRef.current);
+    map.on("zoomend moveend resize", refreshLabels);
     refreshLabels();
     return () => {
-      map.off("zoomend", refreshLabels);
+      map.off("zoomend moveend resize", refreshLabels);
       markers.forEach((marker) => marker.remove());
       markersRef.current.clear();
     };
@@ -250,12 +327,11 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
       const marker = markersRef.current.get(location.id);
       if (!marker) return;
       const selected = location.id === selectedId;
-      marker.setIcon(markerIcons[location.marker_kind][selected ? "selected" : "default"]);
+      marker.setIcon(makeCircleMarker(location.marker_kind, selected, openTaskLocationIds.has(location.id)));
       marker.setZIndexOffset(selected ? 1000 : 0);
-      const show = shouldShowLabel(location, map.getZoom(), selectedId, locations);
-      if (show) marker.openTooltip();
-      else marker.closeTooltip();
+
     });
+    updateVisibleLabels(map, locations, markersRef.current, selectedId);
   }, [map, locations, selectedId]);
 
   return <div className="investigation-map-frame">
