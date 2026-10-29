@@ -150,9 +150,12 @@ html:has(.public-site) {
 }
 
 .is-reality-page .gap-card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
+  display: grid;
+  gap: 4px;
+}
+
+.is-reality-page .gap-card-action {
+  margin-top: 8px;
 }
 
 .is-reality-page .gap-card-action small,

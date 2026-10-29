@@ -181,7 +181,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                 </span>
               </span>
               <span className="gap-card-meta">
-                <span> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"}</span>
+                <span> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"} responding</span>
                 {latestActivity && <span> {latestActivity.kind === "work" ? "Work updated" : "Assessment updated"} {formatShortDate(latestActivity.date)}</span>}
               </span>
               <span className="gap-card-action">
