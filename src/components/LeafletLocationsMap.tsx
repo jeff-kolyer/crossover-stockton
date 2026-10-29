@@ -8,6 +8,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import type { MappedInvestigationLocation } from "./InvestigationLocations";
 import { locationMarkerColor } from "../lib/evidenceCategoryColors";
 import { openTaskLocationIds } from "../lib/investigationData";
+import { applyChatStyleBasemap } from "../lib/chatStyleBasemap";
 
 setWorkerUrl(workerUrl);
 
@@ -126,7 +127,27 @@ function frameLocations(map: L.Map, locations: MappedInvestigationLocation[]) {
   map.setZoom(map.getZoom() + 1, { animate: false });
 }
 
+function chatStyleReferenceView(): { center: L.LatLngTuple; zoom: number } | null {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has("lat") || !params.has("lon") || !params.has("zoom")) return null;
+  const lat = Number(params.get("lat"));
+  const lon = Number(params.get("lon"));
+  const zoom = Number(params.get("zoom"));
+  if (!Number.isFinite(lat) || !Number.isFinite(lon) || !Number.isFinite(zoom)
+    || Math.abs(lat) > 90 || Math.abs(lon) > 180 || zoom < 1 || zoom > 20) return null;
+  return { center: [lat, lon], zoom };
+}
+
+function selectedBasemapStyle(): "chat-style" | "classic" | "liberty" {
+  const params = new URLSearchParams(window.location.search);
+  const style = params.get("style");
+  if (style === "chat-style" || style === "classic" || style === "liberty") return style;
+  return params.get("palette") === "liberty" ? "liberty" : "chat-style";
+}
+
 export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false, followSelection = true }: LocationsMapProps) {
+  const basemapStyle = selectedBasemapStyle();
+  const chatStyle = basemapStyle === "chat-style";
   const containerRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<L.Map | null>(null);
   const previous = useRef<{ locations: MappedInvestigationLocation[]; selectedId: string; followSelection: boolean } | null>(null);
@@ -142,6 +163,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
       center: [37.98, -121.33],
       zoom: 10,
       minZoom: 1,
+      zoomSnap: chatStyle ? 0.1 : 1,
       zoomControl: !preview,
       scrollWheelZoom: wheelZoom,
       zoomAnimation: false,
@@ -151,7 +173,11 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
     const basemap = maplibreGL({ style: "https://tiles.openfreemap.org/styles/liberty" }).addTo(instance);
     const vectorMap = basemap.getMaplibreMap();
     vectorMap.on("style.load", () => {
-      if (new URLSearchParams(window.location.search).get("palette") === "liberty") return;
+      if (chatStyle) {
+        applyChatStyleBasemap(vectorMap);
+        return;
+      }
+      if (basemapStyle === "liberty") return;
 
       if (vectorMap.getSource("openmaptiles") && vectorMap.getLayer("park") && !vectorMap.getLayer("crossover-rural-landcover")) {
         vectorMap.addLayer({
@@ -246,7 +272,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
       previous.current = null;
       setMap(null);
     };
-  }, [preview]);
+  }, [preview, basemapStyle, chatStyle]);
 
   useEffect(() => {
     if (!map) return;
@@ -258,7 +284,11 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
     if (!map) return;
     const last = previous.current;
     previous.current = { locations, selectedId, followSelection };
-    if (!last || last.locations !== locations) frameLocations(map, locations);
+    if (!last || last.locations !== locations) {
+      const referenceView = chatStyle && !last ? chatStyleReferenceView() : null;
+      if (referenceView) map.setView(referenceView.center, referenceView.zoom, { animate: false });
+      else frameLocations(map, locations);
+    }
     if (followSelection && selectedId && (!last || last.locations !== locations || last.selectedId !== selectedId || !last.followSelection)) {
       const location = locations.find(({ id }) => id === selectedId);
       if (location) {
@@ -269,7 +299,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
         map.setView(map.unproject(projectedCenter, zoom), zoom, { animate: false });
       }
     }
-  }, [map, locations, selectedId, followSelection]);
+  }, [map, locations, selectedId, followSelection, chatStyle]);
 
   useEffect(() => {
     if (!map) return;
