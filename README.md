@@ -26,22 +26,27 @@ A dated record of what actually happened, including field observations, voluntee
 Field reports can be created with or without an existing task. Seeing no dogs during a visit is still useful evidence when the time, location, and circumstances are recorded.
 
 ### Map
-The geographic view connecting locations, reports, tasks, and observations.
+
+The geographic view of Crossover's investigations, connecting locations, organizations, reports, tasks, activities, and findings.
+
+Locations can represent places we've investigated, organizations we've engaged with, or areas identified through public reports. A location may connect multiple records, allowing the investigation to accumulate evidence and activity over time.
 
 **Marker colors:**
 
-- **Orange:** Recent public reports
-- **Gray:** Historical reports
-- **Blue:** Official records
-- **Green:** Locations with open Crossover tasks
+- **Orange — Recent:** Recent public reports.
+- **Gray — Historical:** Older reports.
+- **Blue — Official:** Government-related locations and records.
+- **Green — Firsthand:** Locations with documented Crossover firsthand activity or observations.
 
-An open task takes priority over the underlying report color. Green indicates work to be done, not a verified observation. The original evidence category remains unchanged.
+**Marker icons identify what the location or record represents**, such as an animal-care facility, organization, or reported sighting. Colors identify the source or nature of the evidence. These are separate properties.
 
-Markers represent generalized locations, not necessarily the exact location of a dog or person. Historical reports do not establish current conditions. Safety alerts identify concerns requiring review, not necessarily present danger.
+A location may have multiple classifications. Its underlying records retain their original source, date, and verification status regardless of the displayed marker color.
 
-The map is designed to support multiple investigations across Stockton. Icons identify the investigation—dogs, housing, food access, and others—while colors identify the evidence or work associated with each location.
+Tasks link to locations but do not themselves constitute firsthand evidence. Planned visits and open tasks must not be represented as completed activity.
 
-A location can connect multiple reports, tasks, and firsthand observations. As investigations expand, the map can reveal where needs overlap and where Crossover is taking action.
+Markers may represent generalized areas rather than precise positions. Public reports do not establish current conditions, and sensitive locations are protected.
+
+The map supports investigations across Stockton, making it possible to see where Crossover has worked, what has been reported, and how evidence, activity, and findings relate to real places.
 
 ### Findings
 What the evidence supports, what remains uncertain, and what should be investigated next.

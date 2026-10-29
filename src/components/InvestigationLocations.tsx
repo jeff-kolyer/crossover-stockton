@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType } from "react";
 import locationsData from "../data/investigation-locations.json";
 import maintenanceData from "../data/investigation-map-maintenance.json";
+import { openTaskLocationIds } from "../lib/investigationData";
 
 export interface InvestigationLocation {
   id: string;
@@ -13,10 +14,10 @@ export interface InvestigationLocation {
   coordinate_note: string;
   coordinate_reference_url: string | null;
   evidence_date: string;
-  date_label: "Occurred" | "Reported occurrence" | "Report published";
+  date_label: "Occurred" | "Reported occurrence" | "Report published" | "Source reviewed";
   evidence_type: string;
-  category: "historical_published_report" | "recent_public_report" | "official_animal_services_record" | "crossover_firsthand";
-  marker_kind: "reported_sighting" | "historical_sighting" | "major_reported_concern" | "firsthand_observation" | null;
+  category: "historical_published_report" | "recent_public_report" | "official_location_record" | "crossover_firsthand";
+  marker_kind: "reported_sighting" | "historical_sighting" | "major_reported_concern" | "firsthand_observation" | "organization" | "animal_shelter" | null;
   map_label: { place: string; report: string; note?: string } | null;
   source_reviewed_at: string | null;
   verification_status: string;
@@ -39,13 +40,13 @@ function fullDate(date: string) { return new Intl.DateTimeFormat("en-US", { mont
 const categoryLabels: Record<InvestigationLocation["category"], string> = {
   historical_published_report: "Historical published reports",
   recent_public_report: "Recent public reports",
-  official_animal_services_record: "Official Animal Services records",
+  official_location_record: "Official locations and records",
   crossover_firsthand: "Crossover firsthand observations",
 };
 const categoryRowLabels: Record<InvestigationLocation["category"], string> = {
   historical_published_report: "Historical published report",
   recent_public_report: "Recent public report",
-  official_animal_services_record: "Animal Services record",
+  official_location_record: "Official location or record",
   crossover_firsthand: "Crossover observation",
 };
 
@@ -71,7 +72,8 @@ function InvestigationLocationDetails({ location, onOpenReport }: { location: In
 export function InvestigationLocations({ investigationId, onOpenReport }: { investigationId: string; onOpenReport: (id: string) => void }) {
   const entries = useMemo(() => locations.filter((location) => location.investigation_id === investigationId), [investigationId]);
   const [filter, setFilter] = useState<"all" | InvestigationLocation["category"]>("all");
-  const visibleEntries = useMemo(() => filter === "all" ? entries : entries.filter((location) => location.category === filter), [entries, filter]);
+  const defaultEntries = useMemo(() => entries.filter((location) => location.category !== "historical_published_report" || openTaskLocationIds.has(location.id)), [entries]);
+  const visibleEntries = useMemo(() => filter === "all" ? defaultEntries : entries.filter((location) => location.category === filter), [entries, defaultEntries, filter]);
   const mappedEntries = useMemo(() => visibleEntries.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleEntries]);
   const [selectedId, setSelectedId] = useState(entries[0]?.id ?? "");
   const [Map, setMap] = useState<ComponentType<MapProps> | null>(null);
@@ -102,8 +104,8 @@ export function InvestigationLocations({ investigationId, onOpenReport }: { inve
 
   return <section id="field-observation-map" className="investigation-locations investigation-section" aria-labelledby="investigation-locations-title">
     <div className="investigation-section-heading"><h2 id="investigation-locations-title">Field observation map</h2></div>
-    <p className="investigation-locations-intro gap-mobile-body">Markers show generalized areas from historical reporting and recent public reports. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p>
-    <div className="investigation-map-filters" role="group" aria-label="Map evidence categories"><button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All records ({entries.length})</button>{(Object.keys(categoryLabels) as InvestigationLocation["category"][]).map((category) => <button type="button" key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{categoryLabels[category]} ({entries.filter((entry) => entry.category === category).length})</button>)}</div>
+    <p className="investigation-locations-intro gap-mobile-body">Markers show generalized report areas and documented organization locations. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p>
+    <div className="investigation-map-filters" role="group" aria-label="Map evidence categories"><button type="button" aria-pressed={filter === "all"} onClick={() => setFilter("all")}>All records ({defaultEntries.length})</button>{(Object.keys(categoryLabels) as InvestigationLocation["category"][]).map((category) => <button type="button" key={category} aria-pressed={filter === category} onClick={() => setFilter(category)}>{categoryLabels[category]} ({entries.filter((entry) => entry.category === category).length})</button>)}</div>
     {visibleEntries.length ? <>
     <div ref={workspaceRef} className="investigation-map-workspace">
       <div className="investigation-locations-map" role="group" aria-label="Map of approximate historical reference areas">
@@ -115,7 +117,7 @@ export function InvestigationLocations({ investigationId, onOpenReport }: { inve
       </div>
       <InvestigationLocationDetails location={selected} onOpenReport={onOpenReport} />
     </div></> : <p className="investigation-map-empty">No records in this category yet.</p>}
-    <div className="investigation-map-maintenance"><h3>How this map is maintained</h3><p>This map uses published reports, public records, and Crossover's firsthand observations when available. Currently only published reports are mapped. {maintenance.review_policy} Historical records remain visible with their limitations.</p><dl><div><dt>Last sources reviewed</dt><dd>{maintenance.last_sources_checked ? fullDate(maintenance.last_sources_checked) : "Not yet recorded"}</dd></div><div><dt>Last map updated</dt><dd>{maintenance.last_map_updated ? fullDate(maintenance.last_map_updated) : "Not yet recorded"}</dd></div><div><dt>Next planned review</dt><dd>{fullDate(maintenance.next_scheduled_review)}</dd></div></dl></div>
+    <div className="investigation-map-maintenance"><h3>How this map is maintained</h3><p>This map uses published reports, public records, documented organization locations, and Crossover's firsthand observations when available. {maintenance.review_policy} Historical records are available under Historical; locations with open tasks remain in the default view.</p><dl><div><dt>Last sources reviewed</dt><dd>{maintenance.last_sources_checked ? fullDate(maintenance.last_sources_checked) : "Not yet recorded"}</dd></div><div><dt>Last map updated</dt><dd>{maintenance.last_map_updated ? fullDate(maintenance.last_map_updated) : "Not yet recorded"}</dd></div><div><dt>Next planned review</dt><dd>{fullDate(maintenance.next_scheduled_review)}</dd></div></dl></div>
     <p className="investigation-locations-footnote">Markers are generalized to nearby public landmarks for context. Broad reports without a supported point are listed without pins. These are not directions to a person, animal, or current encampment.</p>
     <details className="investigation-location-source-index"><summary>All evidence sources</summary><ol>{entries.map((location) => <li key={location.id}><strong>{location.name}</strong> ({monthYear(location.evidence_date)}): {location.description} {location.unknown} <a href={location.source_url} target="_blank" rel="noreferrer">Supporting source</a></li>)}</ol></details>
   </section>;

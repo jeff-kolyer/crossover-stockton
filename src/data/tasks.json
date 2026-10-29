@@ -82,16 +82,16 @@
     "activity_record_ids": []
   },
   {
-    "id": "dogs-check-louis-park",
+    "id": "task-visit-st-marys-dog-care",
     "investigation_id": "street-dog-immediate-welfare",
-    "title": "Check reported conditions around Louis Park",
+    "title": "Visit St. Mary's and learn how people care for dogs.",
     "status": "open",
     "type": "field_observation",
-    "instructions": "First confirm whether the October 20 visit occurred; none is documented. After checking current evidence, observe from safe public areas. Record route, time, duration, dogs seen including zero, and relevant conditions. The Stanislaus Street corridor is a possible second stop, subject to safe access and current evidence.",
-    "location_ids": ["louis-park-pixie-woods-2026-04-06", "stanislaus-street-corridor-2026-04-06"],
-    "organization_ids": [],
-    "question_ids": ["where-dogs-need-help", "severity-of-suffering", "food-and-water"],
-    "basis_record_ids": ["crossover-2026-10-20-reported-location-check-plan", "cbs-2026-04-06-stockton-abandoned-dogs"],
+    "instructions": "Visit St. Mary's Community Services to learn from people already caring for dogs. Ask how food, veterinary care, volunteers, and referrals are coordinated, what information would improve Crossover's investigation map, where help encounters obstacles, and what other places or people we should investigate. Record actual observations separately from what people tell us. Do not assume dogs are strays or abandoned; document only what is learned during the visit.",
+    "location_ids": ["st-marys-community-services-campus"],
+    "organization_ids": ["st-marys-dining-room"],
+    "question_ids": [],
+    "basis_record_ids": ["smcs-standing-housing-outcomes"],
     "activity_record_ids": []
   },
   {

@@ -84,12 +84,12 @@ for (const location of locations) {
     if (location.coordinates.some((value) => String(value).split(".")[1]?.length > 3)) errors.push(`${location.id}: coordinates are too precise for public reference markers`);
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(location.evidence_date) || Number.isNaN(Date.parse(location.evidence_date))) errors.push(`${location.id}: invalid evidence date`);
-  if (!["Occurred", "Reported occurrence", "Report published"].includes(location.date_label)) errors.push(`${location.id}: missing date meaning`);
+  if (!["Occurred", "Reported occurrence", "Report published", "Source reviewed"].includes(location.date_label)) errors.push(`${location.id}: missing date meaning`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(location.source_reviewed_at ?? "") && location.source_reviewed_at !== null) errors.push(`${location.id}: invalid source review date`);
   if (!location.source_reviewed_at) errors.push(`${location.id}: missing source review date`);
   if (!location.verification_status?.trim() || !location.last_known_outcome?.trim()) errors.push(`${location.id}: missing verification or outcome`);
-  if (!["historical_published_report", "recent_public_report", "official_animal_services_record", "crossover_firsthand"].includes(location.category)) errors.push(`${location.id}: invalid category`);
-  const markerKinds = ["reported_sighting", "historical_sighting", "major_reported_concern", "firsthand_observation"];
+  if (!["historical_published_report", "recent_public_report", "official_location_record", "crossover_firsthand"].includes(location.category)) errors.push(`${location.id}: invalid category`);
+  const markerKinds = ["reported_sighting", "historical_sighting", "major_reported_concern", "firsthand_observation", "organization", "animal_shelter"];
   if (location.coordinates === null && (location.marker_kind !== null || location.map_label !== null)) errors.push(`${location.id}: unpinned report cannot have marker presentation`);
   if (location.coordinates !== null && (!markerKinds.includes(location.marker_kind) || !location.map_label?.place?.trim() || !location.map_label?.report?.trim())) errors.push(`${location.id}: mapped report needs a supported marker and concise label`);
   if (location.marker_kind === "firsthand_observation" && location.category !== "crossover_firsthand") errors.push(`${location.id}: firsthand marker needs firsthand evidence`);
@@ -97,7 +97,7 @@ for (const location of locations) {
   if (location.marker_kind === "historical_sighting" && location.category !== "historical_published_report") errors.push(`${location.id}: historical sighting marker needs a historical report`);
   if (location.category === "recent_public_report" && !location.source_reviewed_at) errors.push(`${location.id}: recent public report lacks review date`);
   if (!["reported", "exploratory"].includes(location.status)) errors.push(`${location.id}: invalid status`);
-  if (!["Published local report", "County report", "Public PawBoost report", "Official Animal Services record", "Crossover firsthand observation"].includes(location.evidence_type)) errors.push(`${location.id}: invalid evidence type`);
+  if (!["Published local report", "County report", "Public PawBoost report", "Official Animal Services record", "Official organization information", "Crossover firsthand observation"].includes(location.evidence_type)) errors.push(`${location.id}: invalid evidence type`);
   try { if (new URL(location.source_url).protocol !== "https:") throw new Error(); } catch { errors.push(`${location.id}: invalid source URL`); }
   if (location.coordinate_reference_url !== null) try { if (new URL(location.coordinate_reference_url).protocol !== "https:") throw new Error(); } catch { errors.push(`${location.id}: invalid coordinate reference URL`); }
   if (location.evidence_record_id && recordById.get(location.evidence_record_id)?.source?.url !== location.source_url) errors.push(`${location.id}: evidence record URL mismatch`);

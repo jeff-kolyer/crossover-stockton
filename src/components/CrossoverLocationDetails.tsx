@@ -8,7 +8,7 @@ import { CloseDetailButton, PlainActionButton } from "./PlainActionButton";
 const categoryLabels: Record<InvestigationLocation["category"], string> = {
   historical_published_report: "Historical published report",
   recent_public_report: "Recent public report",
-  official_animal_services_record: "Official Animal Services record",
+  official_location_record: "Official location or record",
   crossover_firsthand: "Crossover firsthand observation",
 };
 

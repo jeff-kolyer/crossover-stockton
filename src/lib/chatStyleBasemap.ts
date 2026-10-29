@@ -13,8 +13,8 @@ const palette = {
   park: "#ADE5BC",
   primaryText: "#252525",
   secondaryText: "#77858B",
-  highway: "#EBA66F",
-  highwayEdge: "#C9783B",
+  highway: "#F2AB72",
+  highwayEdge: "#E6843E",
 } as const;
 
 const interpolate = (...stops: (number | string)[]) => ["interpolate", ["linear"], ["zoom"], ...stops];
@@ -174,6 +174,31 @@ export function applyChatStyleBasemap(map: MapLibreMap) {
   if (map.getLayer("highway-name-major")) map.setLayerZoomRange("highway-name-major", 11.5, 24);
   if (map.getLayer("highway-name-minor")) map.setLayerZoomRange("highway-name-minor", 14.5, 24);
   if (map.getLayer("poi_r1")) map.setLayerZoomRange("poi_r1", 14.5, 24);
+
+  // OpenMapTiles includes golf POIs at zoom 14, ahead of Liberty's general POI labels.
+  if (map.getSource("openmaptiles") && map.getLayer("poi_r1") && !map.getLayer("chat-style-golf-label")) {
+    map.addLayer({
+      id: "chat-style-golf-label",
+      type: "symbol",
+      source: "openmaptiles",
+      "source-layer": "poi",
+      minzoom: 14,
+      maxzoom: 16,
+      filter: ["all", ["==", ["get", "class"], "golf"], ["in", ["get", "subclass"], ["literal", ["golf", "golf_course"]]]],
+      layout: {
+        "text-field": ["coalesce", ["get", "name_en"], ["get", "name"]],
+        "text-font": ["Noto Sans Italic"],
+        "text-size": 12,
+        "text-max-width": 9,
+      },
+      paint: {
+        "text-color": palette.secondaryText,
+        "text-halo-color": palette.background,
+        "text-halo-width": 0.55,
+        "text-halo-blur": 0,
+      },
+    }, "poi_r1");
+  }
 
   if (map.getSource("openmaptiles") && !map.getLayer("chat-style-housenumbers")) {
     map.addLayer({

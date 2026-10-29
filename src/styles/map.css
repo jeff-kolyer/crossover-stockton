@@ -316,7 +316,7 @@
   pointer-events: none;
 }
 .leaflet-tooltip.investigation-map-label--orange { color: #D85D07; }
-.leaflet-tooltip.investigation-map-label--task { color: #0F7653; }
+.leaflet-tooltip.investigation-map-label--official { color: #15539A; }
 .investigation-map-label__content,
 .investigation-map-label__line {
   display: block;

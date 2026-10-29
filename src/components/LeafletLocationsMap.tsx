@@ -6,7 +6,7 @@ import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import "leaflet/dist/leaflet.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { MappedInvestigationLocation } from "./InvestigationLocations";
-import { locationMarkerColor } from "../lib/evidenceCategoryColors";
+import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import { openTaskLocationIds } from "../lib/investigationData";
 import { applyChatStyleBasemap } from "../lib/chatStyleBasemap";
 
@@ -21,19 +21,21 @@ type LocationsMapProps = {
   followSelection?: boolean;
 };
 
-const pawIcon = '<g transform="translate(2.2 2.2) scale(.82)" stroke-width="2"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></g>';
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
-const alertBadge = '<g transform="translate(5.3 5.3) scale(.82)"><circle cx="35" cy="35" r="11" fill="#D74B45" stroke="#fff" stroke-width="1.5"/><path d="M35 27.5 42 40H28Z" fill="#fff"/><path d="M35 32v4" stroke="#D74B45" stroke-width="1.8" stroke-linecap="round"/><circle cx="35" cy="38" r="1" fill="#D74B45"/></g>';
+const pawIcon = '<circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/>';
+const buildingIcon = '<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 21v-4h6v4M8 8h2M14 8h2M8 12h2M14 12h2"/>';
 const labelLineLength = 22;
 const labelOffset = 20;
 
 function makeCircleMarker(location: MappedInvestigationLocation, selected: boolean) {
   const kind = location.marker_kind;
-  const icon = kind === "firsthand_observation" ? eyeIcon : pawIcon;
-  const fill = locationMarkerColor(location.category, openTaskLocationIds.has(location.id));
-  const size = kind === "major_reported_concern" ? 46 : 38;
-  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><circle cx="19" cy="19" r="16" fill="' + fill + '" stroke="' + (selected ? '#000' : '#fff') + '" stroke-width="' + (selected ? 3 : 2.25) + '"/><g transform="translate(7 7)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + (kind === "major_reported_concern" ? alertBadge : '') + '</svg>';
-  return L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [size, size], iconAnchor: [19, 19] });
+  const icon = kind === "animal_shelter" ? pawIcon : kind === "organization" ? buildingIcon : eyeIcon;
+  const fill = location.category === "official_location_record" ? "#1468D1" : evidenceCategoryColors[location.category];
+  const growth = selected ? 2 : 0;
+  const center = 18 + growth;
+  const size = 36 + growth * 2;
+  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><circle cx="' + center + '" cy="' + center + '" r="' + (15 + growth) + '" fill="' + fill + '" stroke="#fff" stroke-width="' + (selected ? 2.5 : 2.25) + '"/><g transform="translate(' + (8.766 + growth) + ' ' + (8.766 + growth) + ') scale(.7695)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g></svg>';
+  return L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [size, size], iconAnchor: [center, center] });
 }
 
 function balancedLabelLines(place: string) {
@@ -85,9 +87,10 @@ function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[
   const markerRects = locations.map((location) => ({ id: location.id, rect: markers.get(location.id)?.getElement()?.getBoundingClientRect() }));
   const labels: DOMRect[] = [];
   const overlaps = (a: DOMRect, b: DOMRect, gap = 4) => a.left < b.right + gap && a.right > b.left - gap && a.top < b.bottom + gap && a.bottom > b.top - gap;
-  const candidates = locations.filter((location) => location.id === selectedId || openTaskLocationIds.has(location.id) || location.category === "recent_public_report")
+  const candidates = locations.filter((location) => location.id === selectedId || openTaskLocationIds.has(location.id) || location.category === "recent_public_report" || location.category === "official_location_record")
     .sort((a, b) => Number(b.id === selectedId) - Number(a.id === selectedId)
       || Number(openTaskLocationIds.has(b.id)) - Number(openTaskLocationIds.has(a.id))
+      || Number(b.category === "official_location_record") - Number(a.category === "official_location_record")
       || Number(b.category === "recent_public_report") - Number(a.category === "recent_public_report")
       || b.evidence_date.localeCompare(a.evidence_date));
 
@@ -314,8 +317,8 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
         direction: "right",
         offset: L.point(labelOffset, 0),
         opacity: 1,
-        className: openTaskLocationIds.has(location.id)
-          ? "investigation-map-label investigation-map-label--task"
+        className: location.category === "official_location_record"
+          ? "investigation-map-label investigation-map-label--official"
           : location.marker_kind === "reported_sighting"
             ? "investigation-map-label investigation-map-label--orange"
             : "investigation-map-label",

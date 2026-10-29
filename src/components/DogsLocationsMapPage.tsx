@@ -5,6 +5,7 @@ import locationsData from "../data/investigation-locations.json";
 import maintenanceData from "../data/investigation-map-maintenance.json";
 import { dogGapBase } from "../lib/dogGapLegacy";
 import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
+import { openTaskLocationIds } from "../lib/investigationData";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 import { InvestigationPageHeader } from "./InvestigationPageHeader";
 
@@ -23,13 +24,13 @@ const filters: { value: Category; label: string }[] = [
   { value: "all", label: "All records" },
   { value: "historical_published_report", label: "Historical published reports" },
   { value: "recent_public_report", label: "Recent public reports" },
-  { value: "official_animal_services_record", label: "Official Animal Services records" },
+  { value: "official_location_record", label: "Official locations and records" },
   { value: "crossover_firsthand", label: "Crossover firsthand observations" },
 ];
 const categorySingular: Record<InvestigationLocation["category"], string> = {
   historical_published_report: "Historical published report",
   recent_public_report: "Recent public report",
-  official_animal_services_record: "Animal Services record",
+  official_location_record: "Official location or record",
   crossover_firsthand: "Crossover observation",
 };
 
@@ -43,14 +44,15 @@ function monthYear(date: string) {
 
 export function DogsLocationsMapPage({ investigationId, onOpenReport }: { investigationId: string; onOpenReport: (id: string) => void }) {
   const entries = useMemo(() => locations.filter((location) => location.investigation_id === investigationId), [investigationId]);
-  const [filter, setFilter] = useState<Category>("recent_public_report");
+  const [filter, setFilter] = useState<Category>("all");
   const [selectedId, setSelectedId] = useState("");
   const [Map, setMap] = useState<ComponentType<MapProps> | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const workspaceRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const detailsRef = useRef<HTMLElement>(null);
-  const visibleEntries = useMemo(() => filter === "all" ? entries : entries.filter((location) => location.category === filter), [entries, filter]);
+  const defaultEntries = useMemo(() => entries.filter((location) => location.category !== "historical_published_report" || openTaskLocationIds.has(location.id)), [entries]);
+  const visibleEntries = useMemo(() => filter === "all" ? defaultEntries : entries.filter((location) => location.category === filter), [entries, defaultEntries, filter]);
   const mappedEntries = useMemo(() => visibleEntries.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleEntries]);
   const selected = visibleEntries.find((location) => location.id === selectedId);
 
@@ -93,11 +95,11 @@ export function DogsLocationsMapPage({ investigationId, onOpenReport }: { invest
     <InvestigationPageHeader title="Reported locations" description="Explore reports of roaming dogs in Stockton. Locations are approximate and do not confirm dogs are currently present." />
 
     <div className="dogs-map-filters" role="group" aria-label="Map evidence categories">
-      {filters.map(({ value, label }) => <button key={value} type="button" aria-pressed={filter === value} onClick={() => changeFilter(value)}>{value !== "all" && <span className="dogs-map-filter-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label} ({value === "all" ? entries.length : entries.filter((entry) => entry.category === value).length})</button>)}
+      {filters.map(({ value, label }) => <button key={value} type="button" aria-pressed={filter === value} onClick={() => changeFilter(value)}>{value !== "all" && <span className="dogs-map-filter-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label} ({value === "all" ? defaultEntries.length : entries.filter((entry) => entry.category === value).length})</button>)}
     </div>
     <div className="dogs-map-filter-select-wrap">
       <select aria-label="Map evidence category" value={filter} onChange={(event) => changeFilter(event.target.value as Category)}>
-        {filters.map(({ value, label }) => <option key={value} value={value}>{label} ({value === "all" ? entries.length : entries.filter((entry) => entry.category === value).length})</option>)}
+        {filters.map(({ value, label }) => <option key={value} value={value}>{label} ({value === "all" ? defaultEntries.length : entries.filter((entry) => entry.category === value).length})</option>)}
       </select>
       
     </div>
@@ -133,7 +135,7 @@ export function DogsLocationsMapPage({ investigationId, onOpenReport }: { invest
     <details className="dogs-map-about">
       <summary><span>About this map</span></summary>
       <p>This map uses published reports, public records, and Crossover's firsthand observations when available. Locations are generalized to nearby public landmarks for context. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot.</p>
-      <div className="dogs-map-about-more"><p>Currently only published reports are mapped. {maintenance.review_policy} Historical records remain visible with their limitations. Broad reports without a supported point are listed without pins. These are not directions to a person, animal, or current encampment. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p><dl><div><dt>Last sources reviewed</dt><dd>{maintenance.last_sources_checked ? fullDate(maintenance.last_sources_checked) : "Not yet recorded"}</dd></div><div><dt>Last map updated</dt><dd>{maintenance.last_map_updated ? fullDate(maintenance.last_map_updated) : "Not yet recorded"}</dd></div><div><dt>Next planned review</dt><dd>{fullDate(maintenance.next_scheduled_review)}</dd></div></dl><h3>All evidence sources</h3><ol>{entries.map((location) => <li key={location.id}><strong>{location.name}</strong> ({monthYear(location.evidence_date)}): {location.description} {location.unknown} <a href={location.source_url} target="_blank" rel="noreferrer">Supporting source</a></li>)}</ol></div>
+      <div className="dogs-map-about-more"><p>The map includes published reports and documented organization locations. {maintenance.review_policy} Historical records are available under Historical; locations with open tasks remain in the default view. Broad reports without a supported point are listed without pins. These are not directions to a person, animal, or current encampment. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.</p><dl><div><dt>Last sources reviewed</dt><dd>{maintenance.last_sources_checked ? fullDate(maintenance.last_sources_checked) : "Not yet recorded"}</dd></div><div><dt>Last map updated</dt><dd>{maintenance.last_map_updated ? fullDate(maintenance.last_map_updated) : "Not yet recorded"}</dd></div><div><dt>Next planned review</dt><dd>{fullDate(maintenance.next_scheduled_review)}</dd></div></dl><h3>All evidence sources</h3><ol>{entries.map((location) => <li key={location.id}><strong>{location.name}</strong> ({monthYear(location.evidence_date)}): {location.description} {location.unknown} <a href={location.source_url} target="_blank" rel="noreferrer">Supporting source</a></li>)}</ol></div>
     </details>
   </div>;
 }

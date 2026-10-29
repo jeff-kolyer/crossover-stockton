@@ -377,6 +377,7 @@ export interface OrgRecord {
   slug: string;
   name: string;
   summary: string;
+  map_location_id?: string;
   website?: string;
   source_url?: string;
   active: boolean;
