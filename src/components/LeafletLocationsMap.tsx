@@ -20,7 +20,7 @@ type LocationsMapProps = {
   followSelection?: boolean;
 };
 
-const dogIcon = '<g transform="translate(1.2 1.2) scale(.9)" stroke-width="2"><path d="M11.25 16.25h1.5L12 17z"/><path d="M16 14v.5"/><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309"/><path d="M8 14v.5"/><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5"/></g>';
+const pawIcon = '<g transform="translate(2.2 2.2) scale(.82)" stroke-width="2"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></g>';
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
 const alertBadge = '<g transform="translate(5.3 5.3) scale(.82)"><circle cx="35" cy="35" r="11" fill="#D74B45" stroke="#fff" stroke-width="1.5"/><path d="M35 27.5 42 40H28Z" fill="#fff"/><path d="M35 32v4" stroke="#D74B45" stroke-width="1.8" stroke-linecap="round"/><circle cx="35" cy="38" r="1" fill="#D74B45"/></g>';
 const labelLineLength = 22;
@@ -28,7 +28,7 @@ const labelOffset = 20;
 
 function makeCircleMarker(location: MappedInvestigationLocation, selected: boolean) {
   const kind = location.marker_kind;
-  const icon = kind === "firsthand_observation" ? eyeIcon : dogIcon;
+  const icon = kind === "firsthand_observation" ? eyeIcon : pawIcon;
   const fill = locationMarkerColor(location.category, openTaskLocationIds.has(location.id));
   const size = kind === "major_reported_concern" ? 46 : 38;
   const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><circle cx="19" cy="19" r="16" fill="' + fill + '" stroke="' + (selected ? '#000' : '#fff') + '" stroke-width="' + (selected ? 3 : 2.25) + '"/><g transform="translate(7 7)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + (kind === "major_reported_concern" ? alertBadge : '') + '</svg>';
