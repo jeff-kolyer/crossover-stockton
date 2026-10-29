@@ -90,23 +90,28 @@ function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[
       || Number(b.category === "recent_public_report") - Number(a.category === "recent_public_report")
       || b.evidence_date.localeCompare(a.evidence_date));
 
-  locations.forEach((location) => markers.get(location.id)?.closeTooltip());
+  const candidateIds = new Set(candidates.map((location) => location.id));
+  locations.forEach((location) => {
+    if (!candidateIds.has(location.id)) {
+      const element = markers.get(location.id)?.getTooltip()?.getElement();
+      if (element) element.style.visibility = "hidden";
+    }
+  });
   for (const location of candidates) {
     const marker = markers.get(location.id);
     const tooltip = marker?.getTooltip();
     if (!marker || !tooltip) continue;
-    marker.openTooltip();
     const element = tooltip.getElement();
     if (!element) continue;
-    tooltip.update();
     const rect = element.getBoundingClientRect();
     const fits = rect.left >= bounds.left + 5 && rect.right <= bounds.right - 5 && rect.top >= bounds.top + 5 && rect.bottom <= bounds.bottom - 5;
     const collides = labels.some((other) => overlaps(rect, other, 6))
       || markerRects.some((other) => other.id !== location.id && other.rect && overlaps(rect, other.rect, 5));
     if (fits && (location.id === selectedId || !collides)) {
       labels.push(rect);
+      element.style.visibility = "visible";
     } else {
-      marker.closeTooltip();
+      element.style.visibility = "hidden";
     }
   }
 }
@@ -288,11 +293,19 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
       return marker;
     });
     markersRef.current = new Map(locations.map((location, index) => [location.id, markers[index]]));
-    const refreshLabels = () => updateVisibleLabels(map, locations, markersRef.current, selectedIdRef.current);
-    map.on("zoomend moveend resize", refreshLabels);
+    let refreshFrame = 0;
+    const refreshLabels = () => {
+      if (refreshFrame) return;
+      refreshFrame = requestAnimationFrame(() => {
+        refreshFrame = 0;
+        updateVisibleLabels(map, locations, markersRef.current, selectedIdRef.current);
+      });
+    };
+    map.on("move zoom moveend zoomend resize", refreshLabels);
     refreshLabels();
     return () => {
-      map.off("zoomend moveend resize", refreshLabels);
+      map.off("move zoom moveend zoomend resize", refreshLabels);
+      cancelAnimationFrame(refreshFrame);
       markers.forEach((marker) => marker.remove());
       markersRef.current.clear();
     };
