@@ -24,7 +24,7 @@
 .is-dog-investigation .plain-action-button.is-filter {
   min-height: 32px;
   padding: 5px 9px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .is-dog-investigation .plain-action-button.is-filter[aria-pressed="true"] {
