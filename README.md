@@ -41,6 +41,10 @@ An open task takes priority over the underlying report color. Green indicates wo
 
 Markers represent generalized locations, not necessarily the exact location of a dog or person. Historical reports do not establish current conditions. Safety alerts identify concerns requiring review, not necessarily present danger.
 
+The map is designed to support multiple investigations across Stockton. Icons identify the investigation—dogs, housing, food access, and others—while colors identify the evidence or work associated with each location.
+
+A location can connect multiple reports, tasks, and firsthand observations. As investigations expand, the map can reveal where needs overlap and where Crossover is taking action.
+
 ### Findings
 What the evidence supports, what remains uncertain, and what should be investigated next.
 
