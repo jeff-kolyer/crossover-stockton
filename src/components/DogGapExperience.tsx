@@ -155,11 +155,9 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
   const [exploreOpen, setExploreOpen] = useState(false);
   const [pageMenuOpen, setPageMenuOpen] = useState(false);
   const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">(section === "map" ? "collapsed" : "expanded");
-  const [isMapFullscreen, setIsMapFullscreen] = useState(false);
   const [panelWidth, setPanelWidth] = useState<number | null>(null);
   const [dragTop, setDragTop] = useState<number | null>(null);
   const workspaceRef = useRef<HTMLDivElement>(null);
-  const sharedMapRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ pointerId: number; startY: number; startTop: number; height: number } | null>(null);
   const panelDragRef = useRef<{ pointerId: number; startX: number; startWidth: number } | null>(null);
@@ -172,15 +170,6 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     setSheetState(section === "map" ? selectedLocationId ? "partial" : "collapsed" : "expanded");
     setDragTop(null);
   }, [section]);
-  useEffect(() => {
-    const onFullscreenChange = () => setIsMapFullscreen(document.fullscreenElement === sharedMapRef.current);
-    document.addEventListener("fullscreenchange", onFullscreenChange);
-    return () => document.removeEventListener("fullscreenchange", onFullscreenChange);
-  }, []);
-  async function toggleMapFullscreen() {
-    if (document.fullscreenElement === sharedMapRef.current) await document.exitFullscreen();
-    else await sharedMapRef.current?.requestFullscreen();
-  }
   useEffect(() => {
     if (section !== "tasks") return;
     const taskId = decodeURIComponent(window.location.hash.slice(1));
@@ -352,7 +341,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     {isDogGap && investigationHeader("crossover-outer-header")}
     <div ref={workspaceRef} className={isWorkspace ? `crossover-map-workspace is-${sheetState}${dragTop === null ? "" : " is-dragging"}` : "dog-gap-layout"} style={isWorkspace && panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
       {isWorkspace && investigationHeader("crossover-desktop-header")}
-      {isWorkspace && <div ref={sharedMapRef} className="crossover-shared-map"><DogGapOverviewMap locations={visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /><button type="button" className="crossover-map-fullscreen" onClick={toggleMapFullscreen} aria-label={isMapFullscreen ? "Exit fullscreen map" : "View map fullscreen"} aria-pressed={isMapFullscreen} title={isMapFullscreen ? "Exit fullscreen" : "Fullscreen"}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{isMapFullscreen ? <path d="M9 3v6H3m12 12v-6h6M3 9l6-6m6 18 6-6" /> : <path d="M9 3H3v6m12-6h6v6M3 3l6 6m6 0 6-6M3 15v6h6m-6 0 6-6m12 0v6h-6m6 0-6-6" />}</svg></button></div>}
+      {isWorkspace && <div className="crossover-shared-map"><DogGapOverviewMap locations={visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
       {isWorkspace && <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />}
       <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         {isWorkspace && <button type="button" className="crossover-sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>}

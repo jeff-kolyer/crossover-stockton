@@ -76,35 +76,6 @@
   grid-row: 1;
 }
 
-.crossover-map-workspace .crossover-shared-map:fullscreen {
-  width: 100vw;
-  height: 100vh;
-  background: #fff;
-}
-
-.crossover-map-fullscreen {
-  position: absolute;
-  z-index: 1000;
-  bottom: 10px;
-  left: 10px;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 2px solid rgba(0, 0, 0, .2);
-  border-radius: 4px;
-  background: #fff;
-  background-clip: padding-box;
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, .65);
-}
-
-.crossover-map-fullscreen:hover { background: #f4f4f4; }
-.crossover-map-fullscreen:focus-visible { outline: 3px solid #26415c; outline-offset: 2px; }
-.crossover-shared-map:has(.leaflet-touch) .crossover-map-fullscreen { box-shadow: none; }
-
 @media (min-width: 1024px) {
   .crossover-map-workspace .crossover-sheet {
     grid-row: 2;
@@ -311,9 +282,6 @@
     transition: top 180ms ease;
   }
 
-  .crossover-map-fullscreen { bottom: calc(22% + 10px); }
-  .crossover-map-workspace.is-partial .crossover-map-fullscreen { bottom: calc(58% + 10px); }
-  .crossover-map-workspace .crossover-shared-map:fullscreen .crossover-map-fullscreen { bottom: 10px; }
 
   .crossover-map-workspace.is-partial .crossover-sheet {
     top: 42%;
