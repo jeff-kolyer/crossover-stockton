@@ -15,8 +15,8 @@ interface AboutPageProps {
 }
 
 const ideas = [
-  { title: "Technology", description: "New capabilities can help meet real needs. But they still need us to steer them toward what matters.", image: "/images/about/techno.jpg", alt: "Industrial robotic arms working in a modern factory" },
-  { title: "Vocation", description: "Post-scarcity technology could free us to discover our true purpose, and give us the tools to pursue it.", image: "/images/about/guy-dog.jpg", alt: "A man sitting with a dog and looking toward the sunset" },
+  { title: "Technology", description: "Machines can take on more necessary work, giving people greater freedom and new ways to meet real needs.", image: "/images/about/techno.jpg", alt: "Industrial robotic arms working in a modern factory" },
+  { title: "Vocation", description: "The crossover from working to make a living toward doing what we feel called to do.", image: "/images/about/guy-dog.jpg", alt: "A man sitting with a dog and looking toward the sunset" },
   { title: "Investigation", description: "Learning what is real by showing up and testing assumptions. We'll bring the dog food.", image: "/images/about/notebook.jpg", alt: "Open field notebook with handwritten observations and a pen" },
   { title: "Compassion", description: "Recognizing our shared unconsciousness and seeing beyond ego, judgment, and division.", image: "/images/about/hands.jpg", alt: "Two hands reaching toward one another in warm sunlight" },
 ];
@@ -29,15 +29,15 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
       <section className="about-simple-section about-simple-purpose" aria-labelledby="about-purpose-title">
         <h1 id="about-purpose-title">How can post-scarcity technology solve real problems?</h1>
         <p>Self-driving vehicles are operating today. AI can tackle increasingly complex problems. Robots are beginning to perform useful physical work.</p>
-        <p>As these technologies advance, they could free people from more compulsory labor and create extraordinary new possibilities.</p>
-        <p><strong>But what will we do with that freedom?</strong></p>
+        <p>As technology takes on more necessary labor, we may gain something extraordinary: the freedom to spend more of our lives doing what matters to us.</p>
+        <p><strong>Crossover is about that transition—from work to vocation.</strong></p>
       </section>
 
       <section className="about-simple-section about-simple-stockton" aria-labelledby="about-stockton-title">
         <img className="about-simple-wide-image about-simple-hero-image" src="/images/about/about-crossover-hero.jpg" alt="Stockton waterfront promenade and skyline at sunset" width="1672" height="941" fetchPriority="high" decoding="async" />
-        <h2 id="about-stockton-title">Starting in Stockton with the stray dogs epidemic</h2>
-        <p>As AI and automation take over administrative drudgery, animal welfare shifts from underpaid bureaucratic labor to <strong>human vocation</strong>—where people could spend 100% of their time calming, training, fostering, and rehabilitating animals while tech handles the logistics.</p>
-        <p>We're examining public reports, checking conditions firsthand, and testing pathways to care—to find out where current systems break down and where post-scarcity technology can help.</p>
+        <h2 id="about-stockton-title">Starting with the stray dogs in Stockton</h2>
+        <p>What if people who love animals could spend their days caring for them, rather than struggling with paperwork, logistics, and limited resources? Technology could handle more of the necessary work while people devote themselves to rescuing, fostering, training, and rehabilitating dogs.</p>
+        <p>But first, we need to understand what actually happens. We're examining public reports, checking conditions firsthand, and testing pathways to care to discover where the difficulties are—and what could genuinely help.</p>
         <p><a href="/work/dogs/">Open the dog investigation</a></p>
       </section>
 
@@ -54,8 +54,8 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
       <section className="about-simple-section about-simple-philosophy" aria-labelledby="about-reality-title">
         <h2 id="about-reality-title">We have to connect with reality.</h2>
         <div className="public-entry">
-          <div><p>Not just read about problems. Not assume we know the solutions. Actually encounter the people, animals, and circumstances that need our attention.</p>
-            <p>That means showing up. Trying to help. Discovering the barriers. Sometimes finding that what seemed simple is surprisingly difficult. And sometimes being changed by the experience.</p></div>
+          <div><p>Freedom means little if we remain disconnected from the world around us. We can't discover our vocation simply by thinking about what might give our lives meaning.</p>
+            <p>We have to show up. Encounter people, animals, and circumstances firsthand. Try to help, discover what gets in the way, and learn from what actually happens. Sometimes the experience changes our understanding. Sometimes it changes us.</p></div>
           <img className="about-simple-wide-image" src="/images/about/growing.jpg" alt="Watercolor seedling with visible roots beside the Stockton waterfront" width="1774" height="887" loading="lazy" decoding="async" />
         </div>
       </section>
@@ -65,8 +65,8 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <p className="about-simple-meta">Founder · Stockton, California</p>
         <div className="public-entry">
           <img className="about-simple-founder-image" src="/images/about/about-the-founder.jpg" alt="Jeff Kolyer by a waterfront promenade" width="1535" height="1024" loading="lazy" decoding="async" />
-          <div><p>Crossover Stockton began with Jeff Kolyer, a former Silicon Valley technology founder exploring how emerging technology can help people live more meaningful lives.</p>
-            <p>After decades working in technology, the question is no longer simply what we can build, but what kind of lives those capabilities can help us live.</p>
+          <div><p>Crossover Stockton began with Jeff Kolyer, a former Silicon Valley technology founder exploring the transition from compulsory work to meaningful vocation.</p>
+            <p>After decades building technology, the question became something more personal: If machines can increasingly do the work, what are we free to become—and what will we do with that freedom?</p>
             <a className="about-simple-text-link" href={linkedInUrl} target="_blank" rel="noreferrer">Connect on LinkedIn</a></div>
         </div>
       </section>
