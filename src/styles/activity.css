@@ -82,16 +82,22 @@
 }
 
 .is-dog-investigation .crossover-record-list strong {
-  font-size: 14px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
-.is-dog-investigation .crossover-record-list small,
-.is-dog-investigation .crossover-record-list span {
+.is-dog-investigation .crossover-record-list button > span {
   display: block;
   color: #5f6368;
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.is-dog-investigation .crossover-record-list small {
+  display: block;
+  color: #5f6368;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 .is-dog-investigation .crossover-simple-section p button,

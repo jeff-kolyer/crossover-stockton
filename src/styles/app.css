@@ -56,6 +56,28 @@ h3 {
   font-size: 16px;
 }
 
+/* Investigation reading content follows the same 16px Roboto body as the public pages. */
+.is-dog-investigation .crossover-sheet {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.is-dog-investigation .crossover-sheet h2,
+.is-dog-investigation .crossover-sheet h3 {
+  font-weight: 700;
+}
+
+.is-dog-investigation .crossover-sheet h3 {
+  font-size: 18px;
+}
+
+.is-dog-investigation .crossover-sheet small,
+.is-dog-investigation .crossover-sheet time,
+.is-dog-investigation .crossover-secondary-text {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 /* APPLICATION SHELL */
 
 .app-shell {
@@ -134,7 +156,7 @@ h3 {
   justify-content: center;
   padding: 8px 2px;
   border-bottom: 2px solid transparent;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
 }

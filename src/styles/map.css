@@ -151,7 +151,8 @@
 .is-dog-investigation .crossover-simple-section > p {
   margin-bottom: 12px;
   color: #5f6368;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .crossover-sheet-grip {
@@ -239,6 +240,14 @@
 .crossover-location-list button strong,
 .crossover-location-list button small {
   display: block;
+}
+
+.is-dog-investigation .crossover-location-eyebrow,
+.is-dog-investigation .crossover-location-area,
+.is-dog-investigation .crossover-location-status,
+.is-dog-investigation .crossover-location-facts dt,
+.is-dog-investigation .crossover-location-coordinate-note {
+  font-size: 14px;
 }
 
 .crossover-reference {

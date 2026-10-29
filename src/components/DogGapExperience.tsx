@@ -391,9 +391,9 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
       {section === "overview" && isDogGap && <DogGapOverviewLanding gap={gap} map={null} onOpenSection={onOpenSection} onOpenWork={onOpenWork} onOpenActionDetail={onOpenActionDetail} onOpenActionIndex={() => onNavigate("action")} />}
       {section === "tasks" && isDogGap && <div className="crossover-simple-section">
         {selectedTask ? <article aria-label={`Task details: ${selectedTask.title}`}>
-          <div className="crossover-detail-heading"><div><p>Task details</p><h2>{selectedTask.title}</h2></div><CloseDetailButton label="task" onClick={backToTasks} /></div>
-          <p>Status: {selectedTask.status === "done" ? "Completed action" : selectedTask.status === "waiting" ? "Waiting for response" : selectedTask.status === "open" ? "Open" : "Cancelled"}</p>
-          {selectedTask.completed_at && <p>Completed {fmt(selectedTask.completed_at)}. Completion of this task does not establish the outcome of an application or inquiry.</p>}
+          <div className="crossover-detail-heading"><div><p className="crossover-secondary-text">Task details</p><h2>{selectedTask.title}</h2></div><CloseDetailButton label="task" onClick={backToTasks} /></div>
+          <p className="crossover-secondary-text">Status: {selectedTask.status === "done" ? "Completed action" : selectedTask.status === "waiting" ? "Waiting for response" : selectedTask.status === "open" ? "Open" : "Cancelled"}</p>
+          {selectedTask.completed_at && <p><span className="crossover-secondary-text">Completed {fmt(selectedTask.completed_at)}.</span> Completion of this task does not establish the outcome of an application or inquiry.</p>}
           <p>{selectedTask.instructions}</p>
           {selectedTask.location_ids.length > 0 && <section><h3>Locations</h3><ul>{selectedTask.location_ids.map((id) => {
             const location = allLocations.find((item) => item.id === id);
@@ -419,7 +419,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
       {(section === "activity" || section === "reports") && isDogGap && <div className="crossover-simple-section">
         {selectedActivity ? <article id={selectedActivity.id} aria-label={`Activity details: ${selectedActivity.title}`}>
           <div className="crossover-detail-heading"><h2>{selectedActivity.title}</h2><CloseDetailButton label="activity" onClick={() => setSelectedActivityId("")} /></div>
-          <p>{fmt(selectedActivity.occurred_at ?? selectedActivity.recorded_at ?? selectedActivity.published_at)} · {selectedActivity.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</p>
+          <p className="crossover-secondary-text">{fmt(selectedActivity.occurred_at ?? selectedActivity.recorded_at ?? selectedActivity.published_at)} · {selectedActivity.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</p>
           <p>{selectedActivity.summary}</p>
           {selectedActivity.outcome && <p><strong>Outcome:</strong> {selectedActivity.outcome.summary}</p>}
           {selectedActivity.organization_ids.length > 0 && <p>Organizations: {selectedActivity.organization_ids.map((id) => {
@@ -456,9 +456,9 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
       {section === "improvements" && isDogGap && <div className="dog-gap-tab-content is-investigation-subpage"><InvestigationPageHeader title="Improvements" description="Project stages and possible effects come from the existing evidence records. Delivered capacity and impact remain unverified unless stated." />{getWork("dogs-solutions") && <DogsSolutionsContent item={getWork("dogs-solutions")!} onOpenReport={onOpenReport} />}</div>}
       {section === "findings" && isDogGap && <div className="crossover-simple-section">
         {selectedFinding ? <article aria-label={`Finding details: ${selectedFinding.title}`}>
-          <div className="crossover-detail-heading"><h2>{selectedFinding.title}</h2><CloseDetailButton label="finding" onClick={() => setSelectedFindingId("")} /></div><p>Status: {selectedFinding.status.replaceAll("_", " ")}</p>
+          <div className="crossover-detail-heading"><h2>{selectedFinding.title}</h2><CloseDetailButton label="finding" onClick={() => setSelectedFindingId("")} /></div><p className="crossover-secondary-text">Status: {selectedFinding.status.replaceAll("_", " ")}</p>
           <p>{selectedFinding.statement}</p><p><strong>Limitations:</strong> {selectedFinding.limitations}</p>
-          <p>Last reviewed {fmt(selectedFinding.last_reviewed_at)}</p>
+          <p className="crossover-secondary-text">Last reviewed {fmt(selectedFinding.last_reviewed_at)}</p>
           <h3>Supporting evidence</h3><ul>{selectedFinding.supporting_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul>
           {selectedFinding.contradicting_record_ids.length > 0 && <><h3>Contradicting evidence</h3><ul>{selectedFinding.contradicting_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></>}
           {selectedFinding.related_question_ids.length > 0 && <p>Related question: {selectedFinding.related_question_ids.map((id) => investigationQuestionById.get(id)?.title).join("; ")}</p>}
