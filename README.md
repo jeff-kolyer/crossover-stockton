@@ -1,8 +1,6 @@
 # Crossover Stockton
 
-Crossover explores the transition from work to vocation: using technology to free people to pursue meaningful lives and solve real problems.
-
-We begin in Stockton, investigating unmet needs, testing ways to help, and documenting what actually happens.
+Crossover Stockton ("See clearly. Act locally.") is a civic investigation and evidence platform designed to figure out how emerging technology—specifically AI, robotics, and automation—combined with human participation can help solve real-world community gaps in Stockton, California.
 
 **Live site:** https://crossoverstockton.org
 
