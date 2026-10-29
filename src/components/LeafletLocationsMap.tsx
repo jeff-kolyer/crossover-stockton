@@ -24,15 +24,17 @@ type MarkerKind = MappedInvestigationLocation["marker_kind"];
 
 const dogIcon = '<path d="M8.3 6.8 6 5 3.7 7v4.2l2 1.4M15.7 6.8 18 5l2.3 2v4.2l-2 1.4M6.2 12.5C6.2 8.7 8.5 6.2 12 6.2s5.8 2.5 5.8 6.3v2.2c0 3.2-2.5 5.3-5.8 5.3s-5.8-2.1-5.8-5.3v-2.2Z"/><path d="M9 12.8h.01M15 12.8h.01" stroke-width="2.5" stroke-linecap="round"/><path d="m10.5 16 1.5 1 1.5-1M12 17v1.2"/>';
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
+const alertBadge = '<g transform="translate(3.5 3.5) scale(.9)"><circle cx="35" cy="35" r="11" fill="#D74B45" stroke="#fff" stroke-width="1.5"/><path d="M35 27.5 42 40H28Z" fill="#fff"/><path d="M35 32v4" stroke="#D74B45" stroke-width="1.8" stroke-linecap="round"/><circle cx="35" cy="38" r="1" fill="#D74B45"/></g>';
 const labelLineLength = 22;
+const labelOffset = 30;
 
 function makeCircleMarker(kind: MarkerKind, selected: boolean, hasOpenTask: boolean) {
   const icon = kind === "firsthand_observation" ? eyeIcon : dogIcon;
-  const badge = kind === "major_reported_concern" ? '<circle cx="26" cy="26" r="3.5" fill="#D74B45" stroke="#fff" stroke-width=".75"/>' : '';
-  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 34 34"><circle cx="17" cy="17" r="13" fill="' + evidenceMarkerColors[kind] + '" stroke="#fff" stroke-width="' + (selected ? 2.5 : 2.25) + '"/><g transform="translate(8 8) scale(.75)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + badge + '</svg>';
+  const size = kind === "major_reported_concern" ? 48 : 40;
+  const circle = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '"><circle cx="20" cy="20" r="17" fill="' + evidenceMarkerColors[kind] + '" stroke="' + (selected ? '#000' : '#fff') + '" stroke-width="' + (selected ? 3 : 2.25) + '"/><g transform="translate(8 8)" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + icon + '</g>' + (kind === "major_reported_concern" ? alertBadge : '') + '</svg>';
   return hasOpenTask
-    ? L.divIcon({ html: circle, className: "task-linked-map-marker", iconSize: [34, 34], iconAnchor: [17, 17] })
-    : L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [34, 34], iconAnchor: [17, 17] });
+    ? L.divIcon({ html: circle, className: "task-linked-map-marker", iconSize: [size, size], iconAnchor: [20, 20] })
+    : L.icon({ iconUrl: 'data:image/svg+xml,' + encodeURIComponent(circle), iconSize: [size, size], iconAnchor: [20, 20] });
 }
 
 function balancedLabelLines(place: string) {
@@ -102,10 +104,10 @@ function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[
     for (const direction of ["right", "left", "top", "bottom"] as const) {
       if ((direction === "right" || direction === "left") && sideSpace[direction] < 70) continue;
       tooltip.options.direction = direction;
-      tooltip.options.offset = direction === "right" ? L.point(22, 0)
-        : direction === "left" ? L.point(-22, 0)
-        : direction === "top" ? L.point(0, -22)
-        : L.point(0, 22);
+      tooltip.options.offset = direction === "right" ? L.point(labelOffset, 0)
+        : direction === "left" ? L.point(-labelOffset, 0)
+        : direction === "top" ? L.point(0, -labelOffset)
+        : L.point(0, labelOffset);
       marker.openTooltip();
       const element = tooltip.getElement();
       if (!element) continue;
@@ -133,10 +135,10 @@ function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[
     }
     if (location.id === selectedId && !marker.isTooltipOpen() && selectedFallback) {
       tooltip.options.direction = selectedFallback;
-      tooltip.options.offset = selectedFallback === "right" ? L.point(22, 0)
-        : selectedFallback === "left" ? L.point(-22, 0)
-        : selectedFallback === "top" ? L.point(0, -22)
-        : L.point(0, 22);
+      tooltip.options.offset = selectedFallback === "right" ? L.point(labelOffset, 0)
+        : selectedFallback === "left" ? L.point(-labelOffset, 0)
+        : selectedFallback === "top" ? L.point(0, -labelOffset)
+        : L.point(0, labelOffset);
       marker.openTooltip();
     }
   }
@@ -310,7 +312,9 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
         direction: "auto",
         offset: L.point(0, 0),
         opacity: 1,
-        className: "investigation-map-label",
+        className: location.marker_kind === "reported_sighting"
+          ? "investigation-map-label investigation-map-label--orange"
+          : "investigation-map-label",
       });
       return marker;
     });

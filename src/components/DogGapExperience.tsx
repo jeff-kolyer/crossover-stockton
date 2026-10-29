@@ -155,10 +155,11 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
   const [exploreOpen, setExploreOpen] = useState(false);
   const [pageMenuOpen, setPageMenuOpen] = useState(false);
   const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">(section === "map" ? "collapsed" : "expanded");
-  const [panelCollapsed, setPanelCollapsed] = useState(false);
+  const [isMapFullscreen, setIsMapFullscreen] = useState(false);
   const [panelWidth, setPanelWidth] = useState<number | null>(null);
   const [dragTop, setDragTop] = useState<number | null>(null);
   const workspaceRef = useRef<HTMLDivElement>(null);
+  const sharedMapRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ pointerId: number; startY: number; startTop: number; height: number } | null>(null);
   const panelDragRef = useRef<{ pointerId: number; startX: number; startWidth: number } | null>(null);
@@ -168,10 +169,18 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
   const [selectedActivityId, setSelectedActivityId] = useState("");
   const [selectedFindingId, setSelectedFindingId] = useState("");
   useEffect(() => {
-    setPanelCollapsed(false);
     setSheetState(section === "map" ? selectedLocationId ? "partial" : "collapsed" : "expanded");
     setDragTop(null);
   }, [section]);
+  useEffect(() => {
+    const onFullscreenChange = () => setIsMapFullscreen(document.fullscreenElement === sharedMapRef.current);
+    document.addEventListener("fullscreenchange", onFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", onFullscreenChange);
+  }, []);
+  async function toggleMapFullscreen() {
+    if (document.fullscreenElement === sharedMapRef.current) await document.exitFullscreen();
+    else await sharedMapRef.current?.requestFullscreen();
+  }
   useEffect(() => {
     if (section !== "tasks") return;
     const taskId = decodeURIComponent(window.location.hash.slice(1));
@@ -206,7 +215,6 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     setFocusSelectedLocation(false);
     setDragTop(null);
     setSheetState(tab === "map" ? "collapsed" : "expanded");
-    setPanelCollapsed(false);
     sheetRef.current?.scrollTo({ top: 0 });
     onOpenSection(tab);
   };
@@ -215,13 +223,11 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     setSelectedLocationId(id);
     setFocusSelectedLocation(focus);
     setSheetState("partial");
-    setPanelCollapsed(false);
     sheetRef.current?.scrollTo({ top: 0 });
     if (section !== "map") onOpenSection("map");
   };
   const selectTask = (task: InvestigationTask) => {
     setSelectedTaskId(task.id);
-    setPanelCollapsed(false);
     if (task.location_ids.length) {
       setLocationFilter("all");
       setSelectedLocationId(task.location_ids[0]);
@@ -290,7 +296,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
     return Math.max(min, Math.min(max, width));
   };
   function startPanelDrag(event: ReactPointerEvent<HTMLButtonElement>) {
-    if (window.matchMedia("(max-width: 1023px)").matches || panelCollapsed) return;
+    if (window.matchMedia("(max-width: 1023px)").matches) return;
     const workspace = workspaceRef.current;
     const sheet = sheetRef.current;
     if (!workspace || !sheet) return;
@@ -344,11 +350,10 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
 
   return <>
     {isDogGap && investigationHeader("crossover-outer-header")}
-    <div ref={workspaceRef} className={isWorkspace ? `crossover-map-workspace is-${sheetState}${panelCollapsed ? " is-panel-collapsed" : ""}${dragTop === null ? "" : " is-dragging"}` : "dog-gap-layout"} style={isWorkspace && panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
+    <div ref={workspaceRef} className={isWorkspace ? `crossover-map-workspace is-${sheetState}${dragTop === null ? "" : " is-dragging"}` : "dog-gap-layout"} style={isWorkspace && panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
       {isWorkspace && investigationHeader("crossover-desktop-header")}
-      {isWorkspace && <div className="crossover-shared-map"><DogGapOverviewMap locations={visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
-      {isWorkspace && <button type="button" className="crossover-panel-toggle" aria-label={panelCollapsed ? "Expand investigation panel" : "Collapse investigation panel"} aria-expanded={!panelCollapsed} onClick={() => setPanelCollapsed((collapsed) => !collapsed)}>{panelCollapsed ? "Show panel" : "Hide panel"}</button>}
-      {isWorkspace && !panelCollapsed && <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />}
+      {isWorkspace && <div ref={sharedMapRef} className="crossover-shared-map"><DogGapOverviewMap locations={visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /><button type="button" className="crossover-map-fullscreen" onClick={toggleMapFullscreen} aria-label={isMapFullscreen ? "Exit fullscreen map" : "View map fullscreen"} aria-pressed={isMapFullscreen} title={isMapFullscreen ? "Exit fullscreen" : "Fullscreen"}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{isMapFullscreen ? <path d="M9 3v6H3m12 12v-6h6M3 9l6-6m6 18 6-6" /> : <path d="M9 3H3v6m12-6h6v6M3 3l6 6m6 0 6-6M3 15v6h6m-6 0 6-6m12 0v6h-6m6 0-6-6" />}</svg></button></div>}
+      {isWorkspace && <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />}
       <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         {isWorkspace && <button type="button" className="crossover-sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>}
         {isWorkspace && primaryTabs("crossover-desktop-tabs")}
@@ -426,7 +431,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
           {selectedActivity.source.url && <a href={selectedActivity.source.url} target="_blank" rel="noreferrer">View source</a>}
         </article> : <>
           <h2>Activity</h2><p>Dated visits, inquiries, applications, and records requests from existing investigation records.</p>
-          <div className="crossover-record-list crossover-report-list">{activityRecords.map((record) => <button type="button" id={record.id} key={record.id} onClick={() => { setSelectedActivityId(record.id); setPanelCollapsed(false); setSheetState("expanded"); sheetRef.current?.scrollTo({ top: 0 }); }}><strong>{record.title}</strong><small>{fmt(record.occurred_at ?? record.recorded_at ?? record.published_at)} · {record.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</small></button>)}</div>
+           <div className="crossover-record-list crossover-report-list">{activityRecords.map((record) => <button type="button" id={record.id} key={record.id} onClick={() => { setSelectedActivityId(record.id); setSheetState("expanded"); sheetRef.current?.scrollTo({ top: 0 }); }}><strong>{record.title}</strong><small>{fmt(record.occurred_at ?? record.recorded_at ?? record.published_at)} · {record.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</small></button>)}</div>
           <h3>Field reports</h3><div className="crossover-record-list crossover-report-list">{reportRecords.map((report) => <button type="button" key={report.id} onClick={() => onOpenReport(report.id)}><strong>{report.title}</strong><small>{fmt(report.occurred_at)} · {report.location || "Stockton"}</small><span>{report.summary}</span></button>)}</div>
         </>}
       </div>}
@@ -463,7 +468,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, onOpenSectio
           })}</ul></section>}
         </article> : <>
         <h2 id="investigation-findings">Findings</h2><p>Propositions evaluated against evidence. Status and limitations are part of each finding.</p>
-        <div className="crossover-record-list">{investigationFindings.map((finding) => <button type="button" key={finding.id} onClick={() => { setSelectedFindingId(finding.id); setPanelCollapsed(false); setSheetState("expanded"); sheetRef.current?.scrollTo({ top: 0 }); }}><strong>{finding.title}</strong><span>{finding.statement}</span><small>Status: {finding.status.replaceAll("_", " ")}</small></button>)}</div>
+         <div className="crossover-record-list">{investigationFindings.map((finding) => <button type="button" key={finding.id} onClick={() => { setSelectedFindingId(finding.id); setSheetState("expanded"); sheetRef.current?.scrollTo({ top: 0 }); }}><strong>{finding.title}</strong><span>{finding.statement}</span><small>Status: {finding.status.replaceAll("_", " ")}</small></button>)}</div>
         <section id="investigation-questions"><h2>Investigation questions</h2><p>These remain questions until evidence supports a specific finding.</p>
           {investigationQuestions.map((question) => <article key={question.id}><h3>{question.title}</h3><p>{question.description}</p>
             {question.task_ids.length > 0 && <p>Related tasks: {question.task_ids.map((id) => investigationTasks.find((task) => task.id === id)).filter((task): task is InvestigationTask => Boolean(task)).map((task, index) => <span key={task.id}>{index > 0 ? "; " : ""}<button type="button" onClick={() => openTaskFromLocation(task)}>{task.title}</button></span>)}</p>}
