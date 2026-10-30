@@ -31,11 +31,13 @@
   box-shadow: none;
   text-decoration: none;
   font-size: 14px;
+  font-weight: 400;
 }
 
 .is-dog-investigation .plain-action-button.is-filter[aria-pressed="true"] {
   background: #404145;
   color: #fff;
+  font-weight: 700;
 }
 
 .is-dog-investigation .plain-action-button:focus-visible {
