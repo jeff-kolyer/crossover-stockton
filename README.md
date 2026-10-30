@@ -17,8 +17,30 @@ This is a continuous feedback loop, not a rigid sequence. Evidence and firsthand
 
 ## The investigation app
 
+### Shared investigation workspace
+
+The investigation app combines Tasks, Activity, Map, and Findings around a shared geographic workspace.
+
+The map reflects the selected view:
+
+- **Tasks:** Locations connected to tasks in the selected status filter (Open, Waiting, Completed, or All).
+- **Activity:** Locations connected to recorded activities.
+- **Map:** All investigation locations, with filters for Recent, Historical, Official, and Firsthand.
+- **Findings:** What the evidence establishes, what remains unknown, and what to investigate next.
+
+Selecting a task or activity with a mapped location automatically positions the map at that location. Multiple records can reference the same location without creating duplicate markers.
+
+On desktop, the map appears beside the investigation panel. On mobile, the map remains visible above a draggable sheet. People can slide the sheet down to explore locations or up to examine records without leaving the investigation.
+
+Marker colors and icons retain their meaning across views. Filtering changes which locations appear, not what the underlying evidence means.
+
+**The purpose is simple: see what needs doing, see where it is, go investigate, and record what happened.**
+
 ### Tasks
+
 The working to-do list. Tasks can be open, awaiting a response, or completed. Completing a task does not mean the underlying problem is solved.
+
+Filtering tasks by status updates both the list and the shared map, showing locations connected to that work. Selecting a task with a mapped location automatically centers the map there.
 
 ### Activity
 A dated record of what actually happened, including field observations, volunteering, pathway tests, conversations, and unsuccessful attempts.
