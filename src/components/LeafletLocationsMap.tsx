@@ -87,7 +87,7 @@ function updateVisibleLabels(map: L.Map, locations: MappedInvestigationLocation[
   const markerRects = locations.map((location) => ({ id: location.id, rect: markers.get(location.id)?.getElement()?.getBoundingClientRect() }));
   const labels: DOMRect[] = [];
   const overlaps = (a: DOMRect, b: DOMRect, gap = 4) => a.left < b.right + gap && a.right > b.left - gap && a.top < b.bottom + gap && a.bottom > b.top - gap;
-  const candidates = locations.filter((location) => location.id === selectedId || openTaskLocationIds.has(location.id) || location.category === "recent_public_report" || location.category === "official_location_record")
+  const candidates = [...locations]
     .sort((a, b) => Number(b.id === selectedId) - Number(a.id === selectedId)
       || Number(openTaskLocationIds.has(b.id)) - Number(openTaskLocationIds.has(a.id))
       || Number(b.category === "official_location_record") - Number(a.category === "official_location_record")

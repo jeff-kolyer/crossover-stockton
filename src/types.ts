@@ -479,6 +479,7 @@ export interface EvidenceRecord {
   investigation_id?: string;
   gap_ids: string[];
   organization_ids: string[];
+  location_ids?: string[];
   published_at?: string | null;
   checked_at?: string;
   record_type:

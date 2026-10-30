@@ -95,6 +95,19 @@
     "activity_record_ids": []
   },
   {
+    "id": "task-verify-south-stockton-district-5-reports",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Verify reported conditions in South Stockton / District 5",
+    "status": "open",
+    "type": "field_observation",
+    "instructions": "Investigate the September 24, 2026 KCRA account in which Stockton Street Dogs described increased stray- and dumped-dog encounters, particularly in District 5. First identify a specific current public location through the organization's firsthand knowledge, relevant reports, or Animal Services records. Then conduct a safe field observation and document what is actually present, including zero dogs if none are seen. Distinguish reported claims from firsthand findings and record follow-up questions.",
+    "location_ids": [],
+    "organization_ids": ["stockton-street-dogs"],
+    "question_ids": [],
+    "basis_record_ids": ["kcra-2026-09-24-stockton-stray-dog-report"],
+    "activity_record_ids": []
+  },
+  {
     "id": "task-ssd-ask-contact-questions",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up with Stockton Street Dogs",

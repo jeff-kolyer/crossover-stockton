@@ -295,6 +295,10 @@
     border-radius: 999px;
     background: #aaa;
   }
+
+  .is-dog-investigation .crossover-task-section {
+    padding-top: 4px;
+  }
 }
 
 /* Compact location names stay beside their markers. */
