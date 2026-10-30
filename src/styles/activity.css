@@ -24,9 +24,9 @@
 .is-dog-investigation .plain-action-button.is-filter {
   min-height: 32px;
   padding: 5px 9px;
-  border: 1px solid #dadce0;
+  border: 0;
   border-radius: 4px;
-  background: #fff;
+  background: #f1f3f4;
   background-image: none;
   box-shadow: none;
   text-decoration: none;
