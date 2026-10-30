@@ -35,8 +35,8 @@
 }
 
 .is-dog-investigation .plain-action-button.is-filter[aria-pressed="true"] {
-  background: #e8eaed;
-  color: #202124;
+  background: #202124;
+  color: #fff;
   font-weight: 700;
 }
 
