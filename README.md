@@ -6,14 +6,24 @@ Crossover Stockton ("See clearly. Act locally.") is a civic investigation and ev
 
 ## How Crossover works
 
+Crossover investigates real-world problems, takes action, and uses what we learn to improve our understanding of reality.
+
+### The public gap page
+
+**Gap — Understand the problem.** A clear, evidence-based summary of what's happening, what's needed, what's available, and what remains unresolved. It reflects our current understanding and improves as we learn more.
+
+### The investigation
+
 **Action → Activity → Findings → New Action**
 
-- **Action:** What needs doing? Identify places to investigate, people to contact, services to test, and conditions to verify.
-- **Activity:** What happened? Record visits, observations, conversations, attempts, obstacles, and outcomes.
-- **Findings:** What did we learn? Evaluate evidence, distinguish facts from assumptions, and identify what remains unknown.
-- **New Action:** What's next? Turn findings into practical steps and continue investigating.
+- **Tasks — What needs doing?** Identify places to investigate, people to contact, services to test, and conditions to verify.
+- **Activity — What happened?** Record observations, conversations, attempts to help, obstacles, and outcomes.
+- **Findings — What did we learn?** Evaluate the evidence, distinguish facts from assumptions, and identify what remains unknown.
+- **New Action — What's next?** Turn what we've learned into practical steps and continue investigating.
 
 This is a continuous feedback loop, not a rigid sequence. Evidence and firsthand reports can enter at any point.
+
+**As our understanding improves, we update the gap page so the public can see the clearest available picture of the problem.**
 
 ## The investigation app
 
