@@ -1,3 +1,16 @@
+import dogsInvestigationsData from "./dogs-investigations.json";
+import recordsData from "./records.json";
+import type { EvidenceRecord } from "../types";
+
+// The investigation names the request record; its outcome tracks whether it is still pending.
+const recordsRequestId = (dogsInvestigationsData as {
+  active_investigations: Array<{ id: string; records_request?: { activity_record_id: string } }>;
+}).active_investigations.find((investigation) => investigation.id === "street-dog-immediate-welfare")?.records_request?.activity_record_id;
+const recordsRequest = (recordsData as EvidenceRecord[]).find((record) => record.id === recordsRequestId && record.record_type === "activity");
+const recordsRequestPending = recordsRequest?.outcome?.status === "awaiting_response" ? "1"
+  : recordsRequest?.outcome?.status === "received" || recordsRequest?.outcome?.status === "closed" ? "0"
+  : "Unknown";
+
 export type CrossoverAction = {
   id: string;
   title: string;
@@ -9,7 +22,7 @@ export type CrossoverAction = {
   active: boolean;
 };
 
-export const dogStreetActionId = "look-for-dogs-on-the-street";
+export const dogStreetActionId = "verifying-reported-conditions";
 
 export const crossoverActions: CrossoverAction[] = [
   {
@@ -44,9 +57,9 @@ export const crossoverActions: CrossoverAction[] = [
       height: 471,
     },
     status: [
-      { value: "1", label: "Records requested" },
+      { value: recordsRequest ? "1" : "Unknown", label: "Records requested" },
       { value: "0", label: "Records received" },
-      { value: "1", label: "Requests pending" },
+      { value: recordsRequestPending, label: "Requests pending" },
     ],
     active: true,
   },

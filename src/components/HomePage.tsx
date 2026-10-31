@@ -18,7 +18,7 @@ interface HomePageProps {
   onOpenGapSection: (slug: string, section: "our-findings") => void;
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
-  onOpenActionDetail: () => void;
+  onOpenTasks: () => void;
 }
 
 const gaps = gapsData as GapRecord[];
@@ -55,7 +55,7 @@ const activeGaps = gaps.filter((gap) => gap.active).sort((a, b) => a.rank - b.ra
 const activeStories = stories
   .filter((story) => story.active)
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
-export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenActionDetail }: HomePageProps) {
+export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenTasks }: HomePageProps) {
   const isHome = page === "home";
   const copy = pageCopy[page];
   const visibleGaps = activeGaps;
@@ -89,7 +89,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         </div>
       </section>
 
-      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenActionDetail={onOpenActionDetail} />}
+      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenTasks={onOpenTasks} />}
 
       {page === "reality" && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">

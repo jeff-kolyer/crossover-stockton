@@ -21,6 +21,7 @@ async function expectRedirect(path, target) {
 }
 
 for (const [workId, target] of oldWork) await expectRedirect(`/work/${workId}/`, target);
+await expectRedirect("/action/look-for-dogs-on-the-street/", "/work/dogs/");
 for (const gap of gaps.filter((item) => item.active)) {
   const root = `/reality/${gap.slug}/`;
   for (const [section, anchor] of Object.entries({ "key-factors": "gap-unknown", "ways-to-help": "gap-responders", improvements: "gap-known", research: "gap-sources", sources: "gap-sources", updates: "gap-known" })) {

@@ -13,12 +13,11 @@ interface GapDetailPageProps {
   onOpenSection: (slug: string, section: Section, anchor?: string) => void;
   onNavigate: (page: "home" | "reality" | "action" | "organizations") => void;
   onOpenReport: (reportId: string) => void;
-  onOpenActionDetail: () => void;
 }
 
 const gaps = gapsData as GapRecord[];
 
-export function GapDetailPage({ slug, section, workspaceBasePath, articlePath, onOpenArticle, onOpenSection, onNavigate, onOpenReport, onOpenActionDetail }: GapDetailPageProps) {
+export function GapDetailPage({ slug, section, workspaceBasePath, articlePath, onOpenArticle, onOpenSection, onNavigate, onOpenReport }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
   if (!gap) return <main className="gap-page"><h1>Investigation not found</h1></main>;
 
@@ -32,7 +31,6 @@ export function GapDetailPage({ slug, section, workspaceBasePath, articlePath, o
       onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)}
       onNavigate={onNavigate}
       onOpenReport={onOpenReport}
-      onOpenActionDetail={onOpenActionDetail}
     />
   </main>;
 }

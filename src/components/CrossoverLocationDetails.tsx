@@ -3,7 +3,7 @@ import type { EvidenceRecord } from "../types";
 import type { InvestigationTask } from "../types/investigation";
 import { navigateInternalLink } from "../lib/internalLink";
 import type { InvestigationLocation } from "./InvestigationLocations";
-import { CloseDetailButton, PlainActionButton } from "./PlainActionButton";
+import { CloseDetailButton } from "./PlainActionButton";
 
 const categoryLabels: Record<InvestigationLocation["category"], string> = {
   historical_published_report: "Historical published report",
@@ -16,7 +16,7 @@ function fullDate(value: string) {
   return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(`${value.slice(0, 10)}T12:00:00Z`));
 }
 
-export function CrossoverLocationDetails({ location, records, tasks, activities, onBack, onOpenTask, onOpenReport, onOpenActionDetail }: {
+export function CrossoverLocationDetails({ location, records, tasks, activities, onBack, onOpenTask, onOpenReport }: {
   location: InvestigationLocation;
   records: EvidenceRecord[];
   tasks: InvestigationTask[];
@@ -24,7 +24,6 @@ export function CrossoverLocationDetails({ location, records, tasks, activities,
   onBack: () => void;
   onOpenTask: (task: InvestigationTask) => void;
   onOpenReport: (id: string) => void;
-  onOpenActionDetail: () => void;
 }) {
   const evidence = location.evidence_record_id ? records.find((record) => record.id === location.evidence_record_id) : undefined;
   const report = location.field_report_id ? records.find((record) => record.id === location.field_report_id) : undefined;
@@ -55,6 +54,5 @@ export function CrossoverLocationDetails({ location, records, tasks, activities,
     <section><h3>Observations</h3>{observations.length ? observations.map(({ record, site }) => <div className="crossover-location-record" key={`${record.id}-${site.label}`}><strong>{site.label}</strong><p>{site.reason}</p><small>{record.outcome?.summary ?? record.summary}</small></div>) : <p>No Crossover field observation is documented for this location.</p>}</section>
     <section><h3>Evidence</h3>{evidence ? <div className="crossover-location-record"><strong>{evidence.title}</strong><p>{evidence.summary}</p></div> : <p>{location.evidence_type}: {location.description}</p>}</section>
     <section><h3>Sources</h3><div className="crossover-location-links"><a href={location.source_url} target="_blank" rel="noreferrer"> Read supporting source</a>{location.coordinate_reference_url && <a href={location.coordinate_reference_url} target="_blank" rel="noreferrer"> Location reference</a>}</div><p className="crossover-location-coordinate-note">{location.coordinate_note}</p></section>
-    <PlainActionButton onClick={onOpenActionDetail}>File a new report</PlainActionButton>
   </article>;
 }

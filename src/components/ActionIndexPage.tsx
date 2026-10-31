@@ -8,10 +8,10 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 interface ActionIndexPageProps {
   onNavigate: (page: PublicRoute) => void;
-  onOpenActionDetail: () => void;
+  onOpenTasks: () => void;
 }
 
-export function ActionIndexPage({ onNavigate, onOpenActionDetail }: ActionIndexPageProps) {
+export function ActionIndexPage({ onNavigate, onOpenTasks }: ActionIndexPageProps) {
   return (
     <main className="public-site public-home action-index-page">
       <PublicSiteNav active="action" onNavigate={onNavigate} variant="dark" />
@@ -47,7 +47,7 @@ export function ActionIndexPage({ onNavigate, onOpenActionDetail }: ActionIndexP
                   </div>
                 ))}
               </dl>
-              <p><a href={action.href} onClick={(event) => navigateInternalLink(event, onOpenActionDetail)}>{action.buttonLabel}</a></p>
+              <p><a href={action.href} onClick={(event) => navigateInternalLink(event, onOpenTasks)}>{action.buttonLabel}</a></p>
             </div>
           </article>)}
         </section>

@@ -78,14 +78,13 @@ function DogGapOverviewMap({ locations, selectedId, onSelect, followSelection }:
   </div>;
 }
 
-export function DogGapExperience({ gap, section, workspaceBasePath, articlePath, onOpenArticle, onOpenSection, onNavigate, onOpenReport, onOpenActionDetail }: {
+export function DogGapExperience({ gap, section, workspaceBasePath, articlePath, onOpenArticle, onOpenSection, onNavigate, onOpenReport }: {
   gap: GapRecord; section: Section; onOpenSection: (section: Section, anchor?: string) => void;
   workspaceBasePath: string;
   articlePath?: string;
   onOpenArticle?: (path: string) => void;
   onNavigate: (page: "home" | "reality" | "action" | "organizations") => void;
   onOpenReport: (id: string) => void;
-  onOpenActionDetail: () => void;
 }) {
   const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">(section === "map" ? "collapsed" : "expanded");
   const [panelWidth, setPanelWidth] = useState<number | null>(null);
@@ -345,7 +344,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           <WorkspaceSection title="Field reports"><div className="crossover-record-list crossover-report-list">{reportRecords.map((report) => <button type="button" key={report.id} onClick={() => onOpenReport(report.id)}><strong>{report.title}</strong><small>{fmt(report.occurred_at)} · {report.location || "Stockton"}</small><span>{report.summary}</span></button>)}</div></WorkspaceSection>
         </WorkspacePage>)}
       {section === "map" && (selectedLocation
-        ? <CrossoverLocationDetails location={selectedLocation} records={records} tasks={investigationTasks} activities={activityRecords} onBack={backToLocations} onOpenTask={openTaskFromLocation} onOpenReport={onOpenReport} onOpenActionDetail={onOpenActionDetail} />
+        ? <CrossoverLocationDetails location={selectedLocation} records={records} tasks={investigationTasks} activities={activityRecords} onBack={backToLocations} onOpenTask={openTaskFromLocation} onOpenReport={onOpenReport} />
         : <WorkspacePage title="Locations" subtitle="Markers identify investigation locations and generalized report areas. They do not show where dogs are now."><div className="crossover-map-filters" role="group" aria-label="Map evidence filters">{locationFilterOptions.map(({ value, label }) => <PlainActionButton key={value} variant="filter" pressed={locationFilter === value} onClick={() => changeLocationFilter(value)}>{value !== "all" && <span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label}</PlainActionButton>)}</div><div className="crossover-record-list crossover-location-list">{visibleLocations.map((location) => <button type="button" key={location.id} onClick={() => selectLocation(location.id, true)}><strong className="crossover-location-title"><span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[location.category] }} aria-hidden="true" />{location.name}{location.marker_kind === "major_reported_concern" && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D74B45" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Reported historical concern"><path d="M10.7 4.6a1.5 1.5 0 0 1 2.6 0l8.1 13.8a1.5 1.5 0 0 1-1.3-2.3H3.9a1.5 1.5 0 0 1-1.3-2.3Z"/><path d="M12 9v5M12 17.5h.01"/></svg>}</strong><small>{fmt(location.evidence_date)} · {location.verification_status}{!location.coordinates && " · No map pin"}</small></button>)}</div></WorkspacePage>)}
       {section === "findings" && article && <ArticleContent article={article} onBack={() => onOpenSection("findings")} />}
       {section === "findings" && articlePath && !article && <WorkspacePage title="Article not found" subtitle="This article is not published." backLink={<a href="/work/dogs/findings/">← Findings</a>}>{null}</WorkspacePage>}

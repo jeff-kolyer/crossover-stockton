@@ -156,6 +156,7 @@ try {
   }
 
   const legacyRedirects = [
+    ["/action/look-for-dogs-on-the-street/", "/work/dogs/"],
     ...gaps.filter((gap) => gap.active).flatMap((gap) => [
       ...Object.entries(legacyReferenceSections).map(([section, anchor]) => [`/reality/${gap.slug}/${section}/`, `/reality/${gap.slug}/#${anchor}`]),
       ...(gap.id === "dogs-safe-placement" ? [] : [[`/reality/${gap.slug}/our-findings/`, `/reality/${gap.slug}/#gap-known`]]),

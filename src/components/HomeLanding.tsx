@@ -14,7 +14,7 @@ interface HomeLandingProps {
   onOpenGapSection: (slug: string, section: "our-findings") => void;
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
-  onOpenActionDetail: () => void;
+  onOpenTasks: () => void;
 }
 
 const gaps = (gapsData as GapRecord[]).filter((gap) => gap.active).sort((a, b) => a.rank - b.rank);
@@ -31,7 +31,7 @@ const homeStoryImages: Record<string, string> = {
 };
 const stories = (storiesData as StoryRecord[]).filter((story) => story.active && story.featured).sort((a, b) => Date.parse(b.published_at ?? "") - Date.parse(a.published_at ?? "")).slice(0, 3);
 
-export function HomeLanding({ onNavigate, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenActionDetail }: HomeLandingProps) {
+export function HomeLanding({ onNavigate, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenTasks }: HomeLandingProps) {
   return <div className="home-landing">
     <section className="home-landing-section" aria-labelledby="home-needs-title">
       <div className="home-landing-section-heading"><div><p>Explore the gaps</p><h2 id="home-needs-title">Gaps to investigate</h2></div><a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs </a></div>
@@ -48,7 +48,7 @@ export function HomeLanding({ onNavigate, onOpenGap, onOpenGapSection, onOpenWor
       <nav className="home-landing-investigation-links" aria-label="Explore the investigation">
         <a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}><span>Explore our findings<small>What we're learning from the evidence</small></span></a>
         <a href="/work/dogs/map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}><span>Explore the map<small>Places, reports, and firsthand observations</small></span></a>
-        <a href="/work/dogs/" onClick={(event) => navigateInternalLink(event, onOpenActionDetail)}><span>See what's underway<small>Our current tasks and next steps</small></span></a>
+        <a href="/work/dogs/" onClick={(event) => navigateInternalLink(event, onOpenTasks)}><span>See what's underway<small>Our current tasks and next steps</small></span></a>
       </nav>
     </section>}
 

@@ -379,53 +379,6 @@ export interface OrgRecord {
   verification?: { checked_at: string; evidence_record_ids: string[]; direct_check: string; open_questions: string[] };
 }
 
-export interface PublicActionRecord {
-  id: string;
-  slug: string;
-  title: string;
-  summary: string;
-  tags?: ActionTag[];
-  at_a_glance?: {
-    what?: string;
-    time?: string;
-    why?: string;
-    availability?: string;
-  };
-  organization_id?: string;
-  gap_ids: string[];
-  source_url?: string;
-  source_label?: string;
-  featured: boolean;
-  active: boolean;
-  updated_at?: string;
-  when_label?: string;
-  location_label?: string;
-  distance_label?: string;
-  priority?: "high" | "medium" | "supporting" | "low";
-  priority_basis?: string[];
-  currentness?: "standing" | "recent" | "dated" | "unverified";
-  last_supported_at?: string | null;
-  modal_title?: string;
-  why_it_helps?: string;
-  what_to_expect?: string[];
-  provider_label?: string;
-  handoff_label?: string;
-  action_type?: "investigation" | "direct action" | "direct care" | "organizational opportunity";
-  estimated_time?: string;
-  requirements?: string[];
-  evidence_record_ids?: string[];
-  evidence_url?: string;
-  evidence_label?: string;
-  last_verified_at?: string;
-  availability_status?: string;
-  related_work_id?: string;
-  related_anchor?: string;
-  next_url?: string;
-  participation_roles?: Array<{ name: string; state: "available" | "investigating" | "proposed" }>;
-}
-
-export type ActionTag = "dogs" | "today" | "volunteer" | "donate" | "food" | "housing" | "reentry" | "foster-adopt";
-
 export interface StoryRecord {
   id: string;
   slug: string;
@@ -513,12 +466,10 @@ export interface EvidenceRecord {
   basis_record_ids?: string[];
   outcome?: { status: string; summary: string; as_of: string };
   report_record_ids?: string[];
-  action_ids?: string[];
   location?: string;
   map_url?: string;
   visit_notes?: Array<{ title: string; body: string }>;
   sections?: Array<{ title: string; body: string }>;
   supports?: string[];
-  action_signals?: string[];
   role_signals?: string[];
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import gapsData from "./data/gaps.json";
-import { ActionModal } from "./components/ActionModal";
 import { ActionIndexPage } from "./components/ActionIndexPage";
 import { AboutPage } from "./components/AboutPage";
 import { GapDetailPage } from "./components/GapDetailPage";
@@ -15,7 +14,7 @@ import storiesData from "./data/stories.json";
 import workData from "./data/work.json";
 import recordsData from "./data/records.json";
 import orgsData from "./data/orgs.json";
-import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord, StoryRecord } from "./types";
+import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "./types";
 import { dogGapBase, dogGapSlug, legacyDogWorkDestination } from "./lib/dogGapLegacy";
 
 const gaps = gapsData as GapRecord[];
@@ -171,7 +170,6 @@ function titleForRoute(route: RouteState) {
 
 export default function App({ initialPath }: { initialPath?: string }) {
   const [route, setRoute] = useState<RouteState>(() => routeFromPathname(initialPath ?? window.location.pathname));
-  const [selectedAction, setSelectedAction] = useState<PublicActionRecord | null>(null);
 
   useEffect(() => {
     function ensureCanonicalPath() {
@@ -239,7 +237,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     setRoute({ page: "article", articlePath: path });
   }
 
-  function showActionDetail() {
+  function showDogTasks() {
     showInvestigation("dogs");
   }
 
@@ -302,7 +300,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
   function showReport(reportId: string) {
     const nextPath = `/reports/${encodeURIComponent(reportId)}/`;
     if (window.location.pathname !== nextPath) window.history.pushState({}, "", nextPath);
-    setSelectedAction(null);
     setRoute({ page: "report", reportId });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
@@ -330,14 +327,14 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenGapSection={showGapSection}
           onOpenWork={showWork}
           onOpenStory={showStory}
-          onOpenActionDetail={showActionDetail}
+          onOpenTasks={showDogTasks}
         />
       )}
 
       {route.page === "action" && (
         <ActionIndexPage
           onNavigate={showPage}
-          onOpenActionDetail={showActionDetail}
+          onOpenTasks={showDogTasks}
         />
       )}
 
@@ -354,7 +351,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
         onOpenSection={showGapSection}
         onNavigate={showPage}
         onOpenReport={showReport}
-        onOpenActionDetail={showActionDetail}
       />}
 
       {route.page === "report" && (
@@ -363,7 +359,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onNavigate={showPage}
           onOpenGap={showGap}
           onOpenWork={showWork}
-          onOpenAction={setSelectedAction}
           onOpenInvestigationReports={() => showGapSection(dogGapSlug, "reports")}
         />
       )}
@@ -403,16 +398,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
         />
       )}
 
-      {selectedAction && (
-        <ActionModal
-          action={selectedAction}
-          onClose={() => setSelectedAction(null)}
-          onOpenGap={showGap}
-          onOpenWork={showWork}
-          onOpenDogSection={(section, anchor) => showGapSection(dogGapSlug, section, anchor)}
-          onOpenReport={showReport}
-        />
-      )}
     </div>
   );
 }

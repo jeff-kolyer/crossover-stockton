@@ -1,9 +1,8 @@
 
-import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import recordsData from "../data/records.json";
-import type { EvidenceRecord, GapRecord, OrgRecord, PublicActionRecord } from "../types";
+import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
 import { PublicSiteNav } from "./PublicSiteNav";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
@@ -13,22 +12,19 @@ interface FieldReportPageProps {
   onNavigate: (page: PublicRoute) => void;
   onOpenGap: (slug: string) => void;
   onOpenWork: (id: string) => void;
-  onOpenAction: (action: PublicActionRecord) => void;
   onOpenInvestigationReports: () => void;
 }
 
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 const gaps = gapsData as GapRecord[];
 const orgs = orgsData as OrgRecord[];
-const actions = actionsData as PublicActionRecord[];
 const logoLight = "/images/logo_light.webp";
 const logoDark = "/images/logo_dark.webp";
 
-export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, onOpenAction, onOpenInvestigationReports }: FieldReportPageProps) {
+export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, onOpenInvestigationReports }: FieldReportPageProps) {
   const report = reports.find((item) => item.id === reportId);
   const relatedGaps = (report?.gap_ids ?? []).map((id) => gaps.find((gap) => gap.id === id)).filter((gap): gap is GapRecord => Boolean(gap));
   const relatedOrgs = (report?.organization_ids ?? []).map((id) => orgs.find((org) => org.id === id)).filter((org): org is OrgRecord => Boolean(org));
-  const relatedActions = (report?.action_ids ?? []).map((id) => actions.find((action) => action.id === id)).filter((action): action is PublicActionRecord => Boolean(action));
   const visitWebsite = relatedOrgs.length === 1 ? relatedOrgs[0].website : undefined;
 
   return (
@@ -61,7 +57,6 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
             <div className="report-related">
               <h2>Connected records</h2>
               {relatedOrgs.length > 0 && <div><strong>Organizations</strong>{relatedOrgs.map((org) => <button type="button" key={org.id} onClick={() => onNavigate("organizations")}>{org.name}</button>)}</div>}
-              {relatedActions.length > 0 && <div><strong>Actions</strong>{relatedActions.map((action) => <button type="button" key={action.id} onClick={() => onOpenAction(action)}>{action.title}</button>)}</div>}
               {relatedGaps.length > 0 && <div><strong>Needs</strong>{relatedGaps.map((gap) => <button type="button" key={gap.id} onClick={() => onOpenGap(gap.slug)}>{gap.title}</button>)}</div>}
               {report.work_id && <div><strong>Activity</strong><button type="button" onClick={() => onOpenWork(report.work_id!)}>Direct conversations and field visits</button></div>}
             </div>
