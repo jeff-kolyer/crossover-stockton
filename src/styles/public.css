@@ -1,5 +1,49 @@
 /* Layout for public reference pages. The Work workspace and homepage are separate. */
 
+/* Shared document rhythm for public content. The homepage's composed hero and
+   landing sections and the investigation workspace keep their own layout. */
+.public-site .public-document :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0;
+}
+
+.public-site .public-document h1 {
+  margin-bottom: 12px;
+}
+
+.public-site .public-document h2 {
+  margin-bottom: 8px;
+}
+
+.public-site .public-document :is(h3, h4, h5, h6) {
+  margin-bottom: 6px;
+}
+
+.public-site .public-document :is(p, ul, ol, figure) {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.public-site .public-document > :is(section, article, div):not(:last-child) {
+  margin-bottom: 24px;
+}
+
+.public-site .public-document li + li {
+  margin-top: .75em;
+}
+
+.public-site .public-document figure img {
+  display: block;
+}
+
+.public-site .public-document figcaption {
+  margin-top: 6px;
+}
+
+.public-site .public-document > :last-child,
+.public-site .public-document :is(section, article) > :last-child {
+  margin-bottom: 0;
+}
+
 html:has(.public-site) {
   scrollbar-gutter: stable;
 }
@@ -171,21 +215,15 @@ html:has(.public-site) {
 
 .about-simple .about-simple-section {
   max-width: 760px;
-  margin: 0 0 40px;
-}
-
-.about-simple .about-simple-purpose {
-  margin-bottom: 24px;
 }
 
 .about-simple .about-simple-stockton .about-simple-hero-image {
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .about-simple .about-simple-philosophy {
   border-bottom: 1px solid #dadce0;
   padding-bottom: 32px;
-  margin-bottom: 40px;
 }
 
 .about-simple .about-simple-actions {
@@ -197,27 +235,11 @@ html:has(.public-site) {
 
 .gap-reference-page .gap-reference-article > section {
   max-width: 760px;
-  margin: 0 auto 2em;
-}
-
-.gap-reference-page .gap-reference-article > section :is(h2, h3) {
-  margin: 0 0 .75em;
-}
-
-.gap-reference-page .gap-reference-article > section h3 {
-  margin-top: 2em;
-}
-
-.gap-reference-page .gap-reference-article > section > h2 + h3 {
-  margin-top: 0;
-}
-
-.gap-reference-page .gap-reference-article > section.gap-reference-entities > h2 {
-  margin-bottom: 12px;
+  margin-inline: auto;
 }
 
 .gap-reference-page .gap-reference-article > section.gap-reference-entities > h3 {
-  margin: 24px 0 8px;
+  margin-top: 24px;
 }
 
 .gap-reference-page .gap-reference-article > section.gap-reference-entities > h2 + h3 {
@@ -228,18 +250,6 @@ html:has(.public-site) {
   border-top: 1px solid #dadce0;
   margin-top: 8px;
   padding-top: 7px;
-}
-
-.gap-reference-page .gap-reference-article > section :is(p, ul, ol) {
-  margin: 0 0 1em;
-}
-
-.gap-reference-page .gap-reference-article > section > :last-child {
-  margin-bottom: 0;
-}
-
-.gap-reference-page .gap-reference-article > section li + li {
-  margin-top: .75em;
 }
 
 .gap-reference-page .gap-reference-article > section > button {
@@ -268,7 +278,17 @@ html:has(.public-site) {
 }
 
 .about-simple .about-simple-philosophy .public-entry {
-  grid-template-columns: minmax(0, 58fr) minmax(0, 42fr);
+  display: flow-root;
+}
+
+.about-simple .about-simple-philosophy .public-entry img {
+  float: right;
+  width: 42%;
+  margin: 4px 0 8px 16px;
+}
+
+.about-simple .about-simple-philosophy-full {
+  clear: both;
 }
 
 .about-simple .about-simple-wide-image {
@@ -298,10 +318,6 @@ html:has(.public-site) {
 
 .gap-reference-page .gap-reference-article > nav {
   margin-bottom: 24px;
-}
-
-.gap-reference-page .gap-reference-lead {
-  margin-bottom: 2em;
 }
 
 .action-index-page .action-index-feature {
@@ -334,36 +350,12 @@ html:has(.public-site) {
   margin-inline: auto;
 }
 
-.story-detail-page .story-detail-shell > :not(:last-child) {
-  margin-bottom: 2em;
-}
-
 .organizations-page .crossover-index-body > article {
   margin-bottom: 32px;
 }
 
-.story-detail-page .story-detail-shell :is(h2, h3) {
-  margin: 0 0 .75em;
-}
-
-.story-detail-page .story-detail-shell :is(p, ul, ol) {
-  margin: 0 0 1em;
-}
-
-.story-detail-page .story-detail-shell li + li {
-  margin-top: .75em;
-}
-
-.story-detail-page .story-detail-shell :is(section, article) > :last-child {
-  margin-bottom: 0;
-}
-
-.story-detail-page .story-opening-copy > :last-child {
-  margin-bottom: 0;
-}
-
 .story-detail-page :is(.story-meaning-row, .story-lower-grid) > section + section {
-  margin-top: 2em;
+  margin-top: 24px;
 }
 
 .story-detail-page .story-moment-card + .story-moment-card {
@@ -383,10 +375,6 @@ html:has(.public-site) {
   padding-bottom: 0;
 }
 
-.gap-updates-page .gap-history-header p {
-  margin-bottom: 0;
-}
-
 .gap-updates-page .gap-history-timeline {
   padding-top: 24px;
 }
@@ -395,10 +383,6 @@ html:has(.public-site) {
   color: #6b7280;
   font-size: 14px;
   margin-bottom: 4px;
-}
-
-.gap-updates-page .gap-history-item h2 {
-  margin-bottom: 8px;
 }
 
 .gap-updates-page .gap-history-item + .gap-history-item {
@@ -426,13 +410,10 @@ html:has(.public-site) {
     grid-template-columns: minmax(0, 33fr) minmax(0, 67fr);
   }
 
-  .about-simple .about-simple-philosophy .public-entry {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .about-simple .about-simple-philosophy .public-entry img {
-    order: -1;
-    margin-bottom: 8px;
+    float: none;
+    width: 100%;
+    margin: 0 0 8px;
   }
 
   :is(.about-simple, .gap-reference-page) .public-entry,

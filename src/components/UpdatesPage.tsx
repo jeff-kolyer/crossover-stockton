@@ -25,12 +25,12 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
     <main className="public-site gap-updates-page gap-page">
       <PublicNav onNavigate={onNavigate} />
 
-      <section className="gap-history-header">
+      <section className="gap-history-header public-document">
         <h1>Updates</h1>
         <p>Public reports, local developments, and new information about the needs we're tracking in Stockton.</p>
       </section>
 
-      <section className="gap-history-timeline" aria-label="Crossover update history">
+      <section className="gap-history-timeline public-document" aria-label="Crossover update history">
           <div className="gap-history-feed-list">
             {updateRecords.map((record) => {
               const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));

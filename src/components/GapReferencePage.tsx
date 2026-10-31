@@ -106,7 +106,7 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, o
 
   return <main className="public-site gap-reference-page">
     <PublicSiteNav active="reality" onNavigate={onNavigate} />
-    <article className="gap-reference-article">
+    <article className="gap-reference-article public-document">
       <p><a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>← Back to needs</a></p>
       <nav aria-label="Previous and next gaps">
         {previous && <a href={`/reality/${previous.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(previous.slug))}>Previous gap: {previous.title}</a>}

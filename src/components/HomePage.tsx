@@ -78,7 +78,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         <div className="public-hero-shade" />
         {!isHome && navigation}
 
-        <div className="public-hero-copy">
+        <div className={`public-hero-copy${isHome ? "" : " public-document"}`}>
           <h1>{isHome ? <>See clearly.<br className="home-hero-title-break" /> Act locally.</> : copy.title}</h1>
           <p>{copy.text}</p>
           {isHome && (

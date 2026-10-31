@@ -50,7 +50,7 @@ export function OrganizationsPage({ onNavigate, onOpenReport, selectedSlug, onOp
   return (
     <main className="public-site organizations-page">
       <PublicSiteNav active="organizations" onNavigate={onNavigate} />
-      <div className="crossover-index-body">
+      <div className="crossover-index-body public-document">
         {selected ? <>
           <p><a href="/organizations/" onClick={(event) => navigateInternalLink(event, () => onNavigate("organizations"))}>Back to Organizations</a></p>
           <h1>{selected.name}</h1>

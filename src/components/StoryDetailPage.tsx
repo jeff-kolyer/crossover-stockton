@@ -26,7 +26,7 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
     return (
       <main className="public-site story-detail-page public-home">
         <PublicStoryNav onNavigate={onNavigate} />
-        <section className="story-detail-shell story-not-found">
+        <section className="story-detail-shell story-not-found public-document">
           <h1>We could not find that story.</h1>
           <p>This story may have moved, been retired, or not been added to the public data yet.</p>
         </section>
@@ -43,7 +43,7 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
     <main className="public-site story-detail-page public-home">
       <PublicStoryNav onNavigate={onNavigate} />
 
-      <article className="story-detail-shell">
+      <article className="story-detail-shell public-document">
         <section className="story-opening">
           <div className="story-opening-copy">
             <h1>{story.title}</h1>

@@ -56,6 +56,11 @@ h3 {
   font-size: 16px;
 }
 
+.crossover-workspace-app :is(h1, h2, h3, h4, h5, h6),
+.crossover-workspace-app .crossover-investigation-title {
+  color: #111815;
+}
+
 .crossover-sheet small,
 .crossover-sheet time,
 .crossover-secondary-text {
@@ -71,12 +76,10 @@ h3 {
 
 .crossover-workspace-title {
   margin-bottom: 4px;
-  color: #233447;
 }
 
 .crossover-workspace-section-title {
   margin-bottom: 8px;
-  color: #233447;
 }
 
 .crossover-workspace-back,

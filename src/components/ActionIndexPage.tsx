@@ -16,7 +16,7 @@ export function ActionIndexPage({ onNavigate, onOpenTasks }: ActionIndexPageProp
     <main className="public-site public-home action-index-page">
       <PublicSiteNav active="action" onNavigate={onNavigate} variant="dark" />
 
-      <div className="action-index-canvas">
+      <div className="action-index-canvas public-document">
         <section className="action-index-intro" aria-labelledby="action-index-title">
           <h1 id="action-index-title">Taking action. Learning from reality.</h1>
           <p>We're investigating real problems in Stockton by showing up, testing what works, and documenting what happens. Here's what we're doing now.</p>
