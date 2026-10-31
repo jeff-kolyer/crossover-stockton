@@ -37,6 +37,8 @@ export const crossoverActions: CrossoverAction[] = [
       width: 836,
       height: 471,
     },
+    // Manual as of October 30: the location-check plan is still planned, and no street-condition
+    // observation, dog-sighting result, or reporting test is recorded. The shelter visit is separate.
     status: [
       { value: "0", label: "Field visits" },
       { value: "0", label: "Dogs spotted" },
@@ -56,6 +58,7 @@ export const crossoverActions: CrossoverAction[] = [
       width: 836,
       height: 471,
     },
+    // Receipt is manual: the request outcome says no records arrived, but has no receipt count.
     status: [
       { value: recordsRequest ? "1" : "Unknown", label: "Records requested" },
       { value: "0", label: "Records received" },
@@ -67,7 +70,7 @@ export const crossoverActions: CrossoverAction[] = [
     id: "testing-pathways",
     title: "Testing pathways",
     href: "/work/dogs/",
-    summary: "We're testing existing routes to contribute to understand what works, what gets in the way, and what could be improved.",
+    summary: "We're investigating existing ways to contribute to animal care, documenting what happens when we try to get involved and whether those opportunities lead to meaningful action.",
     buttonLabel: "Explore our pathway tests",
     image: {
       src: "/images/action/testing-pathways.jpg",
@@ -75,6 +78,9 @@ export const crossoverActions: CrossoverAction[] = [
       width: 836,
       height: 471,
     },
+    // Manual as of October 30: one Stockton Street Dogs application and the Animal Services
+    // inquiry/application represent two pathways. Three Activity records have no pathway grouping
+    // or completed-test outcome, so neither count can be calculated safely from record totals.
     status: [
       { value: "2", label: "Pathways initiated" },
       { value: "2", label: "Awaiting responses" },
