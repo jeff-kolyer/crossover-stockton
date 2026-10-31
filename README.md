@@ -143,7 +143,7 @@ The build validates data, compiles TypeScript, bundles the application, prerende
 
 ## Core principle
 
-**See what needs doing. Take a real step. Record what happened. Learn from reality. Repeat.**
+**Investigate real needs. Document what happened. Learn from reality. Repeat.**
 
 Technology provides the tools. Vocation provides the purpose.
 

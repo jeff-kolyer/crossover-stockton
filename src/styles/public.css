@@ -39,7 +39,6 @@ html:has(.public-site) {
 .is-section-page .public-hero-copy,
 .is-section-page .public-band,
 .action-index-page .action-index-canvas,
-.action-detail-page .action-detail-canvas,
 .story-detail-page .story-detail-shell,
 .gap-updates-page > section {
   width: 100%;
@@ -56,7 +55,6 @@ html:has(.public-site) {
 .about-simple-content h1,
 .gap-reference-article h1,
 .action-index-intro h1,
-.action-detail-intro h1,
 .story-detail-shell h1,
 .gap-history-header h1,
 .organizations-page .crossover-index-body > h1 {
@@ -129,13 +127,12 @@ html:has(.public-site) {
 
 .is-reality-page .gap-card-image-frame {
   grid-column: 1;
-  grid-row: 1 / span 4;
+  grid-row: 1 / span 3;
 }
 
 .is-reality-page .gap-level,
 .is-reality-page .gap-card-body,
-.is-reality-page .gap-card-meta,
-.is-reality-page .gap-card-action {
+.is-reality-page .gap-card-meta {
   grid-column: 2;
 }
 
@@ -152,15 +149,6 @@ html:has(.public-site) {
 .is-reality-page .gap-card-meta {
   display: grid;
   gap: 4px;
-}
-
-.is-reality-page .gap-card-action {
-  margin-top: 8px;
-}
-
-.is-reality-page .gap-card-action small,
-.is-reality-page .gap-card-action strong {
-  display: block;
 }
 
 .is-connection-page .story-card {
@@ -346,9 +334,44 @@ html:has(.public-site) {
   margin-inline: auto;
 }
 
-.story-detail-page .story-detail-shell > section,
+.story-detail-page .story-detail-shell > :not(:last-child) {
+  margin-bottom: 2em;
+}
+
 .organizations-page .crossover-index-body > article {
   margin-bottom: 32px;
+}
+
+.story-detail-page .story-detail-shell :is(h2, h3) {
+  margin: 0 0 .75em;
+}
+
+.story-detail-page .story-detail-shell :is(p, ul, ol) {
+  margin: 0 0 1em;
+}
+
+.story-detail-page .story-detail-shell li + li {
+  margin-top: .75em;
+}
+
+.story-detail-page .story-detail-shell :is(section, article) > :last-child {
+  margin-bottom: 0;
+}
+
+.story-detail-page .story-opening-copy > :last-child {
+  margin-bottom: 0;
+}
+
+.story-detail-page :is(.story-meaning-row, .story-lower-grid) > section + section {
+  margin-top: 2em;
+}
+
+.story-detail-page .story-moment-card + .story-moment-card {
+  margin-top: 1.5em;
+}
+
+.story-detail-page .story-source-list small {
+  margin-left: .5em;
 }
 
 .gap-updates-page .gap-history-feed-list {
@@ -425,7 +448,6 @@ html:has(.public-site) {
   .is-reality-page .gap-level,
   .is-reality-page .gap-card-body,
   .is-reality-page .gap-card-meta,
-  .is-reality-page .gap-card-action,
   .story-detail-page .story-opening img,
   .story-detail-page .story-opening-copy {
     grid-column: 1;
@@ -443,7 +465,6 @@ html:has(.public-site) {
   .is-section-page .public-hero-copy,
   .is-section-page .public-band,
   .action-index-page .action-index-canvas,
-  .action-detail-page .action-detail-canvas,
   .story-detail-page .story-detail-shell,
   .gap-updates-page > section,
   .about-simple .about-simple-content,

@@ -178,7 +178,6 @@ export interface GapRecord {
   >;
   contributing_factors: string[];
   organization_ids: string[];
-  action_ids: string[];
   story_ids: string[];
   updates?: Array<{ date: string; text: string }>;
   sources: Array<{ url?: string; label?: string }>;
@@ -195,12 +194,6 @@ export interface GapRecord {
   }>;
   record_ids?: string[];
   work_ids?: string[];
-  most_useful_now?: {
-    label: string;
-    action_ids: string[];
-    confidence?: string;
-    basis_record_ids?: string[];
-  };
   latest_change?: {
     record_id?: string;
     label: string;
@@ -269,7 +262,6 @@ export interface ActiveInvestigation {
   contact_plan?: { intro: string; shared_checks: string[]; organizations: Array<{ name: string; status: string; questions: string[]; record_ids: string[]; source_links: Array<{ label: string; url: string }> }> };
   records_request?: { activity_record_id: string; submitted_at: string; status: string; summary: string; review_plan: string };
   care_coordination?: { title: string; central_question: string; participation_scope: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; decentralized_protocol_concept: { status: "concept_only"; steps: string[]; note: string }; potential_capabilities?: string[]; capability_note?: string; potential_outcome: string };
-  participation_roles?: Array<{ name: string; purpose: string; state: "available" | "investigating" | "proposed"; action_id?: string }>;
   safeguards: string[];
   public_approach: string;
   evidence_record_ids: string[];

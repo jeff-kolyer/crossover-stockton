@@ -65,7 +65,7 @@ const legacyReferenceSections = {
 };
 
 const pages = [
-  ["/", "Crossover Stockton", "See what Stockton needs, who is responding, and practical ways to help."],
+  ["/", "Crossover Stockton", "See what Stockton needs and what Crossover is learning through its investigations."],
   ["/work/", "Investigations | Crossover Stockton", "Explore current Crossover investigations."],
   ["/work/dogs/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
   ["/work/dogs/tasks/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
@@ -75,7 +75,7 @@ const pages = [
   ...publishedArticles.map((article) => [article.path, `${article.title} | Crossover Stockton`, article.description]),
   ["/reality/", "Reality | Crossover Stockton", "Follow needs in Stockton and the evidence behind them."],
   ["/connection/", "Connection | Crossover Stockton", "Stories of local people and organizations responding to Stockton's needs."],
-  ["/action/", "Action | Crossover Stockton", "Find practical ways to help in Stockton."],
+  ["/action/", "Action | Crossover Stockton", "Follow Crossover's current work and field investigations in Stockton."],
   ["/updates/", "Updates | Crossover Stockton", "Recent updates on Stockton's needs and community response."],
   ["/about/", "About | Crossover Stockton", "Learn how Crossover Stockton connects local reality, response, and action."],
   ["/organizations/", "Organizations | Crossover Stockton", "Organizations Crossover has contacted or visited."],

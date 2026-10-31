@@ -33,20 +33,6 @@
       "stockton-animal-services",
       "hard-luck-awa"
     ],
-    "action_ids": [
-      "check-reported-stray-dog-area",
-      "report-a-stray-dog",
-      "document-dog-response-attempt",
-      "verify-a-dog-care-service",
-      "identify-missing-dog-care-capability",
-      "help-feed-street-dogs",
-      "foster-a-dog",
-      "adopt-a-dog",
-      "doggie-day-out",
-      "donate-dog-supplies",
-      "volunteer-with-streetdogs",
-      "transport-a-dog"
-    ],
     "story_ids": [
       "streetdogs-fed-70-animals",
       "cats-transferred-out-of-overcrowding"
@@ -186,20 +172,6 @@
       "dogs-locations-map",
       "dogs-direct-field-work"
     ],
-    "most_useful_now": {
-      "label": "Check reported conditions and find out where care breaks down.",
-      "action_ids": [
-        "foster-a-dog",
-        "adopt-a-dog"
-      ],
-      "confidence": "medium",
-      "basis_record_ids": [
-        "cbs-2026-04-06-stockton-abandoned-dogs",
-        "ssd-standing-foster-adopt",
-        "sas-2026-05-05-overpopulation-report",
-        "sas-2026-01-13-spay-neuter-capacity"
-      ]
-    },
     "responder_roles": [
       {
         "organization_id": "stockton-street-dogs",
@@ -308,10 +280,6 @@
       "stockton-street-dogs",
       "st-marys-dining-room"
     ],
-    "action_ids": [
-      "support-pet-inclusive-shelter",
-      "donate-pet-supplies"
-    ],
     "story_ids": [
       "streetdogs-fed-70-animals"
     ],
@@ -374,19 +342,6 @@
     "work_ids": [
       "pet-shelter-public-source-review"
     ],
-    "most_useful_now": {
-      "label": "Help people stay with their pets while they move toward housing.",
-      "action_ids": [
-        "support-pet-inclusive-shelter",
-        "donate-pet-supplies"
-      ],
-      "confidence": "medium",
-      "basis_record_ids": [
-        "ssd-2026-06-08-safe-grounds",
-        "smcs-standing-pathways-pet-inclusive",
-        "ssd-standing-food-supplies"
-      ]
-    },
     "responder_roles": [
       {
         "organization_id": "st-marys-dining-room",
@@ -471,11 +426,6 @@
       "bread-of-life",
       "community-partnership-families"
     ],
-    "action_ids": [
-      "support-food-storage-capacity",
-      "help-food-distribution",
-      "donate-food-supplies"
-    ],
     "story_ids": [
       "truckloads-of-food-reached-families"
     ],
@@ -546,21 +496,6 @@
     "work_ids": [
       "food-distribution-public-source-review"
     ],
-    "most_useful_now": {
-      "label": "Help expand the capacity to store and move donated food while it is available.",
-      "action_ids": [
-        "support-food-storage-capacity",
-        "help-food-distribution",
-        "donate-food-supplies"
-      ],
-      "confidence": "high",
-      "basis_record_ids": [
-        "bol-2026-08-06-cold-storage-overflow",
-        "bol-2026-08-06-freezer-expansion-need",
-        "bol-standing-volunteer",
-        "bol-standing-donate-food"
-      ]
-    },
     "responder_roles": [
       {
         "organization_id": "bread-of-life",
@@ -645,11 +580,6 @@
     "organization_ids": [
       "ready-to-work-sjc",
       "friends-outside"
-    ],
-    "action_ids": [
-      "hire-ready-to-work",
-      "support-ready-to-work",
-      "support-friends-outside-reentry"
     ],
     "story_ids": [
       "prison-puppy-program",
@@ -741,20 +671,6 @@
     "work_ids": [
       "reentry-housing-public-source-review"
     ],
-    "most_useful_now": {
-      "label": "Support reentry housing and work.",
-      "action_ids": [
-        "hire-ready-to-work",
-        "support-ready-to-work",
-        "support-friends-outside-reentry"
-      ],
-      "confidence": "high",
-      "basis_record_ids": [
-        "rtw-standing-housing-work-pathway",
-        "rtw-standing-employer-partner",
-        "friends-outside-standing-reentry-housing"
-      ]
-    },
     "responder_roles": [
       {
         "organization_id": "ready-to-work-sjc",
@@ -811,9 +727,6 @@
     ],
     "organization_ids": [
       "st-marys-dining-room"
-    ],
-    "action_ids": [
-      "support-st-marys-housing-work"
     ],
     "story_ids": [
       "pathways-opened-268-beds"
@@ -903,17 +816,6 @@
     "work_ids": [
       "housing-pathways-public-source-review"
     ],
-    "most_useful_now": {
-      "label": "Support the local pathways that move people from shelter toward stable housing.",
-      "action_ids": [
-        "support-st-marys-housing-work"
-      ],
-      "confidence": "medium",
-      "basis_record_ids": [
-        "smcs-2026-06-17-pathways-268-beds",
-        "smcs-standing-housing-outcomes"
-      ]
-    },
     "responder_roles": [
       {
         "organization_id": "st-marys-dining-room",

@@ -196,15 +196,6 @@
         "capability_note": "These are proposed capabilities that may operate concurrently, not required steps or staffed services. Animal reporting, ownership, holding, safety, and veterinary requirements still apply.",
         "potential_outcome": "Publish an organization-verified guide to helping street dogs once responders confirm needs, contacts, safe instructions, and any participation requirements."
       },
-      "participation_roles": [
-        { "name": "Spotter", "purpose": "Report a dated sighting through an official channel", "state": "available", "action_id": "report-a-stray-dog" },
-        { "name": "Field Responder", "purpose": "Check a reported area safely and record what was observed", "state": "available", "action_id": "check-reported-stray-dog-area" },
-        { "name": "Investigator", "purpose": "Verify services, responses, and unresolved questions", "state": "available", "action_id": "verify-a-dog-care-service" },
-        { "name": "Care Host", "purpose": "Provide authorized temporary care through a responsible organization", "state": "investigating" },
-        { "name": "Supply Neighbor", "purpose": "Provide supplies requested by a confirmed care coordinator", "state": "investigating" },
-        { "name": "Transport Neighbor", "purpose": "Move animals or supplies through an approved arrangement", "state": "investigating" },
-        { "name": "Care Coordinator", "purpose": "Coordinate lawful reunification, veterinary care, or placement", "state": "proposed" }
-      ],
       "safeguards": [
         "Do not publish precise locations of vulnerable people or animals without a specific reason and consideration of their safety.",
         "Do not assume dogs accompanying unhoused people are stray, abandoned, or neglected.",

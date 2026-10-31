@@ -159,18 +159,12 @@
 }
 
 /* Other map surfaces need a definite height. */
-.action-detail-map,
-.dogs-map-canvas,
 .investigation-map-canvas {
   position: relative;
   min-height: 320px;
 }
 
-.action-detail-map .investigation-map-frame,
-.dogs-map-canvas .investigation-map-frame,
 .investigation-map-canvas .investigation-map-frame,
-.action-detail-map .investigation-leaflet-shell,
-.dogs-map-canvas .investigation-leaflet-shell,
 .investigation-map-canvas .investigation-leaflet-shell {
   width: 100%;
   height: 100%;

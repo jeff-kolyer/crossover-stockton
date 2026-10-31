@@ -7,7 +7,7 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 interface AboutPageProps {
   onNavigate: (page: PublicRoute) => void;
-  onPrimaryAction: () => void;
+  onOpenTasks: () => void;
   onOpenWork: (workId: string) => void;
   onOpenGap: (slug: string) => void;
   onOpenResearch: () => void;
@@ -22,7 +22,7 @@ const ideas = [
 ];
 
 const linkedInUrl = "https://www.linkedin.com/in/jeff-kolyer";
-export function AboutPage({ onNavigate, onPrimaryAction, onOpenFindings }: AboutPageProps) {
+export function AboutPage({ onNavigate, onOpenTasks, onOpenFindings }: AboutPageProps) {
   return <main className="public-site about-simple">
     <PublicSiteNav active="about" onNavigate={onNavigate} />
     <div className="about-simple-content">
@@ -72,10 +72,10 @@ export function AboutPage({ onNavigate, onPrimaryAction, onOpenFindings }: About
       </section>
 
       <section className="about-simple-section about-simple-next" aria-labelledby="about-next-title">
-        <h2 id="about-next-title">Take a real step.</h2>
-        <p>There's no need to wait for the future to begin participating.</p>
+        <h2 id="about-next-title">See how we're getting involved.</h2>
+        <p>We're investigating real problems in Stockton, taking action, and documenting what we learn.</p>
         <div className="about-simple-actions">
-          <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, onPrimaryAction)}>Find out how you can help</PublicPrimaryAction>
+          <PublicPrimaryAction href="/work/dogs/tasks/" onClick={(event) => navigateInternalLink(event, onOpenTasks)}>View our current task list</PublicPrimaryAction>
           <a className="about-simple-text-link" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs</a>
         </div>
       </section>

@@ -3,7 +3,6 @@ import { activeCrossoverActions, dogStreetActionId } from "../data/crossoverActi
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
-import { PublicPrimaryAction } from "./PublicPrimaryAction";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
@@ -40,7 +39,7 @@ export function ActionIndexPage({ onNavigate, onOpenActionDetail }: ActionIndexP
                 <h3>{action.title}</h3>
                 <p>{action.summary}</p>
               </div>
-              <dl className="action-index-status" aria-label="Fieldwork status">
+              <dl className="action-index-status" aria-label="Action status">
                 {action.status.map(({ value, label }) => (
                   <div className="action-index-status-item" key={label}>
                     <dt>{label}</dt>
@@ -48,9 +47,7 @@ export function ActionIndexPage({ onNavigate, onOpenActionDetail }: ActionIndexP
                   </div>
                 ))}
               </dl>
-              <PublicPrimaryAction href={action.href} onClick={action.id === dogStreetActionId ? (event) => navigateInternalLink(event, onOpenActionDetail) : undefined}>
-                {action.buttonLabel}
-              </PublicPrimaryAction>
+              <p><a href={action.href} onClick={(event) => navigateInternalLink(event, onOpenActionDetail)}>{action.buttonLabel}</a></p>
             </div>
           </article>)}
         </section>

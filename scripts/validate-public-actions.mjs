@@ -59,8 +59,8 @@ function validate(styles = css) {
   if ((aboutPage.match(/<PublicPrimaryAction\b/g) ?? []).length !== 1 || aboutPage.includes("PlainActionButton")) {
     errors.push("AboutPage must use the shared public action for its /action/ link");
   }
-  if ((actionIndex.match(/<PublicPrimaryAction\b/g) ?? []).length !== 1 || actionIndex.includes("action-index-button")) {
-    errors.push("ActionIndexPage must use the shared public action for its action link");
+  if (actionIndex.includes("<PublicPrimaryAction") || actionIndex.includes("action-index-button") || !actionIndex.includes("<p><a href={action.href}")) {
+    errors.push("ActionIndexPage must use a plain text link for each action");
   }
   for (const [path, source, allowed] of [
     ["src/components/HomePage.tsx", homePage, "../styles/home.css"],

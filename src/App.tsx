@@ -5,9 +5,6 @@ import { ActionIndexPage } from "./components/ActionIndexPage";
 import { AboutPage } from "./components/AboutPage";
 import { GapDetailPage } from "./components/GapDetailPage";
 import { GapReferencePage } from "./components/GapReferencePage";
-import { GapSourcesPage } from "./components/GapSourcesPage";
-import { GapUpdatesPage } from "./components/GapUpdatesPage";
-import { WorkPage } from "./components/WorkPage";
 import { FieldReportPage } from "./components/FieldReportPage";
 import { articleForPath } from "./lib/articles";
 import { HomePage } from "./components/HomePage";
@@ -27,7 +24,7 @@ const work = workData as { id: string; title: string }[];
 const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
 const organizations = orgsData as OrgRecord[];
 
-type AppRoute = "home" | "workIndex" | "workInvestigation" | "reality" | "gapDetail" | "gapUpdates" | "gapSources" | "work" | "report" | "article" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations" | "organizationDetail";
+type AppRoute = "home" | "workIndex" | "workInvestigation" | "reality" | "gapDetail" | "report" | "article" | "storyDetail" | "connection" | "action" | "updates" | "about" | "organizations" | "organizationDetail";
 type WorkSection = "tasks" | "activity" | "map" | "findings";
 const investigations = [{ slug: "dogs", id: "street-dog-immediate-welfare", gapSlug: dogGapSlug, title: "Dogs on the street in Stockton" }] as const;
 const workSections: WorkSection[] = ["tasks", "activity", "map", "findings"];
@@ -37,7 +34,6 @@ interface RouteState {
   gapSlug?: string;
   gapSection?: "overview" | "tasks" | "activity" | "reports" | "map" | "findings" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   storySlug?: string;
-  workId?: string;
   reportId?: string;
   articlePath?: string;
   organizationSlug?: string;
@@ -45,7 +41,7 @@ interface RouteState {
   workSection?: WorkSection;
 }
 
-const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "workInvestigation" | "report" | "article" | "storyDetail" | "organizationDetail">, string> = {
+const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "workInvestigation" | "report" | "article" | "storyDetail" | "organizationDetail">, string> = {
   home: "/",
   workIndex: "/work/",
   reality: "/reality/",
@@ -73,18 +69,10 @@ function routeFromPathname(pathname: string): RouteState {
     const requestedSection = gapSection[2] === "sources" ? "research" : gapSection[2];
     return { page: "gapDetail", gapSlug, gapSection: requestedSection === "our-findings" && gap?.investigation_status !== "investigating" ? "overview" : requestedSection as RouteState["gapSection"] };
   }
-  if (normalized.startsWith("/reality/") && normalized.endsWith("/updates")) {
-    const gapSlug = normalized.replace("/reality/", "").replace(/\/updates$/, "");
-    return { page: "gapUpdates", gapSlug: decodeURIComponent(gapSlug) };
-  }
-  if (normalized.startsWith("/reality/") && normalized.endsWith("/sources")) {
-    const gapSlug = normalized.replace("/reality/", "").replace(/\/sources$/, "");
-    return { page: "gapSources", gapSlug: decodeURIComponent(gapSlug) };
-  }
   if (normalized.startsWith("/work/")) {
     const workId = decodeURIComponent(normalized.replace("/work/", ""));
     const destination = legacyDogWorkDestination(workId);
-    return destination ? { page: "gapDetail", gapSlug: dogGapSlug, gapSection: destination.section } : { page: "work", workId };
+    return destination ? { page: "gapDetail", gapSlug: dogGapSlug, gapSection: destination.section } : { page: "workIndex" };
   }
   if (normalized.startsWith("/reports/")) {
     return { page: "report", reportId: decodeURIComponent(normalized.replace("/reports/", "")) };
@@ -151,14 +139,10 @@ function titleForRoute(route: RouteState) {
   if (route.page === "article") return `${articleForPath(route.articlePath ?? "")?.title ?? "Article not found"} | Crossover Stockton`;
   if (route.page === "workInvestigation" && route.workSection === "findings") return "Findings | Crossover Stockton";
   if (route.page === "workInvestigation") return `${investigations.find((item) => item.slug === route.investigationSlug)?.title ?? "Investigation"} — ${route.workSection ?? "tasks"} | Crossover Stockton`;
-  if (route.page === "gapDetail" || route.page === "gapUpdates" || route.page === "gapSources") {
+  if (route.page === "gapDetail") {
     const gap = gaps.find((item) => item.slug === route.gapSlug);
-    const suffix = route.page === "gapUpdates" ? "Updates" : route.page === "gapSources" ? "Sources" : route.gapSection ? ({ overview: "About the gap", tasks: "Tasks", activity: "Activity", reports: "Activity", map: "Map", findings: "Findings", more: "About the gap", "key-factors": "Key Factors", "ways-to-help": "Ways to Help", improvements: "Improvements", "our-findings": "Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
-    return gap ? `${gap.title} — ${gap.id === "dogs-safe-placement" && route.gapSection === "ways-to-help" ? "Show Up With Us" : suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
-  }
-  if (route.page === "work") {
-    const item = work.find((entry) => entry.id === route.workId);
-    return item ? `${item.title} | Crossover Stockton` : "Crossover work | Crossover Stockton";
+    const suffix = route.gapSection ? ({ overview: "About the gap", tasks: "Tasks", activity: "Activity", reports: "Activity", map: "Map", findings: "Findings", more: "About the gap", "key-factors": "Key Factors", "ways-to-help": "Responders", improvements: "Improvements", "our-findings": "Findings", research: "Research", updates: "Updates" }[route.gapSection]) : "Reality";
+    return gap ? `${gap.title} — ${suffix} | Crossover Stockton` : `${suffix} | Crossover Stockton`;
   }
   if (route.page === "report") {
     const report = reports.find((item) => item.id === route.reportId);
@@ -172,7 +156,7 @@ function titleForRoute(route: RouteState) {
     const org = organizations.find((item) => item.slug === route.organizationSlug);
     return org ? `${org.name} | Crossover Stockton` : "Organizations | Crossover Stockton";
   }
-  const titles: Record<Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "workInvestigation" | "report" | "article" | "storyDetail" | "organizationDetail">, string> = {
+  const titles: Record<Exclude<AppRoute, "gapDetail" | "workInvestigation" | "report" | "article" | "storyDetail" | "organizationDetail">, string> = {
     home: "Crossover Stockton",
     workIndex: "Investigations | Crossover Stockton",
     reality: "Reality | Crossover Stockton",
@@ -228,7 +212,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     document.title = titleForRoute(route);
   }, [route]);
 
-  function showPage(page: Exclude<AppRoute, "gapDetail" | "gapUpdates" | "gapSources" | "work" | "workInvestigation" | "report" | "article" | "storyDetail" | "organizationDetail">) {
+  function showPage(page: Exclude<AppRoute, "gapDetail" | "workInvestigation" | "report" | "article" | "storyDetail" | "organizationDetail">) {
     const nextPath = ROUTE_PATHS[page];
     if (window.location.pathname !== nextPath) {
       window.history.pushState({}, "", nextPath);
@@ -296,14 +280,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
     });
   }
 
-  function showGapUpdates(slug: string) {
-    showGapSection(slug, "updates");
-  }
-
-  function showGapSources(slug: string) {
-    showGapSection(slug, "research");
-  }
-
   function showWork(workId: string, anchor?: string) {
     if (workId === "dogs-map-placement-barriers" && anchor === "field-observation-map") {
       showWork("dogs-locations-map", anchor);
@@ -320,15 +296,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
       showGapSection(dogGapSlug, destination.section, destination.anchor);
       return;
     }
-    const nextPath = `/work/${workId}/${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
-    if (`${window.location.pathname}${window.location.hash}` !== nextPath) {
-      window.history.pushState({}, "", nextPath);
-    }
-    setRoute({ page: "work", workId });
-    requestAnimationFrame(() => {
-      if (anchor) document.getElementById(anchor)?.scrollIntoView();
-      else window.scrollTo({ top: 0, left: 0 });
-    });
+    showPage("workIndex");
   }
 
   function showReport(reportId: string) {
@@ -362,7 +330,6 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenGapSection={showGapSection}
           onOpenWork={showWork}
           onOpenStory={showStory}
-          onOpenAction={setSelectedAction}
           onOpenActionDetail={showActionDetail}
         />
       )}
@@ -386,14 +353,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         workspaceBasePath={route.page === "article" ? "/work/dogs/" : `/work/${route.investigationSlug}/`}
         onOpenSection={showGapSection}
         onNavigate={showPage}
-        onOpenAbout={() => showPage("about")}
-        onOpenGap={showGap}
-        onOpenUpdates={showGapUpdates}
-        onOpenSources={showGapSources}
-        onOpenWork={showWork}
         onOpenReport={showReport}
-        onOpenStory={showStory}
-        onOpenAction={setSelectedAction}
         onOpenActionDetail={showActionDetail}
       />}
 
@@ -408,42 +368,10 @@ export default function App({ initialPath }: { initialPath?: string }) {
         />
       )}
 
-      {route.page === "gapUpdates" && (
-        <GapUpdatesPage
-          slug={route.gapSlug ?? firstGapSlug}
-          onNavigate={showPage}
-          onOpenAbout={() => showPage("about")}
-          onOpenGap={showGap}
-          onOpenWork={showWork}
-          onOpenReport={showReport}
-        />
-      )}
-
-      {route.page === "gapSources" && (
-        <GapSourcesPage
-          slug={route.gapSlug ?? firstGapSlug}
-          onNavigate={showPage}
-          onOpenAbout={() => showPage("about")}
-          onOpenGap={showGap}
-        />
-      )}
-
-      {route.page === "work" && (
-        <WorkPage
-          workId={route.workId}
-          onNavigate={showPage}
-          onOpenGap={showGap}
-          onOpenGapSection={showGapSection}
-          onOpenWork={showWork}
-          onOpenReport={showReport}
-          onOpenAbout={() => showPage("about")}
-        />
-      )}
-
       {route.page === "about" && (
         <AboutPage
           onNavigate={showPage}
-          onPrimaryAction={() => showPage("action")}
+          onOpenTasks={() => showInvestigation("dogs", "tasks")}
           onOpenWork={showWork}
           onOpenGap={showGap}
           onOpenResearch={() => showGapSection("too-many-dogs-still-lack-safe-placement", "research")}
@@ -462,6 +390,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         <StoryDetailPage
           slug={route.storySlug}
           onNavigate={showPage}
+          onOpenGap={showGap}
         />
       )}
 

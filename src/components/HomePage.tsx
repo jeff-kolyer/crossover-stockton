@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import "../styles/home.css";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
-import actionsData from "../data/actions.json";
 import gapsData from "../data/gaps.json";
 import storiesData from "../data/stories.json";
 import { latestGapActivity } from "../lib/gapActivity";
@@ -10,25 +8,21 @@ import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import { HomeLanding } from "./HomeLanding";
-import type { ActionTag, GapRecord, PublicActionRecord, StoryRecord } from "../types";
+import type { GapRecord, StoryRecord } from "../types";
 
 interface HomePageProps {
-  page: "home" | "reality" | "connection" | "action";
+  page: "home" | "reality" | "connection";
   onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
   onOpenGapSection: (slug: string, section: "our-findings") => void;
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
-  onOpenAction: (action: PublicActionRecord) => void;
   onOpenActionDetail: () => void;
 }
 
 const gaps = gapsData as GapRecord[];
 const stories = storiesData as StoryRecord[];
-const actions = actionsData as PublicActionRecord[];
-
-const actionHeroImage = "/images/action/action_banner.jpg";
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
 const heroImage = "/images/home/home-hero-wide.jpg";
 const realityHeroImage = "/images/reality/reality_banner.jpg";
@@ -49,69 +43,21 @@ const pageCopy = {
     title: "Signs of Being",
     text: "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations.",
   },
-  action: {
-    eyebrow: "Action",
-    title: "Take a real step",
-    text: "These are possible ways to help or learn what's needed. We're testing how accessible and effective they are, and documenting what happens.",
-  },
 };
 
 const heroImageItems = [
   { page: "home", src: heroImage },
   { page: "reality", src: realityHeroImage },
   { page: "connection", src: connectionHeroImage },
-  { page: "action", src: actionHeroImage },
 ] as const;
 
 const activeGaps = gaps.filter((gap) => gap.active).sort((a, b) => a.rank - b.rank);
 const activeStories = stories
   .filter((story) => story.active)
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
-const actionTagOrder: ActionTag[] = ["dogs", "today", "volunteer", "donate", "food", "housing", "reentry", "foster-adopt"];
-const actionTagLabels: Record<ActionTag, string> = {
-  dogs: "Dogs",
-  today: "Today",
-  volunteer: "Volunteer",
-  donate: "Donate",
-  food: "Food",
-  housing: "Housing",
-  reentry: "Reentry",
-  "foster-adopt": "Foster / Adopt",
-};
-
-function dogActionRank(id: string) {
-  const immediate = ["check-reported-stray-dog-area", "report-a-stray-dog", "document-dog-response-attempt", "verify-a-dog-care-service", "identify-missing-dog-care-capability", "help-feed-street-dogs"];
-  const index = immediate.indexOf(id);
-  return index === -1 ? immediate.length : index;
-}
-
-export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenAction, onOpenActionDetail }: HomePageProps) {
-  const [selectedActionTag, setSelectedActionTag] = useState<ActionTag | null>(null);
-  const [selectedRole, setSelectedRole] = useState("");
-  const [roleMenuOpen, setRoleMenuOpen] = useState(false);
-  const roleFilterRef = useRef<HTMLDivElement>(null);
-  const roleTriggerRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => {
-    if (!roleMenuOpen) return;
-    const closeOutside = (event: PointerEvent) => {
-      if (!roleFilterRef.current?.contains(event.target as Node)) setRoleMenuOpen(false);
-    };
-    document.addEventListener("pointerdown", closeOutside);
-    return () => document.removeEventListener("pointerdown", closeOutside);
-  }, [roleMenuOpen]);
+export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenActionDetail }: HomePageProps) {
   const isHome = page === "home";
   const copy = pageCopy[page];
-  const visibleActions = actions.filter((action) => action.active);
-  const availableActionTags = actionTagOrder.filter((tag) => visibleActions.some((action) => action.tags?.includes(tag)));
-  const availableRoles = [...new Set(visibleActions.flatMap((action) => action.participation_roles?.map((role) => role.name) ?? []))].sort((a, b) => a.localeCompare(b));
-  const filteredActions = page === "action"
-    ? visibleActions.filter((action) =>
-      (!selectedActionTag || action.tags?.includes(selectedActionTag)) &&
-      (!selectedRole || action.participation_roles?.some((role) => role.name === selectedRole)))
-    : visibleActions;
-  const orderedActions = selectedActionTag === "dogs"
-    ? [...filteredActions].sort((a, b) => dogActionRank(a.id) - dogActionRank(b.id))
-    : filteredActions;
   const visibleGaps = activeGaps;
   const visibleStories = activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
@@ -152,7 +98,6 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         <div className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
             const latestActivity = latestGapActivity(gap);
-            const useful = actionTitles(gap.action_ids);
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
             const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
             return (
@@ -184,12 +129,6 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                 <span> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"} responding</span>
                 {latestActivity && <span> {latestActivity.kind === "work" ? "Work updated" : "Assessment updated"} {formatShortDate(latestActivity.date)}</span>}
               </span>
-              <span className="gap-card-action">
-                <span>
-                  <small>{gap.investigation_status === "investigating" ? "CURRENT FOCUS" : "POSSIBLE WAY TO HELP"}</small>
-                  <strong>{compactUsefulNow(gap, useful)}</strong>
-                </span>
-              </span>
             </a>
             );
           })}
@@ -213,131 +152,9 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
       </section>}
 
-      {page === "action" && <section id="action" className="public-band public-action-band">
-        <div className="section-intro">
-          <p>How Can I Help Today?</p>
-          <h2>Find your way in.</h2>
-          <span>These are possible ways to help or learn what's needed. We're testing how accessible and effective they are, and documenting what happens.</span>
-        </div>
-        <div className="action-browser">
-          {page === "action" && (
-            <div className="action-filter-row" aria-label="Action filters">
-              <div className="action-topic-filters" aria-label="Topic filters">
-                <button
-                  className={selectedActionTag === null ? "is-active" : ""}
-                  type="button"
-                  onClick={() => setSelectedActionTag(null)}
-                >
-                  All
-                </button>
-                {availableActionTags.map((tag) => (
-                  <button
-                    className={selectedActionTag === tag ? "is-active" : ""}
-                    type="button"
-                    onClick={() => setSelectedActionTag(tag)}
-                    key={tag}
-                  >
-                    {actionTagLabels[tag]}
-                  </button>
-                ))}
-              </div>
-              <div className="action-role-filter" ref={roleFilterRef} onKeyDown={(event) => {
-                if (event.key === "Escape" && roleMenuOpen) {
-                  setRoleMenuOpen(false);
-                  roleTriggerRef.current?.focus();
-                }
-              }}>
-                <button
-                  className="action-role-trigger"
-                  type="button"
-                  ref={roleTriggerRef}
-                  aria-label={`Filter by role: ${selectedRole || "All roles"}`}
-                  aria-expanded={roleMenuOpen}
-                  aria-controls="action-role-options"
-                  onClick={() => setRoleMenuOpen((open) => !open)}
-                >
-                  <span>{selectedRole || "All roles"}</span>
-                  
-                </button>
-                {roleMenuOpen && <div className="action-role-menu" id="action-role-options" role="group" aria-label="Role options">
-                  {["", ...availableRoles].map((role) => (
-                    <button
-                      type="button"
-                      className={selectedRole === role ? "is-active" : ""}
-                      aria-pressed={selectedRole === role}
-                      key={role || "all"}
-                      onClick={() => {
-                        setSelectedRole(role);
-                        setRoleMenuOpen(false);
-                        roleTriggerRef.current?.focus();
-                      }}
-                    >
-                      
-                      <span>{role || "All roles"}</span>
-                    </button>
-                  ))}
-                </div>}
-              </div>
-            </div>
-          )}
-          {page === "action" && orderedActions.length === 0 && (
-            <div className="action-empty-state" role="status">
-              <strong>No actions match these filters.</strong>
-              <p>Try another topic or role to see more ways to help.</p>
-              <button type="button" onClick={() => { setSelectedActionTag(null); setSelectedRole(""); }}>Clear filters</button>
-            </div>
-          )}
-          <div className="action-grid">
-            {orderedActions.map((action) => {
-              return (
-              <button
-                className="action-card"
-                key={action.id}
-                type="button"
-                onClick={() => onOpenAction(action)}
-              >
-                
-                <strong>{action.title}</strong>
-                <p>{action.summary}</p>
-                <span className="action-meta">
-                  <span>{action.action_type === "investigation" ? "Investigation activity" : action.currentness === "unverified" ? "Participation not verified" : action.source_url ? "Published route; confirm availability" : "Check with provider"}</span>
-                  {action.participation_roles?.length ? <span>{action.participation_roles.map((role) => `${role.name} · ${role.state}`).join(" / ")}</span> : null}
-                  {[action.estimated_time || action.when_label, action.availability_status || action.location_label].filter(Boolean).map((line) => <span key={line}>{line}</span>)}
-                </span>
-                
-              </button>
-              );
-            })}
-          </div>
-        </div>
-        <button className="center-link" type="button" onClick={() => onNavigate("home")}>
-           Back to home
-        </button>
-      </section>}
-
       <PublicFooter active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
     </main>
   );
-}
-
-function actionTitles(ids: string[]) {
-  return ids
-    .map((id) => actions.find((action) => action.id === id)?.title)
-    .filter((title): title is string => Boolean(title))
-    .join(". ");
-}
-
-function compactUsefulNow(gap: GapRecord, fallback: string) {
-  const label = gap.most_useful_now?.label || fallback || "Learn what would help now.";
-  return label
-    .replace("Create placement capacity by fostering or adopting.", "Foster. Adopt. Take a shelter dog out.")
-    .replace("Help people stay with their pets while they move toward housing.", "Support pet-inclusive shelter.")
-    .replace("Help people stay with their pets while they move toward stable housing.", "Support pet-inclusive shelter.")
-    .replace("Help expand the capacity to store and move donated food while it is available.", "Donate food or supplies.")
-    .replace("Support cold storage and food movement.", "Donate food or supplies.")
-    .replace("Foster, adopt, or take a shelter dog out.", "Foster. Adopt. Take a shelter dog out.")
-    .replace("Support the local pathways that move people from shelter toward stable housing.", "Support St. Mary's housing work.")
-    .replace("Support low-barrier paths from homelessness to housing.", "Support St. Mary's housing work.");
 }
 
 function formatDate(value?: string) {

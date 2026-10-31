@@ -1,22 +1,25 @@
 
+import gapsData from "../data/gaps.json";
 import storiesData from "../data/stories.json";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
-import type { StoryEvidence, StoryRecord } from "../types";
+import type { GapRecord, StoryEvidence, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 
 interface StoryDetailPageProps {
   slug?: string;
   onNavigate: (page: PublicRoute) => void;
+  onOpenGap: (slug: string) => void;
 }
 
 const stories = storiesData as StoryRecord[];
+const gaps = gapsData as GapRecord[];
 const fallbackImage = "/images/connection/connection_banner.jpg";
 
-export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
+export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPageProps) {
   const story = stories.find((item) => item.slug === slug && item.active);
 
   if (!story) {
@@ -34,6 +37,7 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
 
   const evidence = resolvedEvidence(story);
   const image = story.image || fallbackImage;
+  const relatedGap = story.gap_ids.map((id) => gaps.find((gap) => gap.id === id && gap.active)).find((gap): gap is GapRecord => Boolean(gap));
 
   return (
     <main className="public-site story-detail-page public-home">
@@ -50,30 +54,30 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
         </section>
 
         {(story.body || (story.connection && story.connection.length > 1)) && (
-          <section className="story-meaning-row">
+          <div className="story-meaning-row">
             {story.body && (
-              <div className="story-body-block">
+              <section className="story-body-block">
                 <h2>What is happening here</h2>
                 <p>{story.body}</p>
-              </div>
+              </section>
             )}
 
             {story.connection && story.connection.length > 1 && (
-              <div className="story-connection-block">
+              <section className="story-connection-block">
                 <h2>The connection</h2>
                 <ConnectionFlow items={story.connection} />
-              </div>
+              </section>
             )}
-          </section>
+          </div>
         )}
 
-        <section className="story-lower-grid">
+        <div className="story-lower-grid">
           {story.fruit && story.fruit.length > 0 && (
             <section className="story-panel story-fruit-panel">
-              <h2> The fruit</h2>
+              <h2>The fruit</h2>
               <ul>
                 {story.fruit.map((item) => (
-                  <li key={item}> {item}</li>
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </section>
@@ -85,12 +89,11 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
               <div className="story-moment-grid">
                 {story.moments.map((moment) => (
                   <article className="story-moment-card" key={`${moment.title}-${moment.source_url ?? ""}`}>
-                    
-                    <strong>{moment.title}</strong>
+                    <h3>{moment.title}</h3>
                     <p>{moment.text}</p>
                     {moment.source_url && (
                       <a href={moment.source_url} target="_blank" rel="noreferrer">
-                        {moment.source_label || "Source"} 
+                        {moment.source_label || "Source"}
                       </a>
                     )}
                   </article>
@@ -102,29 +105,21 @@ export function StoryDetailPage({ slug, onNavigate }: StoryDetailPageProps) {
           {evidence.length > 0 && (
             <section className="story-panel story-sources-panel">
               <h2>Sources</h2>
-              <div className="story-source-list">
+              <ul className="story-source-list">
                 {evidence.map((source) => (
-                  <a href={source.url} target="_blank" rel="noreferrer" key={source.url}>
-                    
-                    <span>
-                      <strong>{source.label}</strong>
-                      {source.published_at && <small>{formatDate(source.published_at)}</small>}
-                    </span>
-                    
-                  </a>
+                  <li key={source.url}>
+                    <a href={source.url} target="_blank" rel="noreferrer">{source.label}</a>
+                    {source.published_at && <> <small>{formatDate(source.published_at)}</small></>}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </section>
           )}
-        </section>
+        </div>
 
-        <section className="story-action-band">
-          <div>
-            <h2>Small acts of care can cross unlikely boundaries.</h2>
-            <p>Your attention, time, and support help real work keep moving forward.</p>
-          </div>
-          <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>Take a real step</PublicPrimaryAction>
-        </section>
+        {relatedGap && <p>
+          <PublicPrimaryAction href={`/reality/${relatedGap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(relatedGap.slug))}>Explore the related gap</PublicPrimaryAction>
+        </p>}
       </article>
 
       <PublicFooter active="connection" onNavigate={onNavigate} />
