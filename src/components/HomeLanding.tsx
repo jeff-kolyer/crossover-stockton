@@ -46,9 +46,9 @@ export function HomeLanding({ onNavigate, onOpenGap, onOpenGapSection, onOpenWor
       <img src="/images/home/dog-shelter.jpg" alt="" loading="lazy" />
       <div className="home-landing-investigation-copy"><p>Investigation · Stockton</p><h2 id="home-investigation-title">Why do so many dogs struggle to reach care?</h2><span>Stockton's animal shelter reports regular overcrowding. We're examining what happens when someone finds a dog and tries to help.</span><PublicPrimaryAction href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}>Explore what we're learning</PublicPrimaryAction></div>
       <nav className="home-landing-investigation-links" aria-label="Explore the investigation">
-        <a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}><span>Explore our findings<small>What the evidence shows</small></span></a>
-        <a href="/work/dogs/map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}><span>View the map<small>Where dogs have been reported</small></span></a>
-        <a href="/work/dogs/" onClick={(event) => navigateInternalLink(event, onOpenActionDetail)}><span>Take a real step<small>Look for dogs on the street</small></span></a>
+        <a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}><span>Explore our findings<small>What we're learning from the evidence</small></span></a>
+        <a href="/work/dogs/map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}><span>Explore the map<small>Places, reports, and firsthand observations</small></span></a>
+        <a href="/work/dogs/" onClick={(event) => navigateInternalLink(event, onOpenActionDetail)}><span>See what's underway<small>Our current tasks and next steps</small></span></a>
       </nav>
     </section>}
 

@@ -375,7 +375,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
       )}
 
       {route.page === "gapDetail" && (
-        <GapReferencePage slug={route.gapSlug ?? firstGapSlug} onNavigate={showPage} onOpenGap={showGap} onOpenArticle={showArticle} />
+        <GapReferencePage slug={route.gapSlug ?? firstGapSlug} onNavigate={showPage} onOpenGap={showGap} onOpenArticle={showArticle} onOpenFindings={() => showInvestigation("dogs", "findings")} />
       )}
 
       {(route.page === "workInvestigation" || route.page === "article") && <GapDetailPage
@@ -447,7 +447,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
           onOpenWork={showWork}
           onOpenGap={showGap}
           onOpenResearch={() => showGapSection("too-many-dogs-still-lack-safe-placement", "research")}
-          onOpenFindings={() => showGapSection("too-many-dogs-still-lack-safe-placement", "our-findings")}
+          onOpenFindings={() => showInvestigation("dogs", "findings")}
         />
       )}
 

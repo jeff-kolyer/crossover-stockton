@@ -19,8 +19,8 @@ export function ActionIndexPage({ onNavigate, onOpenActionDetail }: ActionIndexP
 
       <div className="action-index-canvas">
         <section className="action-index-intro" aria-labelledby="action-index-title">
-          <h1 id="action-index-title">Take a real step.</h1>
-          <p>We're investigating real problems in Stockton by showing up, testing what works, and documenting what happens. Here's how you can participate.</p>
+          <h1 id="action-index-title">Taking action. Learning from reality.</h1>
+          <p>We're investigating real problems in Stockton by showing up, testing what works, and documenting what happens. Here's what we're doing now.</p>
         </section>
 
         <section className="action-index-current" aria-labelledby="action-index-current-title">

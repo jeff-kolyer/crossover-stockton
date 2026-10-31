@@ -77,7 +77,7 @@ function sourceEntries(gap: GapRecord, related: EvidenceRecord[]): SourceEntry[]
   return [...byUrl.values()];
 }
 
-export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle }: { slug?: string; onNavigate: (page: PublicRoute) => void; onOpenGap: (slug: string) => void; onOpenArticle: (path: string) => void }) {
+export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, onOpenFindings }: { slug?: string; onNavigate: (page: PublicRoute) => void; onOpenGap: (slug: string) => void; onOpenArticle: (path: string) => void; onOpenFindings: () => void }) {
   const [showAllSources, setShowAllSources] = useState(false);
   const [expandedImprovementGapId, setExpandedImprovementGapId] = useState<string | null>(null);
   useEffect(() => { setExpandedImprovementGapId(null); }, [slug]);
@@ -136,7 +136,7 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle }:
 
       {relatedArticles.length > 0 && <section aria-labelledby="gap-articles"><h2 id="gap-articles">Related articles</h2><ul>{relatedArticles.map((article) => <li key={article.id}><a href={article.path} onClick={(event) => navigateInternalLink(event, () => onOpenArticle(article.path))}>{article.title}</a></li>)}</ul></section>}
 
-      {gap.id === "dogs-safe-placement" && <section aria-labelledby="gap-investigation"><h2 id="gap-investigation">Related investigation</h2><p><a href="/work/dogs/findings/">See our findings →</a></p></section>}
+      {gap.id === "dogs-safe-placement" && <section aria-labelledby="gap-investigation"><h2 id="gap-investigation">Related investigation</h2><p><a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See our findings →</a></p></section>}
     </article>
     <PublicFooter active="reality" onNavigate={onNavigate} />
   </main>;

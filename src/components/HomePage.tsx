@@ -137,7 +137,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
           <p>{copy.text}</p>
           {isHome && (
             <div className="hero-action-row">
-              <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>Find out how you can help</PublicPrimaryAction>
+              <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>See what we're doing</PublicPrimaryAction>
             </div>
           )}
         </div>

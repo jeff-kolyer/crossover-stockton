@@ -22,7 +22,7 @@ const ideas = [
 ];
 
 const linkedInUrl = "https://www.linkedin.com/in/jeff-kolyer";
-export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
+export function AboutPage({ onNavigate, onPrimaryAction, onOpenFindings }: AboutPageProps) {
   return <main className="public-site about-simple">
     <PublicSiteNav active="about" onNavigate={onNavigate} />
     <div className="about-simple-content">
@@ -38,7 +38,7 @@ export function AboutPage({ onNavigate, onPrimaryAction }: AboutPageProps) {
         <h2 id="about-stockton-title">Starting with the stray dogs in Stockton</h2>
         <p>What if people who love animals could spend their days caring for them, rather than struggling with paperwork, logistics, and limited resources? Technology could handle more of the necessary work while people devote themselves to rescuing, fostering, training, and rehabilitating dogs.</p>
         <p>But first, we need to understand what actually happens. We're examining public reports, checking conditions firsthand, and testing pathways to care to discover where the difficulties are—and what could genuinely help.</p>
-        <p><a href="/work/dogs/findings/">See our findings →</a></p>
+        <p><a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See our findings →</a></p>
       </section>
 
       <section className="about-simple-section" aria-labelledby="about-ideas-title">
