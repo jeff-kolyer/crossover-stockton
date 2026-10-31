@@ -1,6 +1,7 @@
 import { useState } from "react";
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
+import { articlesForGap } from "../lib/articles";
 import orgsData from "../data/orgs.json";
 import projectsData from "../data/projects.json";
 import dogResearchData from "../data/dogs-research.json";
@@ -76,7 +77,7 @@ function sourceEntries(gap: GapRecord, related: EvidenceRecord[]): SourceEntry[]
   return [...byUrl.values()];
 }
 
-export function GapReferencePage({ slug, onNavigate, onOpenGap }: { slug?: string; onNavigate: (page: PublicRoute) => void; onOpenGap: (slug: string) => void }) {
+export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle }: { slug?: string; onNavigate: (page: PublicRoute) => void; onOpenGap: (slug: string) => void; onOpenArticle: (path: string) => void }) {
   const [showAllSources, setShowAllSources] = useState(false);
   const gap = gaps.find((item) => item.slug === slug);
   if (!gap) return <main className="crossover-index-body"><h1>Gap not found</h1><p>This reference page is unavailable.</p><a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Back to needs</a></main>;
@@ -97,6 +98,7 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap }: { slug?: strin
   const visibleReports = showAllSources || sourceLimit === Number.POSITIVE_INFINITY ? reports : reports.slice(0, Math.max(0, sourceLimit - sources.length));
   const hiddenSourceCount = Math.max(0, sources.length + reports.length - sourceLimit);
   const stocktoniaReport = gap.id === "dogs-safe-placement" ? records.find((record) => record.id === "stocktonia-2026-10-20-animal-control-proposals") : undefined;
+  const relatedArticles = articlesForGap(gap.id);
 
   return <main className="public-site gap-reference-page">
     <PublicSiteNav active="reality" onNavigate={onNavigate} />
@@ -125,6 +127,8 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap }: { slug?: strin
       <section aria-labelledby="gap-responders"><h2 id="gap-responders">Who's responding?</h2><p>These roles are described in public and provider records. Listing an organization does not imply direct Crossover involvement.</p><ul>{roles.map(({ role, organization }) => <li key={organization.id}><strong>{organization.name}.</strong> {role.label || organization.summary}{organization.website && <> <a href={organization.website} target="_blank" rel="noreferrer">Organization website</a></>}</li>)}</ul></section>
 
       <section aria-labelledby="gap-sources"><h2 id="gap-sources">Sources</h2><ul id="gap-source-list">{visibleSources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>{source.publisher && ` — ${source.publisher}`}{(source.publishedAt || source.checkedAt) && ` · ${source.publishedAt ? `Published ${formatDate(source.publishedAt)}` : `Reviewed ${formatDate(source.checkedAt)}`}`}</li>)}{visibleReports.map((report) => <li key={report.id}><a href={`/reports/${encodeURIComponent(report.id)}/`}>{report.title}</a> — Crossover field report{report.occurred_at && ` · ${formatDate(report.occurred_at)}`}</li>)}</ul>{hiddenSourceCount > 0 && <button type="button" aria-expanded={showAllSources} aria-controls="gap-source-list" onClick={() => setShowAllSources((value) => !value)}>{showAllSources ? "Show fewer sources" : `Show all sources (${hiddenSourceCount})`}</button>}</section>
+
+      {relatedArticles.length > 0 && <section aria-labelledby="gap-articles"><h2 id="gap-articles">Related articles</h2><ul>{relatedArticles.map((article) => <li key={article.id}><a href={article.path} onClick={(event) => navigateInternalLink(event, () => onOpenArticle(article.path))}>{article.title}</a></li>)}</ul></section>}
 
       {gap.id === "dogs-safe-placement" && <section aria-labelledby="gap-investigation"><h2 id="gap-investigation">Related investigation</h2><p><a href="/work/dogs/">Open investigation →</a></p></section>}
     </article>

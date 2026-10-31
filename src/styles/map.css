@@ -166,7 +166,8 @@
 }
 
 .crossover-map-filters .plain-action-button.is-filter,
-.crossover-location-list button .crossover-location-title {
+.crossover-location-list button .crossover-location-title,
+.crossover-task-list button .crossover-task-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;

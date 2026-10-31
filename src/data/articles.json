@@ -1,0 +1,219 @@
+[
+  {
+    "id": "friction-of-volunteering",
+    "path": "/articles/friction-of-volunteering/",
+    "title": "The friction of volunteering",
+    "date": "2026-10-30",
+    "type": "investigation",
+    "description": "Crossover's volunteer applications in Stockton raise a practical question: how could better coordination help willingness to care become action?",
+    "summary": "We applied to volunteer with two animal-care organizations. What happens between offering help and actually providing it?",
+    "content": {
+      "introduction": "Wanting to help a dog is only the beginning. A person has to find an opportunity, connect with an organization, complete its requirements, and reach a task they can safely do. Crossover's attempts to volunteer in Stockton give us a starting point for investigating that path.",
+      "sections": [
+        {
+          "heading": "Two attempts to take part",
+          "paragraphs": [
+            "Crossover submitted a volunteer application to Stockton Street Dogs on October 7, 2026. We had not documented a response as of October 30. We emailed Stockton Animal Services about its Doggie Day Out program on October 12 and submitted a volunteer application in person on October 14. We had not documented a substantive next step by October 30.",
+            "These are our firsthand records of two volunteer pathways, not evidence that either organization routinely fails to respond. We do not know what happened to the applications internally or why participation has not progressed. Stockton Animal Services publicly describes volunteer roles and a Doggie Day Out orientation; Stockton Street Dogs also offers a public volunteer entry point. We want to understand what happens after someone uses those entry points."
+          ],
+          "links": [
+            { "label": "Street Dogs application Activity record", "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application" },
+            { "label": "Doggie Day Out inquiry Activity record", "url": "/work/dogs/activity/#crossover-2026-10-12-doggie-day-out-inquiry" },
+            { "label": "Animal Services application Activity record", "url": "/work/dogs/activity/#crossover-2026-10-14-sas-volunteer-application" },
+            { "label": "Stockton Animal Services volunteer information", "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php" },
+            { "label": "Stockton Street Dogs volunteer link", "url": "https://linktr.ee/streetdogsanctuary" }
+          ]
+        },
+        {
+          "heading": "Where willingness can meet friction",
+          "paragraphs": [
+            "A prospective volunteer finds an organization, applies, and waits to learn the next step. Orientation, training, screening, scheduling, and approval may follow. Some requirements protect animals, volunteers, and the organization and should remain. The question is which parts require human judgment and which repetitive steps could be made easier to understand and complete.",
+            "Shelters and rescues are already caring for animals while managing facilities, emergencies, communication, and existing volunteers. Administrative work can consume the same time that could support a new helper. We have not measured these workloads in Stockton or established where any particular application stalled. That is what we need to investigate."
+          ]
+        },
+        {
+          "heading": "What business already knows",
+          "paragraphs": [
+            "In business, interest is captured and supported. Here we're asking why that kind of smooth pathway isn't available to people who want to help dogs.",
+            "Companies have spent decades building systems that answer inquiries, track interest, follow up, schedule appointments, and help people take the next step. An offer to help an animal may still pass through applications, emails, waiting, and manual coordination. This comparison does not treat care as a sale. It asks whether the tools developed to guide commercial participation could also support people who want to care for living beings."
+          ]
+        },
+        {
+          "heading": "Infrastructure that helps both sides",
+          "paragraphs": [
+            "Stockton Animal Services and Stockton Street Dogs do essential work. Better volunteer infrastructure could help their staff and existing volunteers as well as applicants. It might show which roles are open, explain requirements, acknowledge applications, provide status updates, and make it easier to schedule an appropriate next step. We do not know whether these organizations already use some of these tools or what changes they would find useful.",
+            "An AI-supported system could answer routine questions immediately, guide an applicant through forms, coordinate orientation and training, suggest tasks that fit a person's availability and abilities, and reduce repeated administrative work. These are proposals to test with organizations, not claims of a working Stockton system. Screening, animal-handling safeguards, supervision, and final decisions would stay with qualified people. The purpose is to automate the friction surrounding compassion, not compassion itself."
+          ]
+        },
+        {
+          "heading": "More room for vocation",
+          "paragraphs": [
+            "Today's systems devote substantial effort to making commercial participation easy. AI and automation may make similar coordination tools more accessible to community organizations without requiring large administrative teams. Whether that promise holds for Stockton's animal-care work remains to be tested.",
+            "People would still provide attention, judgment, relationships, and direct care. Technology could make it simpler for them to contribute. This is one practical part of Crossover's broader investigation into using new capabilities to free more human time for meaningful work and care."
+          ]
+        },
+        {
+          "heading": "Questions for the next step",
+          "paragraphs": [
+            "How do these organizations receive and manage volunteer applications? What determines response time, and where do applicants commonly get stuck? Which administrative tasks consume staff and volunteer time? Which steps need human judgment, and which could be simplified? Could organizations share coordination tools while retaining their independence? We need answers from the people doing this work before proposing a specific system.",
+            "We've built extraordinary systems for turning interest into purchases. We should be able to build equally effective systems for turning compassion into care."
+          ]
+        }
+      ]
+    },
+    "published": true,
+    "show_in_findings": true,
+    "related_gap_ids": ["dogs-safe-placement"],
+    "related_location_ids": ["stockton-animal-services-shelter"]
+  },
+  {
+    "id": "public-access-to-stray-dog-information",
+    "path": "/articles/public-access-to-stray-dog-information/",
+    "title": "Public access to stray dog information in Stockton",
+    "date": "2026-10-30",
+    "type": "investigation",
+    "description": "An investigation into which information about Stockton's stray dogs is public, what remains difficult to trace, and how better coordination could help.",
+    "summary": "Public reporting and shelter information exist. Can people also learn what happened after a stray dog was reported and where help is still needed?",
+    "content": {
+      "introduction": "When someone reports a dog on Stockton's streets, what information reaches the people who could help? Stockton Animal Services, independent rescuers, volunteers, and residents already respond in different ways. We are investigating whether useful information about reported dogs, responses, and unresolved needs is accessible enough to support that work.",
+      "sections": [
+        {
+          "heading": "Our October 20 records request",
+          "paragraphs": [
+            "On October 20, Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. We asked for dates, general areas, complaint categories, response dispositions, and closure statuses where those fields are maintained. The request is intended to help us learn where dogs are reported, whether officers respond and locate them, what follows a response, and which reports remain unresolved. We do not yet know which of these questions the records can answer.",
+            "As of October 30, ten calendar days after submission, Crossover had received an automatic forwarding acknowledgment but no substantive response or records. This status was confirmed by the requester on October 30. California's Public Records Act generally calls for an agency to make a disclosure determination within ten calendar days, with qualifying extensions; that is not necessarily a deadline for delivering the records. We have not established the agency's receipt date, any applicable extension, or the full circumstances of its processing, so we are drawing no legal conclusion from this timeline."
+          ],
+          "links": [
+            { "label": "Crossover's records-request Activity record", "url": "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request" },
+            { "label": "California Department of Justice guide to public records timelines", "url": "https://oag.ca.gov/consumers/general/pra" }
+          ]
+        },
+        {
+          "heading": "What the public can already see",
+          "paragraphs": [
+            "The City provides an online route for animal-related complaints, a list of pets currently in shelter care, and a lost-and-found pet map. Stockton's open-data portal also publishes an animal-shelter overview of intake and outcomes. These are useful public resources. A shelter intake or outcome total, however, is different from a record of each street report and what happened afterward.",
+            "Our question is whether a person can follow the path from a reported dog to an officer response, a located animal, care, reunification, placement, or an unresolved case. We have not established that this information is unavailable elsewhere. We need to examine the requested records, the limits of the public tools, and what can be shared safely before concluding that a gap exists."
+          ],
+          "links": [
+            { "label": "Stockton Animal Services complaint guidance", "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php" },
+            { "label": "City lost-and-found pet resources", "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php" },
+            { "label": "Stockton open-data animal-shelter overview", "url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/" }
+          ]
+        },
+        {
+          "heading": "Information across organizations",
+          "paragraphs": [
+            "Animal Services is one part of the response. Stockton Street Dogs, independent rescuers, volunteers, and other groups also encounter dogs and provide care. We do not know how their internal records are kept or how they share information. Public access is a separate question: can a resident identify a current need and a safe way to help without relying on an outdated post or an uncertain contact route?",
+            "Crossover applied to volunteer with Stockton Street Dogs on October 7. We had not documented a response by October 30. That experience tells us about our own attempt to connect; it does not establish how the organization handles other applications or communicates internally. We want to learn which public and organizational channels already work, and where information about opportunities or outcomes is hard to find."
+          ],
+          "links": [
+            { "label": "Crossover's volunteer-application Activity record", "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application" },
+            { "label": "Stockton Street Dogs' public site", "url": "https://streetdogsanctuary.com/" }
+          ]
+        },
+        {
+          "heading": "What better information could make possible",
+          "paragraphs": [
+            "A public, AI-supported animal-welfare information system is a possibility to test. It could organize public reports and official information, show patterns across general areas, record what happened after reports, identify unresolved needs, and connect people with verified ways to help. It could also make investigation findings easier to inspect. This would require cooperation, reliable source data, and a clear account of what each record does and does not establish.",
+            "Sensitive animal locations and personal information should be protected. Reported sightings must remain distinct from verified conditions and confirmed outcomes. AI could help sort and summarize information, but people would need to check its work and make care decisions. We have not built or validated such a system for Stockton."
+          ]
+        },
+        {
+          "heading": "How Crossover is testing the approach",
+          "paragraphs": [
+            "Crossover's public investigation follows a cycle: Tasks identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The records request is one Activity in that cycle, and its result remains pending.",
+            "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. The next steps are to examine the field-call records if provided, compare them with existing public resources, ask responders what information they can share, and test whether that information helps people act safely."
+          ],
+          "links": [
+            { "label": "Investigation Tasks", "url": "/work/dogs/tasks/" },
+            { "label": "Investigation Activity", "url": "/work/dogs/activity/" },
+            { "label": "Findings", "url": "/work/dogs/findings/" },
+            { "label": "Public Actions", "url": "/action/" }
+          ]
+        },
+        {
+          "heading": "What remains to establish",
+          "paragraphs": [
+            "We still need to learn what field-call data exists and can be released, how a public report moves through response and closure, what useful information is already public, and how Animal Services and independent caregivers coordinate when appropriate. We also need to ask whether better access would change outcomes for dogs, while respecting privacy and safety.",
+            "How could better public information and AI-supported coordination help more dogs reach care?"
+          ]
+        }
+      ]
+    },
+    "published": true,
+    "show_in_findings": true,
+    "related_gap_ids": ["dogs-safe-placement"],
+    "related_location_ids": ["stockton-animal-services-shelter", "weston-ranch-carrie-street", "south-lincoln-crosstown", "trinity-bear-creek", "country-club-i5", "pawboost-crown-rose-marie-2026-10-16", "pawboost-california-magnolia-2026-10-15", "pawboost-mcdougald-henry-long-2026-10-15", "louis-park-pixie-woods-2026-04-06", "stanislaus-street-corridor-2026-04-06", "highway-4-corridor-2026-04-06"]
+  },
+  {
+    "id": "caring-for-stocktons-dogs",
+    "path": "/articles/caring-for-stocktons-dogs/",
+    "title": "What if caring for Stockton's dogs were as easy as going to the park?",
+    "date": "2026-10-30",
+    "type": "investigation",
+    "description": "An investigation into existing dog-care services, proposed facilities, and how more people might participate in caring for Stockton's dogs.",
+    "summary": "Stockton's shelter is expanding and Streetdogs has proposed a Canine Campus. What would make everyday participation in dog care easier?",
+    "content": {
+      "introduction": "Caring for Stockton's dogs already takes public workers, rescue groups, volunteers, and adopters. We are investigating what more could become possible if a welcoming place made it easier for ordinary people to help. This is a question about adding ways to care, alongside the essential services that already exist.",
+      "sections": [
+        {
+          "heading": "What exists: Stockton Animal Services",
+          "paragraphs": [
+            "Stockton Animal Services performs essential municipal work: responding to animal-control needs, taking animals into the shelter, caring for them, and helping them reach adoption or other outcomes. Its ongoing expansion is a positive development. City plans include treatment, isolation, rehabilitation, and public adoption space; we do not yet know how much additional usable capacity it will provide or how outcomes will change.",
+            "On October 14, Crossover visited the shelter at 1575 S. Lincoln Street, submitted a volunteer application, and spoke briefly with staff. We observed construction beside the entrance and a crowded public lobby during our visit. The entrance was difficult for us to find amid the work. The shelter sits in an industrial area, so we are also checking what transportation and walking options would make volunteer outings practical. These are observations from one visit, not a judgment about the shelter or its location. The expansion may address some of the limitations we saw."
+          ],
+          "links": [
+            { "label": "Crossover's October 14 visit report", "url": "/reports/crossover-2026-10-14-sas-first-visit/" },
+            { "label": "City of Stockton shelter expansion announcement", "url": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf" }
+          ]
+        },
+        {
+          "heading": "What is proposed: the Canine Campus",
+          "paragraphs": [
+            "Stockton Streetdogs proposes a Canine Campus that could shelter hundreds of stray dogs at a time, provide overflow space for Stockton Animal Services, and include recovery space for spay and neuter procedures and for sick dogs. Its published proposal describes 24-hour staffing, coordination with rescues, selected volunteers, and opportunities for the public to visit and help. These are the organization's plans, not services operating today.",
+            "Streetdogs opened a construction fundraiser in July 2026. Fundraising is documented, but we have not verified full funding, a secured site, approvals, an opening date, or usable operating capacity. If built and staffed, the campus could complement the municipal shelter with more room for recovery, exercise, and care. We want to learn how its public participation plans would work in practice before assuming they would match the broader idea explored below."
+          ],
+          "links": [
+            { "label": "Stockton Streetdogs' Canine Campus proposal", "url": "https://streetdogsanctuary.com/canine-campus" },
+            { "label": "Canine Campus construction fundraiser", "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus" }
+          ]
+        },
+        {
+          "heading": "A different model: The Asher House",
+          "paragraphs": [
+            "Lee Asher's animal sanctuary in Oregon offers another model to study. The Asher House says it rescues and rehabilitates animals, places many for adoption, and gives others a lasting home. Animals have room for activity and enrichment; a staff team helps provide care. The nonprofit says donations and merchandise sales support animal care, while Lee purchased the land with personal income.",
+            "The Asher House is not currently open for public visits and says it does not yet have a volunteer program. Its animal-centered living environment, rehabilitation work, and adoption network are worth studying for Stockton. A public place where visitors regularly help care for dogs would be an additional local idea, not a description of how The Asher House operates today."
+          ],
+          "links": [
+            { "label": "The Asher House and its operating model", "url": "https://www.theasherhouse.com/pages/asher-house-faqs" }
+          ]
+        },
+        {
+          "heading": "What if helping felt like going to the park?",
+          "paragraphs": [
+            "Here is Crossover's proposal to investigate: a welcoming dog-care place with easy parking, walking trails, open grounds, and comfortable spaces for animals. Someone could arrive, learn which dogs are ready for interaction, and take a suitable dog for a supervised walk. Others could help socialize dogs, assist with rehabilitation under trained guidance, or support daily care.",
+            "The goal is to make caring for dogs as accessible as visiting a public park. Access would still need appropriate screening, training, supervision, animal-behavior assessment, and safeguards for dogs and people. We do not yet know what site, staffing, costs, partnerships, and rules would make this workable in Stockton."
+          ]
+        },
+        {
+          "heading": "More time for care",
+          "paragraphs": [
+            "AI and automation could help with scheduling, matching people to suitable tasks, keeping care records current, and coordinating transport and follow-up. Robotics may eventually help with repetitive physical chores. These are possibilities to test, not tools we have shown to work here. People and animal-care professionals would still make welfare and safety decisions.",
+            "If technology reduces the logistical burden, more human time could go toward walking, socializing, rehabilitating, and caring for living beings. That is part of Crossover's broader investigation into a future in which people can spend more of their lives on vocation rather than compulsory work. The immediate test is practical: can more dogs get good care, and can more people take part safely?"
+          ]
+        },
+        {
+          "heading": "The question ahead",
+          "paragraphs": [
+            "We want to learn from Stockton Animal Services, Stockton Streetdogs, other rescuers, and residents: which roles are already open to the public, what barriers keep people from participating, and what extra space or support would genuinely help? The shelter expansion and the Canine Campus proposal are concrete developments to follow. The park-like care setting is a further possibility to examine with the people doing the work.",
+            "What would it take to make caring for Stockton's dogs as accessible as visiting a public park?"
+          ]
+        }
+      ]
+    },
+    "published": true,
+    "show_in_findings": true,
+    "related_gap_ids": ["dogs-safe-placement"],
+    "related_location_ids": ["stockton-animal-services-shelter"]
+  }
+]

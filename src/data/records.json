@@ -78,10 +78,10 @@
     "record_type": "activity",
     "trust": "crossover_source",
     "title": "Requested Stockton Animal Services field-call records",
-    "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. Records have not yet been received or analyzed.",
+    "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. An automatic forwarding acknowledgment arrived; no substantive response or records had been received as of October 30.",
     "source": { "publisher": "Crossover Stockton", "type": "firsthand_account" },
     "evidence_status": "self_reported",
-    "outcome": { "status": "submitted", "summary": "Submitted October 20, 2026. Awaiting response; no data received or analyzed.", "as_of": "2026-10-20" },
+    "outcome": { "status": "awaiting_response", "summary": "Submitted October 20, 2026. An automatic forwarding acknowledgment arrived; no substantive response or records received as of October 30. No data analyzed.", "as_of": "2026-10-30" },
     "work_id": "dogs-direct-field-work",
     "report_record_ids": [],
     "supports": [],
@@ -109,9 +109,9 @@
     },
     "evidence_status": "self_reported",
     "outcome": {
-      "status": "submitted",
-      "summary": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities.",
-      "as_of": "2026-10-14"
+      "status": "awaiting_next_step",
+      "summary": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities. No substantive next step documented as of October 30.",
+      "as_of": "2026-10-30"
     },
     "work_id": "dogs-direct-field-work",
     "report_record_ids": [
@@ -1477,8 +1477,8 @@
     "evidence_status": "self_reported",
     "outcome": {
       "status": "awaiting_response",
-      "summary": "Awaiting a response as of October 8, 2026.",
-      "as_of": "2026-10-08"
+      "summary": "No response documented as of October 30, 2026.",
+      "as_of": "2026-10-30"
     },
     "work_id": "dogs-direct-field-work",
     "report_record_ids": [],
@@ -1504,8 +1504,8 @@
     "evidence_status": "self_reported",
     "outcome": {
       "status": "awaiting_response",
-      "summary": "Awaiting response. No field report yet.",
-      "as_of": "2026-10-12"
+      "summary": "No substantive next step documented as of October 30, 2026. No field report yet.",
+      "as_of": "2026-10-30"
     },
     "work_id": "dogs-direct-field-work",
     "report_record_ids": [],

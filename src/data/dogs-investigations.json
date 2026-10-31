@@ -107,7 +107,7 @@
           },
           {
             "name": "Stockton Streetdogs",
-            "status": "Volunteer application submitted October 7, 2026. The October 8 record says a response was awaited; no later reply is documented.",
+            "status": "Volunteer application submitted October 7, 2026. No response documented as of October 30.",
             "questions": [
               "Which dogs or general areas need help now, and how are current cases distinguished from older reports?",
               "Do you coordinate feeding or water routes? Can residents join safely, and what supplies, drop sites, schedules, or approvals are confirmed?",
@@ -122,7 +122,7 @@
           },
           {
             "name": "Stockton Animal Services",
-            "status": "Doggie Day Out inquiry emailed October 12; volunteer application submitted October 14; field-call records requested October 20. No later volunteer, orientation, or records response is documented. October 20 reporting describes an untested temporary found-animal foster pathway.",
+            "status": "Doggie Day Out inquiry emailed October 12; volunteer application submitted October 14; field-call records requested October 20. No substantive volunteer next step or records response documented as of October 30. October 20 reporting describes an untested temporary found-animal foster pathway.",
             "questions": [
               "When a dog is reported, who receives the call, how is urgency assessed, and which response and closure details are recorded?",
               "Can field-call records show general areas, repeat reports, pickups, unresolved cases, and outcomes? Which fields are unavailable?",
@@ -154,7 +154,7 @@
       "records_request": {
         "activity_record_id": "crossover-2026-10-20-sas-field-call-records-request",
         "submitted_at": "2026-10-20",
-        "status": "Submitted — awaiting response",
+        "status": "Automatic forwarding acknowledgment received; substantive response and records pending as of October 30",
         "summary": "Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include dates, general areas, complaint categories, response dispositions, and closure statuses where maintained.",
         "review_plan": "When records arrive, examine concentrations and repeat reports by general area; separate confirmed pickups, unresolved calls, and other dispositions; compare them with published reports and field observations; and cite any generalized map locations. Availability of requested fields is unknown."
       },

@@ -19,6 +19,8 @@ type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "a
 
 interface GapDetailPageProps {
   workspaceBasePath?: string;
+  articlePath?: string;
+  onOpenArticle?: (path: string) => void;
   slug?: string;
   section?: "overview" | "tasks" | "activity" | "reports" | "map" | "findings" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   onOpenSection?: (slug: string, section: NonNullable<GapDetailPageProps["section"]>, anchor?: string) => void;
@@ -71,7 +73,7 @@ const dogGapNavItems: WorkSectionNavItem[] = [
   { id: "recent-updates", label: "Updates" },
 ];
 
-export function GapDetailPage({ slug, section = "overview", workspaceBasePath, onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction, onOpenActionDetail }: GapDetailPageProps) {
+export function GapDetailPage({ slug, section = "overview", workspaceBasePath, articlePath, onOpenArticle, onOpenSection, onNavigate, onOpenAbout, onOpenGap, onOpenUpdates, onOpenSources, onOpenWork, onOpenReport, onOpenStory, onOpenAction, onOpenActionDetail }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
 
   if (!gap) {
@@ -121,7 +123,7 @@ export function GapDetailPage({ slug, section = "overview", workspaceBasePath, o
 
   if (onOpenSection) return <main className={`gap-page dog-gap-page is-${gap.investigation_status}${isDogGap && workspaceBasePath ? " is-dog-investigation" : ""}`}>
     {!isDogGap && <PublicSiteNav active="reality" onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant="dark" />}
-    <DogGapExperience gap={gap} section={section} workspaceBasePath={workspaceBasePath} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} onOpenActionDetail={onOpenActionDetail} />
+    <DogGapExperience gap={gap} section={section} workspaceBasePath={workspaceBasePath} articlePath={articlePath} onOpenArticle={onOpenArticle} onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)} onOpenGap={onOpenGap} onNavigate={onNavigate} onOpenWork={onOpenWork} onOpenReport={onOpenReport} onOpenAction={onOpenAction} onOpenActionDetail={onOpenActionDetail} />
     {!isDogGap && <footer className="public-footer"><div className="footer-logo" aria-label="Crossover"><picture><source media="(max-width: 760px)" srcSet={logoDark} /><img src={logoLight} alt="" /></picture><span>Crossover</span></div><span>© 2026 Crossover Stockton</span><p>Reality. Connection. Action.</p><button type="button" onClick={() => onNavigate("reality")}>Needs</button><button type="button" onClick={() => onNavigate("action")}>Action</button><button type="button" onClick={onOpenAbout}>About</button></footer>}
   </main>;
 

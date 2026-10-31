@@ -9,6 +9,29 @@ const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.m
 const stories = JSON.parse(await readFile(new URL("../src/data/stories.json", import.meta.url), "utf8"));
 const work = JSON.parse(await readFile(new URL("../src/data/work.json", import.meta.url), "utf8"));
 const records = JSON.parse(await readFile(new URL("../src/data/records.json", import.meta.url), "utf8"));
+const articles = JSON.parse(await readFile(new URL("../src/data/articles.json", import.meta.url), "utf8"));
+const articleLocations = JSON.parse(await readFile(new URL("../src/data/investigation-locations.json", import.meta.url), "utf8"));
+const articlePaths = new Set();
+const articleIds = new Set();
+for (const article of articles) {
+  if (!article.id || articleIds.has(article.id) || !/^\/articles\/[a-z0-9]+(?:-[a-z0-9]+)*\/$/.test(article.path) || articlePaths.has(article.path)
+    || !article.title || !/^\d{4}-\d{2}-\d{2}$/.test(article.date)
+    || !["finding", "investigation", "opinion", "report", "update"].includes(article.type)
+    || !article.description || !article.summary || !article.content?.introduction
+    || !Array.isArray(article.content.sections) || typeof article.published !== "boolean"
+    || typeof article.show_in_findings !== "boolean" || !Array.isArray(article.related_gap_ids)
+    || article.related_gap_ids.some((id) => !gaps.some((gap) => gap.id === id))
+    || !Array.isArray(article.related_location_ids)
+    || article.related_location_ids.some((id) => !articleLocations.some((location) => location.id === id && location.coordinates && location.marker_kind && location.map_label))
+    || article.content.sections.some((section) => !section.heading || !Array.isArray(section.paragraphs)
+      || section.paragraphs.some((paragraph) => typeof paragraph !== "string" || !paragraph.trim())
+      || (section.links !== undefined && (!Array.isArray(section.links) || section.links.some((link) => !link.label || !link.url))))) {
+    throw new Error(`Invalid article record: ${article.id ?? "unknown"}`);
+  }
+  articleIds.add(article.id);
+  articlePaths.add(article.path);
+}
+const publishedArticles = articles.filter((article) => article.published);
 const organizations = JSON.parse(await readFile(new URL("../src/data/orgs.json", import.meta.url), "utf8"));
 const engagedOrganizationIds = new Set(records.filter((record) => record.source.publisher?.startsWith("Crossover Stockton") && (record.record_type === "activity" || record.record_type === "field_report" || record.record_type === "field_investigation") && !record.evidence_status?.startsWith("planned")).flatMap((record) => record.organization_ids ?? []));
 const dogGapBase = "/reality/too-many-dogs-still-lack-safe-placement/";
@@ -48,7 +71,8 @@ const pages = [
   ["/work/dogs/tasks/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
   ["/work/dogs/activity/", "Activity | Crossover Stockton", "Documented work in the Stockton dog investigation."],
   ["/work/dogs/map/", "Map | Crossover Stockton", "Locations and field observations in the Stockton dog investigation."],
-  ["/work/dogs/findings/", "Findings | Crossover Stockton", "Evidence-backed findings in the Stockton dog investigation."],
+  ["/work/dogs/findings/", "Findings | Crossover Stockton", "Articles on what Crossover has observed, believes, and is still investigating about dog care in Stockton."],
+  ...publishedArticles.map((article) => [article.path, `${article.title} | Crossover Stockton`, article.description]),
   ["/reality/", "Reality | Crossover Stockton", "Follow needs in Stockton and the evidence behind them."],
   ["/connection/", "Connection | Crossover Stockton", "Stories of local people and organizations responding to Stockton's needs."],
   ["/action/", "Action | Crossover Stockton", "Find practical ways to help in Stockton."],
