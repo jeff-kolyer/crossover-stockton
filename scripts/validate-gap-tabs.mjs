@@ -25,8 +25,8 @@ for (const [index, gap] of gaps.entries()) {
   }
   assert.ok(!html.includes('class="dog-gap-tabs"') && !html.includes('class="dog-gap-sidebar"'), `${gap.slug}: legacy gap navigation remains`);
   assert.ok(!html.includes("crossover-shared-map"), `${gap.slug}: workspace map embedded in reference page`);
-  if (gap.id === "dogs-safe-placement") assert.ok(html.includes('href="/work/dogs/"'), "Dogs: related investigation missing");
-  else assert.ok(!html.includes('href="/work/dogs/"'), `${gap.slug}: unrelated investigation link`);
+  if (gap.id === "dogs-safe-placement") assert.ok(html.includes('href="/work/dogs/findings/"'), "Dogs: Findings link missing");
+  else assert.ok(!html.includes('href="/work/dogs/findings/"'), `${gap.slug}: unrelated Findings link`);
 }
 
 for (const [path, active] of [["", "tasks"], ["tasks/", "tasks"], ["activity/", "activity"], ["map/", "map"]]) {

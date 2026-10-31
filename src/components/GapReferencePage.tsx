@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import gapsData from "../data/gaps.json";
 import recordsData from "../data/records.json";
 import { articlesForGap } from "../lib/articles";
@@ -79,6 +79,8 @@ function sourceEntries(gap: GapRecord, related: EvidenceRecord[]): SourceEntry[]
 
 export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle }: { slug?: string; onNavigate: (page: PublicRoute) => void; onOpenGap: (slug: string) => void; onOpenArticle: (path: string) => void }) {
   const [showAllSources, setShowAllSources] = useState(false);
+  const [expandedImprovementGapId, setExpandedImprovementGapId] = useState<string | null>(null);
+  useEffect(() => { setExpandedImprovementGapId(null); }, [slug]);
   const gap = gaps.find((item) => item.slug === slug);
   if (!gap) return <main className="crossover-index-body"><h1>Gap not found</h1><p>This reference page is unavailable.</p><a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Back to needs</a></main>;
 
@@ -88,6 +90,8 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle }:
   const related = gapRecords(gap);
   const facts = keyFacts(gap);
   const relatedProjects = projects.filter((project) => project.gap_ids.includes(gap.id));
+  const showAllImprovements = expandedImprovementGapId === gap.id;
+  const visibleProjects = showAllImprovements ? relatedProjects : relatedProjects.slice(0, 2);
   const roles = (gap.responder_roles?.length ? gap.responder_roles : gap.organization_ids.map((organization_id) => ({ organization_id, label: "", current_role: "" }))).map((role) => ({ role, organization: organizations.find((organization) => organization.id === role.organization_id) })).filter((entry): entry is { role: typeof entry.role; organization: OrgRecord } => Boolean(entry.organization));
   const sources = sourceEntries(gap, related);
   const reports = related.filter((record) => record.record_type === "field_report");
@@ -120,17 +124,19 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle }:
 
       {facts.length > 0 && <section aria-labelledby="gap-facts"><h2 id="gap-facts">Key facts</h2><ul>{facts.map((fact) => <li key={fact.label}><strong>{fact.value} — {fact.label}.</strong> {fact.detail}{fact.record && <> Evidence: {fact.record.source.url ? <a href={fact.record.source.url} target="_blank" rel="noreferrer">{fact.record.title}</a> : fact.record.title}{fact.record.published_at && ` (${formatDate(fact.record.published_at)})`}.</>}{!fact.record && fact.source && <> Evidence: <a href={fact.source.url} target="_blank" rel="noreferrer">{fact.source.title}</a>{fact.source.publishedAt && ` (${formatDate(fact.source.publishedAt)})`}.</>}</li>)}</ul></section>}
 
-      <section aria-labelledby="gap-known"><h2 id="gap-known">What's documented?</h2><p>{gap.investigation_status === "identified" ? "The following points come from published and provider sources. Crossover has not independently checked their current outcomes." : "Published and provider sources describe the following. Crossover's direct observations are identified separately."}</p><ul>{gap.what_we_are_seeing.slice(1, gap.id === "dogs-safe-placement" ? undefined : 4).map((point) => <li key={point}>{point}</li>)}</ul>{stocktoniaReport?.source.url && <p><a href={stocktoniaReport.source.url} target="_blank" rel="noreferrer">Read Stocktonia's October 20 report</a> on shelter capacity and the proposed ordinance changes.</p>}{firsthand && <p><strong>Crossover firsthand record ({formatDate(firsthand.occurred_at || firsthand.recorded_at)}):</strong> {firsthand.summary}</p>}{relatedProjects.length > 0 && <><h3>Projects and proposed changes</h3><ul>{relatedProjects.map((project) => <li key={project.id}><strong>{project.title}.</strong> {project.capacity_summary.headline} Development: {project.development_stage.replaceAll("_", " ")}; operating status: {project.operational_status.replaceAll("_", " ")}. {project.capacity_summary.not_yet_verified}</li>)}</ul></>}</section>
+      <section aria-labelledby="gap-known"><h2 id="gap-known">What's documented?</h2><p>{gap.investigation_status === "identified" ? "The following points come from published and provider sources. Crossover has not independently checked their current outcomes." : "Published and provider sources describe the following. Crossover's direct observations are identified separately."}</p><ul>{gap.what_we_are_seeing.slice(1, gap.id === "dogs-safe-placement" ? undefined : 4).map((point) => <li key={point}>{point}</li>)}</ul>{stocktoniaReport?.source.url && <p><a href={stocktoniaReport.source.url} target="_blank" rel="noreferrer">Read Stocktonia's October 20 report</a> on shelter capacity and the proposed ordinance changes.</p>}{firsthand && <><h3>Crossover firsthand record ({formatDate(firsthand.occurred_at || firsthand.recorded_at)}):</h3><p>{firsthand.summary}</p></>}</section>
+
+      {relatedProjects.length > 0 && <section className="gap-reference-entities gap-reference-projects" aria-labelledby="gap-projects"><h2 id="gap-projects">Projects and proposed changes</h2>{visibleProjects.map((project) => <Fragment key={project.id}><h3>{project.title}.</h3><p>{project.capacity_summary.headline} Development: {project.development_stage.replaceAll("_", " ")}; operating status: {project.operational_status.replaceAll("_", " ")}. {project.capacity_summary.not_yet_verified}</p></Fragment>)}{relatedProjects.length > 2 && <button type="button" aria-expanded={showAllImprovements} onClick={() => setExpandedImprovementGapId(showAllImprovements ? null : gap.id)}>{showAllImprovements ? "Show fewer improvements" : `Show all improvements (${relatedProjects.length})`}</button>}</section>}
 
       <section aria-labelledby="gap-unknown"><h2 id="gap-unknown">What remains unknown?</h2>{gap.investigation_status === "identified" && <p>Crossover has not independently investigated which reported conditions currently limit access. These are possible factors to verify, not established findings.</p>}<ul>{dogQuestions.length ? dogQuestions.map((question) => <li key={question}>{question}</li>) : gap.contributing_factors.slice(0, 3).map((factor) => <li key={factor}>{factor}</li>)}</ul></section>
 
-      <section aria-labelledby="gap-responders"><h2 id="gap-responders">Who's responding?</h2><p>These roles are described in public and provider records. Listing an organization does not imply direct Crossover involvement.</p><ul>{roles.map(({ role, organization }) => <li key={organization.id}><strong>{organization.name}.</strong> {role.label || organization.summary}{organization.website && <> <a href={organization.website} target="_blank" rel="noreferrer">Organization website</a></>}</li>)}</ul></section>
+      <section className="gap-reference-entities" aria-labelledby="gap-responders"><h2 id="gap-responders">Who's responding?</h2><p>These roles are described in public and provider records. Listing an organization does not imply direct Crossover involvement.</p>{roles.map(({ role, organization }) => <Fragment key={organization.id}><h3>{organization.name}.</h3><p>{role.label || organization.summary}{organization.website && <> <a href={organization.website} target="_blank" rel="noreferrer">Organization website</a></>}</p></Fragment>)}</section>
 
       <section aria-labelledby="gap-sources"><h2 id="gap-sources">Sources</h2><ul id="gap-source-list">{visibleSources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>{source.publisher && ` — ${source.publisher}`}{(source.publishedAt || source.checkedAt) && ` · ${source.publishedAt ? `Published ${formatDate(source.publishedAt)}` : `Reviewed ${formatDate(source.checkedAt)}`}`}</li>)}{visibleReports.map((report) => <li key={report.id}><a href={`/reports/${encodeURIComponent(report.id)}/`}>{report.title}</a> — Crossover field report{report.occurred_at && ` · ${formatDate(report.occurred_at)}`}</li>)}</ul>{hiddenSourceCount > 0 && <button type="button" aria-expanded={showAllSources} aria-controls="gap-source-list" onClick={() => setShowAllSources((value) => !value)}>{showAllSources ? "Show fewer sources" : `Show all sources (${hiddenSourceCount})`}</button>}</section>
 
       {relatedArticles.length > 0 && <section aria-labelledby="gap-articles"><h2 id="gap-articles">Related articles</h2><ul>{relatedArticles.map((article) => <li key={article.id}><a href={article.path} onClick={(event) => navigateInternalLink(event, () => onOpenArticle(article.path))}>{article.title}</a></li>)}</ul></section>}
 
-      {gap.id === "dogs-safe-placement" && <section aria-labelledby="gap-investigation"><h2 id="gap-investigation">Related investigation</h2><p><a href="/work/dogs/">Open investigation →</a></p></section>}
+      {gap.id === "dogs-safe-placement" && <section aria-labelledby="gap-investigation"><h2 id="gap-investigation">Related investigation</h2><p><a href="/work/dogs/findings/">See our findings →</a></p></section>}
     </article>
     <PublicFooter active="reality" onNavigate={onNavigate} />
   </main>;

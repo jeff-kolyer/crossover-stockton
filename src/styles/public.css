@@ -209,10 +209,52 @@ html:has(.public-site) {
 
 .gap-reference-page .gap-reference-article > section {
   max-width: 760px;
-  margin: 0 auto 40px;
+  margin: 0 auto 2em;
 }
 
-.gap-reference-page [aria-labelledby="gap-sources"] > button {
+.gap-reference-page .gap-reference-article > section :is(h2, h3) {
+  margin: 0 0 .75em;
+}
+
+.gap-reference-page .gap-reference-article > section h3 {
+  margin-top: 2em;
+}
+
+.gap-reference-page .gap-reference-article > section > h2 + h3 {
+  margin-top: 0;
+}
+
+.gap-reference-page .gap-reference-article > section.gap-reference-entities > h2 {
+  margin-bottom: 12px;
+}
+
+.gap-reference-page .gap-reference-article > section.gap-reference-entities > h3 {
+  margin: 24px 0 8px;
+}
+
+.gap-reference-page .gap-reference-article > section.gap-reference-entities > h2 + h3 {
+  margin-top: 0;
+}
+
+.gap-reference-page .gap-reference-article > section.gap-reference-projects > p + h3 {
+  border-top: 1px solid #dadce0;
+  margin-top: 8px;
+  padding-top: 7px;
+}
+
+.gap-reference-page .gap-reference-article > section :is(p, ul, ol) {
+  margin: 0 0 1em;
+}
+
+.gap-reference-page .gap-reference-article > section > :last-child {
+  margin-bottom: 0;
+}
+
+.gap-reference-page .gap-reference-article > section li + li {
+  margin-top: .75em;
+}
+
+.gap-reference-page .gap-reference-article > section > button {
   border: 0;
   background: transparent;
   padding: 0;
@@ -271,7 +313,7 @@ html:has(.public-site) {
 }
 
 .gap-reference-page .gap-reference-lead {
-  margin-bottom: 40px;
+  margin-bottom: 2em;
 }
 
 .action-index-page .action-index-feature {

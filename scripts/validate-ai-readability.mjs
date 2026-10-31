@@ -51,7 +51,7 @@ for (const gap of gaps.filter((item) => item.active)) {
   const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");
   if (!gapHtml.includes("What&#x27;s happening?") || !gapHtml.includes("What remains unknown?") || !gapHtml.includes('id="gap-sources"')) throw new Error(`${gap.slug} lacks reference sections.`);
   if (gapHtml.includes('class="crossover-primary-tabs"') || gapHtml.includes('class="dog-gap-tabs"')) throw new Error(`${gap.slug} contains workspace navigation.`);
-  if (gap.id === "dogs-safe-placement" && !gapHtml.includes('href="/work/dogs/"')) throw new Error("The dog gap page lacks its related investigation link.");
+  if (gap.id === "dogs-safe-placement" && !gapHtml.includes('href="/work/dogs/findings/"')) throw new Error("The dog gap page lacks its Findings link.");
 }
 
 console.log(`Verified initial HTML and plain text for ${urls.length} public pages`);
