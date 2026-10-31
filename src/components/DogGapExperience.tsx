@@ -246,6 +246,11 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const findingsInvestigation = activeInvestigations.find((investigation) => investigation.gap_id === gap.id);
   const findingsIntroduction = findingsInvestigation?.findings_introduction;
   const currentFindings = investigationFindings.filter((finding) => finding.investigation_id === findingsInvestigation?.id && finding.current !== false);
+  const findingsLocationIds = new Set(currentFindings.flatMap((finding) => [
+    ...finding.location_ids,
+    ...(publishedArticles.find((article) => article.id === finding.article_id)?.related_location_ids ?? []),
+  ]));
+  const findingsMappedLocations = mappedLocations.filter((location) => findingsLocationIds.has(location.id));
   const isWorkspace = isDogGap && Boolean(workspaceBasePath);
   const gapIndex = activeGaps.findIndex((item) => item.id === gap.id);
   const previousGap = gapIndex > 0 ? activeGaps[gapIndex - 1] : undefined;
@@ -420,7 +425,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     {isDogGap && !isWorkspace && investigationHeader("crossover-outer-header")}
     <div ref={workspaceRef} className={isWorkspace ? `crossover-map-workspace is-${sheetState}${dragTop === null ? "" : " is-dragging"}` : "dog-gap-layout"} style={isWorkspace && panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
       {isWorkspace && investigationHeader("crossover-workspace-header")}
-      {isWorkspace && <div ref={mapRef} className="crossover-shared-map"><DogGapOverviewMap locations={articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" || section === "reports" ? activityMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
+      {isWorkspace && <div ref={mapRef} className="crossover-shared-map"><DogGapOverviewMap locations={articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" || section === "reports" ? activityMappedLocations : section === "findings" ? findingsMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
       {isWorkspace && <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />}
       <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         {isWorkspace && <button type="button" className="crossover-sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>}
