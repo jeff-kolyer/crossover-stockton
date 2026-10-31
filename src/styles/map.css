@@ -1,14 +1,16 @@
 /* Functional geometry for the Leaflet investigation workspace. */
 
-.is-dog-investigation {
+.crossover-workspace-app {
   display: flex;
   flex-direction: column;
   height: 100dvh;
   overflow: hidden;
 }
 
-.crossover-desktop-header {
-  display: none;
+.crossover-workspace-header {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
 }
 
 .crossover-map-workspace {
@@ -22,22 +24,13 @@
 }
 
 @media (min-width: 1024px) {
-  .is-dog-investigation > .crossover-outer-header {
-    display: none;
-  }
-
   .crossover-map-workspace {
     grid-template-rows: max-content minmax(0, 1fr);
   }
 
-  .crossover-map-workspace > .crossover-desktop-header {
-    display: block;
-    grid-column: 1;
-    grid-row: 1;
-    min-width: 0;
+  .crossover-workspace-header {
     border-right: 1px solid #dadce0;
   }
-
 }
 
 @media (min-width: 1200px) {
@@ -117,7 +110,6 @@
 
 .crossover-map-filters {
   display: flex;
-  flex-wrap: nowrap;
   gap: 6px;
   overflow-x: auto;
   scrollbar-width: none;
@@ -130,6 +122,7 @@
 
 .crossover-map-filters .plain-action-button.is-filter {
   flex: none;
+  gap: 6px;
 }
 
 .investigation-leaflet-shell .leaflet-marker-icon {
@@ -150,27 +143,11 @@
   top: -1px;
 }
 
-.crossover-map-filters .plain-action-button.is-filter,
 .crossover-location-list button .crossover-location-title,
 .crossover-task-list button .crossover-task-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-
-.crossover-location-list {
-  display: grid;
-  margin-top: 12px;
-}
-
-.crossover-location-list button {
-  width: 100%;
-  text-align: left;
-}
-
-.crossover-location-list button strong,
-.crossover-location-list button small {
-  display: block;
 }
 
 .crossover-location-eyebrow,
@@ -179,14 +156,6 @@
 .crossover-location-facts dt,
 .crossover-location-coordinate-note {
   font-size: 14px;
-}
-
-.crossover-reference {
-  margin-top: 32px;
-}
-
-.crossover-reference ul {
-  margin-bottom: 0;
 }
 
 /* Other map surfaces need a definite height. */
@@ -219,30 +188,29 @@
   }
 
   .crossover-map-workspace {
-    display: block;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: max-content minmax(0, 1fr);
   }
 
   .crossover-map-workspace .crossover-shared-map {
+    grid-column: 1;
+    grid-row: 2;
     position: absolute;
     z-index: 0;
     inset: 0;
-    visibility: visible;
-    pointer-events: auto;
   }
 
   .crossover-map-workspace .crossover-sheet {
+    grid-column: 1;
+    grid-row: 2;
     position: absolute;
     z-index: 1;
     inset: 78% 0 0;
     border-top: 1px solid #dadce0;
     border-right: 0;
     border-radius: 12px 12px 0 0;
-    background: #fff;
-    visibility: visible;
     transition: top 180ms ease;
   }
-
-
   .crossover-map-workspace.is-partial .crossover-sheet {
     top: 42%;
   }

@@ -260,6 +260,7 @@ export interface ActiveInvestigation {
   title: string;
   status: "preparing_fieldwork" | "in_progress" | "completed";
   introduction: string;
+  findings_summary?: string;
   findings_introduction?: { heading: string; paragraphs: string[] };
   purpose: string;
   questions: Array<{ id: string; icon: "ClipboardList" | "HeartPulse" | "MapPin" | "Package" | "Users"; title: string; description: string }>;

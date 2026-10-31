@@ -196,6 +196,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const [panelWidth, setPanelWidth] = useState<number | null>(null);
   const [dragTop, setDragTop] = useState<number | null>(null);
   const workspaceRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ pointerId: number; startY: number; startTop: number; height: number } | null>(null);
   const panelDragRef = useRef<{ pointerId: number; startX: number; startWidth: number } | null>(null);
@@ -325,10 +326,10 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const sheetPositions = ["expanded", "partial", "collapsed"] as const;
   function startSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
     if (!window.matchMedia("(max-width: 1023px)").matches) return;
-    const workspace = workspaceRef.current;
-    if (!workspace) return;
-    const height = workspace.clientHeight;
-    dragRef.current = { pointerId: event.pointerId, startY: event.clientY, startTop: event.currentTarget.parentElement!.getBoundingClientRect().top - workspace.getBoundingClientRect().top, height };
+    const map = mapRef.current;
+    if (!map) return;
+    const height = map.clientHeight;
+    dragRef.current = { pointerId: event.pointerId, startY: event.clientY, startTop: event.currentTarget.parentElement!.getBoundingClientRect().top - map.getBoundingClientRect().top, height };
     event.currentTarget.setPointerCapture(event.pointerId);
   }
   function moveSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
@@ -416,10 +417,10 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   </div>;
 
   return <>
-    {isDogGap && investigationHeader("crossover-outer-header")}
+    {isDogGap && !isWorkspace && investigationHeader("crossover-outer-header")}
     <div ref={workspaceRef} className={isWorkspace ? `crossover-map-workspace is-${sheetState}${dragTop === null ? "" : " is-dragging"}` : "dog-gap-layout"} style={isWorkspace && panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
-      {isWorkspace && investigationHeader("crossover-desktop-header")}
-      {isWorkspace && <div className="crossover-shared-map"><DogGapOverviewMap locations={articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" || section === "reports" ? activityMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
+      {isWorkspace && investigationHeader("crossover-workspace-header")}
+      {isWorkspace && <div ref={mapRef} className="crossover-shared-map"><DogGapOverviewMap locations={articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" || section === "reports" ? activityMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>}
       {isWorkspace && <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />}
       <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         {isWorkspace && <button type="button" className="crossover-sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>}
@@ -495,7 +496,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {selectedActivity.source.url && <a href={selectedActivity.source.url} target="_blank" rel="noreferrer">View source</a>}
         </article></div> : <WorkspacePage title="Activity" subtitle="Dated visits, inquiries, applications, and records requests from existing investigation records.">
            <div className="crossover-record-list crossover-report-list">{activityRecords.map((record) => <button type="button" id={record.id} key={record.id} onClick={() => selectActivity(record)}><strong>{record.title}</strong><small>{fmt(record.occurred_at ?? record.recorded_at ?? record.published_at)} · {record.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</small></button>)}</div>
-          <WorkspaceSection title="Field reports" subtitle="Firsthand visits documented in full reports."><div className="crossover-record-list crossover-report-list">{reportRecords.map((report) => <button type="button" key={report.id} onClick={() => onOpenReport(report.id)}><strong>{report.title}</strong><small>{fmt(report.occurred_at)} · {report.location || "Stockton"}</small><span>{report.summary}</span></button>)}</div></WorkspaceSection>
+          <WorkspaceSection title="Field reports"><div className="crossover-record-list crossover-report-list">{reportRecords.map((report) => <button type="button" key={report.id} onClick={() => onOpenReport(report.id)}><strong>{report.title}</strong><small>{fmt(report.occurred_at)} · {report.location || "Stockton"}</small><span>{report.summary}</span></button>)}</div></WorkspaceSection>
         </WorkspacePage>)}
       {section === "map" && isDogGap && (selectedLocation
         ? <CrossoverLocationDetails location={selectedLocation} records={records} tasks={investigationTasks} activities={activityRecords} onBack={backToLocations} onOpenTask={openTaskFromLocation} onOpenReport={onOpenReport} onOpenActionDetail={onOpenActionDetail} />
@@ -519,6 +520,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
       {section === "findings" && isDogGap && article && <ArticleContent article={article} onBack={() => onOpenSection("findings")} />}
       {section === "findings" && isDogGap && articlePath && !article && <WorkspacePage title="Article not found" subtitle="This article is not published." backLink={<a href="/work/dogs/findings/">← Findings</a>}>{null}</WorkspacePage>}
       {section === "findings" && isDogGap && !articlePath && <WorkspacePage title="Findings" headingId="investigation-findings" subtitle="Propositions evaluated against evidence. Status and limitations are part of each finding.">
+        {findingsInvestigation?.findings_summary && <WorkspaceSection title="Summary"><p>{findingsInvestigation.findings_summary}</p></WorkspaceSection>}
         {findingsIntroduction && <WorkspaceSection title={findingsIntroduction.heading} headingId="findings-introduction-heading">
           {findingsIntroduction.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
         </WorkspaceSection>}
