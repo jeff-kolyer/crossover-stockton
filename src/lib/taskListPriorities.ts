@@ -9,7 +9,6 @@ const assessment = [
   { id: "task-verify-south-stockton-district-5-reports", dateLabel: "KCRA", context: "Identify a supported public location first" },
   { id: "task-review-reported-location-sources", context: "Review historical Louis Park and Stanislaus reports before fieldwork" },
   { id: "task-sas-volunteer-onboarding-follow-up", dateLabel: "Applied", context: "Check onboarding and orientation" },
-  { id: "task-investigate-found-animal-foster-pathway", dateLabel: "Reported", context: "Verify eligibility and how care works" },
   { id: "task-contact-cbs-charlie-lapastora", context: "Clarify reported locations and seek firsthand leads" },
   { id: "task-monitor-animal-control-ordinance", context: "Verify the Council outcome" },
 ] as const;

@@ -154,26 +154,6 @@
     "activity_record_ids": []
   },
   {
-    "id": "task-investigate-found-animal-foster-pathway",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Investigate the temporary found-animal foster pathway",
-    "status": "open",
-    "type": "source_verification",
-    "instructions": "Ask Animal Services who is eligible, how a resident enrolls, who authorizes care and provides supplies or veterinary services, how many places are available, and how intake, reunification, adoption, or other successful outcomes can be verified. Do not treat the publicly described pathway as tested.",
-    "location_ids": [],
-    "organization_ids": [
-      "stockton-animal-services"
-    ],
-    "question_ids": [
-      "response-barriers",
-      "additional-help"
-    ],
-    "basis_record_ids": [
-      "stocktonia-2026-10-20-found-animal-foster-pathway"
-    ],
-    "activity_record_ids": []
-  },
-  {
     "id": "task-monitor-animal-control-ordinance",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Monitor the proposed animal-control ordinance",

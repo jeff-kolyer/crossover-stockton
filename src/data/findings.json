@@ -75,8 +75,7 @@
       "severity-of-suffering"
     ],
     "related_task_ids": [
-      "task-sas-field-call-follow-up",
-      "task-investigate-found-animal-foster-pathway"
+      "task-sas-field-call-follow-up"
     ],
     "limitations": "The report does not establish appointment wait times, field response rates, case outcomes, or whether every urgent animal received care."
   },
@@ -122,9 +121,7 @@
       "response-barriers",
       "additional-help"
     ],
-    "related_task_ids": [
-      "task-investigate-found-animal-foster-pathway"
-    ],
+    "related_task_ids": [],
     "limitations": "Public description establishes neither current eligibility or capacity nor successful use, reunification, adoption, or other outcomes. Crossover has not tested the pathway."
   },
   {
