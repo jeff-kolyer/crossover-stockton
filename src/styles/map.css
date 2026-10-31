@@ -111,21 +111,6 @@
   background: #fff;
 }
 
-.is-dog-investigation .crossover-simple-section {
-  padding: 16px 0 24px;
-}
-
-.is-dog-investigation .crossover-simple-section > h2 {
-  margin-bottom: 4px;
-}
-
-.is-dog-investigation .crossover-simple-section > p {
-  margin-bottom: 12px;
-  color: #5f6368;
-  font-size: 16px;
-  line-height: 1.5;
-}
-
 .crossover-sheet-grip {
   display: none;
 }
@@ -188,11 +173,11 @@
   display: block;
 }
 
-.is-dog-investigation .crossover-location-eyebrow,
-.is-dog-investigation .crossover-location-area,
-.is-dog-investigation .crossover-location-status,
-.is-dog-investigation .crossover-location-facts dt,
-.is-dog-investigation .crossover-location-coordinate-note {
+.crossover-location-eyebrow,
+.crossover-location-area,
+.crossover-location-status,
+.crossover-location-facts dt,
+.crossover-location-coordinate-note {
   font-size: 14px;
 }
 
@@ -297,9 +282,6 @@
     background: #aaa;
   }
 
-  .is-dog-investigation .crossover-task-section {
-    padding-top: 4px;
-  }
 }
 
 /* Compact location names stay beside their markers. */

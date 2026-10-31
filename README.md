@@ -10,7 +10,7 @@ Crossover investigates real-world problems, takes action, and uses what we learn
 
 ### The public gap page
 
-**Gap — Understand the problem.** A clear, evidence-based summary of what's happening, what's needed, what's available, and what remains unresolved. It reflects our current understanding and improves as we learn more.
+**Gap — Understand what has been reported.** The public gap page summarizes public reports and what Crossover's investigation has established so far, drawing from the app's underlying records. It identifies what remains uncertain and improves as we learn more.
 
 ### The investigation
 
@@ -23,7 +23,7 @@ Crossover investigates real-world problems, takes action, and uses what we learn
 
 This is a continuous feedback loop, not a rigid sequence. Evidence and firsthand reports can enter at any point.
 
-**As our understanding improves, we update the gap page so the public can see the clearest available picture of the problem.**
+**As our understanding improves, we update the gap page so the public can see what is documented and what remains unverified.**
 
 ## The investigation app
 

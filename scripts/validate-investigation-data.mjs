@@ -1,8 +1,8 @@
 import { readFile } from "node:fs/promises";
 
 const read = async (name) => JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
-const [tasks, questions, findings, records, locations, organizations, projects, investigations] = await Promise.all([
-  "tasks", "investigation-questions", "findings", "records", "investigation-locations", "orgs", "projects", "dogs-investigations",
+const [tasks, questions, findings, records, locations, organizations, projects, investigations, articles] = await Promise.all([
+  "tasks", "investigation-questions", "findings", "records", "investigation-locations", "orgs", "projects", "dogs-investigations", "articles",
 ].map(read));
 const errors = [];
 const check = (condition, message) => { if (!condition) errors.push(message); };
@@ -22,6 +22,7 @@ const recordById = indexed(records, "records");
 const locationById = indexed(locations, "locations");
 const organizationById = indexed(organizations, "organizations");
 const projectById = indexed(projects, "projects");
+const articleById = indexed(articles, "articles");
 const investigationIds = new Set(investigations.active_investigations.map((item) => item.id));
 const validDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T12:00:00Z`));
 const refs = (owner, field, index) => {
@@ -88,7 +89,9 @@ for (const question of questions) {
 
 for (const finding of findings) {
   check(investigationIds.has(finding.investigation_id), `${finding.id}: unknown investigation`);
-  check(["established", "developing", "contradicted", "insufficient_evidence"].includes(finding.status), `${finding.id}: invalid status`);
+  check(["established", "developing", "contradicted", "insufficient_evidence", "preliminary", "exploratory"].includes(finding.status), `${finding.id}: invalid status`);
+  check(finding.current === undefined || typeof finding.current === "boolean", `${finding.id}: current must be boolean`);
+  if (finding.article_id) check(articleById.get(finding.article_id)?.published, `${finding.id}: article must exist and be published`);
   check(Boolean(finding.title && finding.statement && finding.limitations), `${finding.id}: title, statement, and limitations required`);
   check(validDate(finding.last_reviewed_at), `${finding.id}: invalid review date`);
   refs(finding, "supporting_record_ids", recordById);

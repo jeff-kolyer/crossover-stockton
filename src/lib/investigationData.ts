@@ -1,11 +1,13 @@
 import tasksData from "../data/tasks.json";
+import investigationsData from "../data/dogs-investigations.json";
 import questionsData from "../data/investigation-questions.json";
 import findingsData from "../data/findings.json";
 import recordsData from "../data/records.json";
-import type { EvidenceRecord } from "../types";
+import type { DogsInvestigationData, EvidenceRecord } from "../types";
 import type { InvestigationFinding, InvestigationQuestion, InvestigationTask } from "../types/investigation";
 
 export const dogInvestigationId = "street-dog-immediate-welfare";
+export const activeInvestigations = (investigationsData as DogsInvestigationData).active_investigations;
 export const investigationTasks = tasksData as InvestigationTask[];
 export const openTaskLocationIds = new Set(investigationTasks
   .filter((task) => task.status === "open")

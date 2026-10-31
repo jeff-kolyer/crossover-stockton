@@ -1,5 +1,6 @@
 import type { Article } from "../types/article";
 import { navigateInternalLink } from "../lib/internalLink";
+import { WorkspacePage, WorkspaceSection } from "./WorkspacePage";
 
 function formatDate(value: string) {
   const [year, month, day] = value.split("-").map(Number);
@@ -7,17 +8,11 @@ function formatDate(value: string) {
 }
 
 export function ArticleContent({ article, onBack }: { article: Article; onBack: () => void }) {
-  return <div className="crossover-simple-section">
-    <p><a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onBack)}>← Findings</a></p>
-    <article>
-      <h1>{article.title}</h1>
-      <p><time dateTime={article.date}>{formatDate(article.date)}</time> · {article.type}</p>
+  return <WorkspacePage article title={article.title} subtitle={<><time dateTime={article.date}>{formatDate(article.date)}</time> · {article.type}</>} backLink={<a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onBack)}>← Findings</a>}>
       <p>{article.content.introduction}</p>
-      {article.content.sections.map((section) => <section key={section.heading}>
-        <h2>{section.heading}</h2>
+      {article.content.sections.map((section) => <WorkspaceSection key={section.heading} title={section.heading}>
         {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         {section.links?.length ? <ul>{section.links.map((link) => <li key={link.url}><a href={link.url}>{link.label}</a></li>)}</ul> : null}
-      </section>)}
-    </article>
-  </div>;
+      </WorkspaceSection>)}
+  </WorkspacePage>;
 }

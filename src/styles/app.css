@@ -56,25 +56,34 @@ h3 {
   font-size: 16px;
 }
 
-/* Investigation reading content follows the same 16px Roboto body as the public pages. */
-.is-dog-investigation .crossover-sheet {
-  font-size: 16px;
+.crossover-sheet small,
+.crossover-sheet time,
+.crossover-secondary-text {
+  font-size: 14px;
   line-height: 1.5;
 }
 
-.is-dog-investigation .crossover-sheet h2,
-.is-dog-investigation .crossover-sheet h3 {
-  font-weight: 700;
+/* Shared spacing for every Work page, including articles and location details. */
+.crossover-workspace-page,
+.crossover-location-sheet-detail {
+  padding-top: 5px;
 }
 
-.is-dog-investigation .crossover-sheet h3 {
-  font-size: 18px;
+.crossover-workspace-title {
+  margin-bottom: 4px;
+  color: #233447;
 }
 
-.is-dog-investigation .crossover-sheet small,
-.is-dog-investigation .crossover-sheet time,
-.is-dog-investigation .crossover-secondary-text {
-  font-size: 14px;
+.crossover-workspace-section-title {
+  margin-bottom: 4px;
+  color: #233447;
+}
+
+.crossover-workspace-back,
+.crossover-workspace-subtitle {
+  margin-bottom: 12px;
+  color: #5f6368;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -94,9 +103,11 @@ h3 {
   padding-bottom: 0;
 }
 
-.crossover-investigation-header h1 {
+.crossover-investigation-title {
   margin: 14px 0 3px;
   font-size: 21px;
+  font-weight: 700;
+  line-height: 1.25;
 }
 
 .crossover-investigation-header p {

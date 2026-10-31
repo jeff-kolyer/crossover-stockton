@@ -1,6 +1,6 @@
 /* Shared record rows in the Work sheet. */
 
-.is-dog-investigation .plain-action-button {
+.plain-action-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -17,11 +17,11 @@
   cursor: pointer;
 }
 
-.is-dog-investigation .plain-action-button:hover {
+.plain-action-button:hover {
   background: #f7f7f7;
 }
 
-.is-dog-investigation .plain-action-button.is-filter {
+.plain-action-button.is-filter {
   min-height: 32px;
   padding: 5px 9px;
   border: 0;
@@ -35,18 +35,18 @@
   font-weight: 400;
 }
 
-.is-dog-investigation .plain-action-button.is-filter[aria-pressed="true"] {
+.plain-action-button.is-filter[aria-pressed="true"] {
   background: #202124;
   color: #fff;
   font-weight: 700;
 }
 
-.is-dog-investigation .plain-action-button:focus-visible {
+.plain-action-button:focus-visible {
   outline: 2px solid #1a73e8;
   outline-offset: 2px;
 }
 
-.is-dog-investigation .plain-action-button.is-compact {
+.plain-action-button.is-compact {
   min-width: 36px;
   padding: 5px;
   font-size: 20px;
@@ -65,12 +65,12 @@
   min-width: 0;
 }
 
-.is-dog-investigation .crossover-record-list {
+.crossover-record-list {
   display: grid;
   margin: 8px 0 16px;
 }
 
-.is-dog-investigation .crossover-record-list button {
+.crossover-record-list button {
   display: grid;
   gap: 2px;
   width: 100%;
@@ -83,35 +83,52 @@
   text-align: left;
 }
 
-.is-dog-investigation .crossover-record-list button:first-child {
+.crossover-record-list > article {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  padding: 9px 2px;
+}
+
+.crossover-record-list > article + article {
   border-top: 1px solid #e2e4e6;
 }
 
-.is-dog-investigation .crossover-record-list button:hover {
+.crossover-record-list button:first-child {
+  border-top: 1px solid #e2e4e6;
+}
+
+.crossover-record-list button:hover {
   background: #f7f7f7;
 }
 
-.is-dog-investigation .crossover-record-list strong {
+.crossover-record-list strong {
   font-size: 16px;
   line-height: 1.5;
 }
 
-.is-dog-investigation .crossover-record-list button > span {
+.crossover-record-list > article p {
+  color: #5f6368;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.crossover-record-list button > span {
   display: block;
   color: #5f6368;
   font-size: 16px;
   line-height: 1.5;
 }
 
-.is-dog-investigation .crossover-record-list small {
+.crossover-record-list small {
   display: block;
   color: #5f6368;
   font-size: 14px;
   line-height: 1.5;
 }
 
-.is-dog-investigation .crossover-simple-section p button,
-.is-dog-investigation .crossover-simple-section li button {
+.crossover-workspace-page p button,
+.crossover-workspace-page li button {
   border: 0;
   background: none;
   padding: 0;

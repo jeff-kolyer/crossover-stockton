@@ -34,7 +34,7 @@ const stories = (storiesData as StoryRecord[]).filter((story) => story.active &&
 export function HomeLanding({ onNavigate, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenActionDetail }: HomeLandingProps) {
   return <div className="home-landing">
     <section className="home-landing-section" aria-labelledby="home-needs-title">
-      <div className="home-landing-section-heading"><div><p>Explore the gaps</p><h2 id="home-needs-title">Key needs in Stockton</h2></div><a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs </a></div>
+      <div className="home-landing-section-heading"><div><p>Explore the gaps</p><h2 id="home-needs-title">Gaps to investigate</h2></div><a href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs </a></div>
       <div className="home-landing-needs">{needs.map((gap) => <a className="home-landing-need" key={gap.id} href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>
         <span className="home-landing-need-image"><img src={homeGapImages[gap.id] || gap.thumbnail_image || gap.artwork} alt="" loading="lazy" /></span>
         <span className="home-landing-need-body"><span className="home-landing-status" data-status={gap.investigation_status}>{investigationStatusLabel(gap.investigation_status)}</span><strong>{gap.title}</strong><span className="home-landing-need-summary">{gap.summary}</span></span>

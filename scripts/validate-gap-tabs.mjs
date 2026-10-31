@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 
 const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8")).filter((gap) => gap.active).sort((a, b) => a.rank - b.rank);
 const articles = JSON.parse(await readFile(new URL("../src/data/articles.json", import.meta.url), "utf8"));
+const findingRecords = JSON.parse(await readFile(new URL("../src/data/findings.json", import.meta.url), "utf8"));
 const publishedArticles = articles.filter((article) => article.published);
 const dist = new URL("../dist/", import.meta.url);
 const sections = ["What&#x27;s happening?", "What&#x27;s documented?", "What remains unknown?", "Who&#x27;s responding?", "Sources"];
@@ -36,10 +37,21 @@ for (const [path, active] of [["", "tasks"], ["tasks/", "tasks"], ["activity/", 
 const findings = await readFile(new URL("./work/dogs/findings/index.html", dist), "utf8");
 assert.ok(findings.includes('href="/work/dogs/findings/" aria-current="page"'), "Findings: active tab missing");
 assert.ok(findings.includes("crossover-shared-map"), "Findings: shared workspace map missing");
-assert.ok(findings.includes('<h2 id="investigation-findings">Findings</h2>') && findings.includes('id="investigation-questions"'), "Findings: original findings or questions missing");
-assert.ok(findings.includes('<h2>Articles</h2>'), "Findings: Articles section missing");
-if (!publishedArticles.some((article) => article.show_in_findings)) {
-  assert.ok(findings.includes("No articles have been published yet."), "Findings: empty state missing");
+assert.ok(findings.includes('<h1 class="crossover-workspace-title" id="investigation-findings">Findings</h1>') && findings.includes('Propositions evaluated against evidence. Status and limitations are part of each finding.'), "Findings: heading or subtitle missing");
+assert.ok(findings.includes('<h2 class="crossover-workspace-section-title" id="current-findings-heading">Current findings</h2>'), "Findings: current section missing");
+assert.ok(!findings.includes('If AI can drive cars') && !findings.includes('id="investigation-questions"') && !findings.includes('id="crossover-reference-title"'), "Findings: old introduction or reference wall remains");
+const currentFindings = findingRecords.filter((finding) => finding.investigation_id === "street-dog-immediate-welfare" && finding.current !== false);
+assert.equal(currentFindings.length, 3, "Findings: expected exactly three current records");
+assert.equal((findings.match(/<article>/g) ?? []).length, 3, "Findings: expected exactly three list entries");
+const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("'", "&#x27;");
+let lastFindingPosition = findings.indexOf('id="current-findings-heading"');
+for (const finding of currentFindings) {
+  const article = publishedArticles.find((item) => item.id === finding.article_id);
+  assert.ok(article, `${finding.id}: related article missing`);
+  const row = `<strong>${escapeHtml(finding.title)}</strong><p>${escapeHtml(finding.statement)}</p>`;
+  const position = findings.indexOf(row);
+  assert.ok(position > lastFindingPosition && findings.includes(`href="${article.path}"`), `${finding.id}: row or article link missing or out of order`);
+  lastFindingPosition = position;
 }
 const sitemap = await readFile(new URL("./sitemap.xml", dist), "utf8");
 for (const article of publishedArticles) {
@@ -55,7 +67,7 @@ for (const article of publishedArticles) {
   }
   const escapedDescription = article.description.replaceAll("&", "&amp;").replaceAll("'", "&#39;");
   const escapedTitle = article.title.replaceAll("&", "&amp;").replaceAll("'", "&#x27;");
-  assert.ok(html.includes(`<h1>${escapedTitle}</h1>`) && html.includes(`rel="canonical" href="https://crossoverstockton.org${article.path}"`) && html.includes(`content="${escapedDescription}"`), `${article.id}: article title, description, or canonical missing`);
+  assert.ok(html.includes(`<h1 class="crossover-workspace-title">${escapedTitle}</h1>`) && html.includes(`rel="canonical" href="https://crossoverstockton.org${article.path}"`) && html.includes(`content="${escapedDescription}"`), `${article.id}: article title, description, or canonical missing`);
 }
 console.log(`Verified ${gaps.length} shared gap references, the three Work map views, and ${publishedArticles.length} published articles.`);
 
