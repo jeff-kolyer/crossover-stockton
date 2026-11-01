@@ -22,7 +22,7 @@ for (const article of articles) {
     || typeof article.show_in_findings !== "boolean" || !Array.isArray(article.related_gap_ids)
     || article.related_gap_ids.some((id) => !gaps.some((gap) => gap.id === id))
     || !Array.isArray(article.related_location_ids)
-    || article.related_location_ids.some((id) => !articleLocations.some((location) => location.id === id && location.coordinates && location.marker_kind && location.map_label))
+    || article.related_location_ids.some((id) => !articleLocations.some((location) => location.id === id))
     || article.content.sections.some((section) => !section.heading || !Array.isArray(section.paragraphs)
       || section.paragraphs.some((paragraph) => typeof paragraph !== "string" || !paragraph.trim())
       || (section.links !== undefined && (!Array.isArray(section.links) || section.links.some((link) => !link.label || !link.url))))) {

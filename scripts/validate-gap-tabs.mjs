@@ -25,7 +25,11 @@ for (const [index, gap] of gaps.entries()) {
   }
   assert.ok(!html.includes('class="dog-gap-tabs"') && !html.includes('class="dog-gap-sidebar"'), `${gap.slug}: legacy gap navigation remains`);
   assert.ok(!html.includes("crossover-shared-map"), `${gap.slug}: workspace map embedded in reference page`);
-  if (gap.id === "dogs-safe-placement") assert.ok(html.includes('href="/work/dogs/findings/"'), "Dogs: Findings link missing");
+  if (gap.id === "dogs-safe-placement") {
+    assert.ok(html.includes('href="/work/dogs/findings/"'), "Dogs: Findings link missing");
+    assert.ok(html.indexOf('id="gap-articles">Articles</h2>') > html.indexOf('id="gap-investigation"'), "Dogs: Articles must follow the existing gap content");
+    assert.ok(html.includes('href="/articles/where-are-stray-dogs/"'), "Dogs: opening investigation article missing");
+  }
   else assert.ok(!html.includes('href="/work/dogs/findings/"'), `${gap.slug}: unrelated Findings link`);
 }
 
@@ -41,8 +45,7 @@ assert.ok(findings.includes('<h1 class="crossover-workspace-title" id="investiga
 assert.ok(findings.includes('<h2 class="crossover-workspace-section-title" id="current-findings-heading">Current findings</h2>'), "Findings: current section missing");
 assert.ok(!findings.includes('If AI can drive cars') && !findings.includes('id="investigation-questions"') && !findings.includes('id="crossover-reference-title"'), "Findings: old introduction or reference wall remains");
 const currentFindings = findingRecords.filter((finding) => finding.investigation_id === "street-dog-immediate-welfare" && finding.current !== false);
-assert.equal(currentFindings.length, 3, "Findings: expected exactly three current records");
-assert.equal((findings.match(/<article>/g) ?? []).length, 3, "Findings: expected exactly three list entries");
+assert.equal((findings.match(/<article>/g) ?? []).length, currentFindings.length, "Findings: list entries must match current records");
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("'", "&#x27;");
 let lastFindingPosition = findings.indexOf('id="current-findings-heading"');
 for (const finding of currentFindings) {

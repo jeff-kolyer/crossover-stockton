@@ -125,6 +125,16 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
       setSheetState("expanded");
     }
   }, [section]);
+  useEffect(() => {
+    if (section !== "map") return;
+    const locationId = decodeURIComponent(window.location.hash.slice(1));
+    const location = allLocations.find((item) => item.id === locationId);
+    if (!location) return;
+    setLocationFilter("all");
+    setSelectedLocationId(location.id);
+    setFocusSelectedLocation(Boolean(location.coordinates));
+    setSheetState("partial");
+  }, [section]);
   const visibleLocations = useMemo(() => allLocations.filter((location) => locationFilter === "all" || location.category === locationFilter), [locationFilter]);
   const visibleMappedLocations = useMemo(() => visibleLocations.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleLocations]);
   const filteredTasks = orderInvestigationTasks(investigationTasks).filter((task) => taskFilter === "all" || task.status === taskFilter);

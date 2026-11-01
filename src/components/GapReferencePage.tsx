@@ -14,7 +14,7 @@ import type { CapacityProject, DogsResearchBaseline, EvidenceRecord, GapRecord, 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 type SourceEntry = { url: string; title: string; publisher?: string; publishedAt?: string | null; checkedAt?: string };
 type ExtendedGapSource = { url?: string; title?: string; label?: string; publisher?: string; published_at?: string | null; checked_at?: string };
-type GapQuestion = { investigation_id: string; title: string };
+type GapQuestion = { id: string; investigation_id: string; title: string };
 type Fact = { label: string; value: string; detail: string; record?: EvidenceRecord; source?: SourceEntry };
 
 const gaps = (gapsData as GapRecord[]).filter((gap) => gap.active).sort((a, b) => a.rank - b.rank);
@@ -96,6 +96,7 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, o
   const sources = sourceEntries(gap, related);
   const reports = related.filter((record) => record.record_type === "field_report");
   const dogQuestions = gap.id === "dogs-safe-placement" ? (gap.unknown_questions ?? questions.filter((question) => question.investigation_id === "street-dog-immediate-welfare").slice(0, 4).map((question) => question.title)) : [];
+  const streetDogQuestion = gap.id === "dogs-safe-placement" ? questions.find((question) => question.id === "where-dogs-need-help") : undefined;
   const firsthand = gap.id === "dogs-safe-placement" ? records.find((record) => record.id === "crossover-2026-10-14-sas-first-visit") : undefined;
   const sourceLimit = gap.id === "dogs-safe-placement" ? 5 : Number.POSITIVE_INFINITY;
   const visibleSources = showAllSources ? sources : sources.slice(0, sourceLimit);
@@ -128,15 +129,15 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, o
 
       {relatedProjects.length > 0 && <section className="gap-reference-entities gap-reference-projects" aria-labelledby="gap-projects"><h2 id="gap-projects">Projects and proposed changes</h2>{visibleProjects.map((project) => <Fragment key={project.id}><h3>{project.title}.</h3><p>{project.capacity_summary.headline} Development: {project.development_stage.replaceAll("_", " ")}; operating status: {project.operational_status.replaceAll("_", " ")}. {project.capacity_summary.not_yet_verified}</p></Fragment>)}{relatedProjects.length > 2 && <button type="button" aria-expanded={showAllImprovements} onClick={() => setExpandedImprovementGapId(showAllImprovements ? null : gap.id)}>{showAllImprovements ? "Show fewer improvements" : `Show all improvements (${relatedProjects.length})`}</button>}</section>}
 
-      <section aria-labelledby="gap-unknown"><h2 id="gap-unknown">What remains unknown?</h2>{gap.investigation_status === "identified" && <p>Crossover has not independently investigated which reported conditions currently limit access. These are possible factors to verify, not established findings.</p>}<ul>{dogQuestions.length ? dogQuestions.map((question) => <li key={question}>{question}</li>) : gap.contributing_factors.slice(0, 3).map((factor) => <li key={factor}>{factor}</li>)}</ul></section>
+      <section aria-labelledby="gap-unknown"><h2 id="gap-unknown">What remains unknown?</h2>{gap.investigation_status === "identified" && <p>Crossover has not independently investigated which reported conditions currently limit access. These are possible factors to verify, not established findings.</p>}<ul>{dogQuestions.length ? dogQuestions.map((question) => <li key={question}>{question}</li>) : gap.contributing_factors.slice(0, 3).map((factor) => <li key={factor}>{factor}</li>)}</ul>{streetDogQuestion && <p id={`question-${streetDogQuestion.id}`}>Investigation question: {streetDogQuestion.title}</p>}</section>
 
       <section className="gap-reference-entities" aria-labelledby="gap-responders"><h2 id="gap-responders">Who's responding?</h2><p>These roles are described in public and provider records. Listing an organization does not imply direct Crossover involvement.</p>{roles.map(({ role, organization }) => <Fragment key={organization.id}><h3>{organization.name}.</h3><p>{role.label || organization.summary}{organization.website && <> <a href={organization.website} target="_blank" rel="noreferrer">Organization website</a></>}</p></Fragment>)}</section>
 
       <section aria-labelledby="gap-sources"><h2 id="gap-sources">Sources</h2><ul id="gap-source-list">{visibleSources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a>{source.publisher && ` — ${source.publisher}`}{(source.publishedAt || source.checkedAt) && ` · ${source.publishedAt ? `Published ${formatDate(source.publishedAt)}` : `Reviewed ${formatDate(source.checkedAt)}`}`}</li>)}{visibleReports.map((report) => <li key={report.id}><a href={`/reports/${encodeURIComponent(report.id)}/`}>{report.title}</a> — Crossover field report{report.occurred_at && ` · ${formatDate(report.occurred_at)}`}</li>)}</ul>{hiddenSourceCount > 0 && <button type="button" aria-expanded={showAllSources} aria-controls="gap-source-list" onClick={() => setShowAllSources((value) => !value)}>{showAllSources ? "Show fewer sources" : `Show all sources (${hiddenSourceCount})`}</button>}</section>
 
-      {relatedArticles.length > 0 && <section aria-labelledby="gap-articles"><h2 id="gap-articles">Related articles</h2><ul>{relatedArticles.map((article) => <li key={article.id}><a href={article.path} onClick={(event) => navigateInternalLink(event, () => onOpenArticle(article.path))}>{article.title}</a></li>)}</ul></section>}
-
       {gap.id === "dogs-safe-placement" && <section aria-labelledby="gap-investigation"><h2 id="gap-investigation">Related investigation</h2><p><a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See our findings →</a></p></section>}
+
+      {relatedArticles.length > 0 && <section aria-labelledby="gap-articles"><h2 id="gap-articles">Articles</h2><ul>{relatedArticles.map((article) => <li key={article.id}><a href={article.path} onClick={(event) => navigateInternalLink(event, () => onOpenArticle(article.path))}>{article.title}</a></li>)}</ul></section>}
     </article>
     <PublicFooter active="reality" onNavigate={onNavigate} />
   </main>;

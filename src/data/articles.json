@@ -328,7 +328,11 @@
               "url": "https://www.cbsnews.com/sacramento/video/animal-shelters-speak-out-on-abandoned-dog-problem-in-stockton/"
             },
             {
-              "label": "Investigation question and current findings",
+              "label": "Investigation question: Where are the stray dogs, and how many are there?",
+              "url": "/reality/too-many-dogs-still-lack-safe-placement/#question-where-dogs-need-help"
+            },
+            {
+              "label": "Current findings",
               "url": "/work/dogs/findings/"
             }
           ]
@@ -347,6 +351,10 @@
             {
               "label": "Planned St. Mary's corridor field task",
               "url": "/work/dogs/tasks/#task-verify-st-marys-church-street-dog-scale"
+            },
+            {
+              "label": "St. Mary's–Church Street corridor location record",
+              "url": "/work/dogs/map/#st-marys-church-street-corridor"
             }
           ]
         },
@@ -360,6 +368,18 @@
             {
               "label": "Planned South Stockton / District 5 field task",
               "url": "/work/dogs/tasks/#task-verify-south-stockton-district-5-reports"
+            },
+            {
+              "label": "Carrie Street levee / Weston Ranch location record",
+              "url": "/work/dogs/map/#weston-ranch-carrie-street"
+            },
+            {
+              "label": "Stocktonia: Carrie Street incident report (May 11, 2026)",
+              "url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/"
+            },
+            {
+              "label": "KCRA 3: District 5 reporting (September 24, 2026)",
+              "url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921"
             }
           ]
         },

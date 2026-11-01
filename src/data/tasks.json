@@ -91,7 +91,7 @@
     "instructions": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site. Choose a safe public observation route near the reported Carrie Street area, confirm access and current conditions before visiting, and document what is actually present, including zero dogs if none are seen. Do not treat the April incident as evidence of current danger or assume the September encounters occurred there. Distinguish both published reports from firsthand findings and record follow-up questions.",
     "location_ids": ["weston-ranch-carrie-street", "stockton-district-5-reported-area-2026-09-24"],
     "organization_ids": ["stockton-street-dogs"],
-    "question_ids": [],
+    "question_ids": ["where-dogs-need-help"],
     "basis_record_ids": ["stockton-2026-05-11-stray-dog-report", "kcra-2026-09-24-stockton-stray-dog-report"],
     "activity_record_ids": []
   },

@@ -10,5 +10,5 @@ export function articleForPath(path: string) {
 }
 
 export function articlesForGap(gapId: string) {
-  return publishedArticles.filter((article) => article.related_gap_ids.includes(gapId));
+  return publishedArticles.filter((article) => article.related_gap_ids.includes(gapId)).sort((a, b) => b.date.localeCompare(a.date));
 }

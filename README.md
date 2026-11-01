@@ -160,6 +160,8 @@ The shared map helps connect what we're learning to actual places, and helps us 
 
 Findings organize what the evidence tells us.
 
+Findings are not merely conclusions. They are the major threads of investigation we choose to pursue, grounded in evidence and guiding what we seek to understand next.
+
 They distinguish established facts, supported interpretations, unresolved questions, contradictory reports, and opportunities for further investigation.
 
 Findings are supported by evidence and remain open to revision.
