@@ -137,7 +137,7 @@ h3 {
 
 .investigation-header {
   display: grid;
-  gap: 6px;
+  gap: 4px;
   padding-bottom: 0;
 }
 
@@ -208,7 +208,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 2px;
+  padding: 8px 2px;
   border-bottom: 3px solid transparent;
   font-size: 15px;
   text-align: center;
