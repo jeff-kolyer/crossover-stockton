@@ -374,7 +374,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const primaryTabs = () => <nav className="primary-tabs" aria-label="Investigation sections">{(["tasks", "activity", "map", "findings"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={section === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{tab[0].toUpperCase() + tab.slice(1)}</a>)}</nav>;
   const investigationHeader = (className: string) => <header className={`investigation-header ${className}`}>
     <div className="brand-row"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>CROSSOVER</a><a href="/about/">About</a></div>
-    <hgroup><h1>Dogs on the street in Stockton</h1><p>Investigating · Stockton, California</p></hgroup>
+    <hgroup><h2>Dogs on the street in Stockton</h2><p>Investigating · Stockton, California</p></hgroup>
     {primaryTabs()}
   </header>;
 

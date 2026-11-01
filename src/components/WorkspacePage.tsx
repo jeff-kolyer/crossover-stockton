@@ -9,10 +9,11 @@ export function WorkspacePage({ title, subtitle, headingId, backLink, article = 
   children: ReactNode;
 }) {
   const Element = article ? "article" : "div";
+  const Heading = article ? "h1" : "h2";
 
   return <Element className="workspace-page">
     {backLink && <p className="workspace-back">{backLink}</p>}
-    <header><h1 id={headingId}>{title}</h1>{subtitle && <p>{subtitle}</p>}</header>
+    <header><Heading id={headingId}>{title}</Heading>{subtitle && <p>{subtitle}</p>}</header>
     {children}
   </Element>;
 }
