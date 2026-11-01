@@ -17,11 +17,26 @@
             "These are our firsthand records of two volunteer pathways, not evidence that either organization routinely fails to respond. We do not know what happened to the applications internally or why participation has not progressed. Stockton Animal Services publicly describes volunteer roles and a Doggie Day Out orientation; Stockton Street Dogs also offers a public volunteer entry point. We want to understand what happens after someone uses those entry points."
           ],
           "links": [
-            { "label": "Street Dogs application Activity record", "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application" },
-            { "label": "Doggie Day Out inquiry Activity record", "url": "/work/dogs/activity/#crossover-2026-10-12-doggie-day-out-inquiry" },
-            { "label": "Animal Services application Activity record", "url": "/work/dogs/activity/#crossover-2026-10-14-sas-volunteer-application" },
-            { "label": "Stockton Animal Services volunteer information", "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php" },
-            { "label": "Stockton Street Dogs volunteer link", "url": "https://linktr.ee/streetdogsanctuary" }
+            {
+              "label": "Street Dogs application Activity record",
+              "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application"
+            },
+            {
+              "label": "Doggie Day Out inquiry Activity record",
+              "url": "/work/dogs/activity/#crossover-2026-10-12-doggie-day-out-inquiry"
+            },
+            {
+              "label": "Animal Services application Activity record",
+              "url": "/work/dogs/activity/#crossover-2026-10-14-sas-volunteer-application"
+            },
+            {
+              "label": "Stockton Animal Services volunteer information",
+              "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php"
+            },
+            {
+              "label": "Stockton Street Dogs volunteer link",
+              "url": "https://linktr.ee/streetdogsanctuary"
+            }
           ]
         },
         {
@@ -63,8 +78,12 @@
     },
     "published": true,
     "show_in_findings": true,
-    "related_gap_ids": ["dogs-safe-placement"],
-    "related_location_ids": ["stockton-animal-services-shelter"]
+    "related_gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "related_location_ids": [
+      "stockton-animal-services-shelter"
+    ]
   },
   {
     "id": "public-access-to-stray-dog-information",
@@ -84,8 +103,14 @@
             "As of October 30, ten calendar days after submission, Crossover had received an automatic forwarding acknowledgment but no substantive response or records. This status was confirmed by the requester on October 30. California's Public Records Act generally calls for an agency to make a disclosure determination within ten calendar days, with qualifying extensions; that is not necessarily a deadline for delivering the records. We have not established the agency's receipt date, any applicable extension, or the full circumstances of its processing, so we are drawing no legal conclusion from this timeline."
           ],
           "links": [
-            { "label": "Crossover's records-request Activity record", "url": "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request" },
-            { "label": "California Department of Justice guide to public records timelines", "url": "https://oag.ca.gov/consumers/general/pra" }
+            {
+              "label": "Crossover's records-request Activity record",
+              "url": "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request"
+            },
+            {
+              "label": "California Department of Justice guide to public records timelines",
+              "url": "https://oag.ca.gov/consumers/general/pra"
+            }
           ]
         },
         {
@@ -95,9 +120,18 @@
             "Our question is whether a person can follow the path from a reported dog to an officer response, a located animal, care, reunification, placement, or an unresolved case. We have not established that this information is unavailable elsewhere. We need to examine the requested records, the limits of the public tools, and what can be shared safely before concluding that a gap exists."
           ],
           "links": [
-            { "label": "Stockton Animal Services complaint guidance", "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php" },
-            { "label": "City lost-and-found pet resources", "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php" },
-            { "label": "Stockton open-data animal-shelter overview", "url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/" }
+            {
+              "label": "Stockton Animal Services complaint guidance",
+              "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php"
+            },
+            {
+              "label": "City lost-and-found pet resources",
+              "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php"
+            },
+            {
+              "label": "Stockton open-data animal-shelter overview",
+              "url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/"
+            }
           ]
         },
         {
@@ -107,8 +141,14 @@
             "Crossover applied to volunteer with Stockton Street Dogs on October 7. We had not documented a response by October 30. That experience tells us about our own attempt to connect; it does not establish how the organization handles other applications or communicates internally. We want to learn which public and organizational channels already work, and where information about opportunities or outcomes is hard to find."
           ],
           "links": [
-            { "label": "Crossover's volunteer-application Activity record", "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application" },
-            { "label": "Stockton Street Dogs' public site", "url": "https://streetdogsanctuary.com/" }
+            {
+              "label": "Crossover's volunteer-application Activity record",
+              "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application"
+            },
+            {
+              "label": "Stockton Street Dogs' public site",
+              "url": "https://streetdogsanctuary.com/"
+            }
           ]
         },
         {
@@ -125,10 +165,22 @@
             "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. The next steps are to examine the field-call records if provided, compare them with existing public resources, ask responders what information they can share, and test whether that information helps people act safely."
           ],
           "links": [
-            { "label": "Investigation Tasks", "url": "/work/dogs/tasks/" },
-            { "label": "Investigation Activity", "url": "/work/dogs/activity/" },
-            { "label": "Findings", "url": "/work/dogs/findings/" },
-            { "label": "Public Actions", "url": "/action/" }
+            {
+              "label": "Investigation Tasks",
+              "url": "/work/dogs/tasks/"
+            },
+            {
+              "label": "Investigation Activity",
+              "url": "/work/dogs/activity/"
+            },
+            {
+              "label": "Findings",
+              "url": "/work/dogs/findings/"
+            },
+            {
+              "label": "Public Actions",
+              "url": "/action/"
+            }
           ]
         },
         {
@@ -142,8 +194,22 @@
     },
     "published": true,
     "show_in_findings": true,
-    "related_gap_ids": ["dogs-safe-placement"],
-    "related_location_ids": ["stockton-animal-services-shelter", "weston-ranch-carrie-street", "south-lincoln-crosstown", "trinity-bear-creek", "country-club-i5", "pawboost-crown-rose-marie-2026-10-16", "pawboost-california-magnolia-2026-10-15", "pawboost-mcdougald-henry-long-2026-10-15", "louis-park-pixie-woods-2026-04-06", "stanislaus-street-corridor-2026-04-06", "highway-4-corridor-2026-04-06"]
+    "related_gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "related_location_ids": [
+      "stockton-animal-services-shelter",
+      "weston-ranch-carrie-street",
+      "south-lincoln-crosstown",
+      "trinity-bear-creek",
+      "country-club-i5",
+      "pawboost-crown-rose-marie-2026-10-16",
+      "pawboost-california-magnolia-2026-10-15",
+      "pawboost-mcdougald-henry-long-2026-10-15",
+      "louis-park-pixie-woods-2026-04-06",
+      "stanislaus-street-corridor-2026-04-06",
+      "highway-4-corridor-2026-04-06"
+    ]
   },
   {
     "id": "caring-for-stocktons-dogs",
@@ -163,8 +229,14 @@
             "On October 14, Crossover visited the shelter at 1575 S. Lincoln Street, submitted a volunteer application, and spoke briefly with staff. We observed construction beside the entrance and a crowded public lobby during our visit. The entrance was difficult for us to find amid the work. The shelter sits in an industrial area, so we are also checking what transportation and walking options would make volunteer outings practical. These are observations from one visit, not a judgment about the shelter or its location. The expansion may address some of the limitations we saw."
           ],
           "links": [
-            { "label": "Crossover's October 14 visit report", "url": "/reports/crossover-2026-10-14-sas-first-visit/" },
-            { "label": "City of Stockton shelter expansion announcement", "url": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf" }
+            {
+              "label": "Crossover's October 14 visit report",
+              "url": "/reports/crossover-2026-10-14-sas-first-visit/"
+            },
+            {
+              "label": "City of Stockton shelter expansion announcement",
+              "url": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"
+            }
           ]
         },
         {
@@ -174,8 +246,14 @@
             "Streetdogs opened a construction fundraiser in July 2026. Fundraising is documented, but we have not verified full funding, a secured site, approvals, an opening date, or usable operating capacity. If built and staffed, the campus could complement the municipal shelter with more room for recovery, exercise, and care. We want to learn how its public participation plans would work in practice before assuming they would match the broader idea explored below."
           ],
           "links": [
-            { "label": "Stockton Streetdogs' Canine Campus proposal", "url": "https://streetdogsanctuary.com/canine-campus" },
-            { "label": "Canine Campus construction fundraiser", "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus" }
+            {
+              "label": "Stockton Streetdogs' Canine Campus proposal",
+              "url": "https://streetdogsanctuary.com/canine-campus"
+            },
+            {
+              "label": "Canine Campus construction fundraiser",
+              "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus"
+            }
           ]
         },
         {
@@ -185,7 +263,10 @@
             "The Asher House is not currently open for public visits and says it does not yet have a volunteer program. Its animal-centered living environment, rehabilitation work, and adoption network are worth studying for Stockton. A public place where visitors regularly help care for dogs would be an additional local idea, not a description of how The Asher House operates today."
           ],
           "links": [
-            { "label": "The Asher House and its operating model", "url": "https://www.theasherhouse.com/pages/asher-house-faqs" }
+            {
+              "label": "The Asher House and its operating model",
+              "url": "https://www.theasherhouse.com/pages/asher-house-faqs"
+            }
           ]
         },
         {
@@ -213,7 +294,115 @@
     },
     "published": true,
     "show_in_findings": true,
-    "related_gap_ids": ["dogs-safe-placement"],
-    "related_location_ids": ["stockton-animal-services-shelter"]
+    "related_gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "related_location_ids": [
+      "stockton-animal-services-shelter"
+    ]
+  },
+  {
+    "id": "where-are-stray-dogs",
+    "path": "/articles/where-are-stray-dogs/",
+    "title": "Where are the stray dogs, and how many are there?",
+    "date": "2026-10-31",
+    "type": "investigation",
+    "description": "An ongoing investigation into the number and distribution of dogs on Stockton's streets, starting with published reports and two planned field investigations.",
+    "summary": "Published estimates suggest hundreds of dogs may be on Stockton's streets. Where are they, and what can firsthand observations establish?",
+    "content": {
+      "introduction": "How many dogs are on Stockton's streets, and where are they? Published reports describe abandoned and roaming dogs, but no verified current citywide street-dog count has been established. Crossover is gathering evidence, checking specific areas, and documenting what we actually find. This article starts with what is known and will be updated as our investigation produces firsthand reports.",
+      "sections": [
+        {
+          "heading": "What the published reports tell us",
+          "paragraphs": [
+            "In an April 6, 2026 CBS Sacramento report, Stockton Street Dogs founder Jesse Mejia estimated that at least 200 to 300 dogs were on Stockton's streets at a given time, potentially rising to 400 during puppy season. Those figures are Mejia's estimates, not an independently verified census. The report and accompanying television coverage are useful leads, but they cannot establish current dog locations or numbers.",
+            "Stockton Animal Services recorded 3,106 stray dog intake events in 2024 across its broader multi-jurisdiction service area. Intake events over a year are not a count of dogs currently on Stockton's streets, and cannot be directly compared with the advocate's point-in-time estimate."
+          ],
+          "links": [
+            {
+              "label": "CBS Sacramento: abandoned dogs in Stockton (April 6, 2026)",
+              "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/"
+            },
+            {
+              "label": "CBS Sacramento: television report",
+              "url": "https://www.cbsnews.com/sacramento/video/animal-shelters-speak-out-on-abandoned-dog-problem-in-stockton/"
+            },
+            {
+              "label": "Investigation question and current findings",
+              "url": "/work/dogs/findings/"
+            }
+          ]
+        },
+        {
+          "heading": "First investigation area: St. Mary's–Church Street corridor",
+          "paragraphs": [
+            "CBS Sacramento reported on June 8, 2026 that Stockton Street Dogs distributed about 200 pounds of food to around 70 dogs during an outreach visit at a Church Street encampment near St. Mary's Community Services. This describes a particular reported event, not the number of dogs currently living in the area. It does not place the dogs at the community-services campus itself.",
+            "Crossover plans an initial observation on Monday, November 2, 2026, of a manageable portion of public areas in the St. Mary's–Church Street corridor. We will record the date, general area examined, approximate number of visible dogs (including zero), observed circumstances, and limitations. No Crossover field observation of this corridor is claimed yet. Dogs with unhoused people must not automatically be described as abandoned."
+          ],
+          "links": [
+            {
+              "label": "CBS Sacramento: Church Street outreach report (June 8, 2026)",
+              "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/"
+            },
+            {
+              "label": "Planned St. Mary's corridor field task",
+              "url": "/work/dogs/tasks/#task-verify-st-marys-church-street-dog-scale"
+            }
+          ]
+        },
+        {
+          "heading": "Second investigation area: Carrie Street levee and South Stockton / District 5",
+          "paragraphs": [
+            "The Carrie Street levee near Weston Ranch is a separate location lead, associated with a reported April 2026 roaming-dog incident. September reporting separately described increased stray- and dumped-dog encounters across District 5, but did not identify Carrie Street as the location of those encounters. These reports are not evidence of how many dogs are there now.",
+            "Crossover plans to select a safe public observation route, examine conditions firsthand, and document its observations—including zero dogs if none are found. This visit has not yet happened. We will not treat a historical report as a current location or publish precise sensitive animal or resident locations."
+          ],
+          "links": [
+            {
+              "label": "Planned South Stockton / District 5 field task",
+              "url": "/work/dogs/tasks/#task-verify-south-stockton-district-5-reports"
+            }
+          ]
+        },
+        {
+          "heading": "What remains unknown",
+          "paragraphs": [
+            "We do not yet have a verified current citywide population estimate or a reliable map of where dogs are present. Reports concern different dates, areas, and kinds of observations, and dogs seen roaming may be owned, lost, abandoned, or living with people. These categories cannot be inferred from appearance or location alone.",
+            "Even visits to two areas will not constitute a citywide census. They can establish limited, dated firsthand observations that help us test published leads and plan a better investigation."
+          ]
+        },
+        {
+          "heading": "Follow the investigation",
+          "paragraphs": [
+            "This is an ongoing article, not a completed conclusion. The St. Mary's corridor and South Stockton / District 5 tasks are currently planned; their field observations are not yet available. When firsthand reports are completed, we will add dated results, sources, limitations, and any resulting changes to our findings. New evidence may change our questions and where we investigate next.",
+            "The number and location of Stockton's street dogs remain unknown. That's precisely why we're going to look."
+          ],
+          "links": [
+            {
+              "label": "Current Crossover tasks",
+              "url": "/work/dogs/tasks/"
+            },
+            {
+              "label": "Investigation activity",
+              "url": "/work/dogs/activity/"
+            },
+            {
+              "label": "Evidence-based findings",
+              "url": "/work/dogs/findings/"
+            }
+          ]
+        }
+      ]
+    },
+    "published": true,
+    "show_in_findings": true,
+    "related_gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "related_location_ids": [
+      "st-marys-church-street-corridor",
+      "st-marys-community-services-campus",
+      "weston-ranch-carrie-street",
+      "stockton-district-5-reported-area-2026-09-24"
+    ]
   }
 ]
