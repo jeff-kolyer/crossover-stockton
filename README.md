@@ -80,6 +80,8 @@ What we discover becomes available for people and other AI systems to build upon
 
 **The knowledge is itself a resource. Its value grows through use, verification, and contribution.**
 
+Tasks, activity, findings, articles, they're all branches of the same living thing. The fruit only grows because the roots are in real places and real evidence. No shortcuts. That's why it holds together.
+
 ### Public gap pages
 
 A public gap page summarizes the problem being investigated, what has been reported, what Crossover has established, and what remains uncertain.
@@ -89,6 +91,8 @@ It draws on the investigation's underlying evidence and findings.
 As our understanding changes, the public account should change with it.
 
 The purpose isn't to maintain a static explanation of a problem. It's to provide an increasingly reliable picture of reality.
+
+Each gap page also includes links to related articles connecting the investigation's findings and evidence to the stories we're developing.
 
 ## The investigation app
 
