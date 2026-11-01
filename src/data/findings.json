@@ -6,11 +6,19 @@
     "title": "Shelter expansion construction was underway on October 14, 2026",
     "status": "established",
     "statement": "Crossover observed construction activity during its October 14 visit to Stockton Animal Services.",
-    "supporting_record_ids": ["crossover-2026-10-14-sas-first-visit"],
+    "supporting_record_ids": [
+      "crossover-2026-10-14-sas-first-visit"
+    ],
     "contradicting_record_ids": [],
-    "related_question_ids": ["additional-help"],
-    "related_task_ids": ["task-sas-visit-application-2026-10-14"],
-    "related_project_ids": ["stockton-animal-shelter-renovation"],
+    "related_question_ids": [
+      "additional-help"
+    ],
+    "related_task_ids": [
+      "task-sas-visit-application-2026-10-14"
+    ],
+    "related_project_ids": [
+      "stockton-animal-shelter-renovation"
+    ],
     "location_ids": [],
     "limitations": "Construction observed during one visit does not establish a completion date, delivered animal-care capacity, or operational impact.",
     "last_reviewed_at": "2026-10-26"
@@ -22,14 +30,21 @@
     "title": "Current street-dog population is not established",
     "status": "insufficient_evidence",
     "statement": "The reviewed shelter intake figures do not establish the current number of free-roaming dogs in Stockton.",
-    "supporting_record_ids": ["sas-2024-kennel-statistics"],
+    "supporting_record_ids": [
+      "sas-2024-kennel-statistics"
+    ],
     "contradicting_record_ids": [],
-    "related_question_ids": ["where-dogs-need-help"],
-    "related_task_ids": ["task-sas-field-call-follow-up"],
+    "related_question_ids": [
+      "where-dogs-need-help"
+    ],
+    "related_task_ids": [
+      "task-sas-field-call-follow-up"
+    ],
     "related_project_ids": [],
     "location_ids": [],
     "limitations": "Shelter intake is a period flow over a multi-jurisdiction service area. A current Stockton street-population estimate requires an appropriate observation and estimation method.",
-    "last_reviewed_at": "2026-10-26"
+    "last_reviewed_at": "2026-10-26",
+    "article_id": "where-are-stray-dogs"
   },
   {
     "investigation_id": "street-dog-immediate-welfare",
@@ -132,12 +147,24 @@
     "status": "preliminary",
     "statement": "We applied to volunteer with Stockton Street Dogs on October 7 and Stockton Animal Services on October 14. We have not documented a completed onboarding process with either organization.",
     "article_id": "friction-of-volunteering",
-    "supporting_record_ids": ["crossover-2026-10-07-street-dogs-volunteer-application", "crossover-2026-10-12-doggie-day-out-inquiry", "crossover-2026-10-14-sas-volunteer-application"],
+    "supporting_record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application",
+      "crossover-2026-10-12-doggie-day-out-inquiry",
+      "crossover-2026-10-14-sas-volunteer-application"
+    ],
     "contradicting_record_ids": [],
-    "related_question_ids": ["food-and-water", "additional-help"],
-    "related_task_ids": ["task-ssd-volunteer-application-2026-10-07", "task-sas-visit-application-2026-10-14"],
+    "related_question_ids": [
+      "food-and-water",
+      "additional-help"
+    ],
+    "related_task_ids": [
+      "task-ssd-volunteer-application-2026-10-07",
+      "task-sas-visit-application-2026-10-14"
+    ],
     "related_project_ids": [],
-    "location_ids": ["stockton-animal-services-shelter"],
+    "location_ids": [
+      "stockton-animal-services-shelter"
+    ],
     "limitations": "Two applications do not establish an organization-wide or systemic failure. We have not established what happened internally to either application.",
     "last_reviewed_at": "2026-10-30"
   },
@@ -149,10 +176,20 @@
     "status": "developing",
     "statement": "We found public estimates, shelter statistics, reported sightings, and descriptions of available services. These sources do not establish how many dogs are currently on Stockton's streets or what happens to individual dogs after they're reported.",
     "article_id": "public-access-to-stray-dog-information",
-    "supporting_record_ids": ["cbs-2026-04-06-stockton-abandoned-dogs", "ssd-2026-09-29-dumped-dogs-surge", "sas-2024-kennel-statistics", "stockton-animal-services-2026-10-20-reporting-guidance"],
+    "supporting_record_ids": [
+      "cbs-2026-04-06-stockton-abandoned-dogs",
+      "ssd-2026-09-29-dumped-dogs-surge",
+      "sas-2024-kennel-statistics",
+      "stockton-animal-services-2026-10-20-reporting-guidance"
+    ],
     "contradicting_record_ids": [],
-    "related_question_ids": ["where-dogs-need-help", "response-barriers"],
-    "related_task_ids": ["task-sas-field-call-follow-up"],
+    "related_question_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
+    "related_task_ids": [
+      "task-sas-field-call-follow-up"
+    ],
     "related_project_ids": [],
     "location_ids": [],
     "limitations": "Our review of public information does not establish what internal agency or rescue records may contain.",
@@ -166,12 +203,25 @@
     "status": "exploratory",
     "statement": "We observed shelter expansion construction on October 14. Stockton Street Dogs has also proposed a Canine Campus. Their future capacity and effects on access to care remain unverified.",
     "article_id": "caring-for-stocktons-dogs",
-    "supporting_record_ids": ["crossover-2026-10-14-sas-first-visit", "ssd-2026-07-30-canine-campus-proposal", "ssd-2026-10-07-canine-campus-details"],
+    "supporting_record_ids": [
+      "crossover-2026-10-14-sas-first-visit",
+      "ssd-2026-07-30-canine-campus-proposal",
+      "ssd-2026-10-07-canine-campus-details"
+    ],
     "contradicting_record_ids": [],
-    "related_question_ids": ["additional-help"],
-    "related_task_ids": ["task-sas-visit-application-2026-10-14"],
-    "related_project_ids": ["stockton-animal-shelter-renovation", "canine-campus"],
-    "location_ids": ["stockton-animal-services-shelter"],
+    "related_question_ids": [
+      "additional-help"
+    ],
+    "related_task_ids": [
+      "task-sas-visit-application-2026-10-14"
+    ],
+    "related_project_ids": [
+      "stockton-animal-shelter-renovation",
+      "canine-campus"
+    ],
+    "location_ids": [
+      "stockton-animal-services-shelter"
+    ],
     "limitations": "We have not established that new facilities will be insufficient or that any proposed alternative would produce better outcomes.",
     "last_reviewed_at": "2026-10-30"
   }
