@@ -41,7 +41,7 @@ for (const [path, active] of [["", "tasks"], ["tasks/", "tasks"], ["activity/", 
 const findings = await readFile(new URL("./work/dogs/findings/index.html", dist), "utf8");
 assert.ok(findings.includes('href="/work/dogs/findings/" aria-current="page"'), "Findings: active tab missing");
 assert.ok(findings.includes("shared-map"), "Findings: shared workspace map missing");
-assert.ok(findings.includes('<h1 id="investigation-findings">Findings</h1>') && findings.includes('Propositions evaluated against evidence. Status and limitations are part of each finding.'), "Findings: heading or subtitle missing");
+assert.ok(findings.includes('<h2 id="investigation-findings">Findings</h2>') && findings.includes('Propositions evaluated against evidence. Status and limitations are part of each finding.'), "Findings: heading or subtitle missing");
 assert.ok(findings.includes('<h2 id="current-findings-heading">Current findings</h2>'), "Findings: current section missing");
 assert.ok(!findings.includes('If AI can drive cars') && !findings.includes('id="investigation-questions"') && !findings.includes('id="crossover-reference-title"'), "Findings: old introduction or reference wall remains");
 const currentFindings = findingRecords.filter((finding) => finding.investigation_id === "street-dog-immediate-welfare" && finding.current !== false);
