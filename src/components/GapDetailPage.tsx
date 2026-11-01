@@ -1,6 +1,7 @@
 import gapsData from "../data/gaps.json";
 import type { GapRecord } from "../types";
 import { DogGapExperience } from "./DogGapExperience";
+import type { PublicRoute } from "./PublicMobileMenu";
 
 type Section = "tasks" | "activity" | "map" | "findings";
 
@@ -13,7 +14,7 @@ interface GapDetailPageProps {
   reportLocationId?: string;
   onOpenArticle?: (path: string) => void;
   onOpenSection: (slug: string, section: Section, anchor?: string) => void;
-  onNavigate: (page: "home" | "reality" | "action" | "organizations") => void;
+  onNavigate: (page: PublicRoute) => void;
   onOpenReport: (reportId: string, locationId?: string) => void;
 }
 

@@ -18,6 +18,7 @@ import { CloseDetailButton, PlainActionButton } from "./PlainActionButton";
 import { ArticleContent } from "./ArticlePages";
 import { FieldReportContent, formatReportDate } from "./FieldReportContent";
 import { WorkspacePage, WorkspaceSection } from "./WorkspacePage";
+import { PublicMobileMenu, type PublicRoute } from "./PublicMobileMenu";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 
 type Section = "tasks" | "activity" | "map" | "findings";
@@ -131,16 +132,17 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   reportId?: string;
   reportLocationId?: string;
   onOpenArticle?: (path: string) => void;
-  onNavigate: (page: "home" | "reality" | "action" | "organizations") => void;
+  onNavigate: (page: PublicRoute) => void;
   onOpenReport: (id: string, locationId?: string) => void;
 }) {
-  const [sheetState, setSheetState] = useState<"collapsed" | "partial" | "expanded">(section === "map" ? "collapsed" : "expanded");
+  const [sheetState, setSheetState] = useState<"collapsed" | "peek" | "partial" | "expanded">(section === "map" ? "peek" : "expanded");
   const [panelWidth, setPanelWidth] = useState<number | null>(null);
   const [dragTop, setDragTop] = useState<number | null>(null);
+  const [isSheetDragging, setIsSheetDragging] = useState(false);
   const workspaceRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<{ pointerId: number; startY: number; startTop: number; height: number } | null>(null);
+  const dragRef = useRef<{ pointerId: number; startY: number; startTop: number; height: number; maxTop: number } | null>(null);
   const panelDragRef = useRef<{ pointerId: number; startX: number; startWidth: number } | null>(null);
   const [selectedLocationId, setSelectedLocationId] = useState("");
   const [focusSelectedLocation, setFocusSelectedLocation] = useState(false);
@@ -156,7 +158,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     setFocusSelectedLocation(Boolean(location?.coordinates));
   };
   useEffect(() => {
-    setSheetState(section === "map" ? selectedLocationId ? "partial" : "collapsed" : "expanded");
+    setSheetState(section === "map" ? selectedLocationId ? "partial" : "peek" : "expanded");
     setDragTop(null);
   }, [section]);
   useEffect(() => {
@@ -189,34 +191,43 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     && (!showLocationStatusFilters || locationFilter === "all" || location.category === locationFilter)
   ), [locationFilter, markerTypeFilter, showLocationStatusFilters]);
   const visibleMappedLocations = useMemo(() => visibleLocations.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleLocations]);
-  const filteredTasks = orderInvestigationTasks(investigationTasks).filter((task) => taskFilter === "all" || task.status === taskFilter);
-  const taskLocationIds = new Set(filteredTasks.flatMap(mappedLocationIdsFor));
-  const taskMappedLocations = mappedLocations.filter((location) => taskLocationIds.has(location.id));
-  const activityLocationIds = new Set(investigationActivities.flatMap(activityMappedLocationIds));
-  const activityMappedLocations = mappedLocations.filter((location) => activityLocationIds.has(location.id));
+  const filteredTasks = useMemo(() => orderInvestigationTasks(investigationTasks).filter((task) => taskFilter === "all" || task.status === taskFilter), [taskFilter]);
+  const taskMappedLocations = useMemo(() => {
+    const locationIds = new Set(filteredTasks.flatMap(mappedLocationIdsFor));
+    return mappedLocations.filter((location) => locationIds.has(location.id));
+  }, [filteredTasks]);
+  const activityMappedLocations = useMemo(() => {
+    const locationIds = new Set(investigationActivities.flatMap(activityMappedLocationIds));
+    return mappedLocations.filter((location) => locationIds.has(location.id));
+  }, []);
   const article = articlePath ? articleForPath(articlePath) : undefined;
   const report = reportId ? records.find((record) => record.id === reportId && record.record_type === "field_report") : undefined;
   const reportAssociatedLocationId = reportLocationId ?? report?.location_ids?.[0] ?? report?.organization_ids.map((id) => organizations.find((org) => org.id === id)?.map_location_id).find(Boolean);
-  const reportMappedLocations = mappedLocations.filter((location) => location.id === reportAssociatedLocationId);
-  const articleLocationIds = new Set(article?.related_location_ids ?? []);
-  const articleMappedLocations = mappedLocations.filter((location) => articleLocationIds.has(location.id));
+  const reportMappedLocations = useMemo(() => mappedLocations.filter((location) => location.id === reportAssociatedLocationId), [reportAssociatedLocationId]);
+  const articleMappedLocations = useMemo(() => {
+    const locationIds = new Set(article?.related_location_ids ?? []);
+    return mappedLocations.filter((location) => locationIds.has(location.id));
+  }, [article]);
   const selectedLocation = allLocations.find((location) => location.id === selectedLocationId);
   useEffect(() => {
     if (!reportId) return;
     setSelectedLocationId(reportAssociatedLocationId ?? "");
     setFocusSelectedLocation(Boolean(reportAssociatedLocationId));
+    setDragTop(null);
     setSheetState("expanded");
     sheetRef.current?.scrollTo({ top: 0 });
   }, [reportId, reportAssociatedLocationId]);
   const selectedTask = investigationTasks.find((task) => task.id === selectedTaskId);
   const findingsInvestigation = activeInvestigations.find((investigation) => investigation.gap_id === gap.id);
   const findingsIntroduction = findingsInvestigation?.findings_introduction;
-  const currentFindings = investigationFindings.filter((finding) => finding.investigation_id === findingsInvestigation?.id && finding.current !== false);
-  const findingsLocationIds = new Set(currentFindings.flatMap((finding) => [
-    ...finding.location_ids,
-    ...(publishedArticles.find((article) => article.id === finding.article_id)?.related_location_ids ?? []),
-  ]));
-  const findingsMappedLocations = mappedLocations.filter((location) => findingsLocationIds.has(location.id));
+  const currentFindings = useMemo(() => investigationFindings.filter((finding) => finding.investigation_id === findingsInvestigation?.id && finding.current !== false), [findingsInvestigation?.id]);
+  const findingsMappedLocations = useMemo(() => {
+    const locationIds = new Set(currentFindings.flatMap((finding) => [
+      ...finding.location_ids,
+      ...(publishedArticles.find((article) => article.id === finding.article_id)?.related_location_ids ?? []),
+    ]));
+    return mappedLocations.filter((location) => locationIds.has(location.id));
+  }, [currentFindings]);
   const tabLink = (id: Section) => `${workspaceBasePath}${id}/`;
   const openPrimary = (tab: "tasks" | "activity" | "map" | "findings") => {
     setSelectedTaskId("");
@@ -224,7 +235,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     setSelectedLocationId("");
     setFocusSelectedLocation(false);
     setDragTop(null);
-    setSheetState(tab === "map" ? "collapsed" : "expanded");
+    setSheetState(tab === "map" ? "peek" : "expanded");
     sheetRef.current?.scrollTo({ top: 0 });
     onOpenSection(tab);
   };
@@ -232,6 +243,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     setSelectedTaskId("");
     setSelectedLocationId(id);
     setFocusSelectedLocation(focus);
+    setDragTop(null);
     setSheetState("partial");
     sheetRef.current?.scrollTo({ top: 0 });
     if (section !== "map") {
@@ -247,6 +259,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const selectTask = (task: InvestigationTask) => {
     setSelectedTaskId(task.id);
     showTaskLocation(task);
+    setDragTop(null);
     setSheetState("expanded");
     sheetRef.current?.scrollTo({ top: 0 });
   };
@@ -255,6 +268,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     setSelectedActivityId(activity.id);
     setSelectedLocationId(location?.id ?? "");
     setFocusSelectedLocation(Boolean(location));
+    setDragTop(null);
     setSheetState("expanded");
     sheetRef.current?.scrollTo({ top: 0 });
   };
@@ -270,6 +284,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   };
   const backToTasks = () => {
     setSelectedTaskId("");
+    setDragTop(null);
     setSheetState("expanded");
     sheetRef.current?.scrollTo({ top: 0 });
   };
@@ -285,7 +300,12 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     if (selected && ((filter !== "all" && selected.category !== filter) || (markerTypeFilter !== "all" && selected.marker_type !== markerTypeFilter))) setSelectedLocationId("");
   };
   const openMapFilterMenu = () => {
-    if (window.matchMedia("(max-width: 1023px)").matches) setSheetState((current) => current === "collapsed" ? "partial" : current);
+    if (!window.matchMedia("(max-width: 1023px)").matches || !mapRef.current || !sheetRef.current) return;
+    const sheetTop = sheetRef.current.getBoundingClientRect().top - mapRef.current.getBoundingClientRect().top;
+    if (sheetTop > mapRef.current.clientHeight * .42) {
+      setDragTop(null);
+      setSheetState("partial");
+    }
   };
   const changeMarkerTypeFilter = (filter: MarkerTypeFilter) => {
     setMarkerTypeFilter(filter);
@@ -294,36 +314,40 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     const selected = allLocations.find((location) => location.id === selectedLocationId);
     if (selected && filter !== "all" && selected.marker_type !== filter) setSelectedLocationId("");
   };
-  const sheetPositions = ["expanded", "partial", "collapsed"] as const;
+  const sheetPositions = ["expanded", "partial", "peek", "collapsed"] as const;
   function startSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
     if (!window.matchMedia("(max-width: 1023px)").matches) return;
     const map = mapRef.current;
     if (!map) return;
-    const height = map.clientHeight;
-    dragRef.current = { pointerId: event.pointerId, startY: event.clientY, startTop: event.currentTarget.parentElement!.getBoundingClientRect().top - map.getBoundingClientRect().top, height };
+    const height = map.getBoundingClientRect().height;
+    const sheet = event.currentTarget.parentElement!;
+    dragRef.current = { pointerId: event.pointerId, startY: event.clientY, startTop: sheet.getBoundingClientRect().top - map.getBoundingClientRect().top, height, maxTop: Math.max(0, height - event.currentTarget.getBoundingClientRect().height - parseFloat(getComputedStyle(sheet).borderTopWidth)) };
+    setIsSheetDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
   }
   function moveSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
-    setDragTop(Math.max(0, Math.min(drag.height * .78, drag.startTop + event.clientY - drag.startY)));
+    setDragTop(Math.max(0, Math.min(drag.maxTop, drag.startTop + event.clientY - drag.startY)));
   }
   function endSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
     const drag = dragRef.current;
     if (!drag || drag.pointerId !== event.pointerId) return;
-    const top = Math.max(0, Math.min(drag.height * .78, drag.startTop + event.clientY - drag.startY));
-    const snapTops = [0, drag.height * .42, drag.height * .78];
-    const nearest = snapTops.reduce((best, value, index) => Math.abs(top - value) < Math.abs(top - snapTops[best]) ? index : best, 0);
+    const top = Math.max(0, Math.min(drag.maxTop, drag.startTop + event.clientY - drag.startY));
+    const peekHeight = parseFloat(getComputedStyle(workspaceRef.current!).getPropertyValue("--sheet-peek-height"));
+    const keyboardStops = [0, drag.height * .42, Math.max(0, drag.height - peekHeight), drag.maxTop];
+    const nearest = keyboardStops.reduce((best, value, index) => Math.abs(top - value) < Math.abs(top - keyboardStops[best]) ? index : best, 0);
     setSheetState(sheetPositions[nearest]);
-    setDragTop(null);
+    setDragTop(top);
+    setIsSheetDragging(false);
     dragRef.current = null;
   }
   function moveSheetWithKeyboard(event: ReactKeyboardEvent<HTMLButtonElement>) {
     const index = sheetPositions.indexOf(sheetState);
-    if (event.key === "ArrowUp") { event.preventDefault(); setSheetState(sheetPositions[Math.max(0, index - 1)]); }
-    if (event.key === "ArrowDown") { event.preventDefault(); setSheetState(sheetPositions[Math.min(2, index + 1)]); }
-    if (event.key === "Home") { event.preventDefault(); setSheetState("expanded"); }
-    if (event.key === "End") { event.preventDefault(); setSheetState("collapsed"); }
+    const next = event.key === "ArrowUp" ? sheetPositions[Math.max(0, index - 1)]
+      : event.key === "ArrowDown" ? sheetPositions[Math.min(sheetPositions.length - 1, index + 1)]
+        : event.key === "Home" ? "expanded" : event.key === "End" ? "collapsed" : null;
+    if (next) { event.preventDefault(); setDragTop(null); setSheetState(next); }
   }
   const panelWidthBounds = () => {
     const workspaceWidth = workspaceRef.current?.clientWidth ?? window.innerWidth;
@@ -373,15 +397,17 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   };
   const primaryTabs = () => <nav className="primary-tabs" aria-label="Investigation sections">{(["tasks", "activity", "map", "findings"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={section === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{tab[0].toUpperCase() + tab.slice(1)}</a>)}</nav>;
   const investigationHeader = (className: string) => <header className={`investigation-header ${className}`}>
-    <div className="brand-row"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>CROSSOVER</a><a href="/about/">About</a></div>
-    <hgroup><h2>Dogs on the street in Stockton</h2><p>Investigating · Stockton, California</p></hgroup>
+    <div className="investigation-app-bar">
+      <PublicMobileMenu onNavigate={onNavigate} onOpenInvestigation={() => openPrimary("tasks")} />
+      <h2 className="investigation-app-title" title="Dogs on the street in Stockton">Dogs on the street in Stockton</h2>
+    </div>
     {primaryTabs()}
   </header>;
 
   return <>
-    <div ref={workspaceRef} className={`map-workspace is-${sheetState}${dragTop === null ? "" : " is-dragging"}`} style={panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
+    <div ref={workspaceRef} className={`map-workspace is-${sheetState}${isSheetDragging ? " is-dragging" : ""}`} style={panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
       {investigationHeader("workspace-header")}
-      <div ref={mapRef} className="shared-map"><DogGapOverviewMap locations={reportId ? reportMappedLocations : articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" ? activityMappedLocations : section === "findings" ? findingsMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => { selectLocation(id); if (reportId) onOpenSection("map", id); }} followSelection={focusSelectedLocation} preserveViewOnFilter={section === "map"} /></div>
+      <div ref={mapRef} className="shared-map"><DogGapOverviewMap locations={reportId ? reportMappedLocations : articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" ? activityMappedLocations : section === "findings" ? findingsMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => { selectLocation(id); if (reportId) onOpenSection("map", id); }} followSelection={focusSelectedLocation} preserveViewOnFilter /></div>
       <button type="button" className="panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />
       <div ref={sheetRef} className="sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         <button type="button" className="sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>
@@ -417,7 +443,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {selectedTask.question_ids.length > 0 && <section><h2>Investigation questions</h2><ul>{selectedTask.question_ids.map((id) => <li key={id}>{investigationQuestionById.get(id)?.title}</li>)}</ul></section>}
           {selectedTask.basis_record_ids.length > 0 && <section><h2>Basis and sources</h2><ul>{selectedTask.basis_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
           {selectedTask.activity_record_ids.length > 0 && <section><h2>Documented activity</h2><ul>{selectedTask.activity_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
-        </article></div> : <WorkspacePage title="Tasks" subtitle="Planned actions and documented completed steps. A planned visit is not a field observation.">
+        </article></div> : <WorkspacePage title="Tasks">
           <div className="map-filters" role="group" aria-label="Task filters">{(["all", "open", "waiting", "done"] as const).map((filter) => <PlainActionButton key={filter} variant="filter" pressed={taskFilter === filter} onClick={() => { setTaskFilter(filter); setSelectedLocationId(""); setFocusSelectedLocation(false); }}>{filter !== "all" && <span className="evidence-dot" style={{ backgroundColor: taskStatusColors[filter] }} aria-hidden="true" />}{filter === "done" ? "Completed" : filter[0].toUpperCase() + filter.slice(1)}</PlainActionButton>)}</div>
           <div className="record-list task-list">{filteredTasks.map((task) => <button type="button" key={task.id} onClick={() => selectTask(task)}>
             <strong className="task-title"><span className="evidence-dot" style={task.status === "cancelled" ? { visibility: "hidden" } : { backgroundColor: taskStatusColors[task.status] }} aria-hidden="true" />{task.title}</strong>
@@ -436,13 +462,13 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {investigationTasks.filter((task) => task.activity_record_ids.includes(selectedActivity.id)).map((task) => <p key={task.id}>Task: <button type="button" onClick={() => openTaskFromLocation(task)}>{task.title}</button></p>)}
           {(selectedActivity.report_record_ids ?? []).map((id) => <p key={id}>Field report: {recordLink(id)}</p>)}
           {selectedActivity.source.url && <a href={selectedActivity.source.url} target="_blank" rel="noreferrer">View source</a>}
-        </article></div> : <WorkspacePage title="Activity" subtitle="Dated visits, inquiries, applications, and records requests from existing investigation records.">
+        </article></div> : <WorkspacePage title="Activity">
           <section aria-label="Activity records"><div className="record-list report-list">{activityRecords.map((record) => <button type="button" id={record.id} key={record.id} onClick={() => selectActivity(record)}><strong>{record.title}</strong><small>{fmt(record.occurred_at ?? record.recorded_at ?? record.published_at)} · {record.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</small></button>)}</div></section>
           <WorkspaceSection title="Field reports"><div className="record-list report-list">{reportRecords.map((report) => <button type="button" key={report.id} onClick={() => openInvestigationReport(report.id)}><strong>{report.title}</strong><small>{fmt(report.occurred_at)} · {report.location || "Stockton"}</small><span>{report.summary}</span></button>)}</div></WorkspaceSection>
         </WorkspacePage>)}
       {!reportId && section === "map" && (selectedLocation
         ? <CrossoverLocationDetails location={selectedLocation} records={records} tasks={investigationTasks} activities={activityRecords} onBack={backToLocations} onOpenTask={openTaskFromLocation} onOpenReport={openInvestigationReport} />
-        : <WorkspacePage title="Locations" subtitle="Markers identify investigation locations and generalized report areas. They do not show where dogs are now.">
+        : <WorkspacePage title="Locations">
           <div className="map-filter-row">
             <MapFilterDropdown value={markerTypeFilter} options={markerTypeOptions} onChange={changeMarkerTypeFilter} onOpen={openMapFilterMenu} ariaLabel="Location type" />
             {showLocationStatusFilters && <MapFilterDropdown value={locationFilter} options={locationFilterOptions} onChange={changeLocationFilter} onOpen={openMapFilterMenu} ariaLabel="Report status" />}
@@ -452,12 +478,12 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
         </WorkspacePage>)}
       {!reportId && section === "findings" && article && <ArticleContent article={article} onBack={() => onOpenSection("findings")} onOpenReport={openInvestigationReport} />}
       {!reportId && section === "findings" && articlePath && !article && <WorkspacePage title="Article not found" subtitle="This article is not published." backLink={<a href="/work/dogs/findings/">← Findings</a>}>{null}</WorkspacePage>}
-      {!reportId && section === "findings" && !articlePath && <WorkspacePage title="Findings" headingId="investigation-findings" subtitle="Propositions evaluated against evidence. Status and limitations are part of each finding.">
-        {findingsInvestigation?.findings_summary && <WorkspaceSection title="Summary"><p>{findingsInvestigation.findings_summary}</p></WorkspaceSection>}
+      {!reportId && section === "findings" && !articlePath && <div className="workspace-page">
+        {findingsInvestigation?.findings_summary && <WorkspaceSection title="Summary" headingId="investigation-findings"><p>{findingsInvestigation.findings_summary}</p></WorkspaceSection>}
         {findingsIntroduction && <WorkspaceSection title={findingsIntroduction.heading} headingId="findings-introduction-heading">
           {findingsIntroduction.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
         </WorkspaceSection>}
-        <WorkspaceSection title="Current findings" headingId="current-findings-heading">
+        <WorkspaceSection title="Findings" headingId="current-findings-heading">
           <div className="record-list">{currentFindings.map((finding) => {
             const relatedArticle = publishedArticles.find((item) => item.id === finding.article_id);
             return <article key={finding.id}>
@@ -467,7 +493,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
             </article>;
           })}</div>
         </WorkspaceSection>
-      </WorkspacePage>}
+      </div>}
     </div>
   </div></div></div></>;
 }

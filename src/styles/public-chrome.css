@@ -71,8 +71,6 @@
   white-space: nowrap;
 }
 .public-site .public-mobile-menu { display: none; }
-.public-site .public-mobile-menu-icon { display: flex; flex-direction: column; gap: 4px; width: 20px; }
-.public-site .public-mobile-menu-icon span { width: 100%; height: 2px; border-radius: 1px; background: currentColor; }
 
 @media (min-width: 901px) {
   .public-site .public-logo { gap: 9px; }
@@ -99,36 +97,9 @@
 .public-site .public-footer nav a:hover { text-decoration: underline; }
 .public-site .public-bottom-nav { display: none; }
 
-.public-site .public-menu-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: grid;
-  place-items: start center;
-  background: #050c0a8a;
-  padding: 18px;
-}
-.public-site .public-menu-modal {
-  width: min(390px, 100%);
-  border-radius: 8px;
-  background: #fff;
-  color: #17211b;
-  overflow: hidden;
-}
-.public-site .public-menu-header,
-.public-site .public-menu-location { padding: 14px 20px; border-bottom: 1px solid #ddd; }
-.public-site .public-menu-header span { font-weight: 700; }
-.public-site .public-menu-header button { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; border: 0; background: none; color: inherit; font-size: 26px; line-height: 1; }
-.public-site .public-mobile-menu,
-.public-site .public-menu-modal button { -webkit-tap-highlight-color: transparent; }
-.public-site .public-menu-list { padding: 8px; }
-.public-site .public-menu-list button { min-height: 48px; border: 0; background: none; text-align: left; }
-.public-site .public-menu-list button:hover,
-.public-site .public-menu-list button:focus-visible { background: #fff; }
-
 @media (max-width: 900px) {
   .public-site .public-nav { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; padding: 9px 20px; }
-  .public-site .public-mobile-menu { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; }
+  .public-site .public-mobile-menu { display: grid; }
   .public-site .public-logo { justify-self: center; min-width: 0; }
   .public-site .public-logo img { width: 26px; height: 26px; }
   .public-site .public-logo span { font-size: .72rem; letter-spacing: .17em; }

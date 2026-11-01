@@ -1,8 +1,7 @@
 
-import { PublicMobileMenu } from "./PublicMobileMenu";
+import { PublicMobileMenu, type PublicRoute } from "./PublicMobileMenu";
 import { navigateInternalLink } from "../lib/internalLink";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
 interface PublicSiteNavProps {
   active: PublicRoute;
   onNavigate: (page: PublicRoute) => void;

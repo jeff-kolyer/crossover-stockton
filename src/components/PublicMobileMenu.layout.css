@@ -1,4 +1,32 @@
-/* The public menu needs positioning to remain operable. */
+.public-mobile-menu {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+}
+
+.public-mobile-menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 20px;
+}
+
+.public-mobile-menu-icon span {
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+}
+
+.public-mobile-menu,
+.public-menu-modal button {
+  -webkit-tap-highlight-color: transparent;
+}
 
 .public-menu-backdrop {
   position: fixed;
@@ -7,12 +35,17 @@
   display: grid;
   place-items: start center;
   overflow-y: auto;
-  background: Canvas;
+  padding: 18px;
+  background: #050c0a8a;
 }
 
 .public-menu-modal {
-  width: min(100%, 420px);
+  width: min(390px, 100%);
   padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+  color: #17211b;
+  overflow: hidden;
 }
 
 .public-menu-header {
@@ -21,7 +54,38 @@
   justify-content: space-between;
 }
 
+.public-menu-header,
+.public-menu-location {
+  padding: 14px 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.public-menu-header span { font-weight: 700; }
+.public-menu-header button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 26px;
+  line-height: 1;
+}
+
 .public-menu-list {
   display: grid;
   gap: 8px;
+  padding: 8px;
 }
+
+.public-menu-list button {
+  min-height: 48px;
+  border: 0;
+  background: none;
+  text-align: left;
+}
+
+.public-menu-list button:hover,
+.public-menu-list button:focus-visible { background: #fff; }
