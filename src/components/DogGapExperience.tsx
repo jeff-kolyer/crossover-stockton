@@ -415,27 +415,27 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     <div className="dog-gap-main">
       {reportId && (report ? <WorkspacePage article title={report.title} subtitle={<><time dateTime={report.occurred_at}>{formatReportDate(report.occurred_at)}</time>{report.location && <> · {report.location}</>}</>}><p>{report.summary}</p><div className="field-report"><FieldReportContent report={report} /></div></WorkspacePage> : <WorkspacePage title="Field report not found" subtitle="This report ID does not match a published field report.">{null}</WorkspacePage>)}
       {!reportId && section === "tasks" && (selectedTask ? <div className="workspace-page"><article aria-label={`Task details: ${selectedTask.title}`}>
-          <div className="detail-heading"><div><p className="secondary-text">Task details</p><h1>{selectedTask.title}</h1></div><CloseDetailButton label="task" onClick={backToTasks} /></div>
+          <div className="detail-heading"><div><p className="secondary-text">Task details</p><h2>{selectedTask.title}</h2></div><CloseDetailButton label="task" onClick={backToTasks} /></div>
           <p className="secondary-text">Status: {selectedTask.status === "done" ? "Completed action" : selectedTask.status === "waiting" ? "Waiting for response" : selectedTask.status === "open" ? "Open" : "Cancelled"}</p>
           {selectedTask.completed_at && <p><span className="secondary-text">Completed {fmt(selectedTask.completed_at)}.</span> Completion of this task does not establish the outcome of an application or inquiry.</p>}
           <p>{selectedTask.instructions}</p>
-          {selectedTask.location_ids.length > 0 && <section><h2>Locations</h2><ul>{selectedTask.location_ids.map((id) => {
+          {selectedTask.location_ids.length > 0 && <section><h3>Locations</h3><ul>{selectedTask.location_ids.map((id) => {
             const location = allLocations.find((item) => item.id === id);
              return location ? <li key={id}>{location.name} · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(id))}>{location.coordinates ? "Open on map" : "View area details"}</a></li> : null;
           })}</ul><p>These are generalized evidence areas, not current dog locations.</p></section>}
-          {selectedTask.map_reference_location_ids?.length ? <section><h2>Nearby map reference</h2><ul>{selectedTask.map_reference_location_ids.map((id) => {
+          {selectedTask.map_reference_location_ids?.length ? <section><h3>Nearby map reference</h3><ul>{selectedTask.map_reference_location_ids.map((id) => {
             const location = allLocations.find((item) => item.id === id);
             return location ? <li key={id}>{location.name} · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(id))}>Open on map</a></li> : null;
           })}</ul><p>This marker identifies the organization, not the field observation site.</p></section> : null}
-          {selectedTask.organization_ids.length > 0 && <section><h2>Organizations</h2><ul>{selectedTask.organization_ids.map((id) => {
+          {selectedTask.organization_ids.length > 0 && <section><h3>Organizations</h3><ul>{selectedTask.organization_ids.map((id) => {
             const org = organizations.find((item) => item.id === id);
              const mappedLocation = org?.map_location_id ? allLocations.find((item) => item.id === org.map_location_id) : undefined;
              return org ? <li key={id}><a href={`/organizations/${org.slug}/`}>{org.name}</a>{mappedLocation?.coordinates && mappedLocation.marker_kind && mappedLocation.map_label && <> · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(mappedLocation.id))}>Open on map</a></>}</li> : null;
           })}</ul></section>}
-          {selectedTask.checklist && <section><h2>Questions to ask</h2><ul>{selectedTask.checklist.map((item) => <li key={item}>{item}</li>)}</ul></section>}
-          {selectedTask.question_ids.length > 0 && <section><h2>Investigation questions</h2><ul>{selectedTask.question_ids.map((id) => <li key={id}>{investigationQuestionById.get(id)?.title}</li>)}</ul></section>}
-          {selectedTask.basis_record_ids.length > 0 && <section><h2>Basis and sources</h2><ul>{selectedTask.basis_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
-          {selectedTask.activity_record_ids.length > 0 && <section><h2>Documented activity</h2><ul>{selectedTask.activity_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
+          {selectedTask.checklist && <section><h3>Questions to ask</h3><ul>{selectedTask.checklist.map((item) => <li key={item}>{item}</li>)}</ul></section>}
+          {selectedTask.question_ids.length > 0 && <section><h3>Investigation questions</h3><ul>{selectedTask.question_ids.map((id) => <li key={id}>{investigationQuestionById.get(id)?.title}</li>)}</ul></section>}
+          {selectedTask.basis_record_ids.length > 0 && <section><h3>Basis and sources</h3><ul>{selectedTask.basis_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
+          {selectedTask.activity_record_ids.length > 0 && <section><h3>Documented activity</h3><ul>{selectedTask.activity_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
         </article></div> : <WorkspacePage title="Tasks">
           <div className="map-filters" role="group" aria-label="Task filters">{(["all", "open", "waiting", "done"] as const).map((filter) => <PlainActionButton key={filter} variant="filter" pressed={taskFilter === filter} onClick={() => { setTaskFilter(filter); setSelectedLocationId(""); setFocusSelectedLocation(false); }}>{filter !== "all" && <span className="evidence-dot" style={{ backgroundColor: taskStatusColors[filter] }} aria-hidden="true" />}{filter === "done" ? "Completed" : filter[0].toUpperCase() + filter.slice(1)}</PlainActionButton>)}</div>
           <div className="record-list task-list">{filteredTasks.map((task) => <button type="button" key={task.id} onClick={() => selectTask(task)}>
@@ -444,7 +444,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           </button>)}</div>
         </WorkspacePage>)}
       {!reportId && section === "activity" && (selectedActivity ? <div className="workspace-page"><article id={selectedActivity.id} aria-label={`Activity details: ${selectedActivity.title}`}>
-          <div className="detail-heading"><h1>{selectedActivity.title}</h1><CloseDetailButton label="activity" onClick={() => setSelectedActivityId("")} /></div>
+          <div className="detail-heading"><h2>{selectedActivity.title}</h2><CloseDetailButton label="activity" onClick={() => setSelectedActivityId("")} /></div>
           <p className="secondary-text">{fmt(selectedActivity.occurred_at ?? selectedActivity.recorded_at ?? selectedActivity.published_at)} · {selectedActivity.evidence_status?.replaceAll("_", " ") ?? "Recorded activity"}</p>
           <p>{selectedActivity.summary}</p>
           {selectedActivity.outcome && <p><strong>Outcome:</strong> {selectedActivity.outcome.summary}</p>}
