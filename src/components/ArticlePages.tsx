@@ -7,8 +7,8 @@ function formatDate(value: string) {
   return new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(new Date(year, month - 1, day));
 }
 
-export function ArticleContent({ article, onOpenReport }: { article: Article; onOpenReport?: (id: string) => void }) {
-  return <WorkspacePage article title={article.title} subtitle={<><time dateTime={article.date}>{formatDate(article.date)}</time> · {article.type}</>}>
+export function ArticleContent({ article, onBack, onOpenReport }: { article: Article; onBack: () => void; onOpenReport?: (id: string) => void }) {
+  return <WorkspacePage article title={article.title} subtitle={<><time dateTime={article.date}>{formatDate(article.date)}</time> · {article.type}</>} backLink={<a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onBack)}>← Findings</a>}>
       <p>{article.content.introduction}</p>
       {article.content.sections.map((section) => <WorkspaceSection key={section.heading} title={section.heading}>
         {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
