@@ -4,7 +4,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border: 1px solid #dadce0;
   border-radius: 5px;
   background: #fff;
@@ -35,7 +35,7 @@ button.plain-action-button:not(.is-filter):hover {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border: 1px solid #dadce0;
   border-radius: 999px;
   background: #fff;
@@ -121,7 +121,7 @@ button.plain-action-button:not(.is-filter):hover {
   align-items: center;
   gap: 6px;
   width: 100%;
-  padding: 10px 14px;
+  padding: 8px 14px;
   border: 0;
   border-radius: 4px;
   background: #fff;
