@@ -20,6 +20,7 @@ import type { InvestigationLocation, MappedInvestigationLocation } from "./Inves
 
 type Section = "tasks" | "activity" | "map" | "findings";
 type TaskFilter = "open" | "waiting" | "done" | "all";
+type MarkerTypeFilter = "all" | InvestigationLocation["marker_type"];
 const taskStatusColors = {
   open: evidenceCategoryColors.crossover_firsthand,
   waiting: evidenceCategoryColors.recent_public_report,
@@ -57,16 +58,59 @@ const activityMappedLocation = (activity: EvidenceRecord) => {
   }
   return undefined;
 };
-const locationFilterOptions: { value: "all" | InvestigationLocation["category"]; label: string }[] = [
-  { value: "all", label: "All" },
-  { value: "recent_public_report", label: "Recent" },
-  { value: "historical_published_report", label: "Historical" },
-  { value: "official_location_record", label: "Official" },
-  { value: "crossover_firsthand", label: "Firsthand" },
+type LocationStatusFilter = "all" | InvestigationLocation["category"];
+type MapFilterOption<T extends string> = { value: T; label: string; dotColor?: string };
+const locationFilterOptions: MapFilterOption<LocationStatusFilter>[] = [
+  { value: "all", label: "All reports" },
+  { value: "recent_public_report", label: "Recent", dotColor: evidenceCategoryColors.recent_public_report },
+  { value: "historical_published_report", label: "Historical", dotColor: evidenceCategoryColors.historical_published_report },
+  { value: "official_location_record", label: "Official", dotColor: evidenceCategoryColors.official_location_record },
+  { value: "crossover_firsthand", label: "Firsthand", dotColor: evidenceCategoryColors.crossover_firsthand },
+];
+const markerTypeOptions: MapFilterOption<MarkerTypeFilter>[] = [
+  { value: "all", label: "All locations" },
+  { value: "dog_sighting", label: "Dog sightings" },
+  { value: "human_services", label: "Human services" },
+  { value: "animal_care", label: "Animal care" },
 ];
 
-function DogGapOverviewMap({ locations, selectedId, onSelect, followSelection }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; followSelection: boolean }) {
-  const [Map, setMap] = useState<ComponentType<{ locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean; followSelection?: boolean }> | null>(null);
+function MapFilterDropdown<T extends string>({ value, options, onChange, ariaLabel }: { value: T; options: readonly MapFilterOption<T>[]; onChange: (value: T) => void; ariaLabel: string }) {
+  const detailsRef = useRef<HTMLDetailsElement>(null);
+  const summaryRef = useRef<HTMLElement>(null);
+  const selected = options.find((option) => option.value === value)!;
+  useEffect(() => {
+    const closeOutside = (event: PointerEvent) => {
+      if (detailsRef.current && !detailsRef.current.contains(event.target as Node)) detailsRef.current.open = false;
+    };
+    const closeOnEscape = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape" && detailsRef.current?.open) {
+        detailsRef.current.open = false;
+        summaryRef.current?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+  return <details ref={detailsRef} className="crossover-map-dropdown">
+    <summary ref={summaryRef} className="plain-action-button is-filter" aria-label={`${ariaLabel}: ${selected.label}`}>
+      {selected.dotColor && <span className="crossover-evidence-dot" style={{ backgroundColor: selected.dotColor }} aria-hidden="true" />}
+      {selected.label}
+    </summary>
+    <div className="crossover-map-dropdown-options" role="group" aria-label={ariaLabel}>
+      {options.map((option) => <button type="button" key={option.value} aria-pressed={value === option.value} onClick={(event) => { onChange(option.value); if (detailsRef.current) detailsRef.current.open = false; if (event.detail === 0) summaryRef.current?.focus(); }}>
+        {option.dotColor && <span className="crossover-evidence-dot" style={{ backgroundColor: option.dotColor }} aria-hidden="true" />}
+        {option.label}
+      </button>)}
+    </div>
+  </details>;
+}
+
+function DogGapOverviewMap({ locations, selectedId, onSelect, followSelection, preserveViewOnFilter }: { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; followSelection: boolean; preserveViewOnFilter: boolean }) {
+  const [Map, setMap] = useState<ComponentType<{ locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean; preview?: boolean; followSelection?: boolean; preserveViewOnFilter?: boolean }> | null>(null);
   useEffect(() => {
     let active = true;
     import("./InvestigationLocationsMap").then(({ InvestigationLocationsMap }) => {
@@ -75,7 +119,7 @@ function DogGapOverviewMap({ locations, selectedId, onSelect, followSelection }:
     return () => { active = false; };
   }, []);
   return <div className="dog-gap-real-map" aria-label="Map of generalized historical and public report areas">
-    {Map ? <Map locations={locations} selectedId={selectedId} onSelect={onSelect} wheelZoom={true} followSelection={followSelection} /> : <div className="dog-gap-map-loading" role="status">Loading map…</div>}
+    {Map ? <Map locations={locations} selectedId={selectedId} onSelect={onSelect} wheelZoom={true} followSelection={followSelection} preserveViewOnFilter={preserveViewOnFilter} /> : <div className="dog-gap-map-loading" role="status">Loading map…</div>}
   </div>;
 }
 
@@ -100,6 +144,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const [selectedTaskId, setSelectedTaskId] = useState("");
   const [selectedActivityId, setSelectedActivityId] = useState("");
   const [locationFilter, setLocationFilter] = useState<"all" | InvestigationLocation["category"]>("all");
+  const [markerTypeFilter, setMarkerTypeFilter] = useState<MarkerTypeFilter>("all");
   const [taskFilter, setTaskFilter] = useState<TaskFilter>("all");
   const showTaskLocation = (task: InvestigationTask) => {
     setTaskFilter((current) => current === "all" || current === task.status ? current : task.status === "cancelled" ? "all" : task.status);
@@ -135,7 +180,11 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     setFocusSelectedLocation(Boolean(location.coordinates));
     setSheetState("partial");
   }, [section]);
-  const visibleLocations = useMemo(() => allLocations.filter((location) => locationFilter === "all" || location.category === locationFilter), [locationFilter]);
+  const showLocationStatusFilters = markerTypeFilter === "all" || markerTypeFilter === "dog_sighting";
+  const visibleLocations = useMemo(() => allLocations.filter((location) =>
+    (markerTypeFilter === "all" || location.marker_type === markerTypeFilter)
+    && (!showLocationStatusFilters || locationFilter === "all" || location.category === locationFilter)
+  ), [locationFilter, markerTypeFilter, showLocationStatusFilters]);
   const visibleMappedLocations = useMemo(() => visibleLocations.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleLocations]);
   const filteredTasks = orderInvestigationTasks(investigationTasks).filter((task) => taskFilter === "all" || task.status === taskFilter);
   const taskLocationIds = new Set(filteredTasks.flatMap(mappedLocationIdsFor));
@@ -218,8 +267,16 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   };
   const changeLocationFilter = (filter: typeof locationFilter) => {
     setLocationFilter(filter);
-    setSelectedLocationId("");
     setFocusSelectedLocation(false);
+    const selected = allLocations.find((location) => location.id === selectedLocationId);
+    if (selected && ((filter !== "all" && selected.category !== filter) || (markerTypeFilter !== "all" && selected.marker_type !== markerTypeFilter))) setSelectedLocationId("");
+  };
+  const changeMarkerTypeFilter = (filter: MarkerTypeFilter) => {
+    setMarkerTypeFilter(filter);
+    setLocationFilter("all");
+    setFocusSelectedLocation(false);
+    const selected = allLocations.find((location) => location.id === selectedLocationId);
+    if (selected && filter !== "all" && selected.marker_type !== filter) setSelectedLocationId("");
   };
   const sheetPositions = ["expanded", "partial", "collapsed"] as const;
   function startSheetDrag(event: ReactPointerEvent<HTMLButtonElement>) {
@@ -306,7 +363,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   return <>
     <div ref={workspaceRef} className={`crossover-map-workspace is-${sheetState}${dragTop === null ? "" : " is-dragging"}`} style={panelWidth !== null ? { "--crossover-expanded-panel-width": `${panelWidth}px` } as CSSProperties : undefined}>
       {investigationHeader("crossover-workspace-header")}
-      <div ref={mapRef} className="crossover-shared-map"><DogGapOverviewMap locations={articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" ? activityMappedLocations : section === "findings" ? findingsMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} /></div>
+      <div ref={mapRef} className="crossover-shared-map"><DogGapOverviewMap locations={articlePath ? articleMappedLocations : section === "tasks" ? taskMappedLocations : section === "activity" ? activityMappedLocations : section === "findings" ? findingsMappedLocations : visibleMappedLocations} selectedId={selectedLocationId} onSelect={(id) => selectLocation(id)} followSelection={focusSelectedLocation} preserveViewOnFilter={section === "map"} /></div>
       <button type="button" className="crossover-panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />
       <div ref={sheetRef} className="crossover-sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         <button type="button" className="crossover-sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>
@@ -360,7 +417,14 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
         </WorkspacePage>)}
       {section === "map" && (selectedLocation
         ? <CrossoverLocationDetails location={selectedLocation} records={records} tasks={investigationTasks} activities={activityRecords} onBack={backToLocations} onOpenTask={openTaskFromLocation} onOpenReport={onOpenReport} />
-        : <WorkspacePage title="Locations" subtitle="Markers identify investigation locations and generalized report areas. They do not show where dogs are now."><div className="crossover-map-filters" role="group" aria-label="Map evidence filters">{locationFilterOptions.map(({ value, label }) => <PlainActionButton key={value} variant="filter" pressed={locationFilter === value} onClick={() => changeLocationFilter(value)}>{value !== "all" && <span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[value] }} aria-hidden="true" />}{label}</PlainActionButton>)}</div><div className="crossover-record-list crossover-location-list">{visibleLocations.map((location) => <button type="button" key={location.id} onClick={() => selectLocation(location.id, true)}><strong className="crossover-location-title"><span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[location.category] }} aria-hidden="true" />{location.name}{location.marker_kind === "major_reported_concern" && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D74B45" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Reported historical concern"><path d="M10.7 4.6a1.5 1.5 0 0 1 2.6 0l8.1 13.8a1.5 1.5 0 0 1-1.3-2.3H3.9a1.5 1.5 0 0 1-1.3-2.3Z"/><path d="M12 9v5M12 17.5h.01"/></svg>}</strong><small>{fmt(location.evidence_date)} · {location.verification_status}{!location.coordinates && " · No map pin"}</small></button>)}</div></WorkspacePage>)}
+        : <WorkspacePage title="Locations" subtitle="Markers identify investigation locations and generalized report areas. They do not show where dogs are now.">
+          <div className="crossover-map-filter-row">
+            <MapFilterDropdown value={markerTypeFilter} options={markerTypeOptions} onChange={changeMarkerTypeFilter} ariaLabel="Location type" />
+            {showLocationStatusFilters && <MapFilterDropdown value={locationFilter} options={locationFilterOptions} onChange={changeLocationFilter} ariaLabel="Report status" />}
+          </div>
+          <div className="crossover-record-list crossover-location-list">{visibleLocations.map((location) => <button type="button" key={location.id} onClick={() => selectLocation(location.id, true)}><strong className="crossover-location-title"><span className="crossover-evidence-dot" style={{ backgroundColor: evidenceCategoryColors[location.category] }} aria-hidden="true" />{location.name}{location.marker_kind === "major_reported_concern" && <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#D74B45" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Reported historical concern"><path d="M10.7 4.6a1.5 1.5 0 0 1 2.6 0l8.1 13.8a1.5 1.5 0 0 1-1.3-2.3H3.9a1.5 1.5 0 0 1-1.3-2.3Z"/><path d="M12 9v5M12 17.5h.01"/></svg>}</strong><small>{fmt(location.evidence_date)} · {location.verification_status}{!location.coordinates && " · No map pin"}</small></button>)}</div>
+          {visibleLocations.length === 0 && <p>No matching locations.</p>}
+        </WorkspacePage>)}
       {section === "findings" && article && <ArticleContent article={article} onBack={() => onOpenSection("findings")} />}
       {section === "findings" && articlePath && !article && <WorkspacePage title="Article not found" subtitle="This article is not published." backLink={<a href="/work/dogs/findings/">← Findings</a>}>{null}</WorkspacePage>}
       {section === "findings" && !articlePath && <WorkspacePage title="Findings" headingId="investigation-findings" subtitle="Propositions evaluated against evidence. Status and limitations are part of each finding.">

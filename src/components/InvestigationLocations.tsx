@@ -16,6 +16,7 @@ export interface InvestigationLocation {
   evidence_date: string;
   date_label: "Occurred" | "Reported occurrence" | "Report published" | "Source reviewed";
   evidence_type: string;
+  marker_type: "dog_sighting" | "human_services" | "animal_care";
   category: "historical_published_report" | "recent_public_report" | "official_location_record" | "crossover_firsthand";
   marker_kind: "reported_sighting" | "historical_sighting" | "major_reported_concern" | "firsthand_observation" | "organization" | "animal_shelter" | null;
   map_label: { place: string; report: string; note?: string } | null;

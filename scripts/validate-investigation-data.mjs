@@ -37,6 +37,9 @@ const actualActivities = new Map(records.filter((record) => record.record_type =
   .map((record) => [record.id, record]));
 
 for (const location of locations) {
+  check(["dog_sighting", "human_services", "animal_care"].includes(location.marker_type), `${location.id}: invalid marker_type`);
+  if (location.marker_kind === "organization") check(location.marker_type === "human_services", `${location.id}: organization marker must be human services`);
+  if (location.marker_kind === "animal_shelter") check(location.marker_type === "animal_care", `${location.id}: shelter marker must be animal care`);
   if (location.evidence_record_id) check(recordById.has(location.evidence_record_id), `${location.id}: unknown evidence_record_id`);
   for (const id of location.evidence_record_ids ?? []) check(recordById.has(id), `${location.id}: unknown evidence_record_ids id ${id}`);
   if (location.field_report_id) check(recordById.get(location.field_report_id)?.record_type === "field_report", `${location.id}: field_report_id must reference a field report`);

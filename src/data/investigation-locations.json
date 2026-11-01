@@ -1,6 +1,7 @@
 [
   {
     "id": "weston-ranch-carrie-street",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Weston Ranch — Carrie Street levee",
     "area": "800 block of Carrie Street / levee",
@@ -24,6 +25,7 @@
   },
   {
     "id": "south-lincoln-crosstown",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "South Lincoln Street — Crosstown Freeway",
     "area": "Near the DMV beneath the Crosstown Freeway",
@@ -46,6 +48,7 @@
   },
   {
     "id": "trinity-bear-creek",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Trinity Parkway — Bear Creek levee",
     "area": "Trinity Parkway / McAuliffe Road vicinity",
@@ -68,6 +71,7 @@
   },
   {
     "id": "country-club-i5",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Country Club — I-5 vicinity",
     "area": "Country Club Boulevard / Interstate 5",
@@ -90,6 +94,7 @@
   },
   {
     "id": "pawboost-crown-rose-marie-2026-10-16",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Crown Avenue — Rose Marie Lane",
     "area": "Crown Avenue / Rose Marie Lane vicinity",
@@ -112,6 +117,7 @@
   },
   {
     "id": "pawboost-california-magnolia-2026-10-15",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "California Street — Magnolia Street",
     "area": "California Street / Magnolia Street vicinity",
@@ -134,6 +140,7 @@
   },
   {
     "id": "pawboost-mcdougald-henry-long-2026-10-15",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "McDougald Boulevard — Henry Long Boulevard",
     "area": "McDougald Boulevard / Henry Long Boulevard vicinity",
@@ -156,6 +163,7 @@
   },
   {
     "id": "louis-park-pixie-woods-2026-04-06",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Louis Park / Pixie Woods vicinity",
     "area": "Louis Park public-area reference; Pixie Woods is an adjacent landmark",
@@ -179,6 +187,7 @@
   },
   {
     "id": "stanislaus-street-corridor-2026-04-06",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stanislaus Street corridor",
     "area": "Stanislaus Street; no block identified in the report",
@@ -202,6 +211,7 @@
   },
   {
     "id": "highway-4-corridor-2026-04-06",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Highway 4 corridor",
     "area": "Broad Highway 4 corridor; no segment identified",
@@ -225,6 +235,7 @@
   },
   {
     "id": "stockton-animal-services-shelter",
+    "marker_type": "animal_care",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton Animal Services",
     "area": "1575 S. Lincoln Street, Stockton",
@@ -249,6 +260,7 @@
   },
   {
     "id": "stockton-district-5-reported-area-2026-09-24",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton District 5 reported area",
     "area": "District 5, Stockton; no street or block identified in the report",
@@ -272,6 +284,7 @@
   },
   {
     "id": "st-marys-church-street-corridor",
+    "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's–Church Street corridor",
     "area": "Public areas around West Church Street near St. Mary's Community Services, Stockton; the first observation route has not yet been set",
@@ -295,6 +308,7 @@
   },
   {
     "id": "st-marys-community-services-campus",
+    "marker_type": "human_services",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's Community Services",
     "area": "545 W. Sonora Street, Stockton",

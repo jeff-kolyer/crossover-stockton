@@ -19,6 +19,7 @@ type LocationsMapProps = {
   wheelZoom: boolean;
   preview?: boolean;
   followSelection?: boolean;
+  preserveViewOnFilter?: boolean;
 };
 
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
@@ -148,7 +149,7 @@ function selectedBasemapStyle(): "chat-style" | "classic" | "liberty" {
   return params.get("palette") === "liberty" ? "liberty" : "chat-style";
 }
 
-export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false, followSelection = true }: LocationsMapProps) {
+export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom, preview = false, followSelection = true, preserveViewOnFilter = false }: LocationsMapProps) {
   const basemapStyle = selectedBasemapStyle();
   const chatStyle = basemapStyle === "chat-style";
   const containerRef = useRef<HTMLDivElement>(null);
@@ -287,7 +288,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
     if (!map) return;
     const last = previous.current;
     previous.current = { locations, selectedId, followSelection };
-    if (!last || last.locations !== locations) {
+    if (!last || (last.locations !== locations && !preserveViewOnFilter)) {
       const referenceView = chatStyle && !last ? chatStyleReferenceView() : null;
       if (referenceView) map.setView(referenceView.center, referenceView.zoom, { animate: false });
       else frameLocations(map, locations);
@@ -302,7 +303,7 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
         map.setView(map.unproject(projectedCenter, zoom), zoom, { animate: false });
       }
     }
-  }, [map, locations, selectedId, followSelection, chatStyle]);
+  }, [map, locations, selectedId, followSelection, chatStyle, preserveViewOnFilter]);
 
   useEffect(() => {
     if (!map) return;
