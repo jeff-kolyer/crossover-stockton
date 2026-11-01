@@ -17,7 +17,7 @@
   },
   {
     "id": "finding-street-population-unknown",
-    "current": false,
+    "current": true,
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Current street-dog population is not established",
     "status": "insufficient_evidence",
