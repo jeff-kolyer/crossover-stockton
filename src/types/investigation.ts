@@ -8,6 +8,7 @@ export interface InvestigationTask {
   type: "application" | "inquiry" | "field_observation" | "records_request" | "follow_up" | "source_review" | "organization_contact";
   instructions: string;
   location_ids: string[];
+  map_reference_location_ids?: string[];
   organization_ids: string[];
   question_ids: string[];
   basis_record_ids: string[];

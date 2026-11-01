@@ -298,9 +298,9 @@
     "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's Community Services",
     "area": "545 W. Sonora Street, Stockton",
-    "coordinates": [37.948, -121.297],
-    "coordinate_note": "Approximate public-address reference for St. Mary's campus, generalized to three decimal places; not where dogs were reported.",
-    "coordinate_reference_url": "https://smcares.org/wp-content/uploads/2025/08/SMCS_PositionDescription_EA_07.2025.pdf",
+    "coordinates": [37.947, -121.297],
+    "coordinate_note": "Approximate reference for St. Mary's at 545 W. Sonora Street, rounded from a State Water Boards coordinate for the adjacent St. Mary's Dining Room project at 550 W. Sonora Street; not where dogs were reported. Use the Google Maps address link for the organization listing.",
+    "coordinate_reference_url": "https://ciwqs.waterboards.ca.gov/ciwqs/readOnly/CiwqsReportServlet?newPageNumber=666&reportID=7096660",
     "evidence_date": "2026-10-29",
     "date_label": "Source reviewed",
     "evidence_type": "Official organization information",
@@ -314,6 +314,7 @@
     "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street and describes housing and other support services. The Stockton Record reported that its Pathways Neighborhood project opened in June 2026 with 268 beds. This pin marks the organization, not a dog sighting or the wider Church Street investigation area. The published bed count does not establish that those beds accommodate dogs.",
     "unknown": "Whether the relevant programs accommodate people with dogs, and whether any dog-related need exists at this campus, remain unverified. The Church Street outreach report concerns a nearby area, not this address.",
     "source_url": "https://smcares.org/",
+    "google_maps_url": "https://goo.gl/maps/C9CZmW1XNqFqkE6F6",
     "evidence_record_id": "smcs-standing-housing-outcomes",
     "evidence_record_ids": ["smcs-standing-housing-outcomes", "smcs-2026-06-17-pathways-268-beds"]
   }

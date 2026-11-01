@@ -76,6 +76,7 @@
     "type": "field_observation",
     "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
     "location_ids": ["st-marys-church-street-corridor"],
+    "map_reference_location_ids": ["st-marys-community-services-campus"],
     "organization_ids": [],
     "question_ids": ["where-dogs-need-help"],
     "basis_record_ids": ["ssd-2026-06-08-street-response"],

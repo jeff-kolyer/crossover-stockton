@@ -64,6 +64,7 @@ for (const task of tasks) {
   check(["open", "waiting", "done", "cancelled"].includes(task.status), `${task.id}: invalid status`);
   check(Boolean(task.title && task.instructions), `${task.id}: title and instructions required`);
   refs(task, "location_ids", locationById);
+  if (task.map_reference_location_ids) refs(task, "map_reference_location_ids", locationById);
   for (const id of task.location_ids) check(locationById.get(id)?.investigation_id === task.investigation_id, `${task.id}: location ${id} belongs to another investigation`);
   refs(task, "organization_ids", organizationById);
   refs(task, "question_ids", questionById);

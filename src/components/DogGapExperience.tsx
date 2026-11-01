@@ -30,8 +30,9 @@ const records = recordsData as EvidenceRecord[];
 const fmt = (value?: string | null) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value.length === 10 ? `${value}T12:00:00` : value)) : "Date not recorded";
 const allLocations = locations as InvestigationLocation[];
 const mappedLocations = allLocations.filter((item): item is MappedInvestigationLocation => item.coordinates !== null && item.marker_kind !== null && item.map_label !== null);
-const mappedLocationIdsFor = (record: { location_ids?: string[]; organization_ids: string[] }) => [
+const mappedLocationIdsFor = (record: { location_ids?: string[]; map_reference_location_ids?: string[]; organization_ids: string[] }) => [
   ...(record.location_ids ?? []),
+  ...(record.map_reference_location_ids ?? []),
   ...record.organization_ids.map((id) => organizations.find((item) => item.id === id)?.map_location_id),
 ].filter((id): id is string => Boolean(id));
 const activityMappedLocationIds = (activity: EvidenceRecord) => [
@@ -311,6 +312,10 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
             const location = allLocations.find((item) => item.id === id);
              return location ? <li key={id}>{location.name} · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(id))}>{location.coordinates ? "Open on map" : "View area details"}</a></li> : null;
           })}</ul><p>These are generalized evidence areas, not current dog locations.</p></section>}
+          {selectedTask.map_reference_location_ids?.length ? <section><h3>Nearby map reference</h3><ul>{selectedTask.map_reference_location_ids.map((id) => {
+            const location = allLocations.find((item) => item.id === id);
+            return location ? <li key={id}>{location.name} · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(id))}>Open on map</a></li> : null;
+          })}</ul><p>This marker identifies the organization, not the field observation site.</p></section> : null}
           {selectedTask.organization_ids.length > 0 && <section><h3>Organizations</h3><ul>{selectedTask.organization_ids.map((id) => {
             const org = organizations.find((item) => item.id === id);
              const mappedLocation = org?.map_location_id ? allLocations.find((item) => item.id === org.map_location_id) : undefined;

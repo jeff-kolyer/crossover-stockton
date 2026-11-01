@@ -26,6 +26,7 @@ export interface InvestigationLocation {
   description: string;
   unknown: string;
   source_url: string;
+  google_maps_url?: string;
   evidence_record_id?: string;
   evidence_record_ids?: string[];
   field_report_id?: string;
@@ -65,7 +66,7 @@ function InvestigationLocationDetails({ location, onOpenReport }: { location: In
       <p className="investigation-location-description">{location.description} {!location.coordinates && <strong>This broad report has no map pin.</strong>}</p>
       <p className="investigation-location-description"><strong>Last known outcome:</strong> {location.last_known_outcome} <strong>Source reviewed:</strong> {location.source_reviewed_at ? fullDate(location.source_reviewed_at) : "Not yet recorded"}.</p>
       <p className="investigation-location-unknown"><span><strong>What remains unknown:</strong> {location.unknown}</span></p>
-      <div className="investigation-location-links"><a href={location.source_url} target="_blank" rel="noreferrer"> Read supporting source</a>{location.coordinates && <a href={`https://www.openstreetmap.org/?mlat=${location.coordinates[0]}&mlon=${location.coordinates[1]}#map=15/${location.coordinates[0]}/${location.coordinates[1]}`} target="_blank" rel="noreferrer"> Explore generalized area in OpenStreetMap</a>}{location.field_report_id && <a href={`/reports/${location.field_report_id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(location.field_report_id!); }}>Read field report</a>}</div>
+      <div className="investigation-location-links"><a href={location.source_url} target="_blank" rel="noreferrer"> Read supporting source</a>{location.google_maps_url && <a href={location.google_maps_url} target="_blank" rel="noreferrer">Open in Google Maps</a>}{location.coordinates && <a href={`https://www.openstreetmap.org/?mlat=${location.coordinates[0]}&mlon=${location.coordinates[1]}#map=15/${location.coordinates[0]}/${location.coordinates[1]}`} target="_blank" rel="noreferrer"> Explore generalized area in OpenStreetMap</a>}{location.field_report_id && <a href={`/reports/${location.field_report_id}/`} onClick={(event) => { event.preventDefault(); onOpenReport(location.field_report_id!); }}>Read field report</a>}</div>
     </div>
   </article>;
 }
