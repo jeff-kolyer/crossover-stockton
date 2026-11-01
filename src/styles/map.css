@@ -93,17 +93,6 @@
   touch-action: none;
 }
 
-.mobile-tabs {
-  display: none;
-}
-
-.desktop-tabs {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background: #fff;
-}
-
 .sheet-grip {
   display: none;
 }
@@ -160,11 +149,6 @@
 }
 
 @media (max-width: 1023px) {
-  .mobile-tabs {
-    display: grid;
-  }
-
-  .desktop-tabs,
   .panel-resize-handle {
     display: none;
   }

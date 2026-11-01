@@ -371,11 +371,11 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     if (record.source.url) return <a key={id} href={record.source.url} target="_blank" rel="noreferrer">{record.title}</a>;
     return <span key={id}>{record.title}</span>;
   };
-  const primaryTabs = (className: string) => <nav className={`primary-tabs ${className}`} aria-label="Investigation sections">{(["tasks", "activity", "map", "findings"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={section === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{tab[0].toUpperCase() + tab.slice(1)}</a>)}</nav>;
+  const primaryTabs = () => <nav className="primary-tabs" aria-label="Investigation sections">{(["tasks", "activity", "map", "findings"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={section === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{tab[0].toUpperCase() + tab.slice(1)}</a>)}</nav>;
   const investigationHeader = (className: string) => <header className={`investigation-header ${className}`}>
     <div className="brand-row"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>CROSSOVER</a><a href="/about/">About</a></div>
     <hgroup><h1>Dogs on the street in Stockton</h1><p>Investigating · Stockton, California</p></hgroup>
-    {primaryTabs("mobile-tabs")}
+    {primaryTabs()}
   </header>;
 
   return <>
@@ -385,7 +385,6 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
       <button type="button" className="panel-resize-handle" aria-label="Drag to resize investigation panel; use left and right arrow keys to adjust" onPointerDown={startPanelDrag} onPointerMove={movePanelDrag} onPointerUp={endPanelDrag} onPointerCancel={endPanelDrag} onKeyDown={movePanelWithKeyboard} />
       <div ref={sheetRef} className="sheet" style={dragTop === null ? undefined : { top: dragTop }}>
         <button type="button" className="sheet-grip" aria-label="Drag to resize investigation details; use up and down arrow keys to adjust" onPointerDown={startSheetDrag} onPointerMove={moveSheetDrag} onPointerUp={endSheetDrag} onPointerCancel={endSheetDrag} onKeyDown={moveSheetWithKeyboard}><span aria-hidden="true" /></button>
-        {primaryTabs("desktop-tabs")}
   <div className="dog-gap-layout is-dog-redesign">
     <div className="dog-gap-main">
       {reportId && (report ? <WorkspacePage article title={report.title} subtitle={<><time dateTime={report.occurred_at}>{formatReportDate(report.occurred_at)}</time>{report.location && <> · {report.location}</>}</>} backLink={<a href={reportAssociatedLocationId ? `${tabLink("map")}#${encodeURIComponent(reportAssociatedLocationId)}` : tabLink(section)} onClick={(event) => navigateInternalLink(event, () => {

@@ -137,7 +137,7 @@ h3 {
 
 .investigation-header {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-3);
   padding-bottom: 0;
 }
 
@@ -201,20 +201,17 @@ h3 {
 
 .primary-tabs a {
   min-width: 0;
-  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 2px;
-  border-bottom: 2px solid transparent;
+  padding: 12px 2px;
+  border-bottom: 3px solid transparent;
   font-size: 15px;
   text-align: center;
   text-decoration: none;
 }
 
 .primary-tabs a[aria-current="page"] {
-  padding-bottom: 7px;
-  border-bottom-width: 3px;
   border-bottom-color: #1a73e8;
   font-weight: 700;
 }
