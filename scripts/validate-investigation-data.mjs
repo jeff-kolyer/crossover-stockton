@@ -36,6 +36,12 @@ const actualActivities = new Map(records.filter((record) => record.record_type =
   && record.source.publisher?.startsWith("Crossover Stockton"))
   .map((record) => [record.id, record]));
 
+for (const location of locations) {
+  if (location.evidence_record_id) check(recordById.has(location.evidence_record_id), `${location.id}: unknown evidence_record_id`);
+  for (const id of location.evidence_record_ids ?? []) check(recordById.has(id), `${location.id}: unknown evidence_record_ids id ${id}`);
+  if (location.field_report_id) check(recordById.get(location.field_report_id)?.record_type === "field_report", `${location.id}: field_report_id must reference a field report`);
+}
+
 for (const record of records) {
   if (record.record_type === "activity" && record.source.publisher?.startsWith("Crossover Stockton")) {
     check(investigationIds.has(record.investigation_id), `${record.id}: actual Activity needs an investigation_id`);

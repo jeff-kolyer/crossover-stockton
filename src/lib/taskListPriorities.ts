@@ -3,13 +3,12 @@ import { investigationRecordById } from "./investigationData";
 
 // Reviewed ordering of active work. Update this assessment when the evidence or next steps change.
 const assessment = [
+  { id: "task-verify-st-marys-church-street-dog-scale", context: "Nov 2 field observation · Count visible dogs across a limited area" },
+  { id: "task-contact-cbs-charlie-lapastora", context: "Clarify reported locations and seek firsthand leads" },
   { id: "task-ssd-ask-contact-questions", dateLabel: "Applied", context: "Clarify field access and current care needs" },
   { id: "task-sas-field-call-follow-up", dateLabel: "Requested", context: "General-area records could guide fieldwork" },
-  { id: "task-visit-st-marys-dog-care", context: "Field visit planned · Learn from existing caregivers" },
   { id: "task-verify-south-stockton-district-5-reports", dateLabel: "KCRA", context: "Identify a supported public location first" },
-  { id: "task-review-reported-location-sources", context: "Review historical Louis Park and Stanislaus reports before fieldwork" },
   { id: "task-sas-volunteer-onboarding-follow-up", dateLabel: "Applied", context: "Check onboarding and orientation" },
-  { id: "task-contact-cbs-charlie-lapastora", context: "Clarify reported locations and seek firsthand leads" },
   { id: "task-monitor-animal-control-ordinance", context: "Verify the Council outcome" },
 ] as const;
 

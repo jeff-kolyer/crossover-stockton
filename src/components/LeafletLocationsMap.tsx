@@ -23,13 +23,13 @@ type LocationsMapProps = {
 
 const eyeIcon = '<path d="M2 12s3.7-5.6 10-5.6S22 12 22 12s-3.7 5.6-10 5.6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/>';
 const pawIcon = '<circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/>';
-const buildingIcon = '<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 21v-4h6v4M8 8h2M14 8h2M8 12h2M14 12h2"/>';
+const handHeartIcon = '<path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"/><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95"/><path d="m2 15 6 6"/><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91"/>';
 const labelLineLength = 22;
 const labelOffset = 20;
 
 function makeCircleMarker(location: MappedInvestigationLocation, selected: boolean) {
   const kind = location.marker_kind;
-  const icon = kind === "animal_shelter" ? pawIcon : kind === "organization" ? buildingIcon : eyeIcon;
+  const icon = kind === "animal_shelter" ? pawIcon : kind === "organization" ? handHeartIcon : eyeIcon;
   const fill = location.category === "official_location_record" ? "#1468D1" : evidenceCategoryColors[location.category];
   const growth = selected ? 2 : 0;
   const center = 18 + growth;

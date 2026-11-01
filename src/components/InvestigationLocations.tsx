@@ -27,6 +27,7 @@ export interface InvestigationLocation {
   unknown: string;
   source_url: string;
   evidence_record_id?: string;
+  evidence_record_ids?: string[];
   field_report_id?: string;
 }
 

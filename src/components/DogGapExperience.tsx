@@ -102,9 +102,9 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const [taskFilter, setTaskFilter] = useState<TaskFilter>("all");
   const showTaskLocation = (task: InvestigationTask) => {
     setTaskFilter((current) => current === "all" || current === task.status ? current : task.status === "cancelled" ? "all" : task.status);
-    const location = taskMappedLocation(task);
+    const location = taskMappedLocation(task) ?? allLocations.find((item) => task.location_ids.includes(item.id));
     setSelectedLocationId(location?.id ?? "");
-    setFocusSelectedLocation(Boolean(location));
+    setFocusSelectedLocation(Boolean(location?.coordinates));
   };
   useEffect(() => {
     setSheetState(section === "map" ? selectedLocationId ? "partial" : "collapsed" : "expanded");
@@ -168,8 +168,8 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   };
   const openTaskLocationOnMap = (id: string) => {
     const location = allLocations.find((item) => item.id === id);
-    if (!location?.coordinates || !location.marker_kind || !location.map_label) return;
-    selectLocation(id, true);
+    if (!location) return;
+    selectLocation(id, Boolean(location.coordinates));
   };
   const selectTask = (task: InvestigationTask) => {
     setSelectedTaskId(task.id);
@@ -309,7 +309,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           <p>{selectedTask.instructions}</p>
           {selectedTask.location_ids.length > 0 && <section><h3>Locations</h3><ul>{selectedTask.location_ids.map((id) => {
             const location = allLocations.find((item) => item.id === id);
-             return location ? <li key={id}>{location.name} · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(id))}>Open on map</a></li> : null;
+             return location ? <li key={id}>{location.name} · <a href={tabLink("map")} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(id))}>{location.coordinates ? "Open on map" : "View area details"}</a></li> : null;
           })}</ul><p>These are generalized evidence areas, not current dog locations.</p></section>}
           {selectedTask.organization_ids.length > 0 && <section><h3>Organizations</h3><ul>{selectedTask.organization_ids.map((id) => {
             const org = organizations.find((item) => item.id === id);
