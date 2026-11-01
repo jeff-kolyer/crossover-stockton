@@ -1,11 +1,15 @@
-/* CROSSOVER — MINIMUM APPLICATION CSS */
+/* Shared defaults and application shell. */
 
 :root {
   font-family: Roboto, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.5;
   color: #202124;
   background: #fff;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
 }
 
 *,
@@ -38,10 +42,6 @@ img {
   height: auto;
 }
 
-h1, h2, h3, p {
-  margin-top: 0;
-}
-
 h1 {
   font-size: 24px;
   line-height: 1.25;
@@ -56,36 +56,71 @@ h3 {
   font-size: 16px;
 }
 
-.crossover-workspace-app :is(h1, h2, h3, h4, h5, h6),
-.crossover-workspace-app .crossover-investigation-title {
-  color: #111815;
-}
-
-.crossover-sheet small,
-.crossover-sheet time,
-.crossover-secondary-text {
+.sheet small,
+.sheet time,
+.secondary-text {
   font-size: 14px;
   line-height: 1.5;
 }
 
-/* Shared spacing for every Work page, including articles and location details. */
-.crossover-workspace-page,
-.crossover-location-sheet-detail {
-  padding-top: 5px;
+/* Ordinary document content shares one block-flow rhythm on public and Work pages. */
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 var(--space-2);
 }
 
-.crossover-workspace-title {
-  margin-bottom: 4px;
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(p, ul, ol, figure) {
+  margin: 0 0 var(--space-3);
 }
 
-.crossover-workspace-section-title {
-  margin-bottom: 8px;
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(ul, ol) {
+  padding-inline-start: var(--space-4);
 }
 
-.crossover-workspace-back,
-.crossover-workspace-subtitle {
-  margin-bottom: 12px;
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) li + li {
+  margin-top: var(--space-2);
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) section + section {
+  margin-top: var(--space-4);
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(section, article) > img {
+  display: block;
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) img + :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {
+  margin-top: var(--space-3);
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) figure img {
+  display: block;
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) figcaption {
+  margin-top: var(--space-1);
+  font-size: 14px;
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) > nav {
+  margin-bottom: var(--space-4);
+}
+
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) > :last-child,
+:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(section, article) > :last-child {
+  margin-bottom: 0;
+}
+
+.workspace-page > header p,
+.workspace-section > header p,
+.workspace-back {
   color: #5f6368;
+}
+
+.report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  margin-bottom: var(--space-2);
 }
 
 /* APPLICATION SHELL */
@@ -95,30 +130,34 @@ h3 {
 }
 
 .crossover-index > header,
-.crossover-investigation-header,
+.investigation-header,
 .public-nav {
   padding: 16px;
 }
 
-.crossover-investigation-header {
+.investigation-header {
+  display: grid;
+  gap: var(--space-2);
   padding-bottom: 0;
 }
 
-.crossover-investigation-title {
-  margin: 14px 0 3px;
-  font-size: 21px;
-  font-weight: 700;
-  line-height: 1.25;
+.investigation-header > hgroup {
+  display: grid;
+  gap: var(--space-1);
 }
 
-.crossover-investigation-header p {
-  margin: 0 0 12px;
+.investigation-header > hgroup h1 {
+  margin: 0;
+}
+
+.investigation-header > hgroup p {
+  margin: 0;
   color: #5f6368;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .crossover-index > header,
-.crossover-brand-row,
+.brand-row,
 .public-nav {
   display: flex;
   align-items: center;
@@ -154,13 +193,13 @@ h3 {
   gap: 8px 16px;
 }
 
-.crossover-primary-tabs {
+.primary-tabs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   border-bottom: 1px solid #dadce0;
 }
 
-.crossover-primary-tabs a {
+.primary-tabs a {
   min-width: 0;
   min-height: 44px;
   display: flex;
@@ -173,7 +212,7 @@ h3 {
   text-decoration: none;
 }
 
-.crossover-primary-tabs a[aria-current="page"] {
+.primary-tabs a[aria-current="page"] {
   padding-bottom: 7px;
   border-bottom-width: 3px;
   border-bottom-color: #1a73e8;

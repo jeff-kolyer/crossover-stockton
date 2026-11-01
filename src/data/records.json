@@ -155,12 +155,18 @@
         "body": "The lobby was cramped and congested during our visit. City plans include a new public adoption lobby as part of the ongoing expansion."
       }
     ],
+    "visit_notes_attribution": "Firsthand visitor observations",
     "source": {
       "publisher": "Crossover Stockton / Jeff Kolyer",
       "type": "firsthand_account"
     },
+    "source_notes": [
+      "Statements attributed to staff are reported from a brief conversation.",
+      "Parking, entry procedures, and construction conditions may change."
+    ],
     "context_sources": [
       {
+        "title": "City shelter renovation plans",
         "publisher": "City of Stockton",
         "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Public%20Works/Bid%20Flash%20SEB/P023001RFP/P023001_RFP_ConstructionManagement%20-%20Animal%20Shelter.pdf",
         "type": "government"

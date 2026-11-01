@@ -10,10 +10,9 @@ export function WorkspacePage({ title, subtitle, headingId, backLink, article = 
 }) {
   const Element = article ? "article" : "div";
 
-  return <Element className="crossover-workspace-page">
-    {backLink && <p className="crossover-workspace-back">{backLink}</p>}
-    <h1 className="crossover-workspace-title" id={headingId}>{title}</h1>
-    {subtitle && <p className="crossover-workspace-subtitle">{subtitle}</p>}
+  return <Element className="workspace-page">
+    {backLink && <p className="workspace-back">{backLink}</p>}
+    <header><h1 id={headingId}>{title}</h1>{subtitle && <p>{subtitle}</p>}</header>
     {children}
   </Element>;
 }
@@ -24,9 +23,8 @@ export function WorkspaceSection({ title, subtitle, headingId, children }: {
   headingId?: string;
   children: ReactNode;
 }) {
-  return <section className="crossover-workspace-section" aria-labelledby={headingId}>
-    <h2 className="crossover-workspace-section-title" id={headingId}>{title}</h2>
-    {subtitle && <p className="crossover-workspace-subtitle">{subtitle}</p>}
+  return <section className="workspace-section" aria-labelledby={headingId}>
+    <header><h2 id={headingId}>{title}</h2>{subtitle && <p>{subtitle}</p>}</header>
     {children}
   </section>;
 }

@@ -164,3 +164,9 @@
   .public-site .location-pill { font-size: .72rem; }
   .public-site .public-logo { gap: 6px; }
 }
+
+@media (max-width: 260px) {
+  .public-site .public-nav { grid-template-columns: 44px minmax(0, 1fr); }
+  .public-site .public-logo { grid-column: 1 / -1; grid-row: 2; }
+  .public-site .public-nav .location-pill { grid-column: 2; grid-row: 1; justify-self: end; }
+}

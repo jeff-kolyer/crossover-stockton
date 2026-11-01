@@ -1,49 +1,5 @@
 /* Layout for public reference pages. The Work workspace and homepage are separate. */
 
-/* Shared document rhythm for public content. The homepage's composed hero and
-   landing sections and the investigation workspace keep their own layout. */
-.public-site .public-document :is(h1, h2, h3, h4, h5, h6) {
-  margin-top: 0;
-}
-
-.public-site .public-document h1 {
-  margin-bottom: 12px;
-}
-
-.public-site .public-document h2 {
-  margin-bottom: 8px;
-}
-
-.public-site .public-document :is(h3, h4, h5, h6) {
-  margin-bottom: 6px;
-}
-
-.public-site .public-document :is(p, ul, ol, figure) {
-  margin-top: 0;
-  margin-bottom: 12px;
-}
-
-.public-site .public-document > :is(section, article, div):not(:last-child) {
-  margin-bottom: 24px;
-}
-
-.public-site .public-document li + li {
-  margin-top: .75em;
-}
-
-.public-site .public-document figure img {
-  display: block;
-}
-
-.public-site .public-document figcaption {
-  margin-top: 6px;
-}
-
-.public-site .public-document > :last-child,
-.public-site .public-document :is(section, article) > :last-child {
-  margin-bottom: 0;
-}
-
 html:has(.public-site) {
   scrollbar-gutter: stable;
 }
@@ -88,7 +44,7 @@ html:has(.public-site) {
   width: 100%;
   max-width: 960px;
   margin-inline: auto;
-  padding: 24px 32px;
+  padding: 16px;
 }
 
 .is-section-page .public-hero-copy {
@@ -96,13 +52,17 @@ html:has(.public-site) {
 }
 
 .is-section-page .public-hero-copy h1,
-.about-simple-content h1,
 .gap-reference-article h1,
 .action-index-intro h1,
 .story-detail-shell h1,
 .gap-history-header h1,
 .organizations-page .crossover-index-body > h1 {
   font-size: 28px;
+  line-height: 1.25;
+}
+
+.about-simple-content h1 {
+  font-size: 24px;
   line-height: 1.25;
 }
 
@@ -131,7 +91,7 @@ html:has(.public-site) {
 .story-detail-page .story-opening {
   display: grid;
   grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
-  gap: 24px;
+  gap: 16px;
   align-items: start;
 }
 
@@ -210,20 +170,16 @@ html:has(.public-site) {
   width: 100%;
   max-width: 960px;
   margin-inline: auto;
-  padding: 24px 32px;
+  padding: 16px;
 }
 
 .about-simple .about-simple-section {
   max-width: 760px;
 }
 
-.about-simple .about-simple-stockton .about-simple-hero-image {
-  margin-bottom: 12px;
-}
-
 .about-simple .about-simple-philosophy {
   border-bottom: 1px solid #dadce0;
-  padding-bottom: 32px;
+  padding-bottom: 16px;
 }
 
 .about-simple .about-simple-actions {
@@ -238,17 +194,8 @@ html:has(.public-site) {
   margin-inline: auto;
 }
 
-.gap-reference-page .gap-reference-article > section.gap-reference-entities > h3 {
-  margin-top: 24px;
-}
-
-.gap-reference-page .gap-reference-article > section.gap-reference-entities > h2 + h3 {
-  margin-top: 0;
-}
-
 .gap-reference-page .gap-reference-article > section.gap-reference-projects > p + h3 {
   border-top: 1px solid #dadce0;
-  margin-top: 8px;
   padding-top: 7px;
 }
 
@@ -263,7 +210,7 @@ html:has(.public-site) {
 .about-simple .about-simple-ideas {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px 24px;
+  gap: 24px;
 }
 
 .about-simple .about-simple-ideas .public-entry {
@@ -316,10 +263,6 @@ html:has(.public-site) {
   object-position: center top;
 }
 
-.gap-reference-page .gap-reference-article > nav {
-  margin-bottom: 24px;
-}
-
 .action-index-page .action-index-feature {
   margin-bottom: 32px;
 }
@@ -352,10 +295,6 @@ html:has(.public-site) {
 
 .organizations-page .crossover-index-body > article {
   margin-bottom: 32px;
-}
-
-.story-detail-page :is(.story-meaning-row, .story-lower-grid) > section + section {
-  margin-top: 24px;
 }
 
 .story-detail-page .story-moment-card + .story-moment-card {
@@ -413,7 +352,7 @@ html:has(.public-site) {
   .about-simple .about-simple-philosophy .public-entry img {
     float: none;
     width: 100%;
-    margin: 0 0 8px;
+    margin: 0 0 16px;
   }
 
   :is(.about-simple, .gap-reference-page) .public-entry,
@@ -422,7 +361,6 @@ html:has(.public-site) {
   .action-index-page .action-index-feature,
   .story-detail-page .story-opening {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
   }
 
   .is-reality-page .gap-card-image-frame,
@@ -441,16 +379,6 @@ html:has(.public-site) {
 
   .action-index-page .action-index-feature-copy {
     display: grid;
-  }
-
-  .is-section-page .public-hero-copy,
-  .is-section-page .public-band,
-  .action-index-page .action-index-canvas,
-  .story-detail-page .story-detail-shell,
-  .gap-updates-page > section,
-  .about-simple .about-simple-content,
-  .gap-reference-page .gap-reference-article {
-    padding: 20px;
   }
 
 }

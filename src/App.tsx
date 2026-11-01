@@ -34,6 +34,7 @@ interface RouteState {
   gapSection?: "overview" | "tasks" | "activity" | "reports" | "map" | "findings" | "more" | "key-factors" | "ways-to-help" | "improvements" | "our-findings" | "research" | "updates";
   storySlug?: string;
   reportId?: string;
+  reportLocationId?: string;
   articlePath?: string;
   organizationSlug?: string;
   investigationSlug?: string;
@@ -51,11 +52,17 @@ const ROUTE_PATHS: Record<Exclude<AppRoute, "gapDetail" | "workInvestigation" | 
   organizations: "/organizations/",
 };
 
-function routeFromPathname(pathname: string): RouteState {
+function routeFromPathname(pathname: string, search = ""): RouteState {
   const normalized = pathname.replace(/\/+$/, "") || "/";
   if (normalized === "/work") return { page: "workIndex" };
   if (/^\/articles\/[^/]+$/.test(normalized)) return { page: "article", articlePath: `${normalized}/` };
   if (normalized === `${dogGapBase}about`.replace(/\/$/, "")) return { page: "gapDetail", gapSlug: dogGapSlug, gapSection: "overview" };
+  const investigationReport = normalized.match(/^\/work\/dogs\/reports\/([^/]+)$/);
+  if (investigationReport) {
+    const params = new URLSearchParams(search);
+    const from = params.get("from");
+    return { page: "workInvestigation", investigationSlug: "dogs", workSection: workSections.includes(from as WorkSection) ? from as WorkSection : "map", reportId: decodeURIComponent(investigationReport[1]), reportLocationId: params.get("location") ?? undefined };
+  }
   const workInvestigation = normalized.match(/^\/work\/([^/]+)(?:\/(tasks|activity|map|findings))?$/);
   if (workInvestigation && investigations.some((item) => item.slug === workInvestigation[1])) return { page: "workInvestigation", investigationSlug: workInvestigation[1], workSection: (workInvestigation[2] as WorkSection | undefined) ?? "tasks" };
   if (normalized === "/action/look-for-dogs-on-the-street") return { page: "workInvestigation", investigationSlug: "dogs", workSection: "tasks" };
@@ -136,6 +143,7 @@ function canonicalPathname(pathname: string, hash = "") {
 
 function titleForRoute(route: RouteState) {
   if (route.page === "article") return `${articleForPath(route.articlePath ?? "")?.title ?? "Article not found"} | Crossover Stockton`;
+  if (route.page === "workInvestigation" && route.reportId) return `${reports.find((item) => item.id === route.reportId)?.title ?? "Field report not found"} | Crossover Stockton`;
   if (route.page === "workInvestigation" && route.workSection === "findings") return "Findings | Crossover Stockton";
   if (route.page === "workInvestigation") return `${investigations.find((item) => item.slug === route.investigationSlug)?.title ?? "Investigation"} — ${route.workSection ?? "tasks"} | Crossover Stockton`;
   if (route.page === "gapDetail") {
@@ -181,7 +189,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
       return pathname;
     }
 
-    setRoute(routeFromPathname(ensureCanonicalPath()));
+    setRoute(routeFromPathname(ensureCanonicalPath(), window.location.search));
     if (window.location.hash) requestAnimationFrame(() => requestAnimationFrame(() => {
       const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
       if (target instanceof HTMLDetailsElement) target.open = true;
@@ -189,7 +197,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     }));
 
     function handlePopState() {
-      setRoute(routeFromPathname(ensureCanonicalPath()));
+      setRoute(routeFromPathname(ensureCanonicalPath(), window.location.search));
       requestAnimationFrame(() => {
         const anchor = decodeURIComponent(window.location.hash.slice(1));
         if (!anchor) {
@@ -304,6 +312,15 @@ export default function App({ initialPath }: { initialPath?: string }) {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
+  function showInvestigationReport(reportId: string, locationId?: string) {
+    const originSection = route.page === "article" ? "findings" : route.page === "workInvestigation" ? route.workSection ?? "map" : "map";
+    const params = new URLSearchParams({ from: originSection });
+    if (locationId) params.set("location", locationId);
+    const nextPath = `/work/dogs/reports/${encodeURIComponent(reportId)}/?${params}`;
+    if (`${window.location.pathname}${window.location.search}` !== nextPath) window.history.pushState({}, "", nextPath);
+    setRoute({ page: "workInvestigation", investigationSlug: "dogs", workSection: originSection, reportId, reportLocationId: locationId });
+  }
+
   function showStory(slug: string) {
     const nextPath = `/stories/${slug}/`;
     if (window.location.pathname !== nextPath) {
@@ -346,11 +363,13 @@ export default function App({ initialPath }: { initialPath?: string }) {
         slug={route.page === "article" ? dogGapSlug : investigations.find((item) => item.slug === route.investigationSlug)?.gapSlug}
         section={route.page === "article" ? "findings" : route.workSection ?? "tasks"}
         articlePath={route.page === "article" ? route.articlePath : undefined}
+        reportId={route.reportId}
+        reportLocationId={route.reportLocationId}
         onOpenArticle={showArticle}
         workspaceBasePath={route.page === "article" ? "/work/dogs/" : `/work/${route.investigationSlug}/`}
         onOpenSection={showGapSection}
         onNavigate={showPage}
-        onOpenReport={showReport}
+        onOpenReport={showInvestigationReport}
       />}
 
       {route.page === "report" && (

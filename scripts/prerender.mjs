@@ -72,6 +72,9 @@ const pages = [
   ["/work/dogs/activity/", "Activity | Crossover Stockton", "Documented work in the Stockton dog investigation."],
   ["/work/dogs/map/", "Map | Crossover Stockton", "Locations and field observations in the Stockton dog investigation."],
   ["/work/dogs/findings/", "Findings | Crossover Stockton", "Articles on what Crossover has observed, believes, and is still investigating about dog care in Stockton."],
+  ...records.filter((record) => record.record_type === "field_report" && record.gap_ids.includes("dogs-safe-placement")).map((record) => [
+    `/work/dogs/reports/${encodeURIComponent(record.id)}/`, `${record.title} | Crossover Stockton`, record.summary ?? record.title,
+  ]),
   ...publishedArticles.map((article) => [article.path, `${article.title} | Crossover Stockton`, article.description]),
   ["/reality/", "Reality | Crossover Stockton", "Follow needs in Stockton and the evidence behind them."],
   ["/connection/", "Connection | Crossover Stockton", "Stories of local people and organizations responding to Stockton's needs."],

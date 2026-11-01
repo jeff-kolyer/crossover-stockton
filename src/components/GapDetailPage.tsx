@@ -9,24 +9,28 @@ interface GapDetailPageProps {
   section: Section;
   workspaceBasePath: string;
   articlePath?: string;
+  reportId?: string;
+  reportLocationId?: string;
   onOpenArticle?: (path: string) => void;
   onOpenSection: (slug: string, section: Section, anchor?: string) => void;
   onNavigate: (page: "home" | "reality" | "action" | "organizations") => void;
-  onOpenReport: (reportId: string) => void;
+  onOpenReport: (reportId: string, locationId?: string) => void;
 }
 
 const gaps = gapsData as GapRecord[];
 
-export function GapDetailPage({ slug, section, workspaceBasePath, articlePath, onOpenArticle, onOpenSection, onNavigate, onOpenReport }: GapDetailPageProps) {
+export function GapDetailPage({ slug, section, workspaceBasePath, articlePath, reportId, reportLocationId, onOpenArticle, onOpenSection, onNavigate, onOpenReport }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);
   if (!gap) return <main className="gap-page"><h1>Investigation not found</h1></main>;
 
-  return <main className={`gap-page dog-gap-page is-${gap.investigation_status} crossover-workspace-app`}>
+  return <main className={`gap-page dog-gap-page is-${gap.investigation_status} workspace-app`}>
     <DogGapExperience
       gap={gap}
       section={section}
       workspaceBasePath={workspaceBasePath}
       articlePath={articlePath}
+      reportId={reportId}
+      reportLocationId={reportLocationId}
       onOpenArticle={onOpenArticle}
       onOpenSection={(next, anchor) => onOpenSection(gap.slug, next, anchor)}
       onNavigate={onNavigate}

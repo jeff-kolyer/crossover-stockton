@@ -416,6 +416,7 @@ export interface StoryEvidence {
 }
 
 export interface SourceRecord {
+  title?: string;
   publisher?: string;
   url?: string;
   type?: string;
@@ -453,6 +454,7 @@ export interface EvidenceRecord {
   summary: string;
   source: SourceRecord;
   context_sources?: SourceRecord[];
+  source_notes?: string[];
   image?: string;
   image_alt?: string;
   image_caption?: string;
@@ -469,6 +471,7 @@ export interface EvidenceRecord {
   location?: string;
   map_url?: string;
   visit_notes?: Array<{ title: string; body: string }>;
+  visit_notes_attribution?: string;
   sections?: Array<{ title: string; body: string }>;
   supports?: string[];
   role_signals?: string[];

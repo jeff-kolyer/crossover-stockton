@@ -1,19 +1,19 @@
 /* Functional geometry for the Leaflet investigation workspace. */
 
-.crossover-workspace-app {
+.workspace-app {
   display: flex;
   flex-direction: column;
   height: 100dvh;
   overflow: hidden;
 }
 
-.crossover-workspace-header {
+.workspace-header {
   grid-column: 1;
   grid-row: 1;
   min-width: 0;
 }
 
-.crossover-map-workspace {
+.map-workspace {
   position: relative;
   flex: 1;
   display: grid;
@@ -24,36 +24,36 @@
 }
 
 @media (min-width: 1024px) {
-  .crossover-map-workspace {
+  .map-workspace {
     grid-template-rows: max-content minmax(0, 1fr);
   }
 
-  .crossover-workspace-header {
+  .workspace-header {
     border-right: 1px solid #dadce0;
   }
 }
 
 @media (min-width: 1200px) {
-  .crossover-map-workspace {
+  .map-workspace {
     --crossover-panel-width: clamp(600px, var(--crossover-expanded-panel-width, 40%), calc(100% - 600px));
   }
 }
 
-.crossover-map-workspace .crossover-shared-map,
-.crossover-map-workspace .crossover-sheet {
+.map-workspace .shared-map,
+.map-workspace .sheet {
   min-width: 0;
   min-height: 0;
 }
 
-.crossover-map-workspace .dog-gap-real-map,
-.crossover-map-workspace .investigation-map-frame,
-.crossover-map-workspace .investigation-leaflet-shell,
-.crossover-map-workspace .dog-gap-map-loading {
+.map-workspace .dog-gap-real-map,
+.map-workspace .investigation-map-frame,
+.map-workspace .investigation-leaflet-shell,
+.map-workspace .dog-gap-map-loading {
   width: 100%;
   height: 100%;
 }
 
-.crossover-map-workspace .crossover-sheet {
+.map-workspace .sheet {
   grid-column: 1;
   grid-row: 1;
   overflow-y: auto;
@@ -63,23 +63,23 @@
   border-right: 1px solid #dadce0;
 }
 
-.crossover-map-workspace .crossover-shared-map {
+.map-workspace .shared-map {
   position: relative;
   grid-column: 2;
   grid-row: 1;
 }
 
 @media (min-width: 1024px) {
-  .crossover-map-workspace .crossover-sheet {
+  .map-workspace .sheet {
     grid-row: 2;
   }
 
-  .crossover-map-workspace .crossover-shared-map {
+  .map-workspace .shared-map {
     grid-row: 1 / 3;
   }
 }
 
-.crossover-panel-resize-handle {
+.panel-resize-handle {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -93,134 +93,30 @@
   touch-action: none;
 }
 
-.crossover-mobile-tabs {
+.mobile-tabs {
   display: none;
 }
 
-.crossover-desktop-tabs {
+.desktop-tabs {
   position: sticky;
   top: 0;
   z-index: 1;
   background: #fff;
 }
 
-.crossover-sheet-grip {
+.sheet-grip {
   display: none;
-}
-
-.crossover-map-filter-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  gap: 6px;
-  margin-bottom: 6px;
-}
-
-.crossover-map-dropdown summary::after {
-  content: "";
-  position: absolute;
-  right: 12px;
-  top: 10px;
-  width: 7px;
-  height: 7px;
-  border-right: 2px solid #202124;
-  border-bottom: 2px solid #202124;
-  transform: rotate(45deg);
-  pointer-events: none;
-}
-
-.crossover-map-dropdown {
-  position: relative;
-  flex: none;
-}
-
-.crossover-map-dropdown summary.plain-action-button.is-filter {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 32px;
-  padding-right: 29px;
-  list-style: none;
-  cursor: pointer;
-}
-
-.crossover-map-dropdown summary::-webkit-details-marker {
-  display: none;
-}
-
-.crossover-map-dropdown summary:focus {
-  outline: none;
-}
-
-.crossover-map-dropdown summary:focus-visible {
-  outline: 2px solid #1a73e8;
-  outline-offset: 2px;
-}
-
-.crossover-map-dropdown-options {
-  position: absolute;
-  z-index: 3;
-  top: calc(100% + 4px);
-  left: 0;
-  min-width: 100%;
-  width: max-content;
-  padding: 4px;
-  border: 1px solid #dadce0;
-  border-radius: 4px;
-  background: #fff;
-}
-
-.crossover-map-dropdown-options button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-  min-height: 32px;
-  padding: 5px 9px;
-  border: 0;
-  border-radius: 4px;
-  background: #fff;
-  color: #202124;
-  font: inherit;
-  font-size: 14px;
-  line-height: 1.3;
-  text-align: left;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.crossover-map-dropdown-options button:hover,
-.crossover-map-dropdown-options button:focus-visible {
-  background: #f1f3f4;
-}
-
-.crossover-map-filters {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  white-space: nowrap;
-}
-
-.crossover-map-filters::-webkit-scrollbar {
-  display: none;
-}
-
-.crossover-map-filters .plain-action-button.is-filter {
-  flex: none;
-  gap: 6px;
 }
 
 .investigation-leaflet-shell .leaflet-marker-icon {
   filter: drop-shadow(0 1px 1.5px rgba(31, 43, 54, .45));
 }
 
-.crossover-location-list .crossover-evidence-dot {
+.location-list .evidence-dot {
   box-shadow: 0 0 0 1px #fff;
 }
 
-.crossover-evidence-dot {
+.evidence-dot {
   display: inline-block;
   flex: none;
   width: 8px;
@@ -230,18 +126,23 @@
   top: -1px;
 }
 
-.crossover-location-list button .crossover-location-title,
-.crossover-task-list button .crossover-task-title {
+.location-list button .location-title,
+.task-list button .task-title {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
-.crossover-location-eyebrow,
-.crossover-location-area,
-.crossover-location-status,
-.crossover-location-facts dt,
-.crossover-location-coordinate-note {
+.location-list button > small,
+.task-list button > small {
+  padding-left: 14px;
+}
+
+.location-eyebrow,
+.location-area,
+.location-status,
+.location-facts dt,
+.location-coordinate-note {
   font-size: 14px;
 }
 
@@ -259,21 +160,21 @@
 }
 
 @media (max-width: 1023px) {
-  .crossover-mobile-tabs {
+  .mobile-tabs {
     display: grid;
   }
 
-  .crossover-desktop-tabs,
-  .crossover-panel-resize-handle {
+  .desktop-tabs,
+  .panel-resize-handle {
     display: none;
   }
 
-  .crossover-map-workspace {
+  .map-workspace {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: max-content minmax(0, 1fr);
   }
 
-  .crossover-map-workspace .crossover-shared-map {
+  .map-workspace .shared-map {
     grid-column: 1;
     grid-row: 2;
     position: absolute;
@@ -281,7 +182,7 @@
     inset: 0;
   }
 
-  .crossover-map-workspace .crossover-sheet {
+  .map-workspace .sheet {
     grid-column: 1;
     grid-row: 2;
     position: absolute;
@@ -292,19 +193,19 @@
     border-radius: 12px 12px 0 0;
     transition: top 180ms ease;
   }
-  .crossover-map-workspace.is-partial .crossover-sheet {
+  .map-workspace.is-partial .sheet {
     top: 42%;
   }
 
-  .crossover-map-workspace.is-expanded .crossover-sheet {
+  .map-workspace.is-expanded .sheet {
     top: 0;
   }
 
-  .crossover-map-workspace.is-dragging .crossover-sheet {
+  .map-workspace.is-dragging .sheet {
     transition: none;
   }
 
-  .crossover-sheet-grip {
+  .sheet-grip {
     position: sticky;
     top: 0;
     z-index: 1;
@@ -320,11 +221,11 @@
     touch-action: none;
   }
 
-  .crossover-sheet-grip:active {
+  .sheet-grip:active {
     cursor: grabbing;
   }
 
-  .crossover-sheet-grip span {
+  .sheet-grip span {
     width: 36px;
     height: 4px;
     border-radius: 999px;

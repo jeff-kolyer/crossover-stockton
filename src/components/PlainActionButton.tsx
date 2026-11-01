@@ -11,7 +11,7 @@ interface PlainActionButtonProps {
 }
 
 export function PlainActionButton({ children, onClick, disabled, compact = false, ariaLabel, pressed, variant = "default" }: PlainActionButtonProps) {
-  return <button type="button" className={`plain-action-button${compact ? " is-compact" : ""}${variant === "filter" ? " is-filter" : ""}`} aria-label={ariaLabel} aria-pressed={pressed} onClick={onClick} disabled={disabled}>{children}</button>;
+  return <button type="button" className={`plain-action-button${compact ? " is-compact" : ""}${variant === "filter" ? " is-filter" : ""}`} aria-label={ariaLabel} aria-pressed={pressed} onClick={onClick} disabled={disabled}>{variant === "filter" ? <span>{children}</span> : children}</button>;
 }
 
 export function CloseDetailButton({ label, onClick }: { label: string; onClick: MouseEventHandler<HTMLButtonElement> }) {
