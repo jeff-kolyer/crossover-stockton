@@ -143,43 +143,49 @@ h3 {
 }
 
 .investigation-app-bar {
+  display: grid;
+  gap: 4px;
+}
+
+.investigation-parent-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-.investigation-header .public-mobile-menu {
-  display: grid;
-  flex: none;
+.investigation-parent-nav a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-inline: -8px;
+  padding: 11px 8px;
+  font-size: 15px;
+  font-weight: 400;
 }
 
-@media (min-width: 1024px) {
-  .investigation-header .public-menu-backdrop {
-    position: absolute;
-    inset: 53px auto auto 16px;
-    display: block;
-    width: min(390px, calc(100vw - 32px));
-    padding: 0;
-    overflow: visible;
-    background: none;
-  }
-
-  .investigation-header .public-menu-modal {
-    width: 100%;
-    border: 1px solid #dadce0;
-  }
+.investigation-parent-nav svg {
+  width: 16px;
+  height: 16px;
 }
 
 .investigation-app-title {
-  flex: 1;
   min-width: 0;
   margin: 0;
-  overflow: hidden;
   color: inherit;
   font-size: 18px;
   font-weight: 700;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+}
+
+.investigation-subtitle {
+  margin: 0;
+  color: #5f6368;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.investigation-header .primary-tabs {
+  margin-top: 16px;
 }
 
 .crossover-index>header,

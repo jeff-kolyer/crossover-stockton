@@ -178,6 +178,13 @@ function titleForRoute(route: RouteState) {
 
 export default function App({ initialPath }: { initialPath?: string }) {
   const [route, setRoute] = useState<RouteState>(() => routeFromPathname(initialPath ?? window.location.pathname));
+  const googleExperiment = import.meta.env.DEV && typeof window !== "undefined" && new URLSearchParams(window.location.search).get("ui") === "google";
+  const investigationPath = (path: string) => {
+    if (!googleExperiment) return path;
+    const url = new URL(path, window.location.origin);
+    url.searchParams.set("ui", "google");
+    return `${url.pathname}${url.search}${url.hash}`;
+  };
 
   useEffect(() => {
     function ensureCanonicalPath() {
@@ -230,8 +237,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
   function showInvestigation(slug: string, section: WorkSection = "tasks", anchor?: string) {
     const investigation = investigations.find((item) => item.slug === slug);
     if (!investigation) return;
-    const nextPath = `/work/${slug}/${section === "tasks" ? "" : `${section}/`}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`;
-    if (`${window.location.pathname}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
+    const nextPath = investigationPath(`/work/${slug}/${section === "tasks" ? "" : `${section}/`}${anchor ? `#${encodeURIComponent(anchor)}` : ""}`);
+    if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== nextPath) window.history.pushState({}, "", nextPath);
     setRoute({ page: "workInvestigation", investigationSlug: slug, workSection: section });
     requestAnimationFrame(() => {
       if (anchor) document.getElementById(anchor)?.scrollIntoView({ block: "start" });
@@ -241,7 +248,8 @@ export default function App({ initialPath }: { initialPath?: string }) {
 
   function showArticle(path: string) {
     if (!articleForPath(path)) return;
-    if (window.location.pathname !== path) window.history.pushState({}, "", path);
+    const nextPath = investigationPath(path);
+    if (`${window.location.pathname}${window.location.search}` !== nextPath) window.history.pushState({}, "", nextPath);
     setRoute({ page: "article", articlePath: path });
   }
 
@@ -316,6 +324,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
     const originSection = route.page === "article" ? "findings" : route.page === "workInvestigation" ? route.workSection ?? "map" : "map";
     const params = new URLSearchParams({ from: originSection });
     if (locationId) params.set("location", locationId);
+    if (googleExperiment) params.set("ui", "google");
     const nextPath = `/work/dogs/reports/${encodeURIComponent(reportId)}/?${params}`;
     if (`${window.location.pathname}${window.location.search}` !== nextPath) window.history.pushState({}, "", nextPath);
     setRoute({ page: "workInvestigation", investigationSlug: "dogs", workSection: originSection, reportId, reportLocationId: locationId });
@@ -365,6 +374,7 @@ export default function App({ initialPath }: { initialPath?: string }) {
         articlePath={route.page === "article" ? route.articlePath : undefined}
         reportId={route.reportId}
         reportLocationId={route.reportLocationId}
+        googleExperiment={googleExperiment}
         onOpenArticle={showArticle}
         workspaceBasePath={route.page === "article" ? "/work/dogs/" : `/work/${route.investigationSlug}/`}
         onOpenSection={showGapSection}

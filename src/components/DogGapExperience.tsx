@@ -18,7 +18,7 @@ import { CloseDetailButton, PlainActionButton } from "./PlainActionButton";
 import { ArticleContent } from "./ArticlePages";
 import { FieldReportContent, formatReportDate } from "./FieldReportContent";
 import { WorkspacePage, WorkspaceSection } from "./WorkspacePage";
-import { PublicMobileMenu, type PublicRoute } from "./PublicMobileMenu";
+import type { PublicRoute } from "./PublicMobileMenu";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 
 type Section = "tasks" | "activity" | "map" | "findings";
@@ -125,12 +125,13 @@ function DogGapOverviewMap({ locations, selectedId, onSelect, followSelection, p
   </div>;
 }
 
-export function DogGapExperience({ gap, section, workspaceBasePath, articlePath, reportId, reportLocationId, onOpenArticle, onOpenSection, onNavigate, onOpenReport }: {
+export function DogGapExperience({ gap, section, workspaceBasePath, articlePath, reportId, reportLocationId, googleExperiment = false, onOpenArticle, onOpenSection, onNavigate, onOpenReport }: {
   gap: GapRecord; section: Section; onOpenSection: (section: Section, anchor?: string) => void;
   workspaceBasePath: string;
   articlePath?: string;
   reportId?: string;
   reportLocationId?: string;
+  googleExperiment?: boolean;
   onOpenArticle?: (path: string) => void;
   onNavigate: (page: PublicRoute) => void;
   onOpenReport: (id: string, locationId?: string) => void;
@@ -228,7 +229,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     ]));
     return mappedLocations.filter((location) => locationIds.has(location.id));
   }, [currentFindings]);
-  const tabLink = (id: Section) => `${workspaceBasePath}${id}/`;
+  const tabLink = (id: Section) => `${workspaceBasePath}${id}/${googleExperiment ? "?ui=google" : ""}`;
   const openPrimary = (tab: "tasks" | "activity" | "map" | "findings") => {
     setSelectedTaskId("");
     setSelectedActivityId("");
@@ -385,7 +386,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const reportRecords = records.filter((record) => record.record_type === "field_report" && record.gap_ids.includes(gap.id));
   const activityRecords = investigationActivities;
   const selectedActivity = activityRecords.find((record) => record.id === selectedActivityId);
-  const reportHref = (id: string, locationId?: string) => `/work/dogs/reports/${encodeURIComponent(id)}/?from=${section}${locationId ? `&location=${encodeURIComponent(locationId)}` : ""}`;
+  const reportHref = (id: string, locationId?: string) => `/work/dogs/reports/${encodeURIComponent(id)}/?from=${section}${locationId ? `&location=${encodeURIComponent(locationId)}` : ""}${googleExperiment ? "&ui=google" : ""}`;
   const openInvestigationReport = (id: string, locationId?: string) => onOpenReport(id, locationId ?? (selectedLocationId || undefined));
   const recordLink = (id: string) => {
     const record = investigationRecordById.get(id);
@@ -398,8 +399,12 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const primaryTabs = () => <nav className="primary-tabs" aria-label="Investigation sections">{(["tasks", "activity", "map", "findings"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={section === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{tab[0].toUpperCase() + tab.slice(1)}</a>)}</nav>;
   const investigationHeader = (className: string) => <header className={`investigation-header ${className}`}>
     <div className="investigation-app-bar">
-      <PublicMobileMenu onNavigate={onNavigate} onOpenInvestigation={() => openPrimary("tasks")} />
+      <nav className="investigation-parent-nav" aria-label="Crossover navigation">
+        <a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>Crossover</a>
+        <a href="/about/" onClick={(event) => navigateInternalLink(event, () => onNavigate("about"))}>About</a>
+      </nav>
       <h2 className="investigation-app-title" title="Dogs on the street in Stockton">Dogs on the street in Stockton</h2>
+      <p className="investigation-subtitle">Investigating · Stockton, California</p>
     </div>
     {primaryTabs()}
   </header>;
@@ -489,7 +494,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
             return <article key={finding.id}>
               <h3>{finding.title}</h3>
               <div>{finding.statement}</div>
-              <small>{finding.status.charAt(0).toUpperCase() + finding.status.slice(1).replaceAll("_", " ")}{relatedArticle && <> · <a href={relatedArticle.path} onClick={onOpenArticle ? (event) => navigateInternalLink(event, () => onOpenArticle(relatedArticle.path)) : undefined}>{relatedArticle.title}</a></>}</small>
+              <small>{finding.status.charAt(0).toUpperCase() + finding.status.slice(1).replaceAll("_", " ")}{relatedArticle && <> · <a href={`${relatedArticle.path}${googleExperiment ? "?ui=google" : ""}`} onClick={onOpenArticle ? (event) => navigateInternalLink(event, () => onOpenArticle(relatedArticle.path)) : undefined}>{relatedArticle.title}</a></>}</small>
             </article>;
           })}</div>
         </WorkspaceSection>
