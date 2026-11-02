@@ -31,6 +31,8 @@ export interface InvestigationQuestion {
 export interface InvestigationFinding {
   id: string;
   investigation_id: string;
+  /** One of the shared Overview, Activity, and Findings question section IDs. */
+  primary_question_id?: string;
   /** False retains a superseded finding and its evidence links without listing it as current. Defaults to true. */
   current?: boolean;
   title: string;

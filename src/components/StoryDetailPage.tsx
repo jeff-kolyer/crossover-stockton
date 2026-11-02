@@ -7,7 +7,7 @@ import { PublicFooter } from "./PublicFooter";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
 import type { GapRecord, StoryEvidence, StoryRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
 interface StoryDetailPageProps {
   slug?: string;

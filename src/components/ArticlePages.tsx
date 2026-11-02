@@ -14,7 +14,7 @@ export function ArticleContent({ article, onBack, onOpenReport }: { article: Art
         {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         {section.links?.length ? <ul>{section.links.map((link) => {
           const reportId = link.url.match(/^\/reports\/([^/]+)\/?$/)?.[1];
-          return <li key={link.url}><a href={reportId ? `/work/dogs/reports/${reportId}/?from=findings` : link.url} onClick={reportId && onOpenReport ? (event) => navigateInternalLink(event, () => onOpenReport(decodeURIComponent(reportId))) : undefined}>{link.label}</a></li>;
+          return <li key={link.url}><a href={reportId ? `/work/dogs/reports/${reportId}/?from=findings` : link.url} onClick={reportId && onOpenReport ? (event) => navigateInternalLink(event, () => onOpenReport(decodeURIComponent(reportId))) : undefined}>{link.display_label ?? link.label}</a></li>;
         })}</ul> : null}
       </WorkspaceSection>)}
   </WorkspacePage>;

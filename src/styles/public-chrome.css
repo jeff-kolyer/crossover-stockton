@@ -141,3 +141,76 @@
   .public-site .public-logo { grid-column: 1 / -1; grid-row: 2; }
   .public-site .public-nav .location-pill { grid-column: 2; grid-row: 1; justify-self: end; }
 }
+
+/* The working panel always uses the site's compact navigation layout. */
+.public-nav--investigation {
+  position: relative;
+  z-index: 5;
+  display: block;
+  width: 100%;
+  min-height: 62px;
+  padding: 0;
+  background: #08110f;
+  color: #fff;
+}
+
+.investigation-nav-inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 62px;
+  padding: 9px 16px;
+}
+
+.public-nav--investigation .public-mobile-menu {
+  display: grid;
+  border: 0;
+  background: none;
+  color: #fff;
+}
+
+.public-nav--investigation .public-logo {
+  justify-self: center;
+  min-width: 0;
+  gap: 6px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.public-nav--investigation .public-logo img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.public-nav--investigation .public-logo span {
+  font-family: "Avenir Next", Montserrat, Arial, sans-serif;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+
+.public-nav--investigation nav { display: none; }
+
+.public-nav--investigation .location-pill {
+  display: block;
+  min-height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+@media (max-width: 260px) {
+  .investigation-nav-inner { grid-template-columns: 44px minmax(0, 1fr); }
+  .public-nav--investigation .public-logo { grid-column: 1 / -1; grid-row: 2; }
+  .public-nav--investigation .location-pill { grid-column: 2; grid-row: 1; justify-self: end; }
+}

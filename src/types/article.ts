@@ -2,6 +2,7 @@ export type ArticleType = "finding" | "investigation" | "opinion" | "report" | "
 
 export interface ArticleLink {
   label: string;
+  display_label?: string;
   url: string;
 }
 

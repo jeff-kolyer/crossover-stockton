@@ -31,7 +31,7 @@ const labelOffset = 20;
 function makeCircleMarker(location: MappedInvestigationLocation, selected: boolean) {
   const kind = location.marker_kind;
   const icon = kind === "animal_shelter" ? pawIcon : kind === "organization" ? handHeartIcon : eyeIcon;
-  const fill = location.category === "official_location_record" ? "#1468D1" : evidenceCategoryColors[location.category];
+  const fill = evidenceCategoryColors[location.category];
   const growth = selected ? 2 : 0;
   const center = 18 + growth;
   const size = 36 + growth * 2;

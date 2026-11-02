@@ -2,6 +2,7 @@
 import type { EvidenceRecord } from "../types";
 import type { InvestigationTask } from "../types/investigation";
 import { navigateInternalLink } from "../lib/internalLink";
+import { locationSourceLinkLabel, recordLinkLabel, taskLinkLabel } from "../lib/linkLabels";
 import type { InvestigationLocation } from "./InvestigationLocations";
 import { CloseDetailButton } from "./PlainActionButton";
 
@@ -27,6 +28,8 @@ export function CrossoverLocationDetails({ location, records, tasks, activities,
 }) {
   const evidenceIds = location.evidence_record_ids ?? (location.evidence_record_id ? [location.evidence_record_id] : []);
   const evidence = evidenceIds.flatMap((id) => records.find((record) => record.id === id) ?? []);
+  const primarySource = evidence.find((record) => record.source.url === location.source_url);
+  const sourceLabel = primarySource ? recordLinkLabel(primarySource) : locationSourceLinkLabel(location.id);
   const observations = activities.flatMap((record) => (record.planned_sites ?? [])
     .filter((site) => site.location_id === location.id)
     .map((site) => ({ record, site })));
@@ -51,10 +54,10 @@ export function CrossoverLocationDetails({ location, records, tasks, activities,
     <section><h3>What was reported</h3><p>{location.description}</p></section>
     <section><h3>Last known outcome</h3><p>{location.last_known_outcome}</p></section>
     <section><h3>What remains unknown</h3><p>{location.unknown}</p></section>
-    <section><h3>Field reports</h3>{reports.length ? <ul>{reports.map((report) => <li key={report.id}><a href={`/work/dogs/reports/${encodeURIComponent(report.id)}/?from=map&location=${encodeURIComponent(location.id)}`} onClick={(event) => navigateInternalLink(event, () => onOpenReport(report.id))}>{report.title}</a>{report.occurred_at && ` · ${fullDate(report.occurred_at)}`}</li>)}</ul> : <p>No field report is linked to this location yet.</p>}</section>
-    <section><h3>Related tasks</h3>{relatedTasks.length ? <ul>{relatedTasks.map((task) => <li key={task.id}><a href={`/work/dogs/tasks/#${encodeURIComponent(task.id)}`} onClick={(event) => navigateInternalLink(event, () => onOpenTask(task))}>{task.title}</a> · {task.status}</li>)}</ul> : <p>No task is linked to this location yet.</p>}</section>
+    <section><h3>Field reports</h3>{reports.length ? <ul>{reports.map((report) => <li key={report.id}><a href={`/work/dogs/reports/${encodeURIComponent(report.id)}/?from=map&location=${encodeURIComponent(location.id)}`} onClick={(event) => navigateInternalLink(event, () => onOpenReport(report.id))}>{recordLinkLabel(report)}</a>{report.occurred_at && ` · ${fullDate(report.occurred_at)}`}</li>)}</ul> : <p>No field report is linked to this location yet.</p>}</section>
+    <section><h3>Related tasks</h3>{relatedTasks.length ? <ul>{relatedTasks.map((task) => <li key={task.id}><a href={`/work/dogs/tasks/#${encodeURIComponent(task.id)}`} onClick={(event) => navigateInternalLink(event, () => onOpenTask(task))}>{taskLinkLabel(task)}</a> · {task.status}</li>)}</ul> : <p>No task is linked to this location yet.</p>}</section>
     <section><h3>What Crossover observed</h3>{observations.length ? observations.map(({ record, site }) => <div className="location-record" key={`${record.id}-${site.label}`}><strong>{site.label}{record.occurred_at && ` · ${fullDate(record.occurred_at)}`}</strong><p>{site.reason}</p><small>{record.outcome?.summary ?? record.summary}</small></div>) : <p>No Crossover field observation is documented for this location.</p>}</section>
-    <section><h3>Evidence</h3>{evidence.length ? evidence.map((record) => <div className="location-record" key={record.id}><strong>{record.title}</strong><p>{record.summary}</p>{record.source.url && <a href={record.source.url} target="_blank" rel="noreferrer">{record.source.publisher ?? "Read source"}</a>}</div>) : <p>{location.evidence_type}: {location.description}</p>}</section>
-    <section><h3>Sources</h3><div className="location-links"><a href={location.source_url} target="_blank" rel="noreferrer"> Read supporting source</a>{location.google_maps_url && <a href={location.google_maps_url} target="_blank" rel="noreferrer">Open in Google Maps</a>}{location.coordinate_reference_url && <a href={location.coordinate_reference_url} target="_blank" rel="noreferrer"> Location reference</a>}</div><p className="location-coordinate-note">{location.coordinate_note}</p></section>
+    <section><h3>Evidence</h3>{evidence.length ? evidence.map((record) => <div className="location-record" key={record.id}><strong>{record.title}</strong><p>{record.summary}</p>{record.source.url && <a href={record.source.url} target="_blank" rel="noreferrer">{recordLinkLabel(record)}</a>}</div>) : <p>{location.evidence_type}: {location.description}</p>}</section>
+    <section><h3>Sources</h3><div className="location-links"><a href={location.source_url} target="_blank" rel="noreferrer">{sourceLabel}</a>{location.google_maps_url && <a href={location.google_maps_url} target="_blank" rel="noreferrer">Open in Google Maps</a>}{location.coordinate_reference_url && <a href={location.coordinate_reference_url} target="_blank" rel="noreferrer">Location reference</a>}</div><p className="location-coordinate-note">{location.coordinate_note}</p></section>
   </article>;
 }

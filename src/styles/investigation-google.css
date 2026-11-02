@@ -3,22 +3,12 @@
   color: #0b57d0;
 }
 
-.investigation-google .map-filters,
-.investigation-google .map-filter-row {
+.investigation-google .map-filters {
   margin-bottom: 12px;
 }
 
-.investigation-google .plain-action-button.is-filter > span {
+.investigation-google .plain-action-button.is-pill > span {
   padding: 12px 10px;
-}
-
-.investigation-google .plain-action-button.is-filter[aria-pressed="true"] > span {
-  border-color: #0b57d0;
-  background: #0b57d0;
-}
-
-.investigation-google .map-dropdown-options {
-  border-radius: 12px;
 }
 
 .investigation-google .record-list {

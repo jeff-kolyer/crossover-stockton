@@ -81,8 +81,6 @@ const pages = [
   ["/action/", "Action | Crossover Stockton", "Follow Crossover's current work and field investigations in Stockton."],
   ["/updates/", "Updates | Crossover Stockton", "Recent updates on Stockton's needs and community response."],
   ["/about/", "About | Crossover Stockton", "Learn how Crossover Stockton connects local reality, response, and action."],
-  ["/organizations/", "Organizations | Crossover Stockton", "Organizations Crossover has contacted or visited."],
-  ...organizations.filter((org) => org.active && engagedOrganizationIds.has(org.id)).map((org) => [`/organizations/${org.slug}/`, `${org.name} | Crossover Stockton`, `Crossover's recorded involvement with ${org.name}.`]),
   ...gaps.filter((gap) => gap.active).map((gap) => [`/reality/${gap.slug}/`, `${gap.title} — Reality | Crossover Stockton`, gap.summary]),
   ...stories.filter((story) => story.active).map((story) => [
     `/stories/${story.slug}/`, `${story.title} | Crossover Stockton`, story.summary,
@@ -159,6 +157,9 @@ try {
   }
 
   const legacyRedirects = [
+    ["/work/dogs/about/", "/work/dogs/activity/#overview"],
+    ["/organizations/", "/work/dogs/activity/#organizations"],
+    ...organizations.filter((org) => org.active && engagedOrganizationIds.has(org.id)).map((org) => [`/organizations/${org.slug}/`, `/work/dogs/activity/#organization-${org.slug}`]),
     ["/action/look-for-dogs-on-the-street/", "/work/dogs/"],
     ...gaps.filter((gap) => gap.active).flatMap((gap) => [
       ...Object.entries(legacyReferenceSections).map(([section, anchor]) => [`/reality/${gap.slug}/${section}/`, `/reality/${gap.slug}/#${anchor}`]),

@@ -25,6 +25,7 @@
   },
   {
     "id": "finding-street-population-unknown",
+    "primary_question_id": "question-extent",
     "current": true,
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Current street-dog population is not established",
@@ -141,6 +142,7 @@
   },
   {
     "id": "finding-volunteer-onboarding-can-stall",
+    "primary_question_id": "question-participation",
     "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "Attempts to get involved in animal care can stall.",
@@ -170,6 +172,7 @@
   },
   {
     "id": "finding-public-street-dog-information-fragmented",
+    "primary_question_id": "question-extent",
     "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "Public information about street dogs is difficult to piece together.",
@@ -197,6 +200,7 @@
   },
   {
     "id": "finding-new-facilities-impact-uncertain",
+    "primary_question_id": "question-improvements",
     "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "New facilities may expand care, but their impact remains uncertain.",

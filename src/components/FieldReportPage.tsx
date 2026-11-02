@@ -5,7 +5,7 @@ import type { EvidenceRecord, GapRecord } from "../types";
 import { FieldReportContent, formatReportDate } from "./FieldReportContent";
 import { PublicSiteNav } from "./PublicSiteNav";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
 interface FieldReportPageProps {
   reportId?: string;

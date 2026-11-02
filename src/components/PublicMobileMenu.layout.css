@@ -39,6 +39,21 @@
   background: #050c0a8a;
 }
 
+.public-menu-popover {
+  position: absolute;
+  z-index: 1000;
+  top: 100%;
+  left: 16px;
+  width: min(390px, calc(100% - 32px));
+  border: 1px solid #dadce0;
+  background: #fff;
+}
+
+.public-menu-popover .public-menu-modal {
+  width: 100%;
+  border-radius: 0;
+}
+
 .public-menu-modal {
   width: min(390px, 100%);
   padding: 16px;

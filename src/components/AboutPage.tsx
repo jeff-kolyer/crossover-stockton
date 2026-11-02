@@ -3,7 +3,7 @@ import { PublicPrimaryAction } from "./PublicPrimaryAction";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
 interface AboutPageProps {
   onNavigate: (page: PublicRoute) => void;

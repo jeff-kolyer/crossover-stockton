@@ -11,7 +11,7 @@ import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import type { CapacityProject, DogsResearchBaseline, EvidenceRecord, GapRecord, OrgRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 type SourceEntry = { url: string; title: string; publisher?: string; publishedAt?: string | null; checkedAt?: string };
 type ExtendedGapSource = { url?: string; title?: string; label?: string; publisher?: string; published_at?: string | null; checked_at?: string };
 type GapQuestion = { id: string; investigation_id: string; title: string };

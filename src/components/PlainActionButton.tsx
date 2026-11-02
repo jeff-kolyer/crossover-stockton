@@ -1,4 +1,4 @@
-import type { MouseEventHandler, ReactNode } from "react";
+import type { MouseEventHandler, ReactNode, Ref } from "react";
 
 interface PlainActionButtonProps {
   children: ReactNode;
@@ -7,11 +7,13 @@ interface PlainActionButtonProps {
   compact?: boolean;
   ariaLabel?: string;
   pressed?: boolean;
-  variant?: "default" | "filter";
+  variant?: "default" | "selection" | "applied-filter";
+  tone?: "navy" | "light-blue";
+  buttonRef?: Ref<HTMLButtonElement>;
 }
 
-export function PlainActionButton({ children, onClick, disabled, compact = false, ariaLabel, pressed, variant = "default" }: PlainActionButtonProps) {
-  return <button type="button" className={`plain-action-button${compact ? " is-compact" : ""}${variant === "filter" ? " is-filter" : ""}`} aria-label={ariaLabel} aria-pressed={pressed} onClick={onClick} disabled={disabled}>{variant === "filter" ? <span>{children}</span> : children}</button>;
+export function PlainActionButton({ children, onClick, disabled, compact = false, ariaLabel, pressed, variant = "default", tone = "navy", buttonRef }: PlainActionButtonProps) {
+  return <button ref={buttonRef} type="button" className={`plain-action-button${compact ? " is-compact" : ""}${variant !== "default" ? ` is-pill is-${variant}` : ""}${variant === "selection" && tone === "light-blue" ? " is-light-blue" : ""}`} aria-label={ariaLabel} aria-pressed={pressed} onClick={onClick} disabled={disabled}>{variant !== "default" ? <span>{children}</span> : children}</button>;
 }
 
 export function CloseDetailButton({ label, onClick }: { label: string; onClick: MouseEventHandler<HTMLButtonElement> }) {

@@ -12,7 +12,7 @@ import type { GapRecord, StoryRecord } from "../types";
 
 interface HomePageProps {
   page: "home" | "reality" | "connection";
-  onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations") => void;
+  onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
   onOpenGapSection: (slug: string, section: "our-findings") => void;

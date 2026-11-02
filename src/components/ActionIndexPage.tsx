@@ -4,7 +4,7 @@ import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
 interface ActionIndexPageProps {
   onNavigate: (page: PublicRoute) => void;

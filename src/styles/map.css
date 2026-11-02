@@ -119,12 +119,12 @@
 .task-list button .task-title {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 }
 
 .location-list button > small,
 .task-list button > small {
-  padding-left: 16px;
+  padding-left: 24px;
 }
 
 .location-eyebrow,

@@ -1,6 +1,6 @@
 import { navigateInternalLink } from "../lib/internalLink";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
 export function PublicFooter({ active, onNavigate, onOpenAbout }: {
   active: PublicRoute;

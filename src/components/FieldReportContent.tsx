@@ -2,6 +2,7 @@ import gapsData from "../data/gaps.json";
 import orgsData from "../data/orgs.json";
 import workData from "../data/work.json";
 import { navigateInternalLink } from "../lib/internalLink";
+import { organizationActivityHref } from "../lib/organizationActivity";
 import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
 
 const gaps = gapsData as GapRecord[];
@@ -40,16 +41,16 @@ export function FieldReportContent({ report, publicNavigation }: {
     {(report.map_url || visitWebsite) && <section aria-labelledby="report-location-resources-title">
       <h2 id="report-location-resources-title">Location resources</h2>
       <ul>
-        {report.map_url && <li><a href={report.map_url} target="_blank" rel="noreferrer">View location in OpenStreetMap</a></li>}
+        {report.map_url && <li><a href={report.map_url} target="_blank" rel="noreferrer">OpenStreetMap location</a></li>}
         {visitWebsite && <li><a href={visitWebsite} target="_blank" rel="noreferrer">{relatedOrgs[0].name} website</a></li>}
       </ul>
     </section>}
     {hasConnectedRecords && <section aria-labelledby="report-related-title">
       <h2 id="report-related-title">Connected records</h2>
       <ul>
-        {relatedOrgs.map((org) => <li key={org.id}><strong>Organization:</strong> <a href={`/organizations/${org.slug}/`}>{org.name}</a></li>)}
+        {relatedOrgs.map((org) => <li key={org.id}><strong>Organization:</strong> <a href={organizationActivityHref(org.slug)}>{org.name}</a></li>)}
         {relatedGaps.map((gap) => <li key={gap.id}><strong>Need:</strong> <a href={`/reality/${gap.slug}/`} onClick={publicNavigation ? (event) => navigateInternalLink(event, () => publicNavigation.onOpenGap(gap.slug)) : undefined}>{gap.title}</a></li>)}
-        {relatedWork && <li><strong>Activity:</strong> <a href="/work/dogs/activity/" onClick={publicNavigation ? (event) => navigateInternalLink(event, () => publicNavigation.onOpenWork(relatedWork.id)) : undefined}>{relatedWork.title}</a></li>}
+        {relatedWork && <li><strong>Activity:</strong> <a href="/work/dogs/activity/" onClick={publicNavigation ? (event) => navigateInternalLink(event, () => publicNavigation.onOpenWork(relatedWork.id)) : undefined}>Investigation activity</a></li>}
       </ul>
     </section>}
     <section aria-labelledby="report-sources-title">

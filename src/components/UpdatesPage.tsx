@@ -8,7 +8,7 @@ import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import type { EvidenceRecord, GapRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
 interface UpdatesPageProps {
   onNavigate: (page: PublicRoute) => void;

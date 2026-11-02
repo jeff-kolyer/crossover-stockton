@@ -19,22 +19,27 @@
           "links": [
             {
               "label": "Street Dogs application Activity record",
+              "display_label": "Street Dogs application",
               "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application"
             },
             {
               "label": "Doggie Day Out inquiry Activity record",
+              "display_label": "Doggie Day Out inquiry",
               "url": "/work/dogs/activity/#crossover-2026-10-12-doggie-day-out-inquiry"
             },
             {
               "label": "Animal Services application Activity record",
+              "display_label": "Animal Services application",
               "url": "/work/dogs/activity/#crossover-2026-10-14-sas-volunteer-application"
             },
             {
               "label": "Stockton Animal Services volunteer information",
+              "display_label": "Animal Services volunteering",
               "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php"
             },
             {
               "label": "Stockton Street Dogs volunteer link",
+              "display_label": "Street Dogs volunteering",
               "url": "https://linktr.ee/streetdogsanctuary"
             }
           ]
@@ -105,10 +110,12 @@
           "links": [
             {
               "label": "Crossover's records-request Activity record",
+              "display_label": "Animal Services records request",
               "url": "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request"
             },
             {
               "label": "California Department of Justice guide to public records timelines",
+              "display_label": "California records timelines guide",
               "url": "https://oag.ca.gov/consumers/general/pra"
             }
           ]
@@ -122,14 +129,17 @@
           "links": [
             {
               "label": "Stockton Animal Services complaint guidance",
+              "display_label": "Animal Services complaint guidance",
               "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php"
             },
             {
               "label": "City lost-and-found pet resources",
+              "display_label": "City lost-and-found resources",
               "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php"
             },
             {
               "label": "Stockton open-data animal-shelter overview",
+              "display_label": "Stockton animal-shelter data",
               "url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/"
             }
           ]
@@ -143,10 +153,12 @@
           "links": [
             {
               "label": "Crossover's volunteer-application Activity record",
+              "display_label": "Street Dogs volunteer application",
               "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application"
             },
             {
               "label": "Stockton Street Dogs' public site",
+              "display_label": "Street Dogs website",
               "url": "https://streetdogsanctuary.com/"
             }
           ]
@@ -231,10 +243,12 @@
           "links": [
             {
               "label": "Crossover's October 14 visit report",
+              "display_label": "Animal Services visit report",
               "url": "/reports/crossover-2026-10-14-sas-first-visit/"
             },
             {
               "label": "City of Stockton shelter expansion announcement",
+              "display_label": "City shelter expansion announcement",
               "url": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"
             }
           ]
@@ -248,10 +262,12 @@
           "links": [
             {
               "label": "Stockton Streetdogs' Canine Campus proposal",
+              "display_label": "Street Dogs campus proposal",
               "url": "https://streetdogsanctuary.com/canine-campus"
             },
             {
               "label": "Canine Campus construction fundraiser",
+              "display_label": "Canine Campus fundraiser",
               "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus"
             }
           ]
@@ -265,6 +281,7 @@
           "links": [
             {
               "label": "The Asher House and its operating model",
+              "display_label": "Asher House operating model",
               "url": "https://www.theasherhouse.com/pages/asher-house-faqs"
             }
           ]
@@ -321,14 +338,17 @@
           "links": [
             {
               "label": "CBS Sacramento: abandoned dogs in Stockton (April 6, 2026)",
+              "display_label": "CBS abandoned-dog report",
               "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/"
             },
             {
               "label": "CBS Sacramento: television report",
+              "display_label": "CBS shelter interview video",
               "url": "https://www.cbsnews.com/sacramento/video/animal-shelters-speak-out-on-abandoned-dog-problem-in-stockton/"
             },
             {
               "label": "Investigation question: Where are the stray dogs, and how many are there?",
+              "display_label": "Stray-dog investigation question",
               "url": "/reality/too-many-dogs-still-lack-safe-placement/#question-where-dogs-need-help"
             },
             {
@@ -346,14 +366,17 @@
           "links": [
             {
               "label": "CBS Sacramento: Church Street outreach report (June 8, 2026)",
+              "display_label": "CBS Church Street report",
               "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/"
             },
             {
               "label": "Planned St. Mary's corridor field task",
+              "display_label": "St. Mary’s field task",
               "url": "/work/dogs/tasks/#task-verify-st-marys-church-street-dog-scale"
             },
             {
               "label": "St. Mary's–Church Street corridor location record",
+              "display_label": "St. Mary’s corridor location",
               "url": "/work/dogs/map/#st-marys-church-street-corridor"
             }
           ]
@@ -367,18 +390,22 @@
           "links": [
             {
               "label": "Planned South Stockton / District 5 field task",
+              "display_label": "South Stockton field task",
               "url": "/work/dogs/tasks/#task-verify-south-stockton-district-5-reports"
             },
             {
               "label": "Carrie Street levee / Weston Ranch location record",
+              "display_label": "Carrie Street levee location",
               "url": "/work/dogs/map/#weston-ranch-carrie-street"
             },
             {
               "label": "Stocktonia: Carrie Street incident report (May 11, 2026)",
+              "display_label": "Stocktonia Carrie Street report",
               "url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/"
             },
             {
               "label": "KCRA 3: District 5 reporting (September 24, 2026)",
+              "display_label": "KCRA District 5 report",
               "url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921"
             }
           ]

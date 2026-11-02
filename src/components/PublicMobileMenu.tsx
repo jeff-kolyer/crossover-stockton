@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import "./PublicMobileMenu.layout.css";
 
-export type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "organizations";
-type MenuPage = PublicRoute | "investigation";
+export type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
+type MenuPage = PublicRoute;
 
 interface PublicMobileMenuProps {
   active?: PublicRoute;
   onNavigate: (page: PublicRoute) => void;
   onOpenAbout?: () => void;
-  onOpenInvestigation?: () => void;
+  popoverOnWide?: boolean;
 }
 
 const menuItems: Array<{ label: string; page: MenuPage }> = [
@@ -17,11 +17,11 @@ const menuItems: Array<{ label: string; page: MenuPage }> = [
   { label: "Stories", page: "connection" },
   { label: "Action", page: "action" },
   { label: "Updates", page: "updates" },
-  { label: "Organizations", page: "organizations" },
+  { label: "Investigation", page: "investigation" },
   { label: "About", page: "about" },
 ];
 
-export function PublicMobileMenu({ onNavigate, onOpenAbout, onOpenInvestigation }: PublicMobileMenuProps) {
+export function PublicMobileMenu({ onNavigate, onOpenAbout, popoverOnWide = false }: PublicMobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [desktopPopover, setDesktopPopover] = useState(false);
   const [pressedPage, setPressedPage] = useState<MenuPage | null>(null);
@@ -34,13 +34,13 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout, onOpenInvestigation 
   };
 
   useEffect(() => {
-    if (!onOpenInvestigation) return;
+    if (!popoverOnWide) return;
     const media = window.matchMedia("(min-width: 1024px)");
     const update = () => setDesktopPopover(media.matches);
     update();
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
-  }, [onOpenInvestigation]);
+  }, [popoverOnWide]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -85,10 +85,6 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout, onOpenInvestigation 
         onOpenAbout();
         return;
       }
-      if (page === "investigation") {
-        onOpenInvestigation?.();
-        return;
-      }
       onNavigate(page);
     }, 90);
   };
@@ -115,7 +111,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout, onOpenInvestigation 
       </button>
 
       {isOpen && (
-        <div className="public-menu-backdrop" role="presentation" onMouseDown={closeMenu}>
+        <div className={popoverOnWide && desktopPopover ? "public-menu-popover" : "public-menu-backdrop"} role="presentation" onMouseDown={closeMenu}>
           <div
             ref={dialogRef}
             id="site-navigation-menu"
@@ -137,7 +133,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout, onOpenInvestigation 
             </div>
 
             <div className="public-menu-list" role="navigation" aria-label="Mobile primary">
-              {(onOpenInvestigation ? [menuItems[0], { label: "Dogs on the street in Stockton", page: "investigation" as const }, ...menuItems.slice(1)] : menuItems).map((item) => (
+              {menuItems.map((item) => (
                 <button
                   className={pressedPage === item.page ? "is-pressed" : ""}
                   type="button"

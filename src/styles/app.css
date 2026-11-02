@@ -37,6 +37,21 @@ a {
   color: inherit;
 }
 
+.arrow-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+}
+
+.arrow-text-link-icon {
+  display: block;
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: inherit;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -63,50 +78,50 @@ h3 {
   line-height: 1.5;
 }
 
-/* Ordinary document content shares one block-flow rhythm on public and Work pages. */
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(h1, h2, h3, h4, h5, h6) {
+/* Public documents retain their shared rhythm; Work documents use HTML spacing. */
+:where(.public-document, .report-shell) :is(h1, h2, h3, h4, h5, h6) {
   margin: 0 0 var(--space-2);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(p, ul, ol, figure) {
+:where(.public-document, .report-shell) :is(p, ul, ol, figure) {
   margin: 0 0 var(--space-3);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(ul, ol) {
+:where(.public-document, .report-shell) :is(ul, ol) {
   padding-inline-start: var(--space-4);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) li+li {
+:where(.public-document, .report-shell) li+li {
   margin-top: var(--space-2);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) section+section {
+:where(.public-document, .report-shell) section+section {
   margin-top: var(--space-4);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(section, article)>img {
+:where(.public-document, .report-shell) :is(section, article)>img {
   display: block;
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) img+ :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {
+:where(.public-document, .report-shell) img+ :is(h1, h2, h3, h4, h5, h6, p, ul, ol) {
   margin-top: var(--space-3);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) figure img {
+:where(.public-document, .report-shell) figure img {
   display: block;
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) figcaption {
+:where(.public-document, .report-shell) figcaption {
   margin-top: var(--space-1);
   font-size: 14px;
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail)>nav {
+:where(.public-document, .report-shell)>nav {
   margin-bottom: var(--space-4);
 }
 
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail)> :last-child,
-:where(.public-document, .report-shell, .workspace-page, .location-sheet-detail) :is(section, article)> :last-child {
+:where(.public-document, .report-shell)> :last-child,
+:where(.public-document, .report-shell) :is(section, article)> :last-child {
   margin-bottom: 0;
 }
 
@@ -138,54 +153,87 @@ h3 {
   position: relative;
   z-index: 2;
   display: grid;
-  padding: 9px 16px 0;
   background: #fff;
 }
 
-.investigation-app-bar {
+.workspace-app {
+  --investigation-content-width: 900px;
+}
+
+.investigation-identity {
+  border-bottom: 1px solid #dadce0;
+}
+
+.investigation-identity-inner {
   display: grid;
-  gap: 4px;
-}
-
-.investigation-parent-nav {
-  display: flex;
+  grid-template-columns: 60.8px minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
-}
-
-.investigation-parent-nav a {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-inline: -8px;
-  padding: 11px 8px;
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.investigation-parent-nav svg {
-  width: 16px;
-  height: 16px;
-}
-
-.investigation-app-title {
+  width: 100%;
+  max-width: var(--investigation-content-width);
+  margin-inline: auto;
   min-width: 0;
-  margin: 0;
-  color: inherit;
-  font-size: 18px;
-  font-weight: 700;
+  padding: 12px 16px;
 }
 
-.investigation-subtitle {
+.investigation-dog-icon {
+  display: block;
+  width: 60.8px;
+  height: 60.8px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.investigation-identity-copy {
+  min-width: 0;
+}
+
+.investigation-identity h2 {
   margin: 0;
-  color: #5f6368;
-  font-size: 15px;
-  line-height: 1.5;
+}
+
+.investigation-identity-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.investigation-identity-meta a {
+  color: #111;
+  text-decoration: underline;
+}
+
+.investigation-identity-meta .investigation-identity-next {
+  flex: 0 1 auto;
+  min-width: 0;
+  margin-left: 5px;
+  padding-left: 6px;
+  border-left: 1px solid #c6ccd2;
+  color: #333;
+  text-decoration: none;
+}
+
+.investigation-identity-next:hover {
+  text-decoration: underline;
+}
+
+.investigation-identity-next span {
+  color: #111;
 }
 
 .investigation-header .primary-tabs {
-  margin-top: 16px;
+  margin-top: 0;
+  width: 100%;
+  max-width: var(--investigation-content-width);
+  margin-inline: auto;
+  border-bottom: 0;
+}
+
+.investigation-tabs-band {
+  border-bottom: 1px solid #dadce0;
 }
 
 .crossover-index>header,
@@ -264,12 +312,8 @@ h3 {
   max-width: 640px;
 }
 
-.crossover-index-body>h1 {
-  margin-bottom: 8px;
-}
-
-.crossover-index-body>p {
-  margin-bottom: 24px;
+.workspace-app .dog-gap-layout {
+  max-width: var(--investigation-content-width);
 }
 
 .crossover-index>header button {

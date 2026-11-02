@@ -4,6 +4,8 @@ import { readFile } from "node:fs/promises";
 const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8")).filter((gap) => gap.active).sort((a, b) => a.rank - b.rank);
 const articles = JSON.parse(await readFile(new URL("../src/data/articles.json", import.meta.url), "utf8"));
 const findingRecords = JSON.parse(await readFile(new URL("../src/data/findings.json", import.meta.url), "utf8"));
+const activityQuestions = ["question-extent", "question-care", "question-reporting", "question-participation", "question-improvements"];
+const records = JSON.parse(await readFile(new URL("../src/data/records.json", import.meta.url), "utf8"));
 const publishedArticles = articles.filter((article) => article.published);
 const dist = new URL("../dist/", import.meta.url);
 const sections = ["What&#x27;s happening?", "What&#x27;s documented?", "What remains unknown?", "Who&#x27;s responding?", "Sources"];
@@ -38,6 +40,23 @@ for (const [path, active] of [["", "tasks"], ["tasks/", "tasks"], ["activity/", 
   assert.ok(html.includes(`href="/work/dogs/${active}/" aria-current="page"`), `${path}: active workspace tab missing`);
   assert.ok(html.includes("shared-map"), `${path}: shared workspace map missing`);
 }
+const activity = await readFile(new URL("./work/dogs/activity/index.html", dist), "utf8");
+assert.ok(activity.includes('<div class="workspace-page investigation-activity-page"><section class="investigation-activity-work" aria-labelledby="recorded-activity-title"><h2 id="recorded-activity-title">Activity</h2>'), "Activity: page must begin with Activity");
+assert.ok(!activity.includes('id="investigation-about-title"') && !activity.includes('id="investigation-questions-title"'), "Activity: Overview content belongs in its detail view");
+assert.equal((activity.match(/class="activity-question-toggle" aria-expanded="false"/g) ?? []).length, 5, "Activity: all questions must start collapsed");
+let previousQuestion = activity.indexOf('id="recorded-activity-title"');
+for (const questionId of activityQuestions) {
+  const position = activity.indexOf(`id="${questionId}"`);
+  assert.ok(position > previousQuestion, `Activity: ${questionId} missing or out of order`);
+  assert.ok(activity.includes(`href="/work/dogs/findings/#${questionId}"`), `Activity: ${questionId} Findings link missing`);
+  assert.ok(activity.includes(`id="${questionId}-records" class="activity-question-records" hidden=""`), `Activity: ${questionId} records must start hidden`);
+  previousQuestion = position;
+}
+assert.ok(activity.includes('id="organizations"') && activity.includes('id="organization-stockton-street-dogs"'), "Activity: organization details missing");
+for (const record of records.filter((item) => (item.record_type === "activity" || item.record_type === "field_report") && item.gap_ids.includes("dogs-safe-placement"))) {
+  assert.equal(activity.split(`id="${record.id}"`).length - 1, 1, `Activity: ${record.id} must appear once`);
+}
+assert.ok(!activity.includes('investigation-overview-dialog'), "Activity: obsolete Overview dialog remains");
 const findings = await readFile(new URL("./work/dogs/findings/index.html", dist), "utf8");
 assert.ok(findings.includes('href="/work/dogs/findings/" aria-current="page"'), "Findings: active tab missing");
 assert.ok(findings.includes("shared-map"), "Findings: shared workspace map missing");
@@ -45,16 +64,22 @@ assert.ok(findings.includes('<h2 id="investigation-findings">Summary</h2>'), "Fi
 assert.ok(findings.includes('<h2 id="current-findings-heading">Findings</h2>'), "Findings: section missing");
 assert.ok(!findings.includes('If AI can drive cars') && !findings.includes('id="investigation-questions"') && !findings.includes('id="crossover-reference-title"'), "Findings: old introduction or reference wall remains");
 const currentFindings = findingRecords.filter((finding) => finding.investigation_id === "street-dog-immediate-welfare" && finding.current !== false);
-assert.equal((findings.match(/<article>/g) ?? []).length, currentFindings.length, "Findings: list entries must match current records");
+assert.equal((findings.match(/<article id="finding-/g) ?? []).length, currentFindings.length, "Findings: list entries must match current records");
 const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("'", "&#x27;");
 let lastFindingPosition = findings.indexOf('id="current-findings-heading"');
-for (const finding of currentFindings) {
-  const article = publishedArticles.find((item) => item.id === finding.article_id);
-  assert.ok(article, `${finding.id}: related article missing`);
-  const row = `<h3>${escapeHtml(finding.title)}</h3><div>${escapeHtml(finding.statement)}</div>`;
-  const position = findings.indexOf(row);
-  assert.ok(position > lastFindingPosition && findings.includes(`href="${article.path}"`), `${finding.id}: row or article link missing or out of order`);
+for (const questionId of activityQuestions) {
+  const position = findings.indexOf(`id="${questionId}"`);
+  assert.ok(position > lastFindingPosition, `Findings: ${questionId} missing or out of order`);
+  assert.ok(findings.includes(`href="/work/dogs/activity/#${questionId}"`), `Findings: ${questionId} Activity link missing`);
   lastFindingPosition = position;
+  for (const finding of currentFindings.filter((item) => item.primary_question_id === questionId)) {
+    const article = publishedArticles.find((item) => item.id === finding.article_id);
+    assert.ok(article, `${finding.id}: related article missing`);
+    const row = `<h4>${escapeHtml(finding.title)}</h4><div>${escapeHtml(finding.statement)}</div>`;
+    const findingPosition = findings.indexOf(row);
+    assert.ok(findingPosition > position && findings.includes(`href="${article.path}"`), `${finding.id}: row or article link missing`);
+    assert.ok(findings.includes(escapeHtml(finding.limitations)), `${finding.id}: limitation missing`);
+  }
 }
 const sitemap = await readFile(new URL("./sitemap.xml", dist), "utf8");
 for (const article of publishedArticles) {

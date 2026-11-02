@@ -3,18 +3,18 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 // An isolated OpenFreeMap preview. Roads remain centerlines; the high-zoom
 // casing and white interior are a cartographic approximation, not road polygons.
 const palette = {
-  background: "#F8F9F7",
+  background: "#F9F6ED",
   minorRoad: "#C8C9C5",
   majorRoad: "#B7B9B5",
   roadInterior: "#FFFFFF",
   building: "#DCDBD7",
   buildingOutline: "#CBCBC7",
-  water: "#A5D6F5",
-  park: "#ADE5BC",
+  water: "#9CDEFD",
+  park: "#C7EFC2",
   primaryText: "#252525",
   secondaryText: "#77858B",
-  highway: "#F2AB72",
-  highwayEdge: "#E6843E",
+  highway: "#FFB34F",
+  highwayEdge: "#E77E14",
 } as const;
 
 const interpolate = (...stops: (number | string)[]) => ["interpolate", ["linear"], ["zoom"], ...stops];
@@ -88,8 +88,8 @@ const roadFamilies: RoadFamily[] = [
     color: palette.highway,
     edge: palette.highwayEdge,
     width: interpolate(10, 2, 13, 3, 15, 4.5, 17, 6.5, 18, 9.5, 19, 14, 20, 19),
-    casingWidth: interpolate(10, 2, 13, 3, 15, 5.2, 17, 7.5, 18, 10.8, 19, 15.5, 20, 20.5),
-    casingOpacity: interpolate(10, 0, 14.5, 0, 15.5, 0.4, 17, 0.8, 18, 1),
+    casingWidth: interpolate(10, 3.2, 13, 4.5, 15, 6.5, 17, 9.5, 18, 13, 19, 19, 20, 25),
+    casingOpacity: 1,
   },
 ];
 
@@ -103,7 +103,7 @@ export function applyChatStyleBasemap(map: MapLibreMap) {
       source: "openmaptiles",
       "source-layer": "landcover",
       filter: ["match", ["get", "class"], ["farmland", "grass", "wetland"], true, false],
-      paint: { "fill-color": "#C5ECD2", "fill-opacity": 0.92 },
+      paint: { "fill-color": palette.park, "fill-opacity": 1 },
     }, "park");
   }
 
@@ -111,13 +111,13 @@ export function applyChatStyleBasemap(map: MapLibreMap) {
   paint(map, "landuse_residential", "fill-opacity", 1);
   paint(map, "park", "fill-color", palette.park);
   paint(map, "park", "fill-outline-color", palette.park);
-  paint(map, "park", "fill-opacity", 0.95);
+  paint(map, "park", "fill-opacity", 1);
   layout(map, "park_outline", "visibility", "none");
-  paint(map, "landcover_wood", "fill-color", "#BFE6CA");
-  paint(map, "landcover_wood", "fill-opacity", 0.75);
-  paint(map, "landcover_grass", "fill-color", "#C9EBD2");
-  paint(map, "landcover_grass", "fill-opacity", 0.7);
-  paint(map, "landuse_pitch", "fill-color", "#C8E9CF");
+  paint(map, "landcover_wood", "fill-color", palette.park);
+  paint(map, "landcover_wood", "fill-opacity", 1);
+  paint(map, "landcover_grass", "fill-color", palette.park);
+  paint(map, "landcover_grass", "fill-opacity", 1);
+  paint(map, "landuse_pitch", "fill-color", palette.park);
   paint(map, "landuse_track", "fill-color", "#E8EEE9");
   paint(map, "landuse_cemetery", "fill-color", "#DDEADB");
   paint(map, "landuse_hospital", "fill-color", "#F4F1EF");

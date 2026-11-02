@@ -101,6 +101,7 @@ for (const finding of findings) {
   check(investigationIds.has(finding.investigation_id), `${finding.id}: unknown investigation`);
   check(["established", "developing", "contradicted", "insufficient_evidence", "preliminary", "exploratory"].includes(finding.status), `${finding.id}: invalid status`);
   check(finding.current === undefined || typeof finding.current === "boolean", `${finding.id}: current must be boolean`);
+  if (finding.current !== false) check(["question-extent", "question-care", "question-reporting", "question-participation", "question-improvements"].includes(finding.primary_question_id), `${finding.id}: invalid primary question`);
   if (finding.article_id) check(articleById.get(finding.article_id)?.published, `${finding.id}: article must exist and be published`);
   check(Boolean(finding.title && finding.statement && finding.limitations), `${finding.id}: title, statement, and limitations required`);
   check(validDate(finding.last_reviewed_at), `${finding.id}: invalid review date`);

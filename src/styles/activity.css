@@ -32,15 +32,27 @@
   text-align: left;
 }
 
+.task-list > button:first-child,
+.location-list > button:first-child {
+  border-top: 0;
+}
+
+.task-list button,
+.location-list button {
+  padding: 12px 2px;
+  border-bottom: 0;
+}
+
+.task-list button + button,
+.location-list button + button {
+  border-top: 1px solid #e2e4e6;
+}
+
 .record-list > article {
   display: grid;
   gap: 2px;
   min-width: 0;
   padding: 8px 2px;
-}
-
-.record-list > article h3 {
-  margin: 0;
 }
 
 .record-list > article + article {
@@ -67,6 +79,90 @@
 .record-list small {
   display: block;
   color: #5f6368;
+}
+
+.investigation-organizations > article + article {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e4e6;
+}
+
+.investigation-activity-question + .investigation-activity-question {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e4e6;
+}
+
+.activity-question-toggle {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.activity-question-copy {
+  min-width: 0;
+}
+
+.activity-question-copy strong,
+.activity-question-copy > span {
+  display: block;
+}
+
+.activity-question-copy strong {
+  font-size: 16px;
+}
+
+.activity-question-copy > span {
+  margin-top: 4px;
+  color: #5f6368;
+}
+
+.activity-question-chevron {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin: 8px 4px 0 0;
+  border-right: 1.5px solid #5f6368;
+  border-bottom: 1.5px solid #5f6368;
+  transform: rotate(45deg);
+}
+
+.activity-question-toggle[aria-expanded="true"] .activity-question-chevron {
+  transform: rotate(225deg);
+}
+
+.investigation-activity-question > .activity-question-findings {
+  margin: 8px 0 0;
+}
+
+.activity-question-records {
+  margin-top: 16px;
+}
+
+.activity-question-records[hidden] {
+  display: none;
+}
+
+.activity-question-findings a,
+.activity-question-records a,
+.investigation-activity-related a,
+.investigation-organizations a {
+  text-decoration: underline;
+}
+
+@media (max-width: 1023px) {
+  #organizations,
+  .investigation-organizations > article {
+    scroll-margin-top: calc(var(--sheet-grip-height) + 8px);
+  }
 }
 
 .workspace-page p button,
