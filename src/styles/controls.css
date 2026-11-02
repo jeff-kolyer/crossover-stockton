@@ -63,6 +63,15 @@ button.plain-action-button:not(.is-pill):hover {
   background: #dbeafe;
 }
 
+/* Map filter selections use a softer blue fill with dark text. */
+.map-filters .plain-action-button.is-selection.is-light-blue[aria-pressed="true"]>span,
+.map-active-filters .plain-action-button.is-applied-filter>span,
+.map-active-filters .plain-action-button.is-applied-filter:hover>span {
+  border-color: #527fb9;
+  background: #f1f6ff;
+  color: #202124;
+}
+
 .plain-action-button.is-compact {
   min-width: 36px;
   padding: 5px;

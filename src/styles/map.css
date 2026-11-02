@@ -120,6 +120,7 @@
   display: inline-flex;
   align-items: center;
   gap: 16px;
+  line-height: 1.2;
 }
 
 .location-list button > small,
