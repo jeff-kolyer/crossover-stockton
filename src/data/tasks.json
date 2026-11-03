@@ -7,10 +7,17 @@
     "type": "application",
     "instructions": "Submit an application to learn how Crossover can participate firsthand.",
     "location_ids": [],
-    "organization_ids": ["stockton-street-dogs"],
-    "question_ids": ["food-and-water", "additional-help"],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "question_ids": [
+      "food-and-water",
+      "additional-help"
+    ],
     "basis_record_ids": [],
-    "activity_record_ids": ["crossover-2026-10-07-street-dogs-volunteer-application"],
+    "activity_record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application"
+    ],
     "completed_at": "2026-10-07"
   },
   {
@@ -21,10 +28,18 @@
     "type": "inquiry",
     "instructions": "Ask about sign-up, requirements, paperwork, and orientation.",
     "location_ids": [],
-    "organization_ids": ["stockton-animal-services"],
-    "question_ids": ["additional-help"],
-    "basis_record_ids": ["sas-standing-doggie-day-out"],
-    "activity_record_ids": ["crossover-2026-10-12-doggie-day-out-inquiry"],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "additional-help"
+    ],
+    "basis_record_ids": [
+      "sas-standing-doggie-day-out"
+    ],
+    "activity_record_ids": [
+      "crossover-2026-10-12-doggie-day-out-inquiry"
+    ],
     "completed_at": "2026-10-12"
   },
   {
@@ -35,10 +50,17 @@
     "type": "application",
     "instructions": "Visit the shelter, deliver the application, and learn about the public visitor experience.",
     "location_ids": [],
-    "organization_ids": ["stockton-animal-services"],
-    "question_ids": ["response-barriers", "additional-help"],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "response-barriers",
+      "additional-help"
+    ],
     "basis_record_ids": [],
-    "activity_record_ids": ["crossover-2026-10-14-sas-volunteer-application"],
+    "activity_record_ids": [
+      "crossover-2026-10-14-sas-volunteer-application"
+    ],
     "completed_at": "2026-10-14"
   },
   {
@@ -49,10 +71,17 @@
     "type": "records_request",
     "instructions": "Request field-call records for roaming, stray, abandoned, aggressive, and distressed dogs.",
     "location_ids": [],
-    "organization_ids": ["stockton-animal-services"],
-    "question_ids": ["where-dogs-need-help", "response-barriers"],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
     "basis_record_ids": [],
-    "activity_record_ids": ["crossover-2026-10-20-sas-field-call-records-request"],
+    "activity_record_ids": [
+      "crossover-2026-10-20-sas-field-call-records-request"
+    ],
     "completed_at": "2026-10-20"
   },
   {
@@ -63,9 +92,36 @@
     "type": "follow_up",
     "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
     "location_ids": [],
-    "organization_ids": ["stockton-animal-services"],
-    "question_ids": ["where-dogs-need-help", "response-barriers"],
-    "basis_record_ids": ["crossover-2026-10-20-sas-field-call-records-request"],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
+    "basis_record_ids": [
+      "crossover-2026-10-20-sas-field-call-records-request"
+    ],
+    "activity_record_ids": []
+  },
+  {
+    "id": "task-review-sas-field-call-records",
+    "investigation_id": "street-dog-immediate-welfare",
+    "title": "Review Animal Services field-call records",
+    "status": "open",
+    "type": "records_review",
+    "instructions": "Review the records received in response to the October 20 Stockton Animal Services field-call request. Preserve the original files and receipt details, document the date range, fields, definitions, coverage, missing or redacted information, and limitations. Analyze patterns relevant to where dogs need help and what happens after reports; distinguish administrative records from firsthand observations and do not treat calls as unique dogs or verified street population. Record findings and next actions only after reviewing the evidence.",
+    "location_ids": [],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "question_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
+    "basis_record_ids": [
+      "crossover-2026-10-20-sas-field-call-records-request"
+    ],
     "activity_record_ids": []
   },
   {
@@ -75,11 +131,19 @@
     "status": "open",
     "type": "field_observation",
     "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
-    "location_ids": ["st-marys-church-street-corridor"],
-    "map_reference_location_ids": ["st-marys-community-services-campus"],
+    "location_ids": [
+      "st-marys-church-street-corridor"
+    ],
+    "map_reference_location_ids": [
+      "st-marys-community-services-campus"
+    ],
     "organization_ids": [],
-    "question_ids": ["where-dogs-need-help"],
-    "basis_record_ids": ["ssd-2026-06-08-street-response"],
+    "question_ids": [
+      "where-dogs-need-help"
+    ],
+    "basis_record_ids": [
+      "ssd-2026-06-08-street-response"
+    ],
     "activity_record_ids": []
   },
   {
@@ -89,10 +153,20 @@
     "status": "open",
     "type": "field_observation",
     "instructions": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site. Choose a safe public observation route near the reported Carrie Street area, confirm access and current conditions before visiting, and document what is actually present, including zero dogs if none are seen. Do not treat the April incident as evidence of current danger or assume the September encounters occurred there. Distinguish both published reports from firsthand findings and record follow-up questions.",
-    "location_ids": ["weston-ranch-carrie-street", "stockton-district-5-reported-area-2026-09-24"],
-    "organization_ids": ["stockton-street-dogs"],
-    "question_ids": ["where-dogs-need-help"],
-    "basis_record_ids": ["stockton-2026-05-11-stray-dog-report", "kcra-2026-09-24-stockton-stray-dog-report"],
+    "location_ids": [
+      "weston-ranch-carrie-street",
+      "stockton-district-5-reported-area-2026-09-24"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "question_ids": [
+      "where-dogs-need-help"
+    ],
+    "basis_record_ids": [
+      "stockton-2026-05-11-stray-dog-report",
+      "kcra-2026-09-24-stockton-stray-dog-report"
+    ],
     "activity_record_ids": []
   },
   {
@@ -103,9 +177,17 @@
     "type": "organization_contact",
     "instructions": "Check whether the October 7 volunteer application received a response. Ask for the current status and evidence of progress on Canine Campus, and identify practical approved volunteer or care opportunities, requirements, schedules, and contacts. Record any reply only when received.",
     "location_ids": [],
-    "organization_ids": ["stockton-street-dogs"],
-    "question_ids": ["food-and-water", "additional-help"],
-    "basis_record_ids": ["crossover-2026-10-07-street-dogs-volunteer-application", "ssd-2026-10-07-canine-campus-details"],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "question_ids": [
+      "food-and-water",
+      "additional-help"
+    ],
+    "basis_record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application",
+      "ssd-2026-10-07-canine-campus-details"
+    ],
     "activity_record_ids": [],
     "checklist": [
       "What is the current status of Canine Campus?",
