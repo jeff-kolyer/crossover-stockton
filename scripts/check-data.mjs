@@ -74,6 +74,12 @@ for (const prop of ["activityIds", "reportIds", "relatedActivityIds", "relatedRe
 for (const item of records.get("records") ?? []) {
   if (item.record_type === "activity" && item.occurred_at && item.evidence_status?.startsWith("planned")) errors.push(`evidence:${item.id} planned status conflicts with occurred_at`);
   if (item.source?.url && !/^https?:\/\//.test(item.source.url)) errors.push(`evidence:${item.id} invalid source URL`);
+  if (item.public_update === true) {
+    if (item.record_type !== "activity" || !item.occurred_at) errors.push(`evidence:${item.id} public update needs a completed activity`);
+    if (item.visibility !== "public") errors.push(`evidence:${item.id} public update needs explicit public visibility`);
+    const activeNeedIds = new Set((records.get("gaps") ?? []).filter((need) => need.active).map((need) => need.id));
+    if (!item.gap_ids?.some((id) => activeNeedIds.has(id))) errors.push(`evidence:${item.id} public update needs an active related need`);
+  }
 }
 for (const item of records.get("claims") ?? []) {
   if (item.verificationStatus === "not_established" && item.sourceRecordIds.length) errors.push(`claim:${item.id} unknown quantity has source records`);

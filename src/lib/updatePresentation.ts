@@ -3,6 +3,7 @@ import uiCopy from "../data/pages/updates.json";
 import type { EvidenceRecord } from "../types";
 
 export function updateTypeLabel(record: EvidenceRecord) {
+  if (record.record_type === "activity") return uiCopy.updatePresentation.crossoverActivity;
   const publisher = record.source.publisher?.toLowerCase() ?? "";
   const type = record.source.type?.toLowerCase() ?? "";
   const hostname = sourceHostname(record.source.url);

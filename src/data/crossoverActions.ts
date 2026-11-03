@@ -8,6 +8,7 @@ const workstreams = siteModel.getWorkstreams();
 const recordsRequestPending = recordsRequest?.outcome?.status === "awaiting_response" ? "1"
   : recordsRequest?.outcome?.status === "received" || recordsRequest?.outcome?.status === "closed" ? "0"
   : workstreams[1].status[2].value;
+const recordsRequestReceived = recordsRequest?.outcome?.status === "received" ? "1" : "0";
 
 export type CrossoverAction = {
   id: string;
@@ -32,6 +33,7 @@ export const crossoverActions: CrossoverAction[] = actionPage.actions.map((confi
   action.id === "requesting-records"
     ? { ...action, status: action.status.map((metric, index) => index === 0
       ? { ...metric, value: recordsRequest ? "1" : metric.value }
+      : index === 1 ? { ...metric, value: recordsRequestReceived }
       : index === 2 ? { ...metric, value: recordsRequestPending } : metric) }
     : action
 );

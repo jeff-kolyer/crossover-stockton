@@ -24,7 +24,8 @@
     "title": "What happens when someone reports a dog?",
     "description": "How are reports handled, and what happens to the dogs?",
     "activityIds": [
-      "crossover-2026-10-20-sas-field-call-records-request"
+      "crossover-2026-10-20-sas-field-call-records-request",
+      "crossover-2026-11-02-sas-field-call-records-received"
     ],
     "reportIds": []
   },

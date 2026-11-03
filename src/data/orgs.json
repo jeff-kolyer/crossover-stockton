@@ -28,7 +28,7 @@
     "summary": "Municipal animal services for Stockton, including shelter intake, animal care, foster and adoption pathways, veterinary services, and rescue coordination.",
     "website": "https://www.stocktonca.gov/services/animal_services/",
     "source_url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
-    "verification": { "checked_at": "2026-10-20", "evidence_record_ids": ["stockton-animal-services-2026-10-20-reporting-guidance", "crossover-2026-10-14-sas-first-visit"], "direct_check": "Crossover visited the public shelter on October 14; this did not verify field-call response or case outcomes. Field-call records were requested October 20 and remain pending.", "open_questions": ["What dispositions follow stray-dog reports?", "Which requests receive actual care or reunification?"] },
+    "verification": { "checked_at": "2026-11-02", "evidence_record_ids": ["stockton-animal-services-2026-10-20-reporting-guidance", "crossover-2026-10-14-sas-first-visit", "crossover-2026-11-02-sas-field-call-records-received"], "direct_check": "Crossover visited the public shelter on October 14; this did not verify field-call response or case outcomes. Field-call records requested October 20 were received by email November 2. Their contents and case outcomes have not been assessed here.", "open_questions": ["What dispositions follow stray-dog reports?", "Which requests receive actual care or reunification?"] },
     "active": true,
     "tracked": true
   },

@@ -4,7 +4,11 @@
     "publicReportsLocalDevelopmentsAndNewInformation": "Public reports, local developments, and new information about the needs we're tracking in Stockton.",
     "crossoverUpdateHistory": "Crossover update history",
     "relatedGaps": "Related gaps:",
-    "undated": "Undated"
+    "undated": "Undated",
+    "invalidDate": "Date unavailable",
+    "reviewed": "Reviewed",
+    "viewActivity": "View activity",
+    "viewRecord": "View record"
   },
   "sourceLinks": {
     "linkedIn": "Read on LinkedIn",
@@ -25,6 +29,7 @@
     "government": "Government",
     "currentAsk": "Current ask",
     "outcome": "Outcome",
+    "crossoverActivity": "Crossover activity",
     "source": "Source"
   }
 }

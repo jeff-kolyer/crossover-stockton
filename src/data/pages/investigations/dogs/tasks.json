@@ -19,9 +19,13 @@
       "context": "Clarify field access and current care needs"
     },
     {
+      "id": "task-sas-field-call-records-review",
+      "context": "Review the records received Nov 2; findings are pending"
+    },
+    {
       "id": "task-sas-field-call-follow-up",
-      "dateLabel": "Requested",
-      "context": "General-area records could guide fieldwork"
+      "dateLabel": "Received",
+      "context": "Records received by email Nov 2; contents not yet assessed here"
     },
     {
       "id": "task-verify-south-stockton-district-5-reports",
