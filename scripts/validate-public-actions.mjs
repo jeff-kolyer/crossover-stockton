@@ -56,8 +56,11 @@ function validate(styles = css) {
     if ((source.match(/<PublicPrimaryAction\b/g) ?? []).length !== 1) errors.push(`${path}: expected one shared Home primary action`);
     if (/hero-investigation-button|home-landing-primary/.test(source)) errors.push(`${path}: legacy primary-action class remains`);
   }
-  if ((aboutPage.match(/<PublicPrimaryAction\b/g) ?? []).length !== 1 || aboutPage.includes("PlainActionButton")) {
-    errors.push("AboutPage must use the shared public action for its /action/ link");
+  if ((aboutPage.match(/<PublicPrimaryAction\b/g) ?? []).length !== 2
+    || !aboutPage.includes('<PublicPrimaryAction href="/work/dogs/findings/"')
+    || !aboutPage.includes('<PublicPrimaryAction href="/work/dogs/tasks/"')
+    || aboutPage.includes("PlainActionButton")) {
+    errors.push("AboutPage must use the shared public action for its Findings and current tasks links");
   }
   if (actionIndex.includes("<PublicPrimaryAction") || actionIndex.includes("action-index-button") || !actionIndex.includes('<ArrowTextLink className="arrow-text-link--green" href={action.href}')) {
     errors.push("ActionIndexPage must use the shared green text link for each action");
