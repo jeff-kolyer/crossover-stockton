@@ -72,6 +72,7 @@ export function createInformationModel(input: InformationInput) {
   const investigations = index(input.investigations, "investigations");
   const questions = index(input.questions, "questions");
   const tasks = index(input.tasks, "tasks");
+  const orderedTasks = [...input.tasks].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
   const evidence = index(input.evidence, "evidence");
   const findings = index(input.findings, "findings");
   const organizations = index(input.organizations, "organizations");
@@ -112,8 +113,8 @@ export function createInformationModel(input: InformationInput) {
     getQuestions: (investigationId: string) => input.questions.filter((question) => question.investigation_id === investigationId),
     getAllQuestions: () => input.questions,
     getTask: (id: string) => tasks.get(id),
-    getTasks: (investigationId: string) => input.tasks.filter((task) => task.investigation_id === investigationId),
-    getAllTasks: () => input.tasks,
+    getTasks: (investigationId: string) => orderedTasks.filter((task) => task.investigation_id === investigationId),
+    getAllTasks: () => orderedTasks,
     getActivity: (id: string) => actualActivities.find((record) => record.id === id),
     getAllActivities: () => actualActivities,
     getActivities: (questionId: string) => {

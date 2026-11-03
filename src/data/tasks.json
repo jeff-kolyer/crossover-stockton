@@ -1,6 +1,7 @@
 [
   {
     "id": "task-ssd-volunteer-application-2026-10-07",
+    "order_by_id": 12,
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Submit a volunteer application to Stockton Street Dogs",
     "status": "done",
@@ -22,6 +23,7 @@
   },
   {
     "id": "task-sas-doggie-day-out-inquiry-2026-10-12",
+    "order_by_id": 11,
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Ask Stockton Animal Services about Doggie Day Out",
     "status": "done",
@@ -44,6 +46,7 @@
   },
   {
     "id": "task-sas-visit-application-2026-10-14",
+    "order_by_id": 10,
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Visit Stockton Animal Services and submit a volunteer application",
     "status": "done",
@@ -65,6 +68,7 @@
   },
   {
     "id": "task-sas-field-call-request-2026-10-20",
+    "order_by_id": 9,
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Request Animal Services field-call records",
     "status": "done",
@@ -86,6 +90,9 @@
   },
   {
     "id": "task-sas-field-call-follow-up",
+    "order_by_id": 8,
+    "list_context": "Records received by email Nov 2; contents not yet assessed here",
+    "list_date_label": "Received",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up on Animal Services field-call records",
     "status": "done",
@@ -100,6 +107,8 @@
   },
   {
     "id": "task-review-sas-field-call-records",
+    "order_by_id": 2,
+    "list_context": "Review the records received Nov 2; findings are pending",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Review Animal Services field-call records",
     "status": "open",
@@ -113,6 +122,8 @@
   },
   {
     "id": "task-verify-st-marys-church-street-dog-scale",
+    "order_by_id": 1,
+    "list_context": "Nov 2 field observation · Count visible dogs across a limited area",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Verify conditions: scale of the dog problem near St. Mary's",
     "status": "open",
@@ -135,6 +146,9 @@
   },
   {
     "id": "task-verify-south-stockton-district-5-reports",
+    "order_by_id": 5,
+    "list_context": "Identify a supported public location first",
+    "list_date_label": "KCRA",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Verify reported conditions in South Stockton / District 5",
     "status": "open",
@@ -158,6 +172,9 @@
   },
   {
     "id": "task-ssd-ask-contact-questions",
+    "order_by_id": 4,
+    "list_context": "Clarify field access and current care needs",
+    "list_date_label": "Applied",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up with Stockton Street Dogs",
     "status": "open",
@@ -191,6 +208,9 @@
   },
   {
     "id": "task-sas-volunteer-onboarding-follow-up",
+    "order_by_id": 6,
+    "list_context": "Check onboarding and orientation",
+    "list_date_label": "Applied",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up with Stockton Animal Services on volunteering",
     "status": "waiting",
@@ -212,6 +232,8 @@
   },
   {
     "id": "task-monitor-animal-control-ordinance",
+    "order_by_id": 7,
+    "list_context": "Verify the Council outcome",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Monitor the proposed animal-control ordinance",
     "status": "open",
@@ -232,6 +254,8 @@
   },
   {
     "id": "task-contact-cbs-charlie-lapastora",
+    "order_by_id": 3,
+    "list_context": "Clarify reported locations and seek firsthand leads",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Contact CBS reporter Charlie Lapastora",
     "status": "open",

@@ -2,11 +2,14 @@ export type TaskStatus = "open" | "waiting" | "done" | "cancelled";
 
 export interface InvestigationTask {
   id: string;
+  order_by_id: number;
   investigation_id: string;
   title: string;
   status: TaskStatus;
   type: "application" | "inquiry" | "field_observation" | "records_request" | "follow_up" | "source_review" | "organization_contact";
   instructions: string;
+  list_context?: string;
+  list_date_label?: string;
   location_ids: string[];
   map_reference_location_ids?: string[];
   organization_ids: string[];

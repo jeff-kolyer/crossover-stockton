@@ -7,7 +7,7 @@ import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import { navigateInternalLink } from "../lib/internalLink";
 import { activeInvestigations, investigationActivities, investigationFindings, investigationQuestionById, investigationRecordById, investigationTasks } from "../lib/investigationData";
 import { articleForPath, publishedArticles } from "../lib/articles";
-import { orderInvestigationTasks, taskPriorityContext } from "../lib/taskListPriorities";
+import { taskListContext } from "../lib/taskPresentation";
 import type { InvestigationTask } from "../types/investigation";
 import { CrossoverLocationDetails } from "./CrossoverLocationDetails";
 import { CloseDetailButton, PlainActionButton } from "./PlainActionButton";
@@ -25,6 +25,13 @@ const uiText = uiCopy.DogGapExperience;
 
 type Section = "tasks" | "activity" | "map" | "findings";
 type TaskFilter = "open" | "waiting" | "done" | "all";
+const taskFilterOrder: TaskFilter[] = ["open", "waiting", "done", "all"];
+const taskFilterCounts: Record<TaskFilter, number> = {
+  open: investigationTasks.filter((task) => task.status === "open").length,
+  waiting: investigationTasks.filter((task) => task.status === "waiting").length,
+  done: investigationTasks.filter((task) => task.status === "done").length,
+  all: investigationTasks.length,
+};
 type MarkerTypeFilter = InvestigationLocation["marker_type"];
 const taskStatusColors = {
   open: evidenceCategoryColors.crossover_firsthand,
@@ -146,7 +153,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const [markerTypeFilters, setMarkerTypeFilters] = useState<MarkerTypeFilter[]>([]);
   const [pendingLocationFilters, setPendingLocationFilters] = useState<LocationStatusFilter[]>([]);
   const [pendingMarkerTypeFilters, setPendingMarkerTypeFilters] = useState<MarkerTypeFilter[]>([]);
-  const [taskFilter, setTaskFilter] = useState<TaskFilter>("all");
+  const [taskFilter, setTaskFilter] = useState<TaskFilter>("open");
   const showTaskLocation = (task: InvestigationTask) => {
     setTaskFilter((current) => current === "all" || current === task.status ? current : task.status === "cancelled" ? "all" : task.status);
     const location = taskMappedLocation(task) ?? allLocations.find((item) => task.location_ids.includes(item.id));
@@ -186,7 +193,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     && (locationFilters.length === 0 || locationFilters.includes(location.category))
   ), [locationFilters, markerTypeFilters]);
   const visibleMappedLocations = useMemo(() => visibleLocations.filter((location): location is MappedInvestigationLocation => location.coordinates !== null && location.marker_kind !== null && location.map_label !== null), [visibleLocations]);
-  const filteredTasks = useMemo(() => orderInvestigationTasks(investigationTasks).filter((task) => taskFilter === "all" || task.status === taskFilter), [taskFilter]);
+  const filteredTasks = useMemo(() => investigationTasks.filter((task) => taskFilter === "all" || task.status === taskFilter), [taskFilter]);
   const taskMappedLocations = useMemo(() => {
     const locationIds = new Set(filteredTasks.flatMap(mappedLocationIdsFor));
     return mappedLocations.filter((location) => locationIds.has(location.id));
@@ -435,7 +442,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     return <span key={id}>{record.title}</span>;
   };
   const primaryTabs = () => <nav className="primary-tabs" aria-label={uiText.investigationSections}>{(["tasks", "activity", "map", "findings"] as const).map((tab) => <a key={tab} href={tabLink(tab)} aria-current={section === tab ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => openPrimary(tab))}>{uiText.tabs[tab]}</a>)}</nav>;
-  const nextTask = orderInvestigationTasks(investigationTasks).find((task) => task.status === "open");
+  const nextTask = investigationTasks.find((task) => task.status === "open");
   const nextTaskLabel = nextTask?.id === "task-verify-st-marys-church-street-dog-scale" ? uiText.nextTaskFallback : nextTask?.title;
   const investigationHeader = (className: string) => <div className={`investigation-header ${className}`}>
     <header className="investigation-identity">
@@ -499,10 +506,10 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {selectedTask.basis_record_ids.length > 0 && <section><h3>{uiText.basisAndSources}</h3><ul>{selectedTask.basis_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
           {selectedTask.activity_record_ids.length > 0 && <section><h3>{uiText.documentedActivity}</h3><ul>{selectedTask.activity_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
         </article></div> : <WorkspacePage title={uiText.tasks}>
-          <div className="map-filters filter-buttons task-filters" role="group" aria-label={uiText.taskFilters}>{(["all", "open", "waiting", "done"] as const).map((filter) => <PlainActionButton key={filter} variant="selection" pressed={taskFilter === filter} onClick={() => { setTaskFilter(filter); setSelectedLocationId(""); setFocusSelectedLocation(false); }}>{filter !== "all" && <span className="evidence-dot" style={{ backgroundColor: taskStatusColors[filter] }} aria-hidden="true" />}{uiText.taskFilterLabels[filter]}</PlainActionButton>)}</div>
+          <div className="primary-tabs task-tabs" role="group" aria-label={uiText.taskFilters}>{taskFilterOrder.map((filter) => <button type="button" key={filter} aria-pressed={taskFilter === filter} onClick={() => { setTaskFilter(filter); setSelectedLocationId(""); setFocusSelectedLocation(false); }}>{filter !== "all" && <span className="evidence-dot" style={{ backgroundColor: taskStatusColors[filter] }} aria-hidden="true" />}{uiText.taskFilterLabels[filter]} ({taskFilterCounts[filter]})</button>)}</div>
           <div className="record-list task-list">{filteredTasks.map((task) => <button type="button" key={task.id} onClick={() => selectTask(task)}>
             <strong className="task-title"><span className="evidence-dot" style={task.status === "cancelled" ? { visibility: "hidden" } : { backgroundColor: taskStatusColors[task.status] }} aria-hidden="true" />{task.title}</strong>
-            <small>{task.status === "done" ? `Completed ${fmt(task.completed_at)}` : taskPriorityContext(task)}</small>
+            <small>{task.status === "done" ? `Completed ${fmt(task.completed_at)}` : taskListContext(task)}</small>
           </button>)}</div>
         </WorkspacePage>)}
       {!reportId && section === "activity" && (selectedActivity ? <div className="workspace-page"><article id={selectedActivity.id} aria-label={`${uiText.activityDetailsPrefix}${selectedActivity.title}`}>

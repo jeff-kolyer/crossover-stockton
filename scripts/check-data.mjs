@@ -41,6 +41,13 @@ checkRefs(records.get("crossover"), "methods", "methodIds", "crossover");
 checkRefs(records.get("dogs-investigations"), "gaps", "gap_id", "investigation");
 checkRefs(records.get("investigation-questions"), "dogs-investigations", "investigation_id", "question");
 checkRefs(records.get("tasks"), "dogs-investigations", "investigation_id", "task");
+const taskOrders = new Map();
+for (const task of records.get("tasks") ?? []) {
+  if (!Number.isSafeInteger(task.order_by_id) || task.order_by_id < 1) errors.push(`task:${task.id} order_by_id must be a positive integer`);
+  const key = String(task.order_by_id);
+  if (taskOrders.has(key)) errors.push(`task:${task.id} order_by_id duplicates task:${taskOrders.get(key)}`);
+  taskOrders.set(key, task.id);
+}
 for (const prop of ["question_ids", "organization_ids", "location_ids", "basis_record_ids", "activity_record_ids"]) {
   const target = { question_ids: "investigation-questions", organization_ids: "orgs", location_ids: "investigation-locations", basis_record_ids: "records", activity_record_ids: "records" }[prop];
   checkRefs(records.get("tasks"), target, prop, "task");

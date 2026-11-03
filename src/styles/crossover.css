@@ -655,7 +655,8 @@ button, input, select, textarea { font: inherit; }
   border-bottom: 1px solid #dadce0;
 }
 
-.primary-tabs a {
+.primary-tabs a,
+.primary-tabs.task-tabs button {
   min-width: 0;
   display: flex;
   align-items: center;
@@ -667,9 +668,38 @@ button, input, select, textarea { font: inherit; }
   text-decoration: none;
 }
 
-.primary-tabs a[aria-current="page"] {
+.primary-tabs.task-tabs button {
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-body);
+  white-space: nowrap;
+  cursor: pointer;
+  gap: var(--space-2);
+}
+
+.primary-tabs a[aria-current="page"],
+.primary-tabs.task-tabs button[aria-pressed="true"] {
   border-bottom-color: #1a73e8;
   font-weight: 700;
+}
+
+.primary-tabs.task-tabs {
+  display: flex;
+  min-width: 0;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.primary-tabs.task-tabs button {
+  flex: 1 0 auto;
+}
+
+.primary-tabs.task-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .public-nav [aria-current="page"] {
@@ -847,7 +877,8 @@ html:has(.public-site) {
 .story-detail-page .story-moment-grid { display: grid; gap: var(--space-4); }
 
 /* 7. Investigation components */
-.investigation-google .primary-tabs a[aria-current="page"] {
+.investigation-google .primary-tabs a[aria-current="page"],
+.investigation-google .primary-tabs.task-tabs button[aria-pressed="true"] {
   color: #0b57d0;
 }
 
@@ -964,13 +995,23 @@ html:has(.public-site) {
 .task-list button .task-title {
   display: inline-flex;
   align-items: center;
-  gap: 16px;
   line-height: var(--type-list-title-leading);
 }
 
-.location-list button > small,
+.location-list button .location-title {
+  gap: var(--space-3);
+}
+
+.task-list button .task-title {
+  gap: var(--space-2);
+}
+
+.location-list button > small {
+  padding-left: var(--space-4);
+}
+
 .task-list button > small {
-  padding-left: 24px;
+  padding-left: var(--space-3);
 }
 
 .location-eyebrow,
@@ -1279,18 +1320,6 @@ button.plain-action-button:not(.is-pill):hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-}
-
-.task-filters {
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.task-filters::-webkit-scrollbar {
-  display: none;
 }
 
 .filter-buttons .plain-action-button.is-pill {

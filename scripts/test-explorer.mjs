@@ -6,6 +6,7 @@ import { explorerRecordUrl, recordIdFromSearch } from "../src/controller/explore
 
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const published = await readJson("../src/generated/explorer-public.json");
+const sourceTasks = await readJson("../src/data/tasks.json");
 const policy = await readJson("../src/model/explorer-publication.json");
 const schemas = Object.fromEntries(await Promise.all(policy.collections.map(async ({ schema }) =>
   [schema, await readJson(`../src/schemas/${schema}.schema.json`)])));
@@ -20,6 +21,13 @@ test("published counts come from unique records, and schema metadata names types
     assert.ok(collection?.recordIds.length > 0);
     assert.equal(collection.recordIds.length, new Set(collection.recordIds).size);
   }
+});
+
+test("task order follows each task record's order_by_id", () => {
+  const collection = published.collections.find((item) => item.id === "tasks");
+  const ordered = [...sourceTasks].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
+  assert.deepEqual(collection.recordIds, ordered.map((task) => task.id));
+  assert.equal(ordered[1].id, "task-review-sas-field-call-records");
 });
 
 test("adding and removing publishable evidence changes the inventory without view edits", () => {
