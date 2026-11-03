@@ -12,7 +12,7 @@ const reports = siteModel.getAllEvidence().filter((record) => record.record_type
 const organizations = siteModel.getOrganizations();
 const uiText = uiCopy.App;
 
-export type AppRoute = "home" | "workInvestigation" | "reality" | "gapDetail" | "report" | "article" | "storyDetail" | "connection" | "action" | "updates" | "about";
+export type AppRoute = "home" | "workInvestigation" | "reality" | "gapDetail" | "report" | "article" | "storyDetail" | "connection" | "action" | "updates" | "about" | "data";
 export type WorkSection = "tasks" | "activity" | "map" | "findings";
 export const investigations = [{ slug: "dogs", id: "street-dog-immediate-welfare", gapSlug: dogGapSlug, title: siteModel.getInvestigation("street-dog-immediate-welfare")!.publicName }] as const;
 export const workSections: WorkSection[] = ["tasks", "activity", "map", "findings"];
@@ -35,6 +35,7 @@ export const ROUTE_PATHS: Record<Exclude<PublicRoute, "investigation">, string> 
   connection: "/connection/",
   action: "/action/",
   updates: "/updates/",
+  data: "/data/",
   about: "/about/",
 };
 
@@ -80,6 +81,7 @@ export function routeFromPathname(pathname: string, search = ""): RouteState {
   if (normalized === "/connection") return { page: "connection" };
   if (normalized === "/action") return { page: "action" };
   if (normalized === "/updates") return { page: "updates" };
+  if (normalized === "/data") return { page: "data" };
   if (normalized === "/about") return { page: "about" };
   if (normalized === "/organizations") return { page: "workInvestigation", investigationSlug: "dogs", workSection: "activity" };
   return { page: "home" };

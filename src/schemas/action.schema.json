@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crossoverstockton.org/schemas/action.schema.json",
-  "title": "action",
+  "title": "Task",
   "description": "action information definition. Schema describes source data, not page layout.",
   "type": "object",
   "properties": {

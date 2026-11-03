@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 const uiText = uiCopy.PublicMobileMenu;
 
-export type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
+export type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "data" | "investigation";
 type MenuPage = PublicRoute;
 
 interface PublicMobileMenuProps {

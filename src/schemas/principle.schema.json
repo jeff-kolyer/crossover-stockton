@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crossoverstockton.org/schemas/principle.schema.json",
-  "title": "principle",
+  "title": "Principle",
   "description": "principle information definition. Schema describes source data, not page layout.",
   "type": "object",
   "properties": {

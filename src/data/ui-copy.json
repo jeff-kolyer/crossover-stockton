@@ -26,6 +26,11 @@
       "href": "/updates/"
     },
     {
+      "page": "data",
+      "label": "Data",
+      "href": "/data/"
+    },
+    {
       "page": "about",
       "label": "About",
       "href": "/about/"
@@ -44,6 +49,7 @@
       "connection": "Connection | Crossover Stockton",
       "action": "Action | Crossover Stockton",
       "updates": "Updates | Crossover Stockton",
+      "data": "Crossover Explorer | Crossover Stockton",
       "about": "About | Crossover Stockton"
     },
     "sectionTitles": {
@@ -101,6 +107,7 @@
     "action": "Action",
     "stories": "Stories",
     "updates": "Updates",
+    "data": "Data",
     "about": "About",
     "stocktonCa": "Stockton, CA"
   }

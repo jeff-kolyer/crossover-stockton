@@ -7,6 +7,7 @@ import { HomePage } from "../components/HomePage";
 import { StoryDetailPage } from "../components/StoryDetailPage";
 import { SiteShell, type PageMode } from "../components/SiteShell";
 import { UpdatesPage } from "../components/UpdatesPage";
+import { ExplorerPage } from "../components/ExplorerPage";
 import type { PublicRoute } from "../components/PublicMobileMenu";
 import { dogGapSlug } from "../lib/dogGapLegacy";
 import { gaps, investigations, type RouteState, type WorkSection } from "../controller/routes";
@@ -98,6 +99,8 @@ export function PageRenderer({ route, googleExperiment, handlers }: { route: Rou
           onOpenGap={showGap}
         />
       )}
+
+      {route.page === "data" && <ExplorerPage />}
 
       {route.page === "storyDetail" && (
         <StoryDetailPage

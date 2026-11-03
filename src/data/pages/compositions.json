@@ -51,6 +51,11 @@
     ]
   },
   {
+    "id": "data",
+    "route": "/data/",
+    "sections": []
+  },
+  {
     "id": "dogs-overview",
     "route": "/work/dogs/about/",
     "sections": [

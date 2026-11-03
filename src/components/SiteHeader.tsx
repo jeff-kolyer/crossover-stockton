@@ -16,6 +16,7 @@ export function SiteHeader({ active, onNavigate }: { active: PublicRoute; onNavi
       <button type="button" className={active === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}>{uiText.action}</button>
       <button type="button" className={active === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}>{uiText.stories}</button>
       <button type="button" className={active === "updates" ? "is-active" : ""} onClick={() => onNavigate("updates")}>{uiText.updates}</button>
+      <button type="button" className={active === "data" ? "is-active" : ""} aria-current={active === "data" ? "page" : undefined} onClick={() => onNavigate("data")}>{uiText.data}</button>
       <button type="button" className={active === "about" ? "is-active" : ""} aria-current={active === "about" ? "page" : undefined} onClick={() => onNavigate("about")}>{uiText.about}</button>
     </nav>
     <button className="location-pill" type="button" onClick={() => onNavigate("home")}>{uiText.stocktonCa}</button>

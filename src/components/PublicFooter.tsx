@@ -3,7 +3,7 @@ import { navigateInternalLink } from "../lib/internalLink";
 
 const uiText = uiCopy.PublicFooter;
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
+type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "data" | "investigation";
 
 export function PublicFooter({ active, onNavigate, onOpenAbout }: {
   active: PublicRoute;
@@ -11,7 +11,7 @@ export function PublicFooter({ active, onNavigate, onOpenAbout }: {
   onOpenAbout?: () => void;
 }) {
   const open = (page: PublicRoute) => page === "about" && onOpenAbout ? onOpenAbout() : onNavigate(page);
-  const links = uiCopy.navigation.filter(({ page }) => page !== "updates") as { page: PublicRoute; label: string; href: string }[];
+  const links = uiCopy.navigation.filter(({ page }) => page !== "updates" && page !== "data") as { page: PublicRoute; label: string; href: string }[];
   return <>
     <footer className="public-footer">
       <a className="footer-logo" href="/" aria-label={uiText.crossoverHome} onClick={(event) => navigateInternalLink(event, () => open("home"))}>

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "predev": "node scripts/validate-public-actions.mjs",
+    "predev": "node scripts/validate-public-actions.mjs && node scripts/build-explorer-data.mjs",
     "validate:public-actions": "node scripts/validate-public-actions.mjs",
     "validate:projects": "node scripts/validate-projects.mjs",
     "validate:research": "node scripts/validate-dogs-research.mjs",
@@ -13,8 +13,9 @@
     "validate:investigation-data": "node scripts/validate-investigation-data.mjs",
     "check:layout": "node scripts/check-layout.mjs",
     "check:data": "node scripts/check-data.mjs && node scripts/validate-investigation-data.mjs",
+    "check:explorer": "node scripts/build-explorer-data.mjs && node --test scripts/test-explorer.mjs",
     "check:copy": "node scripts/audit-static-copy.mjs --direct",
-    "build": "node scripts/check-data.mjs && node scripts/check-layout.mjs && node scripts/audit-static-copy.mjs --direct && node scripts/validate-public-actions.mjs && node scripts/validate-investigation-data.mjs && tsc -b && vite build && node scripts/prerender.mjs && node scripts/validate-ai-readability.mjs && node scripts/validate-gap-tabs.mjs && node scripts/validate-dog-work-redirects.mjs",
+    "build": "node scripts/check-data.mjs && node scripts/check-layout.mjs && node scripts/audit-static-copy.mjs --direct && node scripts/validate-public-actions.mjs && node scripts/validate-investigation-data.mjs && npm run check:explorer && tsc -b && vite build && node scripts/prerender.mjs && node scripts/validate-ai-readability.mjs && node scripts/validate-gap-tabs.mjs && node scripts/validate-dog-work-redirects.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

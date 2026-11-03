@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crossoverstockton.org/schemas/organization-service.schema.json",
-  "title": "organization-service",
+  "title": "Organization service",
   "description": "organization-service information definition. Schema describes source data, not page layout.",
   "type": "object",
   "properties": {

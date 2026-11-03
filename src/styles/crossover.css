@@ -1650,6 +1650,28 @@ button.plain-action-button:not(.is-pill):hover {
 /* 9. Responsive layout */
 @media (max-width: 720px) { .layout-action-metrics > div + div { padding-left: var(--space-2); } }
 
+/* The Explorer uses the shared page, type, and spacing scales. */
+.explorer-content { display: grid; align-content: start; gap: var(--space-4); }
+.explorer-search { display: grid; gap: var(--space-2); }
+.explorer-search-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.explorer-search-controls input { flex: 1 1 260px; min-width: 0; max-width: 100%; padding: var(--space-2); border: 1px solid #c6ccd0; border-radius: 4px; font: inherit; }
+.explorer-search-controls button { padding: var(--space-2) var(--space-3); border: 1px solid #c6ccd0; border-radius: 4px; background: #fff; color: inherit; font: inherit; }
+.explorer-tree { border-top: 1px solid #dadce0; }
+.explorer-tree details { min-width: 0; border-bottom: 1px solid #dadce0; }
+.explorer-tree summary { cursor: pointer; padding-block: var(--space-3); }
+.explorer-tree summary:focus-visible { outline: 2px solid #1c6b3e; outline-offset: -2px; }
+.explorer-tree summary span, .explorer-tree summary small { overflow-wrap: anywhere; }
+.explorer-group-children, .explorer-collection-children { padding-inline-start: var(--space-3); }
+.explorer-record-details { display: grid; gap: var(--space-3); padding-block: 0 var(--space-3); }
+.explorer-properties, .explorer-nested-properties { display: grid; gap: var(--space-2); margin: 0; }
+.explorer-properties > div, .explorer-nested-properties > div { display: grid; gap: var(--space-1); min-width: 0; }
+.explorer-properties dt, .explorer-nested-properties dt { font-weight: 700; }
+.explorer-properties dd, .explorer-nested-properties dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
+.explorer-properties ul, .explorer-nested-properties ul { margin: 0; }
+.explorer-selected { border-block: 1px solid #dadce0; padding-block: var(--space-3); }
+.explorer-results ul { margin: 0; }
+.explorer-content a { overflow-wrap: anywhere; }
+
 @media (max-width: 720px) {
   .about-simple .about-simple-ideas {
     grid-template-columns: minmax(0, 1fr);
