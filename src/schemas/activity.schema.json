@@ -19,6 +19,10 @@
     "record_type": {
       "const": "activity"
     },
+    "public_update": {
+      "type": "boolean",
+      "description": "Explicit permission for an activity to appear in the public Updates feed. Other activities remain excluded."
+    },
     "trust": {
       "type": "string",
       "enum": [

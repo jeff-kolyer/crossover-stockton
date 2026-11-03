@@ -448,6 +448,8 @@ export interface EvidenceRecord {
     | "finding"
     | "activity"
     | "field_report";
+  public_update?: boolean;
+  visibility?: "public" | "internal";
   trust: string;
   title: string;
   work_update_label?: string;

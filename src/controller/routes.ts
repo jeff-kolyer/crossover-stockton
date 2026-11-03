@@ -4,6 +4,7 @@ import { organizationActivityHref, organizationsActivityHref } from "../lib/orga
 import { dogGapBase, dogGapSlug, legacyDogWorkDestination } from "../lib/dogGapLegacy";
 import type { PublicRoute } from "../components/PublicMobileMenu";
 import { siteModel } from "../model";
+import type { PublicUpdate } from "../model/publicUpdates";
 
 export const gaps = siteModel.getNeeds();
 const stories = siteModel.getStories();
@@ -15,6 +16,13 @@ const uiText = uiCopy.App;
 export type AppRoute = "home" | "workInvestigation" | "reality" | "gapDetail" | "report" | "article" | "storyDetail" | "connection" | "action" | "updates" | "about" | "data";
 export type WorkSection = "tasks" | "activity" | "map" | "findings";
 export const investigations = [{ slug: "dogs", id: "street-dog-immediate-welfare", gapSlug: dogGapSlug, title: siteModel.getInvestigation("street-dog-immediate-welfare")!.publicName }] as const;
+export function publicUpdateDestination(update: PublicUpdate) {
+  const { record } = update;
+  const investigation = investigations.find((item) => item.id === record.investigation_id);
+  return record.record_type === "activity" && investigation
+    ? { href: `/work/${investigation.slug}/activity/#${encodeURIComponent(record.id)}`, kind: "activity" as const }
+    : { href: `/data/?record=${encodeURIComponent(record.id)}`, kind: "record" as const };
+}
 export const workSections: WorkSection[] = ["tasks", "activity", "map", "findings"];
 
 export interface RouteState {

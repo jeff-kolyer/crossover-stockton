@@ -88,40 +88,27 @@
     "id": "task-sas-field-call-follow-up",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up on Animal Services field-call records",
-    "status": "waiting",
+    "status": "done",
     "type": "follow_up",
     "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
     "location_ids": [],
-    "organization_ids": [
-      "stockton-animal-services"
-    ],
-    "question_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
-    ],
-    "basis_record_ids": [
-      "crossover-2026-10-20-sas-field-call-records-request"
-    ],
-    "activity_record_ids": []
+    "organization_ids": ["stockton-animal-services"],
+    "question_ids": ["where-dogs-need-help", "response-barriers"],
+    "basis_record_ids": ["crossover-2026-10-20-sas-field-call-records-request"],
+    "activity_record_ids": ["crossover-2026-11-02-sas-field-call-records-received"],
+    "completed_at": "2026-11-02"
   },
   {
     "id": "task-review-sas-field-call-records",
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Review Animal Services field-call records",
     "status": "open",
-    "type": "records_review",
+    "type": "source_review",
     "instructions": "Review the records received in response to the October 20 Stockton Animal Services field-call request. Preserve the original files and receipt details, document the date range, fields, definitions, coverage, missing or redacted information, and limitations. Analyze patterns relevant to where dogs need help and what happens after reports; distinguish administrative records from firsthand observations and do not treat calls as unique dogs or verified street population. Record findings and next actions only after reviewing the evidence.",
     "location_ids": [],
-    "organization_ids": [
-      "stockton-animal-services"
-    ],
-    "question_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
-    ],
-    "basis_record_ids": [
-      "crossover-2026-10-20-sas-field-call-records-request"
-    ],
+    "organization_ids": ["stockton-animal-services"],
+    "question_ids": ["where-dogs-need-help", "response-barriers"],
+    "basis_record_ids": ["crossover-2026-10-20-sas-field-call-records-request", "crossover-2026-11-02-sas-field-call-records-received"],
     "activity_record_ids": []
   },
   {
