@@ -1,18 +1,21 @@
 {
   "groups": [
-    { "id": "organization", "title": "Organization" },
+    { "id": "updates", "title": "Updates" },
+    { "id": "organization", "title": "Crossover" },
+    { "id": "organizations", "title": "Organizations" },
     { "id": "needs", "title": "Needs" },
     { "id": "investigation", "title": "Investigations" },
     { "id": "knowledge", "title": "Evidence and knowledge" },
     { "id": "stories", "title": "Stories" },
     { "id": "developments", "title": "Developments" }
   ],
+  "relationshipFields": ["founderPersonId", "principleIds", "methodIds", "organizationId", "organization_ids", "gap_id", "gap_ids", "investigation_id", "question_ids", "task_ids", "activity_record_ids", "activityIds", "relatedActivityIds", "evidence_record_ids", "finding_ids", "verified_finding_ids", "location_ids", "basis_record_ids", "source_record_id", "sourceRecordIds", "measurementId", "needId", "supporting_record_ids", "contradicting_record_ids", "report_record_ids", "reportIds", "relatedReportIds", "record_ids", "related_gap_ids", "related_location_ids", "related_question_ids", "source_record_ids"],
   "collections": [
     { "id": "identity", "schema": "identity", "group": "organization", "title": "Identity", "query": "identity", "fields": ["id", "name", "slogan", "purpose", "geographicScope", "founderPersonId", "principleIds", "methodIds"] },
     { "id": "principles", "schema": "principle", "group": "organization", "title": "Principles", "query": "principles", "fields": ["id", "title", "statement", "description"] },
     { "id": "methods", "schema": "method", "group": "organization", "title": "Methods", "query": "methods", "fields": ["id", "title", "statement"] },
     { "id": "people", "schema": "person", "group": "organization", "title": "People", "query": "people", "fields": ["id", "name", "roles", "biography", "profileUrl"] },
-    { "id": "organizations", "schema": "organization", "group": "organization", "title": "Organizations", "query": "organizations", "fields": ["id", "name", "summary", "website", "active"] },
+    { "id": "organizations", "schema": "organization", "group": "organizations", "title": "Organizations", "query": "organizations", "fields": ["id", "name", "summary", "website", "active"] },
     { "id": "needs", "schema": "need", "group": "needs", "title": "Needs", "query": "needs", "fields": ["id", "title", "summary", "status", "investigation_status", "updated_at", "organization_ids", "record_ids", "unknown_questions", "active"] },
     { "id": "investigations", "schema": "investigation", "group": "investigation", "title": "Investigations", "query": "investigations", "fields": ["id", "publicName", "title", "introduction", "status", "gap_id", "findings_summary", "uncertainties", "verified_finding_ids", "evidence_record_ids", "last_updated_at"] },
     { "id": "questions", "schema": "question", "group": "investigation", "title": "Questions", "query": "questions", "fields": ["id", "title", "description", "investigation_id", "task_ids", "activity_record_ids", "evidence_record_ids", "finding_ids"] },
@@ -27,7 +30,8 @@
     { "id": "stories", "schema": "story", "group": "stories", "title": "Stories", "query": "stories", "fields": ["id", "title", "summary", "body", "sign_of_being", "published_at", "source_label", "source_url", "gap_ids", "organization_ids", "active"] },
     { "id": "projects", "schema": "project", "group": "developments", "title": "Projects", "query": "projects", "fields": ["id", "title", "description", "intended_outcome", "development_stage", "operational_status", "funding_status", "capacity_summary", "evidence_record_ids", "gap_ids", "organization_ids", "last_verified_at", "open_questions"] },
     { "id": "workstreams", "schema": "workstream", "group": "developments", "title": "Current workstreams", "query": "workstreams", "fields": ["id", "title", "summary", "status", "active"] },
-    { "id": "articles", "schema": "article", "group": "developments", "title": "Articles", "query": "articles", "fields": ["id", "title", "description", "summary", "date", "type", "path", "related_gap_ids", "related_location_ids", "published"] }
+    { "id": "articles", "schema": "article", "group": "developments", "title": "Articles", "query": "articles", "fields": ["id", "title", "description", "summary", "date", "type", "path", "related_gap_ids", "related_location_ids", "published"] },
+    { "id": "public-updates", "schema": "evidence", "group": "updates", "title": "Public updates", "query": "publicUpdates", "fieldsFrom": "evidence" }
   ],
   "nestedFields": {
     "source": ["publisher", "title", "url", "type", "published_at"],

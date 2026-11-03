@@ -1700,6 +1700,15 @@ button.plain-action-button:not(.is-pill):hover {
 .explorer-selected { border-block: 1px solid #dadce0; padding-block: var(--space-3); }
 .explorer-results ul { margin: 0; }
 .explorer-content a { overflow-wrap: anywhere; }
+.explorer-view-controls, .explorer-view-controls > div { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.explorer-view-controls { gap: var(--space-4); }
+.explorer-breadcrumb { display: grid; gap: var(--space-3); min-width: 0; }
+.explorer-breadcrumb nav { overflow-wrap: anywhere; }
+.explorer-breadcrumb nav button { border: 0; padding: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+.explorer-breadcrumb ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid #dadce0; }
+.explorer-breadcrumb li { border-bottom: 1px solid #dadce0; }
+.explorer-breadcrumb li button { width: 100%; padding-block: var(--space-3); border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; overflow-wrap: anywhere; }
+.explorer-json pre { max-width: 100%; margin: 0; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 
 @media (max-width: 720px) {
   .about-simple .about-simple-ideas {

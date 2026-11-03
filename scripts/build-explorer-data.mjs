@@ -23,6 +23,7 @@ try {
     findings: siteModel.getAllFindings(),
     locations: siteModel.getAllLocations(),
     evidence: siteModel.getAllEvidence(),
+    publicUpdates: siteModel.getPublicUpdates().map(({ record }) => record),
     claims: siteModel.getAllClaims(),
     measurements: siteModel.getMeasurements(),
     stories: siteModel.getStories(),
