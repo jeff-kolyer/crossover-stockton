@@ -14,9 +14,9 @@ interface PublicMobileMenuProps {
 const menuItems: Array<{ label: string; page: MenuPage }> = [
   { label: "Home", page: "home" },
   { label: "Needs", page: "reality" },
-  { label: "Stories", page: "connection" },
   { label: "Action", page: "action" },
   { label: "Updates", page: "updates" },
+  { label: "Stories", page: "connection" },
   { label: "About", page: "about" },
 ];
 

@@ -11,8 +11,8 @@ export function PublicFooter({ active, onNavigate, onOpenAbout }: {
   const links: { page: PublicRoute; label: string; href: string }[] = [
     { page: "home", label: "Home", href: "/" },
     { page: "reality", label: "Needs", href: "/reality/" },
-    { page: "connection", label: "Stories", href: "/connection/" },
     { page: "action", label: "Action", href: "/action/" },
+    { page: "connection", label: "Stories", href: "/connection/" },
     { page: "about", label: "About", href: "/about/" },
   ];
   return <>
