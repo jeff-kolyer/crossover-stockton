@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/investigation.schema.json",
+  "title": "Investigation",
+  "description": "investigation information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "gap_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "publicName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "preparing_fieldwork",
+        "in_progress",
+        "completed"
+      ]
+    },
+    "introduction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "verified_finding_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "last_updated_at": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
+    "uncertainties": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "gap_id",
+    "title",
+    "status",
+    "introduction"
+  ],
+  "additionalProperties": true
+}

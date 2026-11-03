@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/evidence.schema.json",
+  "title": "Evidence record",
+  "description": "evidence information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_type": {
+      "type": "string",
+      "enum": [
+        "current_service",
+        "update",
+        "planning_update",
+        "activity",
+        "field_report",
+        "capacity_intervention",
+        "outcome",
+        "condition",
+        "operational_change",
+        "response",
+        "current_ask",
+        "capacity_constraint",
+        "current_need",
+        "organization_update",
+        "finding",
+        "operational_condition",
+        "reported_context",
+        "reported_service"
+      ]
+    },
+    "trust": {
+      "type": "string",
+      "enum": [
+        "source_supported",
+        "crossover_source",
+        "government",
+        "organization_source"
+      ]
+    },
+    "source": {
+      "$ref": "./common.schema.json#/$defs/source"
+    },
+    "investigation_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "gap_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "organization_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "location_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "occurred_at": {
+      "anyOf": [
+        {
+          "$ref": "./common.schema.json#/$defs/date"
+        },
+        {
+          "$ref": "./common.schema.json#/$defs/dateTime"
+        }
+      ]
+    },
+    "published_at": {
+      "anyOf": [
+        {
+          "$ref": "./common.schema.json#/$defs/date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "checked_at": {
+      "anyOf": [
+        {
+          "$ref": "./common.schema.json#/$defs/date"
+        },
+        {
+          "$ref": "./common.schema.json#/$defs/dateTime"
+        }
+      ]
+    },
+    "recorded_at": {
+      "anyOf": [
+        {
+          "$ref": "./common.schema.json#/$defs/date"
+        },
+        {
+          "$ref": "./common.schema.json#/$defs/dateTime"
+        }
+      ]
+    },
+    "evidence_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "basis_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "report_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "outcome": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "as_of": {
+          "anyOf": [
+            {
+              "$ref": "./common.schema.json#/$defs/date"
+            },
+            {
+              "$ref": "./common.schema.json#/$defs/dateTime"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "summary",
+        "as_of"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "required": [
+    "id",
+    "record_type",
+    "title",
+    "summary",
+    "trust",
+    "source",
+    "gap_ids",
+    "organization_ids"
+  ],
+  "additionalProperties": true
+}

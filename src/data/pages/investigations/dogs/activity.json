@@ -1,0 +1,56 @@
+{
+  "InvestigationActivitySections": {
+    "activity": "Activity",
+    "whatWeVeDoneToAnswerThese": "What we've done to answer these questions.",
+    "seeFindings": "See findings",
+    "relatedRecordedWork": "Related recorded work:",
+    "activitySingular": "activity",
+    "activityPlural": "activities",
+    "recordSingular": "record",
+    "recordPlural": "records",
+    "recorded": "recorded",
+    "related": "related",
+    "seeFindingsPrefix": "See findings: ",
+    "dateNotRecorded": "Date not recorded"
+  },
+  "InvestigationOrganizations": {
+    "organizationsContactedOrVisited": "Organizations contacted or visited",
+    "groupsKnownOnlyThroughPublishedMaterialRemain": "Groups known only through published material remain sources and references.",
+    "ourInvolvement": "Our involvement:",
+    "latestRecordedOutcome": "Latest recorded outcome:",
+    "fieldReports": "Field reports:",
+    "whatRemainsUnverified": "What remains unverified:",
+    "relatedQuestionsToAsk": "Related questions to ask:",
+    "sources": "Sources:",
+    "website": "website",
+    "dateNotRecorded": "Date not recorded"
+  },
+  "FieldReportContent": {
+    "reportNarrative": "Report narrative",
+    "visiting": "Visiting ",
+    "locationResources": "Location resources",
+    "openstreetmapLocation": "OpenStreetMap location",
+    "website": "website",
+    "connectedRecords": "Connected records",
+    "organization": "Organization:",
+    "need": "Need:",
+    "activity": "Activity:",
+    "investigationActivity": "Investigation activity",
+    "sourcesAndNotes": "Sources and notes",
+    "source": "Source: ",
+    "additionalContext": "Additional context: ",
+    "thisLocation": "this location",
+    "crossoverStockton": "Crossover Stockton",
+    "supportingSource": "Supporting source",
+    "undated": "Undated",
+    "sourceFallback": "source"
+  },
+  "FieldReportPage": {
+    "fieldReport": "Field report",
+    "fieldReportNotFound": "Field report not found",
+    "thisReportIdDoesNotMatchA": "This report ID does not match a published field report.",
+    "backToReports": "Back to reports",
+    "backToActivity": "Back to activity",
+    "backToNeeds": "Back to needs"
+  }
+}

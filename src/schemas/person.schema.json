@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/person.schema.json",
+  "title": "Person",
+  "description": "person information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "$ref": "./common.schema.json#/$defs/id"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "locality": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "organizationId",
+          "title"
+        ],
+        "additionalProperties": true
+      }
+    },
+    "biography": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "profileUrl": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "roles",
+    "biography"
+  ],
+  "additionalProperties": true
+}

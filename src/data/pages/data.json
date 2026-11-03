@@ -1,0 +1,14 @@
+{
+  "title": "Crossover Explorer",
+  "intro": "Explore Crossover's structured information: our investigations, evidence, activities, findings, organizations, locations, and stories. This view is generated from the underlying data.",
+  "searchLabel": "Search records",
+  "searchPlaceholder": "Search by name, type, source, or ID",
+  "searchResults": "Search results",
+  "noResults": "No matching public records.",
+  "selectedRecord": "Selected record",
+  "recordUnavailable": "This record is not available in the public Explorer.",
+  "directLink": "Link to this record",
+  "unsupportedTypes": "Schema types without a public collection",
+  "unavailableReference": "Related record unavailable in the public Explorer",
+  "clearSearch": "Clear search"
+}

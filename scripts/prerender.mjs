@@ -78,6 +78,7 @@ const pages = [
   ["/reality/", "Reality | Crossover Stockton", "Follow needs in Stockton and the evidence behind them."],
   ["/connection/", "Connection | Crossover Stockton", "Stories of local people and organizations responding to Stockton's needs."],
   ["/action/", "Action | Crossover Stockton", "Follow Crossover's current work and field investigations in Stockton."],
+  ["/data/", "Crossover Explorer | Crossover Stockton", "Explore Crossover's structured information, records, classifications, and relationships."],
   ["/updates/", "Updates | Crossover Stockton", "Recent updates on Stockton's needs and community response."],
   ["/about/", "About | Crossover Stockton", "Learn how Crossover Stockton connects local reality, response, and action."],
   ...gaps.filter((gap) => gap.active).map((gap) => [`/reality/${gap.slug}/`, `${gap.title} — Reality | Crossover Stockton`, gap.summary]),

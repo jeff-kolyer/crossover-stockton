@@ -1,36 +1,32 @@
+import uiCopy from "../data/pages/stories.json";
+import { siteModel } from "../model";
 
-import gapsData from "../data/gaps.json";
-import storiesData from "../data/stories.json";
 import { navigateInternalLink } from "../lib/internalLink";
-import { PublicSiteNav } from "./PublicSiteNav";
-import { PublicFooter } from "./PublicFooter";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
+import { HeadingGroup, RecordList, SectionHeader, Stack } from "./layout";
 import type { GapRecord, StoryEvidence, StoryRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
+const uiText = uiCopy.StoryDetailPage;
 
 interface StoryDetailPageProps {
   slug?: string;
-  onNavigate: (page: PublicRoute) => void;
   onOpenGap: (slug: string) => void;
 }
 
-const stories = storiesData as StoryRecord[];
-const gaps = gapsData as GapRecord[];
+const stories = siteModel.getStories();
+const gaps = siteModel.getNeeds();
 const fallbackImage = "/images/connection/connection_banner.jpg";
 
-export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPageProps) {
+export function StoryDetailPage({ slug, onOpenGap }: StoryDetailPageProps) {
   const story = stories.find((item) => item.slug === slug && item.active);
 
   if (!story) {
     return (
-      <main className="public-site story-detail-page public-home">
-        <PublicStoryNav onNavigate={onNavigate} />
-        <section className="story-detail-shell story-not-found public-document">
-          <h1>We could not find that story.</h1>
-          <p>This story may have moved, been retired, or not been added to the public data yet.</p>
-        </section>
-        <PublicFooter active="connection" onNavigate={onNavigate} />
+      <main className="story-detail-page public-home">
+        <HeadingGroup as="section" className="story-detail-shell story-not-found public-document">
+          <h1>{uiText.weCouldNotFindThatStory}</h1>
+          <p>{uiText.thisStoryMayHaveMovedBeenRetired}</p>
+        </HeadingGroup>
       </main>
     );
   }
@@ -40,71 +36,70 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
   const relatedGap = story.gap_ids.map((id) => gaps.find((gap) => gap.id === id && gap.active)).find((gap): gap is GapRecord => Boolean(gap));
 
   return (
-    <main className="public-site story-detail-page public-home">
-      <PublicStoryNav onNavigate={onNavigate} />
+    <main className="story-detail-page public-home">
 
       <article className="story-detail-shell public-document">
         <section className="story-opening">
-          <div className="story-opening-copy">
+          <HeadingGroup className="story-opening-copy">
             <h1>{story.title}</h1>
             <p className="story-summary">{story.summary}</p>
             {story.sign_of_being && <p className="story-sign-line">{story.sign_of_being}</p>}
-          </div>
+          </HeadingGroup>
           <img src={image} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         </section>
 
         {(story.body || (story.connection && story.connection.length > 1)) && (
           <div className="story-meaning-row">
             {story.body && (
-              <section className="story-body-block">
-                <h2>What is happening here</h2>
+              <HeadingGroup as="section" className="story-body-block">
+                <h2>{uiText.whatIsHappeningHere}</h2>
                 <p>{story.body}</p>
-              </section>
+              </HeadingGroup>
             )}
 
             {story.connection && story.connection.length > 1 && (
-              <section className="story-connection-block">
-                <h2>The connection</h2>
+              <Stack as="section" className="story-connection-block" space="content">
+                <SectionHeader><h2>{uiText.theConnection}</h2></SectionHeader>
                 <ConnectionFlow items={story.connection} />
-              </section>
+              </Stack>
             )}
           </div>
         )}
 
         <div className="story-lower-grid">
           {story.fruit && story.fruit.length > 0 && (
-            <section className="story-panel story-fruit-panel">
-              <h2>The fruit</h2>
+            <Stack as="section" className="story-panel story-fruit-panel" space="content">
+              <SectionHeader><h2>{uiText.theFruit}</h2></SectionHeader>
               <ul>
                 {story.fruit.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-            </section>
+            </Stack>
           )}
 
           {story.moments && story.moments.length > 0 && (
-            <section className="story-panel story-moments-panel">
-              <h2>Moments</h2>
-              <div className="story-moment-grid">
+            <Stack as="section" className="story-panel story-moments-panel" space="content">
+              <SectionHeader><h2>{uiText.moments}</h2></SectionHeader>
+              <RecordList className="story-moment-grid">
                 {story.moments.map((moment) => (
-                  <article className="story-moment-card" key={`${moment.title}-${moment.source_url ?? ""}`}>
-                    <h3>{moment.title}</h3>
-                    <p>{moment.text}</p>
+                  <Stack as="article" className="story-moment-card" space="content" key={`${moment.title}-${moment.source_url ?? ""}`}>
+                    <HeadingGroup><h3>{moment.title}</h3>
+                      <p>{moment.text}</p></HeadingGroup>
                     {moment.source_url && (
                       <a href={moment.source_url} target="_blank" rel="noreferrer">
-                        {moment.source_label || "Source"}
+                        {moment.source_label || uiText.sourceFallback}
                       </a>
                     )}
-                  </article>
+                  </Stack>
                 ))}
-              </div>
-            </section>
+              </RecordList>
+            </Stack>
           )}
 
           {evidence.length > 0 && (
-            <section className="story-panel story-sources-panel">
-              <h2>Sources</h2>
+            <Stack as="section" className="story-panel story-sources-panel" space="content">
+              <SectionHeader><h2>{uiText.sources}</h2></SectionHeader>
               <ul className="story-source-list">
                 {evidence.map((source) => (
                   <li key={source.url}>
@@ -113,22 +108,17 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
                   </li>
                 ))}
               </ul>
-            </section>
+            </Stack>
           )}
         </div>
 
         {relatedGap && <p>
-          <PublicPrimaryAction href={`/reality/${relatedGap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(relatedGap.slug))}>Explore the related gap</PublicPrimaryAction>
+          <PublicPrimaryAction href={`/reality/${relatedGap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(relatedGap.slug))}>{uiText.exploreTheRelatedGap}</PublicPrimaryAction>
         </p>}
       </article>
 
-      <PublicFooter active="connection" onNavigate={onNavigate} />
     </main>
   );
-}
-
-function PublicStoryNav({ onNavigate }: { onNavigate: (page: PublicRoute) => void }) {
-  return <PublicSiteNav active="connection" onNavigate={onNavigate} variant="story" />;
 }
 
 function ConnectionFlow({ items }: { items: string[] }) {
@@ -149,7 +139,7 @@ function resolvedEvidence(story: StoryRecord): StoryEvidence[] {
   const candidates = story.evidence?.length
     ? story.evidence
     : story.source_url
-      ? [{ label: story.source_label || "Source", url: story.source_url, published_at: story.source_published_at }]
+      ? [{ label: story.source_label || uiText.sourceFallback, url: story.source_url, published_at: story.source_published_at }]
       : [];
   const byUrl = new Map<string, StoryEvidence>();
   candidates.forEach((source) => {

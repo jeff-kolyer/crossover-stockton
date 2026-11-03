@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/identity.schema.json",
+  "title": "Identity",
+  "description": "identity information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slogan": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geographicScope": {
+      "$ref": "./common.schema.json#/$defs/geographicScope"
+    },
+    "founderPersonId": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "principleIds": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "methodIds": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "statements": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "slogan",
+    "purpose",
+    "geographicScope",
+    "founderPersonId",
+    "principleIds",
+    "methodIds"
+  ],
+  "additionalProperties": true
+}

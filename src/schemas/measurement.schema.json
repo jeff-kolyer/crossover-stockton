@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/measurement.schema.json",
+  "title": "Measurement",
+  "description": "measurement information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "measure": {
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coverage_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "source_record_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "period_start": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
+    "period_end": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "official_reported_actual",
+        "calculated_from_official",
+        "self_reported",
+        "planned_authorized",
+        "estimate"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "measure",
+    "value",
+    "unit",
+    "coverage_id",
+    "source_record_id",
+    "period_start",
+    "period_end",
+    "evidence_status"
+  ],
+  "additionalProperties": true
+}

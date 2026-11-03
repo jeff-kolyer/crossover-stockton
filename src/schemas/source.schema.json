@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/source.schema.json",
+  "title": "Source",
+  "description": "A source entry; an ID is optional until a reviewed source registry exists.",
+  "$ref": "./common.schema.json#/$defs/source"
+}

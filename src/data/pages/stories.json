@@ -1,0 +1,13 @@
+{
+  "StoryDetailPage": {
+    "weCouldNotFindThatStory": "We could not find that story.",
+    "thisStoryMayHaveMovedBeenRetired": "This story may have moved, been retired, or not been added to the public data yet.",
+    "whatIsHappeningHere": "What is happening here",
+    "theConnection": "The connection",
+    "theFruit": "The fruit",
+    "moments": "Moments",
+    "sources": "Sources",
+    "exploreTheRelatedGap": "Explore the related gap",
+    "sourceFallback": "Source"
+  }
+}

@@ -266,6 +266,74 @@ What takes their time? What limits their efforts? What resources are missing? Wh
 
 Crossover has also identified other needs in Stockton. The same method can be applied to additional investigations as our work expands.
 
+## Information independent of presentation
+
+**Crossover is its information, not its interface.**
+
+The information we gather and develop must exist independently of the website that displays it.
+
+Needs, stories, investigations, questions, activities, evidence, findings, organizations, and locations are structured data. Each record has a defined type, properties, relationships, and sources.
+
+Pages are also defined as structured JSON. A page describes what information to present, how it is grouped, and which presentation methods to use.
+
+The page does not define its own HTML, CSS, typography, or spacing.
+
+### Content → Layout → Presentation
+
+Crossover separates three responsibilities:
+
+- **Content:** What the information is. Its meaning, evidence, relationships, and history.
+- **Layout:** How information is organized for presentation. Articles, lists, grids, maps, timelines, expandable sections, and other reusable methods.
+- **Renderer:** The technology that turns those definitions into a usable interface.
+
+The same information can be presented in different ways without being rewritten or duplicated.
+
+A collection of needs might appear as a compact grid on the homepage and a detailed list on the Needs page. Investigation questions might appear as expandable sections in Activity and as evidence-based explanations in Findings.
+
+Both presentations use the same underlying records.
+
+### Pages are data
+
+Each page has a JSON definition describing its content and composition. Shared records remain in reusable data collections.
+
+Presentation components interpret these definitions using a common layout system.
+
+Adding a page should ordinarily mean describing its information and selecting existing presentation methods, not writing new page-specific HTML and CSS.
+
+The public site and investigation views use the same typography, spacing rules, navigation system, and rendering infrastructure.
+
+### AI-assisted presentation
+
+AI can examine structured information and propose how best to present it.
+
+It might recommend a chronological list for activities, expandable groups for questions, a map for geographic evidence, or an editorial layout for findings.
+
+These proposals use defined components and interaction patterns. They can be validated, reviewed, and changed without modifying the underlying information.
+
+AI can help generate new renderers as presentation technologies improve.
+
+**The information remains authoritative. The interface is replaceable.**
+
+We should be able to replace our CSS, component library, frontend framework, or entire website presentation without reconstructing the knowledge Crossover has accumulated.
+
+Different renderers may offer different experiences, but they must preserve the meaning, sources, relationships, and limitations of the information.
+
+### Built for future chapters
+
+Stockton is our starting point, not the boundary of the system.
+
+Other Crossover chapters may investigate different needs, communities, and possibilities. They should not need to reinvent the information architecture or presentation infrastructure.
+
+They can introduce new records, investigations, and pages while reusing the same schemas, layout methods, and rendering system.
+
+Improvements to these shared capabilities become available to every chapter.
+
+This architecture is a direction we are implementing, not a claim that all content has already been migrated to JSON or that interchangeable renderers are already operational.
+
+**We preserve what we discover. We can change how we present it.**
+
+The website is one expression of Crossover. The accumulated knowledge is what endures.
+
 ## Technology
 
 The current platform uses:

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "jeff-kolyer",
+    "name": "Jeff Kolyer",
+    "roles": [
+      {
+        "organizationId": "crossover-stockton",
+        "title": "Founder",
+        "locality": "Stockton, California"
+      }
+    ],
+    "biography": [
+      "Crossover Stockton began with Jeff Kolyer, a former Silicon Valley technology founder exploring the transition from compulsory work to meaningful vocation.",
+      "After decades building technology, the question became personal: If machines can increasingly do the work, what are we free to become—and what will we do with that freedom?"
+    ],
+    "profileUrl": "https://www.linkedin.com/in/jeff-kolyer"
+  }
+]

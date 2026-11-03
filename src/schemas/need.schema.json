@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/need.schema.json",
+  "title": "Need",
+  "description": "need information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "slug": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high_priority",
+        "monitored",
+        "improving"
+      ]
+    },
+    "investigation_status": {
+      "type": "string",
+      "enum": [
+        "investigating",
+        "identified"
+      ]
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "organization_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "work_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "story_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "first_seen": {
+      "anyOf": [
+        {
+          "$ref": "./common.schema.json#/$defs/date"
+        },
+        {
+          "$ref": "./common.schema.json#/$defs/dateTime"
+        }
+      ]
+    },
+    "updated_at": {
+      "anyOf": [
+        {
+          "$ref": "./common.schema.json#/$defs/date"
+        },
+        {
+          "$ref": "./common.schema.json#/$defs/dateTime"
+        }
+      ]
+    },
+    "unknown_questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "summary",
+    "status",
+    "investigation_status"
+  ],
+  "additionalProperties": true
+}

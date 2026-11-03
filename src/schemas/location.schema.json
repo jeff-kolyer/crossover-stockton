@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/location.schema.json",
+  "title": "Location",
+  "description": "location information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "investigation_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "area": {
+      "type": "string",
+      "minLength": 1
+    },
+    "coordinates": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "number"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "historical_published_report",
+        "recent_public_report",
+        "official_location_record",
+        "crossover_firsthand"
+      ]
+    },
+    "evidence_date": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "evidence_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "verification_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "unknown": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "investigation_id",
+    "name",
+    "area",
+    "coordinates",
+    "category",
+    "evidence_date",
+    "source_url",
+    "verification_status",
+    "unknown"
+  ],
+  "additionalProperties": true
+}

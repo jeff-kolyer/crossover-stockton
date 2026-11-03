@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/finding.schema.json",
+  "title": "Finding",
+  "description": "finding information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "investigation_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "established",
+        "developing",
+        "contradicted",
+        "insufficient_evidence",
+        "preliminary",
+        "exploratory"
+      ]
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supporting_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "contradicting_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "related_question_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_reviewed_at": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
+    "current": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "investigation_id",
+    "title",
+    "status",
+    "statement",
+    "supporting_record_ids",
+    "contradicting_record_ids",
+    "limitations",
+    "last_reviewed_at"
+  ],
+  "additionalProperties": true
+}

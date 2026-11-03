@@ -1,58 +1,116 @@
-# Crossover layout system — current implementation
+# Crossover layout system
 
-This document records the layout that exists on 2026-11-02. It is the reference for new work, not a silent migration to the proposed Crossover Layout System v1 values. The companion [audit](LAYOUT_AUDIT.md) lists every authored spacing and type declaration and the decisions still open.
+This is the normative specification for every route, including the investigation workspace. The legacy [audit](LAYOUT_AUDIT.md) describes the implementation it replaced.
 
-## Sources and ownership
+## Four layers
 
-- `src/styles/app.css` defines the root type, four spacing tokens, shared heading sizes, shared editorial rhythm, and the investigation shell.
-- `src/styles/public.css` defines public page layouts and editorial sections.
-- `src/styles/public-chrome.css` defines the public header, footer, and bottom navigation.
-- `src/styles/home.css` defines the home hero and landing layout.
-- `src/styles/map.css`, `activity.css`, `controls.css`, and `investigation-google.css` define investigation UI layouts.
-- `src/components/PublicMobileMenu.layout.css` defines the mobile menu.
-- Component TSX adds state classes and a few inline values. External Leaflet and MapLibre styles also render in the map, but are not Crossover-authored rules.
+1. **Tokens** in `src/styles/crossover.css` define typography, the spacing scale, width roles, and named geometry. This is the sole first-party stylesheet, imported once in `src/main.tsx`. Leaflet and MapLibre vendor styles remain separate.
+2. **Semantic elements** carry document meaning and central typography. Standard content elements have zero external margin.
+3. **Layout primitives** in `src/components/layout.tsx` own alignment and space between boxes.
+4. **Content components** compose primitives for recurring editorial and investigation structures.
 
-There is no Tailwind configuration or `space-x`/`space-y` utility layer. CSS is imported from `src/main.tsx` and the relevant components. A selector's presence does not prove it wins the cascade; consult computed styles when changing a rule.
+`SiteShell` renders `SiteHeader` once, then `PageShell`, route content, and a shared footer on document routes. `PageShell` has three explicit origins: `standard` begins 24px below the header; `flush` begins at the header edge for the investigation; `hero` begins 24px below the header and leaves hero composition to its child. No page adds a header offset. For any visible gap, inspect the nearest layout parent and its named contract. A border belongs to its owner; the content around it belongs to SectionBoundary or a separated RecordList.
 
-## Typography
+## Typography roles
 
-| Role | Current authored size | Current line height | Source |
-|---|---:|---:|---|
-| Root/body | 17px | 1.5 | `app.css:3–6` |
-| H1 | 28px | 1.25 | `app.css:85–88` |
-| H2 | 22px | 1.3 | `app.css:90–93` |
-| H3 | 18px, browser bold weight | 1.3 | `app.css:95–98` |
-| Investigation small/time/secondary | 14px | 1.5 | `app.css:100–105` |
-| Home hero title | 3.125rem desktop; 1.875rem through 820px | 1.1 desktop; 1.2 through 820px | `home.css:21,99` |
-| Home hero subtitle | 1.04rem; `--type-body-size` (.98rem) through 520px | 1.45 | `home.css:22,122` |
+All standard roles use `Roboto, Arial, sans-serif`. Values are defined once in `crossover.css`.
 
-The home hero title is a paragraph with a named class, not an H1 (`HomePage.tsx:82`). Public interior H1 elements use the one global 28px rule. The hero is an existing exception, including its responsive type change. Green arrow links, status labels, statistics, navigation, map controls, and metadata have their own authored sizes; see the audit inventory for every occurrence. `rem` values currently resolve against the 17px root, not 16px.
+| Role | Element or class | Size | Weight | Leading | Tracking |
+|---|---|---:|---:|---:|---|
+| Body | `html`, inherited paragraphs | 17px | 400 | 1.5 | normal |
+| H1 | `h1` | 28px | 700 | 1.25 | normal |
+| H2 | `h2` | 22px | 700 | 1.3 | normal |
+| H3 | `h3` | 18px | 700 | 1.3 | normal |
+| Small / metadata | `small`, `time`, `.type-small` | 14px | 400 | 1.4 | normal |
+| Control | `.type-control`, public actions | 14px | 700 | 1.3 | normal |
+| Display | `.home-hero-title` only | 3.125rem | 700 | 1.1 | −.025em |
 
-## Spacing and external geometry
+The existing home Display becomes 1.875rem / 1.2 below 820px. Its subtitle and compact brand labels are registered exceptions in [layout-exceptions.json](layout-exceptions.json). Semantic heading levels reflect the document outline, never a desired visual size. No page may change H1, H2, or H3 typography. Metric values use `--type-metric-value-size`; labels use Small. Status eyebrows, map labels, icon glyphs, and brand lettering have named central tokens.
 
-The four defined tokens are `--space-1: 4px`, `--space-2: 8px`, `--space-3: 16px`, and `--space-4: 24px` (`app.css:9–12`). Existing CSS also uses literal values outside this scale. The tokens are available but are not yet the sole spacing authority.
+## Content spacing scale
 
-- **Public page gutters and widths.** Standard interior public content uses 16px padding and a 960px maximum width (`public.css:48–56,157–162`). Editorial text often caps at 760px (`public.css:63–74,165–166`). The home rail caps at 1120px (`home.css:2–4`); its landing gutters are 20px through 820px and 16px through 520px (`home.css:98,125`). These are separate existing layout rules.
-- **Investigation widths.** The investigation content cap is 900px (`app.css:185–199`). The workspace layout, sheet sizes, map, and resizable panel are governed by `app.css`, `map.css`, and inline runtime position variables.
-- **Major sections.** Editorial documents currently use 24px between adjacent sections (`app.css:124–126`). Some public sections use different literal margins or parent gaps. Preserve these until a visual decision is made.
-- **Text groups.** Shared public H3 uses 8px below (`public.css:7–10`); shared document headings also use 8px below (`app.css:108–110`). Paragraphs, lists, and figures use 16px below in document shells (`app.css:112–114`). Other components override those margins locally.
-- **Repeated lists.** Document list items use 8px above subsequent items (`app.css:120–122`). Action features use a 24px parent gap plus an additional 8px margin on later rows (`public.css:330–359`). The latter is recorded as compound spacing, not a target rule.
-- **Controls.** Public primary actions have a 45px minimum height (`public.css:16–24`); public navigation buttons use 44px (`public-chrome.css:57–61`), mobile bottom navigation 62px (`public-chrome.css:110–129`), and mobile menu items 48px (`PublicMobileMenu.layout.css:94–100`). Investigation controls have their own dimensions in `controls.css` and `map.css`.
-- **Images.** Most public entries use `16 / 10` (`public.css:100–110`); About's wide hero uses `2.5 / 1` (`public.css:237–240`); Action images use `16 / 9` and a 260px maximum (`public.css:336–345`). On desktop, home story card headings span both card columns, above the image and summary; through 820px, the image sits left of both text rows (`home.css:63–68,116–119`). Other home and investigation images have component-specific dimensions recorded in the audit.
-- **Borders and separators.** Public section borders use 1px hairlines (`public.css`); the About philosophy and founder sections share a bottom hairline and 16px bottom padding (`public.css:169–173`). Action investigation cards use `border-block` (`public.css:271–282`). Action feature separators are pseudo-elements positioned relative to the feature (`public.css:356–368`). Preserve these offsets during any spacing ownership change.
+| Token | Value | Use |
+|---|---:|---|
+| `--space-1` | 4px | Tight text, metric value to label, image to caption |
+| `--space-2` | 8px | Related controls and compact records |
+| `--space-3` | 16px | Content groups, records, prose paragraphs |
+| `--space-4` | 24px | Major sections |
+
+Zero is allowed. Arbitrary content spacing is not. Specialized image, control, map, and safe-area geometry uses named tokens and registered exceptions. Auto margins for rail alignment are not content separation.
+
+## Semantic defaults
+
+`h1`–`h6`, `p`, `ul`, `ol`, `figure`, `blockquote`, and `hr` have `margin: 0`. All elements use border-box sizing. Form controls inherit the root font until a control role is applied. Lists receive indentation and item gaps from their containing document or workspace layout. Figure owns its image-to-caption gap. Links never add external spacing. The home destinations rail has the sole registered negative margin, which extends its background and border to the page edge.
+
+## Primitive contracts
+
+| Primitive | Anatomy and owner |
+|---|---|
+| `Page` | Named width: `document` 760px, `wide` 960px, `investigation` 900px, `map` full width; 16px horizontal gutters. |
+| `Section` | Semantic major section with a 24px internal group relationship. |
+| `Stack` | Vertical children with named `tight`, `related`, `content`, or `section` gap. |
+| `Row` | Horizontal children with named gap and alignment; direction may change responsively. |
+| `Grid` | Columns and row/column gaps, including responsive column changes. |
+| `Cluster` | Wrapping controls and links with 8px gap. |
+| `Inset` | Internal padding from the scale, default 16px. |
+| `Divider` | A 1px hairline without margin or padding. |
+| `SectionBoundary` | 16px before, 1px divider, 16px after. |
+
+`RecordList separated` applies the same 16px / line / 16px contract between repeated siblings. A plain `RecordList` uses 16px without borders. `PageShell` owns the header-to-content origin and bottom padding on document pages. The investigation workspace fills the remaining viewport beneath the same global header; its identity, local tabs, content panel, and contextual map sit inside the flush page shell.
+
+## Relationship table
+
+| Relationship | Owner | Gap |
+|---|---|---:|
+| Page edge to content | Page | 16px |
+| Global header to page content | PageShell standard / hero | 24px |
+| Global header to investigation workspace | PageShell flush | 0px |
+| Page title to introduction | HeadingGroup | 4px |
+| Heading to supporting text | HeadingGroup | 4px |
+| Paragraph to paragraph | ProseStack | 16px |
+| Related controls | Cluster | 8px |
+| Record to record | RecordList | 16px |
+| Content group to content group | Stack / workspace section | 16px |
+| Major section to next section | Public shell / Section layout | 24px |
+| Image to caption | Figure | 4px |
+| Content to visible boundary | SectionBoundary / separated RecordList | 16px |
+| Visible boundary to next content | SectionBoundary / separated RecordList | 16px |
+
+Gaps are measured between layout boxes. Font leading, wrapping, aspect ratios, and borders affect perceived whitespace. Do not compensate with a second local margin.
+
+## Content component anatomy
+
+| Component | Anatomy | Internal gap | External owner |
+|---|---|---:|---|
+| `HeadingGroup` | Heading, optional supporting copy | 4px | Section / Stack |
+| `ProseStack` | Editorial paragraphs | 16px | Section / Stack |
+| `SectionHeader` | Heading, optional deck | 4px | Section |
+| `RecordList` | Repeated records, optional lines | 16px or boundary | Parent section |
+| `RecordRow` | Identity and summary | 8px | RecordList |
+| `QuestionGroup` | Disclosure, count, expanded findings and records, related navigation | 16px groups, 4px toggle text | Activity list |
+| `ActivityRecord` | Date/time, title, description/result, optional location, evidence links, status | 8px | RecordList |
+| `Finding` | Title, state, explanation, evidence/navigation | 8px | RecordList or Section |
+| `Figure` | Image and optional caption | 4px | Parent layout |
+| `MediaRow` | Image/media and copy column | 16px | Parent list / Section |
+| `ActionMetrics` | Three equal columns; value above label | 4px value to label | Action feature copy |
+
+QuestionGroup uses the bordered Activity accordion. Its expanded content remains in the same group through its final record; it has no nested decorative cards. ActionMetrics keeps values on one line while labels may wrap within their column. Metric meaning and values come from `crossoverActions`.
 
 ## Responsive behavior
 
-Public navigation changes at 900px and 520px (`public-chrome.css`). The home hero and card layout change at 820px and 520px (`home.css`); its image/copy layout changes without preserving a single hero title size. The About ideas layout changes at 720px (`public.css`). The investigation map/sheet changes at 1023/1024px (`map.css`, `activity.css`, `investigation-google.css`). The 260px navigation breakpoint is an existing narrow-screen exception. The audit identifies the breakpoints that alter type or control dimensions.
+The site is phone-first. Breakpoints may change columns, direction, navigation visibility, panel arrangement, image placement, and available width. They do not change standard H1/H2/H3/Body roles. The compact home Display, home subtitle, and small header branding are preserved exceptions. On desktop, the investigation panel and map are adjacent; on phone, its Map tab retains the full map and draggable detail sheet. Map sheet positions, grip, peek height, and drag widths are functional geometry. Bottom navigation clearance includes its fixed 62px height, an 8px buffer, and the browser safe-area inset.
 
-## Spacing ownership for new work
+## Example
 
-1. A reusable text or control component should not add an external margin. Its parent layout owns the distance to siblings.
-2. One visual relationship should have one owner. Use a parent `gap` for repeated flex/grid relationships. Do not combine child top and bottom margins to tune one gap.
-3. Reserve margins for a named document-flow or positioning reason, such as editorial prose, floated imagery, or intentional rail alignment. Record the exception and its owner here before adding it.
-4. Use existing type and spacing tokens where they match the intended computed value. Do not replace literals merely for appearance of consistency if the result changes layout.
-5. For an existing non-token value, first measure and document the current rendering. Any visible change to size, line height, spacing, control dimensions, or image geometry needs a separate design decision.
+```tsx
+<Page width="wide">
+  <HeadingGroup><h1>Updates</h1><p>Recent reporting.</p></HeadingGroup>
+  <RecordList separated>{records.map((record) => <ActivityRecord key={record.id}>…</ActivityRecord>)}</RecordList>
+</Page>
+```
 
-**Correct ownership example:** a three-item flex column uses `gap: 8px` on the column; its children have no external margins. **Incorrect ownership example:** an H3 has `margin-bottom: 8px` and the following paragraph has `margin-top: 4px` to produce a 12px gap. The current Action investigation card contains this pattern (`public.css:315–320`) and remains unchanged pending review.
+HeadingGroup owns the 4px title-to-deck gap; Page or a containing Section owns separation from RecordList; the separated RecordList owns the full border relationship.
 
-For future AI-generated components, do not introduce an undocumented CSS length, line height, font size, or local spacing override. Reuse an established value or add a named, reasoned exception here with its owner and computed desktop/mobile result before implementation.
+## Enforcement and exceptions
+
+Run `npm run check:layout`. The PostCSS checker covers authored CSS and inline component spacing. It rejects local type values, external vertical margins, non-scale spacing, page-specific heading typography, responsive type without an exception, and stale or incomplete exceptions. The normal build runs it before compilation. Specialized geometry is enumerated in [layout-exceptions.json](layout-exceptions.json) with exact file, selector, property, value, reason, owner, and responsive status. A new exception must be narrow and justified; no entire stylesheet is exempt.

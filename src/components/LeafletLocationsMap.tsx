@@ -1,3 +1,4 @@
+import uiCopy from "../data/pages/investigations/dogs/map.json";
 import { useEffect, useRef, useState } from "react";
 import * as L from "leaflet";
 import { maplibreGL } from "@maplibre/maplibre-gl-leaflet";
@@ -9,6 +10,8 @@ import type { MappedInvestigationLocation } from "./InvestigationLocations";
 import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import { openTaskLocationIds } from "../lib/investigationData";
 import { applyChatStyleBasemap } from "../lib/chatStyleBasemap";
+
+const uiText = uiCopy.LeafletLocationsMap;
 
 setWorkerUrl(workerUrl);
 
@@ -359,6 +362,6 @@ export function LeafletLocationsMap({ locations, selectedId, onSelect, wheelZoom
   }, [map, locations, selectedId]);
 
   return <div className="investigation-map-frame">
-    <div ref={containerRef} className="investigation-leaflet-shell" aria-label="Map of generalized historical and public report areas" />
+    <div ref={containerRef} className="investigation-leaflet-shell" aria-label={uiText.mapOfGeneralizedHistoricalAndPublicReport} />
   </div>;
 }
