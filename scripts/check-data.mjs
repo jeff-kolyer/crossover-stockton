@@ -12,6 +12,7 @@ const datasets = [
   ["claims", "claim"],
   ["workstreams", "workstream"],
   ["work", "legacy-work"], ["projects", "project"], ["articles", "article"],
+  ["activity-question-groups", "question-group"],
 ];
 const errors = [];
 const records = new Map();
@@ -69,6 +70,7 @@ checkRefs(records.get("work"), "projects", "project_ids", "work");
 checkRefs(records.get("work"), "orgs", "organization_ids", "work");
 checkRefs(records.get("articles"), "gaps", "related_gap_ids", "article");
 checkRefs(records.get("articles"), "investigation-locations", "related_location_ids", "article");
+for (const prop of ["activityIds", "reportIds", "relatedActivityIds", "relatedReportIds"]) checkRefs(records.get("activity-question-groups"), "records", prop, "activity question group");
 for (const item of records.get("records") ?? []) {
   if (item.record_type === "activity" && item.occurred_at && item.evidence_status?.startsWith("planned")) errors.push(`evidence:${item.id} planned status conflicts with occurred_at`);
   if (item.source?.url && !/^https?:\/\//.test(item.source.url)) errors.push(`evidence:${item.id} invalid source URL`);
@@ -84,7 +86,7 @@ for (const item of actionConfiguration) {
   if (!item.href?.startsWith("/") || !item.buttonLabel) errors.push(`action page:${item.id} missing link configuration`);
 }
 const compositionIds = new Set();
-const sourceCollections = { identity: "crossover", people: "people", principles: "principles", methods: "methods", needs: "gaps", investigations: "dogs-investigations", questions: "investigation-questions", tasks: "tasks", activities: "records", evidence: "records", findings: "findings", claims: "claims", organizations: "orgs", stories: "stories", locations: "investigation-locations", workstreams: "workstreams", "legacy-work": "work", projects: "projects", articles: "articles", measurements: "dogs-research", developments: "records" };
+const sourceCollections = { identity: "crossover", people: "people", principles: "principles", methods: "methods", needs: "gaps", investigations: "dogs-investigations", questions: "investigation-questions", "question-groups": "activity-question-groups", tasks: "tasks", activities: "records", evidence: "records", findings: "findings", claims: "claims", organizations: "orgs", stories: "stories", locations: "investigation-locations", workstreams: "workstreams", "legacy-work": "work", projects: "projects", articles: "articles", measurements: "dogs-research", developments: "records" };
 for (const page of compositions) {
   errors.push(...validateRecord(page, "page", `page:${page.id}`));
   if (compositionIds.has(page.id)) errors.push(`duplicate page composition: ${page.id}`);

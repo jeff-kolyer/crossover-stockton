@@ -1,7 +1,5 @@
 import uiCopy from "../data/pages/investigations/dogs/activity.json";
-import gapsData from "../data/gaps.json";
-import orgsData from "../data/orgs.json";
-import workData from "../data/work.json";
+import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { organizationActivityHref } from "../lib/organizationActivity";
 import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
@@ -9,9 +7,9 @@ import { Figure, HeadingGroup, ProseStack, Section, Stack } from "./layout";
 
 const uiText = uiCopy.FieldReportContent;
 
-const gaps = gapsData as GapRecord[];
-const orgs = orgsData as OrgRecord[];
-const work = workData as Array<{ id: string; title: string }>;
+const gaps = siteModel.getNeeds();
+const orgs = siteModel.getOrganizations();
+const work = siteModel.getAllLegacyWork();
 
 export function formatReportDate(value?: string) {
   if (!value) return uiText.undated;

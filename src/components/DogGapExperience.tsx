@@ -1,9 +1,7 @@
 import uiCopy from "../data/pages/investigations/dogs/overview.json";
+import { siteModel } from "../model";
 
 import { useEffect, useMemo, useRef, useState, type ComponentType, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
-import orgsData from "../data/orgs.json";
-import locations from "../data/investigation-locations.json";
-import recordsData from "../data/records.json";
 import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
 import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import { navigateInternalLink } from "../lib/internalLink";
@@ -33,10 +31,10 @@ const taskStatusColors = {
   waiting: evidenceCategoryColors.recent_public_report,
   done: evidenceCategoryColors.historical_published_report,
 } as const;
-const organizations = orgsData as OrgRecord[];
-const records = recordsData as EvidenceRecord[];
+const organizations = siteModel.getOrganizations();
+const records = siteModel.getAllEvidence();
 const fmt = (value?: string | null) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value.length === 10 ? `${value}T12:00:00` : value)) : uiText.dateNotRecorded;
-const allLocations = locations as InvestigationLocation[];
+const allLocations = siteModel.getAllLocations() as InvestigationLocation[];
 const mappedLocations = allLocations.filter((item): item is MappedInvestigationLocation => item.coordinates !== null && item.marker_kind !== null && item.map_label !== null);
 const mappedLocationIdsFor = (record: { location_ids?: string[]; map_reference_location_ids?: string[]; organization_ids: string[] }) => [
   ...(record.location_ids ?? []),

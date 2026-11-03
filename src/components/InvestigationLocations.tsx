@@ -1,9 +1,8 @@
 import uiCopy from "../data/pages/investigations/dogs/map.json";
+import { siteModel } from "../model";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType } from "react";
-import locationsData from "../data/investigation-locations.json";
-import maintenanceData from "../data/investigation-map-maintenance.json";
 import { openTaskLocationIds } from "../lib/investigationData";
 
 const uiText = uiCopy.InvestigationLocations;
@@ -36,8 +35,8 @@ export interface InvestigationLocation {
   field_report_id?: string;
 }
 
-const locations = locationsData as InvestigationLocation[];
-const maintenance = maintenanceData;
+const locations = siteModel.getAllLocations() as InvestigationLocation[];
+const maintenance = siteModel.getMapMaintenance();
 export type MappedInvestigationLocation = InvestigationLocation & { coordinates: [number, number]; marker_kind: NonNullable<InvestigationLocation["marker_kind"]>; map_label: NonNullable<InvestigationLocation["map_label"]> };
 type MapProps = { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean };
 

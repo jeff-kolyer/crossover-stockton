@@ -1,7 +1,6 @@
 import uiCopy from "../data/pages/investigations/dogs/activity.json";
+import { siteModel } from "../model";
 
-import gapsData from "../data/gaps.json";
-import recordsData from "../data/records.json";
 import type { EvidenceRecord, GapRecord } from "../types";
 import { FieldReportContent, formatReportDate } from "./FieldReportContent";
 
@@ -17,8 +16,8 @@ interface FieldReportPageProps {
   onOpenInvestigationReports: () => void;
 }
 
-const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
-const gaps = gapsData as GapRecord[];
+const reports = siteModel.getAllEvidence().filter((record) => record.record_type === "field_report");
+const gaps = siteModel.getNeeds();
 
 export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, onOpenInvestigationReports }: FieldReportPageProps) {
   const report = reports.find((item) => item.id === reportId);

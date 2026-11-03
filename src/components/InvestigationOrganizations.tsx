@@ -1,17 +1,15 @@
 import uiCopy from "../data/pages/investigations/dogs/activity.json";
 import globalCopy from "../data/ui-copy.json";
-import orgsData from "../data/orgs.json";
-import recordsData from "../data/records.json";
-import workData from "../data/work.json";
+import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { recordLinkLabel } from "../lib/linkLabels";
 import type { EvidenceRecord, OrgRecord, WorkRecord } from "../types";
 
 const uiText = uiCopy.InvestigationOrganizations;
 
-const orgs = orgsData as OrgRecord[];
-const records = recordsData as EvidenceRecord[];
-const works = workData as WorkRecord[];
+const orgs = siteModel.getOrganizations();
+const records = siteModel.getAllEvidence();
+const works = siteModel.getAllLegacyWork() as WorkRecord[];
 const engagementRecords = records.filter((record) =>
   record.source.publisher?.startsWith(globalCopy.App.siteName) &&
   (record.record_type === "activity" || record.record_type === "field_report" || record.record_type === "field_investigation") &&

@@ -43,7 +43,7 @@ Shared menu labels and destinations are in `src/data/ui-copy.json`; route parsin
 ## Migration issues to resolve explicitly
 
 1. Source objects are nested in records and often have no ID. A future source registry needs an editorial ID policy; a URL alone should not be mistaken for a verified publication identity.
-2. `dogs-investigations.json` embeds five broad questions while `investigation-questions.json` defines five cross-linked questions. Their titles/IDs differ. They are retained until a reviewed mapping is possible.
+2. `dogs-investigations.json` embeds five broad questions, `investigation-questions.json` defines five cross-linked questions, and `activity-question-groups.json` defines five Activity presentation groupings. Their titles/IDs differ. They are retained until a reviewed mapping is possible.
 3. `records.json` includes record types and fields beyond the current TypeScript `EvidenceRecord` interface. Schemas must reflect the actual data without deleting fields or weakening evidence distinctions.
 4. Some Action statistics are manually reported display values. The records-request count is derived from a specific record. Those sources must remain distinct; an unknown value must never be converted to zero.
 5. Existing page JSON still includes page-specific editorial statements and presentation labels. Shared substantive About statements, dog-gap factual claims, and Action workstreams have moved to semantic records; navigation and UI labels remain in View configuration.

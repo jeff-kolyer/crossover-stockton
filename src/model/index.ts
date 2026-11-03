@@ -17,6 +17,8 @@ import claimsData from "../data/claims.json";
 import workstreamsData from "../data/workstreams.json";
 import legacyWorkData from "../data/work.json";
 import articlesData from "../data/articles.json";
+import mapMaintenanceData from "../data/investigation-map-maintenance.json";
+import activityQuestionGroupsData from "../data/activity-question-groups.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "../types";
 import type { InvestigationFinding, InvestigationQuestion, InvestigationTask } from "../types/investigation";
 
@@ -50,10 +52,14 @@ export type InformationInput = {
   locations: typeof locationsData;
   projects: typeof projectsData;
   measurements: typeof researchData.measurements;
+  researchBaseline: typeof researchData;
+  investigationDataset: typeof investigationsData;
+  mapMaintenance: typeof mapMaintenanceData;
   claims: typeof claimsData;
   workstreams: typeof workstreamsData;
   legacyWork: typeof legacyWorkData;
   articles: typeof articlesData;
+  activityQuestionGroups: typeof activityQuestionGroupsData;
 };
 
 /** The Model has no React or page-layout dependency. It keeps raw records distinct from derived queries. */
@@ -76,6 +82,7 @@ export function createInformationModel(input: InformationInput) {
   const workstreams = index(input.workstreams, "workstreams");
   const legacyWork = index(input.legacyWork, "legacy work");
   const articles = index(input.articles, "articles");
+  const activityQuestionGroups = index(input.activityQuestionGroups, "activity question groups");
 
   requireReference(people.get(input.identity.founderPersonId), "person", input.identity.founderPersonId);
   for (const id of input.identity.principleIds) requireReference(principles.get(id), "principle", id);
@@ -99,6 +106,7 @@ export function createInformationModel(input: InformationInput) {
     getNeeds: () => input.needs,
     getInvestigation: (id: string) => investigations.get(id),
     getInvestigations: () => input.investigations,
+    getInvestigationDataset: () => input.investigationDataset,
     getQuestion: (id: string) => questions.get(id),
     getQuestions: (investigationId: string) => input.questions.filter((question) => question.investigation_id === investigationId),
     getAllQuestions: () => input.questions,
@@ -133,6 +141,7 @@ export function createInformationModel(input: InformationInput) {
     },
     getLocation: (id: string) => locations.get(id),
     getAllLocations: () => input.locations,
+    getMapMaintenance: () => input.mapMaintenance,
     getPeople: () => input.people,
     getPrinciples: () => input.principles,
     getMethods: () => input.methods,
@@ -144,6 +153,7 @@ export function createInformationModel(input: InformationInput) {
     getProjects: () => input.projects,
     getMeasurement: (id: string) => measurements.get(id),
     getMeasurements: () => input.measurements,
+    getResearchBaseline: () => input.researchBaseline,
     getClaim: (id: string) => claims.get(id),
     getClaims: (needId: string) => input.claims.filter((claim) => claim.needId === needId),
     getAllClaims: () => input.claims,
@@ -153,6 +163,8 @@ export function createInformationModel(input: InformationInput) {
     getAllLegacyWork: () => input.legacyWork,
     getArticle: (id: string) => articles.get(id),
     getArticles: () => input.articles,
+    getActivityQuestionGroup: (id: string) => activityQuestionGroups.get(id),
+    getActivityQuestionGroups: () => input.activityQuestionGroups,
     getDevelopments: () => input.evidence.filter((record) => ["update", "planning_update", "operational_change", "organization_update", "capacity_intervention", "reported_context"].includes(record.record_type)),
   };
 }
@@ -173,8 +185,12 @@ export const siteModel = createInformationModel({
   locations: locationsData,
   projects: projectsData,
   measurements: researchData.measurements,
+  researchBaseline: researchData,
+  investigationDataset: investigationsData,
+  mapMaintenance: mapMaintenanceData,
   claims: claimsData,
   workstreams: workstreamsData,
   legacyWork: legacyWorkData,
   articles: articlesData,
+  activityQuestionGroups: activityQuestionGroupsData,
 });

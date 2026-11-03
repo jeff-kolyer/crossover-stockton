@@ -1,9 +1,8 @@
-import dogsInvestigationData from "../data/dogs-investigations.json";
-import workData from "../data/work.json";
+import { siteModel } from "../model";
 import type { DogsInvestigationData, GapRecord, WorkRecord } from "../types";
 
-const work = workData as WorkRecord[];
-const dogsInvestigation = dogsInvestigationData as DogsInvestigationData;
+const work = siteModel.getAllLegacyWork() as WorkRecord[];
+const dogsInvestigation = siteModel.getInvestigationDataset() as DogsInvestigationData;
 
 /** Keep changes to the gap assessment distinct from changes to linked work. */
 export function latestGapActivity(gap: GapRecord): { date: string; kind: "assessment" | "work" } | undefined {

@@ -1,5 +1,5 @@
 import uiCopy from "../data/pages/investigations/dogs/overview.json";
-import gapsData from "../data/gaps.json";
+import { siteModel } from "../model";
 import type { GapRecord } from "../types";
 import { DogGapExperience } from "./DogGapExperience";
 
@@ -20,7 +20,7 @@ interface GapDetailPageProps {
   onOpenReport: (reportId: string, locationId?: string) => void;
 }
 
-const gaps = gapsData as GapRecord[];
+const gaps = siteModel.getNeeds();
 
 export function GapDetailPage({ slug, section, workspaceBasePath, articlePath, reportId, reportLocationId, googleExperiment = false, onOpenArticle, onOpenSection, onOpenReport }: GapDetailPageProps) {
   const gap = gaps.find((item) => item.slug === slug);

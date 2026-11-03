@@ -2,7 +2,6 @@ import uiCopy from "../data/pages/needs.json";
 import { siteModel } from "../model";
 import { useEffect, useState } from "react";
 import { articlesForGap } from "../lib/articles";
-import dogResearchData from "../data/dogs-research.json";
 import { navigateInternalLink } from "../lib/internalLink";
 import { HeadingGroup, Stack } from "./layout";
 import type { CapacityProject, DogsResearchBaseline, EvidenceRecord, GapRecord, OrgRecord } from "../types";
@@ -19,7 +18,7 @@ const gaps = siteModel.getNeeds().filter((gap) => gap.active).sort((a, b) => a.r
 const records = siteModel.getAllEvidence();
 const organizations = siteModel.getOrganizations();
 const projects = siteModel.getProjects() as CapacityProject[];
-const dogResearch = dogResearchData as DogsResearchBaseline;
+const dogResearch = siteModel.getResearchBaseline() as DogsResearchBaseline;
 const questions = siteModel.getAllQuestions() as GapQuestion[];
 const factIndices: Record<string, number[]> = {
   "pet-inclusive-shelter": [0, 1],

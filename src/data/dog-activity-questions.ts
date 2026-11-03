@@ -1,4 +1,4 @@
-import activityPage from "./pages/investigations/dogs/activity.json";
+import { siteModel } from "../model";
 
 export interface ActivityQuestion {
   id: string;
@@ -11,4 +11,4 @@ export interface ActivityQuestion {
   note?: string;
 }
 
-export const dogActivityQuestions: ActivityQuestion[] = activityPage.questions;
+export const dogActivityQuestions: ActivityQuestion[] = siteModel.getActivityQuestionGroups();

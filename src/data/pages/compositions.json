@@ -71,7 +71,8 @@
     "route": "/work/dogs/activity/",
     "sections": [
       { "id": "workspace", "source": "investigations", "method": "split-investigation-workspace", "recordIds": ["street-dog-immediate-welfare"] },
-      { "id": "activity", "source": "activities", "method": "timeline" }
+      { "id": "activity", "source": "activities", "method": "timeline" },
+      { "id": "question-groups", "source": "question-groups", "method": "disclosure-list" }
     ]
   },
   {

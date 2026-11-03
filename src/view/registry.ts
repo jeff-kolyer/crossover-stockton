@@ -6,7 +6,7 @@ export const viewMethods = [
   "evidence-list", "finding-explanation", "statistics", "geographic-map", "split-investigation-workspace",
 ] as const;
 export type ViewMethod = typeof viewMethods[number];
-export type InformationSource = "identity" | "people" | "principles" | "methods" | "needs" | "investigations" | "questions" | "tasks" | "activities" | "evidence" | "findings" | "claims" | "organizations" | "stories" | "locations" | "workstreams" | "legacy-work" | "projects" | "articles" | "measurements" | "developments";
+export type InformationSource = "identity" | "people" | "principles" | "methods" | "needs" | "investigations" | "questions" | "question-groups" | "tasks" | "activities" | "evidence" | "findings" | "claims" | "organizations" | "stories" | "locations" | "workstreams" | "legacy-work" | "projects" | "articles" | "measurements" | "developments";
 
 const sources = {
   identity: () => [siteModel.getIdentity()],
@@ -16,6 +16,7 @@ const sources = {
   needs: () => siteModel.getNeeds(),
   investigations: () => siteModel.getInvestigations(),
   questions: () => siteModel.getAllQuestions(),
+  "question-groups": () => siteModel.getActivityQuestionGroups(),
   tasks: () => siteModel.getAllTasks(),
   activities: () => siteModel.getAllActivities(),
   evidence: () => siteModel.getAllEvidence(),
