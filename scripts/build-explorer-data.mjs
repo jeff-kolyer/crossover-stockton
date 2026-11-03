@@ -8,6 +8,9 @@ const schemas = Object.fromEntries(await Promise.all(schemaNames.map(async (name
 const vite = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
 try {
   const { siteModel } = await vite.ssrLoadModule("/src/model/index.ts");
+  const { publicUpdateCategory: classifyUpdate } = await vite.ssrLoadModule("/src/model/publicUpdates.ts");
+  const unclassified = siteModel.getPublicUpdates().filter(({ record }) => !classifyUpdate(record));
+  if (unclassified.length) throw new Error(`Unclassified public updates: ${unclassified.map(({ record }) => record.id).join(", ")}`);
   const collections = {
     identity: [siteModel.getIdentity()],
     principles: siteModel.getPrinciples(),
@@ -23,7 +26,8 @@ try {
     findings: siteModel.getAllFindings(),
     locations: siteModel.getAllLocations(),
     evidence: siteModel.getAllEvidence(),
-    publicUpdates: siteModel.getPublicUpdates().map(({ record }) => record),
+    publicDevelopments: siteModel.getPublicDevelopments().map(({ record }) => record),
+    investigationUpdates: siteModel.getInvestigationUpdates().map(({ record }) => record),
     claims: siteModel.getAllClaims(),
     measurements: siteModel.getMeasurements(),
     stories: siteModel.getStories(),

@@ -283,22 +283,11 @@
         "public-access-coordination"
       ],
       "related_project_ids": [],
-      "verified_finding_ids": ["finding-street-population-unknown", "finding-sas-regular-capacity-pressure", "finding-sas-intake-priorities", "finding-roaming-dog-status-uncertain", "finding-found-animal-foster-described"],
+      "verified_finding_ids": [],
       "last_updated_at": "2026-11-03",
       "short_focus": "First street-condition observation pending; reported shelter practices and foster pathway need case-level verification",
       "next_verification_step": "First confirm whether the October 20 visit occurred; no report is documented. Review dated Louis Park and Stanislaus Street leads, then complete and record a safe public-area observation, including zero dogs if that is what is seen. Review the field-call records received November 2, and separately follow up on volunteer applications, the found-animal foster pathway, and Council consideration of the proposed ordinance."
     }
   ],
-  "established_findings": [
-    {
-      "id": "shelter-expansion-construction-observed-2026-10-14",
-      "title": "Shelter expansion construction was underway on October 14, 2026.",
-      "summary": "Crossover observed construction during its field visit. Completion, usable additional dog-care capacity, and resulting outcomes remain unverified.",
-      "evidence_kind": "crossover_firsthand",
-      "evidence_record_ids": ["crossover-2026-10-14-sas-first-visit"],
-      "observed_at": "2026-10-14",
-      "related_barrier_thread_ids": ["shelter-foster-capacity"],
-      "related_project_ids": ["stockton-animal-shelter-renovation"]
-    }
-  ]
+  "established_findings": []
 }

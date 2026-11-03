@@ -8,12 +8,15 @@ export type ExplorerRecord = {
   description: string;
   fields: Record<string, unknown>;
 };
-export type ExplorerCollection = { id: string; title: string; group: string; schema: string; recordIds: string[] };
-export type ExplorerGroup = { id: string; title: string; collectionIds: string[] };
+export type ExplorerCollection = { id: string; title: string; group: string; schema: string | null; recordIds: string[]; hidden?: boolean; investigationId?: string; parentCollectionId?: string; childCollectionIds?: string[] };
+export type ExplorerGroup = { id: string; title: string; collectionIds: string[]; investigationIds?: string[] };
+export type ExplorerInvestigation = { id: string; title: string; collectionIds: string[] };
 export type ExplorerFieldInfo = { label: string; kind: "reference" | "date" | "url" | "value"; description?: string };
-export type ExplorerPath = { groupId: string; collectionId: string; recordId: string };
+export type ExplorerPath = { groupId: string; investigationId: string | null; collectionId: string | null; recordId: string };
 export type ExplorerSnapshot = {
   groups: ExplorerGroup[];
+  investigations: ExplorerInvestigation[];
+  recordChildren: Record<string, string[]>;
   collections: ExplorerCollection[];
   records: Record<string, ExplorerRecord>;
   unsupportedTypes: string[];
@@ -24,16 +27,22 @@ export type ExplorerSnapshot = {
 export const explorerSnapshot = generated as unknown as ExplorerSnapshot;
 export const explorerCollections = new Map(explorerSnapshot.collections.map((item) => [item.id, item]));
 export const explorerGroups = new Map(explorerSnapshot.groups.map((item) => [item.id, item]));
+export const explorerInvestigations = new Map(explorerSnapshot.investigations.map((item) => [item.id, item]));
 export const explorerFieldInfo = (name: string): ExplorerFieldInfo => explorerSnapshot.fieldInfo[name] ?? { label: name, kind: "value" };
+export const explorerChildCollections = (recordId: string) => (explorerSnapshot.recordChildren[recordId] ?? [])
+  .map((id) => explorerCollections.get(id)).filter((item): item is ExplorerCollection => Boolean(item));
 
-export function explorerPathForRecord(recordId: string, preferredCollectionId?: string): ExplorerPath | undefined {
+export function explorerPathForRecord(recordId: string, preferredCollectionId?: string, preferredInvestigationId?: string): ExplorerPath | undefined {
   const record = explorerSnapshot.records[recordId];
   if (!record) return undefined;
-  const collections = explorerSnapshot.collections.filter((collection) => collection.recordIds.includes(recordId));
+  const collections = explorerSnapshot.collections.filter((collection) => !collection.hidden && collection.recordIds.includes(recordId));
   const collection = collections.find((item) => item.id === preferredCollectionId)
+    ?? collections.find((item) => item.investigationId === preferredInvestigationId)
     ?? collections.find((item) => item.schema === record.schema)
     ?? collections[0];
-  return collection ? { groupId: collection.group, collectionId: collection.id, recordId } : undefined;
+  if (collection) return { groupId: collection.group, investigationId: collection.investigationId ?? null, collectionId: collection.id, recordId };
+  if (explorerInvestigations.has(recordId)) return { groupId: "investigation", investigationId: recordId, collectionId: null, recordId };
+  return undefined;
 }
 
 export function searchExplorerRecords(query: string) {

@@ -6,7 +6,7 @@ import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
 import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import { navigateInternalLink } from "../lib/internalLink";
 import { activeInvestigations, investigationActivities, investigationFindings, investigationQuestionById, investigationRecordById, investigationTasks } from "../lib/investigationData";
-import { articleForPath, publishedArticles } from "../lib/articles";
+import { articleForPath, findingsArticles, publishedArticles } from "../lib/articles";
 import { taskListContext } from "../lib/taskPresentation";
 import type { InvestigationTask } from "../types/investigation";
 import { CrossoverLocationDetails } from "./CrossoverLocationDetails";
@@ -223,6 +223,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
   const findingsInvestigation = activeInvestigations.find((investigation) => investigation.gap_id === gap.id);
   const findingsIntroduction = findingsInvestigation?.findings_introduction;
   const currentFindings = useMemo(() => investigationFindings.filter((finding) => finding.investigation_id === findingsInvestigation?.id && finding.current !== false), [findingsInvestigation?.id]);
+  const unlinkedFindingsArticles = findingsArticles.filter((article) => !currentFindings.some((finding) => finding.article_id === article.id));
   const findingsMappedLocations = useMemo(() => {
     const locationIds = new Set(currentFindings.flatMap((finding) => [
       ...finding.location_ids,
@@ -574,6 +575,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
                <p><a href={`/work/dogs/activity/#${question.id}`} aria-label={`${uiText.seeActivityPrefix}${question.title}`} onClick={(event) => navigateInternalLink(event, () => onOpenSection("activity", question.id))}>{uiText.seeActivity}</a></p>
             </section>;
           })}
+          {unlinkedFindingsArticles.map((relatedArticle) => <p key={relatedArticle.id}><a href={`${relatedArticle.path}${googleExperiment ? "?ui=google" : ""}`} onClick={onOpenArticle ? (event) => navigateInternalLink(event, () => onOpenArticle(relatedArticle.path)) : undefined}>{articleLinkLabel(relatedArticle)}</a></p>)}
         </WorkspaceSection>
       </div>}
       </div>

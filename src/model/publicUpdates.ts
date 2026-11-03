@@ -11,6 +11,17 @@ export type PublicUpdate = {
   relatedNeeds: GapRecord[];
 };
 
+export type PublicUpdateCategory = "development" | "investigation_update";
+
+/** Classify a public feed record by its existing provenance and record type.
+ * Unknown combinations remain unclassified rather than being guessed from a title. */
+export function publicUpdateCategory(record: EvidenceRecord): PublicUpdateCategory | null {
+  if (record.trust === "crossover_source") {
+    return record.record_type === "activity" || record.record_type === "update" ? "investigation_update" : null;
+  }
+  return ["source_supported", "organization_source", "government"].includes(record.trust) ? "development" : null;
+}
+
 function validDate(value: string) {
   const match = /^(\d{4})-(\d{2})-(\d{2})(?:T\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{2}:\d{2}))?$/.exec(value);
   if (!match) return false;

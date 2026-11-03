@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { publicUpdateDate, selectPublicUpdates } from "../src/model/publicUpdates.ts";
+import { publicUpdateCategory, publicUpdateDate, selectPublicUpdates } from "../src/model/publicUpdates.ts";
 
 const readJson = async (name) => JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
 const needs = await readJson("gaps");
@@ -53,4 +53,12 @@ test("published and reviewed dates retain their distinct meanings", () => {
   const external = evidence.find((record) => record.id === "stocktonia-2026-10-20-animal-control-proposals");
   assert.equal(publicUpdateDate(external).meaning, "published");
   assert.deepEqual(publicUpdateDate({ ...external, published_at: null, checked_at: "2026-11-01" }), { value: "2026-11-01", meaning: "reviewed" });
+});
+
+test("public update categories follow provenance and leave unknown combinations unclassified", () => {
+  const updates = selectPublicUpdates(needs, evidence);
+  assert.ok(updates.every(({ record }) => publicUpdateCategory(record) !== null));
+  assert.equal(publicUpdateCategory(updates.find(({ record }) => record.id === receiptId).record), "investigation_update");
+  assert.equal(publicUpdateCategory(updates.find(({ record }) => record.id === "stocktonia-2026-10-20-animal-control-proposals").record), "development");
+  assert.equal(publicUpdateCategory({ ...evidence.find((record) => record.id === receiptId), trust: "unknown" }), null);
 });

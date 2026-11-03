@@ -21,7 +21,7 @@ import mapMaintenanceData from "../data/investigation-map-maintenance.json";
 import activityQuestionGroupsData from "../data/activity-question-groups.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "../types";
 import type { InvestigationFinding, InvestigationQuestion, InvestigationTask } from "../types/investigation";
-import { selectPublicUpdates } from "./publicUpdates";
+import { publicUpdateCategory, selectPublicUpdates } from "./publicUpdates";
 
 type Identified = { id: string };
 const index = <T extends Identified>(items: T[], collection: string) => {
@@ -130,6 +130,8 @@ export function createInformationModel(input: InformationInput) {
     getEvidenceRecord: (id: string) => evidence.get(id),
     getAllEvidence: () => input.evidence,
     getPublicUpdates: () => selectPublicUpdates(input.needs, input.evidence),
+    getPublicDevelopments: () => selectPublicUpdates(input.needs, input.evidence).filter(({ record }) => publicUpdateCategory(record) === "development"),
+    getInvestigationUpdates: () => selectPublicUpdates(input.needs, input.evidence).filter(({ record }) => publicUpdateCategory(record) === "investigation_update"),
     getEvidence: (findingId: string) => {
       const finding = requireReference(findings.get(findingId), "finding", findingId);
       return { supporting: finding.supporting_record_ids.map((id) => requireReference(evidence.get(id), "evidence", id)), contradicting: finding.contradicting_record_ids.map((id) => requireReference(evidence.get(id), "evidence", id)) };
