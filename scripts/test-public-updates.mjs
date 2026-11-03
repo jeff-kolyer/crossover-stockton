@@ -20,7 +20,7 @@ test("the receipt is one activity shared by Activity and public Updates", () => 
   assert.ok(!needs.find((need) => need.id === "dogs-safe-placement").record_ids.includes(receiptId));
   const update = selectPublicUpdates(needs, evidence).find((item) => item.record.id === receiptId);
   assert.equal(update.record, receipt);
-  assert.equal(tasks.find((task) => task.id === "task-sas-field-call-records-review").status, "open");
+  assert.equal(tasks.find((task) => task.id === "task-review-sas-field-call-records").status, "open");
   assert.equal(tasks.find((task) => task.id === "task-sas-field-call-request-2026-10-20").status, "done");
   assert.deepEqual(publicUpdateDate(receipt), { value: "2026-11-02", meaning: "occurred" });
 });

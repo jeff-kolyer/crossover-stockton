@@ -4,7 +4,7 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Where are the stray dogs, and how many are there?",
     "description": "Can we obtain reliable population estimates and identify where dogs are likely to be found? How current and accurate are the available reports?",
-    "task_ids": ["task-verify-st-marys-church-street-dog-scale", "task-verify-south-stockton-district-5-reports", "task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-sas-field-call-records-review", "task-contact-cbs-charlie-lapastora"],
+    "task_ids": ["task-verify-st-marys-church-street-dog-scale", "task-verify-south-stockton-district-5-reports", "task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-review-sas-field-call-records", "task-contact-cbs-charlie-lapastora"],
     "activity_record_ids": ["crossover-2026-10-20-sas-field-call-records-request", "crossover-2026-11-02-sas-field-call-records-received"],
     "evidence_record_ids": ["sas-2024-kennel-statistics","cbs-2026-04-06-stockton-abandoned-dogs","ssd-2026-06-08-street-response","stockton-2026-05-11-stray-dog-report","kcra-2026-09-24-stockton-stray-dog-report","stocktonia-2026-10-20-roaming-dog-distinction"],
     "finding_ids": ["finding-street-population-unknown","finding-roaming-dog-status-uncertain","finding-public-street-dog-information-fragmented"]
@@ -34,7 +34,7 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "What happens when someone reports a dog?",
     "description": "Who receives the report, what action follows, and can we establish what ultimately happens to the animal?",
-    "task_ids": ["task-sas-visit-application-2026-10-14", "task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-sas-field-call-records-review", "task-monitor-animal-control-ordinance", "task-contact-cbs-charlie-lapastora"],
+    "task_ids": ["task-sas-visit-application-2026-10-14", "task-sas-field-call-request-2026-10-20", "task-sas-field-call-follow-up", "task-review-sas-field-call-records", "task-monitor-animal-control-ordinance", "task-contact-cbs-charlie-lapastora"],
     "activity_record_ids": ["crossover-2026-10-14-sas-volunteer-application", "crossover-2026-10-20-sas-field-call-records-request", "crossover-2026-11-02-sas-field-call-records-received"],
     "evidence_record_ids": ["stockton-animal-services-2026-10-20-reporting-guidance","crossover-2026-10-20-sas-field-call-records-request","stocktonia-2026-10-20-sas-capacity-intake","stocktonia-2026-10-20-roaming-dog-distinction","stocktonia-2026-10-20-found-animal-foster-pathway","stocktonia-2026-10-20-animal-control-proposals"],
     "finding_ids": ["finding-sas-regular-capacity-pressure","finding-sas-intake-priorities","finding-roaming-dog-status-uncertain","finding-found-animal-foster-described","finding-public-street-dog-information-fragmented"]
