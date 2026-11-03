@@ -201,7 +201,7 @@ test("Investigation branches use one canonical record per ID and explicit relati
   assert.equal(published.investigations.length, 1);
   const investigation = published.investigations[0];
   assert.equal(investigation.title, "Dogs on the street in Stockton");
-  assert.deepEqual(investigation.collectionIds.map((id) => published.collections.find((item) => item.id === id)?.title), ["Updates", "Questions", "Tasks", "Activity", "Findings", "Locations", "Evidence", "Improvements", "Organizations"]);
+  assert.deepEqual(investigation.collectionIds.map((id) => published.collections.find((item) => item.id === id)?.title), ["Updates", "Questions", "Tasks", "Activity", "Findings", "Articles", "Locations", "Evidence", "Improvements", "Organizations"]);
   assert.deepEqual(published.collections.find((item) => item.id === `${investigation.id}:updates`)?.childCollectionIds, [`${investigation.id}:developments`, `${investigation.id}:investigation-updates`]);
   assert.deepEqual(published.recordChildren[investigation.id], investigation.collectionIds);
   assert.equal(published.records[investigation.id].schema, "investigation");
@@ -216,6 +216,17 @@ test("Investigation branches use one canonical record per ID and explicit relati
   assert.ok(child("developments").recordIds.includes("stocktonia-2026-10-20-animal-control-proposals"));
   assert.ok(child("investigation-updates").recordIds.includes("crossover-2026-11-02-sas-field-call-records-received"));
   assert.equal(child("findings").recordIds.length, 3);
+  assert.deepEqual(child("articles").recordIds, sourceArticles.map((article) => article.id));
+  for (const findingId of child("findings").recordIds) {
+    const articleId = published.records[findingId].fields.article_id;
+    assert.ok(child("articles").recordIds.includes(articleId));
+    assert.equal(published.fieldInfo.article_id.kind, "reference");
+  }
+  assert.equal(child("findings").recordIds.some((id) => published.records[id].fields.article_id === "where-are-stray-dogs"), false);
+  assert.deepEqual(published.records["caring-for-stocktons-dogs"].fields.related_finding_ids, ["finding-new-facilities-impact-uncertain"]);
+  assert.equal(published.fieldInfo.related_finding_ids.label, "Related findings");
+  assert.equal(published.fieldInfo.related_finding_ids.kind, "reference");
+  assert.equal(published.records["where-are-stray-dogs"].fields.related_finding_ids, undefined);
   assert.equal(child("projects").recordIds.length, 6);
   assert.ok(child("organizations").recordIds.length > 0);
   assert.ok(child("organizations").recordIds.length < 11);

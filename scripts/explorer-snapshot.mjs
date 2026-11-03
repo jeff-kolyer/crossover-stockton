@@ -19,6 +19,7 @@ function investigationBranches(policy, collections, publishedCollections, record
     const tasks = scoped("tasks");
     const activities = scoped("activities");
     const findings = scoped("findings");
+    const articles = (collections.articles ?? []).filter((item) => item.related_gap_ids?.includes(investigation.gap_id) && publishedIds("articles").has(item.id));
     const locations = scoped("locations");
     const projects = (collections.projects ?? []).filter((item) => item.gap_ids?.includes(investigation.gap_id) && publishedIds("projects").has(item.id));
     const need = (collections.needs ?? []).find((item) => item.id === investigation.gap_id);
@@ -50,7 +51,7 @@ function investigationBranches(policy, collections, publishedCollections, record
       return (collections[query] ?? []).filter((item) =>
         (item.investigation_id === investigation.id || item.gap_ids?.includes(investigation.gap_id)) && publishedIds(id).has(item.id));
     };
-    const members = { questions, tasks, activities, findings, locations, evidence: relatedEvidence, projects, organizations,
+    const members = { questions, tasks, activities, findings, articles, locations, evidence: relatedEvidence, projects, organizations,
       developments: relatedUpdates("developments"), "investigation-updates": relatedUpdates("investigation-updates") };
     const collectionIds = [];
     for (const sourceId of policy.investigationChildren ?? []) {
@@ -144,6 +145,16 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
     }
     if (ids.size) publishedCollections.push({ id: definition.id, title: definition.title, group: definition.group, schema: definition.schema, recordIds: [...ids] });
   }
+  for (const relation of policy.reverseRelationships ?? []) {
+    for (const source of [...records.values()]) {
+      if (source.schema !== relation.sourceSchema) continue;
+      const targetId = source.fields[relation.sourceField];
+      const target = records.get(targetId);
+      if (!target || target.schema !== relation.targetSchema) continue;
+      const relatedIds = target.fields[relation.field] ?? [];
+      records.set(targetId, { ...target, fields: { ...target.fields, [relation.field]: [...new Set([...relatedIds, source.id])] } });
+    }
+  }
   const recordMap = Object.fromEntries(records);
   for (const record of records.values()) {
     for (const [field, value] of Object.entries(record.fields)) {
@@ -154,7 +165,8 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
     }
   }
   const { branches, children } = investigationBranches(policy, collections, publishedCollections, records);
-  const hiddenCollectionIds = new Set(["investigations", "question-groups", "workstreams", ...(policy.investigationChildren ?? [])]);
+  const hiddenCollectionIds = new Set(["investigations", "question-groups", "workstreams",
+    ...(policy.investigationChildren ?? []).filter((id) => policy.collections.find((item) => item.id === id)?.group === "investigation")]);
   const visibleCollections = publishedCollections.map((item) => ({ ...item, hidden: hiddenCollectionIds.has(item.id) || !policy.groups.some((group) => group.id === item.group) }));
   const groups = policy.groups.map((group) => ({ ...group, collectionIds: visibleCollections.filter((item) => item.group === group.id && !item.hidden).map((item) => item.id), ...(group.id === "investigation" ? { investigationIds: branches.map((item) => item.id) } : {}) })).filter((group) => group.collectionIds.length || group.investigationIds?.length);
   const namedSchemas = new Set(policy.collections.map((item) => item.schema));
@@ -163,14 +175,16 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
   const nestedFieldNames = (rule) => Array.isArray(rule) ? rule : Object.entries(rule).flatMap(([name, child]) => [name, ...(child === true ? [] : nestedFieldNames(child))]);
   const fieldNames = new Set([
     ...Object.keys(policy.fieldLabels ?? {}),
+    ...(policy.reverseRelationships ?? []).map((relation) => relation.field),
     ...policy.collections.flatMap((collection) => collectionFields(collection) ?? []),
     ...Object.values(policy.nestedFields ?? {}).flatMap(nestedFieldNames),
   ]);
   const fieldInfo = Object.fromEntries([...fieldNames].map((name) => {
     const property = Object.values(schemas).map((schema) => schema.properties?.[name]).find(Boolean);
-    const kind = relationshipFields.has(name) ? "reference" : dateField(name) || property?.$ref?.endsWith("/$defs/date") ? "date"
+    const reverseRelation = policy.reverseRelationships?.find((relation) => relation.field === name);
+    const kind = relationshipFields.has(name) || reverseRelation ? "reference" : dateField(name) || property?.$ref?.endsWith("/$defs/date") ? "date"
       : urlField(name) ? "url" : "value";
-    return [name, { label: policy.fieldLabels?.[name] ?? name, kind, ...(property?.description ? { description: property.description } : {}) }];
+    return [name, { label: policy.fieldLabels?.[name] ?? reverseRelation?.label ?? name, kind, ...(property?.description ? { description: property.description } : {}) }];
   }));
   return {
     snapshot: { groups, investigations: branches, recordChildren: Object.fromEntries(branches.map((branch) => [branch.id, branch.collectionIds])), collections: [...visibleCollections, ...children], records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo },
