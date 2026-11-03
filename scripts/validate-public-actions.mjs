@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 
-const publicStyles = ["src/styles/public.css", "src/styles/home.css", "src/styles/public-chrome.css"];
+const publicStyles = ["src/styles/crossover.css"];
 const css = Object.fromEntries(publicStyles.map((path) => [path, readFileSync(path, "utf8")]));
 const homePage = readFileSync("src/components/HomePage.tsx", "utf8");
 const homeLanding = readFileSync("src/components/HomeLanding.tsx", "utf8");
@@ -30,19 +30,20 @@ function validate(styles = css) {
       for (const selector of selectors) {
         if (!selector || selector.startsWith("@")) continue;
         const targetsPrimary = selector.replaceAll(":not(.public-primary-action)", "").includes(".public-primary-action");
-        const isCanonical = path === "src/styles/public.css" && canonical.has(selector);
+        const isCanonical = path === "src/styles/crossover.css" && canonical.has(selector);
         if (isCanonical) seen.set(selector, (seen.get(selector) ?? 0) + 1);
         if (targetsPrimary && !isCanonical) errors.push(`${path}: primary action has a competing selector: ${selector}`);
 
         // A second colored link/button is another primary-button implementation.
         const interactive = /(?:^|[\s>+~,])(?:a|button)(?=[:.#\[\s>+~,]|$)|\.[\w-]*(?:-button|-primary|-cta)(?=[:.#\[\s>+~,]|$)/i.test(selector);
         const backgrounds = [...declarations.matchAll(/(?:^|;)\s*background(?:-color)?\s*:\s*([^;]+)/gi)].map((match) => match[1].trim().toLowerCase());
-        if (interactive && !isCanonical && backgrounds.some((value) => !/^(?:none|transparent|white|#fff|#ffffff)$/.test(value))) {
+        const investigationControl = /(?:plain-action-button|\.map-|\.record-list)/.test(selector);
+        if (interactive && !investigationControl && !isCanonical && backgrounds.some((value) => !/^(?:none|transparent|white|#fff|#ffffff)$/.test(value))) {
           errors.push(`${path}: colored action background outside the shared style: ${selector}`);
         }
 
         // These ancestor selectors would restyle either Home primary action.
-        if (path === "src/styles/home.css" && /\.(?:hero-action-row|home-landing-investigation-copy|home-landing)\s+(?:a|button)(?=[:.#\[\s]|$)/.test(selector) && !selector.includes(":not(.public-primary-action)")) {
+        if (/\.(?:hero-action-row|home-landing-investigation-copy|home-landing)\s+(?:a|button)(?=[:.#\[\s]|$)/.test(selector) && !selector.includes(":not(.public-primary-action)")) {
           errors.push(`${path}: ancestor selector can override a primary action: ${selector}`);
         }
       }
@@ -50,7 +51,7 @@ function validate(styles = css) {
   }
 
   for (const selector of canonical) {
-    if (seen.get(selector) !== 1) errors.push(`Expected exactly one ${selector} rule in src/styles/public.css`);
+    if (seen.get(selector) !== 1) errors.push(`Expected exactly one ${selector} rule in src/styles/crossover.css`);
   }
   for (const [path, source] of [["src/components/HomePage.tsx", homePage], ["src/components/HomeLanding.tsx", homeLanding]]) {
     if ((source.match(/<PublicPrimaryAction\b/g) ?? []).length !== 1) errors.push(`${path}: expected one shared Home primary action`);
@@ -66,7 +67,7 @@ function validate(styles = css) {
     errors.push("ActionIndexPage must use the shared green text link for each action");
   }
   for (const [path, source, allowed] of [
-    ["src/components/HomePage.tsx", homePage, "../styles/home.css"],
+    ["src/components/HomePage.tsx", homePage, ""],
     ["src/components/HomeLanding.tsx", homeLanding, ""],
     ["src/components/AboutPage.tsx", aboutPage, ""],
     ["src/components/ActionIndexPage.tsx", actionIndex, ""],
@@ -82,7 +83,7 @@ function validate(styles = css) {
 }
 
 if (process.argv.includes("--self-test")) {
-  const duplicate = { ...css, "src/styles/home.css": `${css["src/styles/home.css"]}\n.crossover-home .duplicate-primary-button { background: #1f6b34; padding: 0 12px; }` };
+  const duplicate = { ...css, "src/styles/crossover.css": `${css["src/styles/crossover.css"]}\n.crossover-home .duplicate-primary-button { background: #1f6b34; padding: 0 12px; }` };
   if (!validate(duplicate).some((error) => error.includes("duplicate-primary-button"))) throw new Error("Duplicate primary style went undetected");
   console.log("Duplicate public primary-action style correctly rejected.");
 } else {

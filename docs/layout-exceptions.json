@@ -1,7 +1,7 @@
 [
   {
     "name": "Home landing rail inset",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .home-landing",
     "property": "padding-inline",
     "value": "var(--home-pad)",
@@ -11,7 +11,7 @@
   },
   {
     "name": "Home destinations rail bleed",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .home-landing-destinations",
     "property": "margin-inline",
     "value": "calc(-1 * var(--home-pad))",
@@ -21,7 +21,7 @@
   },
   {
     "name": "Home destinations inset",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .home-landing-destinations",
     "property": "padding",
     "value": "var(--space-4) var(--home-pad)",
@@ -31,7 +31,7 @@
   },
   {
     "name": "Compact home display size",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .home-hero-title",
     "property": "font-size",
     "value": "var(--type-display-compact-size)",
@@ -41,7 +41,7 @@
   },
   {
     "name": "Compact home display leading",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .home-hero-title",
     "property": "line-height",
     "value": "var(--type-display-compact-leading)",
@@ -51,7 +51,7 @@
   },
   {
     "name": "Compact home subtitle",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .home-hero-subtitle",
     "property": "font-size",
     "value": "var(--type-body-size)",
@@ -61,7 +61,7 @@
   },
   {
     "name": "Responsive desktop navigation cluster",
-    "file": "src/styles/public-chrome.css",
+    "file": "src/styles/crossover.css",
     "selector": ".public-site .public-nav nav",
     "property": "gap",
     "value": "clamp(var(--space-2), 2vw, var(--space-4))",
@@ -71,7 +71,7 @@
   },
   {
     "name": "Compact public logo",
-    "file": "src/styles/public-chrome.css",
+    "file": "src/styles/crossover.css",
     "selector": ".public-site .public-logo span",
     "property": "font-size",
     "value": "var(--type-logo-compact-size)",
@@ -81,7 +81,7 @@
   },
   {
     "name": "Compact public location label",
-    "file": "src/styles/public-chrome.css",
+    "file": "src/styles/crossover.css",
     "selector": ".public-site .location-pill",
     "property": "font-size",
     "value": "var(--type-logo-compact-size)",
@@ -91,7 +91,7 @@
   },
   {
     "name": "Home image fade geometry",
-    "file": "src/styles/home.css",
+    "file": "src/styles/crossover.css",
     "selector": ".crossover-home .public-hero-shade",
     "property": "--hero-fade-shift",
     "value": "clamp(0px, calc(10vw - 90px), 70px)",
@@ -100,68 +100,8 @@
     "responsive": true
   },
   {
-    "name": "Document rail width",
-    "file": "src/styles/layout-system.css",
-    "selector": ":root",
-    "property": "--layout-width-document",
-    "value": "760px",
-    "reason": "Existing editorial reading rail maximum width.",
-    "owner": "Page document width role",
-    "responsive": false
-  },
-  {
-    "name": "Wide rail width",
-    "file": "src/styles/layout-system.css",
-    "selector": ":root",
-    "property": "--layout-width-wide",
-    "value": "960px",
-    "reason": "Existing public section and Action content maximum width.",
-    "owner": "Page wide width role",
-    "responsive": false
-  },
-  {
-    "name": "Home rail width",
-    "file": "src/styles/layout-system.css",
-    "selector": ":root",
-    "property": "--layout-width-home",
-    "value": "1120px",
-    "reason": "Existing home landing maximum width.",
-    "owner": "Page home width role",
-    "responsive": false
-  },
-  {
-    "name": "Investigation rail width",
-    "file": "src/styles/layout-system.css",
-    "selector": ":root",
-    "property": "--layout-width-investigation",
-    "value": "900px",
-    "reason": "Existing investigation header and sheet content maximum width.",
-    "owner": "Page investigation width role",
-    "responsive": false
-  },
-  {
-    "name": "Work rail width",
-    "file": "src/styles/layout-system.css",
-    "selector": ":root",
-    "property": "--layout-width-work",
-    "value": "1100px",
-    "reason": "Existing outer Work document maximum width outside the compact investigation workspace.",
-    "owner": "Page work width role",
-    "responsive": false
-  },
-  {
-    "name": "Index rail width",
-    "file": "src/styles/layout-system.css",
-    "selector": ":root",
-    "property": "--layout-width-index",
-    "value": "640px",
-    "reason": "Existing narrow index reading rail.",
-    "owner": "Page index width role",
-    "responsive": false
-  },
-  {
     "name": "Chrome wide rail alignment",
-    "file": "src/styles/layout-system.css",
+    "file": "src/styles/crossover.css",
     "selector": ":root",
     "property": "--layout-chrome-rail-gutter",
     "value": "max(var(--space-4), calc((100% - 1600px) / 2))",
@@ -171,7 +111,7 @@
   },
   {
     "name": "Fixed bottom navigation clearance",
-    "file": "src/styles/layout-system.css",
+    "file": "src/styles/crossover.css",
     "selector": ":root",
     "property": "--layout-bottom-nav-height",
     "value": "62px",
@@ -181,7 +121,7 @@
   },
   {
     "name": "Resizable map panel width",
-    "file": "src/styles/map.css",
+    "file": "src/styles/crossover.css",
     "selector": ".map-workspace",
     "property": "--crossover-panel-width",
     "value": "clamp(280px, var(--crossover-expanded-panel-width, min(480px, 42vw)), calc(100% - 320px))",
@@ -191,7 +131,7 @@
   },
   {
     "name": "Wide resizable map panel width",
-    "file": "src/styles/map.css",
+    "file": "src/styles/crossover.css",
     "selector": ".map-workspace",
     "property": "--crossover-panel-width",
     "value": "clamp(600px, var(--crossover-expanded-panel-width, 40%), calc(100% - 600px))",
@@ -201,7 +141,7 @@
   },
   {
     "name": "Mobile sheet grip height",
-    "file": "src/styles/map.css",
+    "file": "src/styles/crossover.css",
     "selector": ".map-workspace",
     "property": "--sheet-grip-height",
     "value": "32px",
@@ -211,7 +151,7 @@
   },
   {
     "name": "Mobile sheet peek height",
-    "file": "src/styles/map.css",
+    "file": "src/styles/crossover.css",
     "selector": ".map-workspace",
     "property": "--sheet-peek-height",
     "value": "128px",

@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/workstream.schema.json",
+  "title": "workstream",
+  "description": "workstream information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "src": {
+          "type": "string",
+          "minLength": 1
+        },
+        "alt": {
+          "type": "string"
+        },
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "src",
+        "alt",
+        "width",
+        "height"
+      ],
+      "additionalProperties": true
+    },
+    "status": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "value",
+          "label"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "summary",
+    "image",
+    "status",
+    "active"
+  ],
+  "additionalProperties": false
+}

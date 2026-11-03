@@ -1,6 +1,9 @@
+import uiCopy from "../data/pages/investigations/dogs/findings.json";
 import type { Article } from "../types/article";
 import { navigateInternalLink } from "../lib/internalLink";
 import { WorkspacePage, WorkspaceSection } from "./WorkspacePage";
+
+const uiText = uiCopy.ArticlePages;
 
 function formatDate(value: string) {
   const [year, month, day] = value.split("-").map(Number);
@@ -8,7 +11,7 @@ function formatDate(value: string) {
 }
 
 export function ArticleContent({ article, onBack, onOpenReport }: { article: Article; onBack: () => void; onOpenReport?: (id: string) => void }) {
-  return <WorkspacePage article title={article.title} subtitle={<><time dateTime={article.date}>{formatDate(article.date)}</time> · {article.type}</>} backLink={<a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onBack)}>← Findings</a>}>
+  return <WorkspacePage article title={article.title} subtitle={<><time dateTime={article.date}>{formatDate(article.date)}</time> · {article.type}</>} backLink={<a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onBack)}>{uiText.findings}</a>}>
       <p>{article.content.introduction}</p>
       {article.content.sections.map((section) => <WorkspaceSection key={section.heading} title={section.heading}>
         {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}

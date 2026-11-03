@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/page.schema.json",
+  "title": "page",
+  "description": "page information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "route": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "./common.schema.json#/$defs/id"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "identity",
+              "people",
+              "principles",
+              "methods",
+              "needs",
+              "investigations",
+              "questions",
+              "tasks",
+              "activities",
+              "evidence",
+              "findings",
+              "claims",
+              "organizations",
+              "stories",
+              "locations",
+              "workstreams",
+              "measurements",
+              "developments"
+            ]
+          },
+          "recordIds": {
+            "type": "array",
+            "items": {
+              "$ref": "./common.schema.json#/$defs/id"
+            },
+            "uniqueItems": true
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "prose",
+              "media-list",
+              "media-grid",
+              "collection-index",
+              "disclosure-list",
+              "timeline",
+              "evidence-list",
+              "finding-explanation",
+              "statistics",
+              "geographic-map",
+              "split-investigation-workspace"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "method"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "route",
+    "sections"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "verifying-reported-conditions",
+    "title": "Verifying reported conditions",
+    "summary": "We're visiting areas identified in public reports to observe and document conditions firsthand.",
+    "image": {
+      "src": "/images/action/dog-on-street.jpg",
+      "alt": "Dog sitting beside a Stockton street at sunset",
+      "width": 836,
+      "height": 471
+    },
+    "status": [
+      {
+        "value": "0",
+        "label": "Field visits"
+      },
+      {
+        "value": "0",
+        "label": "Dogs spotted"
+      },
+      {
+        "value": "Not yet",
+        "label": "Reporting tested"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "requesting-records",
+    "title": "Requesting records",
+    "summary": "We're requesting public records to better understand reported problems and how existing services respond.",
+    "image": {
+      "src": "/images/action/records-request.jpg",
+      "alt": "Person reviewing a public records request on a laptop",
+      "width": 836,
+      "height": 471
+    },
+    "status": [
+      {
+        "value": "Unknown",
+        "label": "Requested"
+      },
+      {
+        "value": "0",
+        "label": "Received"
+      },
+      {
+        "value": "Unknown",
+        "label": "Pending"
+      }
+    ],
+    "active": true
+  },
+  {
+    "id": "testing-pathways",
+    "title": "Testing pathways",
+    "summary": "We're investigating existing ways to contribute to animal care, documenting what happens when we try to get involved and whether those opportunities lead to meaningful action.",
+    "image": {
+      "src": "/images/action/testing-pathways.jpg",
+      "alt": "Person entering an animal care facility",
+      "width": 836,
+      "height": 471
+    },
+    "status": [
+      {
+        "value": "2",
+        "label": "Initiated"
+      },
+      {
+        "value": "2",
+        "label": "Awaiting response"
+      },
+      {
+        "value": "0",
+        "label": "Tested"
+      }
+    ],
+    "active": true
+  }
+]

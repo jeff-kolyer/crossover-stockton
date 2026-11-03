@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/action.schema.json",
+  "title": "action",
+  "description": "action information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "investigation_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "waiting",
+        "done",
+        "cancelled"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "application",
+        "inquiry",
+        "field_observation",
+        "records_request",
+        "follow_up",
+        "source_review",
+        "organization_contact",
+        "policy_monitoring"
+      ]
+    },
+    "instructions": {
+      "type": "string",
+      "minLength": 1
+    },
+    "location_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "organization_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "question_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "basis_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "activity_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "completed_at": {
+      "$ref": "./common.schema.json#/$defs/date"
+    }
+  },
+  "required": [
+    "id",
+    "investigation_id",
+    "title",
+    "status",
+    "type",
+    "instructions",
+    "location_ids",
+    "organization_ids",
+    "question_ids",
+    "basis_record_ids",
+    "activity_record_ids"
+  ],
+  "additionalProperties": true
+}

@@ -1,5 +1,7 @@
+import uiCopy from "../data/ui-copy.json";
 import { useEffect, useRef, useState } from "react";
-import "./PublicMobileMenu.layout.css";
+
+const uiText = uiCopy.PublicMobileMenu;
 
 export type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 type MenuPage = PublicRoute;
@@ -11,14 +13,7 @@ interface PublicMobileMenuProps {
   popoverOnWide?: boolean;
 }
 
-const menuItems: Array<{ label: string; page: MenuPage }> = [
-  { label: "Home", page: "home" },
-  { label: "Needs", page: "reality" },
-  { label: "Action", page: "action" },
-  { label: "Updates", page: "updates" },
-  { label: "Stories", page: "connection" },
-  { label: "About", page: "about" },
-];
+const menuItems = uiCopy.navigation as Array<{ label: string; page: MenuPage }>;
 
 export function PublicMobileMenu({ onNavigate, onOpenAbout, popoverOnWide = false }: PublicMobileMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -94,7 +89,7 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout, popoverOnWide = fals
         ref={triggerRef}
         className="public-mobile-menu"
         type="button"
-        aria-label="Open navigation"
+        aria-label={uiText.openNavigation}
         aria-expanded={isOpen}
         aria-controls="site-navigation-menu"
         onClick={() => {
@@ -117,21 +112,20 @@ export function PublicMobileMenu({ onNavigate, onOpenAbout, popoverOnWide = fals
             className="public-menu-modal"
             role={desktopPopover ? undefined : "dialog"}
             aria-modal={desktopPopover ? undefined : "true"}
-            aria-label={desktopPopover ? undefined : "Primary navigation"}
+            aria-label={desktopPopover ? undefined : uiText.primaryNavigation}
             onMouseDown={(event) => event.stopPropagation()}
           >
             <div className="public-menu-header">
-              <span>Menu</span>
-              <button type="button" aria-label="Close navigation" onClick={closeMenu}>
+              <span>{uiText.menu}</span>
+              <button type="button" aria-label={uiText.closeNavigation} onClick={closeMenu}>
                 <span aria-hidden="true">×</span>
               </button>
             </div>
 
             <div className="public-menu-location">
-              Stockton, CA
-            </div>
+              {uiText.stocktonCa}</div>
 
-            <div className="public-menu-list" role="navigation" aria-label="Mobile primary">
+            <div className="public-menu-list" role="navigation" aria-label={uiText.mobilePrimary}>
               {menuItems.map((item) => (
                 <button
                   className={pressedPage === item.page ? "is-pressed" : ""}

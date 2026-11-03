@@ -1,19 +1,19 @@
 # Crossover layout system
 
-This is the normative specification for the public site and investigation app. The legacy [audit](LAYOUT_AUDIT.md) describes the implementation it replaced, not the rules for new work.
+This is the normative specification for every route, including the investigation workspace. The legacy [audit](LAYOUT_AUDIT.md) describes the implementation it replaced.
 
 ## Four layers
 
-1. **Tokens** in `src/styles/layout-system.css` define typography, the spacing scale, width roles, and named geometry.
+1. **Tokens** in `src/styles/crossover.css` define typography, the spacing scale, width roles, and named geometry. This is the sole first-party stylesheet, imported once in `src/main.tsx`. Leaflet and MapLibre vendor styles remain separate.
 2. **Semantic elements** carry document meaning and central typography. Standard content elements have zero external margin.
 3. **Layout primitives** in `src/components/layout.tsx` own alignment and space between boxes.
 4. **Content components** compose primitives for recurring editorial and investigation structures.
 
-No text element decides its distance from a neighbor. For any visible gap, inspect the nearest layout parent and its named contract. A border belongs to its owner; the content around it belongs to SectionBoundary or a separated RecordList.
+`SiteShell` renders `SiteHeader` once, then `PageShell`, route content, and a shared footer on document routes. `PageShell` has three explicit origins: `standard` begins 24px below the header; `flush` begins at the header edge for the investigation; `hero` begins 24px below the header and leaves hero composition to its child. No page adds a header offset. For any visible gap, inspect the nearest layout parent and its named contract. A border belongs to its owner; the content around it belongs to SectionBoundary or a separated RecordList.
 
 ## Typography roles
 
-All standard roles use `Roboto, Arial, sans-serif`. Values are defined once in `layout-system.css`.
+All standard roles use `Roboto, Arial, sans-serif`. Values are defined once in `crossover.css`.
 
 | Role | Element or class | Size | Weight | Leading | Tracking |
 |---|---|---:|---:|---:|---|
@@ -56,14 +56,15 @@ Zero is allowed. Arbitrary content spacing is not. Specialized image, control, m
 | `Divider` | A 1px hairline without margin or padding. |
 | `SectionBoundary` | 16px before, 1px divider, 16px after. |
 
-`RecordList separated` applies the same 16px / line / 16px contract between repeated siblings. A plain `RecordList` uses 16px without borders. The public shell owns a 24px relationship beneath the header and before the footer.
+`RecordList separated` applies the same 16px / line / 16px contract between repeated siblings. A plain `RecordList` uses 16px without borders. `PageShell` owns the header-to-content origin and bottom padding on document pages. The investigation workspace fills the remaining viewport beneath the same global header; its identity, local tabs, content panel, and contextual map sit inside the flush page shell.
 
 ## Relationship table
 
 | Relationship | Owner | Gap |
 |---|---|---:|
 | Page edge to content | Page | 16px |
-| Public chrome to page content | Public shell | 24px |
+| Global header to page content | PageShell standard / hero | 24px |
+| Global header to investigation workspace | PageShell flush | 0px |
 | Page title to introduction | HeadingGroup | 4px |
 | Heading to supporting text | HeadingGroup | 4px |
 | Paragraph to paragraph | ProseStack | 16px |
@@ -97,7 +98,7 @@ QuestionGroup uses the bordered Activity accordion. Its expanded content remains
 
 ## Responsive behavior
 
-The application is phone-first. Breakpoints may change columns, direction, navigation visibility, panel arrangement, image placement, and available width. They do not change standard H1/H2/H3/Body roles. The compact home Display, home subtitle, and small header branding are preserved exceptions. Map sheet positions, grip, peek height, and drag widths are functional geometry. Bottom navigation clearance includes its fixed 62px height, an 8px buffer, and the browser safe-area inset.
+The site is phone-first. Breakpoints may change columns, direction, navigation visibility, panel arrangement, image placement, and available width. They do not change standard H1/H2/H3/Body roles. The compact home Display, home subtitle, and small header branding are preserved exceptions. On desktop, the investigation panel and map are adjacent; on phone, its Map tab retains the full map and draggable detail sheet. Map sheet positions, grip, peek height, and drag widths are functional geometry. Bottom navigation clearance includes its fixed 62px height, an 8px buffer, and the browser safe-area inset.
 
 ## Example
 

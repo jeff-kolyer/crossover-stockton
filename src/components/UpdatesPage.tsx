@@ -1,37 +1,33 @@
+import uiCopy from "../data/pages/updates.json";
+import { siteModel } from "../model";
 
-import gapsData from "../data/gaps.json";
-import recordsData from "../data/records.json";
 import { sourceLinkLabel } from "../lib/sourceLinks";
 import { updateTypeLabel } from "../lib/updatePresentation";
 import { navigateInternalLink } from "../lib/internalLink";
-import { PublicSiteNav } from "./PublicSiteNav";
-import { PublicFooter } from "./PublicFooter";
 import { ActivityRecord, HeadingGroup, RecordList } from "./layout";
 import type { EvidenceRecord, GapRecord } from "../types";
 
-type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
+const uiText = uiCopy.UpdatesPage;
 
 interface UpdatesPageProps {
-  onNavigate: (page: PublicRoute) => void;
   onOpenGap: (slug: string) => void;
 }
 
-const gaps = gapsData as GapRecord[];
-const records = recordsData as EvidenceRecord[];
+const gaps = siteModel.getNeeds();
+const records = siteModel.getAllEvidence();
 
-export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
+export function UpdatesPage({ onOpenGap }: UpdatesPageProps) {
   const updateRecords = updateRecordsFromGaps();
 
   return (
-    <main className="public-site gap-updates-page gap-page">
-      <PublicNav onNavigate={onNavigate} />
+    <main className="gap-updates-page gap-page">
 
       <HeadingGroup as="section" className="gap-history-header public-document">
-        <h1>Updates</h1>
-        <p>Public reports, local developments, and new information about the needs we're tracking in Stockton.</p>
+        <h1>{uiText.updates}</h1>
+        <p>{uiText.publicReportsLocalDevelopmentsAndNewInformation}</p>
       </HeadingGroup>
 
-      <section className="gap-history-timeline public-document" aria-label="Crossover update history">
+      <section className="gap-history-timeline public-document" aria-label={uiText.crossoverUpdateHistory}>
           <RecordList separated className="gap-history-feed-list">
             {updateRecords.map((record) => {
               const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));
@@ -46,7 +42,7 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
                     <p>{record.summary}</p></HeadingGroup>
                   {relatedGaps.length > 0 && (
                     <div className="gap-history-related-gaps">
-                      <strong>Related gaps:</strong>
+                      <strong>{uiText.relatedGaps}</strong>
                       {relatedGaps.map((gap) => (
                         <a key={gap.id} href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>
                           {shortGapTitle(gap.title)}
@@ -71,7 +67,6 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
           </RecordList>
       </section>
 
-      <PublicFooter active="updates" onNavigate={onNavigate} />
     </main>
   );
 }
@@ -91,10 +86,6 @@ function updateRecordsFromGaps() {
     });
 
   return Array.from(recordMap.values()).sort((a, b) => recordTime(b) - recordTime(a));
-}
-
-function PublicNav({ onNavigate }: { onNavigate: (page: PublicRoute) => void }) {
-  return <PublicSiteNav active="updates" onNavigate={onNavigate} variant="history" />;
 }
 
 function recordsForGap(gap: GapRecord) {
@@ -120,7 +111,7 @@ function recordTime(record: EvidenceRecord) {
 }
 
 function formatDate(value?: string | null) {
-  if (!value) return "Undated";
+  if (!value) return uiText.undated;
   const date = parseDisplayDate(value);
   if (Number.isNaN(date.getTime())) return value;
   return new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(date);

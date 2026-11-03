@@ -1,4 +1,7 @@
+import uiCopy from "../data/ui-copy.json";
 import { navigateInternalLink } from "../lib/internalLink";
+
+const uiText = uiCopy.PublicFooter;
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
@@ -8,27 +11,21 @@ export function PublicFooter({ active, onNavigate, onOpenAbout }: {
   onOpenAbout?: () => void;
 }) {
   const open = (page: PublicRoute) => page === "about" && onOpenAbout ? onOpenAbout() : onNavigate(page);
-  const links: { page: PublicRoute; label: string; href: string }[] = [
-    { page: "home", label: "Home", href: "/" },
-    { page: "reality", label: "Needs", href: "/reality/" },
-    { page: "action", label: "Action", href: "/action/" },
-    { page: "connection", label: "Stories", href: "/connection/" },
-    { page: "about", label: "About", href: "/about/" },
-  ];
+  const links = uiCopy.navigation.filter(({ page }) => page !== "updates") as { page: PublicRoute; label: string; href: string }[];
   return <>
     <footer className="public-footer">
-      <a className="footer-logo" href="/" aria-label="Crossover home" onClick={(event) => navigateInternalLink(event, () => open("home"))}>
+      <a className="footer-logo" href="/" aria-label={uiText.crossoverHome} onClick={(event) => navigateInternalLink(event, () => open("home"))}>
         <img src="/images/logo_light.webp" alt="" decoding="async" />
-        <span>Crossover</span>
+        <span>{uiText.crossover}</span>
       </a>
-      <span>© 2026 Crossover Stockton</span>
-      <p>Reality. Connection. Action.</p>
-      <nav aria-label="Footer">
+      <span>{uiText.text2026CrossoverStockton}</span>
+      <p>{uiText.realityConnectionAction}</p>
+      <nav aria-label={uiText.footer}>
         {links.filter(({ page }) => page === "reality" || page === "action" || page === "about").map(({ page, label, href }) =>
           <a key={page} href={href} aria-current={active === page ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => open(page))}>{label}</a>)}
       </nav>
     </footer>
-    <nav className="public-bottom-nav" aria-label="Mobile primary">
+    <nav className="public-bottom-nav" aria-label={uiText.mobilePrimary}>
       {links.map(({ page, label, href }) => <a key={page} href={href} aria-current={active === page ? "page" : undefined} onClick={(event) => navigateInternalLink(event, () => open(page))}>{label}</a>)}
     </nav>
   </>;

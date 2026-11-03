@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/story.schema.json",
+  "title": "story",
+  "description": "story information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "slug": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gap_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "organization_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "published_at": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "slug",
+    "title",
+    "summary",
+    "gap_ids",
+    "organization_ids"
+  ],
+  "additionalProperties": true
+}

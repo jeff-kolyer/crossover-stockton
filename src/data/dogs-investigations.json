@@ -5,6 +5,8 @@
   "active_investigations": [
     {
       "id": "street-dog-immediate-welfare",
+      "publicName": "Dogs on the street in Stockton",
+      "indexSummary": "Field reports, locations, pathways to care, and current findings.",
       "gap_id": "dogs-safe-placement",
       "title": "What would it take to understand the need?",
       "status": "in_progress",

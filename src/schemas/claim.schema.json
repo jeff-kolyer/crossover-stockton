@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/claim.schema.json",
+  "title": "claim",
+  "description": "claim information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "reported_estimate",
+        "reported_count",
+        "administrative_count",
+        "unknown_quantity",
+        "editorial_interpretation"
+      ]
+    },
+    "verificationStatus": {
+      "type": "string",
+      "enum": [
+        "source_reported",
+        "official_reported",
+        "not_established",
+        "crossover_interpretation"
+      ]
+    },
+    "sourceRecordIds": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "limitations": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reportedValue": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "geographicScopeId": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "needId": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "measurementId": {
+      "$ref": "./common.schema.json#/$defs/id"
+    }
+  },
+  "required": [
+    "id",
+    "statement",
+    "kind",
+    "verificationStatus",
+    "sourceRecordIds",
+    "limitations",
+    "needId"
+  ],
+  "additionalProperties": true
+}

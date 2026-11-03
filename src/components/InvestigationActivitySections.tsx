@@ -1,3 +1,4 @@
+import uiCopy from "../data/pages/investigations/dogs/activity.json";
 import { useEffect, useState } from "react";
 import { dogActivityQuestions } from "../data/dog-activity-questions";
 import { navigateInternalLink } from "../lib/internalLink";
@@ -6,9 +7,11 @@ import type { EvidenceRecord } from "../types";
 import { InvestigationOrganizations } from "./InvestigationOrganizations";
 import { ActivityRecord, HeadingGroup, QuestionGroup, RecordList } from "./layout";
 
+const uiText = uiCopy.InvestigationActivitySections;
+
 const dateLabel = (date?: string | null) => date
   ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${date.slice(0, 10)}T12:00:00`))
-  : "Date not recorded";
+  : uiText.dateNotRecorded;
 
 const occurredAt = (record: EvidenceRecord) => record.occurred_at ?? record.recorded_at ?? record.published_at;
 const newestFirst = (a: EvidenceRecord, b: EvidenceRecord) => (occurredAt(b) ?? "").localeCompare(occurredAt(a) ?? "");
@@ -49,8 +52,8 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
 
   return <div className="workspace-page investigation-activity-page">
     <section className="investigation-activity-work" aria-labelledby="recorded-activity-title">
-      <HeadingGroup><h2 id="recorded-activity-title">Activity</h2>
-        <p>What we've done to answer these questions.</p></HeadingGroup>
+      <HeadingGroup><h2 id="recorded-activity-title">{uiText.activity}</h2>
+        <p>{uiText.whatWeVeDoneToAnswerThese}</p></HeadingGroup>
       {dogActivityQuestions.map((question, index) => {
         const questionActivities = question.activityIds.map((id) => activityById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
         const questionReports = question.reportIds.map((id) => reportById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
@@ -60,7 +63,7 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
           ...(question.relatedReportIds ?? []).map((id) => reportById.get(id)).filter((record): record is EvidenceRecord => Boolean(record)),
         ].sort(newestFirst);
         const count = primary.length || related.length;
-        const countLabel = primary.length ? `recorded ${count === 1 ? "activity" : "activities"}` : `related ${count === 1 ? "record" : "records"}`;
+        const countLabel = primary.length ? `${uiText.recorded} ${count === 1 ? uiText.activitySingular : uiText.activityPlural}` : `${uiText.related} ${count === 1 ? uiText.recordSingular : uiText.recordPlural}`;
         const isExpanded = expanded.has(question.id);
         return <QuestionGroup id={question.id} className="investigation-activity-question" aria-labelledby={`${question.id}-title`} key={question.id}>
           <button type="button" className="activity-question-toggle" aria-expanded={isExpanded} aria-controls={`${question.id}-records`} onClick={() => setExpanded((current) => {
@@ -75,14 +78,14 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
             </span>
             <span className="activity-question-chevron" aria-hidden="true" />
           </button>
-          <p className="activity-question-findings"><a href={`/work/dogs/findings/#${question.id}`} aria-label={`See findings: ${question.title}`} onClick={(event) => navigateInternalLink(event, () => onOpenFindings(question.id))}>See findings</a></p>
+          <p className="activity-question-findings"><a href={`/work/dogs/findings/#${question.id}`} aria-label={`${uiText.seeFindingsPrefix}${question.title}`} onClick={(event) => navigateInternalLink(event, () => onOpenFindings(question.id))}>{uiText.seeFindings}</a></p>
           <div id={`${question.id}-records`} className="activity-question-records" hidden={!isExpanded}>
             {primary.length > 0 && <RecordList className="record-list activity-record-list">{primary.map((record) => <ActivityRecord id={record.id} key={record.id}>
               <h4><time dateTime={occurredAt(record)?.slice(0, 10)}>{dateLabel(occurredAt(record))}</time> · {record.title}</h4>
               <p>{record.summary}</p>
               <p><a href={record.record_type === "field_report" ? reportHref(record) : activityHref(record)} onClick={(event) => navigateInternalLink(event, () => record.record_type === "field_report" ? onOpenReport(record.id) : openActivity(record))}>{recordLinkLabel(record)}</a></p>
             </ActivityRecord>)}</RecordList>}
-            {related.length > 0 && <p className="investigation-activity-related"><strong>Related recorded work:</strong> {related.map((record, relatedIndex) => <span key={record.id}>{relatedIndex > 0 && "; "}{recordLink(record)}</span>)}</p>}
+            {related.length > 0 && <p className="investigation-activity-related"><strong>{uiText.relatedRecordedWork}</strong> {related.map((record, relatedIndex) => <span key={record.id}>{relatedIndex > 0 && "; "}{recordLink(record)}</span>)}</p>}
             {question.id === "question-care" && <InvestigationOrganizations onOpenActivity={onOpenActivity} />}
           </div>
         </QuestionGroup>;

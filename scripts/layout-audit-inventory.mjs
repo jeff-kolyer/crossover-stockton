@@ -3,17 +3,7 @@ import path from "node:path";
 import postcss from "postcss";
 
 const root = path.resolve(import.meta.dirname, "..");
-const cssFiles = [
-  "src/styles/app.css",
-  "src/styles/public.css",
-  "src/styles/public-chrome.css",
-  "src/styles/home.css",
-  "src/styles/map.css",
-  "src/styles/activity.css",
-  "src/styles/controls.css",
-  "src/styles/investigation-google.css",
-  "src/components/PublicMobileMenu.layout.css",
-];
+const cssFiles = ["src/styles/crossover.css"];
 const properties = /^(?:font|font-size|line-height|margin(?:-(?:top|right|bottom|left|inline(?:-start|-end)?|block(?:-start|-end)?))?|padding(?:-(?:top|right|bottom|left|inline(?:-start|-end)?|block(?:-start|-end)?))?|gap|row-gap|column-gap)$/;
 const output = [
   "## Complete declaration inventory",

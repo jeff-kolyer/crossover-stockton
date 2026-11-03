@@ -1,15 +1,15 @@
-import "../styles/home.css";
+import uiCopy from "../data/pages/home.json";
+import { siteModel } from "../model";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
-import gapsData from "../data/gaps.json";
-import storiesData from "../data/stories.json";
 import { latestGapActivity } from "../lib/gapActivity";
 import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
-import { PublicSiteNav } from "./PublicSiteNav";
-import { PublicFooter } from "./PublicFooter";
 import { HomeLanding } from "./HomeLanding";
 import { HeadingGroup, RecordList } from "./layout";
-import type { GapRecord, StoryRecord } from "../types";
+
+const uiText = uiCopy.HomePage;
+const identity = siteModel.getIdentity();
+const sloganBreak = identity.slogan.indexOf(". ") + 1;
 
 interface HomePageProps {
   page: "home" | "reality" | "connection";
@@ -23,29 +23,13 @@ interface HomePageProps {
   onOpenTasks: () => void;
 }
 
-const gaps = gapsData as GapRecord[];
-const stories = storiesData as StoryRecord[];
+const gaps = siteModel.getNeeds();
+const stories = siteModel.getStories();
 const connectionHeroImage = "/images/connection/connection_banner.jpg";
 const heroImage = "/images/home/home-hero-wide.jpg";
 const realityHeroImage = "/images/reality/reality_banner.jpg";
 
-const pageCopy = {
-  home: {
-    eyebrow: "",
-    title: "See clearly. Act locally.",
-    text: "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs in Stockton.",
-  },
-  reality: {
-    eyebrow: "Reality",
-    title: "Needs in Stockton",
-    text: "AI surfaced these possibilities through public information. Crossover is investigating street dog care first; the assumptions and severity of the other needs have not been independently established.",
-  },
-  connection: {
-    eyebrow: "Connection",
-    title: "Signs of Being",
-    text: "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations.",
-  },
-};
+const pageCopy = uiText.pages;
 
 const heroImageItems = [
   { page: "home", src: heroImage },
@@ -59,15 +43,12 @@ const activeStories = stories
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
 export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverview, onOpenGapSection, onOpenWork, onOpenStory, onOpenTasks }: HomePageProps) {
   const isHome = page === "home";
-  const copy = pageCopy[page];
+  const copy = page === "home" ? null : pageCopy[page];
   const visibleGaps = activeGaps;
   const visibleStories = activeStories;
   const currentHeroImage = heroImageItems.find((item) => item.page === page)?.src ?? heroImage;
-  const navigation = <PublicSiteNav active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} variant={isHome ? "dark" : "overlay"} />;
-
   return (
-    <main className={`public-site public-home ${isHome ? "crossover-home is-home-page" : "is-section-page"} is-${page}-page`}>
-      {isHome && navigation}
+    <main className={`public-home ${isHome ? "crossover-home is-home-page" : "is-section-page"} is-${page}-page`}>
       <section className={`public-hero ${isHome ? "" : "is-compact"}`}>
         {isHome ? (
           <picture className="public-hero-picture">
@@ -78,16 +59,15 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
           <img className="public-hero-image is-active" src={currentHeroImage} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         )}
         <div className="public-hero-shade" />
-        {!isHome && navigation}
 
         <div className="public-hero-copy">
           <HeadingGroup>
-            {isHome ? <p className="home-hero-title">See clearly.<br className="home-hero-title-break" /> Act locally.</p> : <h1>{copy.title}</h1>}
-            <p className={isHome ? "home-hero-subtitle" : undefined}>{copy.text}</p>
+            {isHome ? <p className="home-hero-title">{identity.slogan.slice(0, sloganBreak)}<br className="home-hero-title-break" /> {identity.slogan.slice(sloganBreak + 1)}</p> : <h1>{copy?.title}</h1>}
+            <p className={isHome ? "home-hero-subtitle" : undefined}>{isHome ? identity.purpose : copy?.text}</p>
           </HeadingGroup>
           {isHome && (
             <div className="hero-action-row">
-              <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>See what we're doing</PublicPrimaryAction>
+              <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>{uiText.seeWhatWeReDoing}</PublicPrimaryAction>
             </div>
           )}
         </div>
@@ -97,7 +77,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
 
       {page === "reality" && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">
-          <small className="gap-status-guide"><span> Investigating: active Crossover work.</span><span> Identified: not yet investigated by Crossover.</span></small>
+          <small className="gap-status-guide"><span> {uiText.investigatingActiveCrossoverWork}</span><span> {uiText.identifiedNotYetInvestigatedByCrossover}</span></small>
         </div>
         <RecordList separated className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
@@ -130,14 +110,14 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
                 </div>
               </div>
               <span className="gap-card-meta">
-                <span> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"} responding</span>
-                {latestActivity && <span> {latestActivity.kind === "work" ? "Work updated" : "Assessment updated"} {formatShortDate(latestActivity.date)}</span>}
+                <span> {organizationCount} {organizationCount === 1 ? uiText.organizationSingular : uiText.organizationPlural} {uiText.responding}</span>
+                {latestActivity && <span> {latestActivity.kind === "work" ? uiText.workUpdated : uiText.assessmentUpdated} {formatShortDate(latestActivity.date)}</span>}
               </span>
             </a>
             );
           })}
         </RecordList>
-        <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
+        <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>{uiText.backToHome}</a></p>
       </section>}
 
       {page === "connection" && <section id="connection" className="public-band public-story-band">
@@ -148,15 +128,14 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
               <div>
                 <h3>{story.title}</h3>
                 <p>{story.summary}</p>
-                <small>{formatDate(story.published_at) || "Story"}</small>
+                <small>{formatDate(story.published_at) || uiText.storyFallback}</small>
               </div>
             </a>
           ))}
         </RecordList>
-        <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
+        <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>{uiText.backToHome}</a></p>
       </section>}
 
-      <PublicFooter active={page} onNavigate={onNavigate} onOpenAbout={onOpenAbout} />
     </main>
   );
 }

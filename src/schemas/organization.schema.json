@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/organization.schema.json",
+  "title": "organization",
+  "description": "organization information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "slug": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "website": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string"
+    },
+    "map_location_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "active": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "summary"
+  ],
+  "additionalProperties": true
+}

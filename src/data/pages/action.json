@@ -1,0 +1,30 @@
+{
+  "ActionIndexPage": {
+    "takingActionLearningFromReality": "Taking action. Learning from reality.",
+    "weReInvestigatingRealProblemsInStockton": "We're investigating real problems in Stockton by showing up, testing what works, and documenting what happens. Here's what we're doing now.",
+    "investigations": "Investigations",
+    "exploreWhatWeAreLearningInStockton": "Explore what we are learning in Stockton.",
+    "investigating": "Investigating",
+    "currentActions": "Current actions"
+  },
+  "ActionProgressStats": {
+    "actionProgress": "Action progress"
+  },
+  "actions": [
+    {
+      "id": "verifying-reported-conditions",
+      "href": "/work/dogs/",
+      "buttonLabel": "Explore our fieldwork"
+    },
+    {
+      "id": "requesting-records",
+      "href": "/work/dogs/",
+      "buttonLabel": "Explore our records requests"
+    },
+    {
+      "id": "testing-pathways",
+      "href": "/work/dogs/",
+      "buttonLabel": "Explore our pathway tests"
+    }
+  ]
+}
