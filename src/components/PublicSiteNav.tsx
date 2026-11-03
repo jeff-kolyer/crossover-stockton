@@ -24,7 +24,6 @@ export function PublicSiteNav({ active, onNavigate, onOpenAbout, variant = "over
       <button type="button" className={active === "connection" ? "is-active" : ""} onClick={() => onNavigate("connection")}>Stories</button>
       <button type="button" className={active === "action" ? "is-active" : ""} onClick={() => onNavigate("action")}>Action</button>
       <button type="button" className={active === "updates" ? "is-active" : ""} onClick={() => onNavigate("updates")}>Updates</button>
-      <button type="button" className={active === "investigation" ? "is-active" : ""} onClick={() => onNavigate("investigation")}>Investigation</button>
       <button type="button" className={active === "about" ? "is-active" : ""} aria-current={active === "about" ? "page" : undefined} onClick={openAbout}>About</button>
     </nav>
     <button className="location-pill" type="button" onClick={() => onNavigate("home")}>Stockton, CA</button>

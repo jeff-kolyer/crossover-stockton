@@ -42,10 +42,10 @@ const homeHtml = await readFile(new URL("index.html", dist), "utf8");
 const homeText = await readFile(new URL("page.txt", dist), "utf8");
 const featuredGap = gaps.find((gap) => gap.id === "dogs-safe-placement");
 if (!featuredGap || !homeHtml.includes(`href="/reality/${featuredGap.slug}/"`)) throw new Error("The homepage does not link to the dog gap page.");
-const workIndexHtml = await readFile(new URL("work/index.html", dist), "utf8");
-const workIndexText = await readFile(new URL("work/page.txt", dist), "utf8");
-if (!workIndexHtml.includes("Dogs on the street in Stockton") || !workIndexText.includes("Field reports, locations, pathways to care, and current findings")) throw new Error("The investigation index does not summarize the active investigation.");
-if (!workIndexText.includes(`${origin}/work/dogs/`)) throw new Error("The investigation index lacks its workspace link.");
+const actionHtml = await readFile(new URL("action/index.html", dist), "utf8");
+const actionText = await readFile(new URL("action/page.txt", dist), "utf8");
+if (!actionHtml.includes("Dogs on the street in Stockton") || !actionText.includes("Field reports, locations, pathways to care, and current findings")) throw new Error("The action page does not summarize the active investigation.");
+if (!actionText.includes(`${origin}/work/dogs/activity/#overview`)) throw new Error("The action page lacks its investigation link.");
 
 for (const gap of gaps.filter((item) => item.active)) {
   const gapHtml = await readFile(new URL(`./reality/${gap.slug}/index.html`, dist), "utf8");

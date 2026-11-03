@@ -66,7 +66,6 @@ const legacyReferenceSections = {
 
 const pages = [
   ["/", "Crossover Stockton", "See what Stockton needs and what Crossover is learning through its investigations."],
-  ["/work/", "Investigations | Crossover Stockton", "Explore current Crossover investigations."],
   ["/work/dogs/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
   ["/work/dogs/tasks/", "Tasks | Crossover Stockton", "Planned work in the Stockton dog investigation."],
   ["/work/dogs/activity/", "Activity | Crossover Stockton", "Documented work in the Stockton dog investigation."],
@@ -157,6 +156,7 @@ try {
   }
 
   const legacyRedirects = [
+    ["/work/", "/action/"],
     ["/work/dogs/about/", "/work/dogs/activity/#overview"],
     ["/organizations/", "/work/dogs/activity/#organizations"],
     ...organizations.filter((org) => org.active && engagedOrganizationIds.has(org.id)).map((org) => [`/organizations/${org.slug}/`, `/work/dogs/activity/#organization-${org.slug}`]),

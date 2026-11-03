@@ -60,9 +60,9 @@ export const crossoverActions: CrossoverAction[] = [
     },
     // Receipt is manual: the request outcome says no records arrived, but has no receipt count.
     status: [
-      { value: recordsRequest ? "1" : "Unknown", label: "Records requested" },
-      { value: "0", label: "Records received" },
-      { value: recordsRequestPending, label: "Requests pending" },
+      { value: recordsRequest ? "1" : "Unknown", label: "Requested" },
+      { value: "0", label: "Received" },
+      { value: recordsRequestPending, label: "Pending" },
     ],
     active: true,
   },
@@ -82,9 +82,9 @@ export const crossoverActions: CrossoverAction[] = [
     // inquiry/application represent two pathways. Three Activity records have no pathway grouping
     // or completed-test outcome, so neither count can be calculated safely from record totals.
     status: [
-      { value: "2", label: "Pathways initiated" },
-      { value: "2", label: "Awaiting responses" },
-      { value: "0", label: "Pathways tested" },
+      { value: "2", label: "Initiated" },
+      { value: "2", label: "Awaiting response" },
+      { value: "0", label: "Tested" },
     ],
     active: true,
   },

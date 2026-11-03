@@ -17,7 +17,6 @@ const menuItems: Array<{ label: string; page: MenuPage }> = [
   { label: "Stories", page: "connection" },
   { label: "Action", page: "action" },
   { label: "Updates", page: "updates" },
-  { label: "Investigation", page: "investigation" },
   { label: "About", page: "about" },
 ];
 

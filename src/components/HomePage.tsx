@@ -15,6 +15,7 @@ interface HomePageProps {
   onNavigate: (page: "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation") => void;
   onOpenAbout: () => void;
   onOpenGap: (slug: string) => void;
+  onOpenOverview: () => void;
   onOpenGapSection: (slug: string, section: "our-findings") => void;
   onOpenWork: (workId: string) => void;
   onOpenStory: (slug: string) => void;
@@ -55,7 +56,7 @@ const activeGaps = gaps.filter((gap) => gap.active).sort((a, b) => a.rank - b.ra
 const activeStories = stories
   .filter((story) => story.active)
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
-export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSection, onOpenWork, onOpenStory, onOpenTasks }: HomePageProps) {
+export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverview, onOpenGapSection, onOpenWork, onOpenStory, onOpenTasks }: HomePageProps) {
   const isHome = page === "home";
   const copy = pageCopy[page];
   const visibleGaps = activeGaps;
@@ -79,8 +80,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         {!isHome && navigation}
 
         <div className={`public-hero-copy${isHome ? "" : " public-document"}`}>
-          <h1>{isHome ? <>See clearly.<br className="home-hero-title-break" /> Act locally.</> : copy.title}</h1>
-          <p>{copy.text}</p>
+          {isHome ? <p className="home-hero-title">See clearly.<br className="home-hero-title-break" /> Act locally.</p> : <h1>{copy.title}</h1>}
+          <p className={isHome ? "home-hero-subtitle" : undefined}>{copy.text}</p>
           {isHome && (
             <div className="hero-action-row">
               <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>See what we're doing</PublicPrimaryAction>
@@ -89,7 +90,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
         </div>
       </section>
 
-      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenTasks={onOpenTasks} />}
+      {isHome && <HomeLanding onNavigate={onNavigate} onOpenGap={onOpenGap} onOpenOverview={onOpenOverview} onOpenGapSection={onOpenGapSection} onOpenWork={onOpenWork} onOpenStory={onOpenStory} onOpenTasks={onOpenTasks} />}
 
       {page === "reality" && <section id="reality" className="public-band public-gap-band">
         <div className="section-intro">
@@ -118,13 +119,13 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenGapSe
                   />
                 </span>
               )}
-              <span className="gap-level investigation-status-pill"> {investigationStatusLabel(gap.investigation_status)}</span>
-              <span className="gap-card-body">
-                <span className="gap-card-copy">
+              <span className="gap-level investigation-status-pill home-landing-status" data-status={gap.investigation_status}>{investigationStatusLabel(gap.investigation_status)}</span>
+              <div className="gap-card-body">
+                <div className="gap-card-copy">
                   <h3>{gap.title}</h3>
                   <p>{gap.summary}</p>
-                </span>
-              </span>
+                </div>
+              </div>
               <span className="gap-card-meta">
                 <span> {organizationCount} {organizationCount === 1 ? "organization" : "organizations"} responding</span>
                 {latestActivity && <span> {latestActivity.kind === "work" ? "Work updated" : "Assessment updated"} {formatShortDate(latestActivity.date)}</span>}

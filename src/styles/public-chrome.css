@@ -9,7 +9,7 @@
   width: 100%;
   max-width: none;
   min-height: 62px;
-  margin: 0;
+  margin: 0 0 8px;
   padding: 9px max(38px, calc((100% - 1600px) / 2));
   background: #08110f;
   color: #fff;

@@ -4,6 +4,15 @@ html:has(.public-site) {
   scrollbar-gutter: stable;
 }
 
+/* One heading rhythm across public pages, including cards and editorial entries. */
+.public-site h3 {
+  margin: 0 0 var(--space-2);
+}
+
+.public-site :is(h1, h2, h3) + p {
+  margin-top: 0;
+}
+
 .public-site .public-primary-action {
   display: inline-flex;
   align-items: center;
@@ -49,21 +58,6 @@ html:has(.public-site) {
 
 .is-section-page .public-hero-copy {
   position: static;
-}
-
-.is-section-page .public-hero-copy h1,
-.gap-reference-article h1,
-.action-index-intro h1,
-.story-detail-shell h1,
-.gap-history-header h1,
-.organizations-page .crossover-index-body > h1 {
-  font-size: 28px;
-  line-height: 1.25;
-}
-
-.about-simple-content h1 {
-  font-size: 24px;
-  line-height: 1.25;
 }
 
 .is-section-page .public-hero-copy h1,
@@ -140,11 +134,6 @@ html:has(.public-site) {
   grid-column: 2;
 }
 
-.is-reality-page .gap-card-body h3,
-.is-connection-page .story-card h3 {
-  margin-bottom: 4px;
-}
-
 .is-reality-page .gap-card-body p,
 .is-connection-page .story-card p {
   margin-bottom: 8px;
@@ -177,7 +166,8 @@ html:has(.public-site) {
   max-width: 760px;
 }
 
-.about-simple .about-simple-philosophy {
+.about-simple .about-simple-philosophy,
+.about-simple .about-simple-founder {
   border-bottom: 1px solid #dadce0;
   padding-bottom: 16px;
 }
@@ -263,18 +253,163 @@ html:has(.public-site) {
   object-position: center top;
 }
 
-.action-index-page .action-index-feature {
-  margin-bottom: 32px;
+.action-index-page .action-index-investigations {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
 }
 
-.action-index-page .action-index-status {
-  display: flex;
-  flex-wrap: wrap;
+.action-index-page .action-index-investigations-intro {
+  display: grid;
+  gap: 8px;
+}
+
+.action-index-page .action-index-investigations h2,
+.action-index-page .action-index-investigations p {
+  margin: 0;
+}
+
+.action-index-page .action-index-investigation-card {
+  --investigation-thumb-size: clamp(76px, 10vw, 120px);
+  display: grid;
+  grid-template-columns: var(--investigation-thumb-size) minmax(0, 1fr) 18px;
+  align-items: start;
+  gap: 16px;
+  width: 100%;
+  border-block: 1px solid #dadce0;
+  padding-block: 16px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.action-index-page .action-index-investigation-card:hover h3 {
+  text-decoration: underline;
+}
+
+.action-index-page .action-index-investigation-card img {
+  display: block;
+  width: var(--investigation-thumb-size);
+  height: var(--investigation-thumb-size);
+  object-fit: cover;
+}
+
+.action-index-page .action-index-investigation-copy {
+  display: grid;
+  min-width: 0;
+}
+
+.action-index-page .action-index-investigation-meta {
+  display: block;
+}
+
+.action-index-page .action-index-investigation-meta small {
+  color: #5f6862;
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.action-index-page .action-index-investigation-meta small::before {
+  content: " · ";
+  white-space: pre;
+}
+
+.action-index-page .action-index-investigation-copy h3 {
+  margin-bottom: 8px;
+}
+
+.action-index-page .action-index-investigation-copy > p {
+  margin: 4px 0 0;
+}
+
+.action-index-page .action-index-investigation-chevron {
+  align-self: center;
+  width: 18px;
+  height: 18px;
+  color: #6b7280;
+}
+
+.action-index-page .action-index-current {
+  display: grid;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.action-index-page .action-index-feature {
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+
+.action-index-page .action-index-feature .action-index-image {
+  max-width: 260px;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+}
+
+.action-index-page .action-index-current > h2,
+.action-index-page .action-index-feature,
+.action-index-page .action-index-feature-description h3,
+.action-index-page .action-index-feature-description p,
+.action-index-page .action-index-explore {
+  margin: 0;
+}
+
+.action-index-page .action-index-feature + .action-index-feature {
+  position: relative;
+  margin-top: 8px;
+}
+
+.action-index-page .action-index-feature + .action-index-feature::before {
+  position: absolute;
+  top: -16px;
+  right: 0;
+  left: 284px;
+  border-top: 1px solid #dadce0;
+  content: "";
+}
+
+.action-index-page .action-index-feature-copy {
+  display: grid;
+  align-content: start;
   gap: 16px;
 }
 
-.action-index-page .action-index-status dd {
+.action-index-page .action-index-feature-description {
+  display: grid;
+  gap: 8px;
+}
+
+.action-index-page .action-index-status {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: 0;
+}
+
+.action-index-page .action-index-status-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.action-index-page .action-index-status-item + .action-index-status-item {
+  border-left: 1px solid #dadce0;
+  padding-left: 24px;
+}
+
+.action-index-page .action-index-status dt {
+  order: 2;
+  font-size: .875rem;
+  line-height: 1.35;
+}
+
+.action-index-page .action-index-status dd {
+  order: 1;
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 .story-detail-page .story-opening img {
@@ -340,6 +475,12 @@ html:has(.public-site) {
   margin-top: 5px;
 }
 
+@media (max-width: 900px) {
+  .public-site.action-index-page {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+}
+
 @media (max-width: 720px) {
   .about-simple .about-simple-ideas {
     grid-template-columns: minmax(0, 1fr);
@@ -363,6 +504,18 @@ html:has(.public-site) {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .action-index-page .action-index-feature + .action-index-feature::before {
+    left: 0;
+  }
+
+  .action-index-page .action-index-feature {
+    align-items: start;
+  }
+
+  .action-index-page .action-index-status-item + .action-index-status-item {
+    padding-left: 8px;
+  }
+
   .is-reality-page .gap-card-image-frame,
   .is-reality-page .gap-level,
   .is-reality-page .gap-card-body,
@@ -375,10 +528,6 @@ html:has(.public-site) {
 
   .story-detail-page .story-opening img {
     grid-row: 1;
-  }
-
-  .action-index-page .action-index-feature-copy {
-    display: grid;
   }
 
 }

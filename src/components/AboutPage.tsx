@@ -1,5 +1,6 @@
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
+import { ArrowTextLink } from "./ArrowTextLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 
@@ -29,7 +30,7 @@ export function AboutPage({ onNavigate, onOpenTasks, onOpenFindings }: AboutPage
       <section className="about-simple-section about-simple-purpose" aria-labelledby="about-purpose-title">
         <h1 id="about-purpose-title">How can post-scarcity technology solve real problems?</h1>
         <p>As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.</p>
-        <p><strong>Crossover explores that transition—from work to vocation.</strong></p>
+        <p><strong>We're exploring the transition from work to vocation.</strong></p>
         <p>We're starting now, investigating real needs in Stockton, taking action, and using what we learn to discover what technology and human participation can make possible.</p>
       </section>
 
@@ -39,7 +40,7 @@ export function AboutPage({ onNavigate, onOpenTasks, onOpenFindings }: AboutPage
         <p>What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?</p>
         <p>We're investigating what happens to dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.</p>
         <p>What we discover guides what we do next.</p>
-        <p><a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See our findings →</a></p>
+        <p><PublicPrimaryAction href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, onOpenFindings)}>See our findings</PublicPrimaryAction></p>
       </section>
 
       <section className="about-simple-section" aria-labelledby="about-ideas-title">
@@ -72,7 +73,14 @@ export function AboutPage({ onNavigate, onOpenTasks, onOpenFindings }: AboutPage
           <img className="about-simple-founder-image" src="/images/about/about-the-founder.jpg" alt="Jeff Kolyer by a waterfront promenade" width="1535" height="1024" loading="lazy" decoding="async" />
           <div><p>Crossover Stockton began with Jeff Kolyer, a former Silicon Valley technology founder exploring the transition from compulsory work to meaningful vocation.</p>
             <p>After decades building technology, the question became personal: If machines can increasingly do the work, what are we free to become—and what will we do with that freedom?</p>
-            <a className="about-simple-text-link" href={linkedInUrl} target="_blank" rel="noreferrer">Connect on LinkedIn</a></div>
+            <a className="public-primary-action" href={linkedInUrl} target="_blank" rel="noreferrer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+              <span>Connect on LinkedIn</span>
+            </a></div>
         </div>
       </section>
 
@@ -81,7 +89,7 @@ export function AboutPage({ onNavigate, onOpenTasks, onOpenFindings }: AboutPage
         <p>We're investigating real needs in Stockton. Our actions, observations, and findings are public—including what we haven't figured out yet.</p>
         <div className="about-simple-actions">
           <PublicPrimaryAction href="/work/dogs/tasks/" onClick={(event) => navigateInternalLink(event, onOpenTasks)}>View our current tasks</PublicPrimaryAction>
-          <a className="about-simple-text-link" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs</a>
+          <ArrowTextLink className="arrow-text-link--green" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs</ArrowTextLink>
         </div>
       </section>
     </div>
