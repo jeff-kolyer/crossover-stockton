@@ -6,9 +6,9 @@
 - Moved shared Crossover identity and About prose to `crossover.json`, `people.json`, `principles.json`, and `methods.json`. Home and About resolve these through the framework-independent Model API.
 - Moved four dog-gap facts from the Needs page copy to `claims.json`, preserving their values, source record IDs, and stated limits. The unknown citywide population remains unknown; shelter intake is explicitly scoped to the multi-jurisdiction service area.
 - Moved the three Action workstreams into `workstreams.json`. Page-specific links and labels remain in `pages/action.json`; the records-request count continues to derive from the existing activity outcome.
-- Added 16 JSON Schema definitions plus shared definitions, a strict schema checker, cross-reference and evidence checks, and `npm run check:data`. The existing investigation validator remains in the gate.
+- Added 19 collection schemas plus shared, page, and View definitions, a strict schema checker, cross-reference and evidence checks, and `npm run check:data`. The existing investigation validator remains in the gate.
 - Added 15 validated page compositions and a View method registry. The Action page now resolves its investigation and action list through that registry and renders the list with the shared section renderer. Home, Needs, Updates, Stories, About, and the investigation data adapter read their shared records through the Model API.
-- Moved route parsing, canonical redirects, and document-title decisions to `src/controller/routes.ts`; `App.tsx` retains browser history state. `src/view/PageRenderer.tsx` dispatches the existing page Views through the shared site shell.
+- Moved route parsing, canonical redirects, and document-title decisions to `src/controller/routes.ts`; it resolves needs, stories, reports, organizations, and legacy work through the Model API. `App.tsx` retains browser history state. `src/view/PageRenderer.tsx` dispatches the existing page Views through the shared site shell.
 
 ## Retained as legacy during migration
 
@@ -19,6 +19,6 @@
 
 ## Validation
 
-Run `npm run check:data`, `npm run check:layout`, and `npm run build`. The data check rejects invalid schema values, duplicate IDs, missing references, mismatched page composition references, invalid source URLs, and an administrative-count claim without a measurement link. The existing investigation validator checks actual versus planned activity, finding support, and the canonical task/question/finding graph.
+Run `npm run check:data`, `npm run check:layout`, and `npm run build`. The data check rejects invalid schema values, duplicate IDs, missing references, mismatched page composition references, invalid source URLs, and an administrative-count claim without a measurement link. It covers needs, people, principles, methods, investigations, questions, tasks, evidence, findings, organizations, stories, locations, measurements, claims, workstreams, legacy work, projects, and articles. The existing investigation validator checks actual versus planned activity, finding support, and the canonical task/question/finding graph.
 
 The Model API is independent of React and layout classes. Page compositions contain record IDs and View method names, so a new renderer can consume the same records without extracting facts from JSX. The remaining legacy Views listed above are the outstanding migration work before the entire site has one page renderer.

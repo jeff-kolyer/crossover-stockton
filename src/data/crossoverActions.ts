@@ -1,14 +1,10 @@
-import dogsInvestigationsData from "./dogs-investigations.json";
-import recordsData from "./records.json";
 import actionPage from "./pages/action.json";
-import workstreams from "./workstreams.json";
-import type { EvidenceRecord } from "../types";
+import { siteModel } from "../model";
 
 // The investigation names the request record; its outcome tracks whether it is still pending.
-const recordsRequestId = (dogsInvestigationsData as {
-  active_investigations: Array<{ id: string; records_request?: { activity_record_id: string } }>;
-}).active_investigations.find((investigation) => investigation.id === "street-dog-immediate-welfare")?.records_request?.activity_record_id;
-const recordsRequest = (recordsData as EvidenceRecord[]).find((record) => record.id === recordsRequestId && record.record_type === "activity");
+const recordsRequestId = siteModel.getInvestigation("street-dog-immediate-welfare")?.records_request?.activity_record_id;
+const recordsRequest = recordsRequestId ? siteModel.getActivity(recordsRequestId) : undefined;
+const workstreams = siteModel.getWorkstreams();
 const recordsRequestPending = recordsRequest?.outcome?.status === "awaiting_response" ? "1"
   : recordsRequest?.outcome?.status === "received" || recordsRequest?.outcome?.status === "closed" ? "0"
   : workstreams[1].status[2].value;

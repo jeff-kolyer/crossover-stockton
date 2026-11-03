@@ -39,6 +39,9 @@
               "stories",
               "locations",
               "workstreams",
+              "legacy-work",
+              "projects",
+              "articles",
               "measurements",
               "developments"
             ]

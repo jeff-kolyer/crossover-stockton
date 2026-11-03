@@ -15,6 +15,8 @@ import projectsData from "../data/projects.json";
 import researchData from "../data/dogs-research.json";
 import claimsData from "../data/claims.json";
 import workstreamsData from "../data/workstreams.json";
+import legacyWorkData from "../data/work.json";
+import articlesData from "../data/articles.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "../types";
 import type { InvestigationFinding, InvestigationQuestion, InvestigationTask } from "../types/investigation";
 
@@ -50,6 +52,8 @@ export type InformationInput = {
   measurements: typeof researchData.measurements;
   claims: typeof claimsData;
   workstreams: typeof workstreamsData;
+  legacyWork: typeof legacyWorkData;
+  articles: typeof articlesData;
 };
 
 /** The Model has no React or page-layout dependency. It keeps raw records distinct from derived queries. */
@@ -70,6 +74,8 @@ export function createInformationModel(input: InformationInput) {
   const measurements = index(input.measurements, "measurements");
   const claims = index(input.claims, "claims");
   const workstreams = index(input.workstreams, "workstreams");
+  const legacyWork = index(input.legacyWork, "legacy work");
+  const articles = index(input.articles, "articles");
 
   requireReference(people.get(input.identity.founderPersonId), "person", input.identity.founderPersonId);
   for (const id of input.identity.principleIds) requireReference(principles.get(id), "principle", id);
@@ -143,6 +149,10 @@ export function createInformationModel(input: InformationInput) {
     getAllClaims: () => input.claims,
     getWorkstream: (id: string) => workstreams.get(id),
     getWorkstreams: () => input.workstreams,
+    getLegacyWork: (id: string) => legacyWork.get(id),
+    getAllLegacyWork: () => input.legacyWork,
+    getArticle: (id: string) => articles.get(id),
+    getArticles: () => input.articles,
     getDevelopments: () => input.evidence.filter((record) => ["update", "planning_update", "operational_change", "organization_update", "capacity_intervention", "reported_context"].includes(record.record_type)),
   };
 }
@@ -165,4 +175,6 @@ export const siteModel = createInformationModel({
   measurements: researchData.measurements,
   claims: claimsData,
   workstreams: workstreamsData,
+  legacyWork: legacyWorkData,
+  articles: articlesData,
 });

@@ -1,7 +1,7 @@
-import articlesData from "../data/articles.json";
+import { siteModel } from "../model";
 import type { Article } from "../types/article";
 
-export const articles = articlesData as Article[];
+export const articles = siteModel.getArticles() as Article[];
 export const publishedArticles = articles.filter((article) => article.published);
 export const findingsArticles = publishedArticles.filter((article) => article.show_in_findings);
 

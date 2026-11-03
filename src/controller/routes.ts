@@ -1,21 +1,15 @@
 import uiCopy from "../data/ui-copy.json";
-import gapsData from "../data/gaps.json";
-import storiesData from "../data/stories.json";
-import workData from "../data/work.json";
-import recordsData from "../data/records.json";
-import orgsData from "../data/orgs.json";
 import { articleForPath } from "../lib/articles";
 import { organizationActivityHref, organizationsActivityHref } from "../lib/organizationActivity";
 import { dogGapBase, dogGapSlug, legacyDogWorkDestination } from "../lib/dogGapLegacy";
-import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "../types";
 import type { PublicRoute } from "../components/PublicMobileMenu";
 import { siteModel } from "../model";
 
-export const gaps = gapsData as GapRecord[];
-const stories = storiesData as StoryRecord[];
-const work = workData as { id: string; title: string }[];
-const reports = (recordsData as EvidenceRecord[]).filter((record) => record.record_type === "field_report");
-const organizations = orgsData as OrgRecord[];
+export const gaps = siteModel.getNeeds();
+const stories = siteModel.getStories();
+const work = siteModel.getAllLegacyWork();
+const reports = siteModel.getAllEvidence().filter((record) => record.record_type === "field_report");
+const organizations = siteModel.getOrganizations();
 const uiText = uiCopy.App;
 
 export type AppRoute = "home" | "workInvestigation" | "reality" | "gapDetail" | "report" | "article" | "storyDetail" | "connection" | "action" | "updates" | "about";

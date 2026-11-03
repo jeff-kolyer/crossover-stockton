@@ -97,7 +97,8 @@
       { "id": "need", "source": "needs", "method": "prose" },
       { "id": "claims", "source": "claims", "method": "evidence-list" },
       { "id": "evidence", "source": "evidence", "method": "evidence-list" },
-      { "id": "services", "source": "organizations", "method": "collection-index" }
+      { "id": "services", "source": "organizations", "method": "collection-index" },
+      { "id": "projects", "source": "projects", "method": "media-list" }
     ]
   },
   {
@@ -112,6 +113,7 @@
     "id": "article-detail",
     "route": "/articles/:slug/",
     "sections": [
+      { "id": "article", "source": "articles", "method": "prose" },
       { "id": "evidence", "source": "evidence", "method": "evidence-list" },
       { "id": "findings", "source": "findings", "method": "finding-explanation" }
     ]

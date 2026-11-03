@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crossoverstockton.org/schemas/project.schema.json",
+  "title": "project",
+  "description": "project information definition. Schema describes source data, not page layout.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "intended_outcome": {
+      "type": "string",
+      "minLength": 1
+    },
+    "gap_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "organization_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "development_stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operational_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "funding_status": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_record_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "last_verified_at": {
+      "$ref": "./common.schema.json#/$defs/date"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "description",
+    "gap_ids",
+    "organization_ids",
+    "development_stage",
+    "operational_status",
+    "funding_status",
+    "evidence_record_ids"
+  ],
+  "additionalProperties": true
+}
