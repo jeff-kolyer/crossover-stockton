@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { HeadingGroup, Stack } from "./layout";
 
 export function WorkspacePage({ title, subtitle, headingId, backLink, article = false, children }: {
   title: string;
@@ -11,11 +12,11 @@ export function WorkspacePage({ title, subtitle, headingId, backLink, article = 
   const Element = article ? "article" : "div";
   const Heading = article ? "h1" : "h2";
 
-  return <Element className="workspace-page">
+  return <Stack as={Element} className="workspace-page" space="content">
     {backLink && <p className="workspace-back">{backLink}</p>}
-    <header><Heading id={headingId}>{title}</Heading>{subtitle && <p>{subtitle}</p>}</header>
+    <HeadingGroup as="header"><Heading id={headingId}>{title}</Heading>{subtitle && <p>{subtitle}</p>}</HeadingGroup>
     {children}
-  </Element>;
+  </Stack>;
 }
 
 export function WorkspaceSection({ title, subtitle, headingId, children }: {
@@ -24,8 +25,8 @@ export function WorkspaceSection({ title, subtitle, headingId, children }: {
   headingId?: string;
   children: ReactNode;
 }) {
-  return <section className="workspace-section" aria-labelledby={headingId}>
-    <header><h2 id={headingId}>{title}</h2>{subtitle && <p>{subtitle}</p>}</header>
+  return <Stack as="section" className="workspace-section" aria-labelledby={headingId} space="content">
+    <HeadingGroup as="header"><h2 id={headingId}>{title}</h2>{subtitle && <p>{subtitle}</p>}</HeadingGroup>
     {children}
-  </section>;
+  </Stack>;
 }

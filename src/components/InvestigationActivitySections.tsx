@@ -4,6 +4,7 @@ import { navigateInternalLink } from "../lib/internalLink";
 import { recordLinkLabel } from "../lib/linkLabels";
 import type { EvidenceRecord } from "../types";
 import { InvestigationOrganizations } from "./InvestigationOrganizations";
+import { ActivityRecord, HeadingGroup, QuestionGroup, RecordList } from "./layout";
 
 const dateLabel = (date?: string | null) => date
   ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${date.slice(0, 10)}T12:00:00`))
@@ -48,8 +49,8 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
 
   return <div className="workspace-page investigation-activity-page">
     <section className="investigation-activity-work" aria-labelledby="recorded-activity-title">
-      <h2 id="recorded-activity-title">Activity</h2>
-      <p>What we've done to answer these questions.</p>
+      <HeadingGroup><h2 id="recorded-activity-title">Activity</h2>
+        <p>What we've done to answer these questions.</p></HeadingGroup>
       {dogActivityQuestions.map((question, index) => {
         const questionActivities = question.activityIds.map((id) => activityById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
         const questionReports = question.reportIds.map((id) => reportById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
@@ -61,7 +62,7 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
         const count = primary.length || related.length;
         const countLabel = primary.length ? `recorded ${count === 1 ? "activity" : "activities"}` : `related ${count === 1 ? "record" : "records"}`;
         const isExpanded = expanded.has(question.id);
-        return <section id={question.id} className="investigation-activity-question" aria-labelledby={`${question.id}-title`} key={question.id}>
+        return <QuestionGroup id={question.id} className="investigation-activity-question" aria-labelledby={`${question.id}-title`} key={question.id}>
           <button type="button" className="activity-question-toggle" aria-expanded={isExpanded} aria-controls={`${question.id}-records`} onClick={() => setExpanded((current) => {
             const next = new Set(current);
             if (next.has(question.id)) next.delete(question.id);
@@ -76,15 +77,15 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
           </button>
           <p className="activity-question-findings"><a href={`/work/dogs/findings/#${question.id}`} aria-label={`See findings: ${question.title}`} onClick={(event) => navigateInternalLink(event, () => onOpenFindings(question.id))}>See findings</a></p>
           <div id={`${question.id}-records`} className="activity-question-records" hidden={!isExpanded}>
-            {primary.length > 0 && <div className="record-list activity-record-list">{primary.map((record) => <article id={record.id} key={record.id}>
+            {primary.length > 0 && <RecordList className="record-list activity-record-list">{primary.map((record) => <ActivityRecord id={record.id} key={record.id}>
               <h4><time dateTime={occurredAt(record)?.slice(0, 10)}>{dateLabel(occurredAt(record))}</time> · {record.title}</h4>
               <p>{record.summary}</p>
               <p><a href={record.record_type === "field_report" ? reportHref(record) : activityHref(record)} onClick={(event) => navigateInternalLink(event, () => record.record_type === "field_report" ? onOpenReport(record.id) : openActivity(record))}>{recordLinkLabel(record)}</a></p>
-            </article>)}</div>}
+            </ActivityRecord>)}</RecordList>}
             {related.length > 0 && <p className="investigation-activity-related"><strong>Related recorded work:</strong> {related.map((record, relatedIndex) => <span key={record.id}>{relatedIndex > 0 && "; "}{recordLink(record)}</span>)}</p>}
             {question.id === "question-care" && <InvestigationOrganizations onOpenActivity={onOpenActivity} />}
           </div>
-        </section>;
+        </QuestionGroup>;
       })}
     </section>
   </div>;

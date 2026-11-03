@@ -3,26 +3,22 @@
   color: #0b57d0;
 }
 
-.investigation-google .map-filters {
-  margin-bottom: 12px;
-}
-
 .investigation-google .plain-action-button.is-pill > span {
-  padding: 12px 10px;
+  padding: var(--space-3) var(--space-2);
 }
 
 .investigation-google .record-list {
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .investigation-google .record-list > button {
-  padding: 12px;
+  padding: var(--space-3);
   border: 1px solid #dadce0;
   border-radius: 12px;
 }
 
 .investigation-google .detail-heading .plain-action-button.is-compact {
-  padding: 11px;
+  padding: var(--space-2);
   border-radius: 50%;
 }
 

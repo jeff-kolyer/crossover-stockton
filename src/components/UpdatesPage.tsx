@@ -6,6 +6,7 @@ import { updateTypeLabel } from "../lib/updatePresentation";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
+import { ActivityRecord, HeadingGroup, RecordList } from "./layout";
 import type { EvidenceRecord, GapRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
@@ -25,24 +26,24 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
     <main className="public-site gap-updates-page gap-page">
       <PublicNav onNavigate={onNavigate} />
 
-      <section className="gap-history-header public-document">
+      <HeadingGroup as="section" className="gap-history-header public-document">
         <h1>Updates</h1>
         <p>Public reports, local developments, and new information about the needs we're tracking in Stockton.</p>
-      </section>
+      </HeadingGroup>
 
       <section className="gap-history-timeline public-document" aria-label="Crossover update history">
-          <div className="gap-history-feed-list">
+          <RecordList separated className="gap-history-feed-list">
             {updateRecords.map((record) => {
               const relatedGaps = gaps.filter((gap) => record.gap_ids.includes(gap.id));
               return (
-                <article className={`gap-history-item is-${record.record_type}`} key={record.id}>
+                <ActivityRecord className={`gap-history-item is-${record.record_type}`} key={record.id}>
                   <div className="gap-history-feed-meta">
                     <time>{formatDate(record.published_at || record.checked_at)}</time>
                     {" · "}
                     <span>{updateTypeLabel(record)}</span>
                   </div>
-                  <h2>{record.title}</h2>
-                  <p>{record.summary}</p>
+                  <HeadingGroup><h2>{record.title}</h2>
+                    <p>{record.summary}</p></HeadingGroup>
                   {relatedGaps.length > 0 && (
                     <div className="gap-history-related-gaps">
                       <strong>Related gaps:</strong>
@@ -64,10 +65,10 @@ export function UpdatesPage({ onNavigate, onOpenGap }: UpdatesPageProps) {
                       </a>
                     )}
                   </div>
-                </article>
+                </ActivityRecord>
               );
             })}
-          </div>
+          </RecordList>
       </section>
 
       <PublicFooter active="updates" onNavigate={onNavigate} />

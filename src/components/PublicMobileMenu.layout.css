@@ -35,7 +35,7 @@
   display: grid;
   place-items: start center;
   overflow-y: auto;
-  padding: 18px;
+  padding: var(--space-3);
   background: #050c0a8a;
 }
 
@@ -71,7 +71,7 @@
 
 .public-menu-header,
 .public-menu-location {
-  padding: 14px 20px;
+  padding: var(--space-3);
   border-bottom: 1px solid #ddd;
 }
 
@@ -85,7 +85,7 @@
   border: 0;
   background: none;
   color: inherit;
-  font-size: 26px;
+  font-size: var(--type-icon-large-size);
   line-height: 1;
 }
 

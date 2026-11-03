@@ -1,4 +1,5 @@
 /* Shared public header, menu, and footer. The Work application has no .public-site root. */
+.public-site { display: grid; align-content: start; gap: var(--space-4); }
 .public-site .public-nav {
   position: relative;
   z-index: 5;
@@ -9,8 +10,7 @@
   width: 100%;
   max-width: none;
   min-height: 62px;
-  margin: 0 0 8px;
-  padding: 9px max(38px, calc((100% - 1600px) / 2));
+  padding: var(--space-2) var(--layout-chrome-rail-gutter);
   background: #08110f;
   color: #fff;
 }
@@ -19,7 +19,7 @@
 .public-site .footer-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-2);
   color: #fff;
   text-decoration: none;
 }
@@ -28,21 +28,21 @@
 .public-site .footer-logo img { width: 26px; height: 26px; object-fit: contain; }
 .public-site .public-logo span,
 .public-site .footer-logo span {
-  font-family: "Avenir Next", Montserrat, Arial, sans-serif;
-  font-weight: 700;
-  letter-spacing: .2em;
+  font-family: var(--font-brand);
+  font-weight: var(--type-brand-weight);
+  letter-spacing: var(--type-brand-tracking);
   text-transform: uppercase;
 }
-.public-site .public-logo span { font-size: .82rem; }
+.public-site .public-logo span { font-size: var(--type-logo-size); }
 
 .public-site .public-nav nav {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-  gap: clamp(12px, 2vw, 28px);
+  gap: clamp(var(--space-2), 2vw, var(--space-4));
   min-width: 0;
   border-left: 1px solid #ffffff40;
-  padding-left: 30px;
+  padding-left: var(--space-4);
 }
 
 .public-site .public-nav nav button,
@@ -57,7 +57,7 @@
 .public-site .public-nav nav button {
   min-height: 44px;
   padding: 0;
-  font-size: .82rem;
+  font-size: var(--type-logo-size);
   white-space: nowrap;
 }
 .public-site .public-nav nav button.is-active,
@@ -66,14 +66,14 @@
   min-height: 34px;
   border: 1px solid #ffffff47;
   border-radius: 999px;
-  padding: 0 12px;
-  font-size: .82rem;
+  padding: 0 var(--space-3);
+  font-size: var(--type-logo-size);
   white-space: nowrap;
 }
 .public-site .public-mobile-menu { display: none; }
 
 @media (min-width: 901px) {
-  .public-site .public-logo { gap: 9px; }
+  .public-site .public-logo { gap: var(--space-2); }
 }
 
 .public-site .public-footer {
@@ -82,30 +82,30 @@
   align-items: center;
   gap: 24px;
   min-height: 78px;
-  margin: 40px 0 0;
-  padding: 16px max(38px, calc((100% - 1600px) / 2));
+  padding: var(--space-3) var(--layout-chrome-rail-gutter);
   background: #10181b;
   color: #fff;
 }
-.public-site .public-footer .footer-logo span { font-size: .78rem; }
+.public-site .public-footer .footer-logo span { font-size: var(--type-footer-logo-size); }
 .public-site .public-footer > span,
 .public-site .public-footer p,
-.public-site .public-footer nav a { margin: 0; color: #ffffffdb; font-size: .82rem; }
+.public-site .public-footer nav a { color: #ffffffdb; font-size: var(--type-logo-size); }
 .public-site .public-footer p { justify-self: center; }
 .public-site .public-footer nav { display: flex; gap: 24px; }
 .public-site .public-footer nav a { text-decoration: none; }
 .public-site .public-footer nav a:hover { text-decoration: underline; }
 .public-site .public-bottom-nav { display: none; }
+.public-site .public-bottom-nav a { font-size: var(--type-nav-compact-size); }
 
 @media (max-width: 900px) {
-  .public-site .public-nav { grid-template-columns: 44px minmax(0, 1fr) auto; gap: 10px; padding: 9px 20px; }
+  .public-site .public-nav { grid-template-columns: 44px minmax(0, 1fr) auto; gap: var(--space-2); padding: var(--space-2) var(--space-3); }
   .public-site .public-mobile-menu { display: grid; }
   .public-site .public-logo { justify-self: center; min-width: 0; }
   .public-site .public-logo img { width: 26px; height: 26px; }
-  .public-site .public-logo span { font-size: .72rem; letter-spacing: .17em; }
+  .public-site .public-logo span { font-size: var(--type-logo-compact-size); letter-spacing: var(--type-brand-compact-tracking); }
   .public-site .public-nav nav { display: none; }
-  .public-site .public-nav .location-pill { display: block; border: 0; border-radius: 0; padding: 0; font-size: .82rem; font-weight: 400; }
-  .public-site .public-footer { grid-template-columns: 1fr; justify-items: center; gap: 10px; padding: 24px 20px; text-align: center; }
+  .public-site .public-nav .location-pill { display: block; border: 0; border-radius: 0; padding: 0; font-weight: 400; }
+  .public-site .public-footer { grid-template-columns: 1fr; justify-items: center; gap: var(--space-2); padding: var(--space-4) var(--space-3); text-align: center; }
   .public-site .public-footer p { justify-self: center; }
   .public-site .public-bottom-nav {
     position: fixed;
@@ -123,17 +123,16 @@
     min-width: 0;
     min-height: 62px;
     color: #17221b;
-    font-size: .8rem;
     text-decoration: none;
   }
   .public-site .public-bottom-nav a[aria-current="page"] { color: #1f6b34; font-weight: 700; }
-  .public-site { padding-bottom: 62px; }
+  .public-site { padding-bottom: calc(var(--layout-bottom-nav-height) + var(--space-2) + env(safe-area-inset-bottom)); }
 }
 
 @media (max-width: 520px) {
-  .public-site .public-nav { padding: 9px 16px; }
-  .public-site .location-pill { font-size: .72rem; }
-  .public-site .public-logo { gap: 6px; }
+  .public-site .public-nav { padding: var(--space-2) var(--space-3); }
+  .public-site .location-pill { font-size: var(--type-logo-compact-size); }
+  .public-site .public-logo { gap: var(--space-2); }
 }
 
 @media (max-width: 260px) {
@@ -162,7 +161,7 @@
   gap: 8px;
   width: 100%;
   min-height: 62px;
-  padding: 9px 16px;
+  padding: var(--space-2) var(--space-3);
 }
 
 .public-nav--investigation .public-mobile-menu {
@@ -175,7 +174,7 @@
 .public-nav--investigation .public-logo {
   justify-self: center;
   min-width: 0;
-  gap: 6px;
+  gap: var(--space-2);
   color: #fff;
   text-decoration: none;
 }
@@ -187,10 +186,10 @@
 }
 
 .public-nav--investigation .public-logo span {
-  font-family: "Avenir Next", Montserrat, Arial, sans-serif;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .17em;
+  font-family: var(--font-brand);
+  font-size: var(--type-logo-compact-size);
+  font-weight: var(--type-brand-weight);
+  letter-spacing: var(--type-brand-compact-tracking);
   text-transform: uppercase;
 }
 
@@ -204,7 +203,7 @@
   border-radius: 0;
   background: none;
   color: #fff;
-  font-size: .72rem;
+  font-size: var(--type-logo-compact-size);
   font-weight: 400;
   white-space: nowrap;
 }

@@ -5,6 +5,7 @@ import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
+import { HeadingGroup, RecordList, SectionHeader, Stack } from "./layout";
 import type { GapRecord, StoryEvidence, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
@@ -26,10 +27,10 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
     return (
       <main className="public-site story-detail-page public-home">
         <PublicStoryNav onNavigate={onNavigate} />
-        <section className="story-detail-shell story-not-found public-document">
+        <HeadingGroup as="section" className="story-detail-shell story-not-found public-document">
           <h1>We could not find that story.</h1>
           <p>This story may have moved, been retired, or not been added to the public data yet.</p>
-        </section>
+        </HeadingGroup>
         <PublicFooter active="connection" onNavigate={onNavigate} />
       </main>
     );
@@ -45,66 +46,66 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
 
       <article className="story-detail-shell public-document">
         <section className="story-opening">
-          <div className="story-opening-copy">
+          <HeadingGroup className="story-opening-copy">
             <h1>{story.title}</h1>
             <p className="story-summary">{story.summary}</p>
             {story.sign_of_being && <p className="story-sign-line">{story.sign_of_being}</p>}
-          </div>
+          </HeadingGroup>
           <img src={image} alt="" aria-hidden="true" loading="eager" decoding="sync" fetchPriority="high" />
         </section>
 
         {(story.body || (story.connection && story.connection.length > 1)) && (
           <div className="story-meaning-row">
             {story.body && (
-              <section className="story-body-block">
+              <HeadingGroup as="section" className="story-body-block">
                 <h2>What is happening here</h2>
                 <p>{story.body}</p>
-              </section>
+              </HeadingGroup>
             )}
 
             {story.connection && story.connection.length > 1 && (
-              <section className="story-connection-block">
-                <h2>The connection</h2>
+              <Stack as="section" className="story-connection-block" space="content">
+                <SectionHeader><h2>The connection</h2></SectionHeader>
                 <ConnectionFlow items={story.connection} />
-              </section>
+              </Stack>
             )}
           </div>
         )}
 
         <div className="story-lower-grid">
           {story.fruit && story.fruit.length > 0 && (
-            <section className="story-panel story-fruit-panel">
-              <h2>The fruit</h2>
+            <Stack as="section" className="story-panel story-fruit-panel" space="content">
+              <SectionHeader><h2>The fruit</h2></SectionHeader>
               <ul>
                 {story.fruit.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-            </section>
+            </Stack>
           )}
 
           {story.moments && story.moments.length > 0 && (
-            <section className="story-panel story-moments-panel">
-              <h2>Moments</h2>
-              <div className="story-moment-grid">
+            <Stack as="section" className="story-panel story-moments-panel" space="content">
+              <SectionHeader><h2>Moments</h2></SectionHeader>
+              <RecordList className="story-moment-grid">
                 {story.moments.map((moment) => (
-                  <article className="story-moment-card" key={`${moment.title}-${moment.source_url ?? ""}`}>
-                    <h3>{moment.title}</h3>
-                    <p>{moment.text}</p>
+                  <Stack as="article" className="story-moment-card" space="content" key={`${moment.title}-${moment.source_url ?? ""}`}>
+                    <HeadingGroup><h3>{moment.title}</h3>
+                      <p>{moment.text}</p></HeadingGroup>
                     {moment.source_url && (
                       <a href={moment.source_url} target="_blank" rel="noreferrer">
                         {moment.source_label || "Source"}
                       </a>
                     )}
-                  </article>
+                  </Stack>
                 ))}
-              </div>
-            </section>
+              </RecordList>
+            </Stack>
           )}
 
           {evidence.length > 0 && (
-            <section className="story-panel story-sources-panel">
-              <h2>Sources</h2>
+            <Stack as="section" className="story-panel story-sources-panel" space="content">
+              <SectionHeader><h2>Sources</h2></SectionHeader>
               <ul className="story-source-list">
                 {evidence.map((source) => (
                   <li key={source.url}>
@@ -113,7 +114,7 @@ export function StoryDetailPage({ slug, onNavigate, onOpenGap }: StoryDetailPage
                   </li>
                 ))}
               </ul>
-            </section>
+            </Stack>
           )}
         </div>
 

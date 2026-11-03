@@ -120,7 +120,7 @@
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  line-height: 1.2;
+  line-height: var(--type-list-title-leading);
 }
 
 .location-list button > small,
@@ -133,7 +133,7 @@
 .location-status,
 .location-facts dt,
 .location-coordinate-note {
-  font-size: 14px;
+  font-size: var(--type-small-size);
 }
 
 /* Other map surfaces need a definite height. */
@@ -235,8 +235,11 @@
   padding: 0;
   box-shadow: none;
   color: #0f172a;
-  font: 500 13px/1.15 "Noto Sans", "Segoe UI", Arial, sans-serif;
-  letter-spacing: -.01em;
+  font-family: var(--font-map-label);
+  font-size: var(--type-map-label-size);
+  font-weight: var(--type-map-label-weight);
+  line-height: var(--type-map-label-leading);
+  letter-spacing: var(--type-map-label-tracking);
   -webkit-text-stroke: 2.5px rgba(255, 255, 255, .95);
   paint-order: stroke fill;
   text-shadow: none;

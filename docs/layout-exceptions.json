@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Home landing rail inset",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .home-landing",
+    "property": "padding-inline",
+    "value": "var(--home-pad)",
+    "reason": "The full width desktop rail has no inset while the narrow rail retains 16px gutters.",
+    "owner": "Home landing Page rail",
+    "responsive": true
+  },
+  {
+    "name": "Home destinations rail bleed",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .home-landing-destinations",
+    "property": "margin-inline",
+    "value": "calc(-1 * var(--home-pad))",
+    "reason": "The destination border and background extend to the full rail width while its text keeps the page gutter.",
+    "owner": "Home destinations rail",
+    "responsive": true
+  },
+  {
+    "name": "Home destinations inset",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .home-landing-destinations",
+    "property": "padding",
+    "value": "var(--space-4) var(--home-pad)",
+    "reason": "The destination text aligns to the same responsive page gutter as the home cards.",
+    "owner": "Home destinations rail",
+    "responsive": true
+  },
+  {
+    "name": "Compact home display size",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .home-hero-title",
+    "property": "font-size",
+    "value": "var(--type-display-compact-size)",
+    "reason": "The existing home Display treatment uses a compact size below 820px and remains a named exception to semantic heading roles.",
+    "owner": "Home Display typography",
+    "responsive": true
+  },
+  {
+    "name": "Compact home display leading",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .home-hero-title",
+    "property": "line-height",
+    "value": "var(--type-display-compact-leading)",
+    "reason": "The compact home Display treatment preserves its established line height.",
+    "owner": "Home Display typography",
+    "responsive": true
+  },
+  {
+    "name": "Compact home subtitle",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .home-hero-subtitle",
+    "property": "font-size",
+    "value": "var(--type-body-size)",
+    "reason": "The existing home hero subtitle returns to Body size below 520px.",
+    "owner": "Home Display typography",
+    "responsive": true
+  },
+  {
+    "name": "Responsive desktop navigation cluster",
+    "file": "src/styles/public-chrome.css",
+    "selector": ".public-site .public-nav nav",
+    "property": "gap",
+    "value": "clamp(var(--space-2), 2vw, var(--space-4))",
+    "reason": "The desktop navigation row contracts continuously to fit intermediate widths before it is replaced by the mobile menu.",
+    "owner": "Public navigation Row",
+    "responsive": true
+  },
+  {
+    "name": "Compact public logo",
+    "file": "src/styles/public-chrome.css",
+    "selector": ".public-site .public-logo span",
+    "property": "font-size",
+    "value": "var(--type-logo-compact-size)",
+    "reason": "The existing compact header needs a shorter brand wordmark beside its location label.",
+    "owner": "Public navigation brand",
+    "responsive": true
+  },
+  {
+    "name": "Compact public location label",
+    "file": "src/styles/public-chrome.css",
+    "selector": ".public-site .location-pill",
+    "property": "font-size",
+    "value": "var(--type-logo-compact-size)",
+    "reason": "The narrow header preserves the existing location label fit at 520px and below.",
+    "owner": "Public navigation location control",
+    "responsive": true
+  },
+  {
+    "name": "Home image fade geometry",
+    "file": "src/styles/home.css",
+    "selector": ".crossover-home .public-hero-shade",
+    "property": "--hero-fade-shift",
+    "value": "clamp(0px, calc(10vw - 90px), 70px)",
+    "reason": "The translucent edge tracks the home hero image at different wide viewport widths.",
+    "owner": "Home hero image treatment",
+    "responsive": true
+  },
+  {
+    "name": "Document rail width",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-width-document",
+    "value": "760px",
+    "reason": "Existing editorial reading rail maximum width.",
+    "owner": "Page document width role",
+    "responsive": false
+  },
+  {
+    "name": "Wide rail width",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-width-wide",
+    "value": "960px",
+    "reason": "Existing public section and Action content maximum width.",
+    "owner": "Page wide width role",
+    "responsive": false
+  },
+  {
+    "name": "Home rail width",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-width-home",
+    "value": "1120px",
+    "reason": "Existing home landing maximum width.",
+    "owner": "Page home width role",
+    "responsive": false
+  },
+  {
+    "name": "Investigation rail width",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-width-investigation",
+    "value": "900px",
+    "reason": "Existing investigation header and sheet content maximum width.",
+    "owner": "Page investigation width role",
+    "responsive": false
+  },
+  {
+    "name": "Work rail width",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-width-work",
+    "value": "1100px",
+    "reason": "Existing outer Work document maximum width outside the compact investigation workspace.",
+    "owner": "Page work width role",
+    "responsive": false
+  },
+  {
+    "name": "Index rail width",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-width-index",
+    "value": "640px",
+    "reason": "Existing narrow index reading rail.",
+    "owner": "Page index width role",
+    "responsive": false
+  },
+  {
+    "name": "Chrome wide rail alignment",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-chrome-rail-gutter",
+    "value": "max(var(--space-4), calc((100% - 1600px) / 2))",
+    "reason": "Header and footer align within the existing 1600px chrome rail while retaining edge clearance.",
+    "owner": "Public chrome Page rail",
+    "responsive": true
+  },
+  {
+    "name": "Fixed bottom navigation clearance",
+    "file": "src/styles/layout-system.css",
+    "selector": ":root",
+    "property": "--layout-bottom-nav-height",
+    "value": "62px",
+    "reason": "The mobile navigation has a fixed 62px hit area and page content needs matching bottom clearance.",
+    "owner": "Public mobile navigation",
+    "responsive": true
+  },
+  {
+    "name": "Resizable map panel width",
+    "file": "src/styles/map.css",
+    "selector": ".map-workspace",
+    "property": "--crossover-panel-width",
+    "value": "clamp(280px, var(--crossover-expanded-panel-width, min(480px, 42vw)), calc(100% - 320px))",
+    "reason": "The map keeps a usable minimum area while the investigation panel can be dragged.",
+    "owner": "Resizable map workspace",
+    "responsive": true
+  },
+  {
+    "name": "Wide resizable map panel width",
+    "file": "src/styles/map.css",
+    "selector": ".map-workspace",
+    "property": "--crossover-panel-width",
+    "value": "clamp(600px, var(--crossover-expanded-panel-width, 40%), calc(100% - 600px))",
+    "reason": "Wide screens reserve at least 600px for the map and for the panel.",
+    "owner": "Resizable map workspace",
+    "responsive": true
+  },
+  {
+    "name": "Mobile sheet grip height",
+    "file": "src/styles/map.css",
+    "selector": ".map-workspace",
+    "property": "--sheet-grip-height",
+    "value": "32px",
+    "reason": "The drag grip occupies a fixed region used by sheet position calculations.",
+    "owner": "Mobile map sheet geometry",
+    "responsive": true
+  },
+  {
+    "name": "Mobile sheet peek height",
+    "file": "src/styles/map.css",
+    "selector": ".map-workspace",
+    "property": "--sheet-peek-height",
+    "value": "128px",
+    "reason": "The compact sheet leaves a readable preview above the map.",
+    "owner": "Mobile map sheet geometry",
+    "responsive": true
+  }
+]

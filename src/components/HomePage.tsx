@@ -8,6 +8,7 @@ import { navigateInternalLink } from "../lib/internalLink";
 import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import { HomeLanding } from "./HomeLanding";
+import { HeadingGroup, RecordList } from "./layout";
 import type { GapRecord, StoryRecord } from "../types";
 
 interface HomePageProps {
@@ -79,9 +80,11 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
         <div className="public-hero-shade" />
         {!isHome && navigation}
 
-        <div className={`public-hero-copy${isHome ? "" : " public-document"}`}>
-          {isHome ? <p className="home-hero-title">See clearly.<br className="home-hero-title-break" /> Act locally.</p> : <h1>{copy.title}</h1>}
-          <p className={isHome ? "home-hero-subtitle" : undefined}>{copy.text}</p>
+        <div className="public-hero-copy">
+          <HeadingGroup>
+            {isHome ? <p className="home-hero-title">See clearly.<br className="home-hero-title-break" /> Act locally.</p> : <h1>{copy.title}</h1>}
+            <p className={isHome ? "home-hero-subtitle" : undefined}>{copy.text}</p>
+          </HeadingGroup>
           {isHome && (
             <div className="hero-action-row">
               <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>See what we're doing</PublicPrimaryAction>
@@ -96,7 +99,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
         <div className="section-intro">
           <small className="gap-status-guide"><span> Investigating: active Crossover work.</span><span> Identified: not yet investigated by Crossover.</span></small>
         </div>
-        <div className="gap-card-grid">
+        <RecordList separated className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
             const latestActivity = latestGapActivity(gap);
             const thumbnailImage = gap.thumbnail_image || gap.artwork;
@@ -133,12 +136,12 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
             </a>
             );
           })}
-        </div>
+        </RecordList>
         <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
       </section>}
 
       {page === "connection" && <section id="connection" className="public-band public-story-band">
-        <div className="story-grid">
+        <RecordList separated className="story-grid">
           {visibleStories.map((story, index) => (
             <a className="story-card" key={story.id} href={`/stories/${story.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenStory(story.slug))}>
               <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading={page === "connection" && index < 3 ? "eager" : "lazy"} decoding="sync" />
@@ -149,7 +152,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
               </div>
             </a>
           ))}
-        </div>
+        </RecordList>
         <p className="public-back-link"><a href="/" onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>Back to home</a></p>
       </section>}
 

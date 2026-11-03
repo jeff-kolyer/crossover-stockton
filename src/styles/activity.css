@@ -4,7 +4,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .detail-heading > div,
@@ -22,9 +22,9 @@
 
 .record-list button {
   display: grid;
-  gap: 2px;
+  gap: var(--space-1);
   width: 100%;
-  padding: 8px 2px;
+  padding: var(--space-2) var(--space-1);
   border: 0;
   border-bottom: 1px solid #e2e4e6;
   background: #fff;
@@ -39,7 +39,7 @@
 
 .task-list button,
 .location-list button {
-  padding: 12px 2px;
+  padding: var(--space-3) var(--space-1);
   border-bottom: 0;
 }
 
@@ -50,9 +50,9 @@
 
 .record-list > article {
   display: grid;
-  gap: 2px;
+  gap: var(--space-2);
   min-width: 0;
-  padding: 8px 2px;
+  padding: var(--space-2) var(--space-1);
 }
 
 .record-list > article + article {
@@ -81,15 +81,16 @@
   color: #5f6368;
 }
 
+.investigation-activity-work,
+.investigation-organizations { display: grid; gap: var(--space-3); }
+
 .investigation-organizations > article + article {
-  margin-top: 16px;
-  padding-top: 16px;
+  padding-top: var(--space-3);
   border-top: 1px solid #e2e4e6;
 }
 
 .investigation-activity-question + .investigation-activity-question {
-  margin-top: 16px;
-  padding-top: 16px;
+  padding-top: var(--space-3);
   border-top: 1px solid #e2e4e6;
 }
 
@@ -111,25 +112,21 @@
   min-width: 0;
 }
 
-.activity-question-copy strong,
-.activity-question-copy > span {
-  display: block;
-}
+.activity-question-copy { display: grid; gap: var(--space-1); }
 
 .activity-question-copy strong {
-  font-size: 16px;
+  font-size: var(--type-body-size);
 }
 
 .activity-question-copy > span {
-  margin-top: 4px;
   color: #5f6368;
 }
 
 .activity-question-chevron {
   flex: none;
+  align-self: center;
   width: 8px;
   height: 8px;
-  margin: 8px 4px 0 0;
   border-right: 1.5px solid #5f6368;
   border-bottom: 1.5px solid #5f6368;
   transform: rotate(45deg);
@@ -140,11 +137,12 @@
 }
 
 .investigation-activity-question > .activity-question-findings {
-  margin: 8px 0 0;
+  color: inherit;
 }
 
 .activity-question-records {
-  margin-top: 16px;
+  display: grid;
+  gap: var(--space-3);
 }
 
 .activity-question-records[hidden] {

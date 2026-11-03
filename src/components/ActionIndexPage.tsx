@@ -5,6 +5,7 @@ import { PublicSiteNav } from "./PublicSiteNav";
 import { PublicFooter } from "./PublicFooter";
 import { ActionProgressStats } from "./ActionProgressStats";
 import { ArrowTextLink } from "./ArrowTextLink";
+import { HeadingGroup, Page, RecordList } from "./layout";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 
@@ -19,17 +20,17 @@ export function ActionIndexPage({ onNavigate, onOpenTasks, onOpenInvestigation }
     <main className="public-site public-home action-index-page">
       <PublicSiteNav active="action" onNavigate={onNavigate} variant="dark" />
 
-      <div className="action-index-canvas public-document">
-        <section className="action-index-intro" aria-labelledby="action-index-title">
+      <Page width="wide" className="action-index-canvas public-document">
+        <HeadingGroup as="section" className="action-index-intro" aria-labelledby="action-index-title">
           <h1 id="action-index-title">Taking action. Learning from reality.</h1>
           <p>We're investigating real problems in Stockton by showing up, testing what works, and documenting what happens. Here's what we're doing now.</p>
-        </section>
+        </HeadingGroup>
 
         <section className="action-index-investigations" aria-labelledby="action-index-investigations-title">
-          <div className="action-index-investigations-intro">
+          <HeadingGroup className="action-index-investigations-intro">
             <h2 id="action-index-investigations-title">Investigations</h2>
             <p>Explore what we are learning in Stockton.</p>
-          </div>
+          </HeadingGroup>
           <a className="action-index-investigation-card" href="/work/dogs/activity/#overview" onClick={(event) => navigateInternalLink(event, onOpenInvestigation)}>
             <img src="/images/reality/dog-thumb.jpg" alt="" width="120" height="120" />
             <div className="action-index-investigation-copy">
@@ -43,6 +44,7 @@ export function ActionIndexPage({ onNavigate, onOpenTasks, onOpenInvestigation }
 
         <section className="action-index-current" aria-labelledby="action-index-current-title">
           <h2 id="action-index-current-title">Current actions</h2>
+          <RecordList separated className="action-index-feature-list">
           {activeCrossoverActions.map((action) => <article className="action-index-feature" key={action.id}>
             <img
               className="action-index-image"
@@ -54,16 +56,17 @@ export function ActionIndexPage({ onNavigate, onOpenTasks, onOpenInvestigation }
               decoding="async"
             />
             <div className="action-index-feature-copy">
-              <div className="action-index-feature-description">
+              <HeadingGroup className="action-index-feature-description">
                 <h3>{action.title}</h3>
                 <p>{action.summary}</p>
-              </div>
+              </HeadingGroup>
               <ActionProgressStats status={action.status} />
               <p className="action-index-explore"><ArrowTextLink className="arrow-text-link--green" href={action.href} onClick={(event) => navigateInternalLink(event, onOpenTasks)}>{action.buttonLabel}</ArrowTextLink></p>
             </div>
           </article>)}
+          </RecordList>
         </section>
-      </div>
+      </Page>
 
       <PublicFooter active="action" onNavigate={onNavigate} />
     </main>

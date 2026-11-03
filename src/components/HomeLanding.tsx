@@ -5,6 +5,7 @@ import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
 import { ArrowTextLink } from "./ArrowTextLink";
+import { HeadingGroup, Stack } from "./layout";
 import type { GapRecord, StoryRecord } from "../types";
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
@@ -40,10 +41,14 @@ export function HomeLanding({ onNavigate, onOpenGap, onOpenOverview, onOpenGapSe
       <div className="home-landing-needs">{needs.map((gap) => <article className="home-landing-need" key={gap.id}>
         <span className="home-landing-need-image"><img src={homeGapImages[gap.id] || gap.thumbnail_image || gap.artwork} alt="" loading="lazy" /></span>
         <div className="home-landing-need-body">
-          <span className="home-landing-status" data-status={gap.investigation_status}>{investigationStatusLabel(gap.investigation_status)}</span>
-          <h3><a className="home-landing-need-main-link" href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>{gap.title}</a></h3>
-          <p className="home-landing-need-summary">{gap.summary}</p>
-          {gap.id === "dogs-safe-placement" && <ArrowTextLink className="home-landing-need-more arrow-text-link--green" href="/work/dogs/activity/#overview" onClick={(event) => navigateInternalLink(event, onOpenOverview)}>Find out more</ArrowTextLink>}
+          <Stack className="home-landing-need-heading" space="related">
+            <span className="home-landing-status" data-status={gap.investigation_status}>{investigationStatusLabel(gap.investigation_status)}</span>
+            <h3><a className="home-landing-need-main-link" href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>{gap.title}</a></h3>
+          </Stack>
+          <Stack className="home-landing-need-details" space="content">
+            <p className="home-landing-need-summary">{gap.summary}</p>
+            {gap.id === "dogs-safe-placement" && <ArrowTextLink className="home-landing-need-more arrow-text-link--green" href="/work/dogs/activity/#overview" onClick={(event) => navigateInternalLink(event, onOpenOverview)}>Find out more</ArrowTextLink>}
+          </Stack>
         </div>
       </article>)}</div>
       <ArrowTextLink className="home-landing-section-link arrow-text-link--green" href="/reality/" onClick={(event) => navigateInternalLink(event, () => onNavigate("reality"))}>Explore all needs</ArrowTextLink>
@@ -51,7 +56,7 @@ export function HomeLanding({ onNavigate, onOpenGap, onOpenOverview, onOpenGapSe
 
     {dogGap && <section className="home-landing-investigation" aria-labelledby="home-investigation-title">
       <img src="/images/home/dog-shelter.jpg" alt="" loading="lazy" />
-      <div className="home-landing-investigation-copy"><p>Investigation · Stockton</p><h2 id="home-investigation-title">Why do so many dogs struggle to reach care?</h2><p>Stockton's animal shelter reports regular overcrowding. We're examining what happens when someone finds a dog and tries to help.</p><PublicPrimaryAction href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}>Explore what we're learning</PublicPrimaryAction></div>
+      <Stack className="home-landing-investigation-copy" space="content"><p>Investigation · Stockton</p><HeadingGroup><h2 id="home-investigation-title">Why do so many dogs struggle to reach care?</h2><p>Stockton's animal shelter reports regular overcrowding. We're examining what happens when someone finds a dog and tries to help.</p></HeadingGroup><div><PublicPrimaryAction href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}>Explore what we're learning</PublicPrimaryAction></div></Stack>
       <nav className="home-landing-investigation-links" aria-label="Explore the investigation">
         <a href="/work/dogs/findings/" onClick={(event) => navigateInternalLink(event, () => onOpenGapSection(dogGap.slug, "our-findings"))}><div><h3>Explore our findings</h3><p>What we're learning from the evidence</p></div></a>
         <a href="/work/dogs/map/" onClick={(event) => navigateInternalLink(event, () => onOpenWork("dogs-locations-map"))}><div><h3>Explore the map</h3><p>Places, reports, and firsthand observations</p></div></a>

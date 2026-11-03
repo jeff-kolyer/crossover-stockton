@@ -41,7 +41,7 @@ for (const [path, active] of [["", "tasks"], ["tasks/", "tasks"], ["activity/", 
   assert.ok(html.includes("shared-map"), `${path}: shared workspace map missing`);
 }
 const activity = await readFile(new URL("./work/dogs/activity/index.html", dist), "utf8");
-assert.ok(activity.includes('<div class="workspace-page investigation-activity-page"><section class="investigation-activity-work" aria-labelledby="recorded-activity-title"><h2 id="recorded-activity-title">Activity</h2>'), "Activity: page must begin with Activity");
+assert.ok(activity.includes('<h2 id="recorded-activity-title">Activity</h2>') && activity.indexOf('id="recorded-activity-title"') < activity.indexOf('id="question-extent"'), "Activity: page must begin with Activity");
 assert.ok(!activity.includes('id="investigation-about-title"') && !activity.includes('id="investigation-questions-title"'), "Activity: Overview content belongs in its detail view");
 assert.equal((activity.match(/class="activity-question-toggle" aria-expanded="false"/g) ?? []).length, 5, "Activity: all questions must start collapsed");
 let previousQuestion = activity.indexOf('id="recorded-activity-title"');

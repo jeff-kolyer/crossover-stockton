@@ -4,28 +4,22 @@ html:has(.public-site) {
   scrollbar-gutter: stable;
 }
 
-/* One heading rhythm across public pages, including cards and editorial entries. */
-.public-site h3 {
-  margin: 0 0 var(--space-2);
-}
-
-.public-site :is(h1, h2, h3) + p {
-  margin-top: 0;
-}
-
 .public-site .public-primary-action {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-2);
   min-height: 45px;
   border: 1px solid #1f6b34;
   border-radius: 6px;
   background: #1f6b34;
-  padding: 0 17px;
+  padding: 0 var(--space-3);
   box-shadow: none;
   color: #fff;
-  font: 700 .9rem/1.5 Inter, Roboto, Arial, sans-serif;
+  font-family: var(--font-body);
+  font-size: var(--type-control-size);
+  font-weight: var(--type-control-weight);
+  line-height: var(--type-control-leading);
   text-decoration: none;
   cursor: pointer;
 }
@@ -47,35 +41,35 @@ html:has(.public-site) {
 
 .is-section-page .public-hero-copy,
 .is-section-page .public-band,
-.action-index-page .action-index-canvas,
 .story-detail-page .story-detail-shell,
 .gap-updates-page > section {
   width: 100%;
-  max-width: 960px;
+  max-width: var(--layout-width-wide);
   margin-inline: auto;
-  padding: 16px;
+  padding-inline: var(--space-3);
 }
 
 .is-section-page .public-hero-copy {
   position: static;
+  display: grid;
+  gap: var(--space-1);
 }
 
 .is-section-page .public-hero-copy h1,
 .is-section-page .public-hero-copy p {
-  max-width: 760px;
+  max-width: var(--layout-width-document);
 }
 
 .is-section-page .public-band {
-  padding-top: 8px;
+  padding-top: 0;
 }
 
 .is-section-page .section-intro {
-  max-width: 760px;
-  margin-bottom: 24px;
+  max-width: var(--layout-width-document);
 }
 
 .is-section-page .public-back-link {
-  margin: 24px 0 0;
+  justify-self: start;
 }
 
 :is(.about-simple, .gap-reference-page) .public-entry,
@@ -109,17 +103,9 @@ html:has(.public-site) {
   object-fit: cover;
 }
 
-.is-reality-page .gap-card-grid,
-.is-connection-page .story-grid {
-  display: grid;
-  gap: 24px;
-}
-
 .is-reality-page .gap-card {
   column-gap: 24px;
   row-gap: 4px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid #dadce0;
   text-decoration: none;
 }
 
@@ -136,7 +122,15 @@ html:has(.public-site) {
 
 .is-reality-page .gap-card-body p,
 .is-connection-page .story-card p {
-  margin-bottom: 8px;
+  color: inherit;
+}
+
+.is-reality-page .gap-card-copy,
+.is-connection-page .story-card > div,
+:is(.about-simple, .gap-reference-page) .public-entry > .layout-heading-group {
+  display: grid;
+  align-content: start;
+  gap: var(--space-1);
 }
 
 .is-reality-page .gap-card-meta {
@@ -148,28 +142,25 @@ html:has(.public-site) {
   width: 100%;
   text-align: left;
   text-decoration: none;
-  border: 0;
   background: none;
-  padding: 0 0 24px;
-  border-bottom: 1px solid #dadce0;
 }
 
 .about-simple .about-simple-content,
 .gap-reference-page .gap-reference-article {
   width: 100%;
-  max-width: 960px;
+  max-width: var(--layout-width-wide);
   margin-inline: auto;
-  padding: 16px;
+  padding-inline: var(--space-3);
 }
 
 .about-simple .about-simple-section {
-  max-width: 760px;
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
 }
 
-.about-simple .about-simple-philosophy,
-.about-simple .about-simple-founder {
-  border-bottom: 1px solid #dadce0;
-  padding-bottom: 16px;
+.about-simple .about-simple-section {
+  max-width: var(--layout-width-document);
 }
 
 .about-simple .about-simple-actions {
@@ -180,13 +171,8 @@ html:has(.public-site) {
 }
 
 .gap-reference-page .gap-reference-article > section {
-  max-width: 760px;
+  max-width: var(--layout-width-document);
   margin-inline: auto;
-}
-
-.gap-reference-page .gap-reference-article > section.gap-reference-projects > p + h3 {
-  border-top: 1px solid #dadce0;
-  padding-top: 7px;
 }
 
 .gap-reference-page .gap-reference-article > section > button {
@@ -210,18 +196,15 @@ html:has(.public-site) {
 
 .about-simple .about-simple-ideas .public-entry img {
   height: calc(100% - 20px);
-  margin-top: 4px;
   aspect-ratio: auto;
 }
 
 .about-simple .about-simple-philosophy .public-entry {
-  display: flow-root;
+  display: grid;
 }
 
 .about-simple .about-simple-philosophy .public-entry img {
-  float: right;
-  width: 42%;
-  margin: 4px 0 8px 16px;
+  width: 100%;
 }
 
 .about-simple .about-simple-philosophy-full {
@@ -241,32 +224,20 @@ html:has(.public-site) {
 }
 
 .about-simple .about-simple-founder .public-entry {
-  display: flow-root;
+  display: grid;
+  grid-template-columns: 127px minmax(0, 1fr);
 }
 
 .about-simple .about-simple-founder .about-simple-founder-image {
-  float: left;
-  width: min(31.5%, 127px);
+  width: 127px;
   height: 132px;
-  margin: 4px 16px 8px 0;
   aspect-ratio: auto;
   object-position: center top;
 }
 
 .action-index-page .action-index-investigations {
   display: grid;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-.action-index-page .action-index-investigations-intro {
-  display: grid;
-  gap: 8px;
-}
-
-.action-index-page .action-index-investigations h2,
-.action-index-page .action-index-investigations p {
-  margin: 0;
+  gap: var(--space-3);
 }
 
 .action-index-page .action-index-investigation-card {
@@ -293,10 +264,7 @@ html:has(.public-site) {
   object-fit: cover;
 }
 
-.action-index-page .action-index-investigation-copy {
-  display: grid;
-  min-width: 0;
-}
+.action-index-page .action-index-investigation-copy { display: grid; gap: var(--space-1); min-width: 0; }
 
 .action-index-page .action-index-investigation-meta {
   display: block;
@@ -304,21 +272,13 @@ html:has(.public-site) {
 
 .action-index-page .action-index-investigation-meta small {
   color: #5f6862;
-  font-size: 14px;
-  line-height: 1.25;
+  font-size: var(--type-small-size);
+  line-height: var(--type-small-leading);
 }
 
 .action-index-page .action-index-investigation-meta small::before {
   content: " · ";
   white-space: pre;
-}
-
-.action-index-page .action-index-investigation-copy h3 {
-  margin-bottom: 8px;
-}
-
-.action-index-page .action-index-investigation-copy > p {
-  margin: 4px 0 0;
 }
 
 .action-index-page .action-index-investigation-chevron {
@@ -330,8 +290,7 @@ html:has(.public-site) {
 
 .action-index-page .action-index-current {
   display: grid;
-  gap: 24px;
-  margin-top: 24px;
+  gap: var(--space-3);
 }
 
 .action-index-page .action-index-feature {
@@ -346,70 +305,10 @@ html:has(.public-site) {
   border-radius: 6px;
 }
 
-.action-index-page .action-index-current > h2,
-.action-index-page .action-index-feature,
-.action-index-page .action-index-feature-description h3,
-.action-index-page .action-index-feature-description p,
-.action-index-page .action-index-explore {
-  margin: 0;
-}
-
-.action-index-page .action-index-feature + .action-index-feature {
-  position: relative;
-  margin-top: 8px;
-}
-
-.action-index-page .action-index-feature + .action-index-feature::before {
-  position: absolute;
-  top: -16px;
-  right: 0;
-  left: 284px;
-  border-top: 1px solid #dadce0;
-  content: "";
-}
-
 .action-index-page .action-index-feature-copy {
   display: grid;
   align-content: start;
   gap: 16px;
-}
-
-.action-index-page .action-index-feature-description {
-  display: grid;
-  gap: 8px;
-}
-
-.action-index-page .action-index-status {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin: 0;
-}
-
-.action-index-page .action-index-status-item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.action-index-page .action-index-status-item + .action-index-status-item {
-  border-left: 1px solid #dadce0;
-  padding-left: 24px;
-}
-
-.action-index-page .action-index-status dt {
-  order: 2;
-  font-size: .875rem;
-  line-height: 1.35;
-}
-
-.action-index-page .action-index-status dd {
-  order: 1;
-  margin: 0;
-  font-size: 1.2rem;
-  line-height: 1.3;
-  font-weight: 700;
-  white-space: nowrap;
 }
 
 .story-detail-page .story-opening img {
@@ -424,26 +323,12 @@ html:has(.public-site) {
 
 .story-detail-page .story-detail-shell > :not(.story-opening),
 .organizations-page .crossover-index-body {
-  max-width: 760px;
+  max-width: var(--layout-width-document);
   margin-inline: auto;
 }
 
-.organizations-page .crossover-index-body > article {
-  margin-bottom: 32px;
-}
-
-.story-detail-page .story-moment-card + .story-moment-card {
-  margin-top: 1.5em;
-}
-
-.story-detail-page .story-source-list small {
-  margin-left: .5em;
-}
-
-.gap-updates-page .gap-history-feed-list {
-  display: grid;
-  gap: 24px;
-}
+.organizations-page .crossover-index-body,
+.story-detail-page .story-moment-grid { display: grid; gap: var(--space-4); }
 
 .gap-updates-page .gap-history-header {
   padding-bottom: 0;
@@ -455,13 +340,7 @@ html:has(.public-site) {
 
 .gap-updates-page .gap-history-feed-meta {
   color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.gap-updates-page .gap-history-item + .gap-history-item {
-  border-top: 1px solid #dadce0;
-  padding-top: 24px;
+  font-size: var(--type-small-size);
 }
 
 .gap-updates-page .gap-history-related-gaps {
@@ -471,15 +350,6 @@ html:has(.public-site) {
   gap: 4px 8px;
 }
 
-.gap-updates-page .gap-history-related-gaps + .gap-history-actions {
-  margin-top: 5px;
-}
-
-@media (max-width: 900px) {
-  .public-site.action-index-page {
-    padding-bottom: calc(70px + env(safe-area-inset-bottom));
-  }
-}
 
 @media (max-width: 720px) {
   .about-simple .about-simple-ideas {
@@ -490,11 +360,7 @@ html:has(.public-site) {
     grid-template-columns: minmax(0, 33fr) minmax(0, 67fr);
   }
 
-  .about-simple .about-simple-philosophy .public-entry img {
-    float: none;
-    width: 100%;
-    margin: 0 0 16px;
-  }
+  .about-simple .about-simple-founder .public-entry { grid-template-columns: minmax(0, 1fr); }
 
   :is(.about-simple, .gap-reference-page) .public-entry,
   .is-reality-page .gap-card,
@@ -504,16 +370,8 @@ html:has(.public-site) {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .action-index-page .action-index-feature + .action-index-feature::before {
-    left: 0;
-  }
-
   .action-index-page .action-index-feature {
     align-items: start;
-  }
-
-  .action-index-page .action-index-status-item + .action-index-status-item {
-    padding-left: 8px;
   }
 
   .is-reality-page .gap-card-image-frame,
