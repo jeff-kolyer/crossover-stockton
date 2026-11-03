@@ -87,6 +87,18 @@ button.plain-action-button:not(.is-pill):hover {
   margin-bottom: 8px;
 }
 
+.task-filters {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.task-filters::-webkit-scrollbar {
+  display: none;
+}
+
 .filter-buttons .plain-action-button.is-pill {
   min-width: 64px;
 }

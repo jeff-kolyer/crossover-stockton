@@ -446,12 +446,12 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
     <PublicSiteNav active="investigation" onNavigate={onNavigate} variant="investigation" />
     <header className="investigation-identity">
       <div className="investigation-identity-inner">
-      <img className="investigation-dog-icon" src="/images/reality/dog-thumb.jpg" alt="" width="61" height="61" />
+      <img className="investigation-dog-icon" src="/images/reality/dog-thumb.jpg" alt="" width="54" height="54" />
       <div className="investigation-identity-copy">
         <h2>Dogs on the street in Stockton</h2>
         <div className="investigation-identity-meta">
           <a ref={overviewLinkRef} href="/work/dogs/about/" onClick={(event) => navigateInternalLink(event, openOverview)}>Overview</a>
-          {nextTask && <a className="investigation-identity-next" href={`${tabLink("tasks")}#${encodeURIComponent(nextTask.id)}`} onClick={(event) => navigateInternalLink(event, () => { setShowOverview(false); overviewReturnRef.current = null; setShowMapFilters(false); mapFilterReturnRef.current = null; selectTask(nextTask); onOpenSection("tasks", nextTask.id); })}><span>Next:</span> {nextTaskLabel}</a>}
+          {nextTask && <><span className="investigation-identity-divider" aria-hidden="true" /><a className="investigation-identity-next" href={`${tabLink("tasks")}#${encodeURIComponent(nextTask.id)}`} onClick={(event) => navigateInternalLink(event, () => { setShowOverview(false); overviewReturnRef.current = null; setShowMapFilters(false); mapFilterReturnRef.current = null; selectTask(nextTask); onOpenSection("tasks", nextTask.id); })}><span>Next:</span> {nextTaskLabel}</a></>}
         </div>
       </div>
       </div>
@@ -505,7 +505,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {selectedTask.basis_record_ids.length > 0 && <section><h3>Basis and sources</h3><ul>{selectedTask.basis_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
           {selectedTask.activity_record_ids.length > 0 && <section><h3>Documented activity</h3><ul>{selectedTask.activity_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
         </article></div> : <WorkspacePage title="Tasks">
-          <div className="map-filters filter-buttons" role="group" aria-label="Task filters">{(["all", "open", "waiting", "done"] as const).map((filter) => <PlainActionButton key={filter} variant="selection" pressed={taskFilter === filter} onClick={() => { setTaskFilter(filter); setSelectedLocationId(""); setFocusSelectedLocation(false); }}>{filter !== "all" && <span className="evidence-dot" style={{ backgroundColor: taskStatusColors[filter] }} aria-hidden="true" />}{filter === "done" ? "Completed" : filter[0].toUpperCase() + filter.slice(1)}</PlainActionButton>)}</div>
+          <div className="map-filters filter-buttons task-filters" role="group" aria-label="Task filters">{(["all", "open", "waiting", "done"] as const).map((filter) => <PlainActionButton key={filter} variant="selection" pressed={taskFilter === filter} onClick={() => { setTaskFilter(filter); setSelectedLocationId(""); setFocusSelectedLocation(false); }}>{filter !== "all" && <span className="evidence-dot" style={{ backgroundColor: taskStatusColors[filter] }} aria-hidden="true" />}{filter === "done" ? "Completed" : filter[0].toUpperCase() + filter.slice(1)}</PlainActionButton>)}</div>
           <div className="record-list task-list">{filteredTasks.map((task) => <button type="button" key={task.id} onClick={() => selectTask(task)}>
             <strong className="task-title"><span className="evidence-dot" style={task.status === "cancelled" ? { visibility: "hidden" } : { backgroundColor: taskStatusColors[task.status] }} aria-hidden="true" />{task.title}</strong>
             <small>{task.status === "done" ? `Completed ${fmt(task.completed_at)}` : taskPriorityContext(task)}</small>
