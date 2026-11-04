@@ -89,7 +89,7 @@ export function renderStaticPages(oneFile, feed, origin) {
       .replace('<p id="footer-purpose"></p>', `<p id="footer-purpose">${escapeHtml(node("footer-purpose").textContent)}</p>`)
       .replace('<span id="record-count"></span>', `<span id="record-count">${records.length}</span>`)
       .replace('id="header-linkedin" target=', `id="header-linkedin" href="${escapeHtml(node("header-linkedin").href)}" target=`)
-      .replace('</div></div></footer>', '<a href="/interactive/">Interactive one-file version ↗</a></div></div></footer>')
+      .replace('</div></div></footer>', '<a href="/data/records.json">Public feed (JSON) ↗</a></div></div></footer>')
       .replaceAll('href="#/"', 'href="/"')
       .replace(/href="\?page=([^"]*)"/g, (_, value) => `href="${escapeHtml(routeFromQuery(value))}"`);
     html += `<script src="/static-navigation.js" defer></script>\n</body>\n</html>\n`;
