@@ -102,7 +102,6 @@ test("the root and every feed record have readable HTML with normal URLs", async
   for (const [id, section, label] of [
     ["dogs-safe-placement", "needs", "Needs"],
     ["streetdogs-fed-70-animals", "responses", "Responses"],
-    ["weston-ranch-carrie-street", "places", "Places"],
     ["crossover-2026-10-14-sas-volunteer-application", "activity", "Activity"],
     ["crossover-2026-10-14-sas-first-visit", "explore", "Explore"],
   ]) {
@@ -110,6 +109,13 @@ test("the root and every feed record have readable HTML with normal URLs", async
     assert.ok(page.includes(`<a href="/${section}/" aria-current="page">${label}</a>`), `${id} top navigation`);
     assert.ok(page.includes(`<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/${section}/">${label}</a> / <span aria-current="page">`), `${id} breadcrumb`);
   }
+  const placePage = await read("dist/record/weston-ranch-carrie-street/index.html");
+  assert.ok(placePage.includes('<a href="/places/">Places</a> / <span aria-current="page">'), "place breadcrumb remains available");
+  const mainNav = placePage.match(/<nav class="nav" id="site-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  const footerNav = placePage.match(/<nav[^>]*id="footer-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0];
+  assert.ok(mainNav && footerNav, "both menus are present");
+  assert.doesNotMatch(mainNav, />Places<\/a>/, "Places is absent from the main navigation");
+  assert.doesNotMatch(footerNav, />Places<\/a>/, "Places is absent from the footer navigation");
   for (const id of ["stockton-animal-services-shelter", "st-marys-community-services-campus"]) {
     const embed = feed.records[id].fields.map_reference.embed_url;
     const page = await read(`dist/record/${id}/index.html`);
