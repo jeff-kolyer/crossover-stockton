@@ -92,7 +92,7 @@ export function renderStaticPages(oneFile, feed, origin) {
       .replace('</div></div></footer>', '<a href="/interactive/">Interactive one-file version ↗</a></div></div></footer>')
       .replaceAll('href="#/"', 'href="/"')
       .replace(/href="\?page=([^"]*)"/g, (_, value) => `href="${escapeHtml(routeFromQuery(value))}"`);
-    html += `<script>document.getElementById("menu-toggle").addEventListener("click",function(){const nav=document.getElementById("site-nav");nav.classList.toggle("open");this.setAttribute("aria-expanded",String(nav.classList.contains("open")))});if(location.hash.startsWith("#/")){const route=location.hash.slice(1);if(!route.startsWith("//")&&route.split("/").every(part=>/^[a-z0-9%_-]*$/i.test(part)))location.replace((route==="/"?"/":route.endsWith("/")?route:route+"/")+location.search)}</script>\n</body>\n</html>\n`;
+    html += `<script src="/static-navigation.js" defer></script>\n</body>\n</html>\n`;
     return { path: publicPath(route), html, sitemap };
   });
   return { pages, assets: Object.keys(assets) };

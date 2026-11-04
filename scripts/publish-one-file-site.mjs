@@ -48,6 +48,7 @@ await mkdir(resolve(dist, "data"), { recursive: true });
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
 await writeFile(resolve(dist, "favicon.ico"), await readFile("public/favicon.ico"));
+await copyFile("public/static-navigation.js", resolve(dist, "static-navigation.js"));
 await writeFile(resolve(dist, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
 const staticSite = renderStaticPages(html, feed, origin);
 for (const imagePath of staticSite.assets) {
