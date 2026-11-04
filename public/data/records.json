@@ -73,11 +73,11 @@
       "schema": "principle",
       "typeName": "Principle",
       "title": "The work discovers the work.",
-      "description": "The work discovers the work.",
+      "description": "We don't need a complete plan before we begin. Each action can reveal new questions, possibilities, and the next useful step.",
       "fields": {
         "id": "work-discovers-work",
         "title": "The work discovers the work.",
-        "statement": "The work discovers the work."
+        "statement": "We don't need a complete plan before we begin. Each action can reveal new questions, possibilities, and the next useful step."
       }
     },
     "technology": {
