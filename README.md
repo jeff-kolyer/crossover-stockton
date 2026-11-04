@@ -429,6 +429,8 @@ npm run preview
 
 The build validates source records, generates the public feed and one-file HTML, renders static pages, and checks published output.
 
+`src/data/` holds the source records. The generated public feed at `public/data/records.json` is committed to GitHub and served at `/data/records.json`. Run `npm run build` after editing source records and commit the refreshed feed with them. The deployment checks that the committed feed matches the generated one.
+
 ## Core principle
 
 **Before we can change reality, we must understand it.**
