@@ -6,7 +6,7 @@ const read = (name) => JSON.parse(readFileSync(`src/data/${name}.json`, "utf8"))
 const datasets = [
   ["crossover", "identity"], ["people", "person"], ["principles", "principle"], ["methods", "method"],
   ["needs", "need"], ["investigations", "investigation"],
-  ["objectives", "objective"], ["tasks", "action"], ["activities", "activity"], ["evidence", "evidence"],
+  ["objectives", "objective"], ["actions", "action"], ["activities", "activity"], ["evidence", "evidence"],
   ["findings", "finding"], ["organizations", "organization"], ["stories", "story"],
   ["locations", "location"], ["measurements", "measurement"],
   ["claims", "claim"],
@@ -60,24 +60,25 @@ for (const investigation of records.get("investigations") ?? []) {
 }
 checkRefs(records.get("measurements"), "investigations", "investigation_id", "measurement");
 checkRefs(records.get("objectives"), "investigations", "investigation_id", "objective");
-checkRefs(records.get("tasks"), "investigations", "investigation_id", "task");
-const taskOrders = new Map();
-for (const task of records.get("tasks") ?? []) {
-  if (!Number.isSafeInteger(task.order_by_id) || task.order_by_id < 1) errors.push(`task:${task.id} order_by_id must be a positive integer`);
-  const key = String(task.order_by_id);
-  if (taskOrders.has(key)) errors.push(`task:${task.id} order_by_id duplicates task:${taskOrders.get(key)}`);
-  taskOrders.set(key, task.id);
+checkRefs(records.get("actions"), "investigations", "investigation_id", "action");
+const actionOrders = new Map();
+for (const action of records.get("actions") ?? []) {
+  if (!Number.isSafeInteger(action.order_by_id) || action.order_by_id < 1) errors.push(`action:${action.id} order_by_id must be a positive integer`);
+  const key = String(action.order_by_id);
+  if (actionOrders.has(key)) errors.push(`action:${action.id} order_by_id duplicates action:${actionOrders.get(key)}`);
+  actionOrders.set(key, action.id);
 }
 for (const prop of ["objective_ids", "organization_ids", "location_ids", "map_reference_location_ids", "basis_record_ids", "activity_record_ids"]) {
   const target = { objective_ids: "objectives", organization_ids: "organizations", location_ids: "locations", map_reference_location_ids: "locations", basis_record_ids: "records", activity_record_ids: "activities" }[prop];
-  checkRefs(records.get("tasks"), target, prop, "task");
+  checkRefs(records.get("actions"), target, prop, "action");
 }
-for (const prop of ["activity_record_ids", "evidence_record_ids", "finding_ids", "task_ids"]) {
-  const target = { activity_record_ids: "activities", evidence_record_ids: "records", finding_ids: "findings", task_ids: "tasks" }[prop];
+for (const prop of ["activity_record_ids", "evidence_record_ids", "finding_ids", "action_ids"]) {
+  const target = { activity_record_ids: "activities", evidence_record_ids: "records", finding_ids: "findings", action_ids: "actions" }[prop];
   checkRefs(records.get("objectives"), target, prop, "objective");
 }
 checkRefs(records.get("findings"), "investigations", "investigation_id", "finding");
 for (const prop of ["supporting_record_ids", "contradicting_record_ids"]) checkRefs(records.get("findings"), "records", prop, "finding");
+checkRefs(records.get("findings"), "actions", "related_action_ids", "finding");
 checkRefs(records.get("claims"), "records", "sourceRecordIds", "claim");
 checkRefs(records.get("claims"), "needs", "needId", "claim");
 checkRefs(records.get("claims"), "measurements", "measurementId", "claim");
@@ -85,6 +86,7 @@ checkRefs(records.get("measurements"), "records", "source_record_id", "measureme
 checkRefs(records.get("locations"), "investigations", "investigation_id", "location");
 checkRefs(records.get("locations"), "records", "evidence_record_id", "location");
 checkRefs(records.get("locations"), "records", "evidence_record_ids", "location");
+checkRefs(records.get("organizations"), "locations", "map_location_id", "organization");
 for (const location of records.get("locations") ?? []) {
   if (location.map_reference?.verified && !location.map_reference.source_url?.startsWith("https://"))
     errors.push(`location:${location.id} verified map reference requires an HTTPS source URL`);

@@ -28,6 +28,19 @@
           "technology",
           "investigation"
         ],
+        "statements": {
+          "missionQuestion": "How can post-scarcity technology solve real problems?",
+          "opportunity": "As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.",
+          "startingApproach": "We're starting now, investigating real needs in Stockton, taking action, and using what we learn to discover what technology and human participation can make possible.",
+          "animalCareVision": "What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?",
+          "animalCareInvestigation": "We're investigating what happens to dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
+          "learningRule": "What we discover guides what we do next.",
+          "presencePractice": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens.",
+          "documentationPractice": "Crossover connects those experiences through an investigation app: Actions, Activity, Places, and Findings. We document what we do, examine what we learn, and identify what needs investigating next.",
+          "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our articles become a growing body of knowledge that others can use, question, and build upon.",
+          "experienceChangesUs": "And sometimes the experience changes our understanding. Sometimes it changes us.",
+          "publicCommitment": "We're investigating real needs in Stockton. Our actions, observations, and findings are public—including what we haven't figured out yet."
+        },
         "preferred_logo": "/images/logo_light.webp"
       }
     },
@@ -169,6 +182,7 @@
         "name": "Stockton Animal Services",
         "summary": "Municipal animal services for Stockton, including shelter intake, animal care, foster and adoption pathways, veterinary services, and rescue coordination.",
         "website": "https://www.stocktonca.gov/services/animal_services/",
+        "map_location_id": "stockton-animal-services-shelter",
         "active": true,
         "contact_activity_ids": [
           "crossover-2026-11-02-sas-field-call-records-received",
@@ -189,6 +203,7 @@
         "name": "St. Mary's Community Services",
         "summary": "Low-barrier shelter, meals, hygiene, health care, and housing support for people experiencing poverty and homelessness.",
         "website": "https://smcares.org/",
+        "map_location_id": "st-marys-community-services-campus",
         "active": true
       }
     },
@@ -550,7 +565,7 @@
         "title": "Establish the scale, distribution, and condition of street dogs",
         "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status.",
         "investigation_id": "street-dog-immediate-welfare",
-        "task_ids": [
+        "action_ids": [
           "task-verify-st-marys-church-street-dog-scale",
           "task-verify-south-stockton-district-5-reports",
           "task-sas-field-call-request-2026-10-20",
@@ -587,7 +602,7 @@
         "title": "Establish who is providing care and what care reaches dogs",
         "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery.",
         "investigation_id": "street-dog-immediate-welfare",
-        "task_ids": [
+        "action_ids": [
           "task-ssd-volunteer-application-2026-10-07",
           "task-ssd-ask-contact-questions"
         ],
@@ -613,7 +628,7 @@
         "title": "Trace reporting, response, intake, and outcomes",
         "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends.",
         "investigation_id": "street-dog-immediate-welfare",
-        "task_ids": [
+        "action_ids": [
           "task-sas-visit-application-2026-10-14",
           "task-sas-field-call-request-2026-10-20",
           "task-sas-field-call-follow-up",
@@ -650,7 +665,7 @@
         "title": "Identify what prevents people from helping",
         "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence.",
         "investigation_id": "street-dog-immediate-welfare",
-        "task_ids": [
+        "action_ids": [
           "task-ssd-volunteer-application-2026-10-07",
           "task-sas-doggie-day-out-inquiry-2026-10-12",
           "task-sas-visit-application-2026-10-14",
@@ -685,7 +700,7 @@
         "title": "Evaluate improvements to access and outcomes",
         "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution.",
         "investigation_id": "street-dog-immediate-welfare",
-        "task_ids": [],
+        "action_ids": [],
         "activity_record_ids": [
           "crossover-2026-10-12-doggie-day-out-inquiry"
         ],
@@ -702,7 +717,7 @@
     "task-verify-st-marys-church-street-dog-scale": {
       "id": "task-verify-st-marys-church-street-dog-scale",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Verify conditions: scale of the dog problem near St. Mary's",
       "description": "",
       "fields": {
@@ -711,10 +726,7 @@
         "title": "Verify conditions: scale of the dog problem near St. Mary's",
         "status": "open",
         "type": "field_observation",
-        "estimated_created_at": "2026-10-31",
-        "creation_date_basis": "Estimated from the first Git record on October 31; the task may have been planned earlier.",
-        "recorded_at": "2026-10-31",
-        "public_instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
+        "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "where-dogs-need-help"
@@ -730,16 +742,12 @@
           "ssd-2026-06-08-street-response"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-10-31"
       }
     },
     "task-review-sas-field-call-records": {
       "id": "task-review-sas-field-call-records",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Review Animal Services field-call records",
       "description": "",
       "fields": {
@@ -748,8 +756,7 @@
         "title": "Review Animal Services field-call records",
         "status": "open",
         "type": "source_review",
-        "estimated_created_at": "2026-11-02",
-        "creation_date_basis": "Estimated from the November 2 receipt of records; this task first appears in Git on November 3.",
+        "instructions": "Review the records received in response to the October 20 Stockton Animal Services field-call request. Preserve the original files and receipt details, document the date range, fields, definitions, coverage, missing or redacted information, and limitations. Analyze patterns relevant to where dogs need help and what happens after reports; distinguish administrative records from firsthand observations and do not treat calls as unique dogs or verified street population. Record findings and next actions only after reviewing the evidence.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "where-dogs-need-help",
@@ -764,16 +771,12 @@
           "crossover-2026-11-02-sas-field-call-records-received"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-11-02"
       }
     },
     "task-contact-cbs-charlie-lapastora": {
       "id": "task-contact-cbs-charlie-lapastora",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Contact CBS reporter Charlie Lapastora",
       "description": "",
       "fields": {
@@ -782,8 +785,7 @@
         "title": "Contact CBS reporter Charlie Lapastora",
         "status": "open",
         "type": "organization_contact",
-        "estimated_created_at": "2026-10-28",
-        "creation_date_basis": "Estimated from the first Git record on October 28; the task may have been planned earlier.",
+        "instructions": "Follow up on the April 6 and June 8 CBS Sacramento reports about abandoned dogs in Stockton. Ask what evidence was gathered, what has happened since, and whether the reporter can connect Crossover with firsthand observers with their permission. Record contact or answers only if they actually occur.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "where-dogs-need-help",
@@ -797,16 +799,12 @@
           "ssd-2026-06-08-street-response"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-10-28"
       }
     },
     "task-ssd-ask-contact-questions": {
       "id": "task-ssd-ask-contact-questions",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Follow up with Stockton Street Dogs",
       "description": "",
       "fields": {
@@ -815,8 +813,7 @@
         "title": "Follow up with Stockton Street Dogs",
         "status": "open",
         "type": "organization_contact",
-        "estimated_created_at": "2026-10-27",
-        "creation_date_basis": "Estimated from the first Git record on October 27; the task may have been planned earlier.",
+        "instructions": "Check whether the October 7 volunteer application received a response. Ask for the current status and evidence of progress on Canine Campus, and identify practical approved volunteer or care opportunities, requirements, schedules, and contacts. Record any reply only when received.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "food-and-water",
@@ -831,16 +828,12 @@
           "ssd-2026-10-07-canine-campus-details"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-10-27"
       }
     },
     "task-verify-south-stockton-district-5-reports": {
       "id": "task-verify-south-stockton-district-5-reports",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Verify reported conditions in South Stockton / District 5",
       "description": "",
       "fields": {
@@ -849,8 +842,7 @@
         "title": "Verify reported conditions in South Stockton / District 5",
         "status": "open",
         "type": "field_observation",
-        "estimated_created_at": "2026-10-29",
-        "creation_date_basis": "Estimated from the first Git record on October 29; the task may have been planned earlier.",
+        "instructions": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site. Choose a safe public observation route near the reported Carrie Street area, confirm access and current conditions before visiting, and document what is actually present, including zero dogs if none are seen. Do not treat the April incident as evidence of current danger or assume the September encounters occurred there. Distinguish both published reports from firsthand findings and record follow-up questions.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "where-dogs-need-help"
@@ -867,16 +859,12 @@
           "kcra-2026-09-24-stockton-stray-dog-report"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-10-29"
       }
     },
     "task-sas-volunteer-onboarding-follow-up": {
       "id": "task-sas-volunteer-onboarding-follow-up",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Follow up with Stockton Animal Services on volunteering",
       "description": "",
       "fields": {
@@ -885,8 +873,7 @@
         "title": "Follow up with Stockton Animal Services on volunteering",
         "status": "waiting",
         "type": "follow_up",
-        "estimated_created_at": "2026-10-28",
-        "creation_date_basis": "Estimated from the first Git record on October 28; the task may have been planned earlier.",
+        "instructions": "Check the status of the October 14 volunteer application and the October 12 Doggie Day Out inquiry. Confirm onboarding, orientation, eligibility, scheduling, and practical transport requirements; document a response only if received.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "additional-help"
@@ -901,16 +888,12 @@
           "sas-standing-doggie-day-out"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-10-28"
       }
     },
     "task-monitor-animal-control-ordinance": {
       "id": "task-monitor-animal-control-ordinance",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Monitor the proposed animal-control ordinance",
       "description": "",
       "fields": {
@@ -919,8 +902,7 @@
         "title": "Monitor the proposed animal-control ordinance",
         "status": "open",
         "type": "policy_monitoring",
-        "estimated_created_at": "2026-10-28",
-        "creation_date_basis": "Estimated from the first Git record on October 28; the task may have been planned earlier.",
+        "instructions": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date. Keep the October 19 committee referral separate from any later Council adoption.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "response-barriers"
@@ -934,16 +916,12 @@
           "stocktonia-2026-10-20-animal-control-proposals"
         ],
         "activity_record_ids": []
-      },
-      "dateForSort": {
-        "field": "estimated_created_at",
-        "value": "2026-10-28"
       }
     },
     "task-sas-field-call-follow-up": {
       "id": "task-sas-field-call-follow-up",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Follow up on Animal Services field-call records",
       "description": "",
       "fields": {
@@ -952,8 +930,7 @@
         "title": "Follow up on Animal Services field-call records",
         "status": "done",
         "type": "follow_up",
-        "estimated_created_at": "2026-10-20",
-        "creation_date_basis": "Estimated from the October 20 records request that prompted this follow-up; the original planning date was not recorded.",
+        "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "where-dogs-need-help",
@@ -979,7 +956,7 @@
     "task-sas-field-call-request-2026-10-20": {
       "id": "task-sas-field-call-request-2026-10-20",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Request Animal Services field-call records",
       "description": "",
       "fields": {
@@ -988,8 +965,7 @@
         "title": "Request Animal Services field-call records",
         "status": "done",
         "type": "records_request",
-        "estimated_created_at": "2026-10-20",
-        "creation_date_basis": "Estimated from the documented records-request date; the original planning date was not recorded.",
+        "instructions": "Request field-call records for roaming, stray, abandoned, aggressive, and distressed dogs.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "where-dogs-need-help",
@@ -1013,7 +989,7 @@
     "task-sas-visit-application-2026-10-14": {
       "id": "task-sas-visit-application-2026-10-14",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Visit Stockton Animal Services and submit a volunteer application",
       "description": "",
       "fields": {
@@ -1022,8 +998,7 @@
         "title": "Visit Stockton Animal Services and submit a volunteer application",
         "status": "done",
         "type": "application",
-        "estimated_created_at": "2026-10-14",
-        "creation_date_basis": "Estimated from the documented visit and application date; the original planning date was not recorded.",
+        "instructions": "Visit the shelter, deliver the application, and learn about the public visitor experience.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "response-barriers",
@@ -1047,7 +1022,7 @@
     "task-sas-doggie-day-out-inquiry-2026-10-12": {
       "id": "task-sas-doggie-day-out-inquiry-2026-10-12",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Ask Stockton Animal Services about Doggie Day Out",
       "description": "",
       "fields": {
@@ -1056,8 +1031,7 @@
         "title": "Ask Stockton Animal Services about Doggie Day Out",
         "status": "done",
         "type": "inquiry",
-        "estimated_created_at": "2026-10-12",
-        "creation_date_basis": "Estimated from the documented inquiry date; the original planning date was not recorded.",
+        "instructions": "Ask about sign-up, requirements, paperwork, and orientation.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "additional-help"
@@ -1082,7 +1056,7 @@
     "task-ssd-volunteer-application-2026-10-07": {
       "id": "task-ssd-volunteer-application-2026-10-07",
       "schema": "action",
-      "typeName": "Task",
+      "typeName": "Action",
       "title": "Submit a volunteer application to Stockton Street Dogs",
       "description": "",
       "fields": {
@@ -1091,8 +1065,7 @@
         "title": "Submit a volunteer application to Stockton Street Dogs",
         "status": "done",
         "type": "application",
-        "estimated_created_at": "2026-10-07",
-        "creation_date_basis": "Estimated from the documented application date; the original planning date was not recorded.",
+        "instructions": "Submit an application to learn how Crossover can participate firsthand.",
         "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
           "food-and-water",
@@ -4124,13 +4097,13 @@
             {
               "heading": "How Crossover is testing the approach",
               "paragraphs": [
-                "Crossover's public investigation follows a cycle: Tasks identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The records request is one Activity in that cycle, and its result remains pending.",
+                "Crossover's public investigation follows a cycle: planned Actions identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The records request is one Activity in that cycle, and its result remains pending.",
                 "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. The next steps are to examine the field-call records if provided, compare them with existing public resources, ask responders what information they can share, and test whether that information helps people act safely."
               ],
               "links": [
                 {
-                  "label": "Investigation Tasks",
-                  "url": "/work/dogs/tasks/"
+                  "label": "Investigation Actions",
+                  "url": "/activity/#next-actions"
                 },
                 {
                   "label": "Investigation Activity",
@@ -4347,9 +4320,9 @@
                   "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/"
                 },
                 {
-                  "label": "Planned St. Mary's corridor field task",
-                  "display_label": "St. Mary’s field task",
-                  "url": "/work/dogs/tasks/#task-verify-st-marys-church-street-dog-scale"
+                  "label": "Planned St. Mary's corridor field action",
+                  "display_label": "St. Mary’s field action",
+                  "url": "/record/task-verify-st-marys-church-street-dog-scale/"
                 },
                 {
                   "label": "St. Mary's–Church Street corridor location record",
@@ -4366,9 +4339,9 @@
               ],
               "links": [
                 {
-                  "label": "Planned South Stockton / District 5 field task",
-                  "display_label": "South Stockton field task",
-                  "url": "/work/dogs/tasks/#task-verify-south-stockton-district-5-reports"
+                  "label": "Planned South Stockton / District 5 field action",
+                  "display_label": "South Stockton field action",
+                  "url": "/record/task-verify-south-stockton-district-5-reports/"
                 },
                 {
                   "label": "Carrie Street levee / Weston Ranch location record",
@@ -4397,13 +4370,13 @@
             {
               "heading": "Follow the investigation",
               "paragraphs": [
-                "This is an ongoing article, not a completed conclusion. The St. Mary's corridor and South Stockton / District 5 tasks are currently planned; their field observations are not yet available. When firsthand reports are completed, we will add dated results, sources, limitations, and any resulting changes to our findings. New evidence may change our questions and where we investigate next.",
+                "This is an ongoing article, not a completed conclusion. The St. Mary's corridor and South Stockton / District 5 actions are currently planned; their field observations are not yet available. When firsthand reports are completed, we will add dated results, sources, limitations, and any resulting changes to our findings. New evidence may change our questions and where we investigate next.",
                 "The number and location of Stockton's street dogs remain unknown. That's precisely why we're going to look."
               ],
               "links": [
                 {
-                  "label": "Current Crossover tasks",
-                  "url": "/work/dogs/tasks/"
+                  "label": "Current Crossover actions",
+                  "url": "/activity/#next-actions"
                 },
                 {
                   "label": "Investigation activity",
@@ -4900,7 +4873,7 @@
       "description": "Optional thumbnail variant of the preferred image for compact displays."
     },
     "order_by_id": {
-      "label": "Task order",
+      "label": "Action order",
       "kind": "value"
     },
     "activity": {
@@ -5049,10 +5022,9 @@
       "kind": "value",
       "description": "Marks an activity as a meaningful public development; visibility must also authorize publication."
     },
-    "public_instructions": {
+    "instructions": {
       "label": "Instructions",
-      "kind": "value",
-      "description": "Instructions approved for publication on the task page."
+      "kind": "value"
     },
     "organization_interaction": {
       "label": "Organization interaction",
@@ -5069,6 +5041,10 @@
       "label": "Crossover contact activities",
       "kind": "reference",
       "description": "Firsthand, occurred Crossover Activity records that identify this organization. A nonempty list means Crossover approached or heard from it; inspect each Activity's organization_interaction and outcome before claiming a response, visit, acceptance, or collaboration. Organizations without this field may still be referenced in research."
+    },
+    "map_location_id": {
+      "label": "Documented place",
+      "kind": "reference"
     },
     "trust": {
       "label": "Provenance classification",
@@ -5181,16 +5157,6 @@
     "recorded_at": {
       "label": "Recorded",
       "kind": "date"
-    },
-    "estimated_created_at": {
-      "label": "Created (estimated)",
-      "kind": "date",
-      "description": "Best available estimate of when the task was created; not a verified timestamp."
-    },
-    "creation_date_basis": {
-      "label": "Date basis",
-      "kind": "value",
-      "description": "Evidence and uncertainty behind estimated_created_at."
     },
     "occurred_at": {
       "label": "Occurred",
@@ -5361,8 +5327,8 @@
       "label": "Related article",
       "kind": "reference"
     },
-    "task_ids": {
-      "label": "Tasks",
+    "action_ids": {
+      "label": "Actions",
       "kind": "reference"
     },
     "objective_ids": {
@@ -5405,7 +5371,7 @@
     "map_reference_location_ids": {
       "label": "Nearby geographic references",
       "kind": "reference",
-      "description": "Nearby public geographic references for a task. These are not necessarily task sites or observed animal locations."
+      "description": "Nearby public geographic references for an action. These are not necessarily action sites or observed animal locations."
     },
     "basis_record_ids": {
       "label": "Basis records",
@@ -5451,6 +5417,10 @@
       "label": "Related findings",
       "kind": "reference"
     },
+    "statements": {
+      "label": "statements",
+      "kind": "value"
+    },
     "website": {
       "label": "website",
       "kind": "url"
@@ -5486,6 +5456,50 @@
     },
     "country": {
       "label": "country",
+      "kind": "value"
+    },
+    "missionQuestion": {
+      "label": "missionQuestion",
+      "kind": "value"
+    },
+    "opportunity": {
+      "label": "opportunity",
+      "kind": "value"
+    },
+    "startingApproach": {
+      "label": "startingApproach",
+      "kind": "value"
+    },
+    "animalCareVision": {
+      "label": "animalCareVision",
+      "kind": "value"
+    },
+    "animalCareInvestigation": {
+      "label": "animalCareInvestigation",
+      "kind": "value"
+    },
+    "learningRule": {
+      "label": "learningRule",
+      "kind": "value"
+    },
+    "presencePractice": {
+      "label": "presencePractice",
+      "kind": "value"
+    },
+    "documentationPractice": {
+      "label": "documentationPractice",
+      "kind": "value"
+    },
+    "aiPractice": {
+      "label": "aiPractice",
+      "kind": "value"
+    },
+    "experienceChangesUs": {
+      "label": "experienceChangesUs",
+      "kind": "value"
+    },
+    "publicCommitment": {
+      "label": "publicCommitment",
       "kind": "value"
     },
     "headline": {

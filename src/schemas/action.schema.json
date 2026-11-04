@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crossoverstockton.org/schemas/action.schema.json",
-  "title": "Task",
+  "title": "Action",
   "description": "action information definition. Schema describes source data, not page layout.",
   "type": "object",
   "properties": {
@@ -43,23 +43,6 @@
     "instructions": {
       "type": "string",
       "minLength": 1
-    },
-    "public_instructions": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Instructions approved for publication on the task page."
-    },
-    "recorded_at": {
-      "$ref": "./common.schema.json#/$defs/date"
-    },
-    "estimated_created_at": {
-      "$ref": "./common.schema.json#/$defs/date",
-      "description": "Best available estimate of when the task was created; not a verified timestamp."
-    },
-    "creation_date_basis": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Evidence and uncertainty behind estimated_created_at."
     },
     "list_context": {
       "type": "string",
@@ -136,8 +119,6 @@
     "status",
     "type",
     "instructions",
-    "estimated_created_at",
-    "creation_date_basis",
     "location_ids",
     "organization_ids",
     "objective_ids",

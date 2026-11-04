@@ -3,7 +3,7 @@ import peopleData from "../data/people.json";
 import needsData from "../data/needs.json";
 import investigationsData from "../data/investigations.json";
 import objectivesData from "../data/objectives.json";
-import tasksData from "../data/tasks.json";
+import actionsData from "../data/actions.json";
 import activitiesData from "../data/activities.json";
 import evidenceData from "../data/evidence.json";
 import findingsData from "../data/findings.json";
@@ -15,7 +15,7 @@ import measurementsData from "../data/measurements.json";
 import claimsData from "../data/claims.json";
 import articlesData from "../data/articles.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "../types";
-import type { InvestigationFinding, InvestigationObjective, InvestigationTask } from "../types/investigation";
+import type { InvestigationFinding, InvestigationObjective, InvestigationAction } from "../types/investigation";
 import { publicUpdateCategory, selectPublicUpdates } from "./publicUpdates";
 
 type Identified = { id: string };
@@ -40,7 +40,7 @@ export type InformationInput = {
   needs: GapRecord[];
   investigations: typeof investigationsData.records;
   objectives: InvestigationObjective[];
-  tasks: InvestigationTask[];
+  actions: InvestigationAction[];
   activities: EvidenceRecord[];
   evidence: EvidenceRecord[];
   findings: InvestigationFinding[];
@@ -61,8 +61,8 @@ export function createInformationModel(input: InformationInput) {
   const needs = index(input.needs, "needs");
   const investigations = index(input.investigations, "investigations");
   const objectives = index(input.objectives, "objectives");
-  const tasks = index(input.tasks, "tasks");
-  const orderedTasks = [...input.tasks].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
+  const actions = index(input.actions, "actions");
+  const orderedActions = [...input.actions].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
   const activities = index(input.activities, "activities");
   const evidence = index(input.evidence, "evidence");
   const allRecords = [...input.evidence, ...input.activities];
@@ -82,7 +82,7 @@ export function createInformationModel(input: InformationInput) {
   for (const id of input.identity.principleIds) requireReference(principles.get(id), "principle", id);
   for (const id of input.identity.methodIds) requireReference(methods.get(id), "method", id);
   for (const item of input.objectives) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
-  for (const item of input.tasks) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
+  for (const item of input.actions) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
   for (const item of input.findings) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
   for (const claim of input.claims) {
     requireReference(needs.get(claim.needId), "need", claim.needId);
@@ -103,9 +103,9 @@ export function createInformationModel(input: InformationInput) {
     getObjectives: (investigationId: string) => input.objectives.filter((objective) => objective.investigation_id === investigationId),
     getActivityObjectives: (investigationId: string) => input.objectives.filter((objective) => objective.investigation_id === investigationId),
     getAllObjectives: () => input.objectives,
-    getTask: (id: string) => tasks.get(id),
-    getTasks: (investigationId: string) => orderedTasks.filter((task) => task.investigation_id === investigationId),
-    getAllTasks: () => orderedTasks,
+    getAction: (id: string) => actions.get(id),
+    getActions: (investigationId: string) => orderedActions.filter((action) => action.investigation_id === investigationId),
+    getAllActions: () => orderedActions,
     getActivity: (id: string) => activities.get(id),
     getAllActivities: () => input.activities,
     getActivities: (objectiveId: string) => {
@@ -167,7 +167,7 @@ export const siteModel = createInformationModel({
   needs: needsData.records as GapRecord[],
   investigations: investigationsData.records,
   objectives: objectivesData as InvestigationObjective[],
-  tasks: tasksData as InvestigationTask[],
+  actions: actionsData as InvestigationAction[],
   activities: activitiesData as EvidenceRecord[],
   evidence: evidenceData as EvidenceRecord[],
   findings: findingsData as InvestigationFinding[],

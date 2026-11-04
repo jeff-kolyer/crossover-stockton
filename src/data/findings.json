@@ -13,10 +13,6 @@
       "crossover-2026-10-14-sas-volunteer-application"
     ],
     "contradicting_record_ids": [],
-    "related_task_ids": [
-      "task-ssd-volunteer-application-2026-10-07",
-      "task-sas-visit-application-2026-10-14"
-    ],
     "related_project_ids": [],
     "location_ids": [
       "stockton-animal-services-shelter"
@@ -27,6 +23,10 @@
     "related_objective_ids": [
       "food-and-water",
       "additional-help"
+    ],
+    "related_action_ids": [
+      "task-ssd-volunteer-application-2026-10-07",
+      "task-sas-visit-application-2026-10-14"
     ]
   },
   {
@@ -44,9 +44,6 @@
       "stockton-animal-services-2026-10-20-reporting-guidance"
     ],
     "contradicting_record_ids": [],
-    "related_task_ids": [
-      "task-sas-field-call-follow-up"
-    ],
     "related_project_ids": [],
     "location_ids": [],
     "limitations": "Our review of public information does not establish what internal agency or rescue records may contain.",
@@ -55,6 +52,9 @@
     "related_objective_ids": [
       "where-dogs-need-help",
       "response-barriers"
+    ],
+    "related_action_ids": [
+      "task-sas-field-call-follow-up"
     ]
   },
   {
@@ -71,9 +71,6 @@
       "ssd-2026-10-07-canine-campus-details"
     ],
     "contradicting_record_ids": [],
-    "related_task_ids": [
-      "task-sas-visit-application-2026-10-14"
-    ],
     "related_project_ids": [
       "stockton-animal-shelter-renovation",
       "canine-campus"
@@ -87,6 +84,9 @@
     "related_objective_ids": [
       "additional-help",
       "improvement-outcomes"
+    ],
+    "related_action_ids": [
+      "task-sas-visit-application-2026-10-14"
     ]
   }
 ]

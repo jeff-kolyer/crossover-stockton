@@ -19,7 +19,7 @@ try {
     needs: siteModel.getNeeds(),
     investigations: siteModel.getInvestigations(),
     objectives: siteModel.getAllObjectives(),
-    tasks: siteModel.getAllTasks(),
+    actions: siteModel.getAllActions(),
     activities: siteModel.getAllActivities(),
     findings: siteModel.getAllFindings(),
     locations: siteModel.getAllLocations(),
@@ -32,7 +32,7 @@ try {
   };
   const { snapshot, diagnostics } = buildExplorerSnapshot(policy, schemas, collections, roots);
   const output = `${JSON.stringify(snapshot, null, 2)}\n`;
-  if (/"(?:visit_notes|checklist|coordinates|contact_questions|instructions|source_notes)"\s*:/.test(output)) throw new Error("A non-public field entered the Explorer payload");
+  if (/"(?:visit_notes|checklist|coordinates|contact_questions|source_notes)"\s*:/.test(output)) throw new Error("A non-public field entered the Explorer payload");
   await mkdir("src/generated", { recursive: true });
   const path = "src/generated/explorer-public.json";
   let old = "";

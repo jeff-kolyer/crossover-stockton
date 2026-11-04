@@ -33,8 +33,25 @@
     .organization-list .card{display:flex}
     .organization-list .card-body{display:flex;flex-direction:column;flex:1}
     .organization-list .card-foot{margin-top:auto}
+    .detail-section li + li{margin-top:12px}
+    .row.undated-action{grid-template-columns:minmax(0,1fr) auto}
+    @media(max-width:760px){.row.undated-action{grid-template-columns:1fr}}
     @media(max-width:760px){.organization-metrics .metric-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:760px){.hero-image{position:relative;inset:auto;height:390px;object-position:67% center}.hero:before,.hero:after{display:none}.hero-inner{min-height:0;padding-block:42px}}
+
+    .about-hero{position:relative;min-height:540px;color:white;background:#493728;overflow:hidden;display:flex;align-items:end}
+    .about-hero-photo,.about-hero-photo img{position:absolute;inset:0;width:100%;height:100%}
+    .about-hero-photo img{object-fit:cover;object-position:center 52%}
+    .about-hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(22,27,25,.77),rgba(22,27,25,.43) 46%,rgba(22,27,25,.05) 82%)}
+    .about-hero-inner{position:relative;z-index:2;padding:100px 0 75px}
+    .about-hero .eyebrow{color:#ffd0a8}.about-hero h1{font-size:clamp(3.4rem,7vw,6.4rem);max-width:720px;margin:16px 0 22px}.about-hero p{font:normal clamp(1.2rem,2vw,1.7rem)/1.4 Georgia,serif;max-width:650px;margin:0}
+    .about-intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:8%;align-items:start}.about-intro h2{font-size:clamp(2.2rem,3.8vw,3.5rem);margin:14px 0 0}.about-intro-copy{border-left:3px solid var(--accent);padding-left:28px;font-size:1.08rem;line-height:1.65;color:var(--soft)}.about-intro-copy p:last-child{margin-bottom:0}
+    .about-practice{background:var(--sage)}.about-practice h2,.about-methods h2,.about-principles h2{margin:12px 0 32px}.about-practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center}.about-practice-grid img{width:100%;height:390px;object-fit:cover;border-radius:10px}.about-practice-copy{font-size:1rem;line-height:1.65;color:var(--soft)}.about-practice-copy .about-large{font:normal 1.65rem/1.35 Georgia,serif;color:var(--ink)}.about-practice-copy .text-link{display:inline-block;margin-top:12px}
+    .about-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.about-method{min-width:0}.about-method-image img{width:100%;height:250px;object-fit:cover;border-radius:10px}.about-method-body{display:grid;grid-template-columns:46px 1fr;column-gap:14px;padding:25px 0;border-bottom:1px solid var(--line)}.about-number{font:normal 1rem Georgia,serif;color:var(--accent)}.about-method h3{font:normal 2rem Georgia,serif;margin:0 0 12px}.about-method p,.about-method a{grid-column:2}.about-method p{font-size:1rem;line-height:1.6;color:var(--soft);margin-bottom:14px}.about-method a{justify-self:start}
+    .about-principles{background:#e9ede7}.about-principle-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:7%}.about-principle{display:grid;grid-template-columns:46px 1fr;gap:14px;padding:25px 0;border-top:1px solid #cbd6cb}.about-principle h3{font:normal 1.7rem Georgia,serif;margin:0 0 10px}.about-principle p{font-size:.96rem;line-height:1.58;color:var(--soft);margin:0 0 9px}.about-principle p:last-child{margin-bottom:0}
+    .about-founder-grid{display:grid;grid-template-columns:minmax(240px,390px) 1fr;gap:8%;align-items:center}.about-founder-grid>img{width:100%;height:390px;object-fit:cover;border-radius:10px}.about-founder h2{margin:12px 0 25px}.about-founder p{font-size:1.06rem;line-height:1.65;color:var(--soft)}.about-founder .btn{margin-top:10px}
+    .about-close{background:var(--deep);color:white;margin-bottom:-70px}.about-close-grid{display:grid;grid-template-columns:1fr 1fr;gap:8%;align-items:center}.about-close-grid>div{padding:70px 0}.about-close h2{font-size:clamp(2rem,3.3vw,3rem);margin:12px 0 27px}.about-close .eyebrow{color:#efb993}.about-close img{width:100%;height:100%;min-height:320px;object-fit:cover}
+    @media(max-width:760px){.about-hero{min-height:450px}.about-hero-photo img{object-position:60% center}.about-hero:before{background:linear-gradient(0deg,rgba(22,27,25,.75),rgba(22,27,25,.18) 75%)}.about-hero-inner{padding:120px 0 42px}.about-hero h1{font-size:3.25rem}.about-intro-grid,.about-practice-grid,.about-method-grid,.about-principle-grid,.about-founder-grid,.about-close-grid{grid-template-columns:1fr;gap:26px}.about-intro-copy{padding-left:18px}.about-practice-grid img{height:250px}.about-method-image img{height:215px}.about-founder-grid>img{height:320px}.about-close-grid>div{padding:55px 0 0}.about-close img{height:210px;min-height:0}.about-close{margin-bottom:-70px}}
   </style>
 <link rel="canonical" href="https://crossoverstockton.org/"></head>
 <body>

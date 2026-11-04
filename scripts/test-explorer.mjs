@@ -7,7 +7,7 @@ import { googleMapsSearchUrl } from "../src/lib/googleMapsUrl.ts";
 
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const published = await readJson("../src/generated/explorer-public.json");
-const sourceTasks = await readJson("../src/data/tasks.json");
+const sourceActions = await readJson("../src/data/actions.json");
 const sourceLocations = await readJson("../src/data/locations.json");
 const sourceArticles = (await readJson("../src/data/articles.json")).records;
 const needsSource = await readJson("../src/data/needs.json");
@@ -22,7 +22,7 @@ test("published counts come from unique records, and schema metadata names types
   assert.ok(evidence?.recordIds.length > 0);
   assert.equal(evidence.recordIds.length, new Set(evidence.recordIds).size);
   assert.equal(published.records[evidence.recordIds[0]].typeName, schemas.evidence.title);
-  for (const id of ["tasks", "objectives", "findings", "locations", "stories"]) {
+  for (const id of ["actions", "objectives", "findings", "locations", "stories"]) {
     const collection = published.collections.find((item) => item.id === id);
     assert.ok(collection?.recordIds.length > 0);
     assert.equal(collection.recordIds.length, new Set(collection.recordIds).size);
@@ -63,11 +63,11 @@ test("broad references stay broad, verified addresses cite sources, and relation
     assert.ok(source_url.startsWith("https://"));
   }
   const campusId = "st-marys-community-services-campus";
-  const task = sourceTasks.find(({ map_reference_location_ids }) => map_reference_location_ids?.includes(campusId));
+  const action = sourceActions.find(({ map_reference_location_ids }) => map_reference_location_ids?.includes(campusId));
   const article = sourceArticles.find(({ related_location_ids }) => related_location_ids?.includes(campusId));
-  assert.ok(task);
+  assert.ok(action);
   assert.ok(article);
-  assert.ok(published.records[task.id].fields.map_reference_location_ids.includes(campusId));
+  assert.ok(published.records[action.id].fields.map_reference_location_ids.includes(campusId));
   assert.ok(published.records[article.id].fields.related_location_ids.includes(campusId));
   assert.ok(published.collections.find(({ id }) => id === "street-dog-immediate-welfare:locations").recordIds.includes(campusId));
   for (const id of ["louis-park-pixie-woods-2026-04-06", "stanislaus-street-corridor-2026-04-06", "highway-4-corridor-2026-04-06"])
@@ -163,10 +163,10 @@ test("visual preferences publish when supplied and remain optional", () => {
   for (const field of policy.sharedFields) assert.equal(snapshot.records["without-visuals"].fields[field], undefined);
 });
 
-test("task order follows each task record's order_by_id", () => {
-  const collection = published.collections.find((item) => item.id === "tasks");
-  const ordered = [...sourceTasks].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
-  assert.deepEqual(collection.recordIds, ordered.map((task) => task.id));
+test("action order follows each action record's order_by_id", () => {
+  const collection = published.collections.find((item) => item.id === "actions");
+  const ordered = [...sourceActions].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
+  assert.deepEqual(collection.recordIds, ordered.map((action) => action.id));
   assert.equal(ordered[1].id, "task-review-sas-field-call-records");
 });
 
@@ -233,7 +233,7 @@ test("real records share one public payload across browse paths and inspection m
     ["dogs-safe-placement", "needs"],
     ["street-dog-immediate-welfare", "investigations"],
     ["where-dogs-need-help", "objectives"],
-    ["task-review-sas-field-call-records", "tasks"],
+    ["task-review-sas-field-call-records", "actions"],
     ["crossover-2026-11-02-sas-field-call-records-received", "activities"],
     ["sas-2024-dog-intake-total", "measurements"],
     ["finding-public-street-dog-information-fragmented", "findings"],
@@ -308,7 +308,7 @@ test("Investigation branches use one canonical record per ID and explicit relati
   assert.equal(published.investigations.length, 1);
   const investigation = published.investigations[0];
   assert.equal(investigation.title, "Dogs on the street in Stockton");
-  assert.deepEqual(investigation.collectionIds.map((id) => published.collections.find((item) => item.id === id)?.title), ["Objectives", "Tasks", "Activities", "Findings", "Articles", "Locations", "Evidence", "Projects", "Organizations"]);
+  assert.deepEqual(investigation.collectionIds.map((id) => published.collections.find((item) => item.id === id)?.title), ["Objectives", "Actions", "Activities", "Findings", "Articles", "Locations", "Evidence", "Projects", "Organizations"]);
   assert.deepEqual(published.recordChildren[investigation.id], investigation.collectionIds);
   assert.equal(published.records[investigation.id].schema, "investigation");
   assert.equal(published.collections.find((item) => item.id === `${investigation.id}:projects`)?.schema, "project");
@@ -340,13 +340,13 @@ test("Investigation branches use one canonical record per ID and explicit relati
 });
 
 test("a second investigation creates its own scoped branch without copying shared records", () => {
-  const ids = new Set(["needs", "investigations", "objectives", "tasks", "activities", "findings", "locations", "evidence", "projects", "organizations"]);
+  const ids = new Set(["needs", "investigations", "objectives", "actions", "activities", "findings", "locations", "evidence", "projects", "organizations"]);
   const fixturePolicy = { ...policy, collections: policy.collections.filter((item) => ids.has(item.id)) };
   const { snapshot } = buildExplorerSnapshot(fixturePolicy, schemas, {
     needs: [{ id: "need-one" }, { id: "need-two" }],
     investigations: [{ id: "investigation-one", publicName: "One", gap_id: "need-one" }, { id: "investigation-two", publicName: "Two", gap_id: "need-two" }],
     objectives: [{ id: "objective-one", investigation_id: "investigation-one", evidence_record_ids: ["evidence-one"] }],
-    tasks: [], activities: [],
+    actions: [], activities: [],
     findings: [{ id: "finding-one", investigation_id: "investigation-one" }, { id: "finding-two", investigation_id: "investigation-two" }],
     locations: [],
     evidence: [{ id: "evidence-one", title: "One" }, { id: "evidence-two", title: "Two", investigation_id: "investigation-two" }, { id: "unrelated", title: "Unrelated" }],

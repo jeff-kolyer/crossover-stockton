@@ -4,14 +4,6 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Establish the scale, distribution, and condition of street dogs",
     "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status.",
-    "task_ids": [
-      "task-verify-st-marys-church-street-dog-scale",
-      "task-verify-south-stockton-district-5-reports",
-      "task-sas-field-call-request-2026-10-20",
-      "task-sas-field-call-follow-up",
-      "task-review-sas-field-call-records",
-      "task-contact-cbs-charlie-lapastora"
-    ],
     "activity_record_ids": [
       "crossover-2026-10-20-sas-field-call-records-request",
       "crossover-2026-11-02-sas-field-call-records-received"
@@ -27,6 +19,14 @@
     ],
     "finding_ids": [
       "finding-public-street-dog-information-fragmented"
+    ],
+    "action_ids": [
+      "task-verify-st-marys-church-street-dog-scale",
+      "task-verify-south-stockton-district-5-reports",
+      "task-sas-field-call-request-2026-10-20",
+      "task-sas-field-call-follow-up",
+      "task-review-sas-field-call-records",
+      "task-contact-cbs-charlie-lapastora"
     ]
   },
   {
@@ -34,10 +34,6 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Establish who is providing care and what care reaches dogs",
     "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery.",
-    "task_ids": [
-      "task-ssd-volunteer-application-2026-10-07",
-      "task-ssd-ask-contact-questions"
-    ],
     "activity_record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application"
     ],
@@ -46,6 +42,10 @@
     ],
     "finding_ids": [
       "finding-volunteer-onboarding-can-stall"
+    ],
+    "action_ids": [
+      "task-ssd-volunteer-application-2026-10-07",
+      "task-ssd-ask-contact-questions"
     ]
   },
   {
@@ -53,14 +53,6 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Trace reporting, response, intake, and outcomes",
     "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends.",
-    "task_ids": [
-      "task-sas-visit-application-2026-10-14",
-      "task-sas-field-call-request-2026-10-20",
-      "task-sas-field-call-follow-up",
-      "task-review-sas-field-call-records",
-      "task-monitor-animal-control-ordinance",
-      "task-contact-cbs-charlie-lapastora"
-    ],
     "activity_record_ids": [
       "crossover-2026-10-14-sas-volunteer-application",
       "crossover-2026-10-20-sas-field-call-records-request",
@@ -76,6 +68,14 @@
     ],
     "finding_ids": [
       "finding-public-street-dog-information-fragmented"
+    ],
+    "action_ids": [
+      "task-sas-visit-application-2026-10-14",
+      "task-sas-field-call-request-2026-10-20",
+      "task-sas-field-call-follow-up",
+      "task-review-sas-field-call-records",
+      "task-monitor-animal-control-ordinance",
+      "task-contact-cbs-charlie-lapastora"
     ]
   },
   {
@@ -83,14 +83,6 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Identify what prevents people from helping",
     "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence.",
-    "task_ids": [
-      "task-ssd-volunteer-application-2026-10-07",
-      "task-sas-doggie-day-out-inquiry-2026-10-12",
-      "task-sas-visit-application-2026-10-14",
-      "task-ssd-ask-contact-questions",
-      "task-sas-volunteer-onboarding-follow-up",
-      "task-contact-cbs-charlie-lapastora"
-    ],
     "activity_record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application",
       "crossover-2026-10-12-doggie-day-out-inquiry",
@@ -104,6 +96,14 @@
     "finding_ids": [
       "finding-volunteer-onboarding-can-stall",
       "finding-new-facilities-impact-uncertain"
+    ],
+    "action_ids": [
+      "task-ssd-volunteer-application-2026-10-07",
+      "task-sas-doggie-day-out-inquiry-2026-10-12",
+      "task-sas-visit-application-2026-10-14",
+      "task-ssd-ask-contact-questions",
+      "task-sas-volunteer-onboarding-follow-up",
+      "task-contact-cbs-charlie-lapastora"
     ]
   },
   {
@@ -111,7 +111,6 @@
     "investigation_id": "street-dog-immediate-welfare",
     "title": "Evaluate improvements to access and outcomes",
     "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution.",
-    "task_ids": [],
     "activity_record_ids": [
       "crossover-2026-10-12-doggie-day-out-inquiry"
     ],
@@ -122,6 +121,7 @@
     ],
     "finding_ids": [
       "finding-new-facilities-impact-uncertain"
-    ]
+    ],
+    "action_ids": []
   }
 ]

@@ -6,7 +6,7 @@ const titleFor = (record) => record.publicName || record.name || record.title ||
 
 const idsFrom = (record, fields) => fields.flatMap((field) => Array.isArray(record?.[field]) ? record[field] : []);
 
-const dateFields = ["occurred_at", "published_at", "date", "completed_at", "estimated_created_at", "recorded_at", "updated_at", "last_updated_at", "last_reviewed_at", "last_verified_at", "evidence_date", "period_end", "period_start", "checked_at"];
+const dateFields = ["occurred_at", "published_at", "date", "completed_at", "recorded_at", "updated_at", "last_updated_at", "last_reviewed_at", "last_verified_at", "evidence_date", "period_end", "period_start", "checked_at"];
 const validDate = (value) => {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(value) || !Number.isFinite(Date.parse(value))) return false;
   const [year, month, day] = value.slice(0, 10).split("-").map(Number);
@@ -30,7 +30,7 @@ function investigationBranches(policy, collections, publishedCollections, record
     if (!records.has(investigation.id)) continue;
     const scoped = (id) => (collections[id] ?? []).filter((item) => item.investigation_id === investigation.id && publishedIds(id).has(item.id));
     const objectives = scoped("objectives");
-    const tasks = scoped("tasks");
+    const actions = scoped("actions");
     const activities = scoped("activities");
     const findings = scoped("findings");
     const articles = (collections.articles ?? []).filter((item) => item.related_gap_ids?.includes(investigation.gap_id) && publishedIds("articles").has(item.id));
@@ -38,7 +38,7 @@ function investigationBranches(policy, collections, publishedCollections, record
     const projects = (collections.projects ?? []).filter((item) => item.gap_ids?.includes(investigation.gap_id) && publishedIds("projects").has(item.id));
     const need = (collections.needs ?? []).find((item) => item.id === investigation.gap_id);
     const evidenceIds = new Set(idsFrom(investigation, ["evidence_record_ids"]));
-    for (const item of [...objectives, ...tasks, ...activities, ...findings, ...locations, ...projects, need]) {
+    for (const item of [...objectives, ...actions, ...activities, ...findings, ...locations, ...projects, need]) {
       for (const id of idsFrom(item, ["evidence_record_ids", "activity_record_ids", "basis_record_ids", "report_record_ids", "supporting_record_ids", "contradicting_record_ids", "record_ids", "source_record_ids"])) evidenceIds.add(id);
       if (item?.evidence_record_id) evidenceIds.add(item.evidence_record_id);
     }
@@ -55,11 +55,11 @@ function investigationBranches(policy, collections, publishedCollections, record
     }
     const relatedEvidence = (collections.evidence ?? []).filter((item) => evidenceIds.has(item.id) && publishedIds("evidence").has(item.id));
     const organizationIds = new Set();
-    for (const item of [need, ...tasks, ...activities, ...projects, ...relatedEvidence]) {
+    for (const item of [need, ...actions, ...activities, ...projects, ...relatedEvidence]) {
       for (const id of idsFrom(item, ["organization_ids"])) organizationIds.add(id);
     }
     const organizations = (collections.organizations ?? []).filter((item) => organizationIds.has(item.id) && publishedIds("organizations").has(item.id));
-    const members = { objectives, tasks, activities, findings, articles, locations, evidence: relatedEvidence, projects, organizations };
+    const members = { objectives, actions, activities, findings, articles, locations, evidence: relatedEvidence, projects, organizations };
     const collectionIds = [];
     for (const sourceId of policy.investigationChildren ?? []) {
       const nested = policy.investigationCollectionGroups?.find((item) => item.id === sourceId);
@@ -168,7 +168,7 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
     }
   }
   // Only firsthand, occurred Crossover actions establish contact. Research references
-  // and planned tasks do not create a contact relationship.
+  // and planned actions do not create a contact relationship.
   for (const activity of records.values()) {
     if (activity.schema !== "activity" || activity.fields.trust !== "crossover_source"
       || activity.fields.source?.type !== "firsthand_account" || !validDate(activity.fields.occurred_at)) continue;

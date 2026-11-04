@@ -7,7 +7,7 @@ const readJson = async (name) => JSON.parse(await readFile(new URL(`../src/data/
 const needs = (await readJson("needs")).records;
 const evidence = [...await readJson("evidence"), ...await readJson("activities")];
 const objectives = await readJson("objectives");
-const tasks = await readJson("tasks");
+const actions = await readJson("actions");
 const receiptId = "crossover-2026-11-02-sas-field-call-records-received";
 
 test("the receipt is one activity shared by Activity and public Updates", () => {
@@ -20,8 +20,8 @@ test("the receipt is one activity shared by Activity and public Updates", () => 
   assert.ok(!needs.find((need) => need.id === "dogs-safe-placement").record_ids.includes(receiptId));
   const update = selectPublicUpdates(needs, evidence).find((item) => item.record.id === receiptId);
   assert.equal(update.record, receipt);
-  assert.equal(tasks.find((task) => task.id === "task-review-sas-field-call-records").status, "open");
-  assert.equal(tasks.find((task) => task.id === "task-sas-field-call-request-2026-10-20").status, "done");
+  assert.equal(actions.find((action) => action.id === "task-review-sas-field-call-records").status, "open");
+  assert.equal(actions.find((action) => action.id === "task-sas-field-call-request-2026-10-20").status, "done");
   assert.deepEqual(publicUpdateDate(receipt), { value: "2026-11-02", meaning: "occurred" });
 });
 

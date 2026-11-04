@@ -19,7 +19,7 @@
       "type": "string",
       "minLength": 1
     },
-    "task_ids": {
+    "action_ids": {
       "type": "array",
       "items": {
         "$ref": "./common.schema.json#/$defs/id"
@@ -73,7 +73,7 @@
     "investigation_id",
     "title",
     "description",
-    "task_ids",
+    "action_ids",
     "activity_record_ids",
     "evidence_record_ids",
     "finding_ids"

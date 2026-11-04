@@ -1,12 +1,12 @@
-export type TaskStatus = "open" | "waiting" | "done" | "cancelled";
+export type ActionStatus = "open" | "waiting" | "done" | "cancelled";
 
-export interface InvestigationTask {
+export interface InvestigationAction {
   id: string;
   order_by_id: number;
   investigation_id: string;
   title: string;
-  status: TaskStatus;
-  type: "application" | "inquiry" | "field_observation" | "records_request" | "follow_up" | "source_review" | "organization_contact";
+  status: ActionStatus;
+  type: "application" | "inquiry" | "field_observation" | "records_request" | "follow_up" | "source_review" | "organization_contact" | "policy_monitoring";
   instructions: string;
   list_context?: string;
   list_date_label?: string;
@@ -25,7 +25,7 @@ export interface InvestigationObjective {
   investigation_id: string;
   title: string;
   description: string;
-  task_ids: string[];
+  action_ids: string[];
   activity_record_ids: string[];
   evidence_record_ids: string[];
   finding_ids: string[];
@@ -46,7 +46,7 @@ export interface InvestigationFinding {
   supporting_record_ids: string[];
   contradicting_record_ids: string[];
   related_objective_ids: string[];
-  related_task_ids: string[];
+  related_action_ids: string[];
   related_project_ids: string[];
   location_ids: string[];
   limitations: string;

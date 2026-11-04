@@ -175,13 +175,13 @@
         {
           "heading": "How Crossover is testing the approach",
           "paragraphs": [
-            "Crossover's public investigation follows a cycle: Tasks identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The records request is one Activity in that cycle, and its result remains pending.",
+            "Crossover's public investigation follows a cycle: planned Actions identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The records request is one Activity in that cycle, and its result remains pending.",
             "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. The next steps are to examine the field-call records if provided, compare them with existing public resources, ask responders what information they can share, and test whether that information helps people act safely."
           ],
           "links": [
             {
-              "label": "Investigation Tasks",
-              "url": "/work/dogs/tasks/"
+              "label": "Investigation Actions",
+              "url": "/activity/#next-actions"
             },
             {
               "label": "Investigation Activity",
@@ -372,9 +372,9 @@
               "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/"
             },
             {
-              "label": "Planned St. Mary's corridor field task",
-              "display_label": "St. Mary’s field task",
-              "url": "/work/dogs/tasks/#task-verify-st-marys-church-street-dog-scale"
+              "label": "Planned St. Mary's corridor field action",
+              "display_label": "St. Mary’s field action",
+              "url": "/record/task-verify-st-marys-church-street-dog-scale/"
             },
             {
               "label": "St. Mary's–Church Street corridor location record",
@@ -391,9 +391,9 @@
           ],
           "links": [
             {
-              "label": "Planned South Stockton / District 5 field task",
-              "display_label": "South Stockton field task",
-              "url": "/work/dogs/tasks/#task-verify-south-stockton-district-5-reports"
+              "label": "Planned South Stockton / District 5 field action",
+              "display_label": "South Stockton field action",
+              "url": "/record/task-verify-south-stockton-district-5-reports/"
             },
             {
               "label": "Carrie Street levee / Weston Ranch location record",
@@ -422,13 +422,13 @@
         {
           "heading": "Follow the investigation",
           "paragraphs": [
-            "This is an ongoing article, not a completed conclusion. The St. Mary's corridor and South Stockton / District 5 tasks are currently planned; their field observations are not yet available. When firsthand reports are completed, we will add dated results, sources, limitations, and any resulting changes to our findings. New evidence may change our questions and where we investigate next.",
+            "This is an ongoing article, not a completed conclusion. The St. Mary's corridor and South Stockton / District 5 actions are currently planned; their field observations are not yet available. When firsthand reports are completed, we will add dated results, sources, limitations, and any resulting changes to our findings. New evidence may change our questions and where we investigate next.",
             "The number and location of Stockton's street dogs remain unknown. That's precisely why we're going to look."
           ],
           "links": [
             {
-              "label": "Current Crossover tasks",
-              "url": "/work/dogs/tasks/"
+              "label": "Current Crossover actions",
+              "url": "/activity/#next-actions"
             },
             {
               "label": "Investigation activity",

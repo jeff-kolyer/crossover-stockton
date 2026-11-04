@@ -3,7 +3,7 @@ import { resolve, sep } from "node:path";
 
 const feed = JSON.parse(await readFile("public/data/records.json", "utf8"));
 const template = await readFile("site/one-file-template.html", "utf8");
-const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/home/home-hero-wide.jpg", "/images/about/about-the-founder.jpg"]);
+const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/home/home-hero-wide.jpg", "/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg", "/images/about/guy-dog.jpg", "/images/about/notebook.jpg", "/images/about/techno.jpg", "/images/about/hands.jpg"]);
 const collect = (value) => {
   if (typeof value === "string" && value.startsWith("/images/")) imagePaths.add(value);
   else if (Array.isArray(value)) value.forEach(collect);

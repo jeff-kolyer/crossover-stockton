@@ -86,29 +86,55 @@ test("the one-file interactive version remains available without hash route link
   assert.deepEqual((await readdir("dist")).filter((name) => name === "assets"), []);
 });
 
-test("the St. Mary's task publishes its instructions and estimated creation date", async () => {
+test("About uses the published identity statements and existing images", async () => {
+  const statements = feed.records["crossover-stockton"].fields.statements;
+  const source = JSON.parse(await read("src/data/crossover.json")).identity.statements;
+  assert.deepEqual(statements, source);
+  const page = await read("dist/about/index.html");
+  for (const key of ["missionQuestion", "opportunity", "startingApproach", "animalCareInvestigation", "presencePractice", "publicCommitment"]) {
+    assert.ok(page.includes(escapeHtml(statements[key])), key);
+  }
+  for (const image of ["about-crossover-hero.jpg", "guy-dog.jpg", "techno.jpg", "notebook.jpg", "hands.jpg", "about-the-founder.jpg"]) {
+    assert.ok(page.includes(`/images/about/${image}`), image);
+  }
+});
+
+test("the St. Mary's action publishes instructions without an invented date", async () => {
   const id = "task-verify-st-marys-church-street-dog-scale";
   const record = feed.records[id];
   const page = await read(`dist/record/${id}/index.html`);
-  assert.equal(record.fields.recorded_at, "2026-10-31");
-  assert.equal(record.fields.estimated_created_at, "2026-10-31");
-  assert.equal(record.dateForSort.field, "estimated_created_at");
-  assert.ok(record.fields.public_instructions);
-  assert.equal(record.fields.instructions, undefined);
-  assert.ok(page.includes(`<h2>Instructions</h2><p>${escapeHtml(record.fields.public_instructions)}</p>`));
-  assert.match(page, /Created \(estimated\) · Oct 31, 2026/);
+  assert.equal(record.dateForSort, undefined);
+  assert.equal(record.fields.completed_at, undefined);
+  assert.ok(record.fields.instructions);
+  assert.equal(record.fields.public_instructions, undefined);
+  assert.ok(page.includes(`<h2>Instructions</h2><p>${escapeHtml(record.fields.instructions)}</p>`));
+  assert.doesNotMatch(page, /Created \(estimated\)|Est\. created|Undated/);
 });
 
-test("every task publishes an estimated creation date with its basis", async () => {
-  const tasks = records.filter(({ schema }) => schema === "action");
-  assert.equal(tasks.length, 12);
-  for (const task of tasks) {
-    assert.match(task.fields.estimated_created_at, /^2026-\d{2}-\d{2}$/);
-    assert.ok(task.fields.creation_date_basis?.includes("Estimated from"), task.id);
-    assert.equal(task.dateForSort.field, task.fields.completed_at ? "completed_at" : "estimated_created_at");
-    if (task.fields.completed_at) assert.ok(task.fields.estimated_created_at <= task.fields.completed_at, `${task.id} estimate is no later than completion`);
-    const page = await read(`dist/record/${task.id}/index.html`);
-    assert.ok(page.includes(escapeHtml(task.fields.creation_date_basis)), `${task.id} date basis on page`);
+test("open actions have no displayed date; completed actions use completion dates", async () => {
+  const actions = records.filter(({ schema }) => schema === "action");
+  assert.equal(actions.length, 12);
+  for (const action of actions) {
+    assert.equal(action.fields.estimated_created_at, undefined);
+    assert.equal(action.fields.creation_date_basis, undefined);
+    assert.equal(action.fields.recorded_at, undefined);
+    assert.equal(action.dateForSort?.field, action.fields.completed_at ? "completed_at" : undefined);
+    const page = await read(`dist/record/${action.id}/index.html`);
+    assert.doesNotMatch(page, /Created \(estimated\)|Est\. created/);
+  }
+  const activity = await read("dist/activity/index.html");
+  assert.match(activity, /class="row undated-action"><div><h3>/);
+  assert.doesNotMatch(activity, /class="row-date">Undated<\/span>/);
+});
+
+test("every action publishes its source instructions on its record page", async () => {
+  const sourceActions = JSON.parse(await read("src/data/actions.json"));
+  assert.equal(sourceActions.length, 12);
+  for (const action of sourceActions) {
+    const record = feed.records[action.id];
+    const page = await read(`dist/record/${action.id}/index.html`);
+    assert.equal(record.fields.instructions, action.instructions, `${action.id} instructions in feed`);
+    assert.ok(page.includes(`<h2>Instructions</h2><p>${escapeHtml(action.instructions)}</p>`), `${action.id} instructions on page`);
   }
 });
 
@@ -126,6 +152,45 @@ test("need pages show public record points and their linked claims", async () =>
         assert.ok(page.includes(`/record/${sourceId}/`), `${claim.id} links source ${sourceId}`);
       }
     }
+  }
+});
+
+test("objective pages place supporting records in the main column", async () => {
+  for (const objective of records.filter(({ schema }) => schema === "objective")) {
+    const page = await read(`dist/record/${objective.id}/index.html`);
+    const mainColumn = page.split('<div class="wrap detail-grid"><div>')[1]?.split('</div><aside class="detail-aside">')[0];
+    const sidebar = page.split('<aside class="detail-aside">')[1]?.split('</aside>')[0];
+    assert.ok(mainColumn && sidebar, `${objective.id} has both columns`);
+    for (const [field, heading] of [
+      ["finding_ids", "Findings"],
+      ["evidence_record_ids", "Evidence"],
+      ["activity_record_ids", "Documented Crossover activity"],
+      ["action_ids", "Next actions"],
+    ]) {
+      if (!objective.fields[field]?.length) continue;
+      assert.ok(mainColumn.includes(`<h2>${heading}</h2>`), `${objective.id} ${heading} section`);
+      for (const id of objective.fields[field]) {
+        assert.ok(mainColumn.includes(`/record/${id}/`), `${objective.id} links ${id} in main column`);
+        assert.ok(!sidebar.includes(`/record/${id}/`), `${objective.id} does not duplicate ${id} in sidebar`);
+      }
+    }
+  }
+});
+
+test("organizations and their documented places link to each other", async () => {
+  for (const organization of organizations) {
+    const placeId = organization.fields.map_location_id;
+    const page = await read(`dist/organization/${organization.id}/index.html`);
+    if (!placeId) {
+      assert.doesNotMatch(page, /<h2>Place<\/h2>/, organization.id);
+      continue;
+    }
+    const place = feed.records[placeId];
+    assert.equal(place?.schema, "location", organization.id);
+    assert.match(page, new RegExp(`<h2>Place<\\/h2>[\\s\\S]*?href="/record/${placeId}/"`), organization.id);
+    assert.ok(page.includes(`Open on Google Maps ↗`), organization.id);
+    const placePage = await read(`dist/record/${placeId}/index.html`);
+    assert.ok(placePage.includes(`<h3>Organization</h3><a href="/organization/${organization.id}/">${escapeHtml(organization.title)}</a>`), placeId);
   }
 });
 
