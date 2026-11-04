@@ -65,6 +65,25 @@ test("records-access article preserves its publication date and dated developmen
   assert.doesNotMatch(page, /result remains pending|examine the field-call records if provided/);
 });
 
+test("records-access article uses current internal links and straight arrows", async () => {
+  const article = feed.records["public-access-to-stray-dog-information"];
+  const page = await read(`dist/record/${article.id}/index.html`);
+  const expected = new Map([
+    ["Investigation Actions", "/activity/#next-actions"],
+    ["Investigation Activity", "/activity/"],
+    ["Findings", "/investigation/#findings"],
+    ["Public Actions", "/activity/#next-actions"],
+  ]);
+  for (const [label, href] of expected) {
+    assert.ok(page.includes(`href="${href}"`), `${label} uses ${href}`);
+    assert.match(page, new RegExp(`href="${href.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"[^>]*>${label} <svg class="right-arrow"`), `${label} has the internal arrow`);
+  }
+  assert.doesNotMatch(page, /href="\/(?:work\/dogs|action\/)/, "article has no old internal routes");
+  const script = await read("dist/static-navigation.js");
+  assert.match(script, /url\.pathname \+ url\.hash/, "navigation retains cross-page fragments");
+  assert.match(script, /scrollToDestination\(url, scrollY\)/, "navigation scrolls to the destination section");
+});
+
 test("the root and every feed record have readable HTML with normal URLs", async () => {
   const root = await read("dist/index.html");
   assert.equal(await read("index.html"), root);
@@ -146,6 +165,7 @@ test("the root and every feed record have readable HTML with normal URLs", async
   assert.doesNotMatch(broadPlace, /<iframe class="location-map"/);
   assert.match(broadPlace, /<h2>[^<]+<\/h2><a class="btn map mobile-map-action"[^>]*>Open on Google Maps <svg class="external-arrow"[^>]*>.*?<\/svg><\/a>/, "unembedded places retain a near-top mobile link");
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
+  assert.match(broadPlace, /href="\/data\/records\.json">Public feed \(JSON\) <svg class="external-arrow"/, "the raw JSON feed uses the diagonal arrow");
   assert.equal((await read("dist/CNAME")).trim(), "crossoverstockton.org");
 });
 

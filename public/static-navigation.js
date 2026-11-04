@@ -14,7 +14,7 @@
     menu.setAttribute("aria-expanded", String(nav.classList.contains("open")));
   });
 
-  const sections = new Set(["/", "/needs/", "/investigation/", "/activity/", "/responses/", "/organizations/", "/places/", "/explore/", "/about/"]);
+  const sections = new Set(["/", "/needs/", "/investigation/", "/activity/", "/stories/", "/articles/", "/responses/", "/organizations/", "/places/", "/explore/", "/about/"]);
   const recordPath = /^\/(?:record|organization)\/[^/]+\/$/;
   const cache = new Map();
   cache.set(location.pathname, Promise.resolve(document.cloneNode(true)));
@@ -64,7 +64,7 @@
   const destination = (link) => {
     if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return null;
     const url = new URL(link.href, location.href);
-    if (url.origin !== location.origin || url.search || url.hash) return null;
+    if (url.origin !== location.origin || url.search || (url.pathname === displayedPath && url.hash)) return null;
     return sections.has(url.pathname) || recordPath.test(url.pathname) ? url : null;
   };
 
@@ -106,6 +106,16 @@
     breadcrumb.replaceChildren(home, document.createTextNode(" / "), explore, document.createTextNode(" / "), current);
   };
 
+  const scrollToDestination = (url, fallback = 0) => {
+    if (url.hash) {
+      let id = url.hash.slice(1);
+      try { id = decodeURIComponent(id); } catch { /* Keep the literal fragment. */ }
+      const target = document.getElementById(id);
+      if (target) { target.scrollIntoView(); return; }
+    }
+    window.scrollTo(0, fallback);
+  };
+
   const display = (page, url, scrollY, focusMain) => {
     const main = document.importNode(page.querySelector("main#main"), true);
     document.querySelector("main#main").replaceWith(main);
@@ -120,7 +130,7 @@
     displayedPath = url.pathname;
     syncBreadcrumb();
     enhanceExplore();
-    window.scrollTo(0, scrollY);
+    scrollToDestination(url, scrollY);
     if (focusMain) main.focus({ preventScroll: true });
   };
 
@@ -132,7 +142,7 @@
       if (push) {
         const fromExplore = recordPath.test(url.pathname) &&
           (displayedPath === "/explore/" || history.state?.breadcrumbContext === "explore");
-        history.pushState(fromExplore ? { breadcrumbContext: "explore" } : null, "", url.pathname);
+        history.pushState(fromExplore ? { breadcrumbContext: "explore" } : null, "", url.pathname + url.hash);
       }
       display(page, url, restoreScroll, push);
     } catch {
@@ -154,7 +164,7 @@
   });
 
   window.addEventListener("popstate", () => {
-    if (location.pathname === displayedPath) return;
+    if (location.pathname === displayedPath) { scrollToDestination(new URL(location.href)); return; }
     scrollPositions.set(displayedPath, window.scrollY);
     navigate(new URL(location.href), false, scrollPositions.get(location.pathname) ?? 0);
   });

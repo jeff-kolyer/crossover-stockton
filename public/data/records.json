@@ -3933,17 +3933,17 @@
                 {
                   "label": "Street Dogs application Activity record",
                   "display_label": "Street Dogs application",
-                  "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application"
+                  "url": "/record/crossover-2026-10-07-street-dogs-volunteer-application/"
                 },
                 {
                   "label": "Doggie Day Out inquiry Activity record",
                   "display_label": "Doggie Day Out inquiry",
-                  "url": "/work/dogs/activity/#crossover-2026-10-12-doggie-day-out-inquiry"
+                  "url": "/record/crossover-2026-10-12-doggie-day-out-inquiry/"
                 },
                 {
                   "label": "Animal Services application Activity record",
                   "display_label": "Animal Services application",
-                  "url": "/work/dogs/activity/#crossover-2026-10-14-sas-volunteer-application"
+                  "url": "/record/crossover-2026-10-14-sas-volunteer-application/"
                 },
                 {
                   "label": "Stockton Animal Services volunteer information",
@@ -4099,7 +4099,7 @@
                 {
                   "label": "Crossover's volunteer-application Activity record",
                   "display_label": "Street Dogs volunteer application",
-                  "url": "/work/dogs/activity/#crossover-2026-10-07-street-dogs-volunteer-application"
+                  "url": "/record/crossover-2026-10-07-street-dogs-volunteer-application/"
                 },
                 {
                   "label": "Stockton Street Dogs' public site",
@@ -4128,15 +4128,15 @@
                 },
                 {
                   "label": "Investigation Activity",
-                  "url": "/work/dogs/activity/"
+                  "url": "/activity/"
                 },
                 {
                   "label": "Findings",
-                  "url": "/work/dogs/findings/"
+                  "url": "/investigation/#findings"
                 },
                 {
                   "label": "Public Actions",
-                  "url": "/action/"
+                  "url": "/activity/#next-actions"
                 }
               ]
             },
@@ -4203,7 +4203,7 @@
                 {
                   "label": "Crossover's October 14 visit report",
                   "display_label": "Animal Services visit report",
-                  "url": "/reports/crossover-2026-10-14-sas-first-visit/"
+                  "url": "/record/crossover-2026-10-14-sas-first-visit/"
                 },
                 {
                   "label": "City of Stockton shelter expansion announcement",
@@ -4321,11 +4321,11 @@
                 {
                   "label": "Investigation question: Where are the stray dogs, and how many are there?",
                   "display_label": "Stray-dog investigation question",
-                  "url": "/reality/too-many-dogs-still-lack-safe-placement/#question-where-dogs-need-help"
+                  "url": "/record/where-dogs-need-help/"
                 },
                 {
                   "label": "Current findings",
-                  "url": "/work/dogs/findings/"
+                  "url": "/investigation/#findings"
                 }
               ]
             },
@@ -4349,7 +4349,7 @@
                 {
                   "label": "St. Mary's–Church Street corridor location record",
                   "display_label": "St. Mary’s corridor location",
-                  "url": "/work/dogs/map/#st-marys-church-street-corridor"
+                  "url": "/record/st-marys-church-street-corridor/"
                 }
               ]
             },
@@ -4368,7 +4368,7 @@
                 {
                   "label": "Carrie Street levee / Weston Ranch location record",
                   "display_label": "Carrie Street levee location",
-                  "url": "/work/dogs/map/#weston-ranch-carrie-street"
+                  "url": "/record/weston-ranch-carrie-street/"
                 },
                 {
                   "label": "Stocktonia: Carrie Street incident report (May 11, 2026)",
@@ -4402,11 +4402,11 @@
                 },
                 {
                   "label": "Investigation activity",
-                  "url": "/work/dogs/activity/"
+                  "url": "/activity/"
                 },
                 {
                   "label": "Evidence-based findings",
-                  "url": "/work/dogs/findings/"
+                  "url": "/investigation/#findings"
                 }
               ]
             }

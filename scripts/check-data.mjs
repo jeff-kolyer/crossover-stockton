@@ -100,6 +100,27 @@ for (const file of ["projects", "stories"]) {
 checkRefs(records.get("projects"), "records", "evidence_record_ids", "project");
 checkRefs(records.get("articles"), "needs", "related_gap_ids", "article");
 checkRefs(records.get("articles"), "locations", "related_location_ids", "article");
+const canonicalSections = new Set(["/", "/needs/", "/investigation/", "/activity/", "/stories/", "/articles/", "/organizations/", "/places/", "/explore/", "/about/"]);
+const recordIds = new Set([...records.values()].flat().map((record) => record.id));
+for (const article of records.get("articles") ?? []) {
+  for (const section of article.content?.sections ?? []) {
+    for (const link of section.links ?? []) {
+      const context = `article:${article.id} section "${section.heading}" link "${link.label}"`;
+      const url = link.url;
+      if (typeof url !== "string" || !url.trim()) { errors.push(`${context} needs a URL`); continue; }
+      if (url.startsWith("https://") && !url.startsWith("https://crossoverstockton.org/")) continue;
+      if (!url.startsWith("/")) { errors.push(`${context} must use a canonical root path or external HTTPS URL: ${url}`); continue; }
+      const parsed = new URL(url, "https://crossoverstockton.org");
+      const recordId = /^\/record\/([^/]+)\/$/.exec(parsed.pathname)?.[1];
+      const organizationId = /^\/organization\/([^/]+)\/$/.exec(parsed.pathname)?.[1];
+      if (parsed.search || parsed.pathname.includes("//") || !(
+        canonicalSections.has(parsed.pathname) ||
+        (recordId && recordIds.has(recordId)) ||
+        (organizationId && ids("organizations").has(organizationId))
+      )) errors.push(`${context} uses an obsolete or missing internal route: ${url}`);
+    }
+  }
+}
 for (const item of records.get("records") ?? []) {
   if (item.organization_interaction && (item.record_type !== "activity" || item.trust !== "crossover_source"
     || item.source?.type !== "firsthand_account" || !item.occurred_at || !item.organization_ids?.length))
