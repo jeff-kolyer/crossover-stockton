@@ -18,7 +18,7 @@ test("the root and every feed record have readable HTML with normal URLs", async
   assert.doesNotMatch(root, /href="\?page=/);
   assert.doesNotMatch(root, /<script id="feed-data"/);
   assert.doesNotMatch(root, /data:image\/[^\s"]+;base64/);
-  assert.match(root, /<script src="\/static-navigation\.js" defer><\/script>/);
+  assert.match(root, /<script src="\/static-navigation\.js\?v=[a-f0-9]{12}" defer><\/script>/);
   const navigationScript = await read("dist/static-navigation.js");
   assert.equal(navigationScript, await read("public/static-navigation.js"));
   new Script(navigationScript, { filename: "static-navigation.js" });

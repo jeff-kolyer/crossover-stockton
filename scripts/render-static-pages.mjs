@@ -20,7 +20,7 @@ const routeFromQuery = (value) => {
   } catch { return "/"; }
 };
 
-export function renderStaticPages(oneFile, feed, origin) {
+export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
   const bundled = (id) => {
     const match = oneFile.match(new RegExp(`<script id="${id}" type="application/json">([\\s\\S]*?)<\\/script>`));
     if (!match) throw new Error(`Missing embedded ${id}`);
@@ -90,7 +90,7 @@ export function renderStaticPages(oneFile, feed, origin) {
       .replace('</div></div></footer>', '<a href="/data/records.json">Public feed (JSON) ↗</a></div></div></footer>')
       .replaceAll('href="#/"', 'href="/"')
       .replace(/href="\?page=([^"]*)"/g, (_, value) => `href="${escapeHtml(routeFromQuery(value))}"`);
-    html += `<script src="/static-navigation.js" defer></script>\n</body>\n</html>\n`;
+    html += `<script src="/static-navigation.js?v=${navigationVersion}" defer></script>\n</body>\n</html>\n`;
     return { path: publicPath(route), html, sitemap };
   });
   return { pages, assets: Object.keys(assets) };

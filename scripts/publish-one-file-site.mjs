@@ -1,4 +1,5 @@
 import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { resolve, sep } from "node:path";
 import { renderStaticPages } from "./render-static-pages.mjs";
 
@@ -48,9 +49,11 @@ await mkdir(resolve(dist, "data"), { recursive: true });
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
 await writeFile(resolve(dist, "favicon.ico"), await readFile("public/favicon.ico"));
-await copyFile("public/static-navigation.js", resolve(dist, "static-navigation.js"));
+const navigationScript = await readFile("public/static-navigation.js");
+const navigationVersion = createHash("sha256").update(navigationScript).digest("hex").slice(0, 12);
+await writeFile(resolve(dist, "static-navigation.js"), navigationScript);
 await writeFile(resolve(dist, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
-const staticSite = renderStaticPages(html, feed, origin);
+const staticSite = renderStaticPages(html, feed, origin, navigationVersion);
 for (const imagePath of staticSite.assets) {
   const source = resolve("public", `.${imagePath}`);
   const target = resolve(dist, `.${imagePath}`);
