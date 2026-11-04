@@ -3,7 +3,7 @@ import type { Map as MapLibreMap } from "maplibre-gl";
 // An isolated OpenFreeMap preview. Roads remain centerlines; the high-zoom
 // casing and white interior are a cartographic approximation, not road polygons.
 const palette = {
-  background: "#F9F6ED",
+  background: "#F6F5F2",
   minorRoad: "#C8C9C5",
   majorRoad: "#B7B9B5",
   roadInterior: "#FFFFFF",
