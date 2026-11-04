@@ -5,10 +5,12 @@ import { createServer } from "vite";
 import { buildExplorerSnapshot, searchExplorer } from "./explorer-snapshot.mjs";
 import { loadExplorerRoots } from "./explorer-roots.mjs";
 import { explorerRecordUrl, recordIdFromSearch } from "../src/controller/explorer-url.ts";
+import { googleMapsSearchUrl } from "../src/lib/googleMapsUrl.ts";
 
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const published = await readJson("../src/generated/explorer-public.json");
 const sourceTasks = await readJson("../src/data/tasks.json");
+const sourceLocations = await readJson("../src/data/locations.json");
 const sourceArticles = (await readJson("../src/data/articles.json")).records;
 const needsSource = await readJson("../src/data/needs.json");
 const sourceProjects = await readJson("../src/data/projects.json");
@@ -27,6 +29,52 @@ test("published counts come from unique records, and schema metadata names types
     assert.ok(collection?.recordIds.length > 0);
     assert.equal(collection.recordIds.length, new Set(collection.recordIds).size);
   }
+});
+
+test("locations publish typed geographic references with usable Google Maps searches", () => {
+  const collection = published.collections.find(({ id }) => id === "locations");
+  assert.equal(collection.recordIds.length, sourceLocations.length);
+  assert.equal(published.fieldInfo.location_type.kind, "value");
+  assert.match(published.locationGuidance.presentation, /prominent Open in Google Maps link/);
+  for (const location of sourceLocations) {
+    const publicRecord = published.records[location.id];
+    assert.ok(collection.recordIds.includes(location.id), location.id);
+    assert.equal(publicRecord.fields.location_type, location.location_type);
+    assert.deepEqual(publicRecord.fields.map_reference, location.map_reference);
+    assert.equal(publicRecord.fields.category, location.category);
+    const url = googleMapsSearchUrl(publicRecord.fields.map_reference);
+    assert.equal(new URL(url).origin, "https://www.google.com");
+    assert.equal(new URL(url).searchParams.get("api"), "1");
+    assert.equal(new URL(url).searchParams.get("query"), location.map_reference.query);
+    assert.equal(publicRecord.fields.google_maps_url, undefined);
+  }
+  assert.equal(googleMapsSearchUrl({ query: "  ", precision: "general_area", verified: false }), null);
+  assert.equal(googleMapsSearchUrl({ query: "x".repeat(2048), precision: "general_area", verified: false }), null);
+});
+
+test("broad references stay broad, verified addresses cite sources, and relationships use canonical locations", () => {
+  for (const id of ["stockton-district-5-reported-area-2026-09-24", "highway-4-corridor-2026-04-06", "st-marys-church-street-corridor"]) {
+    const { precision, verified } = published.records[id].fields.map_reference;
+    assert.ok(["corridor", "general_area"].includes(precision), id);
+    assert.equal(verified, false);
+  }
+  for (const id of ["stockton-animal-services-shelter", "st-marys-community-services-campus"]) {
+    const { precision, verified, source_url } = published.records[id].fields.map_reference;
+    assert.equal(precision, "address");
+    assert.equal(verified, true);
+    assert.ok(source_url.startsWith("https://"));
+  }
+  const campusId = "st-marys-community-services-campus";
+  const task = sourceTasks.find(({ map_reference_location_ids }) => map_reference_location_ids?.includes(campusId));
+  const article = sourceArticles.find(({ related_location_ids }) => related_location_ids?.includes(campusId));
+  assert.ok(task);
+  assert.ok(article);
+  assert.ok(published.records[task.id].fields.map_reference_location_ids.includes(campusId));
+  assert.ok(published.records[article.id].fields.related_location_ids.includes(campusId));
+  assert.ok(published.collections.find(({ id }) => id === "street-dog-immediate-welfare:locations").recordIds.includes(campusId));
+  assert.equal(recordIdFromSearch(new URL(explorerRecordUrl(campusId), "https://crossover.local").search), campusId);
+  for (const id of ["louis-park-pixie-woods-2026-04-06", "stanislaus-street-corridor-2026-04-06", "highway-4-corridor-2026-04-06"])
+    assert.equal(published.records[id].fields.evidence_record_id, "cbs-2026-04-06-stockton-abandoned-dogs");
 });
 
 test("Need publication carries investigative states without unsupported priority labels", () => {

@@ -40,7 +40,7 @@ try {
   if (old !== output) await writeFile(path, output);
   await mkdir("public/data", { recursive: true });
   const publicPath = "public/data/records.json";
-  const feed = `${JSON.stringify({ records: snapshot.records, fieldInfo: snapshot.fieldInfo, visualGuidance: snapshot.visualGuidance, browseGuidance: snapshot.browseGuidance }, null, 2)}\n`;
+  const feed = `${JSON.stringify({ records: snapshot.records, fieldInfo: snapshot.fieldInfo, visualGuidance: snapshot.visualGuidance, browseGuidance: snapshot.browseGuidance, locationGuidance: snapshot.locationGuidance }, null, 2)}\n`;
   let oldPublic = "";
   try { oldPublic = await readFile(publicPath, "utf8"); } catch { /* First generation. */ }
   if (oldPublic !== feed) await writeFile(publicPath, feed);

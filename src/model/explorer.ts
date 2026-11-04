@@ -25,6 +25,7 @@ export type ExplorerSnapshot = {
   fieldInfo: Record<string, ExplorerFieldInfo>;
   visualGuidance?: { preferredAssets: string; descriptions: string; evidence: string; logos: string };
   browseGuidance?: { defaultTypeFilter: "all"; defaultLayout: "flat"; defaultSort: string; undatedPlacement: "last"; tieBreak: string; defaultView: string; filtering: string; dateMeaning: string };
+  locationGuidance?: { googleMapsSearchUrl: string; presentation: string; precision: string };
 };
 
 export const explorerSnapshot = generated as unknown as ExplorerSnapshot;

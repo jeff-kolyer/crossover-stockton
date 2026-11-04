@@ -80,8 +80,8 @@ for (const task of records.get("tasks") ?? []) {
   if (taskOrders.has(key)) errors.push(`task:${task.id} order_by_id duplicates task:${taskOrders.get(key)}`);
   taskOrders.set(key, task.id);
 }
-for (const prop of ["objective_ids", "organization_ids", "location_ids", "basis_record_ids", "activity_record_ids"]) {
-  const target = { objective_ids: "objectives", organization_ids: "organizations", location_ids: "locations", basis_record_ids: "records", activity_record_ids: "activities" }[prop];
+for (const prop of ["objective_ids", "organization_ids", "location_ids", "map_reference_location_ids", "basis_record_ids", "activity_record_ids"]) {
+  const target = { objective_ids: "objectives", organization_ids: "organizations", location_ids: "locations", map_reference_location_ids: "locations", basis_record_ids: "records", activity_record_ids: "activities" }[prop];
   checkRefs(records.get("tasks"), target, prop, "task");
 }
 for (const prop of ["activity_record_ids", "evidence_record_ids", "finding_ids", "task_ids"]) {
@@ -100,7 +100,12 @@ checkRefs(records.get("claims"), "needs", "needId", "claim");
 checkRefs(records.get("claims"), "measurements", "measurementId", "claim");
 checkRefs(records.get("measurements"), "records", "source_record_id", "measurement");
 checkRefs(records.get("locations"), "investigations", "investigation_id", "location");
+checkRefs(records.get("locations"), "records", "evidence_record_id", "location");
 checkRefs(records.get("locations"), "records", "evidence_record_ids", "location");
+for (const location of records.get("locations") ?? []) {
+  if (location.map_reference?.verified && !location.map_reference.source_url?.startsWith("https://"))
+    errors.push(`location:${location.id} verified map reference requires an HTTPS source URL`);
+}
 checkRefs(records.get("records"), "needs", "gap_ids", "evidence");
 checkRefs(records.get("records"), "organizations", "organization_ids", "evidence");
 for (const file of ["projects", "stories"]) {

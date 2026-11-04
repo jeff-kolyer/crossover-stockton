@@ -1,6 +1,8 @@
 [
   {
     "id": "weston-ranch-carrie-street",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "Carrie Street, Weston Ranch, Stockton, CA", "precision": "corridor", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Weston Ranch — Carrie Street levee",
@@ -25,6 +27,8 @@
   },
   {
     "id": "south-lincoln-crosstown",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "South Lincoln Street, Stockton, CA", "precision": "corridor", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "South Lincoln Street — Crosstown Freeway",
@@ -48,6 +52,8 @@
   },
   {
     "id": "trinity-bear-creek",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "Trinity Parkway, Stockton, CA", "precision": "corridor", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Trinity Parkway — Bear Creek levee",
@@ -71,6 +77,8 @@
   },
   {
     "id": "country-club-i5",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "Country Club Boulevard and Interstate 5, Stockton, CA", "precision": "intersection", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Country Club — I-5 vicinity",
@@ -94,6 +102,8 @@
   },
   {
     "id": "pawboost-crown-rose-marie-2026-10-16",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "Crown Avenue and Rose Marie Lane, Stockton, CA", "precision": "intersection", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Crown Avenue — Rose Marie Lane",
@@ -117,6 +127,8 @@
   },
   {
     "id": "pawboost-california-magnolia-2026-10-15",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "California Street and Magnolia Street, Stockton, CA", "precision": "intersection", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "California Street — Magnolia Street",
@@ -140,6 +152,8 @@
   },
   {
     "id": "pawboost-mcdougald-henry-long-2026-10-15",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "McDougald Boulevard and Henry Long Boulevard, Stockton, CA", "precision": "intersection", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "McDougald Boulevard — Henry Long Boulevard",
@@ -163,6 +177,8 @@
   },
   {
     "id": "louis-park-pixie-woods-2026-04-06",
+    "location_type": "park",
+    "map_reference": { "query": "Louis Park, Stockton, CA", "precision": "named_place", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Louis Park / Pixie Woods vicinity",
@@ -187,6 +203,8 @@
   },
   {
     "id": "stanislaus-street-corridor-2026-04-06",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "Stanislaus Street, Stockton, CA", "precision": "corridor", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stanislaus Street corridor",
@@ -211,6 +229,8 @@
   },
   {
     "id": "highway-4-corridor-2026-04-06",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "California State Route 4, Stockton, CA", "precision": "corridor", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Highway 4 corridor",
@@ -235,6 +255,8 @@
   },
   {
     "id": "stockton-animal-services-shelter",
+    "location_type": "animal_care",
+    "map_reference": { "query": "1575 S Lincoln St, Stockton, CA 95206", "precision": "address", "verified": true, "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf" },
     "marker_type": "animal_care",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton Animal Services",
@@ -260,6 +282,8 @@
   },
   {
     "id": "stockton-district-5-reported-area-2026-09-24",
+    "location_type": "general_area",
+    "map_reference": { "query": "Stockton City Council District 5, Stockton, CA", "precision": "general_area", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton District 5 reported area",
@@ -284,6 +308,8 @@
   },
   {
     "id": "st-marys-church-street-corridor",
+    "location_type": "street_corridor",
+    "map_reference": { "query": "West Church Street, Stockton, CA", "precision": "corridor", "verified": false },
     "marker_type": "dog_sighting",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's–Church Street corridor",
@@ -308,6 +334,8 @@
   },
   {
     "id": "st-marys-community-services-campus",
+    "location_type": "human_services",
+    "map_reference": { "query": "545 W Sonora St, Stockton, CA 95203", "precision": "address", "verified": true, "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf" },
     "marker_type": "human_services",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's Community Services",

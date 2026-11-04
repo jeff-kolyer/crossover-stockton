@@ -8,6 +8,23 @@
     "id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
+    "location_type": {
+      "type": "string",
+      "pattern": "^[a-z][a-z_]*$",
+      "description": "Physical place type, independent of the evidence source or reported activity. Current values include animal_care, human_services, park, street_corridor, general_area, and other; future types may be added."
+    },
+    "map_reference": {
+      "type": "object",
+      "description": "Public geographic search reference. Precision describes the query, not the accuracy of any associated report or the current location of a person or animal.",
+      "properties": {
+        "query": { "type": "string", "minLength": 1 },
+        "precision": { "type": "string", "enum": ["address", "named_place", "intersection", "corridor", "general_area"] },
+        "verified": { "type": "boolean" },
+        "source_url": { "type": "string", "minLength": 1 }
+      },
+      "required": ["query", "precision", "verified"],
+      "additionalProperties": false
+    },
     "investigation_id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
@@ -87,6 +104,8 @@
   },
   "required": [
     "id",
+    "location_type",
+    "map_reference",
     "investigation_id",
     "name",
     "area",
