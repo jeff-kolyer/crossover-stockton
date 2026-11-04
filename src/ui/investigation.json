@@ -22,7 +22,7 @@
     "thisMarkerIdentifiesTheOrganizationNotThe": "This marker identifies the organization, not the field observation site.",
     "organizations": "Organizations",
     "questionsToAsk": "Questions to ask",
-    "investigationQuestions": "Investigation questions",
+    "investigationObjectives": "Investigation objectives",
     "basisAndSources": "Basis and sources",
     "documentedActivity": "Documented activity",
     "tasks": "Tasks",
@@ -95,8 +95,7 @@
   },
   "InvestigationOverview": {
     "aboutThisInvestigation": "About this investigation",
-    "weReInvestigatingWhySoManyDogs": "We're investigating why so many dogs are on the streets in Stockton, what care is already in place, where the system breaks down, and how emerging technology can help.",
-    "questionsWeReAsking": "Questions we're asking"
+    "objectives": "Objectives"
   },
   "linkLabels": {
     "locationSource": "Location source"
@@ -151,5 +150,147 @@
       "pawboost-california-magnolia-2026-10-15": "PawBoost California Street report",
       "pawboost-mcdougald-henry-long-2026-10-15": "PawBoost McDougald Boulevard report"
     }
+  },
+  "statusLabels": {
+    "waiting": "Waiting for response",
+    "cancelled": "Cancelled",
+    "open": "Open"
+  },
+  "InvestigationActivitySections": {
+    "activity": "Activity",
+    "workTowardObjectives": "Work toward these objectives.",
+    "seeFindings": "See findings",
+    "relatedRecordedWork": "Related recorded work:",
+    "activitySingular": "activity",
+    "activityPlural": "activities",
+    "recordSingular": "record",
+    "recordPlural": "records",
+    "recorded": "recorded",
+    "related": "related",
+    "seeFindingsPrefix": "See findings: ",
+    "dateNotRecorded": "Date not recorded"
+  },
+  "InvestigationOrganizations": {
+    "organizationsContactedOrVisited": "Organizations contacted or visited",
+    "groupsKnownOnlyThroughPublishedMaterialRemain": "Groups known only through published material remain sources and references.",
+    "ourInvolvement": "Our involvement:",
+    "latestRecordedOutcome": "Latest recorded outcome:",
+    "fieldReports": "Field reports:",
+    "whatRemainsUnverified": "What remains unverified:",
+    "relatedQuestionsToAsk": "Related questions to ask:",
+    "sources": "Sources:",
+    "website": "website",
+    "dateNotRecorded": "Date not recorded"
+  },
+  "FieldReportContent": {
+    "reportNarrative": "Report narrative",
+    "visiting": "Visiting ",
+    "locationResources": "Location resources",
+    "openstreetmapLocation": "OpenStreetMap location",
+    "website": "website",
+    "connectedRecords": "Connected records",
+    "organization": "Organization:",
+    "need": "Need:",
+    "activity": "Activity:",
+    "investigationActivity": "Investigation activity",
+    "sourcesAndNotes": "Sources and notes",
+    "source": "Source: ",
+    "additionalContext": "Additional context: ",
+    "thisLocation": "this location",
+    "crossoverStockton": "Crossover Stockton",
+    "supportingSource": "Supporting source",
+    "undated": "Undated",
+    "sourceFallback": "source"
+  },
+  "FieldReportPage": {
+    "fieldReport": "Field report",
+    "fieldReportNotFound": "Field report not found",
+    "thisReportIdDoesNotMatchA": "This report ID does not match a published field report.",
+    "backToReports": "Back to reports",
+    "backToActivity": "Back to activity",
+    "backToNeeds": "Back to needs"
+  },
+  "InvestigationLocations": {
+    "thisBroadReportHasNoMapPin": "This broad report has no map pin.",
+    "lastKnownOutcome": "Last known outcome:",
+    "sourceReviewed": "Source reviewed:",
+    "whatRemainsUnknown": "What remains unknown:",
+    "readSupportingSource": "Read supporting source",
+    "openInGoogleMaps": "Open in Google Maps",
+    "exploreGeneralizedAreaInOpenstreetmap": "Explore generalized area in OpenStreetMap",
+    "readFieldReport": "Read field report",
+    "fieldObservationMap": "Field observation map",
+    "markersShowGeneralizedReportAreasAndDocumented": "Markers show generalized report areas and documented organization locations. They do not show where a dog or person is now, establish suffering, verify current conditions, or identify a hotspot. Scroll to move the page; hold Ctrl while scrolling over the map to zoom it.",
+    "mapEvidenceCategories": "Map evidence categories",
+    "allRecords": "All records (",
+    "mapOfApproximateHistoricalReferenceAreas": "Map of approximate historical reference areas",
+    "loadingMap": "Loading map…",
+    "theseBroadReportsHaveNoMapPin": "These broad reports have no map pin.",
+    "reportedLocations": "Reported locations",
+    "mapEvidenceRecords": "Map evidence records",
+    "noRecordsInThisCategoryYet": "No records in this category yet.",
+    "howThisMapIsMaintained": "How this map is maintained",
+    "thisMapUsesPublishedReportsPublicRecords": "This map uses published reports, public records, documented organization locations, and Crossover's firsthand observations when available. ",
+    "historicalRecordsAreAvailableUnderHistoricalLocations": "Historical records are available under Historical; locations with open tasks remain in the default view.",
+    "lastSourcesReviewed": "Last sources reviewed",
+    "lastMapUpdated": "Last map updated",
+    "nextPlannedReview": "Next planned review",
+    "markersAreGeneralizedToNearbyPublicLandmarks": "Markers are generalized to nearby public landmarks for context. Broad reports without a supported point are listed without pins. These are not directions to a person, animal, or current encampment.",
+    "allEvidenceSources": "All evidence sources",
+    "supportingSource": "Supporting source",
+    "categoryLabels": {
+      "historical_published_report": "Historical published reports",
+      "recent_public_report": "Recent public reports",
+      "official_location_record": "Official locations and records",
+      "crossover_firsthand": "Crossover firsthand observations"
+    },
+    "categoryRowLabels": {
+      "historical_published_report": "Historical published report",
+      "recent_public_report": "Recent public report",
+      "official_location_record": "Official location or record",
+      "crossover_firsthand": "Crossover observation"
+    },
+    "noPin": " · No pin",
+    "notYetRecorded": "Not yet recorded",
+    "exitFullscreenMap": "Exit fullscreen map",
+    "viewMapFullscreen": "View map fullscreen",
+    "exitFullscreen": "Exit fullscreen",
+    "fullscreen": "Fullscreen",
+    "locationSingular": "location",
+    "locationPlural": "locations"
+  },
+  "LeafletLocationsMap": {
+    "mapOfGeneralizedHistoricalAndPublicReport": "Map of generalized historical and public report areas"
+  },
+  "CrossoverLocationDetails": {
+    "locationDetails": "Location details",
+    "theRedAlertBadgeIndicatesASafety": "The red alert badge indicates a safety concern in the source report. It does not establish current danger; current conditions at this generalized area are unknown.",
+    "record": "Record",
+    "evidenceType": "Evidence type",
+    "sourceReviewed": "Source reviewed",
+    "whatWasReported": "What was reported",
+    "lastKnownOutcome": "Last known outcome",
+    "whatRemainsUnknown": "What remains unknown",
+    "fieldReports": "Field reports",
+    "noFieldReportIsLinkedToThis": "No field report is linked to this location yet.",
+    "relatedTasks": "Related tasks",
+    "noTaskIsLinkedToThisLocation": "No task is linked to this location yet.",
+    "whatCrossoverObserved": "What Crossover observed",
+    "noCrossoverFieldObservationIsDocumentedFor": "No Crossover field observation is documented for this location.",
+    "evidence": "Evidence",
+    "sources": "Sources",
+    "openInGoogleMaps": "Open in Google Maps",
+    "locationReference": "Location reference",
+    "notRecorded": "Not recorded",
+    "categoryLabels": {
+      "historical_published_report": "Historical published report",
+      "recent_public_report": "Recent public report",
+      "official_location_record": "Official location or record",
+      "crossover_firsthand": "Crossover firsthand observation"
+    },
+    "locationDetailsPrefix": "Location details: "
+  },
+  "ArticlePages": {
+    "findings": "← Findings"
   }
 }

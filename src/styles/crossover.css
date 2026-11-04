@@ -1685,9 +1685,9 @@ button.plain-action-button:not(.is-pill):hover {
 .explorer-search-controls { display: flex; flex-wrap: wrap; gap: var(--space-2); }
 .explorer-search-controls input { flex: 1 1 260px; min-width: 0; max-width: 100%; padding: var(--space-2); border: 1px solid #c6ccd0; border-radius: 4px; font: inherit; }
 .explorer-search-controls button { padding: var(--space-2) var(--space-3); border: 1px solid #c6ccd0; border-radius: 4px; background: #fff; color: inherit; font: inherit; }
-.explorer-tree { border-top: 1px solid #dadce0; }
-.explorer-tree details { min-width: 0; border-bottom: 1px solid #dadce0; }
-.explorer-tree summary { cursor: pointer; padding-block: var(--space-3); }
+.explorer-tree details { min-width: 0; }
+.explorer-tree details.explorer-record[open] { border-bottom: 1px solid #dadce0; }
+.explorer-tree summary { cursor: pointer; padding-block: calc(var(--space-3) * 0.8); }
 .explorer-tree summary:focus-visible { outline: 2px solid #1c6b3e; outline-offset: -2px; }
 .explorer-tree summary span, .explorer-tree summary small { overflow-wrap: anywhere; }
 .explorer-group-children, .explorer-collection-children { padding-inline-start: var(--space-3); }
@@ -1697,7 +1697,7 @@ button.plain-action-button:not(.is-pill):hover {
 .explorer-properties dt, .explorer-nested-properties dt { font-weight: 700; }
 .explorer-properties dd, .explorer-nested-properties dd { min-width: 0; margin: 0; overflow-wrap: anywhere; }
 .explorer-properties ul, .explorer-nested-properties ul { margin: 0; }
-.explorer-selected { border-block: 1px solid #dadce0; padding-block: var(--space-3); }
+.explorer-selected { border-bottom: 1px solid #dadce0; padding-block: var(--space-3); }
 .explorer-results ul { margin: 0; }
 .explorer-content a { overflow-wrap: anywhere; }
 .explorer-view-controls, .explorer-view-controls > div { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
@@ -1705,9 +1705,8 @@ button.plain-action-button:not(.is-pill):hover {
 .explorer-breadcrumb { display: grid; gap: var(--space-3); min-width: 0; }
 .explorer-breadcrumb nav { overflow-wrap: anywhere; }
 .explorer-breadcrumb nav button { border: 0; padding: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
-.explorer-breadcrumb ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid #dadce0; }
-.explorer-breadcrumb li { border-bottom: 1px solid #dadce0; }
-.explorer-breadcrumb li button { width: 100%; padding-block: var(--space-3); border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; overflow-wrap: anywhere; }
+.explorer-breadcrumb ul { list-style: none; margin: 0; padding: 0; }
+.explorer-breadcrumb li button { width: 100%; padding-block: calc(var(--space-3) * 0.5); border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; overflow-wrap: anywhere; }
 .explorer-json pre { max-width: 100%; margin: 0; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; }
 
 @media (max-width: 720px) {

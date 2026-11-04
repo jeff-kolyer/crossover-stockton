@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/investigations/dogs/activity.json";
+import uiCopy from "../ui/investigation.json";
 import { siteModel } from "../model";
 
 import type { EvidenceRecord, GapRecord } from "../types";
@@ -12,14 +12,14 @@ interface FieldReportPageProps {
   reportId?: string;
   onNavigate: (page: PublicRoute) => void;
   onOpenGap: (slug: string) => void;
-  onOpenWork: (id: string) => void;
+  onOpenInvestigationActivity: (id: string) => void;
   onOpenInvestigationReports: () => void;
 }
 
 const reports = siteModel.getAllEvidence().filter((record) => record.record_type === "field_report");
 const gaps = siteModel.getNeeds();
 
-export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, onOpenInvestigationReports }: FieldReportPageProps) {
+export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenInvestigationActivity, onOpenInvestigationReports }: FieldReportPageProps) {
   const report = reports.find((item) => item.id === reportId);
   const relatedGaps = (report?.gap_ids ?? []).map((id) => gaps.find((gap) => gap.id === id)).filter((gap): gap is GapRecord => Boolean(gap));
 
@@ -27,7 +27,7 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
     <main className="work-page report-page gap-page">
 
       <div className="work-page-shell report-shell">
-        <p><button className="gap-history-back" type="button" onClick={() => relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? onOpenInvestigationReports() : report?.work_id ? onOpenWork(report.work_id) : onNavigate("reality")}> {relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? uiText.backToReports : report?.work_id ? uiText.backToActivity : uiText.backToNeeds}</button></p>
+        <p><button className="gap-history-back" type="button" onClick={() => relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? onOpenInvestigationReports() : report?.investigation_id ? onOpenInvestigationActivity(report.investigation_id) : onNavigate("reality")}> {relatedGaps.some((gap) => gap.id === "dogs-safe-placement") ? uiText.backToReports : report?.investigation_id ? uiText.backToActivity : uiText.backToNeeds}</button></p>
         {!report ? (
           <div className="work-page-header"><span className="work-page-kicker">{uiText.fieldReport}</span><h1>{uiText.fieldReportNotFound}</h1><p>{uiText.thisReportIdDoesNotMatchA}</p></div>
         ) : (
@@ -38,7 +38,7 @@ export function FieldReportPage({ reportId, onNavigate, onOpenGap, onOpenWork, o
               <div className="report-meta"><time dateTime={report.occurred_at}>{formatReportDate(report.occurred_at)}</time>{report.location && <span>{report.location}</span>}</div>
               <p className="gap-mobile-body">{report.summary}</p>
             </div>
-            <FieldReportContent report={report} publicNavigation={{ onOpenGap, onOpenWork }} />
+            <FieldReportContent report={report} publicNavigation={{ onOpenGap, onOpenInvestigationActivity }} />
           </>
         )}
       </div>

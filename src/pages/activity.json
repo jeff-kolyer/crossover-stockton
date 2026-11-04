@@ -1,0 +1,14 @@
+{
+  "id": "investigation-activity",
+  "objectiveDisplay": {
+    "where-dogs-need-help": {
+      "note": "No Crossover street-level field observation has been completed yet."
+    },
+    "food-and-water": {
+      "showOrganizations": true
+    },
+    "improvement-outcomes": {
+      "note": "No completed assessment of improvement outcomes is recorded yet."
+    }
+  }
+}

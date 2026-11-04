@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/investigations/dogs/overview.json";
+import uiCopy from "../ui/investigation.json";
 import type { EvidenceRecord } from "../types";
 import type { InvestigationTask } from "../types/investigation";
 import type { Article } from "../types/article";

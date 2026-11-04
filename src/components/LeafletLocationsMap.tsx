@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/investigations/dogs/map.json";
+import uiCopy from "../ui/investigation.json";
 import { useEffect, useRef, useState } from "react";
 import * as L from "leaflet";
 import { maplibreGL } from "@maplibre/maplibre-gl-leaflet";

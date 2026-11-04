@@ -15,8 +15,9 @@
     "check:data": "node scripts/check-data.mjs && node scripts/validate-investigation-data.mjs",
     "check:explorer": "node scripts/build-explorer-data.mjs && node --test scripts/test-explorer.mjs",
     "check:updates": "node --test scripts/test-public-updates.mjs",
+    "check:home": "node --test scripts/test-home-composition.mjs",
     "check:copy": "node scripts/audit-static-copy.mjs --direct",
-    "build": "node scripts/check-data.mjs && node scripts/check-layout.mjs && node scripts/audit-static-copy.mjs --direct && node scripts/validate-public-actions.mjs && node scripts/validate-investigation-data.mjs && npm run check:explorer && npm run check:updates && tsc -b && vite build && node scripts/prerender.mjs && node scripts/validate-public-updates.mjs && node scripts/validate-ai-readability.mjs && node scripts/validate-gap-tabs.mjs && node scripts/validate-dog-work-redirects.mjs",
+    "build": "node scripts/check-data.mjs && node scripts/check-layout.mjs && node scripts/audit-static-copy.mjs --direct && node scripts/validate-public-actions.mjs && node scripts/validate-investigation-data.mjs && npm run check:home && npm run check:explorer && npm run check:updates && tsc -b && vite build && node scripts/prerender.mjs && node scripts/validate-public-updates.mjs && node scripts/validate-ai-readability.mjs && node scripts/validate-gap-tabs.mjs && node scripts/validate-dog-work-redirects.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {

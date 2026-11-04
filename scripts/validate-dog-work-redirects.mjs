@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const dist = new URL("../dist/", import.meta.url);
-const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
+const gaps = JSON.parse(await readFile(new URL("../src/data/needs.json", import.meta.url), "utf8")).records;
+const researchWorkAliases = JSON.parse(await readFile(new URL("../src/pages/legacy-redirects.json", import.meta.url), "utf8"));
 const base = "/reality/too-many-dogs-still-lack-safe-placement/";
 const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const paths = [...sitemap.matchAll(/<loc>https:\/\/crossoverstockton\.org([^<]+)<\/loc>/g)].map((match) => match[1]);
@@ -21,6 +22,11 @@ async function expectRedirect(path, target) {
 }
 
 for (const [workId, target] of oldWork) await expectRedirect(`/work/${workId}/`, target);
+for (const [workId, needId] of Object.entries(researchWorkAliases)) {
+  const gap = gaps.find((item) => item.id === needId);
+  assert.ok(gap, `${workId}: need missing`);
+  await expectRedirect(`/work/${workId}/`, `/reality/${gap.slug}/#gap-sources`);
+}
 await expectRedirect("/action/look-for-dogs-on-the-street/", "/work/dogs/");
 await expectRedirect("/work/dogs/about/", "/work/dogs/activity/#overview");
 for (const gap of gaps.filter((item) => item.active)) {

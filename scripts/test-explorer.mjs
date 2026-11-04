@@ -3,15 +3,17 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createServer } from "vite";
 import { buildExplorerSnapshot, searchExplorer } from "./explorer-snapshot.mjs";
+import { loadExplorerRoots } from "./explorer-roots.mjs";
 import { explorerRecordUrl, recordIdFromSearch } from "../src/controller/explorer-url.ts";
 
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
 const published = await readJson("../src/generated/explorer-public.json");
 const sourceTasks = await readJson("../src/data/tasks.json");
-const sourceArticles = await readJson("../src/data/articles.json");
+const sourceArticles = (await readJson("../src/data/articles.json")).records;
+const needsSource = await readJson("../src/data/needs.json");
 const sourceProjects = await readJson("../src/data/projects.json");
-const sourceWorkstreams = await readJson("../src/data/workstreams.json");
 const policy = await readJson("../src/model/explorer-publication.json");
+const roots = await loadExplorerRoots(policy);
 const schemas = Object.fromEntries(await Promise.all(policy.collections.map(async ({ schema }) =>
   [schema, await readJson(`../src/schemas/${schema}.schema.json`)])));
 
@@ -20,11 +22,30 @@ test("published counts come from unique records, and schema metadata names types
   assert.ok(evidence?.recordIds.length > 0);
   assert.equal(evidence.recordIds.length, new Set(evidence.recordIds).size);
   assert.equal(published.records[evidence.recordIds[0]].typeName, schemas.evidence.title);
-  for (const id of ["tasks", "questions", "findings", "locations", "stories"]) {
+  for (const id of ["tasks", "objectives", "findings", "locations", "stories"]) {
     const collection = published.collections.find((item) => item.id === id);
     assert.ok(collection?.recordIds.length > 0);
     assert.equal(collection.recordIds.length, new Set(collection.recordIds).size);
   }
+});
+
+test("visual preferences publish when supplied and remain optional", () => {
+  const need = needsSource.records[0];
+  assert.equal(published.records[need.id].fields.preferred_image, need.preferred_image);
+  assert.equal(published.records[need.id].fields.thumbnail_image, need.thumbnail_image);
+  assert.equal(published.records["crossover-stockton"].fields.preferred_logo, "/images/logo_light.webp");
+  assert.equal(published.fieldInfo.preferred_image.kind, "url");
+  assert.equal(published.fieldInfo.preferred_logo.kind, "url");
+  assert.ok(published.visualGuidance.evidence.includes("not investigation evidence"));
+  assert.equal(published.records["crossover-2026-10-14-sas-first-visit"].fields.preferred_image, undefined);
+  const definition = policy.collections.find((item) => item.id === "organizations");
+  const fixture = [
+    { id: "with-visuals", name: "Example", visual_description: "A volunteer at a community table", preferred_image: "/images/example.jpg", logo_description: "A blue circle", preferred_logo: "/images/example-logo.svg" },
+    { id: "without-visuals", name: "No image supplied" },
+  ];
+  const { snapshot } = buildExplorerSnapshot({ ...policy, collections: [definition] }, schemas, { organizations: fixture }, [{ id: "organizations", title: "Organizations", collectionIds: ["organizations"] }]);
+  for (const field of policy.sharedFields) assert.equal(snapshot.records["with-visuals"].fields[field], fixture[0][field]);
+  for (const field of policy.sharedFields) assert.equal(snapshot.records["without-visuals"].fields[field], undefined);
 });
 
 test("task order follows each task record's order_by_id", () => {
@@ -36,26 +57,27 @@ test("task order follows each task record's order_by_id", () => {
 
 test("adding and removing publishable evidence changes the inventory without view edits", () => {
   const fixture = { id: "explorer-test-evidence", title: "Test public observation", summary: "A public fixture", record_type: "external_report", trust: "external", limitations: ["Limited scope"], source: { publisher: "Test publisher", url: "https://example.org/source" }, internal_note: "never publish" };
-  const fixturePolicy = { groups: [{ id: "knowledge", title: "Evidence and knowledge" }], collections: [{ id: "evidence", schema: "evidence", group: "knowledge", title: "Evidence records", query: "evidence", fields: ["id", "title", "summary", "record_type", "trust", "limitations", "source"] }], nestedFields: policy.nestedFields, fieldLabels: policy.fieldLabels };
+  const fixturePolicy = { collections: [{ id: "evidence", schema: "evidence", title: "Evidence records", query: "evidence", fields: ["id", "title", "summary", "record_type", "trust", "limitations", "source"] }], nestedFields: policy.nestedFields, fieldLabels: policy.fieldLabels };
+  const fixtureRoots = [{ id: "knowledge", title: "Evidence and knowledge", collectionIds: ["evidence"] }];
   const base = [fixture];
-  const added = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: [...base, { ...fixture, id: "explorer-test-added", title: "Added public evidence" }] }).snapshot;
+  const added = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: [...base, { ...fixture, id: "explorer-test-added", title: "Added public evidence" }] }, fixtureRoots).snapshot;
   assert.equal(added.collections[0].recordIds.length, 2);
   assert.equal(added.records["explorer-test-added"].title, "Added public evidence");
   assert.equal(added.records["explorer-test-added"].fields.source.publisher, "Test publisher");
   assert.deepEqual(added.records["explorer-test-added"].fields.limitations, ["Limited scope"]);
   assert.equal(JSON.stringify(added).includes("never publish"), false);
-  const removed = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: base }).snapshot;
+  const removed = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: base }, fixtureRoots).snapshot;
   assert.equal(removed.collections[0].recordIds.length, 1);
   assert.equal(removed.records["explorer-test-added"], undefined);
 });
 
 test("duplicate appearances, missing references, and unpublished records are handled explicitly", () => {
-  const fixturePolicy = { groups: [{ id: "knowledge", title: "Knowledge" }], collections: [
-    { id: "evidence", schema: "evidence", group: "knowledge", title: "Evidence", query: "evidence", fields: ["id", "title", "sourceRecordIds"] },
-    { id: "activities", schema: "activity", group: "knowledge", title: "Activities", query: "activities", fields: ["id", "title"] },
+  const fixturePolicy = { collections: [
+    { id: "evidence", schema: "evidence", title: "Evidence", query: "evidence", fields: ["id", "title", "sourceRecordIds"] },
+    { id: "activities", schema: "activity", title: "Activities", query: "activities", fields: ["id", "title"] },
   ], nestedFields: {}, fieldLabels: {}, relationshipFields: ["sourceRecordIds"] };
   const shared = { id: "shared", title: "Shared activity", sourceRecordIds: ["missing-record"] };
-  const { snapshot, diagnostics } = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: [shared, { id: "secret", title: "Private", published: false }], activities: [shared] });
+  const { snapshot, diagnostics } = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: [shared, { id: "secret", title: "Private", published: false }], activities: [shared] }, [{ id: "knowledge", title: "Knowledge", collectionIds: ["evidence", "activities"] }]);
   assert.equal(Object.keys(snapshot.records).length, 1);
   assert.equal(snapshot.records.shared.typeName, schemas.activity.title);
   assert.equal(snapshot.records.secret, undefined);
@@ -85,13 +107,13 @@ test("direct record URLs preserve stable IDs through query parsing", () => {
 });
 
 test("explicit internal visibility is excluded even from an allowed collection", () => {
-  const fixturePolicy = { groups: [{ id: "knowledge", title: "Knowledge" }], collections: [
-    { id: "evidence", schema: "evidence", group: "knowledge", title: "Evidence", query: "evidence", fields: ["id", "title", "source"] },
+  const fixturePolicy = { collections: [
+    { id: "evidence", schema: "evidence", title: "Evidence", query: "evidence", fields: ["id", "title", "source"] },
   ], nestedFields: policy.nestedFields, fieldLabels: policy.fieldLabels, relationshipFields: policy.relationshipFields };
   const { snapshot } = buildExplorerSnapshot(fixturePolicy, schemas, { evidence: [
     { id: "public", title: "Public", source: { publisher: "City" } },
     { id: "internal", title: "Internal", visibility: "internal", source: { publisher: "Private" } },
-  ] });
+  ] }, [{ id: "knowledge", title: "Knowledge", collectionIds: ["evidence"] }]);
   assert.deepEqual(snapshot.collections[0].recordIds, ["public"]);
   assert.equal(snapshot.records.internal, undefined);
   assert.equal(JSON.stringify(snapshot).includes("Private"), false);
@@ -102,7 +124,7 @@ test("real records share one public payload across browse paths and inspection m
     ["crossover-stockton", "identity"],
     ["dogs-safe-placement", "needs"],
     ["street-dog-immediate-welfare", "investigations"],
-    ["where-dogs-need-help", "questions"],
+    ["where-dogs-need-help", "objectives"],
     ["task-review-sas-field-call-records", "tasks"],
     ["crossover-2026-11-02-sas-field-call-records-received", "activities"],
     ["sas-2024-dog-intake-total", "measurements"],
@@ -124,7 +146,8 @@ test("real records share one public payload across browse paths and inspection m
     }
   }
   const receipt = published.records["crossover-2026-11-02-sas-field-call-records-received"];
-  assert.ok(published.collections.find((item) => item.id === "evidence")?.recordIds.includes(receipt.id));
+  assert.ok(published.collections.find((item) => item.id === "activities")?.recordIds.includes(receipt.id));
+  assert.equal(published.collections.find((item) => item.id === "evidence")?.recordIds.includes(receipt.id), false);
   assert.equal(published.fieldInfo.basis_record_ids.kind, "reference");
   assert.equal(published.fieldInfo.occurred_at.kind, "date");
   assert.equal(published.fieldInfo.coverage_id.kind, "value");
@@ -133,31 +156,25 @@ test("real records share one public payload across browse paths and inspection m
   assert.ok(published.records["finding-public-street-dog-information-fragmented"].fields.limitations);
 });
 
-test("Updates is first and reuses the Model's public feed without new record identities", async () => {
+test("By date sorts existing public records without creating a collection", async () => {
   const vite = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
   try {
-    const { siteModel } = await vite.ssrLoadModule("/src/model/index.ts");
-    const { explorerPathForRecord } = await vite.ssrLoadModule("/src/model/explorer.ts");
+    const { explorerPathForRecord, explorerRecordsByDate } = await vite.ssrLoadModule("/src/model/explorer.ts");
     const { explorerStateFromSearch } = await vite.ssrLoadModule("/src/controller/explorer.ts");
-    const updateIds = siteModel.getPublicUpdates().map(({ record }) => record.id);
-    const developments = published.collections.find((item) => item.id === "developments");
-    const investigationUpdates = published.collections.find((item) => item.id === "investigation-updates");
-    assert.equal(published.groups[0].id, "updates");
-    assert.deepEqual(published.groups[0].collectionIds, ["developments", "investigation-updates"]);
-    assert.equal(published.collections.some((item) => item.id === "public-updates"), false);
-    assert.deepEqual(developments.recordIds, siteModel.getPublicDevelopments().map(({ record }) => record.id));
-    assert.deepEqual(investigationUpdates.recordIds, siteModel.getInvestigationUpdates().map(({ record }) => record.id));
-    assert.deepEqual(new Set([...developments.recordIds, ...investigationUpdates.recordIds]), new Set(updateIds));
-    assert.equal(updateIds.length, new Set(updateIds).size);
+    assert.equal(published.groups.some((item) => item.id === "latest"), false);
+    assert.equal(published.collections.some((item) => ["latest", "developments", "investigation-updates", "public-updates"].includes(item.id)), false);
+    assert.equal(explorerRecordsByDate.length, Object.keys(published.records).length);
+    assert.equal(explorerRecordsByDate.length, new Set(explorerRecordsByDate.map((record) => record.id)).size);
+    assert.ok(explorerRecordsByDate.some((record) => record.schema === "activity"));
+    assert.ok(explorerRecordsByDate.some((record) => record.schema === "evidence"));
+    assert.ok(explorerRecordsByDate.some((record) => !record.dateForSort));
+    assert.deepEqual(explorerRecordsByDate.map((record) => record.id), [...explorerRecordsByDate].sort((a, b) => (b.dateForSort ? Date.parse(b.dateForSort.value) : -Infinity) - (a.dateForSort ? Date.parse(a.dateForSort.value) : -Infinity) || a.id.localeCompare(b.id)).map((record) => record.id));
     const receiptId = "crossover-2026-11-02-sas-field-call-records-received";
-    assert.ok(investigationUpdates.recordIds.includes(receiptId));
-    assert.ok(developments.recordIds.includes("stocktonia-2026-10-20-animal-control-proposals"));
+    assert.ok(explorerRecordsByDate.some((record) => record.id === receiptId));
+    assert.ok(explorerRecordsByDate.some((record) => record.id === "stocktonia-2026-10-20-animal-control-proposals"));
     assert.ok(published.collections.find((item) => item.id === "activities")?.recordIds.includes(receiptId));
-    assert.ok(published.collections.find((item) => item.id === "evidence")?.recordIds.includes(receiptId));
+    assert.ok(published.collections.find((item) => item.id === "activities")?.recordIds.includes(receiptId));
     assert.equal(published.records[receiptId].fields.id, receiptId);
-    for (const activity of siteModel.getAllActivities()) {
-      if (activity.public_update !== true) assert.equal(investigationUpdates.recordIds.includes(activity.id), false);
-    }
     assert.deepEqual(explorerPathForRecord("finding-public-street-dog-information-fragmented"), {
       groupId: "investigation", investigationId: "street-dog-immediate-welfare", collectionId: "street-dog-immediate-welfare:findings", recordId: "finding-public-street-dog-information-fragmented",
     });
@@ -176,33 +193,69 @@ test("Updates is first and reuses the Model's public feed without new record ide
     assert.equal(linkedEvidence.collectionId, "street-dog-immediate-welfare:findings");
     assert.deepEqual(linkedEvidence.recordTrail, ["finding-public-street-dog-information-fragmented"]);
     assert.equal(linkedEvidence.selectedId, "crossover-2026-11-02-sas-field-call-records-received");
-    const updateLink = explorerStateFromSearch("?nav=breadcrumb&group=investigation&investigation=street-dog-immediate-welfare&collection=street-dog-immediate-welfare%3Ainvestigation-updates&record=crossover-2026-11-02-sas-field-call-records-received");
-    assert.equal(updateLink.collectionId, "street-dog-immediate-welfare:investigation-updates");
+    const byDate = explorerStateFromSearch("?sort=date");
+    assert.equal(byDate.byDate, true);
+    assert.equal(byDate.groupId, null);
+    assert.equal(byDate.collectionId, null);
+    const datePath = explorerStateFromSearch("?sort=date&nav=breadcrumb&date=2026-11-03");
+    assert.equal(datePath.navigation, "breadcrumb");
+    assert.equal(datePath.dateGroup, "2026-11-03");
     const oldUpdateLink = explorerStateFromSearch(`?nav=breadcrumb&group=updates&collection=public-updates&record=${receiptId}`);
-    assert.equal(oldUpdateLink.collectionId, "investigation-updates");
+    assert.equal(oldUpdateLink.byDate, true);
+    assert.equal(oldUpdateLink.selectedId, receiptId);
+    assert.equal(oldUpdateLink.collectionId, null);
+    assert.equal(explorerStateFromSearch("?group=latest&collection=latest%3Aactivity").byDate, true);
+    assert.equal(explorerStateFromSearch("?group=organization").groupId, "crossover");
   } finally {
     await vite.close();
   }
 });
 
-test("Explorer has six top-level categories and keeps Crossover and Needs independent", () => {
-  assert.deepEqual(published.groups.map((group) => group.title), ["Updates", "Crossover", "Needs", "Investigations", "Stories", "Articles"]);
-  const crossover = published.groups.find((group) => group.id === "organization");
+test("Explorer has five top-level categories and keeps Crossover and Needs independent", () => {
+  assert.equal(needsSource.explorer.topLevel, true);
+  assert.equal(needsSource.explorer.id, "needs");
+  assert.equal(needsSource.records[0].rank, 1);
+  assert.deepEqual(published.groups.map((group) => group.title), ["Crossover", "Needs", "Investigations", "Stories", "Articles"]);
+  const crossover = published.groups.find((group) => group.id === "crossover");
   assert.equal(crossover?.title, "Crossover");
   assert.deepEqual(crossover.collectionIds, ["identity", "principles", "methods", "people"]);
   assert.deepEqual(published.groups.find((group) => group.id === "needs")?.collectionIds, ["needs"]);
   assert.equal(published.collections.find((item) => item.id === "needs")?.recordIds.length, 5);
 });
 
+test("top-level categories and labels follow the root data", () => {
+  const fixturePolicy = { collections: [{ id: "stories", schema: "story", title: "Stories", query: "stories", fields: ["id", "title"] }], nestedFields: {}, fieldLabels: {} };
+  const fixtureData = { stories: [{ id: "story-one", title: "A story" }] };
+  const withRoot = buildExplorerSnapshot(fixturePolicy, schemas, fixtureData,
+    [{ id: "voices", title: "Community voices", collectionIds: ["stories"] }]).snapshot;
+  assert.deepEqual(withRoot.groups.map(({ id, title }) => [id, title]), [["voices", "Community voices"]]);
+  assert.deepEqual(withRoot.groups[0].collectionIds, ["stories"]);
+  const withoutRoot = buildExplorerSnapshot(fixturePolicy, schemas, fixtureData, []).snapshot;
+  assert.deepEqual(withoutRoot.groups, []);
+});
+
+test("date metadata follows record dates without adding collections", () => {
+  const fixturePolicy = { collections: [{ id: "evidence", schema: "evidence", title: "Evidence", query: "evidence", fields: ["id", "title", "published_at"] }], nestedFields: {}, fieldLabels: {} };
+  const evidence = [
+    { id: "first", title: "First", published_at: "2026-10-01" },
+    { id: "second", title: "Second", published_at: "2026-10-02" },
+    { id: "undated", title: "Undated" },
+  ];
+  const build = (items) => buildExplorerSnapshot(fixturePolicy, schemas, { evidence: items }, [{ id: "evidence", title: "Evidence", collectionIds: ["evidence"] }]).snapshot;
+  assert.equal(build(evidence).records.first.dateForSort.value, "2026-10-01");
+  assert.equal(build(evidence).records.undated.dateForSort, undefined);
+  assert.equal(build([{ ...evidence[0], published_at: "2026-10-03" }, ...evidence.slice(1)]).records.first.dateForSort.value, "2026-10-03");
+  assert.deepEqual(build(evidence).collections.map((item) => item.id), ["evidence"]);
+});
+
 test("Investigation branches use one canonical record per ID and explicit relationships", () => {
-  assert.equal(published.groups.some((group) => group.id === "developments"), false);
+  assert.equal(published.groups.some((group) => group.id === "updates"), false);
   assert.deepEqual(published.groups.find((group) => group.id === "articles")?.collectionIds, ["articles"]);
   assert.equal(published.collections.find((item) => item.id === "articles")?.recordIds.length, 4);
   assert.equal(published.investigations.length, 1);
   const investigation = published.investigations[0];
   assert.equal(investigation.title, "Dogs on the street in Stockton");
-  assert.deepEqual(investigation.collectionIds.map((id) => published.collections.find((item) => item.id === id)?.title), ["Updates", "Questions", "Tasks", "Activity", "Findings", "Articles", "Locations", "Evidence", "Improvements", "Organizations"]);
-  assert.deepEqual(published.collections.find((item) => item.id === `${investigation.id}:updates`)?.childCollectionIds, [`${investigation.id}:developments`, `${investigation.id}:investigation-updates`]);
+  assert.deepEqual(investigation.collectionIds.map((id) => published.collections.find((item) => item.id === id)?.title), ["Objectives", "Tasks", "Activities", "Findings", "Articles", "Locations", "Evidence", "Projects", "Organizations"]);
   assert.deepEqual(published.recordChildren[investigation.id], investigation.collectionIds);
   assert.equal(published.records[investigation.id].schema, "investigation");
   assert.equal(published.collections.find((item) => item.id === `${investigation.id}:projects`)?.schema, "project");
@@ -213,8 +266,6 @@ test("Investigation branches use one canonical record per ID and explicit relati
     for (const recordId of collection.recordIds) assert.ok(published.records[recordId]);
   }
   const child = (name) => published.collections.find((item) => item.id === `${investigation.id}:${name}`);
-  assert.ok(child("developments").recordIds.includes("stocktonia-2026-10-20-animal-control-proposals"));
-  assert.ok(child("investigation-updates").recordIds.includes("crossover-2026-11-02-sas-field-call-records-received"));
   assert.equal(child("findings").recordIds.length, 3);
   assert.deepEqual(child("articles").recordIds, sourceArticles.map((article) => article.id));
   for (const findingId of child("findings").recordIds) {
@@ -230,26 +281,25 @@ test("Investigation branches use one canonical record per ID and explicit relati
   assert.equal(child("projects").recordIds.length, 6);
   assert.ok(child("organizations").recordIds.length > 0);
   assert.ok(child("organizations").recordIds.length < 11);
-  assert.ok(child("evidence").recordIds.includes("crossover-2026-11-02-sas-field-call-records-received"));
-  assert.equal(investigation.collectionIds.some((id) => id.endsWith(":workstreams")), false);
-  assert.deepEqual(published.collections.find((item) => item.id === "workstreams").recordIds, sourceWorkstreams.map((item) => item.id));
-  assert.equal(published.collections.find((item) => item.id === "workstreams").hidden, true);
+  assert.ok(child("activities").recordIds.includes("crossover-2026-11-02-sas-field-call-records-received"));
+  assert.equal(child("evidence").recordIds.includes("crossover-2026-11-02-sas-field-call-records-received"), false);
+  assert.equal(published.collections.some((item) => item.id === "workstreams"), false);
 });
 
 test("a second investigation creates its own scoped branch without copying shared records", () => {
-  const ids = new Set(["needs", "investigations", "questions", "tasks", "activities", "findings", "locations", "evidence", "projects", "organizations"]);
+  const ids = new Set(["needs", "investigations", "objectives", "tasks", "activities", "findings", "locations", "evidence", "projects", "organizations"]);
   const fixturePolicy = { ...policy, collections: policy.collections.filter((item) => ids.has(item.id)) };
   const { snapshot } = buildExplorerSnapshot(fixturePolicy, schemas, {
     needs: [{ id: "need-one" }, { id: "need-two" }],
     investigations: [{ id: "investigation-one", publicName: "One", gap_id: "need-one" }, { id: "investigation-two", publicName: "Two", gap_id: "need-two" }],
-    questions: [{ id: "question-one", investigation_id: "investigation-one", evidence_record_ids: ["evidence-one"] }],
+    objectives: [{ id: "objective-one", investigation_id: "investigation-one", evidence_record_ids: ["evidence-one"] }],
     tasks: [], activities: [],
     findings: [{ id: "finding-one", investigation_id: "investigation-one" }, { id: "finding-two", investigation_id: "investigation-two" }],
     locations: [],
     evidence: [{ id: "evidence-one", title: "One" }, { id: "evidence-two", title: "Two", investigation_id: "investigation-two" }, { id: "unrelated", title: "Unrelated" }],
     projects: [{ id: "shared-project", title: "Shared", gap_ids: ["need-one", "need-two"], organization_ids: ["shared-org"] }],
     organizations: [{ id: "shared-org", name: "Shared organization" }, { id: "unrelated-org", name: "Unrelated organization" }],
-  });
+  }, roots);
   assert.equal(snapshot.investigations.length, 2);
   const child = (investigationId, collectionId) => snapshot.collections.find((item) => item.id === `${investigationId}:${collectionId}`).recordIds;
   assert.deepEqual(child("investigation-one", "findings"), ["finding-one"]);
@@ -282,7 +332,7 @@ test("published article text and project states survive the public projection", 
 test("nested article publication permits only declared public text fields", () => {
   const articleCollection = policy.collections.find((item) => item.id === "articles");
   const fixture = { id: "article-fixture", title: "Public", content: { introduction: "Intro", private_note: "secret", sections: [{ heading: "Section", paragraphs: ["Text"], links: [{ label: "Source", url: "https://example.org", private_contact: "secret" }], internal_note: "secret" }] } };
-  const { snapshot } = buildExplorerSnapshot({ ...policy, groups: [{ id: "articles", title: "Articles" }], collections: [articleCollection] }, schemas, { articles: [fixture] });
+  const { snapshot } = buildExplorerSnapshot({ ...policy, collections: [articleCollection] }, schemas, { articles: [fixture] }, [{ id: "articles", title: "Articles", collectionIds: ["articles"] }]);
   assert.deepEqual(snapshot.records[fixture.id].fields.content, { introduction: "Intro", sections: [{ heading: "Section", paragraphs: ["Text"], links: [{ label: "Source", url: "https://example.org" }] }] });
   assert.equal(JSON.stringify(snapshot).includes("secret"), false);
 });
@@ -290,7 +340,7 @@ test("nested article publication permits only declared public text fields", () =
 test("project milestones publish public details without nested internal notes", () => {
   const projectCollection = policy.collections.find((item) => item.id === "projects");
   const fixture = { id: "project-fixture", title: "Public", milestones: [{ date: "2026-11-02", status: "planned", description: "Public plan", evidence_record_ids: [], internal_note: "secret" }] };
-  const { snapshot } = buildExplorerSnapshot({ ...policy, groups: [{ id: "projects", title: "Improvements" }], collections: [projectCollection] }, schemas, { projects: [fixture] });
+  const { snapshot } = buildExplorerSnapshot({ ...policy, collections: [projectCollection] }, schemas, { projects: [fixture] }, [{ id: "projects", title: "Projects", collectionIds: ["projects"] }]);
   assert.deepEqual(snapshot.records[fixture.id].fields.milestones, [{ date: "2026-11-02", status: "planned", description: "Public plan", evidence_record_ids: [] }]);
   assert.equal(JSON.stringify(snapshot).includes("secret"), false);
 });

@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/stories.json";
+import uiCopy from "../ui/stories.json";
 import { siteModel } from "../model";
 
 import { navigateInternalLink } from "../lib/internalLink";
@@ -32,7 +32,7 @@ export function StoryDetailPage({ slug, onOpenGap }: StoryDetailPageProps) {
   }
 
   const evidence = resolvedEvidence(story);
-  const image = story.image || fallbackImage;
+  const image = story.preferred_image || fallbackImage;
   const relatedGap = story.gap_ids.map((id) => gaps.find((gap) => gap.id === id && gap.active)).find((gap): gap is GapRecord => Boolean(gap));
 
   return (

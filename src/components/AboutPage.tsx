@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/about.json";
+import uiCopy from "../ui/about.json";
 import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";

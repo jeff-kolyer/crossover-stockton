@@ -1,4 +1,5 @@
-import uiCopy from "../data/ui-copy.json";
+import uiCopy from "../ui/shared.json";
+import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 
 const uiText = uiCopy.PublicFooter;
@@ -15,7 +16,7 @@ export function PublicFooter({ active, onNavigate, onOpenAbout }: {
   return <>
     <footer className="public-footer">
       <a className="footer-logo" href="/" aria-label={uiText.crossoverHome} onClick={(event) => navigateInternalLink(event, () => open("home"))}>
-        <img src="/images/logo_light.webp" alt="" decoding="async" />
+        <img src={siteModel.getIdentity().preferred_logo || "/images/logo_light.webp"} alt="" decoding="async" />
         <span>{uiText.crossover}</span>
       </a>
       <span>{uiText.text2026CrossoverStockton}</span>

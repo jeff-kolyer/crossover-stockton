@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/investigations/dogs/findings.json";
+import uiCopy from "../ui/investigation.json";
 import type { Article } from "../types/article";
 import { navigateInternalLink } from "../lib/internalLink";
 import { WorkspacePage, WorkspaceSection } from "./WorkspacePage";

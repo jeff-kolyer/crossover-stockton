@@ -5,7 +5,7 @@ import ts from 'typescript';
 const root = path.resolve(import.meta.dirname, '..');
 const files = fs.readdirSync(path.join(root, 'src/components')).filter((name) => name.endsWith('.tsx')).map((name) => `src/components/${name}`);
 files.push(...fs.readdirSync(path.join(root, 'src/lib')).filter((name) => /\.(tsx?|jsx?)$/.test(name)).map((name) => `src/lib/${name}`));
-files.push('src/App.tsx', 'src/data/crossoverActions.ts', 'src/data/dog-activity-questions.ts');
+files.push('src/App.tsx', 'src/view/crossoverActions.ts');
 const allCandidates = process.argv.includes('--candidates');
 const directOnly = process.argv.includes('--direct');
 let directCount = 0;

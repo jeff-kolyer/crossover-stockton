@@ -1,0 +1,203 @@
+{
+  "navigation": [
+    {
+      "page": "home",
+      "label": "Home",
+      "href": "/"
+    },
+    {
+      "page": "reality",
+      "label": "Needs",
+      "href": "/reality/"
+    },
+    {
+      "page": "action",
+      "label": "Action",
+      "href": "/action/"
+    },
+    {
+      "page": "connection",
+      "label": "Stories",
+      "href": "/connection/"
+    },
+    {
+      "page": "updates",
+      "label": "Updates",
+      "href": "/updates/"
+    },
+    {
+      "page": "data",
+      "label": "Data",
+      "href": "/data/"
+    },
+    {
+      "page": "about",
+      "label": "About",
+      "href": "/about/"
+    }
+  ],
+  "App": {
+    "siteName": "Crossover Stockton",
+    "reality": "Reality",
+    "stories": "Stories",
+    "articleNotFound": "Article not found",
+    "fieldReportNotFound": "Field report not found",
+    "investigation": "Investigation",
+    "routeTitles": {
+      "home": "Crossover Stockton",
+      "reality": "Reality | Crossover Stockton",
+      "connection": "Connection | Crossover Stockton",
+      "action": "Action | Crossover Stockton",
+      "updates": "Updates | Crossover Stockton",
+      "data": "Crossover Explorer | Crossover Stockton",
+      "about": "About | Crossover Stockton"
+    },
+    "sectionTitles": {
+      "overview": "About the gap",
+      "tasks": "Tasks",
+      "activity": "Activity",
+      "reports": "Activity",
+      "map": "Map",
+      "findings": "Findings",
+      "more": "About the gap",
+      "key-factors": "Key Factors",
+      "ways-to-help": "Responders",
+      "improvements": "Projects",
+      "our-findings": "Findings",
+      "research": "Research",
+      "updates": "Updates"
+    },
+    "workSectionTitles": {
+      "tasks": "tasks",
+      "activity": "activity",
+      "map": "map",
+      "findings": "findings"
+    }
+  },
+  "PublicFooter": {
+    "crossoverHome": "Crossover home",
+    "crossover": "Crossover",
+    "text2026CrossoverStockton": "© 2026 Crossover Stockton",
+    "realityConnectionAction": "Reality. Connection. Action.",
+    "footer": "Footer",
+    "mobilePrimary": "Mobile primary"
+  },
+  "PublicMobileMenu": {
+    "openNavigation": "Open navigation",
+    "menu": "Menu",
+    "closeNavigation": "Close navigation",
+    "stocktonCa": "Stockton, CA",
+    "mobilePrimary": "Mobile primary",
+    "primaryNavigation": "Primary navigation"
+  },
+  "PlainActionButton": {
+    "closeDetails": {
+      "location": "Close location details",
+      "overview": "Close overview details",
+      "task": "Close task details",
+      "activity": "Close activity details",
+      "filters": "Close filters details"
+    }
+  },
+  "SiteHeader": {
+    "crossoverHome": "Crossover home",
+    "crossover": "Crossover",
+    "primary": "Primary",
+    "needs": "Needs",
+    "action": "Action",
+    "stories": "Stories",
+    "updates": "Updates",
+    "data": "Data",
+    "about": "About",
+    "stocktonCa": "Stockton, CA"
+  },
+  "HomePage": {
+    "investigatingActiveCrossoverWork": "Investigating: active Crossover work.",
+    "identifiedNotYetInvestigatedByCrossover": "Identified: not yet investigated by Crossover.",
+    "responding": "responding",
+    "backToHome": "Back to home",
+    "pages": {
+      "home": {
+        "eyebrow": ""
+      },
+      "reality": {
+        "eyebrow": "Reality",
+        "title": "Needs in Stockton",
+        "text": "AI surfaced these possibilities through public information. Crossover is investigating street dog care first; the assumptions and severity of the other needs have not been independently established."
+      },
+      "connection": {
+        "eyebrow": "Connection",
+        "title": "Signs of Being",
+        "text": "Documented stories of people making a difference. These are not presented as outcomes of Crossover's technology investigations."
+      }
+    },
+    "organizationSingular": "organization",
+    "organizationPlural": "organizations",
+    "workUpdated": "Work updated",
+    "assessmentUpdated": "Assessment updated",
+    "storyFallback": "Story"
+  },
+  "HomeLanding": {
+    "gapsToInvestigate": "Gaps to investigate",
+    "findOutMore": "Find out more",
+    "exploreAllNeeds": "Explore all needs",
+    "investigationStockton": "Investigation · Stockton",
+    "exploreWhatWeReLearning": "Explore what we're learning",
+    "exploreTheInvestigation": "Explore the investigation",
+    "exploreOurFindings": "Explore our findings",
+    "whatWeReLearningFromTheEvidence": "What we're learning from the evidence",
+    "exploreTheMap": "Explore the map",
+    "placesReportsAndFirsthandObservations": "Places, reports, and firsthand observations",
+    "seeWhatSUnderway": "See what's underway",
+    "ourCurrentTasksAndNextSteps": "Our current tasks and next steps",
+    "storiesOfConnection": "Stories of connection",
+    "seeAllStories": "See all stories",
+    "moreWaysToExploreCrossover": "More ways to explore Crossover"
+  },
+  "GapReferencePage": {
+    "gapNotFound": "Gap not found",
+    "thisReferencePageIsUnavailable": "This reference page is unavailable.",
+    "backToNeeds": "Back to needs",
+    "backToNeeds2": "← Back to needs",
+    "previousAndNextGaps": "Previous and next gaps",
+    "previousGap": "Previous gap: ",
+    "nextGap": "Next gap: ",
+    "researchUpdated": "· Research updated ",
+    "whatSHappening": "What's happening?",
+    "keyFacts": "Key facts",
+    "evidence": "Evidence: ",
+    "whatSDocumented": "What's documented?",
+    "readStocktoniaSOctober20Report": "Read Stocktonia's October 20 report",
+    "onShelterCapacityAndTheProposedOrdinance": "on shelter capacity and the proposed ordinance changes.",
+    "crossoverFirsthandRecord": "Crossover firsthand record (",
+    "projectsAndProposedChanges": "Projects and proposed changes",
+    "development": "Development: ",
+    "operatingStatus": "; operating status: ",
+    "whatRemainsUnknown": "What remains unknown?",
+    "crossoverHasNotIndependentlyInvestigatedWhichReported": "Crossover has not independently investigated which reported conditions currently limit access. These are possible factors to verify, not established findings.",
+    "investigationObjective": "Investigation objective: ",
+    "whoSResponding": "Who's responding?",
+    "theseRolesAreDescribedInPublicAnd": "These roles are described in public and provider records. Listing an organization does not imply direct Crossover involvement.",
+    "organizationWebsite": "Organization website",
+    "sources": "Sources",
+    "crossoverFieldReport": "— Crossover field report",
+    "relatedInvestigation": "Related investigation",
+    "seeOurFindings": "See our findings →",
+    "articles": "Articles",
+    "investigatingStatus": "INVESTIGATING",
+    "identifiedStatus": "IDENTIFIED",
+    "identifiedEvidenceIntro": "The following points come from published and provider sources. Crossover has not independently checked their current outcomes.",
+    "investigatingEvidenceIntro": "Published and provider sources describe the following. Crossover's direct observations are identified separately.",
+    "showFewerImprovements": "Show fewer projects",
+    "showAllImprovements": "Show all projects",
+    "showFewerSources": "Show fewer sources",
+    "showAllSources": "Show all sources",
+    "published": "Published",
+    "reviewedStatus": "Reviewed",
+    "countyCountReport": "2024 San Joaquin County Point-In-Time Count Report"
+  },
+  "gapInvestigationStatus": {
+    "investigating": "Investigating",
+    "identified": "Identified"
+  }
+}

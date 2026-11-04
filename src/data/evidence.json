@@ -1,38 +1,64 @@
 [
   {
     "id": "stockton-animal-services-2026-10-20-reporting-guidance",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-animal-services"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
     "published_at": null,
     "checked_at": "2026-10-28",
     "record_type": "current_service",
     "trust": "source_supported",
     "title": "Stockton Animal Services reporting and found-dog guidance",
     "summary": "The City directs animal complaints, including animals at large and injured or sick strays, to its online report under Animals → Animals - other. It lists (209) 937-7445 for injured, sick, or aggressive animals and for scheduling a found-dog drop-off appointment during business hours, (209) 937-8377 for after-hours emergencies, and 911 for an animal attack in progress.",
-    "source": { "publisher": "City of Stockton Animal Services", "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php", "type": "official_service" },
+    "source": {
+      "publisher": "City of Stockton Animal Services",
+      "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php",
+      "type": "official_service"
+    },
     "context_sources": [
-      { "publisher": "City of Stockton Animal Services", "url": "https://www.stocktonca.gov/services/animal_services/index.php", "type": "official_service" },
-      { "publisher": "City of Stockton Animal Services", "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php", "type": "official_service" }
+      {
+        "publisher": "City of Stockton Animal Services",
+        "url": "https://www.stocktonca.gov/services/animal_services/index.php",
+        "type": "official_service"
+      },
+      {
+        "publisher": "City of Stockton Animal Services",
+        "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php",
+        "type": "official_service"
+      }
     ],
     "supports": []
   },
   {
     "id": "cbs-2026-04-06-stockton-abandoned-dogs",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-street-dogs"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
     "published_at": "2026-04-06",
     "checked_at": "2026-10-20",
     "record_type": "update",
     "trust": "source_supported",
     "title": "CBS Sacramento reports abandoned-dog concerns around Louis Park, Stanislaus Street, and Highway 4",
     "summary": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. Founder Jesse Mejia estimated at least 200–300 dogs on Stockton's streets at any given time and up to 400 during puppy season; this is an advocate estimate, not a verified census. The group reported feeding dogs on the streets up to four times a week, while saying it cannot directly rescue or remove dogs. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report.",
-    "source": { "publisher": "CBS Sacramento", "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/", "type": "local_reporting" },
+    "source": {
+      "publisher": "CBS Sacramento",
+      "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
+      "type": "local_reporting"
+    },
     "supports": []
   },
   {
     "id": "crossover-2026-10-20-reported-location-check-plan",
     "investigation_id": "street-dog-immediate-welfare",
-    "gap_ids": ["dogs-safe-placement"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "organization_ids": [],
     "published_at": null,
     "recorded_at": "2026-10-20",
@@ -40,9 +66,16 @@
     "trust": "crossover_source",
     "title": "Check reported stray-dog locations",
     "summary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented.",
-    "source": { "publisher": "Crossover Stockton", "type": "fieldwork_plan" },
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "fieldwork_plan"
+    },
     "evidence_status": "planned_not_observed",
-    "outcome": { "status": "planned", "summary": "Plan recorded October 20, 2026; visit date to be confirmed. Proposed visits only; no completed observation or field report is documented.", "as_of": "2026-10-20" },
+    "outcome": {
+      "status": "planned",
+      "summary": "Plan recorded October 20, 2026; visit date to be confirmed. Proposed visits only; no completed observation or field report is documented.",
+      "as_of": "2026-10-20"
+    },
     "planned_sites": [
       {
         "label": "Priority 1 — Louis Park",
@@ -59,81 +92,7 @@
         "reason": "Change or defer either stop if safe access or current evidence warrants it; select any additional area only from corroborated evidence."
       }
     ],
-    "work_id": "dogs-direct-field-work",
     "report_record_ids": [],
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-20-sas-field-call-records-request",
-    "investigation_id": "street-dog-immediate-welfare",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-animal-services"],
-    "published_at": null,
-    "occurred_at": "2026-10-20",
-    "recorded_at": "2026-10-20",
-    "record_type": "activity",
-    "trust": "crossover_source",
-    "title": "Requested Stockton Animal Services field-call records",
-    "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. An automatic forwarding acknowledgment arrived. The records were received by email on November 2; their contents have not been assessed in this record.",
-    "source": { "publisher": "Crossover Stockton", "type": "firsthand_account" },
-    "evidence_status": "self_reported",
-    "outcome": { "status": "received", "summary": "Submitted October 20, 2026. The requested records were received by email on November 2 at 4:03 p.m. PST. This record does not document a review or analysis of their contents.", "as_of": "2026-11-02" },
-    "work_id": "dogs-direct-field-work",
-    "report_record_ids": [],
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-11-02-sas-field-call-records-received",
-    "investigation_id": "street-dog-immediate-welfare",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-animal-services"],
-    "published_at": null,
-    "occurred_at": "2026-11-02",
-    "recorded_at": "2026-11-03",
-    "record_type": "activity",
-    "trust": "crossover_source",
-    "title": "Received Stockton Animal Services field-call records",
-    "summary": "The City responded to our October 20 public records request. Review and analysis are pending.",
-    "public_update": true,
-    "visibility": "public",
-    "source": { "publisher": "Crossover Stockton", "type": "firsthand_account" },
-    "evidence_status": "self_reported",
-    "basis_record_ids": ["crossover-2026-10-20-sas-field-call-records-request"],
-    "outcome": { "status": "received", "summary": "Records received by email; their contents and limitations have not been assessed in this record.", "as_of": "2026-11-02" },
-    "work_id": "dogs-direct-field-work",
-    "report_record_ids": [],
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-14-sas-volunteer-application",
-    "investigation_id": "street-dog-immediate-welfare",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [
-      "stockton-animal-services"
-    ],
-    "published_at": null,
-    "occurred_at": "2026-10-14",
-    "recorded_at": "2026-10-14",
-    "record_type": "activity",
-    "trust": "crossover_source",
-    "title": "Visited Stockton Animal Services and submitted a volunteer application",
-    "summary": "Visited Stockton Animal Services and submitted a volunteer application.",
-    "source": {
-      "publisher": "Crossover Stockton / Jeff Kolyer",
-      "type": "firsthand_account"
-    },
-    "evidence_status": "self_reported",
-    "outcome": {
-      "status": "awaiting_next_step",
-      "summary": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities. No substantive next step documented as of October 30.",
-      "as_of": "2026-10-30"
-    },
-    "work_id": "dogs-direct-field-work",
-    "report_record_ids": [
-      "crossover-2026-10-14-sas-first-visit"
-    ],
     "supports": []
   },
   {
@@ -194,7 +153,6 @@
         "type": "government"
       }
     ],
-    "work_id": "dogs-direct-field-work",
     "sections": [
       {
         "title": "Why we went",
@@ -217,7 +175,12 @@
         "body": "A major expansion of Stockton Animal Services is under construction. City project plans include an expanded public adoption lobby, veterinary facilities, and other improvements.\n\nThe existing cramped lobby may therefore be a temporary condition that the construction is intended to address.\n\nThe shelter remains in an industrial area with limited obvious opportunities for pleasant off-site dog walking nearby. For Doggie Day Out, transportation to another location may be an important practical consideration. Program transportation requirements have not yet been verified."
       }
     ],
-    "supports": []
+    "supports": [],
+    "objective_ids": [
+      "food-and-water",
+      "improvement-outcomes"
+    ],
+    "primary_objective_id": "food-and-water"
   },
   {
     "id": "crossover-2026-09-11-dog-crisis-cost-of-living",
@@ -282,8 +245,12 @@
   },
   {
     "id": "sas-2024-kennel-statistics",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-animal-services"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
     "published_at": null,
     "checked_at": "2026-10-15",
     "record_type": "update",
@@ -295,8 +262,12 @@
       "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
       "type": "government"
     },
-    "work_id": "dogs-public-source-review",
-    "supports": ["dog-intake-demand", "dog-outcomes"]
+    "supports": [
+      "dog-intake-demand",
+      "dog-outcomes"
+    ],
+    "coverage_id": "sas-service-area-2024",
+    "coverage_note": "Stockton Animal Services report covers County, Escalon, Lathrop, Lodi, Manteca, Out Of County, Ripon, Stockton, and Tracy; it is not a Stockton-city-only count."
   },
   {
     "id": "sas-2026-01-13-spay-neuter-capacity",
@@ -1095,8 +1066,12 @@
   },
   {
     "id": "stockton-2026-10-19-animal-services-ordinance-agenda",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-animal-services"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
     "published_at": "2026-10-14",
     "checked_at": "2026-10-19",
     "record_type": "planning_update",
@@ -1108,13 +1083,18 @@
       "url": "https://stockton.granicus.com/GeneratedAgendaViewer.php?event_id=3210&view_id=48",
       "type": "government"
     },
-    "work_id": "dogs-public-source-review",
-    "supports": ["animal-services-policy-review"]
+    "supports": [
+      "animal-services-policy-review"
+    ]
   },
   {
     "id": "kcra-2026-09-24-stockton-stray-dog-report",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-street-dogs"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
     "published_at": "2026-09-24",
     "checked_at": "2026-10-19",
     "record_type": "update",
@@ -1126,13 +1106,19 @@
       "url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921",
       "type": "news"
     },
-    "work_id": "dogs-public-source-review",
-    "supports": ["dumped-dog-intake-pressure", "rescue-capacity-pressure"]
+    "supports": [
+      "dumped-dog-intake-pressure",
+      "rescue-capacity-pressure"
+    ]
   },
   {
     "id": "ssd-2026-07-31-canine-campus-fundraiser",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-street-dogs"],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
     "published_at": "2026-07-31",
     "checked_at": "2026-10-19",
     "record_type": "organization_update",
@@ -1144,8 +1130,9 @@
       "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus",
       "type": "organization"
     },
-    "work_id": "dogs-public-source-review",
-    "supports": ["safe-placement-capacity"]
+    "supports": [
+      "safe-placement-capacity"
+    ]
   },
   {
     "id": "ssd-2026-09-29-dumped-dogs-surge",
@@ -1261,190 +1248,6 @@
     ]
   },
   {
-    "id": "crossover-2026-10-08-initial-barrier-care-space",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [],
-    "published_at": null,
-    "recorded_at": "2026-10-08",
-    "record_type": "finding",
-    "trust": "crossover_source",
-    "title": "Limited foster and indoor care space",
-    "summary": "Public evidence points to constrained shelter and placement capacity. Suitable temporary care and recovery space is an initial barrier to investigate.",
-    "source": {
-      "publisher": "Crossover Stockton",
-      "type": "ai_assisted_synthesis"
-    },
-    "evidence_status": "initial_assessment",
-    "basis_record_ids": [
-      "sas-2026-05-05-overpopulation-report",
-      "ssd-standing-foster-adopt",
-      "ssd-2026-10-07-canine-campus-details"
-    ],
-    "work_id": "dogs-map-placement-barriers",
-    "thread_id": "shelter-foster-capacity",
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-08-initial-barrier-veterinary-access",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [],
-    "published_at": null,
-    "recorded_at": "2026-10-08",
-    "record_type": "finding",
-    "trust": "crossover_source",
-    "title": "Veterinary costs and access",
-    "summary": "Public evidence identifies veterinary access and sterilization capacity as pressures. Costs, appointments, transport, and recovery care need local investigation.",
-    "source": {
-      "publisher": "Crossover Stockton",
-      "type": "ai_assisted_synthesis"
-    },
-    "evidence_status": "initial_assessment",
-    "basis_record_ids": [
-      "stockton-2026-05-11-stray-dog-report",
-      "sas-2026-01-13-spay-neuter-capacity",
-      "hlawa-2026-06-09-contract-extension",
-      "crossover-2026-09-11-dog-crisis-cost-of-living"
-    ],
-    "work_id": "dogs-map-placement-barriers",
-    "thread_id": "veterinary-access",
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-08-initial-barrier-pet-housing",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [],
-    "published_at": null,
-    "recorded_at": "2026-10-08",
-    "record_type": "finding",
-    "trust": "crossover_source",
-    "title": "Housing and shelter restrictions",
-    "summary": "Public-source framing identifies housing constraints, while the Safe Grounds proposal connects shelter access with companion animals. Specific local restrictions and their effects remain to be verified.",
-    "source": {
-      "publisher": "Crossover Stockton",
-      "type": "ai_assisted_synthesis"
-    },
-    "evidence_status": "initial_assessment",
-    "basis_record_ids": [
-      "crossover-2026-09-11-dog-crisis-cost-of-living",
-      "ssd-2026-06-08-street-response"
-    ],
-    "work_id": "dogs-map-placement-barriers",
-    "thread_id": "housing-prevention",
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-08-initial-barrier-care-logistics",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [],
-    "published_at": null,
-    "recorded_at": "2026-10-08",
-    "record_type": "finding",
-    "trust": "crossover_source",
-    "title": "Time and care commitments",
-    "summary": "Crossover’s public-source framing identifies time and care logistics as potential barriers. Training, transport, and backup-care burdens are questions for firsthand investigation.",
-    "source": {
-      "publisher": "Crossover Stockton",
-      "type": "ai_assisted_synthesis"
-    },
-    "evidence_status": "initial_assessment",
-    "basis_record_ids": [
-      "crossover-2026-09-11-dog-crisis-cost-of-living"
-    ],
-    "work_id": "dogs-map-placement-barriers",
-    "thread_id": "shelter-foster-capacity",
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-08-initial-barrier-opportunity-matching",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [],
-    "published_at": null,
-    "recorded_at": "2026-10-08",
-    "record_type": "finding",
-    "trust": "crossover_source",
-    "title": "Connecting willing people with opportunities",
-    "summary": "Public information lists participation routes. Whether unclear roles, application friction, or matching prevent participation is a hypothesis to test, not an established local finding.",
-    "source": {
-      "publisher": "Crossover Stockton",
-      "type": "ai_assisted_synthesis"
-    },
-    "evidence_status": "initial_assessment",
-    "basis_record_ids": [
-      "ssd-standing-volunteer-rescue-partner",
-      "ssd-standing-foster-adopt",
-      "sas-standing-doggie-day-out"
-    ],
-    "work_id": "dogs-map-placement-barriers",
-    "thread_id": "public-access-coordination",
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-07-street-dogs-volunteer-application",
-    "investigation_id": "street-dog-immediate-welfare",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "organization_ids": [
-      "stockton-street-dogs"
-    ],
-    "published_at": null,
-    "occurred_at": "2026-10-07",
-    "recorded_at": "2026-10-08",
-    "record_type": "activity",
-    "trust": "crossover_source",
-    "title": "Stockton Street Dogs volunteer application submitted",
-    "summary": "Applied to volunteer with Stockton Street Dogs and learn firsthand.",
-    "source": {
-      "publisher": "Crossover Stockton / Jeff Kolyer",
-      "type": "firsthand_account"
-    },
-    "evidence_status": "self_reported",
-    "outcome": {
-      "status": "awaiting_response",
-      "summary": "No response documented as of October 30, 2026.",
-      "as_of": "2026-10-30"
-    },
-    "work_id": "dogs-direct-field-work",
-    "report_record_ids": [],
-    "supports": []
-  },
-  {
-    "id": "crossover-2026-10-12-doggie-day-out-inquiry",
-    "investigation_id": "street-dog-immediate-welfare",
-    "gap_ids": ["dogs-safe-placement"],
-    "organization_ids": ["stockton-animal-services"],
-    "published_at": null,
-    "occurred_at": "2026-10-12",
-    "recorded_at": "2026-10-12",
-    "record_type": "activity",
-    "trust": "crossover_source",
-    "title": "Emailed Stockton Animal Services about Doggie Day Out",
-    "summary": "Emailed Stockton Animal Services asking about sign-up, requirements, paperwork, and orientation for Doggie Day Out.",
-    "source": {
-      "publisher": "Crossover Stockton / Jeff Kolyer",
-      "type": "firsthand_account"
-    },
-    "evidence_status": "self_reported",
-    "outcome": {
-      "status": "awaiting_response",
-      "summary": "No substantive next step documented as of October 30, 2026. No field report yet.",
-      "as_of": "2026-10-30"
-    },
-    "work_id": "dogs-direct-field-work",
-    "report_record_ids": [],
-    "supports": []
-  },
-  {
     "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
@@ -1461,7 +1264,6 @@
       "type": "local_reporting"
     },
     "evidence_status": "attributed_public_reporting",
-    "work_id": "dogs-public-source-review",
     "supports": [],
     "id": "stocktonia-2026-10-20-sas-capacity-intake",
     "record_type": "operational_condition",
@@ -1487,7 +1289,6 @@
       "type": "local_reporting"
     },
     "evidence_status": "attributed_public_reporting",
-    "work_id": "dogs-public-source-review",
     "supports": [],
     "id": "stocktonia-2026-10-20-roaming-dog-distinction",
     "record_type": "reported_context",
@@ -1513,7 +1314,6 @@
       "type": "local_reporting"
     },
     "evidence_status": "attributed_public_reporting",
-    "work_id": "dogs-public-source-review",
     "supports": [],
     "id": "stocktonia-2026-10-20-found-animal-foster-pathway",
     "record_type": "reported_service",
@@ -1539,7 +1339,6 @@
       "type": "local_reporting"
     },
     "evidence_status": "attributed_public_reporting",
-    "work_id": "dogs-public-source-review",
     "supports": [],
     "id": "stocktonia-2026-10-20-animal-control-proposals",
     "record_type": "planning_update",

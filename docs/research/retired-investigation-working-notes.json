@@ -1,0 +1,352 @@
+[
+  {
+    "investigation_id": "street-dog-immediate-welfare",
+    "verification_avenues": [
+      {
+        "title": "Field visits and firsthand observations",
+        "description": "Check dated reports from safe public areas. Record when and where we looked, what we observed or did not observe, visible condition, and signs of existing care. A single visit cannot establish conditions across a neighborhood."
+      },
+      {
+        "title": "Contact with responders, caregivers, and organizations",
+        "description": "Ask what care they provide, how they respond to reports, what help is useful, and how residents can participate safely. Record a contact attempt separately from a reply or a confirmed result."
+      },
+      {
+        "title": "Official records and public-source research",
+        "description": "Review dated reporting and request Animal Services field-call data. Check each source's coverage and limits; shelter intake totals are not a count of dogs currently on Stockton streets."
+      },
+      {
+        "title": "Cross-checking evidence and tracing outcomes",
+        "description": "Compare reports, records, conversations, and observations. Distinguish a sighting or request from a response, care delivered, reunification, placement, or a resolved need."
+      }
+    ],
+    "fieldwork_plan": {
+      "activity_record_id": "crossover-2026-10-20-reported-location-check-plan",
+      "observation_fields": [
+        "Visit date and general area",
+        "Approximate observation period",
+        "Original report or reason for visiting",
+        "Animals observed, if any",
+        "Visible condition or distress",
+        "Evidence of food, water, caregivers, or rescue activity",
+        "Direct conversations, recorded with privacy safeguards",
+        "What could not be verified",
+        "Any immediate need identified",
+        "Follow-up required"
+      ],
+      "result_options": [
+        "No dogs observed",
+        "Dogs observed, no visible immediate distress",
+        "Potential unmet need observed",
+        "Urgent need observed and referred",
+        "Unable to assess safely"
+      ],
+      "report_outline": "After a visit, publish a short field report stating the general areas visited, what was and was not seen, what was learned, what remains uncertain, and the next action. A single visit does not establish neighborhood-wide conditions. No dogs observed is a valid finding."
+    },
+    "contact_plan": {
+      "intro": "These are questions to take to organizations already involved in animal care. Public pages describe services and ways to participate, but they do not establish current unmet needs, safe assignments, or the outcome of a particular report.",
+      "shared_checks": [
+        "For each contact, record the attempt, any reply, what the person or organization reports, and what can be checked independently.",
+        "Ask whether a willing resident can find a verified, safe way to help with feeding, supplies, transport, temporary care, or fostering; document geographic or scheduling gaps, onboarding time, requirements, and barriers without creating an unapproved route.",
+        "Trace whether a reported need led to qualified assessment, lawful care, reunification or placement, and a confirmed outcome. Protect precise locations and do not approach unfamiliar dogs without appropriate precautions."
+      ],
+      "organizations": [
+        {
+          "name": "Hungry Tailz Rescue",
+          "status": "Public pages reviewed October 20, 2026; no direct Crossover contact is documented.",
+          "questions": [
+            "What street-dog care does the rescue provide, how are needs identified, and which needs remain unmet?",
+            "Are there verified, safe ways for residents to help with food, supplies, transport, or temporary care? What instructions or approvals apply?",
+            "Who assesses medical urgency, arranges veterinary referrals, and records what happened?"
+          ],
+          "record_ids": [],
+          "source_links": [
+            {
+              "label": "Care and contact",
+              "url": "https://www.hungrytailzrescue.com/"
+            },
+            {
+              "label": "Donation information",
+              "url": "https://www.hungrytailzrescue.com/donation"
+            }
+          ]
+        },
+        {
+          "name": "Stockton Streetdogs",
+          "status": "Volunteer application submitted October 7, 2026. No response documented as of October 30.",
+          "questions": [
+            "Which dogs or general areas need help now, and how are current cases distinguished from older reports?",
+            "Do you coordinate feeding or water routes? Can residents join safely, and what supplies, drop sites, schedules, or approvals are confirmed?",
+            "What rescue, foster, transport, or veterinary capacity is needed, and what prevents willing volunteers from helping?",
+            "What is the current status of Canine Campus, and which proposed capacity is already available?"
+          ],
+          "record_ids": [
+            "crossover-2026-10-07-street-dogs-volunteer-application",
+            "ssd-standing-volunteer-rescue-partner"
+          ],
+          "source_links": [
+            {
+              "label": "Mission and donations",
+              "url": "https://streetdogsanctuary.com/"
+            },
+            {
+              "label": "Volunteer and rescue-partner links",
+              "url": "https://linktr.ee/streetdogsanctuary"
+            }
+          ]
+        },
+        {
+          "name": "Stockton Animal Services",
+          "status": "Doggie Day Out inquiry emailed October 12; volunteer application submitted October 14; field-call records requested October 20 and received by email November 2. No substantive volunteer next step is documented as of October 30. The received records have not yet been assessed here. October 20 reporting describes an untested temporary found-animal foster pathway.",
+          "questions": [
+            "When a dog is reported, who receives the call, how is urgency assessed, and which response and closure details are recorded?",
+            "Can field-call records show general areas, repeat reports, pickups, unresolved cases, and outcomes? Which fields are unavailable?",
+            "What care, veterinary referral, reunification, or placement follows a report, and how can those outcomes be verified?",
+            "What are the current Doggie Day Out and volunteer requirements, orientation steps, and practical transport needs?",
+            "How does the temporary found-animal foster pathway work, who can participate, what capacity exists, and how are outcomes documented?"
+          ],
+          "record_ids": [
+            "crossover-2026-10-12-doggie-day-out-inquiry",
+            "crossover-2026-10-14-sas-first-visit",
+            "crossover-2026-10-20-sas-field-call-records-request",
+            "crossover-2026-11-02-sas-field-call-records-received",
+            "stocktonia-2026-10-20-found-animal-foster-pathway"
+          ],
+          "source_links": [
+            {
+              "label": "Official reporting guidance",
+              "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php"
+            },
+            {
+              "label": "Volunteer information",
+              "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php"
+            }
+          ]
+        },
+        {
+          "name": "Hard Luck Animal Welfare Advocates",
+          "status": "A City veterinary-services partnership is documented; no direct Crossover contact is documented.",
+          "questions": [
+            "What veterinary care is available through the City partnership, and can urgent street-dog cases be referred?",
+            "What capacity, eligibility, cost, transport, or scheduling limits affect access to care?",
+            "What additional qualified help, supplies, or coordination would be useful, and how would an outcome be confirmed?"
+          ],
+          "record_ids": [
+            "hlawa-2026-06-09-contract-extension"
+          ],
+          "source_links": [
+            {
+              "label": "Hard Luck website",
+              "url": "https://www.hardluckawa.org/"
+            }
+          ]
+        }
+      ]
+    },
+    "records_request": {
+      "activity_record_id": "crossover-2026-10-20-sas-field-call-records-request",
+      "submitted_at": "2026-10-20",
+      "status": "Records received by email November 2 at 4:03 p.m. PST; contents not yet assessed here",
+      "summary": "Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include dates, general areas, complaint categories, response dispositions, and closure statuses where maintained.",
+      "review_plan": "Review the received records for concentrations and repeat reports by general area; separate confirmed pickups, unresolved calls, and other dispositions; compare them with published reports and field observations; and cite any generalized map locations. Availability of requested fields is not yet documented."
+    },
+    "care_coordination": {
+      "title": "Community Care Coordination",
+      "central_question": "Can ordinary residents identify an unmet need and contribute to safe animal care without unnecessary administrative barriers?",
+      "participation_scope": "Investigate how willing residents access verified opportunities for observation, supplies, transport, temporary care, fostering, and animal welfare support. Public donation and application links exist; specific assignments, eligibility, response times, and unmet needs require confirmation with the responsible organizations.",
+      "public_source_review": {
+        "checked_at": "2026-10-20",
+        "summary": "The reviewed public pages describe existing feeding and care, donation wishlists, and volunteer or contact entry points. This limited review did not establish a public feeding route, resident safety protocol, supply drop site, or a current request for additional route volunteers. Confirm these directly with responders before publishing instructions.",
+        "sources": [
+          {
+            "label": "Stockton Streetdogs mission and donations",
+            "url": "https://streetdogsanctuary.com/"
+          },
+          {
+            "label": "Stockton Streetdogs official volunteer links",
+            "url": "https://linktr.ee/streetdogsanctuary"
+          },
+          {
+            "label": "Hungry Tailz Rescue care and contact",
+            "url": "https://www.hungrytailzrescue.com/"
+          },
+          {
+            "label": "Hungry Tailz Rescue donations",
+            "url": "https://www.hungrytailzrescue.com/donation"
+          }
+        ]
+      },
+      "questions": [
+        "If a resident wants to help feed street dogs, can anyone direct them to a verified, safe, existing opportunity? If not, what information, coordination, or capacity is missing?",
+        "Which responding organizations coordinate food and water, and do they publish instructions for residents?",
+        "Can residents join established feeding or supply routes without duplicating existing work?",
+        "What supplies are useful, and where should they be delivered?",
+        "Who can evaluate medical urgency and arrange veterinary referrals?",
+        "Are there geographic or scheduling gaps that additional volunteers could cover?",
+        "Can volunteers transport animals or supplies, provide temporary care, or foster? What qualifications or approvals are required, and how long does onboarding take?",
+        "What prevents a willing resident from contributing to established care, and how long does participation take?",
+        "What do Stockton Streetdogs and Stockton Animal Services say they provide, and what can be confirmed through direct contact or case evidence?",
+        "Can temporary care, reunification, transport, veterinary coordination, and lawful placement be arranged through qualified responders?",
+        "What evidence would show that a specific need was resolved rather than only reported or acted upon?",
+        "How can people help safely without attracting dogs into traffic, disrupting caregivers, or approaching unfamiliar dogs?"
+      ],
+      "decentralized_protocol_concept": {
+        "status": "concept_only",
+        "steps": [
+          "Reported need",
+          "Evidence checked",
+          "Safe assistance identified",
+          "Qualified volunteer matched",
+          "Outcome recorded"
+        ],
+        "note": "This is a proposed workflow, not an operating service. No public live animal-location pins, public claimable rescue assignments, volunteer dispatch, or unattended automated rescue decisions are proposed for this investigation."
+      },
+      "potential_capabilities": [
+        "Sighting and reporting",
+        "Field verification and triage",
+        "Temporary care and reunification",
+        "Supplies and resource coordination",
+        "Transport and veterinary coordination",
+        "Long-term placement or transfer"
+      ],
+      "capability_note": "These are proposed capabilities that may operate concurrently, not required steps or staffed services. Animal reporting, ownership, holding, safety, and veterinary requirements still apply.",
+      "potential_outcome": "Publish an organization-verified guide to helping street dogs once responders confirm needs, contacts, safe instructions, and any participation requirements."
+    },
+    "safeguards": [
+      "Do not publish precise locations of vulnerable people or animals without a specific reason and consideration of their safety.",
+      "Do not assume dogs accompanying unhoused people are stray, abandoned, or neglected.",
+      "Do not approach or feed unfamiliar dogs without appropriate safety precautions and coordination."
+    ],
+    "public_approach": "We protect the locations and privacy of vulnerable people and animals. We don't assume dogs accompanying unhoused people are abandoned or neglected. We approach unfamiliar dogs only with appropriate safety precautions and coordination.",
+    "possible_outcomes": [
+      "Additional feeding or water assistance",
+      "Supply deliveries to existing caregivers",
+      "Veterinary referrals or transport",
+      "Rescue coordination",
+      "Better coverage of particular areas",
+      "Evidence that existing assistance meets immediate needs"
+    ],
+    "illustrative_outcome": {
+      "title": "Possible result: Additional feeding assistance needed",
+      "description": "An authorized rescue or caregiver confirms that additional people are needed to support a regular feeding route.",
+      "status": "illustrative_only"
+    },
+    "opportunity_rule": "Practical opportunities should be published only after the responsible organization or caregiver confirms the need, requirements, and appropriate coordination.",
+    "related_barrier_thread_ids": [
+      "street-response-intake",
+      "veterinary-access",
+      "public-access-coordination"
+    ],
+    "related_project_ids": [],
+    "short_focus": "First street-condition observation pending; reported shelter practices and foster pathway need case-level verification",
+    "next_verification_step": "First confirm whether the October 20 visit occurred; no report is documented. Review dated Louis Park and Stanislaus Street leads, then complete and record a safe public-area observation, including zero dogs if that is what is seen. Review the field-call records received November 2, and separately follow up on volunteer applications, the found-animal foster pathway, and Council consideration of the proposed ordinance.",
+    "barrier_threads": [
+      {
+        "id": "street-response-intake",
+        "title": "Street response and intake",
+        "summary": "Follow what happens when someone reports or finds a stray dog, from the first request for help to a safe intake or other response.",
+        "open_questions": [
+          "How are stray-dog reports received, prioritized, and resolved?",
+          "When a dog cannot enter care, what happens next and why?"
+        ],
+        "record_ids": [
+          "stockton-2026-05-11-stray-dog-report",
+          "ssd-2026-06-08-street-response",
+          "sas-2026-05-21-intake-adoption-pause"
+        ]
+      },
+      {
+        "id": "shelter-foster-capacity",
+        "title": "Shelter and foster capacity",
+        "summary": "Examine where dogs wait for safe care and how shelter space, foster homes, recovery space, and everyday care affect movement through the system.",
+        "project_ids": [
+          "canine-campus",
+          "stockton-animal-shelter-renovation"
+        ],
+        "open_questions": [
+          "Where are dogs waiting, and what suitable foster or recovery space is missing?",
+          "Which constraints could the proposed Canine Campus address, and which would remain?"
+        ],
+        "record_ids": [
+          "sas-2026-05-05-overpopulation-report",
+          "ssd-standing-foster-adopt",
+          "ssd-2026-10-07-canine-campus-details"
+        ]
+      },
+      {
+        "id": "veterinary-access",
+        "title": "Veterinary care",
+        "summary": "Investigate how sterilization, treatment, appointment availability, transport, cost, and recovery capacity affect safe placement.",
+        "project_ids": [
+          "canine-campus",
+          "stockton-animal-shelter-renovation",
+          "stockton-pet-wellness-adoption-center",
+          "animal-balance-spay-neuter-contract-2026",
+          "hard-luck-veterinary-staffing-2026"
+        ],
+        "open_questions": [
+          "Where do cost or appointment availability block care or placement?",
+          "What happens between a spay/neuter appointment and a safe recovery placement?"
+        ],
+        "record_ids": [
+          "stockton-2026-05-11-stray-dog-report",
+          "sas-2026-01-13-spay-neuter-capacity",
+          "hlawa-2026-06-09-contract-extension",
+          "crossover-2026-09-11-dog-crisis-cost-of-living"
+        ]
+      },
+      {
+        "id": "public-access-coordination",
+        "title": "Public access and coordination",
+        "summary": "Test whether residents and volunteers can reach the right people, get clear instructions, and participate. Communication or onboarding friction remains a hypothesis until verified.",
+        "project_ids": [
+          "canine-campus",
+          "stockton-animal-shelter-renovation",
+          "stockton-pet-wellness-adoption-center"
+        ],
+        "open_questions": [
+          "Can residents obtain timely guidance when they report or find a dog?",
+          "Where, if anywhere, do volunteer onboarding, scheduling, or coordination stall?"
+        ],
+        "record_ids": [
+          "ssd-standing-volunteer-rescue-partner",
+          "sas-standing-doggie-day-out"
+        ]
+      },
+      {
+        "id": "rescue-reunification-adoption",
+        "title": "Rescue, reunification, and adoption",
+        "summary": "Trace what helps or delays dogs leaving shelter care for reunification, rescue transfer, foster care, or adoption.",
+        "project_ids": [
+          "stockton-pet-wellness-adoption-center"
+        ],
+        "open_questions": [
+          "What delays a dog that is ready for a safe placement?",
+          "Which handoffs between the shelter, rescues, fosters, and adopters need support?",
+          "How often do behavioral problems contribute to dog surrenders, and what training, assessment, or other support could prevent surrender or enable safe placement?"
+        ],
+        "record_ids": [
+          "ssd-standing-foster-adopt",
+          "ssd-standing-volunteer-rescue-partner",
+          "sas-2026-05-21-intake-adoption-pause"
+        ]
+      },
+      {
+        "id": "housing-prevention",
+        "title": "Housing and prevention",
+        "summary": "Investigate whether pet-inclusive housing and other practical support can keep people and dogs together and prevent a crisis.",
+        "project_ids": [
+          "pathways-neighborhood"
+        ],
+        "open_questions": [
+          "Which housing or shelter rules prevent people and dogs from staying together?",
+          "Which supports could prevent dogs from entering crisis?",
+          "How often do housing and insurance breed restrictions prevent people from keeping or adopting dogs in Stockton?"
+        ],
+        "record_ids": [
+          "crossover-2026-09-11-dog-crisis-cost-of-living",
+          "ssd-2026-06-08-street-response"
+        ]
+      }
+    ]
+  }
+]

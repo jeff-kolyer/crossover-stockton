@@ -7,6 +7,7 @@ import { PageRenderer } from "./view/PageRenderer";
 
 export default function App({ initialPath }: { initialPath?: string }) {
   const [route, setRoute] = useState<RouteState>(() => routeFromPathname(initialPath ?? window.location.pathname));
+  const [explorerResetKey, setExplorerResetKey] = useState(0);
   const googleExperiment = import.meta.env.DEV && typeof window !== "undefined" && new URLSearchParams(window.location.search).get("ui") === "google";
   const investigationPath = (path: string) => {
     if (!googleExperiment) return path;
@@ -57,9 +58,10 @@ export default function App({ initialPath }: { initialPath?: string }) {
   function showPage(page: PublicRoute) {
     if (page === "investigation") { showInvestigation("dogs"); return; }
     const nextPath = ROUTE_PATHS[page];
-    if (window.location.pathname !== nextPath) {
+    if (`${window.location.pathname}${window.location.search}${window.location.hash}` !== nextPath) {
       window.history.pushState({}, "", nextPath);
     }
+    if (page === "data") setExplorerResetKey((key) => key + 1);
     setRoute({ page });
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
@@ -162,5 +164,5 @@ export default function App({ initialPath }: { initialPath?: string }) {
     requestAnimationFrame(() => window.scrollTo({ top: 0, left: 0 }));
   }
 
-  return <PageRenderer route={route} googleExperiment={googleExperiment} handlers={{ showPage, showGap, showInvestigation, showGapSection, showWork, showStory, showArticle, showInvestigationReport, showDogTasks }} />;
+  return <PageRenderer route={route} googleExperiment={googleExperiment} explorerResetKey={explorerResetKey} handlers={{ showPage, showGap, showInvestigation, showGapSection, showWork, showStory, showArticle, showInvestigationReport, showDogTasks }} />;
 }

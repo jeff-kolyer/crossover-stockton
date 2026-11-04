@@ -1,9 +1,10 @@
 import { readFile } from "node:fs/promises";
 
 const read = async (name) => JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
-const [tasks, questions, findings, records, locations, organizations, projects, investigations, articles] = await Promise.all([
-  "tasks", "investigation-questions", "findings", "records", "investigation-locations", "orgs", "projects", "dogs-investigations", "articles",
+const [tasks, objectives, findings, activities, evidence, locations, organizations, projects, investigations, articles] = await Promise.all([
+  "tasks", "objectives", "findings", "activities", "evidence", "locations", "organizations", "projects", "investigations", "articles",
 ].map(read));
+const records = [...evidence, ...activities];
 const errors = [];
 const check = (condition, message) => { if (!condition) errors.push(message); };
 const indexed = (items, name) => {
@@ -16,20 +17,20 @@ const indexed = (items, name) => {
   return new Map(items.map((item) => [item.id, item]));
 };
 const taskById = indexed(tasks, "tasks");
-const questionById = indexed(questions, "questions");
+const objectiveById = indexed(objectives, "objectives");
 const findingById = indexed(findings, "findings");
 const recordById = indexed(records, "records");
 const locationById = indexed(locations, "locations");
 const organizationById = indexed(organizations, "organizations");
 const projectById = indexed(projects, "projects");
-const articleById = indexed(articles, "articles");
-const investigationIds = new Set(investigations.active_investigations.map((item) => item.id));
+const articleById = indexed(articles.records, "articles");
+const investigationIds = new Set(investigations.records.map((item) => item.id));
 const validDate = (value) => typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value) && !Number.isNaN(Date.parse(`${value}T12:00:00Z`));
 const refs = (owner, field, index) => {
   check(Array.isArray(owner[field]), `${owner.id}: ${field} must be an array`);
   for (const id of owner[field] ?? []) check(index.has(id), `${owner.id}: unknown ${field} id ${id}`);
 };
-const actualActivities = new Map(records.filter((record) => record.record_type === "activity"
+const actualActivities = new Map(activities.filter((record) => record.record_type === "activity"
   && investigationIds.has(record.investigation_id)
   && record.occurred_at
   && !record.evidence_status?.startsWith("planned")
@@ -50,7 +51,13 @@ for (const record of records) {
     check(investigationIds.has(record.investigation_id), `${record.id}: actual Activity needs an investigation_id`);
     check(validDate(record.occurred_at), `${record.id}: an actual Activity needs an occurrence date`);
     check(!record.evidence_status?.startsWith("planned"), `${record.id}: planned work must not be typed Activity`);
+    check(Array.isArray(record.objective_ids) && record.objective_ids.length > 0, `${record.id}: actual Activity needs at least one objective`);
   }
+  for (const id of record.objective_ids ?? []) {
+    check(objectiveById.get(id)?.investigation_id === record.investigation_id, `${record.id}: objective ${id} belongs to another investigation or is missing`);
+    if (record.record_type === "activity") check(objectiveById.get(id)?.activity_record_ids.includes(record.id), `${record.id}: objective ${id} does not link back to Activity`);
+  }
+  if (record.primary_objective_id) check(record.objective_ids?.includes(record.primary_objective_id), `${record.id}: primary objective must be one of its linked objectives`);
   if (record.investigation_id) check(investigationIds.has(record.investigation_id), `${record.id}: unknown investigation_id`);
   if (record.record_type === "field_report" && record.investigation_id) {
     check([...actualActivities.values()].some((activity) => activity.report_record_ids?.includes(record.id)), `${record.id}: field report needs a linked Activity`);
@@ -70,7 +77,9 @@ for (const task of tasks) {
   if (task.map_reference_location_ids) refs(task, "map_reference_location_ids", locationById);
   for (const id of task.location_ids) check(locationById.get(id)?.investigation_id === task.investigation_id, `${task.id}: location ${id} belongs to another investigation`);
   refs(task, "organization_ids", organizationById);
-  refs(task, "question_ids", questionById);
+  refs(task, "objective_ids", objectiveById);
+  check(task.objective_ids?.length > 0, `${task.id}: Task needs at least one objective`);
+  for (const id of task.objective_ids ?? []) check(objectiveById.get(id)?.investigation_id === task.investigation_id, `${task.id}: objective ${id} belongs to another investigation`);
   refs(task, "basis_record_ids", recordById);
   refs(task, "activity_record_ids", actualActivities);
   for (const id of task.activity_record_ids) check(actualActivities.get(id)?.investigation_id === task.investigation_id, `${task.id}: Activity ${id} belongs to another investigation`);
@@ -83,32 +92,33 @@ for (const task of tasks) {
   }
 }
 
-for (const question of questions) {
-  check(investigationIds.has(question.investigation_id), `${question.id}: unknown investigation`);
-  check(Boolean(question.title && question.description), `${question.id}: title and description required`);
-  refs(question, "task_ids", taskById);
-  for (const id of question.task_ids) check(taskById.get(id)?.investigation_id === question.investigation_id, `${question.id}: Task ${id} belongs to another investigation`);
-  refs(question, "activity_record_ids", actualActivities);
-  for (const id of question.activity_record_ids) check(actualActivities.get(id)?.investigation_id === question.investigation_id, `${question.id}: Activity ${id} belongs to another investigation`);
-  refs(question, "evidence_record_ids", recordById);
-  refs(question, "finding_ids", findingById);
-  for (const id of question.finding_ids) check(findingById.get(id)?.investigation_id === question.investigation_id, `${question.id}: Finding ${id} belongs to another investigation`);
-  for (const id of question.task_ids) check(taskById.get(id)?.question_ids.includes(question.id), `${question.id}: Task ${id} does not link back`);
-  for (const id of question.finding_ids) check(findingById.get(id)?.related_question_ids.includes(question.id), `${question.id}: Finding ${id} does not link back`);
+for (const objective of objectives) {
+  check(investigationIds.has(objective.investigation_id), `${objective.id}: unknown investigation`);
+  check(Boolean(objective.title && objective.description), `${objective.id}: title and description required`);
+  refs(objective, "task_ids", taskById);
+  for (const id of objective.task_ids) check(taskById.get(id)?.investigation_id === objective.investigation_id, `${objective.id}: Task ${id} belongs to another investigation`);
+  refs(objective, "activity_record_ids", actualActivities);
+  for (const id of objective.activity_record_ids) check(actualActivities.get(id)?.investigation_id === objective.investigation_id, `${objective.id}: Activity ${id} belongs to another investigation`);
+  for (const id of objective.activity_record_ids) check(actualActivities.get(id)?.objective_ids?.includes(objective.id), `${objective.id}: Activity ${id} does not link back`);
+  refs(objective, "evidence_record_ids", recordById);
+  refs(objective, "finding_ids", findingById);
+  for (const id of objective.finding_ids) check(findingById.get(id)?.investigation_id === objective.investigation_id, `${objective.id}: Finding ${id} belongs to another investigation`);
+  for (const id of objective.task_ids) check(taskById.get(id)?.objective_ids.includes(objective.id), `${objective.id}: Task ${id} does not link back`);
+  for (const id of objective.finding_ids) check(findingById.get(id)?.related_objective_ids.includes(objective.id), `${objective.id}: Finding ${id} does not link back`);
 }
 
 for (const finding of findings) {
   check(investigationIds.has(finding.investigation_id), `${finding.id}: unknown investigation`);
   check(["established", "developing", "contradicted", "insufficient_evidence", "preliminary", "exploratory"].includes(finding.status), `${finding.id}: invalid status`);
   check(finding.current === undefined || typeof finding.current === "boolean", `${finding.id}: current must be boolean`);
-  if (finding.current !== false) check(["question-extent", "question-care", "question-reporting", "question-participation", "question-improvements"].includes(finding.primary_question_id), `${finding.id}: invalid primary question`);
+  if (finding.current !== false) check(objectiveById.get(finding.primary_objective_id)?.investigation_id === finding.investigation_id, `${finding.id}: invalid primary objective`);
   if (finding.article_id) check(articleById.get(finding.article_id)?.published, `${finding.id}: article must exist and be published`);
   check(Boolean(finding.title && finding.statement && finding.limitations), `${finding.id}: title, statement, and limitations required`);
   check(validDate(finding.last_reviewed_at), `${finding.id}: invalid review date`);
   refs(finding, "supporting_record_ids", recordById);
   refs(finding, "contradicting_record_ids", recordById);
-  refs(finding, "related_question_ids", questionById);
-  for (const id of finding.related_question_ids) check(questionById.get(id)?.investigation_id === finding.investigation_id, `${finding.id}: Question ${id} belongs to another investigation`);
+  refs(finding, "related_objective_ids", objectiveById);
+  for (const id of finding.related_objective_ids) check(objectiveById.get(id)?.investigation_id === finding.investigation_id, `${finding.id}: Objective ${id} belongs to another investigation`);
   refs(finding, "related_task_ids", taskById);
   for (const id of finding.related_task_ids) check(taskById.get(id)?.investigation_id === finding.investigation_id, `${finding.id}: Task ${id} belongs to another investigation`);
   refs(finding, "related_project_ids", projectById);
@@ -122,5 +132,5 @@ if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;
 } else {
-  console.log(`Validated ${tasks.length} Tasks, ${actualActivities.size} canonical Activities, ${questions.length} Questions, and ${findings.length} Findings.`);
+  console.log(`Validated ${tasks.length} Tasks, ${actualActivities.size} canonical Activities, ${objectives.length} Objectives, and ${findings.length} Findings.`);
 }

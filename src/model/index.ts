@@ -1,26 +1,21 @@
-import identityData from "../data/crossover.json";
+import crossoverData from "../data/crossover.json";
 import peopleData from "../data/people.json";
-import principlesData from "../data/principles.json";
-import methodsData from "../data/methods.json";
-import gapsData from "../data/gaps.json";
-import investigationsData from "../data/dogs-investigations.json";
-import questionsData from "../data/investigation-questions.json";
+import needsData from "../data/needs.json";
+import investigationsData from "../data/investigations.json";
+import objectivesData from "../data/objectives.json";
 import tasksData from "../data/tasks.json";
-import recordsData from "../data/records.json";
+import activitiesData from "../data/activities.json";
+import evidenceData from "../data/evidence.json";
 import findingsData from "../data/findings.json";
-import orgsData from "../data/orgs.json";
+import orgsData from "../data/organizations.json";
 import storiesData from "../data/stories.json";
-import locationsData from "../data/investigation-locations.json";
+import locationsData from "../data/locations.json";
 import projectsData from "../data/projects.json";
-import researchData from "../data/dogs-research.json";
+import measurementsData from "../data/measurements.json";
 import claimsData from "../data/claims.json";
-import workstreamsData from "../data/workstreams.json";
-import legacyWorkData from "../data/work.json";
 import articlesData from "../data/articles.json";
-import mapMaintenanceData from "../data/investigation-map-maintenance.json";
-import activityQuestionGroupsData from "../data/activity-question-groups.json";
 import type { EvidenceRecord, GapRecord, OrgRecord, StoryRecord } from "../types";
-import type { InvestigationFinding, InvestigationQuestion, InvestigationTask } from "../types/investigation";
+import type { InvestigationFinding, InvestigationObjective, InvestigationTask } from "../types/investigation";
 import { publicUpdateCategory, selectPublicUpdates } from "./publicUpdates";
 
 type Identified = { id: string };
@@ -38,29 +33,24 @@ const requireReference = <T>(value: T | undefined, collection: string, id: strin
 };
 
 export type InformationInput = {
-  identity: typeof identityData;
+  identity: typeof crossoverData.identity;
   people: typeof peopleData;
-  principles: typeof principlesData;
-  methods: typeof methodsData;
+  principles: typeof crossoverData.principles;
+  methods: typeof crossoverData.methods;
   needs: GapRecord[];
-  investigations: typeof investigationsData.active_investigations;
-  questions: InvestigationQuestion[];
+  investigations: typeof investigationsData.records;
+  objectives: InvestigationObjective[];
   tasks: InvestigationTask[];
+  activities: EvidenceRecord[];
   evidence: EvidenceRecord[];
   findings: InvestigationFinding[];
   organizations: OrgRecord[];
   stories: StoryRecord[];
   locations: typeof locationsData;
   projects: typeof projectsData;
-  measurements: typeof researchData.measurements;
-  researchBaseline: typeof researchData;
-  investigationDataset: typeof investigationsData;
-  mapMaintenance: typeof mapMaintenanceData;
+  measurements: typeof measurementsData;
   claims: typeof claimsData;
-  workstreams: typeof workstreamsData;
-  legacyWork: typeof legacyWorkData;
-  articles: typeof articlesData;
-  activityQuestionGroups: typeof activityQuestionGroupsData;
+  articles: typeof articlesData.records;
 };
 
 /** The Model has no React or page-layout dependency. It keeps raw records distinct from derived queries. */
@@ -70,10 +60,15 @@ export function createInformationModel(input: InformationInput) {
   const methods = index(input.methods, "methods");
   const needs = index(input.needs, "needs");
   const investigations = index(input.investigations, "investigations");
-  const questions = index(input.questions, "questions");
+  const objectives = index(input.objectives, "objectives");
   const tasks = index(input.tasks, "tasks");
   const orderedTasks = [...input.tasks].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
+  const activities = index(input.activities, "activities");
   const evidence = index(input.evidence, "evidence");
+  const allRecords = [...input.evidence, ...input.activities];
+  const records = index(allRecords, "activities and evidence");
+  if (input.activities.some((record) => record.record_type !== "activity" || !record.occurred_at || record.evidence_status?.startsWith("planned"))) throw new Error("activities.json must contain completed activities");
+  if (input.evidence.some((record) => record.record_type === "activity")) throw new Error("evidence.json contains an activity");
   const findings = index(input.findings, "findings");
   const organizations = index(input.organizations, "organizations");
   const stories = index(input.stories, "stories");
@@ -81,15 +76,12 @@ export function createInformationModel(input: InformationInput) {
   const projects = index(input.projects, "projects");
   const measurements = index(input.measurements, "measurements");
   const claims = index(input.claims, "claims");
-  const workstreams = index(input.workstreams, "workstreams");
-  const legacyWork = index(input.legacyWork, "legacy work");
   const articles = index(input.articles, "articles");
-  const activityQuestionGroups = index(input.activityQuestionGroups, "activity question groups");
 
   requireReference(people.get(input.identity.founderPersonId), "person", input.identity.founderPersonId);
   for (const id of input.identity.principleIds) requireReference(principles.get(id), "principle", id);
   for (const id of input.identity.methodIds) requireReference(methods.get(id), "method", id);
-  for (const item of input.questions) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
+  for (const item of input.objectives) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
   for (const item of input.tasks) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
   for (const item of input.findings) requireReference(investigations.get(item.investigation_id), "investigation", item.investigation_id);
   for (const claim of input.claims) {
@@ -98,7 +90,6 @@ export function createInformationModel(input: InformationInput) {
     if ("measurementId" in claim && claim.measurementId) requireReference(measurements.get(claim.measurementId), "measurement", claim.measurementId);
   }
 
-  const actualActivities = input.evidence.filter((record) => record.record_type === "activity" && record.occurred_at && !record.evidence_status?.startsWith("planned"));
   return {
     getIdentity: () => input.identity,
     getPerson: (id: string) => people.get(id),
@@ -108,45 +99,46 @@ export function createInformationModel(input: InformationInput) {
     getNeeds: () => input.needs,
     getInvestigation: (id: string) => investigations.get(id),
     getInvestigations: () => input.investigations,
-    getInvestigationDataset: () => input.investigationDataset,
-    getQuestion: (id: string) => questions.get(id),
-    getQuestions: (investigationId: string) => input.questions.filter((question) => question.investigation_id === investigationId),
-    getAllQuestions: () => input.questions,
+    getObjective: (id: string) => objectives.get(id),
+    getObjectives: (investigationId: string) => input.objectives.filter((objective) => objective.investigation_id === investigationId),
+    getActivityObjectives: (investigationId: string) => input.objectives.filter((objective) => objective.investigation_id === investigationId),
+    getAllObjectives: () => input.objectives,
     getTask: (id: string) => tasks.get(id),
     getTasks: (investigationId: string) => orderedTasks.filter((task) => task.investigation_id === investigationId),
     getAllTasks: () => orderedTasks,
-    getActivity: (id: string) => actualActivities.find((record) => record.id === id),
-    getAllActivities: () => actualActivities,
-    getActivities: (questionId: string) => {
-      const question = requireReference(questions.get(questionId), "question", questionId);
-      return question.activity_record_ids.map((id) => requireReference(actualActivities.find((record) => record.id === id), "actual activity", id));
+    getActivity: (id: string) => activities.get(id),
+    getAllActivities: () => input.activities,
+    getActivities: (objectiveId: string) => {
+      const objective = requireReference(objectives.get(objectiveId), "objective", objectiveId);
+      return objective.activity_record_ids.map((id) => requireReference(activities.get(id), "actual activity", id));
     },
     getFinding: (id: string) => findings.get(id),
     getAllFindings: () => input.findings,
-    getFindings: (questionId: string) => {
-      const question = requireReference(questions.get(questionId), "question", questionId);
-      return question.finding_ids.map((id) => requireReference(findings.get(id), "finding", id));
+    getFindings: (objectiveId: string) => {
+      const objective = requireReference(objectives.get(objectiveId), "objective", objectiveId);
+      return objective.finding_ids.map((id) => requireReference(findings.get(id), "finding", id));
     },
     getEvidenceRecord: (id: string) => evidence.get(id),
     getAllEvidence: () => input.evidence,
-    getPublicUpdates: () => selectPublicUpdates(input.needs, input.evidence),
-    getPublicDevelopments: () => selectPublicUpdates(input.needs, input.evidence).filter(({ record }) => publicUpdateCategory(record) === "development"),
-    getInvestigationUpdates: () => selectPublicUpdates(input.needs, input.evidence).filter(({ record }) => publicUpdateCategory(record) === "investigation_update"),
+    getRecord: (id: string) => records.get(id),
+    getAllRecords: () => allRecords,
+    getPublicUpdates: () => selectPublicUpdates(input.needs, allRecords),
+    getPublicDevelopments: () => selectPublicUpdates(input.needs, allRecords).filter(({ record }) => publicUpdateCategory(record) === "development"),
+    getInvestigationUpdates: () => selectPublicUpdates(input.needs, allRecords).filter(({ record }) => publicUpdateCategory(record) === "investigation_update"),
     getEvidence: (findingId: string) => {
       const finding = requireReference(findings.get(findingId), "finding", findingId);
-      return { supporting: finding.supporting_record_ids.map((id) => requireReference(evidence.get(id), "evidence", id)), contradicting: finding.contradicting_record_ids.map((id) => requireReference(evidence.get(id), "evidence", id)) };
+      return { supporting: finding.supporting_record_ids.map((id) => requireReference(records.get(id), "record", id)), contradicting: finding.contradicting_record_ids.map((id) => requireReference(records.get(id), "record", id)) };
     },
     getSources: (recordId: string) => {
-      const record = requireReference(evidence.get(recordId), "evidence", recordId);
+      const record = requireReference(records.get(recordId), "record", recordId);
       return [record.source, ...(record.context_sources ?? [])];
     },
     getRelatedLocations: (recordId: string) => {
-      requireReference(evidence.get(recordId), "evidence", recordId);
+      requireReference(records.get(recordId), "record", recordId);
       return input.locations.filter((location) => location.evidence_record_id === recordId || location.evidence_record_ids?.includes(recordId));
     },
     getLocation: (id: string) => locations.get(id),
     getAllLocations: () => input.locations,
-    getMapMaintenance: () => input.mapMaintenance,
     getPeople: () => input.people,
     getPrinciples: () => input.principles,
     getMethods: () => input.methods,
@@ -158,44 +150,32 @@ export function createInformationModel(input: InformationInput) {
     getProjects: () => input.projects,
     getMeasurement: (id: string) => measurements.get(id),
     getMeasurements: () => input.measurements,
-    getResearchBaseline: () => input.researchBaseline,
     getClaim: (id: string) => claims.get(id),
     getClaims: (needId: string) => input.claims.filter((claim) => claim.needId === needId),
     getAllClaims: () => input.claims,
-    getWorkstream: (id: string) => workstreams.get(id),
-    getWorkstreams: () => input.workstreams,
-    getLegacyWork: (id: string) => legacyWork.get(id),
-    getAllLegacyWork: () => input.legacyWork,
     getArticle: (id: string) => articles.get(id),
     getArticles: () => input.articles,
-    getActivityQuestionGroup: (id: string) => activityQuestionGroups.get(id),
-    getActivityQuestionGroups: () => input.activityQuestionGroups,
     getDevelopments: () => input.evidence.filter((record) => ["update", "planning_update", "operational_change", "organization_update", "capacity_intervention", "reported_context"].includes(record.record_type)),
   };
 }
 
 export const siteModel = createInformationModel({
-  identity: identityData,
+  identity: crossoverData.identity,
   people: peopleData,
-  principles: principlesData,
-  methods: methodsData,
-  needs: gapsData as GapRecord[],
-  investigations: investigationsData.active_investigations,
-  questions: questionsData as InvestigationQuestion[],
+  principles: crossoverData.principles,
+  methods: crossoverData.methods,
+  needs: needsData.records as GapRecord[],
+  investigations: investigationsData.records,
+  objectives: objectivesData as InvestigationObjective[],
   tasks: tasksData as InvestigationTask[],
-  evidence: recordsData as EvidenceRecord[],
+  activities: activitiesData as EvidenceRecord[],
+  evidence: evidenceData as EvidenceRecord[],
   findings: findingsData as InvestigationFinding[],
   organizations: orgsData as OrgRecord[],
-  stories: storiesData as StoryRecord[],
+  stories: storiesData.records as StoryRecord[],
   locations: locationsData,
   projects: projectsData,
-  measurements: researchData.measurements,
-  researchBaseline: researchData,
-  investigationDataset: investigationsData,
-  mapMaintenance: mapMaintenanceData,
+  measurements: measurementsData,
   claims: claimsData,
-  workstreams: workstreamsData,
-  legacyWork: legacyWorkData,
-  articles: articlesData,
-  activityQuestionGroups: activityQuestionGroupsData,
+  articles: articlesData.records,
 });

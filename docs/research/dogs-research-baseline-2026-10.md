@@ -1,7 +1,8 @@
 # Dogs without safe placement: public-source research baseline
 
-**Review completed:** October 15, 2026  
-**Research work:** `dogs-public-source-review`  
+**Initial review completed:** October 15, 2026
+
+**Last reviewed:** October 19, 2026
 **Scope:** Dog welfare in Stockton, with shelter statistics labeled by their actual multi-jurisdiction coverage.
 
 ## What the evidence says
@@ -87,8 +88,9 @@ Construction, funding, a ceremony, a staffed service, and measured output are di
 4. Unique dogs served and final outcomes across SSD, shelter, fosters, and receiving rescues, with handoff IDs to prevent double-counting.
 5. Pathways-specific pet admission rules, dog-inclusive places, and actual people-with-dog placements.
 6. For each capacity project, the verified opening/implementation milestone and **net additional output** attributable to the project.
+7. Whether SHINE SJC tracks pets or helps unhoused residents find services that accommodate their dogs. Its dog-specific functionality is unverified and should not be counted as a confirmed dog-rescue intervention.
 
-The corresponding machine-readable measurements, source references, unknowns, and project links are in [`dogs-research.json`](../../src/data/dogs-research.json). Future reviews should follow the [research refresh process](dogs-research-refresh.md).
+The machine-readable values are in [`measurements.json`](../../src/data/measurements.json). Each measurement links directly to the investigation and its source record in [`evidence.json`](../../src/data/evidence.json).
 
 ## Sources checked
 
@@ -110,4 +112,4 @@ The corresponding machine-readable measurements, source references, unknowns, an
 [canine-campus]: https://streetdogsanctuary.com/canine-campus
 [pathways-open]: https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/
 [pathways-funding]: https://stockton.granicus.com/MinutesViewer.php?clip_id=9173&view_id=48
-[field-record]: ../../src/data/records.json
+[field-record]: ../../src/data/evidence.json

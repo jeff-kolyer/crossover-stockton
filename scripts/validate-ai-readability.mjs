@@ -5,12 +5,17 @@ const origin = "https://crossoverstockton.org";
 const sitemap = await readFile(new URL("sitemap.xml", dist), "utf8");
 const robots = await readFile(new URL("robots.txt", dist), "utf8");
 const llms = await readFile(new URL("llms.txt", dist), "utf8");
-const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
+const publicRecords = JSON.parse(await readFile(new URL("data/records.json", dist), "utf8"));
+const gaps = JSON.parse(await readFile(new URL("../src/data/needs.json", import.meta.url), "utf8")).records;
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 
 if (!urls.length || !robots.includes(`Sitemap: ${origin}/sitemap.xml`)) {
   throw new Error("The sitemap or robots.txt is missing its public page list.");
 }
+if (!llms.includes(`${origin}/data/records.json`) || !publicRecords.visualGuidance?.evidence) throw new Error("Public records feed or visual guidance is missing.");
+if ("groups" in publicRecords || "collections" in publicRecords || "recordChildren" in publicRecords) throw new Error("Explorer navigation entered the independent records feed.");
+if (publicRecords.records["crossover-stockton"]?.fields.preferred_logo !== "/images/logo_light.webp") throw new Error("The public feed lacks Crossover's preferred logo.");
+if (!publicRecords.records["dogs-safe-placement"]?.fields.preferred_image) throw new Error("The public feed lacks the existing preferred need image.");
 
 for (const url of urls) {
   const page = new URL(url);

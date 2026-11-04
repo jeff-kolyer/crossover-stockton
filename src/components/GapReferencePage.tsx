@@ -1,25 +1,24 @@
-import uiCopy from "../data/pages/needs.json";
+import uiCopy from "../ui/shared.json";
 import { siteModel } from "../model";
 import { useEffect, useState } from "react";
 import { articlesForGap } from "../lib/articles";
 import { navigateInternalLink } from "../lib/internalLink";
 import { HeadingGroup, Stack } from "./layout";
-import type { CapacityProject, DogsResearchBaseline, EvidenceRecord, GapRecord, OrgRecord } from "../types";
+import type { CapacityProject, EvidenceRecord, GapRecord, OrgRecord } from "../types";
 
 const uiText = uiCopy.GapReferencePage;
 
 type PublicRoute = "home" | "reality" | "connection" | "action" | "updates" | "about" | "investigation";
 type SourceEntry = { url: string; title: string; publisher?: string; publishedAt?: string | null; checkedAt?: string };
 type ExtendedGapSource = { url?: string; title?: string; label?: string; publisher?: string; published_at?: string | null; checked_at?: string };
-type GapQuestion = { id: string; investigation_id: string; title: string };
+type ObjectiveSummary = { id: string; investigation_id: string; title: string };
 type Fact = { label: string; value: string; detail: string; record?: EvidenceRecord; source?: SourceEntry };
 
 const gaps = siteModel.getNeeds().filter((gap) => gap.active).sort((a, b) => a.rank - b.rank);
-const records = siteModel.getAllEvidence();
+const records = siteModel.getAllRecords();
 const organizations = siteModel.getOrganizations();
 const projects = siteModel.getProjects() as CapacityProject[];
-const dogResearch = siteModel.getResearchBaseline() as DogsResearchBaseline;
-const questions = siteModel.getAllQuestions() as GapQuestion[];
+const objectives = siteModel.getAllObjectives() as ObjectiveSummary[];
 const factIndices: Record<string, number[]> = {
   "pet-inclusive-shelter": [0, 1],
   "food-distribution-capacity": [0, 1, 2],
@@ -37,7 +36,7 @@ function gapRecords(gap: GapRecord) {
 }
 
 function researchDate(gap: GapRecord, related: EvidenceRecord[]) {
-  const dates = [gap.updated_at, ...(gap.id === "dogs-safe-placement" ? [dogResearch.last_reviewed_at] : []), ...related.filter((record) => record.record_type !== "activity" && record.record_type !== "field_report").map((record) => record.checked_at || record.published_at)].filter((value): value is string => Boolean(value));
+  const dates = [gap.updated_at, ...related.filter((record) => record.record_type !== "activity" && record.record_type !== "field_report").map((record) => record.checked_at || record.published_at)].filter((value): value is string => Boolean(value));
   return dates.sort((a, b) => Date.parse(b) - Date.parse(a))[0];
 }
 
@@ -92,8 +91,8 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, o
   const roles = (gap.responder_roles?.length ? gap.responder_roles : gap.organization_ids.map((organization_id) => ({ organization_id, label: "", current_role: "" }))).map((role) => ({ role, organization: organizations.find((organization) => organization.id === role.organization_id) })).filter((entry): entry is { role: typeof entry.role; organization: OrgRecord } => Boolean(entry.organization));
   const sources = sourceEntries(gap, related);
   const reports = related.filter((record) => record.record_type === "field_report");
-  const dogQuestions = gap.id === "dogs-safe-placement" ? (gap.unknown_questions ?? questions.filter((question) => question.investigation_id === "street-dog-immediate-welfare").slice(0, 4).map((question) => question.title)) : [];
-  const streetDogQuestion = gap.id === "dogs-safe-placement" ? questions.find((question) => question.id === "where-dogs-need-help") : undefined;
+  const dogQuestions = gap.id === "dogs-safe-placement" ? (gap.unknown_questions ?? []) : [];
+  const streetDogObjective = gap.id === "dogs-safe-placement" ? objectives.find((objective) => objective.id === "where-dogs-need-help") : undefined;
   const firsthand = gap.id === "dogs-safe-placement" ? records.find((record) => record.id === "crossover-2026-10-14-sas-first-visit") : undefined;
   const sourceLimit = gap.id === "dogs-safe-placement" ? 5 : Number.POSITIVE_INFINITY;
   const visibleSources = showAllSources ? sources : sources.slice(0, sourceLimit);
@@ -111,7 +110,7 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, o
         {next && <a href={`/reality/${next.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(next.slug))}>{uiText.nextGap}{next.title}</a>}
       </nav>
       <div className="public-entry gap-reference-lead">
-        {gap.artwork && <img src={gap.artwork} alt="" loading="eager" />}
+        {gap.preferred_image && <img src={gap.preferred_image} alt="" loading="eager" />}
         <HeadingGroup><h1>{gap.title}</h1>
           <p>{gap.investigation_status === "investigating" ? uiText.investigatingStatus : uiText.identifiedStatus} {uiText.researchUpdated}{formatDate(researchDate(gap, related))}</p>
           <p>{gap.summary}</p></HeadingGroup>
@@ -125,7 +124,7 @@ export function GapReferencePage({ slug, onNavigate, onOpenGap, onOpenArticle, o
 
       {relatedProjects.length > 0 && <Stack as="section" className="gap-reference-entities gap-reference-projects" aria-labelledby="gap-projects"><h2 id="gap-projects">{uiText.projectsAndProposedChanges}</h2>{visibleProjects.map((project) => <HeadingGroup as="article" key={project.id}><h3>{project.title}.</h3><p>{project.capacity_summary.headline} {uiText.development}{project.development_stage.replaceAll("_", " ")}{uiText.operatingStatus}{project.operational_status.replaceAll("_", " ")}. {project.capacity_summary.not_yet_verified}</p></HeadingGroup>)}{relatedProjects.length > 2 && <button type="button" aria-expanded={showAllImprovements} onClick={() => setExpandedImprovementGapId(showAllImprovements ? null : gap.id)}>{showAllImprovements ? uiText.showFewerImprovements : `${uiText.showAllImprovements} (${relatedProjects.length})`}</button>}</Stack>}
 
-      <Stack as="section" aria-labelledby="gap-unknown"><HeadingGroup><h2 id="gap-unknown">{uiText.whatRemainsUnknown}</h2>{gap.investigation_status === "identified" && <p>{uiText.crossoverHasNotIndependentlyInvestigatedWhichReported}</p>}</HeadingGroup><ul>{dogQuestions.length ? dogQuestions.map((question) => <li key={question}>{question}</li>) : gap.contributing_factors.slice(0, 3).map((factor) => <li key={factor}>{factor}</li>)}</ul>{streetDogQuestion && <p id={`question-${streetDogQuestion.id}`}>{uiText.investigationQuestion}{streetDogQuestion.title}</p>}</Stack>
+      <Stack as="section" aria-labelledby="gap-unknown"><HeadingGroup><h2 id="gap-unknown">{uiText.whatRemainsUnknown}</h2>{gap.investigation_status === "identified" && <p>{uiText.crossoverHasNotIndependentlyInvestigatedWhichReported}</p>}</HeadingGroup><ul>{dogQuestions.length ? dogQuestions.map((question) => <li key={question}>{question}</li>) : gap.contributing_factors.slice(0, 3).map((factor) => <li key={factor}>{factor}</li>)}</ul>{streetDogObjective && <p id={`question-${streetDogObjective.id}`}>{uiText.investigationObjective}{streetDogObjective.title}</p>}</Stack>
 
       <Stack as="section" className="gap-reference-entities" aria-labelledby="gap-responders"><HeadingGroup><h2 id="gap-responders">{uiText.whoSResponding}</h2><p>{uiText.theseRolesAreDescribedInPublicAnd}</p></HeadingGroup>{roles.map(({ role, organization }) => <HeadingGroup as="article" key={organization.id}><h3>{organization.name}.</h3><p>{role.label || organization.summary}{organization.website && <> <a href={organization.website} target="_blank" rel="noreferrer">{uiText.organizationWebsite}</a></>}</p></HeadingGroup>)}</Stack>
 

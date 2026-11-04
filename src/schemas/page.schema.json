@@ -20,17 +20,26 @@
           "id": {
             "$ref": "./common.schema.json#/$defs/id"
           },
+          "region": {
+            "type": "string",
+            "enum": [
+              "hero",
+              "hero-action",
+              "body"
+            ]
+          },
           "source": {
             "type": "string",
             "enum": [
+              "site-navigation",
+              "action-cards",
               "identity",
               "people",
               "principles",
               "methods",
               "needs",
               "investigations",
-              "questions",
-              "question-groups",
+              "objectives",
               "tasks",
               "activities",
               "evidence",
@@ -39,13 +48,30 @@
               "organizations",
               "stories",
               "locations",
-              "workstreams",
-              "legacy-work",
               "projects",
               "articles",
               "measurements",
               "developments"
             ]
+          },
+          "field": {
+            "type": "string",
+            "minLength": 1
+          },
+          "filter": {
+            "type": "string",
+            "minLength": 1
+          },
+          "order": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limit": {
+            "type": "number"
+          },
+          "renderer": {
+            "type": "string",
+            "minLength": 1
           },
           "recordIds": {
             "type": "array",

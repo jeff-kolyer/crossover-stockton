@@ -1,14 +1,14 @@
-import uiCopy from "../data/ui-copy.json";
+import uiCopy from "../ui/shared.json";
 import { articleForPath } from "../lib/articles";
 import { organizationActivityHref, organizationsActivityHref } from "../lib/organizationActivity";
 import { dogGapBase, dogGapSlug, legacyDogWorkDestination } from "../lib/dogGapLegacy";
+import researchWorkAliases from "../pages/legacy-redirects.json";
 import type { PublicRoute } from "../components/PublicMobileMenu";
 import { siteModel } from "../model";
 import type { PublicUpdate } from "../model/publicUpdates";
 
 export const gaps = siteModel.getNeeds();
 const stories = siteModel.getStories();
-const work = siteModel.getAllLegacyWork();
 const reports = siteModel.getAllEvidence().filter((record) => record.record_type === "field_report");
 const organizations = siteModel.getOrganizations();
 const uiText = uiCopy.App;
@@ -133,11 +133,8 @@ export function canonicalPathname(pathname: string, hash = "") {
     if (workId === "dogs-map-placement-barriers") return `/work/dogs/findings/${anchor === "investigation-questions" ? hash : ""}`;
     const destination = legacyDogWorkDestination(workId, anchor);
     if (destination) return `${dogGapBase}${destination.section}/${destination.anchor ? `#${encodeURIComponent(destination.anchor)}` : ""}`;
-    const legacyItem = work.find((item) => item.id === workId);
-    if (legacyItem?.id.endsWith("-public-source-review")) {
-      const gap = gaps.find((item) => item.work_ids?.includes(workId));
-      if (gap) return `/reality/${gap.slug}/research/${hash}`;
-    }
+    const gap = gaps.find((item) => item.id === researchWorkAliases[workId as keyof typeof researchWorkAliases]);
+    if (gap) return `/reality/${gap.slug}/research/${hash}`;
   }
   const sourceAlias = pathname.match(/^\/reality\/([^/]+)\/sources\/?$/);
   if (sourceAlias) return `/reality/${sourceAlias[1]}/research/`;

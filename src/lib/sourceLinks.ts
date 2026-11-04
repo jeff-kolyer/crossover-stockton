@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/updates.json";
+import uiCopy from "../ui/updates.json";
 import type { SourceRecord } from "../types";
 
 export function sourceLinkLabel(source: SourceRecord) {

@@ -1,20 +1,14 @@
 import { siteModel } from "../model";
-import type { DogsInvestigationData, GapRecord, WorkRecord } from "../types";
+import type { GapRecord } from "../types";
 
-const work = siteModel.getAllLegacyWork() as WorkRecord[];
-const dogsInvestigation = siteModel.getInvestigationDataset() as DogsInvestigationData;
+const investigations = siteModel.getInvestigations();
 
 /** Keep changes to the gap assessment distinct from changes to linked work. */
 export function latestGapActivity(gap: GapRecord): { date: string; kind: "assessment" | "work" } | undefined {
-  const linkedWorkIds = new Set(gap.work_ids ?? []);
-  const workDates = [
-    ...work
-      .filter((item) => item.gap_id === gap.id && linkedWorkIds.has(item.id))
-      .map((item) => item.updated_at),
-    ...(dogsInvestigation.gap_id === gap.id && linkedWorkIds.has(dogsInvestigation.work_id)
-      ? dogsInvestigation.active_investigations.map((item) => item.last_updated_at)
-      : []),
-  ].filter((date): date is string => typeof date === "string" && !Number.isNaN(Date.parse(date)));
+  const workDates = investigations
+    .filter((item) => item.gap_id === gap.id)
+    .map((item) => item.last_updated_at)
+    .filter((date): date is string => typeof date === "string" && !Number.isNaN(Date.parse(date)));
 
   const latestWorkDate = workDates.sort((a, b) => b.slice(0, 10).localeCompare(a.slice(0, 10)))[0];
   if (latestWorkDate && (!gap.updated_at || latestWorkDate.slice(0, 10) > gap.updated_at.slice(0, 10))) {

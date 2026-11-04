@@ -9,21 +9,23 @@
       "width": 836,
       "height": 471
     },
-    "status": [
+    "active": true,
+    "href": "/work/dogs/",
+    "buttonLabel": "Explore our fieldwork",
+    "metrics": [
       {
-        "value": "0",
+        "id": "field-visits",
         "label": "Field visits"
       },
       {
-        "value": "0",
+        "id": "dogs-spotted",
         "label": "Dogs spotted"
       },
       {
-        "value": "Not yet",
+        "id": "reporting-tested",
         "label": "Reporting tested"
       }
-    ],
-    "active": true
+    ]
   },
   {
     "id": "requesting-records",
@@ -35,21 +37,23 @@
       "width": 836,
       "height": 471
     },
-    "status": [
+    "active": true,
+    "href": "/work/dogs/",
+    "buttonLabel": "Explore our records requests",
+    "metrics": [
       {
-        "value": "Unknown",
+        "id": "requested",
         "label": "Requested"
       },
       {
-        "value": "0",
+        "id": "received",
         "label": "Received"
       },
       {
-        "value": "Unknown",
+        "id": "pending",
         "label": "Pending"
       }
-    ],
-    "active": true
+    ]
   },
   {
     "id": "testing-pathways",
@@ -61,20 +65,22 @@
       "width": 836,
       "height": 471
     },
-    "status": [
+    "active": true,
+    "href": "/work/dogs/",
+    "buttonLabel": "Explore our pathway tests",
+    "metrics": [
       {
-        "value": "2",
+        "id": "initiated",
         "label": "Initiated"
       },
       {
-        "value": "2",
+        "id": "awaiting-response",
         "label": "Awaiting response"
       },
       {
-        "value": "0",
+        "id": "tested",
         "label": "Tested"
       }
-    ],
-    "active": true
+    ]
   }
 ]

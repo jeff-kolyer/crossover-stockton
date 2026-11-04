@@ -148,7 +148,15 @@ export interface CrossoverFeed {
 export type GapStatus = "critical" | "high_priority" | "monitored" | "improving";
 export type GapInvestigationStatus = "investigating" | "identified";
 
-export interface GapRecord {
+/** Optional presentation preferences; descriptions are not image alt text or evidence. */
+export interface VisualPreferences {
+  visual_description?: string;
+  preferred_image?: string;
+  logo_description?: string;
+  preferred_logo?: string;
+}
+
+export interface GapRecord extends VisualPreferences {
   id: string;
   slug: string;
   title: string;
@@ -181,7 +189,6 @@ export interface GapRecord {
   story_ids: string[];
   updates?: Array<{ date: string; text: string }>;
   sources: Array<{ url?: string; label?: string }>;
-  artwork?: string;
   thumbnail_image?: string;
   first_seen?: string;
   updated_at?: string;
@@ -193,7 +200,6 @@ export interface GapRecord {
     record_ids?: string[];
   }>;
   record_ids?: string[];
-  work_ids?: string[];
   latest_change?: {
     record_id?: string;
     label: string;
@@ -207,76 +213,21 @@ export interface GapRecord {
   }>;
 }
 
-export type WorkStatus = "completed" | "in_progress" | "next";
-export type WorkType = "research" | "investigation" | "field_work";
-
-export interface WorkRecord {
+export interface ActiveInvestigation extends VisualPreferences {
   id: string;
   gap_id: string;
   title: string;
-  summary: string;
-  gap_summary?: string;
-  status: WorkStatus;
-  type: WorkType;
-  started_at?: string;
-  completed_at?: string;
-  updated_at?: string;
-  last_reviewed_at?: string;
-  research_data_id?: string;
-  investigation_data_id?: string;
-  page_kind?: "research" | "investigation" | "activity" | "solutions" | "map";
-  next_step?: string | { title: string; summary: string; action_id?: string; status?: "planned" | "awaiting_response"; planned_for?: string };
-  open_questions?: string[];
-  threads?: WorkThread[];
-  initial_map?: { status: "completed" | "in_progress"; summary: string };
-  activity_record_ids?: string[];
-  report_record_ids?: string[];
-  learning_record_ids?: string[];
-  organization_ids?: string[];
-  project_ids?: string[];
-  contact_questions?: Array<{ organization_id: string; status: "to_ask"; questions: string[] }>;
-  record_ids: string[];
-}
-
-export interface WorkThread {
-  id: string;
-  title: string;
-  summary: string;
-  open_questions?: string[];
-  project_ids?: string[];
-  record_ids: string[];
-}
-
-export interface ActiveInvestigation {
-  id: string;
-  gap_id: string;
-  title: string;
+  primary_goal: string;
   status: "preparing_fieldwork" | "in_progress" | "completed";
   introduction: string;
   findings_summary?: string;
   findings_introduction?: { heading: string; paragraphs: string[] };
   purpose: string;
-  questions: Array<{ id: string; icon: "ClipboardList" | "HeartPulse" | "MapPin" | "Package" | "Users"; title: string; description: string }>;
-  verification_avenues: Array<{ title: string; description: string }>;
-  fieldwork_plan?: { activity_record_id: string; observation_fields: string[]; result_options: string[]; report_outline: string };
-  contact_plan?: { intro: string; shared_checks: string[]; organizations: Array<{ name: string; status: string; questions: string[]; record_ids: string[]; source_links: Array<{ label: string; url: string }> }> };
-  records_request?: { activity_record_id: string; submitted_at: string; status: string; summary: string; review_plan: string };
-  care_coordination?: { title: string; central_question: string; participation_scope: string; public_source_review: { checked_at: string; summary: string; sources: Array<{ label: string; url: string }> }; questions: string[]; decentralized_protocol_concept: { status: "concept_only"; steps: string[]; note: string }; potential_capabilities?: string[]; capability_note?: string; potential_outcome: string };
-  safeguards: string[];
-  public_approach: string;
   evidence_record_ids: string[];
   known_so_far: string;
   evidence_context: Array<{ label: string; summary: string; record_id: string | null }>;
-  uncertainties: string[];
-  possible_outcomes: string[];
-  illustrative_outcome: { title: string; description: string; status: "illustrative_only" };
-  opportunity_rule: string;
-  related_barrier_thread_ids: string[];
-  related_project_ids: string[];
   verified_finding_ids: string[];
   last_updated_at: string;
-  short_focus?: string;
-  next_verification_step: string;
 }
 
 export interface EstablishedInvestigationFinding {
@@ -286,22 +237,13 @@ export interface EstablishedInvestigationFinding {
   evidence_kind: "crossover_firsthand" | "official_public_record" | "organization_report";
   evidence_record_ids: string[];
   observed_at: string;
-  related_barrier_thread_ids: string[];
   related_project_ids: string[];
-}
-
-export interface DogsInvestigationData {
-  id: string;
-  work_id: string;
-  gap_id: string;
-  active_investigations: ActiveInvestigation[];
-  established_findings: EstablishedInvestigationFinding[];
 }
 
 export type ProjectStage = "proposed" | "funded" | "under_development" | "operational" | "completed" | "unknown";
 export type ProjectOperationalStatus = "operational" | "partially_operational" | "not_operational" | "unknown";
 
-export interface CapacityProject {
+export interface CapacityProject extends VisualPreferences {
   id: string;
   title: string;
   description: string;
@@ -319,7 +261,6 @@ export interface CapacityProject {
   demand_contribution?: string;
   milestones: Array<{ date: string | null; status: "planned" | "in_progress" | "reported_complete" | "verified_complete" | "unknown"; description: string; evidence_record_ids: string[] }>;
   procedure_tracking?: { planned: number | null; completed: number | null; capacity_change: string | null; period: string | null };
-  barrier_thread_ids: string[];
   evidence_record_ids: string[];
   source_urls?: string[];
   last_verified_at: string | null;
@@ -327,46 +268,7 @@ export interface CapacityProject {
   next_verification_step: string;
 }
 
-export interface ResearchMeasurement {
-  id: string;
-  domain: "demand" | "current_results";
-  measure: string;
-  value: number;
-  unit: string;
-  species: "dog" | "cat" | "all_animals";
-  period_start: string;
-  period_end: string;
-  coverage_id: string;
-  evidence_status: "official_reported_actual" | "calculated_from_official" | "self_reported" | "planned_authorized" | "estimate";
-  source_record_id: string;
-  verified_at: string;
-  note?: string;
-}
-
-export interface DogsResearchBaseline {
-  id: string;
-  work_id: string;
-  gap_id: string;
-  last_reviewed_at: string;
-  report_path: string;
-  coverage: Record<string, string>;
-  latest_findings: Array<{
-    id: string;
-    finding: string;
-    short_update?: string;
-    show_in_gap_updates?: boolean;
-    discovered_at: string;
-    what_changed: string;
-    previous_state: string | null;
-    current_verified_state: string;
-    evidence_record_ids: string[];
-    why_it_matters: string;
-  }>;
-  measurements: ResearchMeasurement[];
-  planned_improvements: { project_ids: string[]; note: string };
-}
-
-export interface OrgRecord {
+export interface OrgRecord extends VisualPreferences {
   id: string;
   slug: string;
   name: string;
@@ -379,13 +281,12 @@ export interface OrgRecord {
   verification?: { checked_at: string; evidence_record_ids: string[]; direct_check: string; open_questions: string[] };
 }
 
-export interface StoryRecord {
+export interface StoryRecord extends VisualPreferences {
   id: string;
   slug: string;
   title: string;
   summary: string;
   body?: string;
-  image?: string;
   gap_ids: string[];
   organization_ids: string[];
   featured: boolean;
@@ -422,9 +323,14 @@ export interface SourceRecord {
   type?: string;
 }
 
-export interface EvidenceRecord {
+export interface EvidenceRecord extends VisualPreferences {
   id: string;
   investigation_id?: string;
+  objective_ids?: string[];
+  primary_objective_id?: string;
+  observed_dog_count?: number;
+  coverage_id?: string;
+  coverage_note?: string;
   gap_ids: string[];
   organization_ids: string[];
   location_ids?: string[];
@@ -464,7 +370,6 @@ export interface EvidenceRecord {
   occurred_at?: string;
   planned_for?: string;
   planned_sites?: Array<{ label: string; location_id?: string; reason: string; condition?: string }>;
-  work_id?: string;
   thread_id?: string;
   evidence_status?: "initial_assessment" | "self_reported" | string;
   basis_record_ids?: string[];

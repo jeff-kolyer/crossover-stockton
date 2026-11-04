@@ -30,6 +30,9 @@
       "type": "string",
       "minLength": 1
     },
+    "primary_objective_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
     "supporting_record_ids": {
       "type": "array",
       "items": {
@@ -44,7 +47,7 @@
       },
       "uniqueItems": true
     },
-    "related_question_ids": {
+    "related_objective_ids": {
       "type": "array",
       "items": {
         "$ref": "./common.schema.json#/$defs/id"
@@ -60,6 +63,26 @@
     },
     "current": {
       "type": "boolean"
+    },
+    "visual_description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional subject or scene Crossover wants an independent renderer to understand; not alt text or evidence."
+    },
+    "preferred_image": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional preferred illustrative image path or URL; the renderer may use another image or none."
+    },
+    "logo_description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional description of the record's authentic visual identity or symbol; not alt text."
+    },
+    "preferred_logo": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional preferred existing logo path or URL. Do not present an invented mark as an organization's official logo."
     }
   },
   "required": [

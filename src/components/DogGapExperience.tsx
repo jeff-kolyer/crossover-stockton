@@ -1,11 +1,11 @@
-import uiCopy from "../data/pages/investigations/dogs/overview.json";
+import uiCopy from "../ui/investigation.json";
 import { siteModel } from "../model";
 
 import { useEffect, useMemo, useRef, useState, type ComponentType, type CSSProperties, type KeyboardEvent as ReactKeyboardEvent, type PointerEvent as ReactPointerEvent } from "react";
 import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
 import { evidenceCategoryColors } from "../lib/evidenceCategoryColors";
 import { navigateInternalLink } from "../lib/internalLink";
-import { activeInvestigations, investigationActivities, investigationFindings, investigationQuestionById, investigationRecordById, investigationTasks } from "../lib/investigationData";
+import { activeInvestigations, investigationActivities, investigationFindings, investigationObjectiveById, investigationRecordById, investigationTasks } from "../lib/investigationData";
 import { articleForPath, findingsArticles, publishedArticles } from "../lib/articles";
 import { taskListContext } from "../lib/taskPresentation";
 import type { InvestigationTask } from "../types/investigation";
@@ -16,12 +16,12 @@ import { FieldReportContent, formatReportDate } from "./FieldReportContent";
 import { WorkspacePage, WorkspaceSection } from "./WorkspacePage";
 import { InvestigationActivitySections } from "./InvestigationActivitySections";
 import { InvestigationOverview } from "./InvestigationOverview";
-import { dogActivityQuestions } from "../data/dog-activity-questions";
 import { organizationActivityHref } from "../lib/organizationActivity";
 import { articleLinkLabel, recordLinkLabel } from "../lib/linkLabels";
 import type { InvestigationLocation, MappedInvestigationLocation } from "./InvestigationLocations";
 
 const uiText = uiCopy.DogGapExperience;
+const investigationObjectives = siteModel.getActivityObjectives("street-dog-immediate-welfare");
 
 type Section = "tasks" | "activity" | "map" | "findings";
 type TaskFilter = "open" | "waiting" | "done" | "all";
@@ -39,7 +39,7 @@ const taskStatusColors = {
   done: evidenceCategoryColors.historical_published_report,
 } as const;
 const organizations = siteModel.getOrganizations();
-const records = siteModel.getAllEvidence();
+const records = siteModel.getAllRecords();
 const fmt = (value?: string | null) => value ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(value.length === 10 ? `${value}T12:00:00` : value)) : uiText.dateNotRecorded;
 const allLocations = siteModel.getAllLocations() as InvestigationLocation[];
 const mappedLocations = allLocations.filter((item): item is MappedInvestigationLocation => item.coordinates !== null && item.marker_kind !== null && item.map_label !== null);
@@ -503,7 +503,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
                return org ? <li key={id}><a href={organizationActivityHref(org.slug)}>{org.name}</a>{mappedLocation?.coordinates && mappedLocation.marker_kind && mappedLocation.map_label && <> · <a href={tabLink("map")} aria-label={`${uiText.openOnMapPrefix}${org.name}`} onClick={(event) => navigateInternalLink(event, () => openTaskLocationOnMap(mappedLocation.id))}>{uiText.openOnMap}</a></>}</li> : null;
           })}</ul></section>}
           {selectedTask.checklist && <section><h3>{uiText.questionsToAsk}</h3><ul>{selectedTask.checklist.map((item) => <li key={item}>{item}</li>)}</ul></section>}
-          {selectedTask.question_ids.length > 0 && <section><h3>{uiText.investigationQuestions}</h3><ul>{selectedTask.question_ids.map((id) => <li key={id}>{investigationQuestionById.get(id)?.title}</li>)}</ul></section>}
+          {selectedTask.objective_ids.length > 0 && <section><h3>{uiText.investigationObjectives}</h3><ul>{selectedTask.objective_ids.map((id) => <li key={id}>{investigationObjectiveById.get(id)?.title}</li>)}</ul></section>}
           {selectedTask.basis_record_ids.length > 0 && <section><h3>{uiText.basisAndSources}</h3><ul>{selectedTask.basis_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
           {selectedTask.activity_record_ids.length > 0 && <section><h3>{uiText.documentedActivity}</h3><ul>{selectedTask.activity_record_ids.map((id) => <li key={id}>{recordLink(id)}</li>)}</ul></section>}
         </article></div> : <WorkspacePage title={uiText.tasks}>
@@ -525,7 +525,7 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {investigationTasks.filter((task) => task.activity_record_ids.includes(selectedActivity.id)).map((task) => <p key={task.id}>{uiText.task}<button type="button" onClick={() => openTaskFromLocation(task)}>{task.title}</button></p>)}
           {(selectedActivity.report_record_ids ?? []).map((id) => <p key={id}>{uiText.fieldReport}{recordLink(id)}</p>)}
            {selectedActivity.source.url && <a href={selectedActivity.source.url} target="_blank" rel="noreferrer">{recordLinkLabel(selectedActivity)}</a>}
-        </article></div> : <InvestigationActivitySections activities={activityRecords} reports={reportRecords} activeAnchor={activityAnchor} activeQuestionId={dogActivityQuestions.some((question) => question.id === activityAnchor) ? activityAnchor : activityAnchor === "organizations" || activityAnchor.startsWith("organization-") ? "question-care" : undefined} onOpenActivity={selectActivity} onOpenReport={openInvestigationReport} onOpenFindings={(anchor) => onOpenSection("findings", anchor)} />)}
+        </article></div> : <InvestigationActivitySections activities={activityRecords} reports={reportRecords} activeAnchor={activityAnchor} activeQuestionId={investigationObjectives.some((objective) => objective.id === activityAnchor) ? activityAnchor : activityAnchor === "organizations" || activityAnchor.startsWith("organization-") ? "food-and-water" : undefined} onOpenActivity={selectActivity} onOpenReport={openInvestigationReport} onOpenFindings={(anchor) => onOpenSection("findings", anchor)} />)}
       {!reportId && section === "map" && (showMapFilters
         ? <div className="workspace-page">
           <div className="detail-heading"><h2>{uiText.filters}</h2><CloseDetailButton label="filters" onClick={() => closeMapFilters()} /></div>
@@ -558,8 +558,8 @@ export function DogGapExperience({ gap, section, workspaceBasePath, articlePath,
           {findingsIntroduction.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
         </WorkspaceSection>}
         <WorkspaceSection title={uiText.findings2} headingId="current-findings-heading">
-          {dogActivityQuestions.map((question, index) => {
-            const questionFindings = currentFindings.filter((finding) => finding.primary_question_id === question.id);
+          {investigationObjectives.map((question, index) => {
+            const questionFindings = currentFindings.filter((finding) => finding.primary_objective_id === question.id);
             return <section id={question.id} className="investigation-finding-question" aria-labelledby={`${question.id}-findings-title`} key={question.id}>
               <h3 id={`${question.id}-findings-title`}>{index + 1}. {question.title}</h3>
               {questionFindings.length ? <div className="record-list">{questionFindings.map((finding) => {

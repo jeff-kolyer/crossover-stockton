@@ -1,4 +1,4 @@
-import uiCopy from "../data/ui-copy.json";
+import uiCopy from "../ui/shared.json";
 import type { MouseEventHandler, ReactNode, Ref } from "react";
 
 interface PlainActionButtonProps {

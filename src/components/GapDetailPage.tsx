@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/investigations/dogs/overview.json";
+import uiCopy from "../ui/investigation.json";
 import { siteModel } from "../model";
 import type { GapRecord } from "../types";
 import { DogGapExperience } from "./DogGapExperience";

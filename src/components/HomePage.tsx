@@ -1,15 +1,16 @@
-import uiCopy from "../data/pages/home.json";
+import type { MouseEvent } from "react";
+import uiCopy from "../ui/shared.json";
 import { siteModel } from "../model";
 import { PublicPrimaryAction } from "./PublicPrimaryAction";
 import { latestGapActivity } from "../lib/gapActivity";
 import { investigationStatusLabel } from "../lib/gapInvestigationStatus";
 import { navigateInternalLink } from "../lib/internalLink";
 import { HomeLanding } from "./HomeLanding";
+import { getPageComposition } from "../view/registry";
+import { DeclarativeSections, type RegisteredSectionRenderer } from "../view/DeclarativeSections";
 import { HeadingGroup, RecordList } from "./layout";
 
 const uiText = uiCopy.HomePage;
-const identity = siteModel.getIdentity();
-const sloganBreak = identity.slogan.indexOf(". ") + 1;
 
 interface HomePageProps {
   page: "home" | "reality" | "connection";
@@ -30,6 +31,16 @@ const heroImage = "/images/home/home-hero-wide.jpg";
 const realityHeroImage = "/images/reality/reality_banner.jpg";
 
 const pageCopy = uiText.pages;
+type HeroNavigate = HomePageProps["onNavigate"];
+const heroRenderers: Record<string, RegisteredSectionRenderer<HeroNavigate>> = {
+  "hero-slogan": { method: "prose", render: (_items, _navigate, value) => {
+    const slogan = String(value ?? "");
+    const split = slogan.indexOf(". ") + 1;
+    return <p className="home-hero-title">{slogan.slice(0, split)}<br className="home-hero-title-break" /> {slogan.slice(split + 1)}</p>;
+  } },
+  "hero-purpose": { method: "prose", render: (_items, _navigate, value) => <p className="home-hero-subtitle">{String(value ?? "")}</p> },
+  "hero-action": { method: "collection-index", render: (items, navigate) => items.map((item) => <PublicPrimaryAction key={item.id} href={String(item.href)} onClick={item.page ? (event: MouseEvent<HTMLAnchorElement>) => navigateInternalLink(event, () => navigate(item.page as Parameters<HeroNavigate>[0])) : undefined}>{String(item.title)}</PublicPrimaryAction>) },
+};
 
 const heroImageItems = [
   { page: "home", src: heroImage },
@@ -43,6 +54,7 @@ const activeStories = stories
   .sort((a, b) => dateTime(b.published_at) - dateTime(a.published_at));
 export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverview, onOpenGapSection, onOpenWork, onOpenStory, onOpenTasks }: HomePageProps) {
   const isHome = page === "home";
+  const hasHeroAction = isHome && getPageComposition("home")?.sections.some((section) => section.region === "hero-action");
   const copy = page === "home" ? null : pageCopy[page];
   const visibleGaps = activeGaps;
   const visibleStories = activeStories;
@@ -62,12 +74,11 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
 
         <div className="public-hero-copy">
           <HeadingGroup>
-            {isHome ? <p className="home-hero-title">{identity.slogan.slice(0, sloganBreak)}<br className="home-hero-title-break" /> {identity.slogan.slice(sloganBreak + 1)}</p> : <h1>{copy?.title}</h1>}
-            <p className={isHome ? "home-hero-subtitle" : undefined}>{isHome ? identity.purpose : copy?.text}</p>
+            {isHome ? <DeclarativeSections pageId="home" region="hero" renderers={heroRenderers} context={onNavigate} /> : <><h1>{copy?.title}</h1><p>{copy?.text}</p></>}
           </HeadingGroup>
-          {isHome && (
+          {hasHeroAction && (
             <div className="hero-action-row">
-              <PublicPrimaryAction href="/action/" onClick={(event) => navigateInternalLink(event, () => onNavigate("action"))}>{uiText.seeWhatWeReDoing}</PublicPrimaryAction>
+              <DeclarativeSections pageId="home" region="hero-action" renderers={heroRenderers} context={onNavigate} />
             </div>
           )}
         </div>
@@ -82,7 +93,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
         <RecordList separated className="gap-card-grid">
           {visibleGaps.map((gap, index) => {
             const latestActivity = latestGapActivity(gap);
-            const thumbnailImage = gap.thumbnail_image || gap.artwork;
+            const thumbnailImage = gap.thumbnail_image || gap.preferred_image;
             const organizationCount = gap.responder_roles?.length || gap.organization_ids.length;
             return (
             <a className={`gap-card is-${gap.investigation_status}`} key={gap.id} href={`/reality/${gap.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenGap(gap.slug))}>
@@ -95,8 +106,8 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
                     fetchPriority={index < 4 ? "high" : "auto"}
                     decoding="sync"
                     onError={(event) => {
-                      if (gap.artwork && event.currentTarget.src !== new URL(gap.artwork, window.location.origin).href) {
-                        event.currentTarget.src = gap.artwork;
+                      if (gap.preferred_image && event.currentTarget.src !== new URL(gap.preferred_image, window.location.origin).href) {
+                        event.currentTarget.src = gap.preferred_image;
                       }
                     }}
                   />
@@ -124,7 +135,7 @@ export function HomePage({ page, onNavigate, onOpenAbout, onOpenGap, onOpenOverv
         <RecordList separated className="story-grid">
           {visibleStories.map((story, index) => (
             <a className="story-card" key={story.id} href={`/stories/${story.slug}/`} onClick={(event) => navigateInternalLink(event, () => onOpenStory(story.slug))}>
-              <img src={story.image || connectionHeroImage} alt="" aria-hidden="true" loading={page === "connection" && index < 3 ? "eager" : "lazy"} decoding="sync" />
+              <img src={story.preferred_image || connectionHeroImage} alt="" aria-hidden="true" loading={page === "connection" && index < 3 ? "eager" : "lazy"} decoding="sync" />
               <div>
                 <h3>{story.title}</h3>
                 <p>{story.summary}</p>

@@ -1,0 +1,125 @@
+[
+  {
+    "id": "crossover-2026-10-08-initial-barrier-care-space",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": null,
+    "recorded_at": "2026-10-08",
+    "record_type": "finding",
+    "trust": "crossover_source",
+    "title": "Limited foster and indoor care space",
+    "summary": "Public evidence points to constrained shelter and placement capacity. Suitable temporary care and recovery space is an initial barrier to investigate.",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "ai_assisted_synthesis"
+    },
+    "evidence_status": "initial_assessment",
+    "basis_record_ids": [
+      "sas-2026-05-05-overpopulation-report",
+      "ssd-standing-foster-adopt",
+      "ssd-2026-10-07-canine-campus-details"
+    ],
+    "thread_id": "shelter-foster-capacity",
+    "supports": []
+  },
+  {
+    "id": "crossover-2026-10-08-initial-barrier-veterinary-access",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": null,
+    "recorded_at": "2026-10-08",
+    "record_type": "finding",
+    "trust": "crossover_source",
+    "title": "Veterinary costs and access",
+    "summary": "Public evidence identifies veterinary access and sterilization capacity as pressures. Costs, appointments, transport, and recovery care need local investigation.",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "ai_assisted_synthesis"
+    },
+    "evidence_status": "initial_assessment",
+    "basis_record_ids": [
+      "stockton-2026-05-11-stray-dog-report",
+      "sas-2026-01-13-spay-neuter-capacity",
+      "hlawa-2026-06-09-contract-extension",
+      "crossover-2026-09-11-dog-crisis-cost-of-living"
+    ],
+    "thread_id": "veterinary-access",
+    "supports": []
+  },
+  {
+    "id": "crossover-2026-10-08-initial-barrier-pet-housing",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": null,
+    "recorded_at": "2026-10-08",
+    "record_type": "finding",
+    "trust": "crossover_source",
+    "title": "Housing and shelter restrictions",
+    "summary": "Public-source framing identifies housing constraints, while the Safe Grounds proposal connects shelter access with companion animals. Specific local restrictions and their effects remain to be verified.",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "ai_assisted_synthesis"
+    },
+    "evidence_status": "initial_assessment",
+    "basis_record_ids": [
+      "crossover-2026-09-11-dog-crisis-cost-of-living",
+      "ssd-2026-06-08-street-response"
+    ],
+    "thread_id": "housing-prevention",
+    "supports": []
+  },
+  {
+    "id": "crossover-2026-10-08-initial-barrier-care-logistics",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": null,
+    "recorded_at": "2026-10-08",
+    "record_type": "finding",
+    "trust": "crossover_source",
+    "title": "Time and care commitments",
+    "summary": "Crossover’s public-source framing identifies time and care logistics as potential barriers. Training, transport, and backup-care burdens are questions for firsthand investigation.",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "ai_assisted_synthesis"
+    },
+    "evidence_status": "initial_assessment",
+    "basis_record_ids": [
+      "crossover-2026-09-11-dog-crisis-cost-of-living"
+    ],
+    "thread_id": "shelter-foster-capacity",
+    "supports": []
+  },
+  {
+    "id": "crossover-2026-10-08-initial-barrier-opportunity-matching",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [],
+    "published_at": null,
+    "recorded_at": "2026-10-08",
+    "record_type": "finding",
+    "trust": "crossover_source",
+    "title": "Connecting willing people with opportunities",
+    "summary": "Public information lists participation routes. Whether unclear roles, application friction, or matching prevent participation is a hypothesis to test, not an established local finding.",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "ai_assisted_synthesis"
+    },
+    "evidence_status": "initial_assessment",
+    "basis_record_ids": [
+      "ssd-standing-volunteer-rescue-partner",
+      "ssd-standing-foster-adopt",
+      "sas-standing-doggie-day-out"
+    ],
+    "thread_id": "public-access-coordination",
+    "supports": []
+  }
+]

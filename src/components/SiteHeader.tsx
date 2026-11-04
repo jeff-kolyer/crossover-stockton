@@ -1,4 +1,5 @@
-import uiCopy from "../data/ui-copy.json";
+import uiCopy from "../ui/shared.json";
+import { siteModel } from "../model";
 import { PublicMobileMenu, type PublicRoute } from "./PublicMobileMenu";
 import { navigateInternalLink } from "../lib/internalLink";
 
@@ -8,7 +9,7 @@ export function SiteHeader({ active, onNavigate }: { active: PublicRoute; onNavi
   return <header className="public-nav site-header">
     <PublicMobileMenu active={active} onNavigate={onNavigate} onOpenAbout={() => onNavigate("about")} />
     <a className="public-logo" href="/" aria-label={uiText.crossoverHome} onClick={(event) => navigateInternalLink(event, () => onNavigate("home"))}>
-      <img src="/images/logo_light.webp" alt="" decoding="async" />
+      <img src={siteModel.getIdentity().preferred_logo || "/images/logo_light.webp"} alt="" decoding="async" />
       <span>{uiText.crossover}</span>
     </a>
     <nav aria-label={uiText.primary}>

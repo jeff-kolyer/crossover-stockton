@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/investigations/dogs/activity.json";
+import uiCopy from "../ui/investigation.json";
 import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { organizationActivityHref } from "../lib/organizationActivity";
@@ -9,7 +9,6 @@ const uiText = uiCopy.FieldReportContent;
 
 const gaps = siteModel.getNeeds();
 const orgs = siteModel.getOrganizations();
-const work = siteModel.getAllLegacyWork();
 
 export function formatReportDate(value?: string) {
   if (!value) return uiText.undated;
@@ -21,14 +20,14 @@ export function FieldReportContent({ report, publicNavigation }: {
   report: EvidenceRecord;
   publicNavigation?: {
     onOpenGap: (slug: string) => void;
-    onOpenWork: (id: string) => void;
+    onOpenInvestigationActivity: (id: string) => void;
   };
 }) {
   const relatedGaps = [...new Set(report.gap_ids)].map((id) => gaps.find((gap) => gap.id === id)).filter((gap): gap is GapRecord => Boolean(gap));
   const relatedOrgs = [...new Set(report.organization_ids)].map((id) => orgs.find((org) => org.id === id)).filter((org): org is OrgRecord => Boolean(org));
-  const relatedWork = report.work_id ? work.find((item) => item.id === report.work_id) : undefined;
+  const relatedInvestigation = report.investigation_id ? siteModel.getInvestigation(report.investigation_id) : undefined;
   const visitWebsite = relatedOrgs.length === 1 ? relatedOrgs[0].website : undefined;
-  const hasConnectedRecords = relatedOrgs.length > 0 || relatedGaps.length > 0 || Boolean(relatedWork);
+  const hasConnectedRecords = relatedOrgs.length > 0 || relatedGaps.length > 0 || Boolean(relatedInvestigation);
 
   return <>
     {report.image && <Figure className="report-figure" image={<div className="report-image-frame"><img src={report.image} alt={report.image_alt ?? ""} /></div>} caption={report.image_caption} />}
@@ -52,7 +51,7 @@ export function FieldReportContent({ report, publicNavigation }: {
       <ul>
         {relatedOrgs.map((org) => <li key={org.id}><strong>{uiText.organization}</strong> <a href={organizationActivityHref(org.slug)}>{org.name}</a></li>)}
         {relatedGaps.map((gap) => <li key={gap.id}><strong>{uiText.need}</strong> <a href={`/reality/${gap.slug}/`} onClick={publicNavigation ? (event) => navigateInternalLink(event, () => publicNavigation.onOpenGap(gap.slug)) : undefined}>{gap.title}</a></li>)}
-        {relatedWork && <li><strong>{uiText.activity}</strong> <a href="/work/dogs/activity/" onClick={publicNavigation ? (event) => navigateInternalLink(event, () => publicNavigation.onOpenWork(relatedWork.id)) : undefined}>{uiText.investigationActivity}</a></li>}
+        {relatedInvestigation && <li><strong>{uiText.activity}</strong> <a href="/work/dogs/activity/" onClick={publicNavigation ? (event) => navigateInternalLink(event, () => publicNavigation.onOpenInvestigationActivity(relatedInvestigation.id)) : undefined}>{uiText.investigationActivity}</a></li>}
       </ul>
     </Section>}
     <Section aria-labelledby="report-sources-title">

@@ -29,7 +29,14 @@
     },
     "public_update": {
       "type": "boolean",
-      "description": "Explicit permission for an activity to appear in the public Updates feed. Other activities remain excluded."
+      "description": "Marks an activity as a meaningful public development; visibility must also authorize publication."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal"
+      ]
     },
     "trust": {
       "type": "string",
@@ -44,6 +51,16 @@
       "$ref": "./common.schema.json#/$defs/source"
     },
     "investigation_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "objective_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "primary_objective_id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
     "gap_ids": {
@@ -66,6 +83,16 @@
         "$ref": "./common.schema.json#/$defs/id"
       },
       "uniqueItems": true
+    },
+    "coverage_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "coverage_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_dog_count": {
+      "type": "number"
     },
     "occurred_at": {
       "anyOf": [

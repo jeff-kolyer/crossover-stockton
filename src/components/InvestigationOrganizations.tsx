@@ -1,15 +1,15 @@
-import uiCopy from "../data/pages/investigations/dogs/activity.json";
-import globalCopy from "../data/ui-copy.json";
+import uiCopy from "../ui/investigation.json";
+import globalCopy from "../ui/shared.json";
 import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { recordLinkLabel } from "../lib/linkLabels";
-import type { EvidenceRecord, OrgRecord, WorkRecord } from "../types";
+import type { EvidenceRecord, OrgRecord } from "../types";
 
 const uiText = uiCopy.InvestigationOrganizations;
 
 const orgs = siteModel.getOrganizations();
-const records = siteModel.getAllEvidence();
-const works = siteModel.getAllLegacyWork() as WorkRecord[];
+const records = siteModel.getAllRecords();
+const contactTasks = siteModel.getAllTasks().filter((task) => task.type === "organization_contact" && task.checklist?.length);
 const engagementRecords = records.filter((record) =>
   record.source.publisher?.startsWith(globalCopy.App.siteName) &&
   (record.record_type === "activity" || record.record_type === "field_report" || record.record_type === "field_investigation") &&
@@ -39,7 +39,7 @@ export function InvestigationOrganizations({ onOpenActivity }: { onOpenActivity:
         const history = activityFor(org);
         const fieldReports = engagementRecords.filter((record) => record.record_type === "field_report" && record.organization_ids.includes(org.id));
         const sourceRecords = (org.verification?.evidence_record_ids ?? []).map((id) => records.find((record) => record.id === id)).filter((record): record is EvidenceRecord => Boolean(record));
-        const contactQuestions = works.flatMap((work) => work.contact_questions ?? []).filter((item) => item.organization_id === org.id);
+        const contactQuestions = contactTasks.filter((task) => task.organization_ids.includes(org.id));
         return <article id={`organization-${org.slug}`} key={org.id}>
           <h5>{org.name}</h5>
           <p>{org.summary}</p>
@@ -47,7 +47,7 @@ export function InvestigationOrganizations({ onOpenActivity }: { onOpenActivity:
           {history[0]?.outcome && <p><strong>{uiText.latestRecordedOutcome}</strong> {history[0].outcome.summary}</p>}
           {fieldReports.length > 0 && <p><strong>{uiText.fieldReports}</strong> {fieldReports.map((report) => <a key={report.id} href={`/reports/${report.id}/`}>{recordLinkLabel(report)}</a>)}</p>}
           {org.verification && <section><p><strong>{uiText.whatRemainsUnverified}</strong> {org.verification.direct_check}</p><ul>{org.verification.open_questions.map((question) => <li key={question}>{question}</li>)}</ul></section>}
-          {contactQuestions.length > 0 && <section><p><strong>{uiText.relatedQuestionsToAsk}</strong></p><ul>{contactQuestions.flatMap((item) => item.questions).map((question) => <li key={question}>{question}</li>)}</ul></section>}
+          {contactQuestions.length > 0 && <section><p><strong>{uiText.relatedQuestionsToAsk}</strong></p><ul>{contactQuestions.flatMap((task) => task.checklist ?? []).map((question) => <li key={question}>{question}</li>)}</ul></section>}
           <p><strong>{uiText.sources}</strong></p><ul>{sourceRecords.filter((record) => record.source.url).map((record) => <li key={record.id}><a href={record.source.url} target="_blank" rel="noreferrer">{recordLinkLabel(record)}</a></li>)}{org.website && <li><a href={org.website} target="_blank" rel="noreferrer">{org.name} {uiText.website}</a></li>}</ul>
         </article>;
       })}

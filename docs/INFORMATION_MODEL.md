@@ -1,6 +1,6 @@
 # Crossover information model
 
-The Model describes Crossover and its evidence without prescribing a web page. Stable IDs connect records; dates describe different events; source attribution and limitations remain attached to the assertion they qualify. The current legacy JSON collections remain authoritative until each record family is migrated and validated.
+The Model describes Crossover and its evidence without prescribing a web page. Stable IDs connect records; dates describe different events; source attribution and limitations remain attached to the assertion they qualify.
 
 ## Organization and identity
 
@@ -12,7 +12,7 @@ A **need** is a potentially unmet human, animal, or community requirement; it is
 
 ## Investigations
 
-An **investigation** is a bounded effort to learn about a need; its **scope** states geography and subject. An **investigation question** asks what must be learned and can link to tasks, evidence, activities, and findings. A **hypothesis** is a testable proposed explanation, not a finding. A **line of inquiry** groups questions or checks. **Investigation status** describes progress, not the evidentiary truth of any claim. The existing dog investigation retains both its embedded broad questions and its cross-linked question records until their relationship is reviewed.
+An **investigation** is a bounded effort to learn about a need; its **scope** states geography and subject. Its **primary goal** states the purpose of that effort. An **objective** states what the investigation must establish and links to tasks, actual activities, evidence, and findings. Objectives remain open to assessment as evidence accumulates; completing a task does not meet an objective. A **hypothesis** is a testable proposed explanation, not a finding. **Investigation status** describes progress, not the evidentiary truth of any claim. Need-record `unknown_questions` are separate questions about a need, not investigation objectives.
 
 ## Evidence and knowledge
 
@@ -36,11 +36,17 @@ A **development** is a dated change or reported change. An **event** is somethin
 
 A **location** is a place record; exact coordinates, generalized map reference, and unpinned broad report are distinct. **Geographic scope** states the area to which a claim, measurement, investigation, or service applies. An **event date** (`occurredAt`) is when something happened. A **publication date** (`publishedAt`) is when a source appeared. A **review date** (`reviewedAt`) is when Crossover checked or reassessed information. A **reporting period** has a start and end, distinct from publication. Legacy snake_case fields are mapped to these meanings by the Model API without changing their original values.
 
+## Visual preferences
+
+Records may carry `visual_description`, `preferred_image`, `logo_description`, and `preferred_logo`. These are optional information about a visual concept or an existing asset, not page layout instructions. An independent renderer may choose the preferred asset when suitable, choose another illustration, or use no image. A visual description is not alt text; alt text describes the actual displayed image. An organization's authentic logo must never be replaced by an invented mark presented as official.
+
+Existing need artwork and story imagery use `preferred_image`; need thumbnails remain a separate compact variant. Crossover's existing logo is its `preferred_logo`. Field-report imagery remains attached to its source record with its caption and attribution; illustrative imagery is not investigation evidence. The public record projection at `/data/records.json` includes these optional fields when present and omits them when absent.
+
 ## Permitted relationships
 
 - Needs may reference reported conditions, assessments, services, organizations, evidence, investigations, and stories.
-- An investigation references one or more needs, questions, tasks, activities, evidence, findings, organizations, and locations.
-- Questions reference evidence, tasks, actual activities, and findings within the same investigation.
+- An investigation references one or more needs, objectives, tasks, activities, evidence, findings, organizations, and locations.
+- Objectives reference evidence, tasks, actual activities, and findings within the same investigation. Every actual activity and task identifies at least one objective.
 - A finding references supporting or contradicting evidence IDs and keeps its limitation and review date. Unsupported findings are invalid.
 - An activity may reference its task, organization, location, and field report. A planned action may reference a future location but cannot be represented as a completed observation.
 - A claim or measurement references the source/evidence that reports it. Source attribution is not a verification flag.

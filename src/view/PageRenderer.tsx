@@ -24,7 +24,7 @@ type PageHandlers = {
   showDogTasks: () => void;
 };
 
-export function PageRenderer({ route, googleExperiment, handlers }: { route: RouteState; googleExperiment: boolean; handlers: PageHandlers }) {
+export function PageRenderer({ route, googleExperiment, explorerResetKey, handlers }: { route: RouteState; googleExperiment: boolean; explorerResetKey: number; handlers: PageHandlers }) {
   const { showPage, showGap, showInvestigation, showGapSection, showWork, showStory, showArticle, showInvestigationReport, showDogTasks } = handlers;
   const firstGapSlug = gaps.find((gap) => gap.active)?.slug ?? gaps[0]?.slug;
   const pageMode: PageMode = route.page === "workInvestigation" || route.page === "article" ? "flush"
@@ -78,7 +78,10 @@ export function PageRenderer({ route, googleExperiment, handlers }: { route: Rou
           reportId={route.reportId}
           onNavigate={showPage}
           onOpenGap={showGap}
-          onOpenWork={showWork}
+          onOpenInvestigationActivity={(id) => {
+            const investigation = investigations.find((item) => item.id === id);
+            if (investigation) showInvestigation(investigation.slug, "activity");
+          }}
           onOpenInvestigationReports={() => showGapSection(dogGapSlug, "reports")}
         />
       )}
@@ -100,7 +103,7 @@ export function PageRenderer({ route, googleExperiment, handlers }: { route: Rou
         />
       )}
 
-      {route.page === "data" && <ExplorerPage />}
+      {route.page === "data" && <ExplorerPage key={explorerResetKey} />}
 
       {route.page === "storyDetail" && (
         <StoryDetailPage

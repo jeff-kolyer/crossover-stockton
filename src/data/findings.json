@@ -1,7 +1,6 @@
 [
   {
     "id": "finding-volunteer-onboarding-can-stall",
-    "primary_question_id": "question-participation",
     "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "Attempts to get involved in animal care can stall.",
@@ -14,10 +13,6 @@
       "crossover-2026-10-14-sas-volunteer-application"
     ],
     "contradicting_record_ids": [],
-    "related_question_ids": [
-      "food-and-water",
-      "additional-help"
-    ],
     "related_task_ids": [
       "task-ssd-volunteer-application-2026-10-07",
       "task-sas-visit-application-2026-10-14"
@@ -27,11 +22,15 @@
       "stockton-animal-services-shelter"
     ],
     "limitations": "Two applications do not establish an organization-wide or systemic failure. We have not established what happened internally to either application.",
-    "last_reviewed_at": "2026-10-30"
+    "last_reviewed_at": "2026-10-30",
+    "primary_objective_id": "additional-help",
+    "related_objective_ids": [
+      "food-and-water",
+      "additional-help"
+    ]
   },
   {
     "id": "finding-public-street-dog-information-fragmented",
-    "primary_question_id": "question-extent",
     "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "Public information about street dogs is difficult to piece together.",
@@ -45,21 +44,21 @@
       "stockton-animal-services-2026-10-20-reporting-guidance"
     ],
     "contradicting_record_ids": [],
-    "related_question_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
-    ],
     "related_task_ids": [
       "task-sas-field-call-follow-up"
     ],
     "related_project_ids": [],
     "location_ids": [],
     "limitations": "Our review of public information does not establish what internal agency or rescue records may contain.",
-    "last_reviewed_at": "2026-10-30"
+    "last_reviewed_at": "2026-10-30",
+    "primary_objective_id": "where-dogs-need-help",
+    "related_objective_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ]
   },
   {
     "id": "finding-new-facilities-impact-uncertain",
-    "primary_question_id": "question-improvements",
     "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "New facilities may expand care, but their impact remains uncertain.",
@@ -72,9 +71,6 @@
       "ssd-2026-10-07-canine-campus-details"
     ],
     "contradicting_record_ids": [],
-    "related_question_ids": [
-      "additional-help"
-    ],
     "related_task_ids": [
       "task-sas-visit-application-2026-10-14"
     ],
@@ -86,6 +82,11 @@
       "stockton-animal-services-shelter"
     ],
     "limitations": "We have not established that new facilities will be insufficient or that any proposed alternative would produce better outcomes.",
-    "last_reviewed_at": "2026-10-30"
+    "last_reviewed_at": "2026-10-30",
+    "primary_objective_id": "improvement-outcomes",
+    "related_objective_ids": [
+      "additional-help",
+      "improvement-outcomes"
+    ]
   }
 ]

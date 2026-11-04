@@ -1,7 +1,0 @@
-{
-  "statusLabels": {
-    "waiting": "Waiting for response",
-    "cancelled": "Cancelled",
-    "open": "Open"
-  }
-}

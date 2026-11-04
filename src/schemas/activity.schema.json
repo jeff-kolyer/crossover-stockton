@@ -21,7 +21,14 @@
     },
     "public_update": {
       "type": "boolean",
-      "description": "Explicit permission for an activity to appear in the public Updates feed. Other activities remain excluded."
+      "description": "Marks an activity as a meaningful public development; visibility must also authorize publication."
+    },
+    "visibility": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal"
+      ]
     },
     "trust": {
       "type": "string",
@@ -36,6 +43,16 @@
       "$ref": "./common.schema.json#/$defs/source"
     },
     "investigation_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "objective_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "primary_objective_id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
     "gap_ids": {
@@ -58,6 +75,16 @@
         "$ref": "./common.schema.json#/$defs/id"
       },
       "uniqueItems": true
+    },
+    "coverage_id": {
+      "$ref": "./common.schema.json#/$defs/id"
+    },
+    "coverage_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observed_dog_count": {
+      "type": "number"
     },
     "occurred_at": {
       "$ref": "./common.schema.json#/$defs/date"
@@ -138,6 +165,26 @@
         "as_of"
       ],
       "additionalProperties": true
+    },
+    "visual_description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional subject or scene Crossover wants an independent renderer to understand; not alt text or evidence."
+    },
+    "preferred_image": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional preferred illustrative image path or URL; the renderer may use another image or none."
+    },
+    "logo_description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional description of the record's authentic visual identity or symbol; not alt text."
+    },
+    "preferred_logo": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional preferred existing logo path or URL. Do not present an invented mark as an organization's official logo."
     }
   },
   "required": [
@@ -147,7 +194,8 @@
     "summary",
     "source",
     "occurred_at",
-    "investigation_id"
+    "investigation_id",
+    "objective_ids"
   ],
   "additionalProperties": true
 }

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "action",
+    "surface": "hero",
+    "rank": 0,
+    "page": "action",
+    "href": "/action/",
+    "title": "See what we're doing"
+  },
+  {
+    "id": "about",
+    "surface": "home",
+    "rank": 1,
+    "page": "about",
+    "href": "/about/",
+    "title": "Learn about Crossover",
+    "description": "Our approach, our mission, and why we're starting here."
+  },
+  {
+    "id": "needs",
+    "surface": "home",
+    "rank": 2,
+    "page": "reality",
+    "href": "/reality/",
+    "title": "Needs in Stockton",
+    "description": "Problems we've identified for investigation."
+  },
+  {
+    "id": "findings",
+    "surface": "home",
+    "rank": 3,
+    "href": "/work/dogs/findings/",
+    "title": "Explore our findings",
+    "description": "What we know, what's unverified, and what's next."
+  },
+  {
+    "id": "map",
+    "surface": "home",
+    "rank": 4,
+    "href": "/work/dogs/map/",
+    "title": "See what's happening",
+    "description": "Maps, data, and the latest field reports."
+  }
+]

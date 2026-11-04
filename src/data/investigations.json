@@ -1,0 +1,89 @@
+{
+  "explorer": {
+    "id": "investigation",
+    "title": "Investigations",
+    "rank": 4,
+    "topLevel": true,
+    "collectionIds": [
+      "investigations",
+      "organizations",
+      "objectives",
+      "tasks",
+      "activities",
+      "findings",
+      "locations",
+      "evidence",
+      "projects"
+    ]
+  },
+  "records": [
+    {
+      "id": "street-dog-immediate-welfare",
+      "publicName": "Dogs on the street in Stockton",
+      "publicQuestion": "Why do so many dogs struggle to reach care?",
+      "publicSummary": "Stockton's animal shelter reports regular overcrowding. We're examining what happens when someone finds a dog and tries to help.",
+      "indexSummary": "Field reports, locations, pathways to care, and current findings.",
+      "gap_id": "dogs-safe-placement",
+      "title": "What would it take to understand the need?",
+      "primary_goal": "Establish the extent of unmet care needs among dogs on Stockton's streets, understand how existing response and care systems operate, identify where those systems fail to meet needs, and evaluate improvements—including emerging technology—that could produce measurably better outcomes.",
+      "status": "in_progress",
+      "introduction": "We're investigating where Stockton's street dogs are, what condition they're in, what care reaches them, and which needs remain unmet. Public reports are starting points; records, firsthand observations, and conversations with responders can help us verify what is happening.",
+      "findings_summary": "Stockton's municipal shelter handles thousands of stray dog intake events, yet the number of dogs currently on the streets and what happens after a dog is reported remain unclear. Our first attempts to volunteer with two animal-care organizations have not yet led to completed onboarding, raising questions about how easily willing residents can get involved. Meanwhile, shelter expansion is underway and additional facilities are proposed, but their impact on access to care remains to be established.",
+      "purpose": "Not every dog can immediately be rescued or placed in a home. Until that happens, food, water, emergency medical attention, and people willing to monitor their wellbeing can prevent suffering and potentially save lives.",
+      "evidence_record_ids": [
+        "ssd-2026-09-29-dumped-dogs-surge",
+        "ssd-2026-06-08-street-response",
+        "cbs-2026-04-06-stockton-abandoned-dogs",
+        "stocktonia-2026-10-20-sas-capacity-intake",
+        "stocktonia-2026-10-20-roaming-dog-distinction",
+        "stocktonia-2026-10-20-found-animal-foster-pathway",
+        "stocktonia-2026-10-20-animal-control-proposals"
+      ],
+      "known_so_far": "Stockton Streetdogs reports increased dumped-dog encounters and conducts street-level assistance. Animal Services publishes reporting routes and, according to October 20 reporting, describes regular shelter capacity pressure, appointment-based healthy stray intake, priority for urgent and confirmed abandonment cases, and a temporary found-animal foster option. These are attributed public statements, not Crossover field observations or verified outcome measures. A roaming dog may be owned, lost, abandoned, or unowned. Stockton’s current street-dog population, severe suffering, care coverage, and individual outcomes remain unknown.",
+      "evidence_context": [
+        {
+          "label": "October 20 Stocktonia report",
+          "summary": "Animal Services reports regular capacity pressure and different intake handling for healthy strays, urgent cases, and confirmed abandonment. Occupancy and case outcomes are unmeasured here.",
+          "record_id": "stocktonia-2026-10-20-sas-capacity-intake"
+        },
+        {
+          "label": "October 20 Stocktonia report",
+          "summary": "Animal Services describes a temporary found-animal foster pathway, but eligibility, available places, and successful outcomes remain unverified.",
+          "record_id": "stocktonia-2026-10-20-found-animal-foster-pathway"
+        },
+        {
+          "label": "October 20 committee report",
+          "summary": "The committee advanced animal-control proposals for Council consideration; adoption and an effective date are not established.",
+          "record_id": "stocktonia-2026-10-20-animal-control-proposals"
+        },
+        {
+          "label": "Organization report",
+          "summary": "Stockton Streetdogs reports more dumped-dog encounters; this is not a citywide census or a survey of animal condition.",
+          "record_id": "ssd-2026-09-29-dumped-dogs-surge"
+        },
+        {
+          "label": "Published local report",
+          "summary": "CBS Sacramento describes Stockton Streetdogs' street response, but does not measure feeding coverage.",
+          "record_id": "ssd-2026-06-08-street-response"
+        },
+        {
+          "label": "April 2026 published report",
+          "summary": "CBS Sacramento reported a councilmember's concern around Louis Park, a resident's help for dogs off Stanislaus Street, and a broad Highway 4 dumping account. Exact sites and current conditions remain unverified.",
+          "record_id": "cbs-2026-04-06-stockton-abandoned-dogs"
+        },
+        {
+          "label": "Official public data",
+          "summary": "No verified local count of severe street-dog suffering, mortality, or feeding coverage is available in this investigation.",
+          "record_id": null
+        },
+        {
+          "label": "Crossover firsthand",
+          "summary": "No street-condition observation has been completed for this investigation.",
+          "record_id": null
+        }
+      ],
+      "verified_finding_ids": [],
+      "last_updated_at": "2026-11-03"
+    }
+  ]
+}

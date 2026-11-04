@@ -1,6 +1,7 @@
 node_modules/
 dist/
 src/generated/
+public/data/records.json
 *.tsbuildinfo
 .edge-headless/
 

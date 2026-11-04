@@ -1,11 +1,19 @@
 const dateField = (name) => name === "date" || name === "as_of" || name === "period_start" || name === "period_end" || name.endsWith("_at") || name.endsWith("_date");
-const urlField = (name) => name === "url" || name === "website" || name === "path" || name.endsWith("_url") || name.endsWith("Url");
+const urlField = (name) => name === "url" || name === "website" || name === "path" || ["preferred_image", "preferred_logo", "thumbnail_image"].includes(name) || name.endsWith("_url") || name.endsWith("Url");
 const titleFor = (record) => record.publicName || record.name || record.title || record.statement
   || (record.value !== undefined && record.unit ? `${record.value.toLocaleString("en-US")} ${record.unit}` : undefined)
   || record.measure || record.id;
 
 const idsFrom = (record, fields) => fields.flatMap((field) => Array.isArray(record?.[field]) ? record[field] : []);
 
+const dateFields = ["occurred_at", "published_at", "date", "completed_at", "recorded_at", "updated_at", "last_updated_at", "last_reviewed_at", "last_verified_at", "evidence_date", "period_end", "period_start", "checked_at"];
+const dateForSort = (fields) => {
+  for (const field of dateFields) {
+    const value = fields[field];
+    if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value) && Number.isFinite(Date.parse(value))) return { field, value };
+  }
+  return undefined;
+};
 function investigationBranches(policy, collections, publishedCollections, records) {
   const sourceById = new Map(publishedCollections.map((collection) => [collection.id, collection]));
   const publishedIds = (id) => new Set(sourceById.get(id)?.recordIds ?? []);
@@ -15,7 +23,7 @@ function investigationBranches(policy, collections, publishedCollections, record
   for (const investigation of collections.investigations ?? []) {
     if (!records.has(investigation.id)) continue;
     const scoped = (id) => (collections[id] ?? []).filter((item) => item.investigation_id === investigation.id && publishedIds(id).has(item.id));
-    const questions = scoped("questions");
+    const objectives = scoped("objectives");
     const tasks = scoped("tasks");
     const activities = scoped("activities");
     const findings = scoped("findings");
@@ -24,11 +32,10 @@ function investigationBranches(policy, collections, publishedCollections, record
     const projects = (collections.projects ?? []).filter((item) => item.gap_ids?.includes(investigation.gap_id) && publishedIds("projects").has(item.id));
     const need = (collections.needs ?? []).find((item) => item.id === investigation.gap_id);
     const evidenceIds = new Set(idsFrom(investigation, ["evidence_record_ids"]));
-    for (const item of [...questions, ...tasks, ...activities, ...findings, ...locations, ...projects, need]) {
+    for (const item of [...objectives, ...tasks, ...activities, ...findings, ...locations, ...projects, need]) {
       for (const id of idsFrom(item, ["evidence_record_ids", "activity_record_ids", "basis_record_ids", "report_record_ids", "supporting_record_ids", "contradicting_record_ids", "record_ids", "source_record_ids"])) evidenceIds.add(id);
       if (item?.evidence_record_id) evidenceIds.add(item.evidence_record_id);
     }
-    for (const item of activities) evidenceIds.add(item.id);
     for (const project of projects) {
       for (const item of [project.expected_capacity_or_benefit, project.actual_additional_capacity, ...(project.milestones ?? [])]) {
         for (const id of idsFrom(item, ["evidence_record_ids"])) evidenceIds.add(id);
@@ -46,13 +53,7 @@ function investigationBranches(policy, collections, publishedCollections, record
       for (const id of idsFrom(item, ["organization_ids"])) organizationIds.add(id);
     }
     const organizations = (collections.organizations ?? []).filter((item) => organizationIds.has(item.id) && publishedIds("organizations").has(item.id));
-    const relatedUpdates = (id) => {
-      const query = policy.collections.find((item) => item.id === id)?.query;
-      return (collections[query] ?? []).filter((item) =>
-        (item.investigation_id === investigation.id || item.gap_ids?.includes(investigation.gap_id)) && publishedIds(id).has(item.id));
-    };
-    const members = { questions, tasks, activities, findings, articles, locations, evidence: relatedEvidence, projects, organizations,
-      developments: relatedUpdates("developments"), "investigation-updates": relatedUpdates("investigation-updates") };
+    const members = { objectives, tasks, activities, findings, articles, locations, evidence: relatedEvidence, projects, organizations };
     const collectionIds = [];
     for (const sourceId of policy.investigationChildren ?? []) {
       const nested = policy.investigationCollectionGroups?.find((item) => item.id === sourceId);
@@ -74,7 +75,7 @@ function investigationBranches(policy, collections, publishedCollections, record
       const source = sourceById.get(sourceId);
       if (!source) continue;
       const id = `${investigation.id}:${sourceId}`;
-      children.push({ id, title: sourceId === "activities" ? "Activity" : source.title, group: "investigation", investigationId: investigation.id, schema: source.schema, recordIds: (members[sourceId] ?? []).map((item) => item.id) });
+      children.push({ id, title: source.title, group: "investigation", investigationId: investigation.id, schema: source.schema, recordIds: (members[sourceId] ?? []).map((item) => item.id) });
       collectionIds.push(id);
     }
     branches.push({ id: investigation.id, title: titleFor(investigation), collectionIds });
@@ -112,9 +113,14 @@ function projectValue(key, value, nestedFields) {
   return value;
 }
 
-export function buildExplorerSnapshot(policy, schemas, collections) {
+export function buildExplorerSnapshot(policy, schemas, collections, roots) {
+  if (!Array.isArray(roots)) throw new Error("Explorer roots must come from category data files");
+  const groupByCollection = new Map(roots.flatMap((root) => root.collectionIds.map((id) => [id, root.id])));
   const relationshipFields = new Set(policy.relationshipFields ?? []);
-  const collectionFields = (definition) => definition.fields ?? policy.collections.find((item) => item.id === definition.fieldsFrom)?.fields;
+  const collectionFields = (definition) => {
+    const fields = definition.fields ?? policy.collections.find((item) => item.id === definition.fieldsFrom)?.fields;
+    return fields ? [...new Set([...fields, ...(policy.sharedFields ?? [])])] : undefined;
+  };
   const records = new Map();
   const publishedCollections = [];
   const diagnostics = [];
@@ -143,7 +149,7 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
         fields: { ...(existing?.fields ?? {}), ...fields },
       });
     }
-    if (ids.size) publishedCollections.push({ id: definition.id, title: definition.title, group: definition.group, schema: definition.schema, recordIds: [...ids] });
+    if (ids.size) publishedCollections.push({ id: definition.id, title: definition.title, group: groupByCollection.get(definition.id) ?? "unclassified", schema: definition.schema, recordIds: [...ids] });
   }
   for (const relation of policy.reverseRelationships ?? []) {
     for (const source of [...records.values()]) {
@@ -155,6 +161,7 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
       records.set(targetId, { ...target, fields: { ...target.fields, [relation.field]: [...new Set([...relatedIds, source.id])] } });
     }
   }
+  for (const record of records.values()) record.dateForSort = dateForSort(record.fields);
   const recordMap = Object.fromEntries(records);
   for (const record of records.values()) {
     for (const [field, value] of Object.entries(record.fields)) {
@@ -165,12 +172,12 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
     }
   }
   const { branches, children } = investigationBranches(policy, collections, publishedCollections, records);
-  const hiddenCollectionIds = new Set(["investigations", "question-groups", "workstreams",
-    ...(policy.investigationChildren ?? []).filter((id) => policy.collections.find((item) => item.id === id)?.group === "investigation")]);
-  const visibleCollections = publishedCollections.map((item) => ({ ...item, hidden: hiddenCollectionIds.has(item.id) || !policy.groups.some((group) => group.id === item.group) }));
-  const groups = policy.groups.map((group) => ({ ...group, collectionIds: visibleCollections.filter((item) => item.group === group.id && !item.hidden).map((item) => item.id), ...(group.id === "investigation" ? { investigationIds: branches.map((item) => item.id) } : {}) })).filter((group) => group.collectionIds.length || group.investigationIds?.length);
+  const hiddenCollectionIds = new Set(["investigations",
+    ...(policy.investigationChildren ?? []).filter((id) => groupByCollection.get(id) === "investigation")]);
+  const visibleCollections = publishedCollections.map((item) => ({ ...item, hidden: hiddenCollectionIds.has(item.id) || !roots.some((root) => root.id === item.group) }));
+  const groups = roots.map((root) => ({ id: root.id, title: root.title, collectionIds: visibleCollections.filter((item) => item.group === root.id && !item.hidden).map((item) => item.id), ...(root.id === "investigation" ? { investigationIds: branches.map((item) => item.id) } : {}) })).filter((group) => group.collectionIds.length || group.investigationIds?.length);
   const namedSchemas = new Set(policy.collections.map((item) => item.schema));
-  const abstractSchemas = new Set(["common", "page", "view", "source", "organization-service", "development", "legacy-work"]);
+  const abstractSchemas = new Set(["common", "page", "view", "source", "organization-service", "development", "action-card", "navigation"]);
   const unsupportedTypes = Object.keys(schemas).filter((name) => !namedSchemas.has(name) && !abstractSchemas.has(name));
   const nestedFieldNames = (rule) => Array.isArray(rule) ? rule : Object.entries(rule).flatMap(([name, child]) => [name, ...(child === true ? [] : nestedFieldNames(child))]);
   const fieldNames = new Set([
@@ -187,7 +194,7 @@ export function buildExplorerSnapshot(policy, schemas, collections) {
     return [name, { label: policy.fieldLabels?.[name] ?? reverseRelation?.label ?? name, kind, ...(property?.description ? { description: property.description } : {}) }];
   }));
   return {
-    snapshot: { groups, investigations: branches, recordChildren: Object.fromEntries(branches.map((branch) => [branch.id, branch.collectionIds])), collections: [...visibleCollections, ...children], records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo },
+    snapshot: { groups, investigations: branches, recordChildren: Object.fromEntries(branches.map((branch) => [branch.id, branch.collectionIds])), collections: [...visibleCollections, ...children], records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance },
     diagnostics,
   };
 }

@@ -5,12 +5,12 @@ import { createServer } from "vite";
 
 const origin = "https://crossoverstockton.org";
 const dist = new URL("../dist/", import.meta.url);
-const gaps = JSON.parse(await readFile(new URL("../src/data/gaps.json", import.meta.url), "utf8"));
-const stories = JSON.parse(await readFile(new URL("../src/data/stories.json", import.meta.url), "utf8"));
-const work = JSON.parse(await readFile(new URL("../src/data/work.json", import.meta.url), "utf8"));
-const records = JSON.parse(await readFile(new URL("../src/data/records.json", import.meta.url), "utf8"));
-const articles = JSON.parse(await readFile(new URL("../src/data/articles.json", import.meta.url), "utf8"));
-const articleLocations = JSON.parse(await readFile(new URL("../src/data/investigation-locations.json", import.meta.url), "utf8"));
+const gaps = JSON.parse(await readFile(new URL("../src/data/needs.json", import.meta.url), "utf8")).records;
+const stories = JSON.parse(await readFile(new URL("../src/data/stories.json", import.meta.url), "utf8")).records;
+const records = (await Promise.all(["evidence", "activities"].map(async (name) => JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"))))).flat();
+const researchWorkAliases = JSON.parse(await readFile(new URL("../src/pages/legacy-redirects.json", import.meta.url), "utf8"));
+const articles = JSON.parse(await readFile(new URL("../src/data/articles.json", import.meta.url), "utf8")).records;
+const articleLocations = JSON.parse(await readFile(new URL("../src/data/locations.json", import.meta.url), "utf8"));
 const articlePaths = new Set();
 const articleIds = new Set();
 for (const article of articles) {
@@ -32,7 +32,7 @@ for (const article of articles) {
   articlePaths.add(article.path);
 }
 const publishedArticles = articles.filter((article) => article.published);
-const organizations = JSON.parse(await readFile(new URL("../src/data/orgs.json", import.meta.url), "utf8"));
+const organizations = JSON.parse(await readFile(new URL("../src/data/organizations.json", import.meta.url), "utf8"));
 const engagedOrganizationIds = new Set(records.filter((record) => record.source.publisher?.startsWith("Crossover Stockton") && (record.record_type === "activity" || record.record_type === "field_report" || record.record_type === "field_investigation") && !record.evidence_status?.startsWith("planned")).flatMap((record) => record.organization_ids ?? []));
 const dogGapBase = "/reality/too-many-dogs-still-lack-safe-placement/";
 const legacyDogWorkSections = {
@@ -168,9 +168,9 @@ try {
     ]),
     ...Object.entries(legacyDogRoutes).map(([section, target]) => [`${dogGapBase}${section ? `${section}/` : ""}`, target]),
     ...Object.entries(legacyDogWorkSections).map(([workId, section]) => [`/work/${workId}/`, section === "research" ? `${dogGapBase}#gap-sources` : section === "improvements" ? `${dogGapBase}#gap-known` : `/work/dogs/${section}/`]),
-    ...work.filter((item) => !legacyDogWorkSections[item.id] && item.id.endsWith("-public-source-review")).map((item) => {
-      const gap = gaps.find((entry) => entry.work_ids?.includes(item.id));
-      return [`/work/${item.id}/`, gap ? `/reality/${gap.slug}/#gap-sources` : "/reality/"];
+    ...Object.entries(researchWorkAliases).map(([workId, needId]) => {
+      const gap = gaps.find((entry) => entry.id === needId);
+      return [`/work/${workId}/`, gap ? `/reality/${gap.slug}/#gap-sources` : "/reality/"];
     }),
   ];
   for (const [path, target] of legacyRedirects) {
@@ -183,8 +183,9 @@ try {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map(([path]) => `  <url><loc>${origin}${escapeHtml(path)}</loc></url>`).join("\n")}\n</urlset>\n`;
   await writeFile(new URL("sitemap.xml", dist), sitemap);
   await writeFile(new URL("robots.txt", dist), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
-  await writeFile(new URL("llms.txt", dist), `# Crossover Stockton\n\nPublic, plain-text versions of the site's pages. These files are generated from the same content as the HTML pages.\n\n${pages.map(([path, title, description]) => `- [${title}](${origin}${path}page.txt): ${description}`).join("\n")}\n`);
-  console.log(`Prerendered ${pages.length} pages with plain-text versions, sitemap.xml, robots.txt, and llms.txt`);
+  await writeFile(new URL("data/records.json", dist), await readFile(new URL("../public/data/records.json", import.meta.url)));
+  await writeFile(new URL("llms.txt", dist), `# Crossover Stockton\n\nPublic, plain-text versions of the site's pages. These files are generated from the same content as the HTML pages.\n\n- [Public information records](${origin}/data/records.json): Public record fields, optional visual preferences, and guidance for independent renderers.\n\n${pages.map(([path, title, description]) => `- [${title}](${origin}${path}page.txt): ${description}`).join("\n")}\n`);
+  console.log(`Prerendered ${pages.length} pages and public records JSON with plain-text versions, sitemap.xml, robots.txt, and llms.txt`);
 } finally {
   await vite.close();
 }

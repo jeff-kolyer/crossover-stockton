@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { explorerCollections, explorerGroups, explorerInvestigations, explorerPathForRecord, explorerSnapshot, searchExplorerRecords } from "../model/explorer";
+import { explorerCollections, explorerDirectCollection, explorerGroups, explorerInvestigations, explorerPathForRecord, explorerSnapshot, searchExplorerRecords } from "../model/explorer";
 import { recordIdFromSearch } from "./explorer-url";
 
 export type ExplorerNavigation = "tree" | "breadcrumb";
 export type ExplorerDisplay = "reference" | "json";
 type ExplorerState = {
+  byDate: boolean;
+  dateGroup: string | null;
   query: string;
   selectedId: string | null;
   inline: boolean;
@@ -18,23 +20,28 @@ type ExplorerState = {
 
 export function explorerStateFromSearch(search: string): ExplorerState {
   const params = new URLSearchParams(search);
-  const requestedGroup = params.get("group");
+  const requestedGroupParam = params.get("group");
+  const collectionParam = params.get("collection");
+  const requestedCollectionParam = collectionParam === "questions" ? "objectives" : collectionParam?.endsWith(":questions") ? `${collectionParam.slice(0, -":questions".length)}:objectives` : collectionParam;
+  const byDate = params.get("sort") === "date" || requestedGroupParam === "latest" || requestedGroupParam === "updates"
+    || Boolean(requestedCollectionParam && (requestedCollectionParam === "latest" || requestedCollectionParam.startsWith("latest:") || /:(?:latest|updates|developments|investigation-updates)$/.test(requestedCollectionParam)))
+    || ["public-updates", "developments", "investigation-updates"].includes(requestedCollectionParam ?? "");
+  const requestedGroup = requestedGroupParam === "organization" ? "crossover" : byDate ? null : requestedGroupParam;
   const requestedInvestigation = params.get("investigation");
-  const requestedCollectionParam = params.get("collection");
   const selectedId = recordIdFromSearch(search) ?? (requestedGroup === "investigation" && requestedInvestigation && !requestedCollectionParam && explorerInvestigations.has(requestedInvestigation) ? requestedInvestigation : null);
-  const requestedCollection = requestedCollectionParam === "public-updates" && selectedId
-    ? (["developments", "investigation-updates"].find((id) => explorerCollections.get(id)?.recordIds.includes(selectedId)) ?? null)
-    : requestedCollectionParam;
+  const requestedCollection = byDate ? null : requestedCollectionParam;
   const recordTrail = selectedId ? params.getAll("via").filter((id) => Boolean(explorerSnapshot.records[id])).slice(0, 12) : [];
-  const path = selectedId && recordTrail.length === 0 ? explorerPathForRecord(selectedId, requestedCollection ?? undefined, requestedInvestigation ?? undefined) : undefined;
+  const path = !byDate && selectedId && recordTrail.length === 0 ? explorerPathForRecord(selectedId, requestedCollection ?? undefined, requestedInvestigation ?? undefined) : undefined;
   const collection = requestedCollection ? explorerCollections.get(requestedCollection) : undefined;
   const groupId = path?.groupId ?? (!collection?.hidden ? collection?.group : undefined) ?? (requestedGroup && explorerGroups.has(requestedGroup) ? requestedGroup : null);
   const investigationId = path?.investigationId ?? collection?.investigationId ?? (groupId === "investigation" && requestedInvestigation && explorerInvestigations.has(requestedInvestigation) ? requestedInvestigation : null);
   const collectionId = path?.collectionId ?? (collection && !collection.hidden && collection.group === groupId && (!collection.investigationId || collection.investigationId === investigationId) ? collection.id : null);
   return {
+    byDate,
+    dateGroup: byDate ? params.get("date") ?? (selectedId && explorerSnapshot.records[selectedId] ? explorerSnapshot.records[selectedId].dateForSort?.value.slice(0, 10) ?? "undated" : null) : null,
     query: params.get("q") ?? "",
     selectedId,
-    inline: Boolean(selectedId && params.get("nav") !== "breadcrumb" && (params.get("inline") === "1" || selectedId === investigationId && !collectionId)),
+    inline: false,
     groupId,
     investigationId,
     collectionId,
@@ -55,21 +62,25 @@ export function useExplorerController() {
   }, []);
   const commit = (next: ExplorerState, replace = false, scroll = false) => {
     const url = new URL(window.location.href);
-    for (const [key, value] of Object.entries({ record: next.selectedId, inline: next.inline && next.navigation === "tree" ? "1" : null, group: next.groupId, investigation: next.investigationId, collection: next.collectionId, nav: next.navigation === "tree" ? null : next.navigation, view: next.display === "reference" ? null : next.display, q: next.query || null })) {
+    for (const [key, value] of Object.entries({ record: next.selectedId, sort: next.byDate ? "date" : null, date: next.byDate ? next.dateGroup : null, group: next.groupId, investigation: next.investigationId, collection: next.collectionId, nav: next.navigation === "tree" ? null : next.navigation, view: next.display === "reference" ? null : next.display, q: next.query || null })) {
       if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
     }
+    url.searchParams.delete("inline");
     url.searchParams.delete("via");
     for (const id of next.recordTrail) url.searchParams.append("via", id);
     window.history[replace ? "replaceState" : "pushState"]({}, "", `${url.pathname}${url.search}${url.hash}`);
     setState(next);
     if (scroll) requestAnimationFrame(() => {
-      if (next.navigation === "breadcrumb") window.scrollTo(0, 0);
+      if (next.byDate || next.navigation === "breadcrumb") window.scrollTo(0, 0);
       else document.getElementById("explorer-breadcrumb")?.scrollIntoView({ block: "start" });
     });
   };
   const selectRecord = (id: string, preferredCollectionId?: string, scroll = true) => {
     const path = explorerPathForRecord(id, preferredCollectionId ?? state.collectionId ?? undefined, state.investigationId ?? undefined);
-    commit({ ...state, query: "", selectedId: id, inline: false, recordTrail: [], groupId: path?.groupId ?? null, investigationId: path?.investigationId ?? null, collectionId: path?.collectionId ?? null }, false, scroll);
+    commit({ ...state, byDate: false, query: "", selectedId: id, inline: false, recordTrail: [], groupId: path?.groupId ?? null, investigationId: path?.investigationId ?? null, collectionId: path?.collectionId ?? null }, false, scroll);
+  };
+  const selectDateRecord = (id: string, scroll = true, inline = false) => {
+    if (explorerSnapshot.records[id]) commit({ ...state, byDate: true, dateGroup: explorerSnapshot.records[id].dateForSort?.value.slice(0, 10) ?? "undated", selectedId: id, inline, groupId: null, investigationId: null, collectionId: null, recordTrail: [] }, false, scroll);
   };
   const followRecord = (id: string) => {
     if (!explorerSnapshot.records[id] || id === state.selectedId) return;
@@ -85,8 +96,8 @@ export function useExplorerController() {
     if (collection) commit({ ...state, query: "", selectedId: id, inline: true, recordTrail: [], groupId: collection.group, investigationId: collection.investigationId ?? null, collectionId });
   };
   const clearTreeRecord = () => commit({ ...state, selectedId: null, inline: false, recordTrail: [] });
-  const selectRoot = () => commit({ ...state, query: "", selectedId: null, inline: false, recordTrail: [], groupId: null, investigationId: null, collectionId: null });
-  const selectGroup = (groupId: string) => commit({ ...state, query: "", selectedId: null, inline: false, recordTrail: [], groupId, investigationId: null, collectionId: null });
+  const selectRoot = () => commit({ ...state, byDate: false, query: "", selectedId: null, inline: false, recordTrail: [], groupId: null, investigationId: null, collectionId: null });
+  const selectGroup = (groupId: string) => commit({ ...state, byDate: false, query: "", selectedId: null, inline: false, recordTrail: [], groupId, investigationId: null, collectionId: null });
   const selectInvestigation = (investigationId: string) => {
     if (explorerInvestigations.has(investigationId)) commit({ ...state, query: "", selectedId: investigationId, inline: state.navigation === "tree", recordTrail: [], groupId: "investigation", investigationId, collectionId: null });
   };
@@ -95,19 +106,26 @@ export function useExplorerController() {
     if (collection && !collection.hidden) commit({ ...state, query: "", selectedId: null, inline: false, recordTrail: [], groupId: collection.group, investigationId: collection.investigationId ?? null, collectionId });
   };
   const back = () => {
+    if (state.byDate) {
+      if (state.selectedId) commit({ ...state, selectedId: null });
+      else if (state.dateGroup) commit({ ...state, dateGroup: null });
+      else commit({ ...state, byDate: false, query: "" });
+      return;
+    }
     if (state.recordTrail.length) {
       selectTrailRecord(state.recordTrail.length - 1);
       return;
     }
     if (state.selectedId) {
       if (state.selectedId === state.investigationId && !state.collectionId) commit({ ...state, selectedId: null, inline: false, investigationId: null });
-      else commit({ ...state, selectedId: null, inline: false });
+      else commit({ ...state, selectedId: null, inline: false, collectionId: explorerDirectCollection(explorerGroups.get(state.groupId ?? ""))?.id === state.collectionId ? null : state.collectionId });
       if (state.navigation === "tree" && state.collectionId) {
         requestAnimationFrame(() => document.getElementById(`explorer-collection-${state.collectionId}`)?.scrollIntoView({ block: "start" }));
       }
     }
     else if (state.collectionId && explorerCollections.get(state.collectionId)?.parentCollectionId) selectCollection(explorerCollections.get(state.collectionId)!.parentCollectionId!);
     else if (state.collectionId && state.investigationId) selectInvestigation(state.investigationId);
+    else if (state.collectionId && explorerDirectCollection(explorerGroups.get(state.groupId ?? ""))?.id === state.collectionId) selectRoot();
     else if (state.collectionId) commit({ ...state, collectionId: null });
     else if (state.investigationId) commit({ ...state, investigationId: null });
     else if (state.groupId) commit({ ...state, groupId: null });
@@ -118,6 +136,10 @@ export function useExplorerController() {
     results: searchExplorerRecords(state.query),
     selectedRecord: state.selectedId ? explorerSnapshot.records[state.selectedId] : undefined,
     selectRecord,
+    selectDateRecord,
+    clearDateRecord: () => commit({ ...state, selectedId: null, inline: false }),
+    selectDateGroup: (dateGroup: string | null) => commit({ ...state, dateGroup, selectedId: null, inline: false }),
+    setByDate: (byDate: boolean) => commit({ ...state, byDate, dateGroup: null, query: "", selectedId: null, inline: false, groupId: null, investigationId: null, collectionId: null, recordTrail: [] }),
     followRecord,
     selectTrailRecord,
     selectTreeRecord,
@@ -128,13 +150,8 @@ export function useExplorerController() {
     selectCollection,
     back,
     setNavigation: (navigation: ExplorerNavigation) => {
-      const canOpenInline = state.selectedId === state.investigationId && !state.collectionId
-        || Boolean(state.collectionId && state.selectedId && explorerCollections.get(state.collectionId)?.recordIds.includes(state.selectedId));
-      const next = { ...state, navigation, inline: navigation === "tree" && canOpenInline };
+      const next = { ...state, navigation, inline: false };
       commit(next, false, Boolean(state.selectedId && navigation === "breadcrumb"));
-      if (state.selectedId && navigation === "tree" && canOpenInline) {
-        requestAnimationFrame(() => document.getElementById(`explorer-record-${state.collectionId}-${state.selectedId}`)?.scrollIntoView({ block: "start" }));
-      }
     },
     setDisplay: (display: ExplorerDisplay) => commit({ ...state, display }),
   };

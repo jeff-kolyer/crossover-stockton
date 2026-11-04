@@ -1,9 +1,9 @@
-import uiCopy from "../data/pages/action.json";
+import uiCopy from "../ui/action.json";
 import { siteModel } from "../model";
 import { resolvePageSection } from "../view/registry";
 import { PageSectionRenderer } from "../view/PageSectionRenderer";
 
-import { activeCrossoverActions, dogStreetActionId } from "../data/crossoverActions";
+import { activeCrossoverActions, dogStreetActionId } from "../view/crossoverActions";
 import { navigateInternalLink } from "../lib/internalLink";
 import { ActionProgressStats } from "./ActionProgressStats";
 import { ArrowTextLink } from "./ArrowTextLink";

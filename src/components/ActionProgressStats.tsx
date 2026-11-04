@@ -1,5 +1,5 @@
-import uiCopy from "../data/pages/action.json";
-import type { CrossoverAction } from "../data/crossoverActions";
+import uiCopy from "../ui/action.json";
+import type { CrossoverAction } from "../view/crossoverActions";
 import { ActionMetrics } from "./layout";
 
 const uiText = uiCopy.ActionProgressStats;

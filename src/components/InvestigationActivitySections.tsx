@@ -1,6 +1,7 @@
-import uiCopy from "../data/pages/investigations/dogs/activity.json";
+import uiCopy from "../ui/investigation.json";
+import activityPage from "../pages/activity.json";
 import { useEffect, useState } from "react";
-import { dogActivityQuestions } from "../data/dog-activity-questions";
+import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { recordLinkLabel } from "../lib/linkLabels";
 import type { EvidenceRecord } from "../types";
@@ -8,6 +9,7 @@ import { InvestigationOrganizations } from "./InvestigationOrganizations";
 import { ActivityRecord, HeadingGroup, QuestionGroup, RecordList } from "./layout";
 
 const uiText = uiCopy.InvestigationActivitySections;
+const investigationObjectives = siteModel.getActivityObjectives("street-dog-immediate-welfare");
 
 const dateLabel = (date?: string | null) => date
   ? new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric", year: "numeric" }).format(new Date(`${date.slice(0, 10)}T12:00:00`))
@@ -37,7 +39,6 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
   }, [activeAnchor, activeQuestionId, activeQuestionExpanded]);
 
   const activityById = new Map(activities.map((record) => [record.id, record]));
-  const reportById = new Map(reports.map((record) => [record.id, record]));
 
   const openActivity = (record: EvidenceRecord) => {
     const href = `/work/dogs/activity/#${encodeURIComponent(record.id)}`;
@@ -53,14 +54,16 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
   return <div className="workspace-page investigation-activity-page">
     <section className="investigation-activity-work" aria-labelledby="recorded-activity-title">
       <HeadingGroup><h2 id="recorded-activity-title">{uiText.activity}</h2>
-        <p>{uiText.whatWeVeDoneToAnswerThese}</p></HeadingGroup>
-      {dogActivityQuestions.map((question, index) => {
-        const questionActivities = question.activityIds.map((id) => activityById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
-        const questionReports = question.reportIds.map((id) => reportById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
+        <p>{uiText.workTowardObjectives}</p></HeadingGroup>
+      {investigationObjectives.map((question, index) => {
+        const display = (activityPage.objectiveDisplay as Record<string, { note?: string; showOrganizations?: boolean }>)[question.id];
+        const linkedActivities = question.activity_record_ids.map((id) => activityById.get(id)).filter((record): record is EvidenceRecord => Boolean(record));
+        const questionActivities = linkedActivities.filter((record) => record.primary_objective_id === question.id);
+        const questionReports = reports.filter((record) => record.objective_ids?.includes(question.id) && record.primary_objective_id === question.id);
         const primary = [...questionActivities, ...questionReports].sort(newestFirst);
         const related = [
-          ...(question.relatedActivityIds ?? []).map((id) => activityById.get(id)).filter((record): record is EvidenceRecord => Boolean(record)),
-          ...(question.relatedReportIds ?? []).map((id) => reportById.get(id)).filter((record): record is EvidenceRecord => Boolean(record)),
+          ...linkedActivities.filter((record) => record.primary_objective_id !== question.id),
+          ...reports.filter((record) => record.objective_ids?.includes(question.id) && record.primary_objective_id !== question.id),
         ].sort(newestFirst);
         const count = primary.length || related.length;
         const countLabel = primary.length ? `${uiText.recorded} ${count === 1 ? uiText.activitySingular : uiText.activityPlural}` : `${uiText.related} ${count === 1 ? uiText.recordSingular : uiText.recordPlural}`;
@@ -74,7 +77,7 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
           })}>
             <span className="activity-question-copy">
               <strong id={`${question.id}-title`}>{index + 1}. {question.title}</strong>
-              <span>{count} {countLabel}{question.note ? ` · ${question.note}` : "."}</span>
+              <span>{count} {countLabel}{display?.note ? ` · ${display.note}` : "."}</span>
             </span>
             <span className="activity-question-chevron" aria-hidden="true" />
           </button>
@@ -86,7 +89,7 @@ export function InvestigationActivitySections({ activities, reports, activeQuest
               <p><a href={record.record_type === "field_report" ? reportHref(record) : activityHref(record)} onClick={(event) => navigateInternalLink(event, () => record.record_type === "field_report" ? onOpenReport(record.id) : openActivity(record))}>{recordLinkLabel(record)}</a></p>
             </ActivityRecord>)}</RecordList>}
             {related.length > 0 && <p className="investigation-activity-related"><strong>{uiText.relatedRecordedWork}</strong> {related.map((record, relatedIndex) => <span key={record.id}>{relatedIndex > 0 && "; "}{recordLink(record)}</span>)}</p>}
-            {question.id === "question-care" && <InvestigationOrganizations onOpenActivity={onOpenActivity} />}
+            {display?.showOrganizations && <InvestigationOrganizations onOpenActivity={onOpenActivity} />}
           </div>
         </QuestionGroup>;
       })}

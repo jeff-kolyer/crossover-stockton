@@ -1,0 +1,179 @@
+[
+  {
+    "id": "crossover-2026-10-20-sas-field-call-records-request",
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": null,
+    "occurred_at": "2026-10-20",
+    "recorded_at": "2026-10-20",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Requested Stockton Animal Services field-call records",
+    "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. An automatic forwarding acknowledgment arrived. The records were received by email on November 2; their contents have not been assessed in this record.",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "outcome": {
+      "status": "received",
+      "summary": "Submitted October 20, 2026. The requested records were received by email on November 2 at 4:03 p.m. PST. This record does not document a review or analysis of their contents.",
+      "as_of": "2026-11-02"
+    },
+    "report_record_ids": [],
+    "supports": [],
+    "objective_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
+    "primary_objective_id": "response-barriers"
+  },
+  {
+    "id": "crossover-2026-11-02-sas-field-call-records-received",
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": null,
+    "occurred_at": "2026-11-02",
+    "recorded_at": "2026-11-03",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Received Stockton Animal Services field-call records",
+    "summary": "The City responded to our October 20 public records request. Review and analysis are pending.",
+    "public_update": true,
+    "visibility": "public",
+    "source": {
+      "publisher": "Crossover Stockton",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "basis_record_ids": [
+      "crossover-2026-10-20-sas-field-call-records-request"
+    ],
+    "outcome": {
+      "status": "received",
+      "summary": "Records received by email; their contents and limitations have not been assessed in this record.",
+      "as_of": "2026-11-02"
+    },
+    "report_record_ids": [],
+    "supports": [],
+    "objective_ids": [
+      "where-dogs-need-help",
+      "response-barriers"
+    ],
+    "primary_objective_id": "response-barriers"
+  },
+  {
+    "id": "crossover-2026-10-14-sas-volunteer-application",
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": null,
+    "occurred_at": "2026-10-14",
+    "recorded_at": "2026-10-14",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Visited Stockton Animal Services and submitted a volunteer application",
+    "summary": "Visited Stockton Animal Services and submitted a volunteer application.",
+    "source": {
+      "publisher": "Crossover Stockton / Jeff Kolyer",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "outcome": {
+      "status": "awaiting_next_step",
+      "summary": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities. No substantive next step documented as of October 30.",
+      "as_of": "2026-10-30"
+    },
+    "report_record_ids": [
+      "crossover-2026-10-14-sas-first-visit"
+    ],
+    "supports": [],
+    "objective_ids": [
+      "response-barriers",
+      "additional-help"
+    ],
+    "primary_objective_id": "additional-help"
+  },
+  {
+    "id": "crossover-2026-10-07-street-dogs-volunteer-application",
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-street-dogs"
+    ],
+    "published_at": null,
+    "occurred_at": "2026-10-07",
+    "recorded_at": "2026-10-08",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Stockton Street Dogs volunteer application submitted",
+    "summary": "Applied to volunteer with Stockton Street Dogs and learn firsthand.",
+    "source": {
+      "publisher": "Crossover Stockton / Jeff Kolyer",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "outcome": {
+      "status": "awaiting_response",
+      "summary": "No response documented as of October 30, 2026.",
+      "as_of": "2026-10-30"
+    },
+    "report_record_ids": [],
+    "supports": [],
+    "objective_ids": [
+      "food-and-water",
+      "additional-help"
+    ],
+    "primary_objective_id": "additional-help"
+  },
+  {
+    "id": "crossover-2026-10-12-doggie-day-out-inquiry",
+    "investigation_id": "street-dog-immediate-welfare",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "organization_ids": [
+      "stockton-animal-services"
+    ],
+    "published_at": null,
+    "occurred_at": "2026-10-12",
+    "recorded_at": "2026-10-12",
+    "record_type": "activity",
+    "trust": "crossover_source",
+    "title": "Emailed Stockton Animal Services about Doggie Day Out",
+    "summary": "Emailed Stockton Animal Services asking about sign-up, requirements, paperwork, and orientation for Doggie Day Out.",
+    "source": {
+      "publisher": "Crossover Stockton / Jeff Kolyer",
+      "type": "firsthand_account"
+    },
+    "evidence_status": "self_reported",
+    "outcome": {
+      "status": "awaiting_response",
+      "summary": "No substantive next step documented as of October 30, 2026. No field report yet.",
+      "as_of": "2026-10-30"
+    },
+    "report_record_ids": [],
+    "supports": [],
+    "objective_ids": [
+      "additional-help",
+      "improvement-outcomes"
+    ],
+    "primary_objective_id": "additional-help"
+  }
+]

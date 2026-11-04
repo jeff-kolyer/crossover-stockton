@@ -4,6 +4,10 @@
 
 Crossover Stockton is a civic investigation and evidence platform exploring how AI, robotics, automation, and human participation can help meet real-world needs in Stockton, California.
 
+Members investigate reality. Crossover preserves what they learn. AI makes that knowledge accessible.
+
+The goal is not to produce more websites. It is to make reliable knowledge useful to more people, without requiring every investigator to become a web developer.
+
 We begin with dogs on the street: investigating what happens to them, how they reach care, what prevents care from reaching them, and what could be done differently.
 
 Our work consists of real actions, firsthand experiences, public records, conversations, experiments, and evidence-based findings. We publish what we learn, including what remains unknown.
@@ -270,6 +274,16 @@ Crossover has also identified other needs in Stockton. The same method can be ap
 
 **Crossover is its information, not its interface.**
 
+A browser doesn't own the information on a website. It interprets a specification and renders it. When something fails, we can investigate whether the input was invalid or the browser rendered it incorrectly.
+
+Crossover applies the same principle to its own information.
+
+We produce structured records of investigations, objectives, activities, evidence, findings, and their relationships. An independent rendering system interprets that information and makes it accessible.
+
+The renderer can evolve, improve, or be replaced without changing what Crossover knows.
+
+**Members contribute to the investigation, not the design of its website.**
+
 The information we gather and develop must exist independently of the website that displays it.
 
 Needs, stories, investigations, questions, activities, evidence, findings, organizations, and locations are structured data. Each record has a defined type, properties, relationships, and sources.
@@ -333,6 +347,39 @@ This architecture is a direction we are implementing, not a claim that all conte
 **We preserve what we discover. We can change how we present it.**
 
 The website is one expression of Crossover. The accumulated knowledge is what endures.
+
+## Investigate, don't design websites
+
+Crossover is not only an investigation platform. One of its goals is to free future investigators from having to design, build, or maintain websites to share what they learn.
+
+Members should be able to contribute information through ordinary conversation with AI: describe a field visit, report an attempt to help, add a source, connect evidence to an objective, or revise a finding.
+
+The system turns those contributions into structured, source-aware records. Members spend their time investigating and helping, not assembling pages.
+
+Because Crossover's information has clear types, relationships, and sources, independent AI systems can present the same investigation in many useful ways.
+
+Someone might ask:
+
+- "Show me what investigators actually do in the field."
+- "Show me the tasks that are waiting, and why."
+- "Show me the evidence behind this finding."
+- "What changes do their activities and findings seem to point toward?"
+
+That last question is especially important.
+
+Crossover doesn't need an explicit record saying "We recommend this" for AI to recognize patterns across its evidence.
+
+For example, AI might observe that the investigation points toward better coordination among organizations. It might identify possibilities for a more open, park-like model of dog care, where people can visit and interact with animals even when their circumstances prevent them from adopting or fostering.
+
+Why couldn't an animal shelter also function more like a welcoming place to visit dogs?
+
+These are ideas to investigate, not established findings or official recommendations. AI should distinguish its interpretations from what the evidence actually supports.
+
+The same information can support different views, filters, maps, interactive tools, and explanations. As rendering technology improves, the ways people explore Crossover's work can improve without changing the underlying knowledge.
+
+**Members investigate reality. Crossover preserves what they learn. AI makes that knowledge accessible.**
+
+The goal is not to produce more websites. It is to make reliable knowledge useful to more people, without requiring every investigator to become a web developer.
 
 ## Technology
 

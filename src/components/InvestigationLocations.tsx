@@ -1,5 +1,6 @@
-import uiCopy from "../data/pages/investigations/dogs/map.json";
+import uiCopy from "../ui/investigation.json";
 import { siteModel } from "../model";
+import mapPage from "../pages/map.json";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ComponentType } from "react";
@@ -36,7 +37,7 @@ export interface InvestigationLocation {
 }
 
 const locations = siteModel.getAllLocations() as InvestigationLocation[];
-const maintenance = siteModel.getMapMaintenance();
+const maintenance = mapPage.maintenance;
 export type MappedInvestigationLocation = InvestigationLocation & { coordinates: [number, number]; marker_kind: NonNullable<InvestigationLocation["marker_kind"]>; map_label: NonNullable<InvestigationLocation["map_label"]> };
 type MapProps = { locations: MappedInvestigationLocation[]; selectedId: string; onSelect: (id: string) => void; wheelZoom: boolean };
 

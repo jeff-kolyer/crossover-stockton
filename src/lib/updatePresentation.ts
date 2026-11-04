@@ -1,5 +1,5 @@
 
-import uiCopy from "../data/pages/updates.json";
+import uiCopy from "../ui/updates.json";
 import type { EvidenceRecord } from "../types";
 
 export function updateTypeLabel(record: EvidenceRecord) {

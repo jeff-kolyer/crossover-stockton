@@ -13,14 +13,14 @@ export interface InvestigationTask {
   location_ids: string[];
   map_reference_location_ids?: string[];
   organization_ids: string[];
-  question_ids: string[];
+  objective_ids: string[];
   basis_record_ids: string[];
   activity_record_ids: string[];
   completed_at?: string;
   checklist?: string[];
 }
 
-export interface InvestigationQuestion {
+export interface InvestigationObjective {
   id: string;
   investigation_id: string;
   title: string;
@@ -34,8 +34,8 @@ export interface InvestigationQuestion {
 export interface InvestigationFinding {
   id: string;
   investigation_id: string;
-  /** One of the shared Overview, Activity, and Findings question section IDs. */
-  primary_question_id?: string;
+  /** One of the shared Overview, Activity, and Findings objective IDs. */
+  primary_objective_id?: string;
   /** False retains a superseded finding and its evidence links without listing it as current. Defaults to true. */
   current?: boolean;
   title: string;
@@ -45,7 +45,7 @@ export interface InvestigationFinding {
   article_id?: string;
   supporting_record_ids: string[];
   contradicting_record_ids: string[];
-  related_question_ids: string[];
+  related_objective_ids: string[];
   related_task_ids: string[];
   related_project_ids: string[];
   location_ids: string[];

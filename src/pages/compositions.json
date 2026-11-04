@@ -1,15 +1,5 @@
 [
   {
-    "id": "home",
-    "route": "/",
-    "sections": [
-      { "id": "identity", "source": "identity", "method": "prose", "recordIds": ["crossover-stockton"] },
-      { "id": "needs", "source": "needs", "method": "media-list" },
-      { "id": "investigation", "source": "investigations", "method": "collection-index", "recordIds": ["street-dog-immediate-welfare"] },
-      { "id": "stories", "source": "stories", "method": "media-list" }
-    ]
-  },
-  {
     "id": "needs",
     "route": "/reality/",
     "sections": [
@@ -22,7 +12,7 @@
     "route": "/action/",
     "sections": [
       { "id": "investigations", "source": "investigations", "method": "collection-index", "recordIds": ["street-dog-immediate-welfare"] },
-      { "id": "current-actions", "source": "workstreams", "method": "media-list" }
+      { "id": "current-actions", "source": "action-cards", "method": "media-list" }
     ]
   },
   {
@@ -60,7 +50,7 @@
     "route": "/work/dogs/about/",
     "sections": [
       { "id": "investigation", "source": "investigations", "method": "prose", "recordIds": ["street-dog-immediate-welfare"] },
-      { "id": "questions", "source": "questions", "method": "disclosure-list" }
+      { "id": "objectives", "source": "objectives", "method": "disclosure-list" }
     ]
   },
   {
@@ -77,7 +67,7 @@
     "sections": [
       { "id": "workspace", "source": "investigations", "method": "split-investigation-workspace", "recordIds": ["street-dog-immediate-welfare"] },
       { "id": "activity", "source": "activities", "method": "timeline" },
-      { "id": "question-groups", "source": "question-groups", "method": "disclosure-list" }
+      { "id": "objectives", "source": "objectives", "method": "disclosure-list" }
     ]
   },
   {

@@ -1,37 +1,87 @@
 {
-  "id": "crossover-stockton",
-  "name": "Crossover Stockton",
-  "slogan": "See clearly. Act locally.",
-  "purpose": "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs in Stockton.",
-  "geographicScope": {
-    "id": "stockton-ca",
-    "name": "Stockton, California",
-    "locality": "Stockton",
-    "region": "California",
-    "country": "US"
+  "explorer": {
+    "id": "crossover",
+    "title": "Crossover",
+    "rank": 2,
+    "topLevel": true,
+    "collectionIds": [
+      "identity",
+      "principles",
+      "methods",
+      "people"
+    ]
   },
-  "founderPersonId": "jeff-kolyer",
-  "principleIds": [
-    "work-to-vocation",
-    "compassion",
-    "contact-with-reality",
-    "work-discovers-work"
+  "identity": {
+    "id": "crossover-stockton",
+    "name": "Crossover Stockton",
+    "slogan": "See clearly. Act locally.",
+    "purpose": "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs in Stockton.",
+    "geographicScope": {
+      "id": "stockton-ca",
+      "name": "Stockton, California",
+      "locality": "Stockton",
+      "region": "California",
+      "country": "US"
+    },
+    "founderPersonId": "jeff-kolyer",
+    "principleIds": [
+      "work-to-vocation",
+      "compassion",
+      "contact-with-reality",
+      "work-discovers-work"
+    ],
+    "methodIds": [
+      "technology",
+      "investigation"
+    ],
+    "statements": {
+      "missionQuestion": "How can post-scarcity technology solve real problems?",
+      "opportunity": "As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.",
+      "startingApproach": "We're starting now, investigating real needs in Stockton, taking action, and using what we learn to discover what technology and human participation can make possible.",
+      "animalCareVision": "What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?",
+      "animalCareInvestigation": "We're investigating what happens to dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
+      "learningRule": "What we discover guides what we do next.",
+      "presencePractice": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens.",
+      "documentationPractice": "Crossover connects those experiences through an investigation app: Tasks, Activity, Map, and Findings. We document what we do, examine what we learn, and identify what needs investigating next.",
+      "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our articles become a growing body of knowledge that others can use, question, and build upon.",
+      "experienceChangesUs": "And sometimes the experience changes our understanding. Sometimes it changes us.",
+      "publicCommitment": "We're investigating real needs in Stockton. Our actions, observations, and findings are public—including what we haven't figured out yet."
+    },
+    "preferred_logo": "/images/logo_light.webp"
+  },
+  "principles": [
+    {
+      "id": "work-to-vocation",
+      "title": "Vocation",
+      "statement": "We're exploring the transition from work to vocation.",
+      "description": "Moving from working to make a living toward doing what we feel called to do."
+    },
+    {
+      "id": "compassion",
+      "title": "Compassion",
+      "statement": "Recognizing our shared unconsciousness and seeing beyond ego, judgment, and division."
+    },
+    {
+      "id": "contact-with-reality",
+      "title": "We have to connect with reality.",
+      "statement": "Freedom means little if we remain disconnected from the world around us. We can't discover our vocation simply by imagining what might give our lives meaning."
+    },
+    {
+      "id": "work-discovers-work",
+      "title": "The work discovers the work.",
+      "statement": "The work discovers the work."
+    }
   ],
-  "methodIds": [
-    "technology",
-    "investigation"
-  ],
-  "statements": {
-    "missionQuestion": "How can post-scarcity technology solve real problems?",
-    "opportunity": "As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.",
-    "startingApproach": "We're starting now, investigating real needs in Stockton, taking action, and using what we learn to discover what technology and human participation can make possible.",
-    "animalCareVision": "What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?",
-    "animalCareInvestigation": "We're investigating what happens to dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
-    "learningRule": "What we discover guides what we do next.",
-    "presencePractice": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens.",
-    "documentationPractice": "Crossover connects those experiences through an investigation app: Tasks, Activity, Map, and Findings. We document what we do, examine what we learn, and identify what needs investigating next.",
-    "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our articles become a growing body of knowledge that others can use, question, and build upon.",
-    "experienceChangesUs": "And sometimes the experience changes our understanding. Sometimes it changes us.",
-    "publicCommitment": "We're investigating real needs in Stockton. Our actions, observations, and findings are public—including what we haven't figured out yet."
-  }
+  "methods": [
+    {
+      "id": "technology",
+      "title": "Technology",
+      "statement": "Using AI, robotics, and automation to reduce unnecessary work and expand what people can do."
+    },
+    {
+      "id": "investigation",
+      "title": "Investigation",
+      "statement": "Discovering what is real through evidence, firsthand experience, and practical experiments. We'll bring the dog food."
+    }
+  ]
 }

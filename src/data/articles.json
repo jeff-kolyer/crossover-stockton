@@ -1,4 +1,6 @@
-[
+{
+  "explorer": {"id":"articles","title":"Articles","rank":6,"topLevel":true,"collectionIds":["articles"]},
+  "records": [
   {
     "id": "friction-of-volunteering",
     "path": "/articles/friction-of-volunteering/",
@@ -453,3 +455,4 @@
     ]
   }
 ]
+}

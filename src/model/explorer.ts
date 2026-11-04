@@ -6,6 +6,7 @@ export type ExplorerRecord = {
   typeName: string;
   title: string;
   description: string;
+  dateForSort?: { field: string; value: string };
   fields: Record<string, unknown>;
 };
 export type ExplorerCollection = { id: string; title: string; group: string; schema: string | null; recordIds: string[]; hidden?: boolean; investigationId?: string; parentCollectionId?: string; childCollectionIds?: string[] };
@@ -22,12 +23,20 @@ export type ExplorerSnapshot = {
   unsupportedTypes: string[];
   fieldLabels: Record<string, string>;
   fieldInfo: Record<string, ExplorerFieldInfo>;
+  visualGuidance?: { preferredAssets: string; descriptions: string; evidence: string; logos: string };
 };
 
 export const explorerSnapshot = generated as unknown as ExplorerSnapshot;
 export const explorerCollections = new Map(explorerSnapshot.collections.map((item) => [item.id, item]));
 export const explorerGroups = new Map(explorerSnapshot.groups.map((item) => [item.id, item]));
 export const explorerInvestigations = new Map(explorerSnapshot.investigations.map((item) => [item.id, item]));
+export const explorerDirectCollection = (group: ExplorerGroup | undefined): ExplorerCollection | undefined => {
+  if (!group || group.collectionIds.length !== 1 || group.investigationIds?.length) return undefined;
+  const collection = explorerCollections.get(group.collectionIds[0]);
+  return collection && !collection.childCollectionIds?.length ? collection : undefined;
+};
+export const explorerRecordsByDate = Object.values(explorerSnapshot.records)
+  .sort((a, b) => (b.dateForSort ? Date.parse(b.dateForSort.value) : -Infinity) - (a.dateForSort ? Date.parse(a.dateForSort.value) : -Infinity) || a.id.localeCompare(b.id));
 export const explorerFieldInfo = (name: string): ExplorerFieldInfo => explorerSnapshot.fieldInfo[name] ?? { label: name, kind: "value" };
 export const explorerChildCollections = (recordId: string) => (explorerSnapshot.recordChildren[recordId] ?? [])
   .map((id) => explorerCollections.get(id)).filter((item): item is ExplorerCollection => Boolean(item));
@@ -35,6 +44,7 @@ export const explorerChildCollections = (recordId: string) => (explorerSnapshot.
 export function explorerPathForRecord(recordId: string, preferredCollectionId?: string, preferredInvestigationId?: string): ExplorerPath | undefined {
   const record = explorerSnapshot.records[recordId];
   if (!record) return undefined;
+  if (explorerInvestigations.has(recordId) && !preferredCollectionId) return { groupId: "investigation", investigationId: recordId, collectionId: null, recordId };
   const collections = explorerSnapshot.collections.filter((collection) => !collection.hidden && collection.recordIds.includes(recordId));
   const collection = collections.find((item) => item.id === preferredCollectionId)
     ?? collections.find((item) => item.investigationId === preferredInvestigationId)

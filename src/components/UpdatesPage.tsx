@@ -1,4 +1,4 @@
-import uiCopy from "../data/pages/updates.json";
+import uiCopy from "../ui/updates.json";
 import { siteModel } from "../model";
 
 import { sourceLinkLabel } from "../lib/sourceLinks";
