@@ -49,6 +49,10 @@ test("the root and every feed record have readable HTML with normal URLs", async
     const page = await read(`dist/organization/${encodeURIComponent(organization.id)}/index.html`);
     assert.ok(page.includes("Documented Crossover contact"), organization.id);
   }
+  const needPage = await read("dist/record/dogs-safe-placement/index.html");
+  assert.match(needPage, /<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="\/">Home<\/a> \/ <a href="\/needs\/">Needs<\/a> \/ <span aria-current="page">Street dogs and access to care<\/span><\/nav>/);
+  const activityPage = await read("dist/record/crossover-2026-10-14-sas-volunteer-application/index.html");
+  assert.match(activityPage, /<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="\/">Home<\/a> \/ <a href="\/activity\/">Activity<\/a> \/ <span aria-current="page">/);
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
   assert.equal((await read("dist/CNAME")).trim(), "crossoverstockton.org");
 });
