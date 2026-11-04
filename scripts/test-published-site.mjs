@@ -33,6 +33,8 @@ test("every article publishes its complete text as readable HTML", async () => {
 test("Articles navigation leads to a listing of every published article", async () => {
   const articles = records.filter(({ schema }) => schema === "article");
   const index = await read("dist/articles/index.html");
+  const investigation = await read("dist/investigation/index.html");
+  assert.ok(investigation.includes('<a class="articles-cta" href="/articles/">Read articles →</a>'));
   assert.ok(index.includes('<a href="/articles/" aria-current="page">Articles</a>'));
   assert.ok(index.indexOf('href="/record/public-access-to-stray-dog-information/"') < index.indexOf('href="/record/where-are-stray-dogs/"'), "the November 4 update appears first");
   for (const article of articles) {
