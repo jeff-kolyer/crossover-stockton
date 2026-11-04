@@ -77,7 +77,7 @@ test("the root and every feed record have readable HTML with normal URLs", async
   const navigationScript = await read("dist/static-navigation.js");
   assert.equal(navigationScript, await read("public/static-navigation.js"));
   new Script(navigationScript, { filename: "static-navigation.js" });
-  for (const section of ["needs", "investigation", "articles", "activity", "responses", "organizations", "places", "explore", "about"]) {
+  for (const section of ["needs", "investigation", "stories", "articles", "activity", "responses", "organizations", "places", "explore", "about"]) {
     const page = await read(`dist/${section}/index.html`);
     assert.match(page, /<main id="main"[^>]*>\s*\S/, section);
     assert.doesNotMatch(page, /href="#\//, section);
@@ -113,8 +113,8 @@ test("the root and every feed record have readable HTML with normal URLs", async
     assert.ok(page.includes(`<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/${section}/">${label}</a> / <span aria-current="page">`), `${id} breadcrumb`);
   }
   const responsePage = await read("dist/record/streetdogs-fed-70-animals/index.html");
-  assert.ok(responsePage.includes('<a href="/needs/" aria-current="page">Needs</a>'), "related story highlights Needs");
-  assert.ok(responsePage.includes('<a href="/responses/">Responses</a> / <span aria-current="page">'), "related story keeps its Responses breadcrumb");
+  assert.ok(responsePage.includes('<a href="/stories/" aria-current="page">Stories</a>'), "story highlights Stories");
+  assert.ok(responsePage.includes('<a href="/stories/">Stories</a> / <span aria-current="page">'), "story has a Stories breadcrumb");
   const actionPage = await read("dist/record/crossover-2026-10-14-sas-volunteer-application/index.html");
   assert.ok(actionPage.includes('<a href="/investigation/" aria-current="page">Investigation</a>'), "action highlights Investigation");
   assert.ok(actionPage.includes('<a href="/activity/">Activity</a> / <span aria-current="page">'), "action keeps its Activity breadcrumb");
@@ -304,6 +304,22 @@ test("Needs provides the path to related responses and the full Responses page",
   assert.ok(responses.includes('<a href="/needs/" aria-current="page">Needs</a>'));
 });
 
+test("Stories has its own menu and connects Needs and Investigation to Responses", async () => {
+  const stories = await read("dist/stories/index.html");
+  const needs = await read("dist/needs/index.html");
+  const investigation = await read("dist/investigation/index.html");
+  const header = stories.match(/<nav class="nav" id="site-nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1];
+  assert.ok(header, "Stories has main navigation");
+  assert.deepEqual([...header.matchAll(/>(Home|Needs|Investigation|Stories|Explore|About)<\/a>/g)].map((match) => match[1]), ["Home", "Needs", "Investigation", "Stories", "Explore", "About"]);
+  assert.ok(stories.includes('<a href="/stories/" aria-current="page">Stories</a>'));
+  assert.ok(stories.includes('href="/responses/">All responses</a>'));
+  assert.ok(needs.includes('href="/stories/">Browse all stories →</a>'));
+  assert.ok(investigation.includes('href="/stories/">All stories</a>'));
+  assert.ok(investigation.includes('href="/responses/">Responses page →</a>'));
+  for (const story of records.filter(({ schema }) => schema === "story"))
+    assert.ok(stories.includes(`href="/record/${story.id}/"`), `${story.id} appears in Stories`);
+});
+
 test("Need status badges link only to a documented investigation", async () => {
   const index = await read("dist/needs/index.html");
   const investigating = await read("dist/record/dogs-safe-placement/index.html");
@@ -317,7 +333,8 @@ test("Need status badges link only to a documented investigation", async () => {
 test("the sitemap lists every canonical page and legacy URLs lead to clean paths", async () => {
   const sitemap = await read("dist/sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-  assert.equal(urls.length, 10 + records.length);
+  assert.equal(urls.length, 11 + records.length);
+  assert.ok(urls.includes("https://crossoverstockton.org/stories/"));
   assert.ok(urls.includes("https://crossoverstockton.org/articles/"));
   assert.ok(urls.includes("https://crossoverstockton.org/organizations/"));
   assert.ok(urls.includes("https://crossoverstockton.org/organization/stockton-animal-services/"));

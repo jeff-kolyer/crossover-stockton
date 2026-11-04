@@ -51,7 +51,7 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
 
   const shell = oneFile.slice(0, oneFile.indexOf('<script id="feed-data"'));
   const records = Object.values(feed.records);
-  const coreRoutes = ["/", "/needs", "/investigation", "/articles", "/activity", "/responses", "/organizations", "/places", "/explore", "/about"];
+  const coreRoutes = ["/", "/needs", "/investigation", "/stories", "/articles", "/activity", "/responses", "/organizations", "/places", "/explore", "/about"];
   const routes = coreRoutes.map((route) => ({ route, sitemap: true }));
   for (const record of records) {
     routes.push({ route: `/record/${encodeURIComponent(record.id)}`, sitemap: record.schema !== "organization" });
