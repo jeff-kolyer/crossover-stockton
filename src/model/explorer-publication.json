@@ -64,7 +64,7 @@
     "context_sources": ["publisher", "title", "url", "type", "published_at"],
     "outcome": ["status", "summary", "as_of"],
     "geographicScope": ["name", "locality", "region", "country"],
-    "statements": { "missionQuestion": true, "opportunity": true, "startingApproach": true, "animalCareVision": true, "animalCareInvestigation": true, "learningRule": true, "presencePractice": true, "documentationPractice": true, "aiPractice": true, "experienceChangesUs": true, "publicCommitment": true },
+    "statements": { "homeIntroTitle": true, "homeIntroBody": true, "missionQuestion": true, "opportunity": true, "startingApproach": true, "animalCareVision": true, "animalCareInvestigation": true, "learningRule": true, "presencePractice": true, "documentationPractice": true, "aiPractice": true, "experienceChangesUs": true, "publicCommitment": true },
     "roles": ["organizationId", "title", "locality"],
     "capacity_summary": { "headline": true, "how_it_helps": true, "not_yet_verified": true },
     "expected_capacity_or_benefit": { "description": true, "status": true, "evidence_record_ids": true },

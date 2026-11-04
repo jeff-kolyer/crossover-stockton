@@ -14,7 +14,7 @@ test("every article publishes its complete text as readable HTML", async () => {
   assert.ok(articles.length > 0);
   for (const article of articles) {
     const page = await read(`dist/record/${article.id}/index.html`);
-    const readablePage = page.replace(/<span class="civic-heart">♥<\/span>/g, "♥");
+    const readablePage = page.replace(/<svg class="civic-heart"[\s\S]*?<\/svg>/g, "♥");
     const content = article.fields.content;
     assert.ok(page.includes('<article class="article-content">'), article.id);
     assert.ok(page.includes(`<p class="article-lede">${escapeHtml(content.introduction)}</p>`), article.id);
@@ -35,10 +35,10 @@ test("Needs leads to a listing of every published article", async () => {
   const needs = await read("dist/needs/index.html");
   const index = await read("dist/articles/index.html");
   const investigation = await read("dist/investigation/index.html");
-  assert.ok(investigation.includes('<a class="articles-cta" href="/articles/">Read articles →</a>'));
+  assert.ok(investigation.includes('<a class="articles-cta" href="/articles/">Read articles <svg class="right-arrow"'));
   const section = needs.split('<h2>Articles on these needs</h2>')[1]?.split('<h2>Work taking shape</h2>')[0];
   assert.ok(section, "Needs has an Articles section before Responses");
-  assert.ok(section.includes('href="/articles/">All articles</a>'));
+  assert.ok(section.includes('href="/articles/">All articles <svg class="external-arrow"'));
   assert.ok(section.includes('href="/record/public-access-to-stray-dog-information/"'));
   assert.ok(section.includes('href="/record/where-are-stray-dogs/"'));
   assert.ok(index.includes('<a href="/needs/" aria-current="page">Needs</a>'));
@@ -60,7 +60,7 @@ test("records-access article preserves its publication date and dated developmen
   assert.match(page, /Editor&#39;s update — November 4, 2026/);
   assert.match(page, /spreadsheet on November 2/);
   assert.match(page, /7,183 case records/);
-  assert.match(page, /<span class="civic-heart">♥<\/span> We appreciate the department&#39;s cooperation and the work involved in making these records available\./);
+  assert.match(page, /<svg class="civic-heart"[^>]*><path[^>]*\/><\/svg> We appreciate the department&#39;s cooperation and the work involved in making these records available\./);
   assert.match(page, /href="\/record\/crossover-2026-11-02-sas-field-call-records-received\/"/);
   assert.doesNotMatch(page, /result remains pending|examine the field-call records if provided/);
 });
@@ -138,13 +138,13 @@ test("the root and every feed record have readable HTML with normal URLs", async
     const page = await read(`dist/record/${id}/index.html`);
     assert.match(embed, /^https:\/\/www\.google\.com\/maps\/embed\?pb=/);
     assert.ok(page.includes(`<iframe class="location-map" title="Map of ${escapeHtml(feed.records[id].title)}" src="${escapeHtml(embed)}"`), `${id} embedded map`);
-    assert.equal((page.match(/Open on Google Maps ↗/g) || []).length, 1, `${id} has one Google Maps button`);
+    assert.equal((page.match(/Open on Google Maps <svg class="external-arrow"/g) || []).length, 1, `${id} has one Google Maps button`);
     assert.match(page, /<div class="detail-section location-detail">[\s\S]*?<iframe class="location-map"/, `${id} mobile map sits in the location section`);
-    assert.match(page, /<aside class="detail-aside"><a class="btn map"[^>]*>Open on Google Maps ↗<\/a>/, `${id} desktop button remains in the aside`);
+    assert.match(page, /<aside class="detail-aside"><a class="btn map"[^>]*>Open on Google Maps <svg class="external-arrow"[^>]*>.*?<\/svg><\/a>/, `${id} desktop button remains in the aside`);
   }
   const broadPlace = await read("dist/record/weston-ranch-carrie-street/index.html");
   assert.doesNotMatch(broadPlace, /<iframe class="location-map"/);
-  assert.match(broadPlace, /<h2>[^<]+<\/h2><a class="btn map mobile-map-action"[^>]*>Open on Google Maps ↗<\/a>/, "unembedded places retain a near-top mobile link");
+  assert.match(broadPlace, /<h2>[^<]+<\/h2><a class="btn map mobile-map-action"[^>]*>Open on Google Maps <svg class="external-arrow"[^>]*>.*?<\/svg><\/a>/, "unembedded places retain a near-top mobile link");
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
   assert.equal((await read("dist/CNAME")).trim(), "crossoverstockton.org");
 });
@@ -261,7 +261,7 @@ test("organizations and their documented places link to each other", async () =>
     const place = feed.records[placeId];
     assert.equal(place?.schema, "location", organization.id);
     assert.match(page, new RegExp(`<h2>Place<\\/h2>[\\s\\S]*?href="/record/${placeId}/"`), organization.id);
-    assert.ok(page.includes(`Open on Google Maps ↗`), organization.id);
+    assert.ok(page.includes('Open on Google Maps <svg class="external-arrow"'), organization.id);
     const placePage = await read(`dist/record/${placeId}/index.html`);
     assert.ok(placePage.includes(`<h3>Organization</h3><a href="/organization/${organization.id}/">${escapeHtml(organization.title)}</a>`), placeId);
   }
@@ -274,7 +274,7 @@ test("Investigation provides the path to related organizations and the full dire
   const section = investigation.split('<section class="section" id="organizations">')[1]?.split('<section class="section" id="locations">')[0];
   assert.ok(section, "Organizations section precedes Places");
   assert.ok(investigation.includes('<a href="#organizations">Organizations</a><a href="#locations">Places</a>'));
-  assert.ok(section.includes('href="/organizations/">All organizations</a>'));
+  assert.ok(section.includes('href="/organizations/">All organizations <svg class="external-arrow"'));
   for (const id of organizationIds) assert.ok(section.includes(`href="/organization/${id}/"`), id);
   assert.ok(directory.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
   assert.ok((await read("dist/organization/stockton-animal-services/index.html")).includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
@@ -285,7 +285,7 @@ test("Investigation provides the path to Activity", async () => {
   const activity = await read("dist/activity/index.html");
   const section = investigation.split('<section class="section" id="fieldwork">')[1]?.split('<section class="section" id="findings">')[0];
   assert.ok(section, "Investigation retains its activity section");
-  assert.ok(section.includes('href="/activity/">All activity</a>'));
+  assert.ok(section.includes('href="/activity/">All activity <svg class="external-arrow"'));
   assert.ok(section.includes('href="/record/crossover-2026-10-14-sas-volunteer-application/"'));
   assert.ok(activity.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
 });
@@ -295,7 +295,7 @@ test("Needs links related responses to the combined Stories page", async () => {
   const stories = await read("dist/stories/index.html");
   const section = needs.split('<h2>Work taking shape</h2>')[1];
   assert.ok(section, "Needs includes a responses section");
-  assert.ok(section.includes('href="/stories/">Stories and responses</a>'));
+  assert.ok(section.includes('href="/stories/">Stories and responses <svg class="external-arrow"'));
   const previewIds = [...new Set([...section.matchAll(/href="\/record\/([^/]+)\/"/g)].map((match) => match[1]))];
   const needIds = new Set(records.filter(({ schema }) => schema === "need").map(({ id }) => id));
   assert.ok(previewIds.some((id) => feed.records[id]?.schema === "project"), "a linked project appears");
@@ -314,8 +314,9 @@ test("Stories leads with stories, then shows every project response", async () =
   assert.ok(stories.includes('<a href="/stories/" aria-current="page">Stories</a>'));
   assert.ok(stories.includes('<div class="eyebrow">Stories</div><h1>Signs of care and progress</h1>'));
   assert.ok(stories.indexOf('<h2>Stories from Stockton</h2>') < stories.indexOf('<h2>Improvements and proposals</h2>'));
-  assert.ok(needs.includes('href="/stories/">Stories and responses</a>'));
-  assert.ok(investigation.includes('href="/stories/">All stories</a>'));
+  assert.ok(needs.includes('href="/stories/">Stories and responses <svg class="external-arrow"'));
+  assert.doesNotMatch(investigation, /<section[^>]*id="stories"/, "Investigation has no Stories section");
+  assert.doesNotMatch(investigation, /<a href="#stories">Stories<\/a>/, "Investigation has no Stories section jump");
   for (const story of records.filter(({ schema }) => schema === "story"))
     assert.ok(stories.includes(`href="/record/${story.id}/"`), `${story.id} appears in Stories`);
   for (const project of records.filter(({ schema }) => schema === "project"))
@@ -328,7 +329,7 @@ test("Need status badges link only to a documented investigation", async () => {
   const index = await read("dist/needs/index.html");
   const investigating = await read("dist/record/dogs-safe-placement/index.html");
   const identified = await read("dist/record/pet-inclusive-shelter/index.html");
-  const linkedBadge = /<a class="pill dark" href="\/investigation\/"[^>]*>Investigating →<\/a>/;
+  const linkedBadge = /<a class="pill dark" href="\/investigation\/"[^>]*>Investigating <svg class="right-arrow"[^>]*>.*?<\/svg><\/a>/;
   assert.match(index, linkedBadge);
   assert.match(investigating, linkedBadge);
   assert.match(identified, /<div class="meta"><span class="pill ">Identified<\/span>/);
