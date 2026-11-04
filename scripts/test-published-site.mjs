@@ -19,6 +19,8 @@ test("key former pages redirect into the new site", async () => {
     ["dist/work/dogs/findings/index.html", "/#/investigation"],
     ["dist/work/dogs/map/index.html", "/#/places"],
     ["dist/data/index.html", "/#/explore"],
+    ["dist/work/index.html", "/#/responses"],
+    ["dist/organizations/index.html", "/#/organizations"],
   ];
   const article = Object.values(feed.records).find(({ schema, fields }) => schema === "article" && fields.path);
   assert.ok(article);

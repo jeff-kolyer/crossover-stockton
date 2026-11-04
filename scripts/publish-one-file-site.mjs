@@ -17,18 +17,19 @@ const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
 
 const redirects = new Map([
   ["/reality/", "/#/needs"],
-  ["/connection/", "/#/work"],
+  ["/connection/", "/#/responses"],
   ["/action/", "/#/activity"],
   ["/updates/", "/#/activity"],
   ["/about/", "/#/about"],
   ["/data/", "/#/explore"],
-  ["/work/", "/#/work"],
+  ["/work/", "/#/responses"],
+  ["/responses/", "/#/responses"],
   ["/work/dogs/", "/#/investigation"],
   ["/work/dogs/tasks/", "/#/investigation"],
   ["/work/dogs/activity/", "/#/activity"],
   ["/work/dogs/map/", "/#/places"],
   ["/work/dogs/findings/", "/#/investigation"],
-  ["/organizations/", "/#/about"],
+  ["/organizations/", "/#/organizations"],
 ]);
 for (const record of records) {
   const fields = record.fields ?? {};
