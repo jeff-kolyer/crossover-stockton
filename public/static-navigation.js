@@ -93,8 +93,7 @@
     if (history.state?.breadcrumbContext !== "explore" || !recordPath.test(location.pathname)) return;
     const breadcrumb = document.querySelector("main#main .breadcrumbs");
     const title = document.querySelector("main#main h1")?.textContent?.trim();
-    const type = document.querySelector("main#main .page-intro .eyebrow")?.textContent?.trim();
-    if (!breadcrumb || !title || !type) return;
+    if (!breadcrumb || !title) return;
     const home = document.createElement("a");
     home.href = "/";
     home.textContent = "Home";
@@ -104,7 +103,7 @@
     const current = document.createElement("span");
     current.setAttribute("aria-current", "page");
     current.textContent = title;
-    breadcrumb.replaceChildren(home, document.createTextNode(" / "), explore, document.createTextNode(` / ${type} / `), current);
+    breadcrumb.replaceChildren(home, document.createTextNode(" / "), explore, document.createTextNode(" / "), current);
   };
 
   const display = (page, url, scrollY, focusMain) => {
