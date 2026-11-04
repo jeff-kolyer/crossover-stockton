@@ -1,35 +1,33 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
+import { renderStaticPages } from "./render-static-pages.mjs";
 
 const workspace = resolve(".");
 const dist = resolve("dist");
 if (!dist.startsWith(`${workspace}${sep}`)) throw new Error("dist must be inside the workspace");
 
-const html = await readFile("public/preview/one-file-site.html");
+const html = await readFile("public/preview/one-file-site.html", "utf8");
 const feedBytes = await readFile("public/data/records.json");
 const feed = JSON.parse(feedBytes.toString("utf8"));
 const records = Object.values(feed.records);
 const origin = "https://crossoverstockton.org";
-const route = (id) => `/#/record/${encodeURIComponent(id)}`;
+const route = (id) => `/record/${encodeURIComponent(id)}/`;
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
   "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
 })[char]);
 
 const redirects = new Map([
-  ["/reality/", "/#/needs"],
-  ["/connection/", "/#/responses"],
-  ["/action/", "/#/activity"],
-  ["/updates/", "/#/activity"],
-  ["/about/", "/#/about"],
-  ["/data/", "/#/explore"],
-  ["/work/", "/#/responses"],
-  ["/responses/", "/#/responses"],
-  ["/work/dogs/", "/#/investigation"],
-  ["/work/dogs/tasks/", "/#/investigation"],
-  ["/work/dogs/activity/", "/#/activity"],
-  ["/work/dogs/map/", "/#/places"],
-  ["/work/dogs/findings/", "/#/investigation"],
-  ["/organizations/", "/#/organizations"],
+  ["/reality/", "/needs/"],
+  ["/connection/", "/responses/"],
+  ["/action/", "/activity/"],
+  ["/updates/", "/activity/"],
+  ["/data/", "/explore/"],
+  ["/work/", "/responses/"],
+  ["/work/dogs/", "/investigation/"],
+  ["/work/dogs/tasks/", "/investigation/"],
+  ["/work/dogs/activity/", "/activity/"],
+  ["/work/dogs/map/", "/places/"],
+  ["/work/dogs/findings/", "/investigation/"],
 ]);
 for (const record of records) {
   const fields = record.fields ?? {};
@@ -47,21 +45,36 @@ for (const record of records) {
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "data"), { recursive: true });
-await writeFile("index.html", html);
-await writeFile(resolve(dist, "index.html"), html);
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
 await writeFile(resolve(dist, "favicon.ico"), await readFile("public/favicon.ico"));
 await writeFile(resolve(dist, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
-await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${origin}/</loc></url></urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nOne-file public site: ${origin}/\nPublic data feed: ${origin}/data/records.json\n`);
+const staticSite = renderStaticPages(html, feed, origin);
+for (const imagePath of staticSite.assets) {
+  const source = resolve("public", `.${imagePath}`);
+  const target = resolve(dist, `.${imagePath}`);
+  if (!target.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe image path: ${imagePath}`);
+  await mkdir(resolve(target, ".."), { recursive: true });
+  await copyFile(source, target);
+}
+for (const page of staticSite.pages) {
+  const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
+  if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe page path: ${page.path}`);
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, "index.html"), page.html);
+  if (page.path === "/") await writeFile("index.html", page.html);
+}
+await mkdir(resolve(dist, "interactive"), { recursive: true });
+await writeFile(resolve(dist, "interactive/index.html"), html.replace("<head>", '<head><meta name="robots" content="noindex,follow">'));
+await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}</urlset>\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/needs/, ${origin}/investigation/, ${origin}/activity/, ${origin}/responses/, ${origin}/organizations/, ${origin}/places/, ${origin}/explore/, ${origin}/about/\nFull sitemap: ${origin}/sitemap.xml\nPublic data feed: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);
   if (!directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe redirect path: ${path}`);
   await mkdir(directory, { recursive: true });
   const safeTarget = escapeHtml(target);
-  await writeFile(resolve(directory, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${safeTarget}"><link rel="canonical" href="${origin}/"><title>Moved | Crossover Stockton</title><script>location.replace('/'+location.search+${JSON.stringify(target.slice(1))})</script></head><body><p>This page moved to <a href="${safeTarget}">the new Crossover site</a>.</p></body></html>`);
+  await writeFile(resolve(directory, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${safeTarget}"><link rel="canonical" href="${origin}${safeTarget}"><title>Moved | Crossover Stockton</title><script>location.replace(${JSON.stringify(target)}+location.search)</script></head><body><p>This page moved to <a href="${safeTarget}">the new Crossover site</a>.</p></body></html>`);
 }
-await writeFile(resolve(dist, "404.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/#/explore"><title>Find a record | Crossover Stockton</title><script>location.replace('/'+location.search+'#/explore')</script></head><body><p>Find the page in <a href="/#/explore">the public record</a>.</p></body></html>`);
-console.log(`Published one-file site to dist with ${records.length} records and ${redirects.size} legacy URL redirects.`);
+await writeFile(resolve(dist, "404.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/explore/"><title>Find a record | Crossover Stockton</title><script>location.replace('/explore/'+location.search)</script></head><body><p>Find the page in <a href="/explore/">the public record</a>.</p></body></html>`);
+console.log(`Published ${staticSite.pages.length} readable pages and the interactive one-file site, with ${records.length} feed records and ${redirects.size} legacy redirects.`);

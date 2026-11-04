@@ -25,7 +25,8 @@ for (const path of [...imagePaths].sort()) {
 const jsonForHtml = (value) => JSON.stringify(value).replaceAll("<", "\\u003c").replaceAll("\u2028", "\\u2028").replaceAll("\u2029", "\\u2029");
 const output = template
   .replace("__EMBEDDED_FEED__", jsonForHtml(feed))
-  .replace("__EMBEDDED_ASSETS__", jsonForHtml(assets));
+  .replace("__EMBEDDED_ASSETS__", jsonForHtml(assets))
+  .replaceAll('href="#/', 'href="?page=');
 if (output.includes("__EMBEDDED_FEED__") || output.includes("__EMBEDDED_ASSETS__")) throw new Error("Template replacement failed");
 await mkdir("public/preview", { recursive: true });
 await writeFile("public/preview/one-file-site.html", output);
