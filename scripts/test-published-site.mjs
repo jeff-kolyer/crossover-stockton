@@ -49,13 +49,17 @@ test("the root and every feed record have readable HTML with normal URLs", async
     const page = await read(`dist/organization/${encodeURIComponent(organization.id)}/index.html`);
     assert.ok(page.includes("Documented Crossover contact"), organization.id);
   }
-  const needPage = await read("dist/record/dogs-safe-placement/index.html");
-  assert.match(needPage, /<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="\/">Home<\/a> \/ <a href="\/explore\/">Explore<\/a> \/ <span aria-current="page">Street dogs and access to care<\/span><\/nav>/);
-  assert.match(needPage, /<a href="\/needs\/" aria-current="page">Needs<\/a>/);
-  const activityPage = await read("dist/record/crossover-2026-10-14-sas-volunteer-application/index.html");
-  assert.match(activityPage, /<a href="\/activity\/" aria-current="page">Activity<\/a>/);
-  const evidencePage = await read("dist/record/crossover-2026-10-14-sas-first-visit/index.html");
-  assert.match(evidencePage, /<a href="\/explore\/" aria-current="page">Explore<\/a>/);
+  for (const [id, section, label] of [
+    ["dogs-safe-placement", "needs", "Needs"],
+    ["streetdogs-fed-70-animals", "responses", "Responses"],
+    ["weston-ranch-carrie-street", "places", "Places"],
+    ["crossover-2026-10-14-sas-volunteer-application", "activity", "Activity"],
+    ["crossover-2026-10-14-sas-first-visit", "explore", "Explore"],
+  ]) {
+    const page = await read(`dist/record/${id}/index.html`);
+    assert.ok(page.includes(`<a href="/${section}/" aria-current="page">${label}</a>`), `${id} top navigation`);
+    assert.ok(page.includes(`<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/${section}/">${label}</a> / <span aria-current="page">`), `${id} breadcrumb`);
+  }
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
   assert.equal((await read("dist/CNAME")).trim(), "crossoverstockton.org");
 });
