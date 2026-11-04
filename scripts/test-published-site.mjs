@@ -14,12 +14,13 @@ test("every article publishes its complete text as readable HTML", async () => {
   assert.ok(articles.length > 0);
   for (const article of articles) {
     const page = await read(`dist/record/${article.id}/index.html`);
+    const readablePage = page.replace(/<span class="civic-heart">♥<\/span>/g, "♥");
     const content = article.fields.content;
     assert.ok(page.includes('<article class="article-content">'), article.id);
     assert.ok(page.includes(`<p class="article-lede">${escapeHtml(content.introduction)}</p>`), article.id);
     for (const [index, section] of content.sections.entries()) {
       assert.ok(page.includes(`<section id="article-section-${index + 1}"><h2>${escapeHtml(section.heading)}</h2>`), `${article.id}: ${section.heading}`);
-      for (const paragraph of section.paragraphs ?? []) assert.ok(page.includes(`<p>${escapeHtml(paragraph)}</p>`), `${article.id}: missing paragraph`);
+      for (const paragraph of section.paragraphs ?? []) assert.ok(readablePage.includes(`<p>${escapeHtml(paragraph)}</p>`), `${article.id}: missing paragraph`);
       for (const link of section.links ?? []) assert.ok(page.includes(escapeHtml(link.display_label || link.label || "Read source")), `${article.id}: missing source link`);
     }
     for (const id of article.fields.related_location_ids ?? []) {
@@ -38,6 +39,7 @@ test("records-access article preserves its publication date and dated developmen
   assert.match(page, /Editor&#39;s update — November 4, 2026/);
   assert.match(page, /spreadsheet on November 2/);
   assert.match(page, /7,183 case records/);
+  assert.match(page, /cooperation and the work involved in making these records available\. <span class="civic-heart">♥<\/span>/);
   assert.match(page, /href="\/record\/crossover-2026-11-02-sas-field-call-records-received\/"/);
   assert.doesNotMatch(page, /result remains pending|examine the field-call records if provided/);
 });
