@@ -64,10 +64,8 @@ export function renderStaticPages(oneFile, feed, origin) {
     rerender();
     let main = node("main").innerHTML;
     if (route === "/explore") {
-      main = main.replace("Search every public record. Filter by type, sort by date or title, and follow the links between needs, work, evidence, and places. Undated records appear last in date order.", "Browse every public record and follow the links between needs, responses, evidence, and places. Dated records appear newest first; undated records follow.");
       main = main.replace('<div class="record-list" id="explore-results"></div>', `<div class="record-list" id="explore-results">${node("explore-results").innerHTML}</div>`);
-      main = main.replace('<span class="count" id="explore-count"></span>', `<span class="count" id="explore-count">${escapeHtml(node("explore-count").textContent)}</span>`);
-      main = main.replace(/<div class="search-tools">[\s\S]*?<\/div>/, `<p class="notice">All ${records.length} public records are listed below. <a href="/interactive/?page=explore">Search and sort in the interactive version →</a></p>`);
+      main = main.replace('<p class="explore-count" id="explore-count" role="status" aria-live="polite"></p>', `<p class="explore-count" id="explore-count" role="status" aria-live="polite">${escapeHtml(node("explore-count").textContent)}</p>`);
     }
     for (const [path, data] of Object.entries(assets)) main = main.replaceAll(data, path);
     if (!main.trim()) throw new Error(`Static content missing for ${route}`);

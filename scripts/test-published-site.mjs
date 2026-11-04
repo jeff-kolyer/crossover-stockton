@@ -29,7 +29,14 @@ test("the root and every feed record have readable HTML with normal URLs", async
     assert.doesNotMatch(page, /href="\?page=/, section);
     assert.doesNotMatch(page, /<script id="feed-data"/, section);
   }
-  assert.equal((await read("dist/explore/index.html")).match(/class="record-row"/g)?.length, records.length);
+  const explore = await read("dist/explore/index.html");
+  assert.equal(explore.match(/class="record-row"/g)?.length, records.length);
+  assert.match(explore, /id="explore-search"/);
+  assert.match(explore, /id="explore-type"/);
+  assert.match(explore, /id="explore-sort"/);
+  assert.ok(explore.includes(`</div><p class="explore-count" id="explore-count" role="status" aria-live="polite">${records.length} of ${records.length} records</p>`));
+  assert.match(explore, /class="record-row" data-schema="/);
+  assert.doesNotMatch(explore, /Search and sort in the interactive version/);
   for (const record of records) {
     const path = `dist/record/${encodeURIComponent(record.id)}/index.html`;
     const page = await read(path);

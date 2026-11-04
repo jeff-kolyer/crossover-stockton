@@ -23,6 +23,44 @@
   let navigationId = 0;
   history.scrollRestoration = "manual";
 
+  const enhanceExplore = () => {
+    const list = document.getElementById("explore-results");
+    const search = document.getElementById("explore-search");
+    const type = document.getElementById("explore-type");
+    const sort = document.getElementById("explore-sort");
+    const count = document.getElementById("explore-count");
+    if (!list || !search || !type || !sort || !count) return;
+    const rows = [...list.querySelectorAll(".record-row")];
+    const update = () => {
+      const query = search.value.toLowerCase().trim();
+      const matching = rows.filter((row) =>
+        (type.value === "all" || row.dataset.schema === type.value) &&
+        (!query || row.dataset.search.includes(query))
+      );
+      matching.sort((a, b) => {
+        if (sort.value.startsWith("title")) {
+          const order = a.dataset.title.localeCompare(b.dataset.title, undefined, { sensitivity: "base", numeric: true }) || a.dataset.id.localeCompare(b.dataset.id);
+          return sort.value === "title-desc" ? -order : order;
+        }
+        const aDate = a.dataset.sortDate, bDate = b.dataset.sortDate;
+        if (!aDate) return bDate ? 1 : a.dataset.id.localeCompare(b.dataset.id);
+        if (!bDate) return -1;
+        return (sort.value === "oldest" ? aDate.localeCompare(bDate) : bDate.localeCompare(aDate)) || a.dataset.id.localeCompare(b.dataset.id);
+      });
+      if (matching.length) list.replaceChildren(...matching);
+      else {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "No matching records.";
+        list.replaceChildren(empty);
+      }
+      count.textContent = `${matching.length} of ${rows.length} records`;
+    };
+    search.addEventListener("input", update);
+    type.addEventListener("change", update);
+    sort.addEventListener("change", update);
+  };
+
   const destination = (link) => {
     if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return null;
     const url = new URL(link.href, location.href);
@@ -63,6 +101,7 @@
     syncMeta(page, 'meta[name="robots"]');
     syncMeta(page, 'link[rel="canonical"]');
     displayedPath = url.pathname;
+    enhanceExplore();
     window.scrollTo(0, scrollY);
     if (focusMain) main.focus({ preventScroll: true });
   };
@@ -103,4 +142,5 @@
     const url = destination(link);
     if (url && url.pathname !== displayedPath) loadPage(url).catch(() => {});
   }, { passive: true });
+  enhanceExplore();
 })();
