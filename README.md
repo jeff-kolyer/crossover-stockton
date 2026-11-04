@@ -381,6 +381,24 @@ The same information can support different views, filters, maps, interactive too
 
 The goal is not to produce more websites. It is to make reliable knowledge useful to more people, without requiring every investigator to become a web developer.
 
+### AI rendering as a data audit
+
+Giving Crossover's information stream to independent AI systems does more than generate different websites and interfaces. **It reveals what our data actually communicates.**
+
+When AI presents our information, we discover ambiguities, outdated assumptions, misleading counts, unnecessary fields, and relationships we haven't clearly defined.
+
+For example, a renderer might announce that Crossover has 11 organizations when we've only directly interacted with two. Or it might display an investigation status that we have no meaningful way to establish.
+
+These aren't merely presentation problems. They're opportunities to improve the information model.
+
+Sometimes the data needs correcting. Sometimes its meaning needs clarifying. Sometimes the renderer has made an unsupported inference.
+
+**The goal isn't to make every AI produce the same website. It's to make our information clear enough that different AI systems can independently produce accurate, useful interpretations.**
+
+Each rendering becomes another test of the data—and may reveal questions, connections, and possibilities we hadn't considered.
+
+**We improve the information by seeing what others make of it.**
+
 ## Technology
 
 The current platform uses:
