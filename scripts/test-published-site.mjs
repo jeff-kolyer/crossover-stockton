@@ -115,6 +115,16 @@ test("need pages show public record points and their linked claims", async () =>
   }
 });
 
+test("Need status badges link only to a documented investigation", async () => {
+  const index = await read("dist/needs/index.html");
+  const investigating = await read("dist/record/dogs-safe-placement/index.html");
+  const identified = await read("dist/record/pet-inclusive-shelter/index.html");
+  const linkedBadge = /<a class="pill dark" href="\/investigation\/"[^>]*>Investigating →<\/a>/;
+  assert.match(index, linkedBadge);
+  assert.match(investigating, linkedBadge);
+  assert.match(identified, /<div class="meta"><span class="pill ">Identified<\/span>/);
+});
+
 test("the sitemap lists every canonical page and legacy URLs lead to clean paths", async () => {
   const sitemap = await read("dist/sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
