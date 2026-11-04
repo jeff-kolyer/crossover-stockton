@@ -71,7 +71,7 @@ for (const page of staticSite.pages) {
 await mkdir(resolve(dist, "interactive"), { recursive: true });
 await writeFile(resolve(dist, "interactive/index.html"), html.replace("<head>", '<head><meta name="robots" content="noindex,follow">'));
 await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}</urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/needs/, ${origin}/investigation/, ${origin}/activity/, ${origin}/responses/, ${origin}/organizations/, ${origin}/places/, ${origin}/explore/, ${origin}/about/\nFull sitemap: ${origin}/sitemap.xml\nPublic data feed: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/needs/, ${origin}/investigation/, ${origin}/articles/, ${origin}/activity/, ${origin}/responses/, ${origin}/organizations/, ${origin}/places/, ${origin}/explore/, ${origin}/about/\nFull sitemap: ${origin}/sitemap.xml\nPublic data feed: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);

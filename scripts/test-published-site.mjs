@@ -30,6 +30,19 @@ test("every article publishes its complete text as readable HTML", async () => {
   }
 });
 
+test("Articles navigation leads to a listing of every published article", async () => {
+  const articles = records.filter(({ schema }) => schema === "article");
+  const index = await read("dist/articles/index.html");
+  assert.ok(index.includes('<a href="/articles/" aria-current="page">Articles</a>'));
+  assert.ok(index.indexOf('href="/record/public-access-to-stray-dog-information/"') < index.indexOf('href="/record/where-are-stray-dogs/"'), "the November 4 update appears first");
+  for (const article of articles) {
+    assert.ok(index.includes(`<a href="/record/${article.id}/">${escapeHtml(article.title)}</a>`), article.id);
+    const page = await read(`dist/record/${article.id}/index.html`);
+    assert.ok(page.includes('<a href="/articles/" aria-current="page">Articles</a>'), article.id);
+    assert.ok(page.includes('<a href="/articles/">Articles</a> / <span aria-current="page">'), article.id);
+  }
+});
+
 test("records-access article preserves its publication date and dated development", async () => {
   const article = feed.records["public-access-to-stray-dog-information"];
   const page = await read(`dist/record/${article.id}/index.html`);
@@ -57,7 +70,7 @@ test("the root and every feed record have readable HTML with normal URLs", async
   const navigationScript = await read("dist/static-navigation.js");
   assert.equal(navigationScript, await read("public/static-navigation.js"));
   new Script(navigationScript, { filename: "static-navigation.js" });
-  for (const section of ["needs", "investigation", "activity", "responses", "organizations", "places", "explore", "about"]) {
+  for (const section of ["needs", "investigation", "articles", "activity", "responses", "organizations", "places", "explore", "about"]) {
     const page = await read(`dist/${section}/index.html`);
     assert.match(page, /<main id="main"[^>]*>\s*\S/, section);
     assert.doesNotMatch(page, /href="#\//, section);
@@ -242,7 +255,8 @@ test("Need status badges link only to a documented investigation", async () => {
 test("the sitemap lists every canonical page and legacy URLs lead to clean paths", async () => {
   const sitemap = await read("dist/sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-  assert.equal(urls.length, 9 + records.length);
+  assert.equal(urls.length, 10 + records.length);
+  assert.ok(urls.includes("https://crossoverstockton.org/articles/"));
   assert.ok(urls.includes("https://crossoverstockton.org/organizations/"));
   assert.ok(urls.includes("https://crossoverstockton.org/organization/stockton-animal-services/"));
   assert.ok(!urls.some((url) => url.includes("#") || url.includes("?page=")));
