@@ -29,6 +29,75 @@ test("published counts come from unique records, and schema metadata names types
   }
 });
 
+test("Need publication carries investigative states without unsupported priority labels", () => {
+  for (const need of needsSource.records) {
+    assert.equal("status" in need, false);
+    assert.equal("status" in published.records[need.id].fields, false);
+    assert.equal(published.records[need.id].fields.investigation_status, need.investigation_status);
+  }
+  assert.deepEqual(published.fieldInfo.investigation_status.valueLabels,
+    { identified: "Identified", investigating: "Investigating" });
+  assert.match(published.fieldInfo.investigation_status.description, /not its severity/);
+});
+
+test("the feed explains flat newest-first browse semantics and preserves date meanings", () => {
+  assert.equal(published.browseGuidance.defaultTypeFilter, "all");
+  assert.equal(published.browseGuidance.defaultLayout, "flat");
+  assert.equal(published.browseGuidance.defaultSort, "dateForSort.value descending");
+  assert.equal(published.browseGuidance.undatedPlacement, "last");
+  assert.match(published.browseGuidance.defaultView, /All types.*flat list, newest first/);
+  assert.match(published.browseGuidance.filtering, /undated records after dated records/);
+  assert.match(published.browseGuidance.dateMeaning, /dateForSort.field/);
+  assert.deepEqual(published.records["crossover-2026-11-02-sas-field-call-records-received"].dateForSort,
+    { field: "occurred_at", value: "2026-11-02" });
+  assert.deepEqual(published.records["stocktonia-2026-10-20-animal-control-proposals"].dateForSort,
+    { field: "published_at", value: "2026-10-20" });
+  const matching = searchExplorer(published, "stockton");
+  assert.deepEqual(matching.map(({ id }) => id), [...matching].sort((a, b) =>
+    (b.dateForSort ? Date.parse(b.dateForSort.value) : -Infinity)
+    - (a.dateForSort ? Date.parse(a.dateForSort.value) : -Infinity) || a.id.localeCompare(b.id)).map(({ id }) => id));
+});
+
+test("firsthand activities derive contacted organizations without turning references into partners", () => {
+  const contacted = Object.values(published.records).filter((record) =>
+    record.schema === "organization" && record.fields.contact_activity_ids?.length);
+  assert.deepEqual(contacted.map(({ id }) => id).sort(), ["stockton-animal-services", "stockton-street-dogs"]);
+  assert.equal(published.fieldInfo.contact_activity_ids.kind, "reference");
+  assert.match(published.fieldInfo.contact_activity_ids.description, /before claiming.*collaboration/);
+  for (const organization of contacted) {
+    for (const id of organization.fields.contact_activity_ids) {
+      const activity = published.records[id];
+      assert.equal(activity.schema, "activity");
+      assert.equal(activity.fields.trust, "crossover_source");
+      assert.equal(activity.fields.source.type, "firsthand_account");
+      assert.ok(activity.fields.organization_ids.includes(organization.id));
+      assert.ok(activity.fields.organization_interaction);
+    }
+  }
+  assert.equal(published.records["stockton-street-dogs"].fields.contact_activity_ids.length, 1);
+  assert.equal(published.records["crossover-2026-10-07-street-dogs-volunteer-application"].fields.organization_interaction, "outreach_attempt");
+});
+
+test("new firsthand contact updates the organization link while outside reports do not", () => {
+  const fixturePolicy = { ...policy, collections: policy.collections.filter(({ id }) =>
+    ["organizations", "activities"].includes(id)) };
+  const source = {
+    organizations: [{ id: "org-one", name: "Organization one" }, { id: "org-two", name: "Organization two" }],
+    activities: [
+      { id: "contact", title: "Asked about volunteering", record_type: "activity", trust: "crossover_source",
+        source: { publisher: "Crossover Stockton", type: "firsthand_account" }, occurred_at: "2026-11-03",
+        organization_ids: ["org-one"], organization_interaction: "outreach_attempt" },
+      { id: "report", title: "Outside report", record_type: "activity", trust: "source_supported",
+        source: { publisher: "News", type: "local_reporting" }, occurred_at: "2026-11-03",
+        organization_ids: ["org-two"] },
+    ],
+  };
+  const { snapshot } = buildExplorerSnapshot(fixturePolicy, schemas, source,
+    [{ id: "organizations", title: "Organizations", collectionIds: ["organizations", "activities"] }]);
+  assert.deepEqual(snapshot.records["org-one"].fields.contact_activity_ids, ["contact"]);
+  assert.equal(snapshot.records["org-two"].fields.contact_activity_ids, undefined);
+});
+
 test("visual preferences publish when supplied and remain optional", () => {
   const need = needsSource.records[0];
   assert.equal(published.records[need.id].fields.preferred_image, need.preferred_image);

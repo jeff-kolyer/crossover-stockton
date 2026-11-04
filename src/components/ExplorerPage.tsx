@@ -29,7 +29,9 @@ function RecordValue({ name, value, selectRecord }: { name: string; value: unkno
   if (typeof value === "boolean") return value ? copy.yes : copy.no;
   if (typeof value === "number") return value.toLocaleString("en-US");
   if (typeof value !== "string") return String(value);
-  const kind = explorerFieldInfo(name).kind;
+  const info = explorerFieldInfo(name);
+  const kind = info.kind;
+  if (info.valueLabels?.[value]) return info.valueLabels[value];
   if (kind === "reference") {
     const related = explorerSnapshot.records[value];
     return related

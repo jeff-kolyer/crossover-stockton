@@ -7,10 +7,16 @@ const titleFor = (record) => record.publicName || record.name || record.title ||
 const idsFrom = (record, fields) => fields.flatMap((field) => Array.isArray(record?.[field]) ? record[field] : []);
 
 const dateFields = ["occurred_at", "published_at", "date", "completed_at", "recorded_at", "updated_at", "last_updated_at", "last_reviewed_at", "last_verified_at", "evidence_date", "period_end", "period_start", "checked_at"];
+const validDate = (value) => {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(value) || !Number.isFinite(Date.parse(value))) return false;
+  const [year, month, day] = value.slice(0, 10).split("-").map(Number);
+  const actual = new Date(Date.UTC(year, month - 1, day));
+  return actual.getUTCFullYear() === year && actual.getUTCMonth() + 1 === month && actual.getUTCDate() === day;
+};
 const dateForSort = (fields) => {
   for (const field of dateFields) {
     const value = fields[field];
-    if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}/.test(value) && Number.isFinite(Date.parse(value))) return { field, value };
+    if (validDate(value)) return { field, value };
   }
   return undefined;
 };
@@ -161,6 +167,23 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
       records.set(targetId, { ...target, fields: { ...target.fields, [relation.field]: [...new Set([...relatedIds, source.id])] } });
     }
   }
+  // Only firsthand, occurred Crossover actions establish contact. Research references
+  // and planned tasks do not create a contact relationship.
+  for (const activity of records.values()) {
+    if (activity.schema !== "activity" || activity.fields.trust !== "crossover_source"
+      || activity.fields.source?.type !== "firsthand_account" || !validDate(activity.fields.occurred_at)) continue;
+    for (const id of activity.fields.organization_ids ?? []) {
+      const organization = records.get(id);
+      if (organization?.schema !== "organization") continue;
+      const linked = organization.fields.contact_activity_ids ?? [];
+      organization.fields.contact_activity_ids = [...new Set([...linked, activity.id])];
+    }
+  }
+  for (const organization of records.values()) {
+    if (organization.schema !== "organization" || !organization.fields.contact_activity_ids) continue;
+    organization.fields.contact_activity_ids.sort((a, b) =>
+      records.get(b).fields.occurred_at.localeCompare(records.get(a).fields.occurred_at) || a.localeCompare(b));
+  }
   for (const record of records.values()) record.dateForSort = dateForSort(record.fields);
   const recordMap = Object.fromEntries(records);
   for (const record of records.values()) {
@@ -191,10 +214,13 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
     const reverseRelation = policy.reverseRelationships?.find((relation) => relation.field === name);
     const kind = relationshipFields.has(name) || reverseRelation ? "reference" : dateField(name) || property?.$ref?.endsWith("/$defs/date") ? "date"
       : urlField(name) ? "url" : "value";
-    return [name, { label: policy.fieldLabels?.[name] ?? reverseRelation?.label ?? name, kind, ...(property?.description ? { description: property.description } : {}) }];
+    const description = policy.fieldDescriptions?.[name] ?? property?.description;
+    return [name, { label: policy.fieldLabels?.[name] ?? reverseRelation?.label ?? name, kind,
+      ...(description ? { description } : {}),
+      ...(policy.fieldValueLabels?.[name] ? { valueLabels: policy.fieldValueLabels[name] } : {}) }];
   }));
   return {
-    snapshot: { groups, investigations: branches, recordChildren: Object.fromEntries(branches.map((branch) => [branch.id, branch.collectionIds])), collections: [...visibleCollections, ...children], records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance },
+    snapshot: { groups, investigations: branches, recordChildren: Object.fromEntries(branches.map((branch) => [branch.id, branch.collectionIds])), collections: [...visibleCollections, ...children], records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance, browseGuidance: policy.browseGuidance },
     diagnostics,
   };
 }
@@ -208,5 +234,6 @@ export function searchExplorer(snapshot, query) {
       .map((id) => typeof id === "string" ? snapshot.records[id]?.title : undefined).filter(Boolean);
     const text = [record.id, record.typeName, record.title, record.description, JSON.stringify(record.fields), ...linkedNames].join(" ").toLocaleLowerCase();
     return text.includes(needle);
-  });
+  }).sort((a, b) => (b.dateForSort ? Date.parse(b.dateForSort.value) : -Infinity)
+    - (a.dateForSort ? Date.parse(a.dateForSort.value) : -Infinity) || a.id.localeCompare(b.id));
 }

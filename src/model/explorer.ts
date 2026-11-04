@@ -12,7 +12,7 @@ export type ExplorerRecord = {
 export type ExplorerCollection = { id: string; title: string; group: string; schema: string | null; recordIds: string[]; hidden?: boolean; investigationId?: string; parentCollectionId?: string; childCollectionIds?: string[] };
 export type ExplorerGroup = { id: string; title: string; collectionIds: string[]; investigationIds?: string[] };
 export type ExplorerInvestigation = { id: string; title: string; collectionIds: string[] };
-export type ExplorerFieldInfo = { label: string; kind: "reference" | "date" | "url" | "value"; description?: string };
+export type ExplorerFieldInfo = { label: string; kind: "reference" | "date" | "url" | "value"; description?: string; valueLabels?: Record<string, string> };
 export type ExplorerPath = { groupId: string; investigationId: string | null; collectionId: string | null; recordId: string };
 export type ExplorerSnapshot = {
   groups: ExplorerGroup[];
@@ -24,6 +24,7 @@ export type ExplorerSnapshot = {
   fieldLabels: Record<string, string>;
   fieldInfo: Record<string, ExplorerFieldInfo>;
   visualGuidance?: { preferredAssets: string; descriptions: string; evidence: string; logos: string };
+  browseGuidance?: { defaultTypeFilter: "all"; defaultLayout: "flat"; defaultSort: string; undatedPlacement: "last"; tieBreak: string; defaultView: string; filtering: string; dateMeaning: string };
 };
 
 export const explorerSnapshot = generated as unknown as ExplorerSnapshot;
@@ -58,7 +59,7 @@ export function explorerPathForRecord(recordId: string, preferredCollectionId?: 
 export function searchExplorerRecords(query: string) {
   const needle = query.trim().toLocaleLowerCase();
   if (!needle) return [];
-  return Object.values(explorerSnapshot.records).filter((record) => {
+  return explorerRecordsByDate.filter((record) => {
     const linkedNames = Object.entries(record.fields).filter(([name]) => explorerFieldInfo(name).kind === "reference")
       .flatMap(([, value]) => Array.isArray(value) ? value : [value])
       .map((id) => typeof id === "string" ? explorerSnapshot.records[id]?.title : undefined).filter(Boolean);

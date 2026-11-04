@@ -19,17 +19,9 @@
       "type": "string",
       "minLength": 1
     },
-    "status": {
-      "type": "string",
-      "enum": [
-        "critical",
-        "high_priority",
-        "monitored",
-        "improving"
-      ]
-    },
     "investigation_status": {
       "type": "string",
+      "description": "Crossover's investigative engagement with this need, not its severity, priority, condition trend, or solution outcome. Identified means the need is recorded; investigating means Crossover is actively examining it.",
       "enum": [
         "investigating",
         "identified"
@@ -117,7 +109,6 @@
     "slug",
     "title",
     "summary",
-    "status",
     "investigation_status"
   ],
   "additionalProperties": true

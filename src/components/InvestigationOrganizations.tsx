@@ -1,5 +1,4 @@
 import uiCopy from "../ui/investigation.json";
-import globalCopy from "../ui/shared.json";
 import { siteModel } from "../model";
 import { navigateInternalLink } from "../lib/internalLink";
 import { recordLinkLabel } from "../lib/linkLabels";
@@ -10,10 +9,9 @@ const uiText = uiCopy.InvestigationOrganizations;
 const orgs = siteModel.getOrganizations();
 const records = siteModel.getAllRecords();
 const contactTasks = siteModel.getAllTasks().filter((task) => task.type === "organization_contact" && task.checklist?.length);
-const engagementRecords = records.filter((record) =>
-  record.source.publisher?.startsWith(globalCopy.App.siteName) &&
-  (record.record_type === "activity" || record.record_type === "field_report" || record.record_type === "field_investigation") &&
-  !record.evidence_status?.startsWith("planned") &&
+const engagementRecords = siteModel.getAllActivities().filter((record) =>
+  record.trust === "crossover_source" && record.source.type === "firsthand_account" &&
+  Boolean(record.occurred_at) &&
   record.organization_ids.length > 0,
 );
 const engagedIds = new Set(engagementRecords.flatMap((record) => record.organization_ids));
@@ -22,8 +20,7 @@ const dateLabel = (date?: string | null) => date
   : uiText.dateNotRecorded;
 const activityFor = (org: OrgRecord) => {
   const related = engagementRecords.filter((record) => record.organization_ids.includes(org.id));
-  const history = related.filter((record) => record.record_type !== "field_report");
-  return (history.length ? history : related).sort((a, b) => (b.occurred_at ?? b.recorded_at ?? "").localeCompare(a.occurred_at ?? a.recorded_at ?? ""));
+  return related.sort((a, b) => (b.occurred_at ?? "").localeCompare(a.occurred_at ?? ""));
 };
 const engagedOrgs = orgs.filter((org) => org.active && engagedIds.has(org.id)).sort((a, b) => {
   const lastDate = (org: OrgRecord) => activityFor(org)[0]?.occurred_at ?? "";
@@ -37,7 +34,7 @@ export function InvestigationOrganizations({ onOpenActivity }: { onOpenActivity:
     <div className="investigation-organizations">
       {engagedOrgs.map((org) => {
         const history = activityFor(org);
-        const fieldReports = engagementRecords.filter((record) => record.record_type === "field_report" && record.organization_ids.includes(org.id));
+        const fieldReports = records.filter((record) => record.record_type === "field_report" && record.organization_ids.includes(org.id));
         const sourceRecords = (org.verification?.evidence_record_ids ?? []).map((id) => records.find((record) => record.id === id)).filter((record): record is EvidenceRecord => Boolean(record));
         const contactQuestions = contactTasks.filter((task) => task.organization_ids.includes(org.id));
         return <article id={`organization-${org.slug}`} key={org.id}>

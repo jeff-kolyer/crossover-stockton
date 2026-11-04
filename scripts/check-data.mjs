@@ -42,6 +42,7 @@ for (const [file] of datasets) for (const item of records.get(file) ?? []) {
     } else if (!asset.startsWith("https://")) errors.push(`${file}:${item.id} ${field} must be a public path or HTTPS URL`);
   }
   if (file === "needs" && Object.hasOwn(item, "artwork")) errors.push(`need:${item.id} still uses legacy artwork instead of preferred_image`);
+  if (file === "needs" && Object.hasOwn(item, "status")) errors.push(`need:${item.id} still uses unsupported legacy status`);
   if (file === "stories" && Object.hasOwn(item, "image")) errors.push(`story:${item.id} still uses legacy image instead of preferred_image`);
 }
 const ids = (file) => new Set((records.get(file) ?? []).map(({ id }) => id));
@@ -110,6 +111,9 @@ checkRefs(records.get("projects"), "records", "evidence_record_ids", "project");
 checkRefs(records.get("articles"), "needs", "related_gap_ids", "article");
 checkRefs(records.get("articles"), "locations", "related_location_ids", "article");
 for (const item of records.get("records") ?? []) {
+  if (item.organization_interaction && (item.record_type !== "activity" || item.trust !== "crossover_source"
+    || item.source?.type !== "firsthand_account" || !item.occurred_at || !item.organization_ids?.length))
+    errors.push(`evidence:${item.id} organization_interaction requires a completed firsthand Crossover activity linked to an organization`);
   if (item.record_type === "activity" && item.occurred_at && item.evidence_status?.startsWith("planned")) errors.push(`evidence:${item.id} planned status conflicts with occurred_at`);
   if (item.source?.url && !/^https?:\/\//.test(item.source.url)) errors.push(`evidence:${item.id} invalid source URL`);
   if (item.public_update === true) {

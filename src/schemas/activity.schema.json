@@ -23,6 +23,11 @@
       "type": "boolean",
       "description": "Marks an activity as a meaningful public development; visibility must also authorize publication."
     },
+    "organization_interaction": {
+      "type": "string",
+      "enum": ["outreach_attempt", "response_received", "in_person_visit_and_application", "collaboration"],
+      "description": "What Crossover actually did with or received from the linked organization. An application or inquiry is an outreach attempt, not acceptance or partnership. Use collaboration only when directly documented."
+    },
     "visibility": {
       "type": "string",
       "enum": [

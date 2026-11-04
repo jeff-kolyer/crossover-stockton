@@ -13,6 +13,7 @@
     "recorded_at": "2026-10-20",
     "record_type": "activity",
     "trust": "crossover_source",
+    "organization_interaction": "outreach_attempt",
     "title": "Requested Stockton Animal Services field-call records",
     "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. An automatic forwarding acknowledgment arrived. The records were received by email on November 2; their contents have not been assessed in this record.",
     "source": {
@@ -47,6 +48,7 @@
     "recorded_at": "2026-11-03",
     "record_type": "activity",
     "trust": "crossover_source",
+    "organization_interaction": "response_received",
     "title": "Received Stockton Animal Services field-call records",
     "summary": "The City responded to our October 20 public records request. Review and analysis are pending.",
     "public_update": true,
@@ -86,6 +88,7 @@
     "recorded_at": "2026-10-14",
     "record_type": "activity",
     "trust": "crossover_source",
+    "organization_interaction": "in_person_visit_and_application",
     "title": "Visited Stockton Animal Services and submitted a volunteer application",
     "summary": "Visited Stockton Animal Services and submitted a volunteer application.",
     "source": {
@@ -122,6 +125,7 @@
     "recorded_at": "2026-10-08",
     "record_type": "activity",
     "trust": "crossover_source",
+    "organization_interaction": "outreach_attempt",
     "title": "Stockton Street Dogs volunteer application submitted",
     "summary": "Applied to volunteer with Stockton Street Dogs and learn firsthand.",
     "source": {
@@ -156,6 +160,7 @@
     "recorded_at": "2026-10-12",
     "record_type": "activity",
     "trust": "crossover_source",
+    "organization_interaction": "outreach_attempt",
     "title": "Emailed Stockton Animal Services about Doggie Day Out",
     "summary": "Emailed Stockton Animal Services asking about sign-up, requirements, paperwork, and orientation for Doggie Day Out.",
     "source": {

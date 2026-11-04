@@ -145,7 +145,6 @@ export interface CrossoverFeed {
   sources: CivicSource[];
 }
 
-export type GapStatus = "critical" | "high_priority" | "monitored" | "improving";
 export type GapInvestigationStatus = "investigating" | "identified";
 
 /** Optional presentation preferences; descriptions are not image alt text or evidence. */
@@ -160,7 +159,6 @@ export interface GapRecord extends VisualPreferences {
   id: string;
   slug: string;
   title: string;
-  status: GapStatus;
   investigation_status: GapInvestigationStatus;
   active: boolean;
   rank: number;
@@ -355,6 +353,7 @@ export interface EvidenceRecord extends VisualPreferences {
     | "activity"
     | "field_report";
   public_update?: boolean;
+  organization_interaction?: "outreach_attempt" | "response_received" | "in_person_visit_and_application" | "collaboration";
   visibility?: "public" | "internal";
   trust: string;
   title: string;
