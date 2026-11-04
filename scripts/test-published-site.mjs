@@ -52,7 +52,7 @@ test("records-access article preserves its publication date and dated developmen
   assert.match(page, /Editor&#39;s update — November 4, 2026/);
   assert.match(page, /spreadsheet on November 2/);
   assert.match(page, /7,183 case records/);
-  assert.match(page, /cooperation and the work involved in making these records available\. <span class="civic-heart">♥<\/span>/);
+  assert.match(page, /<span class="civic-heart">♥<\/span> We appreciate the department&#39;s cooperation and the work involved in making these records available\./);
   assert.match(page, /href="\/record\/crossover-2026-11-02-sas-field-call-records-received\/"/);
   assert.doesNotMatch(page, /result remains pending|examine the field-call records if provided/);
 });
