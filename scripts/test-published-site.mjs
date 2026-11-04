@@ -38,7 +38,7 @@ test("Needs leads to a listing of every published article", async () => {
   assert.ok(investigation.includes('<a class="articles-cta" href="/articles/">Read articles <svg class="right-arrow"'));
   const section = needs.split('<h2>Articles on these needs</h2>')[1]?.split('<h2>Work taking shape</h2>')[0];
   assert.ok(section, "Needs has an Articles section before Responses");
-  assert.ok(section.includes('href="/articles/">All articles <svg class="external-arrow"'));
+  assert.ok(section.includes('href="/articles/">All articles <svg class="right-arrow"'));
   assert.ok(section.includes('href="/record/public-access-to-stray-dog-information/"'));
   assert.ok(section.includes('href="/record/where-are-stray-dogs/"'));
   assert.ok(index.includes('<a href="/needs/" aria-current="page">Needs</a>'));
@@ -274,7 +274,7 @@ test("Investigation provides the path to related organizations and the full dire
   const section = investigation.split('<section class="section" id="organizations">')[1]?.split('<section class="section" id="locations">')[0];
   assert.ok(section, "Organizations section precedes Places");
   assert.ok(investigation.includes('<a href="#organizations">Organizations</a><a href="#locations">Places</a>'));
-  assert.ok(section.includes('href="/organizations/">All organizations <svg class="external-arrow"'));
+  assert.ok(section.includes('href="/organizations/">All organizations <svg class="right-arrow"'));
   for (const id of organizationIds) assert.ok(section.includes(`href="/organization/${id}/"`), id);
   assert.ok(directory.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
   assert.ok((await read("dist/organization/stockton-animal-services/index.html")).includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
@@ -285,7 +285,7 @@ test("Investigation provides the path to Activity", async () => {
   const activity = await read("dist/activity/index.html");
   const section = investigation.split('<section class="section" id="fieldwork">')[1]?.split('<section class="section" id="findings">')[0];
   assert.ok(section, "Investigation retains its activity section");
-  assert.ok(section.includes('href="/activity/">All activity <svg class="external-arrow"'));
+  assert.ok(section.includes('href="/activity/">All activity <svg class="right-arrow"'));
   assert.ok(section.includes('href="/record/crossover-2026-10-14-sas-volunteer-application/"'));
   assert.ok(activity.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
 });
@@ -295,7 +295,7 @@ test("Needs links related responses to the combined Stories page", async () => {
   const stories = await read("dist/stories/index.html");
   const section = needs.split('<h2>Work taking shape</h2>')[1];
   assert.ok(section, "Needs includes a responses section");
-  assert.ok(section.includes('href="/stories/">Stories and responses <svg class="external-arrow"'));
+  assert.ok(section.includes('href="/stories/">Stories and responses <svg class="right-arrow"'));
   const previewIds = [...new Set([...section.matchAll(/href="\/record\/([^/]+)\/"/g)].map((match) => match[1]))];
   const needIds = new Set(records.filter(({ schema }) => schema === "need").map(({ id }) => id));
   assert.ok(previewIds.some((id) => feed.records[id]?.schema === "project"), "a linked project appears");
@@ -314,7 +314,7 @@ test("Stories leads with stories, then shows every project response", async () =
   assert.ok(stories.includes('<a href="/stories/" aria-current="page">Stories</a>'));
   assert.ok(stories.includes('<div class="eyebrow">Stories</div><h1>Signs of care and progress</h1>'));
   assert.ok(stories.indexOf('<h2>Stories from Stockton</h2>') < stories.indexOf('<h2>Improvements and proposals</h2>'));
-  assert.ok(needs.includes('href="/stories/">Stories and responses <svg class="external-arrow"'));
+  assert.ok(needs.includes('href="/stories/">Stories and responses <svg class="right-arrow"'));
   assert.doesNotMatch(investigation, /<section[^>]*id="stories"/, "Investigation has no Stories section");
   assert.doesNotMatch(investigation, /<a href="#stories">Stories<\/a>/, "Investigation has no Stories section jump");
   for (const story of records.filter(({ schema }) => schema === "story"))

@@ -2,7 +2,7 @@
 
 ## Link arrows
 
-Use the inline SVG `right-arrow` for internal navigation, with path `M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3`. Use the inline SVG `external-arrow` for diagonal links, with path `m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25`. Display both at 1.05em with a 1.75 stroke. Do not put arrows on status labels. Apply these shapes to regenerated pages.
+Use the inline SVG `right-arrow` for internal navigation, with path `M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3`. Use the inline SVG `external-arrow` only for links to other sites, with path `m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25`. Display both at 1.05em with a 1.75 stroke. Do not put arrows on status labels. Apply these shapes to regenerated pages.
 
 ## Civic heart
 
