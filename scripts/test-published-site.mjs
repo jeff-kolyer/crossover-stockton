@@ -63,7 +63,6 @@ test("the root and every feed record have readable HTML with normal URLs", async
   const root = await read("dist/index.html");
   assert.equal(await read("index.html"), root);
   assert.match(root, /<main id="main"[^>]*>[\s\S]*?<h1>See clearly/);
-  assert.match(root, /href="\/organizations\/"/);
   assert.doesNotMatch(root, /href="#\//);
   assert.doesNotMatch(root, /href="\?page=/);
   assert.doesNotMatch(root, /<script id="feed-data"/);
@@ -116,6 +115,8 @@ test("the root and every feed record have readable HTML with normal URLs", async
   assert.ok(mainNav && footerNav, "both menus are present");
   assert.doesNotMatch(mainNav, />Places<\/a>/, "Places is absent from the main navigation");
   assert.doesNotMatch(footerNav, />Places<\/a>/, "Places is absent from the footer navigation");
+  assert.doesNotMatch(mainNav, />Organizations<\/a>/, "Organizations is absent from the main navigation");
+  assert.doesNotMatch(footerNav, />Organizations<\/a>/, "Organizations is absent from the footer navigation");
   for (const id of ["stockton-animal-services-shelter", "st-marys-community-services-campus"]) {
     const embed = feed.records[id].fields.map_reference.embed_url;
     const page = await read(`dist/record/${id}/index.html`);
@@ -248,6 +249,19 @@ test("organizations and their documented places link to each other", async () =>
     const placePage = await read(`dist/record/${placeId}/index.html`);
     assert.ok(placePage.includes(`<h3>Organization</h3><a href="/organization/${organization.id}/">${escapeHtml(organization.title)}</a>`), placeId);
   }
+});
+
+test("Investigation provides the path to related organizations and the full directory", async () => {
+  const investigation = await read("dist/investigation/index.html");
+  const directory = await read("dist/organizations/index.html");
+  const organizationIds = feed.records[feed.records["street-dog-immediate-welfare"].fields.gap_id].fields.organization_ids;
+  const section = investigation.split('<section class="section" id="organizations">')[1]?.split('<section class="section" id="locations">')[0];
+  assert.ok(section, "Organizations section precedes Places");
+  assert.ok(investigation.includes('<a href="#organizations">Organizations</a><a href="#locations">Places</a>'));
+  assert.ok(section.includes('href="/organizations/">All organizations</a>'));
+  for (const id of organizationIds) assert.ok(section.includes(`href="/organization/${id}/"`), id);
+  assert.ok(directory.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
+  assert.ok((await read("dist/organization/stockton-animal-services/index.html")).includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
 });
 
 test("Need status badges link only to a documented investigation", async () => {
