@@ -65,11 +65,13 @@ test("the root and every feed record have readable HTML with normal URLs", async
     const page = await read(`dist/record/${id}/index.html`);
     assert.match(embed, /^https:\/\/www\.google\.com\/maps\/embed\?pb=/);
     assert.ok(page.includes(`<iframe class="location-map" title="Map of ${escapeHtml(feed.records[id].title)}" src="${escapeHtml(embed)}"`), `${id} embedded map`);
-    assert.equal((page.match(/Open on Google Maps ↗/g) || []).length, 2, `${id} has desktop and mobile Google Maps buttons`);
-    assert.match(page, /<h2>[^<]+<\/h2><a class="btn map mobile-map-action"[^>]*>Open on Google Maps ↗<\/a>/, `${id} mobile button follows the address`);
+    assert.equal((page.match(/Open on Google Maps ↗/g) || []).length, 1, `${id} has one Google Maps button`);
+    assert.match(page, /<div class="detail-section location-detail">[\s\S]*?<iframe class="location-map"/, `${id} mobile map sits in the location section`);
     assert.match(page, /<aside class="detail-aside"><a class="btn map"[^>]*>Open on Google Maps ↗<\/a>/, `${id} desktop button remains in the aside`);
   }
-  assert.doesNotMatch(await read("dist/record/weston-ranch-carrie-street/index.html"), /<iframe class="location-map"/);
+  const broadPlace = await read("dist/record/weston-ranch-carrie-street/index.html");
+  assert.doesNotMatch(broadPlace, /<iframe class="location-map"/);
+  assert.match(broadPlace, /<h2>[^<]+<\/h2><a class="btn map mobile-map-action"[^>]*>Open on Google Maps ↗<\/a>/, "unembedded places retain a near-top mobile link");
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
   assert.equal((await read("dist/CNAME")).trim(), "crossoverstockton.org");
 });
