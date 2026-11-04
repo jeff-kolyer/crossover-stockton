@@ -145,7 +145,9 @@
     "title": "Verify conditions: scale of the dog problem near St. Mary's",
     "status": "open",
     "type": "field_observation",
+    "recorded_at": "2026-10-31",
     "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
+    "public_instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
     "location_ids": [
       "st-marys-church-street-corridor"
     ],

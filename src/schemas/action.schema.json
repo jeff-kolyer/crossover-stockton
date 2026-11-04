@@ -44,6 +44,14 @@
       "type": "string",
       "minLength": 1
     },
+    "public_instructions": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Instructions approved for publication on the task page."
+    },
+    "recorded_at": {
+      "$ref": "./common.schema.json#/$defs/date"
+    },
     "list_context": {
       "type": "string",
       "minLength": 1

@@ -86,6 +86,18 @@ test("the one-file interactive version remains available without hash route link
   assert.deepEqual((await readdir("dist")).filter((name) => name === "assets"), []);
 });
 
+test("the St. Mary's task publishes its instructions and recorded date", async () => {
+  const id = "task-verify-st-marys-church-street-dog-scale";
+  const record = feed.records[id];
+  const page = await read(`dist/record/${id}/index.html`);
+  assert.equal(record.fields.recorded_at, "2026-10-31");
+  assert.equal(record.dateForSort.field, "recorded_at");
+  assert.ok(record.fields.public_instructions);
+  assert.equal(record.fields.instructions, undefined);
+  assert.ok(page.includes(`<h2>Instructions</h2><p>${escapeHtml(record.fields.public_instructions)}</p>`));
+  assert.match(page, /Recorded At · Oct 31, 2026/);
+});
+
 test("the sitemap lists every canonical page and legacy URLs lead to clean paths", async () => {
   const sitemap = await read("dist/sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
