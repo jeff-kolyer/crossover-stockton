@@ -403,15 +403,16 @@ Each rendering becomes another test of the data—and may reveal questions, conn
 
 The current platform uses:
 
-- React 19, TypeScript, and Vite
-- Leaflet and MapLibre mapping
-- Static JSON records and Git history
-- Build-time validation and prerendering
-- Cloudflare Pages hosting
+- Structured JSON records, schemas, and Git history
+- A feed generated from the source records
+- One HTML template rendered into readable static pages with clean URLs
+- A small History API script for smooth navigation
+- Vite for the local server and TypeScript feed model loading
+- GitHub Pages hosting
 
 The public site currently operates without a database.
 
-The map and interface provide views of the investigation records. The underlying evidence, relationships, and history matter more than any particular interface.
+The site is generated from the public feed. The underlying evidence, relationships, and history matter more than any particular interface.
 
 AI-assisted updates, conversational record management, and external system integrations require additional implementation and authorization.
 
@@ -426,7 +427,7 @@ npm run build
 npm run preview
 ```
 
-The build validates data, compiles TypeScript, bundles the application, prerenders pages, and checks published output.
+The build validates source records, generates the public feed and one-file HTML, renders static pages, and checks published output.
 
 ## Core principle
 

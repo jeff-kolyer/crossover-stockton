@@ -1,10 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import { createServer } from "vite";
 import { buildExplorerSnapshot, searchExplorer } from "./explorer-snapshot.mjs";
 import { loadExplorerRoots } from "./explorer-roots.mjs";
-import { explorerRecordUrl, recordIdFromSearch } from "../src/controller/explorer-url.ts";
 import { googleMapsSearchUrl } from "../src/lib/googleMapsUrl.ts";
 
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, import.meta.url), "utf8"));
@@ -72,7 +70,6 @@ test("broad references stay broad, verified addresses cite sources, and relation
   assert.ok(published.records[task.id].fields.map_reference_location_ids.includes(campusId));
   assert.ok(published.records[article.id].fields.related_location_ids.includes(campusId));
   assert.ok(published.collections.find(({ id }) => id === "street-dog-immediate-welfare:locations").recordIds.includes(campusId));
-  assert.equal(recordIdFromSearch(new URL(explorerRecordUrl(campusId), "https://crossover.local").search), campusId);
   for (const id of ["louis-park-pixie-woods-2026-04-06", "stanislaus-street-corridor-2026-04-06", "highway-4-corridor-2026-04-06"])
     assert.equal(published.records[id].fields.evidence_record_id, "cbs-2026-04-06-stockton-abandoned-dogs");
 });
@@ -217,13 +214,6 @@ test("generated browser payload omits internal and precise-location fields", () 
   assert.ok(published.groups.length > 0);
 });
 
-test("direct record URLs preserve stable IDs through query parsing", () => {
-  const url = explorerRecordUrl("record/with spaces");
-  assert.equal(url, "/data/?record=record%2Fwith+spaces");
-  assert.equal(recordIdFromSearch(new URL(url, "https://crossover.local").search), "record/with spaces");
-  assert.equal(recordIdFromSearch("?record=missing"), "missing");
-});
-
 test("explicit internal visibility is excluded even from an allowed collection", () => {
   const fixturePolicy = { collections: [
     { id: "evidence", schema: "evidence", title: "Evidence", query: "evidence", fields: ["id", "title", "source"] },
@@ -272,61 +262,6 @@ test("real records share one public payload across browse paths and inspection m
   assert.ok(receipt.fields.source.publisher);
   assert.ok(receipt.fields.occurred_at);
   assert.ok(published.records["finding-public-street-dog-information-fragmented"].fields.limitations);
-});
-
-test("By date sorts existing public records without creating a collection", async () => {
-  const vite = await createServer({ server: { middlewareMode: true }, appType: "custom", logLevel: "error" });
-  try {
-    const { explorerPathForRecord, explorerRecordsByDate } = await vite.ssrLoadModule("/src/model/explorer.ts");
-    const { explorerStateFromSearch } = await vite.ssrLoadModule("/src/controller/explorer.ts");
-    assert.equal(published.groups.some((item) => item.id === "latest"), false);
-    assert.equal(published.collections.some((item) => ["latest", "developments", "investigation-updates", "public-updates"].includes(item.id)), false);
-    assert.equal(explorerRecordsByDate.length, Object.keys(published.records).length);
-    assert.equal(explorerRecordsByDate.length, new Set(explorerRecordsByDate.map((record) => record.id)).size);
-    assert.ok(explorerRecordsByDate.some((record) => record.schema === "activity"));
-    assert.ok(explorerRecordsByDate.some((record) => record.schema === "evidence"));
-    assert.ok(explorerRecordsByDate.some((record) => !record.dateForSort));
-    assert.deepEqual(explorerRecordsByDate.map((record) => record.id), [...explorerRecordsByDate].sort((a, b) => (b.dateForSort ? Date.parse(b.dateForSort.value) : -Infinity) - (a.dateForSort ? Date.parse(a.dateForSort.value) : -Infinity) || a.id.localeCompare(b.id)).map((record) => record.id));
-    const receiptId = "crossover-2026-11-02-sas-field-call-records-received";
-    assert.ok(explorerRecordsByDate.some((record) => record.id === receiptId));
-    assert.ok(explorerRecordsByDate.some((record) => record.id === "stocktonia-2026-10-20-animal-control-proposals"));
-    assert.ok(published.collections.find((item) => item.id === "activities")?.recordIds.includes(receiptId));
-    assert.ok(published.collections.find((item) => item.id === "activities")?.recordIds.includes(receiptId));
-    assert.equal(published.records[receiptId].fields.id, receiptId);
-    assert.deepEqual(explorerPathForRecord("finding-public-street-dog-information-fragmented"), {
-      groupId: "investigation", investigationId: "street-dog-immediate-welfare", collectionId: "street-dog-immediate-welfare:findings", recordId: "finding-public-street-dog-information-fragmented",
-    });
-    assert.equal(explorerPathForRecord("friction-of-volunteering")?.groupId, "articles");
-    assert.equal(explorerPathForRecord("canine-campus")?.collectionId, "street-dog-immediate-welfare:projects");
-    const deepLink = explorerStateFromSearch("?nav=breadcrumb&group=investigation&investigation=street-dog-immediate-welfare&collection=street-dog-immediate-welfare%3Afindings&record=finding-public-street-dog-information-fragmented&view=json");
-    assert.equal(deepLink.navigation, "breadcrumb");
-    assert.equal(deepLink.display, "json");
-    assert.equal(deepLink.investigationId, "street-dog-immediate-welfare");
-    assert.equal(deepLink.collectionId, "street-dog-immediate-welfare:findings");
-    assert.equal(deepLink.selectedId, "finding-public-street-dog-information-fragmented");
-    const investigationLink = explorerStateFromSearch("?nav=breadcrumb&group=investigation&investigation=street-dog-immediate-welfare");
-    assert.equal(investigationLink.selectedId, "street-dog-immediate-welfare");
-    assert.equal(investigationLink.collectionId, null);
-    const linkedEvidence = explorerStateFromSearch("?nav=breadcrumb&group=investigation&investigation=street-dog-immediate-welfare&collection=street-dog-immediate-welfare%3Afindings&via=finding-public-street-dog-information-fragmented&record=crossover-2026-11-02-sas-field-call-records-received");
-    assert.equal(linkedEvidence.collectionId, "street-dog-immediate-welfare:findings");
-    assert.deepEqual(linkedEvidence.recordTrail, ["finding-public-street-dog-information-fragmented"]);
-    assert.equal(linkedEvidence.selectedId, "crossover-2026-11-02-sas-field-call-records-received");
-    const byDate = explorerStateFromSearch("?sort=date");
-    assert.equal(byDate.byDate, true);
-    assert.equal(byDate.groupId, null);
-    assert.equal(byDate.collectionId, null);
-    const datePath = explorerStateFromSearch("?sort=date&nav=breadcrumb&date=2026-11-03");
-    assert.equal(datePath.navigation, "breadcrumb");
-    assert.equal(datePath.dateGroup, "2026-11-03");
-    const oldUpdateLink = explorerStateFromSearch(`?nav=breadcrumb&group=updates&collection=public-updates&record=${receiptId}`);
-    assert.equal(oldUpdateLink.byDate, true);
-    assert.equal(oldUpdateLink.selectedId, receiptId);
-    assert.equal(oldUpdateLink.collectionId, null);
-    assert.equal(explorerStateFromSearch("?group=latest&collection=latest%3Aactivity").byDate, true);
-    assert.equal(explorerStateFromSearch("?group=organization").groupId, "crossover");
-  } finally {
-    await vite.close();
-  }
 });
 
 test("Explorer has five top-level categories and keeps Crossover and Needs independent", () => {

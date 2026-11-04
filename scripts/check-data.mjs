@@ -1,9 +1,8 @@
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
-import { join, resolve, sep } from "node:path";
+import { existsSync, readFileSync } from "node:fs";
+import { resolve, sep } from "node:path";
 import { validateRecord } from "./schema-validator.mjs";
 
 const read = (name) => JSON.parse(readFileSync(`src/data/${name}.json`, "utf8"));
-const readPage = (name) => JSON.parse(readFileSync(`src/pages/${name}.json`, "utf8"));
 const datasets = [
   ["crossover", "identity"], ["people", "person"], ["principles", "principle"], ["methods", "method"],
   ["needs", "need"], ["investigations", "investigation"],
@@ -46,17 +45,6 @@ for (const [file] of datasets) for (const item of records.get(file) ?? []) {
   if (file === "stories" && Object.hasOwn(item, "image")) errors.push(`story:${item.id} still uses legacy image instead of preferred_image`);
 }
 const ids = (file) => new Set((records.get(file) ?? []).map(({ id }) => id));
-for (const [file, schema] of [["site-navigation", "navigation"], ["action-cards", "action-card"]]) {
-  const items = readPage(file);
-  const seen = new Set();
-  for (const item of items) {
-    if (seen.has(item.id)) errors.push(`${file}: duplicate ID ${item.id}`);
-    seen.add(item.id);
-    errors.push(...validateRecord(item, schema, `${file}:${item.id ?? "?"}`));
-    if (!item.href?.startsWith("/")) errors.push(`${file}:${item.id} requires an internal href`);
-  }
-  records.set(file, items);
-}
 const checkRefs = (items, target, prop, source) => {
   const valid = ids(target);
   for (const item of items) for (const id of Array.isArray(item[prop]) ? item[prop] : item[prop] ? [item[prop]] : []) {
@@ -87,11 +75,6 @@ for (const prop of ["objective_ids", "organization_ids", "location_ids", "map_re
 for (const prop of ["activity_record_ids", "evidence_record_ids", "finding_ids", "task_ids"]) {
   const target = { activity_record_ids: "activities", evidence_record_ids: "records", finding_ids: "findings", task_ids: "tasks" }[prop];
   checkRefs(records.get("objectives"), target, prop, "objective");
-}
-const activityPage = readPage("activity");
-for (const [objectiveId, display] of Object.entries(activityPage.objectiveDisplay ?? {})) {
-  if (!ids("objectives").has(objectiveId)) errors.push(`activity page: unknown objective ${objectiveId}`);
-  if (Object.keys(display).some((key) => !["note", "showOrganizations"].includes(key))) errors.push(`activity page: unsupported display field for ${objectiveId}`);
 }
 checkRefs(records.get("findings"), "investigations", "investigation_id", "finding");
 for (const prop of ["supporting_record_ids", "contradicting_record_ids"]) checkRefs(records.get("findings"), "records", prop, "finding");
@@ -132,29 +115,7 @@ for (const item of records.get("claims") ?? []) {
   if (item.verificationStatus === "not_established" && item.sourceRecordIds.length) errors.push(`claim:${item.id} unknown quantity has source records`);
   if (item.kind === "administrative_count" && !item.measurementId) errors.push(`claim:${item.id} administrative count needs measurement`);
 }
-const homePage = readPage("home");
-const compositions = [...readPage("compositions"), { id: homePage.id, route: homePage.route, sections: homePage.sections }];
-const compositionIds = new Set();
-const sourceCollections = { "site-navigation": "site-navigation", "action-cards": "action-cards", identity: "crossover", people: "people", principles: "principles", methods: "methods", needs: "needs", investigations: "investigations", objectives: "objectives", tasks: "tasks", activities: "activities", evidence: "evidence", findings: "findings", claims: "claims", organizations: "organizations", stories: "stories", locations: "locations", projects: "projects", articles: "articles", measurements: "measurements", developments: "evidence" };
-for (const page of compositions) {
-  errors.push(...validateRecord(page, "page", `page:${page.id}`));
-  if (compositionIds.has(page.id)) errors.push(`duplicate page composition: ${page.id}`);
-  compositionIds.add(page.id);
-  const sectionIds = new Set();
-  for (const section of page.sections) {
-    if (sectionIds.has(section.id)) errors.push(`duplicate section: ${page.id}/${section.id}`);
-    sectionIds.add(section.id);
-    const source = sourceCollections[section.source];
-    if (!source) continue;
-    const targetIds = ids(source);
-    for (const id of section.recordIds ?? []) if (!targetIds.has(id)) errors.push(`page:${page.id}/${section.id} → missing ${source}:${id}`);
-  }
-}
-for (const directory of ["src/pages", "src/ui"]) for (const file of readdirSync(directory, { recursive: true })) {
-  const full = join(directory, file);
-  if (statSync(full).isFile() && full.endsWith(".json")) JSON.parse(readFileSync(full, "utf8"));
-}
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exitCode = 1;
-} else console.log(`Data check passed: ${datasets.length} semantic collections and ${compositions.length} page compositions; IDs, schemas, references, and provenance checked.`);
+} else console.log(`Data check passed: ${datasets.length} semantic collections; IDs, schemas, references, and provenance checked.`);

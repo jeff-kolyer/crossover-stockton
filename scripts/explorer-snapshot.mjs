@@ -200,7 +200,7 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
   const visibleCollections = publishedCollections.map((item) => ({ ...item, hidden: hiddenCollectionIds.has(item.id) || !roots.some((root) => root.id === item.group) }));
   const groups = roots.map((root) => ({ id: root.id, title: root.title, collectionIds: visibleCollections.filter((item) => item.group === root.id && !item.hidden).map((item) => item.id), ...(root.id === "investigation" ? { investigationIds: branches.map((item) => item.id) } : {}) })).filter((group) => group.collectionIds.length || group.investigationIds?.length);
   const namedSchemas = new Set(policy.collections.map((item) => item.schema));
-  const abstractSchemas = new Set(["common", "page", "view", "source", "organization-service", "development", "action-card", "navigation"]);
+  const abstractSchemas = new Set(["common", "source", "organization-service", "development"]);
   const unsupportedTypes = Object.keys(schemas).filter((name) => !namedSchemas.has(name) && !abstractSchemas.has(name));
   const nestedFieldNames = (rule) => Array.isArray(rule) ? rule : Object.entries(rule).flatMap(([name, child]) => [name, ...(child === true ? [] : nestedFieldNames(child))]);
   const fieldNames = new Set([

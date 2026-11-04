@@ -1,5 +1,4 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
 import { existsSync, readFileSync } from "node:fs";
 import { resolve, sep } from "node:path";
 
@@ -54,5 +53,5 @@ function devGeneratedPages() {
 }
 
 export default defineConfig({
-  plugins: [react(), devImageCacheHeaders(), devGeneratedPages()],
+  plugins: [devImageCacheHeaders(), devGeneratedPages()],
 });

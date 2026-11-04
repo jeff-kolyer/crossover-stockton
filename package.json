@@ -6,39 +6,18 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "predev": "npm run build",
-    "validate:public-actions": "node scripts/validate-public-actions.mjs",
     "validate:projects": "node scripts/validate-projects.mjs",
     "validate:research": "node scripts/validate-dogs-research.mjs",
-    "validate:investigations": "node scripts/validate-dogs-investigations.mjs",
     "validate:investigation-data": "node scripts/validate-investigation-data.mjs",
-    "check:layout": "node scripts/check-layout.mjs",
     "check:data": "node scripts/check-data.mjs && node scripts/validate-investigation-data.mjs",
     "check:explorer": "node scripts/build-explorer-data.mjs && node --test scripts/test-explorer.mjs",
     "generate:one-file": "node scripts/build-explorer-data.mjs && node scripts/generate-one-file-site.mjs && node --test scripts/test-one-file-site.mjs",
     "check:updates": "node --test scripts/test-public-updates.mjs",
-    "check:home": "node --test scripts/test-home-composition.mjs",
-    "check:copy": "node scripts/audit-static-copy.mjs --direct",
     "build": "npm run check:data && npm run generate:one-file && node scripts/publish-one-file-site.mjs && node --test scripts/test-published-site.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
-    "@fontsource-variable/inter": "^5.3.0",
-    "@maplibre/maplibre-gl-leaflet": "^0.1.4",
-    "@vitejs/plugin-react": "^5.0.4",
-    "clsx": "^2.1.1",
-    "leaflet": "^1.9.4",
-    "maplibre-gl": "^6.16.0",
-    "motion": "^11.15.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-leaflet": "^5.0.0",
     "typescript": "^5.6.3",
     "vite": "^6.0.5"
-  },
-  "devDependencies": {
-    "@types/leaflet": "^1.9.21",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "postcss": "^8.5.26"
   }
 }
