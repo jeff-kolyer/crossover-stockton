@@ -89,6 +89,24 @@
     else document.head.append(document.importNode(incoming, true));
   };
 
+  const syncBreadcrumb = () => {
+    if (history.state?.breadcrumbContext !== "explore" || !recordPath.test(location.pathname)) return;
+    const breadcrumb = document.querySelector("main#main .breadcrumbs");
+    const title = document.querySelector("main#main h1")?.textContent?.trim();
+    const type = document.querySelector("main#main .page-intro .eyebrow")?.textContent?.trim();
+    if (!breadcrumb || !title || !type) return;
+    const home = document.createElement("a");
+    home.href = "/";
+    home.textContent = "Home";
+    const explore = document.createElement("a");
+    explore.href = "/explore/";
+    explore.textContent = "Explore";
+    const current = document.createElement("span");
+    current.setAttribute("aria-current", "page");
+    current.textContent = title;
+    breadcrumb.replaceChildren(home, document.createTextNode(" / "), explore, document.createTextNode(` / ${type} / `), current);
+  };
+
   const display = (page, url, scrollY, focusMain) => {
     const main = document.importNode(page.querySelector("main#main"), true);
     document.querySelector("main#main").replaceWith(main);
@@ -101,6 +119,7 @@
     syncMeta(page, 'meta[name="robots"]');
     syncMeta(page, 'link[rel="canonical"]');
     displayedPath = url.pathname;
+    syncBreadcrumb();
     enhanceExplore();
     window.scrollTo(0, scrollY);
     if (focusMain) main.focus({ preventScroll: true });
@@ -111,7 +130,11 @@
     try {
       const page = await loadPage(url);
       if (requestId !== navigationId) return;
-      if (push) history.pushState(null, "", url.pathname);
+      if (push) {
+        const fromExplore = recordPath.test(url.pathname) &&
+          (displayedPath === "/explore/" || history.state?.breadcrumbContext === "explore");
+        history.pushState(fromExplore ? { breadcrumbContext: "explore" } : null, "", url.pathname);
+      }
       display(page, url, restoreScroll, push);
     } catch {
       if (requestId !== navigationId) return;
@@ -143,4 +166,5 @@
     if (url && url.pathname !== displayedPath) loadPage(url).catch(() => {});
   }, { passive: true });
   enhanceExplore();
+  syncBreadcrumb();
 })();
