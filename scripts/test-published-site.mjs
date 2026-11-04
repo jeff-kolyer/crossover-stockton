@@ -98,6 +98,23 @@ test("the St. Mary's task publishes its instructions and recorded date", async (
   assert.match(page, /Recorded At · Oct 31, 2026/);
 });
 
+test("need pages show public record points and their linked claims", async () => {
+  for (const need of records.filter(({ schema }) => schema === "need")) {
+    const page = await read(`dist/record/${need.id}/index.html`);
+    assert.ok(need.fields.what_we_are_seeing?.length, `${need.id} public record points`);
+    assert.match(page, /<h2>What the public record shows<\/h2>/);
+    for (const point of need.fields.what_we_are_seeing) {
+      assert.ok(page.includes(`<li>${escapeHtml(point)}</li>`), `${need.id} point appears on page`);
+    }
+    for (const claim of records.filter(({ schema, fields }) => schema === "claim" && fields.needId === need.id)) {
+      assert.ok(page.includes(`/record/${claim.id}/`), `${need.id} links claim ${claim.id}`);
+      for (const sourceId of claim.fields.sourceRecordIds ?? []) {
+        assert.ok(page.includes(`/record/${sourceId}/`), `${claim.id} links source ${sourceId}`);
+      }
+    }
+  }
+});
+
 test("the sitemap lists every canonical page and legacy URLs lead to clean paths", async () => {
   const sitemap = await read("dist/sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);

@@ -19,6 +19,11 @@
       "type": "string",
       "minLength": 1
     },
+    "what_we_are_seeing": {
+      "type": "array",
+      "description": "Attributed observations and reported conditions in the public record; these are not necessarily Crossover's firsthand findings.",
+      "items": { "type": "string", "minLength": 1 }
+    },
     "investigation_status": {
       "type": "string",
       "description": "Crossover's investigative engagement with this need, not its severity, priority, condition trend, or solution outcome. Identified means the need is recorded; investigating means Crossover is actively examining it.",

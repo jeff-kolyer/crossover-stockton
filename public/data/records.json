@@ -301,6 +301,12 @@
         "slug": "too-many-dogs-still-lack-safe-placement",
         "title": "Street dogs and access to care",
         "summary": "Animal rescuers estimate that hundreds of dogs may be living on Stockton's streets. The city acknowledges recurring shelter overcrowding, while rescue organizations report increasing abandonment and limited capacity to help. The number of dogs currently on the streets, their conditions, and how many are receiving care remain unverified.",
+        "what_we_are_seeing": [
+          "Stockton Animal Services reports recurring shelter-capacity pressure. It prioritizes sick, injured, aggressive, and confirmed abandonment cases, while healthy stray intake generally requires an appointment. Its guidance cautions that a roaming dog may be lost or owned rather than abandoned.",
+          "Stockton Street Dogs reports feeding and outreach on the streets several times a week. Its public materials also describe fostering, adoption, and other rescue pathways.",
+          "At an October 19, 2026 committee meeting, city officials discussed shelter limitations and repeated roaming-animal violations. The committee advanced proposed animal-control changes for full City Council consideration; the cited report did not establish a final Council outcome.",
+          "On October 20, Crossover requested Animal Services field-call records. They were received by email on November 2; their contents and limitations have not yet been assessed here."
+        ],
         "investigation_status": "investigating",
         "updated_at": "2026-10-28",
         "organization_ids": [
@@ -355,6 +361,12 @@
         "slug": "people-with-pets-still-face-barriers-to-safe-shelter",
         "title": "People with pets and shelter access",
         "summary": "San Joaquin County's 2024 survey reported that 34% of unhoused respondents had pets. St. Mary's has opened pet-inclusive shelter options. Crossover has not investigated whether people with pets still face barriers to shelter access, or how effectively existing services meet their needs.",
+        "what_we_are_seeing": [
+          "San Joaquin County's 2024 survey found 34% of unhoused respondents had a pet, and 45% of pet-owning respondents had two or more pets.",
+          "The 2026 homelessness count added a specific question to measure whether pets are preventing people from entering shelter.",
+          "St. Mary's describes Pathways as offering low-barrier shelter options designed to accommodate people with pets, partners, family, or belongings.",
+          "Stockton Street Dogs has proposed a Safe Grounds model intended to keep unhoused people and companion animals together while they move toward housing; the proposal is not evidence that the program is operating."
+        ],
         "investigation_status": "identified",
         "updated_at": "2026-08-21T20:48:00-07:00",
         "organization_ids": [
@@ -389,6 +401,12 @@
         "slug": "food-distribution-capacity-isnt-keeping-up-with-need",
         "title": "Food distribution capacity",
         "summary": "In August 2026, Bread of Life reported that a large frozen-food donation exceeded its cold-storage capacity. Partners helped distribute the food. Crossover has not investigated whether storage, transportation, or coordination regularly prevent food from reaching people.",
+        "what_we_are_seeing": [
+          "In August 2026, a donation of roughly three semitruck loads, including two loads of frozen food, exceeded Bread of Life's two existing freezers.",
+          "Bread of Life reported relying on local partners for refrigerated transportation and temporary cold storage so the donation could still reach residents.",
+          "Bread of Life's public materials report distribution through more than 33 locations and service to about 7,000 people per month; these are the organization's reported figures.",
+          "Community Partnership for Families also provides neighborhood food distribution and fresh-food access through its Family Resource Centers."
+        ],
         "investigation_status": "identified",
         "updated_at": "2026-08-21T21:42:00-07:00",
         "organization_ids": [
@@ -423,6 +441,12 @@
         "slug": "people-leaving-incarceration-still-face-unstable-reentry-housing",
         "title": "Housing access after incarceration",
         "summary": "Public sources describe programs providing transitional housing, paid work, and assistance to people returning from incarceration. Crossover has not investigated who can access those programs, what outcomes they produce, or where housing barriers remain.",
+        "what_we_are_seeing": [
+          "Ready To Work describes transitional housing, paid work, case management, training, and links to permanent housing for eligible men.",
+          "Friends Outside describes housing and rental assistance, employment readiness, basic-needs support, and case management for people returning from incarceration.",
+          "Friends Outside identifies housing alongside education and employment as one of the three pillars of successful reentry.",
+          "A prison puppy-raising program at California Health Care Facility in Stockton is a separate pre-release initiative. The cited record does not establish whether it improves participants' housing outcomes."
+        ],
         "investigation_status": "identified",
         "updated_at": "2026-09-18T18:28:00-07:00",
         "organization_ids": [
@@ -457,6 +481,12 @@
         "slug": "people-still-need-low-barrier-paths-from-homelessness-to-housing",
         "title": "Paths from homelessness to housing",
         "summary": "St. Mary's opened Pathways Neighborhood in June 2026, adding 268 transitional housing beds. Crossover has not investigated who can access the facility, how many residents reach permanent housing, or what happens to people who cannot enter.",
+        "what_we_are_seeing": [
+          "St. Mary’s opened Pathways Neighborhood in June 2026, adding 268 beds of modular transitional housing with on-site supportive services.",
+          "St. Mary's describes the Pathways model as offering low-barrier shelter, case management, wraparound services, and support toward permanent housing.",
+          "St. Mary’s identifies the Zeiter Navigation Center as another housing-navigation service in downtown Stockton.",
+          "In May 2026, Stockton leaders described homelessness as a continuing city challenge, even as Pathways added capacity."
+        ],
         "investigation_status": "identified",
         "updated_at": "2026-09-18T18:28:00-07:00",
         "organization_ids": [
@@ -4928,6 +4958,11 @@
     "summary": {
       "label": "Summary",
       "kind": "value"
+    },
+    "what_we_are_seeing": {
+      "label": "What the public record shows",
+      "kind": "value",
+      "description": "Attributed observations and reported conditions in the public record; these are not necessarily Crossover's firsthand findings."
     },
     "description": {
       "label": "Description",
