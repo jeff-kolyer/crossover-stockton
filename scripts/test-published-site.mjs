@@ -65,7 +65,7 @@ test("the root and every feed record have readable HTML with normal URLs", async
     const page = await read(`dist/record/${id}/index.html`);
     assert.match(embed, /^https:\/\/www\.google\.com\/maps\/embed\?pb=/);
     assert.ok(page.includes(`<iframe class="location-map" title="Map of ${escapeHtml(feed.records[id].title)}" src="${escapeHtml(embed)}"`), `${id} embedded map`);
-    assert.match(page, /Open on Google Maps ↗/);
+    assert.equal((page.match(/Open on Google Maps ↗/g) || []).length, 1, `${id} has one Google Maps button`);
   }
   assert.doesNotMatch(await read("dist/record/weston-ranch-carrie-street/index.html"), /<iframe class="location-map"/);
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
