@@ -6,6 +6,8 @@
     "title": "Submit a volunteer application to Stockton Street Dogs",
     "status": "done",
     "type": "application",
+    "estimated_created_at": "2026-10-07",
+    "creation_date_basis": "Estimated from the documented application date; the original planning date was not recorded.",
     "instructions": "Submit an application to learn how Crossover can participate firsthand.",
     "location_ids": [],
     "organization_ids": [
@@ -28,6 +30,8 @@
     "title": "Ask Stockton Animal Services about Doggie Day Out",
     "status": "done",
     "type": "inquiry",
+    "estimated_created_at": "2026-10-12",
+    "creation_date_basis": "Estimated from the documented inquiry date; the original planning date was not recorded.",
     "instructions": "Ask about sign-up, requirements, paperwork, and orientation.",
     "location_ids": [],
     "organization_ids": [
@@ -51,6 +55,8 @@
     "title": "Visit Stockton Animal Services and submit a volunteer application",
     "status": "done",
     "type": "application",
+    "estimated_created_at": "2026-10-14",
+    "creation_date_basis": "Estimated from the documented visit and application date; the original planning date was not recorded.",
     "instructions": "Visit the shelter, deliver the application, and learn about the public visitor experience.",
     "location_ids": [],
     "organization_ids": [
@@ -73,6 +79,8 @@
     "title": "Request Animal Services field-call records",
     "status": "done",
     "type": "records_request",
+    "estimated_created_at": "2026-10-20",
+    "creation_date_basis": "Estimated from the documented records-request date; the original planning date was not recorded.",
     "instructions": "Request field-call records for roaming, stray, abandoned, aggressive, and distressed dogs.",
     "location_ids": [],
     "organization_ids": [
@@ -97,6 +105,8 @@
     "title": "Follow up on Animal Services field-call records",
     "status": "done",
     "type": "follow_up",
+    "estimated_created_at": "2026-10-20",
+    "creation_date_basis": "Estimated from the October 20 records request that prompted this follow-up; the original planning date was not recorded.",
     "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
     "location_ids": [],
     "organization_ids": [
@@ -122,6 +132,8 @@
     "title": "Review Animal Services field-call records",
     "status": "open",
     "type": "source_review",
+    "estimated_created_at": "2026-11-02",
+    "creation_date_basis": "Estimated from the November 2 receipt of records; this task first appears in Git on November 3.",
     "instructions": "Review the records received in response to the October 20 Stockton Animal Services field-call request. Preserve the original files and receipt details, document the date range, fields, definitions, coverage, missing or redacted information, and limitations. Analyze patterns relevant to where dogs need help and what happens after reports; distinguish administrative records from firsthand observations and do not treat calls as unique dogs or verified street population. Record findings and next actions only after reviewing the evidence.",
     "location_ids": [],
     "organization_ids": [
@@ -145,6 +157,8 @@
     "title": "Verify conditions: scale of the dog problem near St. Mary's",
     "status": "open",
     "type": "field_observation",
+    "estimated_created_at": "2026-10-31",
+    "creation_date_basis": "Estimated from the first Git record on October 31; the task may have been planned earlier.",
     "recorded_at": "2026-10-31",
     "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
     "public_instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
@@ -172,6 +186,8 @@
     "title": "Verify reported conditions in South Stockton / District 5",
     "status": "open",
     "type": "field_observation",
+    "estimated_created_at": "2026-10-29",
+    "creation_date_basis": "Estimated from the first Git record on October 29; the task may have been planned earlier.",
     "instructions": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site. Choose a safe public observation route near the reported Carrie Street area, confirm access and current conditions before visiting, and document what is actually present, including zero dogs if none are seen. Do not treat the April incident as evidence of current danger or assume the September encounters occurred there. Distinguish both published reports from firsthand findings and record follow-up questions.",
     "location_ids": [
       "weston-ranch-carrie-street",
@@ -198,6 +214,8 @@
     "title": "Follow up with Stockton Street Dogs",
     "status": "open",
     "type": "organization_contact",
+    "estimated_created_at": "2026-10-27",
+    "creation_date_basis": "Estimated from the first Git record on October 27; the task may have been planned earlier.",
     "instructions": "Check whether the October 7 volunteer application received a response. Ask for the current status and evidence of progress on Canine Campus, and identify practical approved volunteer or care opportunities, requirements, schedules, and contacts. Record any reply only when received.",
     "location_ids": [],
     "organization_ids": [
@@ -234,6 +252,8 @@
     "title": "Follow up with Stockton Animal Services on volunteering",
     "status": "waiting",
     "type": "follow_up",
+    "estimated_created_at": "2026-10-28",
+    "creation_date_basis": "Estimated from the first Git record on October 28; the task may have been planned earlier.",
     "instructions": "Check the status of the October 14 volunteer application and the October 12 Doggie Day Out inquiry. Confirm onboarding, orientation, eligibility, scheduling, and practical transport requirements; document a response only if received.",
     "location_ids": [],
     "organization_ids": [
@@ -257,6 +277,8 @@
     "title": "Monitor the proposed animal-control ordinance",
     "status": "open",
     "type": "policy_monitoring",
+    "estimated_created_at": "2026-10-28",
+    "creation_date_basis": "Estimated from the first Git record on October 28; the task may have been planned earlier.",
     "instructions": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date. Keep the October 19 committee referral separate from any later Council adoption.",
     "location_ids": [],
     "organization_ids": [
@@ -279,6 +301,8 @@
     "title": "Contact CBS reporter Charlie Lapastora",
     "status": "open",
     "type": "organization_contact",
+    "estimated_created_at": "2026-10-28",
+    "creation_date_basis": "Estimated from the first Git record on October 28; the task may have been planned earlier.",
     "instructions": "Follow up on the April 6 and June 8 CBS Sacramento reports about abandoned dogs in Stockton. Ask what evidence was gathered, what has happened since, and whether the reporter can connect Crossover with firsthand observers with their permission. Record contact or answers only if they actually occur.",
     "location_ids": [],
     "organization_ids": [],

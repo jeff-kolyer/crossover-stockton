@@ -86,16 +86,30 @@ test("the one-file interactive version remains available without hash route link
   assert.deepEqual((await readdir("dist")).filter((name) => name === "assets"), []);
 });
 
-test("the St. Mary's task publishes its instructions and recorded date", async () => {
+test("the St. Mary's task publishes its instructions and estimated creation date", async () => {
   const id = "task-verify-st-marys-church-street-dog-scale";
   const record = feed.records[id];
   const page = await read(`dist/record/${id}/index.html`);
   assert.equal(record.fields.recorded_at, "2026-10-31");
-  assert.equal(record.dateForSort.field, "recorded_at");
+  assert.equal(record.fields.estimated_created_at, "2026-10-31");
+  assert.equal(record.dateForSort.field, "estimated_created_at");
   assert.ok(record.fields.public_instructions);
   assert.equal(record.fields.instructions, undefined);
   assert.ok(page.includes(`<h2>Instructions</h2><p>${escapeHtml(record.fields.public_instructions)}</p>`));
-  assert.match(page, /Recorded At · Oct 31, 2026/);
+  assert.match(page, /Created \(estimated\) · Oct 31, 2026/);
+});
+
+test("every task publishes an estimated creation date with its basis", async () => {
+  const tasks = records.filter(({ schema }) => schema === "action");
+  assert.equal(tasks.length, 12);
+  for (const task of tasks) {
+    assert.match(task.fields.estimated_created_at, /^2026-\d{2}-\d{2}$/);
+    assert.ok(task.fields.creation_date_basis?.includes("Estimated from"), task.id);
+    assert.equal(task.dateForSort.field, task.fields.completed_at ? "completed_at" : "estimated_created_at");
+    if (task.fields.completed_at) assert.ok(task.fields.estimated_created_at <= task.fields.completed_at, `${task.id} estimate is no later than completion`);
+    const page = await read(`dist/record/${task.id}/index.html`);
+    assert.ok(page.includes(escapeHtml(task.fields.creation_date_basis)), `${task.id} date basis on page`);
+  }
 });
 
 test("need pages show public record points and their linked claims", async () => {
