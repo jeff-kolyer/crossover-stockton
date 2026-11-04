@@ -4023,24 +4023,43 @@
         "type": "investigation",
         "path": "/articles/public-access-to-stray-dog-information/",
         "content": {
-          "introduction": "When someone reports a dog on Stockton's streets, what information reaches the people who could help? Stockton Animal Services, independent rescuers, volunteers, and residents already respond in different ways. We are investigating whether useful information about reported dogs, responses, and unresolved needs is accessible enough to support that work.",
+          "introduction": "We appreciate Stockton Animal Services staff for making field-service records available in response to Crossover's October 20 request. The spreadsheet arrived November 2, 2026, and contains 7,183 case records. We began reviewing it November 4. The records give us a new way to examine how reports are classified and closed, but recorded dispositions alone do not establish what happened to each dog. Our review and follow-up questions are ongoing.",
           "sections": [
             {
-              "heading": "Our October 20 records request",
+              "heading": "Editor's update — November 4, 2026",
               "paragraphs": [
-                "On October 20, Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. We asked for dates, general areas, complaint categories, response dispositions, and closure statuses where those fields are maintained. The request is intended to help us learn where dogs are reported, whether officers respond and locate them, what follows a response, and which reports remain unresolved. We do not yet know which of these questions the records can answer.",
-                "As of October 30, ten calendar days after submission, Crossover had received an automatic forwarding acknowledgment but no substantive response or records. This status was confirmed by the requester on October 30. California's Public Records Act generally calls for an agency to make a disclosure determination within ten calendar days, with qualifying extensions; that is not necessarily a deadline for delivering the records. We have not established the agency's receipt date, any applicable extension, or the full circumstances of its processing, so we are drawing no legal conclusion from this timeline."
+                "Since this article was first published on October 30, Stockton Animal Services provided the field-service records Crossover requested on October 20. We received the spreadsheet on November 2 and began reviewing its 7,183 cases on November 4. We appreciate the department's cooperation and the work involved in making these records available. This article has been revised to reflect that development; conclusions about case classifications, access, and outcomes remain preliminary.",
+                "Milestones: October 20 — request submitted; October 30 — original article published; November 2 — records received; November 4 — review began. This is a new development, not a correction to the original reporting."
               ],
               "links": [
                 {
-                  "label": "Crossover's records-request Activity record",
-                  "display_label": "Animal Services records request",
-                  "url": "/work/dogs/activity/#crossover-2026-10-20-sas-field-call-records-request"
+                  "label": "Records request activity",
+                  "display_label": "October 20 records request",
+                  "url": "/record/crossover-2026-10-20-sas-field-call-records-request/"
                 },
                 {
-                  "label": "California Department of Justice guide to public records timelines",
-                  "display_label": "California records timelines guide",
-                  "url": "https://oag.ca.gov/consumers/general/pra"
+                  "label": "Records received activity",
+                  "display_label": "November 2 records received",
+                  "url": "/record/crossover-2026-11-02-sas-field-call-records-received/"
+                }
+              ]
+            },
+            {
+              "heading": "Our October 20 records request",
+              "paragraphs": [
+                "On October 20, Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. We asked for dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. The department supplied a spreadsheet on November 2 containing 7,183 case records. We began reviewing it November 4.",
+                "Our questions are which general areas appear in the data, how cases are classified, what the response and closure fields mean, and what can safely be made public. A recorded disposition does not by itself establish an animal's ultimate outcome. We will report what the data supports as we examine it."
+              ],
+              "links": [
+                {
+                  "label": "Crossover's records-request activity",
+                  "display_label": "Animal Services records request",
+                  "url": "/record/crossover-2026-10-20-sas-field-call-records-request/"
+                },
+                {
+                  "label": "Crossover's records-received activity",
+                  "display_label": "Records received November 2",
+                  "url": "/record/crossover-2026-11-02-sas-field-call-records-received/"
                 }
               ]
             },
@@ -4048,7 +4067,7 @@
               "heading": "What the public can already see",
               "paragraphs": [
                 "The City provides an online route for animal-related complaints, a list of pets currently in shelter care, and a lost-and-found pet map. Stockton's open-data portal also publishes an animal-shelter overview of intake and outcomes. These are useful public resources. A shelter intake or outcome total, however, is different from a record of each street report and what happened afterward.",
-                "Our question is whether a person can follow the path from a reported dog to an officer response, a located animal, care, reunification, placement, or an unresolved case. We have not established that this information is unavailable elsewhere. We need to examine the requested records, the limits of the public tools, and what can be shared safely before concluding that a gap exists."
+                "Our question is whether a person can follow the path from a reported dog to an officer response, a located animal, care, reunification, placement, or an unresolved case. We have not established that this information is unavailable elsewhere. We are comparing the newly supplied case records with the public tools and considering what can be shared safely before concluding that a gap exists."
               ],
               "links": [
                 {
@@ -4097,8 +4116,8 @@
             {
               "heading": "How Crossover is testing the approach",
               "paragraphs": [
-                "Crossover's public investigation follows a cycle: planned Actions identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The records request is one Activity in that cycle, and its result remains pending.",
-                "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. The next steps are to examine the field-call records if provided, compare them with existing public resources, ask responders what information they can share, and test whether that information helps people act safely."
+                "Crossover's public investigation follows a cycle: planned Actions identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The October 20 records request and November 2 receipt are documented Activities. Review of the spreadsheet began November 4.",
+                "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. We are examining field-call classifications and resolution labels, comparing the records with existing public resources, asking responders what information they can share, and testing whether that information helps people act safely."
               ],
               "links": [
                 {
@@ -4122,12 +4141,13 @@
             {
               "heading": "What remains to establish",
               "paragraphs": [
-                "We still need to learn what field-call data exists and can be released, how a public report moves through response and closure, what useful information is already public, and how Animal Services and independent caregivers coordinate when appropriate. We also need to ask whether better access would change outcomes for dogs, while respecting privacy and safety.",
+                "We still need to learn what the supplied field-call data can establish, how a public report moves through response and closure, what useful information is already public, and how Animal Services and independent caregivers coordinate when appropriate. The 7,183 case records require careful review; case labels must not be treated as verified animal outcomes. We also need to ask whether better access would change outcomes for dogs, while respecting privacy and safety.",
                 "How could better public information and AI-supported coordination help more dogs reach care?"
               ]
             }
           ]
         },
+        "last_updated_at": "2026-11-04",
         "related_gap_ids": [
           "dogs-safe-placement"
         ],

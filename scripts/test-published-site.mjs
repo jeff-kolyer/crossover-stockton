@@ -9,6 +9,39 @@ const feed = JSON.parse(await read("public/data/records.json"));
 const records = Object.values(feed.records);
 const organizations = records.filter(({ schema }) => schema === "organization");
 
+test("every article publishes its complete text as readable HTML", async () => {
+  const articles = records.filter(({ schema }) => schema === "article");
+  assert.ok(articles.length > 0);
+  for (const article of articles) {
+    const page = await read(`dist/record/${article.id}/index.html`);
+    const content = article.fields.content;
+    assert.ok(page.includes('<article class="article-content">'), article.id);
+    assert.ok(page.includes(`<p class="article-lede">${escapeHtml(content.introduction)}</p>`), article.id);
+    for (const [index, section] of content.sections.entries()) {
+      assert.ok(page.includes(`<section id="article-section-${index + 1}"><h2>${escapeHtml(section.heading)}</h2>`), `${article.id}: ${section.heading}`);
+      for (const paragraph of section.paragraphs ?? []) assert.ok(page.includes(`<p>${escapeHtml(paragraph)}</p>`), `${article.id}: missing paragraph`);
+      for (const link of section.links ?? []) assert.ok(page.includes(escapeHtml(link.display_label || link.label || "Read source")), `${article.id}: missing source link`);
+    }
+    for (const id of article.fields.related_location_ids ?? []) {
+      const place = feed.records[id];
+      assert.ok(page.includes(`<a href="/record/${id}/">${escapeHtml(place.title)}</a>`), `${article.id}: ${id} place label`);
+    }
+  }
+});
+
+test("records-access article preserves its publication date and dated development", async () => {
+  const article = feed.records["public-access-to-stray-dog-information"];
+  const page = await read(`dist/record/${article.id}/index.html`);
+  assert.equal(article.fields.date, "2026-10-30");
+  assert.equal(article.fields.last_updated_at, "2026-11-04");
+  assert.match(page, /Originally published Oct 30, 2026 · Last updated Nov 4, 2026/);
+  assert.match(page, /Editor&#39;s update — November 4, 2026/);
+  assert.match(page, /spreadsheet on November 2/);
+  assert.match(page, /7,183 case records/);
+  assert.match(page, /href="\/record\/crossover-2026-11-02-sas-field-call-records-received\/"/);
+  assert.doesNotMatch(page, /result remains pending|examine the field-call records if provided/);
+});
+
 test("the root and every feed record have readable HTML with normal URLs", async () => {
   const root = await read("dist/index.html");
   assert.equal(await read("index.html"), root);

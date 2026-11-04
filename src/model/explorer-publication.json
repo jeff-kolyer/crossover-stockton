@@ -55,7 +55,7 @@
     { "id": "claims", "schema": "claim", "title": "Claims", "query": "claims", "fields": ["id", "statement", "kind", "verificationStatus", "reportedValue", "limitations", "sourceRecordIds", "measurementId", "needId"] },
     { "id": "measurements", "schema": "measurement", "title": "Measurements", "query": "measurements", "fields": ["id", "measure", "value", "unit", "period_start", "period_end", "coverage_id", "source_record_id", "investigation_id", "evidence_status", "note"] },
     { "id": "stories", "schema": "story", "title": "Stories", "query": "stories", "fields": ["id", "slug", "title", "summary", "body", "sign_of_being", "published_at", "source_label", "source_url", "gap_ids", "organization_ids", "active"] },
-    { "id": "articles", "schema": "article", "title": "Articles", "query": "articles", "fields": ["id", "title", "description", "summary", "date", "type", "path", "content", "related_gap_ids", "related_location_ids", "published"] },
+    { "id": "articles", "schema": "article", "title": "Articles", "query": "articles", "fields": ["id", "title", "description", "summary", "date", "type", "path", "content", "last_updated_at", "related_gap_ids", "related_location_ids", "published"] },
     { "id": "projects", "schema": "project", "title": "Projects", "query": "projects", "fields": ["id", "title", "description", "intended_outcome", "development_stage", "operational_status", "funding_status", "capacity_summary", "expected_capacity_or_benefit", "actual_additional_capacity", "demand_contribution", "procedure_tracking", "milestones", "evidence_record_ids", "gap_ids", "organization_ids", "last_verified_at", "open_questions", "next_verification_step"] }
   ],
   "nestedFields": {
