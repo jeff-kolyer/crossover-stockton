@@ -106,7 +106,6 @@ test("the root and every feed record have readable HTML with normal URLs", async
   }
   for (const [id, section, label] of [
     ["dogs-safe-placement", "needs", "Needs"],
-    ["crossover-2026-10-14-sas-volunteer-application", "activity", "Activity"],
     ["crossover-2026-10-14-sas-first-visit", "explore", "Explore"],
   ]) {
     const page = await read(`dist/record/${id}/index.html`);
@@ -116,6 +115,9 @@ test("the root and every feed record have readable HTML with normal URLs", async
   const responsePage = await read("dist/record/streetdogs-fed-70-animals/index.html");
   assert.ok(responsePage.includes('<a href="/needs/" aria-current="page">Needs</a>'), "related story highlights Needs");
   assert.ok(responsePage.includes('<a href="/responses/">Responses</a> / <span aria-current="page">'), "related story keeps its Responses breadcrumb");
+  const actionPage = await read("dist/record/crossover-2026-10-14-sas-volunteer-application/index.html");
+  assert.ok(actionPage.includes('<a href="/investigation/" aria-current="page">Investigation</a>'), "action highlights Investigation");
+  assert.ok(actionPage.includes('<a href="/activity/">Activity</a> / <span aria-current="page">'), "action keeps its Activity breadcrumb");
   const placePage = await read("dist/record/weston-ranch-carrie-street/index.html");
   assert.ok(placePage.includes('<a href="/places/">Places</a> / <span aria-current="page">'), "place breadcrumb remains available");
   const mainNav = placePage.match(/<nav class="nav" id="site-nav"[^>]*>[\s\S]*?<\/nav>/)?.[0];
@@ -129,6 +131,8 @@ test("the root and every feed record have readable HTML with normal URLs", async
   assert.doesNotMatch(footerNav, />Responses<\/a>/, "Responses is absent from the footer navigation");
   assert.doesNotMatch(mainNav, />Articles<\/a>/, "Articles is absent from the main navigation");
   assert.doesNotMatch(footerNav, />Articles<\/a>/, "Articles is absent from the footer navigation");
+  assert.doesNotMatch(mainNav, />Activity<\/a>/, "Activity is absent from the main navigation");
+  assert.doesNotMatch(footerNav, />Activity<\/a>/, "Activity is absent from the footer navigation");
   for (const id of ["stockton-animal-services-shelter", "st-marys-community-services-campus"]) {
     const embed = feed.records[id].fields.map_reference.embed_url;
     const page = await read(`dist/record/${id}/index.html`);
@@ -274,6 +278,16 @@ test("Investigation provides the path to related organizations and the full dire
   for (const id of organizationIds) assert.ok(section.includes(`href="/organization/${id}/"`), id);
   assert.ok(directory.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
   assert.ok((await read("dist/organization/stockton-animal-services/index.html")).includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
+});
+
+test("Investigation provides the path to Activity", async () => {
+  const investigation = await read("dist/investigation/index.html");
+  const activity = await read("dist/activity/index.html");
+  const section = investigation.split('<section class="section" id="fieldwork">')[1]?.split('<section class="section" id="findings">')[0];
+  assert.ok(section, "Investigation retains its activity section");
+  assert.ok(section.includes('href="/activity/">All activity</a>'));
+  assert.ok(section.includes('href="/record/crossover-2026-10-14-sas-volunteer-application/"'));
+  assert.ok(activity.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
 });
 
 test("Needs provides the path to related responses and the full Responses page", async () => {
