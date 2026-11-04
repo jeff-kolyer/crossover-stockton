@@ -30,17 +30,23 @@ test("every article publishes its complete text as readable HTML", async () => {
   }
 });
 
-test("Articles navigation leads to a listing of every published article", async () => {
+test("Needs leads to a listing of every published article", async () => {
   const articles = records.filter(({ schema }) => schema === "article");
+  const needs = await read("dist/needs/index.html");
   const index = await read("dist/articles/index.html");
   const investigation = await read("dist/investigation/index.html");
   assert.ok(investigation.includes('<a class="articles-cta" href="/articles/">Read articles →</a>'));
-  assert.ok(index.includes('<a href="/articles/" aria-current="page">Articles</a>'));
+  const section = needs.split('<h2>Articles on these needs</h2>')[1]?.split('<h2>Work taking shape</h2>')[0];
+  assert.ok(section, "Needs has an Articles section before Responses");
+  assert.ok(section.includes('href="/articles/">All articles</a>'));
+  assert.ok(section.includes('href="/record/public-access-to-stray-dog-information/"'));
+  assert.ok(section.includes('href="/record/where-are-stray-dogs/"'));
+  assert.ok(index.includes('<a href="/needs/" aria-current="page">Needs</a>'));
   assert.ok(index.indexOf('href="/record/public-access-to-stray-dog-information/"') < index.indexOf('href="/record/where-are-stray-dogs/"'), "the November 4 update appears first");
   for (const article of articles) {
     assert.ok(index.includes(`<a href="/record/${article.id}/">${escapeHtml(article.title)}</a>`), article.id);
     const page = await read(`dist/record/${article.id}/index.html`);
-    assert.ok(page.includes('<a href="/articles/" aria-current="page">Articles</a>'), article.id);
+    assert.ok(page.includes('<a href="/needs/" aria-current="page">Needs</a>'), article.id);
     assert.ok(page.includes('<a href="/articles/">Articles</a> / <span aria-current="page">'), article.id);
   }
 });
@@ -121,6 +127,8 @@ test("the root and every feed record have readable HTML with normal URLs", async
   assert.doesNotMatch(footerNav, />Organizations<\/a>/, "Organizations is absent from the footer navigation");
   assert.doesNotMatch(mainNav, />Responses<\/a>/, "Responses is absent from the main navigation");
   assert.doesNotMatch(footerNav, />Responses<\/a>/, "Responses is absent from the footer navigation");
+  assert.doesNotMatch(mainNav, />Articles<\/a>/, "Articles is absent from the main navigation");
+  assert.doesNotMatch(footerNav, />Articles<\/a>/, "Articles is absent from the footer navigation");
   for (const id of ["stockton-animal-services-shelter", "st-marys-community-services-campus"]) {
     const embed = feed.records[id].fields.map_reference.embed_url;
     const page = await read(`dist/record/${id}/index.html`);
