@@ -17,6 +17,7 @@
   const sections = new Set(["/", "/needs/", "/investigation/", "/activity/", "/responses/", "/organizations/", "/places/", "/explore/", "/about/"]);
   const recordPath = /^\/(?:record|organization)\/[^/]+\/$/;
   const cache = new Map();
+  cache.set(location.pathname, Promise.resolve(document.cloneNode(true)));
   const scrollPositions = new Map();
   let displayedPath = location.pathname;
   let navigationId = 0;
