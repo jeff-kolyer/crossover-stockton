@@ -256,7 +256,7 @@
   {
     "id": "stockton-animal-services-shelter",
     "location_type": "animal_care",
-    "map_reference": { "query": "1575 S Lincoln St, Stockton, CA 95206", "precision": "address", "verified": true, "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf" },
+    "map_reference": { "query": "1575 S Lincoln St, Stockton, CA 95206", "precision": "address", "verified": true, "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf", "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573.3905247244797!2d-121.29479729999998!3d37.93554519999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809012edba787fe5%3A0x85896678d130bd20!2s1575%20S%20Lincoln%20St%2C%20Stockton%2C%20CA%2095206!5e0!3m2!1sen!2sus!4v1793803625302!5m2!1sen!2sus" },
     "marker_type": "animal_care",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton Animal Services",
@@ -335,7 +335,7 @@
   {
     "id": "st-marys-community-services-campus",
     "location_type": "human_services",
-    "map_reference": { "query": "545 W Sonora St, Stockton, CA 95203", "precision": "address", "verified": true, "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf" },
+    "map_reference": { "query": "545 W Sonora St, Stockton, CA 95203", "precision": "address", "verified": true, "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf", "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.2689205112047!2d-121.2972552!3d37.9475064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090128fff3f4f63%3A0x90e9010387a9a9ce!2s545%20W%20Sonora%20St%2C%20Stockton%2C%20CA%2095203!5e0!3m2!1sen!2sus!4v1793803679103!5m2!1sen!2sus" },
     "marker_type": "human_services",
     "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's Community Services",

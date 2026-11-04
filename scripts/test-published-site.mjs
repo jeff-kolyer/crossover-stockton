@@ -60,6 +60,14 @@ test("the root and every feed record have readable HTML with normal URLs", async
     assert.ok(page.includes(`<a href="/${section}/" aria-current="page">${label}</a>`), `${id} top navigation`);
     assert.ok(page.includes(`<nav class="wrap breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/${section}/">${label}</a> / <span aria-current="page">`), `${id} breadcrumb`);
   }
+  for (const id of ["stockton-animal-services-shelter", "st-marys-community-services-campus"]) {
+    const embed = feed.records[id].fields.map_reference.embed_url;
+    const page = await read(`dist/record/${id}/index.html`);
+    assert.match(embed, /^https:\/\/www\.google\.com\/maps\/embed\?pb=/);
+    assert.ok(page.includes(`<iframe class="location-map" title="Map of ${escapeHtml(feed.records[id].title)}" src="${escapeHtml(embed)}"`), `${id} embedded map`);
+    assert.match(page, /Open on Google Maps ↗/);
+  }
+  assert.doesNotMatch(await read("dist/record/weston-ranch-carrie-street/index.html"), /<iframe class="location-map"/);
   assert.deepEqual(JSON.parse(await read("dist/data/records.json")), feed);
   assert.equal((await read("dist/CNAME")).trim(), "crossoverstockton.org");
 });

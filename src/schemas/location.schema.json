@@ -20,7 +20,8 @@
         "query": { "type": "string", "minLength": 1 },
         "precision": { "type": "string", "enum": ["address", "named_place", "intersection", "corridor", "general_area"] },
         "verified": { "type": "boolean" },
-        "source_url": { "type": "string", "minLength": 1 }
+        "source_url": { "type": "string", "minLength": 1 },
+        "embed_url": { "type": "string", "pattern": "^https://www\\.google\\.com/maps/embed\\?pb=" }
       },
       "required": ["query", "precision", "verified"],
       "additionalProperties": false

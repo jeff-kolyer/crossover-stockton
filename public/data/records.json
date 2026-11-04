@@ -1645,7 +1645,8 @@
           "query": "1575 S Lincoln St, Stockton, CA 95206",
           "precision": "address",
           "verified": true,
-          "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf"
+          "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf",
+          "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573.3905247244797!2d-121.29479729999998!3d37.93554519999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809012edba787fe5%3A0x85896678d130bd20!2s1575%20S%20Lincoln%20St%2C%20Stockton%2C%20CA%2095206!5e0!3m2!1sen!2sus!4v1793803625302!5m2!1sen!2sus"
         },
         "area": "1575 S. Lincoln Street, Stockton",
         "description": "Stockton Animal Services is the City's animal shelter at 1575 S. Lincoln Street. City guidance describes animal reporting and found-dog services. Crossover's October 14 visit is documented separately; this pin identifies the facility, not a sighting or a field-call result.",
@@ -1739,7 +1740,8 @@
           "query": "545 W Sonora St, Stockton, CA 95203",
           "precision": "address",
           "verified": true,
-          "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf"
+          "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf",
+          "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.2689205112047!2d-121.2972552!3d37.9475064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090128fff3f4f63%3A0x90e9010387a9a9ce!2s545%20W%20Sonora%20St%2C%20Stockton%2C%20CA%2095203!5e0!3m2!1sen!2sus!4v1793803679103!5m2!1sen!2sus"
         },
         "area": "545 W. Sonora Street, Stockton",
         "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street and describes housing and other support services. The Stockton Record reported that its Pathways Neighborhood project opened in June 2026 with 268 beds. This pin marks the organization, not a dog sighting or the wider Church Street investigation area. The published bed count does not establish that those beds accommodate dogs.",
@@ -5362,6 +5364,10 @@
       "label": "published",
       "kind": "value"
     },
+    "embed_url": {
+      "label": "embed_url",
+      "kind": "url"
+    },
     "as_of": {
       "label": "as_of",
       "kind": "date"
@@ -5407,6 +5413,7 @@
   "locationGuidance": {
     "googleMapsSearchUrl": "https://www.google.com/maps/search/?api=1&query={encodeURIComponent(map_reference.query)}",
     "presentation": "For a Location with a nonempty map_reference.query, show a prominent Open in Google Maps link alongside its internal Crossover record link. Generate the URL from the query; do not store a duplicate URL on every record.",
-    "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports."
+    "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports.",
+    "embeddedMaps": "map_reference.embed_url is a Google Maps Share > Embed a map URL for a verified street address. Show it with the precision warning and Open in Google Maps link. Keep broad or unverified geographic references as search links rather than pinned embeds."
   }
 }

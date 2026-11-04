@@ -22,7 +22,8 @@
   "locationGuidance": {
     "googleMapsSearchUrl": "https://www.google.com/maps/search/?api=1&query={encodeURIComponent(map_reference.query)}",
     "presentation": "For a Location with a nonempty map_reference.query, show a prominent Open in Google Maps link alongside its internal Crossover record link. Generate the URL from the query; do not store a duplicate URL on every record.",
-    "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports."
+    "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports.",
+    "embeddedMaps": "map_reference.embed_url is a Google Maps Share > Embed a map URL for a verified street address. Show it with the precision warning and Open in Google Maps link. Keep broad or unverified geographic references as search links rather than pinned embeds."
   },
   "relationshipFields": ["founderPersonId", "principleIds", "methodIds", "organizationId", "organization_ids", "contact_activity_ids", "gap_id", "gap_ids", "investigation_id", "objective_ids", "task_ids", "activity_record_ids", "evidence_record_id", "evidence_record_ids", "finding_ids", "verified_finding_ids", "article_id", "location_ids", "map_reference_location_ids", "basis_record_ids", "source_record_id", "sourceRecordIds", "measurementId", "needId", "supporting_record_ids", "contradicting_record_ids", "report_record_ids", "record_ids", "related_gap_ids", "related_location_ids", "related_objective_ids", "primary_objective_id", "source_record_ids"],
   "fieldDescriptions": {
@@ -58,7 +59,7 @@
     { "id": "projects", "schema": "project", "title": "Projects", "query": "projects", "fields": ["id", "title", "description", "intended_outcome", "development_stage", "operational_status", "funding_status", "capacity_summary", "expected_capacity_or_benefit", "actual_additional_capacity", "demand_contribution", "procedure_tracking", "milestones", "evidence_record_ids", "gap_ids", "organization_ids", "last_verified_at", "open_questions", "next_verification_step"] }
   ],
   "nestedFields": {
-    "map_reference": ["query", "precision", "verified", "source_url"],
+    "map_reference": ["query", "precision", "verified", "source_url", "embed_url"],
     "source": ["publisher", "title", "url", "type", "published_at"],
     "context_sources": ["publisher", "title", "url", "type", "published_at"],
     "outcome": ["status", "summary", "as_of"],
