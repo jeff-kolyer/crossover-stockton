@@ -28,7 +28,8 @@
       ]
     },
     "active": {
-      "type": "boolean"
+      "type": "boolean",
+      "description": "Publication eligibility for the current Need index and related public updates. It does not describe severity, investigation progress, or whether the underlying condition persists or improves."
     },
     "organization_ids": {
       "type": "array",

@@ -34,7 +34,7 @@
     { "id": "methods", "schema": "method", "title": "Methods", "query": "methods", "fields": ["id", "title", "statement"] },
     { "id": "people", "schema": "person", "title": "People", "query": "people", "fields": ["id", "name", "roles", "biography", "profileUrl"] },
     { "id": "organizations", "schema": "organization", "title": "Organizations", "query": "organizations", "fields": ["id", "name", "summary", "website", "active"] },
-    { "id": "needs", "schema": "need", "title": "Needs", "query": "needs", "fields": ["id", "title", "summary", "investigation_status", "updated_at", "organization_ids", "record_ids", "unknown_questions", "active", "thumbnail_image"] },
+    { "id": "needs", "schema": "need", "title": "Needs", "query": "needs", "fields": ["id", "title", "summary", "investigation_status", "updated_at", "organization_ids", "record_ids", "unknown_questions", "thumbnail_image"] },
     { "id": "investigations", "schema": "investigation", "title": "Investigations", "query": "investigations", "fields": ["id", "publicName", "title", "primary_goal", "introduction", "status", "gap_id", "findings_summary", "verified_finding_ids", "evidence_record_ids", "last_updated_at"] },
     { "id": "objectives", "schema": "objective", "title": "Objectives", "query": "objectives", "fields": ["id", "title", "description", "investigation_id", "task_ids", "activity_record_ids", "evidence_record_ids", "finding_ids"] },
     { "id": "tasks", "schema": "action", "title": "Tasks", "query": "tasks", "fields": ["id", "order_by_id", "title", "status", "type", "investigation_id", "objective_ids", "organization_ids", "location_ids", "basis_record_ids", "activity_record_ids", "completed_at"] },

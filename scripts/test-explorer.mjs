@@ -33,6 +33,7 @@ test("Need publication carries investigative states without unsupported priority
   for (const need of needsSource.records) {
     assert.equal("status" in need, false);
     assert.equal("status" in published.records[need.id].fields, false);
+    assert.equal("active" in published.records[need.id].fields, false);
     assert.equal(published.records[need.id].fields.investigation_status, need.investigation_status);
   }
   assert.deepEqual(published.fieldInfo.investigation_status.valueLabels,
