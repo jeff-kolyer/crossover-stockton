@@ -77,7 +77,7 @@ test("the root and every feed record have readable HTML with normal URLs", async
   const navigationScript = await read("dist/static-navigation.js");
   assert.equal(navigationScript, await read("public/static-navigation.js"));
   new Script(navigationScript, { filename: "static-navigation.js" });
-  for (const section of ["needs", "investigation", "stories", "articles", "activity", "responses", "organizations", "places", "explore", "about"]) {
+  for (const section of ["needs", "investigation", "stories", "articles", "activity", "organizations", "places", "explore", "about"]) {
     const page = await read(`dist/${section}/index.html`);
     assert.match(page, /<main id="main"[^>]*>\s*\S/, section);
     assert.doesNotMatch(page, /href="#\//, section);
@@ -290,21 +290,21 @@ test("Investigation provides the path to Activity", async () => {
   assert.ok(activity.includes('<a href="/investigation/" aria-current="page">Investigation</a>'));
 });
 
-test("Needs provides the path to related responses and the full Responses page", async () => {
+test("Needs links related responses to the combined Stories page", async () => {
   const needs = await read("dist/needs/index.html");
-  const responses = await read("dist/responses/index.html");
+  const stories = await read("dist/stories/index.html");
   const section = needs.split('<h2>Work taking shape</h2>')[1];
   assert.ok(section, "Needs includes a responses section");
-  assert.ok(section.includes('href="/responses/">All responses</a>'));
+  assert.ok(section.includes('href="/stories/">Stories and responses</a>'));
   const previewIds = [...new Set([...section.matchAll(/href="\/record\/([^/]+)\/"/g)].map((match) => match[1]))];
   const needIds = new Set(records.filter(({ schema }) => schema === "need").map(({ id }) => id));
   assert.ok(previewIds.some((id) => feed.records[id]?.schema === "project"), "a linked project appears");
   assert.ok(previewIds.some((id) => feed.records[id]?.schema === "story"), "a linked story appears");
   for (const id of previewIds) assert.ok(feed.records[id].fields.gap_ids.some((needId) => needIds.has(needId)), `${id} links to a published need`);
-  assert.ok(responses.includes('<a href="/needs/" aria-current="page">Needs</a>'));
+  assert.ok(stories.includes('<h2>Improvements and proposals</h2>'));
 });
 
-test("Stories has its own menu and connects Needs and Investigation to Responses", async () => {
+test("Stories leads with stories, then shows every project response", async () => {
   const stories = await read("dist/stories/index.html");
   const needs = await read("dist/needs/index.html");
   const investigation = await read("dist/investigation/index.html");
@@ -312,12 +312,16 @@ test("Stories has its own menu and connects Needs and Investigation to Responses
   assert.ok(header, "Stories has main navigation");
   assert.deepEqual([...header.matchAll(/>(Home|Needs|Investigation|Stories|Explore|About)<\/a>/g)].map((match) => match[1]), ["Home", "Needs", "Investigation", "Stories", "Explore", "About"]);
   assert.ok(stories.includes('<a href="/stories/" aria-current="page">Stories</a>'));
-  assert.ok(stories.includes('href="/responses/">All responses</a>'));
-  assert.ok(needs.includes('href="/stories/">Browse all stories →</a>'));
+  assert.ok(stories.includes('<div class="eyebrow">Stories</div><h1>Signs of care and progress</h1>'));
+  assert.ok(stories.indexOf('<h2>Stories from Stockton</h2>') < stories.indexOf('<h2>Improvements and proposals</h2>'));
+  assert.ok(needs.includes('href="/stories/">Stories and responses</a>'));
   assert.ok(investigation.includes('href="/stories/">All stories</a>'));
-  assert.ok(investigation.includes('href="/responses/">Responses page →</a>'));
   for (const story of records.filter(({ schema }) => schema === "story"))
     assert.ok(stories.includes(`href="/record/${story.id}/"`), `${story.id} appears in Stories`);
+  for (const project of records.filter(({ schema }) => schema === "project"))
+    assert.ok(stories.includes(`href="/record/${project.id}/"`), `${project.id} appears in Stories responses`);
+  const projectPage = await read("dist/record/canine-campus/index.html");
+  assert.ok(projectPage.includes('<a href="/stories/" aria-current="page">Stories</a>'));
 });
 
 test("Need status badges link only to a documented investigation", async () => {
@@ -333,8 +337,9 @@ test("Need status badges link only to a documented investigation", async () => {
 test("the sitemap lists every canonical page and legacy URLs lead to clean paths", async () => {
   const sitemap = await read("dist/sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
-  assert.equal(urls.length, 11 + records.length);
+  assert.equal(urls.length, 10 + records.length);
   assert.ok(urls.includes("https://crossoverstockton.org/stories/"));
+  assert.ok(!urls.includes("https://crossoverstockton.org/responses/"));
   assert.ok(urls.includes("https://crossoverstockton.org/articles/"));
   assert.ok(urls.includes("https://crossoverstockton.org/organizations/"));
   assert.ok(urls.includes("https://crossoverstockton.org/organization/stockton-animal-services/"));
@@ -344,7 +349,8 @@ test("the sitemap lists every canonical page and legacy URLs lead to clean paths
     ["dist/work/dogs/findings/index.html", "/investigation/"],
     ["dist/work/dogs/map/index.html", "/places/"],
     ["dist/data/index.html", "/explore/"],
-    ["dist/work/index.html", "/responses/"],
+    ["dist/work/index.html", "/stories/"],
+    ["dist/responses/index.html", "/stories/"],
   ];
   const article = records.find(({ schema, fields }) => schema === "article" && fields.path);
   assert.ok(article);
