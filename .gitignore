@@ -4,6 +4,7 @@ src/generated/
 public/data/records.json
 *.tsbuildinfo
 .edge-headless/
+.tmp-edge-factor/
 
 .env
 .env.*
