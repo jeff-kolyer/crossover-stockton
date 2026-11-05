@@ -35,7 +35,7 @@ test("Needs leads to a listing of every published article", async () => {
   const needs = await read("dist/needs/index.html");
   const index = await read("dist/articles/index.html");
   const investigation = await read("dist/investigation/index.html");
-  assert.ok(investigation.includes('<a class="articles-cta" href="/articles/">Read articles <svg class="right-arrow"'));
+  assert.ok(investigation.includes('<a href="/articles/">Articles</a>'));
   const section = needs.split('<h2>Articles on these needs</h2>')[1]?.split('<h2>Work taking shape</h2>')[0];
   assert.ok(section, "Needs has an Articles section before Responses");
   assert.ok(section.includes('href="/articles/">All articles <svg class="right-arrow"'));
