@@ -10,6 +10,18 @@ Our approach is simple: investigate conditions, examine evidence, test pathways 
 
 **Website:** https://crossoverstockton.org
 
+## What the website is for
+
+The main navigation describes five distinct ways of engaging with reality, not five interchangeable content categories:
+
+- **Needs** — What AI has surfaced about reality: unmet needs worth understanding and investigating. These are leads, not automatically verified conclusions.
+- **Action** — What Crossover and others are actually doing about those needs: investigations, practical attempts, participation, activities, evidence, and findings. Distinguish planned action from documented activity and externally reported work.
+- **Stories** — Real people whose lives are changing and progress being made. Ground stories in documented experience and outcomes; do not invent impact.
+- **Explore** — Explore the public record freely, in the way that serves the reader: search, filter, and follow connections among needs, investigations, actions, activities, findings, evidence, organizations, places, articles, and stories.
+- **About** — What **the crossover** is about: connection, compassion, and the transition from compulsory work to meaningful vocation. It is not merely an organizational biography or a page about what *we* do.
+
+The site should help people **see clearly and act locally**. These meanings should guide future AI-generated pages and navigation, regardless of the layout or implementation. The underlying records remain authoritative; the presentation should make their relationships and limits understandable.
+
 ## How it works
 
 **Action → Activity → Findings → New Action**
