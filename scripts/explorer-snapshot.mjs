@@ -4,8 +4,6 @@ const titleFor = (record) => record.publicName || record.name || record.title ||
   || (record.value !== undefined && record.unit ? `${record.value.toLocaleString("en-US")} ${record.unit}` : undefined)
   || record.measure || record.id;
 
-const idsFrom = (record, fields) => fields.flatMap((field) => Array.isArray(record?.[field]) ? record[field] : []);
-
 const dateFields = ["occurred_at", "published_at", "date", "completed_at", "recorded_at", "updated_at", "last_updated_at", "last_reviewed_at", "last_verified_at", "evidence_date", "period_end", "period_start", "checked_at"];
 const validDate = (value) => {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}(?:T.*)?$/.test(value) || !Number.isFinite(Date.parse(value))) return false;
@@ -20,75 +18,6 @@ const dateForSort = (fields) => {
   }
   return undefined;
 };
-function investigationBranches(policy, collections, publishedCollections, records) {
-  const sourceById = new Map(publishedCollections.map((collection) => [collection.id, collection]));
-  const publishedIds = (id) => new Set(sourceById.get(id)?.recordIds ?? []);
-  const evidence = new Map((collections.evidence ?? []).map((record) => [record.id, record]));
-  const branches = [];
-  const children = [];
-  for (const investigation of collections.investigations ?? []) {
-    if (!records.has(investigation.id)) continue;
-    const scoped = (id) => (collections[id] ?? []).filter((item) => item.investigation_id === investigation.id && publishedIds(id).has(item.id));
-    const objectives = scoped("objectives");
-    const actions = scoped("actions");
-    const activities = scoped("activities");
-    const findings = scoped("findings");
-    const articles = (collections.articles ?? []).filter((item) => item.related_gap_ids?.includes(investigation.gap_id) && publishedIds("articles").has(item.id));
-    const locations = scoped("locations");
-    const projects = (collections.projects ?? []).filter((item) => item.gap_ids?.includes(investigation.gap_id) && publishedIds("projects").has(item.id));
-    const need = (collections.needs ?? []).find((item) => item.id === investigation.gap_id);
-    const evidenceIds = new Set(idsFrom(investigation, ["evidence_record_ids"]));
-    for (const item of [...objectives, ...actions, ...activities, ...findings, ...locations, ...projects, need]) {
-      for (const id of idsFrom(item, ["evidence_record_ids", "activity_record_ids", "basis_record_ids", "report_record_ids", "supporting_record_ids", "contradicting_record_ids", "record_ids", "source_record_ids"])) evidenceIds.add(id);
-      if (item?.evidence_record_id) evidenceIds.add(item.evidence_record_id);
-    }
-    for (const project of projects) {
-      for (const item of [project.expected_capacity_or_benefit, project.actual_additional_capacity, ...(project.milestones ?? [])]) {
-        for (const id of idsFrom(item, ["evidence_record_ids"])) evidenceIds.add(id);
-      }
-    }
-    for (const item of evidence.values()) if (item.investigation_id === investigation.id) evidenceIds.add(item.id);
-    // Source links can identify a second record behind a directly related activity.
-    for (const id of [...evidenceIds]) {
-      const item = evidence.get(id);
-      for (const related of idsFrom(item, ["basis_record_ids", "report_record_ids"])) evidenceIds.add(related);
-    }
-    const relatedEvidence = (collections.evidence ?? []).filter((item) => evidenceIds.has(item.id) && publishedIds("evidence").has(item.id));
-    const organizationIds = new Set();
-    for (const item of [need, ...actions, ...activities, ...projects, ...relatedEvidence]) {
-      for (const id of idsFrom(item, ["organization_ids"])) organizationIds.add(id);
-    }
-    const organizations = (collections.organizations ?? []).filter((item) => organizationIds.has(item.id) && publishedIds("organizations").has(item.id));
-    const members = { objectives, actions, activities, findings, articles, locations, evidence: relatedEvidence, projects, organizations };
-    const collectionIds = [];
-    for (const sourceId of policy.investigationChildren ?? []) {
-      const nested = policy.investigationCollectionGroups?.find((item) => item.id === sourceId);
-      if (nested) {
-        const parentId = `${investigation.id}:${nested.id}`;
-        const childCollectionIds = [];
-        for (const nestedId of nested.collectionIds) {
-          const source = sourceById.get(nestedId);
-          if (!source) continue;
-          const id = `${investigation.id}:${nestedId}`;
-          children.push({ id, title: source.title, group: "investigation", investigationId: investigation.id, parentCollectionId: parentId, schema: source.schema, recordIds: (members[nestedId] ?? []).map((item) => item.id) });
-          childCollectionIds.push(id);
-        }
-        if (!childCollectionIds.length) continue;
-        children.push({ id: parentId, title: nested.title, group: "investigation", investigationId: investigation.id, childCollectionIds, schema: null, recordIds: [] });
-        collectionIds.push(parentId);
-        continue;
-      }
-      const source = sourceById.get(sourceId);
-      if (!source) continue;
-      const id = `${investigation.id}:${sourceId}`;
-      children.push({ id, title: source.title, group: "investigation", investigationId: investigation.id, schema: source.schema, recordIds: (members[sourceId] ?? []).map((item) => item.id) });
-      collectionIds.push(id);
-    }
-    branches.push({ id: investigation.id, title: titleFor(investigation), collectionIds });
-  }
-  return { branches, children };
-}
-
 function projectValue(key, value, nestedFields) {
   if (value === undefined) return undefined;
   const allowed = nestedFields[key];
@@ -194,11 +123,8 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
       }
     }
   }
-  const { branches, children } = investigationBranches(policy, collections, publishedCollections, records);
-  const hiddenCollectionIds = new Set(["investigations",
-    ...(policy.investigationChildren ?? []).filter((id) => groupByCollection.get(id) === "investigation")]);
-  const visibleCollections = publishedCollections.map((item) => ({ ...item, hidden: hiddenCollectionIds.has(item.id) || !roots.some((root) => root.id === item.group) }));
-  const groups = roots.map((root) => ({ id: root.id, title: root.title, collectionIds: visibleCollections.filter((item) => item.group === root.id && !item.hidden).map((item) => item.id), ...(root.id === "investigation" ? { investigationIds: branches.map((item) => item.id) } : {}) })).filter((group) => group.collectionIds.length || group.investigationIds?.length);
+  const visibleCollections = publishedCollections.map((item) => ({ ...item, hidden: !roots.some((root) => root.id === item.group) }));
+  const groups = roots.map((root) => ({ id: root.id, title: root.title, collectionIds: visibleCollections.filter((item) => item.group === root.id && !item.hidden).map((item) => item.id) })).filter((group) => group.collectionIds.length);
   const namedSchemas = new Set(policy.collections.map((item) => item.schema));
   const abstractSchemas = new Set(["common", "source", "organization-service", "development"]);
   const unsupportedTypes = Object.keys(schemas).filter((name) => !namedSchemas.has(name) && !abstractSchemas.has(name));
@@ -220,7 +146,7 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
       ...(policy.fieldValueLabels?.[name] ? { valueLabels: policy.fieldValueLabels[name] } : {}) }];
   }));
   return {
-    snapshot: { groups, investigations: branches, recordChildren: Object.fromEntries(branches.map((branch) => [branch.id, branch.collectionIds])), collections: [...visibleCollections, ...children], records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance, browseGuidance: policy.browseGuidance, locationGuidance: policy.locationGuidance },
+    snapshot: { groups, collections: visibleCollections, records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance, browseGuidance: policy.browseGuidance, locationGuidance: policy.locationGuidance, experienceSpec: policy.experienceSpec },
     diagnostics,
   };
 }

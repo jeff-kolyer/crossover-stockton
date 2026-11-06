@@ -18,35 +18,90 @@ const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
 })[char]);
 
 const redirects = new Map([
-  ["/reality/", "/needs/"],
-  ["/connection/", "/stories/"],
-  ["/action/", "/activity/"],
+  ["/reality/", "/projects/"],
+  ["/connection/", "/projects/"],
   ["/updates/", "/activity/"],
   ["/data/", "/explore/"],
-  ["/work/", "/stories/"],
-  ["/responses/", "/stories/"],
-  ["/work/dogs/", "/investigation/"],
-  ["/work/dogs/tasks/", "/investigation/"],
+  ["/work/", "/activity/"],
+  ["/responses/", "/projects/street-dogs/initiatives/"],
+  ["/stories/", "/projects/"],
+  ["/stories/streetdogs-fed-about-70-animals/", "/record/ssd-2026-06-08-street-response/"],
+  ["/stories/34-cats-moved-out-of-overcrowding/", "/record/sas-2026-03-05-cat-transfer/"],
+  ["/record/streetdogs-fed-70-animals/", "/record/ssd-2026-06-08-street-response/"],
+  ["/record/cats-transferred-out-of-overcrowding/", "/record/sas-2026-03-05-cat-transfer/"],
+  ["/articles/", "/projects/"],
+  ["/needs/", "/projects/"],
+  ["/articles/friction-of-volunteering/", "/projects/street-dogs/findings/"],
+  ["/articles/public-access-to-stray-dog-information/", "/projects/street-dogs/findings/"],
+  ["/articles/caring-for-stocktons-dogs/", "/projects/street-dogs/initiatives/"],
+  ["/articles/where-are-stray-dogs/", "/projects/street-dogs/objectives/"],
+  ["/record/friction-of-volunteering/", "/projects/street-dogs/findings/"],
+  ["/record/public-access-to-stray-dog-information/", "/projects/street-dogs/findings/"],
+  ["/record/caring-for-stocktons-dogs/", "/projects/street-dogs/initiatives/"],
+  ["/record/where-are-stray-dogs/", "/projects/street-dogs/objectives/"],
+  ["/needs/dogs-safe-placement/picture/", "/projects/street-dogs/overview/"],
+  ["/needs/dogs-safe-placement/actions/", "/projects/street-dogs/activity/"],
+  ["/needs/dogs-safe-placement/stories/", "/projects/street-dogs/overview/"],
+  ["/needs/dogs-safe-placement/articles/", "/projects/street-dogs/overview/"],
+  ["/work/dogs/", "/"],
+  ["/work/dogs/tasks/", "/activity/"],
   ["/work/dogs/activity/", "/activity/"],
   ["/work/dogs/map/", "/places/"],
-  ["/work/dogs/findings/", "/investigation/"],
+  ["/work/dogs/findings/", "/explore/"],
+  ["/action/", "/activity/"],
+  ["/investigation/", "/"],
+  ["/investigation/plan/", "/"],
+  ["/investigation/objectives/", "/projects/street-dogs/objectives/"],
+  ["/investigation/questions/", "/projects/street-dogs/objectives/"],
+  ["/investigation/activity/", "/activity/"],
+  ["/investigation/findings/", "/explore/"],
+  ["/investigation/evidence/", "/explore/"],
+  ["/investigation/people-places/", "/places/"],
+  ["/investigation/records/", "/explore/"],
+  ["/record/investigation/", "/record/action/"],
 ]);
 for (const record of records) {
   const fields = record.fields ?? {};
   if (record.schema === "article" && /^\/articles\/[a-z0-9-]+\/$/.test(fields.path ?? ""))
     redirects.set(fields.path, route(record.id));
-  if (record.schema === "need" && /^[a-z0-9-]+$/.test(fields.slug ?? ""))
+  if (record.schema === "gap" && /^[a-z0-9-]+$/.test(fields.slug ?? ""))
     redirects.set(`/reality/${fields.slug}/`, route(record.id));
-  if (record.schema === "story" && /^[a-z0-9-]+$/.test(fields.slug ?? ""))
-    redirects.set(`/stories/${fields.slug}/`, route(record.id));
   if (record.schema === "evidence" && fields.record_type === "field_report") {
     redirects.set(`/reports/${encodeURIComponent(record.id)}/`, route(record.id));
     redirects.set(`/work/dogs/reports/${encodeURIComponent(record.id)}/`, route(record.id));
   }
 }
+for (const gap of records.filter((record) => record.schema === "gap")) {
+  const base = `/gaps/${encodeURIComponent(gap.fields.slug)}/`;
+  redirects.set(base, `${base}overview/`);
+  redirects.set(`/record/${encodeURIComponent(gap.id)}/`, `${base}overview/`);
+  for (const view of ["overview", "objectives", "metrics", "activity", "places", "organizations", "initiatives", "findings", "sources"]) {
+    redirects.set(`/needs/${encodeURIComponent(gap.id)}/${view}/`, `${base}${view}/`);
+    redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/${view}/`, `${base}${view}/`);
+  }
+  redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/`, `${base}overview/`);
+  redirects.set(`${base}reports/`, `${base}activity/#field-reports`);
+  redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/reports/`, `${base}activity/#field-reports`);
+  redirects.set(`/needs/${encodeURIComponent(gap.id)}/reports/`, `${base}activity/#field-reports`);
+  for (const [oldView, nextView] of [["numbers", "metrics"], ["questions", "objectives"]]) {
+    redirects.set(`${base}${oldView}/`, `${base}${nextView}/`);
+    redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/${oldView}/`, `${base}${nextView}/`);
+    redirects.set(`/needs/${encodeURIComponent(gap.id)}/${oldView}/`, `${base}${nextView}/`);
+  }
+  redirects.set(`${base}projects/`, `${base}initiatives/`);
+  redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/projects/`, `${base}initiatives/`);
+  redirects.set(`/needs/${encodeURIComponent(gap.id)}/projects/`, `${base}initiatives/`);
+}
+for (const id of ["where-dogs-need-help", "food-and-water", "response-barriers", "additional-help", "improvement-outcomes"])
+  redirects.set(`/record/${id}/`, "/gaps/street-dogs/objectives/");
+redirects.set("/projects/", "/gaps/");
+for (const [old, target] of [...redirects]) redirects.set(old, target.replaceAll("/projects/street-dogs/", "/gaps/street-dogs/").replace(/^\/projects\/$/, "/gaps/"));
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "data"), { recursive: true });
+await mkdir(resolve(dist, "preview"), { recursive: true });
+for (const file of ["ai-variant.html", "ai-variant.css", "ai-variant-v2.css", "ai-variant-google.css", "ai-variant-modern.css", "ai-variant.js"])
+  await copyFile(resolve("public/preview", file), resolve(dist, "preview", file));
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
 await writeFile(resolve(dist, "favicon.ico"), await readFile("public/favicon.ico"));
@@ -62,17 +117,26 @@ for (const imagePath of staticSite.assets) {
   await mkdir(resolve(target, ".."), { recursive: true });
   await copyFile(source, target);
 }
+await mkdir(resolve(dist, "images/variants/clean"), { recursive: true });
+await copyFile("public/images/variants/clean/dog-park.jpg", resolve(dist, "images/variants/clean/dog-park.jpg"));
+if (staticSite.assets.some(path => path.startsWith("/images/icons/heroicons/")))
+  await copyFile("public/images/icons/heroicons/LICENSE", resolve(dist, "images/icons/heroicons/LICENSE"));
 for (const page of staticSite.pages) {
   const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
   if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe page path: ${page.path}`);
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, "index.html"), page.html);
-  if (page.path === "/") await writeFile("index.html", page.html);
 }
+const workspaceHtml = (await readFile("public/preview/ai-variant.html", "utf8"))
+  .replace(/^[ \t]*<meta name="robots" content="noindex,nofollow">\r?\n/m, '')
+  .replace('  <title>Crossover · Gap workspace experiment</title>',
+    `  <meta name="description" content="Crossover Stockton tracks street dogs and access to care through objectives, activity, findings, and public records.">\n  <link rel="canonical" href="${origin}/">\n  <title>Crossover Stockton · Street dogs and access to care</title>`);
+await writeFile(resolve(dist, "index.html"), workspaceHtml);
+await writeFile("index.html", workspaceHtml);
 await mkdir(resolve(dist, "interactive"), { recursive: true });
 await writeFile(resolve(dist, "interactive/index.html"), html.replace("<head>", '<head><meta name="robots" content="noindex,follow">'));
 await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}</urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/needs/, ${origin}/investigation/, ${origin}/stories/, ${origin}/articles/, ${origin}/activity/, ${origin}/organizations/, ${origin}/places/, ${origin}/explore/, ${origin}/about/\nFull sitemap: ${origin}/sitemap.xml\nPublic data feed: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/projects/, ${origin}/activity/, ${origin}/places/, ${origin}/explore/, ${origin}/organizations/, ${origin}/about/\nFull sitemap: ${origin}/sitemap.xml\nPublic data feed: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);

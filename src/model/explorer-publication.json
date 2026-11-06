@@ -1,13 +1,72 @@
 {
-  "investigationChildren": ["objectives", "actions", "activities", "findings", "articles", "locations", "evidence", "projects", "organizations"],
-  "reverseRelationships": [{ "sourceSchema": "finding", "sourceField": "article_id", "targetSchema": "article", "field": "related_finding_ids", "label": "Related findings" }],
-  "sharedFields": ["visual_description", "preferred_image", "logo_description", "preferred_logo"],
+  "reverseRelationships": [
+    {
+      "sourceSchema": "finding",
+      "sourceField": "article_id",
+      "targetSchema": "article",
+      "field": "related_finding_ids",
+      "label": "Related findings"
+    }
+  ],
+  "sharedFields": [
+    "visual_description",
+    "preferred_image",
+    "logo_description",
+    "preferred_logo"
+  ],
+  "experienceSpec": {
+    "version": 1,
+    "premise": "The public feed tracks what Crossover does and what the evidence says about reality. Interfaces, charts, videos, and other views may be generated from it. Visual style is a separate layer and must not change the meaning of records.",
+    "navigation": [
+      {
+        "label": "Home",
+        "route": "/",
+        "purpose": "Introduce Crossover and the current focus."
+      },
+      {
+        "label": "Gaps",
+        "route": "/gaps",
+        "purpose": "Choose a gap and follow its objectives, metrics, activity, findings, and sources."
+      },
+      {
+        "label": "Activity",
+        "route": "/activity",
+        "purpose": "Show the work Crossover has done and the next useful actions."
+      },
+      {
+        "label": "Places",
+        "route": "/places",
+        "purpose": "Show geographic references and their source records without implying that a report is verified at an exact point."
+      },
+      {
+        "label": "Explore",
+        "route": "/explore",
+        "purpose": "Make the full public feed easy to search, filter, inspect, and reuse."
+      },
+      {
+        "label": "About",
+        "route": "/about",
+        "purpose": "Explain Crossover, its people, principles, and method."
+      },
+      {
+        "label": "Connect",
+        "buttonLabel": "Connect on LinkedIn",
+        "role": "contact",
+        "urlField": "person.profileUrl",
+        "purpose": "Name the destination in the button and use the published profile link; never invent contact details."
+      }
+    ],
+    "appearance": "Keep the current site's visual rules in docs/SITE_DESIGN.md as one presentation skin. Other skins can render the same feed without changing its records or this information architecture."
+  },
   "visualGuidance": {
     "preferredAssets": "Preferred images and logos express a preference, not layout instructions. A renderer may use an appropriate alternative or no image.",
     "descriptions": "Visual and logo descriptions describe an intended subject or identity; they are not alt text. Alt text must describe the image actually shown.",
     "evidence": "Illustrative or generated imagery is not investigation evidence. Documentary images retain separate source, attribution, and caption information.",
     "logos": "Do not present an invented logo as an organization's official logo.",
-    "needInvestigationStatus": "For Needs, Identified may be shown in gray and Investigating in green. These describe Crossover's inquiry, not severity or improvement."
+    "imageDisclosure": {
+      "scope": "Do not place a generic image label over artwork or illustrations. Keep the image's origin, description, and evidence status in the feed. Site branding and navigation icons are excluded.",
+      "documentaryImages": "When an image documents a real event or place, provide its source and context near the image. Do not treat artwork or generated imagery as investigation evidence."
+    }
   },
   "browseGuidance": {
     "defaultTypeFilter": "all",
@@ -17,7 +76,7 @@
     "tieBreak": "id ascending",
     "defaultView": "Open browseable records with All types in one flat list, newest first by dateForSort.value. Preserve the mixed types unless the visitor filters or groups them.",
     "filtering": "Search and type filters retain the same newest-first order. Put undated records after dated records; break equal-date ties by stable record ID ascending. Do not invent a date for an undated record.",
-    "dateMeaning": "dateForSort.field identifies what the date means. An occurrence, source publication, completion, record update, review, verification, and period date are distinct; label the selected field when displaying the date. dateForSort is a browse key, not a claim that every record was published or changed that day."
+    "dateMeaning": "dateForSort.field identifies what the date means. Event occurrence, receipt confirmation, documentation, publication, review start, completion, and verification are distinct. Label the selected field; never move an event date to the day it was recognized or recorded. dateForSort is a browse key, not a claim that every record was published or changed that day."
   },
   "locationGuidance": {
     "googleMapsSearchUrl": "https://www.google.com/maps/search/?api=1&query={encodeURIComponent(map_reference.query)}",
@@ -25,66 +84,641 @@
     "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports.",
     "embeddedMaps": "map_reference.embed_url is a Google Maps Share > Embed a map URL for a verified street address. Show it with the precision warning and Open in Google Maps link. Keep broad or unverified geographic references as search links rather than pinned embeds."
   },
-  "relationshipFields": ["founderPersonId", "principleIds", "methodIds", "organizationId", "organization_ids", "contact_activity_ids", "map_location_id", "gap_id", "gap_ids", "investigation_id", "objective_ids", "action_ids", "activity_record_ids", "evidence_record_id", "evidence_record_ids", "finding_ids", "verified_finding_ids", "article_id", "location_ids", "map_reference_location_ids", "basis_record_ids", "source_record_id", "sourceRecordIds", "measurementId", "needId", "supporting_record_ids", "contradicting_record_ids", "report_record_ids", "record_ids", "related_gap_ids", "related_location_ids", "related_objective_ids", "primary_objective_id", "source_record_ids"],
+  "relationshipFields": [
+    "founderPersonId",
+    "principleIds",
+    "methodIds",
+    "organizationId",
+    "organization_ids",
+    "contact_activity_ids",
+    "map_location_id",
+    "gap_id",
+    "gap_ids",
+    "objective_ids",
+    "measurement_ids",
+    "initiative_ids",
+    "task_ids",
+    "activity_record_ids",
+    "evidence_record_id",
+    "evidence_record_ids",
+    "finding_ids",
+    "verified_finding_ids",
+    "related_task_ids",
+    "related_initiative_ids",
+    "location_ids",
+    "map_reference_location_ids",
+    "basis_record_ids",
+    "source_record_id",
+    "sourceRecordIds",
+    "measurementId",
+    "gap_id",
+    "supporting_record_ids",
+    "contradicting_record_ids",
+    "report_record_ids",
+    "record_ids",
+    "related_gap_ids",
+    "related_location_ids",
+    "source_record_ids"
+  ],
   "fieldDescriptions": {
-    "map_reference_location_ids": "Nearby public geographic references for an action. These are not necessarily action sites or observed animal locations.",
+    "map_reference_location_ids": "Nearby public geographic references for a task. These are not necessarily task sites or observed animal locations.",
     "location_type": "What kind of physical place this is. It is independent of category, which classifies the evidence or source associated with the location.",
     "contact_activity_ids": "Firsthand, occurred Crossover Activity records that identify this organization. A nonempty list means Crossover approached or heard from it; inspect each Activity's organization_interaction and outcome before claiming a response, visit, acceptance, or collaboration. Organizations without this field may still be referenced in research.",
-    "organization_ids": "Organizations related to this record. On outside evidence this is a reference, not evidence of Crossover contact."
+    "organization_ids": "Organizations related to this record. On outside evidence this is a reference, not evidence of Crossover contact.",
+    "occurred_at": "When the activity happened, independent of when it was confirmed, recorded, or published.",
+    "confirmed_at": "When Crossover confirmed a previously received item had arrived; this does not replace the receipt date.",
+    "recorded_at": "When Crossover documented the activity in its records; this does not replace the event date.",
+    "started_at": "When work on a task began; this does not imply completion."
   },
   "fieldValueLabels": {
-    "location_type": { "animal_care": "Animal care", "human_services": "Human services", "park": "Park", "street_corridor": "Street or corridor", "general_area": "General area", "other": "Other" },
-    "precision": { "address": "Address", "named_place": "Named place", "intersection": "Intersection", "corridor": "Corridor", "general_area": "General area" },
-    "investigation_status": { "identified": "Identified", "investigating": "Investigating" },
-    "organization_interaction": { "outreach_attempt": "Outreach attempt", "response_received": "Response received", "in_person_visit_and_application": "In-person visit and application", "collaboration": "Documented collaboration" }
-  },
-  "collections": [
-    { "id": "identity", "schema": "identity", "title": "Identity", "query": "identity", "fields": ["id", "name", "slogan", "purpose", "geographicScope", "founderPersonId", "principleIds", "methodIds", "statements"] },
-    { "id": "principles", "schema": "principle", "title": "Principles", "query": "principles", "fields": ["id", "title", "statement", "description"] },
-    { "id": "methods", "schema": "method", "title": "Methods", "query": "methods", "fields": ["id", "title", "statement"] },
-    { "id": "people", "schema": "person", "title": "People", "query": "people", "fields": ["id", "name", "roles", "biography", "profileUrl"] },
-    { "id": "organizations", "schema": "organization", "title": "Organizations", "query": "organizations", "fields": ["id", "name", "summary", "website", "map_location_id", "active"] },
-    { "id": "needs", "schema": "need", "title": "Needs", "query": "needs", "fields": ["id", "slug", "title", "summary", "what_we_are_seeing", "investigation_status", "updated_at", "organization_ids", "record_ids", "unknown_questions", "thumbnail_image"] },
-    { "id": "investigations", "schema": "investigation", "title": "Investigations", "query": "investigations", "fields": ["id", "publicName", "title", "primary_goal", "introduction", "status", "gap_id", "findings_summary", "verified_finding_ids", "evidence_record_ids", "last_updated_at"] },
-    { "id": "objectives", "schema": "objective", "title": "Objectives", "query": "objectives", "fields": ["id", "title", "description", "investigation_id", "action_ids", "activity_record_ids", "evidence_record_ids", "finding_ids"] },
-    { "id": "actions", "schema": "action", "title": "Actions", "query": "actions", "fields": ["id", "order_by_id", "title", "status", "type", "instructions", "investigation_id", "objective_ids", "organization_ids", "location_ids", "map_reference_location_ids", "basis_record_ids", "activity_record_ids", "completed_at"] },
-    { "id": "activities", "schema": "activity", "title": "Activities", "query": "activities", "fields": ["id", "title", "summary", "record_type", "public_update", "trust", "organization_interaction", "evidence_status", "occurred_at", "source", "outcome", "investigation_id", "objective_ids", "organization_ids", "report_record_ids", "limitations"] },
-    { "id": "findings", "schema": "finding", "title": "Findings", "query": "findings", "fields": ["id", "title", "statement", "status", "current", "investigation_id", "article_id", "primary_objective_id", "related_objective_ids", "supporting_record_ids", "contradicting_record_ids", "limitations", "last_reviewed_at"] },
-    { "id": "locations", "schema": "location", "title": "Locations", "query": "locations", "fields": ["id", "name", "location_type", "map_reference", "area", "description", "coordinate_note", "category", "verification_status", "unknown", "evidence_date", "source_url", "evidence_record_id", "evidence_record_ids", "investigation_id"] },
-    { "id": "evidence", "schema": "evidence", "title": "Evidence", "query": "evidence", "fields": ["id", "title", "summary", "record_type", "public_update", "trust", "evidence_status", "source", "context_sources", "published_at", "checked_at", "occurred_at", "recorded_at", "limitations", "coverage_id", "coverage_note", "gap_ids", "investigation_id", "objective_ids", "organization_ids", "basis_record_ids", "report_record_ids", "outcome"] },
-    { "id": "claims", "schema": "claim", "title": "Claims", "query": "claims", "fields": ["id", "statement", "kind", "verificationStatus", "reportedValue", "limitations", "sourceRecordIds", "measurementId", "needId"] },
-    { "id": "measurements", "schema": "measurement", "title": "Measurements", "query": "measurements", "fields": ["id", "measure", "value", "unit", "period_start", "period_end", "coverage_id", "source_record_id", "investigation_id", "evidence_status", "note"] },
-    { "id": "stories", "schema": "story", "title": "Stories", "query": "stories", "fields": ["id", "slug", "title", "summary", "body", "sign_of_being", "published_at", "source_label", "source_url", "gap_ids", "organization_ids", "active"] },
-    { "id": "articles", "schema": "article", "title": "Articles", "query": "articles", "fields": ["id", "title", "description", "summary", "date", "type", "path", "content", "last_updated_at", "related_gap_ids", "related_location_ids", "published"] },
-    { "id": "projects", "schema": "project", "title": "Projects", "query": "projects", "fields": ["id", "title", "description", "intended_outcome", "development_stage", "operational_status", "funding_status", "capacity_summary", "expected_capacity_or_benefit", "actual_additional_capacity", "demand_contribution", "procedure_tracking", "milestones", "evidence_record_ids", "gap_ids", "organization_ids", "last_verified_at", "open_questions", "next_verification_step"] }
-  ],
-  "nestedFields": {
-    "map_reference": ["query", "precision", "verified", "source_url", "embed_url"],
-    "source": ["publisher", "title", "url", "type", "published_at"],
-    "context_sources": ["publisher", "title", "url", "type", "published_at"],
-    "outcome": ["status", "summary", "as_of"],
-    "geographicScope": ["name", "locality", "region", "country"],
-    "statements": { "homeIntroTitle": true, "homeIntroBody": true, "missionQuestion": true, "opportunity": true, "startingApproach": true, "animalCareVision": true, "animalCareInvestigation": true, "learningRule": true, "presencePractice": true, "documentationPractice": true, "aiPractice": true, "experienceChangesUs": true, "publicCommitment": true },
-    "roles": ["organizationId", "title", "locality"],
-    "capacity_summary": { "headline": true, "how_it_helps": true, "not_yet_verified": true },
-    "expected_capacity_or_benefit": { "description": true, "status": true, "evidence_record_ids": true },
-    "actual_additional_capacity": { "description": true, "status": true, "evidence_record_ids": true },
-    "procedure_tracking": { "planned": true, "completed": true, "capacity_change": true, "period": true },
-    "milestones": { "date": true, "status": true, "description": true, "evidence_record_ids": true },
-    "content": {
-      "introduction": true,
-      "sections": {
-        "heading": true,
-        "paragraphs": true,
-        "links": { "label": true, "display_label": true, "url": true }
-      }
+    "location_type": {
+      "animal_care": "Animal care",
+      "human_services": "Human services",
+      "park": "Park",
+      "street_corridor": "Street or corridor",
+      "general_area": "General area",
+      "other": "Other"
+    },
+    "precision": {
+      "address": "Address",
+      "named_place": "Named place",
+      "intersection": "Intersection",
+      "corridor": "Corridor",
+      "general_area": "General area"
+    },
+    "organization_interaction": {
+      "outreach_attempt": "Outreach attempt",
+      "response_received": "Response received",
+      "in_person_visit_and_application": "In-person visit and application",
+      "collaboration": "Documented collaboration"
     }
   },
+  "collections": [
+    {
+      "id": "identity",
+      "schema": "identity",
+      "title": "Identity",
+      "query": "identity",
+      "fields": [
+        "id",
+        "name",
+        "slogan",
+        "purpose",
+        "geographicScope",
+        "founderPersonId",
+        "principleIds",
+        "methodIds",
+        "statements"
+      ]
+    },
+    {
+      "id": "principles",
+      "schema": "principle",
+      "title": "Principles",
+      "query": "principles",
+      "fields": [
+        "id",
+        "title",
+        "statement",
+        "description"
+      ]
+    },
+    {
+      "id": "methods",
+      "schema": "method",
+      "title": "Methods",
+      "query": "methods",
+      "fields": [
+        "id",
+        "title",
+        "statement"
+      ]
+    },
+    {
+      "id": "people",
+      "schema": "person",
+      "title": "People",
+      "query": "people",
+      "fields": [
+        "id",
+        "name",
+        "roles",
+        "biography",
+        "profileUrl"
+      ]
+    },
+    {
+      "id": "organizations",
+      "schema": "organization",
+      "title": "Organizations",
+      "query": "organizations",
+      "fields": [
+        "id",
+        "name",
+        "summary",
+        "website",
+        "map_location_id",
+        "active"
+      ]
+    },
+    {
+      "id": "gaps",
+      "schema": "gap",
+      "title": "Gaps",
+      "query": "gaps",
+      "fields": [
+        "id",
+        "slug",
+        "title",
+        "summary",
+        "what_we_are_seeing",
+        "current_state",
+        "sources",
+        "updated_at",
+        "organization_ids",
+        "record_ids",
+        "unknown_questions",
+        "thumbnail_image",
+        "default"
+      ]
+    },
+    {
+      "id": "objectives",
+      "schema": "objective",
+      "title": "Objectives",
+      "query": "objectives",
+      "fields": [
+        "id",
+        "gap_ids",
+        "title",
+        "description",
+        "measurement_ids",
+        "initiative_ids",
+        "guiding_questions",
+        "task_ids",
+        "activity_record_ids",
+        "evidence_record_ids",
+        "finding_ids"
+      ]
+    },
+    {
+      "id": "tasks",
+      "schema": "task",
+      "title": "Tasks",
+      "query": "tasks",
+      "fields": [
+        "id",
+        "order_by_id",
+        "title",
+        "list_context",
+        "thumbnail_image",
+        "status",
+        "type",
+        "instructions",
+        "gap_ids",
+        "objective_ids",
+        "organization_ids",
+        "location_ids",
+        "map_reference_location_ids",
+        "basis_record_ids",
+        "activity_record_ids",
+        "started_at",
+        "completed_at"
+      ]
+    },
+    {
+      "id": "activities",
+      "schema": "activity",
+      "title": "Activities",
+      "query": "activities",
+      "fields": [
+        "id",
+        "title",
+        "summary",
+        "record_type",
+        "public_update",
+        "trust",
+        "organization_interaction",
+        "evidence_status",
+        "occurred_at",
+        "confirmed_at",
+        "recorded_at",
+        "source",
+        "outcome",
+        "gap_ids",
+        "objective_ids",
+        "organization_ids",
+        "report_record_ids",
+        "limitations"
+      ]
+    },
+    {
+      "id": "findings",
+      "schema": "finding",
+      "title": "Findings",
+      "query": "findings",
+      "fields": [
+        "id",
+        "title",
+        "statement",
+        "status",
+        "current",
+        "gap_ids",
+        "objective_ids",
+        "related_task_ids",
+        "related_initiative_ids",
+        "location_ids",
+        "supporting_record_ids",
+        "contradicting_record_ids",
+        "limitations",
+        "last_reviewed_at"
+      ]
+    },
+    {
+      "id": "locations",
+      "schema": "location",
+      "title": "Locations",
+      "query": "locations",
+      "fields": [
+        "id",
+        "name",
+        "location_type",
+        "map_reference",
+        "area",
+        "description",
+        "coordinate_note",
+        "category",
+        "verification_status",
+        "unknown",
+        "evidence_date",
+        "source_url",
+        "evidence_record_id",
+        "evidence_record_ids",
+        "gap_ids"
+      ]
+    },
+    {
+      "id": "evidence",
+      "schema": "evidence",
+      "title": "Evidence",
+      "query": "evidence",
+      "fields": [
+        "id",
+        "title",
+        "summary",
+        "record_type",
+        "public_update",
+        "trust",
+        "evidence_status",
+        "source",
+        "context_sources",
+        "published_at",
+        "checked_at",
+        "occurred_at",
+        "recorded_at",
+        "limitations",
+        "coverage_id",
+        "coverage_note",
+        "gap_ids",
+        "objective_ids",
+        "organization_ids",
+        "basis_record_ids",
+        "report_record_ids",
+        "outcome"
+      ]
+    },
+    {
+      "id": "claims",
+      "schema": "claim",
+      "title": "Claims",
+      "query": "claims",
+      "fields": [
+        "id",
+        "statement",
+        "kind",
+        "verificationStatus",
+        "reportedValue",
+        "limitations",
+        "sourceRecordIds",
+        "measurementId",
+        "gap_id"
+      ]
+    },
+    {
+      "id": "measurements",
+      "schema": "measurement",
+      "title": "Measurements",
+      "query": "measurements",
+      "fields": [
+        "id",
+        "measure",
+        "value",
+        "unit",
+        "period_start",
+        "period_end",
+        "coverage_id",
+        "source_record_id",
+        "gap_ids",
+        "evidence_status",
+        "note"
+      ]
+    },
+    {
+      "id": "initiatives",
+      "schema": "initiative",
+      "title": "Initiatives",
+      "query": "initiatives",
+      "fields": [
+        "id",
+        "title",
+        "description",
+        "intended_outcome",
+        "development_stage",
+        "operational_status",
+        "funding_status",
+        "capacity_summary",
+        "expected_capacity_or_benefit",
+        "actual_additional_capacity",
+        "demand_contribution",
+        "procedure_tracking",
+        "milestones",
+        "evidence_record_ids",
+        "gap_ids",
+        "organization_ids",
+        "last_verified_at",
+        "open_questions",
+        "next_verification_step"
+      ]
+    }
+  ],
+  "nestedFields": {
+    "sources": [
+      "title",
+      "publisher",
+      "url",
+      "type",
+      "published_at",
+      "checked_at"
+    ],
+    "map_reference": [
+      "query",
+      "precision",
+      "verified",
+      "source_url",
+      "embed_url"
+    ],
+    "source": [
+      "publisher",
+      "title",
+      "url",
+      "type",
+      "published_at"
+    ],
+    "context_sources": [
+      "publisher",
+      "title",
+      "url",
+      "type",
+      "published_at"
+    ],
+    "outcome": [
+      "status",
+      "summary",
+      "as_of"
+    ],
+    "geographicScope": [
+      "name",
+      "locality",
+      "region",
+      "country"
+    ],
+    "statements": {
+      "homeIntroTitle": true,
+      "homeIntroBody": true,
+      "missionQuestion": true,
+      "opportunity": true,
+      "startingApproach": true,
+      "animalCareVision": true,
+      "animalCareInvestigation": true,
+      "learningRule": true,
+      "presencePractice": true,
+      "documentationPractice": true,
+      "aiPractice": true,
+      "experienceChangesUs": true,
+      "publicCommitment": true
+    },
+    "roles": [
+      "organizationId",
+      "title",
+      "locality"
+    ],
+    "capacity_summary": {
+      "headline": true,
+      "how_it_helps": true,
+      "not_yet_verified": true
+    },
+    "expected_capacity_or_benefit": {
+      "description": true,
+      "status": true,
+      "evidence_record_ids": true
+    },
+    "actual_additional_capacity": {
+      "description": true,
+      "status": true,
+      "evidence_record_ids": true
+    },
+    "procedure_tracking": {
+      "planned": true,
+      "completed": true,
+      "capacity_change": true,
+      "period": true
+    },
+    "milestones": {
+      "date": true,
+      "status": true,
+      "description": true,
+      "evidence_record_ids": true
+    },
+    "overview": {
+      "as_of": true,
+      "synthesis_source_record_ids": true,
+      "developments": {
+        "id": true,
+        "date": true,
+        "basis": true,
+        "status": true,
+        "headline": true,
+        "summary": true,
+        "why_it_matters": true,
+        "attribution": true,
+        "record_id": true,
+        "supporting_record_ids": true
+      },
+      "efforts": {
+        "record_id": true,
+        "label": true,
+        "status": true,
+        "established": true,
+        "unknown": true,
+        "supporting_record_ids": true
+      },
+      "unresolved": {
+        "question": true,
+        "question_id": true,
+        "context": true
+      }
+    },
+    "guiding_questions": [
+      "title",
+      "description"
+    ]
+  },
   "fieldLabels": {
-    "location_type": "Location type", "map_reference": "Geographic reference", "query": "Map search query", "precision": "Geographic precision", "verified": "Place reference verified", "coordinate_note": "Coordinate context", "evidence_record_id": "Evidence record",
-    "visual_description": "Visual concept", "preferred_image": "Preferred image", "logo_description": "Logo description", "preferred_logo": "Preferred logo", "thumbnail_image": "Thumbnail image",
-    "order_by_id": "Action order", "activity": "Activity links", "showOrganizations": "Includes organizations",
-    "content": "Article text", "sections": "Sections", "heading": "Heading", "paragraphs": "Paragraphs", "links": "Links", "label": "Label", "display_label": "Display label", "how_it_helps": "How it could help", "not_yet_verified": "Not yet verified", "expected_capacity_or_benefit": "Expected capacity or benefit", "actual_additional_capacity": "Actual additional capacity", "demand_contribution": "Potential contribution", "procedure_tracking": "Procedure tracking", "milestones": "Milestones", "next_verification_step": "Next verification step", "planned": "Planned", "capacity_change": "Capacity change", "period": "Period",
-    "id": "Stable ID", "slug": "Public URL name", "name": "Name", "title": "Title", "publicName": "Public name", "summary": "Summary", "what_we_are_seeing": "What the public record shows", "description": "Description", "statement": "Statement", "purpose": "Purpose", "slogan": "Slogan", "status": "Status", "type": "Type", "kind": "Kind", "record_type": "Record type", "public_update": "Public update", "instructions": "Instructions", "organization_interaction": "Organization interaction", "contact_activity_ids": "Crossover contact activities", "map_location_id": "Documented place", "trust": "Provenance classification", "evidence_status": "Evidence status", "verificationStatus": "Verification status", "verification_status": "Verification status", "source": "Source", "context_sources": "Context sources", "source_url": "Source URL", "source_label": "Source", "publisher": "Publisher", "url": "URL", "profileUrl": "Public profile", "limitations": "Limitations", "unknown": "Unknown", "unknown_questions": "Open questions", "uncertainties": "Uncertainties", "open_questions": "Open questions", "note": "Note", "reportedValue": "Reported value", "value": "Value", "unit": "Unit", "measure": "Measure", "coverage_id": "Geographic coverage ID", "coverage_note": "Geographic coverage", "period_start": "Period starts", "period_end": "Period ends", "published_at": "Published", "checked_at": "Reviewed", "recorded_at": "Recorded", "occurred_at": "Occurred", "completed_at": "Completed", "last_updated_at": "Last updated", "last_reviewed_at": "Last reviewed", "last_verified_at": "Last verified", "evidence_date": "Evidence date", "updated_at": "Updated", "date": "Date", "geographicScope": "Geographic scope", "area": "General area", "category": "Location category", "outcome": "Outcome", "biography": "Biography", "roles": "Roles", "intro": "Introduction", "introduction": "Introduction", "findings_summary": "Findings summary", "capacity_summary": "Capacity summary", "intended_outcome": "Intended outcome", "development_stage": "Development stage", "operational_status": "Operational status", "funding_status": "Funding status", "sign_of_being": "Sign of being", "body": "Account", "active": "Active", "current": "Current", "path": "Public page", "principleIds": "Principles", "methodIds": "Methods", "founderPersonId": "Founder", "investigation_id": "Investigation", "gap_id": "Need", "needId": "Need", "measurementId": "Measurement", "sourceRecordIds": "Source records", "source_record_id": "Source record", "supporting_record_ids": "Supporting evidence", "contradicting_record_ids": "Contradicting evidence", "evidence_record_ids": "Evidence records", "verified_finding_ids": "Verified findings", "finding_ids": "Findings", "article_id": "Related article", "action_ids": "Actions", "objective_ids": "Objectives", "activity_record_ids": "Activity records", "activityIds": "Activities", "relatedActivityIds": "Related activities", "reportIds": "Reports", "relatedReportIds": "Related reports", "organization_ids": "Organizations", "organizationId": "Organization", "location_ids": "Locations", "map_reference_location_ids": "Nearby geographic references", "basis_record_ids": "Basis records", "report_record_ids": "Reports", "gap_ids": "Needs", "related_gap_ids": "Related needs", "related_location_ids": "Related locations", "record_ids": "Records", "source_record_ids": "Source records", "related_objective_ids": "Related objectives", "primary_objective_id": "Primary objective", "primary_goal": "Primary goal"
+    "location_type": "Location type",
+    "map_reference": "Geographic reference",
+    "query": "Map search query",
+    "precision": "Geographic precision",
+    "verified": "Place reference verified",
+    "coordinate_note": "Coordinate context",
+    "evidence_record_id": "Evidence record",
+    "visual_description": "Visual concept",
+    "preferred_image": "Preferred image",
+    "logo_description": "Logo description",
+    "preferred_logo": "Preferred logo",
+    "thumbnail_image": "Thumbnail image",
+    "order_by_id": "Task order",
+    "activity": "Activity links",
+    "showOrganizations": "Includes organizations",
+    "content": "Article text",
+    "sections": "Sections",
+    "heading": "Heading",
+    "paragraphs": "Paragraphs",
+    "links": "Links",
+    "label": "Label",
+    "display_label": "Display label",
+    "how_it_helps": "How it could help",
+    "not_yet_verified": "Not yet verified",
+    "expected_capacity_or_benefit": "Expected capacity or benefit",
+    "actual_additional_capacity": "Actual additional capacity",
+    "demand_contribution": "Potential contribution",
+    "procedure_tracking": "Procedure tracking",
+    "milestones": "Milestones",
+    "next_verification_step": "Next verification step",
+    "planned": "Planned",
+    "capacity_change": "Capacity change",
+    "period": "Period",
+    "id": "Stable ID",
+    "slug": "Public URL name",
+    "name": "Name",
+    "title": "Title",
+    "publicName": "Public name",
+    "summary": "Summary",
+    "what_we_are_seeing": "What the public record shows",
+    "description": "Description",
+    "statement": "Statement",
+    "purpose": "Purpose",
+    "slogan": "Slogan",
+    "status": "Status",
+    "type": "Type",
+    "kind": "Kind",
+    "record_type": "Record type",
+    "public_update": "Public update",
+    "instructions": "Instructions",
+    "organization_interaction": "Organization interaction",
+    "contact_activity_ids": "Crossover contact activities",
+    "map_location_id": "Documented place",
+    "trust": "Provenance classification",
+    "evidence_status": "Evidence status",
+    "verificationStatus": "Verification status",
+    "verification_status": "Verification status",
+    "source": "Source",
+    "context_sources": "Context sources",
+    "source_url": "Source URL",
+    "source_label": "Source",
+    "publisher": "Publisher",
+    "url": "URL",
+    "profileUrl": "Public profile",
+    "limitations": "Limitations",
+    "unknown": "Unknown",
+    "unknown_questions": "Open questions",
+    "uncertainties": "Uncertainties",
+    "open_questions": "Open questions",
+    "note": "Note",
+    "reportedValue": "Reported value",
+    "value": "Value",
+    "unit": "Unit",
+    "measure": "Measure",
+    "coverage_id": "Geographic coverage ID",
+    "coverage_note": "Geographic coverage",
+    "period_start": "Period starts",
+    "period_end": "Period ends",
+    "published_at": "Published",
+    "checked_at": "Reviewed",
+    "recorded_at": "Recorded",
+    "occurred_at": "Occurred",
+    "completed_at": "Completed",
+    "last_updated_at": "Last updated",
+    "last_reviewed_at": "Last reviewed",
+    "last_verified_at": "Last verified",
+    "evidence_date": "Evidence date",
+    "updated_at": "Updated",
+    "date": "Date",
+    "geographicScope": "Geographic scope",
+    "area": "General area",
+    "category": "Location category",
+    "outcome": "Outcome",
+    "biography": "Biography",
+    "roles": "Roles",
+    "intro": "Introduction",
+    "introduction": "Introduction",
+    "findings_summary": "Findings summary",
+    "capacity_summary": "Capacity summary",
+    "intended_outcome": "Intended outcome",
+    "development_stage": "Development stage",
+    "operational_status": "Operational status",
+    "funding_status": "Funding status",
+    "sign_of_being": "Sign of being",
+    "body": "Account",
+    "active": "Active",
+    "current": "Current",
+    "path": "Public page",
+    "principleIds": "Principles",
+    "methodIds": "Methods",
+    "founderPersonId": "Founder",
+    "gap_id": "Need",
+    "measurementId": "Measurement",
+    "sourceRecordIds": "Source records",
+    "source_record_id": "Source record",
+    "supporting_record_ids": "Supporting evidence",
+    "contradicting_record_ids": "Contradicting evidence",
+    "evidence_record_ids": "Evidence records",
+    "verified_finding_ids": "Verified findings",
+    "finding_ids": "Findings",
+    "activity_record_ids": "Activity records",
+    "activityIds": "Activities",
+    "relatedActivityIds": "Related activities",
+    "reportIds": "Reports",
+    "relatedReportIds": "Related reports",
+    "organization_ids": "Organizations",
+    "organizationId": "Organization",
+    "location_ids": "Locations",
+    "map_reference_location_ids": "Nearby geographic references",
+    "basis_record_ids": "Basis records",
+    "report_record_ids": "Reports",
+    "gap_ids": "Projects",
+    "related_gap_ids": "Related projects",
+    "related_location_ids": "Related locations",
+    "record_ids": "Records",
+    "source_record_ids": "Source records",
+    "measurement_ids": "Related metrics",
+    "initiative_ids": "Related initiatives",
+    "project_id": "Project ID",
+    "primary_goal": "Primary goal",
+    "confirmed_at": "Receipt confirmed",
+    "started_at": "Started",
+    "objective_ids": "Objectives",
+    "task_ids": "Tasks",
+    "guiding_questions": "Guiding questions",
+    "related_initiative_ids": "Related initiatives"
   }
 }

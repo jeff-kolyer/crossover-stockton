@@ -23,11 +23,6 @@
       "type": "boolean",
       "description": "Marks an activity as a meaningful public development; visibility must also authorize publication."
     },
-    "organization_interaction": {
-      "type": "string",
-      "enum": ["outreach_attempt", "response_received", "in_person_visit_and_application", "collaboration"],
-      "description": "What Crossover actually did with or received from the linked organization. An application or inquiry is an outreach attempt, not acceptance or partnership. Use collaboration only when directly documented."
-    },
     "visibility": {
       "type": "string",
       "enum": [
@@ -48,16 +43,6 @@
       "$ref": "./common.schema.json#/$defs/source"
     },
     "investigation_id": {
-      "$ref": "./common.schema.json#/$defs/id"
-    },
-    "objective_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "./common.schema.json#/$defs/id"
-      },
-      "uniqueItems": true
-    },
-    "primary_objective_id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
     "gap_ids": {
@@ -171,6 +156,16 @@
       ],
       "additionalProperties": true
     },
+    "organization_interaction": {
+      "type": "string",
+      "enum": [
+        "outreach_attempt",
+        "response_received",
+        "in_person_visit_and_application",
+        "collaboration"
+      ],
+      "description": "What Crossover actually did with or received from the linked organization. An application or inquiry is an outreach attempt, not acceptance or partnership. Use collaboration only when directly documented."
+    },
     "visual_description": {
       "type": "string",
       "minLength": 1,
@@ -190,6 +185,13 @@
       "type": "string",
       "minLength": 1,
       "description": "Optional preferred existing logo path or URL. Do not present an invented mark as an organization's official logo."
+    },
+    "objective_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
     }
   },
   "required": [
@@ -199,7 +201,7 @@
     "summary",
     "source",
     "occurred_at",
-    "investigation_id",
+    "gap_ids",
     "objective_ids"
   ],
   "additionalProperties": true

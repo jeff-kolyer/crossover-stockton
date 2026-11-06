@@ -10,9 +10,9 @@ The Model describes Crossover and its evidence without prescribing a web page. S
 
 A **need** is a potentially unmet human, animal, or community requirement; it is not proof of severity. A **reported condition** is a source-attributed description of a situation. An **affected population** is the people or animals to whom a condition may apply, with scope and count kept separate. **Service capacity** describes how much care a service can actually provide in a period; a proposed capacity is not operational capacity. A **resource** is something potentially available to meet a need. An **assessment** is Crossover's current interpretation with its date, basis, and limitations. A **knowledge gap** is an explicit unanswered question. These may link to a need but remain distinct from it.
 
-## Investigations
+## Gaps and objectives
 
-An **investigation** is a bounded effort to learn about a need; its **scope** states geography and subject. Its **primary goal** states the purpose of that effort. An **objective** states what the investigation must establish and links to tasks, actual activities, evidence, and findings. Objectives remain open to assessment as evidence accumulates; completing a task does not meet an objective. A **hypothesis** is a testable proposed explanation, not a finding. **Investigation status** describes progress, not the evidentiary truth of any claim. Need-record `unknown_questions` are separate questions about a need, not investigation objectives.
+A **gap** organizes work around an unmet need. An **objective** states what Crossover is trying to establish or improve and links to tasks, activity, evidence, findings, metrics, and initiatives. Its guiding questions are text within the objective, not separate records. Completing a task does not fulfill an objective. The current gap is street dogs and access to care. The gap record carries its own slug and default landing designation; there is no separate project wrapper.
 
 ## Evidence and knowledge
 
@@ -22,7 +22,7 @@ Being documented in a source is not the same as being independently verified. Pu
 
 ## Work and outcomes
 
-An **action** is a proposed or available step. A **task** is tracked work to do and can remain open, waiting, done, or cancelled. An **activity** is an action that actually occurred with an occurrence date and provenance. An **attempt** is an activity whose intended outcome may not have been reached. A **workstream** groups related tasks and activities. An **outcome** records what resulted and when it was known; applying to volunteer is not completed onboarding. An **obstacle** is a documented impediment, not a generalization from one attempt. A **follow-up** is the next check implied by a task, activity, or uncertainty. A completed task may reference an actual activity but is not itself a second event.
+A **task** is tracked work to do and can remain open, waiting, done, or cancelled. An **activity** is work that actually occurred with an occurrence date and provenance. A **field report** is a firsthand activity record. An **attempt** is an activity whose intended outcome may not have been reached. An **outcome** records what resulted and when it was known; applying to volunteer is not completed onboarding. A completed task may reference an actual activity but is not itself a second event.
 
 ## People and services
 
@@ -30,7 +30,7 @@ A **person** is a human, with any public role recorded separately. An **organiza
 
 ## Events and accounts
 
-A **development** is a dated change or reported change. An **event** is something that happened at a time and place. A **story** is an attributed narrative about people or events, with source links and any interpretive framing. An **announcement** is a statement of intent or news, not necessarily an outcome. A **proposal** is a suggested change that may never be enacted. A **policy decision** requires a documented decision; committee referral is not enactment. A **publication** is the released source material, separate from the event it reports. Story publication dates are not event dates unless explicitly the same.
+A **development** is a dated change or reported change. An **event** is something that happened at a time and place. An **announcement** is a statement of intent or news, not necessarily an outcome. A **proposal** is a suggested change that may never be enacted. A **policy decision** requires a documented decision; committee referral is not enactment. A **publication** is the released source material, separate from the event it reports.
 
 ## Geography and time
 
@@ -40,17 +40,15 @@ A **location** is a place record; exact coordinates, generalized map reference, 
 
 Records may carry `visual_description`, `preferred_image`, `logo_description`, and `preferred_logo`. These are optional information about a visual concept or an existing asset, not page layout instructions. An independent renderer may choose the preferred asset when suitable, choose another illustration, or use no image. A visual description is not alt text; alt text describes the actual displayed image. An organization's authentic logo must never be replaced by an invented mark presented as official.
 
-Existing need artwork and story imagery use `preferred_image`; need thumbnails remain a separate compact variant. Crossover's existing logo is its `preferred_logo`. Field-report imagery remains attached to its source record with its caption and attribution; illustrative imagery is not investigation evidence. The public record projection at `/data/records.json` includes these optional fields when present and omits them when absent.
+Existing focus artwork uses `preferred_image`; thumbnails remain a separate compact variant. Crossover's existing logo is its `preferred_logo`. Field-report imagery remains attached to its source record with its caption and attribution; illustrative imagery is not evidence. The public record projection at `/data/records.json` includes these optional fields when present and omits them when absent.
 
 ## Permitted relationships
 
-- Needs may reference reported conditions, assessments, services, organizations, evidence, investigations, and stories.
-- An investigation references one or more needs, objectives, tasks, activities, evidence, findings, organizations, and locations.
-- Objectives reference evidence, tasks, actual activities, and findings within the same investigation. Every actual activity and task identifies at least one objective.
+- A gap may reference reported conditions, assessments, services, organizations, and evidence.
+- An objective references tasks, actual activities, evidence, findings, metrics, and initiatives within the gap.
 - A finding references supporting or contradicting evidence IDs and keeps its limitation and review date. Unsupported findings are invalid.
 - An activity may reference its task, organization, location, and field report. A planned action may reference a future location but cannot be represented as a completed observation.
 - A claim or measurement references the source/evidence that reports it. Source attribution is not a verification flag.
 - A project or proposal may reference evidence of planning, funding, construction, or operation. These states cannot be substituted for one another.
-- Stories may reference needs, people, and organizations but do not automatically become Crossover outcomes.
 
 Relationships are checked by `npm run check:data`. Unresolved links or classifications are recorded as migration issues rather than filled with invented information.

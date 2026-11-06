@@ -145,7 +145,6 @@ export interface CrossoverFeed {
   sources: CivicSource[];
 }
 
-export type GapInvestigationStatus = "investigating" | "identified";
 
 /** Optional presentation preferences; descriptions are not image alt text or evidence. */
 export interface VisualPreferences {
@@ -159,8 +158,8 @@ export interface GapRecord extends VisualPreferences {
   id: string;
   slug: string;
   title: string;
-  investigation_status: GapInvestigationStatus;
   active: boolean;
+  default?: boolean;
   rank: number;
   summary: string;
   what_we_are_seeing: string[];
@@ -184,7 +183,6 @@ export interface GapRecord extends VisualPreferences {
   >;
   contributing_factors: string[];
   organization_ids: string[];
-  story_ids: string[];
   updates?: Array<{ date: string; text: string }>;
   sources: Array<{ url?: string; label?: string }>;
   thumbnail_image?: string;
@@ -211,37 +209,10 @@ export interface GapRecord extends VisualPreferences {
   }>;
 }
 
-export interface ActiveInvestigation extends VisualPreferences {
-  id: string;
-  gap_id: string;
-  title: string;
-  primary_goal: string;
-  status: "preparing_fieldwork" | "in_progress" | "completed";
-  introduction: string;
-  findings_summary?: string;
-  findings_introduction?: { heading: string; paragraphs: string[] };
-  purpose: string;
-  evidence_record_ids: string[];
-  known_so_far: string;
-  evidence_context: Array<{ label: string; summary: string; record_id: string | null }>;
-  verified_finding_ids: string[];
-  last_updated_at: string;
-}
+export type InitiativeStage = "proposed" | "funded" | "under_development" | "operational" | "completed" | "unknown";
+export type InitiativeOperationalStatus = "operational" | "partially_operational" | "not_operational" | "unknown";
 
-export interface EstablishedInvestigationFinding {
-  id: string;
-  title: string;
-  summary: string;
-  evidence_kind: "crossover_firsthand" | "official_public_record" | "organization_report";
-  evidence_record_ids: string[];
-  observed_at: string;
-  related_project_ids: string[];
-}
-
-export type ProjectStage = "proposed" | "funded" | "under_development" | "operational" | "completed" | "unknown";
-export type ProjectOperationalStatus = "operational" | "partially_operational" | "not_operational" | "unknown";
-
-export interface CapacityProject extends VisualPreferences {
+export interface CapacityInitiative extends VisualPreferences {
   id: string;
   title: string;
   description: string;
@@ -249,8 +220,8 @@ export interface CapacityProject extends VisualPreferences {
   gap_ids: string[];
   organization_ids: string[];
   location: { address: string; verified_by: string } | null;
-  development_stage: ProjectStage;
-  operational_status: ProjectOperationalStatus;
+  development_stage: InitiativeStage;
+  operational_status: InitiativeOperationalStatus;
   funding_status?: "unknown" | "authorized" | "contract_awarded" | "operating_funds_allocated";
   funding_source_urls?: string[];
   expected_capacity_or_benefit: { description: string; status: "proposed" | "reported" | "verified"; evidence_record_ids: string[] } | null;
@@ -279,41 +250,6 @@ export interface OrgRecord extends VisualPreferences {
   verification?: { checked_at: string; evidence_record_ids: string[]; direct_check: string; open_questions: string[] };
 }
 
-export interface StoryRecord extends VisualPreferences {
-  id: string;
-  slug: string;
-  title: string;
-  summary: string;
-  body?: string;
-  gap_ids: string[];
-  organization_ids: string[];
-  featured: boolean;
-  active: boolean;
-  published_at?: string;
-  updated_at?: string;
-  source_url?: string;
-  source_label?: string;
-  source_published_at?: string | null;
-  sign_of_being?: string;
-  connection?: string[];
-  fruit?: string[];
-  moments?: StoryMoment[];
-  evidence?: StoryEvidence[];
-}
-
-export interface StoryMoment {
-  title: string;
-  text: string;
-  source_label?: string;
-  source_url?: string;
-}
-
-export interface StoryEvidence {
-  label: string;
-  url: string;
-  published_at?: string | null;
-}
-
 export interface SourceRecord {
   title?: string;
   publisher?: string;
@@ -325,7 +261,6 @@ export interface EvidenceRecord extends VisualPreferences {
   id: string;
   investigation_id?: string;
   objective_ids?: string[];
-  primary_objective_id?: string;
   observed_dog_count?: number;
   coverage_id?: string;
   coverage_note?: string;

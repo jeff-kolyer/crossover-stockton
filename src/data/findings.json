@@ -1,42 +1,41 @@
 [
   {
     "id": "finding-volunteer-onboarding-can-stall",
-    "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "Attempts to get involved in animal care can stall.",
     "status": "preliminary",
     "statement": "We applied to volunteer with Stockton Street Dogs on October 7 and Stockton Animal Services on October 14. We have not documented a completed onboarding process with either organization.",
-    "article_id": "friction-of-volunteering",
     "supporting_record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application",
       "crossover-2026-10-12-doggie-day-out-inquiry",
       "crossover-2026-10-14-sas-volunteer-application"
     ],
     "contradicting_record_ids": [],
-    "related_project_ids": [],
     "location_ids": [
       "stockton-animal-services-shelter"
     ],
     "limitations": "Two applications do not establish an organization-wide or systemic failure. We have not established what happened internally to either application.",
     "last_reviewed_at": "2026-10-30",
-    "primary_objective_id": "additional-help",
-    "related_objective_ids": [
-      "food-and-water",
-      "additional-help"
+    "gap_ids": [
+      "dogs-safe-placement"
     ],
-    "related_action_ids": [
+    "objective_ids": [
+      "understand-access-to-care",
+      "evaluate-existing-responses",
+      "pursue-practical-improvements"
+    ],
+    "related_task_ids": [
       "task-ssd-volunteer-application-2026-10-07",
       "task-sas-visit-application-2026-10-14"
-    ]
+    ],
+    "related_initiative_ids": []
   },
   {
     "id": "finding-public-street-dog-information-fragmented",
-    "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "Public information about street dogs is difficult to piece together.",
     "status": "developing",
     "statement": "We found public estimates, shelter statistics, reported sightings, and descriptions of available services. These sources do not establish how many dogs are currently on Stockton's streets or what happens to individual dogs after they're reported.",
-    "article_id": "public-access-to-stray-dog-information",
     "supporting_record_ids": [
       "cbs-2026-04-06-stockton-abandoned-dogs",
       "ssd-2026-09-29-dumped-dogs-surge",
@@ -44,49 +43,52 @@
       "stockton-animal-services-2026-10-20-reporting-guidance"
     ],
     "contradicting_record_ids": [],
-    "related_project_ids": [],
     "location_ids": [],
     "limitations": "Our review of public information does not establish what internal agency or rescue records may contain.",
     "last_reviewed_at": "2026-10-30",
-    "primary_objective_id": "where-dogs-need-help",
-    "related_objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
+    "gap_ids": [
+      "dogs-safe-placement"
     ],
-    "related_action_ids": [
+    "objective_ids": [
+      "establish-street-dog-extent",
+      "understand-access-to-care"
+    ],
+    "related_task_ids": [
       "task-sas-field-call-follow-up"
-    ]
+    ],
+    "related_initiative_ids": []
   },
   {
     "id": "finding-new-facilities-impact-uncertain",
-    "investigation_id": "street-dog-immediate-welfare",
     "current": true,
     "title": "New facilities may expand care, but their impact remains uncertain.",
     "status": "exploratory",
     "statement": "We observed shelter expansion construction on October 14. Stockton Street Dogs has also proposed a Canine Campus. Their future capacity and effects on access to care remain unverified.",
-    "article_id": "caring-for-stocktons-dogs",
     "supporting_record_ids": [
       "crossover-2026-10-14-sas-first-visit",
       "ssd-2026-07-30-canine-campus-proposal",
       "ssd-2026-10-07-canine-campus-details"
     ],
     "contradicting_record_ids": [],
-    "related_project_ids": [
-      "stockton-animal-shelter-renovation",
-      "canine-campus"
-    ],
     "location_ids": [
       "stockton-animal-services-shelter"
     ],
     "limitations": "We have not established that new facilities will be insufficient or that any proposed alternative would produce better outcomes.",
     "last_reviewed_at": "2026-10-30",
-    "primary_objective_id": "improvement-outcomes",
-    "related_objective_ids": [
-      "additional-help",
-      "improvement-outcomes"
+    "gap_ids": [
+      "dogs-safe-placement"
     ],
-    "related_action_ids": [
+    "objective_ids": [
+      "understand-access-to-care",
+      "pursue-practical-improvements",
+      "evaluate-existing-responses"
+    ],
+    "related_task_ids": [
       "task-sas-visit-application-2026-10-14"
+    ],
+    "related_initiative_ids": [
+      "stockton-animal-shelter-renovation",
+      "canine-campus"
     ]
   }
 ]

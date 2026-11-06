@@ -1,6 +1,33 @@
 (() => {
   "use strict";
 
+  const sectionPath = /^\/gaps\/street-dogs\/(overview|objectives|metrics|activity|places|organizations|initiatives|findings|sources)\/$/;
+  const recordPathForWorkspace = /^\/(?:record|organization)\/([^/]+)\/$/;
+  const sectionMatch = location.pathname.match(sectionPath);
+  const recordMatch = location.pathname.match(recordPathForWorkspace);
+  const generalSections = { "/gaps/": "overview", "/activity/": "activity", "/places/": "places", "/organizations/": "organizations", "/explore/": "sources", "/about/": "about" };
+  const workspaceRoute = sectionMatch?.[1] || (recordMatch ? `record/${recordMatch[1]}` : generalSections[location.pathname]);
+  if (workspaceRoute) {
+    location.replace(`/#${workspaceRoute}`);
+    return;
+  }
+
+  const oldInvestigationSections = {
+    findings: "/explore/", questions: "/", objectives: "/", "next-actions": "/",
+    fieldwork: "/activity/", organizations: "/organizations/", locations: "/places/",
+    evidence: "/explore/", articles: "/gaps/",
+  };
+  const oldSection = location.pathname === "/investigation/" ? oldInvestigationSections[location.hash.slice(1)] : null;
+  if (oldSection && (location.pathname !== oldSection || location.hash)) {
+    location.replace(oldSection);
+    return;
+  }
+
+  if (location.pathname === "/projects/" || location.pathname.startsWith("/projects/street-dogs/")) {
+    location.replace(location.pathname.replace("/projects/", "/gaps/") + location.search + location.hash);
+    return;
+  }
+
   const legacyRoute = location.hash.startsWith("#/") ? location.hash.slice(1) : "";
   if (legacyRoute && !legacyRoute.startsWith("//") && legacyRoute.split("/").every((part) => /^[a-z0-9%_-]*$/i.test(part))) {
     location.replace((legacyRoute === "/" ? "/" : legacyRoute.endsWith("/") ? legacyRoute : `${legacyRoute}/`) + location.search);
@@ -9,12 +36,30 @@
 
   const menu = document.getElementById("menu-toggle");
   menu?.addEventListener("click", () => {
-    const nav = document.getElementById("site-nav");
-    nav.classList.toggle("open");
-    menu.setAttribute("aria-expanded", String(nav.classList.contains("open")));
+    const sidebar = document.querySelector(".need-sidebar");
+    const open = sidebar?.classList.toggle("is-open") ?? false;
+    menu.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", (event) => {
+    const button = event.target instanceof Element ? event.target.closest("#sidebar-toggle") : null;
+    if (!button) return;
+    const sidebar = button.closest(".need-sidebar");
+    const open = sidebar.classList.toggle("is-open");
+    button.setAttribute("aria-expanded", String(open));
+    button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   });
 
-  const sections = new Set(["/", "/needs/", "/investigation/", "/activity/", "/stories/", "/articles/", "/responses/", "/organizations/", "/places/", "/explore/", "/about/"]);
+  document.addEventListener("click", (event) => {
+    const button = event.target instanceof Element ? event.target.closest("#need-menu-toggle") : null;
+    if (!button) return;
+    const sidebar = button.closest(".need-sidebar");
+    const open = sidebar?.classList.toggle("is-open") ?? false;
+    button.setAttribute("aria-expanded", String(open));
+    button.setAttribute("aria-label", open ? "Close sections" : "Open sections");
+  });
+
+  const sections = new Set(["/", "/gaps/", "/activity/", "/organizations/", "/places/", "/explore/", "/about/"]);
+  const projectSectionPath = /^\/gaps\/[^/]+\/[^/]+\/$/;
   const recordPath = /^\/(?:record|organization)\/[^/]+\/$/;
   const cache = new Map();
   cache.set(location.pathname, Promise.resolve(document.cloneNode(true)));
@@ -65,7 +110,7 @@
     if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return null;
     const url = new URL(link.href, location.href);
     if (url.origin !== location.origin || url.search || (url.pathname === displayedPath && url.hash)) return null;
-    return sections.has(url.pathname) || recordPath.test(url.pathname) ? url : null;
+    return sections.has(url.pathname) || projectSectionPath.test(url.pathname) || recordPath.test(url.pathname) ? url : null;
   };
 
   const loadPage = (url) => {
@@ -170,7 +215,7 @@
   });
 
   document.addEventListener("pointerover", (event) => {
-    const link = event.target instanceof Element ? event.target.closest("#site-nav a[href], .card h3 a[href], .row h3 a[href]") : null;
+    const link = event.target instanceof Element ? event.target.closest("#site-nav a[href], .need-section-links a[href], .card h3 a[href], .row h3 a[href]") : null;
     const url = destination(link);
     if (url && url.pathname !== displayedPath) loadPage(url).catch(() => {});
   }, { passive: true });

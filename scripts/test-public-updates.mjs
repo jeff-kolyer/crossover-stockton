@@ -4,10 +4,10 @@ import { readFile } from "node:fs/promises";
 import { publicUpdateCategory, publicUpdateDate, selectPublicUpdates } from "../src/model/publicUpdates.ts";
 
 const readJson = async (name) => JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
-const needs = (await readJson("needs")).records;
+const needs = (await readJson("gaps")).records;
 const evidence = [...await readJson("evidence"), ...await readJson("activities")];
 const objectives = await readJson("objectives");
-const actions = await readJson("actions");
+const tasks = await readJson("tasks");
 const receiptId = "crossover-2026-11-02-sas-field-call-records-received";
 
 test("the receipt is one activity shared by Activity and public Updates", () => {
@@ -17,11 +17,16 @@ test("the receipt is one activity shared by Activity and public Updates", () => 
   assert.equal(receipt?.visibility, "public");
   assert.ok(receipt.basis_record_ids.includes("crossover-2026-10-20-sas-field-call-records-request"));
   assert.ok(objectives.some((objective) => objective.activity_record_ids.includes(receiptId)));
-  assert.ok(!needs.find((need) => need.id === "dogs-safe-placement").record_ids.includes(receiptId));
+  assert.ok(needs.find((need) => need.id === "dogs-safe-placement").record_ids.includes(receiptId));
   const update = selectPublicUpdates(needs, evidence).find((item) => item.record.id === receiptId);
   assert.equal(update.record, receipt);
-  assert.equal(actions.find((action) => action.id === "task-review-sas-field-call-records").status, "open");
-  assert.equal(actions.find((action) => action.id === "task-sas-field-call-request-2026-10-20").status, "done");
+  const review = tasks.find((task) => task.id === "task-review-sas-field-call-records");
+  assert.equal(review.status, "in_progress");
+  assert.equal(review.started_at, "2026-11-04");
+  assert.equal(receipt.occurred_at, "2026-11-02");
+  assert.equal(receipt.confirmed_at, "2026-11-03");
+  assert.equal(receipt.recorded_at, "2026-11-03");
+  assert.equal(tasks.find((task) => task.id === "task-sas-field-call-request-2026-10-20").status, "done");
   assert.deepEqual(publicUpdateDate(receipt), { value: "2026-11-02", meaning: "occurred" });
 });
 

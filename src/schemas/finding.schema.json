@@ -8,8 +8,12 @@
     "id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
-    "investigation_id": {
-      "$ref": "./common.schema.json#/$defs/id"
+    "gap_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
     },
     "title": {
       "type": "string",
@@ -30,9 +34,6 @@
       "type": "string",
       "minLength": 1
     },
-    "primary_objective_id": {
-      "$ref": "./common.schema.json#/$defs/id"
-    },
     "supporting_record_ids": {
       "type": "array",
       "items": {
@@ -41,13 +42,6 @@
       "uniqueItems": true
     },
     "contradicting_record_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "./common.schema.json#/$defs/id"
-      },
-      "uniqueItems": true
-    },
-    "related_objective_ids": {
       "type": "array",
       "items": {
         "$ref": "./common.schema.json#/$defs/id"
@@ -83,11 +77,25 @@
       "type": "string",
       "minLength": 1,
       "description": "Optional preferred existing logo path or URL. Do not present an invented mark as an organization's official logo."
+    },
+    "objective_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "related_task_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
     }
   },
   "required": [
     "id",
-    "investigation_id",
+    "gap_ids",
     "title",
     "status",
     "statement",

@@ -2,12 +2,18 @@
   {
     "id": "weston-ranch-carrie-street",
     "location_type": "street_corridor",
-    "map_reference": { "query": "Carrie Street, Weston Ranch, Stockton, CA", "precision": "corridor", "verified": false },
+    "map_reference": {
+      "query": "Carrie Street, Weston Ranch, Stockton, CA",
+      "precision": "corridor",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Weston Ranch — Carrie Street levee",
     "area": "800 block of Carrie Street / levee",
-    "coordinates": [37.914, -121.301],
+    "coordinates": [
+      37.914,
+      -121.301
+    ],
     "coordinate_note": "Generalized Carrie Street neighborhood reference, informed by public street geography; not the attack site.",
     "coordinate_reference_url": "https://callejero-california.openalfa.com/calles/carrie-street-weston-ranch-ca-carrie-street",
     "evidence_date": "2026-04-23",
@@ -15,7 +21,11 @@
     "evidence_type": "Published local report",
     "category": "historical_published_report",
     "marker_kind": "major_reported_concern",
-    "map_label": {"place":"Carrie St Levee","report":"Roaming-dog attack · Apr 2026","note":"Historical; current conditions unknown"},
+    "map_label": {
+      "place": "Carrie St Levee",
+      "report": "Roaming-dog attack · Apr 2026",
+      "note": "Historical; current conditions unknown"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical — current conditions unknown",
     "last_known_outcome": "At least six dogs reportedly captured after the incident.",
@@ -23,17 +33,26 @@
     "description": "Stocktonia reported an April 23, 2026 roaming-dog attack near the levee and said at least six dogs were subsequently captured.",
     "unknown": "Current dog presence, ownership, and animal-welfare conditions are unverified.",
     "source_url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
-    "evidence_record_id": "stockton-2026-05-11-stray-dog-report"
+    "evidence_record_id": "stockton-2026-05-11-stray-dog-report",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "south-lincoln-crosstown",
     "location_type": "street_corridor",
-    "map_reference": { "query": "South Lincoln Street, Stockton, CA", "precision": "corridor", "verified": false },
+    "map_reference": {
+      "query": "South Lincoln Street, Stockton, CA",
+      "precision": "corridor",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "South Lincoln Street — Crosstown Freeway",
     "area": "Near the DMV beneath the Crosstown Freeway",
-    "coordinates": [37.951, -121.298],
+    "coordinates": [
+      37.951,
+      -121.298
+    ],
     "coordinate_note": "Generalized public DMV-area reference; not an encampment or animal location.",
     "coordinate_reference_url": "https://www.dmv.ca.gov/portal/field-office/stockton/",
     "evidence_date": "2025-02-28",
@@ -41,24 +60,37 @@
     "evidence_type": "Published local report",
     "category": "historical_published_report",
     "marker_kind": "historical_sighting",
-    "map_label": {"place":"S Lincoln St / Crosstown Fwy","report":"Dogs and puppies reported · Feb 2025","note":"Current conditions unknown"},
+    "map_label": {
+      "place": "S Lincoln St / Crosstown Fwy",
+      "report": "Dogs and puppies reported · Feb 2025",
+      "note": "Current conditions unknown"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical — current conditions unknown",
     "last_known_outcome": "Not established.",
     "status": "reported",
     "description": "Stocktonia documented Hungry Tailz Rescue's February 2025 visit, including puppies, adult dogs, and animal-care needs.",
     "unknown": "Current residents, dogs, and care needs are unverified.",
-    "source_url": "https://stocktonia.org/news/community/2025/03/10/puppy-love-spurs-stockton-group-to-offer-homeless-pets-a-lifeline/"
+    "source_url": "https://stocktonia.org/news/community/2025/03/10/puppy-love-spurs-stockton-group-to-offer-homeless-pets-a-lifeline/",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "trinity-bear-creek",
     "location_type": "street_corridor",
-    "map_reference": { "query": "Trinity Parkway, Stockton, CA", "precision": "corridor", "verified": false },
+    "map_reference": {
+      "query": "Trinity Parkway, Stockton, CA",
+      "precision": "corridor",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Trinity Parkway — Bear Creek levee",
     "area": "Trinity Parkway / McAuliffe Road vicinity",
-    "coordinates": [38.048, -121.37],
+    "coordinates": [
+      38.048,
+      -121.37
+    ],
     "coordinate_note": "Generalized Trinity Parkway corridor reference based on public road geography; not an encampment location.",
     "coordinate_reference_url": "https://mapcarta.com/W287547354",
     "evidence_date": "2025-07-22",
@@ -66,24 +98,37 @@
     "evidence_type": "Published local report",
     "category": "historical_published_report",
     "marker_kind": "historical_sighting",
-    "map_label": {"place":"Trinity Pkwy / Bear Creek","report":"Residents with dogs · Jul 2025","note":"Current conditions unknown"},
+    "map_label": {
+      "place": "Trinity Pkwy / Bear Creek",
+      "report": "Residents with dogs · Jul 2025",
+      "note": "Current conditions unknown"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical — current conditions unknown",
     "last_known_outcome": "Encampment removal was reported; subsequent animal-care outcome unknown.",
     "status": "reported",
     "description": "July 2025 reporting documented residents with dogs and puppies, pet-related shelter barriers, and subsequent encampment removal.",
     "unknown": "Conditions following the encampment removal, including any current animal-care needs, are unverified.",
-    "source_url": "https://stocktonia.org/news/homeless/2025/07/23/city-cleans-up-trinity-parkway-dozens-of-homeless-displaced/"
+    "source_url": "https://stocktonia.org/news/homeless/2025/07/23/city-cleans-up-trinity-parkway-dozens-of-homeless-displaced/",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "country-club-i5",
     "location_type": "street_corridor",
-    "map_reference": { "query": "Country Club Boulevard and Interstate 5, Stockton, CA", "precision": "intersection", "verified": false },
+    "map_reference": {
+      "query": "Country Club Boulevard and Interstate 5, Stockton, CA",
+      "precision": "intersection",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Country Club — I-5 vicinity",
     "area": "Country Club Boulevard / Interstate 5",
-    "coordinates": [37.961, -121.334],
+    "coordinates": [
+      37.961,
+      -121.334
+    ],
     "coordinate_note": "SJCOG roadway reference on I-5 near Country Club Boulevard. This marker is a geographic reference, not a documented incident location; the county report identified no specific dog or animal-welfare need.",
     "coordinate_reference_url": "https://www.sjcog.org/DocumentCenter/View/10638/Final_2024_RCMP_Update_SJCOG",
     "evidence_date": "2025-03-05",
@@ -91,24 +136,37 @@
     "evidence_type": "County report",
     "category": "historical_published_report",
     "marker_kind": "historical_sighting",
-    "map_label": {"place":"Country Club / I-5","report":"Encampment outreach · Mar 2025","note":"No dog-specific need documented"},
+    "map_label": {
+      "place": "Country Club / I-5",
+      "report": "Encampment outreach · Mar 2025",
+      "note": "No dog-specific need documented"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical — current conditions unknown",
     "last_known_outcome": "No specific animal-welfare need documented.",
     "status": "exploratory",
     "description": "A county report documented encampment outreach in the area, but identified no specific animal-welfare need.",
     "unknown": "Whether dogs were present, and any current dog-related conditions, are unverified.",
-    "source_url": "https://sjcprobation.org/2025/03/05/san-joaquin-county-probation-and-local-law-enforcement-join-forces-to-address-community-concerns-regarding-homeless-encampment-in-stockton"
+    "source_url": "https://sjcprobation.org/2025/03/05/san-joaquin-county-probation-and-local-law-enforcement-join-forces-to-address-community-concerns-regarding-homeless-encampment-in-stockton",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "pawboost-crown-rose-marie-2026-10-16",
     "location_type": "street_corridor",
-    "map_reference": { "query": "Crown Avenue and Rose Marie Lane, Stockton, CA", "precision": "intersection", "verified": false },
+    "map_reference": {
+      "query": "Crown Avenue and Rose Marie Lane, Stockton, CA",
+      "precision": "intersection",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Crown Avenue — Rose Marie Lane",
     "area": "Crown Avenue / Rose Marie Lane vicinity",
-    "coordinates": [37.988, -121.32],
+    "coordinates": [
+      37.988,
+      -121.32
+    ],
     "coordinate_note": "Generalized Rose Marie Lane neighborhood reference, not the dog's current location.",
     "coordinate_reference_url": "https://scholarlycommons.pacific.edu/postcards/1827/",
     "evidence_date": "2026-10-16",
@@ -116,24 +174,36 @@
     "evidence_type": "Public PawBoost report",
     "category": "recent_public_report",
     "marker_kind": "reported_sighting",
-    "map_label": {"place":"Crown Ave & Rose Marie Ln","report":"Dog running in street · Oct 16"},
+    "map_label": {
+      "place": "Crown Ave & Rose Marie Ln",
+      "report": "Dog running in street · Oct 16"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Reported — unverified",
     "last_known_outcome": "PawBoost listed a sighting; subsequent outcome not established.",
     "status": "reported",
     "description": "A PawBoost user reported a dog with a collar running in the street on October 16. This is a public sighting report, not a Crossover observation.",
     "unknown": "The dog's identity, safety, current location, and outcome are unknown.",
-    "source_url": "https://www.pawboost.com/landing/pet/J21IrhSPtMgdJGPK8Rdf0ApcBAXWYBO9/found-stray-thispet-stockton-ca-95207"
+    "source_url": "https://www.pawboost.com/landing/pet/J21IrhSPtMgdJGPK8Rdf0ApcBAXWYBO9/found-stray-thispet-stockton-ca-95207",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "pawboost-california-magnolia-2026-10-15",
     "location_type": "street_corridor",
-    "map_reference": { "query": "California Street and Magnolia Street, Stockton, CA", "precision": "intersection", "verified": false },
+    "map_reference": {
+      "query": "California Street and Magnolia Street, Stockton, CA",
+      "precision": "intersection",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "California Street — Magnolia Street",
     "area": "California Street / Magnolia Street vicinity",
-    "coordinates": [37.965, -121.29],
+    "coordinates": [
+      37.965,
+      -121.29
+    ],
     "coordinate_note": "Generalized downtown neighborhood reference, not the apartment or dog's current location.",
     "coordinate_reference_url": "https://cms3.revize.com/revize/stockton/Documents/Business/Planning%20%26%20Engineering/Shape%20Stockton/Magnolia%20Recommendation%20Map.pdf",
     "evidence_date": "2026-10-15",
@@ -141,24 +211,36 @@
     "evidence_type": "Public PawBoost report",
     "category": "recent_public_report",
     "marker_kind": "reported_sighting",
-    "map_label": {"place":"California St & Magnolia St","report":"Found dog reported · Oct 15"},
+    "map_label": {
+      "place": "California St & Magnolia St",
+      "report": "Found dog reported · Oct 15"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Reported — unverified",
     "last_known_outcome": "PawBoost listed the dog as found; final disposition not confirmed.",
     "status": "reported",
     "description": "A PawBoost user reported finding a dog in an apartment parking area on October 15. A later public comment claimed temporary care, but the final outcome has not been confirmed.",
     "unknown": "Ownership, final disposition, and present location are unknown.",
-    "source_url": "https://www.pawboost.com/landing/pet/gTZ_Pi5VODtzTDJN42ZvQNFFSmdBfWCY/found-stray-thispet-stockton-ca-95202"
+    "source_url": "https://www.pawboost.com/landing/pet/gTZ_Pi5VODtzTDJN42ZvQNFFSmdBfWCY/found-stray-thispet-stockton-ca-95202",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "pawboost-mcdougald-henry-long-2026-10-15",
     "location_type": "street_corridor",
-    "map_reference": { "query": "McDougald Boulevard and Henry Long Boulevard, Stockton, CA", "precision": "intersection", "verified": false },
+    "map_reference": {
+      "query": "McDougald Boulevard and Henry Long Boulevard, Stockton, CA",
+      "precision": "intersection",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "McDougald Boulevard — Henry Long Boulevard",
     "area": "McDougald Boulevard / Henry Long Boulevard vicinity",
-    "coordinates": [37.905, -121.296],
+    "coordinates": [
+      37.905,
+      -121.296
+    ],
     "coordinate_note": "Generalized public road vicinity, not the dog's current location.",
     "coordinate_reference_url": "https://www.mlslistings.com/Property/EB41145573/3865-mcdougald-blvd-stockton-ca-95206?view=md",
     "evidence_date": "2026-10-15",
@@ -166,24 +248,36 @@
     "evidence_type": "Public PawBoost report",
     "category": "recent_public_report",
     "marker_kind": "reported_sighting",
-    "map_label": {"place":"McDougald Blvd & Henry Long Blvd","report":"Found dog; return reported · Oct 15"},
+    "map_label": {
+      "place": "McDougald Blvd & Henry Long Blvd",
+      "report": "Found dog; return reported · Oct 15"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Reported resolved — owner return unconfirmed independently",
     "last_known_outcome": "A public commenter said the dog was safely returned to its owner; Crossover has not independently confirmed this.",
     "status": "reported",
     "description": "A PawBoost user reported finding a dog without a collar on October 15. A later commenter said the dog was returned to its owner.",
     "unknown": "The reported reunion has not been independently confirmed.",
-    "source_url": "https://www.pawboost.com/landing/pet/Ot64iDUByQq1D1fprLtl41FYCLyGgY1J/found-stray-thispet-stockton-ca-95206"
+    "source_url": "https://www.pawboost.com/landing/pet/Ot64iDUByQq1D1fprLtl41FYCLyGgY1J/found-stray-thispet-stockton-ca-95206",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "louis-park-pixie-woods-2026-04-06",
     "location_type": "park",
-    "map_reference": { "query": "Louis Park, Stockton, CA", "precision": "named_place", "verified": false },
+    "map_reference": {
+      "query": "Louis Park, Stockton, CA",
+      "precision": "named_place",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Louis Park / Pixie Woods vicinity",
     "area": "Louis Park public-area reference; Pixie Woods is an adjacent landmark",
-    "coordinates": [37.957, -121.345],
+    "coordinates": [
+      37.957,
+      -121.345
+    ],
     "coordinate_note": "Generalized public-park reference. CBS named Louis Park; Pixie Woods is adjacent, not a reported dog location.",
     "coordinate_reference_url": "https://www.topozone.com/california/san-joaquin-ca/woods/pixie-woods/",
     "evidence_date": "2026-04-06",
@@ -191,7 +285,11 @@
     "evidence_type": "Published local report",
     "category": "historical_published_report",
     "marker_kind": "major_reported_concern",
-    "map_label": {"place":"Louis Park","report":"Abandoned-dog concern · Apr 2026","note":"Historical; current conditions unknown"},
+    "map_label": {
+      "place": "Louis Park",
+      "report": "Abandoned-dog concern · Apr 2026",
+      "note": "Historical; current conditions unknown"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical report — current conditions unknown",
     "last_known_outcome": "CBS reported a councilmember's concern; no specific dog outcome stated.",
@@ -199,17 +297,26 @@
     "description": "CBS Sacramento reported that a Stockton councilmember described abandoned and unaltered dog challenges particularly around Louis Park. The report did not identify Pixie Woods as an incident site.",
     "unknown": "The location, number, condition, and current presence of any dogs are unverified.",
     "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
-    "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs"
+    "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "stanislaus-street-corridor-2026-04-06",
     "location_type": "street_corridor",
-    "map_reference": { "query": "Stanislaus Street, Stockton, CA", "precision": "corridor", "verified": false },
+    "map_reference": {
+      "query": "Stanislaus Street, Stockton, CA",
+      "precision": "corridor",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Stanislaus Street corridor",
     "area": "Stanislaus Street; no block identified in the report",
-    "coordinates": [37.951, -121.284],
+    "coordinates": [
+      37.951,
+      -121.284
+    ],
     "coordinate_note": "SJCOG roadway reference at Stanislaus Street and SR-4. This marker is a geographic reference, not a documented incident location; the report identified no block or dog location.",
     "coordinate_reference_url": "https://www.sjcog.org/DocumentCenter/View/10638/Final_2024_RCMP_Update_SJCOG",
     "evidence_date": "2026-04-06",
@@ -217,7 +324,11 @@
     "evidence_type": "Published local report",
     "category": "historical_published_report",
     "marker_kind": "historical_sighting",
-    "map_label": {"place":"Stanislaus St corridor","report":"Resident helping dogs · Apr 2026","note":"Reported block unknown"},
+    "map_label": {
+      "place": "Stanislaus St corridor",
+      "report": "Resident helping dogs · Apr 2026",
+      "note": "Reported block unknown"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical report — current conditions unknown",
     "last_known_outcome": "A resident described helping abandoned dogs; no specific dog outcome stated.",
@@ -225,17 +336,26 @@
     "description": "CBS Sacramento reported that a resident living off Stanislaus Street had helped abandoned dogs in her area for more than a year. No particular block was identified.",
     "unknown": "Which part of the corridor was involved, and current conditions, are unknown.",
     "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
-    "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs"
+    "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "highway-4-corridor-2026-04-06",
     "location_type": "street_corridor",
-    "map_reference": { "query": "California State Route 4, Stockton, CA", "precision": "corridor", "verified": false },
+    "map_reference": {
+      "query": "California State Route 4, Stockton, CA",
+      "precision": "corridor",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Highway 4 corridor",
     "area": "Broad Highway 4 corridor; no segment identified",
-    "coordinates": [37.948, -121.301],
+    "coordinates": [
+      37.948,
+      -121.301
+    ],
     "coordinate_note": "OpenStreetMap roadway reference at the SR-4 / I-5 Crosstown Freeway interchange. This marker is a geographic reference, not a documented incident location; the report identified no dumping site or dog location.",
     "coordinate_reference_url": "https://www.openstreetmap.org/?mlat=37.94822&mlon=-121.30054#map=17/37.94822/-121.30054",
     "evidence_date": "2026-04-06",
@@ -243,7 +363,11 @@
     "evidence_type": "Published local report",
     "category": "historical_published_report",
     "marker_kind": "historical_sighting",
-    "map_label": {"place":"Highway 4 corridor","report":"Dumping account · Apr 2026","note":"Reported segment unknown"},
+    "map_label": {
+      "place": "Highway 4 corridor",
+      "report": "Dumping account · Apr 2026",
+      "note": "Reported segment unknown"
+    },
     "source_reviewed_at": "2026-10-20",
     "verification_status": "Historical account — location and current conditions unverified",
     "last_known_outcome": "A rescue founder described dumping off Highway 4; no specific case outcome stated.",
@@ -251,17 +375,28 @@
     "description": "CBS Sacramento quoted Stockton Street Dogs' founder saying dogs were dumped off Highway 4. The report did not identify a particular segment or current site.",
     "unknown": "Where alleged dumping occurred, how often, and whether any related need persists are unknown.",
     "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
-    "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs"
+    "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "stockton-animal-services-shelter",
     "location_type": "animal_care",
-    "map_reference": { "query": "1575 S Lincoln St, Stockton, CA 95206", "precision": "address", "verified": true, "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf", "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573.3905247244797!2d-121.29479729999998!3d37.93554519999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809012edba787fe5%3A0x85896678d130bd20!2s1575%20S%20Lincoln%20St%2C%20Stockton%2C%20CA%2095206!5e0!3m2!1sen!2sus!4v1793803625302!5m2!1sen!2sus" },
+    "map_reference": {
+      "query": "1575 S Lincoln St, Stockton, CA 95206",
+      "precision": "address",
+      "verified": true,
+      "source_url": "https://www.stocktonca.gov/Documents/Services/Animal%20Services/PDFs/Noise_Barking%20Packet.pdf",
+      "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1573.3905247244797!2d-121.29479729999998!3d37.93554519999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809012edba787fe5%3A0x85896678d130bd20!2s1575%20S%20Lincoln%20St%2C%20Stockton%2C%20CA%2095206!5e0!3m2!1sen!2sus!4v1793803625302!5m2!1sen!2sus"
+    },
     "marker_type": "animal_care",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton Animal Services",
     "area": "1575 S. Lincoln Street, Stockton",
-    "coordinates": [37.936, -121.293],
+    "coordinates": [
+      37.936,
+      -121.293
+    ],
     "coordinate_note": "Approximate public-address reference for the shelter, generalized to three decimal places; not a dog sighting or case location.",
     "coordinate_reference_url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=1BC3D57E-04D3-4E09-9024-B1F3031D0131&ID=7743230&Options=&Search=",
     "evidence_date": "2026-10-29",
@@ -269,7 +404,10 @@
     "evidence_type": "Official Animal Services record",
     "category": "official_location_record",
     "marker_kind": "animal_shelter",
-    "map_label": { "place": "Stockton Animal Services", "report": "Municipal animal shelter" },
+    "map_label": {
+      "place": "Stockton Animal Services",
+      "report": "Municipal animal shelter"
+    },
     "source_reviewed_at": "2026-10-29",
     "verification_status": "Official shelter location documented; individual case outcomes unverified",
     "last_known_outcome": "The City identifies this address as its animal shelter. This location marker does not represent a specific dog or case outcome.",
@@ -278,14 +416,20 @@
     "unknown": "Current capacity, response times, and outcomes for specific reports are not established by this location.",
     "source_url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php",
     "evidence_record_id": "stockton-animal-services-2026-10-20-reporting-guidance",
-    "field_report_id": "crossover-2026-10-14-sas-first-visit"
+    "field_report_id": "crossover-2026-10-14-sas-first-visit",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "stockton-district-5-reported-area-2026-09-24",
     "location_type": "general_area",
-    "map_reference": { "query": "Stockton City Council District 5, Stockton, CA", "precision": "general_area", "verified": false },
+    "map_reference": {
+      "query": "Stockton City Council District 5, Stockton, CA",
+      "precision": "general_area",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "Stockton District 5 reported area",
     "area": "District 5, Stockton; no street or block identified in the report",
     "coordinates": null,
@@ -304,14 +448,20 @@
     "description": "Stockton Street Dogs founder Jesse Mejia described increased stray- and dumped-dog encounters to KCRA, with particular concern in District 5. The report does not identify a street, block, or current observation site. This broad area record is a lead for finding a supported public place to investigate, not a dog sighting or a claim about all of District 5.",
     "unknown": "Which public location should be observed, how many dogs are currently present there, and what their circumstances are remain unknown.",
     "source_url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921",
-    "evidence_record_id": "kcra-2026-09-24-stockton-stray-dog-report"
+    "evidence_record_id": "kcra-2026-09-24-stockton-stray-dog-report",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "st-marys-church-street-corridor",
     "location_type": "street_corridor",
-    "map_reference": { "query": "West Church Street, Stockton, CA", "precision": "corridor", "verified": false },
+    "map_reference": {
+      "query": "West Church Street, Stockton, CA",
+      "precision": "corridor",
+      "verified": false
+    },
     "marker_type": "dog_sighting",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's–Church Street corridor",
     "area": "Public areas around West Church Street near St. Mary's Community Services, Stockton; the first observation route has not yet been set",
     "coordinates": null,
@@ -330,17 +480,28 @@
     "description": "CBS Sacramento placed a Stockton Street Dogs outreach visit at a Church Street encampment near St. Mary's Community Services. This is a lead for a limited public-area investigation, not a report of dogs at the service provider's 545 W. Sonora Street campus or proof of a citywide hotspot. Other nearby reports and videos have not been verified as occurring in this corridor. Dogs with unhoused residents are not presumed abandoned.",
     "unknown": "The current number and distribution of visible dogs, conditions in the portion to be examined, and whether the June report reflects present circumstances remain unknown. Crossover has not yet observed this area.",
     "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
-    "evidence_record_id": "ssd-2026-06-08-street-response"
+    "evidence_record_id": "ssd-2026-06-08-street-response",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "st-marys-community-services-campus",
     "location_type": "human_services",
-    "map_reference": { "query": "545 W Sonora St, Stockton, CA 95203", "precision": "address", "verified": true, "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf", "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.2689205112047!2d-121.2972552!3d37.9475064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090128fff3f4f63%3A0x90e9010387a9a9ce!2s545%20W%20Sonora%20St%2C%20Stockton%2C%20CA%2095203!5e0!3m2!1sen!2sus!4v1793803679103!5m2!1sen!2sus" },
+    "map_reference": {
+      "query": "545 W Sonora St, Stockton, CA 95203",
+      "precision": "address",
+      "verified": true,
+      "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf",
+      "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.2689205112047!2d-121.2972552!3d37.9475064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090128fff3f4f63%3A0x90e9010387a9a9ce!2s545%20W%20Sonora%20St%2C%20Stockton%2C%20CA%2095203!5e0!3m2!1sen!2sus!4v1793803679103!5m2!1sen!2sus"
+    },
     "marker_type": "human_services",
-    "investigation_id": "street-dog-immediate-welfare",
     "name": "St. Mary's Community Services",
     "area": "545 W. Sonora Street, Stockton",
-    "coordinates": [37.947, -121.297],
+    "coordinates": [
+      37.947,
+      -121.297
+    ],
     "coordinate_note": "Approximate reference for St. Mary's at 545 W. Sonora Street, rounded from a State Water Boards coordinate for the adjacent St. Mary's Dining Room project at 550 W. Sonora Street; not where dogs were reported. Use the Google Maps address link for the organization listing.",
     "coordinate_reference_url": "https://ciwqs.waterboards.ca.gov/ciwqs/readOnly/CiwqsReportServlet?newPageNumber=666&reportID=7096660",
     "evidence_date": "2026-10-29",
@@ -348,16 +509,20 @@
     "evidence_type": "Official organization information",
     "category": "official_location_record",
     "marker_kind": "organization",
-    "map_label": { "place": "St. Mary's Community Services", "report": "Nearby dog report; campus conditions unverified" },
+    "map_label": {
+      "place": "St. Mary's Community Services",
+      "report": "Nearby dog report; campus conditions unverified"
+    },
     "source_reviewed_at": "2026-10-29",
     "verification_status": "Organization location documented; dog-related conditions unverified",
-    "last_known_outcome": "St. Mary's describes housing and other support services. No dog-specific outcome at this campus is documented here.",
+    "last_known_outcome": "St. Mary's describes support services. No dog-specific outcome at this campus is documented here.",
     "status": "exploratory",
-    "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street and describes housing and other support services. The Stockton Record reported that its Pathways Neighborhood project opened in June 2026 with 268 beds. This pin marks the organization, not a dog sighting or the wider Church Street investigation area. The published bed count does not establish that those beds accommodate dogs.",
+    "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street. This reference marks the organization, not a dog sighting. Whether its relevant services accommodate people with dogs has not been verified by Crossover.",
     "unknown": "Whether the relevant programs accommodate people with dogs, and whether any dog-related need exists at this campus, remain unverified. The Church Street outreach report concerns a nearby area, not this address.",
     "source_url": "https://smcares.org/",
     "google_maps_url": "https://goo.gl/maps/C9CZmW1XNqFqkE6F6",
-    "evidence_record_id": "smcs-standing-housing-outcomes",
-    "evidence_record_ids": ["smcs-standing-housing-outcomes", "smcs-2026-06-17-pathways-268-beds"]
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   }
 ]

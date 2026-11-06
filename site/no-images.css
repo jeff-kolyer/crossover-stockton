@@ -1,0 +1,17 @@
+/* Text-first variant of the one-file site. The feed and navigation are shared. */
+img,.editorial-image,.hero-image,.investigation-hero,.about-hero-photo,.about-method-image,.location-map{display:none!important}
+.hero-inner{min-height:0;padding-block:82px}
+.hero:before,.hero:after,.about-hero:before{display:none}
+.about-hero{min-height:0}
+.about-hero-inner{padding-block:82px}
+.about-practice-grid,.about-founder-grid,.about-close-grid{grid-template-columns:minmax(0,1fr)}
+.about-close-grid>div{padding-block:70px}
+.investigation-entry{grid-template-columns:minmax(0,1fr)}
+.investigation-overview-layout{grid-template-areas:"heading" "picture"}
+@media(max-width:760px){
+  .hero-inner{min-height:0;padding-block:55px}
+  .about-hero{min-height:0}
+  .about-hero-inner{padding-block:65px}
+  .about-close-grid>div{padding-block:55px}
+  .investigation-menu a span{display:block;font-size:.68rem;white-space:normal;text-align:center}
+}

@@ -16,7 +16,7 @@ const publicPath = (route) => route === "/" ? "/" : `/${route.replace(/^\/+|\/+$
 const routeFromQuery = (value) => {
   try {
     const route = decodeURIComponent(value).replace(/^\/+|\/+$/g, "");
-    return publicPath(["work", "responses"].includes(route) ? "/stories" : `/${route}`);
+    return publicPath(route === "work" ? "/action" : route === "responses" ? "/stories" : `/${route}`);
   } catch { return "/"; }
 };
 
@@ -51,12 +51,17 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
 
   const shell = oneFile.slice(0, oneFile.indexOf('<script id="feed-data"'));
   const records = Object.values(feed.records);
-  const coreRoutes = ["/", "/needs", "/investigation", "/stories", "/articles", "/activity", "/organizations", "/places", "/explore", "/about"];
+  const coreRoutes = ["/", "/gaps", "/activity", "/places", "/explore", "/organizations", "/about"];
   const routes = coreRoutes.map((route) => ({ route, sitemap: true }));
+  const needViews = ["overview", "objectives", "metrics", "activity", "places", "organizations", "initiatives", "findings", "sources"];
   for (const record of records) {
     routes.push({ route: `/record/${encodeURIComponent(record.id)}`, sitemap: record.schema !== "organization" });
     if (record.schema === "organization") routes.push({ route: `/organization/${encodeURIComponent(record.id)}`, sitemap: true });
+
   }
+
+  for (const gap of records.filter((record) => record.schema === "gap")) for (const view of needViews)
+    routes.push({ route: `/gaps/${encodeURIComponent(gap.fields.slug)}/${view}`, sitemap: true });
 
   const pages = routes.map(({ route, sitemap }) => {
     location.search = `?page=${encodeURIComponent(route.slice(1))}`;

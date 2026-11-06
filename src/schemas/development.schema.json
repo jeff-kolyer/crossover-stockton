@@ -53,16 +53,6 @@
     "investigation_id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
-    "objective_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "./common.schema.json#/$defs/id"
-      },
-      "uniqueItems": true
-    },
-    "primary_objective_id": {
-      "$ref": "./common.schema.json#/$defs/id"
-    },
     "gap_ids": {
       "type": "array",
       "items": {
@@ -180,6 +170,13 @@
         "as_of"
       ],
       "additionalProperties": true
+    },
+    "objective_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
     }
   },
   "required": [

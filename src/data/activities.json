@@ -1,7 +1,6 @@
 [
   {
     "id": "crossover-2026-10-20-sas-field-call-records-request",
-    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -29,14 +28,12 @@
     "report_record_ids": [],
     "supports": [],
     "objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
-    ],
-    "primary_objective_id": "response-barriers"
+      "establish-street-dog-extent",
+      "understand-access-to-care"
+    ]
   },
   {
     "id": "crossover-2026-11-02-sas-field-call-records-received",
-    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -50,7 +47,7 @@
     "trust": "crossover_source",
     "organization_interaction": "response_received",
     "title": "Received Stockton Animal Services field-call records",
-    "summary": "The City responded to our October 20 public records request. Review and analysis are pending.",
+    "summary": "Stockton Animal Services provided the requested field-service records by email on November 2, 2026. Crossover confirmed receipt on November 3 and began reviewing the records on November 4. The spreadsheet contains 7,183 case records; analysis and findings remain pending.",
     "public_update": true,
     "visibility": "public",
     "source": {
@@ -63,20 +60,19 @@
     ],
     "outcome": {
       "status": "received",
-      "summary": "Records received by email; their contents and limitations have not been assessed in this record.",
+      "summary": "Records arrived November 2 and receipt was confirmed November 3. Review began November 4; this receipt record does not establish case outcomes.",
       "as_of": "2026-11-02"
     },
     "report_record_ids": [],
     "supports": [],
+    "confirmed_at": "2026-11-03",
     "objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
-    ],
-    "primary_objective_id": "response-barriers"
+      "establish-street-dog-extent",
+      "understand-access-to-care"
+    ]
   },
   {
     "id": "crossover-2026-10-14-sas-volunteer-application",
-    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -106,14 +102,12 @@
     ],
     "supports": [],
     "objective_ids": [
-      "response-barriers",
-      "additional-help"
-    ],
-    "primary_objective_id": "additional-help"
+      "understand-access-to-care",
+      "pursue-practical-improvements"
+    ]
   },
   {
     "id": "crossover-2026-10-07-street-dogs-volunteer-application",
-    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -141,14 +135,13 @@
     "report_record_ids": [],
     "supports": [],
     "objective_ids": [
-      "food-and-water",
-      "additional-help"
-    ],
-    "primary_objective_id": "additional-help"
+      "understand-access-to-care",
+      "evaluate-existing-responses",
+      "pursue-practical-improvements"
+    ]
   },
   {
     "id": "crossover-2026-10-12-doggie-day-out-inquiry",
-    "investigation_id": "street-dog-immediate-welfare",
     "gap_ids": [
       "dogs-safe-placement"
     ],
@@ -176,9 +169,9 @@
     "report_record_ids": [],
     "supports": [],
     "objective_ids": [
-      "additional-help",
-      "improvement-outcomes"
-    ],
-    "primary_objective_id": "additional-help"
+      "understand-access-to-care",
+      "pursue-practical-improvements",
+      "evaluate-existing-responses"
+    ]
   }
 ]

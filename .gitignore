@@ -2,6 +2,8 @@ node_modules/
 dist/
 src/generated/
 public/preview/one-file-site.html
+public/preview/no-images-site.html
+public/preview/clean-site.html
 *.tsbuildinfo
 .edge-headless/
 .tmp-edge-factor/
@@ -12,3 +14,9 @@ public/preview/one-file-site.html
 
 .DS_Store
 Thumbs.db
+
+# Local heatmap inputs and geocoding artifacts
+headmap/
+headmap/.venv/
+headmap/.pydeps/
+headmap/stockton_heatmap_output/private_geocode_cache.csv

@@ -1,9 +1,30 @@
 [
   {
-    "id": "where-dogs-need-help",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Establish the scale, distribution, and condition of street dogs",
-    "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status.",
+    "id": "establish-street-dog-extent",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "title": "Establish the extent of the problem",
+    "description": "Determine how many dogs are on Stockton's streets, where they are, and their condition. Keep shelter intake and reports distinct from a count of dogs living on the streets.",
+    "measurement_ids": [
+      "sas-2024-dog-intake-stray",
+      "sas-2024-dog-intake-total"
+    ],
+    "initiative_ids": [],
+    "guiding_questions": [
+      {
+        "title": "How many street dogs need help, where are they, and what condition are they in?",
+        "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status."
+      }
+    ],
+    "task_ids": [
+      "task-verify-st-marys-church-street-dog-scale",
+      "task-verify-south-stockton-district-5-reports",
+      "task-sas-field-call-request-2026-10-20",
+      "task-sas-field-call-follow-up",
+      "task-review-sas-field-call-records",
+      "task-contact-cbs-charlie-lapastora"
+    ],
     "activity_record_ids": [
       "crossover-2026-10-20-sas-field-call-records-request",
       "crossover-2026-11-02-sas-field-call-records-received"
@@ -19,70 +40,144 @@
     ],
     "finding_ids": [
       "finding-public-street-dog-information-fragmented"
-    ],
-    "action_ids": [
-      "task-verify-st-marys-church-street-dog-scale",
-      "task-verify-south-stockton-district-5-reports",
-      "task-sas-field-call-request-2026-10-20",
-      "task-sas-field-call-follow-up",
-      "task-review-sas-field-call-records",
-      "task-contact-cbs-charlie-lapastora"
     ]
   },
   {
-    "id": "food-and-water",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Establish who is providing care and what care reaches dogs",
-    "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery.",
-    "activity_record_ids": [
-      "crossover-2026-10-07-street-dogs-volunteer-application"
+    "id": "understand-access-to-care",
+    "gap_ids": [
+      "dogs-safe-placement"
     ],
-    "evidence_record_ids": [
-      "ssd-2026-06-08-street-response"
+    "title": "Understand access to care",
+    "description": "Test what happens when residents report dogs or try to help them, identify which care reaches dogs, and check whether people seeking shelter can stay with their dogs.",
+    "measurement_ids": [
+      "sas-2024-dog-outcome-total",
+      "sas-2024-dog-outcome-return-owner"
     ],
-    "finding_ids": [
-      "finding-volunteer-onboarding-can-stall"
+    "initiative_ids": [],
+    "guiding_questions": [
+      {
+        "title": "Who is caring for street dogs, and what care reaches them?",
+        "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery."
+      },
+      {
+        "title": "What happens when someone reports a dog?",
+        "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends."
+      },
+      {
+        "title": "What prevents people from helping street dogs?",
+        "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence."
+      },
+      {
+        "title": "Can people seeking shelter stay with their dogs?",
+        "description": "Check current pet-accommodating shelter options, actual access, restrictions, and capacity. Keep published program descriptions separate from verified access for people with dogs."
+      }
     ],
-    "action_ids": [
+    "task_ids": [
       "task-ssd-volunteer-application-2026-10-07",
-      "task-ssd-ask-contact-questions"
-    ]
-  },
-  {
-    "id": "response-barriers",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Trace reporting, response, intake, and outcomes",
-    "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends.",
-    "activity_record_ids": [
-      "crossover-2026-10-14-sas-volunteer-application",
-      "crossover-2026-10-20-sas-field-call-records-request",
-      "crossover-2026-11-02-sas-field-call-records-received"
-    ],
-    "evidence_record_ids": [
-      "stockton-animal-services-2026-10-20-reporting-guidance",
-      "crossover-2026-10-20-sas-field-call-records-request",
-      "stocktonia-2026-10-20-sas-capacity-intake",
-      "stocktonia-2026-10-20-roaming-dog-distinction",
-      "stocktonia-2026-10-20-found-animal-foster-pathway",
-      "stocktonia-2026-10-20-animal-control-proposals"
-    ],
-    "finding_ids": [
-      "finding-public-street-dog-information-fragmented"
-    ],
-    "action_ids": [
+      "task-ssd-ask-contact-questions",
       "task-sas-visit-application-2026-10-14",
       "task-sas-field-call-request-2026-10-20",
       "task-sas-field-call-follow-up",
       "task-review-sas-field-call-records",
       "task-monitor-animal-control-ordinance",
-      "task-contact-cbs-charlie-lapastora"
+      "task-contact-cbs-charlie-lapastora",
+      "task-sas-doggie-day-out-inquiry-2026-10-12",
+      "task-sas-volunteer-onboarding-follow-up"
+    ],
+    "activity_record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application",
+      "crossover-2026-10-14-sas-volunteer-application",
+      "crossover-2026-10-20-sas-field-call-records-request",
+      "crossover-2026-11-02-sas-field-call-records-received",
+      "crossover-2026-10-12-doggie-day-out-inquiry"
+    ],
+    "evidence_record_ids": [
+      "ssd-2026-06-08-street-response",
+      "stockton-animal-services-2026-10-20-reporting-guidance",
+      "crossover-2026-10-20-sas-field-call-records-request",
+      "stocktonia-2026-10-20-sas-capacity-intake",
+      "stocktonia-2026-10-20-roaming-dog-distinction",
+      "stocktonia-2026-10-20-found-animal-foster-pathway",
+      "stocktonia-2026-10-20-animal-control-proposals",
+      "crossover-2026-10-14-sas-first-visit"
+    ],
+    "finding_ids": [
+      "finding-volunteer-onboarding-can-stall",
+      "finding-public-street-dog-information-fragmented",
+      "finding-new-facilities-impact-uncertain"
     ]
   },
   {
-    "id": "additional-help",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Identify what prevents people from helping",
-    "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence.",
+    "id": "evaluate-existing-responses",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "title": "Evaluate existing responses",
+    "description": "Understand what organizations and public services are doing, what results are documented, and where their limitations remain unclear.",
+    "measurement_ids": [
+      "sas-2024-dog-outcome-adopted",
+      "sas-2024-dog-outcome-rescue-transfer"
+    ],
+    "initiative_ids": [
+      "stockton-animal-shelter-renovation",
+      "hard-luck-veterinary-staffing-2026"
+    ],
+    "guiding_questions": [
+      {
+        "title": "What results are documented for existing services and initiatives?",
+        "description": "Compare reported reach, intake, and service capacity with documented outcomes for dogs and people. Distinguish operating services from proposals and identify what their records cannot establish."
+      }
+    ],
+    "task_ids": [
+      "task-ssd-volunteer-application-2026-10-07",
+      "task-ssd-ask-contact-questions"
+    ],
+    "activity_record_ids": [
+      "crossover-2026-10-07-street-dogs-volunteer-application",
+      "crossover-2026-10-12-doggie-day-out-inquiry"
+    ],
+    "evidence_record_ids": [
+      "ssd-2026-06-08-street-response",
+      "crossover-2026-10-14-sas-first-visit",
+      "ssd-2026-07-30-canine-campus-proposal",
+      "ssd-2026-10-07-canine-campus-details"
+    ],
+    "finding_ids": [
+      "finding-volunteer-onboarding-can-stall",
+      "finding-new-facilities-impact-uncertain"
+    ]
+  },
+  {
+    "id": "pursue-practical-improvements",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
+    "title": "Identify and pursue improvements",
+    "description": "Find practical opportunities to increase access to care, take useful steps, and test whether changes improve outcomes.",
+    "measurement_ids": [],
+    "initiative_ids": [
+      "canine-campus",
+      "stockton-pet-wellness-adoption-center",
+      "animal-balance-spay-neuter-contract-2026"
+    ],
+    "guiding_questions": [
+      {
+        "title": "Which efforts improve access to care and outcomes?",
+        "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution."
+      },
+      {
+        "title": "Which practical change should Crossover test next?",
+        "description": "Use documented barriers to choose a feasible step, state its intended result, and decide what evidence would show whether it improved access to care."
+      }
+    ],
+    "task_ids": [
+      "task-ssd-volunteer-application-2026-10-07",
+      "task-sas-doggie-day-out-inquiry-2026-10-12",
+      "task-sas-visit-application-2026-10-14",
+      "task-ssd-ask-contact-questions",
+      "task-sas-volunteer-onboarding-follow-up",
+      "task-contact-cbs-charlie-lapastora"
+    ],
     "activity_record_ids": [
       "crossover-2026-10-07-street-dogs-volunteer-application",
       "crossover-2026-10-12-doggie-day-out-inquiry",
@@ -91,37 +186,13 @@
     "evidence_record_ids": [
       "crossover-2026-10-14-sas-first-visit",
       "stocktonia-2026-10-20-sas-capacity-intake",
-      "stocktonia-2026-10-20-found-animal-foster-pathway"
-    ],
-    "finding_ids": [
-      "finding-volunteer-onboarding-can-stall",
-      "finding-new-facilities-impact-uncertain"
-    ],
-    "action_ids": [
-      "task-ssd-volunteer-application-2026-10-07",
-      "task-sas-doggie-day-out-inquiry-2026-10-12",
-      "task-sas-visit-application-2026-10-14",
-      "task-ssd-ask-contact-questions",
-      "task-sas-volunteer-onboarding-follow-up",
-      "task-contact-cbs-charlie-lapastora"
-    ]
-  },
-  {
-    "id": "improvement-outcomes",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Evaluate improvements to access and outcomes",
-    "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution.",
-    "activity_record_ids": [
-      "crossover-2026-10-12-doggie-day-out-inquiry"
-    ],
-    "evidence_record_ids": [
-      "crossover-2026-10-14-sas-first-visit",
+      "stocktonia-2026-10-20-found-animal-foster-pathway",
       "ssd-2026-07-30-canine-campus-proposal",
       "ssd-2026-10-07-canine-campus-details"
     ],
     "finding_ids": [
+      "finding-volunteer-onboarding-can-stall",
       "finding-new-facilities-impact-uncertain"
-    ],
-    "action_ids": []
+    ]
   }
 ]

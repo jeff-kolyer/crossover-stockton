@@ -4,25 +4,58 @@ import { readFile } from "node:fs/promises";
 import { Script } from "node:vm";
 
 const html = await readFile("public/preview/one-file-site.html", "utf8");
+const noImagesHtml = await readFile("public/preview/no-images-site.html", "utf8");
+const cleanHtml = await readFile("public/preview/clean-site.html", "utf8");
 const feed = JSON.parse(await readFile("public/data/records.json", "utf8"));
-const embedded = (id) => {
-  const match = html.match(new RegExp(`<script id="${id}" type="application/json">([\\s\\S]*?)<\\/script>`));
+const embedded = (id, page = html) => {
+  const match = page.match(new RegExp(`<script id="${id}" type="application/json">([\\s\\S]*?)<\\/script>`));
   assert.ok(match, `${id} is embedded`);
   return JSON.parse(match[1]);
 };
 
-test("the output is one self-contained file with the full public feed and images", () => {
+test("the current site is self-contained and uses the new image set", () => {
   const bundledFeed = embedded("feed-data");
   const assets = embedded("asset-data");
-  assert.deepEqual(bundledFeed, feed);
-  assert.ok(Object.keys(bundledFeed.records).length > 0);
+  assert.deepEqual(Object.keys(bundledFeed.records), Object.keys(feed.records));
   assert.ok(assets["/images/logo_dark.webp"]?.startsWith("data:image/webp;base64,"));
   assert.ok(assets["/images/logo_light.webp"]?.startsWith("data:image/webp;base64,"));
-  assert.ok(assets["/images/home/home-hero-wide.jpg"]?.startsWith("data:image/jpeg;base64,"));
+  assert.ok(assets["/images/variants/clean/dog-sidewalk.jpg"]?.startsWith("data:image/jpeg;base64,"));
+  assert.equal(assets["/images/home/home-hero.jpg"], undefined);
+  assert.ok(html.includes('"label":"Activity","route":"/activity"'));
+  assert.ok(!html.includes('"label":"Investigation","route":"/investigation"'));
+  assert.ok(html.includes("Engineering post-scarcity solutions to real needs"));
+  assert.ok(html.includes('"overview","Overview"'));
+  assert.ok(html.includes('"sources","Sources"'));
+  assert.ok(!Object.values(bundledFeed.records).some(({ schema }) => schema === "article" || schema === "story"));
   assert.equal(/<script[^>]+src=|<link[^>]+href=|<img[^>]+src="\//i.test(html), false);
   assert.equal(html.includes("__EMBEDDED_"), false);
   const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
   new Script(scripts.at(-1)[1], { filename: "one-file-site.html" });
+});
+
+test("the text-first variant shares the feed and embeds no images", () => {
+  assert.deepEqual(embedded("feed-data", noImagesHtml), feed);
+  assert.deepEqual(embedded("asset-data", noImagesHtml), {});
+  assert.ok(noImagesHtml.includes(".hero-inner{min-height:0;padding-block:82px}"));
+  assert.ok(noImagesHtml.includes('||"data:,"'));
+  assert.equal(noImagesHtml.includes("__VARIANT_CSS__"), false);
+  assert.equal(/data:image\//.test(noImagesHtml), false);
+  const scripts = [...noImagesHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+  new Script(scripts.at(-1)[1], { filename: "no-images-site.html" });
+});
+
+test("the clean preview mirrors the current site", () => {
+  assert.equal(cleanHtml, html);
+  const bundledFeed = embedded("feed-data", cleanHtml);
+  const cleanAssets = embedded("asset-data", cleanHtml);
+  assert.deepEqual(Object.keys(bundledFeed.records), Object.keys(feed.records));
+  assert.equal(bundledFeed.records["street-dog-immediate-welfare"], undefined);
+  assert.ok(cleanAssets["/images/variants/clean/dog-sidewalk.jpg"]?.startsWith("data:image/jpeg;base64,"));
+  assert.ok(Object.keys(cleanAssets).every(path => path.startsWith("/images/variants/clean/") || path.startsWith("/images/icons/") || path.startsWith("/images/logo_")));
+  assert.deepEqual(bundledFeed, feed);
+  assert.ok(cleanHtml.includes(".story-opening{"));
+  const scripts = [...cleanHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
+  new Script(scripts.at(-1)[1], { filename: "clean-site.html" });
 });
 
 test("published places can generate map links and the founder can link to LinkedIn", () => {

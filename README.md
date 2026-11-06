@@ -2,49 +2,25 @@
 
 **See clearly. Act locally.**
 
-Crossover Stockton investigates unmet needs and explores how people and technology can help address them.
+AI, robotics, and automation create new possibilities, while people and animals still have needs that are not being met. Crossover aims to help bring post-scarcity into being by engineering practical solutions, starting in Stockton. We show up, learn what is happening, take a useful action, and let that work reveal the next step.
 
-We begin with dogs on the streets of Stockton, California.
+## Current focus
 
-Our approach is simple: investigate conditions, examine evidence, test pathways to help, document what happens, and use what we learn to determine what to do next.
+One gap is active: street dogs and access to care. It includes people trying to help dogs and people who may face barriers to shelter because they have pets. We are getting a clearer picture of the need, the care already available, and barriers people encounter.
 
-**Website:** https://crossoverstockton.org
+The homepage opens the gap's full-width workspace. Its views are Overview, Objectives, Metrics, Activity, Places, Organizations, Initiatives, Findings, and Sources. Activity includes tasks and field reports. New gaps can use the same interface. Explorer holds the full public record. A record count measures the library, not people helped or needs met.
 
-## What the website is for
+Earlier standalone needs about food distribution, reentry housing, general housing pathways, and pet-inclusive shelter are out of the active data. Relevant pet-and-shelter context is part of the street-dog gap. Tasks, activity, evidence, and places link directly to the gap through `gap_ids`. Guiding questions live inside objectives; there are no separate question, story, action, or project collections.
 
-The main navigation describes five distinct ways of engaging with reality, not five interchangeable content categories:
+## Data rules
 
-- **Needs** — What AI has surfaced about reality: unmet needs worth understanding and investigating. These are leads, not automatically verified conclusions.
-- **Action** — What Crossover and others are actually doing about those needs: investigations, practical attempts, participation, activities, evidence, and findings. Distinguish planned action from documented activity and externally reported work.
-- **Stories** — Real people whose lives are changing and progress being made. Ground stories in documented experience and outcomes; do not invent impact.
-- **Explore** — Explore the public record freely, in the way that serves the reader: search, filter, and follow connections among needs, investigations, actions, activities, findings, evidence, organizations, places, articles, and stories.
-- **About** — What **the crossover** is about: connection, compassion, and the transition from compulsory work to meaningful vocation. It is not merely an organizational biography or a page about what *we* do.
+- `src/data/gaps.json` contains the gap and its canonical slug. `src/data/tasks.json` contains tracked work. `src/schemas/` defines record shapes, and `src/model/explorer-publication.json` defines the public projection.
+- `public/data/records.json` is generated. The site, Explorer, and future views should read the same source relationships.
+- Preserve attribution, dates, and limits. The 7,183 Animal Services field-call records were received November 2, 2026; review began later. They are not a count of dogs on the street. The 3,106 stray-dog intake events cover the 2024 service area.
+- Map references retain their stated precision. The field-call data has not yet been validated for a density map.
+- The desired measure of progress is what needs have been met and what has become easier for people and animals, rather than how many records have been collected.
 
-The site should help people **see clearly and act locally**. These meanings should guide future AI-generated pages and navigation, regardless of the layout or implementation. The underlying records remain authoritative; the presentation should make their relationships and limits understandable.
-
-## How it works
-
-**Action → Activity → Findings → New Action**
-
-- **Action:** Identify what needs investigating or doing.
-- **Activity:** Document what actually happened.
-- **Findings:** Evaluate evidence and identify what we've learned.
-- **New Action:** Determine what to investigate or attempt next.
-
-The investigation develops through firsthand observations, conversations, public records, and practical experience.
-
-## Data and architecture
-
-Crossover maintains structured JSON records describing needs, investigations, actions, activities, findings, organizations, and locations.
-
-- `src/data/` — Authoritative, version-controlled source records.
-- `public/data/records.json` — Generated public data feed.
-- Static HTML pages — Generated from the feed.
-- GitHub — Source control and publication.
-
-The information is independent of its presentation. The website can change without changing the underlying investigation records.
-
-## Development
+## Build
 
 ```bash
 npm install
@@ -53,12 +29,4 @@ npm run build
 npm run preview
 ```
 
-The build validates source records, generates the public feed, and produces the website.
-
-## Current investigation
-
-**Dogs in Stockton**
-
-We're investigating the extent of the street-dog problem, what happens when people seek help, and what prevents existing resources from reaching animals in need.
-
-Our findings and activities are published as the investigation progresses.
+The build validates source records, generates the reusable feed, publishes the workspace at `/`, preserves readable static pages as fallbacks, and checks the routes. The live workspace uses `public/preview/ai-variant.js` and `public/preview/ai-variant-modern.css`. The one-file site in `site/one-file-template.html` remains an alternate. See [site design rules](docs/SITE_DESIGN.md) for visual details.

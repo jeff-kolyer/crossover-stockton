@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crossoverstockton.org/schemas/project.schema.json",
-  "title": "Project",
-  "description": "project information definition. Schema describes source data, not page layout.",
+  "$id": "https://crossoverstockton.org/schemas/initiative.schema.json",
+  "title": "Initiative",
+  "description": "An effort to address a gap.",
   "type": "object",
   "properties": {
     "id": {

@@ -5,12 +5,12 @@ import { validateRecord } from "./schema-validator.mjs";
 const read = (name) => JSON.parse(readFileSync(`src/data/${name}.json`, "utf8"));
 const datasets = [
   ["crossover", "identity"], ["people", "person"], ["principles", "principle"], ["methods", "method"],
-  ["needs", "need"], ["investigations", "investigation"],
-  ["objectives", "objective"], ["actions", "action"], ["activities", "activity"], ["evidence", "evidence"],
-  ["findings", "finding"], ["organizations", "organization"], ["stories", "story"],
+  ["gaps", "gap"],
+  ["objectives", "objective"], ["tasks", "task"], ["activities", "activity"], ["evidence", "evidence"],
+  ["findings", "finding"], ["organizations", "organization"],
   ["locations", "location"], ["measurements", "measurement"],
   ["claims", "claim"],
-  ["projects", "project"], ["articles", "article"],
+  ["initiatives", "initiative"], ["articles", "article"],
 ];
 const errors = [];
 const records = new Map();
@@ -40,9 +40,8 @@ for (const [file] of datasets) for (const item of records.get(file) ?? []) {
       if (!local.startsWith(`${publicRoot}${sep}`) || !existsSync(local)) errors.push(`${file}:${item.id} ${field} does not resolve to a public asset: ${asset}`);
     } else if (!asset.startsWith("https://")) errors.push(`${file}:${item.id} ${field} must be a public path or HTTPS URL`);
   }
-  if (file === "needs" && Object.hasOwn(item, "artwork")) errors.push(`need:${item.id} still uses legacy artwork instead of preferred_image`);
-  if (file === "needs" && Object.hasOwn(item, "status")) errors.push(`need:${item.id} still uses unsupported legacy status`);
-  if (file === "stories" && Object.hasOwn(item, "image")) errors.push(`story:${item.id} still uses legacy image instead of preferred_image`);
+  if (file === "gaps" && Object.hasOwn(item, "artwork")) errors.push(`gap:${item.id} still uses legacy artwork instead of preferred_image`);
+  if (file === "gaps" && Object.hasOwn(item, "status")) errors.push(`gap:${item.id} still uses unsupported legacy status`);
 }
 const ids = (file) => new Set((records.get(file) ?? []).map(({ id }) => id));
 const checkRefs = (items, target, prop, source) => {
@@ -54,36 +53,35 @@ const checkRefs = (items, target, prop, source) => {
 checkRefs(records.get("crossover"), "people", "founderPersonId", "identity");
 checkRefs(records.get("crossover"), "principles", "principleIds", "identity");
 checkRefs(records.get("crossover"), "methods", "methodIds", "identity");
-checkRefs(records.get("investigations"), "needs", "gap_id", "investigation");
-for (const investigation of records.get("investigations") ?? []) {
-  if (Object.hasOwn(investigation, "uncertainties")) errors.push(`investigation:${investigation.id} duplicates its investigation objectives in uncertainties`);
+for (const file of ["tasks", "activities", "evidence", "findings", "locations", "measurements"]) {
+  checkRefs(records.get(file), "gaps", "gap_ids", file);
+  for (const item of records.get(file) ?? []) if (Object.hasOwn(item, "investigation_id")) errors.push(`${file}:${item.id} retains investigation_id`);
 }
-checkRefs(records.get("measurements"), "investigations", "investigation_id", "measurement");
-checkRefs(records.get("objectives"), "investigations", "investigation_id", "objective");
-checkRefs(records.get("actions"), "investigations", "investigation_id", "action");
-const actionOrders = new Map();
-for (const action of records.get("actions") ?? []) {
-  if (!Number.isSafeInteger(action.order_by_id) || action.order_by_id < 1) errors.push(`action:${action.id} order_by_id must be a positive integer`);
-  const key = String(action.order_by_id);
-  if (actionOrders.has(key)) errors.push(`action:${action.id} order_by_id duplicates action:${actionOrders.get(key)}`);
-  actionOrders.set(key, action.id);
+const taskOrders = new Map();
+for (const task of records.get("tasks") ?? []) {
+  if (!Number.isSafeInteger(task.order_by_id) || task.order_by_id < 1) errors.push(`task:${task.id} order_by_id must be a positive integer`);
+  const key = String(task.order_by_id);
+  if (taskOrders.has(key)) errors.push(`task:${task.id} order_by_id duplicates task:${taskOrders.get(key)}`);
+  taskOrders.set(key, task.id);
 }
 for (const prop of ["objective_ids", "organization_ids", "location_ids", "map_reference_location_ids", "basis_record_ids", "activity_record_ids"]) {
   const target = { objective_ids: "objectives", organization_ids: "organizations", location_ids: "locations", map_reference_location_ids: "locations", basis_record_ids: "records", activity_record_ids: "activities" }[prop];
-  checkRefs(records.get("actions"), target, prop, "action");
+  checkRefs(records.get("tasks"), target, prop, "task");
 }
-for (const prop of ["activity_record_ids", "evidence_record_ids", "finding_ids", "action_ids"]) {
-  const target = { activity_record_ids: "activities", evidence_record_ids: "records", finding_ids: "findings", action_ids: "actions" }[prop];
-  checkRefs(records.get("objectives"), target, prop, "objective");
-}
-checkRefs(records.get("findings"), "investigations", "investigation_id", "finding");
+checkRefs(records.get("objectives"), "gaps", "gap_ids", "objective");
+for (const [prop, target] of [["task_ids", "tasks"], ["activity_record_ids", "activities"], ["evidence_record_ids", "records"], ["finding_ids", "findings"]]) checkRefs(records.get("objectives"), target, prop, "objective");
+checkRefs(records.get("objectives"), "measurements", "measurement_ids", "objective");
+checkRefs(records.get("objectives"), "initiatives", "initiative_ids", "objective");
+const currentGaps = records.get("gaps") ?? [];
+if (currentGaps.length < 1 || currentGaps.filter((gap) => gap.default).length !== 1) errors.push("gaps: expected exactly one default gap");
+if (new Set(currentGaps.map((gap) => gap.slug)).size !== currentGaps.length) errors.push("gaps: duplicate slug");
 for (const prop of ["supporting_record_ids", "contradicting_record_ids"]) checkRefs(records.get("findings"), "records", prop, "finding");
-checkRefs(records.get("findings"), "actions", "related_action_ids", "finding");
+checkRefs(records.get("findings"), "tasks", "related_task_ids", "finding");
+checkRefs(records.get("findings"), "objectives", "objective_ids", "finding");
 checkRefs(records.get("claims"), "records", "sourceRecordIds", "claim");
-checkRefs(records.get("claims"), "needs", "needId", "claim");
+checkRefs(records.get("claims"), "gaps", "gap_id", "claim");
 checkRefs(records.get("claims"), "measurements", "measurementId", "claim");
 checkRefs(records.get("measurements"), "records", "source_record_id", "measurement");
-checkRefs(records.get("locations"), "investigations", "investigation_id", "location");
 checkRefs(records.get("locations"), "records", "evidence_record_id", "location");
 checkRefs(records.get("locations"), "records", "evidence_record_ids", "location");
 checkRefs(records.get("organizations"), "locations", "map_location_id", "organization");
@@ -91,16 +89,23 @@ for (const location of records.get("locations") ?? []) {
   if (location.map_reference?.verified && !location.map_reference.source_url?.startsWith("https://"))
     errors.push(`location:${location.id} verified map reference requires an HTTPS source URL`);
 }
-checkRefs(records.get("records"), "needs", "gap_ids", "evidence");
+checkRefs(records.get("records"), "gaps", "gap_ids", "evidence");
 checkRefs(records.get("records"), "organizations", "organization_ids", "evidence");
-for (const file of ["projects", "stories"]) {
-  checkRefs(records.get(file), "needs", "gap_ids", file);
+for (const file of ["initiatives"]) {
+  checkRefs(records.get(file), "gaps", "gap_ids", file);
   checkRefs(records.get(file), "organizations", "organization_ids", file);
 }
-checkRefs(records.get("projects"), "records", "evidence_record_ids", "project");
-checkRefs(records.get("articles"), "needs", "related_gap_ids", "article");
+const currentNeedIds = new Set((records.get("gaps") ?? []).filter((gap) => gap.active).map((gap) => gap.id));
+for (const file of ["evidence"]) {
+  for (const item of records.get(file) ?? []) {
+    if (!item.gap_ids?.some((id) => currentNeedIds.has(id)))
+      errors.push(`${file}:${item.id} has no current need`);
+  }
+}
+checkRefs(records.get("initiatives"), "records", "evidence_record_ids", "initiative");
+checkRefs(records.get("articles"), "gaps", "related_gap_ids", "article");
 checkRefs(records.get("articles"), "locations", "related_location_ids", "article");
-const canonicalSections = new Set(["/", "/needs/", "/investigation/", "/activity/", "/stories/", "/articles/", "/organizations/", "/places/", "/explore/", "/about/"]);
+const canonicalSections = new Set(["/", "/needs/", "/investigation/", "/investigation/questions/", "/investigation/activity/", "/investigation/findings/", "/investigation/evidence/", "/activity/", "/stories/", "/articles/", "/organizations/", "/places/", "/explore/", "/about/"]);
 const recordIds = new Set([...records.values()].flat().map((record) => record.id));
 for (const article of records.get("articles") ?? []) {
   for (const section of article.content?.sections ?? []) {
@@ -130,7 +135,7 @@ for (const item of records.get("records") ?? []) {
   if (item.public_update === true) {
     if (item.record_type !== "activity" || !item.occurred_at) errors.push(`evidence:${item.id} public update needs a completed activity`);
     if (item.visibility !== "public") errors.push(`evidence:${item.id} public update needs explicit public visibility`);
-    const activeNeedIds = new Set((records.get("needs") ?? []).filter((need) => need.active).map((need) => need.id));
+    const activeNeedIds = new Set((records.get("gaps") ?? []).filter((gap) => gap.active).map((gap) => gap.id));
     if (!item.gap_ids?.some((id) => activeNeedIds.has(id))) errors.push(`evidence:${item.id} public update needs an active related need`);
   }
 }

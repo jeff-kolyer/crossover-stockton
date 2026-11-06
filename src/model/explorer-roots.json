@@ -1,0 +1,36 @@
+[
+  {
+    "id": "crossover",
+    "title": "Crossover",
+    "rank": 2,
+    "collectionIds": [
+      "identity",
+      "principles",
+      "methods",
+      "people"
+    ]
+  },
+  {
+    "id": "gaps",
+    "title": "Gaps",
+    "rank": 3,
+    "collectionIds": [
+      "gaps"
+    ]
+  },
+  {
+    "id": "work",
+    "title": "Work and sources",
+    "rank": 4,
+    "collectionIds": [
+      "organizations",
+      "objectives",
+      "tasks",
+      "activities",
+      "findings",
+      "locations",
+      "evidence",
+      "initiatives"
+    ]
+  }
+]

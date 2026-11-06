@@ -1,11 +1,11 @@
-export type ActionStatus = "open" | "waiting" | "done" | "cancelled";
+export type TaskStatus = "open" | "in_progress" | "waiting" | "done" | "cancelled";
 
-export interface InvestigationAction {
+export interface TaskRecord {
   id: string;
   order_by_id: number;
-  investigation_id: string;
+  gap_ids: string[];
   title: string;
-  status: ActionStatus;
+  status: TaskStatus;
   type: "application" | "inquiry" | "field_observation" | "records_request" | "follow_up" | "source_review" | "organization_contact" | "policy_monitoring";
   instructions: string;
   list_context?: string;
@@ -20,22 +20,23 @@ export interface InvestigationAction {
   checklist?: string[];
 }
 
-export interface InvestigationObjective {
+export interface ObjectiveRecord {
   id: string;
-  investigation_id: string;
+  gap_ids: string[];
   title: string;
   description: string;
-  action_ids: string[];
+  guiding_questions: Array<{ title: string; description: string }>;
+  task_ids: string[];
   activity_record_ids: string[];
   evidence_record_ids: string[];
   finding_ids: string[];
+  measurement_ids: string[];
+  initiative_ids: string[];
 }
 
-export interface InvestigationFinding {
+export interface FindingRecord {
   id: string;
-  investigation_id: string;
-  /** One of the shared Overview, Activity, and Findings objective IDs. */
-  primary_objective_id?: string;
+  gap_ids: string[];
   /** False retains a superseded finding and its evidence links without listing it as current. Defaults to true. */
   current?: boolean;
   title: string;
@@ -45,9 +46,9 @@ export interface InvestigationFinding {
   article_id?: string;
   supporting_record_ids: string[];
   contradicting_record_ids: string[];
-  related_objective_ids: string[];
-  related_action_ids: string[];
-  related_project_ids: string[];
+  objective_ids: string[];
+  related_task_ids: string[];
+  related_initiative_ids: string[];
   location_ids: string[];
   limitations: string;
   last_reviewed_at: string;

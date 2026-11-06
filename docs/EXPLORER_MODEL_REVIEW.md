@@ -1,14 +1,14 @@
 # Explorer Model review
 
-Reviewed November 3, 2026, before adding Explorer renderers. This describes the current source data and generated public snapshot, not an idealized future ontology. Counts reflect the current checkout and can change as records are edited.
+Historical review from November 3, 2026, before the current needs-based site and source cleanup. The counts and hierarchy below describe the earlier model and are no longer current. Use the generated Explorer feed for the present inventory.
 
 Implementation follow-up: Explorer has five browse categories: Crossover, Needs, Investigations, Stories, and Articles. A separate By date view sorts the same public records by their recorded dates without introducing another collection or grouping by type. Investigations opens individual investigation records, each with child collections derived from explicit relationships. Organizations, evidence, and projects appear in an investigation branch only when related to it. The Action cards are page configuration rather than Explorer records. The snapshot currently has 145 canonical public records. The 18-collection inventory below reflects that cleanup.
 
-Top-level browse groups are declared by `explorer.topLevel` metadata in the corresponding source files under `src/data/`. The same metadata gives each group's ID, label, order, and member collection IDs. `scripts/explorer-roots.mjs` reads and validates those declarations. The `rank` on an individual need orders needs within their collection; it does not control the Explorer hierarchy. `src/model/explorer-publication.json` still defines which fields of each Model collection may be published, but no longer assigns top-level groups. Legacy `group=organization` opens Crossover; old `group=updates` and `group=latest` links open the By date view.
+Top-level browse groups are configured in `src/model/explorer-roots.json`, separate from source records under `src/data/`. The configuration gives each group's ID, label, order, and member collection IDs. `scripts/explorer-roots.mjs` reads and validates it. The `rank` on an individual project focus record orders records within a collection; it does not control the Explorer hierarchy. `src/model/explorer-publication.json` defines which fields of each Model collection may be published. Legacy `group=organization` opens Crossover; old `group=updates` and `group=latest` links open the By date view.
 
 ## Source collections and semantic types
 
-The Model in `src/model/index.ts` reads semantic JSON collections under `src/data/`, indexes stable IDs, checks selected references, and exposes raw records alongside derived queries. Activity and the Explorer use the canonical investigation objectives. Schemas describe the main type and properties, but many source files contain additional optional fields not enumerated by their schema.
+The Model in `src/model/index.ts` reads semantic JSON collections under `src/data/`, indexes stable IDs, checks selected references, and exposes raw records alongside derived queries. Activity and the Explorer use the canonical investigation questions. Schemas describe the main type and properties, but many source files contain additional optional fields not enumerated by their schema.
 
 | Public collection | Source | Count | Meaning and example |
 | --- | --- | ---: | --- |
@@ -19,7 +19,7 @@ The Model in `src/model/index.ts` reads semantic JSON collections under `src/dat
 | Organizations | `organizations.json` | 11 | Named groups and services, with verification notes (`stockton-street-dogs`). |
 | Needs | `needs.json` | 5 | Identified needs, uncertainty, and references (`dogs-safe-placement`). Status is an assessment, not proof of severity. |
 | Investigations | `investigations.json` | 1 | Bounded inquiry (`street-dog-immediate-welfare`). |
-| Objectives | `objectives.json` | 5 | Objectives with action, activity, evidence, and finding IDs (`where-dogs-need-help`). |
+| Questions | `questions.json` | 5 | Questions with action, activity, evidence, and finding IDs (`where-dogs-need-help`). |
 | Actions | `actions.json` | 12 | Work with status and explicit `order_by_id` (`task-review-sas-field-call-records`, open). A completed action is not an additional event. |
 | Activities | `activities.json` | 5 | Completed Crossover actions (`crossover-2026-11-02-sas-field-call-records-received`). |
 | Findings | `findings.json` | 3 | Evaluated statements with status, evidence links, limitations, and review dates (`finding-public-street-dog-information-fragmented`). |
@@ -37,9 +37,9 @@ Map review policy and dates belong to page configuration. Unused barrier threads
 
 ## Relationships and queries
 
-IDs connect the graph: identity → founder/principles/methods; need → evidence/organizations/stories; investigation → need/objectives; objective → investigation/actions/activities/evidence/findings; action → investigation/objectives/basis records/activities/organizations/locations; finding → objectives/supporting and contradicting evidence; claim and measurement → source evidence; project → needs/evidence/organizations; story → needs/organizations; location → investigation/evidence. The receipt activity is linked to the October 20 records request through `basis_record_ids`, to the dog need through `gap_ids`, and to the investigation through `investigation_id`.
+IDs connect the graph: identity → founder/principles/methods; need → evidence/organizations/stories; investigation → need/questions; question → investigation/actions/activities/evidence/findings; action → investigation/questions/basis records/activities/organizations/locations; finding → questions/supporting and contradicting evidence; claim and measurement → source evidence; project → needs/evidence/organizations; story → needs/organizations; location → investigation/evidence. The receipt activity is linked to the October 20 records request through `basis_record_ids`, to the dog need through `gap_ids`, and to the investigation through `investigation_id`.
 
-`siteModel` offers ID lookups (`getAction`, `getObjective`, `getEvidenceRecord`, etc.), collection queries (`getAllActions`, `getAllObjectives`, `getAllEvidence`, etc.), investigation/objective joins (`getActions`, `getActivities`, `getFindings`), source and location lookups, and `getPublicUpdates()`. Derived collections are not new records: `getAllActivities()` filters actual occurred activities from Evidence; `getPublicUpdates()` selects and sorts publishable developments. Action order is read from each action's `order_by_id`. Overview, Activity, and Findings read the same five investigation objective records. Need-record unknown questions remain independent of this investigation collection.
+`siteModel` offers ID lookups (`getAction`, `getQuestion`, `getEvidenceRecord`, etc.), collection queries (`getAllActions`, `getAllQuestions`, `getAllEvidence`, etc.), investigation/question joins (`getActions`, `getActivities`, `getFindings`), source and location lookups, and `getPublicUpdates()`. Derived collections are not new records: `getAllActivities()` filters actual occurred activities from Evidence; `getPublicUpdates()` selects and sorts publishable developments. Action order is read from each action's `order_by_id`. Overview, Activity, and Findings read the same five investigation question records. Need-record unknown questions remain independent of this investigation collection.
 
 ## Existing Explorer hierarchy and publication
 

@@ -1,8 +1,8 @@
 [
   {
     "id": "task-ssd-volunteer-application-2026-10-07",
+    "list_context": "Volunteer application submitted Oct 7; participation was not established by the application.",
     "order_by_id": 12,
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Submit a volunteer application to Stockton Street Dogs",
     "status": "done",
     "type": "application",
@@ -16,15 +16,19 @@
       "crossover-2026-10-07-street-dogs-volunteer-application"
     ],
     "completed_at": "2026-10-07",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "food-and-water",
-      "additional-help"
+      "understand-access-to-care",
+      "evaluate-existing-responses",
+      "pursue-practical-improvements"
     ]
   },
   {
     "id": "task-sas-doggie-day-out-inquiry-2026-10-12",
+    "list_context": "Doggie Day Out inquiry recorded Oct 12; see the linked activity for the documented outcome.",
     "order_by_id": 11,
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Ask Stockton Animal Services about Doggie Day Out",
     "status": "done",
     "type": "inquiry",
@@ -40,14 +44,18 @@
       "crossover-2026-10-12-doggie-day-out-inquiry"
     ],
     "completed_at": "2026-10-12",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "additional-help"
+      "understand-access-to-care",
+      "pursue-practical-improvements"
     ]
   },
   {
     "id": "task-sas-visit-application-2026-10-14",
+    "list_context": "Shelter visit and volunteer application recorded Oct 14; onboarding was not established.",
     "order_by_id": 10,
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Visit Stockton Animal Services and submit a volunteer application",
     "status": "done",
     "type": "application",
@@ -61,15 +69,18 @@
       "crossover-2026-10-14-sas-volunteer-application"
     ],
     "completed_at": "2026-10-14",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "response-barriers",
-      "additional-help"
+      "understand-access-to-care",
+      "pursue-practical-improvements"
     ]
   },
   {
     "id": "task-sas-field-call-request-2026-10-20",
+    "list_context": "Field-call records requested Oct 20 and received Nov 2; analysis remains a separate action.",
     "order_by_id": 9,
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Request Animal Services field-call records",
     "status": "done",
     "type": "records_request",
@@ -83,9 +94,12 @@
       "crossover-2026-10-20-sas-field-call-records-request"
     ],
     "completed_at": "2026-10-20",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
+      "establish-street-dog-extent",
+      "understand-access-to-care"
     ]
   },
   {
@@ -93,8 +107,7 @@
     "order_by_id": 8,
     "list_context": "Records received by email Nov 2; contents not yet assessed here",
     "list_date_label": "Received",
-    "investigation_id": "street-dog-immediate-welfare",
-    "title": "Follow up on Animal Services field-call records",
+    "title": "Track the response to the Animal Services records request",
     "status": "done",
     "type": "follow_up",
     "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
@@ -109,18 +122,21 @@
       "crossover-2026-11-02-sas-field-call-records-received"
     ],
     "completed_at": "2026-11-02",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
+      "establish-street-dog-extent",
+      "understand-access-to-care"
     ]
   },
   {
     "id": "task-review-sas-field-call-records",
+    "thumbnail_image": "/images/variants/clean/records-desk.jpg",
     "order_by_id": 2,
-    "list_context": "Review the records received Nov 2; findings are pending",
-    "investigation_id": "street-dog-immediate-welfare",
+    "list_context": "Review began Nov 4 on 7,183 cases; analysis and findings remain pending",
     "title": "Review Animal Services field-call records",
-    "status": "open",
+    "status": "in_progress",
     "type": "source_review",
     "instructions": "Review the records received in response to the October 20 Stockton Animal Services field-call request. Preserve the original files and receipt details, document the date range, fields, definitions, coverage, missing or redacted information, and limitations. Analyze patterns relevant to where dogs need help and what happens after reports; distinguish administrative records from firsthand observations and do not treat calls as unique dogs or verified street population. Record findings and next actions only after reviewing the evidence.",
     "location_ids": [],
@@ -132,20 +148,24 @@
       "crossover-2026-11-02-sas-field-call-records-received"
     ],
     "activity_record_ids": [],
+    "started_at": "2026-11-04",
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers"
+      "establish-street-dog-extent",
+      "understand-access-to-care"
     ]
   },
   {
     "id": "task-verify-st-marys-church-street-dog-scale",
+    "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
     "order_by_id": 1,
-    "list_context": "Nov 2 field observation · Count visible dogs across a limited area",
-    "investigation_id": "street-dog-immediate-welfare",
+    "list_context": "Plan a limited public-area observation; no visit documented",
     "title": "Verify conditions: scale of the dog problem near St. Mary's",
     "status": "open",
     "type": "field_observation",
-    "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
+    "instructions": "On a future visit, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the actual visit date, the general area examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
     "location_ids": [
       "st-marys-church-street-corridor"
     ],
@@ -157,16 +177,19 @@
       "ssd-2026-06-08-street-response"
     ],
     "activity_record_ids": [],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "where-dogs-need-help"
+      "establish-street-dog-extent"
     ]
   },
   {
     "id": "task-verify-south-stockton-district-5-reports",
+    "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
     "order_by_id": 5,
     "list_context": "Identify a supported public location first",
     "list_date_label": "KCRA",
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Verify reported conditions in South Stockton / District 5",
     "status": "open",
     "type": "field_observation",
@@ -183,16 +206,19 @@
       "kcra-2026-09-24-stockton-stray-dog-report"
     ],
     "activity_record_ids": [],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "where-dogs-need-help"
+      "establish-street-dog-extent"
     ]
   },
   {
     "id": "task-ssd-ask-contact-questions",
+    "thumbnail_image": "/images/variants/clean/shelter.jpg",
     "order_by_id": 4,
     "list_context": "Clarify field access and current care needs",
     "list_date_label": "Applied",
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up with Stockton Street Dogs",
     "status": "open",
     "type": "organization_contact",
@@ -218,17 +244,21 @@
       "Do you coordinate feeding or water, and can residents join an established route?",
       "What supplies are useful, where should they be delivered, and who handles veterinary referrals?"
     ],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "food-and-water",
-      "additional-help"
+      "understand-access-to-care",
+      "evaluate-existing-responses",
+      "pursue-practical-improvements"
     ]
   },
   {
     "id": "task-sas-volunteer-onboarding-follow-up",
+    "thumbnail_image": "/images/variants/clean/shelter.jpg",
     "order_by_id": 6,
     "list_context": "Check onboarding and orientation",
     "list_date_label": "Applied",
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Follow up with Stockton Animal Services on volunteering",
     "status": "waiting",
     "type": "follow_up",
@@ -243,15 +273,19 @@
       "sas-standing-doggie-day-out"
     ],
     "activity_record_ids": [],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "additional-help"
+      "understand-access-to-care",
+      "pursue-practical-improvements"
     ]
   },
   {
     "id": "task-monitor-animal-control-ordinance",
+    "thumbnail_image": "/images/variants/clean/records-desk.jpg",
     "order_by_id": 7,
     "list_context": "Verify the Council outcome",
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Monitor the proposed animal-control ordinance",
     "status": "open",
     "type": "policy_monitoring",
@@ -265,15 +299,18 @@
       "stocktonia-2026-10-20-animal-control-proposals"
     ],
     "activity_record_ids": [],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "response-barriers"
+      "understand-access-to-care"
     ]
   },
   {
     "id": "task-contact-cbs-charlie-lapastora",
+    "thumbnail_image": "/images/variants/clean/records-desk.jpg",
     "order_by_id": 3,
     "list_context": "Clarify reported locations and seek firsthand leads",
-    "investigation_id": "street-dog-immediate-welfare",
     "title": "Contact CBS reporter Charlie Lapastora",
     "status": "open",
     "type": "organization_contact",
@@ -292,10 +329,13 @@
       "How were the estimates of 200–400 street dogs established? Is there underlying documentation?",
       "Have you learned anything new about the situation, the rescue efforts, or the proposed Safe Grounds project since your reports?"
     ],
+    "gap_ids": [
+      "dogs-safe-placement"
+    ],
     "objective_ids": [
-      "where-dogs-need-help",
-      "response-barriers",
-      "additional-help"
+      "establish-street-dog-extent",
+      "understand-access-to-care",
+      "pursue-practical-improvements"
     ]
   }
 ]

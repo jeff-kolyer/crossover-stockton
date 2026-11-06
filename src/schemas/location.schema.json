@@ -8,6 +8,13 @@
     "id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
+    "gap_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
     "location_type": {
       "type": "string",
       "pattern": "^[a-z][a-z_]*$",
@@ -15,19 +22,40 @@
     },
     "map_reference": {
       "type": "object",
-      "description": "Public geographic search reference. Precision describes the query, not the accuracy of any associated report or the current location of a person or animal.",
       "properties": {
-        "query": { "type": "string", "minLength": 1 },
-        "precision": { "type": "string", "enum": ["address", "named_place", "intersection", "corridor", "general_area"] },
-        "verified": { "type": "boolean" },
-        "source_url": { "type": "string", "minLength": 1 },
-        "embed_url": { "type": "string", "pattern": "^https://www\\.google\\.com/maps/embed\\?pb=" }
+        "query": {
+          "type": "string",
+          "minLength": 1
+        },
+        "precision": {
+          "type": "string",
+          "enum": [
+            "address",
+            "named_place",
+            "intersection",
+            "corridor",
+            "general_area"
+          ]
+        },
+        "verified": {
+          "type": "boolean"
+        },
+        "source_url": {
+          "type": "string",
+          "minLength": 1
+        },
+        "embed_url": {
+          "type": "string",
+          "minLength": 1
+        }
       },
-      "required": ["query", "precision", "verified"],
-      "additionalProperties": false
-    },
-    "investigation_id": {
-      "$ref": "./common.schema.json#/$defs/id"
+      "required": [
+        "query",
+        "precision",
+        "verified"
+      ],
+      "additionalProperties": false,
+      "description": "Public geographic search reference. Precision describes the query, not the accuracy of any associated report or the current location of a person or animal."
     },
     "name": {
       "type": "string",
@@ -105,9 +133,9 @@
   },
   "required": [
     "id",
+    "gap_ids",
     "location_type",
     "map_reference",
-    "investigation_id",
     "name",
     "area",
     "coordinates",

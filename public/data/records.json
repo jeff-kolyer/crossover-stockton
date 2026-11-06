@@ -10,7 +10,7 @@
         "id": "crossover-stockton",
         "name": "Crossover Stockton",
         "slogan": "See clearly. Act locally.",
-        "purpose": "Crossover investigates where emerging AI, robotics, and human participation could help meet real-world needs in Stockton.",
+        "purpose": "Crossover aims to help bring post-scarcity into being by engineering practical solutions to real needs. We start in Stockton, learn from people and evidence, and take useful action.",
         "geographicScope": {
           "name": "Stockton, California",
           "locality": "Stockton",
@@ -26,22 +26,22 @@
         ],
         "methodIds": [
           "technology",
-          "investigation"
+          "action"
         ],
         "statements": {
           "homeIntroTitle": "Showing up. Learning what's real.",
           "homeIntroBody": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens. Each action brings us closer to reality, and the next useful step.",
           "missionQuestion": "How can post-scarcity technology solve real problems?",
           "opportunity": "As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.",
-          "startingApproach": "We're starting now, investigating real needs in Stockton, taking action, and using what we learn to discover what technology and human participation can make possible.",
+          "startingApproach": "We start with real needs in Stockton, take action, and use what we learn to discover what technology and human participation can make possible.",
           "animalCareVision": "What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?",
-          "animalCareInvestigation": "We're investigating what happens to dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
+          "animalCareInvestigation": "We're getting a clearer picture of dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
           "learningRule": "What we discover guides what we do next.",
           "presencePractice": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens.",
-          "documentationPractice": "Crossover connects those experiences through an investigation app: Actions, Activity, Places, and Findings. We document what we do, examine what we learn, and identify what needs investigating next.",
-          "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our articles become a growing body of knowledge that others can use, question, and build upon.",
+          "documentationPractice": "Crossover documents needs, actions, activity, places, and source records. We examine what we learn and identify the next useful step.",
+          "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our public records let others inspect, question, and build on what we learn.",
           "experienceChangesUs": "And sometimes the experience changes our understanding. Sometimes it changes us.",
-          "publicCommitment": "We're investigating real needs in Stockton. Our actions, observations, and findings are public—including what we haven't figured out yet."
+          "publicCommitment": "We're tracking real needs in Stockton. Our actions, observations, and source records are public—including what we haven't figured out yet."
         },
         "preferred_logo": "/images/logo_light.webp"
       }
@@ -107,16 +107,16 @@
         "statement": "Using AI, robotics, and automation to reduce unnecessary work and expand what people can do."
       }
     },
-    "investigation": {
-      "id": "investigation",
+    "action": {
+      "id": "action",
       "schema": "method",
       "typeName": "Method",
-      "title": "Investigation",
-      "description": "Discovering what is real through evidence, firsthand experience, and practical experiments. We'll bring the dog food.",
+      "title": "Action",
+      "description": "Start with real needs, show up, learn from evidence and experience, take a useful step, and repeat.",
       "fields": {
-        "id": "investigation",
-        "title": "Investigation",
-        "statement": "Discovering what is real through evidence, firsthand experience, and practical experiments. We'll bring the dog food."
+        "id": "action",
+        "title": "Action",
+        "statement": "Start with real needs, show up, learn from evidence and experience, take a useful step, and repeat."
       }
     },
     "jeff-kolyer": {
@@ -209,127 +209,175 @@
         "active": true
       }
     },
-    "bread-of-life": {
-      "id": "bread-of-life",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "Bread of Life",
-      "description": "Food rescue and multi-site grocery distribution serving families and individuals across Stockton and San Joaquin County.",
-      "fields": {
-        "id": "bread-of-life",
-        "name": "Bread of Life",
-        "summary": "Food rescue and multi-site grocery distribution serving families and individuals across Stockton and San Joaquin County.",
-        "website": "https://www.breadoflifeca.org/",
-        "active": true
-      }
-    },
-    "community-partnership-families": {
-      "id": "community-partnership-families",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "Community Partnership for Families of San Joaquin",
-      "description": "Neighborhood resource centers connecting families to food, utilities, housing support, youth services, and other basic needs.",
-      "fields": {
-        "id": "community-partnership-families",
-        "name": "Community Partnership for Families of San Joaquin",
-        "summary": "Neighborhood resource centers connecting families to food, utilities, housing support, youth services, and other basic needs.",
-        "website": "https://cpfsj.org/",
-        "active": true
-      }
-    },
-    "ready-to-work-sjc": {
-      "id": "ready-to-work-sjc",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "Ready to Work San Joaquin",
-      "description": "Transitional housing, paid work crews, case management, and reentry support for formerly homeless and incarcerated men.",
-      "fields": {
-        "id": "ready-to-work-sjc",
-        "name": "Ready to Work San Joaquin",
-        "summary": "Transitional housing, paid work crews, case management, and reentry support for formerly homeless and incarcerated men.",
-        "website": "https://www.readytoworksjc.org/",
-        "active": true
-      }
-    },
-    "prevail": {
-      "id": "prevail",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "PREVAIL",
-      "description": "Emergency shelter, crisis response, advocacy, and youth services for people facing violence, exploitation, and homelessness.",
-      "fields": {
-        "id": "prevail",
-        "name": "PREVAIL",
-        "summary": "Emergency shelter, crisis response, advocacy, and youth services for people facing violence, exploitation, and homelessness.",
-        "website": "https://weshallprevail.org/",
-        "active": true
-      }
-    },
-    "friends-outside": {
-      "id": "friends-outside",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "Friends Outside",
-      "description": "Reentry, family connection, housing and basic-needs assistance, employment readiness, and support for families affected by incarceration.",
-      "fields": {
-        "id": "friends-outside",
-        "name": "Friends Outside",
-        "summary": "Reentry, family connection, housing and basic-needs assistance, employment readiness, and support for families affected by incarceration.",
-        "website": "https://friendsoutside.org/",
-        "active": true
-      }
-    },
-    "little-manila-rising": {
-      "id": "little-manila-rising",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "Little Manila Rising",
-      "description": "South Stockton community work spanning environmental health, urban forestry, public health, cultural preservation, and community resilience.",
-      "fields": {
-        "id": "little-manila-rising",
-        "name": "Little Manila Rising",
-        "summary": "South Stockton community work spanning environmental health, urban forestry, public health, cultural preservation, and community resilience.",
-        "website": "https://littlemanila.org/",
-        "active": true
-      }
-    },
-    "haven-of-peace": {
-      "id": "haven-of-peace",
-      "schema": "organization",
-      "typeName": "Organization",
-      "title": "Haven of Peace",
-      "description": "Emergency shelter and practical support for homeless women and children in San Joaquin County.",
-      "fields": {
-        "id": "haven-of-peace",
-        "name": "Haven of Peace",
-        "summary": "Emergency shelter and practical support for homeless women and children in San Joaquin County.",
-        "website": "https://havenofpeaceinc.org/",
-        "active": true
-      }
-    },
     "dogs-safe-placement": {
       "id": "dogs-safe-placement",
-      "schema": "need",
-      "typeName": "Need",
+      "schema": "gap",
+      "typeName": "Gap",
       "title": "Street dogs and access to care",
-      "description": "Animal rescuers estimate that hundreds of dogs may be living on Stockton's streets. The city acknowledges recurring shelter overcrowding, while rescue organizations report increasing abandonment and limited capacity to help. The number of dogs currently on the streets, their conditions, and how many are receiving care remain unverified.",
+      "description": "Dogs on Stockton's streets need care, and people trying to help them need workable paths to shelter, fostering, and services. People with pets may also face barriers to shelter. The number and condition of dogs on the streets, the care reaching them, and access for people with dogs remain unverified.",
       "fields": {
         "id": "dogs-safe-placement",
-        "slug": "too-many-dogs-still-lack-safe-placement",
+        "slug": "street-dogs",
         "title": "Street dogs and access to care",
-        "summary": "Animal rescuers estimate that hundreds of dogs may be living on Stockton's streets. The city acknowledges recurring shelter overcrowding, while rescue organizations report increasing abandonment and limited capacity to help. The number of dogs currently on the streets, their conditions, and how many are receiving care remain unverified.",
+        "summary": "Dogs on Stockton's streets need care, and people trying to help them need workable paths to shelter, fostering, and services. People with pets may also face barriers to shelter. The number and condition of dogs on the streets, the care reaching them, and access for people with dogs remain unverified.",
         "what_we_are_seeing": [
           "Stockton Animal Services reports recurring shelter-capacity pressure. It prioritizes sick, injured, aggressive, and confirmed abandonment cases, while healthy stray intake generally requires an appointment. Its guidance cautions that a roaming dog may be lost or owned rather than abandoned.",
           "Stockton Street Dogs reports feeding and outreach on the streets several times a week. Its public materials also describe fostering, adoption, and other rescue pathways.",
           "At an October 19, 2026 committee meeting, city officials discussed shelter limitations and repeated roaming-animal violations. The committee advanced proposed animal-control changes for full City Council consideration; the cited report did not establish a final Council outcome.",
-          "On October 20, Crossover requested Animal Services field-call records. They were received by email on November 2; their contents and limitations have not yet been assessed here."
+          "On October 20, Crossover requested Animal Services field-call records. They were received by email on November 2; their contents and limitations have not yet been assessed here.",
+          "San Joaquin County’s 2024 survey reported that 34% of unhoused respondents had pets. St. Mary’s describes pet-accommodating shelter options, but Crossover has not verified current access or whether people with dogs still face restrictions."
         ],
-        "investigation_status": "investigating",
-        "updated_at": "2026-10-28",
+        "current_state": "Stockton Street Dogs reports that dumped-dog encounters rose from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity. Stockton Animal Services reports recurring shelter capacity pressure. The current number of street dogs and how many reach safe placement remain unverified. Stockton Street Dogs is also pursuing a proposed Canine Campus for overflow, veterinary recovery, and volunteer-supported care; it is not yet an operating facility. People with pets may face shelter-access barriers; current access and dog-inclusive capacity remain unverified.",
+        "sources": [
+          {
+            "title": "Stockton committee advances stricter animal-control rules amid shelter overcrowding",
+            "publisher": "Stocktonia",
+            "url": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+            "type": "local_reporting",
+            "published_at": "2026-10-20",
+            "checked_at": "2026-10-28"
+          },
+          {
+            "title": "Stockton has become a dumping ground for abandoned dogs, advocates say",
+            "publisher": "CBS Sacramento",
+            "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
+            "type": "local_reporting",
+            "published_at": "2026-04-06",
+            "checked_at": "2026-10-28"
+          },
+          {
+            "title": "Stockton Street Dogs reports surge in dumped dogs",
+            "publisher": "Stockton Street Dogs / video source",
+            "url": "https://www.youtube.com/watch?v=XZlwttXFXEc",
+            "type": "news",
+            "published_at": "2026-09-29"
+          },
+          {
+            "title": "2024 kennel statistics",
+            "publisher": "City of Stockton Animal Services",
+            "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
+            "type": "government",
+            "published_at": null,
+            "checked_at": "2026-10-15"
+          },
+          {
+            "title": "Stockton Animal Shelter spay and neuter services agreement",
+            "publisher": "City of Stockton",
+            "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+            "type": "government",
+            "published_at": "2026-01-13",
+            "checked_at": "2026-08-21T17:07:00-07:00"
+          },
+          {
+            "title": "Stockton Street Dogs proposes a Canine Campus",
+            "publisher": "Stockton Street Dogs / KCRA video",
+            "url": "https://www.youtube.com/watch?v=I68lU4UuJ-A",
+            "type": "news",
+            "published_at": "2026-07-30"
+          },
+          {
+            "title": "Canine Campus proposal describes planned overflow and recovery capacity",
+            "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+            "url": "https://streetdogsanctuary.com/canine-campus",
+            "type": "organization",
+            "published_at": null,
+            "checked_at": "2026-10-07T12:00:00-07:00"
+          },
+          {
+            "title": "A Stockton woman was mauled by wild dogs. Here's how to avoid becoming a target",
+            "publisher": "Stocktonia",
+            "url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
+            "type": "local_reporting",
+            "published_at": "2026-05-11",
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "'Out of control' pet population gives rise to call for mandatory spay-neuter law",
+            "publisher": "Stocktonia",
+            "url": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
+            "type": "local_reporting",
+            "published_at": "2026-05-05",
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "Help Us Save the Streetdogs",
+            "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+            "url": "https://streetdogsanctuary.com/",
+            "type": "organization",
+            "published_at": null,
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "Hard Luck Animal Welfare Advocates",
+            "publisher": "Hard Luck AWA",
+            "url": "https://www.hardluckawa.org/",
+            "type": "organization",
+            "published_at": null,
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "Stockton Animal Shelter halts intakes, adoptions after strep zoo case",
+            "publisher": "Stocktonia",
+            "url": "https://stocktonia.org/news/community/2026/05/21/stockton-animal-shelter-halts-intakes-adoptions-after-strep-zoo-case/",
+            "type": "local_reporting",
+            "published_at": "2026-05-21",
+            "checked_at": "2026-08-21T17:07:00-07:00"
+          },
+          {
+            "title": "Hard Luck Animal Welfare Advocates contract extension",
+            "publisher": "City of Stockton",
+            "url": "https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A",
+            "type": "government",
+            "published_at": "2026-06-09",
+            "checked_at": "2026-08-21T17:07:00-07:00"
+          },
+          {
+            "title": "The number of people living on the streets of San Joaquin County has dropped by almost 50%, officials report",
+            "publisher": "Stocktonia",
+            "url": "https://stocktonia.org/news/homeless/2026/05/15/the-number-of-people-living-on-the-streets-of-san-joaquin-county-has-dropped-by-almost-50-this-year-officials-report/",
+            "type": "local_reporting",
+            "published_at": "2026-05-15",
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "HHAP Round 3 - City of Stockton",
+            "publisher": "California Department of Housing and Community Development",
+            "url": "https://www.hcd.ca.gov/sites/default/files/docs/grants-and-funding/calich/hhap_round3/cities/stockton.pdf",
+            "type": "government",
+            "published_at": "2022-01-01",
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "Stockton dog rescue to implement safe temporary campground for homeless residents",
+            "publisher": "CBS Sacramento",
+            "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
+            "type": "local_reporting",
+            "published_at": "2026-06-08",
+            "checked_at": "2026-08-20T18:28:00-07:00"
+          },
+          {
+            "title": "2024 San Joaquin County Point-In-Time Count Report",
+            "publisher": "San Joaquin Continuum of Care",
+            "url": "https://www.sanjoaquincoc.org/wp-content/uploads/2024/09/2024-San-Joaquin-County-Point-In-Time-Count-Report.pdf",
+            "type": "government",
+            "published_at": "2024-09-01",
+            "checked_at": "2026-08-21T20:48:00-07:00"
+          },
+          {
+            "title": "Pathways Program",
+            "publisher": "St. Mary's Community Services / community resource listing",
+            "url": "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926",
+            "type": "organization",
+            "published_at": null,
+            "checked_at": "2026-08-21T20:48:00-07:00"
+          }
+        ],
+        "updated_at": "2026-11-05",
         "organization_ids": [
           "stockton-street-dogs",
           "stockton-animal-services",
-          "hard-luck-awa"
+          "hard-luck-awa",
+          "st-marys-dining-room"
         ],
         "record_ids": [
           "ssd-2026-09-29-dumped-dogs-surge",
@@ -348,7 +396,9 @@
           "ssd-standing-foster-adopt",
           "ssd-standing-volunteer-rescue-partner",
           "ssd-standing-food-supplies",
-          "stocktonia-2026-10-20-animal-control-proposals"
+          "stocktonia-2026-10-20-animal-control-proposals",
+          "crossover-2026-10-20-sas-field-call-records-request",
+          "crossover-2026-11-02-sas-field-call-records-received"
         ],
         "unknown_questions": [
           "How many dogs currently live on Stockton's streets, and where?",
@@ -357,217 +407,44 @@
           "What happens when someone reports a stray, injured, or abandoned dog?",
           "How many reported dogs ultimately receive care?",
           "What prevents willing people and organizations from providing more care?",
-          "Which existing or proposed improvements are actually increasing access to care?"
+          "Which existing or proposed improvements are actually increasing access to care?",
+          "Can people entering shelter remain with their dogs, and under what conditions?",
+          "What care reaches dogs living with people outside?"
         ],
-        "thumbnail_image": "/images/reality/dog-thumb.jpg",
-        "preferred_image": "/images/reality/dog-street-hero.jpg"
+        "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
+        "default": true,
+        "preferred_image": "/images/variants/clean/dog-sidewalk.jpg"
       },
       "dateForSort": {
         "field": "updated_at",
-        "value": "2026-10-28"
+        "value": "2026-11-05"
       }
     },
-    "pet-inclusive-shelter": {
-      "id": "pet-inclusive-shelter",
-      "schema": "need",
-      "typeName": "Need",
-      "title": "People with pets and shelter access",
-      "description": "San Joaquin County's 2024 survey reported that 34% of unhoused respondents had pets. St. Mary's has opened pet-inclusive shelter options. Crossover has not investigated whether people with pets still face barriers to shelter access, or how effectively existing services meet their needs.",
-      "fields": {
-        "id": "pet-inclusive-shelter",
-        "slug": "people-with-pets-still-face-barriers-to-safe-shelter",
-        "title": "People with pets and shelter access",
-        "summary": "San Joaquin County's 2024 survey reported that 34% of unhoused respondents had pets. St. Mary's has opened pet-inclusive shelter options. Crossover has not investigated whether people with pets still face barriers to shelter access, or how effectively existing services meet their needs.",
-        "what_we_are_seeing": [
-          "San Joaquin County's 2024 survey found 34% of unhoused respondents had a pet, and 45% of pet-owning respondents had two or more pets.",
-          "The 2026 homelessness count added a specific question to measure whether pets are preventing people from entering shelter.",
-          "St. Mary's describes Pathways as offering low-barrier shelter options designed to accommodate people with pets, partners, family, or belongings.",
-          "Stockton Street Dogs has proposed a Safe Grounds model intended to keep unhoused people and companion animals together while they move toward housing; the proposal is not evidence that the program is operating."
-        ],
-        "investigation_status": "identified",
-        "updated_at": "2026-08-21T20:48:00-07:00",
-        "organization_ids": [
-          "stockton-street-dogs",
-          "st-marys-dining-room"
-        ],
-        "record_ids": [
-          "stockton-2022-hhap-pets-shelter-barrier",
-          "sjc-2024-pit-pet-ownership",
-          "stockton-2026-05-15-pit-pet-question",
-          "ssd-2026-06-08-safe-grounds",
-          "smcs-2026-06-17-pathways-open",
-          "smcs-standing-pathways-pet-inclusive",
-          "ssd-standing-food-supplies"
-        ],
-        "thumbnail_image": "/images/reality/people-pets-thumb.jpg",
-        "preferred_image": "/images/reality/pet-inclusive-shelter-hero.jpg"
-      },
-      "dateForSort": {
-        "field": "updated_at",
-        "value": "2026-08-21T20:48:00-07:00"
-      }
-    },
-    "food-distribution-capacity": {
-      "id": "food-distribution-capacity",
-      "schema": "need",
-      "typeName": "Need",
-      "title": "Food distribution capacity",
-      "description": "In August 2026, Bread of Life reported that a large frozen-food donation exceeded its cold-storage capacity. Partners helped distribute the food. Crossover has not investigated whether storage, transportation, or coordination regularly prevent food from reaching people.",
-      "fields": {
-        "id": "food-distribution-capacity",
-        "slug": "food-distribution-capacity-isnt-keeping-up-with-need",
-        "title": "Food distribution capacity",
-        "summary": "In August 2026, Bread of Life reported that a large frozen-food donation exceeded its cold-storage capacity. Partners helped distribute the food. Crossover has not investigated whether storage, transportation, or coordination regularly prevent food from reaching people.",
-        "what_we_are_seeing": [
-          "In August 2026, a donation of roughly three semitruck loads, including two loads of frozen food, exceeded Bread of Life's two existing freezers.",
-          "Bread of Life reported relying on local partners for refrigerated transportation and temporary cold storage so the donation could still reach residents.",
-          "Bread of Life's public materials report distribution through more than 33 locations and service to about 7,000 people per month; these are the organization's reported figures.",
-          "Community Partnership for Families also provides neighborhood food distribution and fresh-food access through its Family Resource Centers."
-        ],
-        "investigation_status": "identified",
-        "updated_at": "2026-08-21T21:42:00-07:00",
-        "organization_ids": [
-          "bread-of-life",
-          "community-partnership-families"
-        ],
-        "record_ids": [
-          "bol-2026-08-06-cold-storage-overflow",
-          "bol-2026-08-06-freezer-expansion-need",
-          "bol-standing-distribution-scale",
-          "bol-standing-volunteer",
-          "bol-standing-donate-food",
-          "bol-standing-donate-funds",
-          "cpf-standing-food-access"
-        ],
-        "thumbnail_image": "/images/reality/food-distribution-thumb.jpg",
-        "preferred_image": "/images/reality/food-distribution-capacity.jpg"
-      },
-      "dateForSort": {
-        "field": "updated_at",
-        "value": "2026-08-21T21:42:00-07:00"
-      }
-    },
-    "reentry-housing-instability": {
-      "id": "reentry-housing-instability",
-      "schema": "need",
-      "typeName": "Need",
-      "title": "Housing access after incarceration",
-      "description": "Public sources describe programs providing transitional housing, paid work, and assistance to people returning from incarceration. Crossover has not investigated who can access those programs, what outcomes they produce, or where housing barriers remain.",
-      "fields": {
-        "id": "reentry-housing-instability",
-        "slug": "people-leaving-incarceration-still-face-unstable-reentry-housing",
-        "title": "Housing access after incarceration",
-        "summary": "Public sources describe programs providing transitional housing, paid work, and assistance to people returning from incarceration. Crossover has not investigated who can access those programs, what outcomes they produce, or where housing barriers remain.",
-        "what_we_are_seeing": [
-          "Ready To Work describes transitional housing, paid work, case management, training, and links to permanent housing for eligible men.",
-          "Friends Outside describes housing and rental assistance, employment readiness, basic-needs support, and case management for people returning from incarceration.",
-          "Friends Outside identifies housing alongside education and employment as one of the three pillars of successful reentry.",
-          "A prison puppy-raising program at California Health Care Facility in Stockton is a separate pre-release initiative. The cited record does not establish whether it improves participants' housing outcomes."
-        ],
-        "investigation_status": "identified",
-        "updated_at": "2026-09-18T18:28:00-07:00",
-        "organization_ids": [
-          "ready-to-work-sjc",
-          "friends-outside"
-        ],
-        "record_ids": [
-          "stocktonia-2026-09-13-reentry-outcomes",
-          "rtw-standing-housing-work-pathway",
-          "friends-outside-standing-reentry-housing",
-          "friends-outside-standing-housing-pillar",
-          "rtw-standing-employer-partner",
-          "friends-outside-standing-donate-reentry",
-          "canine-2024-chcf-prison-puppy"
-        ],
-        "thumbnail_image": "/images/reality/reentry-housing-thumb.jpg",
-        "preferred_image": "/images/reality/reentry-housing-hero.jpg"
-      },
-      "dateForSort": {
-        "field": "updated_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "low-barrier-housing-pathways": {
-      "id": "low-barrier-housing-pathways",
-      "schema": "need",
-      "typeName": "Need",
-      "title": "Paths from homelessness to housing",
-      "description": "St. Mary's opened Pathways Neighborhood in June 2026, adding 268 transitional housing beds. Crossover has not investigated who can access the facility, how many residents reach permanent housing, or what happens to people who cannot enter.",
-      "fields": {
-        "id": "low-barrier-housing-pathways",
-        "slug": "people-still-need-low-barrier-paths-from-homelessness-to-housing",
-        "title": "Paths from homelessness to housing",
-        "summary": "St. Mary's opened Pathways Neighborhood in June 2026, adding 268 transitional housing beds. Crossover has not investigated who can access the facility, how many residents reach permanent housing, or what happens to people who cannot enter.",
-        "what_we_are_seeing": [
-          "St. Mary’s opened Pathways Neighborhood in June 2026, adding 268 beds of modular transitional housing with on-site supportive services.",
-          "St. Mary's describes the Pathways model as offering low-barrier shelter, case management, wraparound services, and support toward permanent housing.",
-          "St. Mary’s identifies the Zeiter Navigation Center as another housing-navigation service in downtown Stockton.",
-          "In May 2026, Stockton leaders described homelessness as a continuing city challenge, even as Pathways added capacity."
-        ],
-        "investigation_status": "identified",
-        "updated_at": "2026-09-18T18:28:00-07:00",
-        "organization_ids": [
-          "st-marys-dining-room"
-        ],
-        "record_ids": [
-          "smcs-2026-06-17-pathways-268-beds",
-          "stockton-2025-pathways-operating-funds",
-          "stockton-2026-05-20-homelessness-still-challenge",
-          "smcs-standing-housing-outcomes",
-          "stockton-2026-08-17-homeless-options"
-        ],
-        "thumbnail_image": "/images/reality/low-barrier-housing-thumb.jpg",
-        "preferred_image": "/images/reality/low-barrier-housing-hero.jpg"
-      },
-      "dateForSort": {
-        "field": "updated_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "street-dog-immediate-welfare": {
-      "id": "street-dog-immediate-welfare",
-      "schema": "investigation",
-      "typeName": "Investigation",
-      "title": "Dogs on the street in Stockton",
-      "description": "We're investigating where Stockton's street dogs are, what condition they're in, what care reaches them, and which needs remain unmet. Public reports are starting points; records, firsthand observations, and conversations with responders can help us verify what is happening.",
-      "fields": {
-        "id": "street-dog-immediate-welfare",
-        "publicName": "Dogs on the street in Stockton",
-        "title": "What would it take to understand the need?",
-        "primary_goal": "Establish the extent of unmet care needs among dogs on Stockton's streets, understand how existing response and care systems operate, identify where those systems fail to meet needs, and evaluate improvements—including emerging technology—that could produce measurably better outcomes.",
-        "introduction": "We're investigating where Stockton's street dogs are, what condition they're in, what care reaches them, and which needs remain unmet. Public reports are starting points; records, firsthand observations, and conversations with responders can help us verify what is happening.",
-        "status": "in_progress",
-        "gap_id": "dogs-safe-placement",
-        "findings_summary": "Stockton's shelter handles thousands of stray dogs, but the number still on the streets and outcomes of reports remain unclear. Our volunteer applications have yet to lead to onboarding, raising questions about barriers to helping. Shelter expansion and proposed facilities may improve care, but their impact remains unknown.",
-        "verified_finding_ids": [],
-        "evidence_record_ids": [
-          "ssd-2026-09-29-dumped-dogs-surge",
-          "ssd-2026-06-08-street-response",
-          "cbs-2026-04-06-stockton-abandoned-dogs",
-          "stocktonia-2026-10-20-sas-capacity-intake",
-          "stocktonia-2026-10-20-roaming-dog-distinction",
-          "stocktonia-2026-10-20-found-animal-foster-pathway",
-          "stocktonia-2026-10-20-animal-control-proposals"
-        ],
-        "last_updated_at": "2026-11-03"
-      },
-      "dateForSort": {
-        "field": "last_updated_at",
-        "value": "2026-11-03"
-      }
-    },
-    "where-dogs-need-help": {
-      "id": "where-dogs-need-help",
+    "establish-street-dog-extent": {
+      "id": "establish-street-dog-extent",
       "schema": "objective",
-      "typeName": "Investigation objective",
-      "title": "Establish the scale, distribution, and condition of street dogs",
-      "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status.",
+      "typeName": "Project objective",
+      "title": "Establish the extent of the problem",
+      "description": "Determine how many dogs are on Stockton's streets, where they are, and their condition. Keep shelter intake and reports distinct from a count of dogs living on the streets.",
       "fields": {
-        "id": "where-dogs-need-help",
-        "title": "Establish the scale, distribution, and condition of street dogs",
-        "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status.",
-        "investigation_id": "street-dog-immediate-welfare",
-        "action_ids": [
+        "id": "establish-street-dog-extent",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "title": "Establish the extent of the problem",
+        "description": "Determine how many dogs are on Stockton's streets, where they are, and their condition. Keep shelter intake and reports distinct from a count of dogs living on the streets.",
+        "measurement_ids": [
+          "sas-2024-dog-intake-stray",
+          "sas-2024-dog-intake-total"
+        ],
+        "initiative_ids": [],
+        "guiding_questions": [
+          {
+            "title": "How many street dogs need help, where are they, and what condition are they in?",
+            "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status."
+          }
+        ],
+        "task_ids": [
           "task-verify-st-marys-church-street-dog-scale",
           "task-verify-south-stockton-district-5-reports",
           "task-sas-field-call-request-2026-10-20",
@@ -593,81 +470,155 @@
         ]
       }
     },
-    "food-and-water": {
-      "id": "food-and-water",
+    "understand-access-to-care": {
+      "id": "understand-access-to-care",
       "schema": "objective",
-      "typeName": "Investigation objective",
-      "title": "Establish who is providing care and what care reaches dogs",
-      "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery.",
+      "typeName": "Project objective",
+      "title": "Understand access to care",
+      "description": "Test what happens when residents report dogs or try to help them, identify which care reaches dogs, and check whether people seeking shelter can stay with their dogs.",
       "fields": {
-        "id": "food-and-water",
-        "title": "Establish who is providing care and what care reaches dogs",
-        "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery.",
-        "investigation_id": "street-dog-immediate-welfare",
-        "action_ids": [
+        "id": "understand-access-to-care",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "title": "Understand access to care",
+        "description": "Test what happens when residents report dogs or try to help them, identify which care reaches dogs, and check whether people seeking shelter can stay with their dogs.",
+        "measurement_ids": [
+          "sas-2024-dog-outcome-total",
+          "sas-2024-dog-outcome-return-owner"
+        ],
+        "initiative_ids": [],
+        "guiding_questions": [
+          {
+            "title": "Who is caring for street dogs, and what care reaches them?",
+            "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery."
+          },
+          {
+            "title": "What happens when someone reports a dog?",
+            "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends."
+          },
+          {
+            "title": "What prevents people from helping street dogs?",
+            "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence."
+          },
+          {
+            "title": "Can people seeking shelter stay with their dogs?",
+            "description": "Check current pet-accommodating shelter options, actual access, restrictions, and capacity. Keep published program descriptions separate from verified access for people with dogs."
+          }
+        ],
+        "task_ids": [
           "task-ssd-volunteer-application-2026-10-07",
-          "task-ssd-ask-contact-questions"
-        ],
-        "activity_record_ids": [
-          "crossover-2026-10-07-street-dogs-volunteer-application"
-        ],
-        "evidence_record_ids": [
-          "ssd-2026-06-08-street-response"
-        ],
-        "finding_ids": [
-          "finding-volunteer-onboarding-can-stall"
-        ]
-      }
-    },
-    "response-barriers": {
-      "id": "response-barriers",
-      "schema": "objective",
-      "typeName": "Investigation objective",
-      "title": "Trace reporting, response, intake, and outcomes",
-      "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends.",
-      "fields": {
-        "id": "response-barriers",
-        "title": "Trace reporting, response, intake, and outcomes",
-        "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends.",
-        "investigation_id": "street-dog-immediate-welfare",
-        "action_ids": [
+          "task-ssd-ask-contact-questions",
           "task-sas-visit-application-2026-10-14",
           "task-sas-field-call-request-2026-10-20",
           "task-sas-field-call-follow-up",
           "task-review-sas-field-call-records",
           "task-monitor-animal-control-ordinance",
-          "task-contact-cbs-charlie-lapastora"
+          "task-contact-cbs-charlie-lapastora",
+          "task-sas-doggie-day-out-inquiry-2026-10-12",
+          "task-sas-volunteer-onboarding-follow-up"
         ],
         "activity_record_ids": [
+          "crossover-2026-10-07-street-dogs-volunteer-application",
           "crossover-2026-10-14-sas-volunteer-application",
           "crossover-2026-10-20-sas-field-call-records-request",
-          "crossover-2026-11-02-sas-field-call-records-received"
+          "crossover-2026-11-02-sas-field-call-records-received",
+          "crossover-2026-10-12-doggie-day-out-inquiry"
         ],
         "evidence_record_ids": [
+          "ssd-2026-06-08-street-response",
           "stockton-animal-services-2026-10-20-reporting-guidance",
           "crossover-2026-10-20-sas-field-call-records-request",
           "stocktonia-2026-10-20-sas-capacity-intake",
           "stocktonia-2026-10-20-roaming-dog-distinction",
           "stocktonia-2026-10-20-found-animal-foster-pathway",
-          "stocktonia-2026-10-20-animal-control-proposals"
+          "stocktonia-2026-10-20-animal-control-proposals",
+          "crossover-2026-10-14-sas-first-visit"
         ],
         "finding_ids": [
-          "finding-public-street-dog-information-fragmented"
+          "finding-volunteer-onboarding-can-stall",
+          "finding-public-street-dog-information-fragmented",
+          "finding-new-facilities-impact-uncertain"
         ]
       }
     },
-    "additional-help": {
-      "id": "additional-help",
+    "evaluate-existing-responses": {
+      "id": "evaluate-existing-responses",
       "schema": "objective",
-      "typeName": "Investigation objective",
-      "title": "Identify what prevents people from helping",
-      "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence.",
+      "typeName": "Project objective",
+      "title": "Evaluate existing responses",
+      "description": "Understand what organizations and public services are doing, what results are documented, and where their limitations remain unclear.",
       "fields": {
-        "id": "additional-help",
-        "title": "Identify what prevents people from helping",
-        "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence.",
-        "investigation_id": "street-dog-immediate-welfare",
-        "action_ids": [
+        "id": "evaluate-existing-responses",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "title": "Evaluate existing responses",
+        "description": "Understand what organizations and public services are doing, what results are documented, and where their limitations remain unclear.",
+        "measurement_ids": [
+          "sas-2024-dog-outcome-adopted",
+          "sas-2024-dog-outcome-rescue-transfer"
+        ],
+        "initiative_ids": [
+          "stockton-animal-shelter-renovation",
+          "hard-luck-veterinary-staffing-2026"
+        ],
+        "guiding_questions": [
+          {
+            "title": "What results are documented for existing services and initiatives?",
+            "description": "Compare reported reach, intake, and service capacity with documented outcomes for dogs and people. Distinguish operating services from proposals and identify what their records cannot establish."
+          }
+        ],
+        "task_ids": [
+          "task-ssd-volunteer-application-2026-10-07",
+          "task-ssd-ask-contact-questions"
+        ],
+        "activity_record_ids": [
+          "crossover-2026-10-07-street-dogs-volunteer-application",
+          "crossover-2026-10-12-doggie-day-out-inquiry"
+        ],
+        "evidence_record_ids": [
+          "ssd-2026-06-08-street-response",
+          "crossover-2026-10-14-sas-first-visit",
+          "ssd-2026-07-30-canine-campus-proposal",
+          "ssd-2026-10-07-canine-campus-details"
+        ],
+        "finding_ids": [
+          "finding-volunteer-onboarding-can-stall",
+          "finding-new-facilities-impact-uncertain"
+        ]
+      }
+    },
+    "pursue-practical-improvements": {
+      "id": "pursue-practical-improvements",
+      "schema": "objective",
+      "typeName": "Project objective",
+      "title": "Identify and pursue improvements",
+      "description": "Find practical opportunities to increase access to care, take useful steps, and test whether changes improve outcomes.",
+      "fields": {
+        "id": "pursue-practical-improvements",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "title": "Identify and pursue improvements",
+        "description": "Find practical opportunities to increase access to care, take useful steps, and test whether changes improve outcomes.",
+        "measurement_ids": [],
+        "initiative_ids": [
+          "canine-campus",
+          "stockton-pet-wellness-adoption-center",
+          "animal-balance-spay-neuter-contract-2026"
+        ],
+        "guiding_questions": [
+          {
+            "title": "Which efforts improve access to care and outcomes?",
+            "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution."
+          },
+          {
+            "title": "Which practical change should Crossover test next?",
+            "description": "Use documented barriers to choose a feasible step, state its intended result, and decide what evidence would show whether it improved access to care."
+          }
+        ],
+        "task_ids": [
           "task-ssd-volunteer-application-2026-10-07",
           "task-sas-doggie-day-out-inquiry-2026-10-12",
           "task-sas-visit-application-2026-10-14",
@@ -683,7 +634,9 @@
         "evidence_record_ids": [
           "crossover-2026-10-14-sas-first-visit",
           "stocktonia-2026-10-20-sas-capacity-intake",
-          "stocktonia-2026-10-20-found-animal-foster-pathway"
+          "stocktonia-2026-10-20-found-animal-foster-pathway",
+          "ssd-2026-07-30-canine-campus-proposal",
+          "ssd-2026-10-07-canine-campus-details"
         ],
         "finding_ids": [
           "finding-volunteer-onboarding-can-stall",
@@ -691,47 +644,26 @@
         ]
       }
     },
-    "improvement-outcomes": {
-      "id": "improvement-outcomes",
-      "schema": "objective",
-      "typeName": "Investigation objective",
-      "title": "Evaluate improvements to access and outcomes",
-      "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution.",
-      "fields": {
-        "id": "improvement-outcomes",
-        "title": "Evaluate improvements to access and outcomes",
-        "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution.",
-        "investigation_id": "street-dog-immediate-welfare",
-        "action_ids": [],
-        "activity_record_ids": [
-          "crossover-2026-10-12-doggie-day-out-inquiry"
-        ],
-        "evidence_record_ids": [
-          "crossover-2026-10-14-sas-first-visit",
-          "ssd-2026-07-30-canine-campus-proposal",
-          "ssd-2026-10-07-canine-campus-details"
-        ],
-        "finding_ids": [
-          "finding-new-facilities-impact-uncertain"
-        ]
-      }
-    },
     "task-verify-st-marys-church-street-dog-scale": {
       "id": "task-verify-st-marys-church-street-dog-scale",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Verify conditions: scale of the dog problem near St. Mary's",
       "description": "",
       "fields": {
         "id": "task-verify-st-marys-church-street-dog-scale",
         "order_by_id": 1,
         "title": "Verify conditions: scale of the dog problem near St. Mary's",
+        "list_context": "Plan a limited public-area observation; no visit documented",
+        "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
         "status": "open",
         "type": "field_observation",
-        "instructions": "On November 2, 2026, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the date, the general area actually examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "instructions": "On a future visit, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the actual visit date, the general area examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help"
+          "establish-street-dog-extent"
         ],
         "organization_ids": [],
         "location_ids": [
@@ -748,21 +680,25 @@
     },
     "task-review-sas-field-call-records": {
       "id": "task-review-sas-field-call-records",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Review Animal Services field-call records",
       "description": "",
       "fields": {
         "id": "task-review-sas-field-call-records",
         "order_by_id": 2,
         "title": "Review Animal Services field-call records",
-        "status": "open",
+        "list_context": "Review began Nov 4 on 7,183 cases; analysis and findings remain pending",
+        "thumbnail_image": "/images/variants/clean/records-desk.jpg",
+        "status": "in_progress",
         "type": "source_review",
         "instructions": "Review the records received in response to the October 20 Stockton Animal Services field-call request. Preserve the original files and receipt details, document the date range, fields, definitions, coverage, missing or redacted information, and limitations. Analyze patterns relevant to where dogs need help and what happens after reports; distinguish administrative records from firsthand observations and do not treat calls as unique dogs or verified street population. Record findings and next actions only after reviewing the evidence.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers"
+          "establish-street-dog-extent",
+          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -772,27 +708,32 @@
           "crossover-2026-10-20-sas-field-call-records-request",
           "crossover-2026-11-02-sas-field-call-records-received"
         ],
-        "activity_record_ids": []
+        "activity_record_ids": [],
+        "started_at": "2026-11-04"
       }
     },
     "task-contact-cbs-charlie-lapastora": {
       "id": "task-contact-cbs-charlie-lapastora",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Contact CBS reporter Charlie Lapastora",
       "description": "",
       "fields": {
         "id": "task-contact-cbs-charlie-lapastora",
         "order_by_id": 3,
         "title": "Contact CBS reporter Charlie Lapastora",
+        "list_context": "Clarify reported locations and seek firsthand leads",
+        "thumbnail_image": "/images/variants/clean/records-desk.jpg",
         "status": "open",
         "type": "organization_contact",
         "instructions": "Follow up on the April 6 and June 8 CBS Sacramento reports about abandoned dogs in Stockton. Ask what evidence was gathered, what has happened since, and whether the reporter can connect Crossover with firsthand observers with their permission. Record contact or answers only if they actually occur.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers",
-          "additional-help"
+          "establish-street-dog-extent",
+          "understand-access-to-care",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [],
         "location_ids": [],
@@ -805,21 +746,26 @@
     },
     "task-ssd-ask-contact-questions": {
       "id": "task-ssd-ask-contact-questions",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Follow up with Stockton Street Dogs",
       "description": "",
       "fields": {
         "id": "task-ssd-ask-contact-questions",
         "order_by_id": 4,
         "title": "Follow up with Stockton Street Dogs",
+        "list_context": "Clarify field access and current care needs",
+        "thumbnail_image": "/images/variants/clean/shelter.jpg",
         "status": "open",
         "type": "organization_contact",
         "instructions": "Check whether the October 7 volunteer application received a response. Ask for the current status and evidence of progress on Canine Campus, and identify practical approved volunteer or care opportunities, requirements, schedules, and contacts. Record any reply only when received.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "food-and-water",
-          "additional-help"
+          "understand-access-to-care",
+          "evaluate-existing-responses",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -834,20 +780,24 @@
     },
     "task-verify-south-stockton-district-5-reports": {
       "id": "task-verify-south-stockton-district-5-reports",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Verify reported conditions in South Stockton / District 5",
       "description": "",
       "fields": {
         "id": "task-verify-south-stockton-district-5-reports",
         "order_by_id": 5,
         "title": "Verify reported conditions in South Stockton / District 5",
+        "list_context": "Identify a supported public location first",
+        "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
         "status": "open",
         "type": "field_observation",
         "instructions": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site. Choose a safe public observation route near the reported Carrie Street area, confirm access and current conditions before visiting, and document what is actually present, including zero dogs if none are seen. Do not treat the April incident as evidence of current danger or assume the September encounters occurred there. Distinguish both published reports from firsthand findings and record follow-up questions.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help"
+          "establish-street-dog-extent"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -865,20 +815,25 @@
     },
     "task-sas-volunteer-onboarding-follow-up": {
       "id": "task-sas-volunteer-onboarding-follow-up",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Follow up with Stockton Animal Services on volunteering",
       "description": "",
       "fields": {
         "id": "task-sas-volunteer-onboarding-follow-up",
         "order_by_id": 6,
         "title": "Follow up with Stockton Animal Services on volunteering",
+        "list_context": "Check onboarding and orientation",
+        "thumbnail_image": "/images/variants/clean/shelter.jpg",
         "status": "waiting",
         "type": "follow_up",
         "instructions": "Check the status of the October 14 volunteer application and the October 12 Doggie Day Out inquiry. Confirm onboarding, orientation, eligibility, scheduling, and practical transport requirements; document a response only if received.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "additional-help"
+          "understand-access-to-care",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -894,20 +849,24 @@
     },
     "task-monitor-animal-control-ordinance": {
       "id": "task-monitor-animal-control-ordinance",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Monitor the proposed animal-control ordinance",
       "description": "",
       "fields": {
         "id": "task-monitor-animal-control-ordinance",
         "order_by_id": 7,
         "title": "Monitor the proposed animal-control ordinance",
+        "list_context": "Verify the Council outcome",
+        "thumbnail_image": "/images/variants/clean/records-desk.jpg",
         "status": "open",
         "type": "policy_monitoring",
         "instructions": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date. Keep the October 19 committee referral separate from any later Council adoption.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "response-barriers"
+          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -922,21 +881,24 @@
     },
     "task-sas-field-call-follow-up": {
       "id": "task-sas-field-call-follow-up",
-      "schema": "action",
-      "typeName": "Action",
-      "title": "Follow up on Animal Services field-call records",
+      "schema": "task",
+      "typeName": "Task",
+      "title": "Track the response to the Animal Services records request",
       "description": "",
       "fields": {
         "id": "task-sas-field-call-follow-up",
         "order_by_id": 8,
-        "title": "Follow up on Animal Services field-call records",
+        "title": "Track the response to the Animal Services records request",
+        "list_context": "Records received by email Nov 2; contents not yet assessed here",
         "status": "done",
         "type": "follow_up",
         "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers"
+          "establish-street-dog-extent",
+          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -957,21 +919,24 @@
     },
     "task-sas-field-call-request-2026-10-20": {
       "id": "task-sas-field-call-request-2026-10-20",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Request Animal Services field-call records",
       "description": "",
       "fields": {
         "id": "task-sas-field-call-request-2026-10-20",
         "order_by_id": 9,
         "title": "Request Animal Services field-call records",
+        "list_context": "Field-call records requested Oct 20 and received Nov 2; analysis remains a separate action.",
         "status": "done",
         "type": "records_request",
         "instructions": "Request field-call records for roaming, stray, abandoned, aggressive, and distressed dogs.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers"
+          "establish-street-dog-extent",
+          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -990,21 +955,24 @@
     },
     "task-sas-visit-application-2026-10-14": {
       "id": "task-sas-visit-application-2026-10-14",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Visit Stockton Animal Services and submit a volunteer application",
       "description": "",
       "fields": {
         "id": "task-sas-visit-application-2026-10-14",
         "order_by_id": 10,
         "title": "Visit Stockton Animal Services and submit a volunteer application",
+        "list_context": "Shelter visit and volunteer application recorded Oct 14; onboarding was not established.",
         "status": "done",
         "type": "application",
         "instructions": "Visit the shelter, deliver the application, and learn about the public visitor experience.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "response-barriers",
-          "additional-help"
+          "understand-access-to-care",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1023,20 +991,24 @@
     },
     "task-sas-doggie-day-out-inquiry-2026-10-12": {
       "id": "task-sas-doggie-day-out-inquiry-2026-10-12",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Ask Stockton Animal Services about Doggie Day Out",
       "description": "",
       "fields": {
         "id": "task-sas-doggie-day-out-inquiry-2026-10-12",
         "order_by_id": 11,
         "title": "Ask Stockton Animal Services about Doggie Day Out",
+        "list_context": "Doggie Day Out inquiry recorded Oct 12; see the linked activity for the documented outcome.",
         "status": "done",
         "type": "inquiry",
         "instructions": "Ask about sign-up, requirements, paperwork, and orientation.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "additional-help"
+          "understand-access-to-care",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1057,21 +1029,25 @@
     },
     "task-ssd-volunteer-application-2026-10-07": {
       "id": "task-ssd-volunteer-application-2026-10-07",
-      "schema": "action",
-      "typeName": "Action",
+      "schema": "task",
+      "typeName": "Task",
       "title": "Submit a volunteer application to Stockton Street Dogs",
       "description": "",
       "fields": {
         "id": "task-ssd-volunteer-application-2026-10-07",
         "order_by_id": 12,
         "title": "Submit a volunteer application to Stockton Street Dogs",
+        "list_context": "Volunteer application submitted Oct 7; participation was not established by the application.",
         "status": "done",
         "type": "application",
         "instructions": "Submit an application to learn how Crossover can participate firsthand.",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "food-and-water",
-          "additional-help"
+          "understand-access-to-care",
+          "evaluate-existing-responses",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -1103,6 +1079,7 @@
         "organization_interaction": "outreach_attempt",
         "evidence_status": "self_reported",
         "occurred_at": "2026-10-20",
+        "recorded_at": "2026-10-20",
         "source": {
           "publisher": "Crossover Stockton",
           "type": "firsthand_account"
@@ -1112,10 +1089,12 @@
           "summary": "Submitted October 20, 2026. The requested records were received by email on November 2 at 4:03 p.m. PST. This record does not document a review or analysis of their contents.",
           "as_of": "2026-11-02"
         },
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers"
+          "establish-street-dog-extent",
+          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1132,30 +1111,34 @@
       "schema": "activity",
       "typeName": "Activity",
       "title": "Received Stockton Animal Services field-call records",
-      "description": "The City responded to our October 20 public records request. Review and analysis are pending.",
+      "description": "Stockton Animal Services provided the requested field-service records by email on November 2, 2026. Crossover confirmed receipt on November 3 and began reviewing the records on November 4. The spreadsheet contains 7,183 case records; analysis and findings remain pending.",
       "fields": {
         "id": "crossover-2026-11-02-sas-field-call-records-received",
         "title": "Received Stockton Animal Services field-call records",
-        "summary": "The City responded to our October 20 public records request. Review and analysis are pending.",
+        "summary": "Stockton Animal Services provided the requested field-service records by email on November 2, 2026. Crossover confirmed receipt on November 3 and began reviewing the records on November 4. The spreadsheet contains 7,183 case records; analysis and findings remain pending.",
         "record_type": "activity",
         "public_update": true,
         "trust": "crossover_source",
         "organization_interaction": "response_received",
         "evidence_status": "self_reported",
         "occurred_at": "2026-11-02",
+        "confirmed_at": "2026-11-03",
+        "recorded_at": "2026-11-03",
         "source": {
           "publisher": "Crossover Stockton",
           "type": "firsthand_account"
         },
         "outcome": {
           "status": "received",
-          "summary": "Records received by email; their contents and limitations have not been assessed in this record.",
+          "summary": "Records arrived November 2 and receipt was confirmed November 3. Review began November 4; this receipt record does not establish case outcomes.",
           "as_of": "2026-11-02"
         },
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers"
+          "establish-street-dog-extent",
+          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1182,6 +1165,7 @@
         "organization_interaction": "in_person_visit_and_application",
         "evidence_status": "self_reported",
         "occurred_at": "2026-10-14",
+        "recorded_at": "2026-10-14",
         "source": {
           "publisher": "Crossover Stockton / Jeff Kolyer",
           "type": "firsthand_account"
@@ -1191,10 +1175,12 @@
           "summary": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities. No substantive next step documented as of October 30.",
           "as_of": "2026-10-30"
         },
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "response-barriers",
-          "additional-help"
+          "understand-access-to-care",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1223,6 +1209,7 @@
         "organization_interaction": "outreach_attempt",
         "evidence_status": "self_reported",
         "occurred_at": "2026-10-07",
+        "recorded_at": "2026-10-08",
         "source": {
           "publisher": "Crossover Stockton / Jeff Kolyer",
           "type": "firsthand_account"
@@ -1232,10 +1219,13 @@
           "summary": "No response documented as of October 30, 2026.",
           "as_of": "2026-10-30"
         },
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "food-and-water",
-          "additional-help"
+          "understand-access-to-care",
+          "evaluate-existing-responses",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -1262,6 +1252,7 @@
         "organization_interaction": "outreach_attempt",
         "evidence_status": "self_reported",
         "occurred_at": "2026-10-12",
+        "recorded_at": "2026-10-12",
         "source": {
           "publisher": "Crossover Stockton / Jeff Kolyer",
           "type": "firsthand_account"
@@ -1271,10 +1262,13 @@
           "summary": "No substantive next step documented as of October 30, 2026. No field report yet.",
           "as_of": "2026-10-30"
         },
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "objective_ids": [
-          "additional-help",
-          "improvement-outcomes"
+          "understand-access-to-care",
+          "pursue-practical-improvements",
+          "evaluate-existing-responses"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1298,12 +1292,21 @@
         "statement": "We applied to volunteer with Stockton Street Dogs on October 7 and Stockton Animal Services on October 14. We have not documented a completed onboarding process with either organization.",
         "status": "preliminary",
         "current": true,
-        "investigation_id": "street-dog-immediate-welfare",
-        "article_id": "friction-of-volunteering",
-        "primary_objective_id": "additional-help",
-        "related_objective_ids": [
-          "food-and-water",
-          "additional-help"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "objective_ids": [
+          "understand-access-to-care",
+          "evaluate-existing-responses",
+          "pursue-practical-improvements"
+        ],
+        "related_task_ids": [
+          "task-ssd-volunteer-application-2026-10-07",
+          "task-sas-visit-application-2026-10-14"
+        ],
+        "related_initiative_ids": [],
+        "location_ids": [
+          "stockton-animal-services-shelter"
         ],
         "supporting_record_ids": [
           "crossover-2026-10-07-street-dogs-volunteer-application",
@@ -1331,13 +1334,18 @@
         "statement": "We found public estimates, shelter statistics, reported sightings, and descriptions of available services. These sources do not establish how many dogs are currently on Stockton's streets or what happens to individual dogs after they're reported.",
         "status": "developing",
         "current": true,
-        "investigation_id": "street-dog-immediate-welfare",
-        "article_id": "public-access-to-stray-dog-information",
-        "primary_objective_id": "where-dogs-need-help",
-        "related_objective_ids": [
-          "where-dogs-need-help",
-          "response-barriers"
+        "gap_ids": [
+          "dogs-safe-placement"
         ],
+        "objective_ids": [
+          "establish-street-dog-extent",
+          "understand-access-to-care"
+        ],
+        "related_task_ids": [
+          "task-sas-field-call-follow-up"
+        ],
+        "related_initiative_ids": [],
+        "location_ids": [],
         "supporting_record_ids": [
           "cbs-2026-04-06-stockton-abandoned-dogs",
           "ssd-2026-09-29-dumped-dogs-surge",
@@ -1365,12 +1373,23 @@
         "statement": "We observed shelter expansion construction on October 14. Stockton Street Dogs has also proposed a Canine Campus. Their future capacity and effects on access to care remain unverified.",
         "status": "exploratory",
         "current": true,
-        "investigation_id": "street-dog-immediate-welfare",
-        "article_id": "caring-for-stocktons-dogs",
-        "primary_objective_id": "improvement-outcomes",
-        "related_objective_ids": [
-          "additional-help",
-          "improvement-outcomes"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "objective_ids": [
+          "understand-access-to-care",
+          "pursue-practical-improvements",
+          "evaluate-existing-responses"
+        ],
+        "related_task_ids": [
+          "task-sas-visit-application-2026-10-14"
+        ],
+        "related_initiative_ids": [
+          "stockton-animal-shelter-renovation",
+          "canine-campus"
+        ],
+        "location_ids": [
+          "stockton-animal-services-shelter"
         ],
         "supporting_record_ids": [
           "crossover-2026-10-14-sas-first-visit",
@@ -1410,7 +1429,9 @@
         "evidence_date": "2026-04-23",
         "source_url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
         "evidence_record_id": "stockton-2026-05-11-stray-dog-report",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1440,7 +1461,9 @@
         "unknown": "Current residents, dogs, and care needs are unverified.",
         "evidence_date": "2025-02-28",
         "source_url": "https://stocktonia.org/news/community/2025/03/10/puppy-love-spurs-stockton-group-to-offer-homeless-pets-a-lifeline/",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1470,7 +1493,9 @@
         "unknown": "Conditions following the encampment removal, including any current animal-care needs, are unverified.",
         "evidence_date": "2025-07-22",
         "source_url": "https://stocktonia.org/news/homeless/2025/07/23/city-cleans-up-trinity-parkway-dozens-of-homeless-displaced/",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1500,7 +1525,9 @@
         "unknown": "Whether dogs were present, and any current dog-related conditions, are unverified.",
         "evidence_date": "2025-03-05",
         "source_url": "https://sjcprobation.org/2025/03/05/san-joaquin-county-probation-and-local-law-enforcement-join-forces-to-address-community-concerns-regarding-homeless-encampment-in-stockton",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1530,7 +1557,9 @@
         "unknown": "The dog's identity, safety, current location, and outcome are unknown.",
         "evidence_date": "2026-10-16",
         "source_url": "https://www.pawboost.com/landing/pet/J21IrhSPtMgdJGPK8Rdf0ApcBAXWYBO9/found-stray-thispet-stockton-ca-95207",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1560,7 +1589,9 @@
         "unknown": "Ownership, final disposition, and present location are unknown.",
         "evidence_date": "2026-10-15",
         "source_url": "https://www.pawboost.com/landing/pet/gTZ_Pi5VODtzTDJN42ZvQNFFSmdBfWCY/found-stray-thispet-stockton-ca-95202",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1590,7 +1621,9 @@
         "unknown": "The reported reunion has not been independently confirmed.",
         "evidence_date": "2026-10-15",
         "source_url": "https://www.pawboost.com/landing/pet/Ot64iDUByQq1D1fprLtl41FYCLyGgY1J/found-stray-thispet-stockton-ca-95206",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1621,7 +1654,9 @@
         "evidence_date": "2026-04-06",
         "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
         "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1652,7 +1687,9 @@
         "evidence_date": "2026-04-06",
         "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
         "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1683,7 +1720,9 @@
         "evidence_date": "2026-04-06",
         "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
         "evidence_record_id": "cbs-2026-04-06-stockton-abandoned-dogs",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1716,7 +1755,9 @@
         "evidence_date": "2026-10-29",
         "source_url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php",
         "evidence_record_id": "stockton-animal-services-2026-10-20-reporting-guidance",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1747,7 +1788,9 @@
         "evidence_date": "2026-09-24",
         "source_url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921",
         "evidence_record_id": "kcra-2026-09-24-stockton-stray-dog-report",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1778,7 +1821,9 @@
         "evidence_date": "2026-06-08",
         "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
         "evidence_record_id": "ssd-2026-06-08-street-response",
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1790,7 +1835,7 @@
       "schema": "location",
       "typeName": "Location",
       "title": "St. Mary's Community Services",
-      "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street and describes housing and other support services. The Stockton Record reported that its Pathways Neighborhood project opened in June 2026 with 268 beds. This pin marks the organization, not a dog sighting or the wider Church Street investigation area. The published bed count does not establish that those beds accommodate dogs.",
+      "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street. This reference marks the organization, not a dog sighting. Whether its relevant services accommodate people with dogs has not been verified by Crossover.",
       "fields": {
         "id": "st-marys-community-services-campus",
         "name": "St. Mary's Community Services",
@@ -1803,19 +1848,16 @@
           "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.2689205112047!2d-121.2972552!3d37.9475064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090128fff3f4f63%3A0x90e9010387a9a9ce!2s545%20W%20Sonora%20St%2C%20Stockton%2C%20CA%2095203!5e0!3m2!1sen!2sus!4v1793803679103!5m2!1sen!2sus"
         },
         "area": "545 W. Sonora Street, Stockton",
-        "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street and describes housing and other support services. The Stockton Record reported that its Pathways Neighborhood project opened in June 2026 with 268 beds. This pin marks the organization, not a dog sighting or the wider Church Street investigation area. The published bed count does not establish that those beds accommodate dogs.",
+        "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street. This reference marks the organization, not a dog sighting. Whether its relevant services accommodate people with dogs has not been verified by Crossover.",
         "coordinate_note": "Approximate reference for St. Mary's at 545 W. Sonora Street, rounded from a State Water Boards coordinate for the adjacent St. Mary's Dining Room project at 550 W. Sonora Street; not where dogs were reported. Use the Google Maps address link for the organization listing.",
         "category": "official_location_record",
         "verification_status": "Organization location documented; dog-related conditions unverified",
         "unknown": "Whether the relevant programs accommodate people with dogs, and whether any dog-related need exists at this campus, remain unverified. The Church Street outreach report concerns a nearby area, not this address.",
         "evidence_date": "2026-10-29",
         "source_url": "https://smcares.org/",
-        "evidence_record_id": "smcs-standing-housing-outcomes",
-        "evidence_record_ids": [
-          "smcs-standing-housing-outcomes",
-          "smcs-2026-06-17-pathways-268-beds"
-        ],
-        "investigation_id": "street-dog-immediate-welfare"
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
       },
       "dateForSort": {
         "field": "evidence_date",
@@ -1918,7 +1960,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "investigation_id": "street-dog-immediate-welfare",
         "organization_ids": [],
         "report_record_ids": [],
         "outcome": {
@@ -1963,10 +2004,10 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "investigation_id": "street-dog-immediate-welfare",
         "objective_ids": [
-          "food-and-water",
-          "improvement-outcomes"
+          "understand-access-to-care",
+          "evaluate-existing-responses",
+          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -2056,6 +2097,13 @@
           "url": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
           "type": "government"
         },
+        "context_sources": [
+          {
+            "publisher": "City of Stockton Open Data",
+            "url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/",
+            "type": "government"
+          }
+        ],
         "published_at": null,
         "checked_at": "2026-10-15",
         "coverage_id": "sas-service-area-2024",
@@ -2248,8 +2296,7 @@
         "published_at": "2026-06-08",
         "checked_at": "2026-08-21T17:07:00-07:00",
         "gap_ids": [
-          "dogs-safe-placement",
-          "pet-inclusive-shelter"
+          "dogs-safe-placement"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -2405,8 +2452,7 @@
         "published_at": null,
         "checked_at": "2026-09-18T18:28:00-07:00",
         "gap_ids": [
-          "dogs-safe-placement",
-          "pet-inclusive-shelter"
+          "dogs-safe-placement"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -2415,562 +2461,6 @@
       "dateForSort": {
         "field": "checked_at",
         "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "bol-2026-08-06-cold-storage-overflow": {
-      "id": "bol-2026-08-06-cold-storage-overflow",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "A large frozen-food donation exceeded Bread of Life's cold-storage capacity",
-      "description": "A Grocery Outlet donation of roughly three semitruck loads of frozen meat exceeded Bread of Life's two existing freezers. Local partners supplied refrigerated transportation and temporary cold storage so the food could still be distributed.",
-      "fields": {
-        "id": "bol-2026-08-06-cold-storage-overflow",
-        "title": "A large frozen-food donation exceeded Bread of Life's cold-storage capacity",
-        "summary": "A Grocery Outlet donation of roughly three semitruck loads of frozen meat exceeded Bread of Life's two existing freezers. Local partners supplied refrigerated transportation and temporary cold storage so the food could still be distributed.",
-        "record_type": "capacity_constraint",
-        "trust": "source_supported",
-        "source": {
-          "publisher": "Stocktonia",
-          "url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
-          "type": "local_reporting"
-        },
-        "published_at": "2026-08-06",
-        "checked_at": "2026-08-21T21:42:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ]
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-08-06"
-      }
-    },
-    "bol-2026-08-06-freezer-expansion-need": {
-      "id": "bol-2026-08-06-freezer-expansion-need",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Bread of Life estimated another freezer would cost about $38,000",
-      "description": "Bread of Life said its two existing freezers were full, that warehouse space was available for another freezer, and that purchasing one would cost an estimated $38,000.",
-      "fields": {
-        "id": "bol-2026-08-06-freezer-expansion-need",
-        "title": "Bread of Life estimated another freezer would cost about $38,000",
-        "summary": "Bread of Life said its two existing freezers were full, that warehouse space was available for another freezer, and that purchasing one would cost an estimated $38,000.",
-        "record_type": "current_need",
-        "trust": "source_supported",
-        "source": {
-          "publisher": "Stocktonia",
-          "url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
-          "type": "local_reporting"
-        },
-        "published_at": "2026-08-06",
-        "checked_at": "2026-08-21T21:42:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ]
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-08-06"
-      }
-    },
-    "bol-standing-distribution-scale": {
-      "id": "bol-standing-distribution-scale",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Bread of Life distributes through more than 33 locations and reports serving about 7,000 people per month",
-      "description": "Bread of Life's current site says it distributes groceries through more than 33 locations in San Joaquin County and serves an average of about 2,000 households and 7,000 people per month.",
-      "fields": {
-        "id": "bol-standing-distribution-scale",
-        "title": "Bread of Life distributes through more than 33 locations and reports serving about 7,000 people per month",
-        "summary": "Bread of Life's current site says it distributes groceries through more than 33 locations in San Joaquin County and serves an average of about 2,000 households and 7,000 people per month.",
-        "record_type": "current_service",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Bread of Life",
-          "url": "https://www.breadoflifeca.org/",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-08-24T19:16:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-08-24T19:16:00-07:00"
-      }
-    },
-    "bol-standing-volunteer": {
-      "id": "bol-standing-volunteer",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Bread of Life currently invites individuals and groups to volunteer",
-      "description": "Bread of Life's current volunteer page says it needs volunteers and offers multiple opportunities for individuals and groups to help families access nutritious food.",
-      "fields": {
-        "id": "bol-standing-volunteer",
-        "title": "Bread of Life currently invites individuals and groups to volunteer",
-        "summary": "Bread of Life's current volunteer page says it needs volunteers and offers multiple opportunities for individuals and groups to help families access nutritious food.",
-        "record_type": "current_ask",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Bread of Life",
-          "url": "https://www.breadoflifeca.org/volunteer",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "bol-standing-donate-food": {
-      "id": "bol-standing-donate-food",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Bread of Life currently accepts grocery-rescue and large-scale food donations",
-      "description": "Bread of Life coordinates grocery-rescue pickups and accepts large-scale food donations from local companies for distribution to food-insecure households.",
-      "fields": {
-        "id": "bol-standing-donate-food",
-        "title": "Bread of Life currently accepts grocery-rescue and large-scale food donations",
-        "summary": "Bread of Life coordinates grocery-rescue pickups and accepts large-scale food donations from local companies for distribution to food-insecure households.",
-        "record_type": "current_ask",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Bread of Life",
-          "url": "https://www.breadoflifeca.org/donate-food",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-08-24T19:16:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-08-24T19:16:00-07:00"
-      }
-    },
-    "bol-standing-donate-funds": {
-      "id": "bol-standing-donate-funds",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Bread of Life currently accepts direct financial support",
-      "description": "Bread of Life's current donation page accepts online, check, and ACH gifts to support its food-distribution work.",
-      "fields": {
-        "id": "bol-standing-donate-funds",
-        "title": "Bread of Life currently accepts direct financial support",
-        "summary": "Bread of Life's current donation page accepts online, check, and ACH gifts to support its food-distribution work.",
-        "record_type": "current_ask",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Bread of Life",
-          "url": "https://www.breadoflifeca.org/donate",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-08-24T19:16:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-08-24T19:16:00-07:00"
-      }
-    },
-    "cpf-standing-food-access": {
-      "id": "cpf-standing-food-access",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Community Partnership's Family Resource Centers provide neighborhood food access",
-      "description": "Community Partnership for Families currently lists food distribution, mobile farmers markets, senior commodities, and fresh-produce events among the core services available through its Family Resource Centers.",
-      "fields": {
-        "id": "cpf-standing-food-access",
-        "title": "Community Partnership's Family Resource Centers provide neighborhood food access",
-        "summary": "Community Partnership for Families currently lists food distribution, mobile farmers markets, senior commodities, and fresh-produce events among the core services available through its Family Resource Centers.",
-        "record_type": "current_service",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Community Partnership for Families of San Joaquin County",
-          "url": "https://cpfsj.org/family-resource-centers/",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-08-21T21:42:00-07:00",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "community-partnership-families"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-08-21T21:42:00-07:00"
-      }
-    },
-    "rtw-standing-housing-work-pathway": {
-      "id": "rtw-standing-housing-work-pathway",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Ready To Work currently combines transitional housing, paid work, case management, and permanent-housing support",
-      "description": "Ready To Work says eligible men can receive transitional housing, meals, paid community-improvement work, case management, education or training support, and links to permanent housing. Its program is designed as a pathway from homelessness and incarceration toward employment and stable housing.",
-      "fields": {
-        "id": "rtw-standing-housing-work-pathway",
-        "title": "Ready To Work currently combines transitional housing, paid work, case management, and permanent-housing support",
-        "summary": "Ready To Work says eligible men can receive transitional housing, meals, paid community-improvement work, case management, education or training support, and links to permanent housing. Its program is designed as a pathway from homelessness and incarceration toward employment and stable housing.",
-        "record_type": "current_service",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Ready To Work San Joaquin",
-          "url": "https://www.readytoworksjc.org/get-help/",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "ready-to-work-sjc"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "friends-outside-standing-reentry-housing": {
-      "id": "friends-outside-standing-reentry-housing",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Friends Outside currently provides housing and basic-needs assistance as part of reentry case management",
-      "description": "Friends Outside’s Stockton reentry program currently lists housing and rental assistance, employment readiness, basic-needs support, case management, education, family reunification, and referrals among the services available to people returning from incarceration.",
-      "fields": {
-        "id": "friends-outside-standing-reentry-housing",
-        "title": "Friends Outside currently provides housing and basic-needs assistance as part of reentry case management",
-        "summary": "Friends Outside’s Stockton reentry program currently lists housing and rental assistance, employment readiness, basic-needs support, case management, education, family reunification, and referrals among the services available to people returning from incarceration.",
-        "record_type": "current_service",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Friends Outside",
-          "url": "https://friendsoutside.org/Programs-Services/Reentry-Services",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "friends-outside"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "friends-outside-standing-housing-pillar": {
-      "id": "friends-outside-standing-housing-pillar",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Friends Outside identifies housing as one of the three pillars of successful reentry",
-      "description": "Friends Outside currently describes housing, education, and employment as the three pillars of a successful second chance for formerly incarcerated Californians.",
-      "fields": {
-        "id": "friends-outside-standing-housing-pillar",
-        "title": "Friends Outside identifies housing as one of the three pillars of successful reentry",
-        "summary": "Friends Outside currently describes housing, education, and employment as the three pillars of a successful second chance for formerly incarcerated Californians.",
-        "record_type": "condition",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Friends Outside",
-          "url": "https://www.friendsoutside.org/",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-08-22T16:08:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "friends-outside"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-08-22T16:08:00-07:00"
-      }
-    },
-    "rtw-standing-employer-partner": {
-      "id": "rtw-standing-employer-partner",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Ready To Work currently invites employers to hire or contract with program participants",
-      "description": "Ready To Work’s current Get Involved page invites businesses and organizations to contract with RTW crews or directly hire participants into longer-term employment pathways.",
-      "fields": {
-        "id": "rtw-standing-employer-partner",
-        "title": "Ready To Work currently invites employers to hire or contract with program participants",
-        "summary": "Ready To Work’s current Get Involved page invites businesses and organizations to contract with RTW crews or directly hire participants into longer-term employment pathways.",
-        "record_type": "current_ask",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Ready To Work San Joaquin",
-          "url": "https://www.readytoworksjc.org/get-involved/",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "ready-to-work-sjc"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "friends-outside-standing-donate-reentry": {
-      "id": "friends-outside-standing-donate-reentry",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Friends Outside currently accepts support for reentry clients",
-      "description": "Friends Outside says donations can help people returning from incarceration with needs such as work transportation, work supplies, skills classes, and general reentry support.",
-      "fields": {
-        "id": "friends-outside-standing-donate-reentry",
-        "title": "Friends Outside currently accepts support for reentry clients",
-        "summary": "Friends Outside says donations can help people returning from incarceration with needs such as work transportation, work supplies, skills classes, and general reentry support.",
-        "record_type": "current_ask",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Friends Outside",
-          "url": "https://friendsoutside.org/donate/donate",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "friends-outside"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-09-18T18:28:00-07:00"
-      }
-    },
-    "canine-2024-chcf-prison-puppy": {
-      "id": "canine-2024-chcf-prison-puppy",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "California Health Care Facility in Stockton remains part of Canine Companions’ prison puppy-raising program",
-      "description": "Canine Companions reported incarcerated handlers at California Health Care Facility in Stockton caring for and training future service dogs. Its reporting describes the program as creating purpose, responsibility, community contribution, and preparation for life beyond incarceration.",
-      "fields": {
-        "id": "canine-2024-chcf-prison-puppy",
-        "title": "California Health Care Facility in Stockton remains part of Canine Companions’ prison puppy-raising program",
-        "summary": "Canine Companions reported incarcerated handlers at California Health Care Facility in Stockton caring for and training future service dogs. Its reporting describes the program as creating purpose, responsibility, community contribution, and preparation for life beyond incarceration.",
-        "record_type": "outcome",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "Canine Companions",
-          "url": "https://canine.org/wp-content/uploads/2025/06/CC25_AnnualReport2024-lists-ADA.pdf",
-          "type": "organization"
-        },
-        "published_at": "2025-06-01",
-        "checked_at": "2026-08-22T16:08:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": []
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2025-06-01"
-      }
-    },
-    "smcs-2026-06-17-pathways-268-beds": {
-      "id": "smcs-2026-06-17-pathways-268-beds",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "St. Mary’s celebrated the opening of Pathways Neighborhood with 268 beds",
-      "description": "St. Mary’s Community Services held a June 17 open house for Pathways Neighborhood, an $18 million modular transitional-housing project reported to provide 268 beds plus on-site supportive services intended to help residents move toward permanent housing.",
-      "fields": {
-        "id": "smcs-2026-06-17-pathways-268-beds",
-        "title": "St. Mary’s celebrated the opening of Pathways Neighborhood with 268 beds",
-        "summary": "St. Mary’s Community Services held a June 17 open house for Pathways Neighborhood, an $18 million modular transitional-housing project reported to provide 268 beds plus on-site supportive services intended to help residents move toward permanent housing.",
-        "record_type": "capacity_intervention",
-        "trust": "source_supported",
-        "source": {
-          "publisher": "The Stockton Record / Blue Water Healthy Living",
-          "url": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/",
-          "type": "local_reporting"
-        },
-        "published_at": "2026-06-23",
-        "checked_at": "2026-08-22T16:08:00-07:00",
-        "gap_ids": [
-          "low-barrier-housing-pathways",
-          "pet-inclusive-shelter"
-        ],
-        "organization_ids": [
-          "st-marys-dining-room"
-        ]
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-06-23"
-      }
-    },
-    "stockton-2025-pathways-operating-funds": {
-      "id": "stockton-2025-pathways-operating-funds",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Stockton allocated $1.244 million for Pathways Neighborhood operations",
-      "description": "The Stockton City Council approved $1.244 million in HHAP funding for St. Mary’s Pathways operations, with the project focused on low-barrier shelter, case management, wraparound services, and obtaining and sustaining permanent housing.",
-      "fields": {
-        "id": "stockton-2025-pathways-operating-funds",
-        "title": "Stockton allocated $1.244 million for Pathways Neighborhood operations",
-        "summary": "The Stockton City Council approved $1.244 million in HHAP funding for St. Mary’s Pathways operations, with the project focused on low-barrier shelter, case management, wraparound services, and obtaining and sustaining permanent housing.",
-        "record_type": "capacity_intervention",
-        "trust": "government",
-        "source": {
-          "publisher": "City of Stockton",
-          "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=B3930ED4-FB4A-4D5A-A677-10E02CD33945&ID=7648142",
-          "type": "government"
-        },
-        "published_at": "2025-09-09",
-        "checked_at": "2026-08-22T16:08:00-07:00",
-        "gap_ids": [
-          "low-barrier-housing-pathways"
-        ],
-        "organization_ids": [
-          "st-marys-dining-room"
-        ]
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2025-09-09"
-      }
-    },
-    "stockton-2026-05-20-homelessness-still-challenge": {
-      "id": "stockton-2026-05-20-homelessness-still-challenge",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Stockton continued to identify homelessness as a major city challenge in 2026",
-      "description": "At the 2026 State of the City, local leaders highlighted the Zeiter Navigation Center as a city asset while also acknowledging homelessness as one of Stockton’s continuing major challenges.",
-      "fields": {
-        "id": "stockton-2026-05-20-homelessness-still-challenge",
-        "title": "Stockton continued to identify homelessness as a major city challenge in 2026",
-        "summary": "At the 2026 State of the City, local leaders highlighted the Zeiter Navigation Center as a city asset while also acknowledging homelessness as one of Stockton’s continuing major challenges.",
-        "record_type": "condition",
-        "trust": "source_supported",
-        "source": {
-          "publisher": "Stocktonia",
-          "url": "https://stocktonia.org/news/local-government/2026/05/20/stockton-is-ready-mayor-fugazi-proclaims-at-state-of-the-city/",
-          "type": "local_reporting"
-        },
-        "published_at": "2026-05-20",
-        "checked_at": "2026-08-22T16:08:00-07:00",
-        "gap_ids": [
-          "low-barrier-housing-pathways"
-        ],
-        "organization_ids": []
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-05-20"
-      }
-    },
-    "smcs-standing-housing-outcomes": {
-      "id": "smcs-standing-housing-outcomes",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "St. Mary’s defines its work around pathways out of homelessness",
-      "description": "St. Mary’s describes its core outcomes as safe and stable housing, physical and mental wellbeing, education and employment, and permanent connections, with services intended to support movement toward independence and self-sufficiency.",
-      "fields": {
-        "id": "smcs-standing-housing-outcomes",
-        "title": "St. Mary’s defines its work around pathways out of homelessness",
-        "summary": "St. Mary’s describes its core outcomes as safe and stable housing, physical and mental wellbeing, education and employment, and permanent connections, with services intended to support movement toward independence and self-sufficiency.",
-        "record_type": "current_service",
-        "trust": "organization_source",
-        "source": {
-          "publisher": "St. Mary’s Community Services",
-          "url": "https://smcares.org/",
-          "type": "organization"
-        },
-        "published_at": null,
-        "checked_at": "2026-08-24T19:16:00-07:00",
-        "gap_ids": [
-          "low-barrier-housing-pathways"
-        ],
-        "organization_ids": [
-          "st-marys-dining-room"
-        ]
-      },
-      "dateForSort": {
-        "field": "checked_at",
-        "value": "2026-08-24T19:16:00-07:00"
-      }
-    },
-    "stocktonia-2026-09-13-reentry-outcomes": {
-      "id": "stocktonia-2026-09-13-reentry-outcomes",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Local reporting documented housing, work, and education outcomes after incarceration",
-      "description": "Stocktonia documented several formerly incarcerated Stockton-area residents rebuilding through housing, employment, education, and community support. Friends Outside assisted Floyd Henley with housing and rental support before he moved into a Stockton apartment, while Ready To Work provided Jorge Rodriguez an early employment opportunity after incarceration.",
-      "fields": {
-        "id": "stocktonia-2026-09-13-reentry-outcomes",
-        "title": "Local reporting documented housing, work, and education outcomes after incarceration",
-        "summary": "Stocktonia documented several formerly incarcerated Stockton-area residents rebuilding through housing, employment, education, and community support. Friends Outside assisted Floyd Henley with housing and rental support before he moved into a Stockton apartment, while Ready To Work provided Jorge Rodriguez an early employment opportunity after incarceration.",
-        "record_type": "outcome",
-        "trust": "source_supported",
-        "source": {
-          "publisher": "Stocktonia",
-          "url": "https://stocktonia.org/news/public-safety/justice/2026/09/13/life-after-lockup-for-the-formerly-incarcerated-a-long-rebuilding-process/",
-          "type": "local_reporting"
-        },
-        "published_at": "2026-09-13",
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "friends-outside",
-          "ready-to-work-sjc"
-        ]
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-09-13"
       }
     },
     "stockton-2026-10-19-animal-services-ordinance-agenda": {
@@ -3096,35 +2586,6 @@
         "value": "2026-09-29"
       }
     },
-    "stockton-2026-08-17-homeless-options": {
-      "id": "stockton-2026-08-17-homeless-options",
-      "schema": "evidence",
-      "typeName": "Evidence record",
-      "title": "Stockton developed additional homelessness-response options beyond current operations",
-      "description": "City staff reported that Stockton had completed cost estimates and operational frameworks for additional homelessness responses, including a safe camping site, expansion of current operations, and a tiny-homes complex.",
-      "fields": {
-        "id": "stockton-2026-08-17-homeless-options",
-        "title": "Stockton developed additional homelessness-response options beyond current operations",
-        "summary": "City staff reported that Stockton had completed cost estimates and operational frameworks for additional homelessness responses, including a safe camping site, expansion of current operations, and a tiny-homes complex.",
-        "record_type": "planning_update",
-        "trust": "government",
-        "source": {
-          "publisher": "City of Stockton",
-          "url": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=F762E922-8829-4D16-8FC7-5748711F3FBF&ID=8172268&Options=&Search=",
-          "type": "government"
-        },
-        "published_at": "2026-08-17",
-        "checked_at": "2026-09-18T18:28:00-07:00",
-        "gap_ids": [
-          "low-barrier-housing-pathways"
-        ],
-        "organization_ids": []
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-08-17"
-      }
-    },
     "ssd-2026-07-30-canine-campus-proposal": {
       "id": "ssd-2026-07-30-canine-campus-proposal",
       "schema": "evidence",
@@ -3210,7 +2671,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "investigation_id": "street-dog-immediate-welfare",
         "organization_ids": [
           "stockton-animal-services"
         ]
@@ -3244,7 +2704,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "investigation_id": "street-dog-immediate-welfare",
         "organization_ids": [
           "stockton-animal-services"
         ]
@@ -3278,7 +2737,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "investigation_id": "street-dog-immediate-welfare",
         "organization_ids": [
           "stockton-animal-services"
         ]
@@ -3312,7 +2770,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "investigation_id": "street-dog-immediate-welfare",
         "organization_ids": [
           "stockton-animal-services"
         ]
@@ -3338,7 +2795,7 @@
         "sourceRecordIds": [
           "cbs-2026-04-06-stockton-abandoned-dogs"
         ],
-        "needId": "dogs-safe-placement"
+        "gap_id": "dogs-safe-placement"
       }
     },
     "stockton-dumped-dog-encounters-reported": {
@@ -3357,7 +2814,7 @@
         "sourceRecordIds": [
           "ssd-2026-09-29-dumped-dogs-surge"
         ],
-        "needId": "dogs-safe-placement"
+        "gap_id": "dogs-safe-placement"
       }
     },
     "sas-2024-stray-intake-events": {
@@ -3377,7 +2834,7 @@
           "sas-2024-kennel-statistics"
         ],
         "measurementId": "sas-2024-dog-intake-stray",
-        "needId": "dogs-safe-placement"
+        "gap_id": "dogs-safe-placement"
       }
     },
     "stockton-current-street-dog-population-unknown": {
@@ -3394,7 +2851,7 @@
         "reportedValue": "Unknown",
         "limitations": "No verified current citywide census has been established.",
         "sourceRecordIds": [],
-        "needId": "dogs-safe-placement"
+        "gap_id": "dogs-safe-placement"
       }
     },
     "sas-2024-dog-intake-total": {
@@ -3412,7 +2869,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual",
         "note": "Includes 76 spay/neuter service intakes; not all intakes indicate a need for placement."
       },
@@ -3436,7 +2895,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3459,7 +2920,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3482,7 +2945,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3505,7 +2970,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual",
         "note": "Service intake category, not proof that 76 surgeries were completed."
       },
@@ -3529,7 +2996,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "calculated_from_official",
         "note": "Sum of adoption returns 35, born in care 40, euthanasia requests 29, rabies quarantine 43, and transfers in 3."
       },
@@ -3553,7 +3022,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual",
         "note": "Includes boarding, return-to-owner-surrender, and spay/neuter release categories excluded from the report's percentage chart."
       },
@@ -3577,7 +3048,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3600,7 +3073,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual",
         "note": "May overlap with a receiving rescue's later adoption total; do not add across organizations."
       },
@@ -3624,7 +3099,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual",
         "note": "The report separately lists 57 RTOWSURR dispositions; they are not added here."
       },
@@ -3648,7 +3125,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3671,7 +3150,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3694,7 +3175,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "official_reported_actual"
       },
       "dateForSort": {
@@ -3717,7 +3200,9 @@
         "period_end": "2024-12-31",
         "coverage_id": "sas-service-area-2024",
         "source_record_id": "sas-2024-kennel-statistics",
-        "investigation_id": "street-dog-immediate-welfare",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
         "evidence_status": "calculated_from_official",
         "note": "Sum of boarding 8, RTOWSURR 57, and spay/neuter release 36; reported separately from the six principal final-outcome categories."
       },
@@ -3726,712 +3211,10 @@
         "value": "2024-12-31"
       }
     },
-    "streetdogs-fed-70-animals": {
-      "id": "streetdogs-fed-70-animals",
-      "schema": "story",
-      "typeName": "Story",
-      "title": "200 lbs of food reached about 70 animals.",
-      "description": "Stockton Street Dogs reported distributing roughly 200 pounds of food to about 70 animals at a Church Street encampment.",
-      "fields": {
-        "id": "streetdogs-fed-70-animals",
-        "slug": "streetdogs-fed-about-70-animals",
-        "title": "200 lbs of food reached about 70 animals.",
-        "summary": "Stockton Street Dogs reported distributing roughly 200 pounds of food to about 70 animals at a Church Street encampment.",
-        "body": "A direct street-level response connected food, outreach, people living outside, and companion animals in one concrete act.",
-        "sign_of_being": "Food and care reached animals living outside because people went directly to where they were needed.",
-        "published_at": "2026-06-08",
-        "source_label": "CBS Sacramento",
-        "source_url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
-        "gap_ids": [
-          "dogs-safe-placement",
-          "pet-inclusive-shelter"
-        ],
-        "organization_ids": [
-          "stockton-street-dogs"
-        ],
-        "active": true,
-        "preferred_image": "/images/connection/dog_food.jpg"
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-06-08"
-      }
-    },
-    "truckloads-of-food-reached-families": {
-      "id": "truckloads-of-food-reached-families",
-      "schema": "story",
-      "typeName": "Story",
-      "title": "Truckloads of food reached Stockton families.",
-      "description": "Bread of Life organized a special Weber Square giveaway after a large frozen-food donation exceeded its available freezer space.",
-      "fields": {
-        "id": "truckloads-of-food-reached-families",
-        "slug": "truckloads-of-food-reached-stockton-families",
-        "title": "Truckloads of food reached Stockton families.",
-        "summary": "Bread of Life organized a special Weber Square giveaway after a large frozen-food donation exceeded its available freezer space.",
-        "body": "Volunteers moved frozen meat, produce, bread, and other groceries directly to residents through drive-through and walk-up lines, with local partners helping provide refrigerated transportation and temporary storage.",
-        "sign_of_being": "Food that exceeded one organization’s storage capacity was moved through a local network and reached families instead of being lost.",
-        "published_at": "2026-08-06",
-        "source_label": "Stocktonia",
-        "source_url": "https://stocktonia.org/news/uncategorized/2026/08/06/it-helps-a-lot-of-people-bread-of-life-brings-truckloads-of-donated-food-to-stockton-families/",
-        "gap_ids": [
-          "food-distribution-capacity"
-        ],
-        "organization_ids": [
-          "bread-of-life"
-        ],
-        "active": true,
-        "preferred_image": "/images/connection/food_bank.jpg"
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-08-06"
-      }
-    },
-    "cats-transferred-out-of-overcrowding": {
-      "id": "cats-transferred-out-of-overcrowding",
-      "schema": "story",
-      "typeName": "Story",
-      "title": "34 cats moved out of overcrowding.",
-      "description": "Thirty-four cats and kittens were transferred from Stockton to the San Diego Humane Society during a period of severe local animal overcrowding.",
-      "fields": {
-        "id": "cats-transferred-out-of-overcrowding",
-        "slug": "34-cats-moved-out-of-overcrowding",
-        "title": "34 cats moved out of overcrowding.",
-        "summary": "Thirty-four cats and kittens were transferred from Stockton to the San Diego Humane Society during a period of severe local animal overcrowding.",
-        "body": "The transfer is a concrete example of organizations crossing geographic boundaries to create placement capacity when the local system is strained.",
-        "sign_of_being": "Thirty-four animals moved from a system without enough room into one with capacity to care for them.",
-        "published_at": "2026-05-05",
-        "source_label": "Stocktonia",
-        "source_url": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "organization_ids": [
-          "hard-luck-awa"
-        ],
-        "active": true,
-        "preferred_image": "/images/connection/cat_overcrowding.jpg"
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-05-05"
-      }
-    },
-    "prison-puppy-program": {
-      "id": "prison-puppy-program",
-      "schema": "story",
-      "typeName": "Story",
-      "title": "A prison puppy program keeps changing lives.",
-      "description": "At California Health Care Facility in Stockton, incarcerated handlers help raise future service dogs while practicing responsibility, patience, service, and connection.",
-      "fields": {
-        "id": "prison-puppy-program",
-        "slug": "a-prison-puppy-program-keeps-changing-lives",
-        "title": "A prison puppy program keeps changing lives.",
-        "summary": "At California Health Care Facility in Stockton, incarcerated handlers help raise future service dogs while practicing responsibility, patience, service, and connection.",
-        "body": "Canine Companions’ Stockton prison puppy-raising work is a supporting reentry pathway rather than a housing program: handlers care for and train future service dogs, contributing to another person’s independence while building purpose and responsibility before release.",
-        "sign_of_being": "A person living inside a prison is helping prepare another living being to give someone else greater independence.",
-        "published_at": "2026-08-20",
-        "source_label": "Canine Companions",
-        "source_url": "https://canine.org/wp-content/uploads/2025/06/CC25_AnnualReport2024-lists-ADA.pdf",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [],
-        "active": true,
-        "preferred_image": "/images/connection/prison_puppy.jpg"
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-08-20"
-      }
-    },
-    "pathways-opened-268-beds": {
-      "id": "pathways-opened-268-beds",
-      "schema": "story",
-      "typeName": "Story",
-      "title": "Pathways opened with 268 beds.",
-      "description": "St. Mary’s Community Services opened Pathways Neighborhood, adding modular transitional housing and on-site support for people moving out of homelessness.",
-      "fields": {
-        "id": "pathways-opened-268-beds",
-        "slug": "pathways-neighborhood-opened-with-268-beds",
-        "title": "Pathways opened with 268 beds.",
-        "summary": "St. Mary’s Community Services opened Pathways Neighborhood, adding modular transitional housing and on-site support for people moving out of homelessness.",
-        "body": "The opening is a concrete sign that Stockton’s low-barrier housing pathway is gaining capacity: private modular housing is paired with supportive services intended to help residents transition toward permanent housing.",
-        "sign_of_being": "New physical space became a real pathway out of homelessness when housing and support were created together.",
-        "published_at": "2026-06-23",
-        "source_label": "The Stockton Record",
-        "source_url": "https://bluewaterhealthyliving.com/news/national-news/california/st-marys-community-services-holds-pathways-neighborhood-open-house/",
-        "gap_ids": [
-          "low-barrier-housing-pathways",
-          "pet-inclusive-shelter"
-        ],
-        "organization_ids": [
-          "st-marys-dining-room"
-        ],
-        "active": true,
-        "preferred_image": "/images/connection/pathways-neighborhood.jpg"
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-06-23"
-      }
-    },
-    "floyd-henley-apartment": {
-      "id": "floyd-henley-apartment",
-      "schema": "story",
-      "typeName": "Story",
-      "title": "Floyd got the keys to his own apartment.",
-      "description": "After decades of incarceration, Floyd Henley moved into a Stockton apartment with housing and rental support from Friends Outside while continuing college coursework and employment.",
-      "fields": {
-        "id": "floyd-henley-apartment",
-        "slug": "floyd-henley-got-the-keys-to-his-own-apartment",
-        "title": "Floyd got the keys to his own apartment.",
-        "summary": "After decades of incarceration, Floyd Henley moved into a Stockton apartment with housing and rental support from Friends Outside while continuing college coursework and employment.",
-        "body": "Stocktonia documented Henley receiving the keys to his apartment, picking up furniture and supplies through Friends Outside, continuing his education, and working at a Stockton steel company. The outcome shows several parts of reentry coming together in one life: housing, work, education, and practical support.",
-        "sign_of_being": "A person returning from decades of incarceration reached a home of his own while continuing work and education with local support.",
-        "published_at": "2026-09-13",
-        "source_label": "Stocktonia",
-        "source_url": "https://stocktonia.org/news/public-safety/justice/2026/09/13/life-after-lockup-for-the-formerly-incarcerated-a-long-rebuilding-process/",
-        "gap_ids": [
-          "reentry-housing-instability"
-        ],
-        "organization_ids": [
-          "friends-outside"
-        ],
-        "active": true,
-        "preferred_image": "/images/connection/gets-apartment-keys.jpg"
-      },
-      "dateForSort": {
-        "field": "published_at",
-        "value": "2026-09-13"
-      }
-    },
-    "friction-of-volunteering": {
-      "id": "friction-of-volunteering",
-      "schema": "article",
-      "typeName": "Article",
-      "title": "The friction of volunteering",
-      "description": "We applied to volunteer with two animal-care organizations. What happens between offering help and actually providing it?",
-      "fields": {
-        "id": "friction-of-volunteering",
-        "title": "The friction of volunteering",
-        "description": "Crossover's volunteer applications in Stockton raise a practical question: how could better coordination help willingness to care become action?",
-        "summary": "We applied to volunteer with two animal-care organizations. What happens between offering help and actually providing it?",
-        "date": "2026-10-30",
-        "type": "investigation",
-        "path": "/articles/friction-of-volunteering/",
-        "content": {
-          "introduction": "Wanting to help a dog is only the beginning. A person has to find an opportunity, connect with an organization, complete its requirements, and reach a task they can safely do. Crossover's attempts to volunteer in Stockton give us a starting point for investigating that path.",
-          "sections": [
-            {
-              "heading": "Two attempts to take part",
-              "paragraphs": [
-                "Crossover submitted a volunteer application to Stockton Street Dogs on October 7, 2026. We had not documented a response as of October 30. We emailed Stockton Animal Services about its Doggie Day Out program on October 12 and submitted a volunteer application in person on October 14. We had not documented a substantive next step by October 30.",
-                "These are our firsthand records of two volunteer pathways, not evidence that either organization routinely fails to respond. We do not know what happened to the applications internally or why participation has not progressed. Stockton Animal Services publicly describes volunteer roles and a Doggie Day Out orientation; Stockton Street Dogs also offers a public volunteer entry point. We want to understand what happens after someone uses those entry points."
-              ],
-              "links": [
-                {
-                  "label": "Street Dogs application Activity record",
-                  "display_label": "Street Dogs application",
-                  "url": "/record/crossover-2026-10-07-street-dogs-volunteer-application/"
-                },
-                {
-                  "label": "Doggie Day Out inquiry Activity record",
-                  "display_label": "Doggie Day Out inquiry",
-                  "url": "/record/crossover-2026-10-12-doggie-day-out-inquiry/"
-                },
-                {
-                  "label": "Animal Services application Activity record",
-                  "display_label": "Animal Services application",
-                  "url": "/record/crossover-2026-10-14-sas-volunteer-application/"
-                },
-                {
-                  "label": "Stockton Animal Services volunteer information",
-                  "display_label": "Animal Services volunteering",
-                  "url": "https://www.stocktonca.gov/services/animal_services/volunteer.php"
-                },
-                {
-                  "label": "Stockton Street Dogs volunteer link",
-                  "display_label": "Street Dogs volunteering",
-                  "url": "https://linktr.ee/streetdogsanctuary"
-                }
-              ]
-            },
-            {
-              "heading": "Where willingness can meet friction",
-              "paragraphs": [
-                "A prospective volunteer finds an organization, applies, and waits to learn the next step. Orientation, training, screening, scheduling, and approval may follow. Some requirements protect animals, volunteers, and the organization and should remain. The question is which parts require human judgment and which repetitive steps could be made easier to understand and complete.",
-                "Shelters and rescues are already caring for animals while managing facilities, emergencies, communication, and existing volunteers. Administrative work can consume the same time that could support a new helper. We have not measured these workloads in Stockton or established where any particular application stalled. That is what we need to investigate."
-              ]
-            },
-            {
-              "heading": "What business already knows",
-              "paragraphs": [
-                "In business, interest is captured and supported. Here we're asking why that kind of smooth pathway isn't available to people who want to help dogs.",
-                "Companies have spent decades building systems that answer inquiries, track interest, follow up, schedule appointments, and help people take the next step. An offer to help an animal may still pass through applications, emails, waiting, and manual coordination. This comparison does not treat care as a sale. It asks whether the tools developed to guide commercial participation could also support people who want to care for living beings."
-              ]
-            },
-            {
-              "heading": "Infrastructure that helps both sides",
-              "paragraphs": [
-                "Stockton Animal Services and Stockton Street Dogs do essential work. Better volunteer infrastructure could help their staff and existing volunteers as well as applicants. It might show which roles are open, explain requirements, acknowledge applications, provide status updates, and make it easier to schedule an appropriate next step. We do not know whether these organizations already use some of these tools or what changes they would find useful.",
-                "An AI-supported system could answer routine questions immediately, guide an applicant through forms, coordinate orientation and training, suggest tasks that fit a person's availability and abilities, and reduce repeated administrative work. These are proposals to test with organizations, not claims of a working Stockton system. Screening, animal-handling safeguards, supervision, and final decisions would stay with qualified people. The purpose is to automate the friction surrounding compassion, not compassion itself."
-              ]
-            },
-            {
-              "heading": "More room for vocation",
-              "paragraphs": [
-                "Today's systems devote substantial effort to making commercial participation easy. AI and automation may make similar coordination tools more accessible to community organizations without requiring large administrative teams. Whether that promise holds for Stockton's animal-care work remains to be tested.",
-                "People would still provide attention, judgment, relationships, and direct care. Technology could make it simpler for them to contribute. This is one practical part of Crossover's broader investigation into using new capabilities to free more human time for meaningful work and care."
-              ]
-            },
-            {
-              "heading": "Questions for the next step",
-              "paragraphs": [
-                "How do these organizations receive and manage volunteer applications? What determines response time, and where do applicants commonly get stuck? Which administrative tasks consume staff and volunteer time? Which steps need human judgment, and which could be simplified? Could organizations share coordination tools while retaining their independence? We need answers from the people doing this work before proposing a specific system.",
-                "We've built extraordinary systems for turning interest into purchases. We should be able to build equally effective systems for turning compassion into care."
-              ]
-            }
-          ]
-        },
-        "related_gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "related_location_ids": [
-          "stockton-animal-services-shelter"
-        ],
-        "published": true,
-        "related_finding_ids": [
-          "finding-volunteer-onboarding-can-stall"
-        ]
-      },
-      "dateForSort": {
-        "field": "date",
-        "value": "2026-10-30"
-      }
-    },
-    "public-access-to-stray-dog-information": {
-      "id": "public-access-to-stray-dog-information",
-      "schema": "article",
-      "typeName": "Article",
-      "title": "Public access to stray dog information in Stockton",
-      "description": "Public reporting and shelter information exist. Can people also learn what happened after a stray dog was reported and where help is still needed?",
-      "fields": {
-        "id": "public-access-to-stray-dog-information",
-        "title": "Public access to stray dog information in Stockton",
-        "description": "An investigation into which information about Stockton's stray dogs is public, what remains difficult to trace, and how better coordination could help.",
-        "summary": "Public reporting and shelter information exist. Can people also learn what happened after a stray dog was reported and where help is still needed?",
-        "date": "2026-10-30",
-        "type": "investigation",
-        "path": "/articles/public-access-to-stray-dog-information/",
-        "content": {
-          "introduction": "We appreciate Stockton Animal Services staff for making field-service records available in response to Crossover's October 20 request. The spreadsheet arrived November 2, 2026, and contains 7,183 case records. We began reviewing it November 4. The records give us a new way to examine how reports are classified and closed, but recorded dispositions alone do not establish what happened to each dog. Our review and follow-up questions are ongoing.",
-          "sections": [
-            {
-              "heading": "Editor's update — November 4, 2026",
-              "paragraphs": [
-                "Since this article was first published on October 30, Stockton Animal Services provided the field-service records Crossover requested on October 20. We received the spreadsheet on November 2 and began reviewing its 7,183 cases on November 4. This article has been revised to reflect that development; conclusions about case classifications, access, and outcomes remain preliminary. ♥ We appreciate the department's cooperation and the work involved in making these records available.",
-                "Milestones: October 20 — request submitted; October 30 — original article published; November 2 — records received; November 4 — review began. This is a new development, not a correction to the original reporting."
-              ],
-              "links": [
-                {
-                  "label": "Records request activity",
-                  "display_label": "October 20 records request",
-                  "url": "/record/crossover-2026-10-20-sas-field-call-records-request/"
-                },
-                {
-                  "label": "Records received activity",
-                  "display_label": "November 2 records received",
-                  "url": "/record/crossover-2026-11-02-sas-field-call-records-received/"
-                }
-              ]
-            },
-            {
-              "heading": "Our October 20 records request",
-              "paragraphs": [
-                "On October 20, Crossover requested approximately 12 months of Stockton Animal Services field-call records involving roaming, stray, abandoned, aggressive, and distressed dogs. We asked for dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. The department supplied a spreadsheet on November 2 containing 7,183 case records. We began reviewing it November 4.",
-                "Our questions are which general areas appear in the data, how cases are classified, what the response and closure fields mean, and what can safely be made public. A recorded disposition does not by itself establish an animal's ultimate outcome. We will report what the data supports as we examine it."
-              ],
-              "links": [
-                {
-                  "label": "Crossover's records-request activity",
-                  "display_label": "Animal Services records request",
-                  "url": "/record/crossover-2026-10-20-sas-field-call-records-request/"
-                },
-                {
-                  "label": "Crossover's records-received activity",
-                  "display_label": "Records received November 2",
-                  "url": "/record/crossover-2026-11-02-sas-field-call-records-received/"
-                }
-              ]
-            },
-            {
-              "heading": "What the public can already see",
-              "paragraphs": [
-                "The City provides an online route for animal-related complaints, a list of pets currently in shelter care, and a lost-and-found pet map. Stockton's open-data portal also publishes an animal-shelter overview of intake and outcomes. These are useful public resources. A shelter intake or outcome total, however, is different from a record of each street report and what happened afterward.",
-                "Our question is whether a person can follow the path from a reported dog to an officer response, a located animal, care, reunification, placement, or an unresolved case. We have not established that this information is unavailable elsewhere. We are comparing the newly supplied case records with the public tools and considering what can be shared safely before concluding that a gap exists."
-              ],
-              "links": [
-                {
-                  "label": "Stockton Animal Services complaint guidance",
-                  "display_label": "Animal Services complaint guidance",
-                  "url": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php"
-                },
-                {
-                  "label": "City lost-and-found pet resources",
-                  "display_label": "City lost-and-found resources",
-                  "url": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php"
-                },
-                {
-                  "label": "Stockton open-data animal-shelter overview",
-                  "display_label": "Stockton animal-shelter data",
-                  "url": "https://data.stocktonca.gov/stories/s/Animal-Shelter/k643-feip/"
-                }
-              ]
-            },
-            {
-              "heading": "Information across organizations",
-              "paragraphs": [
-                "Animal Services is one part of the response. Stockton Street Dogs, independent rescuers, volunteers, and other groups also encounter dogs and provide care. We do not know how their internal records are kept or how they share information. Public access is a separate question: can a resident identify a current need and a safe way to help without relying on an outdated post or an uncertain contact route?",
-                "Crossover applied to volunteer with Stockton Street Dogs on October 7. We had not documented a response by October 30. That experience tells us about our own attempt to connect; it does not establish how the organization handles other applications or communicates internally. We want to learn which public and organizational channels already work, and where information about opportunities or outcomes is hard to find."
-              ],
-              "links": [
-                {
-                  "label": "Crossover's volunteer-application Activity record",
-                  "display_label": "Street Dogs volunteer application",
-                  "url": "/record/crossover-2026-10-07-street-dogs-volunteer-application/"
-                },
-                {
-                  "label": "Stockton Street Dogs' public site",
-                  "display_label": "Street Dogs website",
-                  "url": "https://streetdogsanctuary.com/"
-                }
-              ]
-            },
-            {
-              "heading": "What better information could make possible",
-              "paragraphs": [
-                "A public, AI-supported animal-welfare information system is a possibility to test. It could organize public reports and official information, show patterns across general areas, record what happened after reports, identify unresolved needs, and connect people with verified ways to help. It could also make investigation findings easier to inspect. This would require cooperation, reliable source data, and a clear account of what each record does and does not establish.",
-                "Sensitive animal locations and personal information should be protected. Reported sightings must remain distinct from verified conditions and confirmed outcomes. AI could help sort and summarize information, but people would need to check its work and make care decisions. We have not built or validated such a system for Stockton."
-              ]
-            },
-            {
-              "heading": "How Crossover is testing the approach",
-              "paragraphs": [
-                "Crossover's public investigation follows a cycle: planned Actions identify what needs checking; Activity records what happened; Findings explain what the evidence supports; new Actions follow from what we learn. Anyone can inspect those pages without creating an account. The October 20 records request and November 2 receipt are documented Activities. Review of the spreadsheet began November 4.",
-                "This is an emerging way to make our own work inspectable, not a claim that we have solved coordination across organizations. We are examining field-call classifications and resolution labels, comparing the records with existing public resources, asking responders what information they can share, and testing whether that information helps people act safely."
-              ],
-              "links": [
-                {
-                  "label": "Investigation Actions",
-                  "url": "/activity/#next-actions"
-                },
-                {
-                  "label": "Investigation Activity",
-                  "url": "/activity/"
-                },
-                {
-                  "label": "Findings",
-                  "url": "/investigation/#findings"
-                },
-                {
-                  "label": "Public Actions",
-                  "url": "/activity/#next-actions"
-                }
-              ]
-            },
-            {
-              "heading": "What remains to establish",
-              "paragraphs": [
-                "We still need to learn what the supplied field-call data can establish, how a public report moves through response and closure, what useful information is already public, and how Animal Services and independent caregivers coordinate when appropriate. The 7,183 case records require careful review; case labels must not be treated as verified animal outcomes. We also need to ask whether better access would change outcomes for dogs, while respecting privacy and safety.",
-                "How could better public information and AI-supported coordination help more dogs reach care?"
-              ]
-            }
-          ]
-        },
-        "last_updated_at": "2026-11-04",
-        "related_gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "related_location_ids": [
-          "stockton-animal-services-shelter",
-          "weston-ranch-carrie-street",
-          "south-lincoln-crosstown",
-          "trinity-bear-creek",
-          "country-club-i5",
-          "pawboost-crown-rose-marie-2026-10-16",
-          "pawboost-california-magnolia-2026-10-15",
-          "pawboost-mcdougald-henry-long-2026-10-15",
-          "louis-park-pixie-woods-2026-04-06",
-          "stanislaus-street-corridor-2026-04-06",
-          "highway-4-corridor-2026-04-06"
-        ],
-        "published": true,
-        "related_finding_ids": [
-          "finding-public-street-dog-information-fragmented"
-        ]
-      },
-      "dateForSort": {
-        "field": "date",
-        "value": "2026-10-30"
-      }
-    },
-    "caring-for-stocktons-dogs": {
-      "id": "caring-for-stocktons-dogs",
-      "schema": "article",
-      "typeName": "Article",
-      "title": "What if caring for Stockton's dogs were as easy as going to the park?",
-      "description": "Stockton's shelter is expanding and Streetdogs has proposed a Canine Campus. What would make everyday participation in dog care easier?",
-      "fields": {
-        "id": "caring-for-stocktons-dogs",
-        "title": "What if caring for Stockton's dogs were as easy as going to the park?",
-        "description": "An investigation into existing dog-care services, proposed facilities, and how more people might participate in caring for Stockton's dogs.",
-        "summary": "Stockton's shelter is expanding and Streetdogs has proposed a Canine Campus. What would make everyday participation in dog care easier?",
-        "date": "2026-10-30",
-        "type": "investigation",
-        "path": "/articles/caring-for-stocktons-dogs/",
-        "content": {
-          "introduction": "Caring for Stockton's dogs already takes public workers, rescue groups, volunteers, and adopters. We are investigating what more could become possible if a welcoming place made it easier for ordinary people to help. This is a question about adding ways to care, alongside the essential services that already exist.",
-          "sections": [
-            {
-              "heading": "What exists: Stockton Animal Services",
-              "paragraphs": [
-                "Stockton Animal Services performs essential municipal work: responding to animal-control needs, taking animals into the shelter, caring for them, and helping them reach adoption or other outcomes. Its ongoing expansion is a positive development. City plans include treatment, isolation, rehabilitation, and public adoption space; we do not yet know how much additional usable capacity it will provide or how outcomes will change.",
-                "On October 14, Crossover visited the shelter at 1575 S. Lincoln Street, submitted a volunteer application, and spoke briefly with staff. We observed construction beside the entrance and a crowded public lobby during our visit. The entrance was difficult for us to find amid the work. The shelter sits in an industrial area, so we are also checking what transportation and walking options would make volunteer outings practical. These are observations from one visit, not a judgment about the shelter or its location. The expansion may address some of the limitations we saw."
-              ],
-              "links": [
-                {
-                  "label": "Crossover's October 14 visit report",
-                  "display_label": "Animal Services visit report",
-                  "url": "/record/crossover-2026-10-14-sas-first-visit/"
-                },
-                {
-                  "label": "City of Stockton shelter expansion announcement",
-                  "display_label": "City shelter expansion announcement",
-                  "url": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"
-                }
-              ]
-            },
-            {
-              "heading": "What is proposed: the Canine Campus",
-              "paragraphs": [
-                "Stockton Streetdogs proposes a Canine Campus that could shelter hundreds of stray dogs at a time, provide overflow space for Stockton Animal Services, and include recovery space for spay and neuter procedures and for sick dogs. Its published proposal describes 24-hour staffing, coordination with rescues, selected volunteers, and opportunities for the public to visit and help. These are the organization's plans, not services operating today.",
-                "Streetdogs opened a construction fundraiser in July 2026. Fundraising is documented, but we have not verified full funding, a secured site, approvals, an opening date, or usable operating capacity. If built and staffed, the campus could complement the municipal shelter with more room for recovery, exercise, and care. We want to learn how its public participation plans would work in practice before assuming they would match the broader idea explored below."
-              ],
-              "links": [
-                {
-                  "label": "Stockton Streetdogs' Canine Campus proposal",
-                  "display_label": "Street Dogs campus proposal",
-                  "url": "https://streetdogsanctuary.com/canine-campus"
-                },
-                {
-                  "label": "Canine Campus construction fundraiser",
-                  "display_label": "Canine Campus fundraiser",
-                  "url": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus"
-                }
-              ]
-            },
-            {
-              "heading": "A different model: The Asher House",
-              "paragraphs": [
-                "Lee Asher's animal sanctuary in Oregon offers another model to study. The Asher House says it rescues and rehabilitates animals, places many for adoption, and gives others a lasting home. Animals have room for activity and enrichment; a staff team helps provide care. The nonprofit says donations and merchandise sales support animal care, while Lee purchased the land with personal income.",
-                "The Asher House is not currently open for public visits and says it does not yet have a volunteer program. Its animal-centered living environment, rehabilitation work, and adoption network are worth studying for Stockton. A public place where visitors regularly help care for dogs would be an additional local idea, not a description of how The Asher House operates today."
-              ],
-              "links": [
-                {
-                  "label": "The Asher House and its operating model",
-                  "display_label": "Asher House operating model",
-                  "url": "https://www.theasherhouse.com/pages/asher-house-faqs"
-                }
-              ]
-            },
-            {
-              "heading": "What if helping felt like going to the park?",
-              "paragraphs": [
-                "Here is Crossover's proposal to investigate: a welcoming dog-care place with easy parking, walking trails, open grounds, and comfortable spaces for animals. Someone could arrive, learn which dogs are ready for interaction, and take a suitable dog for a supervised walk. Others could help socialize dogs, assist with rehabilitation under trained guidance, or support daily care.",
-                "The goal is to make caring for dogs as accessible as visiting a public park. Access would still need appropriate screening, training, supervision, animal-behavior assessment, and safeguards for dogs and people. We do not yet know what site, staffing, costs, partnerships, and rules would make this workable in Stockton."
-              ]
-            },
-            {
-              "heading": "More time for care",
-              "paragraphs": [
-                "AI and automation could help with scheduling, matching people to suitable tasks, keeping care records current, and coordinating transport and follow-up. Robotics may eventually help with repetitive physical chores. These are possibilities to test, not tools we have shown to work here. People and animal-care professionals would still make welfare and safety decisions.",
-                "If technology reduces the logistical burden, more human time could go toward walking, socializing, rehabilitating, and caring for living beings. That is part of Crossover's broader investigation into a future in which people can spend more of their lives on vocation rather than compulsory work. The immediate test is practical: can more dogs get good care, and can more people take part safely?"
-              ]
-            },
-            {
-              "heading": "The question ahead",
-              "paragraphs": [
-                "We want to learn from Stockton Animal Services, Stockton Streetdogs, other rescuers, and residents: which roles are already open to the public, what barriers keep people from participating, and what extra space or support would genuinely help? The shelter expansion and the Canine Campus proposal are concrete developments to follow. The park-like care setting is a further possibility to examine with the people doing the work.",
-                "What would it take to make caring for Stockton's dogs as accessible as visiting a public park?"
-              ]
-            }
-          ]
-        },
-        "related_gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "related_location_ids": [
-          "stockton-animal-services-shelter"
-        ],
-        "published": true,
-        "related_finding_ids": [
-          "finding-new-facilities-impact-uncertain"
-        ]
-      },
-      "dateForSort": {
-        "field": "date",
-        "value": "2026-10-30"
-      }
-    },
-    "where-are-stray-dogs": {
-      "id": "where-are-stray-dogs",
-      "schema": "article",
-      "typeName": "Article",
-      "title": "Where are the stray dogs, and how many are there?",
-      "description": "Published estimates suggest hundreds of dogs may be on Stockton's streets. Where are they, and what can firsthand observations establish?",
-      "fields": {
-        "id": "where-are-stray-dogs",
-        "title": "Where are the stray dogs, and how many are there?",
-        "description": "An ongoing investigation into the number and distribution of dogs on Stockton's streets, starting with published reports and two planned field investigations.",
-        "summary": "Published estimates suggest hundreds of dogs may be on Stockton's streets. Where are they, and what can firsthand observations establish?",
-        "date": "2026-10-31",
-        "type": "investigation",
-        "path": "/articles/where-are-stray-dogs/",
-        "content": {
-          "introduction": "How many dogs are on Stockton's streets, and where are they? Published reports describe abandoned and roaming dogs, but no verified current citywide street-dog count has been established. Crossover is gathering evidence, checking specific areas, and documenting what we actually find. This article starts with what is known and will be updated as our investigation produces firsthand reports.",
-          "sections": [
-            {
-              "heading": "What the published reports tell us",
-              "paragraphs": [
-                "In an April 6, 2026 CBS Sacramento report, Stockton Street Dogs founder Jesse Mejia estimated that at least 200 to 300 dogs were on Stockton's streets at a given time, potentially rising to 400 during puppy season. Those figures are Mejia's estimates, not an independently verified census. The report and accompanying television coverage are useful leads, but they cannot establish current dog locations or numbers.",
-                "Stockton Animal Services recorded 3,106 stray dog intake events in 2024 across its broader multi-jurisdiction service area. Intake events over a year are not a count of dogs currently on Stockton's streets, and cannot be directly compared with the advocate's point-in-time estimate."
-              ],
-              "links": [
-                {
-                  "label": "CBS Sacramento: abandoned dogs in Stockton (April 6, 2026)",
-                  "display_label": "CBS abandoned-dog report",
-                  "url": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/"
-                },
-                {
-                  "label": "CBS Sacramento: television report",
-                  "display_label": "CBS shelter interview video",
-                  "url": "https://www.cbsnews.com/sacramento/video/animal-shelters-speak-out-on-abandoned-dog-problem-in-stockton/"
-                },
-                {
-                  "label": "Investigation question: Where are the stray dogs, and how many are there?",
-                  "display_label": "Stray-dog investigation question",
-                  "url": "/record/where-dogs-need-help/"
-                },
-                {
-                  "label": "Current findings",
-                  "url": "/investigation/#findings"
-                }
-              ]
-            },
-            {
-              "heading": "First investigation area: St. Mary's–Church Street corridor",
-              "paragraphs": [
-                "CBS Sacramento reported on June 8, 2026 that Stockton Street Dogs distributed about 200 pounds of food to around 70 dogs during an outreach visit at a Church Street encampment near St. Mary's Community Services. This describes a particular reported event, not the number of dogs currently living in the area. It does not place the dogs at the community-services campus itself.",
-                "Crossover plans an initial observation on Monday, November 2, 2026, of a manageable portion of public areas in the St. Mary's–Church Street corridor. We will record the date, general area examined, approximate number of visible dogs (including zero), observed circumstances, and limitations. No Crossover field observation of this corridor is claimed yet. Dogs with unhoused people must not automatically be described as abandoned."
-              ],
-              "links": [
-                {
-                  "label": "CBS Sacramento: Church Street outreach report (June 8, 2026)",
-                  "display_label": "CBS Church Street report",
-                  "url": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/"
-                },
-                {
-                  "label": "Planned St. Mary's corridor field action",
-                  "display_label": "St. Mary’s field action",
-                  "url": "/record/task-verify-st-marys-church-street-dog-scale/"
-                },
-                {
-                  "label": "St. Mary's–Church Street corridor location record",
-                  "display_label": "St. Mary’s corridor location",
-                  "url": "/record/st-marys-church-street-corridor/"
-                }
-              ]
-            },
-            {
-              "heading": "Second investigation area: Carrie Street levee and South Stockton / District 5",
-              "paragraphs": [
-                "The Carrie Street levee near Weston Ranch is a separate location lead, associated with a reported April 2026 roaming-dog incident. September reporting separately described increased stray- and dumped-dog encounters across District 5, but did not identify Carrie Street as the location of those encounters. These reports are not evidence of how many dogs are there now.",
-                "Crossover plans to select a safe public observation route, examine conditions firsthand, and document its observations—including zero dogs if none are found. This visit has not yet happened. We will not treat a historical report as a current location or publish precise sensitive animal or resident locations."
-              ],
-              "links": [
-                {
-                  "label": "Planned South Stockton / District 5 field action",
-                  "display_label": "South Stockton field action",
-                  "url": "/record/task-verify-south-stockton-district-5-reports/"
-                },
-                {
-                  "label": "Carrie Street levee / Weston Ranch location record",
-                  "display_label": "Carrie Street levee location",
-                  "url": "/record/weston-ranch-carrie-street/"
-                },
-                {
-                  "label": "Stocktonia: Carrie Street incident report (May 11, 2026)",
-                  "display_label": "Stocktonia Carrie Street report",
-                  "url": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/"
-                },
-                {
-                  "label": "KCRA 3: District 5 reporting (September 24, 2026)",
-                  "display_label": "KCRA District 5 report",
-                  "url": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921"
-                }
-              ]
-            },
-            {
-              "heading": "What remains unknown",
-              "paragraphs": [
-                "We do not yet have a verified current citywide population estimate or a reliable map of where dogs are present. Reports concern different dates, areas, and kinds of observations, and dogs seen roaming may be owned, lost, abandoned, or living with people. These categories cannot be inferred from appearance or location alone.",
-                "Even visits to two areas will not constitute a citywide census. They can establish limited, dated firsthand observations that help us test published leads and plan a better investigation."
-              ]
-            },
-            {
-              "heading": "Follow the investigation",
-              "paragraphs": [
-                "This is an ongoing article, not a completed conclusion. The St. Mary's corridor and South Stockton / District 5 actions are currently planned; their field observations are not yet available. When firsthand reports are completed, we will add dated results, sources, limitations, and any resulting changes to our findings. New evidence may change our questions and where we investigate next.",
-                "The number and location of Stockton's street dogs remain unknown. That's precisely why we're going to look."
-              ],
-              "links": [
-                {
-                  "label": "Current Crossover actions",
-                  "url": "/activity/#next-actions"
-                },
-                {
-                  "label": "Investigation activity",
-                  "url": "/activity/"
-                },
-                {
-                  "label": "Evidence-based findings",
-                  "url": "/investigation/#findings"
-                }
-              ]
-            }
-          ]
-        },
-        "related_gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "related_location_ids": [
-          "st-marys-church-street-corridor",
-          "st-marys-community-services-campus",
-          "weston-ranch-carrie-street",
-          "stockton-district-5-reported-area-2026-09-24"
-        ],
-        "published": true
-      },
-      "dateForSort": {
-        "field": "date",
-        "value": "2026-10-31"
-      }
-    },
     "canine-campus": {
       "id": "canine-campus",
-      "schema": "project",
-      "typeName": "Project",
+      "schema": "initiative",
+      "typeName": "Initiative",
       "title": "Canine Campus",
       "description": "Stockton Street Dogs / Street Dog Sanctuary proposes a campus for dogs without safe placement, including overflow and recovery care.",
       "fields": {
@@ -4496,8 +3279,8 @@
     },
     "stockton-animal-shelter-renovation": {
       "id": "stockton-animal-shelter-renovation",
-      "schema": "project",
-      "typeName": "Project",
+      "schema": "initiative",
+      "typeName": "Initiative",
       "title": "Stockton Animal Shelter expansion",
       "description": "City renovation and expansion of the Stockton Animal Shelter, including planned care and public-access improvements.",
       "fields": {
@@ -4563,8 +3346,8 @@
     },
     "stockton-pet-wellness-adoption-center": {
       "id": "stockton-pet-wellness-adoption-center",
-      "schema": "project",
-      "typeName": "Project",
+      "schema": "initiative",
+      "typeName": "Initiative",
       "title": "Pet Wellness & Adoption Center",
       "description": "City of Stockton satellite animal resource center with Hard Luck Animal Welfare Advocates as a veterinary-services partner.",
       "fields": {
@@ -4622,8 +3405,8 @@
     },
     "animal-balance-spay-neuter-contract-2026": {
       "id": "animal-balance-spay-neuter-contract-2026",
-      "schema": "project",
-      "typeName": "Project",
+      "schema": "initiative",
+      "typeName": "Initiative",
       "title": "Animal Balance spay/neuter contract",
       "description": "Separate three-month City contract with Animal Balance for high-volume shelter spay/neuter services.",
       "fields": {
@@ -4688,8 +3471,8 @@
     },
     "hard-luck-veterinary-staffing-2026": {
       "id": "hard-luck-veterinary-staffing-2026",
-      "schema": "project",
-      "typeName": "Project",
+      "schema": "initiative",
+      "typeName": "Initiative",
       "title": "Hard Luck veterinary staffing expansion",
       "description": "City extension of its Hard Luck Animal Welfare Advocates agreement, with four additional positions; separate from the Animal Balance procedure contract.",
       "fields": {
@@ -4751,75 +3534,6 @@
       "dateForSort": {
         "field": "last_verified_at",
         "value": "2026-08-21"
-      }
-    },
-    "pathways-neighborhood": {
-      "id": "pathways-neighborhood",
-      "schema": "project",
-      "typeName": "Project",
-      "title": "Pathways Neighborhood",
-      "description": "Existing St. Mary's Community Services modular transitional-housing project, tracked here because housing access may affect whether people can remain with dogs.",
-      "fields": {
-        "id": "pathways-neighborhood",
-        "title": "Pathways Neighborhood",
-        "description": "Existing St. Mary's Community Services modular transitional-housing project, tracked here because housing access may affect whether people can remain with dogs.",
-        "intended_outcome": "Provide transitional housing and supportive services that help residents move toward permanent housing; Pathways pet admission is unverified.",
-        "development_stage": "operational",
-        "operational_status": "operational",
-        "funding_status": "operating_funds_allocated",
-        "capacity_summary": {
-          "headline": "Operational facility: 268 reported housing beds",
-          "how_it_helps": "Transitional housing could help people remain with dogs if Pathways admits pets.",
-          "not_yet_verified": "Dog-admission rules, dog-inclusive capacity, and actual dog-inclusive placements remain unverified."
-        },
-        "expected_capacity_or_benefit": {
-          "description": "Provide transitional housing and on-site support toward permanent housing; pet-inclusive benefit remains unverified.",
-          "status": "reported",
-          "evidence_record_ids": [
-            "smcs-2026-06-17-pathways-268-beds"
-          ]
-        },
-        "actual_additional_capacity": {
-          "description": "Reported 268 transitional-housing beds; dog-inclusive placements and eligible dog capacity are unknown.",
-          "status": "reported",
-          "evidence_record_ids": [
-            "smcs-2026-06-17-pathways-268-beds"
-          ]
-        },
-        "demand_contribution": "Could help people and dogs remain together only if Pathways itself admits dogs; that policy and actual dog-inclusive placements are unverified.",
-        "milestones": [
-          {
-            "date": "2026-06-17",
-            "status": "reported_complete",
-            "description": "St. Mary's held a Pathways open house and described the project as up and running.",
-            "evidence_record_ids": [
-              "smcs-2026-06-17-pathways-268-beds"
-            ]
-          }
-        ],
-        "evidence_record_ids": [
-          "smcs-2026-06-17-pathways-268-beds",
-          "stockton-2025-pathways-operating-funds"
-        ],
-        "gap_ids": [
-          "dogs-safe-placement",
-          "pet-inclusive-shelter",
-          "low-barrier-housing-pathways"
-        ],
-        "organization_ids": [
-          "st-marys-dining-room"
-        ],
-        "last_verified_at": "2026-08-22",
-        "open_questions": [
-          "Does Pathways itself admit residents with dogs, and under what rules?",
-          "Are there breed, size, vaccination, or behavior restrictions?",
-          "How many residents with dogs have been served?"
-        ],
-        "next_verification_step": "Ask St. Mary's for Pathways-specific pet policy and actual pet-inclusive placements; do not infer them from campus-wide pet care."
-      },
-      "dateForSort": {
-        "field": "last_verified_at",
-        "value": "2026-08-22"
       }
     }
   },
@@ -4895,7 +3609,7 @@
       "description": "Optional thumbnail variant of the preferred image for compact displays."
     },
     "order_by_id": {
-      "label": "Action order",
+      "label": "Task order",
       "kind": "value"
     },
     "activity": {
@@ -5004,8 +3718,7 @@
     },
     "what_we_are_seeing": {
       "label": "What the public record shows",
-      "kind": "value",
-      "description": "Attributed observations and reported conditions in the public record; these are not necessarily Crossover's firsthand findings."
+      "kind": "value"
     },
     "description": {
       "label": "Description",
@@ -5178,11 +3891,13 @@
     },
     "recorded_at": {
       "label": "Recorded",
-      "kind": "date"
+      "kind": "date",
+      "description": "When Crossover documented the activity in its records; this does not replace the event date."
     },
     "occurred_at": {
       "label": "Occurred",
-      "kind": "date"
+      "kind": "date",
+      "description": "When the activity happened, independent of when it was confirmed, recorded, or published."
     },
     "completed_at": {
       "label": "Completed",
@@ -5279,7 +3994,7 @@
     "active": {
       "label": "Active",
       "kind": "value",
-      "description": "Publication eligibility for the current Need index and related public updates. It does not describe severity, investigation progress, or whether the underlying condition persists or improves."
+      "description": "Publication eligibility for the current Need index and related public updates. It does not describe whether the underlying condition persists or improves."
     },
     "current": {
       "label": "Current",
@@ -5301,15 +4016,7 @@
       "label": "Founder",
       "kind": "reference"
     },
-    "investigation_id": {
-      "label": "Investigation",
-      "kind": "reference"
-    },
     "gap_id": {
-      "label": "Need",
-      "kind": "reference"
-    },
-    "needId": {
       "label": "Need",
       "kind": "reference"
     },
@@ -5343,18 +4050,6 @@
     },
     "finding_ids": {
       "label": "Findings",
-      "kind": "reference"
-    },
-    "article_id": {
-      "label": "Related article",
-      "kind": "reference"
-    },
-    "action_ids": {
-      "label": "Actions",
-      "kind": "reference"
-    },
-    "objective_ids": {
-      "label": "Objectives",
       "kind": "reference"
     },
     "activity_record_ids": {
@@ -5393,7 +4088,7 @@
     "map_reference_location_ids": {
       "label": "Nearby geographic references",
       "kind": "reference",
-      "description": "Nearby public geographic references for an action. These are not necessarily action sites or observed animal locations."
+      "description": "Nearby public geographic references for a task. These are not necessarily task sites or observed animal locations."
     },
     "basis_record_ids": {
       "label": "Basis records",
@@ -5404,11 +4099,11 @@
       "kind": "reference"
     },
     "gap_ids": {
-      "label": "Needs",
+      "label": "Projects",
       "kind": "reference"
     },
     "related_gap_ids": {
-      "label": "Related needs",
+      "label": "Related projects",
       "kind": "reference"
     },
     "related_location_ids": {
@@ -5423,17 +4118,47 @@
       "label": "Source records",
       "kind": "reference"
     },
-    "related_objective_ids": {
-      "label": "Related objectives",
+    "measurement_ids": {
+      "label": "Related metrics",
       "kind": "reference"
     },
-    "primary_objective_id": {
-      "label": "Primary objective",
+    "initiative_ids": {
+      "label": "Related initiatives",
       "kind": "reference"
+    },
+    "project_id": {
+      "label": "Project ID",
+      "kind": "value"
     },
     "primary_goal": {
       "label": "Primary goal",
       "kind": "value"
+    },
+    "confirmed_at": {
+      "label": "Receipt confirmed",
+      "kind": "date",
+      "description": "When Crossover confirmed a previously received item had arrived; this does not replace the receipt date."
+    },
+    "started_at": {
+      "label": "Started",
+      "kind": "date",
+      "description": "When work on a task began; this does not imply completion."
+    },
+    "objective_ids": {
+      "label": "Objectives",
+      "kind": "reference"
+    },
+    "task_ids": {
+      "label": "Tasks",
+      "kind": "reference"
+    },
+    "guiding_questions": {
+      "label": "Guiding questions",
+      "kind": "value"
+    },
+    "related_initiative_ids": {
+      "label": "Related initiatives",
+      "kind": "reference"
     },
     "related_finding_ids": {
       "label": "Related findings",
@@ -5447,18 +4172,25 @@
       "label": "website",
       "kind": "url"
     },
-    "investigation_status": {
-      "label": "investigation_status",
-      "kind": "value",
-      "description": "Crossover's investigative engagement with this need, not its severity, priority, condition trend, or solution outcome. Identified means the need is recorded; investigating means Crossover is actively examining it.",
-      "valueLabels": {
-        "identified": "Identified",
-        "investigating": "Investigating"
-      }
-    },
-    "published": {
-      "label": "published",
+    "current_state": {
+      "label": "current_state",
       "kind": "value"
+    },
+    "sources": {
+      "label": "sources",
+      "kind": "value"
+    },
+    "default": {
+      "label": "default",
+      "kind": "value"
+    },
+    "list_context": {
+      "label": "list_context",
+      "kind": "value"
+    },
+    "related_task_ids": {
+      "label": "related_task_ids",
+      "kind": "reference"
     },
     "embed_url": {
       "label": "embed_url",
@@ -5539,6 +4271,54 @@
     "completed": {
       "label": "completed",
       "kind": "value"
+    },
+    "synthesis_source_record_ids": {
+      "label": "synthesis_source_record_ids",
+      "kind": "value"
+    },
+    "developments": {
+      "label": "developments",
+      "kind": "value"
+    },
+    "basis": {
+      "label": "basis",
+      "kind": "value"
+    },
+    "why_it_matters": {
+      "label": "why_it_matters",
+      "kind": "value"
+    },
+    "attribution": {
+      "label": "attribution",
+      "kind": "value"
+    },
+    "record_id": {
+      "label": "record_id",
+      "kind": "value"
+    },
+    "efforts": {
+      "label": "efforts",
+      "kind": "value"
+    },
+    "established": {
+      "label": "established",
+      "kind": "value"
+    },
+    "unresolved": {
+      "label": "unresolved",
+      "kind": "value"
+    },
+    "question": {
+      "label": "question",
+      "kind": "value"
+    },
+    "question_id": {
+      "label": "question_id",
+      "kind": "value"
+    },
+    "context": {
+      "label": "context",
+      "kind": "value"
     }
   },
   "visualGuidance": {
@@ -5546,7 +4326,10 @@
     "descriptions": "Visual and logo descriptions describe an intended subject or identity; they are not alt text. Alt text must describe the image actually shown.",
     "evidence": "Illustrative or generated imagery is not investigation evidence. Documentary images retain separate source, attribution, and caption information.",
     "logos": "Do not present an invented logo as an organization's official logo.",
-    "needInvestigationStatus": "For Needs, Identified may be shown in gray and Investigating in green. These describe Crossover's inquiry, not severity or improvement."
+    "imageDisclosure": {
+      "scope": "Do not place a generic image label over artwork or illustrations. Keep the image's origin, description, and evidence status in the feed. Site branding and navigation icons are excluded.",
+      "documentaryImages": "When an image documents a real event or place, provide its source and context near the image. Do not treat artwork or generated imagery as investigation evidence."
+    }
   },
   "browseGuidance": {
     "defaultTypeFilter": "all",
@@ -5556,12 +4339,56 @@
     "tieBreak": "id ascending",
     "defaultView": "Open browseable records with All types in one flat list, newest first by dateForSort.value. Preserve the mixed types unless the visitor filters or groups them.",
     "filtering": "Search and type filters retain the same newest-first order. Put undated records after dated records; break equal-date ties by stable record ID ascending. Do not invent a date for an undated record.",
-    "dateMeaning": "dateForSort.field identifies what the date means. An occurrence, source publication, completion, record update, review, verification, and period date are distinct; label the selected field when displaying the date. dateForSort is a browse key, not a claim that every record was published or changed that day."
+    "dateMeaning": "dateForSort.field identifies what the date means. Event occurrence, receipt confirmation, documentation, publication, review start, completion, and verification are distinct. Label the selected field; never move an event date to the day it was recognized or recorded. dateForSort is a browse key, not a claim that every record was published or changed that day."
   },
   "locationGuidance": {
     "googleMapsSearchUrl": "https://www.google.com/maps/search/?api=1&query={encodeURIComponent(map_reference.query)}",
     "presentation": "For a Location with a nonempty map_reference.query, show a prominent Open in Google Maps link alongside its internal Crossover record link. Generate the URL from the query; do not store a duplicate URL on every record.",
     "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports.",
     "embeddedMaps": "map_reference.embed_url is a Google Maps Share > Embed a map URL for a verified street address. Show it with the precision warning and Open in Google Maps link. Keep broad or unverified geographic references as search links rather than pinned embeds."
+  },
+  "experienceSpec": {
+    "version": 1,
+    "premise": "The public feed tracks what Crossover does and what the evidence says about reality. Interfaces, charts, videos, and other views may be generated from it. Visual style is a separate layer and must not change the meaning of records.",
+    "navigation": [
+      {
+        "label": "Home",
+        "route": "/",
+        "purpose": "Introduce Crossover and the current focus."
+      },
+      {
+        "label": "Gaps",
+        "route": "/gaps",
+        "purpose": "Choose a gap and follow its objectives, metrics, activity, findings, and sources."
+      },
+      {
+        "label": "Activity",
+        "route": "/activity",
+        "purpose": "Show the work Crossover has done and the next useful actions."
+      },
+      {
+        "label": "Places",
+        "route": "/places",
+        "purpose": "Show geographic references and their source records without implying that a report is verified at an exact point."
+      },
+      {
+        "label": "Explore",
+        "route": "/explore",
+        "purpose": "Make the full public feed easy to search, filter, inspect, and reuse."
+      },
+      {
+        "label": "About",
+        "route": "/about",
+        "purpose": "Explain Crossover, its people, principles, and method."
+      },
+      {
+        "label": "Connect",
+        "buttonLabel": "Connect on LinkedIn",
+        "role": "contact",
+        "urlField": "person.profileUrl",
+        "purpose": "Name the destination in the button and use the published profile link; never invent contact details."
+      }
+    ],
+    "appearance": "Keep the current site's visual rules in docs/SITE_DESIGN.md as one presentation skin. Other skins can render the same feed without changing its records or this information architecture."
   }
 }

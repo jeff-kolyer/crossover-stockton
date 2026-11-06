@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crossoverstockton.org/schemas/action.schema.json",
-  "title": "Action",
-  "description": "action information definition. Schema describes source data, not page layout.",
+  "$id": "https://crossoverstockton.org/schemas/task.schema.json",
+  "title": "Task",
+  "description": "A planned or completed step in a project.",
   "type": "object",
   "properties": {
     "id": {
@@ -11,8 +11,12 @@
     "order_by_id": {
       "type": "number"
     },
-    "investigation_id": {
-      "$ref": "./common.schema.json#/$defs/id"
+    "gap_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
     },
     "title": {
       "type": "string",
@@ -22,6 +26,7 @@
       "type": "string",
       "enum": [
         "open",
+        "in_progress",
         "waiting",
         "done",
         "cancelled"
@@ -66,13 +71,6 @@
       },
       "uniqueItems": true
     },
-    "objective_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "./common.schema.json#/$defs/id"
-      },
-      "uniqueItems": true
-    },
     "basis_record_ids": {
       "type": "array",
       "items": {
@@ -109,12 +107,19 @@
       "type": "string",
       "minLength": 1,
       "description": "Optional preferred existing logo path or URL. Do not present an invented mark as an organization's official logo."
+    },
+    "objective_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "./common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
     }
   },
   "required": [
     "id",
     "order_by_id",
-    "investigation_id",
+    "gap_ids",
     "title",
     "status",
     "type",

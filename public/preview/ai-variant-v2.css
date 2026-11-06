@@ -1,0 +1,90 @@
+/* Alternate visual skin for the same gap workspace and record feed. */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+:root{font-family:'IBM Plex Sans','Segoe UI',sans-serif;color:#26322f;background:#f2efe8;line-height:1.56}
+h1,h2,h3{font-family:Newsreader,Georgia,serif;letter-spacing:-.035em;line-height:1.08;font-weight:500}
+h1{font-size:clamp(2.8rem,4vw,4.6rem)}h2{font-size:1.65rem}h3{font-size:1.22rem}
+.app{grid-template-columns:278px minmax(0,1fr)}
+.rail{background:#e7e3d9;border-right:1px solid #d6d0c2}
+.brand{border-bottom:1px solid #cfc8ba;padding:22px 24px;min-height:90px;gap:15px}
+.brand img{width:43px;height:43px;filter:sepia(.15)}
+.brand-name{font-family:'IBM Plex Sans',sans-serif;font-size:.92rem;font-weight:700;letter-spacing:-.015em;line-height:1.26}
+.rail-topline{color:#8a7666;letter-spacing:.19em;font-size:.63rem;padding:31px 24px 14px}
+.rail nav{padding:0 13px}
+.rail nav a{border-radius:2px;font-size:.91rem;font-weight:500;gap:13px;padding:9px 13px;min-height:41px;color:#43524b}
+.rail nav a svg{stroke-width:1.6;width:19px;height:19px}
+.rail nav a:hover,.rail-bottom a:hover{background:#d9d5ca;color:#26322f}
+.rail nav a[aria-current=page]{background:#344f43;color:#fff;font-weight:600}
+.rail-bottom{border-top:1px solid #cfc8ba;margin:0 22px 18px;padding:15px 0 0}
+.rail-bottom a{border-radius:2px;font-weight:500;color:#43524b;padding:9px 13px}
+.main{background:#f7f5ef}
+.topbar{background:#f7f5ef;border-bottom:1px solid #dbd5c9;height:90px}
+.topbar span{font-size:.7rem;font-weight:600;letter-spacing:.12em;color:#8d7a68}
+.topbar strong{font-weight:600;color:#5e6b60}
+.main-inner{padding-top:54px}
+.page-heading{margin-bottom:36px;align-items:center}
+.page-heading h1{color:#22352d}
+.page-heading p{font-size:1rem;color:#756f65;margin-top:5px}
+.eyebrow{color:#9a5d42;font-size:.67rem;letter-spacing:.17em;font-weight:700}
+.quiet-link,.sources-box a,.relation-links a{color:#8b513b}
+.quiet-link:hover,.sources-box a:hover,.relation-links a:hover{color:#593624}
+.hero{background:#e6e7dc;border:1px solid #d5d8c8;border-radius:2px;min-height:350px;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr)}
+.hero-copy{padding:clamp(34px,4vw,62px)}
+.hero-copy h2{font-size:clamp(2rem,3vw,3.2rem);max-width:700px;color:#254135}
+.hero-copy p{font-family:Newsreader,Georgia,serif;color:#3e5045;font-size:clamp(1.12rem,1.35vw,1.4rem);line-height:1.42;margin-top:21px;max-width:680px}
+.hero-visual{min-height:350px}.hero-image{filter:saturate(.65) contrast(.96);object-position:center 43%}
+.hero-visual span{right:0;bottom:0;background:#f7f5efe8;border-radius:0;padding:7px 12px;font-size:.63rem;color:#666154}
+.stat-grid{gap:0;margin-top:19px;border:1px solid #d9d4c8;background:#fffdf8}
+.stat{border:0;border-right:1px solid #d9d4c8;border-radius:0;background:transparent;padding:24px 27px}
+.stat:last-child{border-right:0}
+.stat strong{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:clamp(2.1rem,3vw,3rem);letter-spacing:-.04em;color:#254135}
+.stat span{color:#4c5c50;font-size:.86rem}
+.stat small{color:#8e897e;font-size:.7rem}
+.section{margin-top:48px}
+.section-heading{border-bottom:1px solid #cfc8ba;padding-bottom:12px;margin-bottom:0}
+.section-heading h2{font-size:1.75rem;color:#2c4437}
+.section-heading .quiet-link{font-size:.76rem}
+.card-list{background:transparent;border:0;border-radius:0}
+.row{grid-template-columns:32px minmax(0,1fr) auto;gap:16px;padding:20px 3px;border-bottom:1px solid #d8d3c8}
+.row+.row{border-top:0}
+.row-icon{width:31px;height:31px;border-radius:50%;background:#e2e7db;color:#435e48}
+.row-icon svg{width:16px;height:16px}
+.row-title{font-weight:600;color:#25362b}
+.row-title:hover{color:#9a5d42}
+.row p{font-size:.88rem;color:#706d63;margin-top:5px}
+.row-meta{font-size:.73rem;color:#8f887d}
+.panel,.list-card{background:#fffdf8;border:1px solid #d9d4c8;border-radius:2px;box-shadow:none}
+.panel{padding:29px}.panel h2{color:#274237}.panel p,.panel li{color:#505d51}
+.list-card{padding:27px}
+.list-card:hover{border-color:#a5947e;box-shadow:0 9px 22px #49432c0b}
+.list-card h3{color:#274237}.list-card p{color:#6b6e62}
+.list-card .foot{color:#8b513b;font-weight:600;border-top:1px solid #e4dfd3;padding-top:14px;margin-top:22px}
+.sources-box{border-top:1px solid #e2dbcd}
+.sources-box a,.relation-links a{font-weight:600}
+.number-card .big{font-family:Newsreader,Georgia,serif;font-weight:600;font-size:2.7rem;color:#254135}
+.number-card .label{color:#475c4d}.number-card .scope{color:#8c877a}
+.tag{border-radius:2px;background:#e6e7df;color:#4b5c4d;font-weight:600}
+.tag.proposed,.tag.preliminary{background:#f2e7d6;color:#795533}
+.tag.in_progress,.tag.active{background:#e0e9df;color:#3c6549}
+.tag.open,.tag.waiting{background:#e9e6df;color:#5c5f58}
+.question-list li::before{border-radius:2px;background:#e7e8de;color:#45634c}
+.search{border-radius:2px;border-color:#cfc8ba;background:#fffdf8}
+.search:focus{outline:2px solid #9a5d42;outline-offset:2px}
+.empty{border-radius:2px;background:#fffdf8;border-color:#d9d4c8}
+.banner{border-radius:2px;filter:saturate(.65)}
+.lede{font-family:Newsreader,Georgia,serif;font-size:1.4rem;line-height:1.45;color:#3f5544}
+.note{color:#807a70}.record-grid .panel{margin-bottom:19px}
+a:focus-visible,button:focus-visible{outline:2px solid #9a5d42;outline-offset:3px}
+@media(max-width:760px){
+  .rail{background:#e7e3d9;border-right:1px solid #d6d0c2}
+  .mobile-top{height:70px;background:#f7f5ef;border-bottom:1px solid #d6d0c2}
+  .mobile-top strong{font-family:'IBM Plex Sans',sans-serif;font-weight:600;color:#2c4437}
+  .menu-button{border-radius:2px;border-color:#bfb9ac;background:#fffdf8}
+  .main-inner{padding-top:31px}
+  .page-heading{margin-bottom:23px}
+  .hero{border-radius:2px}.hero-visual{height:205px;min-height:205px}.hero-copy{padding:29px}
+  .hero-copy h2{font-size:2.25rem}.hero-copy p{font-size:1.19rem}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.stat{padding:14px 11px}.stat strong{font-size:1.85rem}.stat span{font-size:.68rem}
+  .section{margin-top:38px}.section-heading h2{font-size:1.55rem}
+  .panel,.list-card{padding:23px}.row{padding:17px 2px}
+}
+@media(max-width:390px){.stat-grid{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid #d9d4c8}.stat:last-child{border-bottom:0}}

@@ -19,9 +19,6 @@
     "date": {
       "$ref": "./common.schema.json#/$defs/date"
     },
-    "last_updated_at": {
-      "$ref": "./common.schema.json#/$defs/date"
-    },
     "type": {
       "type": "string",
       "minLength": 1

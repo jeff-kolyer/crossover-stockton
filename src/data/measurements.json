@@ -13,7 +13,9 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "Includes 76 spay/neuter service intakes; not all intakes indicate a need for placement.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-intake-stray",
@@ -28,7 +30,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-intake-owner-surrender",
@@ -43,7 +47,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-intake-confiscate",
@@ -58,7 +64,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-intake-spay-service",
@@ -74,7 +82,9 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "Service intake category, not proof that 76 surgeries were completed.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-intake-other",
@@ -90,7 +100,9 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "Sum of adoption returns 35, born in care 40, euthanasia requests 29, rabies quarantine 43, and transfers in 3.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-total",
@@ -106,7 +118,9 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "Includes boarding, return-to-owner-surrender, and spay/neuter release categories excluded from the report's percentage chart.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-adopted",
@@ -121,7 +135,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-rescue-transfer",
@@ -137,7 +153,9 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "May overlap with a receiving rescue's later adoption total; do not add across organizations.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-return-owner",
@@ -153,7 +171,9 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "The report separately lists 57 RTOWSURR dispositions; they are not added here.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-euthanasia",
@@ -168,7 +188,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-died",
@@ -183,7 +205,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-missing",
@@ -198,7 +222,9 @@
     "evidence_status": "official_reported_actual",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   },
   {
     "id": "sas-2024-dog-outcome-other",
@@ -214,6 +240,8 @@
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "Sum of boarding 8, RTOWSURR 57, and spay/neuter release 36; reported separately from the six principal final-outcome categories.",
-    "investigation_id": "street-dog-immediate-welfare"
+    "gap_ids": [
+      "dogs-safe-placement"
+    ]
   }
 ]

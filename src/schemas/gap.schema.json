@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crossoverstockton.org/schemas/need.schema.json",
-  "title": "Need",
-  "description": "need information definition. Schema describes source data, not page layout.",
+  "$id": "https://crossoverstockton.org/schemas/gap.schema.json",
+  "title": "Gap",
+  "description": "A gap Crossover is researching and working to close.",
   "type": "object",
   "properties": {
     "id": {
@@ -19,22 +19,9 @@
       "type": "string",
       "minLength": 1
     },
-    "what_we_are_seeing": {
-      "type": "array",
-      "description": "Attributed observations and reported conditions in the public record; these are not necessarily Crossover's firsthand findings.",
-      "items": { "type": "string", "minLength": 1 }
-    },
-    "investigation_status": {
-      "type": "string",
-      "description": "Crossover's investigative engagement with this need, not its severity, priority, condition trend, or solution outcome. Identified means the need is recorded; investigating means Crossover is actively examining it.",
-      "enum": [
-        "investigating",
-        "identified"
-      ]
-    },
     "active": {
       "type": "boolean",
-      "description": "Publication eligibility for the current Need index and related public updates. It does not describe severity, investigation progress, or whether the underlying condition persists or improves."
+      "description": "Publication eligibility for the current Need index and related public updates. It does not describe whether the underlying condition persists or improves."
     },
     "organization_ids": {
       "type": "array",
@@ -44,13 +31,6 @@
       "uniqueItems": true
     },
     "record_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "./common.schema.json#/$defs/id"
-      },
-      "uniqueItems": true
-    },
-    "story_ids": {
       "type": "array",
       "items": {
         "$ref": "./common.schema.json#/$defs/id"
@@ -108,14 +88,16 @@
       "type": "string",
       "minLength": 1,
       "description": "Optional thumbnail variant of the preferred image for compact displays."
+    },
+    "default": {
+      "type": "boolean"
     }
   },
   "required": [
     "id",
     "slug",
     "title",
-    "summary",
-    "investigation_status"
+    "summary"
   ],
   "additionalProperties": true
 }
