@@ -10,6 +10,7 @@
     "period_end": "2024-12-31",
     "coverage_id": "sas-service-area-2024",
     "evidence_status": "official_reported_actual",
+    "note": "These are intake events across the multi-jurisdiction Animal Services service area, not a count of dogs currently on Stockton's streets.",
     "source_record_id": "sas-2024-kennel-statistics",
     "verified_at": "2026-10-15",
     "note": "Includes 76 spay/neuter service intakes; not all intakes indicate a need for placement.",

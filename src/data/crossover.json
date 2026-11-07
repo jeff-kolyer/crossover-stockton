@@ -19,32 +19,16 @@
       "work-discovers-work"
     ],
     "methodIds": [
-      "technology",
-      "action"
+      "action",
+      "technology"
     ],
-    "statements": {
-      "homeIntroTitle": "Showing up. Learning what's real.",
-      "homeIntroBody": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens. Each action brings us closer to reality, and the next useful step.",
-      "missionQuestion": "How can post-scarcity technology solve real problems?",
-      "opportunity": "As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.",
-      "startingApproach": "We start with real needs in Stockton, take action, and use what we learn to discover what technology and human participation can make possible.",
-      "animalCareVision": "What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?",
-      "animalCareInvestigation": "We're getting a clearer picture of dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
-      "learningRule": "What we discover guides what we do next.",
-      "presencePractice": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens.",
-      "documentationPractice": "Crossover documents needs, actions, activity, places, and source records. We examine what we learn and identify the next useful step.",
-      "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our public records let others inspect, question, and build on what we learn.",
-      "experienceChangesUs": "And sometimes the experience changes our understanding. Sometimes it changes us.",
-      "publicCommitment": "We're tracking real needs in Stockton. Our actions, observations, and source records are public—including what we haven't figured out yet."
-    },
     "preferred_logo": "/images/logo_light.webp"
   },
   "principles": [
     {
       "id": "work-to-vocation",
       "title": "Vocation",
-      "statement": "We're exploring the transition from work to vocation.",
-      "description": "Moving from working to make a living toward doing what we feel called to do."
+      "statement": "Moving from working to make a living toward doing what we feel called to do."
     },
     {
       "id": "compassion",
@@ -53,20 +37,20 @@
     },
     {
       "id": "contact-with-reality",
-      "title": "We have to connect with reality.",
-      "statement": "Freedom means little if we remain disconnected from the world around us. We can't discover our vocation simply by imagining what might give our lives meaning."
+      "title": "Reality",
+      "statement": "Freedom means little if we remain disconnected from the world around us."
     },
     {
       "id": "work-discovers-work",
-      "title": "The work discovers the work.",
-      "statement": "We don't need a complete plan before we begin. Each action can reveal new questions, possibilities, and the next useful step."
+      "title": "Discovery",
+      "statement": "We don't need all the answers before we begin. Each action can reveal the next useful step."
     }
   ],
   "methods": [
     {
       "id": "technology",
       "title": "Technology",
-      "statement": "Using AI, robotics, and automation to reduce unnecessary work and expand what people can do."
+      "statement": "Use AI, robotics, and automation to reduce unnecessary work and expand what people can do."
     },
     {
       "id": "action",

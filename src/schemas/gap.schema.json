@@ -15,6 +15,11 @@
       "type": "string",
       "minLength": 1
     },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable description of the gap, distinct from its changing summary and story overview."
+    },
     "summary": {
       "type": "string",
       "minLength": 1
@@ -91,34 +96,14 @@
     },
     "default": {
       "type": "boolean"
-    },
-    "current_focus": {
-      "type": "object",
-      "properties": {
-        "title": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "updated_at": {
-          "$ref": "./common.schema.json#/$defs/date"
-        }
-      },
-      "required": [
-        "title",
-        "description",
-        "updated_at"
-      ],
-      "additionalProperties": false
     }
   },
   "required": [
     "id",
     "slug",
     "title",
-    "summary",
-    "current_focus"
+    "description",
+    "summary"
   ],
   "additionalProperties": true
 }

@@ -1,63 +1,11 @@
 {
-  "reverseRelationships": [
-    {
-      "sourceSchema": "finding",
-      "sourceField": "article_id",
-      "targetSchema": "article",
-      "field": "related_finding_ids",
-      "label": "Related findings"
-    }
-  ],
+  "reverseRelationships": [],
   "sharedFields": [
     "visual_description",
     "preferred_image",
     "logo_description",
     "preferred_logo"
   ],
-  "experienceSpec": {
-    "version": 1,
-    "premise": "The public feed tracks what Crossover does and what the evidence says about reality. Interfaces, charts, videos, and other views may be generated from it. Visual style is a separate layer and must not change the meaning of records.",
-    "navigation": [
-      {
-        "label": "Home",
-        "route": "/",
-        "purpose": "Introduce Crossover and the current focus."
-      },
-      {
-        "label": "Gaps",
-        "route": "/gaps",
-        "purpose": "Choose a gap and follow its activity, findings, metrics, and sources."
-      },
-      {
-        "label": "Activity",
-        "route": "/activity",
-        "purpose": "Show the work Crossover has done and the next useful actions."
-      },
-      {
-        "label": "Places",
-        "route": "/places",
-        "purpose": "Show geographic references and their source records without implying that a report is verified at an exact point."
-      },
-      {
-        "label": "Explore",
-        "route": "/explore",
-        "purpose": "Make the full public feed easy to search, filter, inspect, and reuse."
-      },
-      {
-        "label": "About",
-        "route": "/about",
-        "purpose": "Explain Crossover, its people, principles, and method."
-      },
-      {
-        "label": "Connect",
-        "buttonLabel": "Connect on LinkedIn",
-        "role": "contact",
-        "urlField": "person.profileUrl",
-        "purpose": "Name the destination in the button and use the published profile link; never invent contact details."
-      }
-    ],
-    "appearance": "Keep the current site's visual rules in docs/SITE_DESIGN.md as one presentation skin. Other skins can render the same feed without changing its records or this information architecture."
-  },
   "visualGuidance": {
     "preferredAssets": "Preferred images and logos express a preference, not layout instructions. A renderer may use an appropriate alternative or no image.",
     "descriptions": "Visual and logo descriptions describe an intended subject or identity; they are not alt text. Alt text must describe the image actually shown.",
@@ -166,8 +114,7 @@
         "geographicScope",
         "founderPersonId",
         "principleIds",
-        "methodIds",
-        "statements"
+        "methodIds"
       ]
     },
     {
@@ -178,8 +125,7 @@
       "fields": [
         "id",
         "title",
-        "statement",
-        "description"
+        "statement"
       ]
     },
     {
@@ -229,10 +175,10 @@
         "id",
         "slug",
         "title",
+        "description",
         "summary",
         "what_we_are_seeing",
         "current_state",
-        "current_focus",
         "sources",
         "updated_at",
         "organization_ids",
@@ -469,21 +415,6 @@
       "region",
       "country"
     ],
-    "statements": {
-      "homeIntroTitle": true,
-      "homeIntroBody": true,
-      "missionQuestion": true,
-      "opportunity": true,
-      "startingApproach": true,
-      "animalCareVision": true,
-      "animalCareInvestigation": true,
-      "learningRule": true,
-      "presencePractice": true,
-      "documentationPractice": true,
-      "aiPractice": true,
-      "experienceChangesUs": true,
-      "publicCommitment": true
-    },
     "roles": [
       "organizationId",
       "title",
@@ -548,11 +479,6 @@
     "guiding_questions": [
       "title",
       "description"
-    ],
-    "current_focus": [
-      "title",
-      "description",
-      "updated_at"
     ]
   },
   "fieldLabels": {
@@ -701,7 +627,6 @@
     "task_ids": "Tasks",
     "guiding_questions": "Guiding questions",
     "completion_criteria": "Completion criteria",
-    "related_initiative_ids": "Related initiatives",
-    "current_focus": "Current focus"
+    "related_initiative_ids": "Related initiatives"
   }
 }

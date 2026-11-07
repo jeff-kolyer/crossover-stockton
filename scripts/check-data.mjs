@@ -10,7 +10,7 @@ const datasets = [
   ["findings", "finding"], ["organizations", "organization"],
   ["locations", "location"], ["measurements", "measurement"],
   ["claims", "claim"],
-  ["initiatives", "initiative"], ["articles", "article"],
+  ["improvements", "initiative"],
 ];
 const errors = [];
 const records = new Map();
@@ -31,7 +31,7 @@ if (new Set(allRecords.map(({ id }) => id)).size !== allRecords.length) errors.p
 records.set("records", allRecords);
 const publicRoot = resolve("public");
 for (const [file] of datasets) for (const item of records.get(file) ?? []) {
-  for (const field of ["preferred_image", "preferred_logo"]) {
+  for (const field of ["preferred_image", "preferred_logo", "homeImage"]) {
     const asset = item[field];
     if (asset === undefined) continue;
     if (typeof asset !== "string" || !asset.trim()) { errors.push(`${file}:${item.id} ${field} must be a nonempty path or URL`); continue; }
@@ -86,7 +86,7 @@ for (const location of records.get("locations") ?? []) {
 }
 checkRefs(records.get("records"), "gaps", "gap_ids", "evidence");
 checkRefs(records.get("records"), "organizations", "organization_ids", "evidence");
-for (const file of ["initiatives"]) {
+for (const file of ["improvements"]) {
   checkRefs(records.get(file), "gaps", "gap_ids", file);
   checkRefs(records.get(file), "organizations", "organization_ids", file);
 }
@@ -97,30 +97,7 @@ for (const file of ["evidence"]) {
       errors.push(`${file}:${item.id} has no current need`);
   }
 }
-checkRefs(records.get("initiatives"), "records", "evidence_record_ids", "initiative");
-checkRefs(records.get("articles"), "gaps", "related_gap_ids", "article");
-checkRefs(records.get("articles"), "locations", "related_location_ids", "article");
-const canonicalSections = new Set(["/", "/needs/", "/investigation/", "/investigation/questions/", "/investigation/activity/", "/investigation/findings/", "/investigation/evidence/", "/activity/", "/stories/", "/articles/", "/organizations/", "/places/", "/explore/", "/about/"]);
-const recordIds = new Set([...records.values()].flat().map((record) => record.id));
-for (const article of records.get("articles") ?? []) {
-  for (const section of article.content?.sections ?? []) {
-    for (const link of section.links ?? []) {
-      const context = `article:${article.id} section "${section.heading}" link "${link.label}"`;
-      const url = link.url;
-      if (typeof url !== "string" || !url.trim()) { errors.push(`${context} needs a URL`); continue; }
-      if (url.startsWith("https://") && !url.startsWith("https://crossoverstockton.org/")) continue;
-      if (!url.startsWith("/")) { errors.push(`${context} must use a canonical root path or external HTTPS URL: ${url}`); continue; }
-      const parsed = new URL(url, "https://crossoverstockton.org");
-      const recordId = /^\/record\/([^/]+)\/$/.exec(parsed.pathname)?.[1];
-      const organizationId = /^\/organization\/([^/]+)\/$/.exec(parsed.pathname)?.[1];
-      if (parsed.search || parsed.pathname.includes("//") || !(
-        canonicalSections.has(parsed.pathname) ||
-        (recordId && recordIds.has(recordId)) ||
-        (organizationId && ids("organizations").has(organizationId))
-      )) errors.push(`${context} uses an obsolete or missing internal route: ${url}`);
-    }
-  }
-}
+checkRefs(records.get("improvements"), "records", "evidence_record_ids", "initiative");
 for (const item of records.get("records") ?? []) {
   if (item.organization_interaction && (item.record_type !== "activity" || item.trust !== "crossover_source"
     || item.source?.type !== "firsthand_account" || !item.occurred_at || !item.organization_ids?.length))

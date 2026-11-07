@@ -4,7 +4,7 @@ const read = async name => {
   const data = JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
   return Array.isArray(data) ? data : data.records;
 };
-const names = ["gaps", "tasks", "findings", "activities", "evidence", "locations", "organizations", "initiatives", "measurements", "articles"];
+const names = ["gaps", "tasks", "findings", "activities", "evidence", "locations", "organizations", "improvements", "measurements"];
 const data = Object.fromEntries(await Promise.all(names.map(async name => [name, await read(name)])));
 const errors = [];
 const check = (condition, message) => { if (!condition) errors.push(message); };
@@ -41,13 +41,11 @@ for (const task of data.tasks) {
     for (const id of task.activity_record_ids) check(actual.get(id)?.occurred_at === task.completed_at, `${task.id}: completion date differs from Activity ${id}`);
   } else check(!task.completed_at, `${task.id}: incomplete task has completed_at`);
 }
-for (const gap of data.gaps) check(Boolean(gap.current_focus?.title && gap.current_focus?.description && validDate(gap.current_focus?.updated_at)), `${gap.id}: current focus needs title, description, and date`);
 for (const finding of data.findings) {
   check(finding.gap_ids?.length > 0, `${finding.id}: finding needs a direct project link`);
   check(validDate(finding.last_reviewed_at), `${finding.id}: invalid review date`);
   check(Boolean(finding.title && finding.statement && finding.limitations), `${finding.id}: title, statement and limitations required`);
-  if (finding.article_id) check(by.articles.get(finding.article_id)?.published, `${finding.id}: linked article missing or unpublished`);
-  for (const [field, map] of [["supporting_record_ids", by.records], ["contradicting_record_ids", by.records], ["related_task_ids", by.tasks], ["related_initiative_ids", by.initiatives], ["location_ids", by.locations]]) refs(finding, field, map);
+  for (const [field, map] of [["supporting_record_ids", by.records], ["contradicting_record_ids", by.records], ["related_task_ids", by.tasks], ["related_initiative_ids", by.improvements], ["location_ids", by.locations]]) refs(finding, field, map);
   check(finding.supporting_record_ids.length + finding.contradicting_record_ids.length > 0, `${finding.id}: finding needs evidence`);
 }
 if (errors.length) { console.error(errors.join("\n")); process.exitCode = 1; }

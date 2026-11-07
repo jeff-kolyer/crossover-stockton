@@ -8,7 +8,7 @@ Crossover Stockton begins with an unmet need in the real world. We examine evide
 
 Our one active gap is **street dogs and access to care**. Dogs on Stockton’s streets need care, people trying to help them need workable paths to services, and people with pets may face barriers to shelter. 
 
-Our current focus is **Understanding the Gap**: learning about dogs on the streets, the care available, and where needs may be going unmet. This is a changeable description on the gap record and its Overview, not a separate collection or permanent goal structure. As the work teaches us more, the focus can change while dated records of earlier work remain.
+Our current focus is **Understanding the Gap**: learning about dogs on the streets, the care available, and where needs may be going unmet. This changeable passage lives in the feed and appears in Overview. As the work teaches us more, the focus can change while dated records of earlier work remain.
 
 ## How we work and what the records mean
 
@@ -33,13 +33,13 @@ We keep source reports, our direct observations, supported conclusions, and unkn
 
 ## Website and public record
 
-The [homepage](https://crossoverstockton.org/) introduces Crossover’s purpose and the current gap, with links to Overview, Activity, and Findings. [About](https://crossoverstockton.org/about/) explains why and how we work. The [gap Overview](https://crossoverstockton.org/gaps/street-dogs/overview/) explains the issue, our current focus, and significant developments. [Activity](https://crossoverstockton.org/gaps/street-dogs/activity/) documents tasks and dated work; [Findings](https://crossoverstockton.org/gaps/street-dogs/findings/) presents supported conclusions and their limits. Metrics, Places, Organizations, Initiatives, and Sources provide further context. Page names organize reading; they are not data types.
+The [homepage](https://crossoverstockton.org/) is the full gap Overview. It selects the situation, key figures, current focus, and developing finding from the feed. The ten gap sections are Overview, Activity, Tasks, Measurements, Findings, Organizations, Improvements, Places, Events, and Sources. The desktop sidebar and mobile navigation lead to these pages. [About](https://crossoverstockton.org/about/) renders the feed's About portion. The [full feed](https://crossoverstockton.org/feed/) also includes the Crossover introduction and About chapters. Page names organize reading; they are not data types.
 
-Source links let readers check individual statements. The [public record feed](https://crossoverstockton.org/data/records.json) contains the published records and their relationships. The [one-file edition](https://crossoverstockton.org/interactive/) also includes a searchable Explorer. Published routes have readable HTML fallbacks, while the interactive site navigates between pages without a reload.
+Source links let readers check individual statements. The [feed JSON](https://crossoverstockton.org/feed.json) holds the authored chapter order, explicit links to deeper chapters or records, and silent navigation entry points. Gap chapters supply the gap menu and reading order; there is no separate page table. The [readable feed](https://crossoverstockton.org/feed/) follows all three top-level chapters; its [daily reading](https://crossoverstockton.org/feed/daily.txt) is a shorter, speech-ready path. The [public records JSON](https://crossoverstockton.org/data/records.json) and [Explorer](https://crossoverstockton.org/explore/) retain the complete evidence and exact fields. The [one-file edition](https://crossoverstockton.org/interactive/) embeds both the feed and records. Published routes have readable HTML fallbacks, while the interactive site navigates between pages without a reload.
 
 ## Data integrity and build
 
-Canonical source records live in `src/data/`, including `gaps.json`, `tasks.json`, `activities.json`, `evidence.json`, and `findings.json`. `src/schemas/` defines record shapes; `src/model/explorer-publication.json` controls the public projection. `public/data/records.json` is generated from those sources. Preserve attribution, dates, geographic precision, and limitations when updating them. No density map has been validated from the field-call spreadsheet.
+Canonical source records live in `src/data/`, including `gaps.json`, `tasks.json`, `activities.json`, `evidence.json`, `findings.json`, and `improvements.json`. Evidence records include published outside sources and firsthand reports, so they remain distinct from claims and findings. `src/feed.json` is the editorial source: it orders the account, selects records, and defines the gap menu without putting page copy in factual records. The improvements file retains the `initiative` record type and existing record IDs. `src/schemas/` defines record shapes; `src/model/explorer-publication.json` controls the technical public projection. The build validates feed references, then generates `public/feed.json`, `public/data/records.json`, and the reading outputs. Preserve attribution, dates, geographic precision, and limitations when updating records. No density map has been validated from the field-call spreadsheet.
 
 ```bash
 npm install
@@ -48,4 +48,4 @@ npm run build
 npm run preview
 ```
 
-`npm run dev` builds the site before starting Vite. `npm run build` validates data, generates the public feed and one-file edition, publishes the site, and tests the output. The main interface is rendered by `public/preview/ai-variant.js` and `public/preview/ai-variant-modern.css`; `site/one-file-template.html` supplies the alternate edition and readable fallback pages. See [site design rules](docs/SITE_DESIGN.md) for visual guidance.
+`npm run dev` builds the site before starting Vite. `npm run build` validates data, generates the public feed and one-file edition, publishes the site, and tests the output. The main interface is rendered by `public/preview/site-md.js` and `public/preview/site-md.css`; `site/one-file-template.html` supplies the alternate edition and readable fallback pages. See [site design rules](docs/SITE_DESIGN.md) for visual guidance.

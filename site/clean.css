@@ -11,7 +11,6 @@ h2{font-size:clamp(2rem,3.1vw,3rem)}
 .nav a{color:var(--ink);font-size:.9rem;font-weight:650}
 .nav a:hover,.nav a[aria-current="page"]{background:#edf2f4;color:var(--ink)}
 .head-link{border-color:var(--green);color:var(--ink);font-size:.86rem}
-.eyebrow{display:none}
 .story-opening{background:#f4f8fa;padding:clamp(64px,8vw,118px) 0 70px;border-bottom:1px solid var(--line)}
 .story-opening .wrap{max-width:1000px}
 .story-opening h1{font-size:clamp(3rem,6vw,5.6rem);max-width:900px;margin:0 0 28px}
@@ -62,7 +61,6 @@ h2{font-size:clamp(2rem,3.1vw,3rem)}
 .hero:after{display:none}
 .hero-inner{min-height:440px;padding-block:65px}
 .hero-copy{max-width:740px;text-shadow:none}
-.hero .eyebrow{color:var(--accent)}
 .hero h1{margin:16px 0 20px;font-size:clamp(3.2rem,5.4vw,5.3rem)}
 .hero p{color:var(--soft);font-size:1.17rem;max-width:640px}
 .hero-actions{margin-top:28px}
@@ -94,7 +92,6 @@ h2{font-size:clamp(2rem,3.1vw,3rem)}
 .intro-lede{font-family:Inter,"Segoe UI",system-ui,sans-serif;font-weight:650}
 .feature{background:#f5f8fa}
 .feature-panel{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.feature-panel .eyebrow{color:var(--accent)!important}
 .feature-panel h3{font-family:Inter,"Segoe UI",system-ui,sans-serif;font-weight:650;font-size:1.15rem;line-height:1.55}
 .feature-panel .mini-list{border-color:var(--line)}
 .feature-panel .mini-list a{border-color:var(--line)}
@@ -162,7 +159,6 @@ h2{font-size:clamp(2rem,3.1vw,3rem)}
 .metric strong{font-family:Inter,"Segoe UI",system-ui,sans-serif;font-weight:760}
 .about-hero{background:#f1f6f8;color:var(--ink);min-height:430px}
 .about-hero:before{background:linear-gradient(90deg,#f1f6f8 0%,rgba(241,246,248,.96) 38%,rgba(241,246,248,.2) 100%)}
-.about-hero .eyebrow{color:var(--accent)}
 .about-hero h1{font-size:clamp(3rem,6vw,5rem)}
 .about-hero p{font-family:Inter,"Segoe UI",system-ui,sans-serif;color:var(--soft)}
 .about-practice,.about-principles{background:#f5f8fa}

@@ -2,8 +2,10 @@ import { readFile, readdir, mkdir, writeFile } from "node:fs/promises";
 import { createServer } from "vite";
 import { buildExplorerSnapshot } from "./explorer-snapshot.mjs";
 import { loadExplorerRoots } from "./explorer-roots.mjs";
+import { validateFeed } from "./validate-feed.mjs";
 
 const policy = JSON.parse(await readFile("src/model/explorer-publication.json", "utf8"));
+const story = JSON.parse(await readFile("src/feed.json", "utf8"));
 const roots = await loadExplorerRoots(policy);
 const schemaNames = (await readdir("src/schemas")).filter((name) => name.endsWith(".schema.json"));
 const schemas = Object.fromEntries(await Promise.all(schemaNames.map(async (name) => [name.replace(".schema.json", ""), JSON.parse(await readFile(`src/schemas/${name}`, "utf8"))])));
@@ -25,9 +27,9 @@ try {
     claims: siteModel.getAllClaims(),
     measurements: siteModel.getMeasurements(),
     initiatives: siteModel.getInitiatives(),
-    articles: siteModel.getArticles(),
   };
   const { snapshot, diagnostics } = buildExplorerSnapshot(policy, schemas, collections, roots);
+  validateFeed(story, snapshot.records);
   const gaps = siteModel.getGaps();
   if (gaps.length < 1 || gaps.filter((gap) => gap.default).length !== 1) throw new Error("Gaps need exactly one default entry");
   if (new Set(gaps.map((gap) => gap.slug)).size !== gaps.length) throw new Error("Gap slugs must be unique");
@@ -41,10 +43,15 @@ try {
   if (old !== output) await writeFile(path, output);
   await mkdir("public/data", { recursive: true });
   const publicPath = "public/data/records.json";
-  const feed = `${JSON.stringify({ records: snapshot.records, fieldInfo: snapshot.fieldInfo, visualGuidance: snapshot.visualGuidance, browseGuidance: snapshot.browseGuidance, locationGuidance: snapshot.locationGuidance, experienceSpec: snapshot.experienceSpec }, null, 2)}\n`;
+  const feed = `${JSON.stringify({ records: snapshot.records, fieldInfo: snapshot.fieldInfo, visualGuidance: snapshot.visualGuidance, browseGuidance: snapshot.browseGuidance, locationGuidance: snapshot.locationGuidance }, null, 2)}\n`;
   let oldPublic = "";
   try { oldPublic = await readFile(publicPath, "utf8"); } catch { /* First generation. */ }
   if (oldPublic !== feed) await writeFile(publicPath, feed);
+  const storyPath = "public/feed.json";
+  const publishedStory = `${JSON.stringify(story, null, 2)}\n`;
+  let oldStory = "";
+  try { oldStory = await readFile(storyPath, "utf8"); } catch { /* First generation. */ }
+  if (oldStory !== publishedStory) await writeFile(storyPath, publishedStory);
   console.log(`Explorer publication: ${Object.keys(snapshot.records).length} unique records in ${snapshot.collections.length} collections; ${diagnostics.length} unavailable references disclosed as such.`);
   if (snapshot.unsupportedTypes.length) console.log(`Schema types without a public collection: ${snapshot.unsupportedTypes.join(", ")}`);
 } finally {

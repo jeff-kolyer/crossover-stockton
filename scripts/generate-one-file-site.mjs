@@ -2,6 +2,7 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 
 const feed = JSON.parse(await readFile("public/data/records.json", "utf8"));
+const story = JSON.parse(await readFile("public/feed.json", "utf8"));
 const template = await readFile("site/one-file-template.html", "utf8");
 const noImagesCss = await readFile("site/no-images.css", "utf8");
 const cleanCss = await readFile("site/clean.css", "utf8");
@@ -10,14 +11,14 @@ const fontCss = (await Promise.all(fontFiles.map(async ([name,weight]) => {
   const bytes = await readFile(`public/fonts/IBMPlexSans-${name}.woff2`);
   return `@font-face{font-family:"IBM Plex Sans";src:url("data:font/woff2;base64,${bytes.toString("base64")}") format("woff2");font-style:normal;font-weight:${weight};font-display:block}`;
 }))).join("\n");
-const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/variants/clean/dog-park.jpg", "/images/variants/clean/dog-sidewalk.jpg", "/images/about/about-the-founder.jpg"]);
+const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/variants/clean/dog-park.jpg", "/images/variants/clean/dog-sidewalk.jpg", "/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg"]);
 const collect = (value) => {
   if (typeof value === "string" && value.startsWith("/images/")) imagePaths.add(value);
   else if (Array.isArray(value)) value.forEach(collect);
   else if (value && typeof value === "object") Object.values(value).forEach(collect);
 };
 for (const record of Object.values(feed.records)) collect(record.fields);
-collect(feed.experienceSpec);
+collect(story);
 
 const publicRoot = resolve("public");
 const dataUri = async (path) => {
@@ -30,7 +31,7 @@ const dataUri = async (path) => {
 };
 const cleanAssets = {};
 for (const path of [...imagePaths].sort()) {
-  if (!path.startsWith("/images/variants/clean/") && !path.startsWith("/images/about/about-the-founder.") && !path.startsWith("/images/icons/") && !path.startsWith("/images/logo_")) throw new Error(`Unexpected image path: ${path}`);
+  if (!path.startsWith("/images/variants/clean/") && !path.startsWith("/images/about/about-the-founder.") && path !== "/images/about/about-crossover-hero.jpg" && !path.startsWith("/images/icons/") && !path.startsWith("/images/logo_")) throw new Error(`Unexpected image path: ${path}`);
   cleanAssets[path] = await dataUri(path);
 }
 
@@ -38,13 +39,14 @@ const jsonForHtml = (value) => JSON.stringify(value).replaceAll("<", "\\u003c").
 const render = (embeddedAssets, variantCss, imageFallback, aliases = {}, embeddedFeed = feed) => {
   const output = template
     .replace("__EMBEDDED_FEED__", jsonForHtml(embeddedFeed))
+    .replace("__EMBEDDED_STORY__", jsonForHtml(story))
     .replace("__EMBEDDED_ASSETS__", jsonForHtml(embeddedAssets))
     .replace("__FONT_CSS__", fontCss)
     .replace("__VARIANT_CSS__", variantCss)
     .replace("__IMAGE_FALLBACK__", imageFallback)
     .replace("__IMAGE_ALIASES__", jsonForHtml(aliases))
     .replaceAll('href="#/', 'href="?page=');
-  if (/__EMBEDDED_FEED__|__EMBEDDED_ASSETS__|__FONT_CSS__|__VARIANT_CSS__|__IMAGE_FALLBACK__|__IMAGE_ALIASES__/.test(output)) throw new Error("Template replacement failed");
+  if (/__EMBEDDED_FEED__|__EMBEDDED_STORY__|__EMBEDDED_ASSETS__|__FONT_CSS__|__VARIANT_CSS__|__IMAGE_FALLBACK__|__IMAGE_ALIASES__/.test(output)) throw new Error("Template replacement failed");
   return output;
 };
 const output = render(cleanAssets, cleanCss, "null");

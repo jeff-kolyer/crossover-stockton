@@ -7,10 +7,9 @@ import evidenceData from "../data/evidence.json";
 import findingsData from "../data/findings.json";
 import orgsData from "../data/organizations.json";
 import locationsData from "../data/locations.json";
-import initiativesData from "../data/initiatives.json";
+import initiativesData from "../data/improvements.json";
 import measurementsData from "../data/measurements.json";
 import claimsData from "../data/claims.json";
-import articlesData from "../data/articles.json";
 import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
 import type { FindingRecord, TaskRecord } from "../types/work";
 import { publicUpdateCategory, selectPublicUpdates } from "./publicUpdates";
@@ -44,7 +43,6 @@ export type InformationInput = {
   initiatives: typeof initiativesData;
   measurements: typeof measurementsData;
   claims: typeof claimsData;
-  articles: typeof articlesData.records;
 };
 
 /** The Model has no React or page-layout dependency. It keeps raw records distinct from derived queries. */
@@ -67,7 +65,6 @@ export function createInformationModel(input: InformationInput) {
   const initiatives = index(input.initiatives, "initiatives");
   const measurements = index(input.measurements, "measurements");
   const claims = index(input.claims, "claims");
-  const articles = index(input.articles, "articles");
 
   requireReference(people.get(input.identity.founderPersonId), "person", input.identity.founderPersonId);
   for (const id of input.identity.principleIds) requireReference(principles.get(id), "principle", id);
@@ -129,8 +126,6 @@ export function createInformationModel(input: InformationInput) {
     getClaim: (id: string) => claims.get(id),
     getClaims: (gapId: string) => input.claims.filter((claim) => claim.gap_id === gapId),
     getAllClaims: () => input.claims,
-    getArticle: (id: string) => articles.get(id),
-    getArticles: () => input.articles,
     getDevelopments: () => input.evidence.filter((record) => ["update", "planning_update", "operational_change", "organization_update", "capacity_intervention", "reported_context"].includes(record.record_type)),
   };
 }
@@ -150,5 +145,4 @@ export const siteModel = createInformationModel({
   initiatives: initiativesData,
   measurements: measurementsData,
   claims: claimsData,
-  articles: articlesData.records,
 });

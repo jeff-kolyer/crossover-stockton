@@ -25,24 +25,9 @@
           "work-discovers-work"
         ],
         "methodIds": [
-          "technology",
-          "action"
+          "action",
+          "technology"
         ],
-        "statements": {
-          "homeIntroTitle": "Showing up. Learning what's real.",
-          "homeIntroBody": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens. Each action brings us closer to reality, and the next useful step.",
-          "missionQuestion": "How can post-scarcity technology solve real problems?",
-          "opportunity": "As AI and robotics take on more necessary work, we have an extraordinary opportunity: to spend more of our lives caring for one another, other living beings, and the world around us.",
-          "startingApproach": "We start with real needs in Stockton, take action, and use what we learn to discover what technology and human participation can make possible.",
-          "animalCareVision": "What if people who love animals could spend their days rescuing, fostering, training, and rehabilitating dogs, while technology handled more of the paperwork, logistics, and coordination?",
-          "animalCareInvestigation": "We're getting a clearer picture of dogs on Stockton's streets, how they reach care, and what gets in the way. We examine public records, check reported conditions firsthand, talk to people already helping, and test pathways to care.",
-          "learningRule": "What we discover guides what we do next.",
-          "presencePractice": "We have to show up. Meet people. Observe conditions. Try to help. Discover what happens.",
-          "documentationPractice": "Crossover documents needs, actions, activity, places, and source records. We examine what we learn and identify the next useful step.",
-          "aiPractice": "AI helps organize the evidence, connect observations, update our findings, and discover new actions. Our public records let others inspect, question, and build on what we learn.",
-          "experienceChangesUs": "And sometimes the experience changes our understanding. Sometimes it changes us.",
-          "publicCommitment": "We're tracking real needs in Stockton. Our actions, observations, and source records are public—including what we haven't figured out yet."
-        },
         "preferred_logo": "/images/logo_light.webp"
       }
     },
@@ -55,8 +40,7 @@
       "fields": {
         "id": "work-to-vocation",
         "title": "Vocation",
-        "statement": "We're exploring the transition from work to vocation.",
-        "description": "Moving from working to make a living toward doing what we feel called to do."
+        "statement": "Moving from working to make a living toward doing what we feel called to do."
       }
     },
     "compassion": {
@@ -75,24 +59,24 @@
       "id": "contact-with-reality",
       "schema": "principle",
       "typeName": "Principle",
-      "title": "We have to connect with reality.",
-      "description": "Freedom means little if we remain disconnected from the world around us. We can't discover our vocation simply by imagining what might give our lives meaning.",
+      "title": "Reality",
+      "description": "Freedom means little if we remain disconnected from the world around us.",
       "fields": {
         "id": "contact-with-reality",
-        "title": "We have to connect with reality.",
-        "statement": "Freedom means little if we remain disconnected from the world around us. We can't discover our vocation simply by imagining what might give our lives meaning."
+        "title": "Reality",
+        "statement": "Freedom means little if we remain disconnected from the world around us."
       }
     },
     "work-discovers-work": {
       "id": "work-discovers-work",
       "schema": "principle",
       "typeName": "Principle",
-      "title": "The work discovers the work.",
-      "description": "We don't need a complete plan before we begin. Each action can reveal new questions, possibilities, and the next useful step.",
+      "title": "Discovery",
+      "description": "We don't need all the answers before we begin. Each action can reveal the next useful step.",
       "fields": {
         "id": "work-discovers-work",
-        "title": "The work discovers the work.",
-        "statement": "We don't need a complete plan before we begin. Each action can reveal new questions, possibilities, and the next useful step."
+        "title": "Discovery",
+        "statement": "We don't need all the answers before we begin. Each action can reveal the next useful step."
       }
     },
     "technology": {
@@ -100,11 +84,11 @@
       "schema": "method",
       "typeName": "Method",
       "title": "Technology",
-      "description": "Using AI, robotics, and automation to reduce unnecessary work and expand what people can do.",
+      "description": "Use AI, robotics, and automation to reduce unnecessary work and expand what people can do.",
       "fields": {
         "id": "technology",
         "title": "Technology",
-        "statement": "Using AI, robotics, and automation to reduce unnecessary work and expand what people can do."
+        "statement": "Use AI, robotics, and automation to reduce unnecessary work and expand what people can do."
       }
     },
     "action": {
@@ -139,7 +123,8 @@
           "Crossover Stockton began with Jeff Kolyer, a former Silicon Valley technology founder exploring the transition from compulsory work to meaningful vocation.",
           "After decades building technology, the question became personal: If machines can increasingly do the work, what are we free to become—and what will we do with that freedom?"
         ],
-        "profileUrl": "https://www.linkedin.com/in/jeff-kolyer"
+        "profileUrl": "https://www.linkedin.com/in/jeff-kolyer",
+        "preferred_image": "/images/about/about-the-founder.jpg"
       }
     },
     "stockton-street-dogs": {
@@ -219,6 +204,7 @@
         "id": "dogs-safe-placement",
         "slug": "street-dogs",
         "title": "Street dogs and access to care",
+        "description": "Street dogs in Stockton need workable paths to shelter, veterinary care, fostering, and safe placement.",
         "summary": "Dogs on Stockton's streets need care, and people trying to help them need workable paths to shelter, fostering, and services. People with pets may also face barriers to shelter. The number and condition of dogs on the streets, the care reaching them, and access for people with dogs remain unverified.",
         "what_we_are_seeing": [
           "Stockton Animal Services reports recurring shelter-capacity pressure. It prioritizes sick, injured, aggressive, and confirmed abandonment cases, while healthy stray intake generally requires an appointment. Its guidance cautions that a roaming dog may be lost or owned rather than abandoned.",
@@ -228,11 +214,6 @@
           "San Joaquin County’s 2024 survey reported that 34% of unhoused respondents had pets. St. Mary’s describes pet-accommodating shelter options, but Crossover has not verified current access or whether people with dogs still face restrictions."
         ],
         "current_state": "Stockton Street Dogs reports that dumped-dog encounters rose from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity. Stockton Animal Services reports recurring shelter capacity pressure. The current number of street dogs and how many reach safe placement remain unverified. Stockton Street Dogs is also pursuing a proposed Canine Campus for overflow, veterinary recovery, and volunteer-supported care; it is not yet an operating facility. People with pets may face shelter-access barriers; current access and dog-inclusive capacity remain unverified.",
-        "current_focus": {
-          "title": "Understanding the Gap",
-          "description": "We're examining public records, checking reported conditions firsthand, and learning how dogs on Stockton's streets reach care.",
-          "updated_at": "2026-11-06"
-        },
         "sources": [
           {
             "title": "Stockton committee advances stricter animal-control rules amid shelter overcrowding",
@@ -2404,11 +2385,11 @@
       "id": "stockton-street-dog-population-reported-estimate",
       "schema": "claim",
       "typeName": "Claim",
-      "title": "Reported street-population estimate",
-      "description": "Reported street-population estimate",
+      "title": "Stockton Street Dogs' founder estimated 200–400 dogs on Stockton's streets in April 2026.",
+      "description": "Stockton Street Dogs' founder estimated 200–400 dogs on Stockton's streets in April 2026.",
       "fields": {
         "id": "stockton-street-dog-population-reported-estimate",
-        "statement": "Reported street-population estimate",
+        "statement": "Stockton Street Dogs' founder estimated 200–400 dogs on Stockton's streets in April 2026.",
         "kind": "reported_estimate",
         "verificationStatus": "source_reported",
         "reportedValue": "200–400 dogs",
@@ -2423,14 +2404,14 @@
       "id": "stockton-dumped-dog-encounters-reported",
       "schema": "claim",
       "typeName": "Claim",
-      "title": "Reported dumped-dog encounters",
-      "description": "Reported dumped-dog encounters",
+      "title": "Stockton Street Dogs reported encountering 3–10 dumped dogs per week in September 2026.",
+      "description": "Stockton Street Dogs reported encountering 3–10 dumped dogs per week in September 2026.",
       "fields": {
         "id": "stockton-dumped-dog-encounters-reported",
-        "statement": "Reported dumped-dog encounters",
+        "statement": "Stockton Street Dogs reported encountering 3–10 dumped dogs per week in September 2026.",
         "kind": "reported_estimate",
         "verificationStatus": "source_reported",
-        "reportedValue": "3–10 per week",
+        "reportedValue": "3–10/week",
         "limitations": "Stockton Street Dogs' September 2026 account, compared with approximately one per week a year earlier; not an independently verified count.",
         "sourceRecordIds": [
           "ssd-2026-09-29-dumped-dogs-surge"
@@ -2438,35 +2419,15 @@
         "gap_id": "dogs-safe-placement"
       }
     },
-    "sas-2024-stray-intake-events": {
-      "id": "sas-2024-stray-intake-events",
-      "schema": "claim",
-      "typeName": "Claim",
-      "title": "2024 shelter intake",
-      "description": "2024 shelter intake",
-      "fields": {
-        "id": "sas-2024-stray-intake-events",
-        "statement": "2024 shelter intake",
-        "kind": "administrative_count",
-        "verificationStatus": "official_reported",
-        "reportedValue": "3,106 stray intake events",
-        "limitations": "Recorded by Stockton Animal Services across its multi-jurisdiction service area. These are intake events, not a Stockton street-dog census.",
-        "sourceRecordIds": [
-          "sas-2024-kennel-statistics"
-        ],
-        "measurementId": "sas-2024-dog-intake-stray",
-        "gap_id": "dogs-safe-placement"
-      }
-    },
     "stockton-current-street-dog-population-unknown": {
       "id": "stockton-current-street-dog-population-unknown",
       "schema": "claim",
       "typeName": "Claim",
-      "title": "Current street population",
-      "description": "Current street population",
+      "title": "No verified current count of dogs on Stockton's streets has been established.",
+      "description": "No verified current count of dogs on Stockton's streets has been established.",
       "fields": {
         "id": "stockton-current-street-dog-population-unknown",
-        "statement": "Current street population",
+        "statement": "No verified current count of dogs on Stockton's streets has been established.",
         "kind": "unknown_quantity",
         "verificationStatus": "not_established",
         "reportedValue": "Unknown",
@@ -3343,7 +3304,8 @@
     },
     "description": {
       "label": "Description",
-      "kind": "value"
+      "kind": "value",
+      "description": "Stable description of the gap, distinct from its changing summary and story overview."
     },
     "statement": {
       "label": "Statement",
@@ -3781,18 +3743,6 @@
       "label": "Related initiatives",
       "kind": "reference"
     },
-    "current_focus": {
-      "label": "Current focus",
-      "kind": "value"
-    },
-    "related_finding_ids": {
-      "label": "Related findings",
-      "kind": "reference"
-    },
-    "statements": {
-      "label": "statements",
-      "kind": "value"
-    },
     "website": {
       "label": "website",
       "kind": "url"
@@ -3835,58 +3785,6 @@
     },
     "country": {
       "label": "country",
-      "kind": "value"
-    },
-    "homeIntroTitle": {
-      "label": "homeIntroTitle",
-      "kind": "value"
-    },
-    "homeIntroBody": {
-      "label": "homeIntroBody",
-      "kind": "value"
-    },
-    "missionQuestion": {
-      "label": "missionQuestion",
-      "kind": "value"
-    },
-    "opportunity": {
-      "label": "opportunity",
-      "kind": "value"
-    },
-    "startingApproach": {
-      "label": "startingApproach",
-      "kind": "value"
-    },
-    "animalCareVision": {
-      "label": "animalCareVision",
-      "kind": "value"
-    },
-    "animalCareInvestigation": {
-      "label": "animalCareInvestigation",
-      "kind": "value"
-    },
-    "learningRule": {
-      "label": "learningRule",
-      "kind": "value"
-    },
-    "presencePractice": {
-      "label": "presencePractice",
-      "kind": "value"
-    },
-    "documentationPractice": {
-      "label": "documentationPractice",
-      "kind": "value"
-    },
-    "aiPractice": {
-      "label": "aiPractice",
-      "kind": "value"
-    },
-    "experienceChangesUs": {
-      "label": "experienceChangesUs",
-      "kind": "value"
-    },
-    "publicCommitment": {
-      "label": "publicCommitment",
       "kind": "value"
     },
     "headline": {
@@ -3971,49 +3869,5 @@
     "presentation": "For a Location with a nonempty map_reference.query, show a prominent Open in Google Maps link alongside its internal Crossover record link. Generate the URL from the query; do not store a duplicate URL on every record.",
     "precision": "map_reference.precision describes the geographic search term, not a verified event, dog, person, or current condition. Corridors and general areas must be presented as broad references. map_reference.verified means the place name or address itself has a documented source; it does not verify associated reports.",
     "embeddedMaps": "map_reference.embed_url is a Google Maps Share > Embed a map URL for a verified street address. Show it with the precision warning and Open in Google Maps link. Keep broad or unverified geographic references as search links rather than pinned embeds."
-  },
-  "experienceSpec": {
-    "version": 1,
-    "premise": "The public feed tracks what Crossover does and what the evidence says about reality. Interfaces, charts, videos, and other views may be generated from it. Visual style is a separate layer and must not change the meaning of records.",
-    "navigation": [
-      {
-        "label": "Home",
-        "route": "/",
-        "purpose": "Introduce Crossover and the current focus."
-      },
-      {
-        "label": "Gaps",
-        "route": "/gaps",
-        "purpose": "Choose a gap and follow its activity, findings, metrics, and sources."
-      },
-      {
-        "label": "Activity",
-        "route": "/activity",
-        "purpose": "Show the work Crossover has done and the next useful actions."
-      },
-      {
-        "label": "Places",
-        "route": "/places",
-        "purpose": "Show geographic references and their source records without implying that a report is verified at an exact point."
-      },
-      {
-        "label": "Explore",
-        "route": "/explore",
-        "purpose": "Make the full public feed easy to search, filter, inspect, and reuse."
-      },
-      {
-        "label": "About",
-        "route": "/about",
-        "purpose": "Explain Crossover, its people, principles, and method."
-      },
-      {
-        "label": "Connect",
-        "buttonLabel": "Connect on LinkedIn",
-        "role": "contact",
-        "urlField": "person.profileUrl",
-        "purpose": "Name the destination in the button and use the published profile link; never invent contact details."
-      }
-    ],
-    "appearance": "Keep the current site's visual rules in docs/SITE_DESIGN.md as one presentation skin. Other skins can render the same feed without changing its records or this information architecture."
   }
 }

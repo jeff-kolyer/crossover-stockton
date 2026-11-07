@@ -1,7 +1,7 @@
 [
   {
     "id": "stockton-street-dog-population-reported-estimate",
-    "statement": "Reported street-population estimate",
+    "statement": "Stockton Street Dogs' founder estimated 200–400 dogs on Stockton's streets in April 2026.",
     "kind": "reported_estimate",
     "verificationStatus": "source_reported",
     "reportedValue": "200–400 dogs",
@@ -13,10 +13,10 @@
   },
   {
     "id": "stockton-dumped-dog-encounters-reported",
-    "statement": "Reported dumped-dog encounters",
+    "statement": "Stockton Street Dogs reported encountering 3–10 dumped dogs per week in September 2026.",
     "kind": "reported_estimate",
     "verificationStatus": "source_reported",
-    "reportedValue": "3–10 per week",
+    "reportedValue": "3–10/week",
     "limitations": "Stockton Street Dogs' September 2026 account, compared with approximately one per week a year earlier; not an independently verified count.",
     "sourceRecordIds": [
       "ssd-2026-09-29-dumped-dogs-surge"
@@ -24,21 +24,8 @@
     "gap_id": "dogs-safe-placement"
   },
   {
-    "id": "sas-2024-stray-intake-events",
-    "statement": "2024 shelter intake",
-    "kind": "administrative_count",
-    "verificationStatus": "official_reported",
-    "reportedValue": "3,106 stray intake events",
-    "limitations": "Recorded by Stockton Animal Services across its multi-jurisdiction service area. These are intake events, not a Stockton street-dog census.",
-    "sourceRecordIds": [
-      "sas-2024-kennel-statistics"
-    ],
-    "measurementId": "sas-2024-dog-intake-stray",
-    "gap_id": "dogs-safe-placement"
-  },
-  {
     "id": "stockton-current-street-dog-population-unknown",
-    "statement": "Current street population",
+    "statement": "No verified current count of dogs on Stockton's streets has been established.",
     "kind": "unknown_quantity",
     "verificationStatus": "not_established",
     "reportedValue": "Unknown",

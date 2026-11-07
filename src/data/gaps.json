@@ -4,6 +4,7 @@
       "id": "dogs-safe-placement",
       "slug": "street-dogs",
       "title": "Street dogs and access to care",
+      "description": "Street dogs in Stockton need workable paths to shelter, veterinary care, fostering, and safe placement.",
       "active": true,
       "rank": 1,
       "summary": "Dogs on Stockton's streets need care, and people trying to help them need workable paths to shelter, fostering, and services. People with pets may also face barriers to shelter. The number and condition of dogs on the streets, the care reaching them, and access for people with dogs remain unverified.",
@@ -282,12 +283,7 @@
         "What care reaches dogs living with people outside?"
       ],
       "preferred_image": "/images/variants/clean/dog-sidewalk.jpg",
-      "default": true,
-      "current_focus": {
-        "title": "Understanding the Gap",
-        "description": "We're examining public records, checking reported conditions firsthand, and learning how dogs on Stockton's streets reach care.",
-        "updated_at": "2026-11-06"
-      }
+      "default": true
     }
   ]
 }

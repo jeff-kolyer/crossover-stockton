@@ -1,0 +1,411 @@
+{
+  "id": "crossover-stockton-feed",
+  "title": "Crossover Stockton Feed",
+  "description": "Our current account of unmet needs in Stockton, what the evidence shows, and what we are doing.",
+  "chapters": [
+    {
+      "id": "introduction",
+      "title": "Understand and improve unmet needs in Stockton.",
+      "text": "We start by identifying a gap, learning what’s happening, and taking useful action.",
+      "tagline": "See clearly. Act locally.",
+      "record": "crossover-stockton",
+      "sections": [
+        {
+          "id": "current-gap",
+          "title": "Current gap",
+          "record": "$gap",
+          "image": "/images/variants/clean/dog-park.jpg",
+          "imageAlt": "Dog in Stockton",
+          "more": {
+            "chapter": "gap.overview",
+            "label": "Explore the gap"
+          }
+        },
+        {
+          "id": "about-bridge",
+          "title": "About Crossover",
+          "headline": "How can post-scarcity technology solve real problems?",
+          "text": "We start with real needs in Stockton, take action, and use what we learn to discover what technology and human participation can make possible.",
+          "record": "crossover-stockton",
+          "more": {
+            "chapter": "about",
+            "label": "Learn about Crossover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap",
+      "record": "$gap",
+      "text": "Dogs on Stockton’s streets need care, shelters are under pressure, and access to services can be difficult. We’re building a basic understanding of the problem.",
+      "chapters": [
+        {
+          "id": "overview",
+          "title": "Overview",
+          "summary": "The need, the available care, and what remains unresolved.",
+          "teaser": "The situation, what we know, and our current focus.",
+          "chapters": [
+            {
+              "id": "situation",
+              "title": "Street dogs and access to care",
+              "text": "Dogs on Stockton’s streets need care, but getting help isn’t always straightforward. Animal Services reports shelter-capacity pressure, rescue groups are responding, and the number of dogs currently on the streets remains unknown.",
+              "references": [
+                "dogs-safe-placement",
+                "finding-new-facilities-impact-uncertain",
+                "stockton-current-street-dog-population-unknown"
+              ],
+              "imageAlt": "Dog standing alone on a neighborhood sidewalk"
+            },
+            {
+              "id": "key-figures",
+              "title": "Key figures",
+              "figures": [
+                {
+                  "record": "sas-2024-dog-intake-stray",
+                  "label": "Stray-dog intake events",
+                  "context": "2024 · Animal Services service area",
+                  "more": {
+                    "chapter": "gap.metrics",
+                    "label": "See all metrics"
+                  }
+                },
+                {
+                  "record": "stockton-dumped-dog-encounters-reported",
+                  "label": "Reported dumped-dog encounters",
+                  "context": "Stockton Street Dogs · Sept 2026",
+                  "more": {
+                    "record": "stockton-dumped-dog-encounters-reported",
+                    "label": "Examine the claim"
+                  }
+                },
+                {
+                  "record": "stockton-current-street-dog-population-unknown",
+                  "label": "Dogs currently on the streets",
+                  "context": "No verified street census",
+                  "more": {
+                    "record": "stockton-current-street-dog-population-unknown",
+                    "label": "Why is this unknown?"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "focus",
+              "title": "Our current focus",
+              "headline": "Understanding the Gap",
+              "text": "We're examining public records, checking reported conditions firsthand, and learning how dogs on Stockton's streets reach care.",
+              "updatedAt": "2026-11-06",
+              "references": [
+                "task-review-sas-field-call-records",
+                "task-verify-st-marys-church-street-dog-scale"
+              ],
+              "more": {
+                "chapter": "gap.activity",
+                "label": "View activity"
+              }
+            }
+          ]
+        },
+        {
+          "id": "activity",
+          "title": "Activity",
+          "summary": "Tasks and firsthand field reports for this gap.",
+          "teaser": "What we've done and what's happening now.",
+          "chapters": [
+            {
+              "id": "developments",
+              "title": "Developments",
+              "dailyRecords": [
+                "crossover-2026-11-02-sas-field-call-records-received"
+              ],
+              "records": [
+                "crossover-2026-11-02-sas-field-call-records-received",
+                "crossover-2026-10-20-sas-field-call-records-request",
+                "crossover-2026-10-14-sas-volunteer-application"
+              ]
+            },
+            {
+              "id": "current-work",
+              "title": "What we're doing",
+              "dailyRecords": [
+                "task-review-sas-field-call-records",
+                "task-sas-volunteer-onboarding-follow-up"
+              ],
+              "records": [
+                "task-review-sas-field-call-records",
+                "task-sas-volunteer-onboarding-follow-up",
+                "task-verify-st-marys-church-street-dog-scale",
+                "task-contact-cbs-charlie-lapastora"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tasks",
+          "title": "Tasks",
+          "summary": "What we're working on.",
+          "select": {
+            "schema": "task",
+            "gap": "$gap.id"
+          }
+        },
+        {
+          "id": "metrics",
+          "title": "Metrics",
+          "text": "Measurements describe different things. Intake events, service records, outcomes, and capacity cannot be treated as a count of dogs living on the streets.",
+          "select": {
+            "schema": "measurement",
+            "gap": "$gap.id"
+          },
+          "summary": "Measurements with dates, sources, and limits."
+        },
+        {
+          "id": "places",
+          "title": "Places",
+          "text": "Places mentioned in reports and source records retain their geographic precision.",
+          "select": {
+            "schema": "location",
+            "gap": "$gap.id"
+          },
+          "summary": "Places mentioned in reports and source records."
+        },
+        {
+          "id": "organizations",
+          "title": "Organizations",
+          "text": "People and services connected to this gap.",
+          "select": {
+            "schema": "organization",
+            "gap": "$gap.id"
+          },
+          "summary": "People and services connected to this gap."
+        },
+        {
+          "id": "improvements",
+          "title": "Improvements",
+          "text": "Efforts by the city and local organizations are tracked by stage. A proposal is not yet operating capacity.",
+          "dailyRecords": [
+            "canine-campus",
+            "stockton-animal-shelter-renovation"
+          ],
+          "records": [
+            "canine-campus",
+            "stockton-animal-shelter-renovation",
+            "stockton-pet-wellness-adoption-center",
+            "animal-balance-spay-neuter-contract-2026",
+            "hard-luck-veterinary-staffing-2026"
+          ],
+          "summary": "Efforts being tried to improve access to care."
+        },
+        {
+          "id": "events",
+          "title": "Events",
+          "summary": "What's scheduled."
+        },
+        {
+          "id": "findings",
+          "title": "Findings",
+          "text": "What the evidence supports, and where it stops.",
+          "records": [
+            "finding-new-facilities-impact-uncertain"
+          ],
+          "summary": "What we learned from the evidence and what it means.",
+          "teaser": "What the evidence shows so far."
+        },
+        {
+          "id": "sources",
+          "title": "Sources",
+          "text": "The supporting source records are available for inspection.",
+          "select": {
+            "schema": "evidence",
+            "gap": "$gap.id"
+          },
+          "summary": "The records behind this work."
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "title": "About Crossover",
+      "sections": [
+        {
+          "id": "opening",
+          "headline": "From work to vocation.",
+          "text": "AI and robotics are changing what's possible. What if more of our lives could be spent caring for people, animals, and the world around us—rather than working simply to survive?"
+        },
+        {
+          "id": "purpose",
+          "headline": "See clearly. Act locally.",
+          "record": "crossover-stockton",
+          "text": "Crossover explores that possibility by starting with real unmet needs in Stockton. We show up, learn from people and evidence, take useful action, and make what we discover public."
+        },
+        {
+          "id": "discovery",
+          "headline": "The work discovers the work.",
+          "record": "work-discovers-work"
+        },
+        {
+          "id": "starting",
+          "title": "Where we're starting",
+          "record": "$gap",
+          "text": "Our first focus is street dogs and access to care. We're learning about the need, the help already available, and where access may be breaking down.",
+          "imageAlt": "Dog on a Stockton neighborhood sidewalk",
+          "more": {
+            "chapter": "gap.overview",
+            "label": "Explore the current gap"
+          }
+        },
+        {
+          "id": "founder",
+          "headline": "Founded by Jeff Kolyer",
+          "record": "$founder",
+          "text": "A former Silicon Valley technology founder. I've been in Stockton for more than a decade, and I'm exploring the transition from work to vocation.",
+          "imageAlt": "Jeff Kolyer",
+          "more": {
+            "chapter": "gap.sources",
+            "label": "Explore our public records"
+          }
+        }
+      ]
+    }
+  ],
+  "silent": {
+    "description": "Navigation and reading selections. These entries are excluded from spoken narration.",
+    "homePage": {
+      "label": "Index",
+      "description": "The gap sections and their current public records.",
+      "image": "/images/variants/clean/dog-sidewalk.jpg",
+      "imageAlt": "Dog on a Stockton neighborhood sidewalk",
+      "actionLabel": "Read the overview",
+      "icon": "index"
+    },
+    "menu": [
+      {
+        "chapter": "gap.overview",
+        "page": "overview",
+        "label": "Overview",
+        "description": "What's happening",
+        "homeDescription": "The situation, evidence, and what we know.",
+        "icon": "story"
+      },
+      {
+        "chapter": "gap.activity",
+        "page": "activity",
+        "label": "Activity",
+        "description": "What we've done",
+        "homeDescription": "What we’ve done and what’s happening now.",
+        "icon": "activity"
+      },
+      {
+        "chapter": "gap.tasks",
+        "page": "tasks",
+        "label": "Tasks",
+        "description": "What we're working on",
+        "homeDescription": "Our current work and next steps.",
+        "icon": "tasks"
+      },
+      {
+        "chapter": "gap.metrics",
+        "page": "metrics",
+        "label": "Measurements",
+        "description": "Numbers and claims",
+        "homeDescription": "Key numbers and claims.",
+        "icon": "metrics"
+      },
+      {
+        "chapter": "gap.findings",
+        "page": "findings",
+        "label": "Findings",
+        "description": "What we've established",
+        "homeDescription": "What the evidence shows so far.",
+        "icon": "findings"
+      },
+      {
+        "chapter": "gap.organizations",
+        "page": "organizations",
+        "label": "Organizations",
+        "description": "Who's involved",
+        "homeDescription": "Who’s involved and what they do.",
+        "icon": "organizations"
+      },
+      {
+        "chapter": "gap.improvements",
+        "page": "improvements",
+        "label": "Improvements",
+        "description": "Programs and efforts to help",
+        "homeDescription": "Options to better address the need.",
+        "icon": "improvements"
+      },
+      {
+        "chapter": "gap.places",
+        "page": "places",
+        "label": "Places",
+        "description": "Where things are happening",
+        "homeDescription": "Key locations and areas of focus.",
+        "icon": "places"
+      },
+      {
+        "chapter": "gap.events",
+        "page": "events",
+        "label": "Events",
+        "description": "What's scheduled",
+        "homeDescription": "Upcoming and past events.",
+        "icon": "events"
+      },
+      {
+        "chapter": "gap.sources",
+        "page": "sources",
+        "label": "Sources",
+        "description": "Documents, reporting & evidence",
+        "homeDescription": "Documents, records, and reporting.",
+        "icon": "document"
+      }
+    ],
+    "entryPoints": [
+      {
+        "label": "Home",
+        "chapter": "introduction"
+      },
+      {
+        "label": "About",
+        "chapter": "about"
+      }
+    ],
+    "homeLinks": [
+      "overview",
+      "activity",
+      "findings"
+    ],
+    "recordExplorer": "/explore/",
+    "recordFeed": "/data/records.json",
+    "feedDocument": "/feed.json",
+    "reading": {
+      "daily": [
+        "introduction",
+        "gap.overview.situation",
+        "gap.overview.key-figures",
+        "gap.overview.focus",
+        "gap.activity.developments",
+        "gap.activity.current-work",
+        "gap.improvements",
+        "gap.findings",
+        "about.opening"
+      ],
+      "full": [
+        "introduction",
+        "gap.overview.situation",
+        "gap.overview.key-figures",
+        "gap.overview.focus",
+        "gap.activity.developments",
+        "gap.activity.current-work",
+        "gap.improvements",
+        "gap.findings",
+        "gap.sources",
+        "about.opening",
+        "about.purpose",
+        "about.discovery",
+        "about.starting",
+        "about.founder"
+      ]
+    }
+  }
+}

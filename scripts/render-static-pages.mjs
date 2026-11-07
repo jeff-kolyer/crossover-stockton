@@ -34,7 +34,7 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
   const nodes = new Map();
   const node = (id) => {
     if (!nodes.has(id)) nodes.set(id, {
-      innerHTML: "", textContent: id === "feed-data" ? bundled("feed-data") : id === "asset-data" ? bundled("asset-data") : "",
+      innerHTML: "", textContent: ["feed-data", "story-data", "asset-data"].includes(id) ? bundled(id) : "",
       classList: { remove() {}, toggle() {}, contains() { return false; } },
       setAttribute() {}, addEventListener() {}, remove() {},
       insertAdjacentHTML(position, html) { if (position !== "beforeend") throw new Error(position); this.innerHTML += html; },
@@ -55,17 +55,23 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
     .replace(/url\("data:font\/woff2;base64,[A-Za-z0-9+/=]+"\)/g, () => `url("${fontPaths[fontIndex++]}")`);
   if (fontIndex !== fontPaths.length) throw new Error(`Expected ${fontPaths.length} embedded font files, found ${fontIndex}`);
   const records = Object.values(feed.records);
+  const story = JSON.parse(bundled("story-data"));
   const coreRoutes = ["/", "/gaps", "/activity", "/places", "/explore", "/organizations", "/about"];
   const routes = coreRoutes.map((route) => ({ route, sitemap: true }));
-  const needViews = ["overview", "activity", "findings", "metrics", "places", "organizations", "initiatives", "sources"];
+  const needViews = story.chapters.find(item => item.id === "gap").chapters.map(item => item.id);
+  const menuViews = story.silent.menu.map(item => item.page);
+  const gapHomeAliases = new Set(records.filter(record => record.schema === "gap").map(record => `/${encodeURIComponent(record.fields.slug)}`));
   for (const record of records) {
     routes.push({ route: `/record/${encodeURIComponent(record.id)}`, sitemap: record.schema !== "organization" });
     if (record.schema === "organization") routes.push({ route: `/organization/${encodeURIComponent(record.id)}`, sitemap: true });
 
   }
 
-  for (const gap of records.filter((record) => record.schema === "gap")) for (const view of needViews)
-    routes.push({ route: `/gaps/${encodeURIComponent(gap.fields.slug)}/${view}`, sitemap: true });
+  for (const gap of records.filter((record) => record.schema === "gap")) {
+    routes.push({ route: `/${encodeURIComponent(gap.fields.slug)}`, sitemap: false });
+    for (const view of needViews) routes.push({ route: `/gaps/${encodeURIComponent(gap.fields.slug)}/${view}`, sitemap: false });
+    for (const view of menuViews) routes.push({ route: `/${encodeURIComponent(gap.fields.slug)}/${view}`, sitemap: true });
+  }
 
   const pages = routes.map(({ route, sitemap }) => {
     location.search = `?page=${encodeURIComponent(route.slice(1))}`;
@@ -81,7 +87,7 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
     const heading = plainText(main.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1] || (route === "/about" ? "About Crossover" : "Crossover Stockton"));
     const description = plainText(main.match(/<p[^>]*>([\s\S]*?)<\/p>/)?.[1] || feed.records["crossover-stockton"]?.fields?.purpose || "Crossover Stockton public record").slice(0, 160);
     const title = route === "/" ? "Crossover Stockton — See clearly. Act locally." : `${heading} | Crossover Stockton`;
-    const canonical = route.startsWith("/record/") && feed.records[decodeURIComponent(route.slice("/record/".length))]?.schema === "organization"
+    const canonical = gapHomeAliases.has(route) ? "/" : route.startsWith("/record/") && feed.records[decodeURIComponent(route.slice("/record/".length))]?.schema === "organization"
       ? publicPath(route.replace("/record/", "/organization/")) : publicPath(route);
     const noindex = canonical !== publicPath(route);
     let html = shell
@@ -96,7 +102,7 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
       .replace('<p id="footer-purpose"></p>', `<p id="footer-purpose">${escapeHtml(node("footer-purpose").textContent)}</p>`)
       .replace('<span id="record-count"></span>', `<span id="record-count">${records.length}</span>`)
       .replace('id="header-linkedin" target=', `id="header-linkedin" href="${escapeHtml(node("header-linkedin").href)}" target=`)
-      .replace('</div></div></footer>', '<a href="/data/records.json">Public feed (JSON) <svg class="external-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/></svg></a></div></div></footer>')
+      .replace('</div></div></footer>', '<a href="/feed/">Read the full feed <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/></svg></a><a href="/feed.json" target="_blank" rel="noopener noreferrer">Feed JSON <svg class="external-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/></svg></a><a href="/data/records.json" target="_blank" rel="noopener noreferrer">Read the JSON <svg class="external-arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"/></svg></a></div></div></footer>')
       .replaceAll('href="#/"', 'href="/"')
       .replace(/href="\?page=([^"]*)"/g, (_, value) => `href="${escapeHtml(routeFromQuery(value))}"`);
     html += `<script src="/static-navigation.js?v=${navigationVersion}" defer></script>\n</body>\n</html>\n`;

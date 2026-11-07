@@ -40,13 +40,6 @@
       },
       "uniqueItems": true
     },
-    "statements": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string",
-        "minLength": 1
-      }
-    },
     "visual_description": {
       "type": "string",
       "minLength": 1,

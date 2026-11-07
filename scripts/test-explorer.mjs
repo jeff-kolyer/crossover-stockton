@@ -10,7 +10,7 @@ const published = await readJson("../src/generated/explorer-public.json");
 const sourceActions = await readJson("../src/data/tasks.json");
 const sourceLocations = await readJson("../src/data/locations.json");
 const needsSource = await readJson("../src/data/gaps.json");
-const sourceProjects = await readJson("../src/data/initiatives.json");
+const sourceProjects = await readJson("../src/data/improvements.json");
 const policy = await readJson("../src/model/explorer-publication.json");
 const roots = await loadExplorerRoots(policy);
 const schemas = Object.fromEntries(await Promise.all(policy.collections.map(async ({ schema }) =>
@@ -239,7 +239,7 @@ test("one need connects dog care and pet shelter without a separate investigatio
   for (const id of ["pet-inclusive-shelter", "low-barrier-housing-pathways", "pathways-opened-268-beds", "pathways-neighborhood", "smcs-2026-06-17-pathways-268-beds"])
     assert.equal(published.records[id], undefined);
   assert.equal(JSON.stringify(published).includes('"pet-inclusive-shelter"'), false);
-  assert.ok(!published.experienceSpec.navigation.some(item => item.route === "/investigation"));
+  assert.equal(published.experienceSpec, undefined);
   for (const record of needs) assert.equal(record.fields.investigation_status, undefined);
   for (const schema of ["task", "activity", "finding", "location"]) {
     for (const record of Object.values(published.records).filter(item => item.schema === schema)) {

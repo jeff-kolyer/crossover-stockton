@@ -146,7 +146,7 @@ export function buildExplorerSnapshot(policy, schemas, collections, roots) {
       ...(policy.fieldValueLabels?.[name] ? { valueLabels: policy.fieldValueLabels[name] } : {}) }];
   }));
   return {
-    snapshot: { groups, collections: visibleCollections, records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance, browseGuidance: policy.browseGuidance, locationGuidance: policy.locationGuidance, experienceSpec: policy.experienceSpec },
+    snapshot: { groups, collections: visibleCollections, records: recordMap, unsupportedTypes, fieldLabels: policy.fieldLabels, fieldInfo, visualGuidance: policy.visualGuidance, browseGuidance: policy.browseGuidance, locationGuidance: policy.locationGuidance },
     diagnostics,
   };
 }
