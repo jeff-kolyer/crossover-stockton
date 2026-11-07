@@ -10,7 +10,7 @@
   if (!supported) return;
 
   document.body.classList.add("spa-active");
-  document.body.insertAdjacentHTML("afterbegin", '<div id="app"><div class="loading">Loading Crossover…</div></div>');
+  document.body.insertAdjacentHTML("afterbegin", '<div id="app"></div>');
   document.querySelector(".skip")?.setAttribute("href", "#content");
   for (const fallbackStyle of document.head.querySelectorAll("style")) fallbackStyle.remove();
   const style = document.createElement("style");
