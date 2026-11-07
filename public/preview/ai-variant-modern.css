@@ -128,8 +128,8 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .gap-overview .gap-hero .hero-copy h2{font-size:clamp(2.15rem,3vw,3.35rem);line-height:1.08}
 .gap-overview .gap-hero .hero-copy p{margin-top:17px;color:#e0ebef;line-height:1.52}
 .gap-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:18px}
-.gap-fact{display:flex;align-items:flex-start;gap:17px;min-width:0;padding:21px 23px;background:#fff;border:1px solid #dce6ec;border-radius:14px;color:#182a39}
-.gap-fact-content{display:flex;flex-direction:column;gap:5px;min-width:0}
+.gap-fact{display:flex;align-items:stretch;gap:17px;min-width:0;padding:21px 23px;background:#fff;border:1px solid #dce6ec;border-radius:14px;color:#182a39}
+.gap-fact-content{display:flex;flex:1;flex-direction:column;gap:5px;min-width:0}
 .gap-fact:hover{text-decoration:none;border-color:#86b9bf}
 .gap-fact strong{font-size:clamp(1.9rem,2.5vw,2.65rem);font-weight:600;line-height:1.1;letter-spacing:-.04em}
 .gap-fact-label{font-weight:600;line-height:1.25}
@@ -157,10 +157,13 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .gap-fact strong{font-size:clamp(1.9rem,2.3vw,2.35rem)}
 .gap-fact-label{font-size:19px}
 .gap-fact small{font-size:16px}
-.gap-fact-icon{display:grid;place-items:center;flex:none;width:42px;height:42px;color:#07998f}
+.gap-fact-icon{display:grid;place-items:center;align-self:flex-start;flex:none;width:42px;height:42px;color:#07998f}
 .gap-fact-icon svg{width:38px;height:38px;stroke-width:1.75}
 .gap-fact:nth-child(2) .gap-fact-icon{color:#397de0}
 .gap-fact:nth-child(3) .gap-fact-icon{color:#9256d0}
+.gap-fact-cta{display:inline-flex;align-items:center;gap:5px;align-self:flex-start;margin-top:auto;padding-top:16px;color:#087e87;font-size:15px;font-weight:600;line-height:1.3}
+.gap-fact-cta svg{width:17px;height:17px}
+.gap-fact:hover .gap-fact-cta{text-decoration:underline}
 .gap-focus h2,.gap-finding h2{font-size:clamp(1.7rem,2.25vw,2.25rem)}
 .gap-focus p,.gap-finding p{font-size:1.08rem}
 .gap-record-info{display:flex;align-items:flex-start;gap:14px}
