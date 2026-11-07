@@ -32,6 +32,8 @@ test('the root introduces Crossover and leads into the separate gap Overview', a
   for (const phrase of ['What would you do if you no longer had to work for money?','You could use that freedom to escape from the world or to become more involved in it.','The work discovers the work.','Street dogs and access to care'])
     assert.ok(root.includes(phrase), phrase);
   assert.ok(root.includes('href="/street-dogs/overview/"'));
+  assert.ok(root.includes('Investigation in progress'));
+  assert.ok(root.includes('Last substantive update: Nov 4, 2026'));
   assert.ok(root.includes('class="shell home-shell"'));
   assert.ok(!root.includes('3,106'));
   assert.ok(!root.includes('class="figure-grid"'));

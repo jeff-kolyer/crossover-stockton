@@ -40,6 +40,10 @@ const relationshipFields=[
 function homePage(){
   const intro=feed.chapters.find(item=>item.id==='introduction');
   const home=feed.silent.homePage;
+  const focus=section('overview').chapters.find(item=>item.id==='focus');
+  const statusTask=lookup(focus.statusRecord);
+  const status=statusTask?.fields?.status==='in_progress'?'Investigation in progress':'Investigation status unknown';
+  const statusDate=date(statusTask?.fields?.started_at);
   const composition=isPreview?(new URLSearchParams(location.search).get('composition')||'window'):'window';
   const image=composition==='city'?'/images/home/stockton-skyline-commons.jpg':composition==='street'?home.gapImage:home.image;
   const variant=['window','city','street'].includes(composition)?composition:'window';
@@ -52,7 +56,7 @@ function homePage(){
     </div>
     <a class="home-gap" href="${href('overview')}">
       <img src="${esc(home.gapImage)}" alt="${esc(home.gapImageAlt)}">
-      <span class="home-gap-copy"><span class="home-gap-label">${esc(home.label)}</span><strong>${esc(gap.title)}</strong><span>${esc(home.description)}</span><span>${esc(home.closing)}</span><span class="home-gap-action">${esc(home.actionLabel)} ${icon('arrow')}</span></span>
+      <span class="home-gap-copy"><span class="home-gap-label">${esc(home.label)}</span><strong>${esc(gap.title)}</strong><span class="home-gap-status">${esc(status)}${statusDate?` · Last substantive update: ${esc(statusDate)}`:''}</span><span>${esc(home.description)}</span><span>${esc(home.closing)}</span><span class="home-gap-action">${esc(home.actionLabel)} ${icon('arrow')}</span></span>
     </a>
   </section>`;
 }
