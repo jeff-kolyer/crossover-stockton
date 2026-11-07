@@ -42,10 +42,10 @@
   .home-shell .mobile-logo{font-size:.74rem;gap:7px}
   .home-shell .mobile-logo img{width:30px;height:30px}
   .home-splash{min-height:0;padding:0 0 28px;display:flex;justify-content:flex-start;overflow:visible;background:#f5f9f9;color:#14232e}
-  .home-intro{order:1;max-width:none;padding:31px 22px 34px;background:#0c3035;color:#fff}
+  .home-intro{order:2;max-width:none;padding:31px 22px 34px;background:#0c3035;color:#fff}
   .home-intro h1{font-size:clamp(2.35rem,9.2vw,3rem);margin-bottom:18px;max-width:15ch}
   .home-intro p{font-size:1rem;line-height:1.55}
-  .home-background{order:2;position:relative;inset:auto;z-index:auto;width:100%;height:240px;object-position:center 43%}
+  .home-background{order:1;position:relative;inset:auto;z-index:auto;width:100%;height:240px;object-position:center 43%}
   .home-shade{display:none}
   .home-gap{order:3;display:flex;flex-direction:column;max-width:none;margin:18px 18px 0;border-radius:10px}
   .home-gap>img{width:100%;height:190px;min-height:0;object-position:center 40%}
