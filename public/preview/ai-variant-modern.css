@@ -155,7 +155,7 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .gap-fact:nth-child(2){border-top-color:#3985f5;background:linear-gradient(180deg,#f8faff,#fff 65%)}
 .gap-fact:nth-child(3){border-top-color:#a465eb;background:linear-gradient(180deg,#fcf9ff,#fff 65%)}
 .gap-fact strong{font-size:clamp(1.9rem,2.3vw,2.35rem)}
-.gap-fact-label{font-size:21px}
+.gap-fact-label{font-size:19px}
 .gap-fact small{font-size:16px}
 .gap-fact-icon{display:grid;place-items:center;flex:none;width:42px;height:42px;color:#07998f}
 .gap-fact-icon svg{width:38px;height:38px;stroke-width:1.75}
@@ -179,4 +179,4 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .about-starting p,.about-founder-compact p{font-size:17px}
 .row p,.list-card p{font-size:16px}
 @media(max-width:760px){.page-heading h1,.main-inner:has(.gap-overview) .page-heading h1{font-size:36px}.page-heading p{font-size:16px}.home-link-copy strong{font-size:22px}.home-link-copy small{font-size:16px}.about-starting h2,.about-founder-compact h2{font-size:22px}.about-starting p,.about-founder-compact p{font-size:16px}}
-@media(max-width:760px){.gap-fact-label{font-size:20px}.gap-fact small{font-size:15px}}
+@media(max-width:760px){.gap-fact-label{font-size:18px}.gap-fact small{font-size:15px}}
