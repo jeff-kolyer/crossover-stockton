@@ -30,12 +30,12 @@ export function renderSiteMdPages(template, source, feed, story, origin) {
     location.pathname = path;
     location.search = '';
     runInNewContext('render()', context, { timeout: 3000 });
-    if (!app.innerHTML.includes('class="shell"')) throw new Error(`SITE.md page did not render: ${path}`);
+    if (!app.innerHTML.includes('class="shell')) throw new Error(`SITE.md page did not render: ${path}`);
     const title = document.title.replace(/ preview$/, '');
-    const description = path === '/' ? story.chapters.find(item => item.id === 'gap')?.text
+    const description = path === '/' ? story.chapters.find(item => item.id === 'introduction')?.text
       : path === '/about/' ? story.chapters.find(item => item.id === 'about')?.sections[0]?.text
       : 'Crossover Stockton public feed and connected records.';
-    const canonical = path === `/${gapSlug}/overview/` ? '/' : path;
+    const canonical = path;
     const html = template
       .replace(/<meta name="robots" content="noindex">\s*/, path === canonical ? '' : '<meta name="robots" content="noindex,follow">\n')
       .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)

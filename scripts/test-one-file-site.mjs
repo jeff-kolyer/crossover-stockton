@@ -25,7 +25,7 @@ test("the current site is self-contained and uses the new image set", () => {
   assert.equal(assets["/images/home/home-hero.jpg"], undefined);
   assert.deepEqual(bundledStory, story);
   assert.equal(bundledFeed.experienceSpec, undefined);
-  assert.equal(bundledStory.chapters[0].title, "Understand and improve unmet needs in Stockton.");
+  assert.equal(bundledStory.chapters[0].title, "What would you do if you no longer had to work for money?");
   assert.equal(bundledFeed.records["crossover-stockton"].fields.statements, undefined);
   assert.equal(bundledStory.chapters[0].record, "crossover-stockton");
   assert.deepEqual(bundledStory.chapters[1].chapters.slice(-4).map(item => item.id), ["improvements", "events", "findings", "sources"]);

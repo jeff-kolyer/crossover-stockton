@@ -11,6 +11,7 @@ export function validateFeed(story, records) {
     if (!node?.id || paths.has(path)) errors.push(`Duplicate or missing chapter path ${path}`);
     paths.set(path, node);
     if (node.record) checkRef(node.record, path);
+    if (node.statusRecord) checkRef(node.statusRecord, path);
     for (const id of [...(node.references ?? []), ...(node.records ?? []), ...(node.dailyRecords ?? [])]) checkRef(id, path);
     if (node.dailyRecords?.some(id => !node.records?.includes(id))) errors.push(`${path}: daily records must be in the full passage`);
     if (node.select && !Object.values(records).some(record => record.schema === node.select.schema && (!node.select.gap || record.fields.gap_id === gap?.id || record.fields.gap_ids?.includes(gap?.id) || record.fields.related_gap_ids?.includes(gap?.id) || gap?.fields.organization_ids?.includes(record.id)))) errors.push(`${path}: selector has no published records`);
@@ -48,8 +49,9 @@ export function validateFeed(story, records) {
   for (const path of story.silent?.reading?.daily ?? []) if (!paths.has(path)) errors.push(`Daily reading references missing passage ${path}`);
   for (const path of story.silent?.reading?.full ?? []) if (!paths.has(path)) errors.push(`Full reading references missing chapter ${path}`);
   const focus = paths.get("gap.overview.focus");
-  if (!focus?.headline || !focus.text || !/^\d{4}-\d{2}-\d{2}$/.test(focus.updatedAt ?? "")) errors.push("Current focus needs a headline, text, and update date");
-  if (!paths.get("introduction")?.tagline) errors.push("Introduction needs a tagline");
+  if (!focus?.headline || !focus.text || !focus.currentWork) errors.push("Current focus needs a headline, text, and current-work summary");
+  if (focus?.statusRecord && (resolve(focus.statusRecord)?.schema !== "task" || !resolve(focus.statusRecord)?.fields?.started_at)) errors.push("Current focus status needs a dated task record");
+  if (!paths.get("introduction")?.title || !paths.get("introduction")?.text) errors.push("Introduction needs its question and text");
   if (!paths.get("gap")?.text) errors.push("Gap chapter needs a current summary");
   for (const record of Object.values(records)) for (const field of ["statements", "homeSummary", "aboutSummary", "overviewSummary", "homeImage", "overviewLabel", "overviewNote", "current_focus"]) if (field in record.fields) errors.push(`${record.id}: page-specific field ${field} remains in the record`);
   if (errors.length) throw new Error(`Invalid story:\n${errors.join("\n")}`);
