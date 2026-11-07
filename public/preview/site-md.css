@@ -55,3 +55,7 @@
   .home-gap-action{font-size:.82rem}
 }
 @media(max-width:380px){.home-gap{grid-template-columns:1fr}.home-gap>img{display:none}.home-intro h1{font-size:2.4rem}}
+
+/* Text links use one arrow size and alignment across cards and sections. */
+.section-title a,.text-link,.figure a,.record-card small{display:inline-flex;align-items:center;gap:5px;vertical-align:middle}
+.section-title a svg,.text-link svg,.figure a svg,.record-card small svg{width:14px;height:14px}
