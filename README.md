@@ -1,14 +1,12 @@
 # Understand and improve unmet needs in Stockton.
 
-# Understand and improve unmet needs in Stockton.
-
 We start by identifying a gap, learning what’s happening, and taking useful action. See clearly. Act locally.
 
 Crossover Stockton begins with an unmet need in the real world. We examine evidence, show up, document what happened, and use what we learn to choose the next useful step. We do not need a complete picture or a promised solution before we begin. **The work discovers the work.**
 
 ## Current gap and focus
 
-Our one active gap is **street dogs and access to care**. Dogs on Stockton’s streets need care, people trying to help them need workable paths to services, and people with pets may face barriers to shelter. Earlier candidate gaps are not separate active projects; pet-inclusive shelter is part of this gap’s context.
+Our one active gap is **street dogs and access to care**. Dogs on Stockton’s streets need care, people trying to help them need workable paths to services, and people with pets may face barriers to shelter. 
 
 Our current focus is **Understanding the Gap**: learning about dogs on the streets, the care available, and where needs may be going unmet. This is a changeable description on the gap record and its Overview, not a separate collection or permanent goal structure. As the work teaches us more, the focus can change while dated records of earlier work remain.
 
