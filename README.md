@@ -1,6 +1,8 @@
 # Crossover Stockton
 
-**See clearly. Act locally.**
+# Understand and improve unmet needs in Stockton.
+
+We start by identifying a gap, learning what’s happening, and taking useful action. See clearly. Act locally.
 
 AI, robotics, and automation create new possibilities, while people and animals still have needs that are not being met. Crossover aims to help bring post-scarcity into being by engineering practical solutions, starting in Stockton. We show up, learn what is happening, take a useful action, and let that work reveal the next step.
 
