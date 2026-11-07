@@ -128,10 +128,11 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .gap-overview .gap-hero .hero-copy h2{font-size:clamp(2.15rem,3vw,3.35rem);line-height:1.08}
 .gap-overview .gap-hero .hero-copy p{margin-top:17px;color:#e0ebef;line-height:1.52}
 .gap-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:18px}
-.gap-fact{display:flex;flex-direction:column;gap:5px;min-width:0;padding:21px 23px;background:#fff;border:1px solid #dce6ec;border-radius:14px;color:#182a39}
+.gap-fact{display:flex;align-items:flex-start;gap:17px;min-width:0;padding:21px 23px;background:#fff;border:1px solid #dce6ec;border-radius:14px;color:#182a39}
+.gap-fact-content{display:flex;flex-direction:column;gap:5px;min-width:0}
 .gap-fact:hover{text-decoration:none;border-color:#86b9bf}
 .gap-fact strong{font-size:clamp(1.9rem,2.5vw,2.65rem);font-weight:600;line-height:1.1;letter-spacing:-.04em}
-.gap-fact span{font-weight:600;line-height:1.35}
+.gap-fact-label{font-weight:600;line-height:1.25}
 .gap-fact small{color:#586d7d;font-size:13px;line-height:1.4}
 .gap-overview-lower{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,58px);margin-top:35px}
 .gap-focus,.gap-finding{border-top:2px solid #b8cdd3;padding-top:22px}
@@ -153,9 +154,13 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .gap-fact{border-top:4px solid #1bbcae;background:linear-gradient(180deg,#f8fcfc,#fff 65%)}
 .gap-fact:nth-child(2){border-top-color:#3985f5;background:linear-gradient(180deg,#f8faff,#fff 65%)}
 .gap-fact:nth-child(3){border-top-color:#a465eb;background:linear-gradient(180deg,#fcf9ff,#fff 65%)}
-.gap-fact strong{font-size:clamp(2.15rem,2.8vw,2.85rem)}
-.gap-fact span{font-size:1.08rem}
-.gap-fact small{font-size:14px}
+.gap-fact strong{font-size:clamp(1.9rem,2.3vw,2.35rem)}
+.gap-fact-label{font-size:21px}
+.gap-fact small{font-size:16px}
+.gap-fact-icon{display:grid;place-items:center;flex:none;width:42px;height:42px;color:#07998f}
+.gap-fact-icon svg{width:38px;height:38px;stroke-width:1.75}
+.gap-fact:nth-child(2) .gap-fact-icon{color:#397de0}
+.gap-fact:nth-child(3) .gap-fact-icon{color:#9256d0}
 .gap-focus h2,.gap-finding h2{font-size:clamp(1.7rem,2.25vw,2.25rem)}
 .gap-focus p,.gap-finding p{font-size:1.08rem}
 .gap-record-info{display:flex;align-items:flex-start;gap:14px}
@@ -174,3 +179,4 @@ code,pre{font-family:"IBM Plex Sans","Segoe UI",sans-serif}
 .about-starting p,.about-founder-compact p{font-size:17px}
 .row p,.list-card p{font-size:16px}
 @media(max-width:760px){.page-heading h1,.main-inner:has(.gap-overview) .page-heading h1{font-size:36px}.page-heading p{font-size:16px}.home-link-copy strong{font-size:22px}.home-link-copy small{font-size:16px}.about-starting h2,.about-founder-compact h2{font-size:22px}.about-starting p,.about-founder-compact p{font-size:16px}}
+@media(max-width:760px){.gap-fact-label{font-size:20px}.gap-fact small{font-size:15px}}
