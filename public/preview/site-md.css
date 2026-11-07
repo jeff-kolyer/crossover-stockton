@@ -41,22 +41,31 @@
   .home-shell .top{padding:0 18px}
   .home-shell .mobile-logo{font-size:.74rem;gap:7px}
   .home-shell .mobile-logo img{width:30px;height:30px}
-  .home-splash{min-height:calc(100svh - 66px);padding:34px 20px 25px}
-  .home-background{object-position:62% center}
-  .home-shade{background:linear-gradient(180deg,rgba(8,30,36,.72),rgba(8,30,36,.62) 52%,rgba(8,30,36,.5))}
-  .home-intro{max-width:none}
-  .home-intro h1{font-size:clamp(2.45rem,10vw,4.1rem);margin-bottom:19px;max-width:13ch}
-  .home-intro p{font-size:1.03rem;line-height:1.5}
-  .home-gap{grid-template-columns:96px minmax(0,1fr);max-width:100%;margin-top:30px}
-  .home-gap>img{width:96px;min-height:218px}
-  .home-gap-copy{padding:15px}
-  .home-gap-copy strong{font-size:1.22rem}
-  .home-gap-copy>span:not(.home-gap-label):not(.home-gap-action){font-size:.78rem}
-  .home-gap-copy .home-gap-status{font-size:.72rem!important}
-  .home-gap-action{font-size:.82rem}
+  .home-splash{min-height:0;padding:0 0 28px;display:flex;justify-content:flex-start;overflow:visible;background:#f5f9f9;color:#14232e}
+  .home-intro{order:1;max-width:none;padding:31px 22px 34px;background:#0c3035;color:#fff}
+  .home-intro h1{font-size:clamp(2.35rem,9.2vw,3rem);margin-bottom:18px;max-width:15ch}
+  .home-intro p{font-size:1rem;line-height:1.55}
+  .home-background{order:2;position:relative;inset:auto;z-index:auto;width:100%;height:240px;object-position:center 43%}
+  .home-shade{display:none}
+  .home-gap{order:3;display:flex;flex-direction:column;max-width:none;margin:18px 18px 0;border-radius:10px}
+  .home-gap>img{width:100%;height:190px;min-height:0;object-position:center 40%}
+  .home-gap-copy{padding:22px;gap:9px}
+  .home-gap-copy strong{font-size:1.55rem}
+  .home-gap-copy>span:not(.home-gap-label):not(.home-gap-action){font-size:.95rem;line-height:1.5}
+  .home-gap-copy .home-gap-status{font-size:.84rem!important}
+  .home-gap-action{font-size:1rem}
 }
-@media(max-width:380px){.home-gap{grid-template-columns:1fr}.home-gap>img{display:none}.home-intro h1{font-size:2.4rem}}
+@media(max-width:380px){.home-intro h1{font-size:2.35rem}}
 
 /* Text links use one arrow size and alignment across cards and sections. */
 .section-title a,.text-link,.figure a,.record-card small{display:inline-flex;align-items:center;gap:5px;vertical-align:middle}
 .section-title a svg,.text-link svg,.figure a svg,.record-card small svg{width:14px;height:14px}
+
+.crumbs-desktop{display:flex;align-items:center;gap:8px;min-width:0}
+.crumbs-mobile-back{display:none}
+@media(max-width:760px){
+  .crumbs{margin-bottom:17px}
+  .crumbs-desktop{display:none}
+  .crumbs .crumbs-mobile-back{display:inline-flex;align-items:center;gap:5px;font-size:.9rem}
+  .crumbs-mobile-back svg{transform:rotate(180deg)}
+}
