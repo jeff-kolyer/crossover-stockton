@@ -25,7 +25,14 @@ const recordsFor=part=>part.records?.map(lookup).filter(Boolean)||records.filter
 const date=value=>value?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${String(value).slice(0,10)}T12:00:00Z`)):'';
 const metricValue=record=>{const value=record?.fields?.value??record?.fields?.reportedValue;return typeof value==='number'?new Intl.NumberFormat('en-US').format(value):value==null?'Unknown':String(value)};
 const navLinks=current=>menu.map(item=>`<a href="${href(item.page)}" ${current===`/${item.page}`?'aria-current="page"':''}>${icon(item.icon)}<span>${esc(item.label)}</span></a>`).join('');
-const breadcrumbs=(current,title,from)=>{if(current==='/home')return '';const origin=menu.find(item=>`/${item.page}`===from),parent=origin&&from!=='/overview'?`<a href="${href(origin.page)}">${esc(origin.label)}</a>${icon('chevron')}`:'';return `<nav class="crumbs" aria-label="Breadcrumb"><a href="${href('home')}">Crossover</a>${icon('chevron')}<a href="${href('overview')}">${esc(gap.title)}</a>${icon('chevron')}${parent}<span aria-current="page">${esc(current==='/overview'?'Overview':title)}</span></nav>`};
+const breadcrumbs=(current,title,from)=>{
+  if(current==='/home')return '';
+  const origin=menu.find(item=>`/${item.page}`===from);
+  const parent=origin&&from!=='/overview'?`<a href="${href(origin.page)}">${esc(origin.label)}</a>${icon('chevron')}`:'';
+  const backPage=origin?.page||(['/overview','/about'].includes(current)?'home':'overview');
+  const backLabel=origin?.label||(backPage==='home'?'Crossover':'Overview');
+  return `<nav class="crumbs" aria-label="Breadcrumb"><div class="crumbs-desktop"><a href="${href('home')}">Crossover</a>${icon('chevron')}<a href="${href('overview')}">${esc(gap.title)}</a>${icon('chevron')}${parent}<span aria-current="page">${esc(current==='/overview'?'Overview':title)}</span></div><a class="crumbs-mobile-back" href="${href(backPage)}" aria-label="Back to ${esc(backLabel)}">${icon('chevron')}<span>${esc(backLabel)}</span></a></nav>`;
+};
 const heading=(title,description,current,from)=>`${breadcrumbs(current,title,from)}<header class="page-intro"><h1>${esc(title)}</h1>${description?`<p>${esc(description)}</p>`:''}</header>`;
 const card=(record,from)=>`<a class="record-card" href="${recordHref(record.id,from)}"><strong>${esc(record.title)}</strong><p>${esc(short(recordText(record)))}</p><small>Open record ${icon('arrow')}</small></a>`;
 const recordList=(items,from,grid=false)=>items.length?`<div class="${grid?'record-grid':'record-list'}">${items.map(item=>card(item,from)).join('')}</div>`:'<p class="empty">No public records are listed here yet.</p>';
