@@ -1,224 +1,28 @@
 (() => {
   "use strict";
 
-  const sectionPath = /^\/gaps\/street-dogs\/(overview|objectives|metrics|activity|places|organizations|initiatives|findings|sources)\/$/;
-  const recordPathForWorkspace = /^\/(?:record|organization)\/([^/]+)\/$/;
-  const sectionMatch = location.pathname.match(sectionPath);
-  const recordMatch = location.pathname.match(recordPathForWorkspace);
-  const generalSections = { "/gaps/": "overview", "/activity/": "activity", "/places/": "places", "/organizations/": "organizations", "/explore/": "sources", "/about/": "about" };
-  const workspaceRoute = sectionMatch?.[1] || (recordMatch ? `record/${recordMatch[1]}` : generalSections[location.pathname]);
-  if (workspaceRoute) {
-    location.replace(`/#${workspaceRoute}`);
-    return;
+  // Published pages keep readable HTML for visitors without JavaScript. With JavaScript,
+  // mount the same application used at / so direct links and in-page navigation agree.
+  const route = location.pathname;
+  const supported = /^\/(?:about|gaps|activity|places|organizations|explore)\/$/.test(route)
+    || /^\/gaps\/[^/]+\/(?:overview|activity|findings|metrics|places|organizations|initiatives|sources)\/$/.test(route)
+    || /^\/(?:record|organization)\/[^/]+\/$/.test(route);
+  if (!supported) return;
+
+  document.body.classList.add("spa-active");
+  document.body.insertAdjacentHTML("afterbegin", '<div id="app"><div class="loading">Loading Crossover…</div></div>');
+  document.querySelector(".skip")?.setAttribute("href", "#content");
+  for (const fallbackStyle of document.head.querySelectorAll("style")) fallbackStyle.remove();
+  const style = document.createElement("style");
+  style.textContent = "body.spa-active > .site-header,body.spa-active > #main,body.spa-active > .footer{display:none!important}";
+  document.head.append(style);
+  for (const href of ["/preview/ai-variant.css", "/preview/ai-variant-modern.css"]) {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.append(link);
   }
-
-  const oldInvestigationSections = {
-    findings: "/explore/", questions: "/", objectives: "/", "next-actions": "/",
-    fieldwork: "/activity/", organizations: "/organizations/", locations: "/places/",
-    evidence: "/explore/", articles: "/gaps/",
-  };
-  const oldSection = location.pathname === "/investigation/" ? oldInvestigationSections[location.hash.slice(1)] : null;
-  if (oldSection && (location.pathname !== oldSection || location.hash)) {
-    location.replace(oldSection);
-    return;
-  }
-
-  if (location.pathname === "/projects/" || location.pathname.startsWith("/projects/street-dogs/")) {
-    location.replace(location.pathname.replace("/projects/", "/gaps/") + location.search + location.hash);
-    return;
-  }
-
-  const legacyRoute = location.hash.startsWith("#/") ? location.hash.slice(1) : "";
-  if (legacyRoute && !legacyRoute.startsWith("//") && legacyRoute.split("/").every((part) => /^[a-z0-9%_-]*$/i.test(part))) {
-    location.replace((legacyRoute === "/" ? "/" : legacyRoute.endsWith("/") ? legacyRoute : `${legacyRoute}/`) + location.search);
-    return;
-  }
-
-  const menu = document.getElementById("menu-toggle");
-  menu?.addEventListener("click", () => {
-    const sidebar = document.querySelector(".need-sidebar");
-    const open = sidebar?.classList.toggle("is-open") ?? false;
-    menu.setAttribute("aria-expanded", String(open));
-  });
-  document.addEventListener("click", (event) => {
-    const button = event.target instanceof Element ? event.target.closest("#sidebar-toggle") : null;
-    if (!button) return;
-    const sidebar = button.closest(".need-sidebar");
-    const open = sidebar.classList.toggle("is-open");
-    button.setAttribute("aria-expanded", String(open));
-    button.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  });
-
-  document.addEventListener("click", (event) => {
-    const button = event.target instanceof Element ? event.target.closest("#need-menu-toggle") : null;
-    if (!button) return;
-    const sidebar = button.closest(".need-sidebar");
-    const open = sidebar?.classList.toggle("is-open") ?? false;
-    button.setAttribute("aria-expanded", String(open));
-    button.setAttribute("aria-label", open ? "Close sections" : "Open sections");
-  });
-
-  const sections = new Set(["/", "/gaps/", "/activity/", "/organizations/", "/places/", "/explore/", "/about/"]);
-  const projectSectionPath = /^\/gaps\/[^/]+\/[^/]+\/$/;
-  const recordPath = /^\/(?:record|organization)\/[^/]+\/$/;
-  const cache = new Map();
-  cache.set(location.pathname, Promise.resolve(document.cloneNode(true)));
-  const scrollPositions = new Map();
-  let displayedPath = location.pathname;
-  let navigationId = 0;
-  history.scrollRestoration = "manual";
-
-  const enhanceExplore = () => {
-    const list = document.getElementById("explore-results");
-    const search = document.getElementById("explore-search");
-    const type = document.getElementById("explore-type");
-    const sort = document.getElementById("explore-sort");
-    const count = document.getElementById("explore-count");
-    if (!list || !search || !type || !sort || !count) return;
-    const rows = [...list.querySelectorAll(".record-row")];
-    const update = () => {
-      const query = search.value.toLowerCase().trim();
-      const matching = rows.filter((row) =>
-        (type.value === "all" || row.dataset.schema === type.value) &&
-        (!query || row.dataset.search.includes(query))
-      );
-      matching.sort((a, b) => {
-        if (sort.value.startsWith("title")) {
-          const order = a.dataset.title.localeCompare(b.dataset.title, undefined, { sensitivity: "base", numeric: true }) || a.dataset.id.localeCompare(b.dataset.id);
-          return sort.value === "title-desc" ? -order : order;
-        }
-        const aDate = a.dataset.sortDate, bDate = b.dataset.sortDate;
-        if (!aDate) return bDate ? 1 : a.dataset.id.localeCompare(b.dataset.id);
-        if (!bDate) return -1;
-        return (sort.value === "oldest" ? aDate.localeCompare(bDate) : bDate.localeCompare(aDate)) || a.dataset.id.localeCompare(b.dataset.id);
-      });
-      if (matching.length) list.replaceChildren(...matching);
-      else {
-        const empty = document.createElement("p");
-        empty.className = "empty";
-        empty.textContent = "No matching records.";
-        list.replaceChildren(empty);
-      }
-      count.textContent = `${matching.length} of ${rows.length} records`;
-    };
-    search.addEventListener("input", update);
-    type.addEventListener("change", update);
-    sort.addEventListener("change", update);
-  };
-
-  const destination = (link) => {
-    if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return null;
-    const url = new URL(link.href, location.href);
-    if (url.origin !== location.origin || url.search || (url.pathname === displayedPath && url.hash)) return null;
-    return sections.has(url.pathname) || projectSectionPath.test(url.pathname) || recordPath.test(url.pathname) ? url : null;
-  };
-
-  const loadPage = (url) => {
-    const key = url.pathname;
-    if (!cache.has(key)) {
-      cache.set(key, fetch(key, { credentials: "same-origin" }).then(async (response) => {
-        if (!response.ok) throw new Error(`Page request failed: ${response.status}`);
-        const page = new DOMParser().parseFromString(await response.text(), "text/html");
-        if (!page.querySelector("main#main") || !page.querySelector('link[rel="canonical"]')) throw new Error("Page content is incomplete");
-        return page;
-      }).catch((error) => { cache.delete(key); throw error; }));
-    }
-    return cache.get(key);
-  };
-
-  const syncMeta = (page, selector) => {
-    const incoming = page.querySelector(selector);
-    const current = document.querySelector(selector);
-    if (!incoming) { current?.remove(); return; }
-    if (current) current.replaceWith(document.importNode(incoming, true));
-    else document.head.append(document.importNode(incoming, true));
-  };
-
-  const syncBreadcrumb = () => {
-    if (history.state?.breadcrumbContext !== "explore" || !recordPath.test(location.pathname)) return;
-    const breadcrumb = document.querySelector("main#main .breadcrumbs");
-    const title = document.querySelector("main#main h1")?.textContent?.trim();
-    if (!breadcrumb || !title) return;
-    const home = document.createElement("a");
-    home.href = "/";
-    home.textContent = "Home";
-    const explore = document.createElement("a");
-    explore.href = "/explore/";
-    explore.textContent = "Explore";
-    const current = document.createElement("span");
-    current.setAttribute("aria-current", "page");
-    current.textContent = title;
-    breadcrumb.replaceChildren(home, document.createTextNode(" / "), explore, document.createTextNode(" / "), current);
-  };
-
-  const scrollToDestination = (url, fallback = 0) => {
-    if (url.hash) {
-      let id = url.hash.slice(1);
-      try { id = decodeURIComponent(id); } catch { /* Keep the literal fragment. */ }
-      const target = document.getElementById(id);
-      if (target) { target.scrollIntoView(); return; }
-    }
-    window.scrollTo(0, fallback);
-  };
-
-  const display = (page, url, scrollY, focusMain) => {
-    const main = document.importNode(page.querySelector("main#main"), true);
-    document.querySelector("main#main").replaceWith(main);
-    document.getElementById("site-nav").innerHTML = page.getElementById("site-nav").innerHTML;
-    document.getElementById("footer-nav").innerHTML = page.getElementById("footer-nav").innerHTML;
-    document.getElementById("site-nav").classList.remove("open");
-    menu?.setAttribute("aria-expanded", "false");
-    document.title = page.title;
-    syncMeta(page, 'meta[name="description"]');
-    syncMeta(page, 'meta[name="robots"]');
-    syncMeta(page, 'link[rel="canonical"]');
-    displayedPath = url.pathname;
-    syncBreadcrumb();
-    enhanceExplore();
-    scrollToDestination(url, scrollY);
-    if (focusMain) main.focus({ preventScroll: true });
-  };
-
-  const navigate = async (url, push, restoreScroll = 0) => {
-    const requestId = ++navigationId;
-    try {
-      const page = await loadPage(url);
-      if (requestId !== navigationId) return;
-      if (push) {
-        const fromExplore = recordPath.test(url.pathname) &&
-          (displayedPath === "/explore/" || history.state?.breadcrumbContext === "explore");
-        history.pushState(fromExplore ? { breadcrumbContext: "explore" } : null, "", url.pathname + url.hash);
-      }
-      display(page, url, restoreScroll, push);
-    } catch {
-      if (requestId !== navigationId) return;
-      if (push) location.assign(url.href);
-      else location.reload();
-    }
-  };
-
-  document.addEventListener("click", (event) => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const link = event.target instanceof Element ? event.target.closest("a[href]") : null;
-    const url = destination(link);
-    if (!url) return;
-    event.preventDefault();
-    if (url.pathname === displayedPath) { window.scrollTo(0, 0); return; }
-    scrollPositions.set(displayedPath, window.scrollY);
-    navigate(url, true);
-  });
-
-  window.addEventListener("popstate", () => {
-    if (location.pathname === displayedPath) { scrollToDestination(new URL(location.href)); return; }
-    scrollPositions.set(displayedPath, window.scrollY);
-    navigate(new URL(location.href), false, scrollPositions.get(location.pathname) ?? 0);
-  });
-
-  document.addEventListener("pointerover", (event) => {
-    const link = event.target instanceof Element ? event.target.closest("#site-nav a[href], .need-section-links a[href], .card h3 a[href], .row h3 a[href]") : null;
-    const url = destination(link);
-    if (url && url.pathname !== displayedPath) loadPage(url).catch(() => {});
-  }, { passive: true });
-  enhanceExplore();
-  syncBreadcrumb();
+  const script = document.createElement("script");
+  script.src = "/preview/ai-variant.js";
+  document.body.append(script);
 })();

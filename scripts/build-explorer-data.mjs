@@ -17,7 +17,6 @@ try {
     people: siteModel.getPeople(),
     organizations: siteModel.getOrganizations(),
     gaps: siteModel.getGaps(),
-    objectives: siteModel.getAllObjectives(),
     tasks: siteModel.getAllTasks(),
     activities: siteModel.getAllActivities(),
     findings: siteModel.getAllFindings(),

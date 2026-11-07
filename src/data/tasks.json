@@ -18,11 +18,6 @@
     "completed_at": "2026-10-07",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "evaluate-existing-responses",
-      "pursue-practical-improvements"
     ]
   },
   {
@@ -46,10 +41,6 @@
     "completed_at": "2026-10-12",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "pursue-practical-improvements"
     ]
   },
   {
@@ -71,10 +62,6 @@
     "completed_at": "2026-10-14",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "pursue-practical-improvements"
     ]
   },
   {
@@ -96,10 +83,6 @@
     "completed_at": "2026-10-20",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care"
     ]
   },
   {
@@ -124,10 +107,6 @@
     "completed_at": "2026-11-02",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care"
     ]
   },
   {
@@ -151,10 +130,6 @@
     "started_at": "2026-11-04",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care"
     ]
   },
   {
@@ -179,9 +154,6 @@
     "activity_record_ids": [],
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent"
     ]
   },
   {
@@ -208,9 +180,6 @@
     "activity_record_ids": [],
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent"
     ]
   },
   {
@@ -246,11 +215,6 @@
     ],
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "evaluate-existing-responses",
-      "pursue-practical-improvements"
     ]
   },
   {
@@ -275,10 +239,6 @@
     "activity_record_ids": [],
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "pursue-practical-improvements"
     ]
   },
   {
@@ -301,9 +261,6 @@
     "activity_record_ids": [],
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care"
     ]
   },
   {
@@ -331,11 +288,6 @@
     ],
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care",
-      "pursue-practical-improvements"
     ]
   }
 ]

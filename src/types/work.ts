@@ -13,25 +13,10 @@ export interface TaskRecord {
   location_ids: string[];
   map_reference_location_ids?: string[];
   organization_ids: string[];
-  objective_ids: string[];
   basis_record_ids: string[];
   activity_record_ids: string[];
   completed_at?: string;
   checklist?: string[];
-}
-
-export interface ObjectiveRecord {
-  id: string;
-  gap_ids: string[];
-  title: string;
-  description: string;
-  guiding_questions: Array<{ title: string; description: string }>;
-  task_ids: string[];
-  activity_record_ids: string[];
-  evidence_record_ids: string[];
-  finding_ids: string[];
-  measurement_ids: string[];
-  initiative_ids: string[];
 }
 
 export interface FindingRecord {
@@ -46,7 +31,6 @@ export interface FindingRecord {
   article_id?: string;
   supporting_record_ids: string[];
   contradicting_record_ids: string[];
-  objective_ids: string[];
   related_task_ids: string[];
   related_initiative_ids: string[];
   location_ids: string[];

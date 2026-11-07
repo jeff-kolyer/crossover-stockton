@@ -6,7 +6,7 @@ const read = (name) => JSON.parse(readFileSync(`src/data/${name}.json`, "utf8"))
 const datasets = [
   ["crossover", "identity"], ["people", "person"], ["principles", "principle"], ["methods", "method"],
   ["gaps", "gap"],
-  ["objectives", "objective"], ["tasks", "task"], ["activities", "activity"], ["evidence", "evidence"],
+  ["tasks", "task"], ["activities", "activity"], ["evidence", "evidence"],
   ["findings", "finding"], ["organizations", "organization"],
   ["locations", "location"], ["measurements", "measurement"],
   ["claims", "claim"],
@@ -64,20 +64,15 @@ for (const task of records.get("tasks") ?? []) {
   if (taskOrders.has(key)) errors.push(`task:${task.id} order_by_id duplicates task:${taskOrders.get(key)}`);
   taskOrders.set(key, task.id);
 }
-for (const prop of ["objective_ids", "organization_ids", "location_ids", "map_reference_location_ids", "basis_record_ids", "activity_record_ids"]) {
-  const target = { objective_ids: "objectives", organization_ids: "organizations", location_ids: "locations", map_reference_location_ids: "locations", basis_record_ids: "records", activity_record_ids: "activities" }[prop];
+for (const prop of ["organization_ids", "location_ids", "map_reference_location_ids", "basis_record_ids", "activity_record_ids"]) {
+  const target = { organization_ids: "organizations", location_ids: "locations", map_reference_location_ids: "locations", basis_record_ids: "records", activity_record_ids: "activities" }[prop];
   checkRefs(records.get("tasks"), target, prop, "task");
 }
-checkRefs(records.get("objectives"), "gaps", "gap_ids", "objective");
-for (const [prop, target] of [["task_ids", "tasks"], ["activity_record_ids", "activities"], ["evidence_record_ids", "records"], ["finding_ids", "findings"]]) checkRefs(records.get("objectives"), target, prop, "objective");
-checkRefs(records.get("objectives"), "measurements", "measurement_ids", "objective");
-checkRefs(records.get("objectives"), "initiatives", "initiative_ids", "objective");
 const currentGaps = records.get("gaps") ?? [];
 if (currentGaps.length < 1 || currentGaps.filter((gap) => gap.default).length !== 1) errors.push("gaps: expected exactly one default gap");
 if (new Set(currentGaps.map((gap) => gap.slug)).size !== currentGaps.length) errors.push("gaps: duplicate slug");
 for (const prop of ["supporting_record_ids", "contradicting_record_ids"]) checkRefs(records.get("findings"), "records", prop, "finding");
 checkRefs(records.get("findings"), "tasks", "related_task_ids", "finding");
-checkRefs(records.get("findings"), "objectives", "objective_ids", "finding");
 checkRefs(records.get("claims"), "records", "sourceRecordIds", "claim");
 checkRefs(records.get("claims"), "gaps", "gap_id", "claim");
 checkRefs(records.get("claims"), "measurements", "measurementId", "claim");

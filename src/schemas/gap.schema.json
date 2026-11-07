@@ -91,13 +91,34 @@
     },
     "default": {
       "type": "boolean"
+    },
+    "current_focus": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "updated_at": {
+          "$ref": "./common.schema.json#/$defs/date"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "updated_at"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
     "id",
     "slug",
     "title",
-    "summary"
+    "summary",
+    "current_focus"
   ],
   "additionalProperties": true
 }

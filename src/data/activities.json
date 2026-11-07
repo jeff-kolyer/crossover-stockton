@@ -26,11 +26,7 @@
       "as_of": "2026-11-02"
     },
     "report_record_ids": [],
-    "supports": [],
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care"
-    ]
+    "supports": []
   },
   {
     "id": "crossover-2026-11-02-sas-field-call-records-received",
@@ -65,11 +61,7 @@
     },
     "report_record_ids": [],
     "supports": [],
-    "confirmed_at": "2026-11-03",
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care"
-    ]
+    "confirmed_at": "2026-11-03"
   },
   {
     "id": "crossover-2026-10-14-sas-volunteer-application",
@@ -100,11 +92,7 @@
     "report_record_ids": [
       "crossover-2026-10-14-sas-first-visit"
     ],
-    "supports": [],
-    "objective_ids": [
-      "understand-access-to-care",
-      "pursue-practical-improvements"
-    ]
+    "supports": []
   },
   {
     "id": "crossover-2026-10-07-street-dogs-volunteer-application",
@@ -133,12 +121,7 @@
       "as_of": "2026-10-30"
     },
     "report_record_ids": [],
-    "supports": [],
-    "objective_ids": [
-      "understand-access-to-care",
-      "evaluate-existing-responses",
-      "pursue-practical-improvements"
-    ]
+    "supports": []
   },
   {
     "id": "crossover-2026-10-12-doggie-day-out-inquiry",
@@ -167,11 +150,6 @@
       "as_of": "2026-10-30"
     },
     "report_record_ids": [],
-    "supports": [],
-    "objective_ids": [
-      "understand-access-to-care",
-      "pursue-practical-improvements",
-      "evaluate-existing-responses"
-    ]
+    "supports": []
   }
 ]

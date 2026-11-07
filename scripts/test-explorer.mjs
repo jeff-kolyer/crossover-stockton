@@ -21,7 +21,7 @@ test("published counts come from unique records, and schema metadata names types
   assert.ok(evidence?.recordIds.length > 0);
   assert.equal(evidence.recordIds.length, new Set(evidence.recordIds).size);
   assert.equal(published.records[evidence.recordIds[0]].typeName, schemas.evidence.title);
-  for (const id of ["tasks", "objectives", "findings", "locations", "initiatives"]) {
+  for (const id of ["tasks", "findings", "locations", "initiatives"]) {
     const collection = published.collections.find((item) => item.id === id);
     assert.ok(collection?.recordIds.length > 0);
     assert.equal(collection.recordIds.length, new Set(collection.recordIds).size);

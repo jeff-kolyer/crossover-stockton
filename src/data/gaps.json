@@ -282,7 +282,12 @@
         "What care reaches dogs living with people outside?"
       ],
       "preferred_image": "/images/variants/clean/dog-sidewalk.jpg",
-      "default": true
+      "default": true,
+      "current_focus": {
+        "title": "Understanding the Gap",
+        "description": "We're examining public records, checking reported conditions firsthand, and learning how dogs on Stockton's streets reach care.",
+        "updated_at": "2026-11-06"
+      }
     }
   ]
 }

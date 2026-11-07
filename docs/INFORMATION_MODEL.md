@@ -10,9 +10,9 @@ The Model describes Crossover and its evidence without prescribing a web page. S
 
 A **need** is a potentially unmet human, animal, or community requirement; it is not proof of severity. A **reported condition** is a source-attributed description of a situation. An **affected population** is the people or animals to whom a condition may apply, with scope and count kept separate. **Service capacity** describes how much care a service can actually provide in a period; a proposed capacity is not operational capacity. A **resource** is something potentially available to meet a need. An **assessment** is Crossover's current interpretation with its date, basis, and limitations. A **knowledge gap** is an explicit unanswered question. These may link to a need but remain distinct from it.
 
-## Gaps and objectives
+## Gap and current focus
 
-A **gap** organizes work around an unmet need. An **objective** states what Crossover is trying to establish or improve and links to tasks, activity, evidence, findings, metrics, and initiatives. Its guiding questions are text within the objective, not separate records. Completing a task does not fulfill an objective. The current gap is street dogs and access to care. The gap record carries its own slug and default landing designation; there is no separate project wrapper.
+A **gap** organizes work around an unmet need. The current gap is street dogs and access to care. Its record carries a short `current_focus` statement, slug, and default landing designation. Tasks, activity, evidence, and findings link directly to the gap. There is no separate objective or project wrapper.
 
 ## Evidence and knowledge
 
@@ -45,7 +45,7 @@ Existing focus artwork uses `preferred_image`; thumbnails remain a separate comp
 ## Permitted relationships
 
 - A gap may reference reported conditions, assessments, services, organizations, and evidence.
-- An objective references tasks, actual activities, evidence, findings, metrics, and initiatives within the gap.
+- Tasks, actual activities, evidence, findings, metrics, and initiatives connect to the gap directly.
 - A finding references supporting or contradicting evidence IDs and keeps its limitation and review date. Unsupported findings are invalid.
 - An activity may reference its task, organization, location, and field report. A planned action may reference a future location but cannot be represented as a completed observation.
 - A claim or measurement references the source/evidence that reports it. Source attribution is not a verification flag.

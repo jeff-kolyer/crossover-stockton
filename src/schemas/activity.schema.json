@@ -185,13 +185,6 @@
       "type": "string",
       "minLength": 1,
       "description": "Optional preferred existing logo path or URL. Do not present an invented mark as an organization's official logo."
-    },
-    "objective_ids": {
-      "type": "array",
-      "items": {
-        "$ref": "./common.schema.json#/$defs/id"
-      },
-      "uniqueItems": true
     }
   },
   "required": [
@@ -201,8 +194,7 @@
     "summary",
     "source",
     "occurred_at",
-    "gap_ids",
-    "objective_ids"
+    "gap_ids"
   ],
   "additionalProperties": true
 }

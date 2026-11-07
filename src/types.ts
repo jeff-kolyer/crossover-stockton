@@ -162,6 +162,7 @@ export interface GapRecord extends VisualPreferences {
   default?: boolean;
   rank: number;
   summary: string;
+  current_focus?: { title: string; description: string; updated_at: string };
   what_we_are_seeing: string[];
   unknown_questions?: string[];
   why_icons?: Array<
@@ -260,7 +261,6 @@ export interface SourceRecord {
 export interface EvidenceRecord extends VisualPreferences {
   id: string;
   investigation_id?: string;
-  objective_ids?: string[];
   observed_dog_count?: number;
   coverage_id?: string;
   coverage_note?: string;

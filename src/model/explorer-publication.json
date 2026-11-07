@@ -26,7 +26,7 @@
       {
         "label": "Gaps",
         "route": "/gaps",
-        "purpose": "Choose a gap and follow its objectives, metrics, activity, findings, and sources."
+        "purpose": "Choose a gap and follow its activity, findings, metrics, and sources."
       },
       {
         "label": "Activity",
@@ -94,7 +94,6 @@
     "map_location_id",
     "gap_id",
     "gap_ids",
-    "objective_ids",
     "measurement_ids",
     "initiative_ids",
     "task_ids",
@@ -233,6 +232,7 @@
         "summary",
         "what_we_are_seeing",
         "current_state",
+        "current_focus",
         "sources",
         "updated_at",
         "organization_ids",
@@ -240,25 +240,6 @@
         "unknown_questions",
         "thumbnail_image",
         "default"
-      ]
-    },
-    {
-      "id": "objectives",
-      "schema": "objective",
-      "title": "Objectives",
-      "query": "objectives",
-      "fields": [
-        "id",
-        "gap_ids",
-        "title",
-        "description",
-        "measurement_ids",
-        "initiative_ids",
-        "guiding_questions",
-        "task_ids",
-        "activity_record_ids",
-        "evidence_record_ids",
-        "finding_ids"
       ]
     },
     {
@@ -276,7 +257,6 @@
         "type",
         "instructions",
         "gap_ids",
-        "objective_ids",
         "organization_ids",
         "location_ids",
         "map_reference_location_ids",
@@ -306,7 +286,6 @@
         "source",
         "outcome",
         "gap_ids",
-        "objective_ids",
         "organization_ids",
         "report_record_ids",
         "limitations"
@@ -324,7 +303,6 @@
         "status",
         "current",
         "gap_ids",
-        "objective_ids",
         "related_task_ids",
         "related_initiative_ids",
         "location_ids",
@@ -380,7 +358,6 @@
         "coverage_id",
         "coverage_note",
         "gap_ids",
-        "objective_ids",
         "organization_ids",
         "basis_record_ids",
         "report_record_ids",
@@ -571,6 +548,11 @@
     "guiding_questions": [
       "title",
       "description"
+    ],
+    "current_focus": [
+      "title",
+      "description",
+      "updated_at"
     ]
   },
   "fieldLabels": {
@@ -716,9 +698,10 @@
     "primary_goal": "Primary goal",
     "confirmed_at": "Receipt confirmed",
     "started_at": "Started",
-    "objective_ids": "Objectives",
     "task_ids": "Tasks",
     "guiding_questions": "Guiding questions",
-    "related_initiative_ids": "Related initiatives"
+    "completion_criteria": "Completion criteria",
+    "related_initiative_ids": "Related initiatives",
+    "current_focus": "Current focus"
   }
 }

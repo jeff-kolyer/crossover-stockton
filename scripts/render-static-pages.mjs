@@ -49,11 +49,15 @@ export function renderStaticPages(oneFile, feed, origin, navigationVersion) {
   const rerender = listeners.get("hashchange");
   if (!rerender) throw new Error("One-file renderer did not register navigation");
 
-  const shell = oneFile.slice(0, oneFile.indexOf('<script id="feed-data"'));
+  const fontPaths = ["Regular", "Medium", "SemiBold", "Bold"].map(name => `/fonts/IBMPlexSans-${name}.woff2`);
+  let fontIndex = 0;
+  const shell = oneFile.slice(0, oneFile.indexOf('<script id="feed-data"'))
+    .replace(/url\("data:font\/woff2;base64,[A-Za-z0-9+/=]+"\)/g, () => `url("${fontPaths[fontIndex++]}")`);
+  if (fontIndex !== fontPaths.length) throw new Error(`Expected ${fontPaths.length} embedded font files, found ${fontIndex}`);
   const records = Object.values(feed.records);
   const coreRoutes = ["/", "/gaps", "/activity", "/places", "/explore", "/organizations", "/about"];
   const routes = coreRoutes.map((route) => ({ route, sitemap: true }));
-  const needViews = ["overview", "objectives", "metrics", "activity", "places", "organizations", "initiatives", "findings", "sources"];
+  const needViews = ["overview", "activity", "findings", "metrics", "places", "organizations", "initiatives", "sources"];
   for (const record of records) {
     routes.push({ route: `/record/${encodeURIComponent(record.id)}`, sitemap: record.schema !== "organization" });
     if (record.schema === "organization") routes.push({ route: `/organization/${encodeURIComponent(record.id)}`, sitemap: true });

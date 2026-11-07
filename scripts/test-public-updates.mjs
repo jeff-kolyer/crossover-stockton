@@ -6,7 +6,6 @@ import { publicUpdateCategory, publicUpdateDate, selectPublicUpdates } from "../
 const readJson = async (name) => JSON.parse(await readFile(new URL(`../src/data/${name}.json`, import.meta.url), "utf8"));
 const needs = (await readJson("gaps")).records;
 const evidence = [...await readJson("evidence"), ...await readJson("activities")];
-const objectives = await readJson("objectives");
 const tasks = await readJson("tasks");
 const receiptId = "crossover-2026-11-02-sas-field-call-records-received";
 
@@ -16,7 +15,7 @@ test("the receipt is one activity shared by Activity and public Updates", () => 
   assert.equal(receipt?.public_update, true);
   assert.equal(receipt?.visibility, "public");
   assert.ok(receipt.basis_record_ids.includes("crossover-2026-10-20-sas-field-call-records-request"));
-  assert.ok(objectives.some((objective) => objective.activity_record_ids.includes(receiptId)));
+  assert.ok(receipt.gap_ids.includes("dogs-safe-placement"));
   assert.ok(needs.find((need) => need.id === "dogs-safe-placement").record_ids.includes(receiptId));
   const update = selectPublicUpdates(needs, evidence).find((item) => item.record.id === receiptId);
   assert.equal(update.record, receipt);

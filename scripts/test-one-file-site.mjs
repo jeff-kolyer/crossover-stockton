@@ -28,6 +28,9 @@ test("the current site is self-contained and uses the new image set", () => {
   assert.ok(html.includes('"sources","Sources"'));
   assert.ok(!Object.values(bundledFeed.records).some(({ schema }) => schema === "article" || schema === "story"));
   assert.equal(/<script[^>]+src=|<link[^>]+href=|<img[^>]+src="\//i.test(html), false);
+  assert.equal((html.match(/data:font\/woff2;base64,/g) || []).length, 4);
+  assert.ok(html.includes('font-family:"IBM Plex Sans"'));
+  assert.ok(!html.includes("fonts.googleapis.com"));
   assert.equal(html.includes("__EMBEDDED_"), false);
   const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
   new Script(scripts.at(-1)[1], { filename: "one-file-site.html" });
@@ -51,7 +54,9 @@ test("the clean preview mirrors the current site", () => {
   assert.deepEqual(Object.keys(bundledFeed.records), Object.keys(feed.records));
   assert.equal(bundledFeed.records["street-dog-immediate-welfare"], undefined);
   assert.ok(cleanAssets["/images/variants/clean/dog-sidewalk.jpg"]?.startsWith("data:image/jpeg;base64,"));
-  assert.ok(Object.keys(cleanAssets).every(path => path.startsWith("/images/variants/clean/") || path.startsWith("/images/icons/") || path.startsWith("/images/logo_")));
+  assert.ok(cleanAssets["/images/variants/clean/dog-park.jpg"]?.startsWith("data:image/jpeg;base64,"));
+  assert.ok(cleanAssets["/images/about/about-the-founder.jpg"]?.startsWith("data:image/jpeg;base64,"));
+  assert.ok(Object.keys(cleanAssets).every(path => path.startsWith("/images/variants/clean/") || path === "/images/about/about-the-founder.jpg" || path.startsWith("/images/icons/") || path.startsWith("/images/logo_")));
   assert.deepEqual(bundledFeed, feed);
   assert.ok(cleanHtml.includes(".story-opening{"));
   const scripts = [...cleanHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];

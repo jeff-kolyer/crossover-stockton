@@ -34,11 +34,11 @@ const redirects = new Map([
   ["/articles/friction-of-volunteering/", "/projects/street-dogs/findings/"],
   ["/articles/public-access-to-stray-dog-information/", "/projects/street-dogs/findings/"],
   ["/articles/caring-for-stocktons-dogs/", "/projects/street-dogs/initiatives/"],
-  ["/articles/where-are-stray-dogs/", "/projects/street-dogs/objectives/"],
+  ["/articles/where-are-stray-dogs/", "/projects/street-dogs/overview/"],
   ["/record/friction-of-volunteering/", "/projects/street-dogs/findings/"],
   ["/record/public-access-to-stray-dog-information/", "/projects/street-dogs/findings/"],
   ["/record/caring-for-stocktons-dogs/", "/projects/street-dogs/initiatives/"],
-  ["/record/where-are-stray-dogs/", "/projects/street-dogs/objectives/"],
+  ["/record/where-are-stray-dogs/", "/projects/street-dogs/overview/"],
   ["/needs/dogs-safe-placement/picture/", "/projects/street-dogs/overview/"],
   ["/needs/dogs-safe-placement/actions/", "/projects/street-dogs/activity/"],
   ["/needs/dogs-safe-placement/stories/", "/projects/street-dogs/overview/"],
@@ -51,8 +51,8 @@ const redirects = new Map([
   ["/action/", "/activity/"],
   ["/investigation/", "/"],
   ["/investigation/plan/", "/"],
-  ["/investigation/objectives/", "/projects/street-dogs/objectives/"],
-  ["/investigation/questions/", "/projects/street-dogs/objectives/"],
+  ["/investigation/objectives/", "/projects/street-dogs/overview/"],
+  ["/investigation/questions/", "/projects/street-dogs/overview/"],
   ["/investigation/activity/", "/activity/"],
   ["/investigation/findings/", "/explore/"],
   ["/investigation/evidence/", "/explore/"],
@@ -75,7 +75,7 @@ for (const gap of records.filter((record) => record.schema === "gap")) {
   const base = `/gaps/${encodeURIComponent(gap.fields.slug)}/`;
   redirects.set(base, `${base}overview/`);
   redirects.set(`/record/${encodeURIComponent(gap.id)}/`, `${base}overview/`);
-  for (const view of ["overview", "objectives", "metrics", "activity", "places", "organizations", "initiatives", "findings", "sources"]) {
+  for (const view of ["overview", "activity", "findings", "metrics", "places", "organizations", "initiatives", "sources"]) {
     redirects.set(`/needs/${encodeURIComponent(gap.id)}/${view}/`, `${base}${view}/`);
     redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/${view}/`, `${base}${view}/`);
   }
@@ -83,7 +83,7 @@ for (const gap of records.filter((record) => record.schema === "gap")) {
   redirects.set(`${base}reports/`, `${base}activity/#field-reports`);
   redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/reports/`, `${base}activity/#field-reports`);
   redirects.set(`/needs/${encodeURIComponent(gap.id)}/reports/`, `${base}activity/#field-reports`);
-  for (const [oldView, nextView] of [["numbers", "metrics"], ["questions", "objectives"]]) {
+  for (const [oldView, nextView] of [["numbers", "metrics"], ["questions", "overview"], ["objectives", "overview"]]) {
     redirects.set(`${base}${oldView}/`, `${base}${nextView}/`);
     redirects.set(`/projects/${encodeURIComponent(gap.fields.slug)}/${oldView}/`, `${base}${nextView}/`);
     redirects.set(`/needs/${encodeURIComponent(gap.id)}/${oldView}/`, `${base}${nextView}/`);
@@ -93,13 +93,18 @@ for (const gap of records.filter((record) => record.schema === "gap")) {
   redirects.set(`/needs/${encodeURIComponent(gap.id)}/projects/`, `${base}initiatives/`);
 }
 for (const id of ["where-dogs-need-help", "food-and-water", "response-barriers", "additional-help", "improvement-outcomes"])
-  redirects.set(`/record/${id}/`, "/gaps/street-dogs/objectives/");
+  redirects.set(`/record/${id}/`, "/gaps/street-dogs/overview/");
 redirects.set("/projects/", "/gaps/");
 for (const [old, target] of [...redirects]) redirects.set(old, target.replaceAll("/projects/street-dogs/", "/gaps/street-dogs/").replace(/^\/projects\/$/, "/gaps/"));
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "data"), { recursive: true });
 await mkdir(resolve(dist, "preview"), { recursive: true });
+await mkdir(resolve(dist, "fonts"), { recursive: true });
+for (const name of ["Regular", "Medium", "SemiBold", "Bold"])
+  await copyFile(`public/fonts/IBMPlexSans-${name}.woff2`, resolve(dist, `fonts/IBMPlexSans-${name}.woff2`));
+await copyFile("public/fonts/ibm-plex.css", resolve(dist, "fonts/ibm-plex.css"));
+await copyFile("public/fonts/LICENSE.txt", resolve(dist, "fonts/LICENSE.txt"));
 for (const file of ["ai-variant.html", "ai-variant.css", "ai-variant-v2.css", "ai-variant-google.css", "ai-variant-modern.css", "ai-variant.js"])
   await copyFile(resolve("public/preview", file), resolve(dist, "preview", file));
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
@@ -119,8 +124,6 @@ for (const imagePath of staticSite.assets) {
 }
 await mkdir(resolve(dist, "images/variants/clean"), { recursive: true });
 await copyFile("public/images/variants/clean/dog-park.jpg", resolve(dist, "images/variants/clean/dog-park.jpg"));
-if (staticSite.assets.some(path => path.startsWith("/images/icons/heroicons/")))
-  await copyFile("public/images/icons/heroicons/LICENSE", resolve(dist, "images/icons/heroicons/LICENSE"));
 for (const page of staticSite.pages) {
   const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
   if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe page path: ${page.path}`);
@@ -130,7 +133,7 @@ for (const page of staticSite.pages) {
 const workspaceHtml = (await readFile("public/preview/ai-variant.html", "utf8"))
   .replace(/^[ \t]*<meta name="robots" content="noindex,nofollow">\r?\n/m, '')
   .replace('  <title>Crossover · Gap workspace experiment</title>',
-    `  <meta name="description" content="Crossover Stockton tracks street dogs and access to care through objectives, activity, findings, and public records.">\n  <link rel="canonical" href="${origin}/">\n  <title>Crossover Stockton · Street dogs and access to care</title>`);
+    `  <meta name="description" content="Crossover Stockton starts with real needs in Stockton, takes action, and shares what it learns.">\n  <link rel="canonical" href="${origin}/">\n  <title>Crossover Stockton · Home</title>`);
 await writeFile(resolve(dist, "index.html"), workspaceHtml);
 await writeFile("index.html", workspaceHtml);
 await mkdir(resolve(dist, "interactive"), { recursive: true });

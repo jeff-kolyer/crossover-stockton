@@ -228,6 +228,11 @@
           "San Joaquin County’s 2024 survey reported that 34% of unhoused respondents had pets. St. Mary’s describes pet-accommodating shelter options, but Crossover has not verified current access or whether people with dogs still face restrictions."
         ],
         "current_state": "Stockton Street Dogs reports that dumped-dog encounters rose from roughly one per week a year ago to about three to ten per week, with District 5 seeing notable activity. Stockton Animal Services reports recurring shelter capacity pressure. The current number of street dogs and how many reach safe placement remain unverified. Stockton Street Dogs is also pursuing a proposed Canine Campus for overflow, veterinary recovery, and volunteer-supported care; it is not yet an operating facility. People with pets may face shelter-access barriers; current access and dog-inclusive capacity remain unverified.",
+        "current_focus": {
+          "title": "Understanding the Gap",
+          "description": "We're examining public records, checking reported conditions firsthand, and learning how dogs on Stockton's streets reach care.",
+          "updated_at": "2026-11-06"
+        },
         "sources": [
           {
             "title": "Stockton committee advances stricter animal-control rules amid shelter overcrowding",
@@ -420,230 +425,6 @@
         "value": "2026-11-05"
       }
     },
-    "establish-street-dog-extent": {
-      "id": "establish-street-dog-extent",
-      "schema": "objective",
-      "typeName": "Project objective",
-      "title": "Establish the extent of the problem",
-      "description": "Determine how many dogs are on Stockton's streets, where they are, and their condition. Keep shelter intake and reports distinct from a count of dogs living on the streets.",
-      "fields": {
-        "id": "establish-street-dog-extent",
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "title": "Establish the extent of the problem",
-        "description": "Determine how many dogs are on Stockton's streets, where they are, and their condition. Keep shelter intake and reports distinct from a count of dogs living on the streets.",
-        "measurement_ids": [
-          "sas-2024-dog-intake-stray",
-          "sas-2024-dog-intake-total"
-        ],
-        "initiative_ids": [],
-        "guiding_questions": [
-          {
-            "title": "How many street dogs need help, where are they, and what condition are they in?",
-            "description": "Determine how many dogs may be on Stockton's streets, where they are found, what condition they are in, and what can reasonably be established from available evidence. Distinguish abandoned, lost, owned free-roaming, and other dogs where evidence permits; a sighting alone does not establish ownership status."
-          }
-        ],
-        "task_ids": [
-          "task-verify-st-marys-church-street-dog-scale",
-          "task-verify-south-stockton-district-5-reports",
-          "task-sas-field-call-request-2026-10-20",
-          "task-sas-field-call-follow-up",
-          "task-review-sas-field-call-records",
-          "task-contact-cbs-charlie-lapastora"
-        ],
-        "activity_record_ids": [
-          "crossover-2026-10-20-sas-field-call-records-request",
-          "crossover-2026-11-02-sas-field-call-records-received"
-        ],
-        "evidence_record_ids": [
-          "sas-2024-kennel-statistics",
-          "cbs-2026-04-06-stockton-abandoned-dogs",
-          "ssd-2026-06-08-street-response",
-          "stockton-2026-05-11-stray-dog-report",
-          "kcra-2026-09-24-stockton-stray-dog-report",
-          "stocktonia-2026-10-20-roaming-dog-distinction",
-          "stocktonia-2026-10-20-sas-capacity-intake"
-        ],
-        "finding_ids": [
-          "finding-public-street-dog-information-fragmented"
-        ]
-      }
-    },
-    "understand-access-to-care": {
-      "id": "understand-access-to-care",
-      "schema": "objective",
-      "typeName": "Project objective",
-      "title": "Understand access to care",
-      "description": "Test what happens when residents report dogs or try to help them, identify which care reaches dogs, and check whether people seeking shelter can stay with their dogs.",
-      "fields": {
-        "id": "understand-access-to-care",
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "title": "Understand access to care",
-        "description": "Test what happens when residents report dogs or try to help them, identify which care reaches dogs, and check whether people seeking shelter can stay with their dogs.",
-        "measurement_ids": [
-          "sas-2024-dog-outcome-total",
-          "sas-2024-dog-outcome-return-owner"
-        ],
-        "initiative_ids": [],
-        "guiding_questions": [
-          {
-            "title": "Who is caring for street dogs, and what care reaches them?",
-            "description": "Identify municipal agencies, rescue groups, informal caregivers, and other participants. Understand what care is being provided, to whom, where, and with what known limitations. Distinguish published service descriptions from verified care delivery."
-          },
-          {
-            "title": "What happens when someone reports a dog?",
-            "description": "Investigate what happens when someone reports a dog or attempts to bring one into care, from reporting through response, intake or diversion, and documented outcomes. Identify what is known, what records can establish, and where visibility ends."
-          },
-          {
-            "title": "What prevents people from helping street dogs?",
-            "description": "Investigate practical, procedural, financial, and organizational barriers encountered by people trying to assist dogs, including reporting, transport, fostering, volunteering, veterinary access, surrender, and rescue coordination where relevant. Distinguish suspected barriers from those demonstrated by firsthand attempts or other evidence."
-          },
-          {
-            "title": "Can people seeking shelter stay with their dogs?",
-            "description": "Check current pet-accommodating shelter options, actual access, restrictions, and capacity. Keep published program descriptions separate from verified access for people with dogs."
-          }
-        ],
-        "task_ids": [
-          "task-ssd-volunteer-application-2026-10-07",
-          "task-ssd-ask-contact-questions",
-          "task-sas-visit-application-2026-10-14",
-          "task-sas-field-call-request-2026-10-20",
-          "task-sas-field-call-follow-up",
-          "task-review-sas-field-call-records",
-          "task-monitor-animal-control-ordinance",
-          "task-contact-cbs-charlie-lapastora",
-          "task-sas-doggie-day-out-inquiry-2026-10-12",
-          "task-sas-volunteer-onboarding-follow-up"
-        ],
-        "activity_record_ids": [
-          "crossover-2026-10-07-street-dogs-volunteer-application",
-          "crossover-2026-10-14-sas-volunteer-application",
-          "crossover-2026-10-20-sas-field-call-records-request",
-          "crossover-2026-11-02-sas-field-call-records-received",
-          "crossover-2026-10-12-doggie-day-out-inquiry"
-        ],
-        "evidence_record_ids": [
-          "ssd-2026-06-08-street-response",
-          "stockton-animal-services-2026-10-20-reporting-guidance",
-          "crossover-2026-10-20-sas-field-call-records-request",
-          "stocktonia-2026-10-20-sas-capacity-intake",
-          "stocktonia-2026-10-20-roaming-dog-distinction",
-          "stocktonia-2026-10-20-found-animal-foster-pathway",
-          "stocktonia-2026-10-20-animal-control-proposals",
-          "crossover-2026-10-14-sas-first-visit"
-        ],
-        "finding_ids": [
-          "finding-volunteer-onboarding-can-stall",
-          "finding-public-street-dog-information-fragmented",
-          "finding-new-facilities-impact-uncertain"
-        ]
-      }
-    },
-    "evaluate-existing-responses": {
-      "id": "evaluate-existing-responses",
-      "schema": "objective",
-      "typeName": "Project objective",
-      "title": "Evaluate existing responses",
-      "description": "Understand what organizations and public services are doing, what results are documented, and where their limitations remain unclear.",
-      "fields": {
-        "id": "evaluate-existing-responses",
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "title": "Evaluate existing responses",
-        "description": "Understand what organizations and public services are doing, what results are documented, and where their limitations remain unclear.",
-        "measurement_ids": [
-          "sas-2024-dog-outcome-adopted",
-          "sas-2024-dog-outcome-rescue-transfer"
-        ],
-        "initiative_ids": [
-          "stockton-animal-shelter-renovation",
-          "hard-luck-veterinary-staffing-2026"
-        ],
-        "guiding_questions": [
-          {
-            "title": "What results are documented for existing services and initiatives?",
-            "description": "Compare reported reach, intake, and service capacity with documented outcomes for dogs and people. Distinguish operating services from proposals and identify what their records cannot establish."
-          }
-        ],
-        "task_ids": [
-          "task-ssd-volunteer-application-2026-10-07",
-          "task-ssd-ask-contact-questions"
-        ],
-        "activity_record_ids": [
-          "crossover-2026-10-07-street-dogs-volunteer-application",
-          "crossover-2026-10-12-doggie-day-out-inquiry"
-        ],
-        "evidence_record_ids": [
-          "ssd-2026-06-08-street-response",
-          "crossover-2026-10-14-sas-first-visit",
-          "ssd-2026-07-30-canine-campus-proposal",
-          "ssd-2026-10-07-canine-campus-details"
-        ],
-        "finding_ids": [
-          "finding-volunteer-onboarding-can-stall",
-          "finding-new-facilities-impact-uncertain"
-        ]
-      }
-    },
-    "pursue-practical-improvements": {
-      "id": "pursue-practical-improvements",
-      "schema": "objective",
-      "typeName": "Project objective",
-      "title": "Identify and pursue improvements",
-      "description": "Find practical opportunities to increase access to care, take useful steps, and test whether changes improve outcomes.",
-      "fields": {
-        "id": "pursue-practical-improvements",
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "title": "Identify and pursue improvements",
-        "description": "Find practical opportunities to increase access to care, take useful steps, and test whether changes improve outcomes.",
-        "measurement_ids": [],
-        "initiative_ids": [
-          "canine-campus",
-          "stockton-pet-wellness-adoption-center",
-          "animal-balance-spay-neuter-contract-2026"
-        ],
-        "guiding_questions": [
-          {
-            "title": "Which efforts improve access to care and outcomes?",
-            "description": "Investigate existing and proposed efforts to expand care, prevent suffering, improve coordination, and increase capacity. Assess what has been implemented, what results are documented, and what remains proposed or unverified. Consider emerging technology as a possible means of overcoming identified bottlenecks, not a presumed solution."
-          },
-          {
-            "title": "Which practical change should Crossover test next?",
-            "description": "Use documented barriers to choose a feasible step, state its intended result, and decide what evidence would show whether it improved access to care."
-          }
-        ],
-        "task_ids": [
-          "task-ssd-volunteer-application-2026-10-07",
-          "task-sas-doggie-day-out-inquiry-2026-10-12",
-          "task-sas-visit-application-2026-10-14",
-          "task-ssd-ask-contact-questions",
-          "task-sas-volunteer-onboarding-follow-up",
-          "task-contact-cbs-charlie-lapastora"
-        ],
-        "activity_record_ids": [
-          "crossover-2026-10-07-street-dogs-volunteer-application",
-          "crossover-2026-10-12-doggie-day-out-inquiry",
-          "crossover-2026-10-14-sas-volunteer-application"
-        ],
-        "evidence_record_ids": [
-          "crossover-2026-10-14-sas-first-visit",
-          "stocktonia-2026-10-20-sas-capacity-intake",
-          "stocktonia-2026-10-20-found-animal-foster-pathway",
-          "ssd-2026-07-30-canine-campus-proposal",
-          "ssd-2026-10-07-canine-campus-details"
-        ],
-        "finding_ids": [
-          "finding-volunteer-onboarding-can-stall",
-          "finding-new-facilities-impact-uncertain"
-        ]
-      }
-    },
     "task-verify-st-marys-church-street-dog-scale": {
       "id": "task-verify-st-marys-church-street-dog-scale",
       "schema": "task",
@@ -661,9 +442,6 @@
         "instructions": "On a future visit, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the actual visit date, the general area examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "establish-street-dog-extent"
         ],
         "organization_ids": [],
         "location_ids": [
@@ -696,10 +474,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -730,11 +504,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care",
-          "pursue-practical-improvements"
-        ],
         "organization_ids": [],
         "location_ids": [],
         "basis_record_ids": [
@@ -761,11 +530,6 @@
         "instructions": "Check whether the October 7 volunteer application received a response. Ask for the current status and evidence of progress on Canine Campus, and identify practical approved volunteer or care opportunities, requirements, schedules, and contacts. Record any reply only when received.",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "evaluate-existing-responses",
-          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -795,9 +559,6 @@
         "instructions": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site. Choose a safe public observation route near the reported Carrie Street area, confirm access and current conditions before visiting, and document what is actually present, including zero dogs if none are seen. Do not treat the April incident as evidence of current danger or assume the September encounters occurred there. Distinguish both published reports from firsthand findings and record follow-up questions.",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "establish-street-dog-extent"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -831,10 +592,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "pursue-practical-improvements"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -865,9 +622,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "understand-access-to-care"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -895,10 +649,6 @@
         "instructions": "Check for a response to the October 20 request. Review the data only after it is received; document missing fields and limitations.",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -934,10 +684,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -970,10 +716,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "pursue-practical-improvements"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -1005,10 +747,6 @@
         "instructions": "Ask about sign-up, requirements, paperwork, and orientation.",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1043,11 +781,6 @@
         "instructions": "Submit an application to learn how Crossover can participate firsthand.",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "evaluate-existing-responses",
-          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-street-dogs"
@@ -1092,10 +825,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -1136,10 +865,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -1177,10 +902,6 @@
         },
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -1222,11 +943,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "evaluate-existing-responses",
-          "pursue-practical-improvements"
-        ],
         "organization_ids": [
           "stockton-street-dogs"
         ],
@@ -1265,11 +981,6 @@
         "gap_ids": [
           "dogs-safe-placement"
         ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "pursue-practical-improvements",
-          "evaluate-existing-responses"
-        ],
         "organization_ids": [
           "stockton-animal-services"
         ],
@@ -1280,106 +991,20 @@
         "value": "2026-10-12"
       }
     },
-    "finding-volunteer-onboarding-can-stall": {
-      "id": "finding-volunteer-onboarding-can-stall",
-      "schema": "finding",
-      "typeName": "Finding",
-      "title": "Attempts to get involved in animal care can stall.",
-      "description": "We applied to volunteer with Stockton Street Dogs on October 7 and Stockton Animal Services on October 14. We have not documented a completed onboarding process with either organization.",
-      "fields": {
-        "id": "finding-volunteer-onboarding-can-stall",
-        "title": "Attempts to get involved in animal care can stall.",
-        "statement": "We applied to volunteer with Stockton Street Dogs on October 7 and Stockton Animal Services on October 14. We have not documented a completed onboarding process with either organization.",
-        "status": "preliminary",
-        "current": true,
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "evaluate-existing-responses",
-          "pursue-practical-improvements"
-        ],
-        "related_task_ids": [
-          "task-ssd-volunteer-application-2026-10-07",
-          "task-sas-visit-application-2026-10-14"
-        ],
-        "related_initiative_ids": [],
-        "location_ids": [
-          "stockton-animal-services-shelter"
-        ],
-        "supporting_record_ids": [
-          "crossover-2026-10-07-street-dogs-volunteer-application",
-          "crossover-2026-10-12-doggie-day-out-inquiry",
-          "crossover-2026-10-14-sas-volunteer-application"
-        ],
-        "contradicting_record_ids": [],
-        "limitations": "Two applications do not establish an organization-wide or systemic failure. We have not established what happened internally to either application.",
-        "last_reviewed_at": "2026-10-30"
-      },
-      "dateForSort": {
-        "field": "last_reviewed_at",
-        "value": "2026-10-30"
-      }
-    },
-    "finding-public-street-dog-information-fragmented": {
-      "id": "finding-public-street-dog-information-fragmented",
-      "schema": "finding",
-      "typeName": "Finding",
-      "title": "Public information about street dogs is difficult to piece together.",
-      "description": "We found public estimates, shelter statistics, reported sightings, and descriptions of available services. These sources do not establish how many dogs are currently on Stockton's streets or what happens to individual dogs after they're reported.",
-      "fields": {
-        "id": "finding-public-street-dog-information-fragmented",
-        "title": "Public information about street dogs is difficult to piece together.",
-        "statement": "We found public estimates, shelter statistics, reported sightings, and descriptions of available services. These sources do not establish how many dogs are currently on Stockton's streets or what happens to individual dogs after they're reported.",
-        "status": "developing",
-        "current": true,
-        "gap_ids": [
-          "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "establish-street-dog-extent",
-          "understand-access-to-care"
-        ],
-        "related_task_ids": [
-          "task-sas-field-call-follow-up"
-        ],
-        "related_initiative_ids": [],
-        "location_ids": [],
-        "supporting_record_ids": [
-          "cbs-2026-04-06-stockton-abandoned-dogs",
-          "ssd-2026-09-29-dumped-dogs-surge",
-          "sas-2024-kennel-statistics",
-          "stockton-animal-services-2026-10-20-reporting-guidance"
-        ],
-        "contradicting_record_ids": [],
-        "limitations": "Our review of public information does not establish what internal agency or rescue records may contain.",
-        "last_reviewed_at": "2026-10-30"
-      },
-      "dateForSort": {
-        "field": "last_reviewed_at",
-        "value": "2026-10-30"
-      }
-    },
     "finding-new-facilities-impact-uncertain": {
       "id": "finding-new-facilities-impact-uncertain",
       "schema": "finding",
       "typeName": "Finding",
-      "title": "New facilities may expand care, but their impact remains uncertain.",
-      "description": "We observed shelter expansion construction on October 14. Stockton Street Dogs has also proposed a Canine Campus. Their future capacity and effects on access to care remain unverified.",
+      "title": "Existing animal-care capacity is under pressure",
+      "description": "Stockton Animal Services reports recurring shelter-capacity pressure. The city is expanding its municipal animal shelter, while Stockton Street Dogs has proposed a separate Canine Campus intended to provide additional overflow, recovery, and care capacity. These efforts indicate that existing capacity constraints are an important part of the problem. How much additional care the facilities will provide, and whether they will adequately address unmet needs, remains unknown.",
       "fields": {
         "id": "finding-new-facilities-impact-uncertain",
-        "title": "New facilities may expand care, but their impact remains uncertain.",
-        "statement": "We observed shelter expansion construction on October 14. Stockton Street Dogs has also proposed a Canine Campus. Their future capacity and effects on access to care remain unverified.",
-        "status": "exploratory",
+        "title": "Existing animal-care capacity is under pressure",
+        "statement": "Stockton Animal Services reports recurring shelter-capacity pressure. The city is expanding its municipal animal shelter, while Stockton Street Dogs has proposed a separate Canine Campus intended to provide additional overflow, recovery, and care capacity. These efforts indicate that existing capacity constraints are an important part of the problem. How much additional care the facilities will provide, and whether they will adequately address unmet needs, remains unknown.",
+        "status": "developing",
         "current": true,
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "pursue-practical-improvements",
-          "evaluate-existing-responses"
         ],
         "related_task_ids": [
           "task-sas-visit-application-2026-10-14"
@@ -1394,15 +1019,16 @@
         "supporting_record_ids": [
           "crossover-2026-10-14-sas-first-visit",
           "ssd-2026-07-30-canine-campus-proposal",
-          "ssd-2026-10-07-canine-campus-details"
+          "ssd-2026-10-07-canine-campus-details",
+          "stocktonia-2026-10-20-sas-capacity-intake"
         ],
         "contradicting_record_ids": [],
-        "limitations": "We have not established that new facilities will be insufficient or that any proposed alternative would produce better outcomes.",
-        "last_reviewed_at": "2026-10-30"
+        "limitations": "The evidence does not establish that the municipal expansion will be insufficient. The Canine Campus proposal does not independently establish the scale of unmet need or prove that the facility will be built. Actual future capacity and outcomes remain unknown.",
+        "last_reviewed_at": "2026-11-06"
       },
       "dateForSort": {
         "field": "last_reviewed_at",
-        "value": "2026-10-30"
+        "value": "2026-11-06"
       }
     },
     "weston-ranch-carrie-street": {
@@ -2003,11 +1629,6 @@
         "recorded_at": "2026-10-14",
         "gap_ids": [
           "dogs-safe-placement"
-        ],
-        "objective_ids": [
-          "understand-access-to-care",
-          "evaluate-existing-responses",
-          "pursue-practical-improvements"
         ],
         "organization_ids": [
           "stockton-animal-services"
@@ -4144,10 +3765,6 @@
       "kind": "date",
       "description": "When work on a task began; this does not imply completion."
     },
-    "objective_ids": {
-      "label": "Objectives",
-      "kind": "reference"
-    },
     "task_ids": {
       "label": "Tasks",
       "kind": "reference"
@@ -4156,9 +3773,17 @@
       "label": "Guiding questions",
       "kind": "value"
     },
+    "completion_criteria": {
+      "label": "Completion criteria",
+      "kind": "value"
+    },
     "related_initiative_ids": {
       "label": "Related initiatives",
       "kind": "reference"
+    },
+    "current_focus": {
+      "label": "Current focus",
+      "kind": "value"
     },
     "related_finding_ids": {
       "label": "Related findings",
@@ -4359,7 +3984,7 @@
       {
         "label": "Gaps",
         "route": "/gaps",
-        "purpose": "Choose a gap and follow its objectives, metrics, activity, findings, and sources."
+        "purpose": "Choose a gap and follow its activity, findings, metrics, and sources."
       },
       {
         "label": "Activity",

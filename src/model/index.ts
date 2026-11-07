@@ -1,7 +1,6 @@
 import crossoverData from "../data/crossover.json";
 import peopleData from "../data/people.json";
 import gapsData from "../data/gaps.json";
-import objectivesData from "../data/objectives.json";
 import tasksData from "../data/tasks.json";
 import activitiesData from "../data/activities.json";
 import evidenceData from "../data/evidence.json";
@@ -13,7 +12,7 @@ import measurementsData from "../data/measurements.json";
 import claimsData from "../data/claims.json";
 import articlesData from "../data/articles.json";
 import type { EvidenceRecord, GapRecord, OrgRecord } from "../types";
-import type { FindingRecord, TaskRecord, ObjectiveRecord } from "../types/work";
+import type { FindingRecord, TaskRecord } from "../types/work";
 import { publicUpdateCategory, selectPublicUpdates } from "./publicUpdates";
 
 type Identified = { id: string };
@@ -36,7 +35,6 @@ export type InformationInput = {
   principles: typeof crossoverData.principles;
   methods: typeof crossoverData.methods;
   gaps: GapRecord[];
-  objectives: ObjectiveRecord[];
   tasks: TaskRecord[];
   activities: EvidenceRecord[];
   evidence: EvidenceRecord[];
@@ -55,7 +53,6 @@ export function createInformationModel(input: InformationInput) {
   const principles = index(input.principles, "principles");
   const methods = index(input.methods, "methods");
   const gaps = index(input.gaps, "gaps");
-  const objectives = index(input.objectives, "objectives");
   const tasks = index(input.tasks, "tasks");
   const orderedTasks = [...input.tasks].sort((a, b) => a.order_by_id - b.order_by_id || a.id.localeCompare(b.id));
   const activities = index(input.activities, "activities");
@@ -90,24 +87,15 @@ export function createInformationModel(input: InformationInput) {
     getMethod: (id: string) => methods.get(id),
     getGap: (id: string) => gaps.get(id),
     getGaps: () => input.gaps,
-    getObjective: (id: string) => objectives.get(id),
-    getObjectives: (gapId: string) => input.objectives.filter((objective) => objective.gap_ids.includes(gapId)),
-    getAllObjectives: () => input.objectives,
     getTask: (id: string) => tasks.get(id),
     getTasks: (gapId: string) => orderedTasks.filter((task) => task.gap_ids.includes(gapId)),
     getAllTasks: () => orderedTasks,
     getActivity: (id: string) => activities.get(id),
     getAllActivities: () => input.activities,
-    getActivities: (objectiveId: string) => {
-      const objective = requireReference(objectives.get(objectiveId), "objective", objectiveId);
-      return objective.activity_record_ids.map((id) => requireReference(activities.get(id), "actual activity", id));
-    },
+    getActivities: (gapId: string) => input.activities.filter((activity) => activity.gap_ids.includes(gapId)),
     getFinding: (id: string) => findings.get(id),
     getAllFindings: () => input.findings,
-    getFindings: (objectiveId: string) => {
-      const objective = requireReference(objectives.get(objectiveId), "objective", objectiveId);
-      return objective.finding_ids.map((id) => requireReference(findings.get(id), "finding", id));
-    },
+    getFindings: (gapId: string) => input.findings.filter((finding) => finding.gap_ids.includes(gapId)),
     getEvidenceRecord: (id: string) => evidence.get(id),
     getAllEvidence: () => input.evidence,
     getRecord: (id: string) => records.get(id),
@@ -153,7 +141,6 @@ export const siteModel = createInformationModel({
   principles: crossoverData.principles,
   methods: crossoverData.methods,
   gaps: gapsData.records as GapRecord[],
-  objectives: objectivesData as ObjectiveRecord[],
   tasks: tasksData as TaskRecord[],
   activities: activitiesData as EvidenceRecord[],
   evidence: evidenceData as EvidenceRecord[],

@@ -1,87 +1,24 @@
 [
   {
-    "id": "finding-volunteer-onboarding-can-stall",
-    "current": true,
-    "title": "Attempts to get involved in animal care can stall.",
-    "status": "preliminary",
-    "statement": "We applied to volunteer with Stockton Street Dogs on October 7 and Stockton Animal Services on October 14. We have not documented a completed onboarding process with either organization.",
-    "supporting_record_ids": [
-      "crossover-2026-10-07-street-dogs-volunteer-application",
-      "crossover-2026-10-12-doggie-day-out-inquiry",
-      "crossover-2026-10-14-sas-volunteer-application"
-    ],
-    "contradicting_record_ids": [],
-    "location_ids": [
-      "stockton-animal-services-shelter"
-    ],
-    "limitations": "Two applications do not establish an organization-wide or systemic failure. We have not established what happened internally to either application.",
-    "last_reviewed_at": "2026-10-30",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "evaluate-existing-responses",
-      "pursue-practical-improvements"
-    ],
-    "related_task_ids": [
-      "task-ssd-volunteer-application-2026-10-07",
-      "task-sas-visit-application-2026-10-14"
-    ],
-    "related_initiative_ids": []
-  },
-  {
-    "id": "finding-public-street-dog-information-fragmented",
-    "current": true,
-    "title": "Public information about street dogs is difficult to piece together.",
-    "status": "developing",
-    "statement": "We found public estimates, shelter statistics, reported sightings, and descriptions of available services. These sources do not establish how many dogs are currently on Stockton's streets or what happens to individual dogs after they're reported.",
-    "supporting_record_ids": [
-      "cbs-2026-04-06-stockton-abandoned-dogs",
-      "ssd-2026-09-29-dumped-dogs-surge",
-      "sas-2024-kennel-statistics",
-      "stockton-animal-services-2026-10-20-reporting-guidance"
-    ],
-    "contradicting_record_ids": [],
-    "location_ids": [],
-    "limitations": "Our review of public information does not establish what internal agency or rescue records may contain.",
-    "last_reviewed_at": "2026-10-30",
-    "gap_ids": [
-      "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "establish-street-dog-extent",
-      "understand-access-to-care"
-    ],
-    "related_task_ids": [
-      "task-sas-field-call-follow-up"
-    ],
-    "related_initiative_ids": []
-  },
-  {
     "id": "finding-new-facilities-impact-uncertain",
     "current": true,
-    "title": "New facilities may expand care, but their impact remains uncertain.",
-    "status": "exploratory",
-    "statement": "We observed shelter expansion construction on October 14. Stockton Street Dogs has also proposed a Canine Campus. Their future capacity and effects on access to care remain unverified.",
+    "title": "Existing animal-care capacity is under pressure",
+    "status": "developing",
+    "statement": "Stockton Animal Services reports recurring shelter-capacity pressure. The city is expanding its municipal animal shelter, while Stockton Street Dogs has proposed a separate Canine Campus intended to provide additional overflow, recovery, and care capacity. These efforts indicate that existing capacity constraints are an important part of the problem. How much additional care the facilities will provide, and whether they will adequately address unmet needs, remains unknown.",
     "supporting_record_ids": [
       "crossover-2026-10-14-sas-first-visit",
       "ssd-2026-07-30-canine-campus-proposal",
-      "ssd-2026-10-07-canine-campus-details"
+      "ssd-2026-10-07-canine-campus-details",
+      "stocktonia-2026-10-20-sas-capacity-intake"
     ],
     "contradicting_record_ids": [],
     "location_ids": [
       "stockton-animal-services-shelter"
     ],
-    "limitations": "We have not established that new facilities will be insufficient or that any proposed alternative would produce better outcomes.",
-    "last_reviewed_at": "2026-10-30",
+    "limitations": "The evidence does not establish that the municipal expansion will be insufficient. The Canine Campus proposal does not independently establish the scale of unmet need or prove that the facility will be built. Actual future capacity and outcomes remain unknown.",
+    "last_reviewed_at": "2026-11-06",
     "gap_ids": [
       "dogs-safe-placement"
-    ],
-    "objective_ids": [
-      "understand-access-to-care",
-      "pursue-practical-improvements",
-      "evaluate-existing-responses"
     ],
     "related_task_ids": [
       "task-sas-visit-application-2026-10-14"

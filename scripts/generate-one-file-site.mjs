@@ -5,7 +5,12 @@ const feed = JSON.parse(await readFile("public/data/records.json", "utf8"));
 const template = await readFile("site/one-file-template.html", "utf8");
 const noImagesCss = await readFile("site/no-images.css", "utf8");
 const cleanCss = await readFile("site/clean.css", "utf8");
-const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp"]);
+const fontFiles = [["Regular",400],["Medium",500],["SemiBold",600],["Bold",700]];
+const fontCss = (await Promise.all(fontFiles.map(async ([name,weight]) => {
+  const bytes = await readFile(`public/fonts/IBMPlexSans-${name}.woff2`);
+  return `@font-face{font-family:"IBM Plex Sans";src:url("data:font/woff2;base64,${bytes.toString("base64")}") format("woff2");font-style:normal;font-weight:${weight};font-display:swap}`;
+}))).join("\n");
+const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/variants/clean/dog-park.jpg", "/images/about/about-the-founder.jpg"]);
 const collect = (value) => {
   if (typeof value === "string" && value.startsWith("/images/")) imagePaths.add(value);
   else if (Array.isArray(value)) value.forEach(collect);
@@ -25,7 +30,7 @@ const dataUri = async (path) => {
 };
 const cleanAssets = {};
 for (const path of [...imagePaths].sort()) {
-  if (!path.startsWith("/images/variants/clean/") && !path.startsWith("/images/icons/") && !path.startsWith("/images/logo_")) throw new Error(`Unexpected image path: ${path}`);
+  if (!path.startsWith("/images/variants/clean/") && !path.startsWith("/images/about/about-the-founder.") && !path.startsWith("/images/icons/") && !path.startsWith("/images/logo_")) throw new Error(`Unexpected image path: ${path}`);
   cleanAssets[path] = await dataUri(path);
 }
 
@@ -34,11 +39,12 @@ const render = (embeddedAssets, variantCss, imageFallback, aliases = {}, embedde
   const output = template
     .replace("__EMBEDDED_FEED__", jsonForHtml(embeddedFeed))
     .replace("__EMBEDDED_ASSETS__", jsonForHtml(embeddedAssets))
+    .replace("__FONT_CSS__", fontCss)
     .replace("__VARIANT_CSS__", variantCss)
     .replace("__IMAGE_FALLBACK__", imageFallback)
     .replace("__IMAGE_ALIASES__", jsonForHtml(aliases))
     .replaceAll('href="#/', 'href="?page=');
-  if (/__EMBEDDED_FEED__|__EMBEDDED_ASSETS__|__VARIANT_CSS__|__IMAGE_FALLBACK__|__IMAGE_ALIASES__/.test(output)) throw new Error("Template replacement failed");
+  if (/__EMBEDDED_FEED__|__EMBEDDED_ASSETS__|__FONT_CSS__|__VARIANT_CSS__|__IMAGE_FALLBACK__|__IMAGE_ALIASES__/.test(output)) throw new Error("Template replacement failed");
   return output;
 };
 const output = render(cleanAssets, cleanCss, "null");
