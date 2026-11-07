@@ -118,9 +118,9 @@ for (const [old, target] of [...redirects]) redirects.set(old, target.replaceAll
 const currentGap = records.find(record => record.schema === "gap" && record.fields?.default);
 if (!currentGap) throw new Error("No default gap in the public feed");
 const currentSlug = encodeURIComponent(currentGap.fields.slug);
-redirects.set(`/${currentSlug}/`, "/");
-redirects.set(`/gaps/${currentSlug}/`, "/");
-for (const item of story.silent.menu) redirects.set(`/gaps/${currentSlug}/${item.page}/`, item.page === "overview" ? "/" : `/${currentSlug}/${item.page}/`);
+redirects.set(`/${currentSlug}/`, `/${currentSlug}/overview/`);
+redirects.set(`/gaps/${currentSlug}/`, `/${currentSlug}/overview/`);
+for (const item of story.silent.menu) redirects.set(`/gaps/${currentSlug}/${item.page}/`, `/${currentSlug}/${item.page}/`);
 
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "data"), { recursive: true });
@@ -155,6 +155,7 @@ for (const imagePath of staticSite.assets) {
 }
 await mkdir(resolve(dist, "images/variants/clean"), { recursive: true });
 await copyFile("public/images/variants/clean/dog-park.jpg", resolve(dist, "images/variants/clean/dog-park.jpg"));
+await copyFile("public/images/variants/clean/records-desk.jpg", resolve(dist, "images/variants/clean/records-desk.jpg"));
 for (const page of staticSite.pages) {
   const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
   if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe page path: ${page.path}`);

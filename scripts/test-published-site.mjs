@@ -16,23 +16,34 @@ test('the published feed preserves editorial order and portable data', async () 
   assert.equal(daily, await read('public/feed/daily.txt'));
   for (const [a,b] of [['introduction','gap'],['gap','about'],['improvements','findings'],['findings','sources']])
     assert.ok(text.indexOf(`id="${a}"`) < text.indexOf(`id="${b}"`), `${a} before ${b}`);
-  assert.ok(daily.indexOf('Improvements') < daily.indexOf('Findings'));
+  assert.ok(daily.indexOf('Proposed and active improvements:') < daily.indexOf('What the evidence supports so far:'));
+  assert.ok(daily.startsWith('What would you do if you no longer had to work for money?'));
+  assert.ok(!daily.startsWith('Crossover Stockton Feed'));
   assert.deepEqual(JSON.parse(await read('dist/feed.json')), story);
   assert.deepEqual(JSON.parse(await read('dist/data/records.json')), feed);
 });
 
-test('the root is the full Overview, with links to other sections', async () => {
+test('the root introduces Crossover and leads into the separate gap Overview', async () => {
+  assert.equal(
+    `${story.chapters[0].title} ${story.chapters[0].text}`,
+    "What would you do if you no longer had to work for money? You could use that freedom to escape from the world or to become more involved in it. We're starting in Stockton, getting out into the community, discovering where help is needed, and exploring what we can do. The work discovers the work."
+  );
   const root = await page('/');
-  for (const phrase of ['Street dogs and access to care','3,106','Reported dumped-dog encounters','No verified street census'])
+  for (const phrase of ['What would you do if you no longer had to work for money?','You could use that freedom to escape from the world or to become more involved in it.','The work discovers the work.','Street dogs and access to care'])
     assert.ok(root.includes(phrase), phrase);
-  assert.ok(root.includes('/record/crossover-2026-11-02-sas-field-call-records-received/'));
-  for (const item of story.silent.menu.filter(item => item.page !== 'overview'))
-    assert.ok(root.includes(`href="/street-dogs/${item.page}/"`), item.page);
-  assert.ok(!root.includes('From work to vocation.'));
+  assert.ok(root.includes('href="/street-dogs/overview/"'));
+  assert.ok(root.includes('class="shell home-shell"'));
+  assert.ok(!root.includes('3,106'));
+  assert.ok(!root.includes('class="figure-grid"'));
   assert.ok(!root.includes('href="#/'));
   const overview = await page('/street-dogs/overview/');
-  assert.ok(overview.includes('content="noindex,follow"'));
-  assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/"'));
+  assert.equal(feed.records["task-review-sas-field-call-records"].fields.started_at, '2026-11-04');
+  assert.equal(feed.records["task-review-sas-field-call-records"].fields.status, 'in_progress');
+  assert.ok(feed.records["task-review-sas-field-call-records"].fields.list_context.includes('7,183 cases'));
+  for (const phrase of ['Investigation in progress','Last substantive update: Nov 4, 2026','Currently:','7,183 Animal Services case records','3,106','No verified street census'])
+    assert.ok(overview.includes(phrase), phrase);
+  assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/street-dogs/overview/"'));
+  assert.ok(overview.includes('href="/"'));
 });
 
 test('all ten sections remain reachable and readable', async () => {

@@ -40,7 +40,15 @@ function passageText(passage, chapterId) {
 }
 const daily = story.silent.reading.daily.map(path => {
   const passage = section(path);
-  return [passage.id === "situation" ? gap.title : passage.title, passageText(passage, path.split(".")[0])].filter(Boolean).join("\n\n");
+  if (passage.id === "introduction") return `${passage.title} ${passage.text}`;
+  if (passage.id === "situation") return `Our first gap is ${gap.title}. ${passage.text}`;
+  if (passage.id === "key-figures") return `Here are the key figures, which describe different things and do not count dogs currently living on the streets. ${passageText(passage).replaceAll("\n\n", " ")}`;
+  if (passage.id === "focus") return `Currently, ${passage.currentWork || passage.text}`;
+  if (passage.id === "developments") return `Recent developments: ${passageText(passage).replaceAll("\n\n", " ")}`;
+  if (passage.id === "current-work") return `The work underway: ${passageText(passage).replaceAll("\n\n", " ")}`;
+  if (passage.id === "improvements") return `Proposed and active improvements: ${passageText(passage).replaceAll("\n\n", " ")}`;
+  if (passage.id === "findings") return `What the evidence supports so far: ${passageText(passage).replaceAll("\n\n", " ")}`;
+  return passageText(passage).replaceAll("\n\n", " ");
 }).join("\n\n");
 
 function renderPassage(passage) {
@@ -93,5 +101,5 @@ const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta n
 
 await mkdir("public/feed", { recursive: true });
 await writeFile("public/feed/index.html", html);
-await writeFile("public/feed/daily.txt", `${story.title}\n\n${daily}\n`);
+await writeFile("public/feed/daily.txt", `${daily}\n`);
 console.log(`Rendered ${story.chapters.length} feed chapters and a daily reading from public/feed.json`);
