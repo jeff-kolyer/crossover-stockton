@@ -14,22 +14,22 @@
 .home-shell .mobile-logo img{width:37px;height:37px}
 .home-main{padding:0;min-height:0}
 .home-content{max-width:none}
-.home-splash{position:relative;min-height:calc(100svh - 70px);display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;overflow:hidden;background:#192d33;color:#fff;padding:clamp(38px,6vw,94px) clamp(28px,5vw,88px) clamp(28px,4vw,60px)}
+.home-splash{position:relative;min-height:calc(100svh - 70px);display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;overflow:hidden;background:#192d33;color:#fff;padding:clamp(38px,4vw,65px) clamp(28px,3.2vw,75px) clamp(28px,4vw,60px)}
 .home-background,.home-shade{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
 .home-background{object-fit:cover;object-position:center 49%}
-.home-shade{background:linear-gradient(90deg,rgba(8,30,36,.93) 0%,rgba(8,30,36,.83) 34%,rgba(8,30,36,.38) 63%,rgba(8,30,36,.08) 100%),linear-gradient(0deg,rgba(8,30,36,.46),transparent 35%)}
+.home-shade{background:linear-gradient(90deg,rgba(8,30,36,.58) 0%,rgba(8,30,36,.33) 36%,rgba(8,30,36,.08) 62%,transparent 100%),linear-gradient(0deg,rgba(8,30,36,.24),transparent 30%)}
 .home-splash--city .home-background{object-position:center}
 .home-splash--street .home-background{object-position:center 48%}
-.home-intro{max-width:780px}
-.home-intro h1{font-size:clamp(3.2rem,6vw,6.5rem);line-height:1.03;letter-spacing:-.055em;margin:0 0 25px;max-width:15ch;text-wrap:balance}
-.home-intro p{font-size:clamp(1.1rem,1.55vw,1.42rem);line-height:1.58;max-width:57ch;margin:0;color:#edf5f4;text-wrap:pretty}
-.home-gap{display:grid;grid-template-columns:180px minmax(0,1fr);align-items:stretch;gap:0;max-width:770px;margin-top:45px;background:rgba(246,251,250,.97);color:#14232e;border:1px solid #c9d9d9;border-radius:5px;overflow:hidden;box-shadow:0 12px 32px #061c2552}
+.home-intro{max-width:min(1180px,55vw)}
+.home-intro h1{font-size:clamp(3.2rem,5.2vw,6.5rem);line-height:1.03;letter-spacing:-.055em;margin:0 0 25px;max-width:20ch;text-wrap:balance}
+.home-intro p{font-size:clamp(1.1rem,1.55vw,1.8rem);line-height:1.5;max-width:70ch;margin:0;color:#edf5f4;text-wrap:pretty}
+.home-gap{display:grid;grid-template-columns:23% minmax(0,1fr);align-items:stretch;gap:0;max-width:clamp(770px,46vw,1180px);margin-top:45px;background:rgba(246,251,250,.97);color:#14232e;border:1px solid #c9d9d9;border-radius:5px;overflow:hidden;box-shadow:0 12px 32px #061c2552}
 .home-gap:hover{text-decoration:none;background:#fff}
-.home-gap>img{width:180px;height:100%;min-height:250px;object-fit:cover;object-position:55% center}
+.home-gap>img{width:100%;height:100%;min-height:260px;object-fit:cover;object-position:55% center}
 .home-gap-copy{display:grid;align-content:center;gap:6px;padding:21px 27px}
 .home-gap-label{color:#0a7076;font-size:.91rem;font-weight:700}
 .home-gap-copy strong{font-size:clamp(1.5rem,2.2vw,1.95rem);line-height:1.12;letter-spacing:-.035em}
-.home-gap-copy>span:not(.home-gap-label):not(.home-gap-action){font-size:.94rem;line-height:1.43;color:#465c67}
+.home-gap-copy>span:not(.home-gap-label):not(.home-gap-action){font-size:clamp(.94rem,1.1vw,1.23rem);line-height:1.43;color:#465c67}
 .home-gap-copy .home-gap-status{font-size:.84rem!important;color:#506470!important;font-weight:600;margin-bottom:3px}
 .home-gap-action{display:inline-flex;align-items:center;gap:8px;color:#087c81;font-size:1.05rem;font-weight:700;margin-top:8px}
 .home-gap-action svg{width:18px;height:18px}
@@ -43,10 +43,11 @@
   .home-shell .mobile-logo img{width:30px;height:30px}
   .home-splash{min-height:calc(100svh - 66px);padding:34px 20px 25px}
   .home-background{object-position:62% center}
-  .home-shade{background:linear-gradient(180deg,rgba(8,30,36,.89),rgba(8,30,36,.78) 52%,rgba(8,30,36,.55))}
+  .home-shade{background:linear-gradient(180deg,rgba(8,30,36,.72),rgba(8,30,36,.62) 52%,rgba(8,30,36,.5))}
+  .home-intro{max-width:none}
   .home-intro h1{font-size:clamp(2.45rem,10vw,4.1rem);margin-bottom:19px;max-width:13ch}
   .home-intro p{font-size:1.03rem;line-height:1.5}
-  .home-gap{grid-template-columns:96px minmax(0,1fr);margin-top:30px}
+  .home-gap{grid-template-columns:96px minmax(0,1fr);max-width:100%;margin-top:30px}
   .home-gap>img{width:96px;min-height:218px}
   .home-gap-copy{padding:15px}
   .home-gap-copy strong{font-size:1.22rem}

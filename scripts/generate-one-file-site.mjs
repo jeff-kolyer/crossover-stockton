@@ -31,7 +31,7 @@ const dataUri = async (path) => {
 };
 const cleanAssets = {};
 for (const path of [...imagePaths].sort()) {
-  if (!path.startsWith("/images/variants/clean/") && !path.startsWith("/images/about/about-the-founder.") && path !== "/images/about/about-crossover-hero.jpg" && !path.startsWith("/images/icons/") && !path.startsWith("/images/logo_")) throw new Error(`Unexpected image path: ${path}`);
+  if (!path.startsWith("/images/variants/clean/") && !path.startsWith("/images/about/about-the-founder.") && path !== "/images/about/about-crossover-hero.jpg" && path !== "/images/home/desk-window-stockton-v2.png" && !path.startsWith("/images/icons/") && !path.startsWith("/images/logo_")) throw new Error(`Unexpected image path: ${path}`);
   cleanAssets[path] = await dataUri(path);
 }
 

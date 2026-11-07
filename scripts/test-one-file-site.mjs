@@ -61,7 +61,7 @@ test("the clean preview mirrors the current site", () => {
   assert.ok(cleanAssets["/images/variants/clean/dog-park.jpg"]?.startsWith("data:image/jpeg;base64,"));
   assert.ok(cleanAssets["/images/about/about-the-founder.jpg"]?.startsWith("data:image/jpeg;base64,"));
   assert.ok(cleanAssets["/images/about/about-crossover-hero.jpg"]?.startsWith("data:image/jpeg;base64,"));
-  assert.ok(Object.keys(cleanAssets).every(path => path.startsWith("/images/variants/clean/") || ["/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg"].includes(path) || path.startsWith("/images/icons/") || path.startsWith("/images/logo_")));
+  assert.ok(Object.keys(cleanAssets).every(path => path.startsWith("/images/variants/clean/") || ["/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg", "/images/home/desk-window-stockton-v2.png"].includes(path) || path.startsWith("/images/icons/") || path.startsWith("/images/logo_")));
   assert.deepEqual(bundledFeed, feed);
   assert.ok(cleanHtml.includes(".story-opening{"));
   const scripts = [...cleanHtml.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
