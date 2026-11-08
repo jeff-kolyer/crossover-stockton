@@ -328,7 +328,7 @@
           "id": "purpose",
           "headline": "See clearly. Act locally.",
           "record": "crossover-stockton",
-          "text": "Crossover explores that possibility by starting with real unmet needs in Stockton. We show up, learn from people and evidence, take useful action, and make what we discover public."
+          "text": "We show up, learn from people and evidence, take useful action, and make what we discover public."
         },
         {
           "id": "discovery",
@@ -343,7 +343,7 @@
           "imageAlt": "Dog on a Stockton neighborhood sidewalk",
           "more": {
             "chapter": "gap.overview",
-            "label": "Explore the current gap"
+            "label": "See what's happening"
           }
         },
         {
