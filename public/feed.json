@@ -226,6 +226,96 @@
       ]
     },
     {
+      "id": "briefing",
+      "title": "What we're learning",
+      "sections": [
+        {
+          "id": "st-marys",
+          "title": "Before the first field observation",
+          "text": "We plan to observe public areas near St. Mary's to learn what can be seen firsthand. No visit or street-dog count has been documented there yet. A report about the corridor is a lead, not proof of current conditions.",
+          "entries": [
+            {
+              "record": "task-verify-st-marys-church-street-dog-scale",
+              "narration": "The planned observation is limited to public areas. Seeing no dogs would also be useful, and one visit could not establish a citywide count."
+            },
+            {
+              "record": "sjcoc-2024-pit-survey-pets",
+              "narration": "In the 2024 San Joaquin County Point-in-Time survey, 34 percent of respondents said they had a pet. That is not a Stockton-only measure or a count of street dogs."
+            },
+            {
+              "record": "st-marys-pathways-pet-accommodation",
+              "narration": "A Pathways listing describes units for people accompanied by pets, but current access, dog eligibility, and outcomes remain unverified by us."
+            }
+          ]
+        },
+        {
+          "id": "field-calls",
+          "title": "What the field-call records may tell us",
+          "text": "Stockton Animal Services provided 7,183 field-call case records. We have begun reviewing them for report types, response patterns, and missing data. Cases are not unique animals, verified sightings, or outcomes.",
+          "entries": [
+            {
+              "record": "crossover-2026-11-02-sas-field-call-records-received",
+              "narration": "The records arrived November 2, 2026, and the review began November 4."
+            },
+            {
+              "record": "task-review-sas-field-call-records",
+              "narration": "The analysis remains in progress; we have not published a count of dogs currently living on Stockton's streets."
+            },
+            {
+              "record": "sas-2024-dog-intake-stray",
+              "narration": "The separate 2024 figure of 3,106 stray-dog intake events covers the Animal Services service area. It must not be added to the field calls or treated as a street census."
+            }
+          ]
+        },
+        {
+          "id": "dumping",
+          "title": "Reports of dumped dogs and a proposed response",
+          "text": "Stockton Street Dogs reports repeated dumped-dog encounters. We are treating its reported range as an attributed claim, not a verified count or rate for the city.",
+          "entries": [
+            {
+              "record": "stockton-dumped-dog-encounters-reported",
+              "narration": "The group reported three to ten encounters a week in September 2026; the underlying cases and geography have not been independently checked."
+            },
+            {
+              "record": "canine-campus",
+              "narration": "Its Canine Campus is a proposal. It does not yet represent operating capacity or a measured outcome."
+            }
+          ]
+        },
+        {
+          "id": "animal-services",
+          "title": "What happened when we contacted Animal Services",
+          "text": "We visited Stockton Animal Services in October, submitted a volunteer application, and are following up on what happens next. One visit describes what we saw at that time; it does not establish shelterwide capacity or outcomes.",
+          "entries": [
+            {
+              "record": "crossover-2026-10-14-sas-first-visit",
+              "narration": "Our first visit documented a busy lobby, a posted instruction about dogs entering the building, and construction activity."
+            },
+            {
+              "record": "crossover-2026-10-14-sas-volunteer-application",
+              "narration": "We submitted a volunteer application and have not yet documented an onboarding outcome."
+            },
+            {
+              "record": "stockton-animal-shelter-renovation",
+              "narration": "The city awarded a 10.47 million dollar construction contract for shelter renovation. We have not verified additional capacity from completed work."
+            }
+          ]
+        },
+        {
+          "id": "no-dog-homeless",
+          "title": "Could every dog have a safe place?",
+          "text": "This is an exploratory question about care, human participation, and what future technology might make possible. It is not an announced Stockton program or a finding that AI or robotics can solve the problem.",
+          "note": "Editorial exploration: The Asher House offers one example of rescue, rehabilitation, rehoming, and lifelong sanctuary care. Its model raises questions about land, staffing, animal suitability, costs, and local partnerships that we have not answered.",
+          "entries": [
+            {
+              "record": "asher-house-sanctuary-model",
+              "narration": "We are examining the example as inspiration, not evidence that the same arrangement would work in Stockton."
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "about",
       "title": "About Crossover",
       "sections": [
@@ -385,14 +475,11 @@
     "feedDocument": "/feed.json",
     "reading": [
       "introduction",
-      "gap.overview.situation",
-      "gap.overview.key-figures",
-      "gap.overview.focus",
-      "gap.activity.developments",
-      "gap.activity.current-work",
-      "gap.improvements",
-      "gap.findings",
-      "about.opening"
+      "briefing.st-marys",
+      "briefing.field-calls",
+      "briefing.dumping",
+      "briefing.animal-services",
+      "briefing.no-dog-homeless"
     ]
   }
 }
