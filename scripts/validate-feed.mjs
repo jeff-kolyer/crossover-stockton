@@ -12,8 +12,8 @@ export function validateFeed(story, records) {
     paths.set(path, node);
     if (node.record) checkRef(node.record, path);
     if (node.statusRecord) checkRef(node.statusRecord, path);
-    for (const id of [...(node.references ?? []), ...(node.records ?? []), ...(node.dailyRecords ?? [])]) checkRef(id, path);
-    if (node.dailyRecords?.some(id => !node.records?.includes(id))) errors.push(`${path}: daily records must be in the full passage`);
+    for (const id of [...(node.references ?? []), ...(node.records ?? []), ...(node.feedRecords ?? [])]) checkRef(id, path);
+    if (node.feedRecords?.some(id => !node.records?.includes(id))) errors.push(`${path}: feed records must be in the passage`);
     if (node.select && !Object.values(records).some(record => record.schema === node.select.schema && (!node.select.gap || record.fields.gap_id === gap?.id || record.fields.gap_ids?.includes(gap?.id) || record.fields.related_gap_ids?.includes(gap?.id) || gap?.fields.organization_ids?.includes(record.id)))) errors.push(`${path}: selector has no published records`);
     if (node.more) pendingMore.push([node.more, path]);
     for (const figure of node.figures ?? []) {
@@ -46,12 +46,14 @@ export function validateFeed(story, records) {
   }
   for (const item of story.silent?.entryPoints ?? []) if (!item.label || !paths.has(item.chapter)) errors.push(`Invalid entry point ${item.chapter}`);
   for (const id of story.silent?.homeLinks ?? []) if (!gapChapters.some(item => item.id === id)) errors.push(`Home links to missing gap chapter ${id}`);
-  for (const path of story.silent?.reading?.daily ?? []) if (!paths.has(path)) errors.push(`Daily reading references missing passage ${path}`);
-  for (const path of story.silent?.reading?.full ?? []) if (!paths.has(path)) errors.push(`Full reading references missing chapter ${path}`);
+  if (!Array.isArray(story.silent?.reading) || !story.silent.reading.length) errors.push("Feed needs a curated reading order");
+  for (const path of Array.isArray(story.silent?.reading) ? story.silent.reading : []) if (!paths.has(path)) errors.push(`Feed references missing passage ${path}`);
   const focus = paths.get("gap.overview.focus");
+  const overview = paths.get("gap.overview");
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(overview?.updatedAt ?? "")) errors.push("Overview needs an editorial update date");
   if (!focus?.headline || !focus.text || !focus.currentWork) errors.push("Current focus needs a headline, text, and current-work summary");
   if (focus?.statusRecord && (resolve(focus.statusRecord)?.schema !== "task" || !resolve(focus.statusRecord)?.fields?.started_at)) errors.push("Current focus status needs a dated task record");
-  if (!paths.get("introduction")?.title || !paths.get("introduction")?.text) errors.push("Introduction needs its question and text");
+  if (!paths.get("introduction")?.title || !paths.get("introduction")?.text || !paths.get("introduction")?.method) errors.push("Introduction needs its guiding idea, purpose, and method");
   if (!paths.get("gap")?.text) errors.push("Gap chapter needs a current summary");
   for (const record of Object.values(records)) for (const field of ["statements", "homeSummary", "aboutSummary", "overviewSummary", "homeImage", "overviewLabel", "overviewNote", "current_focus"]) if (field in record.fields) errors.push(`${record.id}: page-specific field ${field} remains in the record`);
   if (errors.length) throw new Error(`Invalid story:\n${errors.join("\n")}`);

@@ -761,7 +761,7 @@ __FONT_CSS__
     };
     const overviewContinuation=need=>{
       let activityStarted=false;
-      const paths=story.silent.reading.full.filter(path=>path.startsWith("gap.")&&!path.startsWith("gap.overview."));
+      const paths=story.silent.reading.filter(path=>path.startsWith("gap.")&&!path.startsWith("gap.overview."));
       const passages=paths.map(path=>{
         const ids=path.split("."),group=chapter("gap").chapters.find(item=>item.id===ids[1]),part=ids[2]?group.chapters.find(item=>item.id===ids[2]):group;
         const heading=ids[1]==="activity"?(activityStarted?"":`<h2>${esc(group.title)}</h2>`):`<h2>${esc(part.title)}</h2>`;

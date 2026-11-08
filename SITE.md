@@ -1,27 +1,31 @@
 # Site Design Specs
 
-## Home
+## Home and Overview
 
-`/` introduces Crossover with the exact question and paragraph authored in the feed. It has one main route into the active gap: `/street-dogs/overview/`. Keep the introduction distinct from the gap's evidence and ongoing work.
+`/` is the living Overview for the active street-dogs work. It opens with the current focus, a dated narrative account, and a listen control that reads the same narrative text shown on the page. The supporting evidence and record workspace follow the account. `/street-dogs/overview/` remains a readable alias with `/` as its canonical URL.
 
-The home page spans the browser width and has no dark navigation rail. Its logo occupies the same top-left screen position as the gap rail logo; About stays at the top right. The photographic composition is quiet, with readable text on the left and the first-gap gateway visible on mobile.
+The Crossover name and guiding idea remain in the site identity; About provides the broader context. The logo returns to the Overview.
 
 ## Gap navigation
 
-The gap has a sticky, full-height dark left rail on desktop and a top-right full-page menu on mobile. Its sections are:
+The gap has a sticky, full-height beige left rail on desktop and a top-right full-page menu on mobile. Its sections are:
 
-Overview · Activity · Tasks · Measurements · Findings · Organizations · Improvements · Places · Events · Sources.
+Overview · Activity · Actions · Measurements · Findings · Organizations · Improvements · Places · Events · Sources. Actions is the display name for canonical task records at `/street-dogs/tasks/`.
 
-The logo always returns to Crossover home. Use ordinary URLs without hash-route links.
+The logo always returns to the Overview. Use ordinary URLs without hash-route links.
+
+Feed and About sit at the bottom of the desktop rail, with Feed above About. The mobile menu includes both links below the section list.
 
 ## Gap overview
 
-`/street-dogs/overview/` is the evidence-linked account. It begins with the gap name, the investigation status, the date of the last substantive recorded update, and a plain statement of current work. Figures, developments, findings, records, and caveats follow. Build or deploy dates are never presented as investigation updates.
+The Overview opens with the dated narrative account, then shows the current focus, three questions, attributed figures, actual recent activity, open questions, and links into the record workspace. The listen control reads the visible narrative paragraphs. Its update date is editorial data in the feed; build or deploy dates are never presented as investigation updates.
+
+Section lists draw their rows and counts from the public records JSON. Filters use the statuses or record kinds actually present in each section. Every row links to a permanent record page with source and limitation details.
 
 ## Contextual breadcrumbs
 
-The reading hierarchy is Crossover → gap → section. Record breadcrumbs include the section from which the reader arrived when available. A record keeps one permanent URL.
+The Overview has no breadcrumb. Record pages show Overview → Data Record, and the feed shows Overview → Feed. Overview links to `/`. A record keeps one permanent URL.
 
 ## Feed
 
-The feed orders Crossover introduction, gap, then About. The daily spoken reading uses continuous prose and keeps source attribution and limits. The site renders the same authored data.
+The feed has one curated reading order drawn from the Crossover introduction, current gap, and About. `/feed/` uses the regular site shell and reading column. Its text version at `/feed.txt` uses the same selected passages and records, with source attribution and limits. The site renders the same authored data.

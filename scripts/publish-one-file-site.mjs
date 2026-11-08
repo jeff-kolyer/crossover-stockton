@@ -24,7 +24,7 @@ const gapIconPaths = {
   improvements: '<path d="m12 2 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 17l9 5 9-5"/>',
   places: '<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
   events: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>',
-  document: '<path d="M6 2h8l4 4v16H6zM14 2v5h4M9 12h6M9 16h6"/>',
+  document: '<path d="M5 2h9l4 4v5M14 2v4h4M5 2v20h8"/><circle cx="16" cy="16" r="3.5"/><path d="m18.5 18.5 3 3"/>',
 };
 const gapIcon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${gapIconPaths[name] ?? gapIconPaths.document}</svg>`;
 const route = (id) => `/record/${encodeURIComponent(id)}/`;
@@ -134,11 +134,12 @@ for (const file of ["ai-variant.html", "ai-variant.css", "ai-variant-v2.css", "a
   await copyFile(resolve("public/preview", file), resolve(dist, "preview", file));
 await copyFile("public/preview/site-md.css", resolve(dist, "site.css"));
 await copyFile("public/preview/site-md.js", resolve(dist, "site.js"));
+await mkdir(resolve(dist, "images/home"), { recursive: true });
+await copyFile("public/images/home/sunlit-window-view.jpg", resolve(dist, "images/home/sunlit-window-view.jpg"));
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await copyFile("public/feed.json", resolve(dist, "feed.json"));
-await mkdir(resolve(dist, "feed"), { recursive: true });
-await copyFile("public/feed/index.html", resolve(dist, "feed/index.html"));
-await copyFile("public/feed/daily.txt", resolve(dist, "feed/daily.txt"));
+await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
+await copyFile("public/feed.txt", resolve(dist, "feed.txt"));
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
 await writeFile(resolve(dist, "favicon.ico"), await readFile("public/favicon.ico"));
 const navigationScript = await readFile("public/static-navigation.js");
@@ -164,7 +165,8 @@ for (const page of staticSite.pages) {
 }
 const siteMdTemplate = await readFile("public/preview/site-md.html", "utf8");
 const siteMdScript = await readFile("public/preview/site-md.js", "utf8");
-const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, origin);
+const feedContent = await readFile("public/feed-content.html", "utf8");
+const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, origin, feedContent);
 for (const page of siteMdPages) {
   const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
   if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe SITE.md page path: ${page.path}`);
@@ -172,10 +174,13 @@ for (const page of siteMdPages) {
   await writeFile(resolve(directory, "index.html"), page.html);
 }
 await writeFile("index.html", siteMdPages.find(page => page.path === "/").html);
+const experimentDirectory = resolve(dist, "preview/style-experiment");
+await mkdir(experimentDirectory, { recursive: true });
+await writeFile(resolve(experimentDirectory, "index.html"), '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/"><link rel="canonical" href="https://crossoverstockton.org/"><title>Crossover Stockton</title><script>location.replace("/")</script></head><body><p>Continue to <a href="/">Crossover Stockton</a>.</p></body></html>');
 await mkdir(resolve(dist, "interactive"), { recursive: true });
 await writeFile(resolve(dist, "interactive/index.html"), html.replace("<head>", '<head><meta name="robots" content="noindex,follow">'));
 await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}<url><loc>${origin}/feed/</loc></url></urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/feed/, ${origin}/activity/, ${origin}/places/, ${origin}/explore/, ${origin}/organizations/, ${origin}/about/\nFeed: ${origin}/feed.json\nDaily reading: ${origin}/feed/daily.txt\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/feed/, ${origin}/activity/, ${origin}/places/, ${origin}/explore/, ${origin}/organizations/, ${origin}/about/\nFeed text: ${origin}/feed.txt\nFeed JSON: ${origin}/feed.json\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);

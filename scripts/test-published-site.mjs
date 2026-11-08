@@ -9,47 +9,64 @@ const story = JSON.parse(await read('public/feed.json'));
 const records = Object.values(feed.records);
 const page = path => read(`dist${path}index.html`);
 
-test('the published feed preserves editorial order and portable data', async () => {
-  const text = await page('/feed/');
-  const daily = await read('dist/feed/daily.txt');
-  assert.equal(text, await read('public/feed/index.html'));
-  assert.equal(daily, await read('public/feed/daily.txt'));
-  for (const [a,b] of [['introduction','gap'],['gap','about'],['improvements','findings'],['findings','sources']])
-    assert.ok(text.indexOf(`id="${a}"`) < text.indexOf(`id="${b}"`), `${a} before ${b}`);
-  assert.ok(daily.indexOf('Proposed and active improvements:') < daily.indexOf('What the evidence supports so far:'));
-  assert.ok(daily.startsWith('What would you do if you no longer had to work for money?'));
-  assert.ok(!daily.startsWith('Crossover Stockton Feed'));
+test('one curated feed is published in HTML and text with the same selections', async () => {
+  const htmlFeed = await page('/feed/');
+  const textFeed = await read('dist/feed.txt');
+  const feedContent = await read('public/feed-content.html');
+  assert.ok(htmlFeed.includes(feedContent.trim()));
+  assert.equal(textFeed, await read('public/feed.txt'));
+  assert.ok(htmlFeed.includes('class="shell"'));
+  assert.ok(htmlFeed.includes('href="/feed/" aria-current="page"><svg'));
+  assert.ok(htmlFeed.includes('class="rail-gap">WHAT&#39;S HAPPENING?</div>'));
+  assert.ok(htmlFeed.includes('class="rail-gap">WHO&#39;S HELPING?</div>'));
+  assert.ok(htmlFeed.includes('class="rail-gap">OUR WORK</div>'));
+  assert.ok(htmlFeed.indexOf('href="/feed/" aria-current="page"><svg') < htmlFeed.indexOf('class="rail-gap">WHO&#39;S HELPING?</div>'));
+  assert.ok(htmlFeed.indexOf('class="rail-gap">WHO&#39;S HELPING?</div>') < htmlFeed.indexOf('class="rail-gap">OUR WORK</div>'));
+  assert.ok(htmlFeed.indexOf('class="rail-foot"') < htmlFeed.indexOf('About Crossover</a></div></aside>'));
+  assert.ok(htmlFeed.includes('<a href="/">Overview</a>'));
+  assert.ok(htmlFeed.includes('<span aria-current="page">Feed</span>'));
+  assert.ok(htmlFeed.includes('href="/feed.txt" target="_blank" rel="noopener noreferrer"'));
+  assert.ok(htmlFeed.includes('Text version ↗'));
+  assert.ok(htmlFeed.includes('href="/street-dogs/metrics/"'));
+  assert.ok(!htmlFeed.includes('href="/gaps/'));
+  assert.ok(!htmlFeed.includes('Daily reading'));
+  for (const [a,b] of [['introduction','gap'],['gap','about'],['improvements','findings']])
+    assert.ok(htmlFeed.indexOf(`id="${a}"`) < htmlFeed.indexOf(`id="${b}"`), `${a} before ${b}`);
+  assert.ok(textFeed.indexOf('Proposed and active improvements:') < textFeed.indexOf('What the evidence supports so far:'));
+  assert.ok(textFeed.startsWith('See clearly. Act locally.'));
+  assert.ok(!textFeed.startsWith('Crossover Stockton Feed'));
+  assert.ok(htmlFeed.includes('Received Stockton Animal Services field-call records'));
+  assert.ok(textFeed.includes('Received Stockton Animal Services field-call records'));
+  assert.ok(!htmlFeed.includes('Requested Stockton Animal Services field-call records'));
+  assert.ok(!textFeed.includes('Requested Stockton Animal Services field-call records'));
   assert.deepEqual(JSON.parse(await read('dist/feed.json')), story);
   assert.deepEqual(JSON.parse(await read('dist/data/records.json')), feed);
 });
 
-test('the root introduces Crossover and leads into the separate gap Overview', async () => {
+test('the root serves the living Overview and the old overview URL stays readable', async () => {
   assert.equal(
     `${story.chapters[0].title} ${story.chapters[0].text}`,
-    "What would you do if you no longer had to work for money? You could use that freedom to escape from the world or to become more involved in it. We're starting in Stockton, getting out into the community, discovering where help is needed, and exploring what we can do. The work discovers the work."
+    'See clearly. Act locally. We’re finding out what’s happening in Stockton, where help is needed, and what can be done about it.'
   );
   const root = await page('/');
-  for (const phrase of ['What would you do if you no longer had to work for money?','You could use that freedom to escape from the world or to become more involved in it.','The work discovers the work.','Street dogs and access to care'])
+  for (const phrase of ['Dogs on<br>Stockton’s Streets','What we know now','Listen to this account','3,106','No verified street census'])
     assert.ok(root.includes(phrase), phrase);
-  assert.ok(root.includes('href="/street-dogs/overview/"'));
-  assert.ok(root.includes('Investigation in progress'));
-  assert.ok(root.includes('Last substantive update: Nov 4, 2026'));
-  assert.ok(root.includes('class="shell home-shell"'));
-  assert.ok(!root.includes('3,106'));
-  assert.ok(!root.includes('class="figure-grid"'));
+  assert.ok(root.includes('class="shell"'));
+  assert.ok(root.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(!root.includes('href="#/'));
   const overview = await page('/street-dogs/overview/');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.started_at, '2026-11-04');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.status, 'in_progress');
   assert.ok(feed.records["task-review-sas-field-call-records"].fields.list_context.includes('7,183 cases'));
-  for (const phrase of ['Investigation in progress','Last substantive update: Nov 4, 2026','Currently:','7,183 Animal Services case records','3,106','No verified street census'])
+  for (const phrase of ['Updated Nov 4, 2026','What we know now','Listen to this account','Dogs on Stockton’s streets need care','7,183 Animal Services case records','3,106','No verified street census'])
     assert.ok(overview.includes(phrase), phrase);
-  assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/street-dogs/overview/"'));
+  assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/"'));
+  assert.ok(overview.includes('<meta name="robots" content="noindex,follow">'));
   assert.ok(overview.includes('href="/"'));
 });
 
 test('all ten sections remain reachable and readable', async () => {
-  assert.deepEqual(story.silent.menu.map(item => item.label), ['Overview','Activity','Tasks','Measurements','Findings','Organizations','Improvements','Places','Events','Sources']);
+  assert.deepEqual(story.silent.menu.map(item => item.label), ['Overview','Activity','Actions','Measurements','Findings','Organizations','Improvements','Places','Events','Sources']);
   for (const item of story.silent.menu) {
     const section = await page(`/street-dogs/${item.page}/`);
     assert.ok(section.includes('class="shell"'), item.page);
@@ -67,6 +84,8 @@ test('About uses feed content and retains founder and record links', async () =>
     assert.ok(about.includes(html(heading)), heading);
   for (const link of ['https://www.linkedin.com/in/jeff-kolyer','/street-dogs/sources/','/feed/'])
     assert.ok(about.includes(`href="${link}"`), link);
+  assert.ok(about.includes('class="menu-about" href="/about/" aria-current="page"'));
+  assert.ok(about.includes('href="/about/" aria-current="page"><svg'));
   assert.ok(about.includes('alt="Jeff Kolyer"'));
   assert.ok(about.includes('alt="Dog on a Stockton neighborhood sidewalk"'));
 });
@@ -74,6 +93,8 @@ test('About uses feed content and retains founder and record links', async () =>
 test('record details retain instructions, limits, and supporting links', async () => {
   for (const record of records.filter(item => item.schema === 'task')) {
     const detail = await page(`/record/${record.id}/`);
+    assert.ok(detail.includes('<a href="/">Overview</a>'), record.id);
+    assert.ok(detail.includes('<span aria-current="page">Data Record</span>'), record.id);
     assert.ok(detail.includes(`<h2>Instructions</h2><p>${html(record.fields.instructions)}</p>`), record.id);
     assert.doesNotMatch(detail, /Created \(estimated\)|Est\. created|Undated/);
   }
@@ -109,6 +130,18 @@ test('every public record and the new design assets are published', async () => 
   const root = await page('/');
   assert.ok(root.includes('href="/site.css"'));
   assert.ok(root.includes('src="/site.js"'));
-  for (const path of ['dist/site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/about/about-the-founder.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
+  assert.ok(root.includes('src="/images/home/sunlit-window-view.jpg"'));
+  assert.ok(root.includes('<path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M22 10v4"/>'));
+  assert.ok(root.includes('<circle cx="16" cy="16" r="3.5"/>'));
+  for (const path of ['dist/site.css','dist/site.js','dist/images/home/sunlit-window-view.jpg','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/about/about-the-founder.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
+});
+
+test('the warm skin is published as the main CSS and the preview redirects home', async () => {
+  const experiment = await page('/preview/style-experiment/');
+  assert.ok(experiment.includes('content="0;url=/"'));
+  const css = await read('dist/site.css');
+  assert.ok(css.includes('--skin-sidebar:#F0EEE7'));
+  assert.ok(css.includes('--skin-selected:#DCE7DC'));
+  assert.ok((await page('/')).includes('href="/site.css"'));
 });

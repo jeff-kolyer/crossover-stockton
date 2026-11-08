@@ -2,7 +2,7 @@ import { runInNewContext } from 'node:vm';
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
-export function renderSiteMdPages(template, source, feed, story, origin) {
+export function renderSiteMdPages(template, source, feed, story, origin, feedContent) {
   const app = { innerHTML: '' };
   const location = { pathname: '/', search: '' };
   const document = {
@@ -12,16 +12,16 @@ export function renderSiteMdPages(template, source, feed, story, origin) {
   };
   const context = {
     document, location, window: { scrollTo() {} }, URLSearchParams,
-    sourceFeed: feed, sourceStory: story,
+    sourceFeed: feed, sourceStory: story, sourceFeedContent: feedContent,
   };
   const renderer = source.replace(/\bstart\(\);\s*$/, '');
   if (renderer === source) throw new Error('Could not isolate the SITE.md renderer');
   runInNewContext(renderer, context, { timeout: 3000 });
-  runInNewContext(`feed=sourceStory;records=Object.values(sourceFeed.records);byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;`, context, { timeout: 3000 });
+  runInNewContext(`feed=sourceStory;feedContent=sourceFeedContent;records=Object.values(sourceFeed.records);byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;`, context, { timeout: 3000 });
 
   const gapSlug = Object.values(feed.records).find(item => item.schema === 'gap' && item.fields?.default)?.fields?.slug;
   if (!gapSlug) throw new Error('No default gap slug in the public records');
-  const paths = new Set(['/', '/about/', `/${gapSlug}/overview/`, ...story.silent.menu.filter(item => item.page !== 'overview').map(item => `/${gapSlug}/${item.page}/`)]);
+  const paths = new Set(['/', '/about/', '/feed/', `/${gapSlug}/overview/`, ...story.silent.menu.filter(item => item.page !== 'overview').map(item => `/${gapSlug}/${item.page}/`)]);
   for (const record of Object.values(feed.records)) {
     paths.add(`/${record.schema === 'organization' ? 'organization' : 'record'}/${encodeURIComponent(record.id)}/`);
   }
@@ -32,10 +32,11 @@ export function renderSiteMdPages(template, source, feed, story, origin) {
     runInNewContext('render()', context, { timeout: 3000 });
     if (!app.innerHTML.includes('class="shell')) throw new Error(`SITE.md page did not render: ${path}`);
     const title = document.title.replace(/ preview$/, '');
-    const description = path === '/' ? story.chapters.find(item => item.id === 'introduction')?.text
+    const description = path === '/' || path === `/${gapSlug}/overview/` ? story.chapters.find(item => item.id === 'gap')?.chapters.find(item => item.id === 'overview')?.chapters.find(item => item.id === 'situation')?.text
       : path === '/about/' ? story.chapters.find(item => item.id === 'about')?.sections[0]?.text
+      : path === '/feed/' ? story.description
       : 'Crossover Stockton public feed and connected records.';
-    const canonical = path;
+    const canonical = path === `/${gapSlug}/overview/` ? '/' : path;
     const html = template
       .replace(/<meta name="robots" content="noindex">\s*/, path === canonical ? '' : '<meta name="robots" content="noindex,follow">\n')
       .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
