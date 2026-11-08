@@ -214,6 +214,7 @@
 .design-directory a{display:flex;flex-direction:column;justify-content:space-between;min-height:115px;padding:18px;border:1px solid #dce3df;background:#fff}
 .design-directory strong{font-size:.9rem}.design-directory span{font-size:.78rem;color:#5e7072}
 .design-directory strong svg{width:18px;height:18px;vertical-align:-4px;margin-right:5px;color:#087b74}
+@media(min-width:1900px){.design-overview:not(.about-page) .design-hero .design-graphic{width:calc(100% + 170px);height:395px;margin:-30px 0 -30px -170px}}
 @media(max-width:1100px){.design-hero{grid-template-columns:1fr .65fr;gap:22px}.design-split{gap:21px}.design-directory{grid-template-columns:repeat(2,1fr)}.top-tag{display:none}}
 @media(min-width:761px) and (max-width:950px){:root{--rail-width:190px}.design-hero,.design-split{grid-template-columns:1fr}.design-graphic{min-height:220px;order:-1}.design-stats{grid-template-columns:1fr 1fr}.design-stat:last-child{grid-column:span 2}}
 @media(max-width:760px){
