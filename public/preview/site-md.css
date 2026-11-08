@@ -214,6 +214,19 @@
 .design-directory a{display:flex;flex-direction:column;justify-content:space-between;min-height:115px;padding:18px;border:1px solid #dce3df;background:#fff}
 .design-directory strong{font-size:.9rem}.design-directory span{font-size:.78rem;color:#5e7072}
 .design-directory strong svg{width:18px;height:18px;vertical-align:-4px;margin-right:5px;color:#087b74}
+.about-principles-section .design-section-head p{max-width:850px}
+.about-principles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 34px}
+.about-principle{display:grid;grid-template-columns:136px minmax(0,1fr);align-items:start;gap:18px;padding:20px 0;border-top:1px solid var(--skin-border)}
+.about-principle img{width:136px;height:108px;object-fit:cover}
+.about-principle h3{margin:7px 0;font:400 1.55rem/1.12 var(--font-editorial);color:var(--skin-ink)}
+.about-principle p{margin:0;line-height:1.55;color:var(--skin-text)}
+.about-starting-band{display:grid;grid-template-columns:minmax(0,1fr) 300px;align-items:center;gap:38px;margin:28px 0;padding:36px 40px;background:var(--skin-sage);border:0}
+.about-starting-band p,.about-founder p{max-width:65ch;line-height:1.6;color:var(--skin-text)}
+.about-starting-band img{width:300px;height:200px;object-fit:cover}
+.about-founder{display:grid;grid-template-columns:136px minmax(0,1fr);align-items:start;gap:32px}
+.about-founder>img{width:136px;height:108px;object-fit:cover}
+@media(max-width:1100px){.about-principles{grid-template-columns:1fr}.about-starting-band{grid-template-columns:minmax(0,1fr) 240px}.about-starting-band img{width:240px;height:165px}}
+@media(max-width:760px){.about-principle{grid-template-columns:96px minmax(0,1fr);gap:14px}.about-principle img{width:96px;height:96px}.about-starting-band{grid-template-columns:1fr;padding:26px;gap:16px}.about-starting-band img{width:100%;height:180px}.about-founder{grid-template-columns:96px minmax(0,1fr);gap:14px}.about-founder>img{width:96px;height:96px}}
 @media(min-width:1900px){.design-overview:not(.about-page) .design-hero .design-graphic{width:calc(100% + 170px);height:395px;margin:-30px 0 -30px -170px}}
 @media(max-width:1100px){.design-hero{grid-template-columns:1fr .65fr;gap:22px}.design-split{gap:21px}.design-directory{grid-template-columns:repeat(2,1fr)}.top-tag{display:none}}
 @media(min-width:761px) and (max-width:950px){:root{--rail-width:190px}.design-hero,.design-split{grid-template-columns:1fr}.design-graphic{min-height:220px;order:-1}.design-stats{grid-template-columns:1fr 1fr}.design-stat:last-child{grid-column:span 2}}

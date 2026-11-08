@@ -169,8 +169,15 @@ function aboutPage(){
   const discovery=about.sections.find(item=>item.id==='discovery');
   const starting=about.sections.find(item=>item.id==='starting');
   const founderSection=about.sections.find(item=>item.id==='founder');
-  const discoveryRecord=lookup(discovery.record);
-  const founderId=records.find(record=>record.schema==='identity')?.fields?.founderPersonId;
+  const identity=records.find(record=>record.schema==='identity');
+  const principles=(identity?.fields?.principleIds||[]).map(lookup).filter(Boolean);
+  const principleImages={
+    'work-to-vocation':{src:'/images/about/techno.jpg',alt:'Robotic arm in a workshop'},
+    compassion:{src:'/images/about/hands.jpg',alt:'Two hands reaching toward one another'},
+    'contact-with-reality':{src:'/images/about/notebook.jpg',alt:'Notebook of field observations'},
+    'work-discovers-work':{src:'/images/about/growing.jpg',alt:'Plant growing beside a city'}
+  };
+  const founderId=identity?.fields?.founderPersonId;
   const founder=lookup(founderId)||records.find(record=>record.schema==='person');
   const profile=safeUrl(founder?.fields?.profileUrl);
   const openingText=opening.text.slice(opening.text.indexOf(' What if')+1);
@@ -180,21 +187,15 @@ function aboutPage(){
       <div><span class="eyebrow">ABOUT CROSSOVER</span><h1 id="about-opening">${esc(opening.headline)}</h1><p>${esc(openingText)}</p></div>
       <div class="design-graphic"><img src="/images/about/guy-dog.jpg" alt="Person sitting beside a dog at sunset"></div>
     </section>
-    <section class="design-section" aria-labelledby="about-approach">
-      <div class="design-section-head"><div><span class="eyebrow">OUR APPROACH</span><h2 id="about-approach">${esc(purpose.headline)}</h2></div></div>
-      <div class="two-col">
-        <article class="panel"><img class="about-photo" src="/images/about/techno.jpg" alt="Robotic arm in a workshop"><span class="eyebrow">01 / TECHNOLOGY</span><h2>Technology</h2><p>${esc(technologyText)}</p></article>
-        <article class="panel"><img class="about-photo" src="/images/about/notebook.jpg" alt="Notebook of field observations"><span class="eyebrow">02 / INVESTIGATION</span><h2>Investigation</h2><p>${esc(purpose.text)}</p></article>
-      </div>
+    <section class="design-section about-principles-section" aria-labelledby="about-principles">
+      <div class="design-section-head"><div><span class="eyebrow">GUIDING IDEAS</span><h2 id="about-principles">Principles</h2><p>${esc(technologyText)} ${esc(purpose.text)}</p></div></div>
+      <div class="about-principles">${principles.map((principle,index)=>{const image=principleImages[principle.id];const title=principle.id==='work-discovers-work'?discovery.headline:principle.title;return `<article class="about-principle"><img src="${esc(image.src)}" alt="${esc(image.alt)}" loading="lazy"><div><span class="eyebrow">${String(index+1).padStart(2,'0')} / PRINCIPLE</span><h3>${esc(title)}</h3><p>${esc(recordText(principle))}</p></div></article>`}).join('')}</div>
     </section>
-    <section class="design-section" aria-labelledby="about-discovery">
-      <div class="design-section-head"><div><span class="eyebrow">GUIDING IDEA</span><h2 id="about-discovery">${esc(discovery.headline)}</h2><p>${esc(recordText(discoveryRecord))}</p></div></div>
-    </section>
-    <section class="design-section" aria-labelledby="about-starting">
-      <div class="design-split"><div><span class="eyebrow">IN STOCKTON, NOW</span><h2 id="about-starting">${esc(starting.title)}</h2><p>${esc(starting.text)}</p><p><a class="text-link" href="${href('overview')}">${esc(starting.more.label)} ${icon('arrow')}</a></p></div><div class="design-graphic"><img src="${esc(gap.fields?.preferred_image||'/images/variants/clean/dog-sidewalk.jpg')}" alt="${esc(starting.imageAlt)}"></div></div>
+    <section class="design-section about-starting-band" aria-labelledby="about-starting">
+      <div><span class="eyebrow">IN STOCKTON, NOW</span><h2 id="about-starting">${esc(starting.title)}</h2><p>${esc(starting.text)}</p><p><a class="text-link" href="${href('overview')}">${esc(starting.more.label)} ${icon('arrow')}</a></p></div><img src="${esc(gap.fields?.preferred_image||'/images/variants/clean/dog-sidewalk.jpg')}" alt="${esc(starting.imageAlt)}" loading="lazy">
     </section>
     <section class="design-section" aria-labelledby="about-founder">
-      <div class="design-split"><div><span class="eyebrow">FOUNDER</span><h2 id="about-founder">${esc(founderSection.headline)}</h2><p>${esc(founderSection.text)}</p><p><a class="text-link" href="${href('sources')}">${esc(founderSection.more.label)} ${icon('arrow')}</a></p>${profile?`<p><a class="text-link" href="${esc(profile)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a></p>`:''}</div><div class="design-graphic"><img src="${esc(founder?.fields?.preferred_image||'/images/about/about-the-founder.jpg')}" alt="${esc(founderSection.imageAlt)}"></div></div>
+      <div class="about-founder"><img src="${esc(founder?.fields?.preferred_image||'/images/about/about-the-founder.jpg')}" alt="${esc(founderSection.imageAlt)}" loading="lazy"><div><span class="eyebrow">FOUNDER</span><h2 id="about-founder">${esc(founderSection.headline)}</h2><p>${esc(founderSection.text)}</p><p><a class="text-link" href="${href('sources')}">${esc(founderSection.more.label)} ${icon('arrow')}</a></p>${profile?`<p><a class="text-link" href="${esc(profile)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a></p>`:''}</div></div>
     </section>
   </div>`;
 }

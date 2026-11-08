@@ -85,8 +85,13 @@ test('all ten sections remain reachable and readable', async () => {
 
 test('About uses feed content and retains founder and record links', async () => {
   const about = await page('/about/');
-  for (const heading of ['From work to vocation.','See clearly. Act locally.','The work discovers the work.',"Where we're starting",'Founded by Jeff Kolyer'])
+  for (const heading of ['From work to vocation.','Principles','Vocation','Compassion','Reality','The work discovers the work.','Starting with dogs','Founded by Jeff Kolyer'])
     assert.ok(about.includes(html(heading)), heading);
+  assert.ok(about.includes('AI and robotics will replace many jobs.'));
+  assert.ok(about.includes('class="design-section about-starting-band"'));
+  assert.ok(about.indexOf('class="about-principles"') < about.indexOf('class="design-section about-starting-band"'));
+  assert.ok(about.indexOf('class="design-section about-starting-band"') < about.indexOf('class="about-founder"'));
+  for (const image of ['techno.jpg','hands.jpg','notebook.jpg','growing.jpg']) assert.ok(about.includes(`/images/about/${image}`), image);
   for (const link of ['https://www.linkedin.com/in/jeff-kolyer','/street-dogs/sources/','/feed/'])
     assert.ok(about.includes(`href="${link}"`), link);
   assert.ok(about.includes('class="menu-about" href="/about/" aria-current="page"'));
@@ -139,7 +144,7 @@ test('every public record and the new design assets are published', async () => 
   assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
   assert.ok(root.includes('<path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M22 10v4"/>'));
   assert.ok(root.includes('<circle cx="16" cy="16" r="3.5"/>'));
-  for (const path of ['dist/site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
+  for (const path of ['dist/site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
 });
 
