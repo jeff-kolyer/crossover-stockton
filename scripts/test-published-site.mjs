@@ -27,18 +27,22 @@ test('one curated feed is published in HTML and text with the same selections', 
   assert.ok(htmlFeed.includes('<span aria-current="page">Feed</span>'));
   assert.ok(htmlFeed.includes('href="/feed.txt" target="_blank" rel="noopener noreferrer"'));
   assert.ok(htmlFeed.includes('Text version ↗'));
-  assert.ok(htmlFeed.includes('href="/street-dogs/metrics/"'));
+  assert.ok(htmlFeed.includes('Listen to the feed'));
+  assert.ok(htmlFeed.includes('href="/record/sjcoc-2024-pit-survey-pets/"'));
+  assert.ok(htmlFeed.includes('href="/record/canine-campus/"'));
   assert.ok(!htmlFeed.includes('href="/gaps/'));
   assert.ok(!htmlFeed.includes('Daily reading'));
-  for (const [a,b] of [['introduction','gap'],['gap','about'],['improvements','findings']])
+  for (const [a,b] of [['introduction','st-marys'],['st-marys','field-calls'],['field-calls','dumping'],['dumping','animal-services'],['animal-services','no-dog-homeless']])
     assert.ok(htmlFeed.indexOf(`id="${a}"`) < htmlFeed.indexOf(`id="${b}"`), `${a} before ${b}`);
-  assert.ok(textFeed.indexOf('Proposed and active improvements:') < textFeed.indexOf('What the evidence supports so far:'));
+  assert.ok(textFeed.indexOf('Before the first field observation') < textFeed.indexOf('Could every dog have a safe place?'));
   assert.ok(textFeed.startsWith('See clearly. Act locally.'));
   assert.ok(!textFeed.startsWith('Crossover Stockton Feed'));
-  assert.ok(htmlFeed.includes('Received Stockton Animal Services field-call records'));
-  assert.ok(textFeed.includes('Received Stockton Animal Services field-call records'));
-  assert.ok(!htmlFeed.includes('Requested Stockton Animal Services field-call records'));
-  assert.ok(!textFeed.includes('Requested Stockton Animal Services field-call records'));
+  for (const phrase of ['7,183 field-call case records','3,106 stray-dog intake events','not a verified count','not yet represent operating capacity','Editorial exploration:']) {
+    assert.ok(htmlFeed.includes(phrase), phrase);
+    assert.ok(textFeed.includes(phrase), phrase);
+  }
+  assert.ok(!textFeed.includes('Explore the records:'));
+  assert.deepEqual(story.silent.reading.slice(1),story.chapters.find(item=>item.id==='briefing').sections.map(item=>`briefing.${item.id}`));
   assert.deepEqual(JSON.parse(await read('dist/feed.json')), story);
   assert.deepEqual(JSON.parse(await read('dist/data/records.json')), feed);
 });

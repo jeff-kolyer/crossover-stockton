@@ -788,5 +788,53 @@
     "summary": "Stocktonia reports that on October 19 the Council Legislation and Environmental Committee advanced proposed changes addressing repeated roaming violations and a conditional fourth household dog or cat. Animal Services also described regular shelter capacity pressure, appointments for healthy stray intake, priority for sick, injured, aggressive, and confirmed abandonment cases, and a temporary found-animal foster pathway. These are reported practices and proposals; the ordinance still requires full City Council consideration before taking effect. For Dogs in Stockton, the report raises questions about how roaming dogs are classified, what happens after an intake request, and whether temporary care leads to verified outcomes. We are following Council action, foster eligibility and outcomes, and the pending field-call records request. The first street observation remains to be documented.",
     "attribution": "Stocktonia reporting of the October 19 committee meeting and Kluza’s presentation.",
     "limitations": "Committee referral is not enactment. The final ordinance text, Council calendar, vote, and effective date remain unverified."
+  },
+  {
+    "id": "sjcoc-2024-pit-survey-pets",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": [],
+    "published_at": null,
+    "checked_at": "2026-11-08",
+    "record_type": "reported_context",
+    "trust": "government",
+    "title": "2024 San Joaquin County survey reports pet ownership among respondents",
+    "summary": "The 2024 San Joaquin County Point-in-Time Count report says 34% of survey respondents indicated they had a pet. This is a share of survey respondents, not all unhoused residents, a Stockton-only figure, or a count of dogs living on the streets.",
+    "source": {
+      "publisher": "San Joaquin Continuum of Care",
+      "url": "https://www.sanjoaquincoc.org/wp-content/uploads/2024/09/2024-San-Joaquin-County-Point-In-Time-Count-Report.pdf",
+      "type": "government"
+    }
+  },
+  {
+    "id": "st-marys-pathways-pet-accommodation",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["st-marys-dining-room"],
+    "published_at": null,
+    "checked_at": "2026-11-08",
+    "record_type": "reported_service",
+    "trust": "organization_source",
+    "title": "Pathways listing describes units for people accompanied by pets",
+    "summary": "The Pathways program listing describes temporary housing with single and double units for people accompanied by pets, partners, family, or belongings. Crossover has not verified current dog-specific eligibility, occupancy, access, or outcomes.",
+    "source": {
+      "publisher": "St. Mary's Community Services / community resource listing",
+      "url": "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926",
+      "type": "organization"
+    }
+  },
+  {
+    "id": "asher-house-sanctuary-model",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": [],
+    "published_at": null,
+    "checked_at": "2026-11-08",
+    "record_type": "reported_service",
+    "trust": "organization_source",
+    "title": "The Asher House describes its animal sanctuary model",
+    "summary": "The Asher House describes rescue, rehabilitation, rehoming, and lifelong sanctuary care. It says dog intake depends on capacity and suitability for its free-roaming environment. This is an example for Crossover's exploration, not a Stockton program or evidence that a similar model can be built here.",
+    "source": {
+      "publisher": "The Asher House",
+      "url": "https://www.theasherhouse.com/pages/asher-house-faqs",
+      "type": "organization"
+    }
   }
 ]

@@ -17,7 +17,8 @@ const route=()=>{
 };
 const href=page=>isPreview?`${previewBase}/${page==='home'?'overview':page}/`:page==='home'||page==='overview'?'/':page==='about'?'/about/':page==='feed'?'/feed/':`/street-dogs/${page}/`;
 const recordHref=(id,from)=>isPreview?`${previewBase}/record/?id=${encodeURIComponent(id)}&from=${encodeURIComponent(from)}`:`/${lookup(id)?.schema==='organization'?'organization':'record'}/${encodeURIComponent(id)}/?from=${encodeURIComponent(from)}`;
-let feed,feedContent,records,byId,gap,gapStory,about,menu,activeFilter='all';
+let feed,feedContent,feedNarration,records,byId,gap,gapStory,about,menu,activeFilter='all';
+let activeListenButton=null;
 const lookup=id=>byId.get(id);
 const section=id=>gapStory.chapters.find(item=>item.id===id);
 const related=record=>record.fields?.gap_id===gap.id||(record.fields?.gap_ids||record.fields?.related_gap_ids||[]).includes(gap.id);
@@ -219,7 +220,7 @@ function detailPage(path){
   </div>`;
 }
 function feedPage(){
-  return `<div class="site-feed">${breadcrumbs('/feed','Feed')}<header class="site-feed-header"><div><p class="eyebrow">CROSSOVER STOCKTON</p><h1>Feed</h1><p>${esc(feed.description)}</p></div><a href="/feed.txt" target="_blank" rel="noopener noreferrer" aria-label="Open text version of the feed">Text version ↗</a></header><div class="feed-reading">${feedContent}</div></div>`;
+  return `<div class="site-feed">${breadcrumbs('/feed','Feed')}<header class="site-feed-header"><div><p class="eyebrow">CROSSOVER STOCKTON</p><h1>Feed</h1><p>${esc(feed.description)}</p><button class="overview-listen feed-listen" type="button"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to the feed</span></button></div><a href="/feed.txt" target="_blank" rel="noopener noreferrer" aria-label="Open text version of the feed">Text version ↗</a></header><div class="feed-reading">${feedContent}</div></div>`;
 }
 function render(){
   const current=route(),isAbout=current==='/about',isHome=current==='/home';
@@ -252,17 +253,17 @@ function handleListen(event){
   const button=event.target.closest('.home-listen,.overview-listen');
   if(!button)return;
   if(!('speechSynthesis' in window)){location.href='/feed/';return}
-  const isOverview=button.classList.contains('overview-listen');
-  const idleLabel=isOverview?'Listen to this account':'Latest update (Listen)';
-  if(speechSynthesis.speaking){speechSynthesis.cancel();button.querySelector('span:last-child').textContent=idleLabel;return}
+  const isFeed=button.classList.contains('feed-listen');
+  const isOverview=button.classList.contains('overview-listen')&&!isFeed;
+  const idleLabel=isFeed?'Listen to the feed':isOverview?'Listen to this account':'Latest update (Listen)';
+  if(activeListenButton){const previous=activeListenButton;activeListenButton=null;speechSynthesis.cancel();previous.querySelector('span:last-child').textContent=previous.classList.contains('feed-listen')?'Listen to the feed':previous.classList.contains('overview-listen')?'Listen to this account':'Latest update (Listen)';if(previous===button)return}
   const focus=section('overview').chapters.find(item=>item.id==='focus');
-  const narrative=isOverview?[...document.querySelectorAll('.overview-spoken')].map(item=>item.textContent.trim()).join(' '):`Latest update from Crossover Stockton. ${focus.currentWork||focus.text}`;
-  const update=new SpeechSynthesisUtterance(narrative);
-  update.lang='en-US';
-  update.rate=.95;
-  update.onend=()=>{const label=document.querySelector(`.${isOverview?'overview-listen':'home-listen'} span:last-child`);if(label)label.textContent=idleLabel};
+  const narrative=isFeed?feedNarration:isOverview?[...document.querySelectorAll('.overview-spoken')].map(item=>item.textContent.trim()).join(' '):`Latest update from Crossover Stockton. ${focus.currentWork||focus.text}`;
+  const parts=isFeed?narrative.split(/\n\s*\n/).filter(Boolean):[narrative];
+  activeListenButton=button;
   button.querySelector('span:last-child').textContent='Stop listening';
-  speechSynthesis.speak(update);
+  const speakNext=()=>{if(activeListenButton!==button)return;const part=parts.shift();if(!part){activeListenButton=null;button.querySelector('span:last-child').textContent=idleLabel;return}const update=new SpeechSynthesisUtterance(part);update.lang='en-US';update.rate=.95;update.onend=speakNext;update.onerror=speakNext;speechSynthesis.speak(update)};
+  speakNext();
 }
 function isSitePage(path){
   if(isPreview)return path.startsWith(`${previewBase}/`);
@@ -290,5 +291,5 @@ function restoreSitePage(event){
   render();
   requestAnimationFrame(()=>window.scrollTo(0,event.state?.scrollY||0));
 }
-async function start(){try{if(location.pathname==='/preview/site-md.html'){location.replace(`${previewBase}/overview/`);return}const [storyResponse,recordsResponse,feedContentResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/feed-content.html')]);if(!storyResponse.ok||!recordsResponse.ok||!feedContentResponse.ok)throw new Error('Could not load the public feed.');feed=await storyResponse.json();feedContent=await feedContentResponse.text();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap)throw new Error('No current gap in the public feed.');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Preview unavailable</h1><p>${esc(error.message)}</p></main>`}}
+async function start(){try{if(location.pathname==='/preview/site-md.html'){location.replace(`${previewBase}/overview/`);return}const [storyResponse,recordsResponse,feedContentResponse,feedTextResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/feed-content.html'),fetch('/feed.txt')]);if(!storyResponse.ok||!recordsResponse.ok||!feedContentResponse.ok||!feedTextResponse.ok)throw new Error('Could not load the public feed.');feed=await storyResponse.json();feedContent=await feedContentResponse.text();feedNarration=await feedTextResponse.text();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap)throw new Error('No current gap in the public feed.');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Preview unavailable</h1><p>${esc(error.message)}</p></main>`}}
 start();

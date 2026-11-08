@@ -248,6 +248,7 @@
 .feed-reading .chapter{padding:34px 0;border-bottom:1px solid #dce3df}
 .feed-reading .chapter>h2{font-size:clamp(2rem,3vw,2.7rem);margin:0 0 18px}
 .feed-reading .chapter>p,.feed-reading .passage>p,.feed-reading .story-part>p{font-size:1.04rem;line-height:1.7;color:#344d50}
+.feed-reading .editorial-note{padding:14px 18px;background:var(--skin-sage);border-left:3px solid var(--skin-orange)}
 .feed-reading .story-part{margin-top:30px}
 .feed-reading .story-part>h3,.feed-reading .passage>h3{font-size:1.45rem;margin:0 0 12px}
 .feed-reading .passage{margin:25px 0 0}

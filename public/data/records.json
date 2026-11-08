@@ -2381,6 +2381,95 @@
         "value": "2026-10-20"
       }
     },
+    "sjcoc-2024-pit-survey-pets": {
+      "id": "sjcoc-2024-pit-survey-pets",
+      "schema": "evidence",
+      "typeName": "Evidence record",
+      "title": "2024 San Joaquin County survey reports pet ownership among respondents",
+      "description": "The 2024 San Joaquin County Point-in-Time Count report says 34% of survey respondents indicated they had a pet. This is a share of survey respondents, not all unhoused residents, a Stockton-only figure, or a count of dogs living on the streets.",
+      "fields": {
+        "id": "sjcoc-2024-pit-survey-pets",
+        "title": "2024 San Joaquin County survey reports pet ownership among respondents",
+        "summary": "The 2024 San Joaquin County Point-in-Time Count report says 34% of survey respondents indicated they had a pet. This is a share of survey respondents, not all unhoused residents, a Stockton-only figure, or a count of dogs living on the streets.",
+        "record_type": "reported_context",
+        "trust": "government",
+        "source": {
+          "publisher": "San Joaquin Continuum of Care",
+          "url": "https://www.sanjoaquincoc.org/wp-content/uploads/2024/09/2024-San-Joaquin-County-Point-In-Time-Count-Report.pdf",
+          "type": "government"
+        },
+        "published_at": null,
+        "checked_at": "2026-11-08",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "organization_ids": []
+      },
+      "dateForSort": {
+        "field": "checked_at",
+        "value": "2026-11-08"
+      }
+    },
+    "st-marys-pathways-pet-accommodation": {
+      "id": "st-marys-pathways-pet-accommodation",
+      "schema": "evidence",
+      "typeName": "Evidence record",
+      "title": "Pathways listing describes units for people accompanied by pets",
+      "description": "The Pathways program listing describes temporary housing with single and double units for people accompanied by pets, partners, family, or belongings. Crossover has not verified current dog-specific eligibility, occupancy, access, or outcomes.",
+      "fields": {
+        "id": "st-marys-pathways-pet-accommodation",
+        "title": "Pathways listing describes units for people accompanied by pets",
+        "summary": "The Pathways program listing describes temporary housing with single and double units for people accompanied by pets, partners, family, or belongings. Crossover has not verified current dog-specific eligibility, occupancy, access, or outcomes.",
+        "record_type": "reported_service",
+        "trust": "organization_source",
+        "source": {
+          "publisher": "St. Mary's Community Services / community resource listing",
+          "url": "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926",
+          "type": "organization"
+        },
+        "published_at": null,
+        "checked_at": "2026-11-08",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "organization_ids": [
+          "st-marys-dining-room"
+        ]
+      },
+      "dateForSort": {
+        "field": "checked_at",
+        "value": "2026-11-08"
+      }
+    },
+    "asher-house-sanctuary-model": {
+      "id": "asher-house-sanctuary-model",
+      "schema": "evidence",
+      "typeName": "Evidence record",
+      "title": "The Asher House describes its animal sanctuary model",
+      "description": "The Asher House describes rescue, rehabilitation, rehoming, and lifelong sanctuary care. It says dog intake depends on capacity and suitability for its free-roaming environment. This is an example for Crossover's exploration, not a Stockton program or evidence that a similar model can be built here.",
+      "fields": {
+        "id": "asher-house-sanctuary-model",
+        "title": "The Asher House describes its animal sanctuary model",
+        "summary": "The Asher House describes rescue, rehabilitation, rehoming, and lifelong sanctuary care. It says dog intake depends on capacity and suitability for its free-roaming environment. This is an example for Crossover's exploration, not a Stockton program or evidence that a similar model can be built here.",
+        "record_type": "reported_service",
+        "trust": "organization_source",
+        "source": {
+          "publisher": "The Asher House",
+          "url": "https://www.theasherhouse.com/pages/asher-house-faqs",
+          "type": "organization"
+        },
+        "published_at": null,
+        "checked_at": "2026-11-08",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ],
+        "organization_ids": []
+      },
+      "dateForSort": {
+        "field": "checked_at",
+        "value": "2026-11-08"
+      }
+    },
     "stockton-street-dog-population-reported-estimate": {
       "id": "stockton-street-dog-population-reported-estimate",
       "schema": "claim",

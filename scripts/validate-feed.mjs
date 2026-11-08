@@ -13,6 +13,10 @@ export function validateFeed(story, records) {
     if (node.record) checkRef(node.record, path);
     if (node.statusRecord) checkRef(node.statusRecord, path);
     for (const id of [...(node.references ?? []), ...(node.records ?? []), ...(node.feedRecords ?? [])]) checkRef(id, path);
+    for (const [index, entry] of (node.entries ?? []).entries()) {
+      if (!entry.record || !entry.narration?.trim()) errors.push(`${path}: entry ${index + 1} needs a record and narration`);
+      if (entry.record) checkRef(entry.record, path);
+    }
     if (node.feedRecords?.some(id => !node.records?.includes(id))) errors.push(`${path}: feed records must be in the passage`);
     if (node.select && !Object.values(records).some(record => record.schema === node.select.schema && (!node.select.gap || record.fields.gap_id === gap?.id || record.fields.gap_ids?.includes(gap?.id) || record.fields.related_gap_ids?.includes(gap?.id) || gap?.fields.organization_ids?.includes(record.id)))) errors.push(`${path}: selector has no published records`);
     if (node.more) pendingMore.push([node.more, path]);
@@ -30,7 +34,7 @@ export function validateFeed(story, records) {
     }
   }
   const top = story.chapters ?? [];
-  if (top.map(item => item.id).join(",") !== "introduction,gap,about") errors.push("Chapters must read Introduction, Gap, About");
+  if (top.map(item => item.id).join(",") !== "introduction,gap,briefing,about") errors.push("Chapters must read Introduction, Gap, Briefing, About");
   for (const item of top) walk(item, item.id);
   const gapChapters = paths.get("gap")?.chapters ?? [];
   if (gapChapters.map(item => item.id).join(",") !== "overview,activity,tasks,metrics,places,organizations,improvements,events,findings,sources") errors.push("Gap chapters must keep Findings immediately before Sources");
@@ -48,6 +52,11 @@ export function validateFeed(story, records) {
   for (const id of story.silent?.homeLinks ?? []) if (!gapChapters.some(item => item.id === id)) errors.push(`Home links to missing gap chapter ${id}`);
   if (!Array.isArray(story.silent?.reading) || !story.silent.reading.length) errors.push("Feed needs a curated reading order");
   for (const path of Array.isArray(story.silent?.reading) ? story.silent.reading : []) if (!paths.has(path)) errors.push(`Feed references missing passage ${path}`);
+  if (story.silent?.reading?.[0] !== "introduction" || story.silent?.reading?.slice(1).some(path => !path.startsWith("briefing."))) errors.push("Feed reading must select the introduction and editorial briefing sections");
+  for (const path of story.silent?.reading?.slice(1) ?? []) {
+    const item = paths.get(path);
+    if (!item?.title || !item.text || !item.entries?.length) errors.push(`${path}: feed section needs a title, narrative, and curated record entries`);
+  }
   const focus = paths.get("gap.overview.focus");
   const overview = paths.get("gap.overview");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(overview?.updatedAt ?? "")) errors.push("Overview needs an editorial update date");

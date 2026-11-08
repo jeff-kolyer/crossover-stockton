@@ -1,17 +1,51 @@
-See clearly. Act locally. We’re finding out what’s happening in Stockton, where help is needed, and what can be done about it. We gather public records, talk to people, visit places, and document what we learn and what happens when we try to help.
+See clearly. Act locally.
 
-Our first gap is Street dogs and access to care. Dogs on Stockton’s streets need care, but getting help isn’t always straightforward. Animal Services reports shelter-capacity pressure, rescue groups are responding, and the number of dogs currently on the streets remains unknown.
+We’re finding out what’s happening in Stockton, where help is needed, and what can be done about it.
 
-Here are the key figures, which describe different things and do not count dogs currently living on the streets. Stray-dog intake events: 3,106. 2024, Animal Services service area. Reported dumped-dog encounters: 3 to 10 per week. Stockton Street Dogs, Sept 2026. Dogs currently on the streets: unknown. No verified street census.
+We gather public records, talk to people, visit places, and document what we learn and what happens when we try to help.
 
-Current work: Reviewing 7,183 Animal Services case records and preparing to verify reported conditions firsthand. These are case records, not a count of dogs or verified street sightings.
+Before the first field observation
 
-Recent developments: Received Stockton Animal Services field-call records. Stockton Animal Services provided the requested field-service records by email on November 2, 2026. Crossover confirmed receipt on November 3 and began reviewing the records on November 4. The spreadsheet contains 7,183 case records; analysis and findings remain pending.
+We plan to observe public areas near St. Mary's to learn what can be seen firsthand. No visit or street-dog count has been documented there yet. A report about the corridor is a lead, not proof of current conditions.
 
-The work underway: Review Animal Services field-call records. Review began Nov 4 on 7,183 cases; analysis and findings remain pending. Follow up with Stockton Animal Services on volunteering. Check onboarding and orientation.
+The planned observation is limited to public areas. Seeing no dogs would also be useful, and one visit could not establish a citywide count.
 
-Proposed and active improvements: Efforts by the city and local organizations are tracked by stage. A proposal is not yet operating capacity. Canine Campus. Stockton Street Dogs / Street Dog Sanctuary proposes a campus for dogs without safe placement, including overflow and recovery care. Stockton Animal Shelter expansion. City renovation and expansion of the Stockton Animal Shelter, including planned care and public-access improvements.
+In the 2024 San Joaquin County Point-in-Time survey, 34 percent of respondents said they had a pet. That is not a Stockton-only measure or a count of street dogs.
 
-What the evidence supports so far: What the evidence supports, and where it stops. Existing animal-care capacity is under pressure. Stockton Animal Services reports recurring shelter-capacity pressure. The city is expanding its municipal animal shelter, while Stockton Street Dogs has proposed a separate Canine Campus intended to provide additional overflow, recovery, and care capacity. These efforts indicate that existing capacity constraints are an important part of the problem. How much additional care the facilities will provide, and whether they will adequately address unmet needs, remains unknown. Limit: The evidence does not establish that the municipal expansion will be insufficient. The Canine Campus proposal does not independently establish the scale of unmet need or prove that the facility will be built. Actual future capacity and outcomes remain unknown.
+A Pathways listing describes units for people accompanied by pets, but current access, dog eligibility, and outcomes remain unverified by us.
 
-From work to vocation. AI and robotics are changing what's possible. What if more of our lives could be spent caring for people, animals, and the world around us—rather than working simply to survive?
+What the field-call records may tell us
+
+Stockton Animal Services provided 7,183 field-call case records. We have begun reviewing them for report types, response patterns, and missing data. Cases are not unique animals, verified sightings, or outcomes.
+
+The records arrived November 2, 2026, and the review began November 4.
+
+The analysis remains in progress; we have not published a count of dogs currently living on Stockton's streets.
+
+The separate 2024 figure of 3,106 stray-dog intake events covers the Animal Services service area. It must not be added to the field calls or treated as a street census.
+
+Reports of dumped dogs and a proposed response
+
+Stockton Street Dogs reports repeated dumped-dog encounters. We are treating its reported range as an attributed claim, not a verified count or rate for the city.
+
+The group reported three to ten encounters a week in September 2026; the underlying cases and geography have not been independently checked.
+
+Its Canine Campus is a proposal. It does not yet represent operating capacity or a measured outcome.
+
+What happened when we contacted Animal Services
+
+We visited Stockton Animal Services in October, submitted a volunteer application, and are following up on what happens next. One visit describes what we saw at that time; it does not establish shelterwide capacity or outcomes.
+
+Our first visit documented a busy lobby, a posted instruction about dogs entering the building, and construction activity.
+
+We submitted a volunteer application and have not yet documented an onboarding outcome.
+
+The city awarded a 10.47 million dollar construction contract for shelter renovation. We have not verified additional capacity from completed work.
+
+Could every dog have a safe place?
+
+This is an exploratory question about care, human participation, and what future technology might make possible. It is not an announced Stockton program or a finding that AI or robotics can solve the problem.
+
+Editorial exploration: The Asher House offers one example of rescue, rehabilitation, rehoming, and lifelong sanctuary care. Its model raises questions about land, staffing, animal suitability, costs, and local partnerships that we have not answered.
+
+We are examining the example as inspiration, not evidence that the same arrangement would work in Stockton.
