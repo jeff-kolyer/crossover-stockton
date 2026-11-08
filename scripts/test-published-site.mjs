@@ -135,10 +135,11 @@ test('every public record and the new design assets are published', async () => 
   const root = await page('/');
   assert.ok(root.includes('href="/site.css"'));
   assert.ok(root.includes('src="/site.js"'));
-  assert.ok(root.includes('src="/images/home/sunlit-window-view.jpg"'));
+  assert.ok(root.includes('src="/images/variants/clean/dog-sidewalk.jpg" alt="Dog standing on a neighborhood sidewalk"'));
+  assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
   assert.ok(root.includes('<path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M22 10v4"/>'));
   assert.ok(root.includes('<circle cx="16" cy="16" r="3.5"/>'));
-  for (const path of ['dist/site.css','dist/site.js','dist/images/home/sunlit-window-view.jpg','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
+  for (const path of ['dist/site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
 });
 
