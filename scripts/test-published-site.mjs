@@ -56,6 +56,7 @@ test('the root serves the living Overview and the old overview URL stays readabl
   for (const phrase of ['Dogs on<br>Stockton’s Streets','What we know now','Listen to this account','3,106','No verified street census'])
     assert.ok(root.includes(phrase), phrase);
   assert.ok(root.includes('class="shell"'));
+  assert.equal((root.match(/href="\/feed\/">Read or listen to the feed ↗<\/a>/g) ?? []).length, 2);
   assert.ok(root.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(!root.includes('href="#/'));
   const overview = await page('/street-dogs/overview/');
