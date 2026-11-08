@@ -1,4 +1,4 @@
-import { copyFile, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { resolve, sep } from "node:path";
 import { renderStaticPages } from "./render-static-pages.mjs";
@@ -136,6 +136,9 @@ await copyFile("public/preview/site-md.css", resolve(dist, "site.css"));
 await copyFile("public/preview/site-md.js", resolve(dist, "site.js"));
 await mkdir(resolve(dist, "images/home"), { recursive: true });
 await copyFile("public/images/home/sunlit-window-view.jpg", resolve(dist, "images/home/sunlit-window-view.jpg"));
+await mkdir(resolve(dist, "images/about"), { recursive: true });
+for (const file of (await readdir("public/images/about")).filter(name => /\.(?:jpg|png|webp)$/i.test(name)))
+  await copyFile(resolve("public/images/about", file), resolve(dist, "images/about", file));
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await copyFile("public/feed.json", resolve(dist, "feed.json"));
 await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
