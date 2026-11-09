@@ -11,7 +11,7 @@ const fontCss = (await Promise.all(fontFiles.map(async ([name,weight]) => {
   const bytes = await readFile(`public/fonts/IBMPlexSans-${name}.woff2`);
   return `@font-face{font-family:"IBM Plex Sans";src:url("data:font/woff2;base64,${bytes.toString("base64")}") format("woff2");font-style:normal;font-weight:${weight};font-display:block}`;
 }))).join("\n");
-const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/variants/clean/dog-park.jpg", "/images/variants/clean/dog-sidewalk.jpg", "/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg"]);
+const imagePaths = new Set(["/images/logo_light.webp", "/images/logo_dark.webp", "/images/variants/clean/dog-through-window.jpg", "/images/variants/clean/dog-sidewalk.jpg", "/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg"]);
 const collect = (value) => {
   if (typeof value === "string" && value.startsWith("/images/")) imagePaths.add(value);
   else if (Array.isArray(value)) value.forEach(collect);

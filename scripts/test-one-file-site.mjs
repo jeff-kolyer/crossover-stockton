@@ -58,7 +58,7 @@ test("the clean preview mirrors the current site", () => {
   assert.deepEqual(Object.keys(bundledFeed.records), Object.keys(feed.records));
   assert.equal(bundledFeed.records["street-dog-immediate-welfare"], undefined);
   assert.ok(cleanAssets["/images/variants/clean/dog-sidewalk.jpg"]?.startsWith("data:image/jpeg;base64,"));
-  assert.ok(cleanAssets["/images/variants/clean/dog-park.jpg"]?.startsWith("data:image/jpeg;base64,"));
+  assert.ok(cleanAssets["/images/variants/clean/dog-through-window.jpg"]?.startsWith("data:image/jpeg;base64,"));
   assert.ok(cleanAssets["/images/about/about-the-founder.jpg"]?.startsWith("data:image/jpeg;base64,"));
   assert.ok(cleanAssets["/images/about/about-crossover-hero.jpg"]?.startsWith("data:image/jpeg;base64,"));
   assert.ok(Object.keys(cleanAssets).every(path => path.startsWith("/images/variants/clean/") || ["/images/about/about-the-founder.jpg", "/images/about/about-crossover-hero.jpg", "/images/home/desk-window-stockton-v2.png"].includes(path) || path.startsWith("/images/icons/") || path.startsWith("/images/logo_")));

@@ -85,7 +85,7 @@ body{background:#fff;color:var(--skin-ink)}
 .design-button,.work-filters button[aria-pressed=true]{background:#005653;border-color:#005653;color:white}
 .design-button.secondary{background:#fff;border-color:#acc1c6;color:#004e4d}
 .design-graphic{overflow:hidden;border:0;border-radius:12px}
-.design-graphic img[src$="dog-through-window-small-dog.png"]{object-position:right center}
+.design-graphic img[src$="dog-through-window.jpg"]{object-position:right center}
 .design-graphic>span{border-radius:6px;background:#fff;color:#004e4d}
 .design-intro{gap:18px}
 .design-intro a,.design-section-head>a,.design-report-actions>a,.design-all,.text-link,.external-links a,.crumbs a,.detail-body a{color:#006c70}

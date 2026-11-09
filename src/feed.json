@@ -14,8 +14,8 @@
           "id": "current-gap",
           "title": "Current gap",
           "record": "$gap",
-          "image": "/images/variants/clean/dog-park.jpg",
-          "imageAlt": "Dog in Stockton",
+          "image": "/images/variants/clean/dog-sidewalk.jpg",
+          "imageAlt": "Dog on a neighborhood sidewalk",
           "more": {
             "chapter": "gap.overview",
             "label": "Explore the gap"
@@ -330,7 +330,7 @@
       "label": "Current focus",
       "description": "How many dogs are on Stockton’s streets? What conditions do they face? And what happens when someone tries to help?",
       "closing": "We’re working to find out.",
-      "image": "/images/variants/clean/dog-through-window-small-dog.png",
+      "image": "/images/variants/clean/dog-through-window.jpg",
       "imageAlt": "Illustrative image of a dog on a neighborhood sidewalk seen through a home window",
       "gapImage": "/images/variants/clean/dog-sidewalk.jpg",
       "gapImageAlt": "Dog on a neighborhood sidewalk",
