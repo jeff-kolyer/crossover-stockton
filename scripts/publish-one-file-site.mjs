@@ -160,6 +160,7 @@ for (const imagePath of staticSite.assets) {
 }
 await mkdir(resolve(dist, "images/variants/clean"), { recursive: true });
 await copyFile("public/images/variants/clean/dog-sidewalk.jpg", resolve(dist, "images/variants/clean/dog-sidewalk.jpg"));
+await copyFile("public/images/variants/clean/dog-through-window-small-dog.png", resolve(dist, "images/variants/clean/dog-through-window-small-dog.png"));
 await copyFile("public/images/variants/clean/dog-park.jpg", resolve(dist, "images/variants/clean/dog-park.jpg"));
 await copyFile("public/images/variants/clean/records-desk.jpg", resolve(dist, "images/variants/clean/records-desk.jpg"));
 for (const page of staticSite.pages) {
