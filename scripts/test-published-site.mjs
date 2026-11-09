@@ -51,7 +51,7 @@ test('the root serves the living Overview and the old overview URL stays readabl
     'See clearly. Act locally. We’re finding out what’s happening in Stockton, where help is needed, and what can be done about it.'
   );
   const root = await page('/');
-  for (const phrase of ['Dogs on<br>Stockton’s Streets','What we know now','Listen to this account','3,106','No verified street census'])
+  for (const phrase of [story.silent.homePage.eyebrow, story.silent.homePage.headline, story.silent.homePage.description, story.silent.homePage.primaryActionLabel, story.silent.homePage.subheroText, 'What we know now','Listen to this account','3,106','No verified street census'])
     assert.ok(root.includes(phrase), phrase);
   assert.ok(root.includes('class="care-shell"'));
   assert.equal((root.match(/Read or listen to the feed/g) ?? []).length, 2);

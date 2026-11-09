@@ -364,7 +364,11 @@
     "description": "Navigation and reading selections. These entries are excluded from spoken narration.",
     "homePage": {
       "label": "Current focus",
-      "description": "How many dogs are on Stockton’s streets? What conditions do they face? And what happens when someone tries to help?",
+      "eyebrow": "Stockton, California",
+      "headline": "Who is looking out for them?",
+      "description": "Dogs are living on Stockton’s streets. How many need help? What happens when someone tries? And where does care fall short?",
+      "primaryActionLabel": "Explore our work",
+      "subheroText": "We follow the evidence, learn from people doing the work, and look for practical ways to help.",
       "closing": "We’re working to find out.",
       "image": "/images/variants/clean/dog-through-window.jpg",
       "imageAlt": "Illustrative image of a dog on a neighborhood sidewalk seen through a home window",
