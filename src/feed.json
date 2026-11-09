@@ -328,7 +328,7 @@
     "description": "Navigation and reading selections. These entries are excluded from spoken narration.",
     "homePage": {
       "label": "Current focus",
-      "description": "How many are there? What’s happening to them? And what happens when someone tries to help?",
+      "description": "How many dogs are on Stockton’s streets? What conditions do they face? And what happens when someone tries to help?",
       "closing": "We’re working to find out.",
       "image": "/images/variants/clean/dog-sidewalk.jpg",
       "imageAlt": "Dog standing on a neighborhood sidewalk",
