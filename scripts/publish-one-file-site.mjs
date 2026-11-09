@@ -133,7 +133,8 @@ await copyFile("public/fonts/LICENSE.txt", resolve(dist, "fonts/LICENSE.txt"));
 for (const file of ["ai-variant.html", "ai-variant.css", "ai-variant-v2.css", "ai-variant-google.css", "ai-variant-modern.css", "ai-variant.js"])
   await copyFile(resolve("public/preview", file), resolve(dist, "preview", file));
 await copyFile("public/preview/site-md.css", resolve(dist, "site.css"));
-await copyFile("public/preview/site-md.js", resolve(dist, "site.js"));
+await copyFile("public/preview/care-site/style.css", resolve(dist, "care-site.css"));
+await copyFile("public/preview/care-site/site.js", resolve(dist, "site.js"));
 await mkdir(resolve(dist, "images/home"), { recursive: true });
 await copyFile("public/images/home/sunlit-window-view.jpg", resolve(dist, "images/home/sunlit-window-view.jpg"));
 await mkdir(resolve(dist, "images/about"), { recursive: true });
@@ -158,6 +159,7 @@ for (const imagePath of staticSite.assets) {
   await copyFile(source, target);
 }
 await mkdir(resolve(dist, "images/variants/clean"), { recursive: true });
+await copyFile("public/images/variants/clean/dog-sidewalk.jpg", resolve(dist, "images/variants/clean/dog-sidewalk.jpg"));
 await copyFile("public/images/variants/clean/dog-park.jpg", resolve(dist, "images/variants/clean/dog-park.jpg"));
 await copyFile("public/images/variants/clean/records-desk.jpg", resolve(dist, "images/variants/clean/records-desk.jpg"));
 for (const page of staticSite.pages) {
@@ -166,8 +168,8 @@ for (const page of staticSite.pages) {
   await mkdir(directory, { recursive: true });
   await writeFile(resolve(directory, "index.html"), page.html);
 }
-const siteMdTemplate = await readFile("public/preview/site-md.html", "utf8");
-const siteMdScript = await readFile("public/preview/site-md.js", "utf8");
+const siteMdTemplate = await readFile("public/preview/care-site/index.html", "utf8");
+const siteMdScript = await readFile("public/preview/care-site/site.js", "utf8");
 const feedContent = await readFile("public/feed-content.html", "utf8");
 const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, origin, feedContent);
 for (const page of siteMdPages) {

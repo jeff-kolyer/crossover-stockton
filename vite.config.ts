@@ -39,7 +39,7 @@ function devGeneratedPages() {
       server.middlewares.use((req, res, next) => {
         if (req.method !== "GET") return next();
         const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
-        if (pathname === "/site.css" || pathname === "/site.js") {
+        if (pathname === "/site.css" || pathname === "/care-site.css" || pathname === "/site.js") {
           const asset = resolve("dist", pathname.slice(1));
           if (existsSync(asset)) {
             res.setHeader("Content-Type", pathname.endsWith(".css") ? "text/css; charset=utf-8" : "text/javascript; charset=utf-8");

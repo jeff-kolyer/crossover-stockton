@@ -60,4 +60,4 @@ npm run build
 npm run preview
 ```
 
-`npm run dev` builds the site before starting Vite. `npm run build` validates data, generates the public feed and one-file edition, publishes the site, and tests the output. The main interface is rendered by `public/preview/site-md.js` and `public/preview/site-md.css`; `site/one-file-template.html` supplies the alternate edition and readable fallback pages. See [site design rules](docs/SITE_DESIGN.md) for visual guidance.
+`npm run dev` builds the site before starting Vite. `npm run build` validates data, generates the public feed and one-file edition, publishes the site, and tests the output. The main interface is rendered from `public/preview/care-site/site.js` and `public/preview/care-site/style.css`, layered over `public/preview/site-md.css`; `site/one-file-template.html` supplies the alternate edition and readable fallback pages. See [site design rules](docs/SITE_DESIGN.md) for visual guidance.

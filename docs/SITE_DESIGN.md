@@ -1,8 +1,8 @@
 # Site design rules
 
-The public site is a rendering of `src/feed.json` and the canonical records in `src/data/`. The active visual layer is `public/preview/site-md.css` and `public/preview/site-md.js`. `SITE.md` defines page and navigation behavior.
+The public site is a rendering of `src/feed.json` and the canonical records in `src/data/`. The active interface is `public/preview/care-site/site.js` and `public/preview/care-site/style.css`, layered over `public/preview/site-md.css`. `SITE.md` defines page and navigation behavior.
 
-Keep one civic type and icon system across Home, About, gap sections, and record pages. Use warm cream, beige, sage, forest green, restrained terracotta, documentary imagery, clear links, and readable source context. A layout change must not change the meaning or provenance of a record.
+Keep one civic type and icon system across Home, About, gap sections, and record pages. The approved interface uses a dark navy sidebar, white reading surface, teal interactions, restrained copper labels, and documentary imagery. Keep source context readable. A layout change must not change the meaning or provenance of a record.
 
 The homepage is the street-dogs Overview. It opens with a dated living account readers can also listen to, then leads into the focus, attributed figures, actual activity, open questions, and record workspace. The site identity carries the guiding idea; About carries the wider technological and vocational context.
 

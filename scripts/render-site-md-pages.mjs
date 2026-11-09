@@ -30,8 +30,8 @@ export function renderSiteMdPages(template, source, feed, story, origin, feedCon
     location.pathname = path;
     location.search = '';
     runInNewContext('render()', context, { timeout: 3000 });
-    if (!app.innerHTML.includes('class="shell')) throw new Error(`SITE.md page did not render: ${path}`);
-    const title = document.title.replace(/ preview$/, '');
+    if (!app.innerHTML.includes('class="care-shell"')) throw new Error(`Crossover page did not render: ${path}`);
+    const title = document.title;
     const description = path === '/' || path === `/${gapSlug}/overview/` ? story.chapters.find(item => item.id === 'gap')?.chapters.find(item => item.id === 'overview')?.chapters.find(item => item.id === 'situation')?.text
       : path === '/about/' ? story.chapters.find(item => item.id === 'about')?.sections[0]?.text
       : path === '/feed/' ? story.description
@@ -41,9 +41,10 @@ export function renderSiteMdPages(template, source, feed, story, origin, feedCon
       .replace(/<meta name="robots" content="noindex">\s*/, path === canonical ? '' : '<meta name="robots" content="noindex,follow">\n')
       .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
       .replace(/<link rel="stylesheet" href="\/preview\/site-md.css">/, '<link rel="stylesheet" href="/site.css">')
-      .replace(/<script src="\/preview\/site-md.js" defer><\/script>/, '<script src="/site.js" defer></script>')
+      .replace(/<link rel="stylesheet" href="\/preview\/care-site\/style.css">/, '<link rel="stylesheet" href="/care-site.css">')
+      .replace(/<script src="\/preview\/care-site\/site.js" defer><\/script>/, '<script src="/site.js" defer></script>')
       .replace('</head>', `<meta name="description" content="${escapeHtml(description)}"><link rel="canonical" href="${escapeHtml(origin + canonical)}"></head>`)
-      .replace('<div id="app"><p class="loading">Opening the public feed…</p></div>', `<div id="app">${app.innerHTML}</div>`);
+      .replace('<div id="app"><p class="loading">Opening the public record…</p></div>', `<div id="app">${app.innerHTML}</div>`);
     return { path, html };
   });
 }
