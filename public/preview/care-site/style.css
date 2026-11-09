@@ -285,13 +285,14 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .work-search-link,.site-feed-header>a,.text-link,.detail-body a,.feed-reading a{font-size:var(--ui-nav);color:var(--skin-green)}
 .feed-reading .chapter>p,.feed-reading .passage>p,.feed-reading .story-part>p,.about-principle p,.about-starting-band p,.about-founder p,.panel p{font-size:var(--ui-body);line-height:1.5}
 .design-questions a{font-size:var(--ui-card);font-weight:700;line-height:1.25}
-.about-starting-band{background:var(--skin-sage)}
+.about-starting-band{padding:25px 24px;background:var(--skin-sage)}
 
 @media(min-width:1900px){
   .design-overview:not(.about-page) .design-hero .design-graphic{width:100%;height:auto;margin:0}
 }
 
 @media(max-width:760px){
+  .about-starting-band{padding:20px 16px}
   .care-top{height:64px;min-height:64px}
   .care-mobile-brand,.care-top-actions>a,.care-top .menu-toggle{font-size:var(--ui-nav)}
   .care-top .menu-toggle{min-height:36px}
