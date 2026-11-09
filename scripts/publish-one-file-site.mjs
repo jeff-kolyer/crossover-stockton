@@ -170,8 +170,13 @@ for (const page of staticSite.pages) {
 }
 const siteMdTemplate = await readFile("public/preview/care-site/index.html", "utf8");
 const siteMdScript = await readFile("public/preview/care-site/site.js", "utf8");
+const siteMdVersion = createHash("sha256")
+  .update(siteMdScript)
+  .update(await readFile("public/preview/site-md.css"))
+  .update(await readFile("public/preview/care-site/style.css"))
+  .digest("hex").slice(0, 12);
 const feedContent = await readFile("public/feed-content.html", "utf8");
-const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, origin, feedContent);
+const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, origin, feedContent, siteMdVersion);
 for (const page of siteMdPages) {
   const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
   if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe SITE.md page path: ${page.path}`);

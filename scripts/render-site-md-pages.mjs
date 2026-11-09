@@ -2,7 +2,7 @@ import { runInNewContext } from 'node:vm';
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
-export function renderSiteMdPages(template, source, feed, story, origin, feedContent) {
+export function renderSiteMdPages(template, source, feed, story, origin, feedContent, assetVersion) {
   const app = { innerHTML: '' };
   const location = { pathname: '/', search: '' };
   const document = {
@@ -40,9 +40,9 @@ export function renderSiteMdPages(template, source, feed, story, origin, feedCon
     const html = template
       .replace(/<meta name="robots" content="noindex">\s*/, path === canonical ? '' : '<meta name="robots" content="noindex,follow">\n')
       .replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(title)}</title>`)
-      .replace(/<link rel="stylesheet" href="\/preview\/site-md.css">/, '<link rel="stylesheet" href="/site.css">')
-      .replace(/<link rel="stylesheet" href="\/preview\/care-site\/style.css">/, '<link rel="stylesheet" href="/care-site.css">')
-      .replace(/<script src="\/preview\/care-site\/site.js" defer><\/script>/, '<script src="/site.js" defer></script>')
+      .replace(/<link rel="stylesheet" href="\/preview\/site-md.css">/, `<link rel="stylesheet" href="/site.css?v=${assetVersion}">`)
+      .replace(/<link rel="stylesheet" href="\/preview\/care-site\/style.css">/, `<link rel="stylesheet" href="/care-site.css?v=${assetVersion}">`)
+      .replace(/<script src="\/preview\/care-site\/site.js" defer><\/script>/, `<script src="/site.js?v=${assetVersion}" defer></script>`)
       .replace('</head>', `<meta name="description" content="${escapeHtml(description)}"><link rel="canonical" href="${escapeHtml(origin + canonical)}"></head>`)
       .replace('<div id="app"><p class="loading">Opening the public record…</p></div>', `<div id="app">${app.innerHTML}</div>`);
     return { path, html };

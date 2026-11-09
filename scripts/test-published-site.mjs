@@ -135,9 +135,9 @@ test('every public record and the new design assets are published', async () => 
     assert.ok(detail.includes(html(record.title)), record.id);
   }
   const root = await page('/');
-  assert.ok(root.includes('href="/site.css"'));
-  assert.ok(root.includes('href="/care-site.css"'));
-  assert.ok(root.includes('src="/site.js"'));
+  assert.match(root, /href="\/site\.css\?v=[a-f0-9]{12}"/);
+  assert.match(root, /href="\/care-site\.css\?v=[a-f0-9]{12}"/);
+  assert.match(root, /src="\/site\.js\?v=[a-f0-9]{12}"/);
   assert.ok(root.includes('src="/images/variants/clean/dog-through-window.jpg" alt="Illustrative image of a dog on a neighborhood sidewalk seen through a home window"'));
   assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
   assert.ok(root.includes('<path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M22 10v4"/>'));
@@ -151,6 +151,6 @@ test('the approved civic skin is published and the earlier experiment redirects 
   assert.ok(experiment.includes('content="0;url=/"'));
   const css = await read('dist/care-site.css');
   assert.ok(css.includes('--skin-sidebar:#0d1c2b'));
-  assert.ok((await page('/')).includes('href="/site.css"'));
-  assert.ok((await page('/')).includes('href="/care-site.css"'));
+  assert.match(await page('/'), /href="\/site\.css\?v=[a-f0-9]{12}"/);
+  assert.match(await page('/'), /href="\/care-site\.css\?v=[a-f0-9]{12}"/);
 });
