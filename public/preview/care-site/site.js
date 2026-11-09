@@ -304,7 +304,16 @@ function navigateToSitePage(event){
   if(!link||link.target||link.hasAttribute('download'))return;
   const destination=new URL(link.href);
   if(destination.origin!==location.origin||!isSitePage(destination.pathname))return;
-  if(destination.pathname===location.pathname&&destination.search===location.search&&destination.hash)return;
+  if(destination.pathname===location.pathname&&destination.search===location.search&&destination.hash){
+    const target=document.getElementById(decodeURIComponent(destination.hash.slice(1)));
+    if(!target)return;
+    event.preventDefault();
+    const targetY=Math.max(0,target.getBoundingClientRect().top+window.scrollY-85);
+    history.replaceState({...history.state,scrollY:window.scrollY},'');
+    if(destination.href!==location.href)history.pushState({scrollY:targetY},'',destination.pathname+destination.search+destination.hash);
+    target.scrollIntoView({behavior:'smooth',block:'start'});
+    return;
+  }
   event.preventDefault();
   if(destination.href===location.href)return;
   history.replaceState({...history.state,scrollY:window.scrollY},'');
