@@ -286,6 +286,8 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .feed-reading .chapter>p,.feed-reading .passage>p,.feed-reading .story-part>p,.about-principle p,.about-starting-band p,.about-founder p,.panel p{font-size:var(--ui-body);line-height:1.5}
 .design-questions a{font-size:var(--ui-card);font-weight:700;line-height:1.25}
 .about-starting-band{padding:25px 24px;background:var(--skin-sage)}
+.about-linkedin-button{gap:8px;border-radius:999px}
+.about-linkedin-button svg{width:16px;height:16px}
 
 @media(min-width:1900px){
   .design-overview:not(.about-page) .design-hero .design-graphic{width:100%;height:auto;margin:0}
