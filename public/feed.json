@@ -364,9 +364,6 @@
     "description": "Navigation and reading selections. These entries are excluded from spoken narration.",
     "homePage": {
       "label": "Current focus",
-      "eyebrow": "Stockton, California",
-      "headline": "How serious is Stockton's stray dog problem?",
-      "description": "Dogs are living on Stockton’s streets. How many need help? What happens when someone tries? And where does care fall short?",
       "primaryActionLabel": "Explore our work",
       "subheroText": "We follow the evidence, learn from people doing the work, and look for practical ways to help.",
       "closing": "We’re working to find out.",

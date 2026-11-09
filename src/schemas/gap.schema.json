@@ -20,6 +20,26 @@
       "minLength": 1,
       "description": "Stable description of the gap, distinct from its changing summary and story overview."
     },
+    "central_question": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The question connecting the observed situation, unknowns, and work."
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What Crossover is working to understand and improve."
+    },
+    "hero": {
+      "type": "object",
+      "properties": {
+        "eyebrow": { "type": "string", "minLength": 1 },
+        "headline": { "type": "string", "minLength": 1 },
+        "subtitle": { "type": "string", "minLength": 1 }
+      },
+      "required": ["eyebrow", "headline", "subtitle"],
+      "additionalProperties": false
+    },
     "summary": {
       "type": "string",
       "minLength": 1
@@ -103,6 +123,9 @@
     "slug",
     "title",
     "description",
+    "central_question",
+    "purpose",
+    "hero",
     "summary"
   ],
   "additionalProperties": true

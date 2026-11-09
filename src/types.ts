@@ -162,6 +162,9 @@ export interface GapRecord extends VisualPreferences {
   default?: boolean;
   rank: number;
   description: string;
+  central_question: string;
+  purpose: string;
+  hero: { eyebrow: string; headline: string; subtitle: string };
   summary: string;
   what_we_are_seeing: string[];
   unknown_questions?: string[];

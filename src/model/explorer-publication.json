@@ -176,6 +176,9 @@
         "slug",
         "title",
         "description",
+        "central_question",
+        "purpose",
+        "hero",
         "summary",
         "what_we_are_seeing",
         "current_state",
@@ -375,6 +378,11 @@
     }
   ],
   "nestedFields": {
+    "hero": [
+      "eyebrow",
+      "headline",
+      "subtitle"
+    ],
     "sources": [
       "title",
       "publisher",
@@ -521,8 +529,10 @@
     "title": "Title",
     "publicName": "Public name",
     "summary": "Summary",
-    "what_we_are_seeing": "What the public record shows",
+    "what_we_are_seeing": "Attributed observations",
     "description": "Description",
+    "central_question": "Central question",
+    "hero": "Home hero",
     "statement": "Statement",
     "purpose": "Purpose",
     "slogan": "Slogan",

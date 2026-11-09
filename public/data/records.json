@@ -199,13 +199,20 @@
       "schema": "gap",
       "typeName": "Gap",
       "title": "Street dogs and access to care",
-      "description": "Dogs on Stockton's streets need care, and people trying to help them need workable paths to shelter, fostering, and services. People with pets may also face barriers to shelter. The number and condition of dogs on the streets, the care reaching them, and access for people with dogs remain unverified.",
+      "description": "Public reports describe roaming and abandoned dogs in Stockton. Animal Services reports shelter-capacity pressure, and organizations report feeding, fostering, and placement work. The number of dogs currently on the streets, their conditions, what happens after someone seeks help, and how reliably care reaches them remain unverified.",
       "fields": {
         "id": "dogs-safe-placement",
         "slug": "street-dogs",
         "title": "Street dogs and access to care",
-        "description": "Street dogs in Stockton need workable paths to shelter, veterinary care, fostering, and safe placement.",
-        "summary": "Dogs on Stockton's streets need care, and people trying to help them need workable paths to shelter, fostering, and services. People with pets may also face barriers to shelter. The number and condition of dogs on the streets, the care reaching them, and access for people with dogs remain unverified.",
+        "description": "Dogs are living on Stockton's streets. We don't know how many need help, what happens to them, or whether available services are reaching them.",
+        "central_question": "What happens to dogs on Stockton's streets, and what prevents them from getting the care they need?",
+        "purpose": "Understand the conditions dogs face, trace what happens when people seek help, and identify practical ways to improve access to care.",
+        "hero": {
+          "eyebrow": "STOCKTON, CALIFORNIA",
+          "headline": "How can we improve care for dogs on Stockton's streets?",
+          "subtitle": "How many need help? What care is available? Who's providing it? What's preventing more dogs from getting the care they need?"
+        },
+        "summary": "Public reports describe roaming and abandoned dogs in Stockton. Animal Services reports shelter-capacity pressure, and organizations report feeding, fostering, and placement work. The number of dogs currently on the streets, their conditions, what happens after someone seeks help, and how reliably care reaches them remain unverified.",
         "what_we_are_seeing": [
           "Stockton Animal Services reports recurring shelter-capacity pressure. It prioritizes sick, injured, aggressive, and confirmed abandonment cases, while healthy stray intake generally requires an appointment. Its guidance cautions that a roaming dog may be lost or owned rather than abandoned.",
           "Stockton Street Dogs reports feeding and outreach on the streets several times a week. Its public materials also describe fostering, adoption, and other rescue pathways.",
@@ -3388,7 +3395,7 @@
       "kind": "value"
     },
     "what_we_are_seeing": {
-      "label": "What the public record shows",
+      "label": "Attributed observations",
       "kind": "value"
     },
     "description": {
@@ -3396,13 +3403,23 @@
       "kind": "value",
       "description": "Stable description of the gap, distinct from its changing summary and story overview."
     },
+    "central_question": {
+      "label": "Central question",
+      "kind": "value",
+      "description": "The question connecting the observed situation, unknowns, and work."
+    },
+    "hero": {
+      "label": "Home hero",
+      "kind": "value"
+    },
     "statement": {
       "label": "Statement",
       "kind": "value"
     },
     "purpose": {
       "label": "Purpose",
-      "kind": "value"
+      "kind": "value",
+      "description": "What Crossover is working to understand and improve."
     },
     "slogan": {
       "label": "Slogan",
@@ -3856,6 +3873,18 @@
       "label": "related_task_ids",
       "kind": "reference"
     },
+    "eyebrow": {
+      "label": "eyebrow",
+      "kind": "value"
+    },
+    "headline": {
+      "label": "headline",
+      "kind": "value"
+    },
+    "subtitle": {
+      "label": "subtitle",
+      "kind": "value"
+    },
     "embed_url": {
       "label": "embed_url",
       "kind": "url"
@@ -3874,10 +3903,6 @@
     },
     "country": {
       "label": "country",
-      "kind": "value"
-    },
-    "headline": {
-      "label": "headline",
       "kind": "value"
     },
     "completed": {

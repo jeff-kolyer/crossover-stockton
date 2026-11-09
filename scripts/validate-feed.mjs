@@ -40,7 +40,8 @@ export function validateFeed(story, records) {
   if (gapChapters.map(item => item.id).join(",") !== "overview,activity,tasks,metrics,places,organizations,improvements,events,findings,sources") errors.push("Gap chapters must keep Findings immediately before Sources");
   const menu = story.silent?.menu ?? [];
   const index = story.silent?.homePage;
-  if (!index?.label || !index.description || !index.image || !index.imageAlt || !index.actionLabel || index.icon !== "index") errors.push("Gap homepage needs its label, description, image, action, and index icon");
+  if (!index?.label || !index.image || !index.imageAlt || !index.actionLabel || index.icon !== "index") errors.push("Gap homepage needs its label, image, action, and index icon");
+  if (!gap?.fields?.central_question || !gap.fields.purpose || !gap.fields.hero?.eyebrow || !gap.fields.hero.headline || !gap.fields.hero.subtitle) errors.push("Default gap needs its question, purpose, and hero copy");
   if (menu.map(item => item.page).join(",") !== "overview,activity,tasks,metrics,findings,organizations,improvements,places,events,sources") errors.push("Gap menu is incomplete or out of order");
   for (const item of menu) if (!paths.has(item.chapter) || !item.label || !item.description || !item.homeDescription || !item.icon) errors.push(`Invalid menu item ${item.page}`);
   for (const [more, at] of pendingMore) {
