@@ -1,4 +1,6 @@
-# Understand and improve unmet needs in Stockton.
+# Focusing on unmet needs in Stockton.
+
+I want to walk a dog. Dogs want to be walked. But it's not that easy. Why?
 
 We start by identifying a gap, learning what’s happening, and taking useful action. See clearly. Act locally.
 
