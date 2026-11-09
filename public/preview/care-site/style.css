@@ -27,6 +27,7 @@ body{background:#fff;color:var(--skin-ink)}
 .care-brand img{width:40px;height:40px;object-fit:contain}
 .care-rail-label{margin:30px 2px 0;color:#e9f2f3;font-size:.71rem;font-weight:700;letter-spacing:.095em;line-height:1.42}
 .care-rail-groups{margin-top:22px}
+.care-rail-sources{margin-top:auto;padding-top:18px;border-top:1px solid #315064}
 .care-nav-group+.care-nav-group{margin-top:22px}
 .care-group-label{padding:0 10px 8px;color:#adc4cc;font-size:.7rem;font-weight:800;letter-spacing:.075em}
 .care-rail-nav{display:grid;gap:2px}
@@ -143,6 +144,7 @@ body{background:#fff;color:var(--skin-ink)}
   .mobile-menu{position:fixed;inset:120px 0 0;z-index:35;display:none;overflow:auto;padding:20px 16px 40px;background:#0d1c2b;color:#fff}
   .mobile-menu.open{display:block}
   .mobile-menu .care-nav-group+.care-nav-group{margin-top:18px}
+  .care-mobile-sources{margin-top:22px;padding-top:18px;border-top:1px solid #315064}
   .mobile-menu .care-group-label{padding:0 0 8px;color:#a9c7cb}
   .mobile-menu nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .mobile-menu nav a{display:flex;align-items:center;gap:8px;min-height:48px;padding:10px;border:1px solid #315064;border-radius:9px;color:#f5fbfc;font-size:.82rem}
