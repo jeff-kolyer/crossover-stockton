@@ -218,7 +218,7 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .care-rail-nav a,.mobile-menu nav a{font-size:var(--ui-nav);font-weight:500}
 .care-rail-nav a{min-height:38px}
 .care-rail-nav svg,.mobile-menu nav svg{width:18px;height:18px}
-.care-group-label{font-size:var(--ui-small);font-weight:600}
+.care-group-label{font-size:var(--ui-small);font-weight:700}
 .care-rail-nav a:is([aria-current=page],[aria-current=location]){background:#0d5b55;color:#fff;box-shadow:inset 2px 0 #2bc9bc}
 .care-rail-nav a:hover{background:#19413f}
 .care-top{min-height:56px;border-bottom:1px solid var(--skin-border)}
@@ -280,7 +280,7 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .account-source-group a{color:var(--skin-green);font-size:inherit;font-weight:700}
 .design-report-meta{font-weight:400;color:var(--skin-muted)}
 .design-overview .design-report-meta span{color:var(--skin-muted);font-weight:400;letter-spacing:normal}
-.design-report-meta .account-eyebrow{color:var(--skin-green);font-weight:700;letter-spacing:.08em}
+.design-report-meta .eyebrow{color:var(--skin-green)}
 .design-latest h3{font-size:20px;font-weight:600}
 .design-latest>a:not(.design-all){padding:12px 0;border-color:var(--skin-border)}
 .design-latest small{font-size:var(--ui-meta);font-weight:400}

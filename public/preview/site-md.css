@@ -387,6 +387,7 @@ button,input{font-family:var(--font-body)}
 .design-report-actions,.design-latest>a:not(.design-all){border-color:var(--skin-border)}
 
 .shell:not(.home-shell) .top-about[aria-current=page]{text-decoration:underline;text-underline-offset:4px}
+.rail-gap{font-weight:700}
 @media(max-width:760px){
   .shell:not(.home-shell) .mobile-menu .menu-about[aria-current=page]{color:var(--skin-green);background:var(--skin-selected);border-radius:7px;padding:8px 10px;margin-left:-10px;margin-right:-10px}
 }

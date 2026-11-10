@@ -27,8 +27,8 @@ const recordsFor=part=>part.records?.map(lookup).filter(Boolean)||records.filter
 const date=value=>value?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${String(value).slice(0,10)}T12:00:00Z`)):'';
 const metricValue=record=>{const value=record?.fields?.value??record?.fields?.reportedValue;return typeof value==='number'?new Intl.NumberFormat('en-US').format(value):value==null?'Unknown':String(value)};
 const navGroups=[
-  {label:"WHAT'S HAPPENING?",pages:['overview','feed']},
-  {label:"WHO'S HELPING?",pages:['organizations','improvements','places','events']},
+  {label:'THE GAP',pages:['overview','feed']},
+  {label:'THE RESPONSE',pages:['organizations','improvements','places','events']},
   {label:'OUR WORK',pages:['activity','tasks','metrics','findings']},
 ];
 const navItem=page=>page==='feed'?{page,label:'Feed',icon:'audioLines'}:menu.find(item=>item.page===page);

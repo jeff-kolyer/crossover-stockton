@@ -129,13 +129,13 @@ The website is a working interface for understanding the situation, following de
 
 It also makes Crossover's work visible to anyone interested.
 
-### What's happening?
+### THE GAP
 
 **Home** — The current picture, central question, available measurements, living account, and latest activity.
 
 **Feed** — The evolving narrative of what we're learning and doing, available to read or listen to.
 
-### Who's helping?
+### THE RESPONSE
 
 **Organizations** — Agencies, nonprofits, rescue groups, service providers, and other participants.
 
