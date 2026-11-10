@@ -326,7 +326,7 @@ test('every public record and the new design assets are published', async () => 
   assert.ok(root.includes('src="/images/variants/clean/dog-through-window.jpg" alt="Illustrative image of a dog on a neighborhood sidewalk seen through a home window"'));
   assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
   assert.ok(root.includes('<path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M22 10v4"/>'));
-  assert.ok(root.includes('<ellipse cx="4.7" cy="9" rx="1.7" ry="2.2" fill="currentColor" stroke="none"/>'));
+  assert.ok(root.includes('<path d="m2.5 10 9.5-7 9.5 7v10a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1V10Z"/>'));
   for (const path of ['dist/site.css','dist/care-site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/variants/clean/dog-through-window.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
 });

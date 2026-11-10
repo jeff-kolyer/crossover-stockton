@@ -262,7 +262,7 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .design-stat strong,.figure strong{font-size:var(--ui-metric);font-weight:700;line-height:1.1;letter-spacing:-.035em;color:var(--skin-green)}
 .design-stat span,.figure span{font-size:var(--ui-nav);font-weight:600;color:var(--skin-ink)}
 .design-stat small,.figure small{font-size:var(--ui-meta);font-weight:400;color:var(--skin-muted)}
-.design-stat-top strong{font-size:38px;font-weight:600;line-height:1.1}
+.design-stat-top strong{font-size:38px;font-weight:700;line-height:1.1}
 .design-stat>.design-stat-label{grid-column:2;font-size:16px;font-weight:500;line-height:1.35;margin-bottom:4px}
 .care-shell .design-stat>small{grid-column:2;font-size:14px;line-height:1.4}
 .design-report{padding:20px}
