@@ -17,6 +17,11 @@ export function validateFeed(story, records) {
       if (!entry.record || !entry.narration?.trim()) errors.push(`${path}: entry ${index + 1} needs a record and narration`);
       if (entry.record) checkRef(entry.record, path);
     }
+    for (const [index, question] of (node.questions ?? []).entries()) {
+      if (!Number.isInteger(question.index) || !gap?.fields?.unknown_questions?.[question.index]) errors.push(`${path}: question ${index + 1} needs an existing gap question`);
+      if (!question.record) errors.push(`${path}: question ${index + 1} needs a linked record`);
+      else checkRef(question.record, path);
+    }
     if (node.feedRecords?.some(id => !node.records?.includes(id))) errors.push(`${path}: feed records must be in the passage`);
     if (node.select && !Object.values(records).some(record => record.schema === node.select.schema && (!node.select.gap || record.fields.gap_id === gap?.id || record.fields.gap_ids?.includes(gap?.id) || record.fields.related_gap_ids?.includes(gap?.id) || gap?.fields.organization_ids?.includes(record.id)))) errors.push(`${path}: selector has no published records`);
     if (node.more) pendingMore.push([node.more, path]);
@@ -61,7 +66,33 @@ export function validateFeed(story, records) {
   const focus = paths.get("gap.overview.focus");
   const overview = paths.get("gap.overview");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(overview?.updatedAt ?? "")) errors.push("Overview needs an editorial update date");
-  if (!focus?.headline || !focus.text || !focus.currentWork) errors.push("Current focus needs a headline, text, and current-work summary");
+  const account = overview?.livingAccount?.paragraphs;
+  if (!Array.isArray(account) || !account.length) errors.push("Overview needs Living Account paragraphs");
+  for (const [index, paragraph] of (account ?? []).entries()) {
+    const at = `gap.overview.livingAccount paragraph ${index + 1}`;
+    const text = paragraph.text || '';
+    if (!text.trim() || !paragraph.links?.length) errors.push(`${at}: text and source links are required`);
+    const spans = [];
+    for (const link of paragraph.links ?? []) {
+      const start = text.indexOf(link.label);
+      if (!link.label || start < 0 || text.indexOf(link.label, start + 1) >= 0) errors.push(`${at}: link label must occur exactly once in the paragraph`);
+      if (link.record) checkRef(link.record, at);
+      else errors.push(`${at}: link needs a record`);
+      if (start >= 0 && link.label) spans.push([start, start + link.label.length]);
+    }
+    spans.sort((a, b) => a[0] - b[0]);
+    if (spans.some((span, i) => i > 0 && span[0] < spans[i - 1][1])) errors.push(`${at}: source link labels overlap`);
+  }
+  for (const id of ["situation", "care", "improvement-account"]) {
+    const part = paths.get(`gap.overview.${id}`);
+    if (!part?.title || !part.text || !part.sections?.length) errors.push(`Overview ${id} needs a title, introduction, and sourced sections`);
+    for (const item of part?.sections ?? []) {
+      if ((!item.title && !item.record) || !item.text || !item.references?.length) errors.push(`Overview ${id}.${item.id} needs a heading, narrative, and source records`);
+      if (id === "improvement-account" && resolve(item.record)?.schema !== "initiative") errors.push(`Overview ${id}.${item.id} must link to an improvement`);
+    }
+  }
+  if (paths.get("gap.overview.open-questions")?.questions?.length !== 5) errors.push("Overview needs five linked open questions");
+  if (!focus?.headline || !focus.text || !focus.currentWork || !focus.nextStep) errors.push("Current focus needs a headline and three account paragraphs");
   if (focus?.statusRecord && (resolve(focus.statusRecord)?.schema !== "task" || !resolve(focus.statusRecord)?.fields?.started_at)) errors.push("Current focus status needs a dated task record");
   if (!paths.get("introduction")?.title || !paths.get("introduction")?.text || !paths.get("introduction")?.method) errors.push("Introduction needs its guiding idea, purpose, and method");
   if (!paths.get("gap")?.text) errors.push("Gap chapter needs a current summary");

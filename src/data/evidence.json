@@ -809,6 +809,7 @@
     "id": "st-marys-pathways-pet-accommodation",
     "gap_ids": ["dogs-safe-placement"],
     "organization_ids": ["st-marys-dining-room"],
+    "location_ids": ["pathways-neighborhood-location"],
     "published_at": null,
     "checked_at": "2026-11-08",
     "record_type": "reported_service",

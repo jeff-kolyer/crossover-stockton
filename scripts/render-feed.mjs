@@ -22,7 +22,7 @@ function renderReading() {
     const spoken = paragraphs(item);
     if (path === "introduction") return `<section id="introduction" class="chapter"><h2>${escape(spoken[0])}</h2>${spoken.slice(1).map(line => `<p class="lead">${escape(line)}</p>`).join("")}</section>`;
     const entries = passage.entries ?? [];
-    const sources = entries.length ? `<p class="feed-sources"><strong>Explore the records:</strong> ${entries.map(entry => `<a href="${recordUrl(resolve(entry.record))}">${escape(resolve(entry.record).title)}</a>`).join(" · ")}</p>` : "";
+    const sources = entries.length ? `<p class="feed-sources"><strong>Explore the records:</strong> ${entries.map(entry => `<a class="text-link" href="${recordUrl(resolve(entry.record))}">${escape(resolve(entry.record).title)}</a>`).join(" · ")}</p>` : "";
     return `<section id="${escape(passage.id)}" class="chapter"><h2>${escape(spoken[0])}</h2>${spoken.slice(1).map((line, index) => `<p${passage.note && index === 1 ? ' class="editorial-note"' : ""}>${escape(line)}</p>`).join("")}${sources}</section>`;
   }).join("\n");
 }

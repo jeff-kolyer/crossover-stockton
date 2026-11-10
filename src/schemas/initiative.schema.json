@@ -46,6 +46,10 @@
       "type": "string",
       "minLength": 1
     },
+    "construction_contract_amount_usd": {
+      "type": "number",
+      "description": "Awarded construction contract amount, supported by the initiative's funding source. This is a contract value, not operating capacity."
+    },
     "evidence_record_ids": {
       "type": "array",
       "items": {

@@ -8,6 +8,14 @@
     "id": {
       "$ref": "./common.schema.json#/$defs/id"
     },
+    "parent_location_id": {
+      "$ref": "./common.schema.json#/$defs/id",
+      "description": "Canonical containing place for a facility; does not imply an event occurred at this facility."
+    },
+    "canonical_location_id": {
+      "$ref": "./common.schema.json#/$defs/id",
+      "description": "Canonical place for a retained historical location record excluded from the top-level index."
+    },
     "gap_ids": {
       "type": "array",
       "items": {
@@ -65,6 +73,13 @@
       "type": "string",
       "minLength": 1
     },
+    "facility_map_embed_url": {
+      "description": "Optional public Google My Maps embed URL for a parent place's facility map.",
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^https://(?:www\\.)?google\\.com/maps/d/(?:u/[0-9]+/)?embed\\?" }
+      ]
+    },
     "coordinates": {
       "anyOf": [
         {
@@ -79,6 +94,10 @@
           "type": "null"
         }
       ]
+    },
+    "coordinates_verified": {
+      "type": "boolean",
+      "description": "True only when the coordinates identify the location itself, rather than a generalized area or sighting reference."
     },
     "category": {
       "type": "string",

@@ -11,7 +11,7 @@ export function renderSiteMdPages(template, source, feed, story, origin, feedCon
     querySelector() { return { addEventListener() {} }; },
   };
   const context = {
-    document, location, window: { scrollTo() {} }, URLSearchParams,
+    document, location, window: { scrollTo() {} }, URL, URLSearchParams,
     sourceFeed: feed, sourceStory: story, sourceFeedContent: feedContent,
   };
   const renderer = source.replace(/\bstart\(\);\s*$/, '');

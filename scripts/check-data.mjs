@@ -79,8 +79,32 @@ checkRefs(records.get("claims"), "measurements", "measurementId", "claim");
 checkRefs(records.get("measurements"), "records", "source_record_id", "measurement");
 checkRefs(records.get("locations"), "records", "evidence_record_id", "location");
 checkRefs(records.get("locations"), "records", "evidence_record_ids", "location");
+checkRefs(records.get("locations"), "locations", "parent_location_id", "location");
+checkRefs(records.get("locations"), "locations", "canonical_location_id", "location");
+checkRefs(records.get("locations"), "tasks", "related_task_ids", "location");
+checkRefs(records.get("locations"), "organizations", "organization_ids", "location");
 checkRefs(records.get("organizations"), "locations", "map_location_id", "organization");
+checkRefs(records.get("records"), "locations", "location_ids", "evidence");
 for (const location of records.get("locations") ?? []) {
+  if (location.facility_map_embed_url != null) {
+    let valid = false;
+    try {
+      const url = new URL(location.facility_map_embed_url);
+      valid = url.protocol === "https:" && ["google.com", "www.google.com"].includes(url.hostname)
+        && /^\/maps\/d\/(?:u\/\d+\/)?embed$/.test(url.pathname) && Boolean(url.searchParams.get("mid"));
+    } catch { /* Invalid URL. */ }
+    if (!valid) errors.push(`location:${location.id} facility_map_embed_url must be a Google My Maps embed URL with a map ID`);
+  }
+  if (location.parent_location_id === location.id || location.canonical_location_id === location.id)
+    errors.push(`location:${location.id} cannot refer to itself`);
+  const seen = new Set([location.id]);
+  let ancestor = location;
+  while (ancestor.parent_location_id) {
+    ancestor = (records.get("locations") ?? []).find((item) => item.id === ancestor.parent_location_id);
+    if (!ancestor) break;
+    if (seen.has(ancestor.id)) { errors.push(`location:${location.id} parent cycle`); break; }
+    seen.add(ancestor.id);
+  }
   if (location.map_reference?.verified && !location.map_reference.source_url?.startsWith("https://"))
     errors.push(`location:${location.id} verified map reference requires an HTTPS source URL`);
 }
@@ -89,6 +113,9 @@ checkRefs(records.get("records"), "organizations", "organization_ids", "evidence
 for (const file of ["improvements"]) {
   checkRefs(records.get(file), "gaps", "gap_ids", file);
   checkRefs(records.get(file), "organizations", "organization_ids", file);
+  for (const item of records.get(file) ?? []) if (item.construction_contract_amount_usd != null &&
+    (!(item.construction_contract_amount_usd > 0) || !item.funding_source_urls?.some(url => /^https:\/\//.test(url))))
+    errors.push(`${file}:${item.id} construction contract amount requires a positive value and HTTPS funding source`);
 }
 const currentNeedIds = new Set((records.get("gaps") ?? []).filter((gap) => gap.active).map((gap) => gap.id));
 for (const file of ["evidence"]) {

@@ -76,6 +76,7 @@
     "development_stage": "under_development",
     "operational_status": "not_operational",
     "funding_status": "contract_awarded",
+    "construction_contract_amount_usd": 10473000,
     "funding_source_urls": [
       "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"
     ],

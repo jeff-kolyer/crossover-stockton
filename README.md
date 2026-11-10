@@ -35,7 +35,7 @@ We keep source reports, our direct observations, supported conclusions, and unkn
 
 ## Website and public record
 
-The [homepage](https://crossoverstockton.org/) is the street-dogs Overview. It presents the dated, listenable account, focus, attributed figures, activity, and open questions from the feed and public records. The former `/street-dogs/overview/` URL remains readable and points search engines to `/` as its canonical URL. The desktop sidebar and mobile navigation group the same pages by what a visitor needs to do:
+The [homepage](https://crossoverstockton.org/) is the street-dogs Overview. It presents attributed figures and a concise situation summary beside latest activity, followed by conditions, care pathways, improvements, open questions, and Crossover's work. Its editorial structure comes from the feed and links to public records for supporting claims. The former `/street-dogs/overview/` URL remains readable and points search engines to `/` as its canonical URL. The desktop sidebar and mobile navigation group the same pages by what a visitor needs to do:
 
 - **What's happening?** Overview explains the current situation; Feed is the evolving account to read or listen to.
 - **Who's helping?** Organizations, Improvements, Places, and Events show the people, efforts, locations, and occasions involved. Improvements records generally describe work by others; listing an effort does not make it Crossover's project.

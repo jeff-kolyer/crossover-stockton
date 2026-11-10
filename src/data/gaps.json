@@ -9,8 +9,8 @@
       "purpose": "Understand the conditions dogs face, trace what happens when people seek help, and identify practical ways to improve access to care.",
       "hero": {
         "eyebrow": "STOCKTON, CALIFORNIA",
-        "headline": "How can we improve care for dogs on Stockton's streets?",
-        "subtitle": "How many need help? What care is available? Who's providing it? What's preventing more dogs from getting the care they need?"
+        "headline": "What happens when a dog needs help?",
+        "subtitle": "Dogs are being abandoned and found roaming Stockton's streets. We're examining what happens when someone tries to help, what care is available, who's providing it, and where access falls short."
       },
       "active": true,
       "rank": 1,
@@ -279,12 +279,13 @@
         }
       ],
       "unknown_questions": [
-        "How many dogs currently live on Stockton's streets, and where?",
+        "How many dogs are currently on Stockton's streets, and what are their circumstances?",
         "What condition are they in, and how many need immediate care?",
         "How many are already being fed, monitored, or otherwise cared for?",
         "What happens when someone reports a stray, injured, or abandoned dog?",
+        "Which services can actually accept or help a reported dog?",
         "How many reported dogs ultimately receive care?",
-        "What prevents willing people and organizations from providing more care?",
+        "Where do care pathways break down for dogs and people trying to help them?",
         "Which existing or proposed improvements are actually increasing access to care?",
         "Can people entering shelter remain with their dogs, and under what conditions?",
         "What care reaches dogs living with people outside?"

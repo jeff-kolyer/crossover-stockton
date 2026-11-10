@@ -209,8 +209,8 @@
         "purpose": "Understand the conditions dogs face, trace what happens when people seek help, and identify practical ways to improve access to care.",
         "hero": {
           "eyebrow": "STOCKTON, CALIFORNIA",
-          "headline": "How can we improve care for dogs on Stockton's streets?",
-          "subtitle": "How many need help? What care is available? Who's providing it? What's preventing more dogs from getting the care they need?"
+          "headline": "What happens when a dog needs help?",
+          "subtitle": "Dogs are being abandoned and found roaming Stockton's streets. We're examining what happens when someone tries to help, what care is available, who's providing it, and where access falls short."
         },
         "summary": "Public reports describe roaming and abandoned dogs in Stockton. Animal Services reports shelter-capacity pressure, and organizations report feeding, fostering, and placement work. The number of dogs currently on the streets, their conditions, what happens after someone seeks help, and how reliably care reaches them remain unverified.",
         "what_we_are_seeing": [
@@ -394,12 +394,13 @@
           "crossover-2026-11-02-sas-field-call-records-received"
         ],
         "unknown_questions": [
-          "How many dogs currently live on Stockton's streets, and where?",
+          "How many dogs are currently on Stockton's streets, and what are their circumstances?",
           "What condition are they in, and how many need immediate care?",
           "How many are already being fed, monitored, or otherwise cared for?",
           "What happens when someone reports a stray, injured, or abandoned dog?",
+          "Which services can actually accept or help a reported dog?",
           "How many reported dogs ultimately receive care?",
-          "What prevents willing people and organizations from providing more care?",
+          "Where do care pathways break down for dogs and people trying to help them?",
           "Which existing or proposed improvements are actually increasing access to care?",
           "Can people entering shelter remain with their dogs, and under what conditions?",
           "What care reaches dogs living with people outside?"
@@ -433,11 +434,9 @@
         ],
         "organization_ids": [],
         "location_ids": [
-          "st-marys-church-street-corridor"
-        ],
-        "map_reference_location_ids": [
           "st-marys-community-services-campus"
         ],
+        "map_reference_location_ids": [],
         "basis_record_ids": [
           "ssd-2026-06-08-street-response"
         ],
@@ -1036,6 +1035,7 @@
         },
         "area": "800 block of Carrie Street / levee",
         "description": "Stocktonia reported an April 23, 2026 roaming-dog attack near the levee and said at least six dogs were subsequently captured.",
+        "last_known_outcome": "At least six dogs reportedly captured after the incident.",
         "coordinate_note": "Generalized Carrie Street neighborhood reference, informed by public street geography; not the attack site.",
         "category": "historical_published_report",
         "verification_status": "Historical — current conditions unknown",
@@ -1069,6 +1069,7 @@
         },
         "area": "Near the DMV beneath the Crosstown Freeway",
         "description": "Stocktonia documented Hungry Tailz Rescue's February 2025 visit, including puppies, adult dogs, and animal-care needs.",
+        "last_known_outcome": "Not established.",
         "coordinate_note": "Generalized public DMV-area reference; not an encampment or animal location.",
         "category": "historical_published_report",
         "verification_status": "Historical — current conditions unknown",
@@ -1101,6 +1102,7 @@
         },
         "area": "Trinity Parkway / McAuliffe Road vicinity",
         "description": "July 2025 reporting documented residents with dogs and puppies, pet-related shelter barriers, and subsequent encampment removal.",
+        "last_known_outcome": "Encampment removal was reported; subsequent animal-care outcome unknown.",
         "coordinate_note": "Generalized Trinity Parkway corridor reference based on public road geography; not an encampment location.",
         "category": "historical_published_report",
         "verification_status": "Historical — current conditions unknown",
@@ -1133,6 +1135,7 @@
         },
         "area": "Country Club Boulevard / Interstate 5",
         "description": "A county report documented encampment outreach in the area, but identified no specific animal-welfare need.",
+        "last_known_outcome": "No specific animal-welfare need documented.",
         "coordinate_note": "SJCOG roadway reference on I-5 near Country Club Boulevard. This marker is a geographic reference, not a documented incident location; the county report identified no specific dog or animal-welfare need.",
         "category": "historical_published_report",
         "verification_status": "Historical — current conditions unknown",
@@ -1165,6 +1168,7 @@
         },
         "area": "Crown Avenue / Rose Marie Lane vicinity",
         "description": "A PawBoost user reported a dog with a collar running in the street on October 16. This is a public sighting report, not a Crossover observation.",
+        "last_known_outcome": "PawBoost listed a sighting; subsequent outcome not established.",
         "coordinate_note": "Generalized Rose Marie Lane neighborhood reference, not the dog's current location.",
         "category": "recent_public_report",
         "verification_status": "Reported — unverified",
@@ -1197,6 +1201,7 @@
         },
         "area": "California Street / Magnolia Street vicinity",
         "description": "A PawBoost user reported finding a dog in an apartment parking area on October 15. A later public comment claimed temporary care, but the final outcome has not been confirmed.",
+        "last_known_outcome": "PawBoost listed the dog as found; final disposition not confirmed.",
         "coordinate_note": "Generalized downtown neighborhood reference, not the apartment or dog's current location.",
         "category": "recent_public_report",
         "verification_status": "Reported — unverified",
@@ -1229,6 +1234,7 @@
         },
         "area": "McDougald Boulevard / Henry Long Boulevard vicinity",
         "description": "A PawBoost user reported finding a dog without a collar on October 15. A later commenter said the dog was returned to its owner.",
+        "last_known_outcome": "A public commenter said the dog was safely returned to its owner; Crossover has not independently confirmed this.",
         "coordinate_note": "Generalized public road vicinity, not the dog's current location.",
         "category": "recent_public_report",
         "verification_status": "Reported resolved — owner return unconfirmed independently",
@@ -1261,6 +1267,7 @@
         },
         "area": "Louis Park public-area reference; Pixie Woods is an adjacent landmark",
         "description": "CBS Sacramento reported that a Stockton councilmember described abandoned and unaltered dog challenges particularly around Louis Park. The report did not identify Pixie Woods as an incident site.",
+        "last_known_outcome": "CBS reported a councilmember's concern; no specific dog outcome stated.",
         "coordinate_note": "Generalized public-park reference. CBS named Louis Park; Pixie Woods is adjacent, not a reported dog location.",
         "category": "historical_published_report",
         "verification_status": "Historical report — current conditions unknown",
@@ -1294,6 +1301,7 @@
         },
         "area": "Stanislaus Street; no block identified in the report",
         "description": "CBS Sacramento reported that a resident living off Stanislaus Street had helped abandoned dogs in her area for more than a year. No particular block was identified.",
+        "last_known_outcome": "A resident described helping abandoned dogs; no specific dog outcome stated.",
         "coordinate_note": "SJCOG roadway reference at Stanislaus Street and SR-4. This marker is a geographic reference, not a documented incident location; the report identified no block or dog location.",
         "category": "historical_published_report",
         "verification_status": "Historical report — current conditions unknown",
@@ -1327,6 +1335,7 @@
         },
         "area": "Broad Highway 4 corridor; no segment identified",
         "description": "CBS Sacramento quoted Stockton Street Dogs' founder saying dogs were dumped off Highway 4. The report did not identify a particular segment or current site.",
+        "last_known_outcome": "A rescue founder described dumping off Highway 4; no specific case outcome stated.",
         "coordinate_note": "OpenStreetMap roadway reference at the SR-4 / I-5 Crosstown Freeway interchange. This marker is a geographic reference, not a documented incident location; the report identified no dumping site or dog location.",
         "category": "historical_published_report",
         "verification_status": "Historical account — location and current conditions unverified",
@@ -1362,6 +1371,7 @@
         },
         "area": "1575 S. Lincoln Street, Stockton",
         "description": "Stockton Animal Services is the City's animal shelter at 1575 S. Lincoln Street. City guidance describes animal reporting and found-dog services. Crossover's October 14 visit is documented separately; this pin identifies the facility, not a sighting or a field-call result.",
+        "last_known_outcome": "The City identifies this address as its animal shelter. This location marker does not represent a specific dog or case outcome.",
         "coordinate_note": "Approximate public-address reference for the shelter, generalized to three decimal places; not a dog sighting or case location.",
         "category": "official_location_record",
         "verification_status": "Official shelter location documented; individual case outcomes unverified",
@@ -1395,6 +1405,7 @@
         },
         "area": "District 5, Stockton; no street or block identified in the report",
         "description": "Stockton Street Dogs founder Jesse Mejia described increased stray- and dumped-dog encounters to KCRA, with particular concern in District 5. The report does not identify a street, block, or current observation site. This broad area record is a lead for finding a supported public place to investigate, not a dog sighting or a claim about all of District 5.",
+        "last_known_outcome": "KCRA reported Stockton Street Dogs' concern about increased stray- and dumped-dog encounters, particularly in District 5. No outcome for a specific dog or site was reported.",
         "coordinate_note": "The KCRA account identifies District 5 but no specific dog encounter site. No map pin is assigned until a current public observation location is supported by evidence.",
         "category": "recent_public_report",
         "verification_status": "Reported concern; exact location and current conditions unverified",
@@ -1421,6 +1432,7 @@
         "id": "st-marys-church-street-corridor",
         "name": "St. Mary's–Church Street corridor",
         "location_type": "street_corridor",
+        "canonical_location_id": "st-marys-community-services-campus",
         "map_reference": {
           "query": "West Church Street, Stockton, CA",
           "precision": "corridor",
@@ -1428,6 +1440,7 @@
         },
         "area": "Public areas around West Church Street near St. Mary's Community Services, Stockton; the first observation route has not yet been set",
         "description": "CBS Sacramento placed a Stockton Street Dogs outreach visit at a Church Street encampment near St. Mary's Community Services. This is a lead for a limited public-area investigation, not a report of dogs at the service provider's 545 W. Sonora Street campus or proof of a citywide hotspot. Other nearby reports and videos have not been verified as occurring in this corridor. Dogs with unhoused residents are not presumed abandoned.",
+        "last_known_outcome": "In June 2026, CBS Sacramento reported Stockton Street Dogs distributed food to around 70 dogs during Church Street outreach. That reported event does not establish the number of dogs currently in the corridor.",
         "coordinate_note": "Area of investigation only. No point is published for the reported encampment, residents, or dogs; the field report will describe the limited public area actually examined.",
         "category": "historical_published_report",
         "verification_status": "June report; current dog count and distribution unverified",
@@ -1448,34 +1461,253 @@
       "id": "st-marys-community-services-campus",
       "schema": "location",
       "typeName": "Location",
-      "title": "St. Mary's Community Services",
-      "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street. This reference marks the organization, not a dog sighting. Whether its relevant services accommodate people with dogs has not been verified by Crossover.",
+      "title": "St. Mary's / Church Street Area",
+      "description": "A Stockton area with dining, shelter, health care, and transitional housing services near a reported Church Street dog-outreach event. The June 2026 report describes outreach in the surrounding area, not at a particular facility. Crossover has not yet made a field observation here.",
       "fields": {
         "id": "st-marys-community-services-campus",
-        "name": "St. Mary's Community Services",
-        "location_type": "human_services",
+        "name": "St. Mary's / Church Street Area",
+        "location_type": "general_area",
         "map_reference": {
-          "query": "545 W Sonora St, Stockton, CA 95203",
-          "precision": "address",
-          "verified": true,
-          "source_url": "https://www.sjchsa.org/Portals/0/Resource%20Directory%202024-2025.pdf",
-          "embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3146.2689205112047!2d-121.2972552!3d37.9475064!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8090128fff3f4f63%3A0x90e9010387a9a9ce!2s545%20W%20Sonora%20St%2C%20Stockton%2C%20CA%2095203!5e0!3m2!1sen!2sus!4v1793803679103!5m2!1sen!2sus"
+          "query": "West Church Street and West Sonora Street, Stockton, CA",
+          "precision": "general_area",
+          "verified": false
         },
-        "area": "545 W. Sonora Street, Stockton",
-        "description": "St. Mary's Community Services lists its campus at 545 W. Sonora Street. This reference marks the organization, not a dog sighting. Whether its relevant services accommodate people with dogs has not been verified by Crossover.",
-        "coordinate_note": "Approximate reference for St. Mary's at 545 W. Sonora Street, rounded from a State Water Boards coordinate for the adjacent St. Mary's Dining Room project at 550 W. Sonora Street; not where dogs were reported. Use the Google Maps address link for the organization listing.",
+        "facility_map_embed_url": "https://www.google.com/maps/d/embed?mid=1dUUknNz5df2_EZXgLXHiJEOKnssybF0",
+        "area": "West Church and West Sonora streets, Stockton, California; a broad area, not a single address",
+        "description": "A Stockton area with dining, shelter, health care, and transitional housing services near a reported Church Street dog-outreach event. The June 2026 report describes outreach in the surrounding area, not at a particular facility. Crossover has not yet made a field observation here.",
+        "last_known_outcome": "CBS Sacramento reported Stockton Street Dogs gave food to about 70 dogs during a June 2026 Church Street outreach. This is a historical report, not a current count or a sighting at a named facility.",
+        "related_task_ids": [
+          "task-verify-st-marys-church-street-dog-scale"
+        ],
+        "coordinate_note": "The area has no single point. Facility map links refer to public addresses; no encampment, resident, or dog location is mapped.",
         "category": "official_location_record",
-        "verification_status": "Organization location documented; dog-related conditions unverified",
-        "unknown": "Whether the relevant programs accommodate people with dogs, and whether any dog-related need exists at this campus, remain unverified. The Church Street outreach report concerns a nearby area, not this address.",
-        "evidence_date": "2026-10-29",
+        "verification_status": "Service locations documented; June 2026 dog outreach reported, present conditions unverified",
+        "unknown": "Which facilities admit people accompanied by dogs, what restrictions and animal care apply, where people encounter barriers, and what could improve access remain open questions. Current dog numbers and conditions in the surrounding public area are unverified.",
+        "evidence_date": "2026-06-08",
         "source_url": "https://smcares.org/",
+        "evidence_record_ids": [
+          "ssd-2026-06-08-street-response",
+          "st-marys-pathways-pet-accommodation"
+        ],
         "gap_ids": [
           "dogs-safe-placement"
         ]
       },
       "dateForSort": {
         "field": "evidence_date",
-        "value": "2026-10-29"
+        "value": "2026-06-08"
+      }
+    },
+    "st-marys-dining-room-location": {
+      "id": "st-marys-dining-room-location",
+      "schema": "location",
+      "typeName": "Location",
+      "title": "St. Mary's Dining Room",
+      "description": "St. Mary's Community Services provides meals and other essential services at its Sonora Street campus. This location is a facility reference, not a dog sighting.",
+      "fields": {
+        "id": "st-marys-dining-room-location",
+        "name": "St. Mary's Dining Room",
+        "location_type": "human_services",
+        "parent_location_id": "st-marys-community-services-campus",
+        "map_reference": {
+          "query": "St. Mary's Dining Room, 545 W Sonora St, Stockton, CA 95203",
+          "precision": "address",
+          "verified": true,
+          "source_url": "https://smcares.org/contact/"
+        },
+        "area": "545 W. Sonora Street, Stockton, CA 95203",
+        "address": "545 W. Sonora Street, Stockton, CA 95203",
+        "description": "St. Mary's Community Services provides meals and other essential services at its Sonora Street campus. This location is a facility reference, not a dog sighting.",
+        "services": [
+          "Meals",
+          "Essential services"
+        ],
+        "organization_ids": [
+          "st-marys-dining-room"
+        ],
+        "phone": "209-467-0703",
+        "website": "https://smcares.org/programs/essential-services/",
+        "service_directory_urls": [
+          "https://www.icarol.info/ResultDetails.aspx?agencynum=24378018&org=62926&sitenum=24378027"
+        ],
+        "category": "official_location_record",
+        "verification_status": "Address and meal service documented by operator; dog admission unverified",
+        "unknown": "Current access rules for people accompanied by dogs, and dog-specific services, have not been verified.",
+        "evidence_date": "2026-11-09",
+        "source_url": "https://smcares.org/contact/",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
+      },
+      "dateForSort": {
+        "field": "evidence_date",
+        "value": "2026-11-09"
+      }
+    },
+    "stockton-mens-shelter-location": {
+      "id": "stockton-mens-shelter-location",
+      "schema": "location",
+      "typeName": "Location",
+      "title": "Stockton Men's Shelter",
+      "description": "A men's shelter site described in a San Joaquin County project assessment near West Church Street. The project document is historical; current entrance and operating details need confirmation.",
+      "fields": {
+        "id": "stockton-mens-shelter-location",
+        "name": "Stockton Men's Shelter",
+        "location_type": "human_services",
+        "parent_location_id": "st-marys-community-services-campus",
+        "map_reference": {
+          "query": "Stockton Men's Shelter, Stockton, CA",
+          "precision": "named_place",
+          "verified": false
+        },
+        "area": "West Church Street area, Stockton, California",
+        "description": "A men's shelter site described in a San Joaquin County project assessment near West Church Street. The project document is historical; current entrance and operating details need confirmation.",
+        "services": [
+          "Shelter"
+        ],
+        "operating_organization": "Operating organization not confirmed from current official source",
+        "category": "official_location_record",
+        "verification_status": "Historical public project document identifies a men's shelter site; current address and access unverified",
+        "unknown": "Current address, operator, services, dog admission rules, and contact details require confirmation.",
+        "evidence_date": "2026-11-09",
+        "source_url": "https://www.sjgov.org/docs/default-source/health-care-services-documents/neighborhood-preservation/public-notices/stockton-shelter-expansion-project-ea.pdf?sfvrsn=16087463_7",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
+      },
+      "dateForSort": {
+        "field": "evidence_date",
+        "value": "2026-11-09"
+      }
+    },
+    "stockton-shelter-for-the-homeless-location": {
+      "id": "stockton-shelter-for-the-homeless-location",
+      "schema": "location",
+      "typeName": "Location",
+      "title": "Stockton Shelter for the Homeless",
+      "description": "A separate shelter organization listed at South Harrison Street in a City of Stockton plan. This record does not equate it with St. Mary's services or the men's shelter project.",
+      "fields": {
+        "id": "stockton-shelter-for-the-homeless-location",
+        "name": "Stockton Shelter for the Homeless",
+        "location_type": "human_services",
+        "parent_location_id": "st-marys-community-services-campus",
+        "map_reference": {
+          "query": "Stockton Shelter for the Homeless, 411 S Harrison St, Stockton, CA",
+          "precision": "address",
+          "verified": true,
+          "source_url": "https://cms3.revize.com/revize/stockton/Documents/Business/Economic%20Development/Consolidated_Plan_20-25__Action_Plan_20-21.pdf"
+        },
+        "area": "411 S. Harrison Street, Stockton, CA 95203",
+        "address": "411 S. Harrison Street, Stockton, CA 95203",
+        "description": "A separate shelter organization listed at South Harrison Street in a City of Stockton plan. This record does not equate it with St. Mary's services or the men's shelter project.",
+        "services": [
+          "Shelter"
+        ],
+        "operating_organization": "Current operator requires confirmation",
+        "category": "official_location_record",
+        "verification_status": "Address appears in a city plan; current services and access unverified",
+        "unknown": "Current service details, contact information, and dog admission rules require confirmation.",
+        "evidence_date": "2026-11-09",
+        "source_url": "https://cms3.revize.com/revize/stockton/Documents/Business/Economic%20Development/Consolidated_Plan_20-25__Action_Plan_20-21.pdf",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
+      },
+      "dateForSort": {
+        "field": "evidence_date",
+        "value": "2026-11-09"
+      }
+    },
+    "cmc-st-marys-location": {
+      "id": "cmc-st-marys-location",
+      "schema": "location",
+      "typeName": "Location",
+      "title": "Community Medical Centers at St. Mary's",
+      "description": "Community Medical Centers lists primary care and support services at its St. Mary's location. No dog-related service or access policy is established by this listing.",
+      "fields": {
+        "id": "cmc-st-marys-location",
+        "name": "Community Medical Centers at St. Mary's",
+        "location_type": "human_services",
+        "parent_location_id": "st-marys-community-services-campus",
+        "map_reference": {
+          "query": "Community Medical Centers St Mary's, 545 W Sonora St, Stockton, CA",
+          "precision": "address",
+          "verified": true,
+          "source_url": "https://cmcenters.org/locations/cmc-st-marys/"
+        },
+        "area": "545 W. Sonora Street, Stockton, CA 95203",
+        "address": "545 W. Sonora Street, Stockton, CA 95203",
+        "description": "Community Medical Centers lists primary care and support services at its St. Mary's location. No dog-related service or access policy is established by this listing.",
+        "services": [
+          "Family practice",
+          "Behavioral health",
+          "Case management",
+          "Health coverage enrollment"
+        ],
+        "operating_organization": "Community Medical Centers",
+        "phone": "209-337-3298",
+        "website": "https://cmcenters.org/locations/cmc-st-marys/",
+        "category": "official_location_record",
+        "verification_status": "Address and services listed by provider; dog access unverified",
+        "unknown": "Current access arrangements for patients accompanied by dogs are unverified.",
+        "evidence_date": "2026-11-09",
+        "source_url": "https://cmcenters.org/locations/cmc-st-marys/",
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
+      },
+      "dateForSort": {
+        "field": "evidence_date",
+        "value": "2026-11-09"
+      }
+    },
+    "pathways-neighborhood-location": {
+      "id": "pathways-neighborhood-location",
+      "schema": "location",
+      "typeName": "Location",
+      "title": "Pathways Neighborhood",
+      "description": "St. Mary's describes Pathways as transitional housing on its campus. A service listing describes units for people accompanied by pets. The reported 268-bed figure has not been independently confirmed as current capacity.",
+      "fields": {
+        "id": "pathways-neighborhood-location",
+        "name": "Pathways Neighborhood",
+        "location_type": "transitional_housing",
+        "parent_location_id": "st-marys-community-services-campus",
+        "map_reference": {
+          "query": "St. Mary's Community Services, 545 W Sonora St, Stockton, CA",
+          "precision": "address",
+          "verified": true,
+          "source_url": "https://smcares.org/contact/"
+        },
+        "area": "St. Mary's Community Services campus, 545 W. Sonora Street, Stockton, CA 95203",
+        "description": "St. Mary's describes Pathways as transitional housing on its campus. A service listing describes units for people accompanied by pets. The reported 268-bed figure has not been independently confirmed as current capacity.",
+        "services": [
+          "Transitional housing",
+          "Case management"
+        ],
+        "reported_capacity_beds": 268,
+        "capacity_report_url": "https://stockton.legistar.com/View.ashx?GUID=F96C8501-3A30-4B4B-A5D1-AC69E4EE08E4&ID=14113197&M=F",
+        "organization_ids": [
+          "st-marys-dining-room"
+        ],
+        "website": "https://smcares.org/news/",
+        "service_directory_urls": [
+          "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926"
+        ],
+        "category": "official_location_record",
+        "verification_status": "Program and campus documented; pet accommodation reported in service listing, dog-specific access unverified",
+        "unknown": "Current dog-specific eligibility, restrictions, available pet-inclusive capacity, actual placements, and the reported 268-bed figure remain unverified by Crossover.",
+        "evidence_date": "2026-11-09",
+        "source_url": "https://smcares.org/news/",
+        "evidence_record_ids": [
+          "st-marys-pathways-pet-accommodation"
+        ],
+        "gap_ids": [
+          "dogs-safe-placement"
+        ]
+      },
+      "dateForSort": {
+        "field": "evidence_date",
+        "value": "2026-11-09"
       }
     },
     "stockton-animal-services-2026-10-20-reporting-guidance": {
@@ -2441,6 +2673,9 @@
         ],
         "organization_ids": [
           "st-marys-dining-room"
+        ],
+        "location_ids": [
+          "pathways-neighborhood-location"
         ]
       },
       "dateForSort": {
@@ -2903,6 +3138,9 @@
         "development_stage": "proposed",
         "operational_status": "not_operational",
         "funding_status": "unknown",
+        "funding_source_urls": [
+          "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus"
+        ],
         "capacity_summary": {
           "headline": "Proposed capacity: Hundreds of dogs",
           "how_it_helps": "Could provide overflow sheltering and recovery care for dogs waiting for safe placement.",
@@ -2969,6 +3207,10 @@
         "development_stage": "under_development",
         "operational_status": "not_operational",
         "funding_status": "contract_awarded",
+        "construction_contract_amount_usd": 10473000,
+        "funding_source_urls": [
+          "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"
+        ],
         "capacity_summary": {
           "headline": "Construction underway: Expanded treatment and recovery facilities",
           "how_it_helps": "New treatment, isolation, and rehabilitation space could improve care and help dogs move toward adoption.",
@@ -3036,6 +3278,9 @@
         "development_stage": "completed",
         "operational_status": "unknown",
         "funding_status": "authorized",
+        "funding_source_urls": [
+          "https://stockton.legistar.com/LegislationDetail.aspx?GUID=5C3A1CB2-BC5A-4CA2-AE4C-95A1EC70C708&ID=7442543"
+        ],
         "capacity_summary": {
           "headline": "Facility development reported complete",
           "how_it_helps": "Wellness care could help owners keep dogs, while off-site adoption space could help dogs leave shelter care.",
@@ -3095,6 +3340,9 @@
         "development_stage": "funded",
         "operational_status": "unknown",
         "funding_status": "authorized",
+        "funding_source_urls": [
+          "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search="
+        ],
         "capacity_summary": {
           "headline": "City-approved contract target: Approximately 200 pets",
           "how_it_helps": "Completed sterilizations could reduce treatment backlogs and placement delays.",
@@ -3161,6 +3409,9 @@
         "development_stage": "funded",
         "operational_status": "unknown",
         "funding_status": "authorized",
+        "funding_source_urls": [
+          "https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A"
+        ],
         "capacity_summary": {
           "headline": "Authorized: 4 additional positions",
           "how_it_helps": "Filled veterinary and animal-care positions could expand treatment and sterilization capacity.",
@@ -3872,6 +4123,62 @@
     "related_task_ids": {
       "label": "related_task_ids",
       "kind": "reference"
+    },
+    "parent_location_id": {
+      "label": "parent_location_id",
+      "kind": "reference",
+      "description": "Canonical containing place for a facility; does not imply an event occurred at this facility."
+    },
+    "canonical_location_id": {
+      "label": "canonical_location_id",
+      "kind": "reference",
+      "description": "Canonical place for a retained historical location record excluded from the top-level index."
+    },
+    "facility_map_embed_url": {
+      "label": "facility_map_embed_url",
+      "kind": "url",
+      "description": "Optional public Google My Maps embed URL for a parent place's facility map."
+    },
+    "address": {
+      "label": "address",
+      "kind": "value"
+    },
+    "last_known_outcome": {
+      "label": "last_known_outcome",
+      "kind": "value"
+    },
+    "services": {
+      "label": "services",
+      "kind": "value"
+    },
+    "reported_capacity_beds": {
+      "label": "reported_capacity_beds",
+      "kind": "value"
+    },
+    "capacity_report_url": {
+      "label": "capacity_report_url",
+      "kind": "url"
+    },
+    "operating_organization": {
+      "label": "operating_organization",
+      "kind": "value"
+    },
+    "phone": {
+      "label": "phone",
+      "kind": "value"
+    },
+    "service_directory_urls": {
+      "label": "service_directory_urls",
+      "kind": "value"
+    },
+    "construction_contract_amount_usd": {
+      "label": "construction_contract_amount_usd",
+      "kind": "value",
+      "description": "Awarded construction contract amount, supported by the initiative's funding source. This is a contract value, not operating capacity."
+    },
+    "funding_source_urls": {
+      "label": "funding_source_urls",
+      "kind": "value"
     },
     "eyebrow": {
       "label": "eyebrow",

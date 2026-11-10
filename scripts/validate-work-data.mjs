@@ -25,7 +25,7 @@ for (const activity of actual.values()) {
   check(activity.gap_ids?.length > 0, `${activity.id}: Activity needs a direct project link`);
 }
 for (const location of data.locations) {
-  check(["dog_sighting", "human_services", "animal_care"].includes(location.marker_type), `${location.id}: invalid marker_type`);
+  check(["dog_sighting", "human_services", "animal_care"].includes(location.marker_type) || (location.location_type === "general_area" && location.marker_type == null), `${location.id}: invalid marker_type`);
   if (location.evidence_record_id) check(by.records.has(location.evidence_record_id), `${location.id}: unknown evidence record`);
   for (const id of location.evidence_record_ids ?? []) check(by.records.has(id), `${location.id}: unknown evidence record ${id}`);
 }
