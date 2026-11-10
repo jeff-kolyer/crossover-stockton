@@ -57,7 +57,7 @@ test('the root serves the Overview and the old overview URL stays readable', asy
   );
   const root = await page('/');
   const gap = feed.records['dogs-safe-placement'].fields;
-  for (const phrase of [gap.hero.eyebrow, 'Stockton Dog Care: Pathways &amp; Bottlenecks', 'Core Question:', story.silent.homePage.primaryActionLabel, 'Latest activity','Listen to this account','3,106','No verified census'])
+  for (const phrase of [gap.hero.eyebrow, 'What happens when a dog needs help?', "We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better.", story.silent.homePage.primaryActionLabel, 'Latest activity','Listen to this account','3,106','No verified census'])
     assert.ok(root.includes(phrase), phrase);
   assert.ok(root.includes('class="design-intro"'));
   assert.ok(root.includes('class="care-shell"'));
@@ -72,7 +72,7 @@ test('the root serves the Overview and the old overview URL stays readable', asy
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.started_at, '2026-11-04');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.status, 'in_progress');
   assert.ok(feed.records["task-review-sas-field-call-records"].fields.list_context.includes('7,183 cases'));
-  for (const phrase of ['Stockton Dog Care: Pathways &amp; Bottlenecks','Listen to this account','What we know now','Stockton has an established animal-care network','3,106','No verified census'])
+  for (const phrase of ['What happens when a dog needs help?','Listen to this account','What we know now','Stockton has an established animal-care network','3,106','No verified census'])
     assert.ok(overview.includes(phrase), phrase);
   assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(overview.includes('<meta name="robots" content="noindex,follow">'));
@@ -84,8 +84,8 @@ test('Overview keeps the simple layout and renders the sourced Living Account', 
   const positions = ['id="current-picture"', 'id="living-update"', 'class="design-latest"', 'id="open-questions"', '04 / THE WORKSPACE', 'class="design-intro"'].map(label => root.indexOf(label));
   assert.ok(positions.every(position => position >= 0));
   assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]));
-  assert.ok(root.includes('Stockton Dog Care: Pathways &amp; Bottlenecks'));
-  assert.ok(root.includes('<strong>Core Question:</strong> When someone reports a roaming, injured, or dumped dog in Stockton, where does the response system stall—and what interventions actually expand capacity?'));
+  assert.ok(root.includes('What happens when a dog needs help?'));
+  assert.ok(root.includes("We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better."));
   assert.ok(root.includes('We follow the evidence, learn from people doing the work'));
   assert.ok(root.includes('Two attributed figures. One important unknown.'));
   assert.equal((root.match(/class="design-stat"/g) ?? []).length, 3);
@@ -326,7 +326,7 @@ test('every public record and the new design assets are published', async () => 
   assert.ok(root.includes('src="/images/variants/clean/dog-through-window.jpg" alt="Illustrative image of a dog on a neighborhood sidewalk seen through a home window"'));
   assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
   assert.ok(root.includes('<path d="M3 10v4M7 7v10M11 4v16M15 8v8M19 6v12M22 10v4"/>'));
-  assert.ok(root.includes('viewBox="0 0 180 190"'));
+  assert.ok(root.includes('<ellipse cx="4.7" cy="9" rx="1.7" ry="2.2" fill="currentColor" stroke="none"/>'));
   for (const path of ['dist/site.css','dist/care-site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/variants/clean/dog-through-window.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
 });
