@@ -252,22 +252,25 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .design-section{padding:25px 0;border-color:var(--skin-border)}
 .design-section-head{margin-bottom:15px}
 .design-section h2,.feed-reading .chapter>h2,.section-title h2{margin:4px 0 6px;font-size:var(--ui-section);font-weight:700;line-height:1.15}
+.design-overview:not(.about-page) .design-section h2{font-size:20px;font-weight:600;line-height:1.25}
 .design-section-head p{font-size:var(--ui-body);color:var(--skin-muted)}
 .eyebrow{font-size:var(--ui-small);font-weight:700;color:var(--skin-orange)}
 .design-stat,.design-report,.design-questions a,.design-directory a,.work-record,.record-card,.panel,.figure{border:1px solid var(--skin-border);border-radius:var(--ui-radius);background:#fff;box-shadow:none}
-.design-stat{min-height:130px;padding:21px 24px 18px;gap:0}
-.design-stat-top{display:flex;align-items:center;gap:8px;min-width:0;margin-bottom:8px}
-.design-stat-top svg{width:28px;height:28px;flex:none;color:var(--skin-green);stroke-width:1.8}
-.design-stat-top svg.dog-icon{width:36px;height:36px}
+.design-stat{grid-template-columns:36px minmax(0,1fr);column-gap:16px;row-gap:0;min-height:148px;padding:24px}
+.design-stat-top{grid-column:1/-1;display:flex;align-items:center;gap:16px;min-width:0;margin-bottom:5px}
+.design-stat-icon{display:flex;align-items:center;justify-content:center;width:36px;height:36px;flex-shrink:0}
+.design-stat-top svg,.design-stat-top svg.dog-icon{width:32px;height:32px;flex:none;color:var(--skin-green);stroke-width:1.8}
 .design-stat strong,.figure strong{font-size:var(--ui-metric);font-weight:700;line-height:1.1;letter-spacing:-.035em;color:var(--skin-green)}
 .design-stat span,.figure span{font-size:var(--ui-nav);font-weight:600;color:var(--skin-ink)}
 .design-stat small,.figure small{font-size:var(--ui-meta);font-weight:400;color:var(--skin-muted)}
-.design-stat>span:not(.design-stat-top){font-size:var(--ui-body);line-height:1.35;margin-bottom:6px}
-.care-shell .design-stat>small{font-size:var(--ui-meta);line-height:1.4}
-.design-report{padding:24px}
+.design-stat-top strong{font-size:38px;font-weight:600;line-height:1.1}
+.design-stat>.design-stat-label{grid-column:2;font-size:16px;font-weight:500;line-height:1.35;margin-bottom:4px}
+.care-shell .design-stat>small{grid-column:2;font-size:14px;line-height:1.4}
+.design-report{padding:20px}
 .design-split{grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr);gap:28px;align-items:start}
 .design-report-actions{justify-content:flex-start;column-gap:18px}
-.design-report .overview-spoken{font-size:var(--ui-body);line-height:1.5;margin-bottom:16px;color:var(--skin-text)}
+.design-report .overview-spoken{font-size:16px;line-height:1.6;margin-bottom:16px;color:var(--skin-text)}
+.design-report .overview-spoken:last-of-type{margin-bottom:20px}
 .account-sources{margin-top:18px;padding-top:16px;border-top:1px solid var(--skin-border)}
 .account-sources summary{cursor:pointer;color:var(--skin-green);font-size:var(--ui-nav);font-weight:700}
 .account-sources summary:focus-visible{outline:2px solid var(--skin-green);outline-offset:3px}
@@ -277,24 +280,25 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .account-source-group li{margin:4px 0}
 .account-source-group a{color:var(--skin-green);font-size:inherit;font-weight:700}
 .design-report-meta{font-weight:400;color:var(--skin-muted)}
-.design-report-meta span:first-child{color:var(--skin-orange);font-weight:700}
-.design-report-meta span:last-child{font-weight:700}
-.design-latest h3{font-size:var(--ui-card);font-weight:600}
+.design-overview .design-report-meta span{color:var(--skin-muted);font-weight:400;letter-spacing:normal}
+.design-report-meta .account-eyebrow{color:var(--skin-green);font-weight:700;letter-spacing:.08em}
+.design-latest h3{font-size:20px;font-weight:600}
 .design-latest>a:not(.design-all){padding:12px 0;border-color:var(--skin-border)}
 .design-latest small{font-size:var(--ui-meta);font-weight:400}
 .design-latest strong{font-size:var(--ui-card);font-weight:600}
 .design-latest span{font-size:var(--ui-body);line-height:1.55}
 
 /* Keep the restored Overview's original type hierarchy within that page. */
-.design-overview:not(.about-page){--ui-section:28px;--ui-support:14px}
+.design-overview:not(.about-page){--ui-section:20px;--ui-support:16px}
 .design-overview:not(.about-page) .design-section-head p{font-size:var(--ui-support)}
-.design-overview:not(.about-page) .design-report-meta{font-size:var(--ui-small)}
-.design-overview:not(.about-page) .design-latest h3{font-weight:700}
+.design-overview:not(.about-page) .design-report-meta{font-size:13px}
+.design-overview:not(.about-page) .design-latest h3{font-weight:600}
 .design-overview:not(.about-page) .design-latest small{font-size:var(--ui-small)}
 .design-overview:not(.about-page) .design-latest strong{font-size:var(--ui-nav);font-weight:700}
 .design-overview:not(.about-page) .design-latest span{font-size:var(--ui-nav);line-height:1.5}
 .design-overview:not(.about-page) .design-directory strong{font-size:var(--ui-nav);font-weight:700}
 .design-overview:not(.about-page) :is(.design-intro a,.design-section-head>a,.design-report-actions>a,.design-all){font-weight:600}
+.design-overview :is(.design-section-head>a,.design-report-actions>a,.design-all,.account-source-group a):hover{text-decoration:underline;text-underline-offset:3px}
 
 /* Listing, feed, record, and About pages share the same type scale. */
 .page-intro h1,.work-listing h1,.site-feed-header h1,.about-page h1{font-size:var(--ui-hero);font-weight:700;line-height:1.1}

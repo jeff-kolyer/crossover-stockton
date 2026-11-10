@@ -48,31 +48,63 @@
           "livingAccount": {
             "paragraphs": [
               {
-                "text": "Dogs are being abandoned and found roaming Stockton's streets, but their circumstances vary. Some are lost or owned, and dogs living with people experiencing homelessness are not automatically abandoned. The number currently living on the streets remains unknown.",
+                "text": "Dogs are being abandoned and found roaming Stockton's streets, but the scale of the problem remains unknown. Stockton Animal Services recorded 3,106 stray-dog intake events in 2024, while Stockton Street Dogs reported encountering 3–10 dumped dogs per week in September 2026. No verified count exists of dogs currently living or roaming on the streets.",
+                "emphasis": [
+                  "Dogs are being abandoned and found roaming Stockton's streets, but the scale of the problem remains unknown."
+                ],
                 "links": [
                   {
                     "label": "Dogs are being abandoned and found roaming Stockton's streets",
                     "record": "cbs-2026-04-06-stockton-abandoned-dogs"
                   },
                   {
-                    "label": "Some are lost or owned",
-                    "record": "stocktonia-2026-10-20-roaming-dog-distinction"
+                    "label": "3,106 stray-dog intake events in 2024",
+                    "record": "sas-2024-dog-intake-stray"
                   },
                   {
-                    "label": "dogs living with people experiencing homelessness",
-                    "record": "sjcoc-2024-pit-survey-pets"
+                    "label": "3–10 dumped dogs per week",
+                    "record": "stockton-dumped-dog-encounters-reported"
                   },
                   {
-                    "label": "number currently living on the streets remains unknown",
+                    "label": "No verified count exists",
                     "record": "stockton-current-street-dog-population-unknown"
                   }
                 ]
               },
               {
-                "text": "Stockton has an established network of care. Animal Services handles reports, sheltering, treatment, reunification, and adoption. Stockton Street Dogs provides street outreach and connects dogs with rescue and fostering. Veterinary providers, including Hard Luck, offer treatment, while St. Mary's provides services for people experiencing homelessness, including reported pet-inclusive housing at Pathways.",
+                "text": "Stockton has an established animal-care network, but access to care is limited. The municipal shelter regularly faces capacity pressure, prioritizing emergencies while requiring appointments for healthy strays. Affordable veterinary care is in high demand, and rescue organizations depend on donations, volunteers, and available foster homes. Not every roaming dog is abandoned; some are lost or owned, including dogs living with people experiencing homelessness.",
+                "emphasis": [
+                  "Stockton has an established animal-care network, but access to care is limited."
+                ],
                 "links": [
                   {
-                    "label": "Animal Services",
+                    "label": "The municipal shelter regularly faces capacity pressure, prioritizing emergencies while requiring appointments for healthy strays",
+                    "record": "stocktonia-2026-10-20-sas-capacity-intake"
+                  },
+                  {
+                    "label": "Affordable veterinary care is in high demand",
+                    "record": "stockton-2026-05-11-stray-dog-report"
+                  },
+                  {
+                    "label": "available foster homes",
+                    "record": "stocktonia-2026-10-20-found-animal-foster-pathway"
+                  },
+                  {
+                    "label": "some are lost or owned",
+                    "record": "stocktonia-2026-10-20-roaming-dog-distinction"
+                  },
+                  {
+                    "label": "dogs living with people experiencing homelessness",
+                    "record": "sjcoc-2024-pit-survey-pets"
+                  }
+                ]
+              },
+              {
+                "text": "Several organizations help fill these needs. Stockton Animal Services handles municipal sheltering and animal-control calls; Stockton Street Dogs provides outreach, supplies, and rescue assistance; Hard Luck offers subsidized veterinary treatment; and St. Mary's Pathways provides transitional housing that accommodates pets. Each service has limits, and actual availability is not always clear.",
+                "emphasis": [],
+                "links": [
+                  {
+                    "label": "Stockton Animal Services",
                     "record": "stockton-animal-services"
                   },
                   {
@@ -84,41 +116,17 @@
                     "record": "hard-luck-awa"
                   },
                   {
-                    "label": "St. Mary's",
-                    "record": "st-marys-dining-room"
-                  },
-                  {
-                    "label": "reported pet-inclusive housing at Pathways",
+                    "label": "St. Mary's Pathways",
                     "record": "st-marys-pathways-pet-accommodation"
                   }
                 ]
               },
               {
-                "text": "The central difficulty is getting dogs into the care they need. Animal Services reports recurring shelter-capacity pressure and appointment requirements for healthy strays. Affordable veterinary care is limited, rescue and foster resources depend on availability, and pet-inclusive housing has admission rules and capacity that we have not yet verified.",
+                "text": "Efforts to expand care are underway. Stockton is developing a roughly $10.47 million animal shelter expansion and has authorized additional veterinary staffing and spay/neuter services. Stockton Street Dogs is proposing a Canine Campus for overflow and recovery. How much additional care these efforts will deliver remains to be established.",
+                "emphasis": [],
                 "links": [
                   {
-                    "label": "Animal Services reports recurring shelter-capacity pressure and appointment requirements for healthy strays",
-                    "record": "stocktonia-2026-10-20-sas-capacity-intake"
-                  },
-                  {
-                    "label": "Affordable veterinary care is limited",
-                    "record": "stockton-2026-05-11-stray-dog-report"
-                  },
-                  {
-                    "label": "rescue and foster resources depend on availability",
-                    "record": "stocktonia-2026-10-20-found-animal-foster-pathway"
-                  },
-                  {
-                    "label": "pet-inclusive housing has admission rules and capacity that we have not yet verified",
-                    "record": "st-marys-pathways-pet-accommodation"
-                  }
-                ]
-              },
-              {
-                "text": "Efforts to improve care are underway. Stockton's animal shelter is being expanded, the City has authorized additional veterinary staffing and spay/neuter services, and Stockton Street Dogs is proposing a Canine Campus for overflow and recovery. Whether these efforts are increasing the number of dogs receiving care remains to be established.",
-                "links": [
-                  {
-                    "label": "Stockton's animal shelter is being expanded",
+                    "label": "a roughly $10.47 million animal shelter expansion",
                     "record": "stockton-animal-shelter-renovation"
                   },
                   {
@@ -136,15 +144,20 @@
                 ]
               },
               {
-                "text": "We are examining how these pathways work in practice: what happens when someone reports a dog, which services can respond, where access breaks down, and what changes could help more dogs receive care.",
+                "text": "Crossover is examining what happens when someone tries to help. We received 7,183 Animal Services field-call records on November 2 and are reviewing them alongside firsthand visits and provider outreach. The goal is to establish how many dogs need help, what happens when care is requested, where access breaks down, and what could improve the response.",
+                "emphasis": [],
                 "links": [
                   {
-                    "label": "what happens when someone reports a dog",
-                    "record": "stockton-animal-services-2026-10-20-reporting-guidance"
+                    "label": "7,183 Animal Services field-call records",
+                    "record": "crossover-2026-11-02-sas-field-call-records-received"
                   },
                   {
-                    "label": "where access breaks down",
-                    "record": "task-review-sas-field-call-records"
+                    "label": "firsthand visits",
+                    "record": "crossover-2026-10-14-sas-first-visit"
+                  },
+                  {
+                    "label": "provider outreach",
+                    "record": "task-sas-volunteer-onboarding-follow-up"
                   }
                 ]
               }
@@ -216,7 +229,7 @@
                 {
                   "record": "sas-2024-dog-intake-stray",
                   "label": "Stray-dog intake events",
-                  "context": "2024 · Animal Services service area",
+                  "context": "2024 · Animal Services",
                   "more": {
                     "chapter": "gap.metrics",
                     "label": "See all metrics"
@@ -224,8 +237,8 @@
                 },
                 {
                   "record": "stockton-dumped-dog-encounters-reported",
-                  "label": "Reported dumped-dog encounters",
-                  "context": "Stockton Street Dogs · Sept 2026",
+                  "label": "Reported dumped dogs",
+                  "context": "Sept 2026 · Street Dogs",
                   "more": {
                     "record": "stockton-dumped-dog-encounters-reported",
                     "label": "Examine the claim"
@@ -233,8 +246,8 @@
                 },
                 {
                   "record": "stockton-current-street-dog-population-unknown",
-                  "label": "Dogs currently on the streets",
-                  "context": "No verified street census",
+                  "label": "Dogs currently on streets",
+                  "context": "No verified census",
                   "more": {
                     "record": "stockton-current-street-dog-population-unknown",
                     "label": "Why is this unknown?"

@@ -57,7 +57,7 @@ test('the root serves the Overview and the old overview URL stays readable', asy
   );
   const root = await page('/');
   const gap = feed.records['dogs-safe-placement'].fields;
-  for (const phrase of [gap.hero.eyebrow, 'When a dog needs help: Stockton', "Dogs are being abandoned and found roaming Stockton's streets.", story.silent.homePage.primaryActionLabel, 'Latest activity','Listen to this account','3,106','No verified street census'])
+  for (const phrase of [gap.hero.eyebrow, 'Stockton Dog Care: Pathways &amp; Bottlenecks', 'Core Question:', story.silent.homePage.primaryActionLabel, 'Latest activity','Listen to this account','3,106','No verified census'])
     assert.ok(root.includes(phrase), phrase);
   assert.ok(root.includes('class="design-intro"'));
   assert.ok(root.includes('class="care-shell"'));
@@ -72,7 +72,7 @@ test('the root serves the Overview and the old overview URL stays readable', asy
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.started_at, '2026-11-04');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.status, 'in_progress');
   assert.ok(feed.records["task-review-sas-field-call-records"].fields.list_context.includes('7,183 cases'));
-  for (const phrase of ['When a dog needs help: Stockton','Listen to this account','What we know now','Stockton has an established network of care.','3,106','No verified street census'])
+  for (const phrase of ['Stockton Dog Care: Pathways &amp; Bottlenecks','Listen to this account','What we know now','Stockton has an established animal-care network','3,106','No verified census'])
     assert.ok(overview.includes(phrase), phrase);
   assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(overview.includes('<meta name="robots" content="noindex,follow">'));
@@ -81,27 +81,33 @@ test('the root serves the Overview and the old overview URL stays readable', asy
 
 test('Overview keeps the simple layout and renders the sourced Living Account', async () => {
   const root = await page('/');
-  const positions = ['class="design-intro"', 'id="current-picture"', 'id="living-update"', 'class="design-latest"', 'id="open-questions"', '04 / THE WORKSPACE'].map(label => root.indexOf(label));
+  const positions = ['id="current-picture"', 'id="living-update"', 'class="design-latest"', 'id="open-questions"', '04 / THE WORKSPACE', 'class="design-intro"'].map(label => root.indexOf(label));
   assert.ok(positions.every(position => position >= 0));
   assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]));
-  assert.ok(root.includes('When a dog needs help: Stockton'));
-  assert.ok(root.includes("Dogs are being abandoned and found roaming Stockton's streets. We're tracing what happens when someone tries to help, where care falls short, and what could make it better."));
+  assert.ok(root.includes('Stockton Dog Care: Pathways &amp; Bottlenecks'));
+  assert.ok(root.includes('<strong>Core Question:</strong> When someone reports a roaming, injured, or dumped dog in Stockton, where does the response system stall—and what interventions actually expand capacity?'));
   assert.ok(root.includes('We follow the evidence, learn from people doing the work'));
   assert.ok(root.includes('Two attributed figures. One important unknown.'));
   assert.equal((root.match(/class="design-stat"/g) ?? []).length, 3);
+  assert.equal((root.match(/class="design-stat-icon"/g) ?? []).length, 3);
+  for (const label of ['Stray-dog intake events','Reported dumped dogs','Dogs currently on streets','2024 · Animal Services','Sept 2026 · Street Dogs','No verified census'])
+    assert.ok(root.includes(label), label);
   assert.ok(root.includes('02 / LIVING ACCOUNT'));
-  assert.ok(root.includes('A public account that changes as the evidence changes.'));
-  assert.ok(root.includes('class="design-split"'));
-  assert.ok(root.includes('Latest activity'));
-  assert.ok(root.includes('03 / OPEN QUESTIONS'));
-  assert.ok(root.includes('Follow the work'));
-  assert.ok(root.includes('Explore the records, their sources, and their limits.'));
+  assert.ok(root.includes("The current situation, the people helping, and what's being done."));
+  assert.ok(root.includes('<div class="design-report-meta"><span>November 9, 2026</span><strong class="account-eyebrow">CURRENT ACCOUNT</strong></div>'));
+  assert.ok(!root.includes('class="overview-eyebrow"'));
+  assert.ok(root.includes('class="design-latest"'));
+  assert.ok(root.includes('class="design-directory"'));
   assert.ok(root.includes('href="#open-questions"'));
   assert.ok(root.includes('href="/street-dogs/activity/"'));
   assert.ok(root.includes('href="/feed/"'));
   const account = story.chapters.find(item => item.id === 'gap').chapters.find(item => item.id === 'overview').livingAccount;
   const written = [...root.matchAll(/<p class="overview-spoken">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<[^>]+>/g, ''));
   assert.deepEqual(written, account.paragraphs.map(paragraph => html(paragraph.text)));
+  assert.equal(written.length, 5);
+  for (const paragraph of account.paragraphs)
+    for (const label of paragraph.emphasis)
+      assert.ok(root.includes(`<strong>${html(label)}</strong>`), label);
   assert.ok(!/<p class="overview-spoken">[\s\S]*?<a\b/.test(root.slice(root.indexOf('id="living-update"'), root.indexOf('class="design-report-actions"'))));
   const sources = root.match(/<details class="account-sources">([\s\S]*?)<\/details>/);
   assert.ok(sources, 'one supporting-record disclosure is present');
