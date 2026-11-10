@@ -252,7 +252,6 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .design-section{padding:25px 0;border-color:var(--skin-border)}
 .design-section-head{margin-bottom:15px}
 .design-section h2,.feed-reading .chapter>h2,.section-title h2{margin:4px 0 6px;font-size:var(--ui-section);font-weight:700;line-height:1.15}
-.design-overview:not(.about-page) .design-section h2{font-size:20px;font-weight:600;line-height:1.25}
 .design-section-head p{font-size:var(--ui-body);color:var(--skin-muted)}
 .eyebrow{font-size:var(--ui-small);font-weight:700;color:var(--skin-orange)}
 .design-stat,.design-report,.design-questions a,.design-directory a,.work-record,.record-card,.panel,.figure{border:1px solid var(--skin-border);border-radius:var(--ui-radius);background:#fff;box-shadow:none}
@@ -289,7 +288,7 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .design-latest span{font-size:var(--ui-body);line-height:1.55}
 
 /* Keep the restored Overview's original type hierarchy within that page. */
-.design-overview:not(.about-page){--ui-section:20px;--ui-support:16px}
+.design-overview:not(.about-page){--ui-support:16px}
 .design-overview:not(.about-page) .design-section-head p{font-size:var(--ui-support)}
 .design-overview:not(.about-page) .design-report-meta{font-size:13px}
 .design-overview:not(.about-page) .design-latest h3{font-weight:600}
