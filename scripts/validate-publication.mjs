@@ -12,7 +12,8 @@ export function validatePublication(publication, records) {
       ids.add(item.id);
       if (item.gapId !== gapPublication.gapId || !sections.some(section => section.id === item.section)) throw new Error(`Invalid placement: ${item.id}`);
       if (!item.title?.trim() || !item.body?.trim() || !Number.isInteger(item.order) || item.order < 1) throw new Error(`Incomplete editorial item: ${item.id}`);
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(item.createdAt) || !/^\d{4}-\d{2}-\d{2}$/.test(item.updatedAt)) throw new Error(`Invalid editorial dates: ${item.id}`);
+      const validDate=value=>typeof value==='string'&&/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z)?$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,10)===value.slice(0,10);
+      if (!validDate(item.createdAt) || !validDate(item.updatedAt) || Date.parse(item.updatedAt)<Date.parse(item.createdAt)) throw new Error(`Invalid editorial dates: ${item.id} (updatedAt must be on or after createdAt)`);
       if (!['published', 'draft', 'retired'].includes(item.status)) throw new Error(`Invalid editorial status: ${item.id}`);
       for (const id of item.relatedRecordIds || []) if (!records[id]) throw new Error(`Missing related record ${id} in ${item.id}`);
       if (item.image && (!item.image.src?.startsWith('/') || !item.image.alt?.trim())) throw new Error(`Invalid editorial image: ${item.id}`);

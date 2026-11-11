@@ -12,7 +12,7 @@ const html = await readFile("public/preview/one-file-site.html", "utf8");
 const feedBytes = await readFile("public/data/records.json");
 const feed = JSON.parse(feedBytes.toString("utf8"));
 const story = JSON.parse(await readFile("public/feed.json", "utf8"));
-const publication = JSON.parse(await readFile("public/publication.json", "utf8"));
+const publication = JSON.parse(await readFile("src/publication.json", "utf8"));
 const records = Object.values(feed.records);
 const origin = "https://crossoverstockton.org";
 const gapIconPaths = {
@@ -155,7 +155,7 @@ for (const file of (await readdir("public/images/about")).filter(name => /\.(?:j
   await copyFile(resolve("public/images/about", file), resolve(dist, "images/about", file));
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await copyFile("public/feed.json", resolve(dist, "feed.json"));
-await copyFile("public/publication.json", resolve(dist, "publication.json"));
+await copyFile("src/publication.json", resolve(dist, "publication.json"));
 await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
 await copyFile("public/feed.txt", resolve(dist, "feed.txt"));
 await copyFile("public/audio-manifest.json", resolve(dist, "audio-manifest.json"));

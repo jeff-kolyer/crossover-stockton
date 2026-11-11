@@ -1,5 +1,6 @@
 node_modules/
 dist/
+public/publication.json
 src/generated/
 public/preview/one-file-site.html
 public/preview/no-images-site.html

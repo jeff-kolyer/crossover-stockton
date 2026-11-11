@@ -2,6 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
+import { createHash } from 'node:crypto';
+import { renderPublicationFeed } from './publication-render.mjs';
+import { validatePublication } from './validate-publication.mjs';
+import { checkPublicationHistory } from './check-publication-history.mjs';
 
 const read = path => readFile(path, 'utf8');
 const html = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -16,6 +20,8 @@ test('one current gap account drives the page and narration', async () => {
   const published=publication.gapPublications.find(item=>item.gapId==='dogs-safe-placement');
   assert.ok(root.includes('class="living-page"'));
   assert.ok(!root.includes('<h2>What we know</h2>'));
+  assert.ok(!root.includes('id="dogs-overview"'));
+  assert.equal(published.items.filter(item=>item.section==='overview'&&item.status==='published').sort((a,b)=>a.order-b.order)[0].id,'dogs-scale');
   assert.ok(root.indexOf('id="dogs-scale"')>root.indexOf('<h2>Overview</h2>'));
   assert.ok(root.indexOf('id="dogs-scale"')<root.indexOf('<h2>Our work</h2>'));
   assert.ok(root.includes('class="gap-identity desktop-identity"'));
@@ -33,20 +39,57 @@ test('one current gap account drives the page and narration', async () => {
     assert.ok(root.includes(`<h2>${html(section.title)}</h2>`));
   }
   const written=published.items.filter(item=>item.status==='published');
+  const latest=written.map(item=>item.updatedAt).sort().at(-1);
+  const formatted=value=>new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${value.slice(0,10)}T12:00:00Z`));
+  assert.ok(root.includes(`<span>Updated ${formatted(latest)}</span>`));
+  assert.equal(await read('src/publication.json'),await read('public/publication.json'));
+  assert.equal(await read('src/publication.json'),await read('dist/publication.json'));
   const textFeed=await read('dist/feed.txt');
   assert.equal(textFeed,await read('public/feed.txt'));
+  const expectedFeed=renderPublicationFeed(publication,feed.records,'dogs-safe-placement');
+  assert.equal(textFeed,expectedFeed.text);
+  assert.equal(await read('dist/feed-content.html'),expectedFeed.html);
   for(const item of written){
     assert.ok(root.includes(html(item.body)),item.id);
+    assert.ok(root.match(new RegExp(`<article[^>]*id="${item.id}"[\\s\\S]*?<div class="living-item-date">Updated ${formatted(item.updatedAt)}</div>[\\s\\S]*?</article>`)),item.id);
     assert.ok(textFeed.includes(item.body),item.id);
     for(const id of item.relatedRecordIds||[])assert.ok(root.includes(`/record/${id}/`)||root.includes(`/organization/${id}/`),id);
   }
   const audio=JSON.parse(await read('dist/audio-manifest.json'));
   assert.deepEqual(Object.keys(audio),['account']);
+  assert.equal(audio.account.version,createHash('sha256').update('offline-voice-v1\n').update(textFeed.trim()).digest('hex').slice(0,16));
   const file=await readFile(`dist${audio.account.src}`);
   assert.equal(file.toString('ascii',0,4),'RIFF');
   assert.equal(file.toString('ascii',8,12),'WAVE');
   assert.ok(file.length>44);
   assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
+});
+
+test('editorial dates follow item revisions and body edits change page and spoken text',async()=>{
+  const fixture=structuredClone(publication);
+  const selected=fixture.gapPublications.find(item=>item.gapId==='dogs-safe-placement');
+  const item=selected.items.find(item=>item.id==='dogs-scale');
+  item.body='A changed editorial account for rendering and narration.';
+  item.updatedAt='2026-11-12';
+  const context={location:{pathname:'/',search:''},URL,URLSearchParams,fixture,recordMap:new Map(records.map(record=>[record.id,record]))};
+  const source=(await read('public/preview/care-site/site.js')).replace(/\bstart\(\);\s*$/,'');
+  runInNewContext(source,context,{timeout:3000});
+  const changedPage=runInNewContext('publication=fixture;gap={id:"dogs-safe-placement"};byId=recordMap;livingPage()',context,{timeout:3000});
+  assert.ok(changedPage.includes(item.body));
+  assert.ok(changedPage.includes('<div class="living-item-date">Updated November 12, 2026</div>'));
+  assert.ok(changedPage.includes('<span>Updated November 12, 2026</span>'));
+  assert.ok(renderPublicationFeed(fixture,feed.records,'dogs-safe-placement').text.includes(item.body));
+  const duplicate=structuredClone(fixture);
+  duplicate.gapPublications[0].items[0].title='  OVERVIEW  ';
+  const once=renderPublicationFeed(duplicate,feed.records,'dogs-safe-placement');
+  assert.ok(once.text.startsWith('Overview\n\n'));
+  assert.ok(!once.text.includes('OVERVIEW'));
+  assert.ok(once.html.includes('<h2>Overview</h2><article id="dogs-scale"><p>'));
+  assert.ok(!once.html.includes('<h3>  OVERVIEW  </h3>'));
+  assert.throws(()=>checkPublicationHistory({...fixture,gapPublications:[{...selected,items:[{...item,updatedAt:'2026-11-11'},...selected.items.filter(other=>other.id!==item.id)]}]},publication),/without a later updatedAt/);
+  const invalid=structuredClone(fixture);
+  invalid.gapPublications[0].items[0].updatedAt='2026-11-10';
+  assert.throws(()=>validatePublication(invalid,feed.records),/updatedAt must be on or after createdAt/);
 });
 
 test('old Feed and Overview routes redirect to the canonical account',async()=>{
@@ -71,12 +114,19 @@ test('navigation and responsive account keep all resources reachable',async()=>{
     assert.ok((await page(url)).includes('class="care-shell"'),path);
   }
   assert.ok(root.includes('href="/about/"'));
+  const rail=root.match(/<aside class="care-rail">([\s\S]*?)<\/aside>/)?.[1];
+  assert.ok(rail?.includes('aria-label="About Crossover"'));
+  assert.ok(rail.indexOf('>Home</span>')<rail.indexOf('>Sources</span>'));
+  assert.ok(rail.indexOf('>Sources</span>')<rail.indexOf('aria-label="About Crossover"'));
+  assert.ok(!rail.includes('More work'));
   assert.ok(!root.includes('class="care-key-nav"'));
   assert.ok(!root.includes('class="care-rail-label"'));
   assert.ok(root.includes('class="gap-identity mobile-identity"'));
   const css=await read('dist/care-site.css');
   assert.ok(css.includes('.mobile-menu{inset:64px 0 0}'));
   assert.ok(css.includes('.living-item img{order:-1;width:100%'));
+  assert.ok(css.includes('.living-page{width:100%;max-width:760px'));
+  assert.ok(css.includes('.living-section:last-child{display:block}'));
   const about=await page('/about/');
   assert.ok(about.includes('Founded by Jeff Kolyer'));
   assert.ok(about.includes('https://www.linkedin.com/in/jeff-kolyer'));

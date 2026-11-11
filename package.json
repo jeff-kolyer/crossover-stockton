@@ -9,7 +9,7 @@
     "validate:projects": "node scripts/validate-projects.mjs",
     "validate:research": "node scripts/validate-dogs-research.mjs",
     "validate:work-data": "node scripts/validate-work-data.mjs",
-    "check:data": "node scripts/check-data.mjs && node scripts/validate-work-data.mjs",
+    "check:data": "node scripts/publication-source.mjs && node scripts/check-data.mjs && node scripts/validate-work-data.mjs && node scripts/check-publication-history.mjs",
     "check:explorer": "node scripts/build-explorer-data.mjs && node --test scripts/test-explorer.mjs",
     "generate:one-file": "node scripts/build-explorer-data.mjs && node scripts/generate-one-file-site.mjs && node scripts/render-feed.mjs && node scripts/render-audio.mjs && node --test scripts/test-one-file-site.mjs",
     "check:updates": "node --test scripts/test-public-updates.mjs",

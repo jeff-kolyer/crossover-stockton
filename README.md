@@ -262,6 +262,14 @@ Record schemas are defined in `src/schemas/`.
 
 The technical public projection is controlled by `src/model/explorer-publication.json`.
 
+### Living gap publication
+
+Edit only `src/publication.json` for the homepage account. Builds, data checks, and local development copy it to the generated `public/publication.json`; the published site receives the same content. Do not edit the generated copy.
+
+Keep retained editorial items' IDs and evidence links stable. When changing an item's title, body, other content, placement, status, or references, advance its `updatedAt`. Dates may be `YYYY-MM-DD`; use a UTC ISO timestamp for a second revision on the same day. Leave dates on untouched items alone. The build checks revisions against Git history and rejects dates earlier than `createdAt`.
+
+The same publication generates the homepage, feed text, and audio. Audio is regenerated when the spoken text changes.
+
 ### Editorial feed
 
 `src/feed.json` defines the current reading experience.
