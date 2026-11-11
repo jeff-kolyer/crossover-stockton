@@ -12,6 +12,7 @@ const html = await readFile("public/preview/one-file-site.html", "utf8");
 const feedBytes = await readFile("public/data/records.json");
 const feed = JSON.parse(feedBytes.toString("utf8"));
 const story = JSON.parse(await readFile("public/feed.json", "utf8"));
+const publication = JSON.parse(await readFile("public/publication.json", "utf8"));
 const records = Object.values(feed.records);
 const origin = "https://crossoverstockton.org";
 const gapIconPaths = {
@@ -154,6 +155,7 @@ for (const file of (await readdir("public/images/about")).filter(name => /\.(?:j
   await copyFile(resolve("public/images/about", file), resolve(dist, "images/about", file));
 await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await copyFile("public/feed.json", resolve(dist, "feed.json"));
+await copyFile("public/publication.json", resolve(dist, "publication.json"));
 await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
 await copyFile("public/feed.txt", resolve(dist, "feed.txt"));
 await copyFile("public/audio-manifest.json", resolve(dist, "audio-manifest.json"));
@@ -196,7 +198,7 @@ const siteMdVersion = createHash("sha256")
   .update(await readFile("public/preview/care-site/style.css"))
   .digest("hex").slice(0, 12);
 const feedContent = await readFile("public/feed-content.html", "utf8");
-const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, origin, feedContent, siteMdVersion);
+const siteMdPages = renderSiteMdPages(siteMdTemplate, siteMdScript, feed, story, publication, origin, feedContent, siteMdVersion);
 for (const page of siteMdPages) {
   const directory = page.path === "/" ? dist : resolve(dist, `.${page.path}`);
   if (directory !== dist && !directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe SITE.md page path: ${page.path}`);
@@ -209,8 +211,11 @@ await mkdir(experimentDirectory, { recursive: true });
 await writeFile(resolve(experimentDirectory, "index.html"), '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/"><link rel="canonical" href="https://crossoverstockton.org/"><title>Crossover Stockton</title><script>location.replace("/")</script></head><body><p>Continue to <a href="/">Crossover Stockton</a>.</p></body></html>');
 await mkdir(resolve(dist, "interactive"), { recursive: true });
 await writeFile(resolve(dist, "interactive/index.html"), html.replace("<head>", '<head><meta name="robots" content="noindex,follow">'));
-await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}<url><loc>${origin}/feed/</loc></url></urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nReadable pages: ${origin}/, ${origin}/feed/, ${origin}/activity/, ${origin}/places/, ${origin}/explore/, ${origin}/organizations/, ${origin}/about/\nFeed text: ${origin}/feed.txt\nFeed JSON: ${origin}/feed.json\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
+redirects.set('/feed/', '/');
+redirects.set(`/${currentSlug}/overview/`, '/');
+redirects.set('/gaps/', '/');
+await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap && !redirects.has(page.path)).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}</urlset>\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nLiving gap page: ${origin}/\nReadable pages: ${origin}/, ${origin}/activity/, ${origin}/places/, ${origin}/explore/, ${origin}/organizations/, ${origin}/about/\nPublication data: ${origin}/publication.json\nPublication text: ${origin}/feed.txt\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);

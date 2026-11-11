@@ -3,13 +3,8 @@ import { spawn } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-const story = JSON.parse(await readFile('public/feed.json', 'utf8'));
 const feedText = (await readFile('public/feed.txt', 'utf8')).trim();
-const overview = story.chapters.find(chapter => chapter.id === 'gap').chapters.find(chapter => chapter.id === 'overview');
-const accountText = overview.livingAccount.paragraphs.map(paragraph => paragraph.text).join('\n\n');
-const focus = overview.chapters.find(chapter => chapter.id === 'focus');
-const latestText = `Latest update from Crossover Stockton. ${focus.currentWork || focus.text}`;
-const tracks = { feed: feedText, account: accountText, latest: latestText };
+const tracks = { account: feedText };
 const audioDir = resolve('public/audio');
 await mkdir(audioDir, { recursive: true });
 

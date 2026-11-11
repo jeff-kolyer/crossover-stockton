@@ -1,14 +1,6 @@
 {
-  "feed": {
-    "src": "/audio/feed-1d8cbab580da153d.wav",
-    "version": "1d8cbab580da153d"
-  },
   "account": {
-    "src": "/audio/account-cb926fef85588154.wav",
-    "version": "cb926fef85588154"
-  },
-  "latest": {
-    "src": "/audio/latest-0469f2bb5bfd1391.wav",
-    "version": "0469f2bb5bfd1391"
+    "src": "/audio/account-2e975101509ebdac.wav",
+    "version": "2e975101509ebdac"
   }
 }

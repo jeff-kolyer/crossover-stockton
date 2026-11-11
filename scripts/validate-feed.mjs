@@ -66,31 +66,6 @@ export function validateFeed(story, records) {
   const focus = paths.get("gap.overview.focus");
   const overview = paths.get("gap.overview");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(overview?.updatedAt ?? "")) errors.push("Overview needs an editorial update date");
-  const account = overview?.livingAccount?.paragraphs;
-  if (!Array.isArray(account) || account.length !== 5) errors.push("Overview needs five Living Account paragraphs");
-  for (const [index, paragraph] of (account ?? []).entries()) {
-    const at = `gap.overview.livingAccount paragraph ${index + 1}`;
-    const text = paragraph.text || '';
-    if (!text.trim() || !paragraph.links?.length) errors.push(`${at}: text and source links are required`);
-    const spans = [];
-    for (const link of paragraph.links ?? []) {
-      const start = text.indexOf(link.label);
-      if (!link.label || start < 0 || text.indexOf(link.label, start + 1) >= 0) errors.push(`${at}: link label must occur exactly once in the paragraph`);
-      if (link.record) checkRef(link.record, at);
-      else errors.push(`${at}: link needs a record`);
-      if (start >= 0 && link.label) spans.push([start, start + link.label.length]);
-    }
-    const emphasisSpans = [];
-    for (const label of paragraph.emphasis ?? []) {
-      const start = text.indexOf(label);
-      if (!label || start < 0 || text.indexOf(label, start + 1) >= 0) errors.push(`${at}: emphasis must occur exactly once in the paragraph`);
-      if (start >= 0 && label) emphasisSpans.push([start, start + label.length]);
-    }
-    emphasisSpans.sort((a, b) => a[0] - b[0]);
-    if (emphasisSpans.some((span, i) => i > 0 && span[0] < emphasisSpans[i - 1][1])) errors.push(`${at}: emphasis spans overlap`);
-    spans.sort((a, b) => a[0] - b[0]);
-    if (spans.some((span, i) => i > 0 && span[0] < spans[i - 1][1])) errors.push(`${at}: source link labels overlap`);
-  }
   for (const id of ["situation", "care", "improvement-account"]) {
     const part = paths.get(`gap.overview.${id}`);
     if (!part?.title || !part.text || !part.sections?.length) errors.push(`Overview ${id} needs a title, introduction, and sourced sections`);

@@ -3,9 +3,11 @@ import { createServer } from "vite";
 import { buildExplorerSnapshot } from "./explorer-snapshot.mjs";
 import { loadExplorerRoots } from "./explorer-roots.mjs";
 import { validateFeed } from "./validate-feed.mjs";
+import { validatePublication } from "./validate-publication.mjs";
 
 const policy = JSON.parse(await readFile("src/model/explorer-publication.json", "utf8"));
 const story = JSON.parse(await readFile("src/feed.json", "utf8"));
+const publication = JSON.parse(await readFile("src/publication.json", "utf8"));
 const roots = await loadExplorerRoots(policy);
 const schemaNames = (await readdir("src/schemas")).filter((name) => name.endsWith(".schema.json"));
 const schemas = Object.fromEntries(await Promise.all(schemaNames.map(async (name) => [name.replace(".schema.json", ""), JSON.parse(await readFile(`src/schemas/${name}`, "utf8"))])));
@@ -30,6 +32,7 @@ try {
   };
   const { snapshot, diagnostics } = buildExplorerSnapshot(policy, schemas, collections, roots);
   validateFeed(story, snapshot.records);
+  validatePublication(publication, snapshot.records);
   const gaps = siteModel.getGaps();
   if (gaps.length < 1 || gaps.filter((gap) => gap.default).length !== 1) throw new Error("Gaps need exactly one default entry");
   if (new Set(gaps.map((gap) => gap.slug)).size !== gaps.length) throw new Error("Gap slugs must be unique");
@@ -52,6 +55,9 @@ try {
   let oldStory = "";
   try { oldStory = await readFile(storyPath, "utf8"); } catch { /* First generation. */ }
   if (oldStory !== publishedStory) await writeFile(storyPath, publishedStory);
+  const publicationPath = "public/publication.json";
+  const publishedPublication = `${JSON.stringify(publication, null, 2)}\n`;
+  if (await readFile(publicationPath, "utf8").catch(() => "") !== publishedPublication) await writeFile(publicationPath, publishedPublication);
   console.log(`Explorer publication: ${Object.keys(snapshot.records).length} unique records in ${snapshot.collections.length} collections; ${diagnostics.length} unavailable references disclosed as such.`);
   if (snapshot.unsupportedTypes.length) console.log(`Schema types without a public collection: ${snapshot.unsupportedTypes.join(", ")}`);
 } finally {
