@@ -35,9 +35,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install offline speech renderer
-        run: sudo apt-get update && sudo apt-get install -y espeak-ng
-
+      # Narration assets are generated locally and committed with each editorial update.
       - name: Cache generated narration
         uses: actions/cache@v4
         with:
