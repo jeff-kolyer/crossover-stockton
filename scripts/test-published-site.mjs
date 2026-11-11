@@ -47,6 +47,8 @@ test('four editorial pages and full account share one publication', async () => 
   assert.equal(await read('src/publication.json'),await read('dist/publication.json'));
   const textFeed=await read('dist/feed.txt');
   assert.equal(textFeed,await read('public/feed.txt'));
+  assert.ok(textFeed.startsWith("A problem whose scale is unknown\n\nDogs are being abandoned and found roaming Stockton's streets."));
+  assert.ok(root.includes('<h3>A problem whose scale is unknown</h3>'));
   const expectedFeed=renderPublicationFeed(publication,feed.records,'dogs-safe-placement');
   assert.equal(textFeed,expectedFeed.text);
   assert.equal(await read('dist/feed-content.html'),expectedFeed.html);
@@ -119,7 +121,7 @@ test('editorial dates follow item revisions and body edits change page and spoke
   const duplicate=structuredClone(fixture);
   duplicate.gapPublications[0].items[0].title='  OVERVIEW  ';
   const once=renderPublicationFeed(duplicate,feed.records,'dogs-safe-placement');
-  assert.ok(once.text.startsWith('Overview\n\n'));
+  assert.ok(once.text.startsWith(`${item.body}\n\n`));
   assert.ok(!once.text.includes('OVERVIEW'));
   assert.ok(once.html.includes('<h2>Overview</h2><article id="dogs-scale"><p>'));
   assert.ok(!once.html.includes('<h3>  OVERVIEW  </h3>'));
