@@ -2,12 +2,12 @@ Open questions
 
 How many dogs currently need help on Stockton's streets?
 
-We also need to understand their circumstances and what help, if any, they need.
+No verified count exists. We need to distinguish dogs who are lost, abandoned, roaming, or living with people, and learn what help each actually needs. A dog seen on the street should not automatically be counted as abandoned or in need of removal.
 
 What happens when someone reports a dog?
 
-The records may describe a response, but whether a dog ultimately received care remains to be established.
+We want to trace the report, any recorded response or disposition, and whether the dog actually reached care. The field-call records may describe only part of that path; an administrative outcome does not by itself establish the dog's later condition.
 
 Where does access to care break down?
 
-We still need to understand which services can accept a reported dog and which barriers people encounter when seeking help.
+Which services can accept a dog at the time someone asks? Capacity, cost, eligibility, and transportation may affect the answer, but we have not established how often each is a barrier in Stockton. Provider follow-up and the records review may clarify this.

@@ -6,48 +6,48 @@ Stockton Animal Services recorded 3,106 stray-dog intake events in 2024. In Sept
 
 The scale of the unmet need remains unknown.
 
-Care exists, but access is limited
+Getting care isn't always straightforward
 
-The municipal shelter faces recurring capacity pressure: emergencies take priority, while healthy strays require appointments. Affordable veterinary care is in high demand, and rescue organizations depend on donations, volunteers, and available foster homes.
+Stockton Animal Services has reported that its shelter is regularly at capacity. Healthy stray intake generally requires an appointment, while sick, injured, and aggressive dogs receive priority. Veterinary costs and the availability of rescue volunteers and foster homes can also affect the options for care. We do not yet know how often a request for help meets these limits or what happens afterward.
 
-A network of care providers
+Help is spread across multiple organizations
 
-Stockton Animal Services handles municipal sheltering and animal-control calls; Stockton Street Dogs provides outreach, supplies, and rescue assistance; Hard Luck offers subsidized veterinary treatment; and St. Mary's Pathways provides transitional housing that accommodates pets. What each provider can offer at a given moment is not always clear.
+Stockton Animal Services handles municipal sheltering and animal-control calls. Stockton Street Dogs works with dogs in the field through outreach, supplies, and placement efforts. Hard Luck offers subsidized veterinary treatment, and St. Mary's Pathways provides transitional housing that accommodates pets. These are different kinds of help; none of these roles guarantees that a particular dog can be taken in or treated when help is requested.
 
-Plans to expand care
+Capacity is expanding, but will it be enough?
 
-Stockton is developing an animal shelter expansion costing roughly 10.47 million dollars and has authorized additional veterinary staffing and spay and neuter services. Stockton Street Dogs is proposing a Canine Campus for overflow and recovery. How much additional care these efforts will deliver remains to be established.
+Stockton is developing a municipal shelter expansion costing roughly $10.47 million and has authorized additional veterinary staffing and spay and neuter services. Separately, Stockton Street Dogs has proposed a Canine Campus for overflow and recovery; it is not operating. How much additional care these plans will deliver, and whether that will meet the need, remains unknown.
 
 Our work
 
 Reviewing the field-call records
 
-Crossover received 7,183 Stockton Animal Services field-call records on November 2 and began reviewing them November 4. We are tracing requests and recorded responses. A call is not a count of unique dogs or of the street population.
+Crossover received 7,183 Stockton Animal Services field-call records on November 2 and began reviewing them November 4. We are checking what each record says about a request, the response, and any recorded outcome, along with missing information and limits in the data. These calls cannot be counted as unique dogs or as the street population; findings from the review remain pending.
 
-Firsthand work and outreach
+Getting closer to the problem
 
-Crossover visited Stockton Animal Services and applied to volunteer there. We also asked about Doggie Day Out and applied to volunteer with Stockton Street Dogs. Neither application establishes participation or completed onboarding.
+Crossover visited Stockton Animal Services, applied to volunteer there, asked about Doggie Day Out, and applied to volunteer with Stockton Street Dogs. These steps are ways to learn how care works in practice. The applications do not establish that we have participated or completed onboarding.
 
 What's next
 
-Continue the records review
+What can the records tell us?
 
-Document the calls' date range, definitions, missing information, and limits before drawing conclusions about response patterns or outcomes.
+First establish the calls' date range, categories, locations where recorded, and missing fields. Then examine recorded requests, response paths, and outcomes without treating a call as a dog or inferring an outcome the records do not contain.
 
-Follow up with care providers
+How does a dog actually get help?
 
-Seek responses to the volunteer and Doggie Day Out inquiries, clarify current care pathways, and document what we learn.
+Follow up on the volunteer and Doggie Day Out inquiries, and ask care providers to describe the path from finding or reporting a dog to a response and possible care. Document what they confirm, where the path depends on capacity or eligibility, and where the answer remains unclear.
 
 Open questions
 
 How many dogs currently need help on Stockton's streets?
 
-We also need to understand their circumstances and what help, if any, they need.
+No verified count exists. We need to distinguish dogs who are lost, abandoned, roaming, or living with people, and learn what help each actually needs. A dog seen on the street should not automatically be counted as abandoned or in need of removal.
 
 What happens when someone reports a dog?
 
-The records may describe a response, but whether a dog ultimately received care remains to be established.
+We want to trace the report, any recorded response or disposition, and whether the dog actually reached care. The field-call records may describe only part of that path; an administrative outcome does not by itself establish the dog's later condition.
 
 Where does access to care break down?
 
-We still need to understand which services can accept a reported dog and which barriers people encounter when seeking help.
+Which services can accept a dog at the time someone asks? Capacity, cost, eligibility, and transportation may affect the answer, but we have not established how often each is a barrier in Stockton. Provider follow-up and the records review may clarify this.

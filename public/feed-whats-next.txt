@@ -1,9 +1,9 @@
 What's next
 
-Continue the records review
+What can the records tell us?
 
-Document the calls' date range, definitions, missing information, and limits before drawing conclusions about response patterns or outcomes.
+First establish the calls' date range, categories, locations where recorded, and missing fields. Then examine recorded requests, response paths, and outcomes without treating a call as a dog or inferring an outcome the records do not contain.
 
-Follow up with care providers
+How does a dog actually get help?
 
-Seek responses to the volunteer and Doggie Day Out inquiries, clarify current care pathways, and document what we learn.
+Follow up on the volunteer and Doggie Day Out inquiries, and ask care providers to describe the path from finding or reporting a dog to a response and possible care. Document what they confirm, where the path depends on capacity or eligibility, and where the answer remains unclear.
