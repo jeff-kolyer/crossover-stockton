@@ -144,6 +144,14 @@ await writeFile(resolve(dist, "data/records.json"), feedBytes);
 await copyFile("public/feed.json", resolve(dist, "feed.json"));
 await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
 await copyFile("public/feed.txt", resolve(dist, "feed.txt"));
+await copyFile("public/audio-manifest.json", resolve(dist, "audio-manifest.json"));
+await mkdir(resolve(dist, "audio"), { recursive: true });
+const audioManifest = JSON.parse(await readFile("public/audio-manifest.json", "utf8"));
+for (const track of Object.values(audioManifest)) {
+  const filename = track.src.split("/").at(-1);
+  if (!/^[a-z]+-[a-f0-9]{16}\.wav$/.test(filename)) throw new Error(`Unsafe audio filename: ${filename}`);
+  await copyFile(resolve("public/audio", filename), resolve(dist, "audio", filename));
+}
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
 await writeFile(resolve(dist, "favicon.ico"), await readFile("public/favicon.ico"));
 const navigationScript = await readFile("public/static-navigation.js");

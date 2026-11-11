@@ -33,8 +33,10 @@ const route=()=>{
 };
 const href=page=>isPreview?`${previewBase}?page=${encodeURIComponent(page)}`:page==='overview'?'/':page==='about'||page==='feed'?`/${page}/`:`/street-dogs/${page}/`;
 const recordHref=id=>isPreview?`${previewBase}?page=record&id=${encodeURIComponent(id)}`:`/${byId.get(id)?.schema==='organization'?'organization':'record'}/${encodeURIComponent(id)}/`;
-let feed,feedContent,feedNarration,records,byId,gap,gapStory,about,menu,activeFilter='all';
-let activeListenButton=null;
+let feed,feedContent,audioManifest,records,byId,gap,gapStory,about,menu,activeFilter='all';
+let narration = null;
+let activeTrack = null;
+let pendingPosition = 0;
 const lookup=id=>byId.get(id);
 const section=id=>gapStory.chapters.find(item=>item.id===id);
 const related=record=>record.fields?.gap_id===gap.id||(record.fields?.gap_ids||record.fields?.related_gap_ids||[]).includes(gap.id);
@@ -242,7 +244,7 @@ function designOverview(){
   return `<div class="design-overview">
     <section class="design-hero"><div><div class="eyebrow">${esc(gap.fields.hero.eyebrow)}</div><h1>What happens when a dog needs help?</h1><p>We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better.</p><div class="design-hero-actions"><a class="design-button" href="#open-questions">${esc(feed.silent.homePage.primaryActionLabel)} ${icon('arrow')}</a><a class="design-button secondary" href="${href('feed')}">${icon('headphones')}<span>Read or listen to the feed</span></a></div></div><div class="design-graphic"><img src="${esc(feed.silent.homePage.image)}" alt="${esc(feed.silent.homePage.imageAlt)}"><span>STOCKTON / LOOKING CLOSER</span></div></section>
     <section class="design-section" id="current-picture"><div class="design-section-head"><div><div class="eyebrow">01 / THE SITUATION</div><h2>The current picture</h2><p>Two attributed figures. One important unknown.</p></div><a href="${href('metrics')}">All measurements ${icon('arrow')}</a></div><div class="design-stats">${figures.figures.map((figure,index)=>{const record=lookup(figure.record);return `<a class="design-stat" href="${recordHref(record.id)}"><span class="design-stat-top"><span class="design-stat-icon">${icon(['paw','firsthand','question'][index])}</span><strong>${esc(metricValue(record))}</strong></span><span class="design-stat-label">${esc(figure.label)}</span><small>${esc(figure.context)}</small></a>`}).join('')}</div></section>
-    <section class="design-section" id="living-update"><div class="design-section-head"><div><div class="eyebrow">02 / LIVING ACCOUNT</div><h2>What we know now</h2><p>The current situation, the people helping, and what's being done.</p></div></div><div class="design-split"><article class="design-report"><div class="design-report-meta"><span>${esc(longDate(chapter.updatedAt))}</span><strong class="eyebrow">CURRENT ACCOUNT</strong></div>${account}<div class="design-report-actions"><button class="overview-listen" type="button"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to this account</span></button><a href="${href('feed')}">Read or listen to the feed ${icon('arrow')}</a><a href="${href('findings')}">See what we’re learning ${icon('arrow')}</a></div>${accountSources}</article><aside class="design-latest"><h3>Latest activity</h3>${activity.map(record=>`<a href="${recordHref(record.id)}"><small>${esc(recordDate(record))}</small><strong>${esc(record.title)} ${icon('arrow')}</strong><span>${esc(short(recordText(record),110))}</span></a>`).join('')}<a class="design-all" href="${href('activity')}">View all activity ${icon('arrow')}</a></aside></div></section>
+    <section class="design-section" id="living-update"><div class="design-section-head"><div><div class="eyebrow">02 / LIVING ACCOUNT</div><h2>What we know now</h2><p>The current situation, the people helping, and what's being done.</p></div></div><div class="design-split"><article class="design-report"><div class="design-report-meta"><span>${esc(longDate(chapter.updatedAt))}</span><strong class="eyebrow">CURRENT ACCOUNT</strong></div><div class="design-report-actions account-listen-top"><button class="overview-listen" type="button"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to this account</span></button></div>${account}<div class="design-report-actions"><a href="${href('feed')}">Read or listen to the feed ${icon('arrow')}</a><a href="${href('findings')}">See what we’re learning ${icon('arrow')}</a></div>${accountSources}</article><aside class="design-latest"><h3>Latest activity</h3>${activity.map(record=>`<a href="${recordHref(record.id)}"><small>${esc(recordDate(record))}</small><strong>${esc(record.title)} ${icon('arrow')}</strong><span>${esc(short(recordText(record),110))}</span></a>`).join('')}<a class="design-all" href="${href('activity')}">View all activity ${icon('arrow')}</a></aside></div></section>
     <section class="design-section" id="open-questions"><div class="design-section-head"><div><div class="eyebrow">03 / OPEN QUESTIONS</div><h2>What we’re trying to find out</h2></div></div><div class="design-questions">${[questions[0],questions[3],questions[5]].filter(Boolean).map((question,index)=>`<a href="${questionLinks[index]}"><small>QUESTION 0${index+1} ${icon('arrow')}</small>${esc(question)}</a>`).join('')}</div></section>
     <section class="design-section"><div class="design-section-head"><div><div class="eyebrow">04 / THE WORKSPACE</div><h2>Follow the work</h2><p>Explore the records, their sources, and their limits.</p></div></div><nav class="design-directory" aria-label="Explore the work">${menu.filter(item=>item.page!=='overview').map(item=>`<a href="${href(item.page)}"><strong>${icon(item.icon)} ${esc(item.label)} ${icon('arrow')}</strong><span>${esc(item.description)}</span></a>`).join('')}</nav></section>
     <section class="design-intro"><div><div class="eyebrow">See clearly. Act locally.</div><p>We follow the evidence, learn from people doing the work, and look for practical ways to help.</p></div><a href="${href('about')}">About Crossover ${icon('arrow')}</a></section>
@@ -362,6 +364,7 @@ function render({reuseExisting=false}={}){
   const keyLinks=keys.map(([page,label,symbol])=>`<a href="${href(page)}" ${activeState(page)} aria-label="${label}">${icon(symbol)}<span>${label}</span></a>`).join('');
   const shell=`<div class="care-shell"><aside class="care-rail"><a class="care-brand" href="${href('overview')}"><img src="/images/logo_light.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><div class="care-rail-label">STREET DOGS AND<br>ACCESS TO CARE</div><div class="care-rail-groups">${grouped}</div><div class="care-rail-sources">${sourcesNav}</div></aside><div class="care-site"><header class="care-top"><a class="care-mobile-brand" href="${href('overview')}"><img src="/images/logo_dark.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><strong>Street dogs and access to care</strong><div class="care-top-actions"><div class="home-search"><button class="home-search-toggle" type="button" aria-label="Search the site" aria-expanded="false" aria-controls="home-search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><div class="home-search-panel" id="home-search-panel" hidden><label for="home-search-input">Search Crossover Stockton</label><input id="home-search-input" type="search" placeholder="Search sections and records"><div class="home-search-results"></div></div></div><a href="${href('about')}" ${activeState('about')}>${icon('about')}<span>About</span></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">${icon('menu')}<span>Menu</span></button></div></header><nav class="care-key-nav" aria-label="Key sections">${keyLinks}</nav><div class="mobile-menu" id="mobile-menu"><div class="mobile-menu-head">Street dogs and access to care</div>${grouped}<div class="care-mobile-sources">${sourcesNav}</div></div><main class="main" id="content" tabindex="-1"><div class="content">${inner}</div></main><footer class="footer"><span>See clearly. Act locally.</span><div class="footer-links"><a href="${href('overview')}">Home</a><a href="${href('feed')}">Feed</a><a href="${href('sources')}">Sources</a><a href="${href('about')}">About</a></div></footer></div></div>`;
   document.getElementById('app').innerHTML=shell;
+  syncListenButtons();
   document.title=`${current==='/overview'?'Home':current==='/about'?'About':current==='/feed'?'Feed':current.startsWith('/record/')?'Record':menu.find(item=>'/'+item.page===current)?.label||'Crossover'} · Crossover Stockton${isPreview?' — new site preview':''}`;
   document.querySelector('.menu-toggle').addEventListener('click',toggleMenu);
   setupHomeSearch();
@@ -391,21 +394,70 @@ function handleListingControls(event){
   if(filterButton){updateListingFilter(filterButton.dataset.filter);return}
   if(event.target.closest('.work-search-link'))document.querySelector('.home-search-toggle')?.click();
 }
+const trackTitles={feed:'The Feed',account:'What we know now',latest:'Latest update'};
+const listenLabels={feed:'Listen to the feed',account:'Listen to this account',latest:'Latest update (Listen)'};
+const trackForButton=button=>button.classList.contains('feed-listen')?'feed':button.classList.contains('overview-listen')?'account':'latest';
+const positionKey=track=>`crossover-audio:${track}:${audioManifest[track].version}`;
+function savePosition(){
+  if(!activeTrack||!Number.isFinite(narration.currentTime))return;
+  try{localStorage.setItem(positionKey(activeTrack),String(narration.currentTime))}catch{}
+}
+function updateMediaPosition(){
+  if(!('mediaSession' in navigator)||!navigator.mediaSession.setPositionState||!Number.isFinite(narration.duration))return;
+  try{navigator.mediaSession.setPositionState({duration:narration.duration,playbackRate:narration.playbackRate,position:Math.min(narration.currentTime,narration.duration)})}catch{}
+}
+function syncListenButtons(){
+  if(!narration)return;
+  document.querySelectorAll('.home-listen,.overview-listen').forEach(button=>{
+    const track=trackForButton(button),playing=track===activeTrack&&!narration.paused;
+    button.querySelector('span:last-child').textContent=playing?'Pause listening':listenLabels[track];
+    button.querySelector('.listen-icon').textContent=playing?'Ⅱ':'▶';
+    button.setAttribute('aria-pressed',String(playing));
+  });
+  const player=document.getElementById('narration-player');
+  if(player){player.hidden=!activeTrack;player.querySelector('.narration-title').textContent=trackTitles[activeTrack]||''}
+  if('mediaSession' in navigator)navigator.mediaSession.playbackState=narration.paused?'paused':'playing';
+  updateMediaPosition();
+}
+function seekBy(seconds){
+  if(!Number.isFinite(narration.duration))return;
+  narration.currentTime=Math.max(0,Math.min(narration.duration,narration.currentTime+seconds));
+  savePosition();updateMediaPosition();
+}
+function setupNarration(){
+  narration=new Audio();
+  const player=document.createElement('div');
+  player.id='narration-player';player.className='narration-player';player.hidden=true;
+  player.innerHTML='<strong class="narration-title"></strong><button type="button" data-seek="-15" aria-label="Back 15 seconds">↶ 15</button><button type="button" data-seek="30" aria-label="Forward 30 seconds">30 ↷</button><label>Speed <select aria-label="Playback speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>';
+  narration.controls=true;narration.preload='metadata';
+  player.insertBefore(narration,player.querySelector('[data-seek]'));
+  document.body.append(player);
+  player.addEventListener('click',event=>{const button=event.target.closest('[data-seek]');if(button)seekBy(Number(button.dataset.seek))});
+  player.querySelector('select').addEventListener('change',event=>{narration.playbackRate=Number(event.target.value);updateMediaPosition()});
+  narration.addEventListener('loadedmetadata',()=>{if(pendingPosition>0&&pendingPosition<narration.duration-1)narration.currentTime=pendingPosition;pendingPosition=0;updateMediaPosition()});
+  narration.addEventListener('timeupdate',()=>{savePosition();updateMediaPosition()});
+  narration.addEventListener('seeked',savePosition);
+  narration.addEventListener('play',syncListenButtons);
+  narration.addEventListener('pause',()=>{savePosition();syncListenButtons()});
+  narration.addEventListener('ended',()=>{try{localStorage.removeItem(positionKey(activeTrack))}catch{}activeTrack=null;syncListenButtons()});
+  window.addEventListener('pagehide',savePosition);
+  if('mediaSession' in navigator){
+    const actions={play:()=>narration.play(),pause:()=>narration.pause(),seekbackward:details=>seekBy(-(details.seekOffset||15)),seekforward:details=>seekBy(details.seekOffset||30),seekto:details=>{if(Number.isFinite(details.seekTime)){narration.currentTime=details.seekTime;savePosition()}}};
+    for(const [action,handler] of Object.entries(actions))try{navigator.mediaSession.setActionHandler(action,handler)}catch{}
+  }
+}
 function handleListen(event){
   const button=event.target.closest('.home-listen,.overview-listen');
   if(!button)return;
-  if(!('speechSynthesis' in window)){location.href='/feed/';return}
-  const isFeed=button.classList.contains('feed-listen');
-  const isOverview=button.classList.contains('overview-listen')&&!isFeed;
-  const idleLabel=isFeed?'Listen to the feed':isOverview?'Listen to this account':'Latest update (Listen)';
-  if(activeListenButton){const previous=activeListenButton;activeListenButton=null;speechSynthesis.cancel();previous.querySelector('span:last-child').textContent=previous.classList.contains('feed-listen')?'Listen to the feed':previous.classList.contains('overview-listen')?'Listen to this account':'Latest update (Listen)';if(previous===button)return}
-  const focus=section('overview').chapters.find(item=>item.id==='focus');
-  const narrative=isFeed?feedNarration:isOverview?[...document.querySelectorAll('#living-update .overview-spoken')].map(item=>item.textContent.trim()).join(' '):`Latest update from Crossover Stockton. ${focus.currentWork||focus.text}`;
-  const parts=isFeed?narrative.split(/\n\s*\n/).filter(Boolean):[narrative];
-  activeListenButton=button;
-  button.querySelector('span:last-child').textContent='Stop listening';
-  const speakNext=()=>{if(activeListenButton!==button)return;const part=parts.shift();if(!part){activeListenButton=null;button.querySelector('span:last-child').textContent=idleLabel;return}const update=new SpeechSynthesisUtterance(part);update.lang='en-US';update.rate=.95;update.onend=speakNext;update.onerror=speakNext;speechSynthesis.speak(update)};
-  speakNext();
+  const track=trackForButton(button);
+  if(activeTrack===track){narration.paused?narration.play():narration.pause();return}
+  savePosition();activeTrack=track;
+  try{pendingPosition=Number(localStorage.getItem(positionKey(track)))||0}catch{pendingPosition=0}
+  narration.src=audioManifest[track].src;
+  narration.load();
+  if('mediaSession' in navigator&&'MediaMetadata' in window)navigator.mediaSession.metadata=new MediaMetadata({title:trackTitles[track],artist:'Crossover Stockton',album:'Crossover Stockton'});
+  narration.play().catch(()=>syncListenButtons());
+  syncListenButtons();
 }
 function isSitePage(path){
   if(isPreview)return path===previewBase;
@@ -451,5 +503,5 @@ function restoreSitePage(event){
   render();
   requestAnimationFrame(()=>window.scrollTo(0,event.state?.scrollY||0));
 }
-async function start(){try{const [storyResponse,recordsResponse,feedContentResponse,feedTextResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/feed-content.html'),fetch('/feed.txt')]);if(!storyResponse.ok||!recordsResponse.ok||!feedContentResponse.ok||!feedTextResponse.ok)throw new Error('Could not load the public feed.');feed=await storyResponse.json();feedContent=await feedContentResponse.text();feedNarration=await feedTextResponse.text();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap)throw new Error('No current gap in the public feed.');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;cleanLegacyRecordUrl();history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render({reuseExisting:true});document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Site unavailable</h1><p>${esc(error.message)}</p></main>`}}
+async function start(){try{const [storyResponse,recordsResponse,feedContentResponse,audioResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/feed-content.html'),fetch('/audio-manifest.json',{cache:'no-store'})]);if(!storyResponse.ok||!recordsResponse.ok||!feedContentResponse.ok||!audioResponse.ok)throw new Error('Could not load the public feed.');feed=await storyResponse.json();feedContent=await feedContentResponse.text();audioManifest=await audioResponse.json();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap)throw new Error('No current gap in the public feed.');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;setupNarration();cleanLegacyRecordUrl();history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render({reuseExisting:true});syncListenButtons();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Site unavailable</h1><p>${esc(error.message)}</p></main>`}}
 start();

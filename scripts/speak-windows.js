@@ -1,0 +1,15 @@
+var input = WScript.Arguments(0);
+var output = WScript.Arguments(1);
+var reader = new ActiveXObject('ADODB.Stream');
+reader.Type = 2;
+reader.Charset = 'utf-8';
+reader.Open();
+reader.LoadFromFile(input);
+var text = reader.ReadText();
+reader.Close();
+var stream = new ActiveXObject('SAPI.SpFileStream');
+stream.Open(output, 3, false);
+var voice = new ActiveXObject('SAPI.SpVoice');
+voice.AudioOutputStream = stream;
+voice.Speak(text, 0);
+stream.Close();

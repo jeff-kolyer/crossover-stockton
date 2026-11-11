@@ -48,6 +48,13 @@ test('one curated feed is published in HTML and text with the same selections', 
   assert.deepEqual(story.silent.reading.slice(1),story.chapters.find(item=>item.id==='briefing').sections.map(item=>`briefing.${item.id}`));
   assert.deepEqual(JSON.parse(await read('dist/feed.json')), story);
   assert.deepEqual(JSON.parse(await read('dist/data/records.json')), feed);
+  const audio = JSON.parse(await read('dist/audio-manifest.json'));
+  for (const track of ['feed','account','latest']) {
+    const file = await readFile(`dist${audio[track].src}`);
+    assert.equal(file.toString('ascii', 0, 4), 'RIFF');
+    assert.equal(file.toString('ascii', 8, 12), 'WAVE');
+    assert.ok(file.length > 44);
+  }
 });
 
 test('the root serves the Overview and the old overview URL stays readable', async () => {
@@ -122,7 +129,8 @@ test('Overview keeps the simple layout and renders the sourced Living Account', 
     }).join('');
     assert.equal(group[1], expected);
   });
-  assert.ok((await read('dist/site.js')).includes("querySelectorAll('#living-update .overview-spoken')"));
+  assert.ok(root.indexOf('Listen to this account') < root.indexOf('<p class="overview-spoken">'));
+  assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
   assert.ok(!root.includes('?from='));
   assert.ok(!root.includes('overview-brief-grid'));
   assert.ok(!root.includes('class="overview-section"'));

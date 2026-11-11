@@ -35,6 +35,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install offline speech renderer
+        run: sudo apt-get update && sudo apt-get install -y espeak-ng
+
+      - name: Cache generated narration
+        uses: actions/cache@v4
+        with:
+          path: public/audio
+          key: feed-audio-${{ hashFiles('public/feed.json') }}
+          restore-keys: feed-audio-
+
       - name: Build
         run: npm run build
 

@@ -333,3 +333,8 @@ We begin where we are, with what we can observe and do.
 **See clearly. Act locally.**
 
 **The work discovers the work.**
+# Feed narration
+
+The Feed, Living Account, and latest-update Listen buttons play real WAV files through one persistent HTML audio element. `npm run build` renders narration from the current `public/feed.json` and `public/feed.txt`. The generator names each file with a hash of its spoken text and reuses it when that text has not changed. The resulting `public/audio-manifest.json` points the site to the matching files. Commit the manifest and generated files when updating the Feed so local previews work without a speech renderer.
+
+On Windows, generation uses the built-in SAPI voice through `cscript.exe`. GitHub Pages builds install the offline `espeak-ng` package. Neither uses a paid text-to-speech API; the operational cost is build time, repository storage, and bandwidth for the WAV files. A listener downloads only the track they start.
