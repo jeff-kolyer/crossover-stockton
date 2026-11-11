@@ -438,7 +438,7 @@ function setupNarration(){
   narration=new Audio();
   const player=document.createElement('div');
   player.id='narration-player';player.className='narration-player';player.hidden=true;
-  player.innerHTML='<strong class="narration-title"></strong><button type="button" data-seek="-15" aria-label="Back 15 seconds">↶ 15</button><button type="button" data-seek="30" aria-label="Forward 30 seconds">30 ↷</button><label>Speed <select aria-label="Playback speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><button type="button" data-close-player aria-label="Close audio player">×</button>';
+  player.innerHTML='<strong class="narration-title"></strong><button type="button" data-seek="-15" aria-label="Back 15 seconds">↶ 15</button><button type="button" data-seek="30" aria-label="Forward 30 seconds">30 ↷</button><label>Speed <select aria-label="Playback speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><button type="button" data-close-player aria-label="Close audio player"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>';
   narration.controls=true;narration.preload='metadata';
   player.insertBefore(narration,player.querySelector('[data-seek]'));
   document.body.append(player);
