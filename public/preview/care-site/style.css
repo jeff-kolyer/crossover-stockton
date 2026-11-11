@@ -502,6 +502,9 @@ a.text-link,button.text-link{font-weight:700}
   .compact-story img{height:116px}
   .compact-story:last-child{grid-column:1 / -1}
 }
+@media(max-width:1450px){
+  .compact-account-actions small{display:none}
+}
 @media(max-width:1260px){
   .compact-account{grid-template-columns:minmax(0,1.45fr) minmax(320px,1fr);gap:20px}
   .compact-account-actions{gap:8px;padding-left:10px}
