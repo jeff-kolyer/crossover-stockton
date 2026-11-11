@@ -63,56 +63,68 @@ test('the root serves the Overview and the old overview URL stays readable', asy
     'See clearly. Act locally. We’re finding out what’s happening in Stockton, where help is needed, and what can be done about it.'
   );
   const root = await page('/');
-  const gap = feed.records['dogs-safe-placement'].fields;
-  for (const phrase of [gap.hero.eyebrow, 'What happens when a dog needs help?', "We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better.", story.silent.homePage.primaryActionLabel, 'Latest activity','Listen to this account','3,106','No verified census'])
+  for (const phrase of ['A closer look at street dogs and access to care in Stockton.', "We're examining the circumstances of dogs living or roaming on Stockton's streets", 'find practical ways to improve the response.', 'Listen to this page', 'Go deeper with our feed', 'Latest updates','3,106','No verified census'])
     assert.ok(root.includes(phrase), phrase);
+  const updates = root.match(/<aside class="compact-latest">([\s\S]*?)<\/aside>/)?.[1] ?? '';
+  assert.equal((updates.match(/<a href="\/record\//g) ?? []).length, 7);
+  assert.equal((updates.match(/<small class="compact-update-date">[^<]*<\/small><span class="compact-update-type">[^<]*<\/span><strong>[^<]*<\/strong><span class="compact-update-summary">[^<]*<\/span>/g) ?? []).length, 7);
+  for (const type of ['Activity', 'Finding', 'Source report']) assert.ok(updates.includes(type), type);
+  for (const highlight of ['3,106', '3–10', 'Stockton Animal Services', 'Stockton Street Dogs', 'Hard Luck', '7,183'])
+    assert.ok(root.includes(`<strong>${highlight}</strong>`), highlight);
   assert.ok(root.includes('class="design-intro"'));
   assert.ok(root.includes('class="care-shell"'));
   assert.ok(root.includes('<title>Home · Crossover Stockton</title>'));
   assert.ok(root.includes('<span>Home</span>'));
   assert.ok(!root.includes('aria-label="Breadcrumb"'));
   assert.ok(root.includes('href="/street-dogs/metrics/"'));
-  assert.equal((root.match(/Read or listen to the feed/g) ?? []).length, 1);
+  assert.equal((root.match(/data-listen-label="Listen to this page"/g) ?? []).length, 1);
+  assert.ok(!root.includes('Listen to this account'));
   assert.ok(root.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(!root.includes('href="#/'));
   const overview = await page('/street-dogs/overview/');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.started_at, '2026-11-04');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.status, 'in_progress');
   assert.ok(feed.records["task-review-sas-field-call-records"].fields.list_context.includes('7,183 cases'));
-  for (const phrase of ['What happens when a dog needs help?','Listen to this account','The current picture','Stockton has an established animal-care network','3,106','No verified census'])
+  for (const phrase of ['A closer look at street dogs and access to care in Stockton.','Listen to this page','The current picture','Stockton has an established animal-care network','3,106','No verified census'])
     assert.ok(overview.includes(phrase), phrase);
   assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(overview.includes('<meta name="robots" content="noindex,follow">'));
   assert.ok(overview.includes('href="/"'));
 });
 
-test('Overview publishes the current account and wide activity layout', async () => {
+test('Overview publishes the current account and wide updates layout', async () => {
   const root = await page('/');
-  const positions = ['class="compact-hero"', 'class="compact-metrics"', 'id="living-update"', 'id="compact-questions"', 'class="design-intro"'].map(label => root.indexOf(label));
+  const positions = ['class="compact-hero"', 'id="living-update"', 'class="compact-metrics"', 'class="compact-stories"', 'id="compact-questions"', 'class="design-intro"'].map(label => root.indexOf(label));
   assert.ok(positions.every(position => position >= 0));
   assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]));
-  assert.ok(root.includes('What happens when a dog needs help?'));
-  assert.ok(root.includes("We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better."));
+  assert.ok(root.includes('A closer look at street dogs and access to care in Stockton.'));
+  assert.ok(root.includes("We're examining the circumstances of dogs living or roaming on Stockton's streets"));
+  assert.ok(root.includes('find practical ways to improve the response.'));
+  assert.ok(!root.includes('class="eyebrow"'));
+  assert.ok(!root.includes('class="compact-story-label"'));
   assert.ok(root.includes('We follow the evidence, learn from people doing the work'));
   assert.equal((root.match(/class="compact-metric"/g) ?? []).length, 3);
   for (const label of ['Stray-dog intake events','Reported dumped dogs','Dogs currently on streets','2024 · Animal Services','Sept 2026 · Street Dogs','No verified census'])
     assert.ok(root.includes(label), label);
   assert.ok(root.includes('<h2>The current picture</h2>'));
-  assert.ok(root.includes("The current situation, the people helping, and what's being done."));
-  assert.ok(root.includes('Updated Nov 9, 2026'));
+  assert.ok(!root.includes("The current situation, the people helping, and what's being done."));
+  assert.ok(root.includes('<h2>The current picture</h2><p class="compact-account-date">Updated November 9, 2026</p>'));
   assert.ok(root.includes('class="compact-latest"'));
   assert.ok(root.includes('href="#compact-questions"'));
   assert.ok(root.includes('href="/street-dogs/activity/"'));
   assert.ok(root.includes('href="/feed/"'));
   const account = story.chapters.find(item => item.id === 'gap').chapters.find(item => item.id === 'overview').livingAccount;
-  const written = [...root.matchAll(/<article class="compact-story">[\s\S]*?<p>([\s\S]*?)<\/p><\/div><\/article>/g)].map(match => match[1]);
-  assert.deepEqual(written, account.paragraphs.map(paragraph => html(paragraph.text)));
+  const written = [...root.matchAll(/<article class="compact-story">[\s\S]*?<p>([\s\S]*?)<\/p><\/article>/g)].map(match => match[1]);
+  assert.deepEqual(written.map(paragraph => paragraph.replace(/<\/?strong>/g, '')), account.paragraphs.map(paragraph => html(paragraph.text)));
   assert.equal(written.length, 5);
-  assert.ok(root.indexOf('Listen to this account') < root.indexOf('class="compact-stories"'));
+  assert.ok(root.indexOf('Listen to this page') < root.indexOf('class="compact-stories"'));
   assert.equal((root.match(/<a href="\/record\/crossover-2026-/g) ?? []).length >= 4, true);
   const css = await read('dist/care-site.css');
-  assert.ok(css.includes('.compact-latest{grid-column:2;grid-row:1 / span 3'));
-  assert.ok(css.includes('.compact-stories{grid-template-columns:repeat(2,minmax(0,1fr))'));
+  assert.ok(css.includes('.compact-primary{grid-column:1;grid-row:1}'));
+  assert.ok(css.includes('.compact-latest{grid-column:2;grid-row:1;align-self:stretch'));
+  assert.ok(css.includes('.compact-stories{display:grid}'));
+  assert.ok(css.includes('@media(min-width:1600px){'));
+  assert.ok(css.includes('  .compact-stories{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px}'));
   assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
   assert.ok(!root.includes('?from='));
 });

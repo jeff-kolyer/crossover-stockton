@@ -203,6 +203,30 @@ function recordDate(record){
   const raw=fields.occurred_at||fields.started_at||fields.published_at||fields.last_reviewed_at||record.dateForSort?.value;
   return raw?(/^\d{4}-\d{2}-\d{2}/.test(raw)?date(raw):String(raw)):'';
 }
+function recentUpdates(limit){
+  const updateDate=record=>record.schema==='activity'?record.fields?.occurred_at:record.schema==='finding'?record.fields?.last_reviewed_at:record.fields?.published_at;
+  const candidates=records.filter(record=>related(record)&&updateDate(record)&&(
+    record.schema==='activity'||record.schema==='finding'||(record.schema==='evidence'&&record.fields?.source?.url)
+  )).sort((a,b)=>updateDate(b).localeCompare(updateDate(a))||a.id.localeCompare(b.id));
+  const seenSources=new Set();
+  return candidates.filter(record=>{
+    if(record.schema!=='evidence')return true;
+    const source=record.fields.source.url;
+    if(seenSources.has(source))return false;
+    seenSources.add(source);
+    return true;
+  }).slice(0,limit);
+}
+function emphasizeAccount(text){
+  const source=String(text??'');
+  const highlights=/Stockton Animal Services|Stockton Street Dogs|Hard Luck|St\. Mary's Pathways|3,106|3[–-]10|\$10\.47 million|7,183|No verified count|capacity pressure|appointments for healthy strays/g;
+  let html='',from=0;
+  for(const match of source.matchAll(highlights)){
+    html+=esc(source.slice(from,match.index))+`<strong>${esc(match[0])}</strong>`;
+    from=match.index+match[0].length;
+  }
+  return html+esc(source.slice(from));
+}
 function listingRows(items,id){
   if(!items.length)return '<p class="record-empty">No published records match this filter.</p>';
   return items.map(record=>{const childCount=id==='places'?records.filter(item=>item.schema==='location'&&item.fields?.parent_location_id===record.id).length:0;const parent=id==='places'?lookup(record.fields?.parent_location_id):null;const context=childCount?`${childCount} facilities · Stockton, California`:parent?`Part of ${parent.title}`:recordDate(record)||record.schema;const type=id==='places'?filterLabel(record.fields?.location_type):recordStatus(record).replaceAll('_',' ')||record.schema;
@@ -230,9 +254,8 @@ function updateListingFilter(value){
 function compactOverview(){
   const chapter=section('overview');
   const figures=chapter.chapters.find(item=>item.id==='key-figures');
-  const activity=listingItems('activity').slice(0,4);
+  const updates=recentUpdates(7);
   const accountTitles=['The scale remains unknown','Care exists, but access is limited','A network of care providers','Plans to expand care','Reviewing the field-call records'];
-  const accountLabels=['Scale and uncertainty','Access to care','Care providers','Expansion efforts','Current investigation'];
   const accountImages=[
     ['/images/variants/clean/dog-sidewalk.jpg','Illustrative dog on a neighborhood sidewalk'],
     ['/images/variants/clean/shelter.jpg','Illustrative animal shelter entrance'],
@@ -242,15 +265,17 @@ function compactOverview(){
   ];
   const account=chapter.livingAccount.paragraphs.map((paragraph,index)=>{
     const image=accountImages[index];
-    return `<article class="compact-story"><img src="${esc(image?.[0]||accountImages[4][0])}" alt="${esc(image?.[1]||'Illustrative records image')}" loading="lazy"><div><div class="compact-story-label">${esc(accountLabels[index]||'Current account')}</div><h3>${esc(accountTitles[index]||'What we know now')}</h3><p>${esc(paragraph.text)}</p></div></article>`;
+    return `<article class="compact-story"><img src="${esc(image?.[0]||accountImages[4][0])}" alt="${esc(image?.[1]||'Illustrative records image')}" loading="lazy"><h3>${esc(accountTitles[index]||'What we know now')}</h3><p>${emphasizeAccount(paragraph.text)}</p></article>`;
   }).join('');
+  const metrics=figures.figures.map((figure,index)=>{const record=lookup(figure.record);return `<a href="${recordHref(record.id)}" class="compact-metric"><span class="compact-metric-icon">${icon(['paw','firsthand','question'][index])}</span><span class="compact-metric-content"><strong>${esc(metricValue(record))}</strong><span class="compact-metric-details"><span class="compact-metric-label">${esc(figure.label)}</span><small>${esc(figure.context)}</small></span></span></a>`}).join('');
   const questions=gap.fields?.unknown_questions||[];
-  return `<div class="compact-home">
-    <section class="compact-hero"><div class="compact-hero-copy"><div class="eyebrow">${esc(gap.fields.hero.eyebrow)}</div><h1>What happens when a dog needs help?</h1><p>We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better.</p><div class="design-hero-actions"><a class="design-button" href="#compact-questions">${esc(feed.silent.homePage.primaryActionLabel)} ${icon('arrow')}</a><a class="design-button secondary" href="${href('feed')}">${icon('headphones')}<span>Read or listen to the feed</span></a></div></div><img class="compact-hero-image" src="${esc(feed.silent.homePage.image)}" alt="${esc(feed.silent.homePage.imageAlt)}"></section>
-    <section class="compact-metrics" aria-label="The current picture">${figures.figures.map((figure,index)=>{const record=lookup(figure.record);return `<a href="${recordHref(record.id)}" class="compact-metric"><span class="compact-metric-icon">${icon(['paw','firsthand','question'][index])}</span><span><strong>${esc(metricValue(record))}</strong><span class="compact-metric-label">${esc(figure.label)}</span><small>${esc(figure.context)}</small></span></a>`}).join('')}</section>
-    <section class="compact-account" id="living-update"><div class="compact-account-main"><header class="compact-account-head"><div><h2>The current picture</h2><p>The current situation, the people helping, and what's being done.</p></div><div class="compact-account-actions"><small>Updated ${esc(date(chapter.updatedAt))}</small><button class="overview-listen" type="button"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to this account</span></button></div></header><div class="compact-stories">${account}</div><div class="compact-account-links"><a href="${href('feed')}">Read the full feed ${icon('arrow')}</a><a href="${href('findings')}">See what we’re learning ${icon('arrow')}</a></div></div><aside class="compact-latest"><h2>Latest activity</h2>${activity.map(record=>`<a href="${recordHref(record.id)}"><small>${esc(recordDate(record))}</small><strong>${esc(record.title)} ${icon('arrow')}</strong><span>${esc(short(recordText(record),180))}</span></a>`).join('')}<a class="compact-all" href="${href('activity')}">View all activity ${icon('arrow')}</a></aside></section>
-    <div class="compact-lower"><section id="compact-questions"><div class="eyebrow">Open questions</div><h2>What we’re trying to find out</h2><ul>${[questions[0],questions[3],questions[5]].filter(Boolean).map((question,index)=>`<li><a href="${[recordHref('stockton-current-street-dog-population-unknown'),href('activity'),href('tasks')][index]}">${esc(question)} ${icon('arrow')}</a></li>`).join('')}</ul></section><section><div class="eyebrow">Workspace</div><h2>Go deeper on this inquiry</h2><nav aria-label="Explore the work">${menu.filter(item=>item.page!=='overview').map(item=>`<a href="${href(item.page)}">${esc(item.label)} ${icon('arrow')}</a>`).join('')}</nav></section></div>
-    <section class="design-intro"><div><div class="eyebrow">See clearly. Act locally.</div><p>We follow the evidence, learn from people doing the work, and look for practical ways to help.</p></div><a href="${href('about')}">About Crossover ${icon('arrow')}</a></section>
+  return `<div class="compact-home"><div class="compact-primary">
+    <section class="compact-hero"><div class="compact-hero-copy"><h1>A closer look at street dogs and access to care in Stockton.</h1><p>We're examining the circumstances of dogs living or roaming on Stockton's streets, the organizations providing care, and what happens when someone seeks help. Through public records, firsthand visits, and conversations with care providers, we're working to understand the scale of unmet need, identify barriers to care, and find practical ways to improve the response.</p><div class="design-hero-actions"><button class="design-button overview-listen hero-listen" type="button" data-listen-label="Listen to this page"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to this page</span></button><a class="design-button secondary" href="${href('feed')}">${icon('headphones')}<span>Go deeper with our feed</span>${icon('arrow')}</a></div></div><div class="compact-hero-media"><img class="compact-hero-image" src="${esc(feed.silent.homePage.image)}" alt="${esc(feed.silent.homePage.imageAlt)}"></div></section>
+    <section class="compact-account" id="living-update"><div class="compact-account-main"><header class="compact-account-head"><div><h2>The current picture</h2><p class="compact-account-date">Updated ${esc(longDate(chapter.updatedAt))}</p></div></header><div class="compact-metrics" aria-label="The current picture">${metrics}</div><div class="compact-stories">${account}</div></div></section>
+    <div class="compact-lower"><section id="compact-questions"><h2>What we’re trying to find out</h2><ul>${[questions[0],questions[3],questions[5]].filter(Boolean).map((question,index)=>`<li><a href="${[recordHref('stockton-current-street-dog-population-unknown'),href('activity'),href('tasks')][index]}">${esc(question)} ${icon('arrow')}</a></li>`).join('')}</ul></section><section id="compact-workspace"><h2>Go deeper on this inquiry</h2><nav aria-label="Explore the work">${menu.filter(item=>item.page!=='overview').map(item=>`<a href="${href(item.page)}">${esc(item.label)} ${icon('arrow')}</a>`).join('')}</nav></section></div></div>
+    <aside class="compact-latest"><h2>Latest updates</h2>${updates.map(record=>`<a href="${recordHref(record.id)}" class="compact-update"><small class="compact-update-date">${esc(recordDate(record))}</small><span class="compact-update-type">${esc(record.schema==='activity'?'Activity':record.schema==='finding'?'Finding':'Source report')}</span><strong>${esc(record.title)}</strong><span class="compact-update-summary">${esc(short(recordText(record),180))}</span></a>`).join('')}<a class="compact-all" href="${href('feed')}">All updates</a></aside>
+    <nav class="compact-mobile-paths" aria-label="Explore this project"><a href="#compact-questions">${icon('question')}<span>Open questions</span></a><a href="#compact-workspace">${icon('improvements')}<span>Project workspace</span></a></nav>
+    <section class="design-intro"><div><p>We follow the evidence, learn from people doing the work, and look for practical ways to help.</p></div><a href="${href('about')}">About Crossover ${icon('arrow')}</a></section>
   </div>`;
 }
 function designOverview(){return compactOverview()}
@@ -414,7 +439,7 @@ function syncListenButtons(){
   if(!narration)return;
   document.querySelectorAll('.home-listen,.overview-listen').forEach(button=>{
     const track=trackForButton(button),playing=track===activeTrack&&!narration.paused;
-    button.querySelector('span:last-child').textContent=playing?'Pause listening':listenLabels[track];
+    button.querySelector('span:last-child').textContent=playing?'Pause listening':button.dataset.listenLabel||listenLabels[track];
     button.querySelector('.listen-icon').textContent=playing?'Ⅱ':'▶';
     button.setAttribute('aria-pressed',String(playing));
   });
