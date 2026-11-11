@@ -15,28 +15,29 @@ const publication = JSON.parse(await read('dist/publication.json'));
 const records = Object.values(feed.records);
 const page = path => read(`dist${path}index.html`);
 
-test('one current gap account drives the page and narration', async () => {
+test('four editorial pages and full account share one publication', async () => {
   const root=await page('/');
   const published=publication.gapPublications.find(item=>item.gapId==='dogs-safe-placement');
   assert.ok(root.includes('class="living-page"'));
   assert.ok(!root.includes('<h2>What we know</h2>'));
   assert.ok(!root.includes('id="dogs-overview"'));
   assert.equal(published.items.filter(item=>item.section==='overview'&&item.status==='published').sort((a,b)=>a.order-b.order)[0].id,'dogs-scale');
-  assert.ok(root.indexOf('id="dogs-scale"')>root.indexOf('<h2>Overview</h2>'));
-  assert.ok(root.indexOf('id="dogs-scale"')<root.indexOf('<h2>Our work</h2>'));
+  assert.ok(root.indexOf('id="dogs-scale"')>root.indexOf('<h1>Overview</h1>'));
+  assert.ok(!root.includes('id="dogs-field-calls"'));
   assert.ok(root.includes('class="gap-identity desktop-identity"'));
   assert.ok(root.includes('background:#0789e8'));
   assert.ok(!root.includes('class="compact-metric"'));
   assert.ok(!root.includes('href="/feed/"'));
-  assert.ok(root.includes('<details class="living-references"><summary>Sources and related work <svg'));
+  assert.ok(root.includes('<details class="living-references"><summary><span class="living-item-date">Updated Nov 11, 2026</span>'));
   assert.ok(!root.includes('<details class="living-references" open'));
-  assert.equal((root.match(/data-listen-label="Listen to this page"/g)||[]).length,1);
-  let last=-1;
-  for(const section of [...published.sections].sort((a,b)=>a.order-b.order)){
-    const position=root.indexOf(`id="${section.id}"`);
-    assert.ok(position>last,section.title);
-    last=position;
-    assert.ok(root.includes(`<h2>${html(section.title)}</h2>`));
+  assert.equal((root.match(/data-listen-label="Listen to the feed"/g)||[]).length,1);
+  const routeBySection={overview:'/', 'our-work':'/our-work/', 'whats-next':'/whats-next/', 'open-questions':'/questions/'};
+  for(const section of published.sections){
+    const rendered=await page(routeBySection[section.id]);
+    assert.ok(rendered.includes(`id="${section.id}"`),section.id);
+    assert.ok(rendered.includes(`href="${routeBySection[section.id]}" aria-current="page"`),section.id);
+    for(const item of published.items.filter(item=>item.status==='published'))
+      assert.equal(rendered.includes(`id="${item.id}"`),item.section===section.id,`${section.id}: ${item.id}`);
   }
   const written=published.items.filter(item=>item.status==='published');
   const latest=written.map(item=>item.updatedAt).sort().at(-1);
@@ -50,19 +51,44 @@ test('one current gap account drives the page and narration', async () => {
   assert.equal(textFeed,expectedFeed.text);
   assert.equal(await read('dist/feed-content.html'),expectedFeed.html);
   for(const item of written){
-    assert.ok(root.includes(html(item.body)),item.id);
-    assert.ok(root.match(new RegExp(`<article[^>]*id="${item.id}"[\\s\\S]*?<div class="living-item-date">Updated ${formatted(item.updatedAt)}</div>[\\s\\S]*?</article>`)),item.id);
+    const rendered=await page(routeBySection[item.section]);
+    assert.ok(rendered.includes(html(item.body)),item.id);
+    const shortDate=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${item.updatedAt.slice(0,10)}T12:00:00Z`));
+    const article=rendered.match(new RegExp(`<article[^>]*id="${item.id}"[\\s\\S]*?</article>`))?.[0];
+    assert.ok(article?.includes(`<span class="living-item-date">Updated ${shortDate}</span>`),item.id);
+    const resolved=(item.relatedRecordIds||[]).filter(id=>feed.records[id]);
+    assert.ok(article?.includes(`Sources (${resolved.length})`),item.id);
     assert.ok(textFeed.includes(item.body),item.id);
-    for(const id of item.relatedRecordIds||[])assert.ok(root.includes(`/record/${id}/`)||root.includes(`/organization/${id}/`),id);
+    for(const id of item.relatedRecordIds||[])assert.ok(rendered.includes(`/record/${id}/`)||rendered.includes(`/organization/${id}/`),id);
   }
   const audio=JSON.parse(await read('dist/audio-manifest.json'));
-  assert.deepEqual(Object.keys(audio),['account']);
+  assert.deepEqual(Object.keys(audio),['account','our-work','whats-next','open-questions']);
   assert.equal(audio.account.version,createHash('sha256').update('offline-voice-v1\n').update(textFeed.trim()).digest('hex').slice(0,16));
-  const file=await readFile(`dist${audio.account.src}`);
-  assert.equal(file.toString('ascii',0,4),'RIFF');
-  assert.equal(file.toString('ascii',8,12),'WAVE');
-  assert.ok(file.length>44);
+  for(const section of published.sections.filter(section=>section.id!=='overview')){
+    const spoken=renderPublicationFeed(publication,feed.records,'dogs-safe-placement',section.id).text;
+    assert.equal(await read(`dist/feed-${section.id}.txt`),spoken);
+    assert.equal(audio[section.id].version,createHash('sha256').update('offline-voice-v1\n').update(spoken.trim()).digest('hex').slice(0,16));
+  }
+  for(const [track,entry] of Object.entries(audio)){
+    const file=await readFile(`dist${entry.src}`);
+    assert.equal(file.toString('ascii',0,4),'RIFF',track);
+    assert.equal(file.toString('ascii',8,12),'WAVE',track);
+    assert.ok(file.length>44,track);
+  }
   assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
+});
+
+test('source disclosures follow item text with a compact, accessible metadata line',async()=>{
+  for(const path of ['/','/our-work/','/whats-next/','/questions/']){
+    const rendered=await page(path);
+    assert.ok(rendered.includes('<details class="living-references"><summary><span class="living-item-date">Updated '),path);
+    assert.ok(rendered.includes('<span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources ('),path);
+    assert.ok(rendered.includes('<div class="living-reference-content">'),path);
+  }
+  const css=await read('dist/care-site.css');
+  assert.ok(css.includes('.living-references summary{display:flex;align-items:center;justify-content:flex-start'));
+  assert.ok(css.includes('.living-reference-label{display:inline-flex'));
+  assert.ok(css.includes('.living-references[open] summary svg{transform:rotate(180deg)}'));
 });
 
 test('editorial dates follow item revisions and body edits change page and spoken text',async()=>{
@@ -76,8 +102,19 @@ test('editorial dates follow item revisions and body edits change page and spoke
   runInNewContext(source,context,{timeout:3000});
   const changedPage=runInNewContext('publication=fixture;gap={id:"dogs-safe-placement"};byId=recordMap;livingPage()',context,{timeout:3000});
   assert.ok(changedPage.includes(item.body));
-  assert.ok(changedPage.includes('<div class="living-item-date">Updated November 12, 2026</div>'));
+  assert.ok(changedPage.includes('<span class="living-item-date">Updated Nov 12, 2026</span>'));
   assert.ok(changedPage.includes('<span>Updated November 12, 2026</span>'));
+  item.relatedRecordIds=[item.relatedRecordIds[0],'missing-record'];
+  const oneSource=runInNewContext('livingPage()',context,{timeout:3000});
+  assert.ok(oneSource.match(/id="dogs-scale"[\s\S]*?Sources \(1\)[\s\S]*?<\/article>/));
+  item.relatedRecordIds=[];
+  const noSources=runInNewContext('livingPage()',context,{timeout:3000});
+  const noSourceItem=noSources.match(/<article[^>]*id="dogs-scale"[\s\S]*?<\/article>/)?.[0];
+  assert.ok(noSourceItem?.includes('<span class="living-item-date">Updated Nov 12, 2026</span>'));
+  assert.ok(!noSourceItem?.includes('<details'));
+  const otherPage=runInNewContext('livingPage("our-work")',context,{timeout:3000});
+  assert.ok(otherPage.includes('<span>Updated November 11, 2026</span>'));
+  assert.ok(!otherPage.includes(item.body));
   assert.ok(renderPublicationFeed(fixture,feed.records,'dogs-safe-placement').text.includes(item.body));
   const duplicate=structuredClone(fixture);
   duplicate.gapPublications[0].items[0].title='  OVERVIEW  ';

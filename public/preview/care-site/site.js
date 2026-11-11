@@ -21,6 +21,9 @@ const route=()=>{
   if(!isPreview){
     const path=location.pathname;
     if(path==='/'||path==='/street-dogs/overview/'||path==='/feed/')return '/overview';
+    if(path==='/our-work/')return '/our-work';
+    if(path==='/whats-next/')return '/whats-next';
+    if(path==='/questions/')return '/questions';
     if(path==='/about/')return '/about';
     const section=path.match(/^\/street-dogs\/(activity|tasks|metrics|findings|organizations|improvements|places|events|sources)\/$/);
     if(section)return `/${section[1]}`;
@@ -32,7 +35,7 @@ const route=()=>{
   const page=params.get('page')||'overview';
   return page==='record'?`/record/${params.get('id')||''}`:page==='index'||page==='feed'?'/overview':`/${page}`;
 };
-const href=page=>isPreview?`${previewBase}?page=${encodeURIComponent(page==='feed'?'overview':page)}`:page==='overview'||page==='feed'?'/':page==='about'?'/about/':`/street-dogs/${page}/`;
+const href=page=>isPreview?`${previewBase}?page=${encodeURIComponent(page==='feed'?'overview':page)}`:page==='overview'||page==='feed'?'/':['our-work','whats-next','questions','about'].includes(page)?`/${page}/`:`/street-dogs/${page}/`;
 const recordHref=id=>isPreview?`${previewBase}?page=record&id=${encodeURIComponent(id)}`:`/${byId.get(id)?.schema==='organization'?'organization':'record'}/${encodeURIComponent(id)}/`;
 let feed,publication,feedContent,audioManifest,records,byId,gap,gapStory,about,menu,activeFilter='all';
 let narration = null;
@@ -251,19 +254,41 @@ function updateListingFilter(value){
   document.querySelector('.work-visible-count').textContent=`(${visible.length})`;
   document.querySelectorAll('[data-filter]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.filter===value)));
 }
-function livingPage(){
+function livingPage(page='overview'){
   const selected=publication.gapPublications.find(item=>item.gapId===gap.id);
   if(!selected)return heading('Page unavailable','No current account is published for this gap.','/overview');
+  const sectionId=page==='questions'?'open-questions':page;
+  const section=selected.sections.find(item=>item.id===sectionId);
+  if(!section)return heading('Page unavailable','This editorial page is not published.','/overview');
   const sections=[...selected.sections].sort((a,b)=>a.order-b.order);
   const items=id=>selected.items.filter(item=>item.section===id&&item.status==='published').sort((a,b)=>a.order-b.order);
-  const updated=selected.items.filter(item=>item.status==='published').map(item=>item.updatedAt).sort().at(-1);
+  const updated=items(sectionId).map(item=>item.updatedAt).sort().at(-1);
   const related=item=>(item.relatedRecordIds||[]).map(id=>lookup(id)).filter(Boolean);
   const sameHeading=(item,section)=>item.title.trim().replace(/\s+/g,' ').toLowerCase()===section.title.trim().replace(/\s+/g,' ').toLowerCase();
   const editorialTable=table=>table?`<div class="living-table-wrap"><table><caption>${esc(table.caption)}</caption><thead><tr>${table.columns.map(value=>`<th scope="col">${esc(value)}</th>`).join('')}</tr></thead><tbody>${table.rows.map(row=>`<tr>${row.map(value=>`<td>${esc(value)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
-  const editorialItem=(item,section)=>`<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}<p>${esc(item.body)}</p>${(item.paragraphs||[]).map(text=>`<p>${esc(text)}</p>`).join('')}${editorialTable(item.table)}${related(item).length?`<details class="living-references"><summary>Sources and related work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div>${related(item).map(record=>`<a href="${recordHref(record.id)}">${esc(record.title)}</a>`).join(' · ')}</div></details>`:''}<div class="living-item-date">Updated ${esc(longDate(item.updatedAt))}</div></div>${item.image?`<img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="lazy">`:''}</article>`;
-  return `<div class="living-page"><div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-listen-label="Listen to this page"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to this page</span></button></div>${sections.map(section=>`<section class="living-section" id="${esc(section.id)}"><h2>${esc(section.title)}</h2><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}</div></section>`).join('')}</div>`;
+  const editorialItem=(item,section)=>{
+    const references=related(item);
+    const grouped=[
+      ['External sources',references.filter(record=>record.schema==='evidence'&&record.fields?.source?.url)],
+      ['Supporting evidence',references.filter(record=>['measurement','claim','finding'].includes(record.schema)||(record.schema==='evidence'&&!record.fields?.source?.url))],
+      ['Related work',references.filter(record=>!['evidence','measurement','claim','finding'].includes(record.schema))]
+    ];
+    const referenceContent=grouped.filter(([,records])=>records.length).map(([label,records])=>`<div class="living-reference-group"><strong>${label}</strong><div>${records.map(record=>`<a href="${recordHref(record.id)}">${esc(record.title)}</a>`).join(' · ')}</div></div>`).join('');
+    const metadata=references.length
+      ?`<details class="living-references"><summary><span class="living-item-date">Updated ${esc(date(item.updatedAt))}</span><span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources (${references.length}) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="living-reference-content">${referenceContent}</div></details>`
+      :`<div class="living-references living-references-empty"><span class="living-item-date">Updated ${esc(date(item.updatedAt))}</span></div>`;
+    return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}<p>${esc(item.body)}</p>${(item.paragraphs||[]).map(text=>`<p>${esc(text)}</p>`).join('')}${editorialTable(item.table)}${metadata}</div>${item.image?`<img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'?'eager':'lazy'}">`:''}</article>`;
+  };
+  const sectionNav=`<nav class="living-section-nav" aria-label="Publication pages">${sections.map(item=>{const target=item.id==='open-questions'?'questions':item.id;return `<a href="${href(target)}" ${item.id===sectionId?'aria-current="page"':''}>${esc(item.id==='open-questions'?'Questions':item.title)}</a>`}).join('')}</nav>`;
+  const latest=Array.isArray(records)?recentUpdates(7):[];
+  const updateDate=record=>record.schema==='activity'?record.fields?.occurred_at:record.schema==='finding'?record.fields?.last_reviewed_at:record.fields?.published_at;
+  const updateType=record=>record.schema==='activity'?'Activity':record.schema==='finding'?'Finding':'Source report';
+  const updates=`<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2><div class="living-update-list">${latest.map(record=>`<a class="living-update" href="${recordHref(record.id)}"><h3>${esc(record.title)}</h3><p>${esc(short(recordText(record),155))}</p><small>${esc(date(updateDate(record)))} · ${updateType(record)}</small></a>`).join('')}</div><a class="living-updates-all" href="${href('activity')}">View activity ${icon('arrow')}</a></aside>`;
+  const track=page==='overview'?'account':sectionId;
+  const listenLabel=page==='overview'?'Listen to the feed':`Listen to ${section.title.toLowerCase()}`;
+  return `<div class="living-layout"><div class="living-page">${sectionNav}<div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-track="${esc(track)}" data-listen-label="${esc(listenLabel)}"><span class="listen-icon" aria-hidden="true">▶</span><span>${esc(listenLabel)}</span></button></div><section class="living-section" id="${esc(section.id)}"><h1>${esc(page==='questions'?'Questions':section.title)}</h1><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}</div></section></div>${updates}</div>`;
 }
-function designOverview(){return livingPage()}
+function designOverview(){return livingPage('overview')}
 function activityPage(){const part=section('activity');return `${heading('Activity',part.summary,'/activity')}${part.chapters.map(group=>`<div class="section-title"><h2>${esc(group.title)}</h2></div>${recordList((group.records||[]).map(lookup).filter(Boolean),'/activity')}`).join('')}`}
 function genericPage(id){
   const item=menu.find(entry=>entry.page===id),part=section(id);
@@ -355,30 +380,33 @@ function feedPage(){
   const reading=feedContent.replace(/href="\/(?:record|organization)\/([^/"?]+)\/"/g,(_,id)=>`href="${recordHref(decodeURIComponent(id),'/feed')}"`);
   return `<div class="site-feed">${listingBreadcrumb('Feed')}<header class="site-feed-header"><div><h1>Our evolving account</h1><p>${esc(feed.description)}</p><button class="overview-listen feed-listen" type="button"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to the feed</span></button></div><a class="text-link" href="/feed.txt" target="_blank" rel="noopener noreferrer" aria-label="Open text version of the feed">Text version ${icon("arrowExternal")}</a></header><div class="feed-reading">${reading}</div></div>`;
 }
+function setupSectionNav(){}
 function render({reuseExisting=false}={}){
   if(reuseExisting&&document.querySelector('#app > .care-shell')){
     document.querySelector('.menu-toggle').addEventListener('click',toggleMenu);
     setupHomeSearch();
+    setupSectionNav();
     setupFacilityMap();
     return;
   }
   const current=route();
-  const inner=current==='/overview'?designOverview():current==='/about'?aboutPage():current.startsWith('/record/')?detailPage(current):listingPage(current.slice(1));
+  const inner=['/overview','/our-work','/whats-next','/questions'].includes(current)?livingPage(current.slice(1)):current==='/about'?aboutPage():current.startsWith('/record/')?detailPage(current):listingPage(current.slice(1));
   const activePage=current.startsWith('/record/')?recordParents[lookup(current.slice('/record/'.length))?.schema]?.page:current.slice(1);
   const activeState=page=>current==='/'+page?'aria-current="page"':activePage===page?'aria-current="location"':'';
   const navLink=([page,label,symbol])=>`<a href="${href(page)}" ${activeState(page)}>${icon(symbol)}<span>${label}</span></a>`;
-  const primaryLinks=[['overview','Home','home'],['tasks','Actions','tasks'],['activity','Activity','activity'],['places','Places','places'],['organizations','Organizations','organizations'],['metrics','Measurements','metrics'],['findings','Findings','findings'],['sources','Sources','document']];
+  const primaryLinks=[['tasks','Actions','tasks'],['activity','Activity','activity'],['places','Places','places'],['organizations','Organizations','organizations'],['metrics','Measurements','metrics'],['findings','Findings','findings'],['sources','Sources','document']];
   const mainNavigation=`<nav class="care-rail-nav" aria-label="Project navigation">${primaryLinks.map(navLink).join('')}</nav>`;
   const aboutNavigation=`<nav class="care-rail-nav care-rail-secondary" aria-label="About Crossover">${navLink(['about','About','about'])}</nav>`;
   const grouped=mainNavigation+aboutNavigation;
   const mobileNavigation=grouped+`<div class="care-nav-group"><div class="care-group-label">More work</div><nav class="care-rail-nav" aria-label="More work">${[['improvements','Improvements','improvements'],['events','Events','events']].map(navLink).join('')}</nav></div>`;
   const identity=`<span class="gap-identity-mark" style="background:${esc(gap.fields?.identity_color||'#0789e8')}"></span><span>${esc(gap.title)}</span>`;
-  const shell=`<div class="care-shell"><aside class="care-rail"><a class="care-brand" href="${href('overview')}"><img src="/images/logo_light.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><div class="care-rail-groups">${grouped}</div></aside><div class="care-site"><header class="care-top"><a class="care-mobile-brand" href="${href('overview')}"><img src="/images/logo_dark.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><a class="gap-identity desktop-identity" href="${href('overview')}">${identity}</a><div class="care-top-actions"><div class="home-search"><button class="home-search-toggle" type="button" aria-label="Search the site" aria-expanded="false" aria-controls="home-search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><div class="home-search-panel" id="home-search-panel" hidden><label for="home-search-input">Search Crossover Stockton</label><input id="home-search-input" type="search" placeholder="Search sections and records"><div class="home-search-results"></div></div></div><a class="desktop-about" href="${href('about')}" ${activeState('about')}>${icon('about')}<span>About</span></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">${icon('menu')}</button></div></header><div class="mobile-menu" id="mobile-menu">${mobileNavigation}</div><main class="main" id="content" tabindex="-1"><div class="content"><div class="gap-identity mobile-identity">${identity}</div>${inner}</div></main><footer class="footer"><span>See clearly. Act locally.</span><div class="footer-links"><a href="${href('overview')}">Home</a><a href="${href('sources')}">Sources</a><a href="${href('improvements')}">Improvements</a><a href="${href('events')}">Events</a><a href="${href('about')}">About</a></div></footer></div></div>`;
-  document.getElementById('app').innerHTML=shell;
+  const shell=`<div class="care-shell"><aside class="care-rail"><a class="care-brand" href="${href('overview')}"><img src="/images/logo_light.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><div class="care-rail-groups">${grouped}</div></aside><div class="care-site"><header class="care-top"><a class="care-mobile-brand" href="${href('overview')}"><img src="/images/logo_dark.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><a class="gap-identity desktop-identity" href="${href('overview')}">${identity}</a><div class="care-top-actions"><div class="home-search"><button class="home-search-toggle" type="button" aria-label="Search the site" aria-expanded="false" aria-controls="home-search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><div class="home-search-panel" id="home-search-panel" hidden><label for="home-search-input">Search Crossover Stockton</label><input id="home-search-input" type="search" placeholder="Search sections and records"><div class="home-search-results"></div></div></div><a class="desktop-about" href="${href('about')}" ${activeState('about')}>${icon('about')}<span>About</span></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">${icon('menu')}</button></div></header><div class="mobile-menu" id="mobile-menu">${mobileNavigation}</div><main class="main" id="content" tabindex="-1"><div class="content"><div class="gap-identity mobile-identity">${identity}</div>${inner}</div></main><footer class="footer"><div class="footer-inner"><div class="footer-copy"><span>&copy; ${new Date().getFullYear()} Crossover Stockton</span><span>See clearly. Act locally.</span></div><nav class="footer-links" aria-label="Footer"><a href="${href('about')}">About</a><a href="${href('sources')}">Sources</a></nav></div></footer></div></div>`;
+  document.getElementById('app').innerHTML=shell.replace('/images/logo_light.webp','/images/logo_dark.webp');
   syncListenButtons();
-  document.title=`${current==='/overview'?'Street dogs and access to care':current==='/about'?'About':current.startsWith('/record/')?'Record':menu.find(item=>'/'+item.page===current)?.label||'Crossover'} · Crossover Stockton${isPreview?' — new site preview':''}`;
+  document.title=`${({ '/overview':'Overview','/our-work':'Our work','/whats-next':"What's next",'/questions':'Questions','/about':'About' })[current]|| (current.startsWith('/record/')?'Record':menu.find(item=>'/'+item.page===current)?.label||'Crossover')} · Street dogs and access to care · Crossover Stockton${isPreview?' — new site preview':''}`;
   document.querySelector('.menu-toggle').addEventListener('click',toggleMenu);
   setupHomeSearch();
+  setupSectionNav();
   setupFacilityMap();
   window.scrollTo(0,0);
 }
@@ -405,9 +433,9 @@ function handleListingControls(event){
   if(filterButton){updateListingFilter(filterButton.dataset.filter);return}
   if(event.target.closest('.work-search-link'))document.querySelector('.home-search-toggle')?.click();
 }
-const trackTitles={account:'Street dogs and access to care'};
-const listenLabels={account:'Listen to this page'};
-const trackForButton=()=> 'account';
+const trackTitles={account:'Street dogs and access to care',overview:'Overview','our-work':'Our work','whats-next':"What's next",'open-questions':'Questions'};
+const listenLabels={account:'Listen to the feed',overview:'Listen to overview','our-work':'Listen to our work','whats-next':"Listen to what's next",'open-questions':'Listen to questions'};
+const trackForButton=button=>button.dataset.track||'account';
 const positionKey=track=>`crossover-audio:${track}:${audioManifest[track].version}`;
 function savePosition(){
   if(!activeTrack||!Number.isFinite(narration.currentTime))return;
@@ -482,7 +510,7 @@ function handleListen(event){
 }
 function isSitePage(path){
   if(isPreview)return path===previewBase;
-  return path==='/'||path==='/about/'||path==='/feed/'||/^\/street-dogs\/(?:overview|activity|tasks|metrics|findings|organizations|improvements|places|events|sources)\/$/.test(path)||/^\/(?:record|organization)\/[^/]+\/$/.test(path);
+  return path==='/'||['/about/','/our-work/','/whats-next/','/questions/','/feed/'].includes(path)||/^\/street-dogs\/(?:overview|activity|tasks|metrics|findings|organizations|improvements|places|events|sources)\/$/.test(path)||/^\/(?:record|organization)\/[^/]+\/$/.test(path);
 }
 function cleanLegacyRecordUrl(){
   if(!route().startsWith('/record/'))return;
@@ -491,6 +519,13 @@ function cleanLegacyRecordUrl(){
   params.delete('from');
   const query=params.toString();
   history.replaceState(history.state,'',location.pathname+(query?`?${query}`:'')+location.hash);
+}
+function resolveLegacySectionHash(){
+  if(location.pathname!=='/'||!location.hash)return false;
+  const section={'#our-work':'/our-work/','#whats-next':'/whats-next/','#open-questions':'/questions/'}[location.hash];
+  if(!section)return false;
+  history.replaceState(history.state,'',section+location.search);
+  return true;
 }
 function navigateToSitePage(event){
   if(event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
@@ -502,7 +537,7 @@ function navigateToSitePage(event){
     const target=document.getElementById(decodeURIComponent(destination.hash.slice(1)));
     if(!target)return;
     event.preventDefault();
-    const targetY=Math.max(0,target.getBoundingClientRect().top+window.scrollY-85);
+    const targetY=Math.max(0,target.getBoundingClientRect().top+window.scrollY-60);
     history.replaceState({...history.state,scrollY:window.scrollY},'');
     if(destination.href!==location.href)history.pushState({scrollY:targetY},'',destination.pathname+destination.search+destination.hash);
     target.scrollIntoView({behavior:'smooth',block:'start'});
@@ -524,5 +559,5 @@ function restoreSitePage(event){
   render();
   requestAnimationFrame(()=>window.scrollTo(0,event.state?.scrollY||0));
 }
-async function start(){try{const [storyResponse,recordsResponse,publicationResponse,feedContentResponse,audioResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/publication.json'),fetch('/feed-content.html'),fetch('/audio-manifest.json',{cache:'no-store'})]);if(!storyResponse.ok||!recordsResponse.ok||!publicationResponse.ok||!feedContentResponse.ok||!audioResponse.ok)throw new Error('Could not load the current account.');feed=await storyResponse.json();publication=await publicationResponse.json();feedContent=await feedContentResponse.text();audioManifest=await audioResponse.json();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap)throw new Error('No current gap in the public account.');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;setupNarration();cleanLegacyRecordUrl();history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render({reuseExisting:true});syncListenButtons();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Site unavailable</h1><p>${esc(error.message)}</p></main>`}}
+async function start(){try{const [storyResponse,recordsResponse,publicationResponse,feedContentResponse,audioResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/publication.json'),fetch('/feed-content.html'),fetch('/audio-manifest.json',{cache:'no-store'})]);if(!storyResponse.ok||!recordsResponse.ok||!publicationResponse.ok||!feedContentResponse.ok||!audioResponse.ok)throw new Error('Could not load the current account.');feed=await storyResponse.json();publication=await publicationResponse.json();feedContent=await feedContentResponse.text();audioManifest=await audioResponse.json();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap)throw new Error('No current gap in the public account.');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;setupNarration();cleanLegacyRecordUrl();const migrated=resolveLegacySectionHash();history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render({reuseExisting:!migrated});syncListenButtons();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Site unavailable</h1><p>${esc(error.message)}</p></main>`}}
 start();

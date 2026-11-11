@@ -2,5 +2,17 @@
   "account": {
     "src": "/audio/account-afd30ad6c7f2ea91.wav",
     "version": "afd30ad6c7f2ea91"
+  },
+  "our-work": {
+    "src": "/audio/our-work-95680cec8fc73d10.wav",
+    "version": "95680cec8fc73d10"
+  },
+  "whats-next": {
+    "src": "/audio/whats-next-732538bc5fad40a2.wav",
+    "version": "732538bc5fad40a2"
+  },
+  "open-questions": {
+    "src": "/audio/open-questions-2a4d175eb972153c.wav",
+    "version": "2a4d175eb972153c"
   }
 }

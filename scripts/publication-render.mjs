@@ -1,10 +1,11 @@
 const escape=value=>String(value).replace(/[&<>"']/g,character=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
 const sameHeading=(item,section)=>item.title.trim().replace(/\s+/g,' ').toLowerCase()===section.title.trim().replace(/\s+/g,' ').toLowerCase();
 
-export function renderPublicationFeed(data,records,gapId){
+export function renderPublicationFeed(data,records,gapId,sectionId){
   const publication=data.gapPublications.find(item=>item.gapId===gapId);
   if(!publication) throw new Error(`No publication for gap ${gapId}`);
-  const sections=[...publication.sections].sort((a,b)=>a.order-b.order);
+  const sections=[...publication.sections].filter(section=>!sectionId||section.id===sectionId).sort((a,b)=>a.order-b.order);
+  if(sectionId&&!sections.length)throw new Error(`Unknown publication section: ${sectionId}`);
   const items=section=>publication.items.filter(item=>item.section===section.id&&item.status==='published').sort((a,b)=>a.order-b.order);
   const tableSpeech=table=>table?[table.caption,...table.rows.map(row=>row.map((value,index)=>`${table.columns[index]}: ${value}`).join('. '))]:[];
   const tableHtml=table=>table?`<table><caption>${escape(table.caption)}</caption><thead><tr>${table.columns.map(value=>`<th scope="col">${escape(value)}</th>`).join('')}</tr></thead><tbody>${table.rows.map(row=>`<tr>${row.map(value=>`<td>${escape(value)}</td>`).join('')}</tr>`).join('')}</tbody></table>`:'';

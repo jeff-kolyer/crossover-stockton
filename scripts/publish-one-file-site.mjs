@@ -158,12 +158,14 @@ await copyFile("public/feed.json", resolve(dist, "feed.json"));
 await copyFile("src/publication.json", resolve(dist, "publication.json"));
 await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
 await copyFile("public/feed.txt", resolve(dist, "feed.txt"));
+for(const section of ['our-work','whats-next','open-questions'])
+  await copyFile(`public/feed-${section}.txt`,resolve(dist,`feed-${section}.txt`));
 await copyFile("public/audio-manifest.json", resolve(dist, "audio-manifest.json"));
 await mkdir(resolve(dist, "audio"), { recursive: true });
 const audioManifest = JSON.parse(await readFile("public/audio-manifest.json", "utf8"));
 for (const track of Object.values(audioManifest)) {
   const filename = track.src.split("/").at(-1);
-  if (!/^[a-z]+-[a-f0-9]{16}\.wav$/.test(filename)) throw new Error(`Unsafe audio filename: ${filename}`);
+  if (!/^[a-z]+(?:-[a-z]+)*-[a-f0-9]{16}\.wav$/.test(filename)) throw new Error(`Unsafe audio filename: ${filename}`);
   await copyFile(resolve("public/audio", filename), resolve(dist, "audio", filename));
 }
 await writeFile(resolve(dist, "CNAME"), await readFile("public/CNAME"));
@@ -214,8 +216,9 @@ await writeFile(resolve(dist, "interactive/index.html"), html.replace("<head>", 
 redirects.set('/feed/', '/');
 redirects.set(`/${currentSlug}/overview/`, '/');
 redirects.set('/gaps/', '/');
-await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap && !redirects.has(page.path)).map((page) => `<url><loc>${origin}${page.path}</loc></url>`).join("")}</urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nLiving gap page: ${origin}/\nReadable pages: ${origin}/, ${origin}/activity/, ${origin}/places/, ${origin}/explore/, ${origin}/organizations/, ${origin}/about/\nPublication data: ${origin}/publication.json\nPublication text: ${origin}/feed.txt\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
+redirects.set('/street-dogs/story/', '/');
+await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...staticSite.pages.filter((page) => page.sitemap && !redirects.has(page.path)).map(page=>page.path),'/our-work/','/whats-next/','/questions/'].map(path=>`<url><loc>${origin}${path}</loc></url>`).join("")}</urlset>\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nLiving publication: ${origin}/\nEditorial pages: ${origin}/, ${origin}/our-work/, ${origin}/whats-next/, ${origin}/questions/\nPublication data: ${origin}/publication.json\nPublication text: ${origin}/feed.txt\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);
