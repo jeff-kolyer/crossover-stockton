@@ -72,68 +72,49 @@ test('the root serves the Overview and the old overview URL stays readable', asy
   assert.ok(root.includes('<span>Home</span>'));
   assert.ok(!root.includes('aria-label="Breadcrumb"'));
   assert.ok(root.includes('href="/street-dogs/metrics/"'));
-  assert.equal((root.match(/Read or listen to the feed/g) ?? []).length, 2);
+  assert.equal((root.match(/Read or listen to the feed/g) ?? []).length, 1);
   assert.ok(root.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(!root.includes('href="#/'));
   const overview = await page('/street-dogs/overview/');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.started_at, '2026-11-04');
   assert.equal(feed.records["task-review-sas-field-call-records"].fields.status, 'in_progress');
   assert.ok(feed.records["task-review-sas-field-call-records"].fields.list_context.includes('7,183 cases'));
-  for (const phrase of ['What happens when a dog needs help?','Listen to this account','What we know now','Stockton has an established animal-care network','3,106','No verified census'])
+  for (const phrase of ['What happens when a dog needs help?','Listen to this account','The current picture','Stockton has an established animal-care network','3,106','No verified census'])
     assert.ok(overview.includes(phrase), phrase);
   assert.ok(overview.includes('rel="canonical" href="https://crossoverstockton.org/"'));
   assert.ok(overview.includes('<meta name="robots" content="noindex,follow">'));
   assert.ok(overview.includes('href="/"'));
 });
 
-test('Overview keeps the simple layout and renders the sourced Living Account', async () => {
+test('Overview publishes the current account and wide activity layout', async () => {
   const root = await page('/');
-  const positions = ['id="current-picture"', 'id="living-update"', 'class="design-latest"', 'id="open-questions"', '04 / THE WORKSPACE', 'class="design-intro"'].map(label => root.indexOf(label));
+  const positions = ['class="compact-hero"', 'class="compact-metrics"', 'id="living-update"', 'id="compact-questions"', 'class="design-intro"'].map(label => root.indexOf(label));
   assert.ok(positions.every(position => position >= 0));
   assert.ok(positions.every((position, index) => index === 0 || position > positions[index - 1]));
   assert.ok(root.includes('What happens when a dog needs help?'));
   assert.ok(root.includes("We're examining how dogs on Stockton's streets get care, where help falls short, and what could make things better."));
   assert.ok(root.includes('We follow the evidence, learn from people doing the work'));
-  assert.ok(root.includes('Two attributed figures. One important unknown.'));
-  assert.equal((root.match(/class="design-stat"/g) ?? []).length, 3);
-  assert.equal((root.match(/class="design-stat-icon"/g) ?? []).length, 3);
+  assert.equal((root.match(/class="compact-metric"/g) ?? []).length, 3);
   for (const label of ['Stray-dog intake events','Reported dumped dogs','Dogs currently on streets','2024 · Animal Services','Sept 2026 · Street Dogs','No verified census'])
     assert.ok(root.includes(label), label);
-  assert.ok(root.includes('02 / LIVING ACCOUNT'));
+  assert.ok(root.includes('<h2>The current picture</h2>'));
   assert.ok(root.includes("The current situation, the people helping, and what's being done."));
-  assert.ok(root.includes('<div class="design-report-meta"><span>November 9, 2026</span><strong class="eyebrow">CURRENT ACCOUNT</strong></div>'));
-  assert.ok(!root.includes('class="overview-eyebrow"'));
-  assert.ok(root.includes('class="design-latest"'));
-  assert.ok(root.includes('class="design-directory"'));
-  assert.ok(root.includes('href="#open-questions"'));
+  assert.ok(root.includes('Updated Nov 9, 2026'));
+  assert.ok(root.includes('class="compact-latest"'));
+  assert.ok(root.includes('href="#compact-questions"'));
   assert.ok(root.includes('href="/street-dogs/activity/"'));
   assert.ok(root.includes('href="/feed/"'));
   const account = story.chapters.find(item => item.id === 'gap').chapters.find(item => item.id === 'overview').livingAccount;
-  const written = [...root.matchAll(/<p class="overview-spoken">([\s\S]*?)<\/p>/g)].map(match => match[1].replace(/<[^>]+>/g, ''));
+  const written = [...root.matchAll(/<article class="compact-story">[\s\S]*?<p>([\s\S]*?)<\/p><\/div><\/article>/g)].map(match => match[1]);
   assert.deepEqual(written, account.paragraphs.map(paragraph => html(paragraph.text)));
   assert.equal(written.length, 5);
-  for (const paragraph of account.paragraphs)
-    for (const label of paragraph.emphasis)
-      assert.ok(root.includes(`<strong>${html(label)}</strong>`), label);
-  assert.ok(!/<p class="overview-spoken">[\s\S]*?<a\b/.test(root.slice(root.indexOf('id="living-update"'), root.indexOf('class="design-report-actions"'))));
-  const sources = root.match(/<details class="account-sources">([\s\S]*?)<\/details>/);
-  assert.ok(sources, 'one supporting-record disclosure is present');
-  assert.equal((root.match(/<details class="account-sources">/g) ?? []).length, 1);
-  assert.ok(sources[1].startsWith('<summary>Sources and supporting records</summary>'));
-  const groups = [...sources[1].matchAll(/<section class="account-source-group"><h3>[^<]+<\/h3><ul>([\s\S]*?)<\/ul><\/section>/g)];
-  assert.equal(groups.length, account.paragraphs.length);
-  groups.forEach((group, index) => {
-    const expected = account.paragraphs[index].links.map(link => {
-      const path = feed.records[link.record].schema === 'organization' ? 'organization' : 'record';
-      return `<li><a href="/${path}/${link.record}/">${html(feed.records[link.record].title)}</a></li>`;
-    }).join('');
-    assert.equal(group[1], expected);
-  });
-  assert.ok(root.indexOf('Listen to this account') < root.indexOf('<p class="overview-spoken">'));
+  assert.ok(root.indexOf('Listen to this account') < root.indexOf('class="compact-stories"'));
+  assert.equal((root.match(/<a href="\/record\/crossover-2026-/g) ?? []).length >= 4, true);
+  const css = await read('dist/care-site.css');
+  assert.ok(css.includes('.compact-latest{grid-column:2;grid-row:1 / span 3'));
+  assert.ok(css.includes('.compact-stories{grid-template-columns:repeat(2,minmax(0,1fr))'));
   assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
   assert.ok(!root.includes('?from='));
-  assert.ok(!root.includes('overview-brief-grid'));
-  assert.ok(!root.includes('class="overview-section"'));
 });
 
 test('all ten sections remain reachable and readable', async () => {

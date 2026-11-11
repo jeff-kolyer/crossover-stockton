@@ -135,6 +135,18 @@ for (const file of ["ai-variant.html", "ai-variant.css", "ai-variant-v2.css", "a
 await copyFile("public/preview/site-md.css", resolve(dist, "site.css"));
 await copyFile("public/preview/care-site/style.css", resolve(dist, "care-site.css"));
 await copyFile("public/preview/care-site/site.js", resolve(dist, "site.js"));
+await mkdir(resolve(dist, "images"), { recursive: true });
+await copyFile("public/images/project.svg", resolve(dist, "images/project.svg"));
+for (const image of [
+  "variants/clean/dog-sidewalk.jpg",
+  "variants/clean/shelter.jpg",
+  "home/pets-shelter.jpg",
+  "reports/stockton-animal-services-first-visit.webp",
+  "variants/clean/records-desk.jpg",
+]) {
+  await mkdir(resolve(dist, "images", image.split("/").slice(0, -1).join("/")), { recursive: true });
+  await copyFile(resolve("public/images", image), resolve(dist, "images", image));
+}
 await mkdir(resolve(dist, "images/home"), { recursive: true });
 await copyFile("public/images/home/sunlit-window-view.jpg", resolve(dist, "images/home/sunlit-window-view.jpg"));
 await mkdir(resolve(dist, "images/about"), { recursive: true });
