@@ -424,15 +424,25 @@ function seekBy(seconds){
   narration.currentTime=Math.max(0,Math.min(narration.duration,narration.currentTime+seconds));
   savePosition();updateMediaPosition();
 }
+function closeNarration(){
+  savePosition();
+  narration.pause();
+  activeTrack=null;
+  pendingPosition=0;
+  narration.removeAttribute('src');
+  narration.load();
+  if('mediaSession' in navigator)navigator.mediaSession.metadata=null;
+  syncListenButtons();
+}
 function setupNarration(){
   narration=new Audio();
   const player=document.createElement('div');
   player.id='narration-player';player.className='narration-player';player.hidden=true;
-  player.innerHTML='<strong class="narration-title"></strong><button type="button" data-seek="-15" aria-label="Back 15 seconds">↶ 15</button><button type="button" data-seek="30" aria-label="Forward 30 seconds">30 ↷</button><label>Speed <select aria-label="Playback speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>';
+  player.innerHTML='<strong class="narration-title"></strong><button type="button" data-seek="-15" aria-label="Back 15 seconds">↶ 15</button><button type="button" data-seek="30" aria-label="Forward 30 seconds">30 ↷</button><label>Speed <select aria-label="Playback speed"><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label><button type="button" data-close-player aria-label="Close audio player">×</button>';
   narration.controls=true;narration.preload='metadata';
   player.insertBefore(narration,player.querySelector('[data-seek]'));
   document.body.append(player);
-  player.addEventListener('click',event=>{const button=event.target.closest('[data-seek]');if(button)seekBy(Number(button.dataset.seek))});
+  player.addEventListener('click',event=>{if(event.target.closest('[data-close-player]')){closeNarration();return}const button=event.target.closest('[data-seek]');if(button)seekBy(Number(button.dataset.seek))});
   player.querySelector('select').addEventListener('change',event=>{narration.playbackRate=Number(event.target.value);updateMediaPosition()});
   narration.addEventListener('loadedmetadata',()=>{if(pendingPosition>0&&pendingPosition<narration.duration-1)narration.currentTime=pendingPosition;pendingPosition=0;updateMediaPosition()});
   narration.addEventListener('timeupdate',()=>{savePosition();updateMediaPosition()});
