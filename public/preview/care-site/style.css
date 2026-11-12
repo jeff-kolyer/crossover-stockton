@@ -618,19 +618,6 @@ a.text-link,button.text-link{font-weight:700}
 .living-founder p{margin:14px 0 0;color:#172b3a;font-size:16px;font-weight:400;line-height:1.5}
 .living-founder .about-linkedin-button{gap:8px;margin-top:18px;border-radius:999px}
 .living-founder .about-linkedin-button .linkedin-icon{flex:none;width:17px;height:17px}
-.living-references summary{display:flex;align-items:center;justify-content:flex-start;gap:10px;width:100%;color:inherit;font-weight:400;cursor:pointer;list-style:none}
-.living-reference-label{display:inline-flex;align-items:center;gap:4px;color:inherit;font-weight:inherit;white-space:nowrap}
-.living-references summary:hover .living-reference-label{text-decoration:underline;text-underline-offset:2px}
-.living-meta-separator{color:inherit}
-.living-references summary:focus-visible{outline:2px solid #00645f;outline-offset:3px;border-radius:2px}
-.living-references summary::-webkit-details-marker{display:none}
-.living-references summary svg{width:15px;height:15px;transition:transform .18s ease}
-.living-references[open] summary svg{transform:rotate(180deg)}
-.living-reference-content{margin-top:8px;overflow-wrap:anywhere}
-.living-reference-group+.living-reference-group{margin-top:8px}
-.living-reference-group strong{display:block;color:var(--skin-ink);font-weight:600}
-.living-references a{color:#00645f;text-decoration:underline;text-underline-offset:2px}
-.living-item-date{color:inherit;font-size:inherit;font-weight:inherit;line-height:inherit;white-space:nowrap}
 .living-table-wrap{max-width:100%;overflow-x:auto;margin:16px 0}
 .living-table-wrap table{width:100%;border-collapse:collapse;font-size:.92rem;text-align:left}
 .living-table-wrap caption{padding-bottom:8px;text-align:left;font-weight:700}
@@ -692,7 +679,13 @@ a.text-link,button.text-link{font-weight:700}
 .living-page--continuous .living-section:not(:last-child){padding-bottom:12px}
 .living-citations{font-size:12px;white-space:nowrap}
 .living-citations a,.living-sources a{color:#00645f;text-decoration:underline;text-underline-offset:2px}
-.living-sources ol{margin:0;padding-left:24px;font-size:16px;line-height:1.5}
+.living-sources{padding:16px 0}
+.living-sources summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none}
+.living-sources summary::-webkit-details-marker{display:none}
+.living-sources summary h2{margin:0}
+.living-sources summary svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;transform:rotate(90deg);transition:transform .18s ease}
+.living-sources details[open] summary svg{transform:rotate(-90deg)}
+.living-sources ol{margin:20px 0 0;padding-left:24px;font-size:16px;line-height:1.5}
 .living-sources li+li{margin-top:10px}
 .living-sources li{scroll-margin-top:60px}
 @media(min-width:901px){
@@ -743,7 +736,6 @@ a.text-link,button.text-link{font-weight:700}
   .living-updates{padding-top:24px}
   .living-update:nth-child(n+4){display:none}
   .living-updates-all{display:none}
-  .living-references summary{flex-wrap:wrap;column-gap:8px;row-gap:2px}
 }
 
 /* Editorial footer follows the full reading grid, including Latest updates. */

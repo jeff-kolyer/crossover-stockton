@@ -51,7 +51,8 @@ test('one scrolling project page contains four sections and keeps About separate
   const ordered=published.sections.toSorted((a,b)=>a.order-b.order).flatMap(section=>written.filter(item=>item.section===section.id).toSorted((a,b)=>a.order-b.order));
   const sourceIds=[...new Set(ordered.flatMap(item=>item.relatedRecordIds||[]))].filter(id=>feed.records[id]);
   const sourceList=root.match(/<section class="living-section living-sources" id="feed-sources">[\s\S]*?<\/section>/)?.[0];
-  assert.ok(sourceList?.startsWith('<section class="living-section living-sources" id="feed-sources"><h2>Sources</h2><ol>'));
+  assert.ok(sourceList?.startsWith(`<section class="living-section living-sources" id="feed-sources"><details><summary><h2>Sources (${sourceIds.length})</h2>`));
+  assert.ok(sourceList.includes('</summary><ol>')&&!sourceList.includes('<details open'));
   assert.ok(root.indexOf('id="open-questions"')<root.indexOf('id="feed-sources"'));
   assert.ok(root.indexOf('id="feed-sources"')<root.indexOf('class="living-updates"'));
   assert.equal((sourceList.match(/<li id="source-/g)||[]).length,sourceIds.length);
@@ -105,19 +106,32 @@ test('one scrolling project page contains four sections and keeps About separate
   assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
 });
 
-test('About keeps its article source disclosures while the project feed uses one source list',async()=>{
+test('both publications collect article sources into a collapsed numbered list',async()=>{
   const root=await page('/');
   assert.ok(root.includes('id="feed-sources"'));
   assert.ok(!root.includes('<details class="living-references">'));
   const rendered=await page('/about/');
-  assert.ok(!rendered.includes('id="feed-sources"'));
-  assert.ok(rendered.includes('<details class="living-references"><summary><span class="living-item-date">Updated '));
-  assert.ok(rendered.includes('<span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources ('));
-  assert.ok(rendered.includes('<div class="living-reference-content">'));
+  const about=publication.sitePublications.find(item=>item.id==='about');
+  const articles=about.items.filter(item=>item.status==='published').sort((a,b)=>a.order-b.order);
+  const sourceIds=[...new Set(articles.flatMap(item=>item.relatedRecordIds||[]))].filter(id=>feed.records[id]);
+  const sourceList=rendered.match(/<section class="living-section living-sources" id="feed-sources">[\s\S]*?<\/section>/)?.[0];
+  assert.ok(sourceList?.startsWith(`<section class="living-section living-sources" id="feed-sources"><details><summary><h2>Sources (${sourceIds.length})</h2>`));
+  assert.ok(sourceList.includes('</summary><ol>')&&!sourceList.includes('<details open'));
+  assert.equal((sourceList.match(/<li id="source-/g)||[]).length,sourceIds.length);
+  for(const [index,id] of sourceIds.entries()){
+    const record=feed.records[id];
+    const prefix=record.schema==='organization'?'organization':'record';
+    assert.ok(sourceList.includes(`<li id="source-${index+1}"><a href="/${prefix}/${id}/">${html(record.title)}</a></li>`),id);
+  }
+  for(const item of articles){
+    const article=rendered.match(new RegExp(`<article[^>]*id="${item.id}"[\\s\\S]*?</article>`))?.[0];
+    assert.ok(article&&!article.includes('living-item-date')&&!article.includes('<details'),item.id);
+    for(const id of new Set(item.relatedRecordIds||[]))assert.ok(article.includes(`href="#source-${sourceIds.indexOf(id)+1}"`),`${item.id}: ${id}`);
+  }
   const css=await read('dist/care-site.css');
-  assert.ok(css.includes('.living-references summary{display:flex;align-items:center;justify-content:flex-start'));
-  assert.ok(css.includes('.living-reference-label{display:inline-flex'));
-  assert.ok(css.includes('.living-references[open] summary svg{transform:rotate(180deg)}'));
+  assert.ok(css.includes('.living-sources summary{display:flex;align-items:center;justify-content:space-between'));
+  assert.ok(css.includes('.living-sources summary svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;transform:rotate(90deg)'));
+  assert.ok(css.includes('.living-sources details[open] summary svg{transform:rotate(-90deg)}'));
 });
 
 test('About reads site publication data without a gap or custom article renderer',async()=>{
@@ -152,7 +166,7 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(speech.startsWith('Our mission\n\nFrom work to vocation\n\n'));
   assert.ok(speech.indexOf(written[0].title)<speech.indexOf(written[1].title));
   assert.ok(speech.indexOf(written[1].title)<speech.indexOf(written[2].title));
-  assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Updated'));
+  assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Updated')&&!speech.includes('Sources ('));
   const fixture=structuredClone(publication);
   fixture.sitePublications[0].items.push({...written[2],id:'about-fourth',order:4,title:'A fourth About article',body:'A new data-only article.',relatedRecordIds:[]});
   validatePublication(fixture,feed.records);

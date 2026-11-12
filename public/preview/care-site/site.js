@@ -262,22 +262,11 @@ function updateListingFilter(value){
 const sameEditorialHeading=(item,section)=>item.title.trim().replace(/\s+/g,' ').toLowerCase()===section.title.trim().replace(/\s+/g,' ').toLowerCase();
 const editorialTable=table=>table?`<div class="living-table-wrap"><table><caption>${esc(table.caption)}</caption><thead><tr>${table.columns.map(value=>`<th scope="col">${esc(value)}</th>`).join('')}</tr></thead><tbody>${table.rows.map(row=>`<tr>${row.map(value=>`<td>${esc(value)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
 function editorialItem(item,section,sourceNumbers){
-  const references=(item.relatedRecordIds||[]).map(id=>lookup(id)).filter(Boolean);
-  const updated=section.id==='about'?date(item.updatedAt):projectDate(item.updatedAt);
-  const grouped=[
-    ['External sources',references.filter(record=>record.schema==='evidence'&&record.fields?.source?.url)],
-    ['Supporting evidence',references.filter(record=>['measurement','claim','finding'].includes(record.schema)||(record.schema==='evidence'&&!record.fields?.source?.url))],
-    ['Related work',references.filter(record=>!['evidence','measurement','claim','finding'].includes(record.schema))]
-  ];
-  const referenceContent=grouped.filter(([,records])=>records.length).map(([label,records])=>`<div class="living-reference-group"><strong>${label}</strong><div>${records.map(record=>`<a href="${recordHref(record.id)}">${esc(record.title)}</a>`).join(' · ')}</div></div>`).join('');
-  const metadata=section.id!=='about'?'':references.length
-    ?`<details class="living-references"><summary><span class="living-item-date">Updated ${esc(updated)}</span><span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources (${references.length}) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="living-reference-content">${referenceContent}</div></details>`
-    :`<div class="living-references living-references-empty"><span class="living-item-date">Updated ${esc(updated)}</span></div>`;
-  const citationNumbers=section.id==='about'?[]:[...new Set(item.relatedRecordIds||[])].map(id=>sourceNumbers.get(id)).filter(Boolean).sort((a,b)=>a-b);
+  const citationNumbers=[...new Set(item.relatedRecordIds||[])].map(id=>sourceNumbers.get(id)).filter(Boolean).sort((a,b)=>a-b);
   const citations=citationNumbers.length?` <sup class="living-citations">[${citationNumbers.map(number=>`<a href="#source-${number}" aria-label="Source ${number}">${number}</a>`).join(', ')}]</sup>`:'';
   const paragraphs=[item.body,...(item.paragraphs||[])];
   const copy=paragraphs.map((text,index)=>`<p>${esc(text)}${index===paragraphs.length-1?citations:''}</p>`).join('');
-  return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameEditorialHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}${copy}${editorialTable(item.table)}${metadata}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'||section.id==='about'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
+  return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameEditorialHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}${copy}${editorialTable(item.table)}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'||section.id==='about'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
 }
 function founderProfile(description){
   const identity=records.find(record=>record.schema==='identity');
@@ -303,9 +292,9 @@ function livingPage(page='overview'){
   const updateType=record=>record.schema==='activity'?'Activity':record.schema==='finding'?'Finding':'Source report';
   const updates=`<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2><div class="living-update-list">${latest.map(record=>`<a class="living-update" href="${recordHref(record.id)}"><h3>${esc(record.title)}</h3><p>${esc(short(recordText(record),155))}</p><small>${esc(date(updateDate(record)))} · ${updateType(record)}</small></a>`).join('')}</div><a class="living-updates-all" href="${href('activity')}">View activity ${icon('arrow')}</a></aside>`;
   const feedUpdated=selected.items.filter(item=>item.status==='published').map(item=>item.updatedAt).sort().at(-1);
-  const sourceIds=isAbout?[]:[...new Set(sections.flatMap(section=>items(section.id).flatMap(item=>item.relatedRecordIds||[])))].filter(id=>lookup(id));
+  const sourceIds=[...new Set(sections.flatMap(section=>items(section.id).flatMap(item=>item.relatedRecordIds||[])))].filter(id=>lookup(id));
   const sourceNumbers=new Map(sourceIds.map((id,index)=>[id,index+1]));
-  const sources=sourceIds.length?`<section class="living-section living-sources" id="feed-sources"><h2>Sources</h2><ol>${sourceIds.map((id,index)=>`<li id="source-${index+1}"><a href="${recordHref(id)}">${esc(lookup(id).title)}</a></li>`).join('')}</ol></section>`:'';
+  const sources=sourceIds.length?`<section class="living-section living-sources" id="feed-sources"><details><summary><h2>Sources (${sourceIds.length})</h2>${icon('chevron')}</summary><ol>${sourceIds.map((id,index)=>`<li id="source-${index+1}"><a href="${recordHref(id)}">${esc(lookup(id).title)}</a></li>`).join('')}</ol></details></section>`:'';
   const renderSection=section=>{
     const title=section.id==='open-questions'?'Questions':section.title;
     const isOpening=isAbout||section.id==='overview';
@@ -392,6 +381,12 @@ function setupSectionNav(){
 function queueEditorialRouteScroll(){
   if(typeof requestAnimationFrame!=='function')return;
   const hash=decodeURIComponent((location.hash||'').slice(1));
+  const source=hash.startsWith('source-')?document.getElementById(hash):null;
+  if(source?.closest('.living-sources')){
+    source.closest('details').open=true;
+    requestAnimationFrame(()=>source.scrollIntoView({block:'start'}));
+    return;
+  }
   const target=['overview','our-work','whats-next','open-questions'].includes(hash)?hash:editorialSectionForPage(route());
   if(!target||target==='overview'&&!hash)return;
   requestAnimationFrame(()=>document.getElementById(target)?.scrollIntoView({block:'start'}));
@@ -557,6 +552,7 @@ function navigateToSitePage(event){
     const target=document.getElementById(decodeURIComponent(destination.hash.slice(1)));
     if(!target)return;
     event.preventDefault();
+    target.closest('.living-sources details')?.setAttribute('open','');
     const targetY=Math.max(0,target.getBoundingClientRect().top+window.scrollY-60);
     history.replaceState({...history.state,scrollY:window.scrollY},'');
     if(destination.href!==location.href)history.pushState({scrollY:targetY},'',destination.pathname+destination.search+destination.hash);
