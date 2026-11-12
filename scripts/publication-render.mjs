@@ -27,5 +27,13 @@ export function renderPublicationFeed(data,records,gapId,sectionId){
 export function renderSitePublicationFeed(data,records,siteId){
   const publication=data.sitePublications?.find(item=>item.id===siteId);
   if(!publication) throw new Error(`No site publication: ${siteId}`);
-  return renderCollection(publication,records,{openingTitle:publication.title,timeZone:'UTC'});
+  const rendered=renderCollection(publication,records,{openingTitle:publication.title,timeZone:'UTC'});
+  const identity=Object.values(records).find(record=>record.schema==='identity');
+  const founder=records[identity?.fields?.founderPersonId];
+  if(!founder)return rendered;
+  const role=founder.fields?.roles?.find(item=>item.title==='Founder')||founder.fields?.roles?.[0];
+  const organization=records[role?.organizationId]?.title||'Crossover Stockton';
+  const description=publication.founderSummary||founder.fields?.biography?.[0]||'';
+  const founderText=[founder.fields?.name||founder.title,`${role?.title||'Founder'}, ${organization}`,description].join('\n\n');
+  return {...rendered,text:`${rendered.text.trimEnd()}\n\n${founderText}\n`};
 }

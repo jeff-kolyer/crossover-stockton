@@ -163,7 +163,7 @@ function render(){
 }
 async function start(){
   try{
-    const [feedResponse,storyResponse]=await Promise.all([fetch('/data/records.json',{cache:'no-store'}),fetch('/feed.json',{cache:'no-store'})]);
+    const [feedResponse,storyResponse]=await Promise.all([fetch('/data/records.json',{cache:'no-store'}),fetch('/site-config.json',{cache:'no-store'})]);
     if(!feedResponse.ok||!storyResponse.ok)throw new Error('Could not load the public feed');
     feed=await feedResponse.json();story=await storyResponse.json();records=Object.values(feed.records||{});byId=new Map(records.map(r=>[r.id,r]));
     gap=all('gap').find(r=>r.fields?.default)||all('gap')[0];if(!gap)throw new Error('No gap in the record feed');

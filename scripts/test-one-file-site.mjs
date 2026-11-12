@@ -7,7 +7,7 @@ const html = await readFile("public/preview/one-file-site.html", "utf8");
 const noImagesHtml = await readFile("public/preview/no-images-site.html", "utf8");
 const cleanHtml = await readFile("public/preview/clean-site.html", "utf8");
 const feed = JSON.parse(await readFile("public/data/records.json", "utf8"));
-const story = JSON.parse(await readFile("public/feed.json", "utf8"));
+const story = JSON.parse(await readFile("public/site-config.json", "utf8"));
 const embedded = (id, page = html) => {
   const match = page.match(new RegExp(`<script id="${id}" type="application/json">([\\s\\S]*?)<\\/script>`));
   assert.ok(match, `${id} is embedded`);

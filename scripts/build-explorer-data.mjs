@@ -51,7 +51,7 @@ try {
   let oldPublic = "";
   try { oldPublic = await readFile(publicPath, "utf8"); } catch { /* First generation. */ }
   if (oldPublic !== feed) await writeFile(publicPath, feed);
-  const storyPath = "public/feed.json";
+  const storyPath = "public/site-config.json";
   const publishedStory = `${JSON.stringify(story, null, 2)}\n`;
   let oldStory = "";
   try { oldStory = await readFile(storyPath, "utf8"); } catch { /* First generation. */ }

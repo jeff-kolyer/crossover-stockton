@@ -20,7 +20,7 @@ Crossover begins by identifying a **gap**: a need that isn't being adequately me
 
 We create a project around that gap and build an understanding of the situation through research, firsthand observations, public records, conversations, and practical attempts to help.
 
-The project evolves as we learn. New information may change our understanding, raise questions, reveal resources, or suggest actions.
+We go out, find out what is happening, and add structured records. We decide what those records mean for our understanding. When something material changes, we revise the feed to reflect our current best account. The records accumulate; the feed stays focused.
 
 The website makes this work public.
 
@@ -45,9 +45,13 @@ These are different views of the same evolving project, not separate investigati
 
 Visitors can read or listen to the feed.
 
+Aim for about seven minutes to read or listen to the complete feed. This is a flexible ceiling, not a quota to fill.
+
 ### A living account, supported by records
 
 The feed is editorial. We can revise explanations, introduce new information, and change the order of subjects as our understanding develops.
+
+The feed is the outcome of the research, not a list of research activities or a news aggregator. New evidence should lead us to revise, condense, or replace the existing account when warranted, while detailed records remain available underneath.
 
 The underlying records provide continuity and accountability.
 
@@ -103,6 +107,8 @@ The system separates three concerns:
 3. **The interface** provides navigation, exploration, and access to the underlying material.
 
 The publication is generated from structured source files. Changes to the editorial account do not automatically change the records on which it relies.
+
+In the future, AI may help flag potential changes, but people still evaluate the evidence and decide what deserves publication.
 
 Public outputs include:
 

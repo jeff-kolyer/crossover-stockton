@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
 
 const script = (await readFile('public/preview/site-md.js', 'utf8')).replace(/\bstart\(\);\s*$/, '');
-const story = JSON.parse(await readFile('public/feed.json', 'utf8'));
+const story = JSON.parse(await readFile('public/site-config.json', 'utf8'));
 const publication = JSON.parse(await readFile('public/data/records.json', 'utf8'));
 const listing = { innerHTML: '' }, count = { textContent: '' };
 const buttons = ['all', 'open', 'in_progress', 'waiting', 'proposed', 'under_development'].map(value => ({ dataset: { filter: value }, setAttribute(name, value) { this[name] = value; } }));

@@ -10,7 +10,7 @@ import { checkPublicationHistory } from './check-publication-history.mjs';
 const read = path => readFile(path, 'utf8');
 const html = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const feed = JSON.parse(await read('public/data/records.json'));
-const story = JSON.parse(await read('public/feed.json'));
+const story = JSON.parse(await read('public/site-config.json'));
 const publication = JSON.parse(await read('dist/publication.json'));
 const records = Object.values(feed.records);
 const page = path => read(`dist${path}index.html`);
@@ -65,6 +65,13 @@ test('one scrolling project page contains four sections and keeps About separate
   assert.equal(await read('src/publication.json'),await read('dist/publication.json'));
   const textFeed=await read('dist/feed.txt');
   assert.equal(textFeed,await read('public/feed.txt'));
+  const feedJson=JSON.parse(await read('dist/feed.json'));
+  assert.equal(await read('dist/feed.json'),await read('public/feed.json'));
+  assert.equal(feedJson.title,feed.records['dogs-safe-placement'].title);
+  assert.equal(feedJson.updatedAt,latest);
+  assert.deepEqual(feedJson.sections,published.sections);
+  assert.deepEqual(feedJson.items,ordered);
+  assert.deepEqual(JSON.parse(await read('dist/site-config.json')),story);
   assert.ok(textFeed.startsWith("Street dogs and access to care\n\nOverview\n\nUpdated November 11, 2026\n\nA problem whose scale is unknown\n\nDogs are being abandoned and found roaming Stockton's streets."));
   assert.ok(root.includes('<h3>A problem whose scale is unknown</h3>'));
   const expectedFeed=renderPublicationFeed(publication,feed.records,'dogs-safe-placement');
@@ -97,6 +104,7 @@ test('one scrolling project page contains four sections and keeps About separate
   const aboutSpeech=renderSitePublicationFeed(publication,feed.records,'about').text;
   assert.equal(await read('dist/feed-about.txt'),aboutSpeech);
   assert.ok(aboutSpeech.startsWith('About Crossover\n\nOur mission\n\nUpdated November 12, 2026\n\nFrom work to vocation\n\n'));
+  assert.ok(aboutSpeech.endsWith(`Jeff Kolyer\n\nFounder, Crossover Stockton\n\n${publication.sitePublications[0].founderSummary}\n`));
   assert.equal(audio.about.version,createHash('sha256').update('offline-voice-v1\n').update(aboutSpeech.trim()).digest('hex').slice(0,16));
   for(const [track,entry] of Object.entries(audio)){
     const file=await readFile(`dist${entry.src}`);
@@ -167,6 +175,7 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(speech.startsWith('About Crossover\n\nOur mission\n\nUpdated November 12, 2026\n\nFrom work to vocation\n\n'));
   assert.ok(speech.indexOf(written[0].title)<speech.indexOf(written[1].title));
   assert.ok(speech.indexOf(written[1].title)<speech.indexOf(written[2].title));
+  assert.ok(speech.indexOf(written[2].title)<speech.indexOf('Jeff Kolyer'));
   assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Sources ('));
   const fixture=structuredClone(publication);
   fixture.sitePublications[0].items.push({...written[2],id:'about-fourth',order:4,title:'A fourth About article',body:'A new data-only article.',relatedRecordIds:[]});

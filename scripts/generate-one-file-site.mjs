@@ -2,7 +2,7 @@ import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { resolve, sep } from "node:path";
 
 const feed = JSON.parse(await readFile("public/data/records.json", "utf8"));
-const story = JSON.parse(await readFile("public/feed.json", "utf8"));
+const story = JSON.parse(await readFile("public/site-config.json", "utf8"));
 const template = await readFile("site/one-file-template.html", "utf8");
 const noImagesCss = await readFile("site/no-images.css", "utf8");
 const cleanCss = await readFile("site/clean.css", "utf8");

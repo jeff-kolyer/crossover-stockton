@@ -6,10 +6,21 @@ const records=JSON.parse(await readFile('public/data/records.json','utf8')).reco
 const data=await syncPublication();
 const gap=Object.values(records).find(record=>record.schema==='gap'&&record.fields?.default);
 if(!gap) throw new Error('No default gap for the publication');
+const gapPublication=data.gapPublications.find(item=>item.gapId===gap.id);
+const publishedItems=gapPublication.items.filter(item=>item.status==='published');
+const feedJson={
+  formatVersion:1,
+  gapId:gap.id,
+  title:gap.title,
+  updatedAt:publishedItems.map(item=>item.updatedAt).sort().at(-1),
+  sections:[...gapPublication.sections].sort((a,b)=>a.order-b.order),
+  items:publishedItems.sort((a,b)=>gapPublication.sections.find(section=>section.id===a.section).order-gapPublication.sections.find(section=>section.id===b.section).order||a.order-b.order)
+};
 const rendered=renderPublicationFeed(data,records,gap.id);
+await writeFile('public/feed.json',`${JSON.stringify(feedJson,null,2)}\n`);
 await writeFile('public/feed-content.html',rendered.html);
 await writeFile('public/feed.txt',rendered.text);
-for(const section of data.gapPublications.find(item=>item.gapId===gap.id).sections.filter(item=>item.id!=='overview')){
+for(const section of gapPublication.sections.filter(item=>item.id!=='overview')){
   const spoken=renderPublicationFeed(data,records,gap.id,section.id);
   await writeFile(`public/feed-${section.id}.txt`,spoken.text);
 }
