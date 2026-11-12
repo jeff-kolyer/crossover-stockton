@@ -623,7 +623,6 @@ a.text-link,button.text-link{font-weight:700}
 .living-table-wrap caption{padding-bottom:8px;text-align:left;font-weight:700}
 .living-table-wrap :is(th,td){padding:9px 12px 9px 0;border-bottom:1px solid #dbe3e8;vertical-align:top}
 .living-section:last-child{display:block}
-.living-section:has(.living-founder){padding-bottom:0}
 .care-rail-secondary{margin-top:20px;padding-top:20px;border-top:1px solid #547082}
 .mobile-menu .care-nav-group{margin-top:24px}
 @media(max-width:1050px){
@@ -679,7 +678,8 @@ a.text-link,button.text-link{font-weight:700}
 .living-page--continuous .living-section:not(:last-child){padding-bottom:12px}
 .living-citations{font-size:12px;white-space:nowrap}
 .living-citations a,.living-sources a{color:#00645f;text-decoration:underline;text-underline-offset:2px}
-.living-sources{padding:16px 0}
+.living-sources{padding:16px 0 0}
+.living-sources:has(details[open]){padding-bottom:16px}
 .living-sources summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none}
 .living-sources summary::-webkit-details-marker{display:none}
 .living-sources summary h2{margin:0}
@@ -700,7 +700,7 @@ a.text-link,button.text-link{font-weight:700}
   .care-shell:has(.living-layout) .desktop-identity .gap-identity-mark{width:16px;height:16px}
 }
 @media(max-width:1350px){
-  .living-layout{grid-template-columns:minmax(0,1fr);max-width:760px}
+  .living-layout{grid-template-columns:minmax(0,1fr);row-gap:16px;max-width:760px}
   .living-updates{margin-top:0;padding:28px 0 0;border-top:1px solid #dce4e9;border-left:0}
 }
 @media(max-width:900px){
