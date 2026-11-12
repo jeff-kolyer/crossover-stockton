@@ -2,15 +2,11 @@
 
 **See clearly. Act locally.**
 
-## Understand unmet needs. Find ways to help.
+Crossover Stockton is an independent civic project for understanding unmet needs and finding practical ways to help in Stockton, California.
 
-Crossover Stockton is an independent civic project focused on understanding and improving unmet needs in Stockton, California.
+We begin with a need in the real world. We investigate what is happening, examine evidence, learn from people involved, and take useful action.
 
-We begin with a real situation: someone or something needs help, and the available systems aren't fully meeting that need.
-
-We investigate what is happening, learn from people directly involved, examine the evidence, and look for practical ways to improve the situation.
-
-We don't need a complete understanding or a promised solution before beginning.
+We don't need a complete understanding or a predetermined solution before beginning.
 
 **The work discovers the work.**
 
@@ -18,289 +14,102 @@ Website: https://crossoverstockton.org/
 
 ---
 
-## 1. Our approach
+## How Crossover works
 
-**Start with reality.**
+Crossover begins by identifying a **gap**: a need that isn't being adequately met.
 
-The needs exist independently of our project. Our first responsibility is to understand them, not invent a solution or construct a narrative around them.
+We create a project around that gap and build an understanding of the situation through research, firsthand observations, public records, conversations, and practical attempts to help.
 
-**Show up.**
+The project evolves as we learn. New information may change our understanding, raise questions, reveal resources, or suggest actions.
 
-Public information is useful, but it is not a substitute for firsthand experience. We visit places, contact organizations, attempt to use existing services, and learn from people doing the work.
+The website makes this work public.
 
-**Follow the evidence.**
+## The feed
 
-We distinguish what has been observed, what others have reported, what the records establish, and what remains unknown. We preserve sources, dates, context, and uncertainty.
+**The feed is the center of the project.**
 
-**Take useful action.**
+It is a living account of what we're learning, what we're doing, and what may happen next.
 
-Understanding is not the endpoint. We look for ways to connect people, remove obstacles, improve access, or expand the capacity to help.
+Unlike a chronological activity log, the feed is organized to help someone understand the situation. It combines narrative, evidence, observations, questions, and developments into a coherent account.
 
-**Let the work evolve.**
+The feed has four views:
 
-An investigation may reveal a different problem, an unexpected resource, or a more useful next step. We adapt rather than force the situation into a predetermined plan.
-
-The goal isn't to produce records, reports, or a website.
-
-**The goal is to improve reality.**
-
----
-
-## 2. Current project: Street dogs and access to care
-
-Our first area of work concerns dogs on Stockton's streets and the people trying to help them.
-
-### What happens when a dog needs help?
-
-Dogs are abandoned, found roaming, injured, or living outdoors with people experiencing homelessness. Stockton has animal shelters, rescue organizations, veterinary providers, outreach services, and people willing to help.
-
-But having services doesn't necessarily mean a dog can access them.
-
-A shelter may be full. Veterinary care may be unaffordable. A rescue may lack foster homes. Someone reporting a dog may not know whom to call. Someone seeking shelter may encounter restrictions involving pets.
-
-We want to understand how the system actually works.
-
-Our questions include:
-
-- How many dogs need help, and where?
-- What happens when someone reports a roaming, injured, or abandoned dog?
-- What care is available, and who provides it?
-- Where do dogs, caregivers, and responders encounter obstacles?
-- What prevents more dogs from receiving care?
-- Which interventions could improve access or expand capacity?
-
-Our current focus is **Understanding the Gap**.
-
-We are examining available records, visiting locations, contacting organizations, and documenting what happens when people try to get help.
-
-The focus can change as we learn more. Our earlier activities and evidence remain part of the public record.
-
----
-
-## 3. How the work is organized
-
-Crossover distinguishes the situation we're trying to improve from the work we do in response.
-
-| Concept | Meaning |
+| View | Purpose |
 |---|---|
-| **Gap** | An unmet need in the real world, independent of Crossover |
-| **Current focus** | What we're concentrating on now |
-| **Actions** | Concrete steps we intend to take |
-| **Activity** | Dated actions and events that actually occurred |
-| **Sources** | Material used to establish or investigate claims |
-| **Measurements** | Quantitative information with attribution and limitations |
-| **Findings** | Revisable conclusions supported by evidence |
-| **Organizations** | People and institutions involved in the situation |
-| **Places** | Locations relevant to the work |
-| **Events** | Occasions relevant to participation or investigation |
-| **Improvements** | Existing, proposed, or developing efforts to improve the situation |
+| **Overview** | What is happening? What do we know, and what remains uncertain? |
+| **Our work** | What have we investigated, attempted, observed, and learned? |
+| **What's next** | What are we pursuing, planning, or waiting for? |
+| **Questions** | What do we still need to understand? |
 
-These aren't stages in a workflow.
+These are different views of the same evolving project, not separate investigations.
 
-We might learn something during a visit that raises a new question, discover an organization that already has a solution, or find that an apparent bottleneck doesn't exist.
+Visitors can read or listen to the feed.
 
-Actions lead to observations. Observations lead to questions. Evidence changes our understanding. New understanding suggests further action.
+### A living account, supported by records
 
-**The gap is the situation. Crossover's work is our contribution to improving it.**
+The feed is editorial. We can revise explanations, introduce new information, and change the order of subjects as our understanding develops.
 
-### Keep the distinctions clear
+The underlying records provide continuity and accountability.
 
-A planned visit is not a completed observation.
+An activity may no longer appear in the current feed, but its record remains available. A finding may change when new evidence emerges. A question may be answered or replaced by a better question.
 
-An organization's claim is not automatically a verified fact.
+**The account evolves. The evidence remains traceable.**
 
-A measurement must retain its source, date, geographic scope, and limitations.
+## Explore the project
 
-A proposed improvement is not an operating service.
+The left navigation provides access to the structured information behind the feed.
 
-Another organization's initiative is not Crossover's accomplishment.
+| Collection | Contents |
+|---|---|
+| **Actions** | Steps we plan to take, are pursuing, or have completed |
+| **Activity** | Dated records of what happened |
+| **Places** | Locations relevant to the project |
+| **Organizations** | People, groups, and institutions involved |
+| **Measurements** | Quantitative information, including its sources and limitations |
+| **Findings** | Evidence-supported conclusions that may be revised |
+| **Sources** | Documents, reports, websites, and other source material |
+| **About** | Crossover's purpose and approach |
 
-An unanswered question is not a finding.
+The feed helps visitors understand the situation. The collections allow them to explore the underlying information.
 
-A finding can be revised when new evidence appears.
+These collections are not a prescribed workflow. Research, observations, questions, findings, and actions can develop in any order.
 
-We do not manufacture conclusions to fill pages or count records as evidence of progress.
+## Evidence and accountability
 
----
+We distinguish between what we observe, what others report, what records establish, and what we infer.
 
-## 4. The website
+Our publishing practices are straightforward:
 
-The website is a working interface for understanding the situation, following developments, finding people and places, examining evidence, and deciding what to do next.
+- **Attribution:** Identify where information originated.
+- **Evidence:** Connect claims and findings to supporting sources.
+- **Dates:** Distinguish when something occurred, was reported, and was updated.
+- **Uncertainty:** Make unknowns, estimates, and limitations explicit.
+- **Revision:** Correct conclusions without misrepresenting historical events.
+- **Transparency:** Identify illustrative and AI-generated material.
+- **Privacy:** Protect sensitive personal information and vulnerable people.
 
-It also makes Crossover's work visible to anyone interested.
+A record is not necessarily a verified fact. A measurement is not necessarily an explanation. A proposed improvement is not a completed outcome.
 
-### THE GAP
+Our objective is to understand reality, not manufacture certainty.
 
-**Home** — The current picture, central question, available measurements, living account, and latest activity.
+## Data and publishing
 
-**Feed** — The evolving narrative of what we're learning and doing, available to read or listen to.
+Crossover is built with Vite, React, TypeScript, and structured JSON data.
 
-### THE RESPONSE
+The system separates three concerns:
 
-**Organizations** — Agencies, nonprofits, rescue groups, service providers, and other participants.
+1. **Records** preserve structured information, evidence, and history.
+2. **The feed** selects and presents information as a readable, listenable account.
+3. **The interface** provides navigation, exploration, and access to the underlying material.
 
-**Improvements** — Efforts underway or proposed to improve access to care.
+The publication is generated from structured source files. Changes to the editorial account do not automatically change the records on which it relies.
 
-**Places** — Locations relevant to the situation, including service facilities and areas being examined.
+Public outputs include:
 
-**Events** — Opportunities, meetings, and other occasions relevant to the work.
-
-### Our work
-
-**Activity** — What Crossover has actually done.
-
-**Actions** — What we're planning, pursuing, awaiting, or have completed.
-
-**Measurements** — The figures we're tracking and their limitations.
-
-**Findings** — Conclusions supported by the evidence gathered so far.
-
-### Reference
-
-**Sources** — The materials behind our understanding.
-
-**About** — Our purpose, principles, and approach.
-
-These are working tools, not decorative navigation. Each section should help someone understand something, investigate a question, contact a participant, or take a useful step.
-
-The homepage is at https://crossoverstockton.org/.
-
----
-
-## 5. The feed and the public record
-
-Crossover maintains two related but distinct things.
-
-### The feed: our living account
-
-The [Feed](https://crossoverstockton.org/feed/) is an editorial account of what we currently know, what has happened, what we're investigating, and where the work may go next.
-
-It is intended to be read or listened to as a coherent narrative.
-
-The feed can change.
-
-We can add new developments, revise explanations, reorder subjects, and remove information that is no longer central to the current account.
-
-The feed is not a separate factual record type. It selects and narrates information from the underlying records.
-
-An event might appear in the feed because it is coming up. After the event passes, it may disappear from the current account while remaining permanently available in Events.
-
-A completed action may leave the feed but remain in Activity.
-
-**Changing the account does not erase the history.**
-
-Feed formats:
-
-- [Read or listen](https://crossoverstockton.org/feed/)
+- [Website](https://crossoverstockton.org/)
 - [Feed JSON](https://crossoverstockton.org/feed.json)
 - [Plain-text feed](https://crossoverstockton.org/feed.txt)
-
-### The public record: what supports the account
-
-The public record contains the underlying observations, activities, source material, measurements, findings, organizations, locations, and other structured information.
-
-Records preserve provenance and meaning independently of how the website chooses to present them.
-
-The public record is not expected to tell a single story. It provides the material from which accounts, analyses, and decisions can be developed.
-
 - [Public records JSON](https://crossoverstockton.org/data/records.json)
-- [Data Explorer](https://crossoverstockton.org/explore/)
-- [One-file interactive edition](https://crossoverstockton.org/interactive/)
-
-The feed helps people understand the work. The records let them inspect it.
-
----
-
-## 6. Data principles
-
-The project's credibility depends on keeping a clear relationship between what happened, what was reported, and what we conclude.
-
-**Attribution.** Identify who supplied information and where it originated.
-
-**Dates.** Distinguish when something happened, when it was published, and when Crossover learned about it.
-
-**Scope.** Preserve geographic boundaries, time periods, definitions, and populations measured.
-
-**Uncertainty.** Say when something is unknown, estimated, incomplete, or unverified.
-
-**Provenance.** Keep links between claims, measurements, findings, and their supporting material.
-
-**Revision.** Correct and update interpretations without silently rewriting the historical record.
-
-**Privacy and safety.** Avoid exposing sensitive personal information or unnecessarily precise locations of vulnerable people or animals.
-
-**Independence.** Distinguish Crossover's observations and actions from the activities and statements of others.
-
-A record's presence on the website does not make every statement in it independently verified.
-
-A map does not establish a pattern merely because points can be plotted. Analysis must account for data quality, reporting behavior, coverage, and limitations.
-
-In particular, the Stockton Animal Services field-call data has not yet established a validated density map of dogs needing care.
-
----
-
-## 7. Repository and publishing
-
-The website is built with Vite, React, TypeScript, and a structured collection of JSON records.
-
-The architecture separates canonical information, editorial presentation, and published outputs.
-
-### Canonical data
-
-Structured source files live in `src/data/`, including:
-
-- `gaps.json`
-- `tasks.json`
-- `activities.json`
-- `evidence.json`
-- `findings.json`
-- `improvements.json`
-
-The improvements file retains the existing `initiative` record type and stable record identifiers.
-
-Record schemas are defined in `src/schemas/`.
-
-The technical public projection is controlled by `src/model/explorer-publication.json`.
-
-### Living gap publication
-
-Edit only `src/publication.json` for the homepage account. Builds, data checks, and local development copy it to the generated `public/publication.json`; the published site receives the same content. Do not edit the generated copy.
-
-Keep retained editorial items' IDs and evidence links stable. When changing an item's title, body, other content, placement, status, or references, advance its `updatedAt`. Dates may be `YYYY-MM-DD`; use a UTC ISO timestamp for a second revision on the same day. Leave dates on untouched items alone. The build checks revisions against Git history and rejects dates earlier than `createdAt`.
-
-The same publication generates the homepage, feed text, and audio. Audio is regenerated when the spoken text changes.
-
-### Editorial feed
-
-`src/feed.json` defines the current reading experience.
-
-It contains authored narrative chapters, their order, selected references to canonical records, and navigation configuration.
-
-A feed entry can reference a canonical record using `record` and supply narration using `narration`. An optional `note` can identify editorial exploration.
-
-Editing the feed should not silently modify the underlying records.
-
-### Generated outputs
-
-The build validates the data and feed references, then generates public artifacts including:
-
-- `public/feed.json`
-- `public/data/records.json`
-- Reading and listening outputs
-- The one-file interactive edition
-- Readable HTML fallbacks
-
-The current main interface uses:
-
-- `public/preview/care-site/site.js`
-- `public/preview/care-site/style.css`
-- `public/preview/site-md.css`
-
-The alternate edition and fallbacks use `site/one-file-template.html`.
-
-Published pages provide readable HTML, while the interactive interface navigates without full-page reloads.
-
-The former `/street-dogs/overview/` route remains readable and identifies `/` as canonical. Actions uses the canonical task records at `/street-dogs/tasks/`.
 
 ### Local development
 
@@ -316,33 +125,18 @@ npm run build
 npm run preview
 ```
 
-`npm run dev` builds the site before starting Vite.
+For implementation details and publishing conventions, see the project documentation.
 
-`npm run build` validates the data, generates public outputs, publishes the site artifacts, and runs output tests.
+## Purpose
 
-For visual conventions, see [Site Design Rules](docs/SITE_DESIGN.md).
+The website is not the outcome.
 
----
+Neither are the number of records, measurements, or findings.
 
-## 8. What success looks like
+Understanding a gap helps us discover where action may be useful. The work succeeds when it contributes to meeting a real need.
 
-A larger website is not success.
-
-More records are not necessarily success.
-
-Even understanding the situation more completely is not the final goal.
-
-Success means our work contributes to a real improvement: a dog receives needed care, a person finds a workable path to help, an organization gains useful information, a barrier is removed, or available resources are connected more effectively.
-
-Some contributions will be small. Some may reveal opportunities for larger changes.
-
-We begin where we are, with what we can observe and do.
+We start with what we can observe, learn what we can, and act where we can help.
 
 **See clearly. Act locally.**
 
 **The work discovers the work.**
-# Feed narration
-
-The Feed, Living Account, and latest-update Listen buttons play real WAV files through one persistent HTML audio element. `npm run build` renders narration from the current `public/feed.json` and `public/feed.txt`. The generator names each file with a hash of its spoken text and reuses it when that text has not changed. The resulting `public/audio-manifest.json` points the site to the matching files. Commit the manifest and generated files when updating the Feed so local previews work without a speech renderer.
-
-On Windows, generation uses the built-in SAPI voice through `cscript.exe`. GitHub Pages builds install the offline `espeak-ng` package. Neither uses a paid text-to-speech API; the operational cost is build time, repository storage, and bandwidth for the WAV files. A listener downloads only the track they start.
