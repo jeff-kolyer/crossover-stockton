@@ -610,13 +610,14 @@ a.text-link,button.text-link{font-weight:700}
 .living-item img{display:block;width:100%;height:375px;object-fit:cover;object-position:var(--living-image-position,center);border-radius:8px}
 .living-references{margin-top:16px;color:#607588;font-size:12px;font-weight:400;line-height:1.4}
 .living-image figcaption{margin-top:6px}
-.living-founder{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;margin:0;padding:20px 0;border-top:1px solid #dbe3e8}
+.living-founder{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;margin:0;padding:20px 0 0;border-top:1px solid #dbe3e8}
 .living-founder img{width:48px;height:48px;object-fit:cover;border-radius:50%}
 .living-founder figcaption{min-width:0}
 .living-founder strong{display:block;font-size:16px;font-weight:700;line-height:1.35}
 .living-founder span{display:block;margin-top:3px;color:#607588;font-size:12px;line-height:1.4}
-.living-founder p{margin:8px 0;color:#405363;font-size:14px;line-height:1.45}
-.living-founder small{display:block;margin-top:8px}
+.living-founder p{margin:14px 0 0;color:#172b3a;font-size:16px;font-weight:400;line-height:1.5}
+.living-founder .about-linkedin-button{gap:8px;margin-top:18px;border-radius:999px}
+.living-founder .about-linkedin-button .linkedin-icon{flex:none;width:17px;height:17px}
 .living-references summary{display:flex;align-items:center;justify-content:flex-start;gap:10px;width:100%;color:inherit;font-weight:400;cursor:pointer;list-style:none}
 .living-reference-label{display:inline-flex;align-items:center;gap:4px;color:inherit;font-weight:inherit;white-space:nowrap}
 .living-references summary:hover .living-reference-label{text-decoration:underline;text-underline-offset:2px}
@@ -635,6 +636,7 @@ a.text-link,button.text-link{font-weight:700}
 .living-table-wrap caption{padding-bottom:8px;text-align:left;font-weight:700}
 .living-table-wrap :is(th,td){padding:9px 12px 9px 0;border-bottom:1px solid #dbe3e8;vertical-align:top}
 .living-section:last-child{display:block}
+.living-section:has(.living-founder){padding-bottom:0}
 .care-rail-secondary{margin-top:20px;padding-top:20px;border-top:1px solid #547082}
 .mobile-menu .care-nav-group{margin-top:24px}
 @media(max-width:1050px){

@@ -11,9 +11,10 @@ paths.firsthand='<path d="M2 12s3.5-5 10-5 10 5 10 5-3.5 5-10 5S2 12 2 12Z"/><ci
 paths.question='<circle cx="12" cy="12" r="10"/><path d="M9.5 9a2.7 2.7 0 0 1 5.3.7c0 2-2.8 2.4-2.8 4.4M12 17.5h.01"/>';
 paths.arrowLeft='<path d="M20 12H4m6 6-6-6 6-6"/>';
 paths.arrowExternal='<path d="M6 18 18 6M8 6h10v10"/>';
+paths.linkedin='<rect x="1" y="1" width="22" height="22" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6.5" cy="7" r="1.5" fill="currentColor" stroke="none"/><path fill="currentColor" stroke="none" d="M5 10h3v9H5zM10 10h3v1.2c.6-.9 1.5-1.4 2.8-1.4 2.5 0 3.2 1.5 3.2 3.9V19h-3v-5c0-1.1-.2-1.9-1.4-1.9-1.1 0-1.6.8-1.6 2V19h-3z"/>';
 paths.document='<path d="M5 2h9l5 5v15H5zM14 2v5h5M8 12h8M8 16h8"/>';
 // Internal navigation uses horizontal arrows; destinations outside the site use the diagonal arrow.
-const icon=name=>`<svg class="${name.startsWith('arrow')?'link-arrow':''} ${name==='arrowLeft'?'link-arrow-left':''} ${name==='dog'?'dog-icon':''}" viewBox="${name==='dog'?'0 0 180 190':'0 0 24 24'}" aria-hidden="true">${paths[name]||paths.document}</svg>`;
+const icon=name=>`<svg class="${name.startsWith('arrow')?'link-arrow':''} ${name==='arrowLeft'?'link-arrow-left':''} ${name==='dog'?'dog-icon':''} ${name==='linkedin'?'linkedin-icon':''}" viewBox="${name==='dog'?'0 0 180 190':'0 0 24 24'}" aria-hidden="true">${paths[name]||paths.document}</svg>`;
 const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const short=(value,n=210)=>{const text=String(value||'').trim();return text.length>n?`${text.slice(0,n).trimEnd()}…`:text};
 const previewBase='/preview/care-site/index.html';
@@ -279,7 +280,7 @@ function founderProfile(description){
   const role=founder.fields?.roles?.find(item=>item.title==='Founder')||founder.fields?.roles?.[0];
   const organization=lookup(role?.organizationId)?.title||'Crossover Stockton';
   description=description||founder.fields?.biography?.[0]||'';
-  return `<figure class="living-founder"><img src="${esc(founder.fields?.preferred_image)}" alt="Illustrative portrait of ${esc(founder.fields?.name||founder.title)}" loading="lazy"><figcaption><strong>${esc(founder.fields?.name||founder.title)}</strong><span>${esc(role?.title||'Founder')}, ${esc(organization)}</span><p>${esc(description)}</p>${profile?`<a class="text-link" href="${esc(profile)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ${icon('arrowExternal')}</a>`:''}<small class="living-references">Illustrative image. AI-generated.</small></figcaption></figure>`;
+  return `<figure class="living-founder"><img src="${esc(founder.fields?.preferred_image)}" alt="Illustrative portrait of ${esc(founder.fields?.name||founder.title)}" loading="lazy"><figcaption><strong>${esc(founder.fields?.name||founder.title)}</strong><span>${esc(role?.title||'Founder')}, ${esc(organization)}</span><p>${esc(description)}</p>${profile?`<a class="design-button about-linkedin-button" href="${esc(profile)}" target="_blank" rel="noopener noreferrer">${icon('linkedin')}Connect on LinkedIn ${icon('arrowExternal')}</a>`:''}</figcaption></figure>`;
 }
 function livingPage(page='overview'){
   const isAbout=page==='about';
@@ -298,7 +299,7 @@ function livingPage(page='overview'){
   const updates=`<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2><div class="living-update-list">${latest.map(record=>`<a class="living-update" href="${recordHref(record.id)}"><h3>${esc(record.title)}</h3><p>${esc(short(recordText(record),155))}</p><small>${esc(date(updateDate(record)))} · ${updateType(record)}</small></a>`).join('')}</div><a class="living-updates-all" href="${href('activity')}">View activity ${icon('arrow')}</a></aside>`;
   const track=page==='overview'?'account':sectionId;
   const listenLabel=isAbout?'Listen to About':page==='overview'?'Listen to the feed':`Listen to ${section.title.toLowerCase()}`;
-  return `<div class="living-layout"><div class="living-page">${sectionNav}<div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-track="${esc(track)}" data-listen-label="${esc(listenLabel)}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${esc(listenLabel)}</span></button></div><section class="living-section" id="${esc(section.id)}"><h1>${esc(page==='questions'?'Questions':section.title)}</h1><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}</div></section>${isAbout?founderProfile(selected.founderSummary):''}</div>${updates}</div>`;
+  return `<div class="living-layout"><div class="living-page">${sectionNav}<div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-track="${esc(track)}" data-listen-label="${esc(listenLabel)}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${esc(listenLabel)}</span></button></div><section class="living-section" id="${esc(section.id)}"><h1>${esc(page==='questions'?'Questions':section.title)}</h1><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}${isAbout?founderProfile(selected.founderSummary):''}</div></section></div>${updates}</div>`;
 }
 function designOverview(){return livingPage('overview')}
 function activityPage(){const part=section('activity');return `${heading('Activity',part.summary,'/activity')}${part.chapters.map(group=>`<div class="section-title"><h2>${esc(group.title)}</h2></div>${recordList((group.records||[]).map(lookup).filter(Boolean),'/activity')}`).join('')}`}

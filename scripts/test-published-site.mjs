@@ -120,9 +120,12 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(written.every(item=>rendered.includes(`id="${item.id}"`)));
   assert.ok(written.every((item,index)=>index===0||rendered.indexOf(`id="${written[index-1].id}"`)<rendered.indexOf(`id="${item.id}"`)));
   assert.ok(rendered.includes('<figure class="living-founder"><img src="/images/about/about-the-founder.jpg"'));
+  assert.ok(rendered.includes('class="design-button about-linkedin-button"'));
+  assert.ok(rendered.includes('linkedin-icon'));
+  assert.match(rendered, /Connect on LinkedIn <svg class="link-arrow/);
   assert.ok(rendered.includes('who has lived in Stockton for more than a decade'));
   assert.ok(rendered.includes("Overview explains what is happening. Our work records what we have done and learned."));
-  assert.ok(rendered.includes('Illustrative image. AI-generated.'));
+  assert.equal((rendered.match(/Illustrative image\. AI-generated\./g)||[]).length,1);
   const speech=renderSitePublicationFeed(publication,feed.records,'about').text;
   assert.ok(speech.startsWith('From work to vocation\n\n'));
   assert.ok(speech.indexOf(written[0].title)<speech.indexOf(written[1].title));
