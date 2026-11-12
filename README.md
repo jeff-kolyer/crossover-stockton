@@ -10,6 +10,8 @@ We don't need a complete understanding or a predetermined solution before beginn
 
 **The work discovers the work.**
 
+We're building a system that continually revises its understanding of reality, and we discovered that system by continually revising our own understanding of what we were building.
+
 Website: https://crossoverstockton.org/
 
 ---
