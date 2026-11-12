@@ -21,7 +21,7 @@ export function renderSiteMdPages(template, source, feed, story, publication, or
 
   const gapSlug = Object.values(feed.records).find(item => item.schema === 'gap' && item.fields?.default)?.fields?.slug;
   if (!gapSlug) throw new Error('No default gap slug in the public records');
-  const paths = new Set(['/', '/our-work/', '/whats-next/', '/questions/', '/about/', '/feed/', `/${gapSlug}/overview/`, ...story.silent.menu.filter(item => item.page !== 'overview').map(item => `/${gapSlug}/${item.page}/`)]);
+  const paths = new Set(['/', '/about/', '/feed/', `/${gapSlug}/overview/`, ...story.silent.menu.filter(item => item.page !== 'overview').map(item => `/${gapSlug}/${item.page}/`)]);
   for (const record of Object.values(feed.records)) {
     paths.add(`/${record.schema === 'organization' ? 'organization' : 'record'}/${encodeURIComponent(record.id)}/`);
   }
@@ -32,7 +32,7 @@ export function renderSiteMdPages(template, source, feed, story, publication, or
     runInNewContext('render()', context, { timeout: 3000 });
     if (!app.innerHTML.includes('class="care-shell"')) throw new Error(`Crossover page did not render: ${path}`);
     const title = document.title;
-    const sectionByPath={'/':'overview','/our-work/':'our-work','/whats-next/':'whats-next','/questions/':'open-questions'};
+    const sectionByPath={'/':'overview'};
     const sectionId=sectionByPath[path]||(path===`/${gapSlug}/overview/`?'overview':null);
     const description = sectionId ? publication.gapPublications.find(item => item.gapId === Object.values(feed.records).find(record => record.schema === 'gap' && record.fields?.default)?.id)?.items.filter(item => item.section === sectionId && item.status === 'published').sort((a,b)=>a.order-b.order)[0]?.body.slice(0,160)
       : path === '/about/' ? publication.sitePublications.find(item => item.id === 'about')?.items.filter(item => item.status === 'published').sort((a,b)=>a.order-b.order)[0]?.body.slice(0,160)

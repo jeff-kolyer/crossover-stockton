@@ -38,7 +38,8 @@ const route=()=>{
   const page=params.get('page')||'overview';
   return page==='record'?`/record/${params.get('id')||''}`:page==='index'||page==='feed'?'/overview':`/${page}`;
 };
-const href=page=>isPreview?`${previewBase}?page=${encodeURIComponent(page==='feed'?'overview':page)}`:page==='overview'||page==='feed'?'/':['our-work','whats-next','questions','about'].includes(page)?`/${page}/`:`/street-dogs/${page}/`;
+const publicationAnchors={'our-work':'our-work','whats-next':'whats-next',questions:'open-questions'};
+const href=page=>isPreview?publicationAnchors[page]?`${previewBase}?page=overview#${publicationAnchors[page]}`:`${previewBase}?page=${encodeURIComponent(page==='feed'?'overview':page)}`:publicationAnchors[page]?`/#${publicationAnchors[page]}`:page==='overview'||page==='feed'?'/':page==='about'?'/about/':`/street-dogs/${page}/`;
 const recordHref=id=>isPreview?`${previewBase}?page=record&id=${encodeURIComponent(id)}`:`/${byId.get(id)?.schema==='organization'?'organization':'record'}/${encodeURIComponent(id)}/`;
 let feed,publication,feedContent,audioManifest,records,byId,gap,gapStory,menu,activeFilter='all';
 let narration = null;
@@ -51,6 +52,7 @@ const recordText=record=>record?.fields?.statement||record?.fields?.list_context
 const recordsFor=part=>part.records?.map(lookup).filter(Boolean)||records.filter(item=>item.schema===part.select?.schema&&(part.select.schema==='organization'?(gap.fields?.organization_ids||[]).includes(item.id):related(item)));
 const date=value=>value?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${String(value).slice(0,10)}T12:00:00Z`)):'';
 const longDate=value=>value?new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${String(value).slice(0,10)}T12:00:00Z`)):'';
+const projectDate=(value,month='short')=>value?new Intl.DateTimeFormat('en-US',{month,day:'numeric',year:'numeric',timeZone:'America/Los_Angeles'}).format(new Date(String(value).includes('T')?value:`${value}T12:00:00Z`)):'';
 const metricValue=record=>{const value=record?.fields?.value??record?.fields?.reportedValue;return typeof value==='number'?new Intl.NumberFormat('en-US').format(value):value==null?'Unknown':String(value)};
 const navGroups=[
   {label:'THE GAP',pages:['overview','feed']},
@@ -259,18 +261,23 @@ function updateListingFilter(value){
 }
 const sameEditorialHeading=(item,section)=>item.title.trim().replace(/\s+/g,' ').toLowerCase()===section.title.trim().replace(/\s+/g,' ').toLowerCase();
 const editorialTable=table=>table?`<div class="living-table-wrap"><table><caption>${esc(table.caption)}</caption><thead><tr>${table.columns.map(value=>`<th scope="col">${esc(value)}</th>`).join('')}</tr></thead><tbody>${table.rows.map(row=>`<tr>${row.map(value=>`<td>${esc(value)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`:'';
-function editorialItem(item,section){
+function editorialItem(item,section,sourceNumbers){
   const references=(item.relatedRecordIds||[]).map(id=>lookup(id)).filter(Boolean);
+  const updated=section.id==='about'?date(item.updatedAt):projectDate(item.updatedAt);
   const grouped=[
     ['External sources',references.filter(record=>record.schema==='evidence'&&record.fields?.source?.url)],
     ['Supporting evidence',references.filter(record=>['measurement','claim','finding'].includes(record.schema)||(record.schema==='evidence'&&!record.fields?.source?.url))],
     ['Related work',references.filter(record=>!['evidence','measurement','claim','finding'].includes(record.schema))]
   ];
   const referenceContent=grouped.filter(([,records])=>records.length).map(([label,records])=>`<div class="living-reference-group"><strong>${label}</strong><div>${records.map(record=>`<a href="${recordHref(record.id)}">${esc(record.title)}</a>`).join(' · ')}</div></div>`).join('');
-  const metadata=references.length
-    ?`<details class="living-references"><summary><span class="living-item-date">Updated ${esc(date(item.updatedAt))}</span><span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources (${references.length}) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="living-reference-content">${referenceContent}</div></details>`
-    :`<div class="living-references living-references-empty"><span class="living-item-date">Updated ${esc(date(item.updatedAt))}</span></div>`;
-  return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameEditorialHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}<p>${esc(item.body)}</p>${(item.paragraphs||[]).map(text=>`<p>${esc(text)}</p>`).join('')}${editorialTable(item.table)}${metadata}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'||section.id==='about'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
+  const metadata=section.id!=='about'?'':references.length
+    ?`<details class="living-references"><summary><span class="living-item-date">Updated ${esc(updated)}</span><span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources (${references.length}) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="living-reference-content">${referenceContent}</div></details>`
+    :`<div class="living-references living-references-empty"><span class="living-item-date">Updated ${esc(updated)}</span></div>`;
+  const citationNumbers=section.id==='about'?[]:[...new Set(item.relatedRecordIds||[])].map(id=>sourceNumbers.get(id)).filter(Boolean).sort((a,b)=>a-b);
+  const citations=citationNumbers.length?` <sup class="living-citations">[${citationNumbers.map(number=>`<a href="#source-${number}" aria-label="Source ${number}">${number}</a>`).join(', ')}]</sup>`:'';
+  const paragraphs=[item.body,...(item.paragraphs||[])];
+  const copy=paragraphs.map((text,index)=>`<p>${esc(text)}${index===paragraphs.length-1?citations:''}</p>`).join('');
+  return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameEditorialHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}${copy}${editorialTable(item.table)}${metadata}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'||section.id==='about'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
 }
 function founderProfile(description){
   const identity=records.find(record=>record.schema==='identity');
@@ -287,19 +294,25 @@ function livingPage(page='overview'){
   const selected=isAbout?publication.sitePublications?.find(item=>item.id==='about'):publication.gapPublications.find(item=>item.gapId===gap?.id);
   if(!selected)return heading('Page unavailable','No publication is available.','/overview');
   const sectionId=page==='questions'?'open-questions':page;
-  const section=selected.sections.find(item=>item.id===sectionId);
-  if(!section)return heading('Page unavailable','This editorial page is not published.','/overview');
   const sections=[...selected.sections].sort((a,b)=>a.order-b.order);
+  if(!sections.some(item=>item.id===sectionId))return heading('Page unavailable','This editorial page is not published.','/overview');
   const items=id=>selected.items.filter(item=>item.section===id&&item.status==='published').sort((a,b)=>a.order-b.order);
-  const updated=items(sectionId).map(item=>item.updatedAt).sort().at(-1);
-  const sectionNav=isAbout?'':`<nav class="living-section-nav" aria-label="Publication pages">${sections.map(item=>{const target=item.id==='open-questions'?'questions':item.id;return `<a href="${href(target)}" ${item.id===sectionId?'aria-current="page"':''}>${esc(item.id==='open-questions'?'Questions':item.title)}</a>`}).join('')}</nav>`;
+  const sectionNav=isAbout?'':`<nav class="living-section-nav" aria-label="Publication sections">${sections.map(item=>{const target=item.id==='open-questions'?'questions':item.id;return `<a href="${target==='overview'?`${href('overview')}#overview`:href(target)}" ${item.id===sectionId?'aria-current="page"':''}>${esc(item.id==='open-questions'?'Questions':item.title)}</a>`}).join('')}</nav>`;
   const latest=Array.isArray(records)?recentUpdates(7,isAbout):[];
   const updateDate=record=>record.schema==='activity'?record.fields?.occurred_at:record.schema==='finding'?record.fields?.last_reviewed_at:record.fields?.published_at;
   const updateType=record=>record.schema==='activity'?'Activity':record.schema==='finding'?'Finding':'Source report';
   const updates=`<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2><div class="living-update-list">${latest.map(record=>`<a class="living-update" href="${recordHref(record.id)}"><h3>${esc(record.title)}</h3><p>${esc(short(recordText(record),155))}</p><small>${esc(date(updateDate(record)))} · ${updateType(record)}</small></a>`).join('')}</div><a class="living-updates-all" href="${href('activity')}">View activity ${icon('arrow')}</a></aside>`;
-  const track=page==='overview'?'account':sectionId;
-  const listenLabel=isAbout?'Listen to About':page==='overview'?'Listen to the feed':`Listen to ${section.title.toLowerCase()}`;
-  return `<div class="living-layout"><div class="living-page">${sectionNav}<div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-track="${esc(track)}" data-listen-label="${esc(listenLabel)}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${esc(listenLabel)}</span></button></div><section class="living-section" id="${esc(section.id)}"><h1>${esc(page==='questions'?'Questions':section.title)}</h1><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}${isAbout?founderProfile(selected.founderSummary):''}</div></section></div>${updates}</div>`;
+  const feedUpdated=selected.items.filter(item=>item.status==='published').map(item=>item.updatedAt).sort().at(-1);
+  const sourceIds=isAbout?[]:[...new Set(sections.flatMap(section=>items(section.id).flatMap(item=>item.relatedRecordIds||[])))].filter(id=>lookup(id));
+  const sourceNumbers=new Map(sourceIds.map((id,index)=>[id,index+1]));
+  const sources=sourceIds.length?`<section class="living-section living-sources" id="feed-sources"><h2>Sources</h2><ol>${sourceIds.map((id,index)=>`<li id="source-${index+1}"><a href="${recordHref(id)}">${esc(lookup(id).title)}</a></li>`).join('')}</ol></section>`:'';
+  const renderSection=section=>{
+    const title=section.id==='open-questions'?'Questions':section.title;
+    const isOpening=isAbout||section.id==='overview';
+    const heading=isOpening?`<div class="living-feed-head"><div><h1>${esc(title)}</h1><span class="living-feed-date">Updated ${esc(isAbout?longDate(feedUpdated):projectDate(feedUpdated,'long'))}</span></div><button class="overview-listen living-listen" type="button" data-track="${isAbout?'about':'account'}" data-listen-label="${isAbout?'Listen to About':'Listen to the feed'}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${isAbout?'Listen to About':'Listen to the feed'}</span></button></div>`:`<h2>${esc(title)}</h2>`;
+    return `<section class="living-section${isOpening?' living-section--overview':''}" id="${esc(section.id)}">${heading}<div class="living-items">${items(section.id).map(item=>editorialItem(item,section,sourceNumbers)).join('')}${isAbout?founderProfile(selected.founderSummary):''}</div></section>`;
+  };
+  return `<div class="living-layout"><div class="living-page${isAbout?'':' living-page--continuous'}">${sectionNav}${(isAbout?sections.filter(item=>item.id===sectionId):sections).map(renderSection).join('')}${sources}</div>${updates}</div>`;
 }
 function designOverview(){return livingPage('overview')}
 function activityPage(){const part=section('activity');return `${heading('Activity',part.summary,'/activity')}${part.chapters.map(group=>`<div class="section-title"><h2>${esc(group.title)}</h2></div>${recordList((group.records||[]).map(lookup).filter(Boolean),'/activity')}`).join('')}`}
@@ -357,13 +370,39 @@ function feedPage(){
   const reading=feedContent.replace(/href="\/(?:record|organization)\/([^/"?]+)\/"/g,(_,id)=>`href="${recordHref(decodeURIComponent(id),'/feed')}"`);
   return `<div class="site-feed">${listingBreadcrumb('Feed')}<header class="site-feed-header"><div><h1>Our evolving account</h1><p>${esc(feed.description)}</p><button class="overview-listen feed-listen" type="button"><span class="listen-icon" aria-hidden="true">▶</span><span>Listen to the feed</span></button></div><a class="text-link" href="/feed.txt" target="_blank" rel="noopener noreferrer" aria-label="Open text version of the feed">Text version ${icon("arrowExternal")}</a></header><div class="feed-reading">${reading}</div></div>`;
 }
-function setupSectionNav(){}
-function render({reuseExisting=false}={}){
+const editorialSectionForPage=page=>({'/overview':'overview','/our-work':'our-work','/whats-next':'whats-next','/questions':'open-questions'})[page];
+let sectionNavListening=false;
+function updateSectionNav(){
+  const nav=document.querySelector('.living-page--continuous .living-section-nav');
+  if(!nav?.querySelectorAll)return;
+  const sections=['overview','our-work','whats-next','open-questions'].map(id=>document.getElementById(id)).filter(Boolean);
+  const active=sections.reduce((selected,section)=>section.getBoundingClientRect().top<=80?section:selected,sections[0]);
+  if(!active)return;
+  nav.querySelectorAll('a').forEach(link=>{
+    const destination=new URL(link.href);
+    if(decodeURIComponent(destination.hash.slice(1))===active.id)link.setAttribute('aria-current','page');
+    else link.removeAttribute('aria-current');
+  });
+}
+function setupSectionNav(){
+  if(typeof window.addEventListener!=='function')return;
+  if(!sectionNavListening){window.addEventListener('scroll',updateSectionNav,{passive:true});sectionNavListening=true}
+  updateSectionNav();
+}
+function queueEditorialRouteScroll(){
+  if(typeof requestAnimationFrame!=='function')return;
+  const hash=decodeURIComponent((location.hash||'').slice(1));
+  const target=['overview','our-work','whats-next','open-questions'].includes(hash)?hash:editorialSectionForPage(route());
+  if(!target||target==='overview'&&!hash)return;
+  requestAnimationFrame(()=>document.getElementById(target)?.scrollIntoView({block:'start'}));
+}
+function render({reuseExisting=false,restoreScroll=false}={}){
   if(reuseExisting&&document.querySelector('#app > .care-shell')){
     document.querySelector('.menu-toggle').addEventListener('click',toggleMenu);
     setupHomeSearch();
     setupSectionNav();
     setupFacilityMap();
+    if(!restoreScroll)queueEditorialRouteScroll();
     return;
   }
   const current=route();
@@ -375,18 +414,19 @@ function render({reuseExisting=false}={}){
   const mainNavigation=`<nav class="care-rail-nav" aria-label="Project navigation">${primaryLinks.map(navLink).join('')}</nav>`;
   const aboutNavigation=`<nav class="care-rail-nav care-rail-secondary" aria-label="About Crossover">${navLink(['about','About','about'])}</nav>`;
   const grouped=mainNavigation+aboutNavigation;
-  const mobileNavigation=grouped+`<div class="care-nav-group"><div class="care-group-label">More work</div><nav class="care-rail-nav" aria-label="More work">${[['improvements','Improvements','improvements'],['events','Events','events']].map(navLink).join('')}</nav></div>`;
+  const mobileNavigation=`<nav class="care-rail-nav" aria-label="Project navigation">${[...primaryLinks,['improvements','Improvements','improvements'],['events','Events','events']].map(navLink).join('')}</nav>`+aboutNavigation;
   const identity=`<span class="gap-identity-mark" style="background:${esc(gap?.fields?.identity_color||'#0789e8')}"></span><span>${esc(current==='/about'?'ABOUT CROSSOVER':gap?.title||'Crossover Stockton')}</span>`;
   const identityHref=current==='/about'?href('about'):href('overview');
-  const shell=`<div class="care-shell"><aside class="care-rail"><a class="care-brand" href="${href('overview')}"><img src="/images/logo_light.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><div class="care-rail-groups">${grouped}</div></aside><div class="care-site"><header class="care-top"><a class="care-mobile-brand" href="${href('overview')}"><img src="/images/logo_dark.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><a class="gap-identity desktop-identity" href="${identityHref}">${identity}</a><div class="care-top-actions"><div class="home-search"><button class="home-search-toggle" type="button" aria-label="Search the site" aria-expanded="false" aria-controls="home-search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><div class="home-search-panel" id="home-search-panel" hidden><label for="home-search-input">Search Crossover Stockton</label><input id="home-search-input" type="search" placeholder="Search sections and records"><div class="home-search-results"></div></div></div><a class="desktop-about" href="${href('about')}" ${activeState('about')}>${icon('about')}<span>About</span></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">${icon('menu')}</button></div></header><div class="mobile-menu" id="mobile-menu">${mobileNavigation}</div><main class="main" id="content" tabindex="-1"><div class="content"><div class="gap-identity mobile-identity">${identity}</div>${inner}</div></main><footer class="footer"><div class="footer-inner"><div class="footer-copy"><span>&copy; ${new Date().getFullYear()} Crossover Stockton</span><span>See clearly. Act locally.</span></div><nav class="footer-links" aria-label="Footer"><a href="${href('about')}">About</a><a href="${href('sources')}">Sources</a></nav></div></footer></div></div>`;
+  const shell=`<div class="care-shell"><aside class="care-rail"><a class="care-brand" href="${href('overview')}"><img src="/images/logo_light.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><div class="care-rail-groups">${grouped}</div></aside><div class="care-site"><header class="care-top"><a class="care-mobile-brand" href="${href('overview')}"><img src="/images/logo_dark.webp" alt=""><span>CROSSOVER<br>STOCKTON</span></a><a class="gap-identity desktop-identity" href="${identityHref}">${identity}</a><div class="care-top-actions"><div class="home-search"><button class="home-search-toggle" type="button" aria-label="Search the site" aria-expanded="false" aria-controls="home-search-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><div class="home-search-panel" id="home-search-panel" hidden><label for="home-search-input">Search Crossover Stockton</label><input id="home-search-input" type="search" placeholder="Search sections and records"><div class="home-search-results"></div></div></div><a class="desktop-about" href="${href('about')}" ${activeState('about')}>${icon('about')}<span>About</span></a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">${icon('menu')}</button></div></header><div class="mobile-menu" id="mobile-menu">${mobileNavigation}</div><main class="main" id="content" tabindex="-1"><div class="content"><div class="gap-identity mobile-identity">${identity}</div>${inner}</div></main><footer class="footer"><div class="footer-inner"><div class="footer-copy"><span>&copy; ${new Date().getFullYear()} Crossover Stockton</span><span>See clearly. Act locally.</span></div><nav class="footer-links" aria-label="Footer"><a href="/feed.txt">Text ${icon('arrowExternal')}</a><a href="/feed.json">Feed JSON ${icon('arrowExternal')}</a><a href="/data/records.json">Data JSON ${icon('arrowExternal')}</a><a href="${href('about')}">About</a></nav></div></footer></div></div>`;
   document.getElementById('app').innerHTML=shell.replace('/images/logo_light.webp','/images/logo_dark.webp');
   syncListenButtons();
-  document.title=current==='/about'?`About Crossover · Crossover Stockton${isPreview?' — new site preview':''}`:`${({ '/overview':'Overview','/our-work':'Our work','/whats-next':"What's next",'/questions':'Questions' })[current]|| (current.startsWith('/record/')?'Record':menu.find(item=>'/'+item.page===current)?.label||'Crossover')} · Street dogs and access to care · Crossover Stockton${isPreview?' — new site preview':''}`;
+  document.title=current==='/about'?`About Crossover · Crossover Stockton${isPreview?' — new site preview':''}`:current==='/overview'?`Street dogs and access to care · Crossover Stockton${isPreview?' — new site preview':''}`:`${(current.startsWith('/record/')?'Record':menu.find(item=>'/'+item.page===current)?.label||'Crossover')} · Street dogs and access to care · Crossover Stockton${isPreview?' — new site preview':''}`;
   document.querySelector('.menu-toggle').addEventListener('click',toggleMenu);
   setupHomeSearch();
   setupSectionNav();
   setupFacilityMap();
   window.scrollTo(0,0);
+  if(!restoreScroll)queueEditorialRouteScroll();
 }
 function setupFacilityMap(){
   const wrap=document.querySelector('.facility-map-wrap');
@@ -500,11 +540,11 @@ function cleanLegacyRecordUrl(){
   const query=params.toString();
   history.replaceState(history.state,'',location.pathname+(query?`?${query}`:'')+location.hash);
 }
-function resolveLegacySectionHash(){
-  if(location.pathname!=='/'||!location.hash)return false;
-  const section={'#our-work':'/our-work/','#whats-next':'/whats-next/','#open-questions':'/questions/'}[location.hash];
+function resolveLegacySectionRoute(){
+  if(isPreview)return false;
+  const section={'/our-work/':'our-work','/whats-next/':'whats-next','/questions/':'open-questions'}[location.pathname];
   if(!section)return false;
-  history.replaceState(history.state,'',section+location.search);
+  history.replaceState(history.state,'',`/${location.search}#${section}`);
   return true;
 }
 function navigateToSitePage(event){
@@ -536,8 +576,8 @@ function restoreSitePage(event){
   cleanLegacyRecordUrl();
   activeFilter='all';
   document.body.classList.remove('menu-open');
-  render();
+  render({restoreScroll:true});
   requestAnimationFrame(()=>window.scrollTo(0,event.state?.scrollY||0));
 }
-async function start(){try{const [storyResponse,recordsResponse,publicationResponse,feedContentResponse,audioResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/publication.json'),fetch('/feed-content.html'),fetch('/audio-manifest.json',{cache:'no-store'})]);if(!storyResponse.ok||!recordsResponse.ok||!publicationResponse.ok||!feedContentResponse.ok||!audioResponse.ok)throw new Error('Could not load the current account.');feed=await storyResponse.json();publication=await publicationResponse.json();feedContent=await feedContentResponse.text();audioManifest=await audioResponse.json();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap&&route()!='/about')throw new Error('No current gap in the public account.');gapStory=feed.chapters.find(item=>item.id==='gap');menu=feed.silent.menu;setupNarration();cleanLegacyRecordUrl();const migrated=resolveLegacySectionHash();history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render({reuseExisting:!migrated});syncListenButtons();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Site unavailable</h1><p>${esc(error.message)}</p></main>`}}
+async function start(){try{const [storyResponse,recordsResponse,publicationResponse,feedContentResponse,audioResponse]=await Promise.all([fetch('/feed.json'),fetch('/data/records.json'),fetch('/publication.json'),fetch('/feed-content.html'),fetch('/audio-manifest.json',{cache:'no-store'})]);if(!storyResponse.ok||!recordsResponse.ok||!publicationResponse.ok||!feedContentResponse.ok||!audioResponse.ok)throw new Error('Could not load the current account.');feed=await storyResponse.json();publication=await publicationResponse.json();feedContent=await feedContentResponse.text();audioManifest=await audioResponse.json();const data=await recordsResponse.json();records=Object.values(data.records||{});byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');if(!gap&&route()!='/about')throw new Error('No current gap in the public account.');gapStory=feed.chapters.find(item=>item.id==='gap');menu=feed.silent.menu;setupNarration();cleanLegacyRecordUrl();const migrated=resolveLegacySectionRoute();history.scrollRestoration='manual';history.replaceState({...history.state,scrollY:window.scrollY},'');render({reuseExisting:!migrated});syncListenButtons();document.addEventListener('click',handleListen);document.addEventListener('click',handleListingControls);document.addEventListener('click',navigateToSitePage);window.addEventListener('popstate',restoreSitePage);document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('menu-open'))toggleMenu();if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){event.preventDefault();document.querySelector('.home-search-toggle')?.click()}})}catch(error){document.getElementById('app').innerHTML=`<main class="loading"><h1>Site unavailable</h1><p>${esc(error.message)}</p></main>`}}
 start();

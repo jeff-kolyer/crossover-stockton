@@ -15,35 +15,51 @@ const publication = JSON.parse(await read('dist/publication.json'));
 const records = Object.values(feed.records);
 const page = path => read(`dist${path}index.html`);
 
-test('four editorial pages and full account share one publication', async () => {
+test('one scrolling project page contains four sections and keeps About separate', async () => {
   const root=await page('/');
   const published=publication.gapPublications.find(item=>item.gapId==='dogs-safe-placement');
-  assert.ok(root.includes('class="living-page"'));
+  assert.ok(root.includes('class="living-page living-page--continuous"'));
   assert.ok(!root.includes('<h2>What we know</h2>'));
   assert.ok(!root.includes('id="dogs-overview"'));
   assert.equal(published.items.filter(item=>item.section==='overview'&&item.status==='published').sort((a,b)=>a.order-b.order)[0].id,'dogs-scale');
   assert.ok(root.indexOf('id="dogs-scale"')>root.indexOf('<h1>Overview</h1>'));
-  assert.ok(!root.includes('id="dogs-field-calls"'));
+  assert.ok(root.includes('id="dogs-field-calls"'));
+  assert.ok(!root.includes('id="about-vocation"'));
   assert.ok(root.includes('class="gap-identity desktop-identity"'));
   assert.ok(root.includes('<a class="gap-identity desktop-identity" href="/">'));
   assert.ok(root.includes('background:#0789e8'));
   assert.ok(!root.includes('class="compact-metric"'));
   assert.ok(!root.includes('href="/feed/"'));
-  assert.ok(root.includes('<details class="living-references"><summary><span class="living-item-date">Updated Nov 11, 2026</span>'));
-  assert.ok(!root.includes('<details class="living-references" open'));
-  assert.equal((root.match(/data-listen-label="Listen to the feed"/g)||[]).length,1);
-  const routeBySection={overview:'/', 'our-work':'/our-work/', 'whats-next':'/whats-next/', 'open-questions':'/questions/'};
+  assert.ok(!root.includes('<details class="living-references">'));
+  assert.equal((root.match(/class="overview-listen living-listen"/g)||[]).length,1);
+  const latest=published.items.filter(item=>item.status==='published').map(item=>item.updatedAt).sort().at(-1);
+  const formatted=value=>new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'America/Los_Angeles'}).format(new Date(value));
+  assert.ok(root.includes(`<div class="living-feed-head"><div><h1>Overview</h1><span class="living-feed-date">Updated ${formatted(latest)}</span></div><button class="overview-listen living-listen" type="button" data-track="account" data-listen-label="Listen to the feed"`));
+  assert.ok(!root.includes('<div class="living-meta"><span>Updated '));
+  const anchors={overview:'/#overview', 'our-work':'/#our-work', 'whats-next':'/#whats-next', 'open-questions':'/#open-questions'};
   for(const section of published.sections){
-    const rendered=await page(routeBySection[section.id]);
-    assert.ok(rendered.includes(`id="${section.id}"`),section.id);
-    assert.ok(rendered.includes(`href="${routeBySection[section.id]}" aria-current="page"`),section.id);
+    assert.ok(root.includes(`id="${section.id}"`),section.id);
+    assert.ok(root.includes(`href="${anchors[section.id]}"`),section.id);
     for(const item of published.items.filter(item=>item.status==='published'))
-      assert.equal(rendered.includes(`id="${item.id}"`),item.section===section.id,`${section.id}: ${item.id}`);
+      assert.ok(root.includes(`id="${item.id}"`),`${section.id}: ${item.id}`);
   }
+  assert.ok(root.indexOf('id="overview"')<root.indexOf('id="our-work"'));
+  assert.ok(root.indexOf('id="our-work"')<root.indexOf('id="whats-next"'));
+  assert.ok(root.indexOf('id="whats-next"')<root.indexOf('id="open-questions"'));
+  assert.ok(root.includes('<h2>Our work</h2>')&&root.includes('<h2>What&#39;s next</h2>')&&root.includes('<h2>Questions</h2>'));
   const written=published.items.filter(item=>item.status==='published');
-  const latest=written.map(item=>item.updatedAt).sort().at(-1);
-  const formatted=value=>new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${value.slice(0,10)}T12:00:00Z`));
-  assert.ok(root.includes(`<span>Updated ${formatted(latest)}</span>`));
+  const ordered=published.sections.toSorted((a,b)=>a.order-b.order).flatMap(section=>written.filter(item=>item.section===section.id).toSorted((a,b)=>a.order-b.order));
+  const sourceIds=[...new Set(ordered.flatMap(item=>item.relatedRecordIds||[]))].filter(id=>feed.records[id]);
+  const sourceList=root.match(/<section class="living-section living-sources" id="feed-sources">[\s\S]*?<\/section>/)?.[0];
+  assert.ok(sourceList?.startsWith('<section class="living-section living-sources" id="feed-sources"><h2>Sources</h2><ol>'));
+  assert.ok(root.indexOf('id="open-questions"')<root.indexOf('id="feed-sources"'));
+  assert.ok(root.indexOf('id="feed-sources"')<root.indexOf('class="living-updates"'));
+  assert.equal((sourceList.match(/<li id="source-/g)||[]).length,sourceIds.length);
+  for(const [index,id] of sourceIds.entries()){
+    const record=feed.records[id];
+    const prefix=record.schema==='organization'?'organization':'record';
+    assert.ok(sourceList.includes(`<li id="source-${index+1}"><a href="/${prefix}/${id}/">${html(record.title)}</a></li>`),id);
+  }
   assert.equal(await read('src/publication.json'),await read('public/publication.json'));
   assert.equal(await read('src/publication.json'),await read('dist/publication.json'));
   const textFeed=await read('dist/feed.txt');
@@ -54,18 +70,18 @@ test('four editorial pages and full account share one publication', async () => 
   assert.equal(textFeed,expectedFeed.text);
   assert.equal(await read('dist/feed-content.html'),expectedFeed.html);
   for(const item of written){
-    const rendered=await page(routeBySection[item.section]);
+    const rendered=root;
     assert.ok(rendered.includes(html(item.body)),item.id);
-    const shortDate=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${item.updatedAt.slice(0,10)}T12:00:00Z`));
     const article=rendered.match(new RegExp(`<article[^>]*id="${item.id}"[\\s\\S]*?</article>`))?.[0];
-    assert.ok(article?.includes(`<span class="living-item-date">Updated ${shortDate}</span>`),item.id);
+    assert.ok(article&&!article.includes('class="living-item-date"')&&!article.includes('<details class="living-references">'),item.id);
     if(item.image){
       assert.match(item.image.src,/\.jpg$/,item.id);
       assert.ok(article?.includes(`<figure class="living-image"><img src="${html(item.image.src)}" alt="${html(item.image.alt)}"`),item.id);
       assert.ok(article?.includes(`<figcaption class="living-references">${html(item.image.caption)}</figcaption></figure>`),item.id);
     }
-    const resolved=(item.relatedRecordIds||[]).filter(id=>feed.records[id]);
-    assert.ok(article?.includes(`Sources (${resolved.length})`),item.id);
+    const resolved=[...new Set(item.relatedRecordIds||[])].filter(id=>feed.records[id]);
+    assert.equal((article.match(/aria-label="Source \d+"/g)||[]).length,resolved.length,item.id);
+    for(const id of resolved)assert.ok(article.includes(`href="#source-${sourceIds.indexOf(id)+1}"`),`${item.id}: ${id}`);
     assert.ok(textFeed.includes(item.body),item.id);
     for(const id of item.relatedRecordIds||[])assert.ok(rendered.includes(`/record/${id}/`)||rendered.includes(`/organization/${id}/`),id);
   }
@@ -89,13 +105,15 @@ test('four editorial pages and full account share one publication', async () => 
   assert.ok((await read('dist/site.js')).includes('navigator.mediaSession.setActionHandler'));
 });
 
-test('source disclosures follow item text with a compact, accessible metadata line',async()=>{
-  for(const path of ['/','/our-work/','/whats-next/','/questions/']){
-    const rendered=await page(path);
-    assert.ok(rendered.includes('<details class="living-references"><summary><span class="living-item-date">Updated '),path);
-    assert.ok(rendered.includes('<span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources ('),path);
-    assert.ok(rendered.includes('<div class="living-reference-content">'),path);
-  }
+test('About keeps its article source disclosures while the project feed uses one source list',async()=>{
+  const root=await page('/');
+  assert.ok(root.includes('id="feed-sources"'));
+  assert.ok(!root.includes('<details class="living-references">'));
+  const rendered=await page('/about/');
+  assert.ok(!rendered.includes('id="feed-sources"'));
+  assert.ok(rendered.includes('<details class="living-references"><summary><span class="living-item-date">Updated '));
+  assert.ok(rendered.includes('<span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources ('));
+  assert.ok(rendered.includes('<div class="living-reference-content">'));
   const css=await read('dist/care-site.css');
   assert.ok(css.includes('.living-references summary{display:flex;align-items:center;justify-content:flex-start'));
   assert.ok(css.includes('.living-reference-label{display:inline-flex'));
@@ -110,11 +128,13 @@ test('About reads site publication data without a gap or custom article renderer
   const rendered=await page('/about/');
   assert.ok(rendered.includes('>ABOUT CROSSOVER</span>'));
   assert.ok(rendered.includes('<a class="gap-identity desktop-identity" href="/about/">'));
-  assert.ok(rendered.includes('<h1>From work to vocation</h1>'));
-  assert.ok(!rendered.includes('<h3>From work to vocation</h3>'));
-  assert.ok(!rendered.includes('The dawn of a new age'));
+  assert.ok(rendered.includes('<div class="living-feed-head"><div><h1>Our mission</h1><span class="living-feed-date">Updated '));
+  assert.ok(rendered.includes('<h3>From work to vocation</h3>'));
+  assert.ok(rendered.indexOf('>ABOUT CROSSOVER</span>')<rendered.indexOf('<h1>Our mission</h1>'));
+  assert.ok(rendered.indexOf('<h1>Our mission</h1>')<rendered.indexOf('id="about-vocation"'));
   assert.ok(rendered.includes('data-track="about" data-listen-label="Listen to About"'));
   assert.ok(!rendered.includes('class="living-section-nav"'));
+  assert.ok(!rendered.includes('id="dogs-scale"'));
   assert.ok(rendered.includes('<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2>'));
   assert.ok(rendered.includes('Existing animal-care capacity is under pressure'));
   assert.ok(!rendered.includes('class="about-principles"'));
@@ -129,7 +149,7 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(rendered.includes("Overview explains what is happening. Our work records what we have done and learned."));
   assert.equal((rendered.match(/Illustrative image\. AI-generated\./g)||[]).length,1);
   const speech=renderSitePublicationFeed(publication,feed.records,'about').text;
-  assert.ok(speech.startsWith('From work to vocation\n\n'));
+  assert.ok(speech.startsWith('Our mission\n\nFrom work to vocation\n\n'));
   assert.ok(speech.indexOf(written[0].title)<speech.indexOf(written[1].title));
   assert.ok(speech.indexOf(written[1].title)<speech.indexOf(written[2].title));
   assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Updated'));
@@ -150,25 +170,26 @@ test('editorial dates follow item revisions and body edits change page and spoke
   const selected=fixture.gapPublications.find(item=>item.gapId==='dogs-safe-placement');
   const item=selected.items.find(item=>item.id==='dogs-scale');
   item.body='A changed editorial account for rendering and narration.';
-  item.updatedAt='2026-11-12';
+  item.updatedAt='2026-11-12T20:00:00Z';
   const context={location:{pathname:'/',search:''},URL,URLSearchParams,fixture,recordMap:new Map(records.map(record=>[record.id,record]))};
   const source=(await read('public/preview/care-site/site.js')).replace(/\bstart\(\);\s*$/,'');
   runInNewContext(source,context,{timeout:3000});
   const changedPage=runInNewContext('publication=fixture;gap={id:"dogs-safe-placement"};byId=recordMap;livingPage()',context,{timeout:3000});
   assert.ok(changedPage.includes(item.body));
-  assert.ok(changedPage.includes('<span class="living-item-date">Updated Nov 12, 2026</span>'));
-  assert.ok(changedPage.includes('<span>Updated November 12, 2026</span>'));
+  assert.ok(changedPage.includes('<span class="living-feed-date">Updated November 12, 2026</span>'));
+  assert.ok(!changedPage.includes('class="living-item-date"'));
+  assert.ok(!changedPage.includes('<div class="living-meta"><span>Updated '));
   item.relatedRecordIds=[item.relatedRecordIds[0],'missing-record'];
   const oneSource=runInNewContext('livingPage()',context,{timeout:3000});
-  assert.ok(oneSource.match(/id="dogs-scale"[\s\S]*?Sources \(1\)[\s\S]*?<\/article>/));
+  assert.ok(oneSource.match(/id="dogs-scale"[\s\S]*?aria-label="Source 1"[\s\S]*?<\/article>/));
   item.relatedRecordIds=[];
   const noSources=runInNewContext('livingPage()',context,{timeout:3000});
   const noSourceItem=noSources.match(/<article[^>]*id="dogs-scale"[\s\S]*?<\/article>/)?.[0];
-  assert.ok(noSourceItem?.includes('<span class="living-item-date">Updated Nov 12, 2026</span>'));
+  assert.ok(!noSourceItem?.includes('living-citations'));
   assert.ok(!noSourceItem?.includes('<details'));
   const otherPage=runInNewContext('livingPage("our-work")',context,{timeout:3000});
-  assert.ok(otherPage.includes('<span>Updated November 12, 2026</span>'));
-  assert.ok(!otherPage.includes(item.body));
+  assert.ok(!otherPage.includes('<div class="living-meta"><span>Updated '));
+  assert.ok(otherPage.includes(item.body));
   assert.ok(renderPublicationFeed(fixture,feed.records,'dogs-safe-placement').text.includes(item.body));
   const duplicate=structuredClone(fixture);
   duplicate.gapPublications[0].items[0].title='  OVERVIEW  ';
@@ -183,17 +204,25 @@ test('editorial dates follow item revisions and body edits change page and spoke
   assert.throws(()=>validatePublication(invalid,feed.records),/updatedAt must be on or after createdAt/);
 });
 
-test('old Feed and Overview routes redirect to the canonical account',async()=>{
+test('old editorial routes redirect to sections of the single account',async()=>{
   for(const path of ['/feed/','/street-dogs/overview/','/gaps/']){
     const old=await page(path);
     assert.ok(old.includes('content="0;url=/"'),path);
     assert.ok(old.includes('rel="canonical" href="https://crossoverstockton.org/"'),path);
+  }
+  for(const [path,anchor] of [['/our-work/','our-work'],['/whats-next/','whats-next'],['/questions/','open-questions']]){
+    const old=await page(path);
+    assert.ok(old.includes(`content="0;url=/#${anchor}"`),path);
+    assert.ok(old.includes(`location.replace("/"+location.search+"#${anchor}")`),path);
   }
   assert.ok((await page('/')).includes('rel="canonical" href="https://crossoverstockton.org/"'));
   const sitemap=await read('dist/sitemap.xml');
   assert.ok(!sitemap.includes('https://crossoverstockton.org/feed/'));
   assert.ok(!sitemap.includes('https://crossoverstockton.org/street-dogs/overview/'));
   assert.ok(!sitemap.includes('https://crossoverstockton.org/gaps/'));
+  assert.ok(!sitemap.includes('https://crossoverstockton.org/our-work/'));
+  assert.ok(!sitemap.includes('https://crossoverstockton.org/whats-next/'));
+  assert.ok(!sitemap.includes('https://crossoverstockton.org/questions/'));
 });
 
 test('navigation and responsive account keep all resources reachable',async()=>{
@@ -221,6 +250,17 @@ test('navigation and responsive account keep all resources reachable',async()=>{
   const about=await page('/about/');
   assert.ok(about.includes('<strong>Jeff Kolyer</strong>'));
   assert.ok(about.includes('https://www.linkedin.com/in/jeff-kolyer'));
+});
+
+test('site-wide feed formats stay in the quiet footer',async()=>{
+  for(const path of ['/','/about/','/record/jeff-kolyer/']){
+    const rendered=await page(path);
+    assert.match(rendered,/<nav class="footer-links" aria-label="Footer"><a href="\/feed\.txt">Text <svg class="link-arrow /,path);
+    assert.match(rendered,/<a href="\/feed\.json">Feed JSON <svg class="link-arrow /,path);
+    assert.match(rendered,/<a href="\/data\/records\.json">Data JSON <svg class="link-arrow /,path);
+    assert.ok(rendered.includes('<a href="/about/">About</a></nav>'),path);
+    assert.ok(!rendered.includes('utm_source='),path);
+  }
 });
 
 test('record details retain instructions, limits, and supporting links', async () => {

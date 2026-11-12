@@ -219,15 +219,20 @@ redirects.set('/feed/', '/');
 redirects.set(`/${currentSlug}/overview/`, '/');
 redirects.set('/gaps/', '/');
 redirects.set('/street-dogs/story/', '/');
-await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...staticSite.pages.filter((page) => page.sitemap && !redirects.has(page.path)).map(page=>page.path),'/our-work/','/whats-next/','/questions/'].map(path=>`<url><loc>${origin}${path}</loc></url>`).join("")}</urlset>\n`);
-await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nLiving publication: ${origin}/\nEditorial pages: ${origin}/, ${origin}/our-work/, ${origin}/whats-next/, ${origin}/questions/\nPublication data: ${origin}/publication.json\nPublication text: ${origin}/feed.txt\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
+redirects.set('/our-work/', '/#our-work');
+redirects.set('/whats-next/', '/#whats-next');
+redirects.set('/questions/', '/#open-questions');
+await writeFile(resolve(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${staticSite.pages.filter((page) => page.sitemap && !redirects.has(page.path)).map(page=>`<url><loc>${origin}${page.path}</loc></url>`).join("")}</urlset>\n`);
+await writeFile(resolve(dist, "llms.txt"), `# Crossover Stockton\n\nLiving publication: ${origin}/\nSections: ${origin}/#overview, ${origin}/#our-work, ${origin}/#whats-next, ${origin}/#open-questions\nAbout Crossover: ${origin}/about/\nPublication data: ${origin}/publication.json\nPublication text: ${origin}/feed.txt\nFull sitemap: ${origin}/sitemap.xml\nPublic records: ${origin}/data/records.json\nInteractive one-file version: ${origin}/interactive/\n`);
 
 for (const [path, target] of redirects) {
   const directory = resolve(dist, `.${path}`);
   if (!directory.startsWith(`${dist}${sep}`)) throw new Error(`Unsafe redirect path: ${path}`);
   await mkdir(directory, { recursive: true });
   const safeTarget = escapeHtml(target);
-  await writeFile(resolve(directory, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${safeTarget}"><link rel="canonical" href="${origin}${safeTarget}"><title>Moved | Crossover Stockton</title><script>location.replace(${JSON.stringify(target)}+location.search)</script></head><body><p>This page moved to <a href="${safeTarget}">the new Crossover site</a>.</p></body></html>`);
+  const [targetPath,targetFragment]=target.split('#');
+  const destination=targetFragment?`${JSON.stringify(targetPath)}+location.search+${JSON.stringify(`#${targetFragment}`)}`:`${JSON.stringify(target)}+location.search`;
+  await writeFile(resolve(directory, "index.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${safeTarget}"><link rel="canonical" href="${origin}${safeTarget}"><title>Moved | Crossover Stockton</title><script>location.replace(${destination})</script></head><body><p>This page moved to <a href="${safeTarget}">the new Crossover site</a>.</p></body></html>`);
 }
 await writeFile(resolve(dist, "404.html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=/explore/"><title>Find a record | Crossover Stockton</title><script>location.replace('/explore/'+location.search)</script></head><body><p>Find the page in <a href="/explore/">the public record</a>.</p></body></html>`);
 console.log(`Published ${siteMdPages.length} SITE.md pages, ${staticSite.pages.length} readable fallbacks, and the interactive one-file site, with ${records.length} feed records and ${redirects.size} legacy redirects.`);

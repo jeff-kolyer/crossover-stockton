@@ -4,7 +4,7 @@
       "id": "about",
       "title": "About Crossover",
       "founderSummary": "Jeff Kolyer is a former Silicon Valley technology founder who has lived in Stockton for more than a decade. Crossover grows out of his interest in the transition from work to vocation: how emerging technology, human attention, and local action can be directed toward unmet needs in the real world.",
-      "sections": [{ "id": "about", "title": "From work to vocation", "order": 1 }],
+      "sections": [{ "id": "about", "title": "Our mission", "order": 1 }],
       "items": [
         {
           "id": "about-vocation", "section": "about", "order": 1,
