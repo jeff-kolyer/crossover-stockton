@@ -16,16 +16,16 @@
             "Stockton Animal Services recorded 3,106 stray-dog intake events in 2024. In September 2026, Stockton Street Dogs reported encountering three to ten dumped dogs per week. These figures establish that dogs are entering the care system and being encountered by rescuers, but they do not tell us how many dogs currently need help or how many are going without care.",
             "The scale of the unmet need remains unknown."
           ],
-          "createdAt": "2026-11-11", "updatedAt": "2026-11-11T14:11:21Z", "status": "published",
+          "createdAt": "2026-11-11", "updatedAt": "2026-11-12T03:49:48Z", "status": "published",
           "relatedRecordIds": ["cbs-2026-04-06-stockton-abandoned-dogs", "sas-2024-dog-intake-stray", "stockton-dumped-dog-encounters-reported", "stockton-current-street-dog-population-unknown", "stocktonia-2026-10-20-roaming-dog-distinction"],
-          "image": { "src": "/images/variants/clean/dog-sidewalk.jpg", "alt": "Illustrative dog on a neighborhood sidewalk" }
+          "image": { "src": "/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg", "alt": "Illustrative tan dog walking slowly on a neighborhood sidewalk", "caption": "Illustrative image. AI-generated." }
         },
         {
           "id": "dogs-care-access", "gapId": "dogs-safe-placement", "section": "overview", "order": 3,
           "title": "Getting care isn't always straightforward", "body": "Stockton Animal Services has reported that its shelter is regularly at capacity. Healthy stray intake generally requires an appointment, while sick, injured, and aggressive dogs receive priority. Veterinary costs and the availability of rescue volunteers and foster homes can also affect the options for care. We do not yet know how often a request for help meets these limits or what happens afterward.",
-          "createdAt": "2026-11-11", "updatedAt": "2026-11-11T14:36:15Z", "status": "published",
+          "createdAt": "2026-11-11", "updatedAt": "2026-11-12T03:49:48Z", "status": "published",
           "relatedRecordIds": ["stocktonia-2026-10-20-sas-capacity-intake", "stockton-2026-05-11-stray-dog-report", "stocktonia-2026-10-20-found-animal-foster-pathway"],
-          "image": { "src": "/images/variants/clean/shelter.jpg", "alt": "Illustrative animal shelter entrance" }
+          "image": { "src": "/images/variants/clean/shelter.jpg", "alt": "Illustrative animal shelter entrance", "caption": "Illustrative image. AI-generated." }
         },
         {
           "id": "dogs-care-providers", "gapId": "dogs-safe-placement", "section": "overview", "order": 4,
@@ -42,9 +42,9 @@
         {
           "id": "dogs-field-calls", "gapId": "dogs-safe-placement", "section": "our-work", "order": 1,
           "title": "Reviewing the field-call records", "body": "Crossover received 7,183 Stockton Animal Services field-call records on November 2 and began reviewing them November 4. We are checking what each record says about a request, the response, and any recorded outcome, along with missing information and limits in the data. These calls cannot be counted as unique dogs or as the street population; findings from the review remain pending.",
-          "createdAt": "2026-11-11", "updatedAt": "2026-11-11T14:36:15Z", "status": "published",
+          "createdAt": "2026-11-11", "updatedAt": "2026-11-12T03:49:48Z", "status": "published",
           "relatedRecordIds": ["crossover-2026-11-02-sas-field-call-records-received", "task-review-sas-field-call-records"],
-          "image": { "src": "/images/variants/clean/records-desk.jpg", "alt": "Illustrative records and notes on a desk" }
+          "image": { "src": "/images/variants/clean/records-desk.jpg", "alt": "Illustrative records and notes on a desk", "caption": "Illustrative image. AI-generated." }
         },
         {
           "id": "dogs-fieldwork", "gapId": "dogs-safe-placement", "section": "our-work", "order": 2,

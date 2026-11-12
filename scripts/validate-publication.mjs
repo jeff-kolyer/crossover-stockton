@@ -16,7 +16,7 @@ export function validatePublication(publication, records) {
       if (!validDate(item.createdAt) || !validDate(item.updatedAt) || Date.parse(item.updatedAt)<Date.parse(item.createdAt)) throw new Error(`Invalid editorial dates: ${item.id} (updatedAt must be on or after createdAt)`);
       if (!['published', 'draft', 'retired'].includes(item.status)) throw new Error(`Invalid editorial status: ${item.id}`);
       for (const id of item.relatedRecordIds || []) if (!records[id]) throw new Error(`Missing related record ${id} in ${item.id}`);
-      if (item.image && (!item.image.src?.startsWith('/') || !item.image.alt?.trim())) throw new Error(`Invalid editorial image: ${item.id}`);
+      if (item.image && (!item.image.src?.startsWith('/') || !item.image.alt?.trim() || !item.image.caption?.trim())) throw new Error(`Invalid editorial image: ${item.id}`);
       if (item.paragraphs && (!Array.isArray(item.paragraphs) || item.paragraphs.some(text => typeof text !== 'string' || !text.trim()))) throw new Error(`Invalid editorial paragraphs: ${item.id}`);
       if (item.table) {
         const { caption, columns, rows } = item.table;

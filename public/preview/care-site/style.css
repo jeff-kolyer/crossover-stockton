@@ -610,8 +610,21 @@ a.text-link,button.text-link{font-weight:700}
 .living-item h3{margin:0 0 14px;font-family:var(--ui-font);font-size:16px;font-weight:700;letter-spacing:0;line-height:1.35}
 .living-item p{margin:0;color:#172b3a;font-size:16px;font-weight:400;line-height:1.5}
 .living-item p+p{margin-top:18px}
-.living-item img{order:-1;display:block;width:100%;height:375px;object-fit:cover;object-position:var(--living-image-position,center);border-radius:8px}
+.living-image{order:-1;margin:0}
+.living-item img{display:block;width:100%;height:375px;object-fit:cover;object-position:var(--living-image-position,center);border-radius:8px}
 .living-references{margin-top:16px;color:#607588;font-size:12px;font-weight:400;line-height:1.4}
+.living-image figcaption{margin-top:6px}
+.about-page .about-image{margin:0;min-width:0}
+.about-page .about-image figcaption{margin-top:6px}
+.about-page .design-graphic{overflow:visible;min-height:0;border:0;background:transparent}
+.about-page .design-graphic img{position:static;display:block;width:100%;height:280px;object-fit:cover;border-radius:var(--ui-radius)}
+.about-page .about-founder>.about-image img{display:block;width:240px;height:180px;object-fit:cover}
+@media(max-width:1100px){.about-page .about-starting-band>.about-image img{width:240px;height:165px}}
+@media(max-width:760px){
+  .about-page .design-graphic img{height:220px}
+  .about-page .about-starting-band>.about-image{order:-1;width:100%}
+  .about-page .about-starting-band>.about-image img,.about-page .about-founder>.about-image img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+}
 .living-references summary{display:flex;align-items:center;justify-content:flex-start;gap:10px;width:100%;color:inherit;font-weight:400;cursor:pointer;list-style:none}
 .living-reference-label{display:inline-flex;align-items:center;gap:4px;color:inherit;font-weight:inherit;white-space:nowrap}
 .living-references summary:hover .living-reference-label{text-decoration:underline;text-underline-offset:2px}
@@ -650,7 +663,7 @@ a.text-link,button.text-link{font-weight:700}
   .living-section :is(h1,h2){margin-bottom:15px}
   .living-item,.living-item.has-image{display:flex;flex-direction:column;gap:20px}
   .living-item{padding:17px 0}
-  .living-item img{order:-1;width:100%;height:auto;max-height:none;aspect-ratio:2.2;object-fit:cover;margin:0}
+  .living-item img{width:100%;height:auto;max-height:none;aspect-ratio:2.2;object-fit:cover;margin:0}
   .living-section:last-child{display:block}
 }
 

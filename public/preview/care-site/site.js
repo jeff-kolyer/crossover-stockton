@@ -279,7 +279,7 @@ function livingPage(page='overview'){
     const metadata=references.length
       ?`<details class="living-references"><summary><span class="living-item-date">Updated ${esc(date(item.updatedAt))}</span><span class="living-meta-separator" aria-hidden="true">·</span><span class="living-reference-label">Sources (${references.length}) <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="living-reference-content">${referenceContent}</div></details>`
       :`<div class="living-references living-references-empty"><span class="living-item-date">Updated ${esc(date(item.updatedAt))}</span></div>`;
-    return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}<p>${esc(item.body)}</p>${(item.paragraphs||[]).map(text=>`<p>${esc(text)}</p>`).join('')}${editorialTable(item.table)}${metadata}</div>${item.image?`<img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'?'eager':'lazy'}">`:''}</article>`;
+    return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}<p>${esc(item.body)}</p>${(item.paragraphs||[]).map(text=>`<p>${esc(text)}</p>`).join('')}${editorialTable(item.table)}${metadata}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
   };
   const sectionNav=`<nav class="living-section-nav" aria-label="Publication pages">${sections.map(item=>{const target=item.id==='open-questions'?'questions':item.id;return `<a href="${href(target)}" ${item.id===sectionId?'aria-current="page"':''}>${esc(item.id==='open-questions'?'Questions':item.title)}</a>`}).join('')}</nav>`;
   const latest=Array.isArray(records)?recentUpdates(7):[];
@@ -310,31 +310,36 @@ function aboutPage(){
   const founderSection=about.sections.find(item=>item.id==='founder');
   const identity=records.find(record=>record.schema==='identity');
   const principles=(identity?.fields?.principleIds||[]).map(lookup).filter(Boolean);
+  const caption='Illustrative image. AI-generated.';
+  const figure=(image,className='')=>`<figure class="about-image${className?` ${className}`:''}"><img src="${esc(image.src)}" alt="${esc(image.alt)}" loading="lazy"><figcaption class="living-references">${esc(image.caption)}</figcaption></figure>`;
   const principleImages={
-    'work-to-vocation':{src:'/images/about/techno.jpg',alt:'Robotic arm in a workshop'},
-    compassion:{src:'/images/about/hands.jpg',alt:'Two hands reaching toward one another'},
-    'contact-with-reality':{src:'/images/about/notebook.jpg',alt:'Notebook of field observations'},
-    'work-discovers-work':{src:'/images/about/growing.jpg',alt:'Plant growing beside a city'}
+    'work-to-vocation':{src:'/images/about/techno.jpg',alt:'Robotic arm in a workshop',caption},
+    compassion:{src:'/images/about/hands.jpg',alt:'Two hands reaching toward one another',caption},
+    'contact-with-reality':{src:'/images/about/notebook.jpg',alt:'Notebook of field observations',caption},
+    'work-discovers-work':{src:'/images/about/growing.jpg',alt:'Plant growing beside a city',caption}
   };
+  const heroImage={src:'/images/about/guy-dog.jpg',alt:'Person sitting beside a dog at sunset',caption};
+  const startingImage={src:'/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg',alt:starting.imageAlt,caption};
   const founderId=identity?.fields?.founderPersonId;
   const founder=lookup(founderId)||records.find(record=>record.schema==='person');
+  const founderImage={src:founder?.fields?.preferred_image||'/images/about/about-the-founder.jpg',alt:founderSection.imageAlt,caption};
   const profile=safeUrl(founder?.fields?.profileUrl);
   const openingText=opening.text.slice(opening.text.indexOf(' What if')+1);
   const technologyText=opening.text.slice(0,opening.text.indexOf(' What if'));
   return `<div class="design-overview about-page">
     <section class="design-hero" aria-labelledby="about-opening">
       <div><span class="eyebrow">ABOUT CROSSOVER</span><h1 id="about-opening">${esc(opening.headline)}</h1><p>${esc(openingText)}</p></div>
-      <div class="design-graphic"><img src="/images/about/guy-dog.jpg" alt="Person sitting beside a dog at sunset"></div>
+      <div class="design-graphic">${figure(heroImage)}</div>
     </section>
     <section class="design-section about-principles-section" aria-labelledby="about-principles">
       <div class="design-section-head"><div><span class="eyebrow">GUIDING IDEAS</span><h2 id="about-principles">Principles</h2><p>${esc(technologyText)} ${esc(purpose.text)}</p></div></div>
-      <div class="about-principles">${principles.map((principle,index)=>{const image=principleImages[principle.id];const title=principle.id==='work-discovers-work'?discovery.headline:principle.title;return `<article class="about-principle"><img src="${esc(image.src)}" alt="${esc(image.alt)}" loading="lazy"><div><span class="eyebrow">${String(index+1).padStart(2,'0')} / PRINCIPLE</span><h3>${esc(title)}</h3><p>${esc(recordText(principle))}</p></div></article>`}).join('')}</div>
+      <div class="about-principles">${principles.map((principle,index)=>{const image=principleImages[principle.id];const title=principle.id==='work-discovers-work'?discovery.headline:principle.title;return `<article class="about-principle">${figure(image)}<div><span class="eyebrow">${String(index+1).padStart(2,'0')} / PRINCIPLE</span><h3>${esc(title)}</h3><p>${esc(recordText(principle))}</p></div></article>`}).join('')}</div>
     </section>
     <section class="design-section about-starting-band" aria-labelledby="about-starting">
-      <div><span class="eyebrow">IN STOCKTON, NOW</span><h2 id="about-starting">${esc(starting.title)}</h2><p>${esc(starting.text)}</p><p><a class="text-link" href="${href('overview')}">${esc(starting.more.label)} ${icon('arrow')}</a></p></div><img src="${esc(gap.fields?.preferred_image||'/images/variants/clean/dog-sidewalk.jpg')}" alt="${esc(starting.imageAlt)}" loading="lazy">
+      <div><span class="eyebrow">IN STOCKTON, NOW</span><h2 id="about-starting">${esc(starting.title)}</h2><p>${esc(starting.text)}</p><p><a class="text-link" href="${href('overview')}">${esc(starting.more.label)} ${icon('arrow')}</a></p></div>${figure(startingImage)}
     </section>
     <section class="design-section" aria-labelledby="about-founder">
-      <div class="about-founder"><img src="${esc(founder?.fields?.preferred_image||'/images/about/about-the-founder.jpg')}" alt="${esc(founderSection.imageAlt)}" loading="lazy"><div><span class="eyebrow">FOUNDER</span><h2 id="about-founder">${esc(founderSection.headline)}</h2><p>${esc(founderSection.text)}</p>${profile?`<p><a class="design-button about-linkedin-button" href="${esc(profile)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ${icon("arrowExternal")}</a></p>`:''}<p><a class="text-link" href="${href('sources')}">${esc(founderSection.more.label)} ${icon('arrow')}</a></p></div></div>
+      <div class="about-founder">${figure(founderImage)}<div><span class="eyebrow">FOUNDER</span><h2 id="about-founder">${esc(founderSection.headline)}</h2><p>${esc(founderSection.text)}</p>${profile?`<p><a class="design-button about-linkedin-button" href="${esc(profile)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn ${icon("arrowExternal")}</a></p>`:''}<p><a class="text-link" href="${href('sources')}">${esc(founderSection.more.label)} ${icon('arrow')}</a></p></div></div>
     </section>
   </div>`;
 }

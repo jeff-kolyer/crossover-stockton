@@ -58,6 +58,11 @@ test('four editorial pages and full account share one publication', async () => 
     const shortDate=new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(`${item.updatedAt.slice(0,10)}T12:00:00Z`));
     const article=rendered.match(new RegExp(`<article[^>]*id="${item.id}"[\\s\\S]*?</article>`))?.[0];
     assert.ok(article?.includes(`<span class="living-item-date">Updated ${shortDate}</span>`),item.id);
+    if(item.image){
+      assert.match(item.image.src,/\.jpg$/,item.id);
+      assert.ok(article?.includes(`<figure class="living-image"><img src="${html(item.image.src)}" alt="${html(item.image.alt)}"`),item.id);
+      assert.ok(article?.includes(`<figcaption class="living-references">${html(item.image.caption)}</figcaption></figure>`),item.id);
+    }
     const resolved=(item.relatedRecordIds||[]).filter(id=>feed.records[id]);
     assert.ok(article?.includes(`Sources (${resolved.length})`),item.id);
     assert.ok(textFeed.includes(item.body),item.id);
@@ -115,7 +120,7 @@ test('editorial dates follow item revisions and body edits change page and spoke
   assert.ok(noSourceItem?.includes('<span class="living-item-date">Updated Nov 12, 2026</span>'));
   assert.ok(!noSourceItem?.includes('<details'));
   const otherPage=runInNewContext('livingPage("our-work")',context,{timeout:3000});
-  assert.ok(otherPage.includes('<span>Updated November 11, 2026</span>'));
+  assert.ok(otherPage.includes('<span>Updated November 12, 2026</span>'));
   assert.ok(!otherPage.includes(item.body));
   assert.ok(renderPublicationFeed(fixture,feed.records,'dogs-safe-placement').text.includes(item.body));
   const duplicate=structuredClone(fixture);
@@ -163,7 +168,7 @@ test('navigation and responsive account keep all resources reachable',async()=>{
   assert.ok(root.includes('class="gap-identity mobile-identity"'));
   const css=await read('dist/care-site.css');
   assert.ok(css.includes('.mobile-menu{inset:64px 0 0}'));
-  assert.ok(css.includes('.living-item img{order:-1;width:100%'));
+  assert.ok(css.includes('.living-image{order:-1;margin:0}'));
   assert.ok(css.includes('.living-page{width:100%;max-width:760px'));
   assert.ok(css.includes('.living-section:last-child{display:block}'));
   const about=await page('/about/');
@@ -333,12 +338,16 @@ test('every public record and the new design assets are published', async () => 
     assert.ok(detail.includes(html(record.title)), record.id);
   }
   const root = await page('/');
+  const about = await page('/about/');
+  assert.equal((about.match(/<figure class="about-image">/g)||[]).length,7);
+  assert.equal((about.match(/<figcaption class="living-references">Illustrative image\. AI-generated\.<\/figcaption>/g)||[]).length,7);
+  for (const [,src] of about.matchAll(/<figure class="about-image"><img src="([^"]+)"/g)) assert.match(src,/\.jpg$/);
   assert.match(root, /href="\/site\.css\?v=[a-f0-9]{12}"/);
   assert.match(root, /href="\/care-site\.css\?v=[a-f0-9]{12}"/);
   assert.match(root, /src="\/site\.js\?v=[a-f0-9]{12}"/);
-  assert.ok(root.includes('src="/images/variants/clean/dog-sidewalk.jpg" alt="Illustrative dog on a neighborhood sidewalk"'));
+  assert.ok(root.includes('src="/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg" alt="Illustrative tan dog walking slowly on a neighborhood sidewalk"'));
   assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
-  for (const path of ['dist/site.css','dist/care-site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk.jpg','dist/images/variants/clean/dog-through-window.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
+  for (const path of ['dist/site.css','dist/care-site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg','dist/images/variants/clean/dog-through-window.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
 });
 

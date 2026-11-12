@@ -140,6 +140,7 @@ await mkdir(resolve(dist, "images"), { recursive: true });
 await copyFile("public/images/project.svg", resolve(dist, "images/project.svg"));
 for (const image of [
   "variants/clean/dog-sidewalk.jpg",
+  "variants/clean/dog-sidewalk-vulnerable-2026.jpg",
   "variants/clean/shelter.jpg",
   "home/pets-shelter.jpg",
   "reports/stockton-animal-services-first-visit.webp",
