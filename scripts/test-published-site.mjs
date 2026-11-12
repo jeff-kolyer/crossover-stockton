@@ -65,7 +65,7 @@ test('one scrolling project page contains four sections and keeps About separate
   assert.equal(await read('src/publication.json'),await read('dist/publication.json'));
   const textFeed=await read('dist/feed.txt');
   assert.equal(textFeed,await read('public/feed.txt'));
-  assert.ok(textFeed.startsWith("A problem whose scale is unknown\n\nDogs are being abandoned and found roaming Stockton's streets."));
+  assert.ok(textFeed.startsWith("Street dogs and access to care\n\nOverview\n\nUpdated November 11, 2026\n\nA problem whose scale is unknown\n\nDogs are being abandoned and found roaming Stockton's streets."));
   assert.ok(root.includes('<h3>A problem whose scale is unknown</h3>'));
   const expectedFeed=renderPublicationFeed(publication,feed.records,'dogs-safe-placement');
   assert.equal(textFeed,expectedFeed.text);
@@ -96,6 +96,7 @@ test('one scrolling project page contains four sections and keeps About separate
   }
   const aboutSpeech=renderSitePublicationFeed(publication,feed.records,'about').text;
   assert.equal(await read('dist/feed-about.txt'),aboutSpeech);
+  assert.ok(aboutSpeech.startsWith('About Crossover\n\nOur mission\n\nUpdated November 12, 2026\n\nFrom work to vocation\n\n'));
   assert.equal(audio.about.version,createHash('sha256').update('offline-voice-v1\n').update(aboutSpeech.trim()).digest('hex').slice(0,16));
   for(const [track,entry] of Object.entries(audio)){
     const file=await readFile(`dist${entry.src}`);
@@ -163,10 +164,10 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(rendered.includes("Overview explains what is happening. Our work records what we have done and learned."));
   assert.equal((rendered.match(/Illustrative image\. AI-generated\./g)||[]).length,1);
   const speech=renderSitePublicationFeed(publication,feed.records,'about').text;
-  assert.ok(speech.startsWith('Our mission\n\nFrom work to vocation\n\n'));
+  assert.ok(speech.startsWith('About Crossover\n\nOur mission\n\nUpdated November 12, 2026\n\nFrom work to vocation\n\n'));
   assert.ok(speech.indexOf(written[0].title)<speech.indexOf(written[1].title));
   assert.ok(speech.indexOf(written[1].title)<speech.indexOf(written[2].title));
-  assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Updated')&&!speech.includes('Sources ('));
+  assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Sources ('));
   const fixture=structuredClone(publication);
   fixture.sitePublications[0].items.push({...written[2],id:'about-fourth',order:4,title:'A fourth About article',body:'A new data-only article.',relatedRecordIds:[]});
   validatePublication(fixture,feed.records);
@@ -208,7 +209,7 @@ test('editorial dates follow item revisions and body edits change page and spoke
   const duplicate=structuredClone(fixture);
   duplicate.gapPublications[0].items[0].title='  OVERVIEW  ';
   const once=renderPublicationFeed(duplicate,feed.records,'dogs-safe-placement');
-  assert.ok(once.text.startsWith(`${item.body}\n\n`));
+  assert.ok(once.text.startsWith(`Street dogs and access to care\n\nOverview\n\nUpdated November 12, 2026\n\n${item.body}\n\n`));
   assert.ok(!once.text.includes('OVERVIEW'));
   assert.ok(once.html.includes('<h2>Overview</h2><article id="dogs-scale"><p>'));
   assert.ok(!once.html.includes('<h3>  OVERVIEW  </h3>'));
