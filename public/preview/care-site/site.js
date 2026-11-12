@@ -208,9 +208,9 @@ function recordDate(record){
   const raw=fields.occurred_at||fields.started_at||fields.published_at||fields.last_reviewed_at||record.dateForSort?.value;
   return raw?(/^\d{4}-\d{2}-\d{2}/.test(raw)?date(raw):String(raw)):'';
 }
-function recentUpdates(limit){
+function recentUpdates(limit,siteWide=false){
   const updateDate=record=>record.schema==='activity'?record.fields?.occurred_at:record.schema==='finding'?record.fields?.last_reviewed_at:record.fields?.published_at;
-  const candidates=records.filter(record=>related(record)&&updateDate(record)&&(
+  const candidates=records.filter(record=>(siteWide||related(record))&&updateDate(record)&&(
     record.schema==='activity'||record.schema==='finding'||(record.schema==='evidence'&&record.fields?.source?.url)
   )).sort((a,b)=>updateDate(b).localeCompare(updateDate(a))||a.id.localeCompare(b.id));
   const seenSources=new Set();
@@ -292,13 +292,13 @@ function livingPage(page='overview'){
   const items=id=>selected.items.filter(item=>item.section===id&&item.status==='published').sort((a,b)=>a.order-b.order);
   const updated=items(sectionId).map(item=>item.updatedAt).sort().at(-1);
   const sectionNav=isAbout?'':`<nav class="living-section-nav" aria-label="Publication pages">${sections.map(item=>{const target=item.id==='open-questions'?'questions':item.id;return `<a href="${href(target)}" ${item.id===sectionId?'aria-current="page"':''}>${esc(item.id==='open-questions'?'Questions':item.title)}</a>`}).join('')}</nav>`;
-  const latest=isAbout?[]:Array.isArray(records)?recentUpdates(7):[];
+  const latest=Array.isArray(records)?recentUpdates(7,isAbout):[];
   const updateDate=record=>record.schema==='activity'?record.fields?.occurred_at:record.schema==='finding'?record.fields?.last_reviewed_at:record.fields?.published_at;
   const updateType=record=>record.schema==='activity'?'Activity':record.schema==='finding'?'Finding':'Source report';
   const updates=`<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2><div class="living-update-list">${latest.map(record=>`<a class="living-update" href="${recordHref(record.id)}"><h3>${esc(record.title)}</h3><p>${esc(short(recordText(record),155))}</p><small>${esc(date(updateDate(record)))} · ${updateType(record)}</small></a>`).join('')}</div><a class="living-updates-all" href="${href('activity')}">View activity ${icon('arrow')}</a></aside>`;
   const track=page==='overview'?'account':sectionId;
   const listenLabel=isAbout?'Listen to About':page==='overview'?'Listen to the feed':`Listen to ${section.title.toLowerCase()}`;
-  return `<div class="living-layout${isAbout?' living-layout--about':''}"><div class="living-page">${sectionNav}<div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-track="${esc(track)}" data-listen-label="${esc(listenLabel)}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${esc(listenLabel)}</span></button></div><section class="living-section" id="${esc(section.id)}"><h1>${esc(page==='questions'?'Questions':section.title)}</h1><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}</div></section>${isAbout?founderProfile(selected.founderSummary):''}</div>${isAbout?'':updates}</div>`;
+  return `<div class="living-layout"><div class="living-page">${sectionNav}<div class="living-meta"><span>Updated ${esc(longDate(updated))}</span><button class="overview-listen living-listen" type="button" data-track="${esc(track)}" data-listen-label="${esc(listenLabel)}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${esc(listenLabel)}</span></button></div><section class="living-section" id="${esc(section.id)}"><h1>${esc(page==='questions'?'Questions':section.title)}</h1><div class="living-items">${items(section.id).map(item=>editorialItem(item,section)).join('')}</div></section>${isAbout?founderProfile(selected.founderSummary):''}</div>${updates}</div>`;
 }
 function designOverview(){return livingPage('overview')}
 function activityPage(){const part=section('activity');return `${heading('Activity',part.summary,'/activity')}${part.chapters.map(group=>`<div class="section-title"><h2>${esc(group.title)}</h2></div>${recordList((group.records||[]).map(lookup).filter(Boolean),'/activity')}`).join('')}`}

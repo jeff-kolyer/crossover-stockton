@@ -667,7 +667,6 @@ a.text-link,button.text-link{font-weight:700}
 .care-rail-nav a:is([aria-current=page],[aria-current=location]){background:#edf0f2;color:var(--skin-ink);font-weight:700;box-shadow:none}
 .care-rail-secondary{border-color:#dce4e9}
 .living-layout{display:grid;grid-template-columns:minmax(0,770fr) minmax(280px,380fr);align-items:start;gap:32px;width:100%;margin:0}
-.living-layout--about{grid-template-columns:minmax(0,770px)}
 .living-page{max-width:none;min-width:0}
 .living-section-nav{position:sticky;top:0;z-index:25;display:flex;gap:26px;min-width:0;overflow-x:auto;border-bottom:1px solid #dce4e9;background:#fff;scrollbar-width:thin}
 .living-section-nav a{display:inline-flex;align-items:center;flex:none;min-height:48px;padding:2px 0 0;border-bottom:2px solid transparent;color:#233544;font-size:var(--ui-nav);font-weight:600;white-space:nowrap;text-decoration:none}

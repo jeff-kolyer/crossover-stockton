@@ -113,9 +113,10 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(!rendered.includes('The dawn of a new age'));
   assert.ok(rendered.includes('data-track="about" data-listen-label="Listen to About"'));
   assert.ok(!rendered.includes('class="living-section-nav"'));
-  assert.ok(!rendered.includes('class="living-updates"'));
+  assert.ok(rendered.includes('<aside class="living-updates" aria-labelledby="living-updates-title"><h2 id="living-updates-title">Latest updates</h2>'));
+  assert.ok(rendered.includes('Existing animal-care capacity is under pressure'));
   assert.ok(!rendered.includes('class="about-principles"'));
-  assert.ok(rendered.includes('<figure class="living-image"><img src="/images/about/guy-dog.jpg"'));
+  assert.ok(rendered.includes('<figure class="living-image"><img src="/images/about/guy-dog-large.jpg"'));
   assert.ok(written.every(item=>rendered.includes(`id="${item.id}"`)));
   assert.ok(written.every((item,index)=>index===0||rendered.indexOf(`id="${written[index-1].id}"`)<rendered.indexOf(`id="${item.id}"`)));
   assert.ok(rendered.includes('<figure class="living-founder"><img src="/images/about/about-the-founder.jpg"'));
@@ -135,6 +136,7 @@ test('About reads site publication data without a gap or custom article renderer
   runInNewContext(source,context,{timeout:3000});
   const withoutGap=runInNewContext('publication=fixture;gap=undefined;records=fixtureRecords;byId=recordMap;livingPage("about")',context,{timeout:3000});
   assert.ok(withoutGap.includes('id="about-fourth"'));
+  assert.ok(withoutGap.includes('<aside class="living-updates"'));
   assert.ok(renderSitePublicationFeed(fixture,feed.records,'about').text.includes('A new data-only article.'));
 });
 
@@ -387,7 +389,7 @@ test('every public record and the new design assets are published', async () => 
   assert.match(root, /src="\/site\.js\?v=[a-f0-9]{12}"/);
   assert.ok(root.includes('src="/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg" alt="Illustrative tan dog walking slowly on a neighborhood sidewalk"'));
   assert.ok(!root.includes('src="/images/home/sunlit-window-view.jpg"'));
-  for (const path of ['dist/site.css','dist/care-site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg','dist/images/variants/clean/dog-through-window.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
+  for (const path of ['dist/site.css','dist/care-site.css','dist/site.js','dist/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg','dist/images/variants/clean/dog-through-window.jpg','dist/images/about/about-the-founder.jpg','dist/images/about/guy-dog-large.jpg','dist/images/about/techno.jpg','dist/images/about/notebook.jpg','dist/images/about/hands.jpg','dist/images/about/growing.jpg','dist/fonts/IBMPlexSans-Regular.woff2'])
     assert.ok((await readFile(path)).length > 10000, path);
 });
 

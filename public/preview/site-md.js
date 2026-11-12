@@ -185,7 +185,7 @@ function aboutPage(){
   return `<div class="design-overview about-page">
     <section class="design-hero" aria-labelledby="about-opening">
       <div><span class="eyebrow">ABOUT CROSSOVER</span><h1 id="about-opening">${esc(opening.headline)}</h1><p>${esc(openingText)}</p></div>
-      <div class="design-graphic"><img src="/images/about/guy-dog.jpg" alt="Person sitting beside a dog at sunset"></div>
+      <div class="design-graphic"><img src="/images/about/guy-dog-large.jpg" alt="A man and a dog sitting together and looking over Stockton at sunset"></div>
     </section>
     <section class="design-section about-principles-section" aria-labelledby="about-principles">
       <div class="design-section-head"><div><span class="eyebrow">GUIDING IDEAS</span><h2 id="about-principles">Principles</h2><p>${esc(technologyText)} ${esc(purpose.text)}</p></div></div>

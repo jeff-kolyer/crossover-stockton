@@ -15,9 +15,9 @@
             "Instead of treating technology as an end in itself, Crossover explores how it can support a transition from compulsory work toward meaningful vocation: work chosen in response to reality, suffering, and unmet need.",
             "This is an attempt to connect tools, attention, and action to the world as it is. The goal is to begin practicing a better future, not merely imagining one."
           ],
-          "createdAt": "2026-11-12T04:55:26Z", "updatedAt": "2026-11-12T05:48:55Z", "status": "published",
+          "createdAt": "2026-11-12T04:55:26Z", "updatedAt": "2026-11-12T06:14:16Z", "status": "published",
           "relatedRecordIds": ["work-to-vocation", "technology"],
-          "image": { "src": "/images/about/guy-dog.jpg", "alt": "Illustrative person sitting beside a dog at sunset", "caption": "Illustrative image. AI-generated." }
+          "image": { "src": "/images/about/guy-dog-large.jpg", "alt": "A man and a dog sitting together and looking over Stockton at sunset", "caption": "Illustrative image. AI-generated." }
         },
         {
           "id": "about-method", "section": "about", "order": 2,
