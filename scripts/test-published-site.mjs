@@ -25,6 +25,7 @@ test('four editorial pages and full account share one publication', async () => 
   assert.ok(root.indexOf('id="dogs-scale"')>root.indexOf('<h1>Overview</h1>'));
   assert.ok(!root.includes('id="dogs-field-calls"'));
   assert.ok(root.includes('class="gap-identity desktop-identity"'));
+  assert.ok(root.includes('<a class="gap-identity desktop-identity" href="/">'));
   assert.ok(root.includes('background:#0789e8'));
   assert.ok(!root.includes('class="compact-metric"'));
   assert.ok(!root.includes('href="/feed/"'));
@@ -108,6 +109,7 @@ test('About reads site publication data without a gap or custom article renderer
   assert.ok(written.every(item=>!item.gapId));
   const rendered=await page('/about/');
   assert.ok(rendered.includes('>ABOUT CROSSOVER</span>'));
+  assert.ok(rendered.includes('<a class="gap-identity desktop-identity" href="/about/">'));
   assert.ok(rendered.includes('<h1>From work to vocation</h1>'));
   assert.ok(!rendered.includes('<h3>From work to vocation</h3>'));
   assert.ok(!rendered.includes('The dawn of a new age'));
