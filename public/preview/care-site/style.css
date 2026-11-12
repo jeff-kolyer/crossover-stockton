@@ -309,9 +309,9 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .design-overview :is(.design-section-head>a,.design-report-actions>a,.design-all,.account-source-group a):hover{text-decoration:underline;text-underline-offset:3px}
 
 /* Listing, feed, record, and About pages share the same type scale. */
-.page-intro h1,.work-listing h1,.site-feed-header h1,.about-page h1{font-size:var(--ui-hero);font-weight:700;line-height:1.1}
+.page-intro h1,.work-listing h1,.site-feed-header h1{font-size:var(--ui-hero);font-weight:700;line-height:1.1}
 .page-intro p,.work-listing-lede,.site-feed-header p:last-child{font-size:var(--ui-body);line-height:1.5}
-.work-listing-head h2,.panel h2,.about-principle h3,.feed-reading .story-part>h3,.feed-reading .passage>h3,.detail-body .panel h2{font-size:var(--ui-card);font-weight:600;line-height:1.2}
+.work-listing-head h2,.panel h2,.feed-reading .story-part>h3,.feed-reading .passage>h3,.detail-body .panel h2{font-size:var(--ui-card);font-weight:600;line-height:1.2}
 .work-listing-head h2{font-weight:700}
 .work-record-main strong,.record-card strong,.design-directory strong{font-size:var(--ui-card);font-weight:600}
 .work-record-description,.record-card p,.design-directory span,.feed-reading .record-list p{font-size:var(--ui-support);line-height:1.5}
@@ -330,12 +330,9 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 .place-card-read{flex:none;color:var(--skin-green);font-size:var(--ui-nav);font-weight:700;white-space:nowrap}
 .place-card-read svg{width:15px;height:15px;vertical-align:-2px}
 .work-search-link,.site-feed-header>a,.text-link,.detail-body a,.feed-reading a{font-size:var(--ui-nav);color:var(--skin-green)}
-.feed-reading .chapter>p,.feed-reading .passage>p,.feed-reading .story-part>p,.about-principle p,.about-starting-band p,.about-founder p,.panel p{font-size:var(--ui-body);line-height:1.5}
+.feed-reading .chapter>p,.feed-reading .passage>p,.feed-reading .story-part>p,.panel p{font-size:var(--ui-body);line-height:1.5}
 .feed-reading .passage h4{font-size:var(--ui-card);font-weight:600}
 .design-questions a{font-size:var(--ui-card);font-weight:700;line-height:1.25}
-.about-starting-band{padding:25px 24px;background:var(--skin-sage)}
-.about-linkedin-button{gap:8px;border-radius:999px}
-.about-linkedin-button svg{width:16px;height:16px}
 
 @media(min-width:1500px){
   .work-listing--places .listing-results{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -348,7 +345,6 @@ body,button,input,select,textarea{font-family:var(--ui-font);line-height:1.5}
 @media(max-width:760px){
   :root{--ui-hero:clamp(34px,9vw,48px)}
   .work-listing--places .listing-results{grid-template-columns:1fr}
-  .about-starting-band{padding:20px 16px}
   .care-top{height:64px;min-height:64px}
   .care-mobile-brand,.care-top-actions>a,.care-top .menu-toggle{font-size:var(--ui-nav)}
   .care-top .menu-toggle{min-height:36px}
@@ -614,17 +610,13 @@ a.text-link,button.text-link{font-weight:700}
 .living-item img{display:block;width:100%;height:375px;object-fit:cover;object-position:var(--living-image-position,center);border-radius:8px}
 .living-references{margin-top:16px;color:#607588;font-size:12px;font-weight:400;line-height:1.4}
 .living-image figcaption{margin-top:6px}
-.about-page .about-image{margin:0;min-width:0}
-.about-page .about-image figcaption{margin-top:6px}
-.about-page .design-graphic{overflow:visible;min-height:0;border:0;background:transparent}
-.about-page .design-graphic img{position:static;display:block;width:100%;height:280px;object-fit:cover;border-radius:var(--ui-radius)}
-.about-page .about-founder>.about-image img{display:block;width:240px;height:180px;object-fit:cover}
-@media(max-width:1100px){.about-page .about-starting-band>.about-image img{width:240px;height:165px}}
-@media(max-width:760px){
-  .about-page .design-graphic img{height:220px}
-  .about-page .about-starting-band>.about-image{order:-1;width:100%}
-  .about-page .about-starting-band>.about-image img,.about-page .about-founder>.about-image img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-}
+.living-founder{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;margin:0;padding:20px 0;border-top:1px solid #dbe3e8}
+.living-founder img{width:48px;height:48px;object-fit:cover;border-radius:50%}
+.living-founder figcaption{min-width:0}
+.living-founder strong{display:block;font-size:16px;font-weight:700;line-height:1.35}
+.living-founder span{display:block;margin-top:3px;color:#607588;font-size:12px;line-height:1.4}
+.living-founder p{margin:8px 0;color:#405363;font-size:14px;line-height:1.45}
+.living-founder small{display:block;margin-top:8px}
 .living-references summary{display:flex;align-items:center;justify-content:flex-start;gap:10px;width:100%;color:inherit;font-weight:400;cursor:pointer;list-style:none}
 .living-reference-label{display:inline-flex;align-items:center;gap:4px;color:inherit;font-weight:inherit;white-space:nowrap}
 .living-references summary:hover .living-reference-label{text-decoration:underline;text-underline-offset:2px}
@@ -675,6 +667,7 @@ a.text-link,button.text-link{font-weight:700}
 .care-rail-nav a:is([aria-current=page],[aria-current=location]){background:#edf0f2;color:var(--skin-ink);font-weight:700;box-shadow:none}
 .care-rail-secondary{border-color:#dce4e9}
 .living-layout{display:grid;grid-template-columns:minmax(0,770fr) minmax(280px,380fr);align-items:start;gap:32px;width:100%;margin:0}
+.living-layout--about{grid-template-columns:minmax(0,770px)}
 .living-page{max-width:none;min-width:0}
 .living-section-nav{position:sticky;top:0;z-index:25;display:flex;gap:26px;min-width:0;overflow-x:auto;border-bottom:1px solid #dce4e9;background:#fff;scrollbar-width:thin}
 .living-section-nav a{display:inline-flex;align-items:center;flex:none;min-height:48px;padding:2px 0 0;border-bottom:2px solid transparent;color:#233544;font-size:var(--ui-nav);font-weight:600;white-space:nowrap;text-decoration:none}

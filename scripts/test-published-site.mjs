@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
 import { createHash } from 'node:crypto';
-import { renderPublicationFeed } from './publication-render.mjs';
+import { renderPublicationFeed, renderSitePublicationFeed } from './publication-render.mjs';
 import { validatePublication } from './validate-publication.mjs';
 import { checkPublicationHistory } from './check-publication-history.mjs';
 
@@ -69,13 +69,16 @@ test('four editorial pages and full account share one publication', async () => 
     for(const id of item.relatedRecordIds||[])assert.ok(rendered.includes(`/record/${id}/`)||rendered.includes(`/organization/${id}/`),id);
   }
   const audio=JSON.parse(await read('dist/audio-manifest.json'));
-  assert.deepEqual(Object.keys(audio),['account','our-work','whats-next','open-questions']);
+  assert.deepEqual(Object.keys(audio),['account','our-work','whats-next','open-questions','about']);
   assert.equal(audio.account.version,createHash('sha256').update('offline-voice-v1\n').update(textFeed.trim()).digest('hex').slice(0,16));
   for(const section of published.sections.filter(section=>section.id!=='overview')){
     const spoken=renderPublicationFeed(publication,feed.records,'dogs-safe-placement',section.id).text;
     assert.equal(await read(`dist/feed-${section.id}.txt`),spoken);
     assert.equal(audio[section.id].version,createHash('sha256').update('offline-voice-v1\n').update(spoken.trim()).digest('hex').slice(0,16));
   }
+  const aboutSpeech=renderSitePublicationFeed(publication,feed.records,'about').text;
+  assert.equal(await read('dist/feed-about.txt'),aboutSpeech);
+  assert.equal(audio.about.version,createHash('sha256').update('offline-voice-v1\n').update(aboutSpeech.trim()).digest('hex').slice(0,16));
   for(const [track,entry] of Object.entries(audio)){
     const file=await readFile(`dist${entry.src}`);
     assert.equal(file.toString('ascii',0,4),'RIFF',track);
@@ -96,6 +99,43 @@ test('source disclosures follow item text with a compact, accessible metadata li
   assert.ok(css.includes('.living-references summary{display:flex;align-items:center;justify-content:flex-start'));
   assert.ok(css.includes('.living-reference-label{display:inline-flex'));
   assert.ok(css.includes('.living-references[open] summary svg{transform:rotate(180deg)}'));
+});
+
+test('About reads site publication data without a gap or custom article renderer',async()=>{
+  const selected=publication.sitePublications.find(item=>item.id==='about');
+  const written=selected.items.filter(item=>item.status==='published').sort((a,b)=>a.order-b.order);
+  assert.equal(written.length,3);
+  assert.ok(written.every(item=>!item.gapId));
+  const rendered=await page('/about/');
+  assert.ok(rendered.includes('>ABOUT CROSSOVER</span>'));
+  assert.ok(rendered.includes('<h1>From work to vocation</h1>'));
+  assert.ok(!rendered.includes('<h3>From work to vocation</h3>'));
+  assert.ok(!rendered.includes('The dawn of a new age'));
+  assert.ok(rendered.includes('data-track="about" data-listen-label="Listen to About"'));
+  assert.ok(!rendered.includes('class="living-section-nav"'));
+  assert.ok(!rendered.includes('class="living-updates"'));
+  assert.ok(!rendered.includes('class="about-principles"'));
+  assert.ok(rendered.includes('<figure class="living-image"><img src="/images/about/guy-dog.jpg"'));
+  assert.ok(written.every(item=>rendered.includes(`id="${item.id}"`)));
+  assert.ok(written.every((item,index)=>index===0||rendered.indexOf(`id="${written[index-1].id}"`)<rendered.indexOf(`id="${item.id}"`)));
+  assert.ok(rendered.includes('<figure class="living-founder"><img src="/images/about/about-the-founder.jpg"'));
+  assert.ok(rendered.includes('who has lived in Stockton for more than a decade'));
+  assert.ok(rendered.includes("Overview explains what is happening. Our work records what we have done and learned."));
+  assert.ok(rendered.includes('Illustrative image. AI-generated.'));
+  const speech=renderSitePublicationFeed(publication,feed.records,'about').text;
+  assert.ok(speech.startsWith('From work to vocation\n\n'));
+  assert.ok(speech.indexOf(written[0].title)<speech.indexOf(written[1].title));
+  assert.ok(speech.indexOf(written[1].title)<speech.indexOf(written[2].title));
+  assert.ok(!speech.includes('Illustrative image.')&&!speech.includes('LinkedIn')&&!speech.includes('Updated'));
+  const fixture=structuredClone(publication);
+  fixture.sitePublications[0].items.push({...written[2],id:'about-fourth',order:4,title:'A fourth About article',body:'A new data-only article.',relatedRecordIds:[]});
+  validatePublication(fixture,feed.records);
+  const source=(await read('public/preview/care-site/site.js')).replace(/\bstart\(\);\s*$/,'');
+  const context={location:{pathname:'/about/',search:''},URL,URLSearchParams,fixture,recordMap:new Map(records.map(record=>[record.id,record])),fixtureRecords:records};
+  runInNewContext(source,context,{timeout:3000});
+  const withoutGap=runInNewContext('publication=fixture;gap=undefined;records=fixtureRecords;byId=recordMap;livingPage("about")',context,{timeout:3000});
+  assert.ok(withoutGap.includes('id="about-fourth"'));
+  assert.ok(renderSitePublicationFeed(fixture,feed.records,'about').text.includes('A new data-only article.'));
 });
 
 test('editorial dates follow item revisions and body edits change page and spoken text',async()=>{
@@ -172,7 +212,7 @@ test('navigation and responsive account keep all resources reachable',async()=>{
   assert.ok(css.includes('.living-page{width:100%;max-width:760px'));
   assert.ok(css.includes('.living-section:last-child{display:block}'));
   const about=await page('/about/');
-  assert.ok(about.includes('Founded by Jeff Kolyer'));
+  assert.ok(about.includes('<strong>Jeff Kolyer</strong>'));
   assert.ok(about.includes('https://www.linkedin.com/in/jeff-kolyer'));
 });
 
@@ -339,9 +379,9 @@ test('every public record and the new design assets are published', async () => 
   }
   const root = await page('/');
   const about = await page('/about/');
-  assert.equal((about.match(/<figure class="about-image">/g)||[]).length,7);
-  assert.equal((about.match(/<figcaption class="living-references">Illustrative image\. AI-generated\.<\/figcaption>/g)||[]).length,7);
-  for (const [,src] of about.matchAll(/<figure class="about-image"><img src="([^"]+)"/g)) assert.match(src,/\.jpg$/);
+  assert.equal((about.match(/<figure class="living-image">/g)||[]).length,1);
+  assert.equal((about.match(/<figcaption class="living-references">Illustrative image\. AI-generated\.<\/figcaption>/g)||[]).length,1);
+  assert.ok(about.includes('<figure class="living-founder"><img src="/images/about/about-the-founder.jpg"'));
   assert.match(root, /href="\/site\.css\?v=[a-f0-9]{12}"/);
   assert.match(root, /href="\/care-site\.css\?v=[a-f0-9]{12}"/);
   assert.match(root, /src="\/site\.js\?v=[a-f0-9]{12}"/);

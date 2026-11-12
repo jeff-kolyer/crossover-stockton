@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 
 const feedText = (await readFile('public/feed.txt', 'utf8')).trim();
 const tracks = { account: feedText };
-for(const name of ['our-work','whats-next','open-questions'])
+for(const name of ['our-work','whats-next','open-questions','about'])
   tracks[name]=(await readFile(`public/feed-${name}.txt`,'utf8')).trim();
 const audioDir = resolve('public/audio');
 await mkdir(audioDir, { recursive: true });

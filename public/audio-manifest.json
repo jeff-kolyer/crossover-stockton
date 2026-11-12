@@ -14,5 +14,9 @@
   "open-questions": {
     "src": "/audio/open-questions-cb3dac78cc70c00f.wav",
     "version": "cb3dac78cc70c00f"
+  },
+  "about": {
+    "src": "/audio/about-09900e1d8a1f7615.wav",
+    "version": "09900e1d8a1f7615"
   }
 }

@@ -159,6 +159,7 @@ await copyFile("public/feed.json", resolve(dist, "feed.json"));
 await copyFile("src/publication.json", resolve(dist, "publication.json"));
 await copyFile("public/feed-content.html", resolve(dist, "feed-content.html"));
 await copyFile("public/feed.txt", resolve(dist, "feed.txt"));
+await copyFile("public/feed-about.txt", resolve(dist, "feed-about.txt"));
 for(const section of ['our-work','whats-next','open-questions'])
   await copyFile(`public/feed-${section}.txt`,resolve(dist,`feed-${section}.txt`));
 await copyFile("public/audio-manifest.json", resolve(dist, "audio-manifest.json"));

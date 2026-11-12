@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 
-const itemsOf=data=>new Map((data.gapPublications||[]).flatMap(gap=>gap.items||[]).map(item=>[item.id,item]));
+const itemsOf=data=>new Map([...(data.gapPublications||[]),...(data.sitePublications||[])].flatMap(collection=>collection.items||[]).map(item=>[item.id,item]));
 const editorialFields=item=>Object.fromEntries(Object.entries(item).filter(([key])=>key!=='createdAt'&&key!=='updatedAt'));
 
 export function checkPublicationHistory(current,previous){

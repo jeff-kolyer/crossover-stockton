@@ -17,7 +17,7 @@ export function renderSiteMdPages(template, source, feed, story, publication, or
   const renderer = source.replace(/\bstart\(\);\s*$/, '');
   if (renderer === source) throw new Error('Could not isolate the SITE.md renderer');
   runInNewContext(renderer, context, { timeout: 3000 });
-  runInNewContext(`feed=sourceStory;publication=sourcePublication;feedContent=sourceFeedContent;records=Object.values(sourceFeed.records);byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');gapStory=feed.chapters.find(item=>item.id==='gap');about=feed.chapters.find(item=>item.id==='about');menu=feed.silent.menu;`, context, { timeout: 3000 });
+  runInNewContext(`feed=sourceStory;publication=sourcePublication;feedContent=sourceFeedContent;records=Object.values(sourceFeed.records);byId=new Map(records.map(item=>[item.id,item]));gap=records.find(item=>item.schema==='gap'&&item.fields?.default)||records.find(item=>item.schema==='gap');gapStory=feed.chapters.find(item=>item.id==='gap');menu=feed.silent.menu;`, context, { timeout: 3000 });
 
   const gapSlug = Object.values(feed.records).find(item => item.schema === 'gap' && item.fields?.default)?.fields?.slug;
   if (!gapSlug) throw new Error('No default gap slug in the public records');
@@ -35,7 +35,7 @@ export function renderSiteMdPages(template, source, feed, story, publication, or
     const sectionByPath={'/':'overview','/our-work/':'our-work','/whats-next/':'whats-next','/questions/':'open-questions'};
     const sectionId=sectionByPath[path]||(path===`/${gapSlug}/overview/`?'overview':null);
     const description = sectionId ? publication.gapPublications.find(item => item.gapId === Object.values(feed.records).find(record => record.schema === 'gap' && record.fields?.default)?.id)?.items.filter(item => item.section === sectionId && item.status === 'published').sort((a,b)=>a.order-b.order)[0]?.body.slice(0,160)
-      : path === '/about/' ? story.chapters.find(item => item.id === 'about')?.sections[0]?.text
+      : path === '/about/' ? publication.sitePublications.find(item => item.id === 'about')?.items.filter(item => item.status === 'published').sort((a,b)=>a.order-b.order)[0]?.body.slice(0,160)
       : path === '/feed/' ? story.description
       : 'Crossover Stockton public feed and connected records.';
     const canonical = path === `/${gapSlug}/overview/` || path === '/feed/' ? '/' : path;
