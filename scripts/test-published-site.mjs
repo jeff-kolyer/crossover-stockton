@@ -21,7 +21,8 @@ test('one scrolling project page contains four sections and keeps About separate
   assert.ok(root.includes('class="living-page living-page--continuous"'));
   assert.ok(!root.includes('<h2>What we know</h2>'));
   assert.ok(!root.includes('id="dogs-overview"'));
-  assert.equal(published.items.filter(item=>item.section==='overview'&&item.status==='published').sort((a,b)=>a.order-b.order)[0].id,'dogs-scale');
+  assert.deepEqual(published.items.filter(item=>item.section==='overview'&&item.status==='published').sort((a,b)=>a.order-b.order).map(item=>item.id),['dogs-scale','dogs-care-access','dogs-expansion']);
+  assert.ok(!root.includes('id="dogs-care-providers"'));
   assert.ok(root.indexOf('id="dogs-scale"')>root.indexOf('<h1>Overview</h1>'));
   assert.ok(root.includes('id="dogs-field-calls"'));
   assert.ok(!root.includes('id="about-vocation"'));
@@ -51,7 +52,7 @@ test('one scrolling project page contains four sections and keeps About separate
   const ordered=published.sections.toSorted((a,b)=>a.order-b.order).flatMap(section=>written.filter(item=>item.section===section.id).toSorted((a,b)=>a.order-b.order));
   const sourceIds=[...new Set(ordered.flatMap(item=>item.relatedRecordIds||[]))].filter(id=>feed.records[id]);
   const sourceList=root.match(/<section class="living-section living-sources" id="feed-sources">[\s\S]*?<\/section>/)?.[0];
-  assert.ok(sourceList?.startsWith(`<section class="living-section living-sources" id="feed-sources"><details><summary><h2>Sources (${sourceIds.length})</h2>`));
+  assert.ok(sourceList?.startsWith(`<section class="living-section living-sources" id="feed-sources"><details><summary>Sources (${sourceIds.length})`));
   assert.ok(sourceList.includes('</summary><ol>')&&!sourceList.includes('<details open'));
   assert.ok(root.indexOf('id="open-questions"')<root.indexOf('id="feed-sources"'));
   assert.ok(root.indexOf('id="feed-sources"')<root.indexOf('class="living-updates"'));
@@ -72,7 +73,7 @@ test('one scrolling project page contains four sections and keeps About separate
   assert.deepEqual(feedJson.sections,published.sections);
   assert.deepEqual(feedJson.items,ordered);
   assert.deepEqual(JSON.parse(await read('dist/site-config.json')),story);
-  assert.ok(textFeed.startsWith("Street dogs and access to care\n\nOverview\n\nUpdated November 11, 2026\n\nA problem whose scale is unknown\n\nDogs are being abandoned and found roaming Stockton's streets."));
+  assert.ok(textFeed.startsWith(`Street dogs and access to care\n\nOverview\n\nUpdated ${formatted(latest)}\n\nA problem whose scale is unknown\n\nDogs are being abandoned and found roaming Stockton's streets.`));
   assert.ok(root.includes('<h3>A problem whose scale is unknown</h3>'));
   const expectedFeed=renderPublicationFeed(publication,feed.records,'dogs-safe-placement');
   assert.equal(textFeed,expectedFeed.text);
@@ -124,7 +125,7 @@ test('both publications collect article sources into a collapsed numbered list',
   const articles=about.items.filter(item=>item.status==='published').sort((a,b)=>a.order-b.order);
   const sourceIds=[...new Set(articles.flatMap(item=>item.relatedRecordIds||[]))].filter(id=>feed.records[id]);
   const sourceList=rendered.match(/<section class="living-section living-sources" id="feed-sources">[\s\S]*?<\/section>/)?.[0];
-  assert.ok(sourceList?.startsWith(`<section class="living-section living-sources" id="feed-sources"><details><summary><h2>Sources (${sourceIds.length})</h2>`));
+  assert.ok(sourceList?.startsWith(`<section class="living-section living-sources" id="feed-sources"><details><summary>Sources (${sourceIds.length})`));
   assert.ok(sourceList.includes('</summary><ol>')&&!sourceList.includes('<details open'));
   assert.equal((sourceList.match(/<li id="source-/g)||[]).length,sourceIds.length);
   for(const [index,id] of sourceIds.entries()){
@@ -138,9 +139,8 @@ test('both publications collect article sources into a collapsed numbered list',
     for(const id of new Set(item.relatedRecordIds||[]))assert.ok(article.includes(`href="#source-${sourceIds.indexOf(id)+1}"`),`${item.id}: ${id}`);
   }
   const css=await read('dist/care-site.css');
-  assert.ok(css.includes('.living-sources summary{display:flex;align-items:center;justify-content:space-between'));
-  assert.ok(css.includes('.living-sources summary svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;transform:rotate(90deg)'));
-  assert.ok(css.includes('.living-sources details[open] summary svg{transform:rotate(-90deg)}'));
+  assert.ok(css.includes('.living-sources summary{color:var(--skin-green);font-size:var(--ui-body);font-weight:700'));
+  assert.ok(!css.includes('.living-sources summary::-webkit-details-marker{display:none}'));
 });
 
 test('About reads site publication data without a gap or custom article renderer',async()=>{

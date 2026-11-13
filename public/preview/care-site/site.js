@@ -294,7 +294,7 @@ function livingPage(page='overview'){
   const feedUpdated=selected.items.filter(item=>item.status==='published').map(item=>item.updatedAt).sort().at(-1);
   const sourceIds=[...new Set(sections.flatMap(section=>items(section.id).flatMap(item=>item.relatedRecordIds||[])))].filter(id=>lookup(id));
   const sourceNumbers=new Map(sourceIds.map((id,index)=>[id,index+1]));
-  const sources=sourceIds.length?`<section class="living-section living-sources" id="feed-sources"><details><summary><h2>Sources (${sourceIds.length})</h2>${icon('chevron')}</summary><ol>${sourceIds.map((id,index)=>`<li id="source-${index+1}"><a href="${recordHref(id)}">${esc(lookup(id).title)}</a></li>`).join('')}</ol></details></section>`:'';
+  const sources=sourceIds.length?`<section class="living-section living-sources" id="feed-sources"><details><summary>Sources (${sourceIds.length})</summary><ol>${sourceIds.map((id,index)=>`<li id="source-${index+1}"><a href="${recordHref(id)}">${esc(lookup(id).title)}</a></li>`).join('')}</ol></details></section>`:'';
   const renderSection=section=>{
     const title=section.id==='open-questions'?'Questions':section.title;
     const isOpening=isAbout||section.id==='overview';

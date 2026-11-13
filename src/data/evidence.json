@@ -275,7 +275,7 @@
       "stockton-animal-services"
     ],
     "published_at": "2026-01-13",
-    "checked_at": "2026-08-21T17:07:00-07:00",
+    "checked_at": "2026-11-12",
     "record_type": "capacity_intervention",
     "trust": "government",
     "title": "City contracted for high-volume spay and neuter services",
@@ -430,10 +430,10 @@
     "record_type": "capacity_intervention",
     "trust": "government",
     "title": "City extended Hard Luck veterinary-services partnership",
-    "summary": "Stockton approved a one-year extension with Hard Luck Animal Welfare Advocates and added four positions, reinforcing veterinary and animal-care capacity connected to Animal Services.",
+    "summary": "On June 9, 2026, Stockton's City Council approved a one-year extension of its Hard Luck Animal Welfare Advocates agreement, authorizing four additional contract positions at a total cost not to exceed $3,969,675. The authorization does not establish how many additional animals have received care.",
     "source": {
       "publisher": "City of Stockton",
-      "url": "https://stockton.legistar.com/View.ashx?GUID=9410C9D4-7BA2-4887-A656-FDEF40CAEC1E&ID=1360997&M=A",
+      "url": "https://stockton.granicus.com/MinutesViewer.php?clip_id=9520&view_id=49",
       "type": "government"
     },
     "supports": [
@@ -821,6 +821,43 @@
       "url": "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926",
       "type": "organization"
     }
+  },
+  {
+    "id": "stockton-2024-11-12-shelter-renovation",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": "2024-11-12",
+    "checked_at": "2026-11-12",
+    "record_type": "capacity_intervention",
+    "trust": "government",
+    "title": "City details animal shelter renovation and construction contract",
+    "summary": "Stockton announced a $10,473,000 construction contract for its animal shelter renovation. Plans include a cattery, medical facilities, isolation and rehabilitation areas, and upgrades to the existing building. The city's original fall 2026 completion target has since been superseded by a reported spring 2027 opening expectation.",
+    "source": {
+      "publisher": "City of Stockton",
+      "url": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf",
+      "type": "government"
+    },
+    "supports": ["animal-care-capacity", "veterinary-capacity"],
+    "limitations": "The release describes plans and a construction award, not completed facilities, current operating capacity, or measured outcomes."
+  },
+  {
+    "id": "kcra-2026-11-10-shelter-expansion",
+    "gap_ids": ["dogs-safe-placement"],
+    "organization_ids": ["stockton-animal-services"],
+    "published_at": "2026-11-10",
+    "checked_at": "2026-11-12",
+    "record_type": "update",
+    "trust": "source_supported",
+    "title": "Animal Services expects expanded shelter to open in spring 2027",
+    "summary": "KCRA reports Stockton Animal Services expects its expanded shelter to open in spring 2027. Plans described by the shelter manager include a new veterinary facility, adoption space, and a community resource center. The shelter also reported taking in 828 animals in October 2026, nearly 600 of them strays; these are animals across species, not a count of street dogs.",
+    "source": {
+      "publisher": "KCRA 3",
+      "url": "https://www.kcra.com/article/stockton-animal-shelter-expansion/74394197",
+      "type": "local_reporting"
+    },
+    "supports": ["animal-care-capacity", "veterinary-capacity"],
+    "attribution": "KCRA's November 10 report attributes expansion details and intake figures to Stockton Animal Services staff.",
+    "limitations": "The reported opening date is an expectation, not a confirmed completion date. The October intake figure is not broken out by dog versus other species or by city versus the shelter's full service area."
   },
   {
     "id": "asher-house-sanctuary-model",

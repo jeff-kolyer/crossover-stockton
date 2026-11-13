@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "gapId": "dogs-safe-placement",
   "title": "Street dogs and access to care",
-  "updatedAt": "2026-11-12T03:49:48Z",
+  "updatedAt": "2026-11-13T01:43:00Z",
   "sections": [
     {
       "id": "overview",
@@ -30,20 +30,22 @@
       "id": "dogs-scale",
       "gapId": "dogs-safe-placement",
       "section": "overview",
-      "order": 2,
+      "order": 1,
       "title": "A problem whose scale is unknown",
-      "body": "Dogs are being abandoned and found roaming Stockton's streets. Some are lost pets, some have been dumped, and others live with people experiencing homelessness. Their circumstances and needs differ.",
+      "body": "Dogs are being abandoned and found roaming Stockton's streets. Some are lost pets. Others live with people experiencing homelessness and should not be assumed abandoned.",
       "paragraphs": [
-        "Stockton Animal Services recorded 3,106 stray-dog intake events in 2024. In September 2026, Stockton Street Dogs reported encountering three to ten dumped dogs per week. These figures establish that dogs are entering the care system and being encountered by rescuers, but they do not tell us how many dogs currently need help or how many are going without care.",
-        "The scale of the unmet need remains unknown."
+        "In April 2026, Stockton Street Dogs' founder estimated at least 200 to 300 dogs on Stockton's streets at a time, rising to about 400 during puppy season. In September, the group reported encountering three to ten dumped dogs a week, up from about one a week the previous year. These are the group's estimates and observations, not a verified count.",
+        "Stockton Animal Services recorded 3,106 stray-dog intake events in 2024 across its service area, which extends beyond Stockton. In October 2026, the shelter reportedly took in 828 animals, nearly 600 of them strays across species. Neither figure measures how many dogs are living on Stockton's streets now.",
+        "We still lack a verified count of dogs needing help, where they are, what condition they're in, and whether they're receiving care. The scale of the unmet need remains unknown."
       ],
       "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-12T03:49:48Z",
+      "updatedAt": "2026-11-13T01:43:00Z",
       "status": "published",
       "relatedRecordIds": [
         "cbs-2026-04-06-stockton-abandoned-dogs",
         "sas-2024-dog-intake-stray",
-        "stockton-dumped-dog-encounters-reported",
+        "ssd-2026-09-29-dumped-dogs-surge",
+        "kcra-2026-11-10-shelter-expansion",
         "stockton-current-street-dog-population-unknown",
         "stocktonia-2026-10-20-roaming-dog-distinction"
       ],
@@ -57,16 +59,24 @@
       "id": "dogs-care-access",
       "gapId": "dogs-safe-placement",
       "section": "overview",
-      "order": 3,
+      "order": 2,
       "title": "Getting care isn't always straightforward",
-      "body": "Stockton Animal Services has reported that its shelter is regularly at capacity. Healthy stray intake generally requires an appointment, while sick, injured, and aggressive dogs receive priority. Veterinary costs and the availability of rescue volunteers and foster homes can also affect the options for care. We do not yet know how often a request for help meets these limits or what happens afterward.",
+      "body": "Finding a dog that needs help is one thing. Getting that dog into care can be another. Residents can report a stray to Stockton Animal Services, which operates the municipal shelter, but a report does not guarantee immediate collection or intake.",
+      "paragraphs": [
+        "Animal Services says the shelter is regularly at capacity. Healthy strays generally need intake appointments; sick, injured, aggressive, and confirmed abandoned animals receive priority. That still does not tell us how quickly a particular dog receives care.",
+        "The city also describes a temporary found-animal foster pathway. Some residents can care for a found dog while shelter intake or adoption is arranged, and Animal Services may provide vaccinations and arrange sterilization. Not everyone can take an unfamiliar dog home.",
+        "Stockton Street Dogs feeds dogs in the field and invites people to foster, adopt, volunteer, or partner in rescue. Those routes depend on available people, funding, and places for dogs to go. Someone may report a dog and still have no immediate way to get it into care. How often that happens, how long dogs wait, and what ultimately happens to them remain unclear."
+      ],
       "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-12T03:49:48Z",
+      "updatedAt": "2026-11-13T01:43:00Z",
       "status": "published",
       "relatedRecordIds": [
+        "stockton-animal-services-2026-10-20-reporting-guidance",
         "stocktonia-2026-10-20-sas-capacity-intake",
-        "stockton-2026-05-11-stray-dog-report",
-        "stocktonia-2026-10-20-found-animal-foster-pathway"
+        "stocktonia-2026-10-20-found-animal-foster-pathway",
+        "cbs-2026-04-06-stockton-abandoned-dogs",
+        "ssd-standing-foster-adopt",
+        "ssd-standing-volunteer-rescue-partner"
       ],
       "image": {
         "src": "/images/variants/clean/shelter.jpg",
@@ -75,35 +85,26 @@
       }
     },
     {
-      "id": "dogs-care-providers",
-      "gapId": "dogs-safe-placement",
-      "section": "overview",
-      "order": 4,
-      "title": "Help is spread across multiple organizations",
-      "body": "Stockton Animal Services handles municipal sheltering and animal-control calls. Stockton Street Dogs works with dogs in the field through outreach, supplies, and placement efforts. Hard Luck offers subsidized veterinary treatment, and St. Mary's Pathways provides transitional housing that accommodates pets. These are different kinds of help; none of these roles guarantees that a particular dog can be taken in or treated when help is requested.",
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "stockton-animal-services",
-        "stockton-street-dogs",
-        "hard-luck-awa",
-        "st-marys-dining-room"
-      ]
-    },
-    {
       "id": "dogs-expansion",
       "gapId": "dogs-safe-placement",
       "section": "overview",
-      "order": 5,
-      "title": "Capacity is expanding, but will it be enough?",
-      "body": "Stockton is developing a municipal shelter expansion costing roughly $10.47 million and has authorized additional veterinary staffing and spay and neuter services. Separately, Stockton Street Dogs has proposed a Canine Campus for overflow and recovery; it is not operating. How much additional care these plans will deliver, and whether that will meet the need, remains unknown.",
+      "order": 3,
+      "title": "Capacity is expanding",
+      "body": "Stockton is investing in more shelter space and veterinary services, although the effect on dogs needing help on the streets is not yet clear.",
+      "paragraphs": [
+        "A roughly $10.5 million city shelter expansion is under construction. City plans include medical, isolation, and rehabilitation space; November 10 reporting also describes a new veterinary facility, adoption space, and a community resource center. The shelter now expects to open the expanded facility in spring 2027, later than the city's original fall 2026 target.",
+        "In June, the City Council approved a one-year extension of its Hard Luck Animal Welfare Advocates contract, up to $3.97 million, with four additional positions. Stockton Street Dogs has separately proposed a Canine Campus for shelter overflow and recovery and is seeking funds. We have not verified that the campus is fully funded, has a secured site, or has an opening date.",
+        "Construction, contracts, and proposals may expand care, but they do not yet show how many more dogs will receive timely help or whether the gap will close."
+      ],
       "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
+      "updatedAt": "2026-11-13T01:43:00Z",
       "status": "published",
       "relatedRecordIds": [
-        "stockton-animal-services",
-        "ssd-2026-07-30-canine-campus-proposal"
+        "stockton-2024-11-12-shelter-renovation",
+        "kcra-2026-11-10-shelter-expansion",
+        "hlawa-2026-06-09-contract-extension",
+        "ssd-2026-10-07-canine-campus-details",
+        "ssd-2026-07-31-canine-campus-fundraiser"
       ]
     },
     {
