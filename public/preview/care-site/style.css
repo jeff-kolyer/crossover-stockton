@@ -598,12 +598,13 @@ a.text-link,button.text-link{font-weight:700}
 .living-listen .listen-icon svg polygon{fill:currentColor;stroke:none}
 .living-section{padding:27px 0 32px;border-top:1px solid #cbd6dd}
 .living-section :is(h1,h2){margin:0 0 20px;font-family:var(--ui-font);font-size:24px;font-weight:700;letter-spacing:0;line-height:1.25}
+.living-section h2{font-size:18px}
 .living-items{display:grid;gap:0}
 .living-item{display:flex;flex-direction:column;gap:24px;min-width:0;padding:20px 0;border-top:1px solid #dbe3e8}
 .living-item:first-child{padding-top:0;border-top:0}
 .living-item.has-image{align-items:stretch}
 .living-item-copy{min-width:0}
-.living-item h3{margin:0 0 14px;font-family:var(--ui-font);font-size:16px;font-weight:700;letter-spacing:0;line-height:1.35}
+.living-item h2{margin:0 0 14px;font-family:var(--ui-font);font-size:18px;font-weight:700;letter-spacing:0;line-height:1.35}
 .living-item p{margin:0;color:#172b3a;font-size:16px;font-weight:400;line-height:1.5}
 .living-item p+p{margin-top:18px}
 .living-image{order:-1;margin:0}
@@ -661,7 +662,7 @@ a.text-link,button.text-link{font-weight:700}
 .living-section-nav a:hover{color:#233544;text-decoration:none}
 .living-section-nav a:is([aria-current=page],[aria-current=location]){border-bottom-color:#0789e8;color:var(--skin-ink);font-weight:700}
 .living-updates{min-width:0;margin-top:14px;padding-left:30px;border-left:1px solid #dce4e9}
-.living-updates h2{margin:0 0 14px;font-family:var(--ui-font);font-size:20px;font-weight:700;letter-spacing:0;line-height:1.3}
+.living-updates h2{margin:0 0 14px;font-family:var(--ui-font);font-size:18px;font-weight:700;letter-spacing:0;line-height:1.3}
 .living-update{display:block;padding:16px 0;border-bottom:1px solid #dce4e9;color:var(--skin-ink);text-decoration:none}
 .living-update:first-child{padding-top:0}
 .living-update:hover{text-decoration:none}
@@ -675,6 +676,7 @@ a.text-link,button.text-link{font-weight:700}
 .living-feed-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px 12px;margin-bottom:20px}
 .living-feed-head h1{margin:0}
 .living-feed-date{display:block;margin-top:6px;color:#405363;font-size:12px;line-height:1.4}
+.living-page--continuous .living-feed-date{font-style:italic}
 .living-page--continuous .living-section:not(:last-child){padding-bottom:12px}
 .living-citations{font-size:12px;white-space:nowrap}
 .living-citations a,.living-sources a{color:#00645f;text-decoration:underline;text-underline-offset:2px}

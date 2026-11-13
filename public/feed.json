@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "gapId": "dogs-safe-placement",
   "title": "Street dogs and access to care",
-  "updatedAt": "2026-11-13T01:43:00Z",
+  "updatedAt": "2026-11-13T03:50:08Z",
   "sections": [
     {
       "id": "overview",
@@ -21,33 +21,36 @@
     },
     {
       "id": "open-questions",
-      "title": "Open questions",
+      "title": "Questions",
       "order": 4
     }
   ],
   "items": [
     {
-      "id": "dogs-scale",
+      "id": "dogs-central-question",
       "gapId": "dogs-safe-placement",
       "section": "overview",
       "order": 1,
-      "title": "A problem whose scale is unknown",
-      "body": "Dogs are being abandoned and found roaming Stockton's streets. Some are lost pets. Others live with people experiencing homelessness and should not be assumed abandoned.",
+      "title": "What happens when a dog needs help in Stockton?",
+      "body": "Dogs are being abandoned, shelters are under pressure, and people are trying to help. But how much help is actually reaching the dogs that need it?",
       "paragraphs": [
-        "In April 2026, Stockton Street Dogs' founder estimated at least 200 to 300 dogs on Stockton's streets at a time, rising to about 400 during puppy season. In September, the group reported encountering three to ten dumped dogs a week, up from about one a week the previous year. These are the group's estimates and observations, not a verified count.",
-        "Stockton Animal Services recorded 3,106 stray-dog intake events in 2024 across its service area, which extends beyond Stockton. In October 2026, the shelter reportedly took in 828 animals, nearly 600 of them strays across species. Neither figure measures how many dogs are living on Stockton's streets now.",
-        "We still lack a verified count of dogs needing help, where they are, what condition they're in, and whether they're receiving care. The scale of the unmet need remains unknown."
+        "In 2024, Stockton Animal Services recorded more than 3,100 stray-dog intakes across its service area. Stockton Street Dogs says it's now encountering three to ten dumped dogs a week.",
+        "Nobody knows how many dogs are currently on Stockton's streets.",
+        "And not every dog on the street is abandoned. Some are lost. Others have owners who may need help caring for them.",
+        "The city is expanding its shelter. Rescue groups are working to create more capacity. But space, veterinary care, and foster homes remain limited.",
+        "**The question is whether help can reach the dogs that need it—and what's getting in the way.**"
       ],
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-13T01:43:00Z",
+      "createdAt": "2026-11-12",
+      "updatedAt": "2026-11-13T03:50:08Z",
       "status": "published",
       "relatedRecordIds": [
-        "cbs-2026-04-06-stockton-abandoned-dogs",
         "sas-2024-dog-intake-stray",
         "ssd-2026-09-29-dumped-dogs-surge",
-        "kcra-2026-11-10-shelter-expansion",
         "stockton-current-street-dog-population-unknown",
-        "stocktonia-2026-10-20-roaming-dog-distinction"
+        "stocktonia-2026-10-20-roaming-dog-distinction",
+        "stockton-2024-11-12-shelter-renovation",
+        "stocktonia-2026-10-20-sas-capacity-intake",
+        "ssd-2026-10-07-canine-campus-details"
       ],
       "image": {
         "src": "/images/variants/clean/dog-sidewalk-vulnerable-2026.jpg",
@@ -56,120 +59,56 @@
       }
     },
     {
-      "id": "dogs-care-access",
-      "gapId": "dogs-safe-placement",
-      "section": "overview",
-      "order": 2,
-      "title": "Getting care isn't always straightforward",
-      "body": "Finding a dog that needs help is one thing. Getting that dog into care can be another. Residents can report a stray to Stockton Animal Services, which operates the municipal shelter, but a report does not guarantee immediate collection or intake.",
-      "paragraphs": [
-        "Animal Services says the shelter is regularly at capacity. Healthy strays generally need intake appointments; sick, injured, aggressive, and confirmed abandoned animals receive priority. That still does not tell us how quickly a particular dog receives care.",
-        "The city also describes a temporary found-animal foster pathway. Some residents can care for a found dog while shelter intake or adoption is arranged, and Animal Services may provide vaccinations and arrange sterilization. Not everyone can take an unfamiliar dog home.",
-        "Stockton Street Dogs feeds dogs in the field and invites people to foster, adopt, volunteer, or partner in rescue. Those routes depend on available people, funding, and places for dogs to go. Someone may report a dog and still have no immediate way to get it into care. How often that happens, how long dogs wait, and what ultimately happens to them remain unclear."
-      ],
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-13T01:43:00Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "stockton-animal-services-2026-10-20-reporting-guidance",
-        "stocktonia-2026-10-20-sas-capacity-intake",
-        "stocktonia-2026-10-20-found-animal-foster-pathway",
-        "cbs-2026-04-06-stockton-abandoned-dogs",
-        "ssd-standing-foster-adopt",
-        "ssd-standing-volunteer-rescue-partner"
-      ],
-      "image": {
-        "src": "/images/variants/clean/shelter.jpg",
-        "alt": "Illustrative animal shelter entrance",
-        "caption": "Illustrative image. AI-generated."
-      }
-    },
-    {
-      "id": "dogs-expansion",
-      "gapId": "dogs-safe-placement",
-      "section": "overview",
-      "order": 3,
-      "title": "Capacity is expanding",
-      "body": "Stockton is investing in more shelter space and veterinary services, although the effect on dogs needing help on the streets is not yet clear.",
-      "paragraphs": [
-        "A roughly $10.5 million city shelter expansion is under construction. City plans include medical, isolation, and rehabilitation space; November 10 reporting also describes a new veterinary facility, adoption space, and a community resource center. The shelter now expects to open the expanded facility in spring 2027, later than the city's original fall 2026 target.",
-        "In June, the City Council approved a one-year extension of its Hard Luck Animal Welfare Advocates contract, up to $3.97 million, with four additional positions. Stockton Street Dogs has separately proposed a Canine Campus for shelter overflow and recovery and is seeking funds. We have not verified that the campus is fully funded, has a secured site, or has an opening date.",
-        "Construction, contracts, and proposals may expand care, but they do not yet show how many more dogs will receive timely help or whether the gap will close."
-      ],
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-13T01:43:00Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "stockton-2024-11-12-shelter-renovation",
-        "kcra-2026-11-10-shelter-expansion",
-        "hlawa-2026-06-09-contract-extension",
-        "ssd-2026-10-07-canine-campus-details",
-        "ssd-2026-07-31-canine-campus-fundraiser"
-      ]
-    },
-    {
-      "id": "dogs-field-calls",
-      "gapId": "dogs-safe-placement",
-      "section": "our-work",
-      "order": 1,
-      "title": "Reviewing the field-call records",
-      "body": "Crossover received 7,183 Stockton Animal Services field-call records on November 2 and began reviewing them November 4. We are checking what each record says about a request, the response, and any recorded outcome, along with missing information and limits in the data. These calls cannot be counted as unique dogs or as the street population; findings from the review remain pending.",
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-12T03:49:48Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "crossover-2026-11-02-sas-field-call-records-received",
-        "task-review-sas-field-call-records"
-      ],
-      "image": {
-        "src": "/images/variants/clean/records-desk.jpg",
-        "alt": "Illustrative records and notes on a desk",
-        "caption": "Illustrative image. AI-generated."
-      }
-    },
-    {
       "id": "dogs-fieldwork",
       "gapId": "dogs-safe-placement",
       "section": "our-work",
-      "order": 2,
-      "title": "Getting closer to the problem",
-      "body": "Crossover visited Stockton Animal Services, applied to volunteer there, asked about Doggie Day Out, and applied to volunteer with Stockton Street Dogs. These steps are ways to learn how care works in practice. The applications do not establish that we have participated or completed onboarding.",
+      "order": 1,
+      "title": "We're beginning to find out.",
+      "body": "We've visited Stockton Animal Services, applied to volunteer with two organizations, and started identifying places where dogs have been reported.",
+      "paragraphs": [
+        "We also requested a year of animal-service calls from the city.",
+        "On November 2, we received **7,183 records**.",
+        "Those records could tell us where people are asking for help, what they're reporting, and how the city responds.",
+        "We haven't finished analyzing them. And records alone won't tell us everything.",
+        "That's why we also need to get out into Stockton and meet the people doing this work."
+      ],
       "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
+      "updatedAt": "2026-11-13T03:50:08Z",
       "status": "published",
       "relatedRecordIds": [
+        "crossover-2026-10-07-street-dogs-volunteer-application",
         "crossover-2026-10-14-sas-volunteer-application",
-        "crossover-2026-10-12-doggie-day-out-inquiry",
-        "crossover-2026-10-07-street-dogs-volunteer-application"
+        "crossover-2026-10-20-sas-field-call-records-request",
+        "crossover-2026-11-02-sas-field-call-records-received",
+        "task-review-sas-field-call-records",
+        "st-marys-community-services-campus"
       ]
     },
     {
-      "id": "dogs-next-records",
+      "id": "dogs-next-st-marys",
       "gapId": "dogs-safe-placement",
       "section": "whats-next",
       "order": 1,
-      "title": "What can the records tell us?",
-      "body": "First establish the calls' date range, categories, locations where recorded, and missing fields. Then examine recorded requests, response paths, and outcomes without treating a call as a dog or inferring an outcome the records do not contain.",
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
+      "title": "From records to reality.",
+      "body": "Our next stop is the St. Mary's and Church Street area, where shelters, food services, medical care, and transitional housing operate close together.",
+      "paragraphs": [
+        "We want to see what's happening with dogs there, speak with people familiar with the area, and understand what help is available.",
+        "We'll also analyze the city's field-call records, follow up on volunteer opportunities, and track the expansion of shelter and veterinary care.",
+        "The goal isn't another report.",
+        "**It's finding something useful we can actually do.**"
+      ],
+      "createdAt": "2026-11-12",
+      "updatedAt": "2026-11-13T03:50:08Z",
       "status": "published",
       "relatedRecordIds": [
-        "task-review-sas-field-call-records"
-      ]
-    },
-    {
-      "id": "dogs-next-contact",
-      "gapId": "dogs-safe-placement",
-      "section": "whats-next",
-      "order": 2,
-      "title": "How does a dog actually get help?",
-      "body": "Follow up on the volunteer and Doggie Day Out inquiries, and ask care providers to describe the path from finding or reporting a dog to a response and possible care. Document what they confirm, where the path depends on capacity or eligibility, and where the answer remains unclear.",
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "task-ssd-ask-contact-questions",
-        "task-sas-volunteer-onboarding-follow-up"
+        "st-marys-community-services-campus",
+        "st-marys-dining-room-location",
+        "cmc-st-marys-location",
+        "pathways-neighborhood-location",
+        "task-review-sas-field-call-records",
+        "task-sas-volunteer-onboarding-follow-up",
+        "stockton-2024-11-12-shelter-renovation",
+        "hlawa-2026-06-09-contract-extension"
       ]
     },
     {
@@ -177,42 +116,24 @@
       "gapId": "dogs-safe-placement",
       "section": "open-questions",
       "order": 1,
-      "title": "How many dogs currently need help on Stockton's streets?",
-      "body": "No verified count exists. We need to distinguish dogs who are lost, abandoned, roaming, or living with people, and learn what help each actually needs. A dog seen on the street should not automatically be counted as abandoned or in need of removal.",
+      "title": "What don't we know?",
+      "body": "How many dogs need help, and where are they?",
+      "paragraphs": [
+        "What happens when someone calls for assistance?",
+        "Why do some dogs end up without care?",
+        "What's the biggest obstacle: shelter space, veterinary services, transportation, foster homes, or something else?",
+        "And perhaps most importantly:",
+        "**If more people wanted to help, what would make their efforts matter?**",
+        "That's what we're trying to discover.",
+        "*See clearly. Act locally.*"
+      ],
       "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
+      "updatedAt": "2026-11-13T03:50:08Z",
       "status": "published",
       "relatedRecordIds": [
-        "stockton-current-street-dog-population-unknown"
-      ]
-    },
-    {
-      "id": "dogs-question-response",
-      "gapId": "dogs-safe-placement",
-      "section": "open-questions",
-      "order": 2,
-      "title": "What happens when someone reports a dog?",
-      "body": "We want to trace the report, any recorded response or disposition, and whether the dog actually reached care. The field-call records may describe only part of that path; an administrative outcome does not by itself establish the dog's later condition.",
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "task-review-sas-field-call-records"
-      ]
-    },
-    {
-      "id": "dogs-question-access",
-      "gapId": "dogs-safe-placement",
-      "section": "open-questions",
-      "order": 3,
-      "title": "Where does access to care break down?",
-      "body": "Which services can accept a dog at the time someone asks? Capacity, cost, eligibility, and transportation may affect the answer, but we have not established how often each is a barrier in Stockton. Provider follow-up and the records review may clarify this.",
-      "createdAt": "2026-11-11",
-      "updatedAt": "2026-11-11T14:36:15Z",
-      "status": "published",
-      "relatedRecordIds": [
-        "task-sas-volunteer-onboarding-follow-up",
-        "task-ssd-ask-contact-questions"
+        "stockton-current-street-dog-population-unknown",
+        "task-review-sas-field-call-records",
+        "stocktonia-2026-10-20-sas-capacity-intake"
       ]
     }
   ]

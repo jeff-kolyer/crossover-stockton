@@ -265,8 +265,10 @@ function editorialItem(item,section,sourceNumbers){
   const citationNumbers=[...new Set(item.relatedRecordIds||[])].map(id=>sourceNumbers.get(id)).filter(Boolean).sort((a,b)=>a-b);
   const citations=citationNumbers.length?` <sup class="living-citations">[${citationNumbers.map(number=>`<a href="#source-${number}" aria-label="Source ${number}">${number}</a>`).join(', ')}]</sup>`:'';
   const paragraphs=[item.body,...(item.paragraphs||[])];
-  const copy=paragraphs.map((text,index)=>`<p>${esc(text)}${index===paragraphs.length-1?citations:''}</p>`).join('');
-  return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameEditorialHeading(item,section)?'':`<h3>${esc(item.title)}</h3>`}${copy}${editorialTable(item.table)}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'||section.id==='about'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
+  const citationIndex=paragraphs.findLastIndex(text=>!/^\*{1,2}/.test(text));
+  const inline=text=>esc(text).replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>');
+  const copy=paragraphs.map((text,index)=>`<p>${inline(text)}${index===citationIndex?citations:''}</p>`).join('');
+  return `<article class="living-item${item.image?' has-image':''}" id="${esc(item.id)}"><div class="living-item-copy">${sameEditorialHeading(item,section)?'':`<h2>${esc(item.title)}</h2>`}${copy}${editorialTable(item.table)}</div>${item.image?`<figure class="living-image"><img src="${esc(item.image.src)}" alt="${esc(item.image.alt)}" loading="${section.id==='overview'||section.id==='about'?'eager':'lazy'}"><figcaption class="living-references">${esc(item.image.caption)}</figcaption></figure>`:''}</article>`;
 }
 function founderProfile(description){
   const identity=records.find(record=>record.schema==='identity');
@@ -298,7 +300,7 @@ function livingPage(page='overview'){
   const renderSection=section=>{
     const title=section.id==='open-questions'?'Questions':section.title;
     const isOpening=isAbout||section.id==='overview';
-    const heading=isOpening?`<div class="living-feed-head"><div><h1>${esc(title)}</h1><span class="living-feed-date">Updated ${esc(isAbout?longDate(feedUpdated):projectDate(feedUpdated,'long'))}</span></div><button class="overview-listen living-listen" type="button" data-track="${isAbout?'about':'account'}" data-listen-label="${isAbout?'Listen to About':'Listen to the feed'}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${isAbout?'Listen to About':'Listen to the feed'}</span></button></div>`:`<h2>${esc(title)}</h2>`;
+    const heading=isOpening?`<div class="living-feed-head"><div><h1>${esc(title)}</h1><span class="living-feed-date">${isAbout?'Updated ':''}${esc(isAbout?longDate(feedUpdated):projectDate(feedUpdated,'long'))}</span></div><button class="overview-listen living-listen" type="button" data-track="${isAbout?'about':'account'}" data-listen-label="${isAbout?'Listen to About':'Listen to the feed'}"><span class="listen-icon" aria-hidden="true">${icon('circlePlay')}</span><span>${isAbout?'Listen to About':'Listen to the feed'}</span></button></div>`:`<h1>${esc(title)}</h1>`;
     return `<section class="living-section${isOpening?' living-section--overview':''}" id="${esc(section.id)}">${heading}<div class="living-items">${items(section.id).map(item=>editorialItem(item,section,sourceNumbers)).join('')}${isAbout?founderProfile(selected.founderSummary):''}</div></section>`;
   };
   return `<div class="living-layout"><div class="living-page${isAbout?'':' living-page--continuous'}">${sectionNav}${(isAbout?sections.filter(item=>item.id===sectionId):sections).map(renderSection).join('')}${sources}</div>${updates}</div>`;
