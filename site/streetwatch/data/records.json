@@ -1,0 +1,2188 @@
+[
+  {
+    "id": "SHEL-2024-001",
+    "title": "2024 animal intake and outcome report",
+    "kind": "Municipal report",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2024-12-31",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
+    "sourceLabel": "Original three-page kennel statistics PDF",
+    "summary": "The City's report gives 2024 intake and outcome counts across its multi-jurisdiction service area.",
+    "limits": "The figures cover Stockton and several other jurisdictions. Intake and outcome totals are different flows and cannot be subtracted to infer shelter occupancy or street population.",
+    "artifact": "Public PDF, pages 1–3",
+    "rows": [
+      {
+        "id": "dog-intakes",
+        "label": "Dog intake events",
+        "value": 3786,
+        "unit": "events",
+        "page": "p. 3",
+        "note": "All reported dog intake categories, excluding foster and DOA disposal."
+      },
+      {
+        "id": "stray-intakes",
+        "label": "Stray dog intake events",
+        "value": 3106,
+        "unit": "events",
+        "page": "p. 3",
+        "note": "A subset of dog intakes, not the number of dogs living outside."
+      },
+      {
+        "id": "dog-outcomes",
+        "label": "Dog outcome dispositions",
+        "value": 3742,
+        "unit": "dispositions",
+        "page": "pp. 1–2",
+        "note": "A separate period total from intake."
+      },
+      {
+        "id": "dog-euthanasia",
+        "label": "Dog euthanasia outcomes",
+        "value": 514,
+        "unit": "dispositions",
+        "page": "p. 1",
+        "note": "The report's DOG column for euthanasia."
+      },
+      {
+        "id": "dog-live-release",
+        "label": "Reported dog live-release percentage",
+        "value": 83.05,
+        "unit": "percent",
+        "page": "p. 2",
+        "note": "Percentage printed by the City; not recalculated from intake."
+      }
+    ],
+    "claims": [
+      "overview-intake",
+      "overview-stray",
+      "ground-outcomes"
+    ],
+    "custody": [
+      "Public City PDF located at the source URL.",
+      "Figures transcribed from the DOG columns and checked against the report on November 14, 2026."
+    ],
+    "response": "No agency clarification has been requested for this preview.",
+    "errata": [],
+    "tags": [
+      "intake",
+      "outcome",
+      "shelter"
+    ],
+    "originalId": "SAS-2024-KENNEL"
+  },
+  {
+    "id": "GOV-2026-001",
+    "title": "Animal Balance shelter spay/neuter agreement",
+    "kind": "Council legislation",
+    "status": "verified",
+    "publisher": "City of Stockton City Council",
+    "date": "2026-01-13",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+    "sourceLabel": "City Council file 25-1403",
+    "summary": "Council legislation describes a three-month agreement of up to $126,000, designed to alter approximately 200 pets across three clinic events.",
+    "limits": "The target is a plan. The published legislation does not verify completed procedures, the dog/cat split, or a sustained increase in public appointment capacity.",
+    "artifact": "Public council legislation and attachments",
+    "rows": [
+      {
+        "id": "contract-ceiling",
+        "label": "Not-to-exceed contract amount",
+        "value": 126000,
+        "unit": "USD",
+        "page": "file 25-1403",
+        "note": "Authorization ceiling, not spending verified."
+      },
+      {
+        "id": "planned-procedures",
+        "label": "Approximate target across three events",
+        "value": 200,
+        "unit": "pets",
+        "page": "file 25-1403",
+        "note": "Planned count; completed procedures unknown."
+      }
+    ],
+    "claims": [
+      "initiative-sterilization"
+    ],
+    "custody": [
+      "City Council file 25-1403 opened from Stockton Legistar.",
+      "Council description checked November 14, 2026."
+    ],
+    "response": "No agency response requested; completed-delivery records remain open.",
+    "errata": [],
+    "tags": [
+      "initiative",
+      "spay-neuter",
+      "contract"
+    ],
+    "originalId": "SAS-2026-ANIMAL-BALANCE"
+  },
+  {
+    "id": "SHEL-2024-002",
+    "title": "Animal shelter renovation announcement",
+    "kind": "City news release",
+    "status": "verified",
+    "publisher": "City of Stockton",
+    "date": "2024-11-12",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf",
+    "sourceLabel": "Original City news-release PDF",
+    "summary": "The City announced a shelter renovation, a $10,473,000 construction contract, and planned medical, isolation, rehabilitation, and cattery space.",
+    "limits": "This 2024 release described an expected fall 2026 completion. It does not prove that new spaces are open or show current operating capacity.",
+    "artifact": "Public two-page news-release PDF",
+    "rows": [
+      {
+        "id": "construction-award",
+        "label": "Construction contract award",
+        "value": 10473000,
+        "unit": "USD",
+        "page": "p. 1",
+        "note": "Contract award, not measured added capacity."
+      },
+      {
+        "id": "planned-facilities",
+        "label": "Planned facilities",
+        "value": "Medical, isolation, rehabilitation, cattery",
+        "unit": "scope",
+        "page": "p. 1",
+        "note": "Announced plans, not verified completed facilities."
+      }
+    ],
+    "claims": [
+      "initiative-expansion"
+    ],
+    "custody": [
+      "City news release dated November 12, 2024.",
+      "Original PDF checked November 14, 2026."
+    ],
+    "response": "Current construction status and capacity figures have not been obtained.",
+    "errata": [],
+    "tags": [
+      "initiative",
+      "shelter"
+    ],
+    "originalId": "SAS-2024-RENOVATION"
+  },
+  {
+    "id": "GOV-2026-002",
+    "title": "Found-pet drop-off and lost-pet guidance",
+    "kind": "Official guidance",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2026-10-03",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php",
+    "sourceLabel": "City Lost & Found Pets page",
+    "summary": "The City asks people who find a pet in Stockton or unincorporated San Joaquin County to call (209) 937-7445 for a shelter drop-off appointment.",
+    "limits": "The page does not guarantee a same-day appointment or current kennel space. Call to confirm the process.",
+    "artifact": "Public municipal guidance page",
+    "rows": [
+      {
+        "id": "dropoff",
+        "label": "Found-pet drop-off",
+        "value": "Call for an appointment",
+        "unit": "guidance",
+        "page": "Did you find a Pet?",
+        "note": "Phone: (209) 937-7445."
+      },
+      {
+        "id": "lost-list",
+        "label": "Lost-pet search",
+        "value": "Check online list and visit in person",
+        "unit": "guidance",
+        "page": "Is Your Pet Missing?",
+        "note": "The City says its list is one tool and encourages an in-person check."
+      }
+    ],
+    "claims": [
+      "care-found"
+    ],
+    "custody": [
+      "City guidance page last updated October 3, 2026.",
+      "Page checked November 14, 2026."
+    ],
+    "response": "City page is the agency's own guidance.",
+    "errata": [],
+    "tags": [
+      "found-pet",
+      "resource"
+    ],
+    "originalId": "CITY-FOUND-PETS"
+  },
+  {
+    "id": "GOV-2024-001",
+    "title": "Animal complaint reporting channel",
+    "kind": "Official guidance",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2024-03-20",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php",
+    "sourceLabel": "City Animal Related Complaints page",
+    "summary": "The City lists injured or sick strays, animals at large, abandonment, and aggressive animals among complaints Animal Services handles. It offers an online report path.",
+    "limits": "The page does not publish a response-time guarantee or prove a dispatch occurred for any individual report.",
+    "artifact": "Public municipal guidance page",
+    "rows": [
+      {
+        "id": "eligible-types",
+        "label": "Listed complaint types",
+        "value": "Injured or sick strays; animals at large; abandonment",
+        "unit": "guidance",
+        "page": "Types of Complaints",
+        "note": "Examples shown on the City page."
+      },
+      {
+        "id": "online-report",
+        "label": "Online complaint route",
+        "value": "Select Animals → Animals - other",
+        "unit": "guidance",
+        "page": "Submit Complaint Online",
+        "note": "The City says staff will confirm receipt."
+      }
+    ],
+    "claims": [
+      "care-report"
+    ],
+    "custody": [
+      "City guidance page last updated March 20, 2024.",
+      "Page checked November 14, 2026."
+    ],
+    "response": "City page is the agency's own guidance.",
+    "errata": [],
+    "tags": [
+      "reporting",
+      "resource"
+    ],
+    "originalId": "CITY-ANIMAL-COMPLAINTS"
+  },
+  {
+    "id": "GOV-2026-003",
+    "title": "Shelter hours, contact and low-cost services",
+    "kind": "Official guidance",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "Date not stated",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/",
+    "sourceLabel": "City Animal Services page",
+    "summary": "The City lists shelter hours and phone numbers, low-cost vaccinations and microchips, and a community-cat spay/neuter program.",
+    "limits": "The page describes low-cost spay/neuter for community cats, not for dogs. Hours and offerings can change.",
+    "artifact": "Public municipal service page",
+    "geo": {
+      "lat": 37.935195978998,
+      "lon": -121.293266033093,
+      "address": "1575 S Lincoln St, Stockton, CA 95206",
+      "precision": "address geocode",
+      "method": "U.S. Census Geocoder, Public_AR_Current, checked 2026-11-14"
+    },
+    "rows": [
+      {
+        "id": "hours",
+        "label": "Shelter hours",
+        "value": "Tue–Sun, noon–5 p.m.",
+        "unit": "schedule",
+        "page": "Hours of Operation",
+        "note": "Closed Monday; verify before visiting."
+      },
+      {
+        "id": "phone",
+        "label": "Regular contact",
+        "value": "(209) 937-7445",
+        "unit": "phone",
+        "page": "Hours and Phone Numbers",
+        "note": "Answering service listed daily, 8 a.m.–5 p.m."
+      },
+      {
+        "id": "after-hours",
+        "label": "After-hours emergencies",
+        "value": "(209) 937-8377",
+        "unit": "phone",
+        "page": "After-Hours Emergencies",
+        "note": "Stockton Police Telecommunications."
+      }
+    ],
+    "claims": [
+      "care-city"
+    ],
+    "custody": [
+      "City service page checked November 14, 2026.",
+      "Public facility address geocoded through the U.S. Census Geocoder on November 14, 2026."
+    ],
+    "response": "City page is the agency's own guidance.",
+    "errata": [],
+    "tags": [
+      "municipal",
+      "resource"
+    ],
+    "originalId": "CITY-SHELTER-SERVICES"
+  },
+  {
+    "id": "CARE-2026-001",
+    "title": "Animal Protection League low-cost clinic",
+    "kind": "Provider page",
+    "status": "verified",
+    "publisher": "Animal Protection League",
+    "date": "Date not stated",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://apl209.org/",
+    "sourceLabel": "APL clinic website",
+    "summary": "APL says it provides low-cost spay/neuter for dogs and cats at 1409 W Oak St, Stockton. Appointments are confirmed by the clinic team.",
+    "limits": "The checked page does not establish current prices, eligibility, appointment openings, or wait times. Call (209) 420-4776.",
+    "artifact": "Public provider website",
+    "geo": {
+      "lat": 37.955423054795,
+      "lon": -121.311081301828,
+      "address": "1409 W Oak St, Stockton, CA 95203",
+      "precision": "address geocode",
+      "method": "U.S. Census Geocoder, Public_AR_Current, checked 2026-11-14"
+    },
+    "rows": [
+      {
+        "id": "service",
+        "label": "Clinic service",
+        "value": "Dog and cat spay/neuter",
+        "unit": "service",
+        "page": "APL's Clinic",
+        "note": "Provider describes its care as low-cost."
+      },
+      {
+        "id": "address",
+        "label": "Clinic address",
+        "value": "1409 W Oak St, Stockton, CA 95203",
+        "unit": "address",
+        "page": "Visit Our Clinic",
+        "note": "Hours may change week to week."
+      },
+      {
+        "id": "contact",
+        "label": "Clinic phone",
+        "value": "(209) 420-4776",
+        "unit": "phone",
+        "page": "APL's Clinic",
+        "note": "Request and confirm appointment."
+      }
+    ],
+    "claims": [
+      "care-apl"
+    ],
+    "custody": [
+      "Provider website checked November 14, 2026.",
+      "Public facility address geocoded through the U.S. Census Geocoder on November 14, 2026."
+    ],
+    "response": "Provider page is APL's own description.",
+    "errata": [],
+    "tags": [
+      "clinic",
+      "spay-neuter",
+      "resource"
+    ],
+    "originalId": "APL-STOCKTON-CLINIC"
+  },
+  {
+    "id": "CARE-2027-001",
+    "title": "Scheduled Stockton clinic, February 2027",
+    "kind": "Provider schedule",
+    "status": "verified",
+    "publisher": "Animal Balance",
+    "date": "February 26–28, 2027",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://animalbalance.org/event/stockton-ca-2/",
+    "sourceLabel": "Animal Balance event page",
+    "summary": "Animal Balance lists a Stockton clinic for February 26–28, 2027.",
+    "limits": "The future event is not proof of completed procedures, public bookings, price, eligibility, or a confirmed clinic address. Recheck the schedule.",
+    "artifact": "Public provider event listing",
+    "rows": [
+      {
+        "id": "scheduled-date",
+        "label": "Scheduled dates",
+        "value": "February 26–28, 2027",
+        "unit": "schedule",
+        "page": "Stockton event",
+        "note": "Future schedule as checked November 14, 2026."
+      }
+    ],
+    "claims": [
+      "initiative-mobile"
+    ],
+    "custody": [
+      "Animal Balance event schedule checked November 14, 2026."
+    ],
+    "response": "Provider page is Animal Balance's own schedule.",
+    "errata": [],
+    "tags": [
+      "initiative",
+      "clinic"
+    ],
+    "dateLabel": "Scheduled event",
+    "originalId": "ANIMAL-BALANCE-2027-STOCKTON"
+  },
+  {
+    "id": "RESC-2026-001",
+    "title": "Streetdog Sanctuary describes its outreach",
+    "kind": "Organization page",
+    "status": "verified",
+    "publisher": "Streetdog Sanctuary",
+    "date": "Date not stated",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://streetdogsanctuary.com/",
+    "sourceLabel": "Organization website",
+    "summary": "Streetdog Sanctuary describes immediate care and health monitoring for abandoned dogs in Stockton and invites community support.",
+    "limits": "An organizational description does not independently establish the number of dogs served, geographic coverage, or current capacity.",
+    "artifact": "Public organization website",
+    "rows": [
+      {
+        "id": "mission",
+        "label": "Stated role",
+        "value": "Street-level support and animal care",
+        "unit": "organization statement",
+        "page": "Home page",
+        "note": "The organization describes its own mission."
+      }
+    ],
+    "claims": [
+      "ecosystem-rescue"
+    ],
+    "custody": [
+      "Organization website checked November 14, 2026."
+    ],
+    "response": "Organization page is its own account.",
+    "errata": [],
+    "tags": [
+      "rescue",
+      "stakeholder"
+    ],
+    "originalId": "STREETDOG-SANCTUARY"
+  },
+  {
+    "id": "GOV-2026-004",
+    "title": "Stockton Animal Services reporting and found-dog guidance",
+    "kind": "current_service",
+    "status": "Verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2026-10-28",
+    "checked": "2026-10-28",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php",
+    "sourceLabel": "Stockton Animal Services reporting and found-dog guidance",
+    "summary": "The City directs animal complaints, including animals at large and injured or sick strays, to its online report under Animals → Animals - other. It lists (209) 937-7445 for injured, sick, or aggressive animals and for scheduling a found-dog drop-off appointment during business hours, (209) 937-8377 for after-hours emergencies, and 911 for an animal attack in progress.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "official_service",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The City directs animal complaints, including animals at large and injured or sick strays, to its online report under Animals → Animals - other. It lists (209) 937-7445 for injured, sick, or aggressive animals and for scheduling a found-dog drop-off appointment during business hours, (209) 937-8377 for after-hours emergencies, and 911 for an animal attack in progress.",
+        "unit": "",
+        "page": "current_service",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stockton-animal-services-2026-10-20-reporting-guidance.",
+      "Source checked 2026-10-28.",
+      "Original source: https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "current_service"
+    ],
+    "originalId": "stockton-animal-services-2026-10-20-reporting-guidance"
+  },
+  {
+    "id": "NEWS-2026-001",
+    "title": "CBS Sacramento reports abandoned-dog concerns around Louis Park, Stanislaus Street, and Highway 4",
+    "kind": "update",
+    "status": "Reported",
+    "publisher": "CBS Sacramento",
+    "date": "2026-04-06",
+    "checked": "2026-10-20",
+    "sourceUrl": "https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/",
+    "sourceLabel": "CBS Sacramento reports abandoned-dog concerns around Louis Park, Stanislaus Street, and Highway 4",
+    "summary": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. Founder Jesse Mejia estimated at least 200–300 dogs on Stockton's streets at any given time and up to 400 during puppy season; this is an advocate estimate, not a verified census. The group reported feeding dogs on the streets up to four times a week, while saying it cannot directly rescue or remove dogs. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. Founder Jesse Mejia estimated at least 200–300 dogs on Stockton's streets at any given time and up to 400 during puppy season; this is an advocate estimate, not a verified census. The group reported feeding dogs on the streets up to four times a week, while saying it cannot directly rescue or remove dogs. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report.",
+        "unit": "",
+        "page": "update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record cbs-2026-04-06-stockton-abandoned-dogs.",
+      "Source checked 2026-10-20.",
+      "Original source: https://www.cbsnews.com/sacramento/news/stockton-dumping-ground-abandoned-dogs/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "cbs-2026-04-06-stockton-abandoned-dogs"
+  },
+  {
+    "id": "PLAN-2026-001",
+    "title": "Check reported stray-dog locations",
+    "kind": "planning_update",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "2026-10-20",
+    "checked": "2026-10-20",
+    "sourceUrl": null,
+    "sourceLabel": "Check reported stray-dog locations",
+    "summary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented.",
+    "limits": "Crossover account; the underlying correspondence or original file is not published in this preview.",
+    "artifact": "fieldwork_plan",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented.",
+        "unit": "",
+        "page": "planning_update",
+        "note": "Plan recorded October 20, 2026; visit date to be confirmed. Proposed visits only; no completed observation or field report is documented."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-10-20-reported-location-check-plan.",
+      "Recorded 2026-10-20.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "planning_update"
+    ],
+    "originalId": "crossover-2026-10-20-reported-location-check-plan"
+  },
+  {
+    "id": "FLD-2026-001",
+    "title": "Our first visit to Stockton Animal Services",
+    "kind": "field_report",
+    "status": "Firsthand",
+    "publisher": "Crossover Stockton / Jeff Kolyer",
+    "date": "2026-10-14",
+    "checked": "2026-10-14",
+    "sourceUrl": null,
+    "sourceLabel": "Our first visit to Stockton Animal Services",
+    "summary": "We visited Stockton Animal Services, submitted a volunteer application, observed the public facilities, and spoke briefly with staff.",
+    "limits": "Statements attributed to staff are reported from a brief conversation. Parking, entry procedures, and construction conditions may change.",
+    "artifact": "firsthand_account",
+    "rows": [
+      {
+        "id": "note-1",
+        "label": "Parking",
+        "value": "We parked on the street, where plenty of spaces were available during our visit. We left the shelter's parking spaces available for visitors arriving with animals.",
+        "unit": "",
+        "page": "Field note",
+        "note": "Firsthand observation; conditions may change."
+      },
+      {
+        "id": "note-2",
+        "label": "Finding the entrance",
+        "value": "The public shelter entrance was difficult to locate. It is tucked beside the construction area, with access from the parking lot.",
+        "unit": "",
+        "page": "Field note",
+        "note": "Firsthand observation; conditions may change."
+      },
+      {
+        "id": "note-3",
+        "label": "Arriving with a dog",
+        "value": "Posted instructions directed visitors to keep their dog in the car and enter the shelter first. Check with staff before bringing an animal inside. Do not leave an animal unattended in a vehicle when heat or other conditions could make it unsafe; call ahead for guidance.",
+        "unit": "",
+        "page": "Field note",
+        "note": "Firsthand observation; conditions may change."
+      },
+      {
+        "id": "note-4",
+        "label": "Inside the shelter",
+        "value": "The lobby was cramped and congested during our visit. City plans include a new public adoption lobby as part of the ongoing expansion.",
+        "unit": "",
+        "page": "Field note",
+        "note": "Firsthand observation; conditions may change."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-10-14-sas-first-visit.",
+      "Occurred 2026-10-14.",
+      "Recorded 2026-10-14.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "field_report"
+    ],
+    "originalId": "crossover-2026-10-14-sas-first-visit"
+  },
+  {
+    "id": "EDT-2026-001",
+    "title": "The Dog Crisis Starts With the Cost of Living",
+    "kind": "update",
+    "status": "Firsthand",
+    "publisher": "LinkedIn / Jeff Kolyer",
+    "date": "2026-09-11",
+    "checked": "2026-09-11",
+    "sourceUrl": "https://www.linkedin.com/pulse/dog-crisis-starts-cost-living-jeff-kolyer-xhn3c",
+    "sourceLabel": "The Dog Crisis Starts With the Cost of Living",
+    "summary": "Crossover published a LinkedIn article connecting broader shelter placement pressure to upstream cost-of-living forces. The article cites San Diego Humane Society reporting that dog adoptions are down and dogs are staying in shelters far longer, then traces the pressure to housing, veterinary costs, and the rising cost of care.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "article",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Crossover published a LinkedIn article connecting broader shelter placement pressure to upstream cost-of-living forces. The article cites San Diego Humane Society reporting that dog adoptions are down and dogs are staying in shelters far longer, then traces the pressure to housing, veterinary costs, and the rising cost of care.",
+        "unit": "",
+        "page": "update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-09-11-dog-crisis-cost-of-living.",
+      "Source checked 2026-09-11T16:29:50-07:00.",
+      "Original source: https://www.linkedin.com/pulse/dog-crisis-starts-cost-living-jeff-kolyer-xhn3c"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "crossover-2026-09-11-dog-crisis-cost-of-living"
+  },
+  {
+    "id": "EDT-2026-002",
+    "title": "Crossover begins field investigation into Stockton's dog-placement gap",
+    "kind": "update",
+    "status": "Firsthand",
+    "publisher": "LinkedIn / Jeff Kolyer",
+    "date": "2026-08-27",
+    "checked": "2026-08-28",
+    "sourceUrl": "https://lnkd.in/p/eqweAdnW",
+    "sourceLabel": "Crossover begins field investigation into Stockton's dog-placement gap",
+    "summary": "We completed the first public-source pass on the gap and started defining the next phase: direct conversations and field work with Stockton Streetdogs, Stockton Animal Services, and Hard Luck. The focus is shifting from simply documenting overcrowding to understanding the full system - where dogs enter, where they get stuck, and what keeps willing people from being able to foster or adopt.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "social_post",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "We completed the first public-source pass on the gap and started defining the next phase: direct conversations and field work with Stockton Streetdogs, Stockton Animal Services, and Hard Luck. The focus is shifting from simply documenting overcrowding to understanding the full system - where dogs enter, where they get stuck, and what keeps willing people from being able to foster or adopt.",
+        "unit": "",
+        "page": "update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-08-27-dog-placement-field-investigation.",
+      "Source checked 2026-08-28T12:00:00-07:00.",
+      "Original source: https://lnkd.in/p/eqweAdnW"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "crossover-2026-08-27-dog-placement-field-investigation"
+  },
+  {
+    "id": "SHEL-2026-001",
+    "title": "City 2024 kennel report provides dog intake and outcome counts",
+    "kind": "update",
+    "status": "Verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2026-10-15",
+    "checked": "2026-10-15",
+    "sourceUrl": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
+    "sourceLabel": "City 2024 kennel report provides dog intake and outcome counts",
+    "summary": "Stockton Animal Services reports 3,786 dog intakes, including 3,106 stray intakes, and 3,742 dog dispositions in calendar 2024 across its multi-jurisdiction service area. These are period flows, not a count of dogs currently lacking placement; beginning and ending dog populations are not supplied.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Animal Services reports 3,786 dog intakes, including 3,106 stray intakes, and 3,742 dog dispositions in calendar 2024 across its multi-jurisdiction service area. These are period flows, not a count of dogs currently lacking placement; beginning and ending dog populations are not supplied.",
+        "unit": "",
+        "page": "update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sas-2024-kennel-statistics.",
+      "Source checked 2026-10-15.",
+      "Original source: https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "sas-2024-kennel-statistics"
+  },
+  {
+    "id": "GOV-2026-005",
+    "title": "City contracted for high-volume spay and neuter services",
+    "kind": "capacity_intervention",
+    "status": "Verified",
+    "publisher": "City of Stockton",
+    "date": "2026-01-13",
+    "checked": "2026-11-12",
+    "sourceUrl": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+    "sourceLabel": "City contracted for high-volume spay and neuter services",
+    "summary": "Stockton said stray animal intakes regularly exceed shelter capacity and that its standard operations could not clear the sterilization backlog, prompting a three-month Animal Balance contract designed for approximately 200 pets across three clinic events. Completed procedures were not reported.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton said stray animal intakes regularly exceed shelter capacity and that its standard operations could not clear the sterilization backlog, prompting a three-month Animal Balance contract designed for approximately 200 pets across three clinic events. Completed procedures were not reported.",
+        "unit": "",
+        "page": "capacity_intervention",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sas-2026-01-13-spay-neuter-capacity.",
+      "Source checked 2026-11-12.",
+      "Original source: https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search="
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "capacity_intervention"
+    ],
+    "originalId": "sas-2026-01-13-spay-neuter-capacity"
+  },
+  {
+    "id": "NEWS-2026-002",
+    "title": "34 cats and kittens were transferred out of Stockton because of overcrowding",
+    "kind": "outcome",
+    "status": "Reported",
+    "publisher": "Stocktonia",
+    "date": "2026-03-05",
+    "checked": "2026-08-21",
+    "sourceUrl": "https://stocktonia.org/news/state-news/2026/03/05/stockton-animal-shelter-cats-san-diego-overcrowding/",
+    "sourceLabel": "34 cats and kittens were transferred out of Stockton because of overcrowding",
+    "summary": "The Stockton Animal Shelter transferred 34 cats and kittens to the San Diego Humane Society after months of overcrowding and a respiratory-disease outbreak.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The Stockton Animal Shelter transferred 34 cats and kittens to the San Diego Humane Society after months of overcrowding and a respiratory-disease outbreak.",
+        "unit": "",
+        "page": "outcome",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sas-2026-03-05-cat-transfer.",
+      "Source checked 2026-08-21T17:07:00-07:00.",
+      "Original source: https://stocktonia.org/news/state-news/2026/03/05/stockton-animal-shelter-cats-san-diego-overcrowding/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "outcome"
+    ],
+    "originalId": "sas-2026-03-05-cat-transfer"
+  },
+  {
+    "id": "NEWS-2026-003",
+    "title": "Local officials described a severe pet overpopulation problem",
+    "kind": "condition",
+    "status": "Reported",
+    "publisher": "Stocktonia",
+    "date": "2026-05-05",
+    "checked": "2026-08-21",
+    "sourceUrl": "https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/",
+    "sourceLabel": "Local officials described a severe pet overpopulation problem",
+    "summary": "Local reporting documented shelter overcrowding, abandonment, and insufficient space for unwanted animals across San Joaquin County, while officials considered stronger spay/neuter requirements.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Local reporting documented shelter overcrowding, abandonment, and insufficient space for unwanted animals across San Joaquin County, while officials considered stronger spay/neuter requirements.",
+        "unit": "",
+        "page": "condition",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sas-2026-05-05-overpopulation-report.",
+      "Source checked 2026-08-21T17:07:00-07:00.",
+      "Original source: https://stocktonia.org/news/local-government/2026/05/05/san-joaquin-county-spay-neuter-shelter-pets/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "condition"
+    ],
+    "originalId": "sas-2026-05-05-overpopulation-report"
+  },
+  {
+    "id": "NEWS-2026-004",
+    "title": "Reporting documented continued stray-dog pressure in Stockton",
+    "kind": "condition",
+    "status": "Reported",
+    "publisher": "Stocktonia",
+    "date": "2026-05-11",
+    "checked": "2026-08-21",
+    "sourceUrl": "https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/",
+    "sourceLabel": "Reporting documented continued stray-dog pressure in Stockton",
+    "summary": "Stocktonia reported continued abandoned and roaming dogs in the city and quoted local advocates describing overpopulation, abandonment, lack of veterinary access, and limited community resources as root causes.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stocktonia reported continued abandoned and roaming dogs in the city and quoted local advocates describing overpopulation, abandonment, lack of veterinary access, and limited community resources as root causes.",
+        "unit": "",
+        "page": "condition",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stockton-2026-05-11-stray-dog-report.",
+      "Source checked 2026-08-21T17:07:00-07:00.",
+      "Original source: https://stocktonia.org/news/public-safety/2026/05/11/stockton-woman-mauled-wild-dogs/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "condition"
+    ],
+    "originalId": "stockton-2026-05-11-stray-dog-report"
+  },
+  {
+    "id": "NEWS-2026-005",
+    "title": "Shelter temporarily halted stray intake and adoptions",
+    "kind": "operational_change",
+    "status": "Reported",
+    "publisher": "Stocktonia",
+    "date": "2026-05-21",
+    "checked": "2026-08-21",
+    "sourceUrl": "https://stocktonia.org/news/community/2026/05/21/stockton-animal-shelter-halts-intakes-adoptions-after-strep-zoo-case/",
+    "sourceLabel": "Shelter temporarily halted stray intake and adoptions",
+    "summary": "Stockton Animal Shelter temporarily stopped stray intake and adoptions after a strep-zoo case, reducing immediate placement and intake options during the quarantine.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Animal Shelter temporarily stopped stray intake and adoptions after a strep-zoo case, reducing immediate placement and intake options during the quarantine.",
+        "unit": "",
+        "page": "operational_change",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sas-2026-05-21-intake-adoption-pause.",
+      "Source checked 2026-08-21T17:07:00-07:00.",
+      "Original source: https://stocktonia.org/news/community/2026/05/21/stockton-animal-shelter-halts-intakes-adoptions-after-strep-zoo-case/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "operational_change"
+    ],
+    "originalId": "sas-2026-05-21-intake-adoption-pause"
+  },
+  {
+    "id": "RESC-2026-002",
+    "title": "Streetdogs reported expanded rescue response and a Safe Grounds proposal",
+    "kind": "response",
+    "status": "Reported",
+    "publisher": "CBS Sacramento",
+    "date": "2026-06-08",
+    "checked": "2026-08-21",
+    "sourceUrl": "https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/",
+    "sourceLabel": "Streetdogs reported expanded rescue response and a Safe Grounds proposal",
+    "summary": "CBS Sacramento accompanied Stockton Street Dogs at a Church Street encampment near St. Mary's Community Services in June 2026. Jesse Mejia said the group distributed 200 pounds of food to around 70 dogs that morning. The report also described ongoing street response and a proposed pet-friendly temporary campground; it does not establish current conditions or classify every dog as abandoned.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "CBS Sacramento accompanied Stockton Street Dogs at a Church Street encampment near St. Mary's Community Services in June 2026. Jesse Mejia said the group distributed 200 pounds of food to around 70 dogs that morning. The report also described ongoing street response and a proposed pet-friendly temporary campground; it does not establish current conditions or classify every dog as abandoned.",
+        "unit": "",
+        "page": "response",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-2026-06-08-street-response.",
+      "Source checked 2026-08-21T17:07:00-07:00.",
+      "Original source: https://www.cbsnews.com/sacramento/news/stockton-dog-rescue-to-implement-safe-temporary-campground-homeless-residents/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "response"
+    ],
+    "originalId": "ssd-2026-06-08-street-response"
+  },
+  {
+    "id": "GOV-2026-006",
+    "title": "City extended Hard Luck veterinary-services partnership",
+    "kind": "capacity_intervention",
+    "status": "Verified",
+    "publisher": "City of Stockton",
+    "date": "2026-06-09",
+    "checked": "2026-08-21",
+    "sourceUrl": "https://stockton.granicus.com/MinutesViewer.php?clip_id=9520&view_id=49",
+    "sourceLabel": "City extended Hard Luck veterinary-services partnership",
+    "summary": "On June 9, 2026, Stockton's City Council approved a one-year extension of its Hard Luck Animal Welfare Advocates agreement, authorizing four additional contract positions at a total cost not to exceed $3,969,675. The authorization does not establish how many additional animals have received care.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "On June 9, 2026, Stockton's City Council approved a one-year extension of its Hard Luck Animal Welfare Advocates agreement, authorizing four additional contract positions at a total cost not to exceed $3,969,675. The authorization does not establish how many additional animals have received care.",
+        "unit": "",
+        "page": "capacity_intervention",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record hlawa-2026-06-09-contract-extension.",
+      "Source checked 2026-08-21T17:07:00-07:00.",
+      "Original source: https://stockton.granicus.com/MinutesViewer.php?clip_id=9520&view_id=49"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "capacity_intervention"
+    ],
+    "originalId": "hlawa-2026-06-09-contract-extension"
+  },
+  {
+    "id": "GOV-2026-007",
+    "title": "Stockton Animal Services invites volunteers to join Doggie Day Out",
+    "kind": "current_ask",
+    "status": "Verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2026-10-12",
+    "checked": "2026-10-12",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/volunteer.php",
+    "sourceLabel": "Stockton Animal Services invites volunteers to join Doggie Day Out",
+    "summary": "The City of Stockton Animal Services volunteer page says people can sign up, attend a brief orientation, and take a shelter dog on a walk, car ride, or quality-time outing. At the October 12 source review, the page stated that volunteers must be 16 or older and ages 16–17 need written parent or guardian approval. It listed SASVolunteers@stocktonca.gov and (209) 937-7445 for questions.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The City of Stockton Animal Services volunteer page says people can sign up, attend a brief orientation, and take a shelter dog on a walk, car ride, or quality-time outing. At the October 12 source review, the page stated that volunteers must be 16 or older and ages 16–17 need written parent or guardian approval. It listed SASVolunteers@stocktonca.gov and (209) 937-7445 for questions.",
+        "unit": "",
+        "page": "current_ask",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sas-standing-doggie-day-out.",
+      "Source checked 2026-10-12T00:00:00-07:00.",
+      "Original source: https://www.stocktonca.gov/services/animal_services/volunteer.php"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "current_ask"
+    ],
+    "originalId": "sas-standing-doggie-day-out"
+  },
+  {
+    "id": "RESC-2026-003",
+    "title": "Stockton Streetdogs maintains foster and adoption applications",
+    "kind": "current_ask",
+    "status": "Reported",
+    "publisher": "Stockton Streetdogs",
+    "date": "2026-09-18",
+    "checked": "2026-09-18",
+    "sourceUrl": "https://linktr.ee/streetdogsanctuary",
+    "sourceLabel": "Stockton Streetdogs maintains foster and adoption applications",
+    "summary": "Stockton Streetdogs currently links directly to adoptable dogs and an application to foster or adopt, while describing 2026 as an expansion of rescue and placement efforts.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Streetdogs currently links directly to adoptable dogs and an application to foster or adopt, while describing 2026 as an expansion of rescue and placement efforts.",
+        "unit": "",
+        "page": "current_ask",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-standing-foster-adopt.",
+      "Source checked 2026-09-18T18:28:00-07:00.",
+      "Original source: https://linktr.ee/streetdogsanctuary"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "current_ask"
+    ],
+    "originalId": "ssd-standing-foster-adopt"
+  },
+  {
+    "id": "RESC-2026-004",
+    "title": "Stockton Streetdogs invites volunteers and rescue partners",
+    "kind": "current_ask",
+    "status": "Reported",
+    "publisher": "Stockton Streetdogs",
+    "date": "2026-08-24",
+    "checked": "2026-08-24",
+    "sourceUrl": "https://linktr.ee/streetdogsanctuary",
+    "sourceLabel": "Stockton Streetdogs invites volunteers and rescue partners",
+    "summary": "The organization's current public links include a volunteer program and a rescue-partner application.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The organization's current public links include a volunteer program and a rescue-partner application.",
+        "unit": "",
+        "page": "current_ask",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-standing-volunteer-rescue-partner.",
+      "Source checked 2026-08-24T19:16:00-07:00.",
+      "Original source: https://linktr.ee/streetdogsanctuary"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "current_ask"
+    ],
+    "originalId": "ssd-standing-volunteer-rescue-partner"
+  },
+  {
+    "id": "RESC-2026-005",
+    "title": "Stockton Streetdogs requests food and supplies",
+    "kind": "current_ask",
+    "status": "Reported",
+    "publisher": "Stockton Streetdogs",
+    "date": "2026-09-18",
+    "checked": "2026-09-18",
+    "sourceUrl": "https://streetdogsanctuary.com/",
+    "sourceLabel": "Stockton Streetdogs requests food and supplies",
+    "summary": "The organization's current site says food donations go directly toward dogs in need and links to Amazon and Walmart wishlists for essential supplies.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The organization's current site says food donations go directly toward dogs in need and links to Amazon and Walmart wishlists for essential supplies.",
+        "unit": "",
+        "page": "current_ask",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-standing-food-supplies.",
+      "Source checked 2026-09-18T18:28:00-07:00.",
+      "Original source: https://streetdogsanctuary.com/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "current_ask"
+    ],
+    "originalId": "ssd-standing-food-supplies"
+  },
+  {
+    "id": "GOV-2026-008",
+    "title": "City schedules Animal Services ordinance review for October 19",
+    "kind": "planning_update",
+    "status": "Verified",
+    "publisher": "City of Stockton / Council Legislation/Environmental Committee",
+    "date": "2026-10-14",
+    "checked": "2026-10-19",
+    "sourceUrl": "https://stockton.granicus.com/GeneratedAgendaViewer.php?event_id=3210&view_id=48",
+    "sourceLabel": "City schedules Animal Services ordinance review for October 19",
+    "summary": "The posted Council Legislation/Environmental Committee agenda lists item 26-1161 for October 19, 2026. Stockton Police Department is scheduled to update the committee on its review of the Animal Services Ordinance and proposed amendments. The agenda does not establish that amendments were adopted; proposal text and meeting outcome remain to be verified.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The posted Council Legislation/Environmental Committee agenda lists item 26-1161 for October 19, 2026. Stockton Police Department is scheduled to update the committee on its review of the Animal Services Ordinance and proposed amendments. The agenda does not establish that amendments were adopted; proposal text and meeting outcome remain to be verified.",
+        "unit": "",
+        "page": "planning_update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stockton-2026-10-19-animal-services-ordinance-agenda.",
+      "Source checked 2026-10-19.",
+      "Original source: https://stockton.granicus.com/GeneratedAgendaViewer.php?event_id=3210&view_id=48"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "planning_update"
+    ],
+    "originalId": "stockton-2026-10-19-animal-services-ordinance-agenda"
+  },
+  {
+    "id": "NEWS-2026-006",
+    "title": "KCRA reports Stockton Street Dogs' rising stray-dog encounters",
+    "kind": "update",
+    "status": "Reported",
+    "publisher": "KCRA 3",
+    "date": "2026-09-24",
+    "checked": "2026-10-19",
+    "sourceUrl": "https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921",
+    "sourceLabel": "KCRA reports Stockton Street Dogs' rising stray-dog encounters",
+    "summary": "KCRA reported that Stockton Street Dogs founder Jesse Mejia described more stray- and dumped-dog encounters than a year earlier, with particular concern in District 5. These are organization-reported observations in local news, not an official Stockton-wide census or Crossover firsthand verification.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "news",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "KCRA reported that Stockton Street Dogs founder Jesse Mejia described more stray- and dumped-dog encounters than a year earlier, with particular concern in District 5. These are organization-reported observations in local news, not an official Stockton-wide census or Crossover firsthand verification.",
+        "unit": "",
+        "page": "update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record kcra-2026-09-24-stockton-stray-dog-report.",
+      "Source checked 2026-10-19.",
+      "Original source: https://www.kcra.com/article/stockton-advocates-seek-support-for-stray-dogs/73877921"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "kcra-2026-09-24-stockton-stray-dog-report"
+  },
+  {
+    "id": "RESC-2026-006",
+    "title": "Stockton Streetdogs opens Canine Campus construction fundraiser",
+    "kind": "organization_update",
+    "status": "Reported",
+    "publisher": "Stockton Streetdogs / GoFundMe",
+    "date": "2026-07-31",
+    "checked": "2026-10-19",
+    "sourceUrl": "https://www.gofundme.com/f/help-us-create-stocktons-canine-campus",
+    "sourceLabel": "Stockton Streetdogs opens Canine Campus construction fundraiser",
+    "summary": "Stockton Streetdogs' fundraising page, dated July 31, 2026, requests support for construction costs of its proposed Canine Campus. It documents fundraising activity, not full funding, approval, construction, operational capacity, or an opening date.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Streetdogs' fundraising page, dated July 31, 2026, requests support for construction costs of its proposed Canine Campus. It documents fundraising activity, not full funding, approval, construction, operational capacity, or an opening date.",
+        "unit": "",
+        "page": "organization_update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-2026-07-31-canine-campus-fundraiser.",
+      "Source checked 2026-10-19.",
+      "Original source: https://www.gofundme.com/f/help-us-create-stocktons-canine-campus"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "organization_update"
+    ],
+    "originalId": "ssd-2026-07-31-canine-campus-fundraiser"
+  },
+  {
+    "id": "RESC-2026-007",
+    "title": "Stockton Street Dogs reports surge in dumped dogs",
+    "kind": "update",
+    "status": "Reported",
+    "publisher": "Stockton Street Dogs / video source",
+    "date": "2026-09-29",
+    "checked": "2026-09-29",
+    "sourceUrl": "https://www.youtube.com/watch?v=XZlwttXFXEc",
+    "sourceLabel": "Stockton Street Dogs reports surge in dumped dogs",
+    "summary": "Stockton Street Dogs reports a sharp increase in dumped dogs across Stockton, from roughly one dog per week around this time last year to approximately three to ten per week now. District 5 is seeing notable activity, while local rescue organizations say they are struggling to keep up. The organization identifies affordable spay/neuter access as a major upstream need and is working toward expanded and mobile veterinary services.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "news",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Street Dogs reports a sharp increase in dumped dogs across Stockton, from roughly one dog per week around this time last year to approximately three to ten per week now. District 5 is seeing notable activity, while local rescue organizations say they are struggling to keep up. The organization identifies affordable spay/neuter access as a major upstream need and is working toward expanded and mobile veterinary services.",
+        "unit": "",
+        "page": "update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-2026-09-29-dumped-dogs-surge.",
+      "Original source: https://www.youtube.com/watch?v=XZlwttXFXEc"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "ssd-2026-09-29-dumped-dogs-surge"
+  },
+  {
+    "id": "RESC-2026-008",
+    "title": "Stockton Street Dogs proposes a Canine Campus",
+    "kind": "planning_update",
+    "status": "Reported",
+    "publisher": "Stockton Street Dogs / KCRA video",
+    "date": "2026-07-30",
+    "checked": "2026-07-30",
+    "sourceUrl": "https://www.youtube.com/watch?v=I68lU4UuJ-A",
+    "sourceLabel": "Stockton Street Dogs proposes a Canine Campus",
+    "summary": "Stockton Street Dogs is working with city officials on a proposed Canine Campus that could provide a safe haven for hundreds of stray dogs at a time. The proposal describes overflow capacity for Stockton Animal Services, dedicated spay/neuter recovery and sick-dog care, 24/7 staffing, and selected volunteer opportunities.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "news",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Street Dogs is working with city officials on a proposed Canine Campus that could provide a safe haven for hundreds of stray dogs at a time. The proposal describes overflow capacity for Stockton Animal Services, dedicated spay/neuter recovery and sick-dog care, 24/7 staffing, and selected volunteer opportunities.",
+        "unit": "",
+        "page": "planning_update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-2026-07-30-canine-campus-proposal.",
+      "Original source: https://www.youtube.com/watch?v=I68lU4UuJ-A"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "planning_update"
+    ],
+    "originalId": "ssd-2026-07-30-canine-campus-proposal"
+  },
+  {
+    "id": "RESC-2026-009",
+    "title": "Canine Campus proposal describes planned overflow and recovery capacity",
+    "kind": "organization_update",
+    "status": "Reported",
+    "publisher": "Stockton Streetdogs / Street Dog Sanctuary",
+    "date": "2026-10-07",
+    "checked": "2026-10-07",
+    "sourceUrl": "https://streetdogsanctuary.com/canine-campus",
+    "sourceLabel": "Canine Campus proposal describes planned overflow and recovery capacity",
+    "summary": "Stockton Street Dogs’ Canine Campus proposal describes a safe place off the streets for hundreds of stray dogs at a time, with overflow support for Stockton Animal Services, dedicated spay/neuter recovery, care for sick and recovering dogs, 24/7 staffing, and selected volunteer opportunities. The page describes a proposal rather than an operating facility.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton Street Dogs’ Canine Campus proposal describes a safe place off the streets for hundreds of stray dogs at a time, with overflow support for Stockton Animal Services, dedicated spay/neuter recovery, care for sick and recovering dogs, 24/7 staffing, and selected volunteer opportunities. The page describes a proposal rather than an operating facility.",
+        "unit": "",
+        "page": "organization_update",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record ssd-2026-10-07-canine-campus-details.",
+      "Source checked 2026-10-07T12:00:00-07:00.",
+      "Original source: https://streetdogsanctuary.com/canine-campus"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "organization_update"
+    ],
+    "originalId": "ssd-2026-10-07-canine-campus-details"
+  },
+  {
+    "id": "NEWS-2026-007",
+    "title": "Animal Services describes regular capacity pressure and intake priorities",
+    "kind": "operational_condition",
+    "status": "Reported",
+    "publisher": "Stocktonia / Andrea Baltodano",
+    "date": "2026-10-20",
+    "checked": "2026-10-28",
+    "sourceUrl": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+    "sourceLabel": "Animal Services describes regular capacity pressure and intake priorities",
+    "summary": "Stocktonia reports Animal Services Manager Ashley Kluza told a Council committee the shelter is regularly at capacity. The report says healthy stray intake generally requires appointments, while sick, injured, and aggressive animals continue to be accepted and confirmed abandonment cases are accepted during investigation.",
+    "limits": "A dated account of reported operating practice, not Crossover observation, a measured occupancy series, a response-time measure, or proof that every urgent case receives timely care.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stocktonia reports Animal Services Manager Ashley Kluza told a Council committee the shelter is regularly at capacity. The report says healthy stray intake generally requires appointments, while sick, injured, and aggressive animals continue to be accepted and confirmed abandonment cases are accepted during investigation.",
+        "unit": "",
+        "page": "operational_condition",
+        "note": "Statements attributed to Stockton Animal Services Manager Ashley Kluza and Stocktonia reporting of shelter practice."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stocktonia-2026-10-20-sas-capacity-intake.",
+      "Source checked 2026-10-28.",
+      "Original source: https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "operational_condition"
+    ],
+    "originalId": "stocktonia-2026-10-20-sas-capacity-intake"
+  },
+  {
+    "id": "NEWS-2026-008",
+    "title": "Animal Services distinguishes roaming dogs from abandoned dogs",
+    "kind": "reported_context",
+    "status": "Reported",
+    "publisher": "Stocktonia / Andrea Baltodano",
+    "date": "2026-10-20",
+    "checked": "2026-10-28",
+    "sourceUrl": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+    "sourceLabel": "Animal Services distinguishes roaming dogs from abandoned dogs",
+    "summary": "Kluza told the committee that a dog roaming Stockton streets is not necessarily abandoned: some escape from home and others roam because owners do not contain them. A sighting alone cannot establish ownership, abandonment, or whether a dog is genuinely unowned.",
+    "limits": "No classification counts or case-level outcomes are provided; each dog’s status requires separate evidence.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Kluza told the committee that a dog roaming Stockton streets is not necessarily abandoned: some escape from home and others roam because owners do not contain them. A sighting alone cannot establish ownership, abandonment, or whether a dog is genuinely unowned.",
+        "unit": "",
+        "page": "reported_context",
+        "note": "Stocktonia account of Animal Services Manager Ashley Kluza’s committee remarks."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stocktonia-2026-10-20-roaming-dog-distinction.",
+      "Source checked 2026-10-28.",
+      "Original source: https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "reported_context"
+    ],
+    "originalId": "stocktonia-2026-10-20-roaming-dog-distinction"
+  },
+  {
+    "id": "NEWS-2026-009",
+    "title": "Animal Services describes a temporary found-animal foster pathway",
+    "kind": "reported_service",
+    "status": "Reported",
+    "publisher": "Stocktonia / Andrea Baltodano",
+    "date": "2026-10-20",
+    "checked": "2026-10-28",
+    "sourceUrl": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+    "sourceLabel": "Animal Services describes a temporary found-animal foster pathway",
+    "summary": "Stocktonia reports Kluza described a program allowing residents to temporarily foster found animals while shelter intake or adoption is arranged. Animal Services may provide vaccinations and arrange sterilization for participating animals.",
+    "limits": "Eligibility, enrollment steps, available places, timing, completed placements, and successful outcomes were not documented or tested by Crossover.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stocktonia reports Kluza described a program allowing residents to temporarily foster found animals while shelter intake or adoption is arranged. Animal Services may provide vaccinations and arrange sterilization for participating animals.",
+        "unit": "",
+        "page": "reported_service",
+        "note": "Stocktonia account of Animal Services Manager Ashley Kluza’s committee remarks."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stocktonia-2026-10-20-found-animal-foster-pathway.",
+      "Source checked 2026-10-28.",
+      "Original source: https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "reported_service"
+    ],
+    "originalId": "stocktonia-2026-10-20-found-animal-foster-pathway"
+  },
+  {
+    "id": "NEWS-2026-010",
+    "title": "Committee advances proposed animal-control changes amid shelter overcrowding",
+    "kind": "planning_update",
+    "status": "Reported",
+    "publisher": "Stocktonia / Andrea Baltodano",
+    "date": "2026-10-20",
+    "checked": "2026-10-28",
+    "sourceUrl": "https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/",
+    "sourceLabel": "Committee advances proposed animal-control changes amid shelter overcrowding",
+    "summary": "Stocktonia reports that on October 19 the Council Legislation and Environmental Committee advanced proposed changes addressing repeated roaming violations and a conditional fourth household dog or cat. Animal Services also described regular shelter capacity pressure, appointments for healthy stray intake, priority for sick, injured, aggressive, and confirmed abandonment cases, and a temporary found-animal foster pathway. These are reported practices and proposals; the ordinance still requires full City Council consideration before taking effect. For Dogs in Stockton, the report raises questions about how roaming dogs are classified, what happens after an intake request, and whether temporary care leads to verified outcomes. We are following Council action, foster eligibility and outcomes, and the pending field-call records request. The first street observation remains to be documented.",
+    "limits": "Committee referral is not enactment. The final ordinance text, Council calendar, vote, and effective date remain unverified.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stocktonia reports that on October 19 the Council Legislation and Environmental Committee advanced proposed changes addressing repeated roaming violations and a conditional fourth household dog or cat. Animal Services also described regular shelter capacity pressure, appointments for healthy stray intake, priority for sick, injured, aggressive, and confirmed abandonment cases, and a temporary found-animal foster pathway. These are reported practices and proposals; the ordinance still requires full City Council consideration before taking effect. For Dogs in Stockton, the report raises questions about how roaming dogs are classified, what happens after an intake request, and whether temporary care leads to verified outcomes. We are following Council action, foster eligibility and outcomes, and the pending field-call records request. The first street observation remains to be documented.",
+        "unit": "",
+        "page": "planning_update",
+        "note": "Stocktonia reporting of the October 19 committee meeting and Kluza’s presentation."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stocktonia-2026-10-20-animal-control-proposals.",
+      "Source checked 2026-10-28.",
+      "Original source: https://stocktonia.org/news/public-safety/2026/10/20/stockton-committee-advances-stricter-animal-control-rules-amid-shelter-overcrowding/"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "planning_update"
+    ],
+    "originalId": "stocktonia-2026-10-20-animal-control-proposals"
+  },
+  {
+    "id": "DATA-2026-001",
+    "title": "2024 San Joaquin County survey reports pet ownership among respondents",
+    "kind": "reported_context",
+    "status": "Verified",
+    "publisher": "San Joaquin Continuum of Care",
+    "date": "2026-11-08",
+    "checked": "2026-11-08",
+    "sourceUrl": "https://www.sanjoaquincoc.org/wp-content/uploads/2024/09/2024-San-Joaquin-County-Point-In-Time-Count-Report.pdf",
+    "sourceLabel": "2024 San Joaquin County survey reports pet ownership among respondents",
+    "summary": "The 2024 San Joaquin County Point-in-Time Count report says 34% of survey respondents indicated they had a pet. This is a share of survey respondents, not all unhoused residents, a Stockton-only figure, or a count of dogs living on the streets.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The 2024 San Joaquin County Point-in-Time Count report says 34% of survey respondents indicated they had a pet. This is a share of survey respondents, not all unhoused residents, a Stockton-only figure, or a count of dogs living on the streets.",
+        "unit": "",
+        "page": "reported_context",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record sjcoc-2024-pit-survey-pets.",
+      "Source checked 2026-11-08.",
+      "Original source: https://www.sanjoaquincoc.org/wp-content/uploads/2024/09/2024-San-Joaquin-County-Point-In-Time-Count-Report.pdf"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "reported_context"
+    ],
+    "originalId": "sjcoc-2024-pit-survey-pets"
+  },
+  {
+    "id": "CARE-2026-002",
+    "title": "Pathways listing describes units for people accompanied by pets",
+    "kind": "reported_service",
+    "status": "Reported",
+    "publisher": "St. Mary's Community Services / community resource listing",
+    "date": "2026-11-08",
+    "checked": "2026-11-08",
+    "sourceUrl": "https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926",
+    "sourceLabel": "Pathways listing describes units for people accompanied by pets",
+    "summary": "The Pathways program listing describes temporary housing with single and double units for people accompanied by pets, partners, family, or belongings. Crossover has not verified current dog-specific eligibility, occupancy, access, or outcomes.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The Pathways program listing describes temporary housing with single and double units for people accompanied by pets, partners, family, or belongings. Crossover has not verified current dog-specific eligibility, occupancy, access, or outcomes.",
+        "unit": "",
+        "page": "reported_service",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record st-marys-pathways-pet-accommodation.",
+      "Source checked 2026-11-08.",
+      "Original source: https://www.icarol.info/ResourceView2.aspx?agencynum=97629369&org=62926"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "reported_service"
+    ],
+    "originalId": "st-marys-pathways-pet-accommodation"
+  },
+  {
+    "id": "SHEL-2024-003",
+    "title": "City details animal shelter renovation and construction contract",
+    "kind": "capacity_intervention",
+    "status": "Verified",
+    "publisher": "City of Stockton",
+    "date": "2024-11-12",
+    "checked": "2026-11-12",
+    "sourceUrl": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf",
+    "sourceLabel": "City details animal shelter renovation and construction contract",
+    "summary": "Stockton announced a $10,473,000 construction contract for its animal shelter renovation. Plans include a cattery, medical facilities, isolation and rehabilitation areas, and upgrades to the existing building. The city's original fall 2026 completion target has since been superseded by a reported spring 2027 opening expectation.",
+    "limits": "The release describes plans and a construction award, not completed facilities, current operating capacity, or measured outcomes.",
+    "artifact": "government",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "Stockton announced a $10,473,000 construction contract for its animal shelter renovation. Plans include a cattery, medical facilities, isolation and rehabilitation areas, and upgrades to the existing building. The city's original fall 2026 completion target has since been superseded by a reported spring 2027 opening expectation.",
+        "unit": "",
+        "page": "capacity_intervention",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record stockton-2024-11-12-shelter-renovation.",
+      "Source checked 2026-11-12.",
+      "Original source: https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "capacity_intervention"
+    ],
+    "originalId": "stockton-2024-11-12-shelter-renovation"
+  },
+  {
+    "id": "NEWS-2026-011",
+    "title": "Animal Services expects expanded shelter to open in spring 2027",
+    "kind": "update",
+    "status": "Reported",
+    "publisher": "KCRA 3",
+    "date": "2026-11-10",
+    "checked": "2026-11-12",
+    "sourceUrl": "https://www.kcra.com/article/stockton-animal-shelter-expansion/74394197",
+    "sourceLabel": "Animal Services expects expanded shelter to open in spring 2027",
+    "summary": "KCRA reports Stockton Animal Services expects its expanded shelter to open in spring 2027. Plans described by the shelter manager include a new veterinary facility, adoption space, and a community resource center. The shelter also reported taking in 828 animals in October 2026, nearly 600 of them strays; these are animals across species, not a count of street dogs.",
+    "limits": "The reported opening date is an expectation, not a confirmed completion date. The October intake figure is not broken out by dog versus other species or by city versus the shelter's full service area.",
+    "artifact": "local_reporting",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "KCRA reports Stockton Animal Services expects its expanded shelter to open in spring 2027. Plans described by the shelter manager include a new veterinary facility, adoption space, and a community resource center. The shelter also reported taking in 828 animals in October 2026, nearly 600 of them strays; these are animals across species, not a count of street dogs.",
+        "unit": "",
+        "page": "update",
+        "note": "KCRA's November 10 report attributes expansion details and intake figures to Stockton Animal Services staff."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record kcra-2026-11-10-shelter-expansion.",
+      "Source checked 2026-11-12.",
+      "Original source: https://www.kcra.com/article/stockton-animal-shelter-expansion/74394197"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "update"
+    ],
+    "originalId": "kcra-2026-11-10-shelter-expansion"
+  },
+  {
+    "id": "RESC-2026-010",
+    "title": "The Asher House describes its animal sanctuary model",
+    "kind": "reported_service",
+    "status": "Reported",
+    "publisher": "The Asher House",
+    "date": "2026-11-08",
+    "checked": "2026-11-08",
+    "sourceUrl": "https://www.theasherhouse.com/pages/asher-house-faqs",
+    "sourceLabel": "The Asher House describes its animal sanctuary model",
+    "summary": "The Asher House describes rescue, rehabilitation, rehoming, and lifelong sanctuary care. It says dog intake depends on capacity and suitability for its free-roaming environment. This is an example for Crossover's exploration, not a Stockton program or evidence that a similar model can be built here.",
+    "limits": "The linked source supports this account; it may not establish current conditions or broader rates.",
+    "artifact": "organization",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Record account",
+        "value": "The Asher House describes rescue, rehabilitation, rehoming, and lifelong sanctuary care. It says dog intake depends on capacity and suitability for its free-roaming environment. This is an example for Crossover's exploration, not a Stockton program or evidence that a similar model can be built here.",
+        "unit": "",
+        "page": "reported_service",
+        "note": "Read source and limitations before drawing a wider conclusion."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record asher-house-sanctuary-model.",
+      "Source checked 2026-11-08.",
+      "Original source: https://www.theasherhouse.com/pages/asher-house-faqs"
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "reported_service"
+    ],
+    "originalId": "asher-house-sanctuary-model"
+  },
+  {
+    "id": "CPRA-2026-001-REQUEST",
+    "title": "Requested Stockton Animal Services field-call records",
+    "kind": "Crossover activity",
+    "status": "Firsthand",
+    "publisher": "Crossover Stockton",
+    "date": "2026-10-20",
+    "checked": "2026-10-20",
+    "sourceUrl": null,
+    "sourceLabel": "Requested Stockton Animal Services field-call records",
+    "summary": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. An automatic forwarding acknowledgment arrived. The records were received by email on November 2; their contents have not been assessed in this record.",
+    "limits": "Crossover account; the underlying correspondence or original file is not published in this preview.",
+    "artifact": "Crossover activity record",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Activity account",
+        "value": "Crossover submitted a public records request for approximately 12 months of field calls involving roaming, stray, abandoned, aggressive, and distressed dogs. Requested fields include report dates, general areas, complaint categories, response dispositions, and closure statuses where maintained. An automatic forwarding acknowledgment arrived. The records were received by email on November 2; their contents have not been assessed in this record.",
+        "unit": "",
+        "page": "activity",
+        "note": "Submitted October 20, 2026. The requested records were received by email on November 2 at 4:03 p.m. PST. This record does not document a review or analysis of their contents."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-10-20-sas-field-call-records-request.",
+      "Occurred 2026-10-20.",
+      "Recorded 2026-10-20.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "activity"
+    ],
+    "originalId": "crossover-2026-10-20-sas-field-call-records-request"
+  },
+  {
+    "id": "CPRA-2026-001-RECEIPT",
+    "title": "Received Stockton Animal Services field-call records",
+    "kind": "Crossover activity",
+    "status": "Firsthand",
+    "publisher": "Crossover Stockton",
+    "date": "2026-11-02",
+    "checked": "2026-11-03",
+    "sourceUrl": null,
+    "sourceLabel": "Received Stockton Animal Services field-call records",
+    "summary": "Stockton Animal Services provided the requested field-service records by email on November 2, 2026. Crossover confirmed receipt on November 3 and began reviewing the records on November 4. The spreadsheet contains 7,183 case records; analysis and findings remain pending.",
+    "limits": "Crossover account; the underlying correspondence or original file is not published in this preview.",
+    "artifact": "Crossover activity record",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Activity account",
+        "value": "Stockton Animal Services provided the requested field-service records by email on November 2, 2026. Crossover confirmed receipt on November 3 and began reviewing the records on November 4. The spreadsheet contains 7,183 case records; analysis and findings remain pending.",
+        "unit": "",
+        "page": "activity",
+        "note": "Records arrived November 2 and receipt was confirmed November 3. Review began November 4; this receipt record does not establish case outcomes."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-11-02-sas-field-call-records-received.",
+      "Occurred 2026-11-02.",
+      "Recorded 2026-11-03.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "activity"
+    ],
+    "originalId": "crossover-2026-11-02-sas-field-call-records-received"
+  },
+  {
+    "id": "FLD-2026-002",
+    "title": "Visited Stockton Animal Services and submitted a volunteer application",
+    "kind": "Crossover activity",
+    "status": "Firsthand",
+    "publisher": "Crossover Stockton / Jeff Kolyer",
+    "date": "2026-10-14",
+    "checked": "2026-10-14",
+    "sourceUrl": null,
+    "sourceLabel": "Visited Stockton Animal Services and submitted a volunteer application",
+    "summary": "Visited Stockton Animal Services and submitted a volunteer application.",
+    "limits": "Crossover account; the underlying correspondence or original file is not published in this preview.",
+    "artifact": "Crossover activity record",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Activity account",
+        "value": "Visited Stockton Animal Services and submitted a volunteer application.",
+        "unit": "",
+        "page": "activity",
+        "note": "Delivered the application, spoke briefly with staff, and documented observations of the shelter and public facilities. No substantive next step documented as of October 30."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-10-14-sas-volunteer-application.",
+      "Occurred 2026-10-14.",
+      "Recorded 2026-10-14.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "activity"
+    ],
+    "originalId": "crossover-2026-10-14-sas-volunteer-application"
+  },
+  {
+    "id": "FLD-2026-003",
+    "title": "Stockton Street Dogs volunteer application submitted",
+    "kind": "Crossover activity",
+    "status": "Firsthand",
+    "publisher": "Crossover Stockton / Jeff Kolyer",
+    "date": "2026-10-07",
+    "checked": "2026-10-08",
+    "sourceUrl": null,
+    "sourceLabel": "Stockton Street Dogs volunteer application submitted",
+    "summary": "Applied to volunteer with Stockton Street Dogs and learn firsthand.",
+    "limits": "Crossover account; the underlying correspondence or original file is not published in this preview.",
+    "artifact": "Crossover activity record",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Activity account",
+        "value": "Applied to volunteer with Stockton Street Dogs and learn firsthand.",
+        "unit": "",
+        "page": "activity",
+        "note": "No response documented as of October 30, 2026."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-10-07-street-dogs-volunteer-application.",
+      "Occurred 2026-10-07.",
+      "Recorded 2026-10-08.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "activity"
+    ],
+    "originalId": "crossover-2026-10-07-street-dogs-volunteer-application"
+  },
+  {
+    "id": "FLD-2026-004",
+    "title": "Emailed Stockton Animal Services about Doggie Day Out",
+    "kind": "Crossover activity",
+    "status": "Firsthand",
+    "publisher": "Crossover Stockton / Jeff Kolyer",
+    "date": "2026-10-12",
+    "checked": "2026-10-12",
+    "sourceUrl": null,
+    "sourceLabel": "Emailed Stockton Animal Services about Doggie Day Out",
+    "summary": "Emailed Stockton Animal Services asking about sign-up, requirements, paperwork, and orientation for Doggie Day Out.",
+    "limits": "Crossover account; the underlying correspondence or original file is not published in this preview.",
+    "artifact": "Crossover activity record",
+    "rows": [
+      {
+        "id": "account",
+        "label": "Activity account",
+        "value": "Emailed Stockton Animal Services asking about sign-up, requirements, paperwork, and orientation for Doggie Day Out.",
+        "unit": "",
+        "page": "activity",
+        "note": "No substantive next step documented as of October 30, 2026. No field report yet."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover record crossover-2026-10-12-doggie-day-out-inquiry.",
+      "Occurred 2026-10-12.",
+      "Recorded 2026-10-12.",
+      "Original artifact not attached to this preview."
+    ],
+    "response": "No additional agency response is included in this record.",
+    "tags": [
+      "activity"
+    ],
+    "originalId": "crossover-2026-10-12-doggie-day-out-inquiry"
+  },
+  {
+    "id": "WORK-2026-001",
+    "title": "Review Animal Services field-call records",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "2026-11-04",
+    "checked": "2026-11-04",
+    "sourceUrl": null,
+    "sourceLabel": "Review Animal Services field-call records",
+    "summary": "Review began Nov 4 on 7,183 cases; analysis and findings remain pending",
+    "artifact": "source review",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "in progress",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Review began Nov 4 on 7,183 cases; analysis and findings remain pending"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Review the records received in response to the October 20 Stockton Animal Services field-call request.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "2 existing records",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-review-sas-field-call-records.",
+      "Current status: in progress.",
+      "Started 2026-11-04.",
+      "Basis record: crossover-2026-10-20-sas-field-call-records-request.",
+      "Basis record: crossover-2026-11-02-sas-field-call-records-received.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "source_review"
+    ],
+    "originalId": "task-review-sas-field-call-records"
+  },
+  {
+    "id": "WORK-2026-002",
+    "title": "Verify conditions: scale of the dog problem near St. Mary's",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "sourceUrl": null,
+    "sourceLabel": "Verify conditions: scale of the dog problem near St. Mary's",
+    "summary": "Plan a limited public-area observation; no visit documented",
+    "artifact": "field observation",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Plan a limited public-area observation; no visit documented"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "On a future visit, observe a manageable portion of the St.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "1 existing record",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-verify-st-marys-church-street-dog-scale.",
+      "Current status: open.",
+      "Basis record: ssd-2026-06-08-street-response.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "field_observation"
+    ],
+    "originalId": "task-verify-st-marys-church-street-dog-scale"
+  },
+  {
+    "id": "WORK-2026-003",
+    "title": "Verify reported conditions in South Stockton / District 5",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "sourceUrl": null,
+    "sourceLabel": "Verify reported conditions in South Stockton / District 5",
+    "summary": "Identify a supported public location first",
+    "artifact": "field observation",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Identify a supported public location first"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Use the generalized Carrie Street levee area in Weston Ranch as a specific historical lead: Stocktonia reported an April 23, 2026 roaming-dog attack near the 800 block, while KCRA's separate September account described increased stray- and dumped-dog encounters across District 5 without naming a site.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "2 existing records",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-verify-south-stockton-district-5-reports.",
+      "Current status: open.",
+      "Basis record: stockton-2026-05-11-stray-dog-report.",
+      "Basis record: kcra-2026-09-24-stockton-stray-dog-report.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "field_observation"
+    ],
+    "originalId": "task-verify-south-stockton-district-5-reports"
+  },
+  {
+    "id": "WORK-2026-004",
+    "title": "Follow up with Stockton Street Dogs",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "sourceUrl": null,
+    "sourceLabel": "Follow up with Stockton Street Dogs",
+    "summary": "Clarify field access and current care needs",
+    "artifact": "organization contact",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Clarify field access and current care needs"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Check whether the October 7 volunteer application received a response.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "2 existing records",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-ssd-ask-contact-questions.",
+      "Current status: open.",
+      "Basis record: crossover-2026-10-07-street-dogs-volunteer-application.",
+      "Basis record: ssd-2026-10-07-canine-campus-details.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "organization_contact"
+    ],
+    "originalId": "task-ssd-ask-contact-questions"
+  },
+  {
+    "id": "WORK-2026-005",
+    "title": "Follow up with Stockton Animal Services on volunteering",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "sourceUrl": null,
+    "sourceLabel": "Follow up with Stockton Animal Services on volunteering",
+    "summary": "Check onboarding and orientation",
+    "artifact": "follow up",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "waiting",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Check onboarding and orientation"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Check the status of the October 14 volunteer application and the October 12 Doggie Day Out inquiry.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "3 existing records",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-sas-volunteer-onboarding-follow-up.",
+      "Current status: waiting.",
+      "Basis record: crossover-2026-10-14-sas-volunteer-application.",
+      "Basis record: crossover-2026-10-12-doggie-day-out-inquiry.",
+      "Basis record: sas-standing-doggie-day-out.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "follow_up"
+    ],
+    "originalId": "task-sas-volunteer-onboarding-follow-up"
+  },
+  {
+    "id": "WORK-2026-006",
+    "title": "Monitor the proposed animal-control ordinance",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "sourceUrl": null,
+    "sourceLabel": "Monitor the proposed animal-control ordinance",
+    "summary": "Verify the Council outcome",
+    "artifact": "policy monitoring",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Verify the Council outcome"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "2 existing records",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-monitor-animal-control-ordinance.",
+      "Current status: open.",
+      "Basis record: stockton-2026-10-19-animal-services-ordinance-agenda.",
+      "Basis record: stocktonia-2026-10-20-animal-control-proposals.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "policy_monitoring"
+    ],
+    "originalId": "task-monitor-animal-control-ordinance"
+  },
+  {
+    "id": "WORK-2026-007",
+    "title": "Contact CBS reporter Charlie Lapastora",
+    "kind": "Investigation work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "sourceUrl": null,
+    "sourceLabel": "Contact CBS reporter Charlie Lapastora",
+    "summary": "Clarify reported locations and seek firsthand leads",
+    "artifact": "organization contact",
+    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Clarify reported locations and seek firsthand leads"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Follow up on the April 6 and June 8 CBS Sacramento reports about abandoned dogs in Stockton.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "The full instructions are in the data snapshot."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "2 existing records",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-contact-cbs-charlie-lapastora.",
+      "Current status: open.",
+      "Basis record: cbs-2026-04-06-stockton-abandoned-dogs.",
+      "Basis record: ssd-2026-06-08-street-response.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "organization_contact"
+    ],
+    "originalId": "task-contact-cbs-charlie-lapastora"
+  }
+]
