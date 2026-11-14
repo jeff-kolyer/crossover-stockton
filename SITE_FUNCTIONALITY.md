@@ -1,6 +1,6 @@
 # StreetWatch Care Gap: current site functionality
 
-Current Site: https://streetwatch-care-gap.jkolyer.chatgpt.site (public). Source: `sites/streetwatch-care-gap`. This is the accepted StreetWatch site as of November 14, 2026. Future revisions should be generated as separate Sites, with this file updated to identify the active one.
+Current public Site: https://crossoverstockton.org (GitHub Pages). Published source: `site/streetwatch`. The accepted ChatGPT Sites copy is https://streetwatch-care-gap.jkolyer.chatgpt.site and is private. Future designs may be generated as separate Sites; after acceptance, copy the selected build into the GitHub Pages source and update this file.
 
 The downloaded `streetwatch_care_gap_investigation (2).html` is the visual and interaction reference. Keep its CSS and six-tab page structure when regenerating. Data in that reference is illustrative; use the checked Crossover and public-source data compiled into this build.
 
