@@ -8,9 +8,13 @@
     "predev": "node scripts/build-streetwatch-data.mjs",
     "check:data": "node scripts/check-catalog.mjs",
     "build": "npm run check:data && node scripts/build-streetwatch-data.mjs && vite build && node scripts/postbuild-streetwatch.mjs",
+    "test:ui": "playwright test",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
     "vite": "^6.0.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1"
   }
 }

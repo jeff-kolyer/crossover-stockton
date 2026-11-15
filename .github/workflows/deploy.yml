@@ -38,6 +38,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Install browser for UI checks
+        run: npx playwright install --with-deps chromium
+
+      - name: Check responsive UI
+        run: npm run test:ui
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
