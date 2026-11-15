@@ -1,0 +1,458 @@
+[
+  {
+    "id": "SHEL-2024-001",
+    "title": "2024 animal intake and outcome report",
+    "kind": "Municipal report",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2024-12-31",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://cms3.revize.com/revize/stockton/Documents/Services/Animal%20Services/PDFs/2024%20-%20Kennel%20Stats.pdf",
+    "sourceLabel": "Original three-page kennel statistics PDF",
+    "summary": "The City's report gives 2024 intake and outcome counts across its multi-jurisdiction service area.",
+    "limits": "The figures cover Stockton and several other jurisdictions. Intake and outcome totals are different flows and cannot be subtracted to infer shelter occupancy or street population.",
+    "artifact": "Public PDF, pages 1–3",
+    "rows": [
+      {
+        "id": "dog-intakes",
+        "label": "Dog intake events",
+        "value": 3786,
+        "unit": "events",
+        "page": "p. 3",
+        "note": "All reported dog intake categories, excluding foster and DOA disposal."
+      },
+      {
+        "id": "stray-intakes",
+        "label": "Stray dog intake events",
+        "value": 3106,
+        "unit": "events",
+        "page": "p. 3",
+        "note": "A subset of dog intakes, not the number of dogs living outside."
+      },
+      {
+        "id": "dog-outcomes",
+        "label": "Dog outcome dispositions",
+        "value": 3742,
+        "unit": "dispositions",
+        "page": "pp. 1–2",
+        "note": "A separate period total from intake."
+      },
+      {
+        "id": "dog-euthanasia",
+        "label": "Dog euthanasia outcomes",
+        "value": 514,
+        "unit": "dispositions",
+        "page": "p. 1",
+        "note": "The report's DOG column for euthanasia."
+      },
+      {
+        "id": "dog-live-release",
+        "label": "Reported dog live-release percentage",
+        "value": 83.05,
+        "unit": "percent",
+        "page": "p. 2",
+        "note": "Percentage printed by the City; not recalculated from intake."
+      }
+    ],
+    "claims": [
+      "overview-intake",
+      "overview-stray",
+      "ground-outcomes"
+    ],
+    "custody": [
+      "Public City PDF located at the source URL.",
+      "Figures transcribed from the DOG columns and checked against the report on November 14, 2026."
+    ],
+    "response": "No agency clarification has been requested for this preview.",
+    "errata": [],
+    "tags": [
+      "intake",
+      "outcome",
+      "shelter"
+    ],
+    "originalId": "SAS-2024-KENNEL"
+  },
+  {
+    "id": "GOV-2026-001",
+    "title": "Animal Balance shelter spay/neuter agreement",
+    "kind": "Council legislation",
+    "status": "verified",
+    "publisher": "City of Stockton City Council",
+    "date": "2026-01-13",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://stockton.legistar.com/LegislationDetail.aspx?GUID=C96FEC14-9D72-4558-ACEA-11472562D6B7&ID=7796623&Options=&Search=",
+    "sourceLabel": "City Council file 25-1403",
+    "summary": "Council legislation describes a three-month agreement of up to $126,000, designed to alter approximately 200 pets across three clinic events.",
+    "limits": "The target is a plan. The published legislation does not verify completed procedures, the dog/cat split, or a sustained increase in public appointment capacity.",
+    "artifact": "Public council legislation and attachments",
+    "rows": [
+      {
+        "id": "contract-ceiling",
+        "label": "Not-to-exceed contract amount",
+        "value": 126000,
+        "unit": "USD",
+        "page": "file 25-1403",
+        "note": "Authorization ceiling, not spending verified."
+      },
+      {
+        "id": "planned-procedures",
+        "label": "Approximate target across three events",
+        "value": 200,
+        "unit": "pets",
+        "page": "file 25-1403",
+        "note": "Planned count; completed procedures unknown."
+      }
+    ],
+    "claims": [
+      "initiative-sterilization"
+    ],
+    "custody": [
+      "City Council file 25-1403 opened from Stockton Legistar.",
+      "Council description checked November 14, 2026."
+    ],
+    "response": "No agency response requested; completed-delivery records remain open.",
+    "errata": [],
+    "tags": [
+      "initiative",
+      "spay-neuter",
+      "contract"
+    ],
+    "originalId": "SAS-2026-ANIMAL-BALANCE"
+  },
+  {
+    "id": "SHEL-2024-002",
+    "title": "Animal shelter renovation announcement",
+    "kind": "City news release",
+    "status": "verified",
+    "publisher": "City of Stockton",
+    "date": "2024-11-12",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://cms3.revize.com/revize/stockton/Documents/Community/News%20%26%20Information/2024/November/News_2024_11_12_AnimalShelterRenovationProjectGroundbreaking.pdf",
+    "sourceLabel": "Original City news-release PDF",
+    "summary": "The City announced a shelter renovation, a $10,473,000 construction contract, and planned medical, isolation, rehabilitation, and cattery space.",
+    "limits": "This 2024 release described an expected fall 2026 completion. It does not prove that new spaces are open or show current operating capacity.",
+    "artifact": "Public two-page news-release PDF",
+    "rows": [
+      {
+        "id": "construction-award",
+        "label": "Construction contract award",
+        "value": 10473000,
+        "unit": "USD",
+        "page": "p. 1",
+        "note": "Contract award, not measured added capacity."
+      },
+      {
+        "id": "planned-facilities",
+        "label": "Planned facilities",
+        "value": "Medical, isolation, rehabilitation, cattery",
+        "unit": "scope",
+        "page": "p. 1",
+        "note": "Announced plans, not verified completed facilities."
+      }
+    ],
+    "claims": [
+      "initiative-expansion"
+    ],
+    "custody": [
+      "City news release dated November 12, 2024.",
+      "Original PDF checked November 14, 2026."
+    ],
+    "response": "Current construction status and capacity figures have not been obtained.",
+    "errata": [],
+    "tags": [
+      "initiative",
+      "shelter"
+    ],
+    "originalId": "SAS-2024-RENOVATION"
+  },
+  {
+    "id": "GOV-2026-002",
+    "title": "Found-pet drop-off and lost-pet guidance",
+    "kind": "Official guidance",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2026-10-03",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/lost___found_pets.php",
+    "sourceLabel": "City Lost & Found Pets page",
+    "summary": "The City asks people who find a pet in Stockton or unincorporated San Joaquin County to call (209) 937-7445 for a shelter drop-off appointment.",
+    "limits": "The page does not guarantee a same-day appointment or current kennel space. Call to confirm the process.",
+    "artifact": "Public municipal guidance page",
+    "rows": [
+      {
+        "id": "dropoff",
+        "label": "Found-pet drop-off",
+        "value": "Call for an appointment",
+        "unit": "guidance",
+        "page": "Did you find a Pet?",
+        "note": "Phone: (209) 937-7445."
+      },
+      {
+        "id": "lost-list",
+        "label": "Lost-pet search",
+        "value": "Check online list and visit in person",
+        "unit": "guidance",
+        "page": "Is Your Pet Missing?",
+        "note": "The City says its list is one tool and encourages an in-person check."
+      }
+    ],
+    "claims": [
+      "care-found"
+    ],
+    "custody": [
+      "City guidance page last updated October 3, 2026.",
+      "Page checked November 14, 2026."
+    ],
+    "response": "City page is the agency's own guidance.",
+    "errata": [],
+    "tags": [
+      "found-pet",
+      "resource"
+    ],
+    "originalId": "CITY-FOUND-PETS"
+  },
+  {
+    "id": "GOV-2024-001",
+    "title": "Animal complaint reporting channel",
+    "kind": "Official guidance",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "2024-03-20",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php",
+    "sourceLabel": "City Animal Related Complaints page",
+    "summary": "The City lists injured or sick strays, animals at large, abandonment, and aggressive animals among complaints Animal Services handles. It offers an online report path.",
+    "limits": "The page does not publish a response-time guarantee or prove a dispatch occurred for any individual report.",
+    "artifact": "Public municipal guidance page",
+    "rows": [
+      {
+        "id": "eligible-types",
+        "label": "Listed complaint types",
+        "value": "Injured or sick strays; animals at large; abandonment",
+        "unit": "guidance",
+        "page": "Types of Complaints",
+        "note": "Examples shown on the City page."
+      },
+      {
+        "id": "online-report",
+        "label": "Online complaint route",
+        "value": "Select Animals → Animals - other",
+        "unit": "guidance",
+        "page": "Submit Complaint Online",
+        "note": "The City says staff will confirm receipt."
+      }
+    ],
+    "claims": [
+      "care-report"
+    ],
+    "custody": [
+      "City guidance page last updated March 20, 2024.",
+      "Page checked November 14, 2026."
+    ],
+    "response": "City page is the agency's own guidance.",
+    "errata": [],
+    "tags": [
+      "reporting",
+      "resource"
+    ],
+    "originalId": "CITY-ANIMAL-COMPLAINTS"
+  },
+  {
+    "id": "GOV-2026-003",
+    "title": "Shelter hours, contact and low-cost services",
+    "kind": "Official guidance",
+    "status": "verified",
+    "publisher": "City of Stockton Animal Services",
+    "date": "Date not stated",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://www.stocktonca.gov/services/animal_services/",
+    "sourceLabel": "City Animal Services page",
+    "summary": "The City lists shelter hours and phone numbers, low-cost vaccinations and microchips, and a community-cat spay/neuter program.",
+    "limits": "The page describes low-cost spay/neuter for community cats, not for dogs. Hours and offerings can change.",
+    "artifact": "Public municipal service page",
+    "geo": {
+      "lat": 37.935195978998,
+      "lon": -121.293266033093,
+      "address": "1575 S Lincoln St, Stockton, CA 95206",
+      "precision": "address geocode",
+      "method": "U.S. Census Geocoder, Public_AR_Current, checked 2026-11-14"
+    },
+    "rows": [
+      {
+        "id": "hours",
+        "label": "Shelter hours",
+        "value": "Tue–Sun, noon–5 p.m.",
+        "unit": "schedule",
+        "page": "Hours of Operation",
+        "note": "Closed Monday; verify before visiting."
+      },
+      {
+        "id": "phone",
+        "label": "Regular contact",
+        "value": "(209) 937-7445",
+        "unit": "phone",
+        "page": "Hours and Phone Numbers",
+        "note": "Answering service listed daily, 8 a.m.–5 p.m."
+      },
+      {
+        "id": "after-hours",
+        "label": "After-hours emergencies",
+        "value": "(209) 937-8377",
+        "unit": "phone",
+        "page": "After-Hours Emergencies",
+        "note": "Stockton Police Telecommunications."
+      }
+    ],
+    "claims": [
+      "care-city"
+    ],
+    "custody": [
+      "City service page checked November 14, 2026.",
+      "Public facility address geocoded through the U.S. Census Geocoder on November 14, 2026."
+    ],
+    "response": "City page is the agency's own guidance.",
+    "errata": [],
+    "tags": [
+      "municipal",
+      "resource"
+    ],
+    "originalId": "CITY-SHELTER-SERVICES"
+  },
+  {
+    "id": "CARE-2026-001",
+    "title": "Animal Protection League low-cost clinic",
+    "kind": "Provider page",
+    "status": "verified",
+    "publisher": "Animal Protection League",
+    "date": "Date not stated",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://apl209.org/",
+    "sourceLabel": "APL clinic website",
+    "summary": "APL says it provides low-cost spay/neuter for dogs and cats at 1409 W Oak St, Stockton. Appointments are confirmed by the clinic team.",
+    "limits": "The checked page does not establish current prices, eligibility, appointment openings, or wait times. Call (209) 420-4776.",
+    "artifact": "Public provider website",
+    "geo": {
+      "lat": 37.955423054795,
+      "lon": -121.311081301828,
+      "address": "1409 W Oak St, Stockton, CA 95203",
+      "precision": "address geocode",
+      "method": "U.S. Census Geocoder, Public_AR_Current, checked 2026-11-14"
+    },
+    "rows": [
+      {
+        "id": "service",
+        "label": "Clinic service",
+        "value": "Dog and cat spay/neuter",
+        "unit": "service",
+        "page": "APL's Clinic",
+        "note": "Provider describes its care as low-cost."
+      },
+      {
+        "id": "address",
+        "label": "Clinic address",
+        "value": "1409 W Oak St, Stockton, CA 95203",
+        "unit": "address",
+        "page": "Visit Our Clinic",
+        "note": "Hours may change week to week."
+      },
+      {
+        "id": "contact",
+        "label": "Clinic phone",
+        "value": "(209) 420-4776",
+        "unit": "phone",
+        "page": "APL's Clinic",
+        "note": "Request and confirm appointment."
+      }
+    ],
+    "claims": [
+      "care-apl"
+    ],
+    "custody": [
+      "Provider website checked November 14, 2026.",
+      "Public facility address geocoded through the U.S. Census Geocoder on November 14, 2026."
+    ],
+    "response": "Provider page is APL's own description.",
+    "errata": [],
+    "tags": [
+      "clinic",
+      "spay-neuter",
+      "resource"
+    ],
+    "originalId": "APL-STOCKTON-CLINIC"
+  },
+  {
+    "id": "CARE-2027-001",
+    "title": "Scheduled Stockton clinic, February 2027",
+    "kind": "Provider schedule",
+    "status": "verified",
+    "publisher": "Animal Balance",
+    "date": "February 26–28, 2027",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://animalbalance.org/event/stockton-ca-2/",
+    "sourceLabel": "Animal Balance event page",
+    "summary": "Animal Balance lists a Stockton clinic for February 26–28, 2027.",
+    "limits": "The future event is not proof of completed procedures, public bookings, price, eligibility, or a confirmed clinic address. Recheck the schedule.",
+    "artifact": "Public provider event listing",
+    "rows": [
+      {
+        "id": "scheduled-date",
+        "label": "Scheduled dates",
+        "value": "February 26–28, 2027",
+        "unit": "schedule",
+        "page": "Stockton event",
+        "note": "Future schedule as checked November 14, 2026."
+      }
+    ],
+    "claims": [
+      "initiative-mobile"
+    ],
+    "custody": [
+      "Animal Balance event schedule checked November 14, 2026."
+    ],
+    "response": "Provider page is Animal Balance's own schedule.",
+    "errata": [],
+    "tags": [
+      "initiative",
+      "clinic"
+    ],
+    "dateLabel": "Scheduled event",
+    "originalId": "ANIMAL-BALANCE-2027-STOCKTON"
+  },
+  {
+    "id": "RESC-2026-001",
+    "title": "Streetdog Sanctuary describes its outreach",
+    "kind": "Organization page",
+    "status": "verified",
+    "publisher": "Streetdog Sanctuary",
+    "date": "Date not stated",
+    "checked": "2026-11-14",
+    "sourceUrl": "https://streetdogsanctuary.com/",
+    "sourceLabel": "Organization website",
+    "summary": "Streetdog Sanctuary describes immediate care and health monitoring for abandoned dogs in Stockton and invites community support.",
+    "limits": "An organizational description does not independently establish the number of dogs served, geographic coverage, or current capacity.",
+    "artifact": "Public organization website",
+    "rows": [
+      {
+        "id": "mission",
+        "label": "Stated role",
+        "value": "Street-level support and animal care",
+        "unit": "organization statement",
+        "page": "Home page",
+        "note": "The organization describes its own mission."
+      }
+    ],
+    "claims": [
+      "ecosystem-rescue"
+    ],
+    "custody": [
+      "Organization website checked November 14, 2026."
+    ],
+    "response": "Organization page is its own account.",
+    "errata": [],
+    "tags": [
+      "rescue",
+      "stakeholder"
+    ],
+    "originalId": "STREETDOG-SANCTUARY"
+  }
+]
