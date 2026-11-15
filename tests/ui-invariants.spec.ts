@@ -14,10 +14,15 @@ test('page fits the viewport and preserves the header actions', async ({ page },
   expect(dimensions.scroll, `Document overflows at ${width}px: ${JSON.stringify(dimensions)}`).toBeLessThanOrEqual(dimensions.viewport + 1);
 
   const brand = page.locator('header button').first();
+  await expect(brand).toContainText('STOCKTON');
+  await expect(brand).toContainText('STREETWATCH');
   const brandBox = await brand.boundingBox();
   expect(brandBox).not.toBeNull();
   expect(brandBox!.x).toBeGreaterThanOrEqual(-1);
   expect(brandBox!.x + brandBox!.width).toBeLessThanOrEqual(width + 1);
+  const locationBox = await brand.getByText('STOCKTON').boundingBox();
+  expect(locationBox).not.toBeNull();
+  expect(locationBox!.x + locationBox!.width).toBeLessThanOrEqual(width + 1);
   await expect(page.getByRole('button', { name: /Checked: 17/i })).toBeVisible();
   await expect(page.getByRole('button', { name: /Waiting: 1/i })).toBeVisible();
 

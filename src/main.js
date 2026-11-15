@@ -178,7 +178,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
     function copyFormalCitation(recordId) {
       const rec = PRIMARY_RECORDS.find(r => r.id === recordId);
       if (!rec) return;
-      const citation = `StreetWatch Care Gap Investigation. Entry [${rec.id}]: "${rec.title}." Source: ${rec.sourceAgency}${rec.sourceUrl ? `, ${rec.sourceUrl}` : ''} (recorded or checked ${rec.dateAcquired}).`;
+      const citation = `Stockton StreetWatch Care Gap Investigation. Entry [${rec.id}]: "${rec.title}." Source: ${rec.sourceAgency}${rec.sourceUrl ? `, ${rec.sourceUrl}` : ''} (recorded or checked ${rec.dateAcquired}).`;
 
       // Fallback-safe copy for iFrame environments
       const textarea = document.createElement('textarea');
