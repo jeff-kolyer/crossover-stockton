@@ -82,6 +82,25 @@ test('all navigation sections are reachable', async ({ page }, testInfo) => {
   }
 });
 
+test('care resource filters show their selected state', async ({ page }, testInfo) => {
+  await page.goto('/?tab=care-resources');
+  const filters = page.locator('.res-filter-btn');
+  const labels = ['All Services', 'Spay/Neuter', 'Vaccines', 'Found Pet', 'Scheduled'];
+  for (const label of labels) {
+    const selected = filters.filter({ hasText: label });
+    await selected.click();
+    await expect(selected).toHaveAttribute('aria-pressed', 'true');
+    await expect(selected).toHaveCSS('background-color', 'rgb(15, 23, 42)');
+    await expect(page.locator('.res-filter-btn[aria-pressed="true"]')).toHaveCount(1);
+    await expect(page.locator('#resources-grid > *').first()).toBeVisible();
+  }
+  const width = testInfo.project.use.viewport!.width;
+  if ([1440, 375, 280].includes(width)) {
+    await filters.filter({ hasText: 'Scheduled' }).scrollIntoViewIfNeeded();
+    await page.screenshot({ path: `test-results/screenshots/care-filters-${width}.png` });
+  }
+});
+
 test('baseline indicators and source labels remain present', async ({ page }) => {
   await page.goto('/');
   const overview = page.locator('#tab-overview');

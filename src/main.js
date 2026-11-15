@@ -755,12 +755,14 @@ import { PRIMARY_RECORDS } from './generated/records.js';
 
     function filterResources(tagFilter, btnEl) {
       document.querySelectorAll('.res-filter-btn').forEach(btn => {
-        btn.classList.remove('bg-slate-900', 'text-white');
-        btn.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200');
+        btn.classList.remove('active-res-filter', 'bg-slate-900', 'text-white');
+        btn.classList.add('bg-white', 'text-stone-700', 'border', 'border-stone-200', 'hover:bg-stone-100');
+        btn.setAttribute('aria-pressed', 'false');
       });
       if (btnEl) {
-        btnEl.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200');
-        btnEl.classList.add('bg-slate-900', 'text-white');
+        btnEl.classList.remove('bg-white', 'text-stone-700', 'border', 'border-stone-200', 'hover:bg-stone-100');
+        btnEl.classList.add('active-res-filter', 'bg-slate-900', 'text-white');
+        btnEl.setAttribute('aria-pressed', 'true');
       }
       renderResourcesGrid(tagFilter);
     }
