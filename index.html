@@ -49,116 +49,85 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-amber-200 selection:text-stone-900">
 
-  <!-- TOP CIVIC INVESTIGATIVE BANNER -->
-  <div class="bg-slate-950 text-stone-300 text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-slate-800">
-    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-      <div class="flex items-center gap-2 font-mono min-w-0">
-        <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
-        <span class="uppercase tracking-wider text-stone-200 font-semibold truncate">Civic Records Audit</span>
-        <span class="hidden md:inline text-stone-500">|</span>
-        <span class="hidden md:inline text-stone-400">Cycle: FY 2024–2026</span>
-      </div>
-      <div class="flex items-center gap-3 font-mono text-[11px] shrink-0">
-        <button onclick="openRecord('SHEL-2024-001')" class="text-stone-400 hover:text-emerald-300 transition">
-          Checked: <strong class="text-emerald-400">17</strong>
-        </button>
-        <button onclick="openRecord('PLAN-2026-001')" class="text-stone-400 hover:text-amber-300 transition">
-          Waiting: <strong class="text-amber-400">1</strong>
-        </button>
+<header class="sticky top-0 z-40 bg-slate-900 text-stone-100 shadow-md border-b border-slate-800">
+
+    <!-- Active investigation status -->
+    <div id="investigation-status" class="bg-slate-950 text-stone-300 text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-slate-800">
+      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
+        <div class="flex items-center gap-2 font-mono min-w-0 whitespace-nowrap">
+          <span id="status-pulse" class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" aria-hidden="true"></span>
+          <span class="uppercase tracking-wider text-stone-200 font-semibold">Active Investigation</span>
+          <span class="hidden md:inline text-stone-500">|</span>
+          <span class="hidden md:inline text-stone-400">Cycle: FY 2024–2026</span>
+        </div>
+        <div class="flex items-center gap-3 font-mono text-[11px] shrink-0 whitespace-nowrap" aria-label="Record status filters">
+          <button onclick="jumpToEvidenceFilter('VERIFIED')" class="text-stone-400 hover:text-emerald-300 transition">Checked: <strong class="text-emerald-400">17</strong></button>
+          <button onclick="jumpToEvidenceFilter('OPEN')" class="text-stone-400 hover:text-sky-300 transition" title="Show six open investigation work items">Open: <strong class="text-sky-400">6</strong></button>
+          <button onclick="jumpToEvidenceFilter('WAITING')" class="text-stone-400 hover:text-amber-300 transition">Waiting: <strong class="text-amber-400">1</strong></button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- STICKY TOP NAVIGATION (Hardened for 260px–320px Ultra-Narrow Screens) -->
-  <header class="sticky top-0 z-40 bg-slate-900 text-stone-100 shadow-md border-b border-slate-800">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-      <!-- Top Brand + CTA Row -->
-      <div class="flex items-center justify-between gap-2 py-2.5 md:py-0 md:h-16">
-        <!-- Brand Identity -->
-        <button onclick="switchTab('overview')" class="flex items-center gap-2 sm:gap-3 text-left group focus:outline-none min-w-0">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-500/15 border border-amber-500/40 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors shrink-0">
-            <i data-lucide="radar" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+    <!-- Tier 2: Main Brand + Navigation Tabs + Persistent Report CTA -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-3 min-h-16">
+
+        <!-- Left: Brand Identity -->
+        <button id="brand-home" onclick="switchTab('overview')" class="flex items-center gap-2.5 text-left group focus:outline-none min-w-0 shrink-0">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-500/15 border border-amber-500/40 flex items-center justify-center group-hover:bg-amber-500/25 group-hover:border-amber-400 transition-colors shrink-0">
+            <img src="/images/crossover-c.svg" alt="" class="w-5 h-5 sm:w-6 sm:h-6" />
           </div>
-          <div class="min-w-0 leading-tight">
-            <span class="block font-mono text-[11px] leading-3 font-bold tracking-widest text-amber-400">STOCKTON</span>
-            <div class="font-mono font-bold text-xs sm:text-base tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
-              <span>STREETWATCH</span>
-              <span class="hidden sm:inline text-amber-400">//</span>
-              <span class="hidden sm:inline">CARE GAP</span>
+          <div class="min-w-0">
+            <div class="font-mono font-bold text-xs min-[360px]:text-sm lg:text-base tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
+              <span>CROSSOVER</span>
+              <span class="hidden min-[360px]:inline text-amber-400">//</span>
+              <span class="hidden min-[360px]:inline text-amber-400">STOCKTON, CA</span>
             </div>
-            <p class="text-[11px] text-stone-400 hidden lg:block truncate">Stray Dog Ecology &amp; Veterinary Access Audit</p>
+            <p class="font-mono text-xs text-stone-400 hidden min-[360px]:block truncate">Stray Dog Ecology &amp; Veterinary Access Audit</p>
           </div>
         </button>
 
-        <!-- Desktop Navigation Tabs -->
-        <nav aria-label="Main Investigation Sections" class="hidden md:flex items-center space-x-1">
-          <button onclick="switchTab('overview')" id="nav-overview" class="tab-btn active px-3.5 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
+        <!-- Center: Desktop Navigation Tabs -->
+        <nav aria-label="Main Investigation Sections" class="hidden xl:flex items-center space-x-0.5 shrink-0">
+          <button onclick="switchTab('overview')" id="nav-overview" class="tab-btn active px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
             <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
             Overview
           </button>
-          <button onclick="switchTab('ground-truth')" id="nav-ground-truth" class="tab-btn px-3.5 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
+          <button onclick="switchTab('ground-truth')" id="nav-ground-truth" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
             <i data-lucide="map-pin" class="w-4 h-4"></i>
             Ground Truth
           </button>
-          <button onclick="switchTab('evidence-room')" id="nav-evidence-room" class="tab-btn px-3.5 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
+          <button onclick="switchTab('evidence-room')" id="nav-evidence-room" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
             <i data-lucide="folder-open" class="w-4 h-4 text-amber-400"></i>
             Evidence Room
           </button>
-          <button onclick="switchTab('initiatives')" id="nav-initiatives" class="tab-btn px-3.5 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
+          <button onclick="switchTab('initiatives')" id="nav-initiatives" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
             <i data-lucide="network" class="w-4 h-4"></i>
             Initiatives
           </button>
-          <button onclick="switchTab('care-resources')" id="nav-care-resources" class="tab-btn px-3.5 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
+          <button onclick="switchTab('care-resources')" id="nav-care-resources" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
             <i data-lucide="heart-handshake" class="w-4 h-4"></i>
             Care Resources
           </button>
-          <button onclick="switchTab('methodology')" id="nav-methodology" class="tab-btn px-3.5 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
+          <button onclick="switchTab('methodology')" id="nav-methodology" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
             <i data-lucide="file-search" class="w-4 h-4"></i>
             Methodology
           </button>
         </nav>
 
-        <!-- Compact Mobile Action CTA (Never wraps or clips at 260px) -->
-        <div class="flex items-center gap-1.5 shrink-0 md:hidden">
-          <button onclick="switchTab('methodology'); scrollToTipForm();" class="shrink-0 text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 px-2.5 py-1.5 rounded-lg font-bold whitespace-nowrap transition shadow-sm">
-            <span class="sm:hidden">Report</span>
-            <span class="hidden sm:inline">Report Sighting</span>
-          </button>
-        </div>
       </div>
 
-      <!-- Mobile Horizontal Scrollable Tab Strip + Right Fade Affordance -->
-      <div class="relative md:hidden border-t border-slate-800/90 -mx-3 px-3">
+      <!-- Mobile horizontal navigation -->
+      <div class="relative xl:hidden border-t border-slate-800/90 -mx-4 sm:-mx-6 px-3 sm:px-6">
         <div id="mobile-nav-scroller" class="flex items-center overflow-x-auto no-scrollbar space-x-1 pr-8">
-          <button onclick="switchTab('overview')" id="mnav-overview" class="tab-btn active px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5">
-            <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>
-            Overview
-          </button>
-          <button onclick="switchTab('ground-truth')" id="mnav-ground-truth" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5">
-            <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
-            Ground Truth
-          </button>
-          <button onclick="switchTab('evidence-room')" id="mnav-evidence-room" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5">
-            <i data-lucide="folder-open" class="w-3.5 h-3.5 text-amber-400"></i>
-            Evidence Room
-          </button>
-          <button onclick="switchTab('initiatives')" id="mnav-initiatives" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5">
-            <i data-lucide="network" class="w-3.5 h-3.5"></i>
-            Initiatives
-          </button>
-          <button onclick="switchTab('care-resources')" id="mnav-care-resources" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5">
-            <i data-lucide="heart-handshake" class="w-3.5 h-3.5"></i>
-            Care Resources
-          </button>
-          <button onclick="switchTab('methodology')" id="mnav-methodology" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5">
-            <i data-lucide="file-search" class="w-3.5 h-3.5"></i>
-            Methodology
-          </button>
+          <button onclick="switchTab('overview')" id="mnav-overview" class="tab-btn active px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>Overview</button>
+          <button onclick="switchTab('ground-truth')" id="mnav-ground-truth" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i>Ground Truth</button>
+          <button onclick="switchTab('evidence-room')" id="mnav-evidence-room" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="folder-open" class="w-3.5 h-3.5 text-amber-400"></i>Evidence Room</button>
+          <button onclick="switchTab('initiatives')" id="mnav-initiatives" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="network" class="w-3.5 h-3.5"></i>Initiatives</button>
+          <button onclick="switchTab('care-resources')" id="mnav-care-resources" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="heart-handshake" class="w-3.5 h-3.5"></i>Care Resources</button>
+          <button onclick="switchTab('methodology')" id="mnav-methodology" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="file-search" class="w-3.5 h-3.5"></i>Methodology</button>
         </div>
-        <!-- Visual Scroll Cue Gradient + Chevron on Right Edge -->
-        <div class="pointer-events-none absolute inset-y-0 right-0 w-9 bg-gradient-to-l from-slate-900 via-slate-900/90 to-transparent flex items-center justify-end pr-1.5">
-          <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-amber-400/90"></i>
-        </div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 w-9 bg-gradient-to-l from-slate-900 via-slate-900/90 to-transparent flex items-center justify-end pr-1.5"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-amber-400/90"></i></div>
       </div>
     </div>
   </header>
@@ -176,7 +145,7 @@
          SECTION 1: OVERVIEW (THE BIG PICTURE)
     ====================================================================== -->
     <section id="tab-overview" class="tab-panel space-y-8">
-      
+
       <!-- Investigative Hero Banner -->
       <div class="bg-slate-900 text-stone-100 rounded-2xl p-6 sm:p-10 border border-slate-800 shadow-lg relative overflow-hidden">
         <div class="absolute top-0 right-0 w-72 h-72 bg-amber-500/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
@@ -211,7 +180,7 @@
           <span class="text-xs text-stone-500">Sources checked: Nov 14, 2026</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          
+
           <!-- KPI 1 -->
           <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
             <div>
@@ -441,7 +410,7 @@
          SECTION 2: GROUND TRUTH (SPATIAL MAP & EVIDENCE LOG)
     ====================================================================== -->
     <section id="tab-ground-truth" class="tab-panel hidden space-y-8">
-      
+
       <!-- Header -->
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
@@ -455,7 +424,7 @@
 
       <!-- Interactive Spatial Map + Inspector Panel -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         <!-- Left 2 Cols: Interactive SVG Spatial Map -->
         <div class="lg:col-span-2 bg-slate-900 rounded-2xl border border-slate-800 shadow-lg overflow-hidden flex flex-col">
           <!-- Layer Filter Toggles -->
@@ -535,29 +504,20 @@
 
       </div>
 
-      <div class="text-right"><a href="/evidence-room/" class="text-sm font-semibold text-amber-800 underline">Open the Primary Records &amp; Evidence Room →</a></div>
-
-      <!-- Public Records & Evidence Log Table -->
+      <!-- Quick Records Summary Table -->
       <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-stone-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="p-5 sm:p-6 border-b border-stone-200 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
           <div>
-            <span class="font-mono text-xs uppercase tracking-wider text-stone-500 font-semibold">Documentary Repository</span>
-            <h3 class="text-lg font-bold text-slate-900">Evidence &amp; Public Records Log (CPRA / Field Audits)</h3>
+            <span class="font-mono text-xs uppercase tracking-wider text-stone-500 font-semibold">Catalog Snapshot</span>
+            <h3 class="text-lg font-bold text-slate-900">Primary Records &amp; Work Items (Click any row to open in Evidence Room)</h3>
           </div>
-          <!-- Filter Buttons -->
-          <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Filter evidence records">
-            <button onclick="filterRecords('ALL')" class="record-filter-btn active-rec-filter px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition">
-              All Records (47)
-            </button>
-            <button onclick="filterRecords('Verified')" class="record-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">
-              Source checked
-            </button>
-            <button onclick="filterRecords('Reported')" class="record-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">
-              Reported
-            </button>
-            <button onclick="filterRecords('Firsthand')" class="record-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">
-              Firsthand
-            </button>
+          <div class="flex flex-wrap gap-1.5" role="group" aria-label="Filter Ground Truth records">
+            <button onclick="filterGroundTruthRecords('ALL', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition">All (54)</button>
+            <button onclick="filterGroundTruthRecords('VERIFIED', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Checked (17)</button>
+            <button onclick="filterGroundTruthRecords('REPORTED', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Reported (21)</button>
+            <button onclick="filterGroundTruthRecords('FIRSTHAND', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Firsthand (8)</button>
+            <button onclick="filterGroundTruthRecords('OPEN', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Open work (6)</button>
+            <button onclick="filterGroundTruthRecords('WAITING', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Waiting (1)</button>
           </div>
         </div>
 
@@ -565,16 +525,14 @@
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-stone-50 border-b border-stone-200 text-[11px] font-mono uppercase tracking-wider text-stone-500">
-                <th class="py-3.5 px-5">Record ID</th>
-                <th class="py-3.5 px-5">Category</th>
-                <th class="py-3.5 px-5">Subject / Agency</th>
-                <th class="py-3.5 px-5">Key Metric or Finding</th>
-                <th class="py-3.5 px-5">Status</th>
+                <th class="py-3.5 px-4 sm:px-5">Catalog ID</th>
+                <th class="py-3.5 px-4 sm:px-5">Entry Title &amp; Type</th>
+                <th class="py-3.5 px-4 sm:px-5">Scope &amp; Verification Note</th>
+                <th class="py-3.5 px-4 sm:px-5">Category</th>
+                <th class="py-3.5 px-4 sm:px-5 text-right">Action</th>
               </tr>
             </thead>
-            <tbody id="records-table-body" class="divide-y divide-stone-200 text-sm">
-              <!-- Populated by JS -->
-            </tbody>
+            <tbody id="gt-records-tbody" class="divide-y divide-stone-200 text-sm"></tbody>
           </table>
         </div>
       </div>
@@ -584,7 +542,7 @@
          SECTION 3: PRIMARY RECORDS & EVIDENCE ROOM (SPLIT-PANE ARCHIVAL DESK)
     ====================================================================== -->
     <section id="tab-evidence-room" class="tab-panel hidden space-y-6">
-      
+
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div>
           <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Archival Inspection Desk</span>
@@ -597,7 +555,7 @@
 
       <!-- Split-Pane Grid: Left Master Drawer (4 Cols) / Right Dossier Inspector (8 Cols) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
+
         <!-- LEFT PANE: Master Record Drawer -->
         <div id="evidence-drawer-pane" class="lg:col-span-4 bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
           <div class="p-4 bg-slate-900 text-stone-100 space-y-3">
@@ -624,7 +582,7 @@
               <button onclick="setEvidenceFilter('FIRSTHAND', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">
                 Firsthand (8)
               </button>
-              <button onclick="setEvidenceFilter('OPEN', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">Open (7)</button>
+              <button onclick="setEvidenceFilter('OPEN', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">Open work (6)</button>
               <button onclick="setEvidenceFilter('WAITING', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">Waiting (1)</button>
             </div>
           </div>
@@ -656,10 +614,10 @@
     </section>
 
     <!-- =====================================================================
-         SECTION 4: INITIATIVES & ECOSYSTEM
+         SECTION 5: INITIATIVES & ECOSYSTEM
     ====================================================================== -->
     <section id="tab-initiatives" class="tab-panel hidden space-y-8">
-      
+
       <div>
         <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Institutional Mapping</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">The Ecosystem &amp; Active Initiatives</h2>
@@ -670,7 +628,7 @@
 
       <!-- Stakeholder Ecosystem Grid (3 Columns) -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         <!-- Pillar 1: Municipal Agencies -->
         <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 flex flex-col justify-between">
           <div class="space-y-4">
@@ -844,7 +802,7 @@
          SECTION 5: ACCESS TO CARE (TRIAGE & RESOURCE DIRECTORY)
     ====================================================================== -->
     <section id="tab-care-resources" class="tab-panel hidden space-y-8">
-      
+
       <div>
         <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Direct Action &amp; Utility</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Access to Care: Triage &amp; Vetted Directory</h2>
@@ -910,7 +868,7 @@
          SECTION 6: METHODOLOGY, SEVERITY RUBRIC & FIELD TIPS
     ====================================================================== -->
     <section id="tab-methodology" class="tab-panel hidden space-y-8">
-      
+
       <div>
         <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Transparency &amp; Participation</span>
         <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Methodology, Open Questions &amp; Field Tips</h2>
@@ -920,10 +878,10 @@
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        
+
         <!-- Left 7 Cols: Standards & Open Questions -->
         <div class="lg:col-span-7 space-y-6">
-          
+
           <!-- Verification Standards -->
           <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 space-y-4">
             <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
@@ -1036,9 +994,9 @@
   <footer class="bg-slate-950 text-stone-400 border-t border-slate-800 mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
       <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 font-mono text-center sm:text-left">
-        <span class="text-amber-400 font-bold">STOCKTON STREETWATCH // CARE GAP</span>
-        <span>&bull;</span>
-        <span>Primary Records &amp; Civic Data Audit</span>
+        <span class="text-white font-bold">CROSSOVER</span>
+        <span class="text-amber-400 font-bold">// STOCKTON, CA</span>
+        <span class="inline-flex max-w-full min-w-0 items-start gap-2"><span aria-hidden="true" class="hidden xl:inline shrink-0">&bull;</span><span>Stray Dog Ecology &amp; Veterinary Access Audit</span></span>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-4">
         <button onclick="switchTab('overview')" class="hover:text-white transition">Overview</button>

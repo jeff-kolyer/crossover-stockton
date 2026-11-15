@@ -14,6 +14,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
     // 2. NAVIGATION & DEEP-LINKING CONTROLLER
     // -------------------------------------------------------------------------
     function switchTab(tabId) {
+      if (!document.getElementById(`tab-${tabId}`)) tabId = 'overview';
       document.querySelectorAll('.tab-panel').forEach(panel => {
         panel.classList.add('hidden');
       });
@@ -29,7 +30,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       if (desktopNav) desktopNav.classList.add('active');
       if (mobileNav) {
         mobileNav.classList.add('active');
-        mobileNav.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        if (mobileNav.offsetParent) mobileNav.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
       // Update URL query param safely without reload
@@ -114,6 +115,20 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       renderEvidenceDrawer();
     }
 
+    function jumpToEvidenceFilter(status) {
+      if (status === 'CHECKED') status = 'VERIFIED';
+      const statuses = ['ALL', 'VERIFIED', 'REPORTED', 'FIRSTHAND', 'OPEN', 'WAITING'];
+      const filterButton = document.querySelectorAll('.ev-filter-btn')[statuses.indexOf(status)];
+      if (!filterButton) return;
+      switchTab('evidence-room');
+      setEvidenceFilter(status, filterButton);
+      requestAnimationFrame(scrollToDrawer);
+    }
+
+    function matchesCatalogFilter(record, status) {
+      return status === 'ALL' || (record.status === status && (status !== 'OPEN' || record.category === 'WORK_ITEM'));
+    }
+
     function renderEvidenceDrawer() {
       const container = document.getElementById('evidence-list-container');
       const searchInput = document.getElementById('evidence-search');
@@ -122,7 +137,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
 
       const filtered = PRIMARY_RECORDS.filter(rec => {
-        const matchesStatus = activeEvidenceFilter === 'ALL' || rec.status === activeEvidenceFilter;
+        const matchesStatus = matchesCatalogFilter(rec, activeEvidenceFilter);
         const matchesQuery = !query ||
           rec.id.toLowerCase().includes(query) ||
           rec.originalId.toLowerCase().includes(query) ||
@@ -135,7 +150,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       const statusStyles = {
         VERIFIED: 'bg-emerald-100 text-emerald-800 border-emerald-200',
         WAITING_CPRA: 'bg-amber-100 text-amber-800 border-amber-200',
-        OPEN_INVESTIGATION: 'bg-blue-100 text-blue-800 border-blue-200', REPORTED: 'bg-amber-100 text-amber-800 border-amber-200', FIRSTHAND: 'bg-sky-100 text-sky-800 border-sky-200', OPEN: 'bg-stone-100 text-stone-700 border-stone-200', WAITING: 'bg-amber-100 text-amber-800 border-amber-200'
+        OPEN_INVESTIGATION: 'bg-blue-100 text-blue-800 border-blue-200', REPORTED: 'bg-amber-100 text-amber-800 border-amber-200', FIRSTHAND: 'bg-sky-100 text-sky-800 border-sky-200', OPEN: 'bg-sky-100 text-sky-800 border-sky-200', WAITING: 'bg-amber-100 text-amber-800 border-amber-200'
       };
 
       if (filtered.length === 0) {
@@ -230,7 +245,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       const statusBadge = {
         VERIFIED: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
         WAITING_CPRA: 'bg-amber-500/20 text-amber-300 border-amber-500/40',
-        OPEN_INVESTIGATION: 'bg-sky-500/20 text-sky-300 border-sky-500/40', REPORTED: 'bg-amber-500/20 text-amber-300 border-amber-500/40', FIRSTHAND: 'bg-sky-500/20 text-sky-300 border-sky-500/40', OPEN: 'bg-stone-500/20 text-stone-200 border-stone-500/40', WAITING: 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+        OPEN_INVESTIGATION: 'bg-sky-500/20 text-sky-300 border-sky-500/40', REPORTED: 'bg-amber-500/20 text-amber-300 border-amber-500/40', FIRSTHAND: 'bg-sky-500/20 text-sky-300 border-sky-500/40', OPEN: 'bg-sky-500/20 text-sky-300 border-sky-500/40', WAITING: 'bg-amber-500/20 text-amber-300 border-amber-500/40'
       }[rec.status];
 
       const severityBadge = {
@@ -638,12 +653,12 @@ import { PRIMARY_RECORDS } from './generated/records.js';
 
       const filtered = statusFilter === 'ALL'
         ? PRIMARY_RECORDS
-        : PRIMARY_RECORDS.filter(r => r.status === statusFilter);
+        : PRIMARY_RECORDS.filter(r => matchesCatalogFilter(r, statusFilter));
 
       const statusBadgeStyles = {
         VERIFIED: 'bg-emerald-100 text-emerald-800 border-emerald-200',
         WAITING_CPRA: 'bg-amber-100 text-amber-800 border-amber-200',
-        OPEN_INVESTIGATION: 'bg-blue-100 text-blue-800 border-blue-200', REPORTED: 'bg-amber-100 text-amber-800 border-amber-200', FIRSTHAND: 'bg-sky-100 text-sky-800 border-sky-200', OPEN: 'bg-stone-100 text-stone-700 border-stone-200', WAITING: 'bg-amber-100 text-amber-800 border-amber-200'
+        OPEN_INVESTIGATION: 'bg-blue-100 text-blue-800 border-blue-200', REPORTED: 'bg-amber-100 text-amber-800 border-amber-200', FIRSTHAND: 'bg-sky-100 text-sky-800 border-sky-200', OPEN: 'bg-sky-100 text-sky-800 border-sky-200', WAITING: 'bg-amber-100 text-amber-800 border-amber-200'
       };
 
       tbody.innerHTML = filtered.map(rec => `
@@ -833,4 +848,4 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       lucide.createIcons();
     });
 
-Object.assign(window, { switchTab, openRecord, scrollToDrawer, scrollToTipForm, showToast, setEvidenceFilter, renderEvidenceDrawer, setDossierSubTab, toggleArtifactFlag, copyFormalCitation, downloadCleanedCsv, renderDossierInspector, renderMapPins, selectMapPin, toggleMapLayer, renderMapInspector, filterGroundTruthRecords, renderGroundTruthTable, setTriageMode, filterResources, renderResourcesGrid, handleTipSubmit });
+Object.assign(window, { switchTab, openRecord, scrollToDrawer, scrollToTipForm, showToast, setEvidenceFilter, jumpToEvidenceFilter, renderEvidenceDrawer, setDossierSubTab, toggleArtifactFlag, copyFormalCitation, downloadCleanedCsv, renderDossierInspector, renderMapPins, selectMapPin, toggleMapLayer, renderMapInspector, filterGroundTruthRecords, renderGroundTruthTable, setTriageMode, filterResources, renderResourcesGrid, handleTipSubmit });
