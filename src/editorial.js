@@ -271,14 +271,21 @@ function renderArticle(article) {
 function renderDoing() {
   const doing = content.doing;
   const items = doing.order.map(id => recordById.get(id)).filter(Boolean);
-  const state = record => record.kind === 'Crossover activity' ? 'completed' : record.rows?.find(row => row.id === 'progress')?.value === 'in progress' ? 'active' : 'planned';
+  const state = record => {
+    if (record.kind === 'Crossover activity') return 'completed';
+    const progress = record.rows?.find(row => row.id === 'progress')?.value;
+    if (progress === 'in progress') return 'active';
+    if (progress === 'planned') return 'planned';
+    return 'open';
+  };
+  const countFor = filter => filter === 'all' ? items.length : items.filter(record => state(record) === filter).length;
   const filtered = workFilter === 'all' ? items : items.filter(record => state(record) === workFilter);
   return `<section class="section-page doing-page"><div class="wrap doing-shell"><header class="page-head"><span class="eyebrow">${escapeHtml(doing.eyebrow)}</span><h1 class="page-title">${escapeHtml(doing.title)}</h1><p class="page-intro">${escapeHtml(doing.intro)}</p><div class="doing-steps">${doing.steps.map(step => `<div><span>STEP ${escapeHtml(step.number)} · ${escapeHtml(step.label)}</span><strong>${escapeHtml(step.text)}</strong></div>`).join('')}</div></header>
-    <div class="filter-row doing-filters" aria-label="Filter local work">${['all', 'active', 'completed', 'planned'].map(filter => `<button type="button" data-work-filter="${filter}" aria-pressed="${workFilter === filter}">${filter[0].toUpperCase() + filter.slice(1)}</button>`).join('')}</div>
+    <div class="filter-row doing-filters" aria-label="Filter local work">${['all', 'open', 'active', 'completed', 'planned'].map(filter => `<button type="button" data-work-filter="${filter}" aria-pressed="${workFilter === filter}">${filter[0].toUpperCase() + filter.slice(1)} (${countFor(filter)})</button>`).join('')}</div>
     <div class="doing-list" id="work-list">${filtered.length ? filtered.map(record => {
       const phase = state(record);
       const next = record.rows?.find(row => row.id === 'next-step')?.value;
-      return `<article class="doing-card"><div class="doing-card-meta"><div><strong>${escapeHtml(record.id)}</strong><span aria-hidden="true"> · </span><span>${escapeHtml(doing.areas[record.id] || record.kind)}</span></div><span class="doing-badge ${phase}">${phase === 'planned' ? 'Open' : phase}</span></div><h2>${escapeHtml(record.title)}</h2><p>${escapeHtml(record.summary)}</p><div class="doing-card-foot"><p><strong>${phase === 'completed' ? 'Recorded:' : 'Next action:'}</strong> ${escapeHtml(phase === 'completed' ? dateLabel(record.date) : next || 'Confirm the next step with the partner.')}</p><a class="text-link" href="${recordUrl(record.id)}" data-record-link="${escapeHtml(record.id)}">View record →</a></div></article>`;
+      return `<article class="doing-card"><div class="doing-card-meta"><div><strong>${escapeHtml(record.id)}</strong><span aria-hidden="true"> · </span><span>${escapeHtml(doing.areas[record.id] || record.kind)}</span></div><span class="doing-badge ${phase}">${phase}</span></div><h2>${escapeHtml(record.title)}</h2><p>${escapeHtml(record.summary)}</p><div class="doing-card-foot"><p><strong>${phase === 'completed' ? 'Recorded:' : 'Next action:'}</strong> ${escapeHtml(phase === 'completed' ? dateLabel(record.date) : next || 'Confirm the next step with the partner.')}</p><a class="text-link" href="${recordUrl(record.id)}" data-record-link="${escapeHtml(record.id)}">View record →</a></div></article>`;
     }).join('') : '<div class="doing-empty">No items have this status in the current record. Planned work becomes active here when a dated action is documented.</div>'}</div>
   </div></section>`;
 }
@@ -529,6 +536,7 @@ function renderResults() {
         <span class="status ${statusClass(record.status)}">${escapeHtml(statusText(record.status))}</span>
       </div>
       <h2>${escapeHtml(record.title)}</h2>
+      ${record.summary ? `<p class="record-row-summary">${escapeHtml(record.summary)}</p>` : ''}
       <div class="record-foot-meta">
         <span>${escapeHtml(tier)}</span>
         <span>${escapeHtml(record.kind)}</span>

@@ -10,7 +10,7 @@ const ui = await read('ui-presentation');
 const articles = await read('articles');
 const siteContent = await read('site-content');
 const errors = [];
-const groups = [['evidence', 33, 'evidence'], ['activities', 5, 'activity'], ['tasks', 7, 'task']];
+const groups = [['evidence', 33, 'evidence'], ['activities', 5, 'activity'], ['tasks', 11, 'task']];
 const source = new Map();
 for (const [name, expected, schema] of groups) {
   const items = catalog[name];
@@ -32,7 +32,7 @@ for (const task of catalog.tasks ?? []) {
   for (const id of task.activity_record_ids ?? []) if (!activityIds.has(id)) errors.push(`${task.id}: missing activity ${id}`);
 }
 const ids = (items) => new Set(items.map((item) => item.originalId));
-if (curated.length !== 9 || presentation.length !== 45 || ui.length !== 54 || ledger.length !== 54) errors.push('catalog collection size mismatch');
+if (curated.length !== 9 || presentation.length !== 49 || ui.length !== 58 || ledger.length !== 58) errors.push('catalog collection size mismatch');
 const curatedIds = ids(curated);
 const presentationIds = ids(presentation);
 const uiIds = ids(ui);

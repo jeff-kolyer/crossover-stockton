@@ -65,17 +65,19 @@ test('articles match the gold demo with key takeaways, single-purpose maps, and 
 test('doing page follows the work-card layout and documented stages', async ({ page }, testInfo) => {
   await page.goto('/?page=doing');
   await expect(page.locator('.doing-steps > div')).toHaveCount(3);
-  await expect(page.locator('#work-list .doing-card')).toHaveCount(12);
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(16);
   await expect(page.locator('.doing-card').first()).toContainText("St. Mary's");
   const width = testInfo.project.use.viewport!.width;
   if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-doing-${width}.png`, fullPage: true });
-  await page.getByRole('button', { name: 'Active', exact: true }).click();
+  await page.getByRole('button', { name: /^Active \(/ }).click();
   await expect(page.locator('#work-list .doing-card')).toHaveCount(1);
   await expect(page.locator('#work-list')).toContainText('Review Animal Services field-call records');
-  await page.getByRole('button', { name: 'Completed', exact: true }).click();
+  await page.getByRole('button', { name: /^Completed \(/ }).click();
   await expect(page.locator('#work-list .doing-card')).toHaveCount(5);
-  await page.getByRole('button', { name: 'Planned', exact: true }).click();
-  await expect(page.locator('#work-list .doing-card')).toHaveCount(6);
+  await page.getByRole('button', { name: /^Planned \(/ }).click();
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(1);
+  await page.getByRole('button', { name: /^Open \(/ }).click();
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(9);
   await page.locator('#work-list [data-record-link="WORK-2026-002"]').click();
   await expect(page.locator('#record-dialog')).toContainText('pet access and street needs');
 });
@@ -105,14 +107,14 @@ test('About is rendered from the About article with the roots image', async ({ p
 
 test('information explorer uses the split-pane dossier desk and full source catalog', async ({ page }, testInfo) => {
   await page.goto('/?page=explorer');
-  await expect(page.locator('#result-count')).toHaveText('Showing 61 of 61 records');
+  await expect(page.locator('#result-count')).toHaveText('Showing 65 of 65 records');
   await expect(page.locator('#explorer-dossier-panel')).toBeVisible();
   await page.locator('#record-kind').selectOption('Article');
   await expect(page.locator('#record-list .record-row')).toHaveCount(4);
   await page.locator('#record-kind').selectOption('all');
   await page.getByRole('button', { name: /^Open Issue \(/ }).click();
   await expect(page.locator('#record-status')).toHaveValue('open issue');
-  await expect(page.locator('#record-list .record-row')).toHaveCount(8);
+  await expect(page.locator('#record-list .record-row')).toHaveCount(12);
   await page.locator('#record-list [data-select-record="WORK-2026-001"]').click();
   await expect(page.locator('#explorer-dossier-panel')).toContainText('Review Animal Services field-call records');
   await page.getByRole('tab', { name: /3\. Custody/ }).click();
@@ -126,22 +128,22 @@ test('information explorer uses the split-pane dossier desk and full source cata
   await expect(page.locator('#result-count')).not.toHaveText('Showing 61 of 61 records');
   await page.locator('#record-search').fill('');
   await page.locator('#record-status').selectOption('open issue');
-  await expect(page.locator('#record-list .record-row')).toHaveCount(8);
+  await expect(page.locator('#record-list .record-row')).toHaveCount(12);
   await page.locator('#record-status').selectOption('all');
-  await expect(page.locator('#record-list .record-row')).toHaveCount(61);
+  await expect(page.locator('#record-list .record-row')).toHaveCount(65);
   const width = testInfo.project.use.viewport!.width;
   if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-explorer-${width}.png`, fullPage: true });
 });
 
 test('home work card opens modal with link to view in info explorer', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.work-card .card-id')).toHaveText(['WORK-2026-001', 'WORK-2026-003', 'WORK-2026-006']);
-  await page.locator('[data-record-link="WORK-2026-001"]').first().click();
+  await expect(page.locator('.work-card .card-id')).toHaveText(['WORK-2026-001', 'WORK-2026-002', 'WORK-2026-008']);
+  await page.locator('[data-record-link="WORK-2026-008"]').first().click();
   await expect(page.locator('#record-dialog')).toBeVisible();
-  await expect(page.locator('#record-dialog')).toContainText('Review Animal Services field-call records');
-  await page.locator('#record-dialog [data-explorer-record="WORK-2026-001"]').click();
+  await expect(page.locator('#record-dialog')).toContainText('Check what the Hard Luck veterinary-services expansion delivers');
+  await page.locator('#record-dialog [data-explorer-record="WORK-2026-008"]').click();
   await expect(page.getByRole('heading', { name: 'Info Explorer' })).toBeVisible();
-  await expect(page.locator('#explorer-dossier-panel')).toContainText('WORK-2026-001');
+  await expect(page.locator('#explorer-dossier-panel')).toContainText('WORK-2026-008');
 });
 
 test('legacy evidence-room link opens the information explorer', async ({ page }) => {

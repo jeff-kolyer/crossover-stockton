@@ -40,7 +40,7 @@ const records = ledger.map(({ sourceId, displayId }) => {
   }
   return record;
 });
-if (records.length !== 54 || curated.size !== 9 || presentation.size !== 45 || uiPresentation.size !== 54) {
+if (records.length !== 58 || curated.size !== 9 || presentation.size !== 49 || uiPresentation.size !== 58) {
   throw new Error('StreetWatch catalog membership changed; review the record ledger and presentation files.');
 }
 const output = `${JSON.stringify(records, null, 2)}\n`;

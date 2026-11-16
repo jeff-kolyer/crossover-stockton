@@ -28,8 +28,8 @@
       {"number": "02", "label": "CONNECT", "text": "Clarify the next handoff and who can help."},
       {"number": "03", "label": "ACT", "text": "Follow through with practical local support."}
     ],
-    "featured": ["WORK-2026-001", "WORK-2026-003", "WORK-2026-006"],
-    "order": ["WORK-2026-002", "WORK-2026-001", "WORK-2026-005", "WORK-2026-004", "WORK-2026-003", "WORK-2026-006", "WORK-2026-007", "FLD-2026-002", "FLD-2026-003", "FLD-2026-004", "CPRA-2026-001-REQUEST", "CPRA-2026-001-RECEIPT"],
+    "featured": ["WORK-2026-001", "WORK-2026-002", "WORK-2026-008"],
+    "order": ["WORK-2026-002", "WORK-2026-001", "WORK-2026-005", "WORK-2026-004", "WORK-2026-003", "WORK-2026-006", "WORK-2026-007", "WORK-2026-008", "WORK-2026-009", "WORK-2026-010", "WORK-2026-011", "FLD-2026-002", "FLD-2026-003", "FLD-2026-004", "CPRA-2026-001-REQUEST", "CPRA-2026-001-RECEIPT"],
     "areas": {
       "WORK-2026-002": "Street outreach · St. Mary's",
       "WORK-2026-001": "Public records · Animal Services",
@@ -38,6 +38,10 @@
       "WORK-2026-003": "Field lead · South Stockton",
       "WORK-2026-006": "Policy · City Council",
       "WORK-2026-007": "Partner contact · Media",
+      "WORK-2026-008": "Veterinary contract · Hard Luck AWA",
+      "WORK-2026-009": "Field Verification · Central Stockton",
+      "WORK-2026-010": "Data Hygiene · Public Records",
+      "WORK-2026-011": "Applied AI Prototype",
       "FLD-2026-002": "Volunteering · Animal Services",
       "FLD-2026-003": "Volunteering · Stockton Street Dogs",
       "FLD-2026-004": "Program inquiry · Doggie Day Out",

@@ -1187,15 +1187,15 @@
       {
         "id": "next-step",
         "label": "Next check",
-        "value": "Review the records received in response to the October 20 Stockton Animal Services field-call request.",
+        "value": "Document fields, redactions, and limitations across the 7,183 cases and record verified patterns.",
         "unit": "",
         "page": "Work plan",
-        "note": "The full instructions are in the data snapshot."
+        "note": "Preserve original files and receipt details (CPRA-2026-001-REQUEST / CPRA-2026-001-RECEIPT); record findings only after reviewing the evidence."
       },
       {
         "id": "basis",
         "label": "Basis",
-        "value": "2 existing records",
+        "value": "2 existing records (CPRA-2026-001-REQUEST, CPRA-2026-001-RECEIPT)",
         "unit": "",
         "page": "Work plan",
         "note": "Record IDs are in the provenance trail."
@@ -1236,15 +1236,15 @@
       {
         "id": "next-step",
         "label": "Next check",
-        "value": "Estimate how many people with pets are staying outside near St. Mary's and verify whether the relevant shelter program allows pets.",
+        "value": "Record visit date, approximate counts (including zero), and confirm the shelter program's pet policy.",
         "unit": "",
         "page": "Work plan",
-        "note": "Pet restrictions are a possible reason, not an observed finding; confirm the policy and ask before attributing anyone's circumstances."
+        "note": "Pet restrictions are a possible reason, not an observed finding; do not enter St. Mary's Community Services to interview staff or publish identifying details."
       },
       {
         "id": "basis",
         "label": "Basis",
-        "value": "1 existing record",
+        "value": "1 existing record (RESC-2026-001)",
         "unit": "",
         "page": "Work plan",
         "note": "Record IDs are in the provenance trail."
@@ -1503,5 +1503,202 @@
       "organization_contact"
     ],
     "originalId": "task-contact-cbs-charlie-lapastora"
+  },
+  {
+    "kind": "Crossover work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "artifact": "source review",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Inspect the Hard Luck AWA contract extension and seek current service delivery details"
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Inspect the agreement and amendments, then check filled roles, community eligibility, pricing, and delivered procedures.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record source dates, responses, and limits without treating the contract ceiling as spending or inferring measured impact."
+      },
+      {
+        "id": "questions",
+        "label": "Questions to verify",
+        "value": "5 key questions",
+        "unit": "",
+        "page": "Work plan",
+        "note": "(1) Duties & fill status of the 4 positions; (2) Shelter vs. community pet spay/neuter access; (3) Eligibility, fees, referral & scheduling; (4) Actual spend & procedures delivered; (5) Relationship to Animal Balance, Wellness Center, and shelter expansion."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "1 existing record (GOV-2026-006)",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-check-hard-luck-vet-expansion.",
+      "Current status: open.",
+      "Basis record: hlawa-2026-06-09-contract-extension (GOV-2026-006).",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "source_review"
+    ],
+    "originalId": "task-check-hard-luck-vet-expansion"
+  },
+  {
+    "kind": "Crossover work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "artifact": "field observation",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Confirming real-world pet capacity limits (268 total shelter beds at St. Mary’s Pathways), temporary boarding options, and mobile vet pop-up schedules."
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Cross-check outreach logs with Fremont Animal Clinic pop-up dates at St. Mary’s Dining Room and publish a verified field note.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record source dates and verified program rules."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "1 existing record (RESC-2026-001)",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-verify-st-marys-pathways-bed-gaps.",
+      "Current status: open.",
+      "Basis record: ssd-2026-06-08-street-response.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "field_observation"
+    ],
+    "originalId": "task-verify-st-marys-pathways-bed-gaps"
+  },
+  {
+    "kind": "Crossover work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "artifact": "source review",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "open",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Auditing updated Stockton Animal Services figures against the 2024 baseline (3,106 stray intakes) and 7,183 CPRA dispatch records."
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Publish updated intake comparison table in Info Explorer and append addendum to ART-01.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Keep species, period, and definitions attached."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "2 existing records (SHEL-2024-001, CPRA-2026-001-RECEIPT)",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-reconcile-sas-public-data-baseline.",
+      "Current status: open.",
+      "Basis record: SAS-2024-KENNEL.",
+      "Basis record: crossover-2026-11-02-sas-field-call-records-received.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this unfinished task.",
+    "tags": [
+      "source_review"
+    ],
+    "originalId": "task-reconcile-sas-public-data-baseline"
+  },
+  {
+    "kind": "Crossover work item",
+    "status": "Open",
+    "publisher": "Crossover Stockton",
+    "date": "Not dated",
+    "checked": "Not dated",
+    "artifact": "applied AI prototype",
+    "limits": "This is a planned prototype item queued behind verification of public data reconciliation and onboarding checks.",
+    "rows": [
+      {
+        "id": "progress",
+        "label": "Progress",
+        "value": "planned",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Queued behind ISSUE-02 and ISSUE-03 verification."
+      },
+      {
+        "id": "next-step",
+        "label": "Next check",
+        "value": "Scope bilingual (English/Spanish) SMS & web spay/neuter slot matcher once prerequisite checks are verified.",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Exploratory prototype; live slots depend on clinic confirmation."
+      },
+      {
+        "id": "basis",
+        "label": "Basis",
+        "value": "1 existing record (CPRA-2026-001-RECEIPT)",
+        "unit": "",
+        "page": "Work plan",
+        "note": "Record IDs are in the provenance trail."
+      }
+    ],
+    "claims": [],
+    "custody": [
+      "Crossover task task-prototype-bilingual-spay-neuter-matcher.",
+      "Current status: planned.",
+      "Basis record: crossover-2026-11-02-sas-field-call-records-received.",
+      "No completion record is attached."
+    ],
+    "response": "No response is recorded for this planned task.",
+    "tags": [
+      "follow_up"
+    ],
+    "originalId": "task-prototype-bilingual-spay-neuter-matcher"
   }
 ]

@@ -216,6 +216,22 @@
     {
       "sourceId": "task-contact-cbs-charlie-lapastora",
       "displayId": "WORK-2026-007"
+    },
+    {
+      "sourceId": "task-check-hard-luck-vet-expansion",
+      "displayId": "WORK-2026-008"
+    },
+    {
+      "sourceId": "task-verify-st-marys-pathways-bed-gaps",
+      "displayId": "WORK-2026-009"
+    },
+    {
+      "sourceId": "task-reconcile-sas-public-data-baseline",
+      "displayId": "WORK-2026-010"
+    },
+    {
+      "sourceId": "task-prototype-bilingual-spay-neuter-matcher",
+      "displayId": "WORK-2026-011"
     }
   ]
 }
