@@ -99,6 +99,12 @@ const ARTICLE_MAPS = {
 };
 
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+const arrowPaths = {
+  right: 'M5 12h14m-6-6 6 6-6 6',
+  left: 'M19 12H5m6-6-6 6 6 6',
+  'up-right': 'M7 17 17 7M7 7h10v10'
+};
+const arrowIcon = (direction = 'right') => `<svg class="link-arrow link-arrow-${direction}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${arrowPaths[direction]}"/></svg>`;
 const articleById = id => articles.find(article => article.id === id);
 const dateLabel = date => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date ?? '')) return date || 'Date not listed';
@@ -127,7 +133,7 @@ function articleCard(article) {
     <div class="article-meta"><span>${escapeHtml(metaLeft)}</span><span>${escapeHtml(readingTime(article))}</span></div>
     <h3 class="card-title"><a href="${articleUrl(article.id)}" data-article-link="${escapeHtml(article.id)}">${escapeHtml(article.title)}</a></h3>
     <p class="card-summary">${escapeHtml(article.summary || article.dek)}</p>
-    <div class="card-bottom"><div class="tag-list">${article.tags.slice(0, 2).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div><a class="text-link" href="${articleUrl(article.id)}" data-article-link="${escapeHtml(article.id)}">Read Article →</a></div>
+    <div class="card-bottom"><div class="tag-list">${article.tags.slice(0, 2).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div><a class="text-link" href="${articleUrl(article.id)}" data-article-link="${escapeHtml(article.id)}">Read Article ${arrowIcon()}</a></div>
   </article>`;
 }
 
@@ -149,7 +155,7 @@ function workCard(record) {
     </div>
     <div class="card-bottom">
       <div class="tag-list">${areaTags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
-      <a class="text-link" href="${recordUrl(record.id)}" data-record-link="${escapeHtml(record.id)}">View record →</a>
+      <a class="text-link" href="${recordUrl(record.id)}" data-record-link="${escapeHtml(record.id)}">View record ${arrowIcon()}</a>
     </div>
   </article>`;
 }
@@ -164,12 +170,12 @@ function renderHome() {
   return `<section class="hero"><div class="wrap hero-grid">
     <div class="hero-copy"><span class="pill">${escapeHtml(content.home.eyebrow)}</span>
       <h1 class="display">${escapeHtml(content.home.title)}</h1><p class="lead">${escapeHtml(content.home.intro)}</p>
-      <div class="hero-actions"><a class="button button-dark" href="/?page=articles" data-page-link="articles">Read Recent Articles →</a><a class="button" href="/?page=doing" data-page-link="doing">See What We're Doing Now</a><a class="button button-quiet" href="/?page=about" data-page-link="about">Why We Exist</a></div>
+      <div class="hero-actions"><a class="button button-dark" href="/?page=articles" data-page-link="articles">Read Recent Articles ${arrowIcon()}</a><a class="button" href="/?page=doing" data-page-link="doing">See What We're Doing Now</a><a class="button button-quiet" href="/?page=about" data-page-link="about">Why We Exist</a></div>
     </div><figure class="hero-art"><img src="${escapeHtml(content.home.image)}" alt="${escapeHtml(content.home.imageAlt)}" /><figcaption><span>${escapeHtml(content.home.imageCaption)}</span><span class="hero-art-badge">v2.4</span></figcaption></figure>
   </div></section>
-  <section class="editorial-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">Open Issues & Current Focus</span><h2 class="section-title">What We're Actively Doing Right Now</h2></div><a class="text-link" href="/?page=doing" data-page-link="doing">View all ${content.doing.order.length} tasks & milestones →</a></div><div class="cards-3">${selected.map(workCard).join('')}</div></div></section>
-  <section class="editorial-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">Published Writing & Field Notes</span><h2 class="section-title">Recent Articles & Analyses</h2></div><a class="text-link" href="/?page=articles" data-page-link="articles">Open Articles Index →</a></div><div class="cards-2">${articles.filter(article => article.type !== 'about' && article.featured).map(articleCard).join('')}</div></div></section>
-  <section class="editorial-section archive-section"><div class="wrap"><div class="archive-callout"><div class="archive-top"><div class="archive-copy"><span class="eyebrow">Information Desk & Archive</span><h2 class="section-title">Explore Every Record, Gap & Source</h2><p>Instead of burying evidence inside complicated maps, every article, public dataset, identified gap, open repository issue, and local care resource is indexed in one filterable archive.</p></div><div class="metric-row"><a class="metric metric-complete" href="/?page=explorer" data-explorer-status="verified"><strong>${verifiedCount}</strong><span>Complete / Verified</span></a><a class="metric metric-open" href="/?page=explorer" data-explorer-status="open"><strong>${openCount}</strong><span>Active / Open</span></a><a class="metric metric-gap" href="/?page=doing" data-page-link="doing"><strong>${gapCount}</strong><span>Identified Gaps</span></a></div></div><div class="archive-foot"><span>Total indexed items: <strong>${records.length}</strong> records across ${kindCount} categories</span><a class="button button-dark" href="/?page=explorer" data-page-link="explorer">Open Information Explorer →</a></div></div></div></section>`;
+  <section class="editorial-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">Open Issues & Current Focus</span><h2 class="section-title">What We're Actively Doing Right Now</h2></div><a class="text-link" href="/?page=doing" data-page-link="doing">View all ${content.doing.order.length} tasks & milestones ${arrowIcon()}</a></div><div class="cards-3">${selected.map(workCard).join('')}</div></div></section>
+  <section class="editorial-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">Published Writing & Field Notes</span><h2 class="section-title">Recent Articles & Analyses</h2></div><a class="text-link" href="/?page=articles" data-page-link="articles">Open Articles Index ${arrowIcon()}</a></div><div class="cards-2">${articles.filter(article => article.type !== 'about' && article.featured).map(articleCard).join('')}</div></div></section>
+  <section class="editorial-section archive-section"><div class="wrap"><div class="archive-callout"><div class="archive-top"><div class="archive-copy"><span class="eyebrow">Information Desk & Archive</span><h2 class="section-title">Explore Every Record, Gap & Source</h2><p>Instead of burying evidence inside complicated maps, every article, public dataset, identified gap, open repository issue, and local care resource is indexed in one filterable archive.</p></div><div class="metric-row"><a class="metric metric-complete" href="/?page=explorer" data-explorer-status="verified"><strong>${verifiedCount}</strong><span>Complete / Verified</span></a><a class="metric metric-open" href="/?page=explorer" data-explorer-status="open"><strong>${openCount}</strong><span>Active / Open</span></a><a class="metric metric-gap" href="/?page=doing" data-page-link="doing"><strong>${gapCount}</strong><span>Identified Gaps</span></a></div></div><div class="archive-foot"><span>Total indexed items: <strong>${records.length}</strong> records across ${kindCount} categories</span><a class="button button-dark" href="/?page=explorer" data-page-link="explorer">Open Information Explorer ${arrowIcon()}</a></div></div></div></section>`;
 }
 
 function renderArticles() {
@@ -189,7 +195,7 @@ function renderArticles() {
       <p class="article-index-summary">${escapeHtml(art.summary || art.dek)}</p>
       <div class="card-bottom">
         <div class="tag-list">${art.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>
-        <a class="button button-dark button-compact" href="${articleUrl(art.id)}" data-article-link="${escapeHtml(art.id)}">Read Full Article →</a>
+        <a class="button button-dark button-compact" href="${articleUrl(art.id)}" data-article-link="${escapeHtml(art.id)}">Read Full Article ${arrowIcon()}</a>
       </div>
     </article>`).join('')}</div>
   </div></section>`;
@@ -334,7 +340,7 @@ function renderArticle(article) {
       }).filter(Boolean);
 
   return `<article class="section-page"><div class="wrap article-shell">
-    <a class="back-link" href="/?page=articles" data-page-link="articles">← Back to All Articles</a>
+    <a class="back-link" href="/?page=articles" data-page-link="articles">${arrowIcon('left')}<span>Back to All Articles</span></a>
     <header class="article-header">
       <div class="article-byline-top">
         <span class="article-kicker">${escapeHtml(article.recordId || article.eyebrow)}</span>
@@ -361,7 +367,7 @@ function renderArticle(article) {
       <ul>
         ${sources.map(src => `<li>
           <span class="source-row-label">${escapeHtml(src.label)}</span>
-          <button type="button" class="source-row-ref" data-record-link="${escapeHtml(src.ref)}">${escapeHtml(src.ref)} →</button>
+          <button type="button" class="source-row-ref" data-record-link="${escapeHtml(src.ref)}">${escapeHtml(src.ref)} ${arrowIcon()}</button>
         </li>`).join('')}
       </ul>
     </div>
@@ -385,7 +391,7 @@ function renderDoing() {
     <div class="doing-list" id="work-list">${filtered.length ? filtered.map(record => {
       const phase = state(record);
       const next = record.rows?.find(row => row.id === 'next-step')?.value;
-      return `<article class="doing-card"><div class="doing-card-meta"><div><strong>${escapeHtml(record.id)}</strong><span aria-hidden="true"> · </span><span>${escapeHtml(doing.areas[record.id] || record.kind)}</span></div><span class="doing-badge ${phase}">${phase}</span></div><h2>${escapeHtml(record.title)}</h2><p>${escapeHtml(record.summary)}</p><div class="doing-card-foot"><p><strong>${phase === 'completed' ? 'Recorded:' : 'Next action:'}</strong> ${escapeHtml(phase === 'completed' ? dateLabel(record.date) : next || 'Confirm the next step with the partner.')}</p><a class="text-link" href="${recordUrl(record.id)}" data-record-link="${escapeHtml(record.id)}">View record →</a></div></article>`;
+      return `<article class="doing-card"><div class="doing-card-meta"><div><strong>${escapeHtml(record.id)}</strong><span aria-hidden="true"> · </span><span>${escapeHtml(doing.areas[record.id] || record.kind)}</span></div><span class="doing-badge ${phase}">${phase}</span></div><h2>${escapeHtml(record.title)}</h2><p>${escapeHtml(record.summary)}</p><div class="doing-card-foot"><p><strong>${phase === 'completed' ? 'Recorded:' : 'Next action:'}</strong> ${escapeHtml(phase === 'completed' ? dateLabel(record.date) : next || 'Confirm the next step with the partner.')}</p><a class="text-link" href="${recordUrl(record.id)}" data-record-link="${escapeHtml(record.id)}">View record ${arrowIcon()}</a></div></article>`;
     }).join('') : '<div class="doing-empty">No items have this status in the current record. Planned work becomes active here when a dated action is documented.</div>'}</div>
   </div></section>`;
 }
@@ -393,7 +399,7 @@ function renderDoing() {
 function renderAi() {
   const ai = content.ai;
   return `<section class="section-page ai-page"><div class="wrap doing-shell"><header class="page-head"><span class="eyebrow">${escapeHtml(ai.eyebrow)}</span><h1 class="page-title">AI & Ideas</h1><p class="page-intro">${escapeHtml(ai.intro)}</p></header>
-    <h2 class="section-title ai-section-title">${escapeHtml(ai.sectionTitle)}</h2><div class="ai-grid">${ai.ideas.map(idea => `<article class="ai-card"><div class="ai-card-top"><span>AI-${escapeHtml(idea.number)}</span><span>${escapeHtml(idea.stage)}</span></div><h3>${escapeHtml(idea.title)}</h3><p><strong>Friction:</strong> ${escapeHtml(idea.friction)}</p><p><strong>Applied role:</strong> ${escapeHtml(idea.role)}</p><a class="text-link" href="${articleUrl(idea.articleId)}" data-article-link="${escapeHtml(idea.articleId)}">Read the context →</a></article>`).join('')}</div>
+    <h2 class="section-title ai-section-title">${escapeHtml(ai.sectionTitle)}</h2><div class="ai-grid">${ai.ideas.map(idea => `<article class="ai-card"><div class="ai-card-top"><span>AI-${escapeHtml(idea.number)}</span><span>${escapeHtml(idea.stage)}</span></div><h3>${escapeHtml(idea.title)}</h3><p><strong>Friction:</strong> ${escapeHtml(idea.friction)}</p><p><strong>Applied role:</strong> ${escapeHtml(idea.role)}</p><a class="text-link" href="${articleUrl(idea.articleId)}" data-article-link="${escapeHtml(idea.articleId)}">Read the context ${arrowIcon()}</a></article>`).join('')}</div>
     <section class="ai-aside"><span class="eyebrow">${escapeHtml(ai.aside.eyebrow)}</span><h2>${escapeHtml(ai.aside.title)}</h2><p>${escapeHtml(ai.aside.intro)}</p>${ai.aside.points?.length ? `<ol>${ai.aside.points.map(point => `<li><strong>${escapeHtml(point.title)}:</strong> ${escapeHtml(point.text)}</li>`).join('')}</ol>` : ''}<p>${escapeHtml(ai.aside.conclusion)}</p></section>
   </div></section>`;
 }
@@ -477,7 +483,7 @@ function renderDossierInspector() {
 
   const artifactHtml = `
     <div class="dossier-tab-stack">
-      ${hasPublicSource ? `<a href="${escapeHtml(rec.sourceUrl)}" target="_blank" rel="noopener noreferrer" class="dossier-source-link">Open original source ↗</a>` : `<p class="dossier-muted-note">${rec.articleId ? 'Published editorial analysis or gap record in Crossover Stockton.' : 'Original artifact is not attached to this preview.'}</p>`}
+      ${hasPublicSource ? `<a href="${escapeHtml(rec.sourceUrl)}" target="_blank" rel="noopener noreferrer" class="dossier-source-link">Open original source ${arrowIcon('up-right')}</a>` : `<p class="dossier-muted-note">${rec.articleId ? 'Published editorial analysis or gap record in Crossover Stockton.' : 'Original artifact is not attached to this preview.'}</p>`}
       ${checklist.length ? checklist.map(item => `
         <div class="dossier-item-card">
           <div class="dossier-item-top">
@@ -503,7 +509,7 @@ function renderDossierInspector() {
             <strong>Published Editorial Record</strong>
             <p>${escapeHtml(rec.summary)}</p>
           </div>
-          <a class="button button-dark button-compact" href="${articleUrl(rec.articleId)}" data-article-link="${escapeHtml(rec.articleId)}">Read Article →</a>
+          <a class="button button-dark button-compact" href="${articleUrl(rec.articleId)}" data-article-link="${escapeHtml(rec.articleId)}">Read Article ${arrowIcon()}</a>
         </div>
       ` : ''}
       ${primaryClaims.map(c => `
@@ -521,7 +527,7 @@ function renderDossierInspector() {
             <strong>Cited in ${escapeHtml(art.recordId)}: ${escapeHtml(art.title)}</strong>
             <p>${escapeHtml(art.dek)}</p>
           </div>
-          <a class="button button-compact" href="${articleUrl(art.id)}" data-article-link="${escapeHtml(art.id)}">Read Article →</a>
+          <a class="button button-compact" href="${articleUrl(art.id)}" data-article-link="${escapeHtml(art.id)}">Read Article ${arrowIcon()}</a>
         </div>
       `).join('')}
       ${totalClaims === 0 ? '<p class="dossier-muted-note">No separate published claim or article citation is linked to this entry yet.</p>' : ''}
@@ -584,7 +590,7 @@ function renderDossierInspector() {
       <div class="dossier-actions">
         <button type="button" class="button button-dark button-compact" data-export-csv="${escapeHtml(rec.id)}">Export Entry CSV</button>
         <button type="button" class="button button-compact" data-copy-citation="${escapeHtml(rec.id)}">Copy Formal Citation</button>
-        ${rec.articleId ? `<a class="button button-compact" href="${articleUrl(rec.articleId)}" data-article-link="${escapeHtml(rec.articleId)}">Read Linked Article →</a>` : ''}
+        ${rec.articleId ? `<a class="button button-compact" href="${articleUrl(rec.articleId)}" data-article-link="${escapeHtml(rec.articleId)}">Read Linked Article ${arrowIcon()}</a>` : ''}
       </div>
     </div>
     <div class="dossier-scope-bar">
@@ -687,7 +693,7 @@ function renderExplorer() {
 function renderAbout(fromArticles = false) {
   const about = articleById('about-crossover');
   const founder = about.founder;
-  return `<article class="section-page about-page"><div class="wrap article-shell">${fromArticles ? '<a class="back-link" href="/?page=articles" data-page-link="articles">← Back to All Articles</a>' : ''}<header class="page-head"><span class="eyebrow">${escapeHtml(about.eyebrow)}</span><h1 class="page-title">${escapeHtml(about.title)}</h1><p class="article-dek">${aboutText(about.intro)}</p></header>
+  return `<article class="section-page about-page"><div class="wrap article-shell">${fromArticles ? `<a class="back-link" href="/?page=articles" data-page-link="articles">${arrowIcon('left')}<span>Back to All Articles</span></a>` : ''}<header class="page-head"><span class="eyebrow">${escapeHtml(about.eyebrow)}</span><h1 class="page-title">${escapeHtml(about.title)}</h1><p class="article-dek">${aboutText(about.intro)}</p></header>
     <figure class="about-figure"><img src="${escapeHtml(about.image)}" alt="${escapeHtml(about.imageAlt)}" /><figcaption>${escapeHtml(about.imageCaption)}</figcaption></figure>
     <div class="prose about-prose">${about.sections.map(section => `<section><h2>${escapeHtml(section.heading)}</h2>${section.paragraphs.map(paragraph => `<p>${aboutText(paragraph)}</p>`).join('')}${section.bullets?.length ? `<ul>${section.bullets.map(bullet => `<li>${aboutText(bullet)}</li>`).join('')}</ul>` : ''}</section>`).join('')}</div>
     <div class="about-grounding">${about.groundingCards.map(card => `<div><span class="eyebrow">${escapeHtml(card.eyebrow)}</span><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(card.text)}</p></div>`).join('')}</div>
@@ -699,7 +705,7 @@ function renderAbout(fromArticles = false) {
         <p>${escapeHtml(founder.bio)}</p>
         <a class="button button-compact about-linkedin-link" href="${escapeHtml(founder.linkedinUrl)}" target="_blank" rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77Z"/></svg>
-          <span>Connect on LinkedIn ↗</span>
+          <span>Connect on LinkedIn</span>${arrowIcon('up-right')}
         </a>
       </div>
     </aside>` : ''}
@@ -762,10 +768,10 @@ function openRecord(id, updateUrl = true) {
     statusEl.textContent = statusText(record.status);
     statusEl.className = `status ${statusClass(record.status)}`;
   }
-  document.querySelector('#record-dialog-content').innerHTML = `<h2 id="record-dialog-title">${escapeHtml(record.title)}</h2><div class="dialog-meta-box"><dl><dt>Status</dt><dd>${escapeHtml(statusText(record.status))}</dd><dt>Publisher</dt><dd>${escapeHtml(record.publisher)}</dd><dt>Record date</dt><dd>${escapeHtml(dateLabel(record.date))}</dd><dt>Checked</dt><dd>${escapeHtml(dateLabel(record.checked))}</dd></dl></div><p class="dialog-summary">${escapeHtml(record.summary)}</p>${record.limits ? `<div class="dialog-section"><h3 class="serif">Scope & limits</h3><p>${escapeHtml(record.limits)}</p></div>` : ''}${record.rows?.length ? `<div class="dialog-section"><h3 class="serif">Details</h3><ul>${record.rows.slice(0, 6).map(row => `<li><strong>${escapeHtml(row.label)}:</strong> ${escapeHtml(row.value)} ${escapeHtml(row.unit || '')}${row.note ? ` — ${escapeHtml(row.note)}` : ''}</li>`).join('')}</ul></div>` : ''}${record.sourceUrl && !record.articleId ? `<p class="dialog-source-link"><a href="${escapeHtml(record.sourceUrl)}" target="_blank" rel="noopener noreferrer">Open original source ↗</a></p>` : ''}`;
+  document.querySelector('#record-dialog-content').innerHTML = `<h2 id="record-dialog-title">${escapeHtml(record.title)}</h2><div class="dialog-meta-box"><dl><dt>Status</dt><dd>${escapeHtml(statusText(record.status))}</dd><dt>Publisher</dt><dd>${escapeHtml(record.publisher)}</dd><dt>Record date</dt><dd>${escapeHtml(dateLabel(record.date))}</dd><dt>Checked</dt><dd>${escapeHtml(dateLabel(record.checked))}</dd></dl></div><p class="dialog-summary">${escapeHtml(record.summary)}</p>${record.limits ? `<div class="dialog-section"><h3 class="serif">Scope & limits</h3><p>${escapeHtml(record.limits)}</p></div>` : ''}${record.rows?.length ? `<div class="dialog-section"><h3 class="serif">Details</h3><ul>${record.rows.slice(0, 6).map(row => `<li><strong>${escapeHtml(row.label)}:</strong> ${escapeHtml(row.value)} ${escapeHtml(row.unit || '')}${row.note ? ` — ${escapeHtml(row.note)}` : ''}</li>`).join('')}</ul></div>` : ''}${record.sourceUrl && !record.articleId ? `<p class="dialog-source-link"><a href="${escapeHtml(record.sourceUrl)}" target="_blank" rel="noopener noreferrer">Open original source ${arrowIcon('up-right')}</a></p>` : ''}`;
   const footEl = document.querySelector('#record-dialog-foot');
   if (footEl) {
-    footEl.innerHTML = `<a class="button button-compact" href="${recordUrl(record.id)}" data-explorer-record="${escapeHtml(record.id)}">View in Info Explorer →</a><div class="dialog-foot-actions">${record.articleId ? `<a class="button button-compact" href="${articleUrl(record.articleId)}" data-article-link="${escapeHtml(record.articleId)}">Read Linked Article →</a>` : ''}<button type="button" class="button button-dark button-compact" data-close-dialog>Done</button></div>`;
+    footEl.innerHTML = `<a class="button button-compact" href="${recordUrl(record.id)}" data-explorer-record="${escapeHtml(record.id)}">View in Info Explorer ${arrowIcon()}</a><div class="dialog-foot-actions">${record.articleId ? `<a class="button button-compact" href="${articleUrl(record.articleId)}" data-article-link="${escapeHtml(record.articleId)}">Read Linked Article ${arrowIcon()}</a>` : ''}<button type="button" class="button button-dark button-compact" data-close-dialog>Done</button></div>`;
   }
   if (!dialog.open) dialog.showModal();
   if (updateUrl) {

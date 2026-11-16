@@ -157,27 +157,22 @@ img {
   white-space: nowrap;
 }
 
-.brand-text strong {
+.brand-text strong,
+.brand-slash,
+.brand-city {
   font: 700 16px/24px "JetBrains Mono", monospace;
   letter-spacing: -0.025em;
   color: #13161c;
 }
 
-.brand-slash {
-  font: 400 12px/16px "JetBrains Mono", monospace;
-  color: #505662;
-}
-
 .brand-city {
-  font: 400 14px/20px "JetBrains Mono", monospace;
-  color: #505662;
   text-transform: uppercase;
 }
 
 .brand-text small {
-  font-size: 11px;
+  font-size: 12px;
   color: #505662;
-  line-height: 16.5px;
+  line-height: 18px;
 }
 
 .desktop-nav {
@@ -455,12 +450,30 @@ p {
 }
 
 .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
   font-size: 12px;
   font-weight: 700;
   color: #1d4ed8;
   white-space: nowrap;
   flex-shrink: 0;
 }
+
+.link-arrow {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex: none;
+  vertical-align: -0.18em;
+  transition: transform 0.15s ease;
+}
+a:hover .link-arrow-right,
+button:hover .link-arrow-right { transform: translateX(2px); }
+a:hover .link-arrow-left,
+button:hover .link-arrow-left { transform: translateX(-2px); }
+a:hover .link-arrow-up-right,
+button:hover .link-arrow-up-right { transform: translate(2px, -2px); }
 
 .text-link:hover {
   text-decoration: underline;
@@ -2768,14 +2781,11 @@ p {
     width: 34px;
     height: 34px;
   }
-  .brand-text strong {
-    font-size: 14px;
-    line-height: 20px;
-  }
+  .brand-text strong,
   .brand-city,
   .brand-slash {
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 20px;
   }
   .brand-text small {
     display: none;
@@ -2960,12 +2970,10 @@ p {
   .brand-line {
     gap: 2px;
   }
-  .brand-text strong {
-    font-size: 10px;
-  }
+  .brand-text strong,
   .brand-city,
   .brand-slash {
-    font-size: 8.5px;
+    font-size: 10px;
   }
   .header-records {
     height: 30px;
@@ -3033,5 +3041,16 @@ p {
   .mobile-menu-btn svg {
     width: 15px;
     height: 15px;
+  }
+}
+
+@media (max-width: 440px) {
+  .header-records {
+    width: 34px;
+    padding-inline: 0;
+    justify-content: center;
+  }
+  .header-records span {
+    display: none;
   }
 }
