@@ -1,12 +1,23 @@
+import 'leaflet/dist/leaflet.css';
 import './style.css';
 import { PRIMARY_RECORDS } from './generated/records.js';
+import { createGroundTruthMap } from './ground-truth-map.js';
 
 // -------------------------------------------------------------------------
     // 1. PRIMARY RECORDS DATABASE (Git-as-a-Database Archival Manifest)
     // -------------------------------------------------------------------------
 
 
-    const MAP_PINS = [{"id":"shelter","type":"shelter","recordId":"GOV-2026-003","x":53,"y":65,"title":"Stockton Animal Services","sector":"1575 S Lincoln St","badge":"CITY SHELTER","badgeColor":"sky","summary":"Public municipal shelter and Animal Services contact point.","metrics":"(209) 937-7445","notes":"Schematic placement; check City page for current access and hours."},{"id":"apl","type":"clinic","recordId":"CARE-2026-001","x":39,"y":30,"title":"Animal Protection League","sector":"1409 W Oak St","badge":"LOW-COST CLINIC","badgeColor":"emerald","summary":"Provider advertises low-cost dog and cat spay/neuter.","metrics":"(209) 420-4776","notes":"Schematic placement; current openings, prices, and eligibility need direct confirmation."}];
+    // Only published facility addresses receive markers. The other records use
+    // approximate area or citywide context without claiming a precise location.
+    const MAP_PINS = [
+      { id: 'shelter', type: 'shelter', recordId: 'GOV-2026-003', latLng: [37.9352382, -121.2933142], title: 'Stockton Animal Services', address: '1575 S Lincoln St', phone: '(209) 937-7445', icon: 'warehouse' },
+      { id: 'apl', type: 'clinic', recordId: 'CARE-2026-001', latLng: [37.9555460, -121.3114714], title: 'Animal Protection League', address: '1409 W Oak St', phone: '(209) 420-4776', icon: 'stethoscope' }
+    ];
+    const FIELD_ZONES = [
+      { recordId: 'WORK-2026-002', center: [37.9475040, -121.2972333], radius: 700, name: "St. Mary's vicinity" },
+      { recordId: 'WORK-2026-003', center: [37.916, -121.294], radius: 2500, name: 'South Stockton' }
+    ];
 
     const CARE_RESOURCES = [{"name":"Animal Protection League","tags":["Spay/Neuter"],"eligibility":"Dog and cat spay/neuter advertised; confirm current eligibility.","waitTime":"Current openings not published in the checked source.","location":"1409 W Oak St, Stockton · (209) 420-4776","notes":"https://apl209.org/"},{"name":"Stockton Animal Services","tags":["Vaccines","Spay/Neuter"],"eligibility":"Low-cost vaccines and microchips; City dog spay/neuter is not listed.","waitTime":"Call for current schedule.","location":"1575 S Lincoln St · (209) 937-7445","notes":"https://www.stocktonca.gov/services/animal_services/"},{"name":"Found-pet drop-off guidance","tags":["Found Pet"],"eligibility":"For pets found in Stockton or unincorporated San Joaquin County.","waitTime":"Call for a drop-off appointment; same-day access is not guaranteed.","location":"Stockton Animal Services · (209) 937-7445","notes":"https://www.stocktonca.gov/services/animal_services/lost___found_pets.php"},{"name":"Animal complaint reporting","tags":["Found Pet"],"eligibility":"City lists injured or sick strays, animals at large, and abandonment.","waitTime":"No response-time guarantee in the checked source.","location":"City online reporting","notes":"https://www.stocktonca.gov/services/animal_services/animal_related_complaints.php"},{"name":"Animal Balance Stockton clinic","tags":["Spay/Neuter","Scheduled"],"eligibility":"Scheduled February 26–28, 2027; eligibility and venue not confirmed.","waitTime":"Future event; check provider schedule.","location":"Stockton venue to confirm","notes":"https://animalbalance.org/event/stockton-ca-2/"}];
 
@@ -40,6 +51,10 @@ import { PRIMARY_RECORDS } from './generated/records.js';
         window.history.replaceState({}, '', url);
       } catch (e) {}
 
+      if (tabId === 'ground-truth') requestAnimationFrame(() => {
+        groundTruthMap?.invalidateSize();
+        if (!groundMapHasExplicitSelection) groundTruthMap?.showOverview();
+      });
       lucide.createIcons();
     }
 
@@ -193,7 +208,7 @@ import { PRIMARY_RECORDS } from './generated/records.js';
     function copyFormalCitation(recordId) {
       const rec = PRIMARY_RECORDS.find(r => r.id === recordId);
       if (!rec) return;
-      const citation = `Stockton StreetWatch Care Gap Investigation. Entry [${rec.id}]: "${rec.title}." Source: ${rec.sourceAgency}${rec.sourceUrl ? `, ${rec.sourceUrl}` : ''} (recorded or checked ${rec.dateAcquired}).`;
+      const citation = `Crossover Stockton care and action record. Entry [${rec.id}]: "${rec.title}." Source: ${rec.sourceAgency}${rec.sourceUrl ? `, ${rec.sourceUrl}` : ''} (recorded or checked ${rec.dateAcquired}).`;
 
       // Fallback-safe copy for iFrame environments
       const textarea = document.createElement('textarea');
@@ -534,115 +549,173 @@ import { PRIMARY_RECORDS } from './generated/records.js';
     // -------------------------------------------------------------------------
     // 4. GROUND TRUTH: INTERACTIVE MAP & RECORDS INDEX TABLE
     // -------------------------------------------------------------------------
-    let activeMapLayers = new Set(['dispatch', 'dumping', 'clinic', 'shelter']);
-    let selectedPinId = 'shelter';
+    let activeMapLayers = new Set(['grid', 'zones', 'clinic', 'shelter']);
+    let groundTruthMap;
+    let groundMapHasExplicitSelection = false;
+    let selectedGroundRecordId = 'GOV-2026-003';
 
-    const PIN_STYLES = {
-      dumping: { bg: 'bg-rose-500', ring: 'ring-rose-500/40', icon: 'alert-triangle' },
-      dispatch: { bg: 'bg-amber-400', ring: 'ring-amber-400/40', icon: 'radio' },
-      clinic: { bg: 'bg-emerald-400', ring: 'ring-emerald-400/40', icon: 'stethoscope' },
-      shelter: { bg: 'bg-sky-400', ring: 'ring-sky-400/40', icon: 'warehouse' }
-    };
+    const SHELTER_SITE_RECORDS = new Set([
+      'GOV-2026-002', 'GOV-2026-003', 'SHEL-2024-002', 'SHEL-2024-003',
+      'FLD-2026-001', 'FLD-2026-002', 'NEWS-2026-005', 'NEWS-2026-011', 'GOV-2026-007'
+    ]);
+
+    function mapContextForRecord(rec) {
+      if (rec.id === 'CARE-2026-001') return {
+        kind: 'point', pinId: 'apl', label: 'Animal Protection League · 1409 W Oak St',
+        note: 'This marker is the published clinic address, not a measure of current appointment access.'
+      };
+      if (SHELTER_SITE_RECORDS.has(rec.id)) return {
+        kind: 'point', pinId: 'shelter', label: 'Stockton Animal Services · 1575 S Lincoln St',
+        note: 'This marker is the documented facility address, not the location of every event described in the record.'
+      };
+      if (rec.id === 'CARE-2026-002' || rec.id === 'WORK-2026-002') return {
+        kind: 'area', center: FIELD_ZONES[0].center, radius: FIELD_ZONES[0].radius,
+        label: "St. Mary's vicinity · approximate context",
+        note: 'The circle is for orientation near the named service location. It is not a measured dog concentration or verified boundary.'
+      };
+      if (rec.id === 'WORK-2026-003') return {
+        kind: 'area', center: FIELD_ZONES[1].center, radius: FIELD_ZONES[1].radius,
+        label: 'South Stockton · broad investigation area',
+        note: 'This broad circle only locates the area named by the work item. Specific conditions and boundaries remain unverified.'
+      };
+      if (rec.id === 'NEWS-2026-001') return {
+        kind: 'area', center: [37.9575558, -121.3436509], radius: 900,
+        label: 'Louis Park vicinity · one reported place',
+        note: 'The report also names other places. This circle is an approximate reference around Louis Park, not a hotspot or incident boundary.'
+      };
+      return {
+        kind: 'city', label: 'Stockton / wider service-area context',
+        note: rec.category === 'WORK_ITEM'
+          ? 'This is an open work item without a verified site. No pin is shown until a location is checked.'
+          : 'This record does not establish one precise location. The map stays on Stockton without assigning it a pin.'
+      };
+    }
+
+    function mapText(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[char]);
+    }
 
     function renderMapPins() {
-      const container = document.getElementById('map-pins-container');
-      if (!container) return;
-      container.innerHTML = '';
-
-      MAP_PINS.forEach(pin => {
-        if (!activeMapLayers.has(pin.type)) return;
-        const style = PIN_STYLES[pin.type];
-        const isSelected = pin.id === selectedPinId;
-
-        const btn = document.createElement('button');
-        btn.style.left = `${pin.x}%`;
-        btn.style.top = `${pin.y}%`;
-        btn.setAttribute('aria-label', pin.title);
-        btn.onclick = () => selectMapPin(pin.id);
-        btn.className = `absolute -translate-x-1/2 -translate-y-1/2 group focus:outline-none transition-transform duration-200 ${isSelected ? 'scale-125 z-20' : 'hover:scale-110 z-10'}`;
-
-        btn.innerHTML = `
-          <span class="flex items-center justify-center w-8 h-8 rounded-full ${style.bg} text-slate-950 shadow-lg ring-4 ${isSelected ? 'ring-white' : style.ring}">
-            <i data-lucide="${style.icon}" class="w-4 h-4 stroke-[2.5]"></i>
-          </span>
-          <span class="hidden sm:block absolute left-1/2 -translate-x-1/2 top-9 whitespace-nowrap px-2 py-0.5 rounded bg-slate-950/90 text-white text-[10px] font-mono border border-slate-700 shadow pointer-events-none ${isSelected ? 'border-amber-400 text-amber-300' : 'opacity-85 group-hover:opacity-100'}">
-            ${pin.badge}
-          </span>
-        `;
-        container.appendChild(btn);
-      });
-
-      lucide.createIcons();
+      if (groundTruthMap) return;
+      const element = document.getElementById('ground-truth-map');
+      if (!element) return;
+      groundTruthMap = createGroundTruthMap(element, MAP_PINS, FIELD_ZONES, selectMapPin, recordId => selectGroundTruthRecord(recordId, false));
+      groundTruthMap.focus({ ...mapContextForRecord(PRIMARY_RECORDS.find(rec => rec.id === selectedGroundRecordId)), recordId: selectedGroundRecordId });
+      groundTruthMap.showOverview();
     }
 
     function selectMapPin(pinId) {
-      selectedPinId = pinId;
-      renderMapPins();
-      renderMapInspector();
+      const pin = MAP_PINS.find(item => item.id === pinId);
+      if (pin) selectGroundTruthRecord(pin.recordId, false);
     }
 
     function toggleMapLayer(layerType) {
-      const btn = document.getElementById(`layer-btn-${layerType}`);
-      if (activeMapLayers.has(layerType)) {
-        activeMapLayers.delete(layerType);
-        btn.classList.add('opacity-40');
-      } else {
-        activeMapLayers.add(layerType);
-        btn.classList.remove('opacity-40');
-      }
-      renderMapPins();
+      if (!['grid', 'zones', 'clinic', 'shelter'].includes(layerType)) return;
+      const visible = !activeMapLayers.has(layerType);
+      if (visible) activeMapLayers.add(layerType);
+      else activeMapLayers.delete(layerType);
+      const button = document.getElementById(`layer-btn-${layerType}`);
+      button?.setAttribute('aria-pressed', String(visible));
+      button?.classList.toggle('opacity-40', !visible);
+      groundTruthMap?.setLayerVisible(layerType, visible);
     }
 
     function renderMapInspector() {
       const container = document.getElementById('map-inspector-content');
-      const pin = MAP_PINS.find(p => p.id === selectedPinId) || MAP_PINS[0];
-
-      const badgeColors = {
-        rose: 'bg-rose-100 text-rose-800 border-rose-200',
-        amber: 'bg-amber-100 text-amber-800 border-amber-200',
-        emerald: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-        sky: 'bg-sky-100 text-sky-800 border-sky-200'
-      };
-
+      const rec = PRIMARY_RECORDS.find(item => item.id === selectedGroundRecordId);
+      if (!container || !rec) return;
+      const context = mapContextForRecord(rec);
+      const pin = context.kind === 'point' ? MAP_PINS.find(item => item.id === context.pinId) : null;
+      const zone = FIELD_ZONES.find(item => item.recordId === rec.id);
+      const placeName = pin?.title || zone?.name || (context.kind === 'area' ? context.label.split(' · ')[0] : rec.title);
+      const placeDetail = pin?.address || (context.kind === 'area' ? 'APPROXIMATE AREA' : 'NO PRECISE PIN');
+      const recordDescription = placeName === rec.title
+        ? `${rec.sourceAgency} · ${rec.statusLabel}`
+        : pin ? `${pin.type === 'clinic' ? 'Low-cost clinic' : 'City shelter'} · ${rec.title}` : rec.title;
+      const metricLabel = pin?.phone ? 'Published contact' : 'Catalog status';
+      const metricValue = pin?.phone || rec.statusLabel;
+      const contextBadge = context.kind === 'point'
+        ? pin?.type === 'clinic' ? 'bg-emerald-100 text-emerald-800 border-emerald-200' : 'bg-sky-100 text-sky-800 border-sky-200'
+        : context.kind === 'area'
+          ? 'bg-rose-100 text-rose-800 border-rose-200'
+          : 'bg-stone-100 text-stone-700 border-stone-200';
+      const sourceUrl = (() => {
+        try { const url = new URL(rec.sourceUrl); return ['http:', 'https:'].includes(url.protocol) ? url.href : null; }
+        catch { return null; }
+      })();
       container.innerHTML = `
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <span class="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold border ${badgeColors[pin.badgeColor]}">
-            ${pin.badge}
-          </span>
-          <span class="text-xs font-mono text-stone-400">${pin.sector}</span>
+          <span data-map-record-id class="px-2.5 py-1 rounded-full text-[11px] font-mono font-semibold border ${contextBadge}">${mapText(rec.id)}</span>
+          <span class="text-[11px] font-mono text-stone-400">${mapText(placeDetail)}</span>
         </div>
         <div>
-          <h3 class="text-lg font-bold text-slate-900 leading-snug">${pin.title}</h3>
-          <p class="text-xs text-stone-600 mt-1">${pin.summary}</p>
+          <h3 class="text-xl font-bold text-slate-900 leading-snug">${mapText(placeName)}</h3>
+          <p class="text-xs text-stone-600 mt-1 leading-relaxed">${mapText(recordDescription)}</p>
         </div>
         <div class="p-3.5 rounded-xl bg-stone-100 border border-stone-200">
-          <div class="text-[11px] font-mono uppercase text-stone-500 font-semibold">Observed Metric</div>
-          <div class="text-sm font-bold text-slate-900 mt-0.5">${pin.metrics}</div>
+          <div class="text-[10px] font-mono uppercase text-stone-500 font-semibold mb-1">${metricLabel}</div>
+          <p class="text-sm font-semibold text-slate-900">${mapText(metricValue)}</p>
         </div>
         <div>
-          <div class="text-[11px] font-mono uppercase text-stone-500 font-semibold mb-1">Field &amp; Spatial Notes</div>
-          <p class="text-xs text-stone-700 leading-relaxed bg-stone-50 p-3.5 rounded-xl border border-stone-200/70">
-            ${pin.notes}
-          </p>
+          <div class="text-[10px] font-mono uppercase text-stone-500 font-semibold mb-1">Field &amp; spatial notes</div>
+          <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200">
+            <p class="text-xs text-stone-700 leading-relaxed">${mapText(context.note)}</p>
+          </div>
         </div>
-        <div>
-          <button onclick="openRecord('${pin.recordId}')" class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition">
-            <i data-lucide="folder-open" class="w-3.5 h-3.5"></i>
-            <span>Open Linked Record [${pin.recordId}]</span>
-          </button>
-        </div>
+        <details class="text-xs text-stone-600">
+          <summary class="cursor-pointer font-semibold text-amber-800">Record summary &amp; limits</summary>
+          <p class="mt-2 leading-relaxed">${mapText(rec.summary)}</p>
+          <p class="text-xs text-stone-700 leading-relaxed">${mapText(rec.limitations)}</p>
+          ${sourceUrl ? `<a href="${mapText(sourceUrl)}" target="_blank" rel="noopener noreferrer" class="block mt-2 font-semibold text-amber-800 underline underline-offset-2">Open original source ↗</a>` : ''}
+        </details>
+        <button onclick="openRecord('${rec.id}')" class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-mono text-xs font-semibold flex items-center justify-center gap-2 transition">
+          <i data-lucide="folder-open" class="w-3.5 h-3.5"></i><span>Open linked record [${mapText(rec.id)}]</span>
+        </button>
       `;
       lucide.createIcons();
+    }
+
+    function selectGroundTruthRecord(recordId, scrollToMap = true) {
+      const rec = PRIMARY_RECORDS.find(item => item.id === recordId || item.originalId === recordId);
+      if (!rec) return;
+      groundMapHasExplicitSelection = true;
+      selectedGroundRecordId = rec.id;
+      if (document.getElementById('tab-ground-truth')?.classList.contains('hidden')) switchTab('ground-truth');
+      renderMapPins();
+      const context = mapContextForRecord(rec);
+      if (context.kind === 'point') {
+        const pin = MAP_PINS.find(item => item.id === context.pinId);
+        if (pin && !activeMapLayers.has(pin.type)) toggleMapLayer(pin.type);
+      }
+      if (FIELD_ZONES.some(zone => zone.recordId === rec.id) && !activeMapLayers.has('zones')) toggleMapLayer('zones');
+      groundTruthMap?.focus({ ...context, recordId: rec.id });
+      renderMapInspector();
+      document.querySelectorAll('#gt-records-tbody tr, #gt-records-mobile [data-record-id]').forEach(row => {
+        const selected = row.dataset.recordId === rec.id;
+        row.classList.toggle('bg-amber-50', selected);
+        row.setAttribute(row.tagName === 'BUTTON' ? 'aria-pressed' : 'aria-selected', String(selected));
+      });
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('tab', 'ground-truth');
+        url.searchParams.set('record', rec.id);
+        window.history.replaceState({}, '', url);
+      } catch (e) {}
+      if (scrollToMap) requestAnimationFrame(() => document.getElementById('ground-truth-map-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
     }
 
     function filterGroundTruthRecords(statusFilter, btnEl) {
       document.querySelectorAll('.gt-rec-filter').forEach(btn => {
         btn.classList.remove('bg-slate-900', 'text-white');
         btn.classList.add('bg-stone-100', 'text-stone-700');
+        btn.setAttribute('aria-pressed', 'false');
       });
       if (btnEl) {
         btnEl.classList.remove('bg-stone-100', 'text-stone-700');
         btnEl.classList.add('bg-slate-900', 'text-white');
+        btnEl.setAttribute('aria-pressed', 'true');
       }
       renderGroundTruthTable(statusFilter);
     }
@@ -662,25 +735,37 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       };
 
       tbody.innerHTML = filtered.map(rec => `
-        <tr onclick="openRecord('${rec.id}')" class="hover:bg-amber-50/60 cursor-pointer transition-colors">
+        <tr data-record-id="${rec.id}" aria-selected="${rec.id === selectedGroundRecordId}" tabindex="0" onclick="selectGroundTruthRecord('${rec.id}')" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectGroundTruthRecord('${rec.id}'); }" class="hover:bg-amber-50/60 focus:bg-amber-50 focus:outline-amber-500 cursor-pointer transition-colors ${rec.id === selectedGroundRecordId ? 'bg-amber-50' : ''}">
           <td class="py-3.5 px-4 sm:px-5 font-mono text-xs font-bold text-slate-900 whitespace-nowrap">${rec.id}</td>
           <td class="py-3.5 px-4 sm:px-5 text-xs">
-            <div class="font-semibold text-slate-900">${rec.title}</div>
-            <div class="text-stone-500 text-[11px]">${rec.sourceAgency}</div>
+            <div class="font-semibold text-slate-900">${mapText(rec.title)}</div>
+            <div class="text-stone-500 text-[11px]">${mapText(rec.sourceAgency)}</div>
           </td>
-          <td class="py-3.5 px-4 sm:px-5 text-xs text-stone-700">${rec.extractedClaims[0] ? rec.extractedClaims[0].metric : rec.summary}</td>
+          <td class="py-3.5 px-4 sm:px-5 text-xs text-stone-700">${mapText(rec.extractedClaims[0] ? rec.extractedClaims[0].metric : rec.summary)}</td>
           <td class="py-3.5 px-4 sm:px-5 whitespace-nowrap">
             <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold border ${statusBadgeStyles[rec.status]}">
               ${rec.statusLabel.toUpperCase()}
             </span>
           </td>
           <td class="py-3.5 px-4 sm:px-5 text-right whitespace-nowrap">
-            <span class="inline-flex items-center gap-1 font-mono text-xs font-semibold text-amber-800">
-              <span>Inspect</span>
-              <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-            </span>
+            <button type="button" data-evidence-id="${rec.id}" onclick="event.stopPropagation(); openRecord('${rec.id}')" onkeydown="event.stopPropagation()" class="font-mono text-xs font-semibold text-amber-800 hover:text-amber-950 hover:underline focus-visible:outline-2 focus-visible:outline-amber-500">Inspect ↗</button>
           </td>
         </tr>
+      `).join('');
+
+      const mobileList = document.getElementById('gt-records-mobile');
+      if (mobileList) mobileList.innerHTML = filtered.map(rec => `
+        <div class="relative">
+          <button type="button" data-record-id="${rec.id}" aria-label="Show ${mapText(rec.id)} on map" aria-pressed="${rec.id === selectedGroundRecordId}" onclick="selectGroundTruthRecord('${rec.id}')" class="w-full text-left px-4 py-2.5 hover:bg-amber-50 focus:bg-amber-50 focus:outline-amber-500 ${rec.id === selectedGroundRecordId ? 'bg-amber-50' : ''}">
+            <span class="flex items-start justify-between gap-3">
+              <span class="font-mono text-[11px] font-bold text-slate-900">${mapText(rec.id)}</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold border shrink-0 ${statusBadgeStyles[rec.status]}">${mapText(rec.statusLabel.toUpperCase())}</span>
+            </span>
+            <span class="block mt-1 text-sm font-semibold text-slate-900 leading-snug">${mapText(rec.title)}</span>
+            <span class="block pr-16 truncate mt-0.5 text-[11px] text-stone-500">${mapText(rec.sourceAgency)}</span>
+          </button>
+          <button type="button" data-evidence-id="${rec.id}" onclick="openRecord('${rec.id}')" class="absolute bottom-2.5 right-3 font-mono text-[11px] font-semibold text-amber-800 hover:text-amber-950 hover:underline focus-visible:outline-2 focus-visible:outline-amber-500">Inspect ↗</button>
+        </div>
       `).join('');
 
       lucide.createIcons();
@@ -835,12 +920,16 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       setTriageMode('stray');
       renderResourcesGrid('ALL');
 
-      // Check URL params for deep links (?tab=evidence-room&record=SHEL-2024-001)
+      // Ground Truth record links keep the record on the map; Evidence Room
+      // links continue to open the full dossier.
       try {
         const params = new URLSearchParams(window.location.search);
         const tabParam = params.get('tab');
         const recParam = params.get('record');
-        if (recParam && PRIMARY_RECORDS.some(r => r.id === recParam || r.originalId === recParam)) {
+        if (tabParam === 'ground-truth' && recParam && PRIMARY_RECORDS.some(r => r.id === recParam || r.originalId === recParam)) {
+          switchTab('ground-truth');
+          selectGroundTruthRecord(recParam, false);
+        } else if (recParam && PRIMARY_RECORDS.some(r => r.id === recParam || r.originalId === recParam)) {
           openRecord(recParam);
         } else if (tabParam) {
           switchTab(tabParam);
@@ -850,4 +939,4 @@ import { PRIMARY_RECORDS } from './generated/records.js';
       lucide.createIcons();
     });
 
-Object.assign(window, { switchTab, openRecord, scrollToDrawer, scrollToTipForm, showToast, setEvidenceFilter, jumpToEvidenceFilter, renderEvidenceDrawer, setDossierSubTab, toggleArtifactFlag, copyFormalCitation, downloadCleanedCsv, renderDossierInspector, renderMapPins, selectMapPin, toggleMapLayer, renderMapInspector, filterGroundTruthRecords, renderGroundTruthTable, setTriageMode, filterResources, renderResourcesGrid, handleTipSubmit });
+Object.assign(window, { switchTab, openRecord, scrollToDrawer, scrollToTipForm, showToast, setEvidenceFilter, jumpToEvidenceFilter, renderEvidenceDrawer, setDossierSubTab, toggleArtifactFlag, copyFormalCitation, downloadCleanedCsv, renderDossierInspector, renderMapPins, selectMapPin, selectGroundTruthRecord, toggleMapLayer, renderMapInspector, filterGroundTruthRecords, renderGroundTruthTable, setTriageMode, filterResources, renderResourcesGrid, handleTipSubmit });

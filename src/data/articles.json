@@ -1,0 +1,253 @@
+[
+  {
+    "id": "art-stats-2024-update",
+    "recordId": "ART-01",
+    "eyebrow": "ART-01 · November 2026",
+    "title": "A Look at the Stray Dogs Gap Through Statistics — And What Happens When the Shelter Updates Its Public Data",
+    "dek": "Reconciling our 2024 baseline (3,106 stray intakes and 7,183 dispatch calls) with newly updated Stockton Animal Services public records.",
+    "summary": "When public agencies update their dashboards, old talking points expire overnight. Here is what our 2024 baseline actually proved, what changed in the updated shelter release, and why honest verification matters more than clinging to static numbers.",
+    "date": "2026-11-16",
+    "dateDisplay": "November 2026",
+    "readTime": "6 min read",
+    "status": "Published · Data Audit",
+    "explorerTitle": "A Look at the Stray Dogs Gap Through Statistics — And Updated Shelter Data",
+    "explorerSource": "Crossover Stockton Editorial // 2024 Shelter Baseline & 7,183 CPRA Logs",
+    "explorerSummary": "Long-form statistical look contrasting the 2024 baseline (3,106 stray intakes, 7,183 field calls) with newly updated Stockton Animal Services public records.",
+    "featured": true,
+    "mapKey": "field-call-density",
+    "tags": ["Statistics", "Public Records", "Data Reconciliation"],
+    "keyTakeaways": [
+      "Our 2024 baseline recorded 3,106 stray-dog intake events at Stockton Animal Shelter alongside 7,183 Animal Services field-call logs obtained via public records.",
+      "Stockton Animal Services recently updated its public reporting figures—requiring line-by-line reconciliation (tracked in WORK-2026-001) before citing current intake totals.",
+      "Regardless of quarterly fluctuations, the structural gap remains clear: field call volume far exceeds immediate kennel and transport bandwidth."
+    ],
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          "Numbers are useful only when they keep us honest. When Crossover first began looking closely at street dogs in Stockton, public debate was dominated by vague impressions—some claiming the city was overrun by tens of thousands of abandoned animals, others insisting the system was working fine.",
+          "To get grounded in reality, we started with verifiable records: <strong>3,106 stray-dog intake events</strong> logged by Stockton Animal Services in 2024, paired with <strong>7,183 Animal Services field-call records</strong> and field observations showing roughly <strong>3 to 10 dumped-dog encounters per week</strong> along low-visibility industrial corridors like Mormon Slough."
+        ]
+      },
+      {
+        "heading": "When the Shelter Updates Its Public Data",
+        "paragraphs": [
+          "Recently, Stockton Animal Services updated its public data disclosures. In traditional advocacy, organizations often keep quoting older statistics because those numbers sound dramatic or already fit a pre-written narrative. That is an egoic trap—protecting an old story instead of looking at what is true today.",
+          "For us, an updated public dataset is good news. It means our first job is <strong>reconciliation</strong>: comparing the 2024 baseline against the newly published figures, separating intake categories (stray, owner surrender, quarantine, transfer), and checking whether timely field response has improved or remained strained."
+        ]
+      },
+      {
+        "heading": "What the 7,183 Dispatch Logs Actually Show",
+        "bullets": [
+          "<strong>High Citizen Engagement:</strong> Stockton residents are not ignoring animals in trouble. Thousands of calls come in from every zip code—reporting loose dogs near traffic, injured strays, and abandoned litters.",
+          "<strong>Triage Compression:</strong> Because field staffing is finite, active bite calls and immediate public-safety hazards rightly take priority—leaving non-aggressive stray sightings queued until the dog moves on or a neighbor intervenes.",
+          "<strong>The Unknown Denominator:</strong> No verified municipal street-dog census exists in Stockton. Pretending we know the exact total street population would be dishonest; naming what is <em>unknown</em> is part of seeing clearly."
+        ],
+        "afterParagraphs": [
+          "Until we complete our line-by-line audit of the newly updated shelter tables (currently tracked in our active work records), we label 2024 figures explicitly as our 2024 baseline—and invite anyone in the community to inspect the raw records in our Info Explorer."
+        ]
+      }
+    ],
+    "sources": [
+      {"label": "Stockton Animal Services — 2024 Intake Baseline & Public Data Report", "ref": "SHEL-2024-001"},
+      {"label": "CPRA Municipal Field-Call Dataset (7,183 Dispatch Records)", "ref": "CPRA-2026-001-RECEIPT"},
+      {"label": "Mormon Slough & Corridor Weekly Dumped-Dog Field Reports", "ref": "RESC-2026-007"},
+      {"label": "Active Audit: Review Animal Services Field-Call Records", "ref": "WORK-2026-001"}
+    ],
+    "sourceIds": ["SHEL-2024-001", "CPRA-2026-001-RECEIPT", "RESC-2026-007", "WORK-2026-001"]
+  },
+  {
+    "id": "art-bottlenecks-ai",
+    "recordId": "ART-02",
+    "eyebrow": "ART-02 · November 2026",
+    "title": "The Bottlenecks to Care: Where AI Pointed Us First",
+    "dek": "Using structured AI analysis across thousands of dispatch logs to isolate addressable chokepoints—without scapegoating \"bad owners.\"",
+    "summary": "When systems fail, the human mind looks for someone to blame. By using AI to cluster 7,183 dispatch logs and intake barriers, we found that upstream sterilization access and intake friction—not moral failure—explain where care breaks down.",
+    "date": "2026-11-16",
+    "dateDisplay": "November 2026",
+    "readTime": "7 min read",
+    "status": "Published · Systems Analysis",
+    "explorerTitle": "The Bottlenecks to Care: Where AI Pointed Us First",
+    "explorerSource": "Crossover Stockton Editorial // AI Cluster Audit",
+    "explorerSummary": "How structured AI analysis isolated upstream spay/neuter access, appointment walls, and willing-helper friction without scapegoating residents.",
+    "featured": true,
+    "mapKey": null,
+    "tags": ["AI Analysis", "Spay/Neuter", "Root Causes"],
+    "keyTakeaways": [
+      "Blaming \"bad owners\" or \"inept staff\" is an egoic shortcut that explains nothing and changes nothing.",
+      "AI pattern clustering across dispatch notes and clinic waitlists isolates three high-leverage bottlenecks: upstream spay/neuter access, appointment-only shelter walls, and stalled volunteer/foster onboarding.",
+      "Focusing technology on scheduling, navigation, and temporary foster diversion produces immediate relief without waiting years for new concrete."
+    ],
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          "In public meetings and neighborhood comment threads, two familiar stories appear whenever street dogs are discussed. One story blames <em>\"bad owners\"</em> who fail to fix or contain their pets. The other blames <em>\"broken city workers\"</em> who fail to answer the phone or pick up every stray.",
+          "Both stories share the same root: the egoic urge to set ourselves above someone else so we don't have to look closely at the shared conditions producing the suffering. When you drop the blame and look at the records with clear eyes, a much more practical picture emerges."
+        ]
+      },
+      {
+        "heading": "What AI Pattern Extraction Revealed",
+        "paragraphs": [
+          "We used large language models to read, categorize, and cross-reference thousands of repetitive municipal dispatch notes, committee minutes, and local clinic constraints. Instead of a vague cloud of \"too many strays,\" three distinct mechanical bottlenecks stood out:"
+        ],
+        "bullets": [
+          "<strong>1. Upstream Spay/Neuter &amp; Preventive Friction:</strong> Multi-week surgical waitlists and out-of-pocket costs turn ordinary, caring families into overwhelmed households with accidental litters. Even municipal rule discussions have struggled to pair mandates with concrete funding and surgical capacity.",
+          "<strong>2. Appointment-Only Shelter Walls:</strong> When kennels at 1575 S. Lincoln St run past capacity, walk-in stray intake closes to non-emergencies. A neighbor who does the right thing by rescuing a dog off the road hits a locked door—and sometimes abandons the effort out of desperation.",
+          "<strong>3. The \"Willing Helper\" Bottleneck:</strong> Stockton has residents actively trying to volunteer, foster found dogs, or walk shelter dogs through programs like Doggie Day Out—yet applications sit unanswered because a small shelter staff is buried in daily kennel triage."
+        ]
+      },
+      {
+        "heading": "Why We Choose Addressable Bottlenecks Over Utopian Fixes",
+        "paragraphs": [
+          "AI is valuable here not because it replaces human compassion, but because it acts as a filter. It shows us that pouring concrete for new buildings takes years and millions of dollars, whereas <strong>removing navigation friction for spay/neuter</strong> and <strong>routing found dogs directly to local microchip scanners and temporary fosters</strong> can keep hundreds of animals out of kennels right now."
+        ]
+      }
+    ],
+    "sources": [
+      {"label": "AI Synthesis of 7,183 Field-Call Logs & Triage Notes", "ref": "CPRA-2026-001-RECEIPT"},
+      {"label": "Identified Gap: Upstream Spay/Neuter Surgical & Scheduling Access", "ref": "GAP-01"},
+      {"label": "Identified Gap: Willing-Helper & Volunteer Onboarding Latency", "ref": "GAP-03"},
+      {"label": "Volunteer & Doggie Day Out Onboarding Follow-Up", "ref": "WORK-2026-005"}
+    ],
+    "sourceIds": ["CPRA-2026-001-RECEIPT", "CARE-2026-001", "GOV-2026-001", "WORK-2026-005"]
+  },
+  {
+    "id": "art-expansion-canine-campus",
+    "recordId": "ART-03",
+    "eyebrow": "ART-03 · October 2026",
+    "title": "The Shelter Expansion & Proposed Canine Campus: Concrete, Timelines, and What Happens in the Meantime",
+    "dek": "Tracking the South Lincoln Street shelter construction (targeted for Spring 2027) and Stockton Streetdogs’ proposed Canine Campus.",
+    "summary": "Physical facilities matter—Stockton’s shelter expansion and the proposed Canine Campus both aim to relieve severe space constraints. Here is an honest look at their current status, realistic timelines, and why community-level care cannot wait for ribbon-cuttings.",
+    "date": "2026-10-20",
+    "dateDisplay": "October 2026",
+    "readTime": "5 min read",
+    "status": "Published · Infrastructure Watch",
+    "explorerTitle": "The Shelter Expansion & Proposed Canine Campus: Concrete, Timelines, and the Meantime",
+    "explorerSource": "Crossover Stockton Editorial // Municipal & Nonprofit Infrastructure Watch",
+    "explorerSummary": "Examining the Spring 2027 South Lincoln St expansion timeline and Stockton Streetdogs’ proposed Canine Campus.",
+    "featured": true,
+    "mapKey": null,
+    "tags": ["Shelter Expansion", "Canine Campus", "Infrastructure"],
+    "keyTakeaways": [
+      "The municipal shelter expansion and clinic project at 1575 S. Lincoln St has faced construction timelines extending into Spring 2027.",
+      "Stockton Streetdogs’ proposed Canine Campus envisions a dedicated 24/7 safe haven and community recovery campus—currently in planning and fundraising.",
+      "Even expanded facilities will overflow within months unless upstream spay/neuter and field reunification reduce intake volume first."
+    ],
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          "Whenever a shelter runs out of kennel space, the most obvious instinct is to build more kennels. In Stockton, two major physical efforts are underway or proposed to expand capacity: the City’s <strong>South Lincoln Street Shelter Expansion &amp; Clinic project</strong> (projected for Spring 2027) and <strong>Stockton Streetdogs’ proposed Canine Campus</strong>.",
+          "Both efforts deserve clear, accurate public tracking—free from both cynical dismissal and magical thinking."
+        ]
+      },
+      {
+        "heading": "1. The Municipal Shelter Expansion (1575 S. Lincoln St)",
+        "paragraphs": [
+          "The City’s expansion aims to modernize housing and add dedicated veterinary clinic space on South Lincoln Street. However, municipal construction moves on brick-and-mortar timelines—with completion targets pushed into <strong>Spring 2027</strong>. While construction continues, daily intake and medical triage still operate inside constrained existing spaces."
+        ]
+      },
+      {
+        "heading": "2. The Proposed Canine Campus",
+        "paragraphs": [
+          "Proposed by local advocates at Stockton Streetdogs, the <strong>Canine Campus</strong> envisions a staffed sanctuary and decompression environment separate from the municipal pound—creating space for recovery, socialization, and community involvement. It remains in the planning, site, and capital-development phase."
+        ]
+      },
+      {
+        "heading": "What Happens in the Meantime?",
+        "paragraphs": [
+          "History across California municipal shelters teaches a sobering lesson: <strong>you cannot build your way out of an unsterilized intake flood.</strong> If Stockton adds 60 new kennels in 2027 without expanding upstream spay/neuter and neighbor foster pathways, those 60 kennels will be full by summer.",
+          "Supporting these physical builds means pairing them with software, volunteer coordination, and preventive veterinary access today—so when new doors open, they stay sustainable."
+        ]
+      }
+    ],
+    "sources": [
+      {"label": "Initiative Tracker: South Lincoln St Shelter Expansion (Spring 2027)", "ref": "NEWS-2026-011"},
+      {"label": "City of Stockton Animal Shelter Renovation Contract", "ref": "SHEL-2024-002"},
+      {"label": "Initiative Tracker: Proposed Canine Campus (Stockton Streetdogs)", "ref": "RESC-2026-009"}
+    ],
+    "sourceIds": ["NEWS-2026-011", "SHEL-2024-002", "RESC-2026-009"]
+  },
+  {
+    "id": "art-reporting-handoffs",
+    "recordId": "ART-04",
+    "eyebrow": "ART-04 · November 2026",
+    "title": "Reporting and Rescue Handoffs — The Unseen Glue That Holds It All Together",
+    "dek": "Why caring for a street dog is never a single heroic act, but a chain of human handoffs—and how simple local tools keep the baton from dropping.",
+    "summary": "Between a resident noticing a limping dog and that dog sleeping safely in a home lies a fragile chain of handoffs: reporting, chip scanning, transport, clinic slots, and temporary foster care. Strengthening that unseen glue saves lives without adding a single municipal kennel.",
+    "date": "2026-11-16",
+    "dateDisplay": "November 2026",
+    "readTime": "6 min read",
+    "status": "Published · Field Practice",
+    "explorerTitle": "Reporting and Rescue Handoffs — The Unseen Glue That Holds It All Together",
+    "explorerSource": "Crossover Stockton Editorial // Field Practice & Triage",
+    "explorerSummary": "Tracing the human handoffs between reporting neighbors, chip scanners, temporary fosters, and community clinics.",
+    "featured": true,
+    "mapKey": "handoff-nodes",
+    "tags": ["Handoffs", "Microchip Triage", "Temporary Foster"],
+    "keyTakeaways": [
+      "Caring for a street dog is a relay where a breakdown at any handoff—unclear reporting, no chip scan, or lack of a 7-day foster—sends the dog back to the street.",
+      "Stockton’s Temporary Found-Animal Foster pathway allows finders to house a stray briefly while Animal Services covers vaccines and sterilization—yet few residents know it exists.",
+      "Direct community resources—ACT Clinic, Shelter walk-in chip/vaccine hours, Home To Home, and Better World Rescue—form a working safety net when connected clearly."
+    ],
+    "sections": [
+      {
+        "heading": null,
+        "paragraphs": [
+          "When someone spots a stray dog on a Stockton sidewalk, they usually imagine a single transaction: <em>\"I call a number, a truck comes, and the dog is taken care of.\"</em>",
+          "In reality, helping a dog in need depends on a sequence of quiet human handoffs—the unseen glue between neighbors, dispatchers, microchip scanners, veterinary techs, and foster homes. When any one link lacks clarity or capacity, the entire effort stalls."
+        ]
+      },
+      {
+        "heading": "Where the Handoff Usually Drops",
+        "bullets": [
+          "<strong>Incomplete Field Reports:</strong> Calls logged without exact cross-streets, photos, or containment status make it nearly impossible for an officer or volunteer to locate a moving dog hours later.",
+          "<strong>Skipping the Neighborhood Chip Scan:</strong> Many roaming dogs are lost family pets living within four blocks of where they are found. Driving straight to an overcrowded shelter—instead of scanning at a local vet clinic or during shelter walk-in hours—turns a 20-minute reunion into a multi-day kennel stay.",
+          "<strong>Invisible Temporary Foster Pathways:</strong> Stockton Animal Services maintains a program allowing residents who find a stray to temporarily foster the animal while the shelter provides vaccinations and arranges sterilization—yet most residents are never guided into that option when they call."
+        ]
+      },
+      {
+        "heading": "Practical Glue Available in Stockton Right Now",
+        "paragraphs": [
+          "Closing the handoff gap doesn't require waiting for new laws. It starts with making existing community nodes easy to reach and use: walk-in vaccine and microchip hours at <strong>1575 S. Lincoln St</strong> (Wed–Sun, 1:00–3:30 PM), low-cost sterilization through <strong>ACT Spay/Neuter Clinic</strong> on Alpine Ave and <strong>Animal Protection League</strong>, pop-up clinics at <strong>St. Mary’s Dining Room</strong>, and direct neighbor-to-neighbor rehoming and temporary foster pathways."
+        ]
+      }
+    ],
+    "sources": [
+      {"label": "Care Resource Directory: Stockton Walk-In Chip, Vaccine & Spay/Neuter Nodes", "ref": "GOV-2026-003"},
+      {"label": "Stockton Animal Services Found-Pet Drop-Off & Lost-Pet Guidance", "ref": "GOV-2026-002"},
+      {"label": "Stockton Temporary Found-Animal Foster Pathway", "ref": "NEWS-2026-009"},
+      {"label": "Identified Gap: Appointment-Only Intake & Handoff Friction", "ref": "GAP-02"}
+    ],
+    "sourceIds": ["GOV-2026-003", "GOV-2026-002", "NEWS-2026-009", "CARE-2026-002"]
+  },
+  {
+    "id": "about-crossover",
+    "type": "about",
+    "eyebrow": "Who We Are · Foundation",
+    "title": "Crossing Over from Egoic Noise to Simple Reality",
+    "intro": "Crossover Stockton is an organization of consciousness and presence—grounded in what Eckhart Tolle points to in A New Earth and what the Gospels point to beneath religious tribalism.",
+    "image": "/images/about/growing.jpg",
+    "imageAlt": "Roots anchored in real earth with new leaves rising beside the Stockton skyline",
+    "imageCaption": "Awareness without action is sleep. Real transformation puts roots into ordinary ground and produces measurable fruit.",
+    "founder": {
+      "name": "Jeff Kolyer",
+      "role": "Founder · Crossover Stockton",
+      "image": "/images/about/about-the-founder.jpg",
+      "imageAlt": "Jeff Kolyer, Founder of Crossover Stockton",
+      "bio": "Former Silicon Valley technology founder who has lived in Stockton for more than a decade. Crossover grows out of his interest in how technology, clear attention, and local action can meet real needs.",
+      "linkedinUrl": "https://www.linkedin.com/in/jeff-kolyer"
+    },
+    "sections": [
+      {"heading": "What \"Crossover\" Means", "paragraphs": ["Most of human life is spent inside compulsive thinking—the egoic mind defending an identity, chasing wealth or status as a buffer against insecurity, or inventing enemies so we can feel righteous. Even our civic debates get trapped there: residents blame \"bad owners,\" advocates blame \"broken officials,\" and everyone stays insulated from reality.", "Crossover is the movement from that unconscious reactivity into simple being and direct connection with what is real."]},
+      {"heading": "Facing Pain (\"Repentance\") & Setting Ourselves Against No Person", "paragraphs": ["In the Gospels, the word translated as repentance (metanoia) is not about religious self-hatred—it means a fundamental shift in awareness: stopping our coping mechanisms, facing the pain and hypocrisy we usually run from, and seeing clearly.", "We recognize that as creatures shaped by evolution, every one of us carries blind spots—the gap between the ideals we admire and how we actually live. Because we see that blindness in ourselves first, we refuse to make enemies out of neighbors, pet owners, or overwhelmed shelter workers. We set ourselves against no person."]},
+      {"heading": "Presence, \"Sorrow Guides,\" and Producing Real Fruit", "paragraphs": ["Awareness is not passive belief; it shows itself by the fruit it produces in ordinary life:"], "bullets": ["Human Presence (\"Sorrow Guides\"): People carry unprocessed grief, shame, and overwhelm—what Tolle calls the pain-body. Sometimes the most honest help is simply sitting beside someone without judgment so they can face reality without running back to numbness.", "AI & Records as a Clear Mirror: In Stockton, we use AI and public records not to feel clever, but to strip away guesswork—locating where animals and neighbors are actually stuck so practical help reaches them.", "Acting Locally: Instead of chasing grand illusions, we verify the facts on our own streets, publish honest articles, and connect people to the clinics, fosters, and support that relieve suffering today."]}
+    ],
+    "groundingCards": [
+      {"eyebrow": "01 · Connection", "title": "No Enemies", "text": "Meeting overwhelmed families, unhoused neighbors, and shelter workers with zero condemnation."},
+      {"eyebrow": "02 · Observation", "title": "Field Truth", "text": "Walking levee roads, auditing dispatch logs, and reconciling public numbers before speaking."},
+      {"eyebrow": "03 · Fruit", "title": "Practical Relief", "text": "Removing friction around spay/neuter, microchip scanning, and temporary neighbor fosters."}
+    ]
+  }
+]

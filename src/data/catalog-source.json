@@ -1084,11 +1084,11 @@
       "id": "task-verify-st-marys-church-street-dog-scale",
       "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
       "order_by_id": 1,
-      "list_context": "Plan a limited public-area observation; no visit documented",
-      "title": "Verify conditions: scale of the dog problem near St. Mary's",
+      "list_context": "Estimate people and dogs outside near St. Mary's; check shelter pet access",
+      "title": "Visit St. Mary's to understand pet access and street needs",
       "status": "open",
       "type": "field_observation",
-      "instructions": "On a future visit, observe a manageable portion of the St. Mary's–Church Street corridor from public areas to establish an initial firsthand picture of approximately how many dogs are visible and how widely they are distributed. Record the actual visit date, the general area examined, an approximate dog count including zero if none are seen, basic observed circumstances, and limits of the observation. This is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
+      "instructions": "Purpose of the St. Mary's visit: estimate how many people with pets are staying outside near the shelter because pet restrictions may keep them from entering. Observe a manageable portion of the St. Mary's–Church Street corridor from public areas. Record the actual visit date, the general area examined, approximate counts of people with dogs and dogs visible (including zero), basic observed circumstances, and limits of the observation. Confirm the current pet policy for the specific shelter program before stating that it does not allow pets; St. Mary's programs may have different rules. Observation alone cannot establish why someone is outside, and this is not a complete census. Do not enter St. Mary's Community Services to interview staff. Do not assume dogs living with people are abandoned or publish identifying details about residents or sensitive animal locations.",
       "location_ids": [
         "st-marys-community-services-campus"
       ],

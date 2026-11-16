@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CROSSOVER // STOCKTON — See Clearly. Act Locally.</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231D4ED8'/%3E%3Cpath d='M20.5 10.5A7 7 0 1 0 20.5 21.5' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round'/%3E%3Cpath d='M16 16h9' stroke='%2393C5FD' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F7F6F2',
+            ink: '#13161C',
+            charcoal: '#505662',
+            cobalt: '#1D4ED8',
+            emerald: '#166534',
+            amberink: '#92400E',
+            rust: '#B91C1C',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+            display: ['"Instrument Serif"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      background-color: #F7F6F2;
+      color: #13161C;
+    }
+    body {
+      background-color: #F7F6F2;
+      color: #13161C;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .editorial-rule {
+      border-color: #E2DFD7;
+    }
+    .article-prose p {
+      margin-bottom: 1.25rem;
+      line-height: 1.8;
+    }
+    .article-prose h3 {
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 600;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: #13161C;
+    }
+    .article-prose ul {
+      list-style-type: disc;
+      padding-left: 1.35rem;
+      margin-bottom: 1.25rem;
+    }
+    .article-prose li {
+      margin-bottom: 0.55rem;
+      line-height: 1.7;
+    }
+    /* Custom scrollbar for clean archival look */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F7F6F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CFCBC0;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #A6A194;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#1D4ED8] selection:text-white pb-20 md:pb-0">
+
+  <!-- ===================================================================== -->
+  <!-- TOP EDITORIAL NAVIGATION HEADER                                       -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-[#F7F6F2]/95 backdrop-blur-md border-b editorial-rule">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between py-3.5 gap-4">
+        
+        <!-- Civic Square Stamp from the consciousness and presence mockup -->
+        <button onclick="navigateTo('home')" class="flex items-center gap-3 text-left group cursor-pointer focus:outline-none">
+          <svg viewBox="0 0 40 40" class="w-10 h-10 rounded-xl shadow-xs shrink-0 transition-transform group-hover:scale-[1.03]" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect width="40" height="40" rx="9" fill="#1D4ED8"/>
+            <path d="M25.5 13.5A8.5 8.5 0 1 0 25.5 26.5" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M20 20H31" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono font-bold text-sm sm:text-base tracking-tight text-[#13161C]">CROSSOVER</span>
+              <span class="text-[#505662] font-mono text-xs">//</span>
+              <span class="font-mono text-xs sm:text-sm text-[#505662] uppercase">Stockton</span>
+            </div>
+            <p class="text-[11px] text-[#505662] hidden sm:block">Presence, Reality &amp; Practical Local Action</p>
+          </div>
+        </button>
+
+        <!-- Desktop 6-View Navigation -->
+        <nav class="hidden md:flex items-center gap-1 bg-white/80 p-1 rounded-xl border editorial-rule" aria-label="Main navigation">
+          <button data-nav="home" onclick="navigateTo('home')" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">Home</button>
+          <button data-nav="articles" onclick="navigateTo('articles')" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">Articles</button>
+          <button data-nav="doing" onclick="navigateTo('doing')" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">What We're Doing</button>
+          <button data-nav="ai" onclick="navigateTo('ai')" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">AI &amp; Ideas</button>
+          <button data-nav="explorer" onclick="navigateTo('explorer')" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">Info Explorer</button>
+          <button data-nav="about" onclick="navigateTo('about')" class="nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">About</button>
+        </nav>
+
+        <!-- Mobile Quick-Jump to Info Explorer -->
+        <button
+          onclick="navigateTo('explorer')"
+          class="md:hidden inline-flex items-center gap-1.5 bg-white border editorial-rule text-[#13161C] text-xs font-semibold px-3 py-2 rounded-xl shadow-2xs cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 text-[#1D4ED8]" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
+          </svg>
+          <span>Records</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN DYNAMIC VIEWPORT                                                 -->
+  <!-- ===================================================================== -->
+  <main id="app-root" class="flex-1">
+    <!-- Rendered dynamically by JavaScript based on active route -->
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- EDITORIAL ARCHIVAL FOOTER                                             -->
+  <!-- ===================================================================== -->
+  <footer class="border-t editorial-rule bg-[#F7F6F2] mt-16">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-10">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div class="space-y-1.5 max-w-lg">
+          <div class="flex items-center gap-2">
+            <svg viewBox="0 0 40 40" class="w-4 h-4 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect width="40" height="40" rx="9" fill="#1D4ED8"/>
+              <path d="M25.5 13.5A8.5 8.5 0 1 0 25.5 26.5" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M20 20H31" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <span class="font-mono font-bold text-xs tracking-wider text-[#13161C]">CROSSOVER // STOCKTON</span>
+          </div>
+          <p class="text-xs text-[#505662] leading-relaxed">
+            Crossing over from egoic noise and disconnection to clear awareness, non-judgmental presence, and verifiable local action in Stockton, California.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-[#505662]">
+          <button onclick="navigateTo('home')" class="hover:text-[#13161C] cursor-pointer">Home</button>
+          <button onclick="navigateTo('articles')" class="hover:text-[#13161C] cursor-pointer">Articles</button>
+          <button onclick="navigateTo('doing')" class="hover:text-[#13161C] cursor-pointer">What We're Doing</button>
+          <button onclick="navigateTo('ai')" class="hover:text-[#13161C] cursor-pointer">AI &amp; Ideas</button>
+          <button onclick="navigateTo('explorer')" class="hover:text-[#13161C] cursor-pointer">Info Explorer</button>
+          <button onclick="navigateTo('about')" class="hover:text-[#13161C] cursor-pointer">About</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MOBILE BOTTOM NAVIGATION BAR                                          -->
+  <!-- ===================================================================== -->
+  <nav class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-md border-t editorial-rule px-1.5 py-1.5 grid grid-cols-5 gap-1 shadow-lg" aria-label="Mobile bottom navigation">
+    <button data-mob-nav="home" onclick="navigateTo('home')" class="mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-semibold cursor-pointer">
+      <span>Home</span>
+    </button>
+    <button data-mob-nav="articles" onclick="navigateTo('articles')" class="mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-semibold cursor-pointer">
+      <span>Articles</span>
+    </button>
+    <button data-mob-nav="doing" onclick="navigateTo('doing')" class="mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-semibold cursor-pointer">
+      <span>Doing</span>
+    </button>
+    <button data-mob-nav="ai" onclick="navigateTo('ai')" class="mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-semibold cursor-pointer">
+      <span>AI &amp; Ideas</span>
+    </button>
+    <button data-mob-nav="about" onclick="navigateTo('about')" class="mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-semibold cursor-pointer">
+      <span>About</span>
+    </button>
+  </nav>
+
+  <!-- ===================================================================== -->
+  <!-- SINGLE-PURPOSE FULL-SCREEN MAP MODAL (TRIGGERED FROM ARTICLES ONLY)   -->
+  <!-- ===================================================================== -->
+  <div id="fullscreen-map-modal" class="fixed inset-0 z-50 hidden flex-col bg-[#F7F6F2]" role="dialog" aria-modal="true" aria-labelledby="fs-map-title">
+    <!-- Minimal Clean Top Bar -->
+    <div class="bg-white border-b editorial-rule px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4 shrink-0">
+      <div class="flex items-center gap-3 min-w-0">
+        <span class="font-mono text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md bg-blue-50 text-[#1D4ED8] border border-blue-200 shrink-0">
+          Single-Layer Map
+        </span>
+        <div class="truncate">
+          <h2 id="fs-map-title" class="font-serif text-lg sm:text-xl font-bold text-[#13161C] truncate">Map Title</h2>
+          <p id="fs-map-subtitle" class="text-xs text-[#505662] truncate">Subtitle</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="adjustMapZoom(0.2)" class="p-2 rounded-lg bg-[#F7F6F2] hover:bg-stone-200 border editorial-rule text-xs font-mono font-bold text-[#13161C] cursor-pointer" title="Zoom In">+</button>
+        <button onclick="adjustMapZoom(-0.2)" class="p-2 rounded-lg bg-[#F7F6F2] hover:bg-stone-200 border editorial-rule text-xs font-mono font-bold text-[#13161C] cursor-pointer" title="Zoom Out">−</button>
+        <button onclick="resetMapTransform()" class="px-2.5 py-2 rounded-lg bg-[#F7F6F2] hover:bg-stone-200 border editorial-rule text-xs font-semibold text-[#13161C] cursor-pointer">Reset</button>
+        <button onclick="closeFullScreenMap()" class="px-3.5 py-2 rounded-lg bg-[#13161C] hover:bg-[#1D4ED8] text-white text-xs font-semibold cursor-pointer">
+          Close Map ✕
+        </button>
+      </div>
+    </div>
+
+    <!-- Clean Interactive Canvas Stage (Drag to pan, buttons/wheel to zoom) -->
+    <div id="fs-map-viewport" class="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing flex items-center justify-center p-4 sm:p-8 select-none">
+      <div id="fs-map-transform-layer" class="transition-transform duration-150 ease-out w-full max-w-4xl">
+        <!-- Injected Single-Purpose SVG Map -->
+      </div>
+
+      <!-- Minimal Bottom Caption Pill -->
+      <div id="fs-map-legend" class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md bg-white/95 backdrop-blur-xs border editorial-rule rounded-2xl p-4 shadow-sm text-xs text-[#505662] leading-relaxed">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- RECORD INSPECTION DRAWER / MODAL (FOR INFO EXPLORER)                  -->
+  <!-- ===================================================================== -->
+  <div id="record-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-[#13161C]/50 backdrop-blur-xs p-4" role="dialog" aria-modal="true" aria-labelledby="rec-modal-title">
+    <div class="bg-white border editorial-rule rounded-2xl max-w-xl w-full shadow-xl overflow-hidden flex flex-col max-h-[88vh]">
+      <div class="px-5 py-4 bg-[#F7F6F2] border-b editorial-rule flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span id="rec-modal-id" class="font-mono text-xs font-bold text-[#1D4ED8]">REC-001</span>
+          <span id="rec-modal-status" class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded-md border">Status</span>
+        </div>
+        <button onclick="closeRecordModal()" class="p-1.5 rounded-lg text-[#505662] hover:text-[#13161C] hover:bg-stone-200/70 cursor-pointer" aria-label="Close record">
+          ✕
+        </button>
+      </div>
+      <div id="rec-modal-body" class="p-5 sm:p-6 overflow-y-auto space-y-4 text-sm text-[#13161C]">
+        <!-- Populated by JS -->
+      </div>
+      <div id="rec-modal-footer" class="px-5 py-3.5 bg-[#F7F6F2] border-t editorial-rule flex items-center justify-between gap-2">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION DATA & VANILLA JAVASCRIPT                                 -->
+  <!-- ===================================================================== -->
+  <script>
+    // =========================================================================
+    // 1. SINGLE-PURPOSE MAPS (EMBEDDED IN SPECIFIC ARTICLES ONLY)
+    // =========================================================================
+    const ARTICLE_MAPS = {
+      'field-call-density': {
+        title: 'Stockton Field-Call Density & Dumping Corridors (7,183 Logs)',
+        subtitle: 'Single-layer geospatial summary of Animal Services dispatch concentration across Stockton corridors',
+        legend: '<strong>Single-Layer View:</strong> Shaded zones indicate concentrations of loose-dog, injured-stray, and weekly dumping calls extracted from the 7,183 municipal dispatch logs. Drag to pan; use + / − to zoom.',
+        svg: `
+          <svg viewBox="0 0 800 500" class="w-full h-auto rounded-2xl border editorial-rule bg-[#FCFBF9] shadow-xs">
+            <defs>
+              <pattern id="grid-light" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#EAE6DD" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="500" fill="url(#grid-light)"/>
+            
+            <!-- San Joaquin River & Calaveras / Mormon Slough Waterways -->
+            <path d="M 40 185 Q 190 215, 290 250 T 520 270 T 760 255" fill="none" stroke="#BFDBFE" stroke-width="14" stroke-linecap="round"/>
+            <path d="M 165 40 Q 210 160, 290 250 L 340 460" fill="none" stroke="#DBEAFE" stroke-width="9" stroke-linecap="round"/>
+            <text x="85" y="172" font-family="JetBrains Mono, monospace" font-size="10" fill="#1D4ED8" font-weight="600">SAN JOAQUIN RIVER / DEEP WATER CHANNEL</text>
+            <text x="535" y="292" font-family="JetBrains Mono, monospace" font-size="10" fill="#1D4ED8" font-weight="600">MORMON SLOUGH CORRIDOR</text>
+
+            <!-- Major Arterials (I-5, Hwy 99, March Ln, Charter Way / MLK) -->
+            <line x1="255" y1="20" x2="310" y2="480" stroke="#D6D3CD" stroke-width="3"/>
+            <line x1="560" y1="20" x2="610" y2="480" stroke="#D6D3CD" stroke-width="3"/>
+            <line x1="60" y1="115" x2="740" y2="115" stroke="#D6D3CD" stroke-width="2.5"/>
+            <line x1="60" y1="355" x2="740" y2="355" stroke="#D6D3CD" stroke-width="2.5"/>
+            <text x="263" y="42" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">I-5</text>
+            <text x="568" y="42" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">HWY 99</text>
+            <text x="68" y="108" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">MARCH LN / TRINITY PKWY</text>
+            <text x="68" y="348" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">DR. MLK JR. BLVD (CHARTER WAY)</text>
+
+            <!-- Zone 1: Mormon Slough & Industrial Corridor (High Dumping / Delayed Dispatch) -->
+            <ellipse cx="520" cy="255" rx="115" ry="52" fill="#DC2626" fill-opacity="0.14" stroke="#B91C1C" stroke-width="2" stroke-dasharray="5 4"/>
+            <circle cx="520" cy="255" r="7" fill="#B91C1C"/>
+            <rect x="425" y="182" width="195" height="44" rx="8" fill="#FFFFFF" stroke="#B91C1C" stroke-width="1.5"/>
+            <text x="522" y="200" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#13161C">Mormon Slough &amp; Industrial</text>
+            <text x="522" y="216" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#B91C1C">3–10 dumped encounters / wk</text>
+
+            <!-- Zone 2: South Stockton & 1575 S. Lincoln St (Shelter Proximity Overload) -->
+            <ellipse cx="325" cy="405" rx="95" ry="48" fill="#1D4ED8" fill-opacity="0.12" stroke="#1D4ED8" stroke-width="2"/>
+            <circle cx="315" cy="405" r="7" fill="#1D4ED8"/>
+            <rect x="215" y="422" width="215" height="44" rx="8" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <text x="322" y="440" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#13161C">1575 S. Lincoln St (Animal Shelter)</text>
+            <text x="322" y="456" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#1D4ED8">3,106 stray intakes (2024 baseline)</text>
+
+            <!-- Zone 3: Central Stockton & St. Mary's Pathways -->
+            <ellipse cx="395" cy="295" rx="75" ry="38" fill="#D97706" fill-opacity="0.15" stroke="#92400E" stroke-width="1.8"/>
+            <circle cx="395" cy="295" r="6" fill="#92400E"/>
+            <rect x="335" y="310" width="185" height="40" rx="8" fill="#FFFFFF" stroke="#92400E" stroke-width="1.5"/>
+            <text x="427" y="327" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10.5" font-weight="700" fill="#13161C">Central / St. Mary's Pathways</text>
+            <text x="427" y="341" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#92400E">ISSUE-01: Pet bed scale under audit</text>
+
+            <!-- Zone 4: North & Trinity Pkwy -->
+            <ellipse cx="235" cy="115" rx="85" ry="40" fill="#166534" fill-opacity="0.11" stroke="#166534" stroke-width="1.8" stroke-dasharray="4 4"/>
+            <circle cx="235" cy="115" r="6" fill="#166534"/>
+            <rect x="135" y="54" width="200" height="40" rx="8" fill="#FFFFFF" stroke="#166534" stroke-width="1.5"/>
+            <text x="235" y="71" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="10.5" font-weight="700" fill="#13161C">North &amp; Trinity Pkwy Zone</text>
+            <text x="235" y="85" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#166534">Clinic waitlist &amp; containment calls</text>
+          </svg>
+        `
+      },
+      'handoff-nodes': {
+        title: 'Community Care & Handoff Points Across Stockton',
+        subtitle: 'Single-layer view of clinics, microchip scanning hubs, and shelter/outreach nodes',
+        legend: '<strong>Single-Layer View:</strong> Active clinics, shelter walk-in hours, and community support hubs where reporting and rescue handoffs succeed without kennel bottlenecks.',
+        svg: `
+          <svg viewBox="0 0 800 500" class="w-full h-auto rounded-2xl border editorial-rule bg-[#FCFBF9] shadow-xs">
+            <defs>
+              <pattern id="grid-handoff" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#EAE6DD" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="800" height="500" fill="url(#grid-handoff)"/>
+
+            <!-- Reference Roads -->
+            <line x1="250" y1="20" x2="295" y2="480" stroke="#DDD9D0" stroke-width="3"/>
+            <line x1="565" y1="20" x2="605" y2="480" stroke="#DDD9D0" stroke-width="3"/>
+            <line x1="60" y1="220" x2="740" y2="220" stroke="#DDD9D0" stroke-width="2.5"/>
+            <text x="258" y="40" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">I-5</text>
+            <text x="573" y="40" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">HWY 99</text>
+            <text x="68" y="212" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#505662">ALPINE AVE / CENTRAL CORRIDOR</text>
+
+            <!-- Handoff Connection Arcs -->
+            <path d="M 390 165 Q 340 270, 315 395" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-dasharray="6 5"/>
+            <path d="M 390 165 Q 445 225, 465 280" fill="none" stroke="#166534" stroke-width="2" stroke-dasharray="6 5"/>
+
+            <!-- Node A: ACT Spay/Neuter Clinic (Alpine Ave) -->
+            <circle cx="390" cy="165" r="10" fill="#166534"/>
+            <rect x="275" y="95" width="235" height="54" rx="10" fill="#FFFFFF" stroke="#166534" stroke-width="1.8"/>
+            <text x="392" y="115" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11.5" font-weight="700" fill="#13161C">ACT Spay/Neuter Clinic (Alpine Ave)</text>
+            <text x="392" y="131" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#166534">Low-cost sterilization · (209) 462-7729</text>
+
+            <!-- Node B: Stockton Animal Shelter (Walk-In Chip/Vaccine + Temp Foster) -->
+            <circle cx="315" cy="395" r="10" fill="#1D4ED8"/>
+            <rect x="180" y="415" width="275" height="54" rx="10" fill="#FFFFFF" stroke="#1D4ED8" stroke-width="1.8"/>
+            <text x="317" y="435" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11.5" font-weight="700" fill="#13161C">Stockton Animal Shelter (1575 S. Lincoln)</text>
+            <text x="317" y="451" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#1D4ED8">Walk-in chip/vax Wed–Sun 1–3:30 PM</text>
+
+            <!-- Node C: St. Mary's Dining Room / Pathways -->
+            <circle cx="465" cy="280" r="9" fill="#92400E"/>
+            <rect x="485" y="254" width="245" height="54" rx="10" fill="#FFFFFF" stroke="#92400E" stroke-width="1.8"/>
+            <text x="607" y="274" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11.5" font-weight="700" fill="#13161C">St. Mary's Dining Room &amp; Pathways</text>
+            <text x="607" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#92400E">Fremont pop-up clinics &amp; pet shelter audit</text>
+          </svg>
+        `
+      }
+    };
+
+    // =========================================================================
+    // 2. LONG-FORM ARTICLES DATA
+    // =========================================================================
+    const ARTICLES = [
+      {
+        id: 'art-stats-2024-update',
+        recordId: 'ART-01',
+        title: 'A Look at the Stray Dogs Gap Through Statistics — And What Happens When the Shelter Updates Its Public Data',
+        subtitle: 'Reconciling our 2024 baseline (3,106 stray intakes and 7,183 dispatch calls) with newly updated Stockton Animal Services public records.',
+        date: 'November 2026',
+        readTime: '6 min read',
+        status: 'Published · Data Audit',
+        tags: ['Statistics', 'Public Records', 'Data Reconciliation'],
+        mapKey: 'field-call-density',
+        summary: 'When public agencies update their dashboards, old talking points expire overnight. Here is what our 2024 baseline actually proved, what changed in the updated shelter release, and why honest verification matters more than clinging to static numbers.',
+        keyTakeaways: [
+          'Our 2024 baseline recorded 3,106 stray-dog intake events at Stockton Animal Shelter alongside 7,183 Animal Services field-call logs obtained via public records.',
+          'Stockton Animal Services recently updated its public reporting figures—requiring line-by-line reconciliation (tracked in ISSUE-02) before citing current intake totals.',
+          'Regardless of quarterly fluctuations, the structural gap remains clear: field call volume far exceeds immediate kennel and transport bandwidth.'
+        ],
+        bodyHtml: `
+          <p>Numbers are useful only when they keep us honest. When Crossover first began looking closely at street dogs in Stockton, public debate was dominated by vague impressions—some claiming the city was overrun by tens of thousands of abandoned animals, others insisting the system was working fine.</p>
+          <p>To get grounded in reality, we started with verifiable records: <strong>3,106 stray-dog intake events</strong> logged by Stockton Animal Services in 2024, paired with <strong>7,183 Animal Services field-call records</strong> and field observations showing roughly <strong>3 to 10 dumped-dog encounters per week</strong> along low-visibility industrial corridors like Mormon Slough.</p>
+          <h3>When the Shelter Updates Its Public Data</h3>
+          <p>Recently, Stockton Animal Services updated its public data disclosures. In traditional advocacy, organizations often keep quoting older statistics because those numbers sound dramatic or already fit a pre-written narrative. That is an egoic trap—protecting an old story instead of looking at what is true today.</p>
+          <p>For us, an updated public dataset is good news. It means our first job is <strong>reconciliation</strong>: comparing the 2024 baseline against the newly published figures, separating intake categories (stray, owner surrender, quarantine, transfer), and checking whether timely field response has improved or remained strained.</p>
+          <h3>What the 7,183 Dispatch Logs Actually Show</h3>
+          <ul>
+            <li><strong>High Citizen Engagement:</strong> Stockton residents are not ignoring animals in trouble. Thousands of calls come in from every zip code—reporting loose dogs near traffic, injured strays, and abandoned litters.</li>
+            <li><strong>Triage Compression:</strong> Because field staffing is finite, active bite calls and immediate public-safety hazards rightly take priority—leaving non-aggressive stray sightings queued until the dog moves on or a neighbor intervenes.</li>
+            <li><strong>The Unknown Denominator:</strong> No verified municipal street-dog census exists in Stockton. Pretending we know the exact total street population would be dishonest; naming what is <em>unknown</em> is part of seeing clearly.</li>
+          </ul>
+          <p>Until we complete our line-by-line audit of the newly updated shelter tables (currently tracked as <strong>ISSUE-02</strong>), we label 2024 figures explicitly as our 2024 baseline—and invite anyone in the community to inspect the raw records in our Info Explorer.</p>
+        `,
+        sources: [
+          { label: 'Stockton Animal Services — 2024 Intake Baseline & Updated Public Data Portal', ref: 'REC-001' },
+          { label: 'CPRA Municipal Field-Call Dataset (7,183 Dispatch Records)', ref: 'REC-002' },
+          { label: 'Mormon Slough & Industrial Corridor Weekly Field Log', ref: 'REC-005' }
+        ]
+      },
+      {
+        id: 'art-bottlenecks-ai',
+        recordId: 'ART-02',
+        title: 'The Bottlenecks to Care: Where AI Pointed Us First',
+        subtitle: 'Using structured AI analysis across thousands of dispatch logs to isolate addressable chokepoints—without scapegoating "bad owners."',
+        date: 'November 2026',
+        readTime: '7 min read',
+        status: 'Published · Systems Analysis',
+        tags: ['AI Analysis', 'Spay/Neuter', 'Root Causes'],
+        mapKey: null,
+        summary: 'When systems fail, the human mind looks for someone to blame. By using AI to cluster 7,183 dispatch logs and intake barriers, we found that upstream sterilization access and intake friction—not moral failure—explain where care breaks down.',
+        keyTakeaways: [
+          'Blaming "bad owners" or "inept staff" is an egoic shortcut that explains nothing and changes nothing.',
+          'AI pattern clustering across dispatch notes and clinic waitlists isolates three high-leverage bottlenecks: upstream spay/neuter access, appointment-only shelter walls, and stalled volunteer/foster onboarding.',
+          'Focusing technology on scheduling, navigation, and temporary foster diversion produces immediate relief without waiting years for new concrete.'
+        ],
+        bodyHtml: `
+          <p>In public meetings and neighborhood comment threads, two familiar stories appear whenever street dogs are discussed. One story blames <em>"bad owners"</em> who fail to fix or contain their pets. The other blames <em>"broken city workers"</em> who fail to answer the phone or pick up every stray.</p>
+          <p>Both stories share the same root: the egoic urge to set ourselves above someone else so we don't have to look closely at the shared conditions producing the suffering. When you drop the blame and look at the records with clear eyes, a much more practical picture emerges.</p>
+          <h3>What AI Pattern Extraction Revealed</h3>
+          <p>We used large language models to read, categorize, and cross-reference thousands of repetitive municipal dispatch notes, committee minutes, and local clinic constraints. Instead of a vague cloud of "too many strays," three distinct mechanical bottlenecks stood out:</p>
+          <ul>
+            <li><strong>1. Upstream Spay/Neuter &amp; Preventive Friction:</strong> Multi-week surgical waitlists and out-of-pocket costs turn ordinary, caring families into overwhelmed households with accidental litters. Even municipal rule discussions have struggled to pair mandates with concrete funding and surgical capacity.</li>
+            <li><strong>2. Appointment-Only Shelter Walls:</strong> When kennels at 1575 S. Lincoln St run past capacity, walk-in stray intake closes to non-emergencies. A neighbor who does the right thing by rescuing a dog off the road hits a locked door—and sometimes abandons the effort out of desperation.</li>
+            <li><strong>3. The "Willing Helper" Bottleneck:</strong> Stockton has residents actively trying to volunteer, foster found dogs, or walk shelter dogs through programs like Doggie Day Out—yet applications sit unanswered because a small shelter staff is buried in daily kennel triage.</li>
+          </ul>
+          <h3>Why We Choose Addressable Bottlenecks Over Utopian Fixes</h3>
+          <p>AI is valuable here not because it replaces human compassion, but because it acts as a filter. It shows us that pouring concrete for new buildings takes years and millions of dollars, whereas <strong>removing navigation friction for spay/neuter</strong> and <strong>routing found dogs directly to local microchip scanners and temporary fosters</strong> can keep hundreds of animals out of kennels right now.</p>
+        `,
+        sources: [
+          { label: 'AI Synthesis of 7,183 Field-Call Logs & Triage Notes', ref: 'REC-002' },
+          { label: 'Identified Gap: Upstream Spay/Neuter Surgical & Scheduling Access', ref: 'GAP-01' },
+          { label: 'Identified Gap: Willing-Helper & Volunteer Onboarding Latency', ref: 'GAP-03' }
+        ]
+      },
+      {
+        id: 'art-expansion-canine-campus',
+        recordId: 'ART-03',
+        title: 'The Shelter Expansion & Proposed Canine Campus: Concrete, Timelines, and What Happens in the Meantime',
+        subtitle: 'Tracking the South Lincoln Street shelter construction (targeted for Spring 2027) and Stockton Streetdogs’ proposed Canine Campus.',
+        date: 'October 2026',
+        readTime: '5 min read',
+        status: 'Published · Infrastructure Watch',
+        tags: ['Shelter Expansion', 'Canine Campus', 'Infrastructure'],
+        mapKey: null,
+        summary: 'Physical facilities matter—Stockton’s shelter expansion and the proposed Canine Campus both aim to relieve severe space constraints. Here is an honest look at their current status, realistic timelines, and why community-level care cannot wait for ribbon-cuttings.',
+        keyTakeaways: [
+          'The municipal shelter expansion and clinic project at 1575 S. Lincoln St has faced construction timelines extending into Spring 2027.',
+          'Stockton Streetdogs’ proposed Canine Campus envisions a dedicated 24/7 safe haven and community recovery campus—currently in planning and fundraising.',
+          'Even expanded facilities will overflow within months unless upstream spay/neuter and field reunification reduce intake volume first.'
+        ],
+        bodyHtml: `
+          <p>Whenever a shelter runs out of kennel space, the most obvious instinct is to build more kennels. In Stockton, two major physical efforts are underway or proposed to expand capacity: the City’s <strong>South Lincoln Street Shelter Expansion &amp; Clinic project</strong> (projected for Spring 2027) and <strong>Stockton Streetdogs’ proposed Canine Campus</strong>.</p>
+          <p>Both efforts deserve clear, accurate public tracking—free from both cynical dismissal and magical thinking.</p>
+          <h3>1. The Municipal Shelter Expansion (1575 S. Lincoln St)</h3>
+          <p>The City’s expansion aims to modernize housing and add dedicated veterinary clinic space on South Lincoln Street. However, municipal construction moves on brick-and-mortar timelines—with completion targets pushed into <strong>Spring 2027</strong>. While construction continues, daily intake and medical triage still operate inside constrained existing spaces.</p>
+          <h3>2. The Proposed Canine Campus</h3>
+          <p>Proposed by local advocates at Stockton Streetdogs, the <strong>Canine Campus</strong> envisions a staffed sanctuary and decompression environment separate from the municipal pound—creating space for recovery, socialization, and community involvement. It remains in the planning, site, and capital-development phase.</p>
+          <h3>What Happens in the Meantime?</h3>
+          <p>History across California municipal shelters teaches a sobering lesson: <strong>you cannot build your way out of an unsterilized intake flood.</strong> If Stockton adds 60 new kennels in 2027 without expanding upstream spay/neuter and neighbor foster pathways, those 60 kennels will be full by summer.</p>
+          <p>Supporting these physical builds means pairing them with software, volunteer coordination, and preventive veterinary access today—so when new doors open, they stay sustainable.</p>
+        `,
+        sources: [
+          { label: 'Initiative Tracker: South Lincoln St Shelter Expansion (Spring 2027)', ref: 'INIT-01' },
+          { label: 'Initiative Tracker: Proposed Canine Campus (Stockton Streetdogs)', ref: 'INIT-02' }
+        ]
+      },
+      {
+        id: 'art-reporting-handoffs',
+        recordId: 'ART-04',
+        title: 'Reporting and Rescue Handoffs — The Unseen Glue That Holds It All Together',
+        subtitle: 'Why caring for a street dog is never a single heroic act, but a chain of human handoffs—and how simple local tools keep the baton from dropping.',
+        date: 'November 2026',
+        readTime: '6 min read',
+        status: 'Published · Field Practice',
+        tags: ['Handoffs', 'Microchip Triage', 'Temporary Foster'],
+        mapKey: 'handoff-nodes',
+        summary: 'Between a resident noticing a limping dog and that dog sleeping safely in a home lies a fragile chain of handoffs: reporting, chip scanning, transport, clinic slots, and temporary foster care. Strengthening that unseen glue saves lives without adding a single municipal kennel.',
+        keyTakeaways: [
+          'Caring for a street dog is a relay where a breakdown at any handoff—unclear reporting, no chip scan, or lack of a 7-day foster—sends the dog back to the street.',
+          'Stockton’s Temporary Found-Animal Foster pathway allows finders to house a stray briefly while Animal Services covers vaccines and sterilization—yet few residents know it exists.',
+          'Direct community resources—ACT Clinic, Shelter walk-in chip/vaccine hours, Home To Home, and Better World Rescue—form a working safety net when connected clearly.'
+        ],
+        bodyHtml: `
+          <p>When someone spots a stray dog on a Stockton sidewalk, they usually imagine a single transaction: <em>"I call a number, a truck comes, and the dog is taken care of."</em></p>
+          <p>In reality, helping a dog in need depends on a sequence of quiet human handoffs—the unseen glue between neighbors, dispatchers, microchip scanners, veterinary techs, and foster homes. When any one link lacks clarity or capacity, the entire effort stalls.</p>
+          <h3>Where the Handoff Usually Drops</h3>
+          <ul>
+            <li><strong>Incomplete Field Reports:</strong> Calls logged without exact cross-streets, photos, or containment status make it nearly impossible for an officer or volunteer to locate a moving dog hours later.</li>
+            <li><strong>Skipping the Neighborhood Chip Scan:</strong> Many roaming dogs are lost family pets living within four blocks of where they are found. Driving straight to an overcrowded shelter—instead of scanning at a local vet clinic or during shelter walk-in hours—turns a 20-minute reunion into a multi-day kennel stay.</li>
+            <li><strong>Invisible Temporary Foster Pathways:</strong> Stockton Animal Services maintains a program allowing residents who find a stray to temporarily foster the animal while the shelter provides vaccinations and arranges sterilization—yet most residents are never guided into that option when they call.</li>
+          </ul>
+          <h3>Practical Glue Available in Stockton Right Now</h3>
+          <p>Closing the handoff gap doesn't require waiting for new laws. It starts with making existing community nodes easy to reach and use: walk-in vaccine and microchip hours at <strong>1575 S. Lincoln St</strong> (Wed–Sun, 1:00–3:30 PM), low-cost sterilization through <strong>ACT Spay/Neuter Clinic</strong> on Alpine Ave and <strong>The Pet Advocate</strong>, pop-up clinics at <strong>St. Mary’s Dining Room</strong>, and direct neighbor-to-neighbor rehoming via <strong>Delta Humane Society’s Home To Home</strong> platform.</p>
+        `,
+        sources: [
+          { label: 'Care Resource Directory: Stockton Walk-In Chip, Vaccine & Spay/Neuter Nodes', ref: 'RES-01' },
+          { label: 'Identified Gap: Appointment-Only Intake & Handoff Friction', ref: 'GAP-02' }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 3. WHAT WE'RE DOING — ACTIVE REPO ISSUES & COMPLETED MILESTONES
+    // =========================================================================
+    const WORK_ITEMS = [
+      {
+        id: 'ISSUE-01',
+        status: 'Active',
+        area: 'Field Verification · Central Stockton',
+        title: 'Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary’s Pathways',
+        summary: 'Confirming real-world pet capacity limits (268 total shelter beds at St. Mary’s Pathways), temporary boarding options during medical/shelter stays, and mobile veterinary pop-up schedules so unhoused neighbors are not forced to separate from their dogs.',
+        nextStep: 'Cross-check outreach logs with Fremont Animal Clinic pop-up dates at St. Mary’s Dining Room and publish a verified field note.'
+      },
+      {
+        id: 'ISSUE-02',
+        status: 'Active',
+        area: 'Data Hygiene · Public Records',
+        title: 'Reconcile newly updated Stockton Animal Services public data with our 2024 baseline',
+        summary: 'Stockton Animal Services updated its public reporting tables. We are auditing the updated figures side-by-side against our 2024 baseline (3,106 stray intakes) and 7,183 CPRA dispatch records so every number on Crossover remains accurate.',
+        nextStep: 'Publish updated intake comparison table in Info Explorer and append addendum to ART-01.'
+      },
+      {
+        id: 'ISSUE-03',
+        status: 'Active',
+        area: 'Operations & Onboarding Audit',
+        title: 'Document the "Willing Helper" & Temporary Found-Pet Foster bottleneck',
+        summary: 'Investigating why resident applications for Doggie Day Out and volunteer walking stall in email queues, and mapping the exact steps required for a neighbor to use Stockton’s Temporary Found-Animal Foster pathway.',
+        nextStep: 'Draft a plain-English 1-page guide for finders and test response latency across intake channels.'
+      },
+      {
+        id: 'ISSUE-04',
+        status: 'Completed',
+        area: 'CPRA & AI Extraction',
+        title: 'Extract, structure, and audit 7,183 Animal Services field-call dispatch logs',
+        summary: 'Processed 7,183 municipal dispatch records to identify call volume, triage priorities, delayed/queued outcomes, and repeat dumping corridors across Stockton.',
+        nextStep: 'Completed — findings published in ART-01 and ART-02.'
+      },
+      {
+        id: 'ISSUE-05',
+        status: 'Completed',
+        area: 'Direct Community Utility',
+        title: 'Verify and publish active Stockton low-cost spay/neuter and walk-in clinic options',
+        summary: 'Compiled verified local access points including ACT Spay/Neuter Clinic (Alpine Ave), Stockton Shelter walk-in vaccine/chip hours (Wed–Sun 1–3:30 PM), The Pet Advocate, and Home To Home rehoming.',
+        nextStep: 'Completed — live in Info Explorer (RES-01).'
+      },
+      {
+        id: 'ISSUE-06',
+        status: 'Planned',
+        area: 'Applied AI Prototype',
+        title: 'Prototype bilingual (English/Spanish) SMS & web spay/neuter slot matcher',
+        summary: 'Once ISSUE-02 and ISSUE-03 are verified, test a lightweight tool that matches Stockton pet owners to open low-cost sterilization slots and sends automated reminders to reduce missed appointments.',
+        nextStep: 'Queued behind completion of ISSUE-02 data reconciliation.'
+      }
+    ];
+
+    // =========================================================================
+    // 4. INFO EXPLORER MASTER CATALOG (ALL RECORDS, ARTICLES, GAPS & RESOURCES)
+    // =========================================================================
+    const EXPLORER_RECORDS = [
+      {
+        id: 'ART-01',
+        type: 'Article',
+        status: 'Complete',
+        title: 'A Look at the Stray Dogs Gap Through Statistics — And Updated Shelter Data',
+        date: '2026-11',
+        source: 'Crossover Stockton Editorial // 2024 Shelter Baseline & 7,183 CPRA Logs',
+        summary: 'Long-form statistical look contrasting the 2024 baseline (3,106 stray intakes, 7,183 field calls) with newly updated Stockton Animal Services public records.',
+        articleId: 'art-stats-2024-update'
+      },
+      {
+        id: 'ART-02',
+        type: 'Article',
+        status: 'Complete',
+        title: 'The Bottlenecks to Care: Where AI Pointed Us First',
+        date: '2026-11',
+        source: 'Crossover Stockton Editorial // AI Cluster Audit',
+        summary: 'How structured AI analysis isolated upstream spay/neuter access, appointment walls, and willing-helper friction without scapegoating residents.',
+        articleId: 'art-bottlenecks-ai'
+      },
+      {
+        id: 'ART-03',
+        type: 'Article',
+        status: 'Complete',
+        title: 'The Shelter Expansion & Proposed Canine Campus: Concrete, Timelines, and the Meantime',
+        date: '2026-10',
+        source: 'Crossover Stockton Editorial // Municipal & Nonprofit Infrastructure Watch',
+        summary: 'Examining the Spring 2027 South Lincoln St expansion timeline and Stockton Streetdogs’ proposed Canine Campus.',
+        articleId: 'art-expansion-canine-campus'
+      },
+      {
+        id: 'ART-04',
+        type: 'Article',
+        status: 'Complete',
+        title: 'Reporting and Rescue Handoffs — The Unseen Glue That Holds It All Together',
+        date: '2026-11',
+        source: 'Crossover Stockton Editorial // Field Practice & Triage',
+        summary: 'Tracing the human handoffs between reporting neighbors, chip scanners, temporary fosters, and community clinics.',
+        articleId: 'art-reporting-handoffs'
+      },
+      {
+        id: 'REC-001',
+        type: 'Dataset / Record',
+        status: 'Active',
+        title: 'Stockton Animal Services Stray Intake Dataset (2024 Baseline vs. Updated Release)',
+        date: '2026-11',
+        source: 'City of Stockton Animal Services Public Disclosures',
+        summary: 'Verified 2024 baseline of 3,106 stray-dog intake events at 1575 S. Lincoln St, currently being reconciled with newly updated municipal reporting tables (ISSUE-02).'
+      },
+      {
+        id: 'REC-002',
+        type: 'Dataset / Record',
+        status: 'Verified',
+        title: 'Municipal Animal Services Field-Call Dispatch Logs (7,183 Records)',
+        date: '2026-11',
+        source: 'California Public Records Act (CPRA) Production',
+        summary: '7,183 structured dispatch logs detailing call timestamps, corridor locations, priority triage, and field response outcomes across Stockton.'
+      },
+      {
+        id: 'REC-005',
+        type: 'Dataset / Record',
+        status: 'Verified',
+        title: 'Mormon Slough & Industrial Corridor Field Observation Log',
+        date: '2026-09',
+        source: 'Direct Field Observation & Community Reports',
+        summary: 'Documented pattern of 3–10 stray or dumped-dog encounters per week along low-visibility levee and industrial warehouse corridors.'
+      },
+      {
+        id: 'GAP-01',
+        type: 'Identified Gap',
+        status: 'Identified Gap',
+        title: 'Upstream Spay/Neuter Surgical & Scheduling Bottleneck',
+        date: '2026-11',
+        source: 'AI Synthesis of Clinic Waitlists & Municipal Committee Records',
+        summary: 'Multi-week surgical waitlists and scheduling friction prevent willing low-income pet families from sterilizing dogs before accidental litters occur.'
+      },
+      {
+        id: 'GAP-02',
+        type: 'Identified Gap',
+        status: 'Identified Gap',
+        title: 'Appointment-Only Shelter Intake Wall & Field Dispatch Latency',
+        date: '2026-11',
+        source: '7,183 Field-Call Logs & 1575 S. Lincoln St Intake Policy',
+        summary: 'Overcrowded kennels force appointment-only stray intake, leaving finders without immediate drop-off options and stretching field trucks thin.'
+      },
+      {
+        id: 'GAP-03',
+        type: 'Identified Gap',
+        status: 'Identified Gap',
+        title: 'Willing-Helper & Volunteer Onboarding Stall (Doggie Day Out / Foster)',
+        date: '2026-11',
+        source: 'Direct Onboarding Audit & Shelter Staffing Analysis',
+        summary: 'Residents applying to walk shelter dogs or temporarily foster found strays face unanswered email queues due to overwhelmed administrative bandwidth.'
+      },
+      {
+        id: 'ISSUE-01',
+        type: 'Open Issue',
+        status: 'Open Issue',
+        title: 'Verify Scale of Companion-Animal Need at St. Mary’s Pathways (268 Beds)',
+        date: '2026-11',
+        source: 'GitHub Repo Open Issue #01 // Central Stockton Field Audit',
+        summary: 'Active verification of pet-inclusive bed capacity, temporary respite boarding, and mobile vet access for unhoused Stockton residents with dogs.'
+      },
+      {
+        id: 'ISSUE-02',
+        type: 'Open Issue',
+        status: 'Open Issue',
+        title: 'Reconcile Updated Stockton Animal Services Public Data with 2024 Baseline',
+        date: '2026-11',
+        source: 'GitHub Repo Open Issue #02 // Data Hygiene',
+        summary: 'Active line-by-line comparison between the 2024 stray intake baseline (3,106) and newly published municipal figures.'
+      },
+      {
+        id: 'INIT-01',
+        type: 'Initiative',
+        status: 'Active',
+        title: 'City of Stockton Animal Shelter Expansion & Clinic (1575 S. Lincoln St)',
+        date: '2026-10',
+        source: 'City of Stockton Capital Project Updates',
+        summary: 'Municipal kennel and veterinary clinic expansion currently under construction, with completion projected for Spring 2027.'
+      },
+      {
+        id: 'INIT-02',
+        type: 'Initiative',
+        status: 'Active',
+        title: 'Proposed Canine Campus & Safe Grounds Advocacy (Stockton Streetdogs)',
+        date: '2026-10',
+        source: 'Stockton Streetdogs Public Campaign Materials',
+        summary: 'Community-led proposal for a 24/7 staffed canine sanctuary/recovery campus and pet-inclusive safe grounds in Stockton.'
+      },
+      {
+        id: 'RES-01',
+        type: 'Care Resource',
+        status: 'Complete',
+        title: 'Verified Stockton Low-Cost Spay/Neuter, Walk-In Vaccine & Rehoming Directory',
+        date: '2026-11',
+        source: 'Direct Clinic & Shelter Verification',
+        summary: 'ACT Spay/Neuter Clinic (Alpine Ave, 209-462-7729), Stockton Shelter walk-in vaccine/chip hours (Wed–Sun 1–3:30 PM, 209-937-7445), The Pet Advocate (209-879-9367), Fremont Animal Clinic pop-ups at St. Mary’s Dining Room, Delta Humane Home To Home, and Better World Rescue.'
+      }
+    ];
+
+    // =========================================================================
+    // 5. NAVIGATION & VIEW RENDERERS
+    // =========================================================================
+    let currentView = 'home';
+    let selectedArticleId = null;
+    let workFilter = 'All';
+    let explorerStatusFilter = 'All';
+    let explorerTypeFilter = 'All';
+    let explorerSearchQuery = '';
+
+    function navigateTo(view, articleId = null) {
+      currentView = view;
+      selectedArticleId = articleId;
+      updateNavHighlight();
+      renderCurrentView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateNavHighlight() {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        const target = btn.getAttribute('data-nav');
+        if (target === currentView) {
+          btn.className = 'nav-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-[#13161C] text-white transition cursor-pointer';
+        } else {
+          btn.className = 'nav-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-[#505662] hover:text-[#13161C] hover:bg-stone-100 transition cursor-pointer';
+        }
+      });
+
+      document.querySelectorAll('.mob-nav-btn').forEach(btn => {
+        const target = btn.getAttribute('data-mob-nav');
+        if (target === currentView) {
+          btn.className = 'mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-bold bg-[#13161C] text-white transition cursor-pointer';
+        } else {
+          btn.className = 'mob-nav-btn flex flex-col items-center justify-center py-1.5 rounded-lg text-[10px] font-semibold text-[#505662] hover:text-[#13161C] transition cursor-pointer';
+        }
+      });
+    }
+
+    function getStatusBadgeClass(status) {
+      const s = status.toLowerCase();
+      if (s.includes('complete') || s.includes('verified')) {
+        return 'bg-emerald-50 text-[#166534] border-emerald-200';
+      }
+      if (s.includes('active') || s.includes('open issue')) {
+        return 'bg-blue-50 text-[#1D4ED8] border-blue-200';
+      }
+      if (s.includes('gap')) {
+        return 'bg-red-50 text-[#B91C1C] border-red-200';
+      }
+      return 'bg-amber-50 text-[#92400E] border-amber-200';
+    }
+
+    function renderCurrentView() {
+      const root = document.getElementById('app-root');
+      if (currentView === 'home') {
+        root.innerHTML = renderHomeView();
+      } else if (currentView === 'articles') {
+        root.innerHTML = selectedArticleId ? renderSingleArticleView(selectedArticleId) : renderArticlesIndexView();
+      } else if (currentView === 'doing') {
+        root.innerHTML = renderDoingView();
+      } else if (currentView === 'ai') {
+        root.innerHTML = renderAiIdeasView();
+      } else if (currentView === 'explorer') {
+        root.innerHTML = renderExplorerView();
+      } else if (currentView === 'about') {
+        root.innerHTML = renderAboutView();
+      }
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 1: HOME
+    // -------------------------------------------------------------------------
+    function renderHomeView() {
+      const completeCount = EXPLORER_RECORDS.filter(r => r.status === 'Complete' || r.status === 'Verified').length;
+      const activeCount = EXPLORER_RECORDS.filter(r => r.status === 'Active' || r.status === 'Open Issue').length;
+      const gapCount = EXPLORER_RECORDS.filter(r => r.status === 'Identified Gap').length;
+
+      return `
+        <!-- Quiet, Grounded Orientation Hero -->
+        <section class="pt-10 pb-12 sm:pt-16 sm:pb-14 border-b editorial-rule">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+              <div class="lg:col-span-7 space-y-5">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border editorial-rule text-xs font-mono font-semibold text-[#505662]">
+                  <span class="w-2 h-2 rounded-full bg-[#1D4ED8]"></span>
+                  <span>Stockton, California · Presence &amp; Reality</span>
+                </div>
+                <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-[#13161C] leading-[1.12]">
+                  Crossing over from noise and disconnection to what is real right where we live.
+                </h1>
+                <p class="text-base sm:text-lg text-[#505662] leading-relaxed">
+                  Crossover Stockton is an organization of awareness and practical local action. We drop blame, use AI and public records as a clear mirror to see where our community’s systems fall short, and focus our hands where real fruit can grow.
+                </p>
+                <div class="pt-1 flex flex-wrap items-center gap-3">
+                  <button onclick="navigateTo('articles')" class="px-5 py-3 rounded-xl bg-[#13161C] hover:bg-[#1D4ED8] text-white text-xs sm:text-sm font-semibold transition cursor-pointer">
+                    Read Recent Articles →
+                  </button>
+                  <button onclick="navigateTo('doing')" class="px-5 py-3 rounded-xl bg-white hover:bg-stone-100 border editorial-rule text-[#13161C] text-xs sm:text-sm font-semibold transition cursor-pointer">
+                    See What We're Doing Now
+                  </button>
+                  <button onclick="navigateTo('about')" class="px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold text-[#505662] hover:text-[#13161C] transition cursor-pointer">
+                    Why We Exist
+                  </button>
+                </div>
+              </div>
+
+              <!-- Editorial Visual Card: Stockton Waterfront & Field Notebook -->
+              <div class="lg:col-span-5">
+                <div class="bg-white border editorial-rule rounded-2xl p-4 shadow-2xs space-y-3">
+                  <div class="rounded-xl overflow-hidden border editorial-rule bg-[#FCFBF9]">
+                    <svg viewBox="0 0 440 240" class="w-full h-auto block" role="img" aria-label="Golden hour over the Stockton waterfront and San Joaquin River">
+                      <defs>
+                        <linearGradient id="sky-golden" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#DBEAFE"/>
+                          <stop offset="55%" stop-color="#FEF3C7"/>
+                          <stop offset="100%" stop-color="#FDE68A"/>
+                        </linearGradient>
+                        <linearGradient id="water-golden" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#93C5FD"/>
+                          <stop offset="50%" stop-color="#FCD34D" stop-opacity="0.45"/>
+                          <stop offset="100%" stop-color="#60A5FA"/>
+                        </linearGradient>
+                      </defs>
+                      <rect width="440" height="145" fill="url(#sky-golden)"/>
+                      <circle cx="355" cy="96" r="24" fill="#F59E0B" fill-opacity="0.85"/>
+                      <!-- Stockton Skyline Silhouettes -->
+                      <rect x="195" y="72" width="28" height="73" fill="#475569"/>
+                      <rect x="232" y="88" width="24" height="57" fill="#64748B"/>
+                      <rect x="264" y="64" width="32" height="81" fill="#334155"/>
+                      <rect x="304" y="95" width="22" height="50" fill="#64748B"/>
+                      <path d="M 330 132 Q 375 124, 430 134 L 430 145 L 330 145 Z" fill="#475569"/>
+                      <!-- San Joaquin River -->
+                      <rect x="0" y="145" width="440" height="95" fill="url(#water-golden)"/>
+                      <line x1="210" y1="162" x2="385" y2="162" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2"/>
+                      <line x1="245" y1="180" x2="365" y2="180" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5"/>
+                      <!-- Waterfront Promenade -->
+                      <path d="M 0 165 Q 115 175, 175 240 L 0 240 Z" fill="#E7E5E4"/>
+                      <path d="M 0 165 Q 115 175, 175 240" fill="none" stroke="#78716C" stroke-width="3"/>
+                      <circle cx="48" cy="148" r="22" fill="#166534" fill-opacity="0.85"/>
+                      <rect x="46" y="160" width="4" height="22" fill="#57534E"/>
+                    </svg>
+                  </div>
+                  <div class="flex items-center justify-between px-1">
+                    <span class="font-mono text-[11px] font-semibold text-[#505662]">STOCKTON WATERFRONT · SEE CLEARLY. ACT LOCALLY.</span>
+                    <span class="font-mono text-[11px] text-[#1D4ED8] font-bold">v2.4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- What We're Actively Doing Right Now -->
+        <section class="py-12 border-b editorial-rule">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+              <div>
+                <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Open Issues &amp; Current Focus</span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#13161C] mt-1">What We're Actively Doing Right Now</h2>
+              </div>
+              <button onclick="navigateTo('doing')" class="text-xs font-bold text-[#1D4ED8] hover:underline cursor-pointer self-start sm:self-auto">
+                View all ${WORK_ITEMS.length} tasks &amp; milestones →
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              ${WORK_ITEMS.filter(w => w.status === 'Active').map(item => `
+                <div class="bg-white border editorial-rule rounded-2xl p-5 flex flex-col justify-between shadow-2xs">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                      <span class="font-mono text-xs font-bold text-[#13161C]">${item.id}</span>
+                      <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded-md border ${getStatusBadgeClass(item.status)}">${item.status}</span>
+                    </div>
+                    <h3 class="font-serif text-lg font-bold text-[#13161C] leading-snug">${item.title}</h3>
+                    <p class="text-xs text-[#505662] mt-2 leading-relaxed">${item.summary}</p>
+                  </div>
+                  <div class="mt-4 pt-3 border-t editorial-rule text-[11px] text-[#505662]">
+                    <strong class="text-[#13161C]">Next:</strong> ${item.nextStep}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Published Articles & Analyses -->
+        <section class="py-12 border-b editorial-rule">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+              <div>
+                <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Published Writing &amp; Field Notes</span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#13161C] mt-1">Recent Articles &amp; Analyses</h2>
+              </div>
+              <button onclick="navigateTo('articles')" class="text-xs font-bold text-[#1D4ED8] hover:underline cursor-pointer self-start sm:self-auto">
+                Open Articles Index →
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              ${ARTICLES.map(art => `
+                <article class="bg-white border editorial-rule rounded-2xl p-6 flex flex-col justify-between hover:border-[#1D4ED8]/60 transition shadow-2xs">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 text-xs font-mono text-[#505662] mb-2.5">
+                      <span>${art.recordId} · ${art.date}</span>
+                      <span>${art.readTime}</span>
+                    </div>
+                    <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#13161C] leading-snug">
+                      <button onclick="navigateTo('articles', '${art.id}')" class="text-left hover:text-[#1D4ED8] transition cursor-pointer">
+                        ${art.title}
+                      </button>
+                    </h3>
+                    <p class="text-xs sm:text-sm text-[#505662] mt-2.5 leading-relaxed">${art.summary}</p>
+                  </div>
+                  <div class="mt-5 pt-4 border-t editorial-rule flex items-center justify-between gap-2">
+                    <div class="flex flex-wrap gap-1.5">
+                      ${art.tags.slice(0, 2).map(t => `<span class="px-2 py-0.5 rounded-md bg-[#F7F6F2] border editorial-rule font-mono text-[10px] text-[#505662]">${t}</span>`).join('')}
+                    </div>
+                    <button onclick="navigateTo('articles', '${art.id}')" class="text-xs font-bold text-[#1D4ED8] hover:underline cursor-pointer shrink-0">
+                      Read Article →
+                    </button>
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- Quick Gateway to the Information Explorer -->
+        <section class="py-12">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="bg-white border editorial-rule rounded-3xl p-6 sm:p-8 shadow-2xs">
+              <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <div class="max-w-xl space-y-2">
+                  <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Information Desk &amp; Archive</span>
+                  <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#13161C]">Explore Every Record, Gap &amp; Source</h2>
+                  <p class="text-sm text-[#505662] leading-relaxed">
+                    Instead of burying evidence inside complicated maps, every article, public dataset, identified gap, open repository issue, and local care resource is indexed in one filterable archive.
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 shrink-0">
+                  <button onclick="openExplorerWithStatus('Complete')" class="p-3.5 rounded-2xl bg-[#F7F6F2] hover:bg-emerald-50 border editorial-rule text-center transition cursor-pointer">
+                    <div class="font-serif text-2xl font-bold text-[#166534]">${completeCount}</div>
+                    <div class="font-mono text-[10px] uppercase font-semibold text-[#505662] mt-0.5">Complete / Verified</div>
+                  </button>
+                  <button onclick="openExplorerWithStatus('Active')" class="p-3.5 rounded-2xl bg-[#F7F6F2] hover:bg-blue-50 border editorial-rule text-center transition cursor-pointer">
+                    <div class="font-serif text-2xl font-bold text-[#1D4ED8]">${activeCount}</div>
+                    <div class="font-mono text-[10px] uppercase font-semibold text-[#505662] mt-0.5">Active / Open</div>
+                  </button>
+                  <button onclick="openExplorerWithStatus('Identified Gap')" class="p-3.5 rounded-2xl bg-[#F7F6F2] hover:bg-red-50 border editorial-rule text-center transition cursor-pointer">
+                    <div class="font-serif text-2xl font-bold text-[#B91C1C]">${gapCount}</div>
+                    <div class="font-mono text-[10px] uppercase font-semibold text-[#505662] mt-0.5">Identified Gaps</div>
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-5 border-t editorial-rule flex flex-wrap items-center justify-between gap-3">
+                <span class="font-mono text-xs text-[#505662]">Total indexed items: <strong>${EXPLORER_RECORDS.length}</strong> records across 6 categories</span>
+                <button onclick="navigateTo('explorer')" class="px-4 py-2.5 rounded-xl bg-[#13161C] hover:bg-[#1D4ED8] text-white text-xs font-semibold transition cursor-pointer">
+                  Open Information Explorer →
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function openExplorerWithStatus(status) {
+      explorerStatusFilter = status;
+      explorerTypeFilter = 'All';
+      explorerSearchQuery = '';
+      navigateTo('explorer');
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 2: ARTICLES (INDEX + LONG-FORM READER WITH SINGLE-PURPOSE MAP)
+    // -------------------------------------------------------------------------
+    function renderArticlesIndexView() {
+      return `
+        <section class="pt-10 pb-14">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="border-b editorial-rule pb-7 mb-8">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Articles &amp; Analyses</span>
+              <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#13161C] mt-1.5">What We've Examined &amp; Written</h1>
+              <p class="text-sm sm:text-base text-[#505662] mt-2.5 leading-relaxed max-w-2xl">
+                Each article examines one concrete question using public records, AI pattern synthesis, and direct field observation—with source citations and focused maps where geography matters.
+              </p>
+            </div>
+
+            <div class="space-y-6">
+              ${ARTICLES.map(art => `
+                <article class="bg-white border editorial-rule rounded-2xl p-6 sm:p-7 shadow-2xs hover:border-[#1D4ED8]/60 transition">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="font-mono text-xs font-bold text-[#1D4ED8]">${art.recordId}</span>
+                      <span class="text-stone-300">•</span>
+                      <span class="font-mono text-xs text-[#505662]">${art.date} · ${art.readTime}</span>
+                    </div>
+                    ${art.mapKey ? `<span class="font-mono text-[10px] font-semibold px-2.5 py-0.5 rounded-md bg-blue-50 text-[#1D4ED8] border border-blue-200">Includes Single-Purpose Map</span>` : ''}
+                  </div>
+
+                  <h2 class="font-serif text-2xl sm:text-3xl font-bold text-[#13161C] leading-snug">
+                    <button onclick="navigateTo('articles', '${art.id}')" class="text-left hover:text-[#1D4ED8] transition cursor-pointer">
+                      ${art.title}
+                    </button>
+                  </h2>
+                  <p class="text-sm text-[#505662] font-medium mt-1.5">${art.subtitle}</p>
+                  <p class="text-sm text-[#505662] mt-3 leading-relaxed">${art.summary}</p>
+
+                  <div class="mt-5 pt-4 border-t editorial-rule flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5">
+                      ${art.tags.map(t => `<span class="px-2.5 py-0.5 rounded-md bg-[#F7F6F2] border editorial-rule font-mono text-[10px] text-[#505662]">${t}</span>`).join('')}
+                    </div>
+                    <button onclick="navigateTo('articles', '${art.id}')" class="px-4 py-2 rounded-xl bg-[#13161C] hover:bg-[#1D4ED8] text-white text-xs font-semibold transition cursor-pointer">
+                      Read Full Article →
+                    </button>
+                  </div>
+                </article>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSingleArticleView(articleId) {
+      const art = ARTICLES.find(a => a.id === articleId) || ARTICLES[0];
+      const mapObj = art.mapKey ? ARTICLE_MAPS[art.mapKey] : null;
+
+      return `
+        <article class="pt-8 pb-16">
+          <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            
+            <!-- Back Link -->
+            <button onclick="navigateTo('articles')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#505662] hover:text-[#13161C] mb-6 cursor-pointer">
+              <span>← Back to All Articles</span>
+            </button>
+
+            <!-- Article Header -->
+            <header class="border-b editorial-rule pb-7 mb-8">
+              <div class="flex flex-wrap items-center gap-2 font-mono text-xs text-[#505662] mb-3">
+                <span class="font-bold text-[#1D4ED8]">${art.recordId}</span>
+                <span>·</span>
+                <span>${art.date}</span>
+                <span>·</span>
+                <span>${art.readTime}</span>
+              </div>
+              <h1 class="font-serif text-3xl sm:text-4xl lg:text-[42px] font-bold text-[#13161C] leading-[1.15]">
+                ${art.title}
+              </h1>
+              <p class="text-base sm:text-lg text-[#505662] mt-3 leading-relaxed">
+                ${art.subtitle}
+              </p>
+            </header>
+
+            <!-- Key Takeaways Box -->
+            <div class="bg-white border editorial-rule rounded-2xl p-5 sm:p-6 mb-8 shadow-2xs">
+              <div class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8] mb-3">Key Takeaways</div>
+              <ul class="space-y-2.5 text-sm text-[#13161C]">
+                ${art.keyTakeaways.map(pt => `
+                  <li class="flex items-start gap-2.5">
+                    <span class="text-[#1D4ED8] font-bold mt-0.5">•</span>
+                    <span class="leading-relaxed">${pt}</span>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+
+            <!-- Single-Purpose Embedded Map Snapshot (Only if this article has one) -->
+            ${mapObj ? `
+              <div class="bg-white border editorial-rule rounded-2xl p-4 sm:p-5 mb-8 shadow-2xs">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                  <div>
+                    <span class="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1D4ED8]">Article Map Snapshot</span>
+                    <h2 class="font-serif text-lg font-bold text-[#13161C]">${mapObj.title}</h2>
+                  </div>
+                  <button
+                    onclick="openFullScreenMap('${art.mapKey}')"
+                    class="self-start sm:self-auto inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#13161C] hover:bg-[#1D4ED8] text-white text-xs font-semibold transition cursor-pointer shrink-0"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                    </svg>
+                    <span>Open Full-Screen Map</span>
+                  </button>
+                </div>
+                <div onclick="openFullScreenMap('${art.mapKey}')" class="cursor-pointer group relative rounded-xl overflow-hidden">
+                  ${mapObj.svg}
+                  <div class="absolute inset-0 bg-[#13161C]/0 group-hover:bg-[#13161C]/5 transition flex items-end justify-end p-3">
+                    <span class="bg-white/95 border editorial-rule px-3 py-1 rounded-lg font-mono text-[10px] font-bold text-[#13161C] shadow-xs">
+                      Click to inspect full-screen map
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- Long-Form Prose -->
+            <div class="article-prose text-base text-[#13161C]">
+              ${art.bodyHtml}
+            </div>
+
+            <!-- Linked Sources & Records Footer -->
+            <div class="mt-10 pt-6 border-t editorial-rule">
+              <div class="font-mono text-xs font-bold uppercase tracking-wider text-[#505662] mb-3">Linked Sources &amp; Records</div>
+              <div class="space-y-2">
+                ${art.sources.map(src => `
+                  <div class="bg-white border editorial-rule rounded-xl p-3.5 flex items-center justify-between gap-3">
+                    <span class="text-xs sm:text-sm font-medium text-[#13161C]">${src.label}</span>
+                    <button onclick="inspectRecordById('${src.ref}')" class="font-mono text-xs font-bold text-[#1D4ED8] hover:underline shrink-0 cursor-pointer">
+                      ${src.ref} →
+                    </button>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+          </div>
+        </article>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 3: WHAT WE'RE DOING (REPO OPEN ISSUES & ACTIVE WORK LOOP)
+    // -------------------------------------------------------------------------
+    function renderDoingView() {
+      const filtered = workFilter === 'All'
+        ? WORK_ITEMS
+        : WORK_ITEMS.filter(w => w.status === workFilter);
+
+      return `
+        <section class="pt-10 pb-16">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="border-b editorial-rule pb-7 mb-8">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Active Work &amp; Repository Issues</span>
+              <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#13161C] mt-1.5">What We're Doing</h1>
+              <p class="text-sm sm:text-base text-[#505662] mt-2.5 leading-relaxed max-w-2xl">
+                Our work follows a simple, transparent loop: <strong>verify field reality and public records → write a clear article → build or support practical local help</strong>. Here is what is currently open, active, and completed.
+              </p>
+
+              <!-- 3-Step Working Loop Banner -->
+              <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-white border editorial-rule rounded-xl p-3.5">
+                  <div class="font-mono text-[10px] font-bold text-[#1D4ED8]">STEP 01 · VERIFY</div>
+                  <div class="text-xs font-semibold text-[#13161C] mt-0.5">Audit records &amp; field observations</div>
+                </div>
+                <div class="bg-white border editorial-rule rounded-xl p-3.5">
+                  <div class="font-mono text-[10px] font-bold text-[#1D4ED8]">STEP 02 · CLARIFY</div>
+                  <div class="text-xs font-semibold text-[#13161C] mt-0.5">Publish honest, source-linked articles</div>
+                </div>
+                <div class="bg-white border editorial-rule rounded-xl p-3.5">
+                  <div class="font-mono text-[10px] font-bold text-[#166534]">STEP 03 · ACT</div>
+                  <div class="text-xs font-semibold text-[#13161C] mt-0.5">Deploy targeted tools &amp; local connections</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Status Filter Pills -->
+            <div class="flex flex-wrap items-center gap-2 mb-6">
+              ${['All', 'Active', 'Completed', 'Planned'].map(st => `
+                <button
+                  onclick="setWorkFilter('${st}')"
+                  class="px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition cursor-pointer ${
+                    workFilter === st
+                      ? 'bg-[#13161C] text-white border-[#13161C]'
+                      : 'bg-white text-[#505662] editorial-rule hover:text-[#13161C]'
+                  }"
+                >
+                  ${st}
+                </button>
+              `).join('')}
+            </div>
+
+            <!-- Work Items List -->
+            <div class="space-y-4">
+              ${filtered.map(item => `
+                <div class="bg-white border editorial-rule rounded-2xl p-5 sm:p-6 shadow-2xs">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                    <div class="flex items-center gap-2">
+                      <span class="font-mono text-xs font-bold text-[#13161C]">${item.id}</span>
+                      <span class="text-stone-300">·</span>
+                      <span class="font-mono text-xs text-[#505662]">${item.area}</span>
+                    </div>
+                    <span class="font-mono text-[10px] font-semibold uppercase px-2.5 py-0.5 rounded-md border ${getStatusBadgeClass(item.status)}">
+                      ${item.status}
+                    </span>
+                  </div>
+                  <h2 class="font-serif text-xl font-bold text-[#13161C]">${item.title}</h2>
+                  <p class="text-sm text-[#505662] mt-2 leading-relaxed">${item.summary}</p>
+                  <div class="mt-4 pt-3 border-t editorial-rule text-xs text-[#505662]">
+                    <strong class="text-[#13161C]">Current Action:</strong> ${item.nextStep}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function setWorkFilter(status) {
+      workFilter = status;
+      renderCurrentView();
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 4: AI & IDEAS (AI INTERVENTIONS & HONEST FILTERING)
+    // -------------------------------------------------------------------------
+    function renderAiIdeasView() {
+      const interventions = [
+        {
+          code: 'AI-01',
+          stage: 'High Leverage · Ready to Prototype',
+          title: 'Zero-Friction Spay/Neuter & Clinic Navigator',
+          problem: 'Willing Stockton pet owners hit multi-week waitlists, confusing eligibility rules, and missed appointment reminders.',
+          solution: 'A plain-English (English & Spanish) triage assistant that asks three simple questions—zip code, pet size/age, and urgency—matches residents to open slots at ACT Clinic, Stockton Shelter walk-in hours, or The Pet Advocate, and sends automated SMS reminders so zero surgical seats go unused.'
+        },
+        {
+          code: 'AI-02',
+          stage: 'High Leverage · Reduces Shelter Intake',
+          title: 'Found-Dog & Temporary Foster Triage Helper',
+          problem: 'Finders hit appointment-only walls at 1575 S. Lincoln St and don’t know Stockton’s Temporary Found-Animal Foster program exists.',
+          solution: 'A guided step-by-step helper that routes finders to the nearest free microchip scanner first, and—if no owner is found—walks them straight into Stockton’s official Temporary Found-Pet Foster pathway without adding inbox burden to 18 shelter staff.'
+        },
+        {
+          code: 'AI-03',
+          stage: 'Diagnostic · In Use',
+          title: 'Repeat-Address & Corridor Pattern Routing',
+          problem: 'Writing repeated citations at the same address fails to stop loose dogs or backyard litters.',
+          solution: 'Using AI clustering across the 7,183 dispatch logs to surface repeat blocks—allowing community outreach teams to show up with free fence repair materials, microchips, and sterilization vouchers instead of punitive tickets.'
+        },
+        {
+          code: 'AI-04',
+          stage: 'Data Hygiene · Active',
+          title: 'Automated Public Data Watcher',
+          problem: 'Municipal shelter dashboards change silently, leaving community reports citing outdated numbers.',
+          solution: 'Automated diffing and structured extraction whenever Stockton Animal Services updates public tables—flagging changes for human verification (as seen in ISSUE-02).'
+        }
+      ];
+
+      return `
+        <section class="pt-10 pb-16">
+          <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="border-b editorial-rule pb-7 mb-8">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Applied Intelligence &amp; Discernment</span>
+              <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#13161C] mt-1.5">AI &amp; Ideas</h1>
+              <p class="text-sm sm:text-base text-[#505662] mt-2.5 leading-relaxed max-w-2xl">
+                We use AI as a <strong>clear mirror, not an idol</strong>. Technology cannot manufacture human compassion, and software cannot pour concrete—but applied carefully, AI helps us see where systems choke and remove practical friction for everyday people.
+              </p>
+            </div>
+
+            <!-- Proposed AI Interventions -->
+            <div class="mb-12">
+              <h2 class="font-serif text-2xl font-bold text-[#13161C] mb-4">Where We're Applying AI</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${interventions.map(item => `
+                  <div class="bg-white border editorial-rule rounded-2xl p-5 sm:p-6 flex flex-col justify-between shadow-2xs">
+                    <div>
+                      <div class="flex items-center justify-between gap-2 mb-2.5">
+                        <span class="font-mono text-xs font-bold text-[#1D4ED8]">${item.code}</span>
+                        <span class="font-mono text-[10px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 text-[#1D4ED8] border border-blue-200">${item.stage}</span>
+                      </div>
+                      <h3 class="font-serif text-xl font-bold text-[#13161C]">${item.title}</h3>
+                      <p class="text-xs text-[#505662] mt-2 leading-relaxed">
+                        <strong class="text-[#13161C]">Friction:</strong> ${item.problem}
+                      </p>
+                      <p class="text-xs text-[#505662] mt-2 leading-relaxed">
+                        <strong class="text-[#13161C]">Applied Role:</strong> ${item.solution}
+                      </p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Intellectual Honesty: Ideas We Pressure-Tested & Set Aside -->
+            <div class="bg-white border editorial-rule rounded-2xl p-6 sm:p-7 shadow-2xs">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#92400E]">Intellectual Honesty · Pressure-Testing Ideas</span>
+              <h2 class="font-serif text-2xl font-bold text-[#13161C] mt-1">Why We Set Aside the "Open Drop-Off Dog Commons" Vision</h2>
+              <p class="text-sm text-[#505662] mt-2.5 leading-relaxed">
+                Earlier in our exploration, we asked whether Crossover should advocate for an open, post-scarcity community sanctuary where anyone could bring street dogs and neighbors could freely walk them. When we pressure-tested that idea against real-world human incentives and medical constraints, two hard flaws appeared:
+              </p>
+              <ul class="mt-4 space-y-2.5 text-sm text-[#13161C]">
+                <li class="flex items-start gap-2.5">
+                  <span class="font-mono text-xs font-bold text-[#B91C1C] mt-1">01</span>
+                  <span class="leading-relaxed"><strong>The Moral Hazard Trap:</strong> Making drop-off effortless without first solving upstream spay/neuter rewards irresponsible breeding—turning a sanctuary into a guilt-free overflow bin that drowns within months.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="font-mono text-xs font-bold text-[#B91C1C] mt-1">02</span>
+                  <span class="leading-relaxed"><strong>Quarantine &amp; Safety Reality:</strong> Municipal street intake includes unvetted, injured, and contagious animals. Bypassing medical quarantine and behavioral screening creates disease outbreaks and bite risks.</span>
+                </li>
+              </ul>
+              <p class="text-sm text-[#505662] mt-4 leading-relaxed">
+                Setting aside an appealing fantasy allowed us to focus where technology actually helps today: <strong>upstream sterilization access, microchip reunification, and temporary neighbor foster support</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 5: INFO EXPLORER (SEARCHABLE & FILTERABLE ARCHIVE)
+    // -------------------------------------------------------------------------
+    function renderExplorerView() {
+      const q = explorerSearchQuery.trim().toLowerCase();
+      const filtered = EXPLORER_RECORDS.filter(rec => {
+        const matchStatus = explorerStatusFilter === 'All' || rec.status === explorerStatusFilter;
+        const matchType = explorerTypeFilter === 'All' || rec.type === explorerTypeFilter;
+        const matchQuery = !q ||
+          rec.id.toLowerCase().includes(q) ||
+          rec.title.toLowerCase().includes(q) ||
+          rec.summary.toLowerCase().includes(q) ||
+          rec.source.toLowerCase().includes(q);
+        return matchStatus && matchType && matchQuery;
+      });
+
+      const statuses = ['All', 'Complete', 'Active', 'Open Issue', 'Identified Gap', 'Verified'];
+      const types = ['All', 'Article', 'Dataset / Record', 'Identified Gap', 'Open Issue', 'Initiative', 'Care Resource'];
+
+      return `
+        <section class="pt-10 pb-16">
+          <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="border-b editorial-rule pb-7 mb-7">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Information Desk &amp; Record Index</span>
+              <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#13161C] mt-1.5">Info Explorer</h1>
+              <p class="text-sm sm:text-base text-[#505662] mt-2 leading-relaxed max-w-2xl">
+                Filter every article, public dataset, identified gap, open repository issue, initiative, and local care resource by status, type, or keyword. Click any record to inspect full details.
+              </p>
+            </div>
+
+            <!-- Filter & Search Controls -->
+            <div class="bg-white border editorial-rule rounded-2xl p-4 sm:p-5 mb-6 space-y-4 shadow-2xs">
+              <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+                <div class="md:col-span-6">
+                  <label for="explorer-search" class="block font-mono text-[10px] font-bold uppercase tracking-wider text-[#505662] mb-1">Keyword Search</label>
+                  <input
+                    id="explorer-search"
+                    type="text"
+                    value="${explorerSearchQuery.replace(/"/g, '&quot;')}"
+                    oninput="updateExplorerSearch(this.value)"
+                    placeholder="Search 7,183 logs, spay/neuter, St. Mary's, Canine Campus..."
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-[#F7F6F2] border editorial-rule text-sm text-[#13161C] focus:outline-none focus:border-[#1D4ED8]"
+                  />
+                </div>
+
+                <div class="md:col-span-3">
+                  <label for="explorer-status" class="block font-mono text-[10px] font-bold uppercase tracking-wider text-[#505662] mb-1">Status</label>
+                  <select
+                    id="explorer-status"
+                    onchange="updateExplorerStatus(this.value)"
+                    class="w-full px-3 py-2.5 rounded-xl bg-[#F7F6F2] border editorial-rule text-sm font-medium text-[#13161C] focus:outline-none focus:border-[#1D4ED8]"
+                  >
+                    ${statuses.map(st => `<option value="${st}" ${explorerStatusFilter === st ? 'selected' : ''}>${st}</option>`).join('')}
+                  </select>
+                </div>
+
+                <div class="md:col-span-3">
+                  <label for="explorer-type" class="block font-mono text-[10px] font-bold uppercase tracking-wider text-[#505662] mb-1">Record Type</label>
+                  <select
+                    id="explorer-type"
+                    onchange="updateExplorerType(this.value)"
+                    class="w-full px-3 py-2.5 rounded-xl bg-[#F7F6F2] border editorial-rule text-sm font-medium text-[#13161C] focus:outline-none focus:border-[#1D4ED8]"
+                  >
+                    ${types.map(tp => `<option value="${tp}" ${explorerTypeFilter === tp ? 'selected' : ''}>${tp}</option>`).join('')}
+                  </select>
+                </div>
+              </div>
+
+              <!-- Quick Status Pills -->
+              <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t editorial-rule">
+                <div class="flex flex-wrap items-center gap-1.5">
+                  ${statuses.map(st => `
+                    <button
+                      onclick="updateExplorerStatus('${st}')"
+                      class="px-2.5 py-1 rounded-lg font-mono text-[11px] font-semibold border transition cursor-pointer ${
+                        explorerStatusFilter === st
+                          ? 'bg-[#13161C] text-white border-[#13161C]'
+                          : 'bg-[#F7F6F2] text-[#505662] editorial-rule hover:text-[#13161C]'
+                      }"
+                    >
+                      ${st}
+                    </button>
+                  `).join('')}
+                </div>
+                <span class="font-mono text-xs text-[#505662]">Showing <strong>${filtered.length}</strong> of ${EXPLORER_RECORDS.length}</span>
+              </div>
+            </div>
+
+            <!-- Results List -->
+            ${filtered.length === 0 ? `
+              <div class="bg-white border editorial-rule rounded-2xl p-8 text-center space-y-3">
+                <p class="font-serif text-xl font-bold text-[#13161C]">No matching records found.</p>
+                <p class="text-sm text-[#505662]">Try clearing your search term or resetting the status filter.</p>
+                <button onclick="resetExplorerFilters()" class="px-4 py-2 rounded-xl bg-[#13161C] text-white text-xs font-semibold cursor-pointer">
+                  Reset Filters
+                </button>
+              </div>
+            ` : `
+              <div class="space-y-3">
+                ${filtered.map(rec => `
+                  <div
+                    onclick="inspectRecordById('${rec.id}')"
+                    class="bg-white border editorial-rule hover:border-[#1D4ED8] rounded-2xl p-4 sm:p-5 transition cursor-pointer shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+                  >
+                    <div class="space-y-1.5">
+                      <div class="flex flex-wrap items-center gap-2">
+                        <span class="font-mono text-xs font-bold text-[#1D4ED8]">${rec.id}</span>
+                        <span class="font-mono text-[10px] uppercase px-2 py-0.5 rounded-md bg-[#F7F6F2] border editorial-rule text-[#505662]">${rec.type}</span>
+                        <span class="font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded-md border ${getStatusBadgeClass(rec.status)}">${rec.status}</span>
+                      </div>
+                      <h2 class="font-serif text-lg sm:text-xl font-bold text-[#13161C]">${rec.title}</h2>
+                      <p class="text-xs sm:text-sm text-[#505662] leading-relaxed">${rec.summary}</p>
+                    </div>
+                    <div class="shrink-0 self-start sm:self-center">
+                      <span class="inline-flex items-center gap-1 text-xs font-bold text-[#1D4ED8]">
+                        <span>Inspect</span>
+                        <span>→</span>
+                      </span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            `}
+          </div>
+        </section>
+      `;
+    }
+
+    function updateExplorerSearch(val) {
+      explorerSearchQuery = val;
+      renderCurrentView();
+      const input = document.getElementById('explorer-search');
+      if (input) {
+        input.focus();
+        input.setSelectionRange(input.value.length, input.value.length);
+      }
+    }
+
+    function updateExplorerStatus(val) {
+      explorerStatusFilter = val;
+      renderCurrentView();
+    }
+
+    function updateExplorerType(val) {
+      explorerTypeFilter = val;
+      renderCurrentView();
+    }
+
+    function resetExplorerFilters() {
+      explorerStatusFilter = 'All';
+      explorerTypeFilter = 'All';
+      explorerSearchQuery = '';
+      renderCurrentView();
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 6: ABOUT (CONSCIOUSNESS, PRESENCE, REPENTANCE & REALITY)
+    // -------------------------------------------------------------------------
+    function renderAboutView() {
+      return `
+        <section class="pt-10 pb-16">
+          <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            
+            <header class="border-b editorial-rule pb-7 mb-8">
+              <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">Who We Are · Foundation</span>
+              <h1 class="font-serif text-3xl sm:text-5xl font-bold text-[#13161C] mt-1.5 leading-[1.12]">
+                Crossing Over from Egoic Noise to Simple Reality
+              </h1>
+              <p class="text-base sm:text-lg text-[#505662] mt-3 leading-relaxed">
+                Crossover Stockton is an organization of consciousness and presence—grounded in what Eckhart Tolle points to in <em>A New Earth</em> and what the Gospels point to beneath religious tribalism.
+              </p>
+            </header>
+
+            <!-- Custom Editorial Artwork: Roots & Growth by the San Joaquin -->
+            <div class="bg-white border editorial-rule rounded-2xl p-4 mb-9 shadow-2xs">
+              <div class="rounded-xl overflow-hidden border editorial-rule bg-[#FCFBF9]">
+                <svg viewBox="0 0 640 240" class="w-full h-auto block" role="img" aria-label="Roots anchored in real earth with new leaves rising beside the Stockton skyline">
+                  <rect width="640" height="145" fill="#EFF6FF"/>
+                  <circle cx="520" cy="64" r="26" fill="#FDE68A"/>
+                  <!-- Distant Skyline -->
+                  <rect x="445" y="88" width="24" height="57" fill="#CBD5E1"/>
+                  <rect x="476" y="72" width="30" height="73" fill="#94A3B8"/>
+                  <rect x="514" y="96" width="22" height="49" fill="#CBD5E1"/>
+                  <!-- River Horizon -->
+                  <rect x="0" y="132" width="640" height="16" fill="#BFDBFE"/>
+                  <!-- Rich Soil Mound -->
+                  <path d="M 110 165 Q 320 120, 530 165 L 560 240 L 80 240 Z" fill="#44403C"/>
+                  <!-- Deep Roots -->
+                  <path d="M 320 145 C 310 175, 275 190, 235 215" fill="none" stroke="#FDE68A" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M 320 145 C 330 175, 365 195, 410 218" fill="none" stroke="#FDE68A" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M 320 155 C 305 188, 295 208, 285 228" fill="none" stroke="#FDE68A" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M 320 155 C 335 188, 345 208, 358 228" fill="none" stroke="#FDE68A" stroke-width="2" stroke-linecap="round"/>
+                  <!-- Living Sprout -->
+                  <path d="M 320 145 L 320 78" stroke="#166534" stroke-width="5" stroke-linecap="round"/>
+                  <path d="M 320 105 C 285 88, 265 98, 260 116 C 282 122, 305 118, 320 105 Z" fill="#22C55E"/>
+                  <path d="M 320 96 C 355 78, 378 88, 384 108 C 360 114, 336 110, 320 96 Z" fill="#16A34A"/>
+                  <path d="M 320 78 C 306 52, 320 34, 334 52 C 336 66, 328 74, 320 78 Z" fill="#15803D"/>
+                </svg>
+              </div>
+              <p class="font-mono text-[11px] text-[#505662] mt-2.5 px-1">
+                Awareness without action is sleep. Real transformation puts roots into ordinary ground and produces measurable fruit.
+              </p>
+            </div>
+
+            <div class="article-prose text-base text-[#13161C]">
+              <h3>What "Crossover" Means</h3>
+              <p>
+                Most of human life is spent inside compulsive thinking—the egoic mind defending an identity, chasing wealth or status as a buffer against insecurity, or inventing enemies so we can feel righteous. Even our civic debates get trapped there: residents blame "bad owners," advocates blame "broken officials," and everyone stays insulated from reality.
+              </p>
+              <p>
+                <strong>Crossover</strong> is the movement from that unconscious reactivity into simple being and direct connection with what is real.
+              </p>
+
+              <h3>Facing Pain ("Repentance") &amp; Setting Ourselves Against No Person</h3>
+              <p>
+                In the Gospels, the word translated as <em>repentance</em> (<em>metanoia</em>) is not about religious self-hatred—it means a fundamental shift in awareness: stopping our coping mechanisms, facing the pain and hypocrisy we usually run from, and seeing clearly.
+              </p>
+              <p>
+                We recognize that as creatures shaped by evolution, every one of us carries blind spots—the gap between the ideals we admire and how we actually live. Because we see that blindness in ourselves first, we refuse to make enemies out of neighbors, pet owners, or overwhelmed shelter workers. <strong>We set ourselves against no person.</strong>
+              </p>
+
+              <h3>Presence, "Sorrow Guides," and Producing Real Fruit</h3>
+              <p>
+                Awareness is not passive belief; it shows itself by the fruit it produces in ordinary life:
+              </p>
+              <ul>
+                <li><strong>Human Presence ("Sorrow Guides"):</strong> People carry unprocessed grief, shame, and overwhelm—what Tolle calls the <em>pain-body</em>. Sometimes the most honest help is simply sitting beside someone without judgment so they can face reality without running back to numbness.</li>
+                <li><strong>AI &amp; Records as a Clear Mirror:</strong> In Stockton, we use AI and public records not to feel clever, but to strip away guesswork—locating where animals and neighbors are actually stuck so practical help reaches them.</li>
+                <li><strong>Acting Locally:</strong> Instead of chasing grand illusions, we verify the facts on our own streets, publish honest articles, and connect people to the clinics, fosters, and support that relieve suffering today.</li>
+              </ul>
+            </div>
+
+            <!-- 3 Visual Grounding Cards (Human Connection, Field Notes, Clear Tools) -->
+            <div class="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-white border editorial-rule rounded-2xl p-4 shadow-2xs">
+                <div class="font-mono text-[10px] font-bold uppercase text-[#1D4ED8] mb-1">01 · Connection</div>
+                <h4 class="font-serif text-lg font-bold text-[#13161C]">No Enemies</h4>
+                <p class="text-xs text-[#505662] mt-1 leading-relaxed">Meeting overwhelmed families, unhoused neighbors, and shelter workers with zero condemnation.</p>
+              </div>
+              <div class="bg-white border editorial-rule rounded-2xl p-4 shadow-2xs">
+                <div class="font-mono text-[10px] font-bold uppercase text-[#1D4ED8] mb-1">02 · Observation</div>
+                <h4 class="font-serif text-lg font-bold text-[#13161C]">Field Truth</h4>
+                <p class="text-xs text-[#505662] mt-1 leading-relaxed">Walking levee roads, auditing dispatch logs, and reconciling public numbers before speaking.</p>
+              </div>
+              <div class="bg-white border editorial-rule rounded-2xl p-4 shadow-2xs">
+                <div class="font-mono text-[10px] font-bold uppercase text-[#166534] mb-1">03 · Fruit</div>
+                <h4 class="font-serif text-lg font-bold text-[#13161C]">Practical Relief</h4>
+                <p class="text-xs text-[#505662] mt-1 leading-relaxed">Removing friction around spay/neuter, microchip scanning, and temporary neighbor fosters.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      `;
+    }
+
+    // =========================================================================
+    // 6. RECORD INSPECTION MODAL & FULL-SCREEN MAP CONTROLLER
+    // =========================================================================
+    function inspectRecordById(id) {
+      const rec = EXPLORER_RECORDS.find(r => r.id === id);
+      if (!rec) return;
+
+      document.getElementById('rec-modal-id').textContent = `${rec.id} · ${rec.type}`;
+      const statusEl = document.getElementById('rec-modal-status');
+      statusEl.textContent = rec.status;
+      statusEl.className = `font-mono text-[10px] font-semibold uppercase px-2 py-0.5 rounded-md border ${getStatusBadgeClass(rec.status)}`;
+
+      document.getElementById('rec-modal-body').innerHTML = `
+        <h3 class="font-serif text-2xl font-bold text-[#13161C] leading-snug">${rec.title}</h3>
+        <div class="p-3.5 rounded-xl bg-[#F7F6F2] border editorial-rule space-y-1 text-xs">
+          <div><strong class="text-[#13161C]">Date Indexed:</strong> <span class="font-mono text-[#505662]">${rec.date}</span></div>
+          <div><strong class="text-[#13161C]">Source / Provenance:</strong> <span class="text-[#505662]">${rec.source}</span></div>
+        </div>
+        <p class="text-sm text-[#13161C] leading-relaxed">${rec.summary}</p>
+      `;
+
+      const footerEl = document.getElementById('rec-modal-footer');
+      if (rec.articleId) {
+        footerEl.innerHTML = `
+          <button onclick="closeRecordModal()" class="px-3.5 py-2 rounded-xl bg-white border editorial-rule text-xs font-semibold text-[#505662] cursor-pointer">Close</button>
+          <button onclick="closeRecordModal(); navigateTo('articles', '${rec.articleId}')" class="px-4 py-2 rounded-xl bg-[#1D4ED8] text-white text-xs font-semibold cursor-pointer">
+            Read Linked Article →
+          </button>
+        `;
+      } else {
+        footerEl.innerHTML = `
+          <span class="font-mono text-[11px] text-[#505662]">Verified Archive Entry</span>
+          <button onclick="closeRecordModal()" class="px-4 py-2 rounded-xl bg-[#13161C] text-white text-xs font-semibold cursor-pointer">Done</button>
+        `;
+      }
+
+      const modal = document.getElementById('record-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeRecordModal() {
+      const modal = document.getElementById('record-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Single-Purpose Full-Screen Map Controls
+    let mapZoom = 1;
+    let mapPanX = 0;
+    let mapPanY = 0;
+    let isDraggingMap = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    function openFullScreenMap(mapKey) {
+      const mapObj = ARTICLE_MAPS[mapKey];
+      if (!mapObj) return;
+
+      document.getElementById('fs-map-title').textContent = mapObj.title;
+      document.getElementById('fs-map-subtitle').textContent = mapObj.subtitle;
+      document.getElementById('fs-map-transform-layer').innerHTML = mapObj.svg;
+      document.getElementById('fs-map-legend').innerHTML = mapObj.legend;
+
+      resetMapTransform();
+      const modal = document.getElementById('fullscreen-map-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeFullScreenMap() {
+      const modal = document.getElementById('fullscreen-map-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function applyMapTransform() {
+      const layer = document.getElementById('fs-map-transform-layer');
+      layer.style.transform = `translate(${mapPanX}px, ${mapPanY}px) scale(${mapZoom})`;
+    }
+
+    function adjustMapZoom(delta) {
+      mapZoom = Math.min(2.4, Math.max(0.7, +(mapZoom + delta).toFixed(2)));
+      applyMapTransform();
+    }
+
+    function resetMapTransform() {
+      mapZoom = 1;
+      mapPanX = 0;
+      mapPanY = 0;
+      applyMapTransform();
+    }
+
+    // Panning listeners for Full-Screen Map
+    const mapViewport = document.getElementById('fs-map-viewport');
+    mapViewport.addEventListener('mousedown', e => {
+      isDraggingMap = true;
+      dragStartX = e.clientX - mapPanX;
+      dragStartY = e.clientY - mapPanY;
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDraggingMap) return;
+      mapPanX = e.clientX - dragStartX;
+      mapPanY = e.clientY - dragStartY;
+      applyMapTransform();
+    });
+    window.addEventListener('mouseup', () => {
+      isDraggingMap = false;
+    });
+
+    mapViewport.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        isDraggingMap = true;
+        dragStartX = e.touches[0].clientX - mapPanX;
+        dragStartY = e.touches[0].clientY - mapPanY;
+      }
+    }, { passive: true });
+    mapViewport.addEventListener('touchmove', e => {
+      if (!isDraggingMap || e.touches.length !== 1) return;
+      mapPanX = e.touches[0].clientX - dragStartX;
+      mapPanY = e.touches[0].clientY - dragStartY;
+      applyMapTransform();
+    }, { passive: true });
+    mapViewport.addEventListener('touchend', () => {
+      isDraggingMap = false;
+    });
+
+    // Global backdrop & Escape key handlers
+    document.getElementById('record-modal').addEventListener('click', e => {
+      if (e.target.id === 'record-modal') closeRecordModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeRecordModal();
+        closeFullScreenMap();
+      }
+    });
+
+    // Boot application
+    window.onload = function () {
+      updateNavHighlight();
+      renderCurrentView();
+    };
+  </script>
+</body>
+</html>

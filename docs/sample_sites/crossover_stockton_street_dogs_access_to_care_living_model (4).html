@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CROSSOVER STOCKTON // Street Dogs & Access to Care — Living System Model</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F8F7F4',
+            paperWarm: '#F1EFEA',
+            ink: '#18181B',
+            inkMuted: '#52525B',
+            hairline: '#E4E2DD',
+            cobalt: '#1D4ED8',
+            cobaltSoft: '#EFF6FF',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+            mono: ['"IBM Plex Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      background-color: #F8F7F4;
+      color: #18181B;
+    }
+    body {
+      background-color: #F8F7F4;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1EFEA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C7C3B9;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #A39E93;
+    }
+    /* SVG node transitions */
+    .care-node-group {
+      cursor: pointer;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+    }
+    .care-node-group:hover .node-outer-halo {
+      opacity: 0.35;
+      transform: scale(1.08);
+    }
+    .node-outer-halo {
+      transform-origin: center;
+      transform-box: fill-box;
+      transition: all 0.3s ease;
+    }
+    .care-link {
+      transition: stroke 0.3s ease, stroke-width 0.3s ease, opacity 0.3s ease;
+    }
+    @keyframes pulseRing {
+      0% { transform: scale(0.95); opacity: 0.65; }
+      70% { transform: scale(1.18); opacity: 0; }
+      100% { transform: scale(1.18); opacity: 0; }
+    }
+    .active-pulse {
+      transform-origin: center;
+      transform-box: fill-box;
+      animation: pulseRing 2.6s infinite cubic-bezier(0.24, 0, 0.38, 1);
+    }
+    .tab-btn-active {
+      border-bottom: 2px solid #1D4ED8;
+      color: #18181B;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-blue-700 selection:text-white">
+
+  <!-- TOP CIVIC INVESTIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-[#F8F7F4]/95 backdrop-blur-md border-b border-[#E4E2DD]">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-between gap-4 py-3.5">
+        
+        <!-- Identity + Signature Blue Square -->
+        <div class="flex items-center gap-3.5">
+          <a href="#care-system" class="flex items-center gap-3 group focus:outline-none">
+            <!-- Signature Blue Square Badge -->
+            <div class="w-11 h-11 sm:w-12 sm:h-12 bg-[#1D4ED8] text-white flex flex-col justify-between p-1.5 shadow-sm shrink-0 transition-transform group-hover:scale-[1.03]" title="Active Investigation Marker">
+              <span class="font-mono text-[8px] leading-none uppercase tracking-wider opacity-85">CASE 01</span>
+              <span class="font-sans font-bold text-[9.5px] leading-[1.05] tracking-tight">Street Dogs &amp; Access to Care</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-mono font-semibold text-sm sm:text-base tracking-tight text-zinc-900">CROSSOVER</span>
+                <span class="text-zinc-400 font-mono text-xs">//</span>
+                <span class="font-mono text-xs sm:text-sm tracking-wide text-zinc-700 uppercase">Stockton</span>
+              </div>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-zinc-600">
+                  <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                  Living System Model · Updated Nov 2026
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Three Core Pillars Navigation -->
+        <nav class="hidden md:flex items-center gap-1 bg-[#F1EFEA] p-1 rounded-lg border border-[#E4E2DD]" aria-label="Primary sections">
+          <a href="#care-system" class="nav-pill px-3.5 py-1.5 rounded-md text-xs font-medium text-zinc-900 bg-white shadow-sm transition">
+            1. The Care System
+          </a>
+          <a href="#whats-changing" class="nav-pill px-3.5 py-1.5 rounded-md text-xs font-medium text-zinc-600 hover:text-zinc-900 transition">
+            2. What's Changing
+          </a>
+          <a href="#what-were-trying" class="nav-pill px-3.5 py-1.5 rounded-md text-xs font-medium text-zinc-600 hover:text-zinc-900 transition">
+            3. What We're Trying
+          </a>
+        </nav>
+
+        <!-- Practical Care Action -->
+        <div class="flex items-center gap-2.5">
+          <button onclick="openCareHelper()" class="inline-flex items-center gap-2 bg-zinc-900 hover:bg-blue-700 text-white text-xs sm:text-sm font-medium px-3.5 py-2 rounded-lg transition-colors shadow-sm cursor-pointer">
+            <svg class="w-4 h-4 text-blue-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+            <span>Get Care Now</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Nav Row -->
+      <div class="flex md:hidden items-center gap-2 pb-2.5 overflow-x-auto text-xs font-medium">
+        <a href="#care-system" class="px-3 py-1 rounded bg-white border border-[#E4E2DD] text-zinc-900 whitespace-nowrap">1. The Care System</a>
+        <a href="#whats-changing" class="px-3 py-1 rounded bg-[#F1EFEA] text-zinc-700 whitespace-nowrap">2. What's Changing</a>
+        <a href="#what-were-trying" class="px-3 py-1 rounded bg-[#F1EFEA] text-zinc-700 whitespace-nowrap">3. What We're Trying</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- EDITORIAL THESIS STRIP -->
+  <section class="border-b border-[#E4E2DD] bg-[#F8F7F4]">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+        <div class="lg:col-span-8">
+          <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wider text-blue-700 mb-2">
+            <span>Civic Systems Investigation</span>
+            <span>•</span>
+            <span>Stockton, California</span>
+          </div>
+          <h1 class="font-serif text-2xl sm:text-3xl lg:text-[36px] leading-[1.16] text-zinc-900 font-medium tracking-tight">
+            The gap isn't a list of isolated failures—it's the distance between what a Stockton dog needs and what the whole care system can deliver.
+          </h1>
+        </div>
+        <div class="lg:col-span-4 lg:border-l lg:border-[#E4E2DD] lg:pl-6">
+          <p class="text-sm text-zinc-600 leading-relaxed">
+            Explore the ten interconnected conditions required for care. Select any pathway to trace how different dogs move through the system, or click any node to inspect verified records, active initiatives, and open questions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1">
+
+    <!-- PILLAR 1: THE CARE SYSTEM (CENTERPIECE LIVING MODEL) -->
+    <section id="care-system" class="py-6 sm:py-10 border-b border-[#E4E2DD]">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Pathway Scenario Filter Bar -->
+        <div class="mb-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+            <div>
+              <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Trace Care Pathways (Non-Linear)</span>
+              <h2 class="text-base sm:text-lg font-semibold text-zinc-900">How does a dog actually move through Stockton's care system?</h2>
+            </div>
+            <div class="text-xs text-zinc-500 font-mono">
+              Showing: <span id="active-pathway-count" class="text-zinc-900 font-semibold">10 of 10 conditions</span>
+            </div>
+          </div>
+
+          <div id="pathway-filters" class="flex flex-wrap gap-2" role="tablist" aria-label="Care pathway scenarios">
+            <!-- Populated by JS -->
+          </div>
+          <p id="pathway-narrative" class="mt-2.5 text-xs sm:text-sm text-zinc-600 bg-[#F1EFEA] border border-[#E4E2DD] rounded-lg px-3.5 py-2.5 leading-relaxed">
+            <!-- Populated by JS -->
+          </p>
+        </div>
+
+        <!-- Split Workspace: Interactive Radial Model (Left) + 5-Dimension Inspector (Right) -->
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+
+          <!-- LEFT: Interactive Radial Care System Diagram -->
+          <div class="xl:col-span-7 bg-white border border-[#E4E2DD] rounded-2xl shadow-xs overflow-hidden flex flex-col">
+            
+            <!-- Status Legend Top Strip -->
+            <div class="px-4 py-3 bg-[#F8F7F4] border-b border-[#E4E2DD] flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] font-mono">
+                <span class="text-zinc-500 uppercase tracking-wider">System Condition:</span>
+                <span class="inline-flex items-center gap-1.5 text-zinc-800">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>Functioning
+                </span>
+                <span class="inline-flex items-center gap-1.5 text-zinc-800">
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>Constrained
+                </span>
+                <span class="inline-flex items-center gap-1.5 text-zinc-800">
+                  <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>Under Investigation
+                </span>
+                <span class="inline-flex items-center gap-1.5 text-zinc-700" title="Unknown is not the same as broken">
+                  <span class="w-2.5 h-2.5 rounded-full border-2 border-dashed border-slate-500 bg-slate-100"></span>Not Yet Measured <em class="not-italic text-slate-500">(Unknown ≠ Broken)</em>
+                </span>
+              </div>
+              <button onclick="resetView()" class="text-[11px] font-mono text-blue-700 hover:underline cursor-pointer">
+                Reset Map
+              </button>
+            </div>
+
+            <!-- SVG Interactive Network Canvas -->
+            <div class="relative w-full aspect-[4/3.6] sm:aspect-[4/3.3] max-h-[680px] bg-white flex items-center justify-center p-2 sm:p-4 select-none">
+              <svg id="care-system-svg" viewBox="0 0 800 660" class="w-full h-full overflow-visible" role="img" aria-label="Interactive diagram of Stockton's 10 interconnected points of care surrounding a dog in need">
+                <defs>
+                  <!-- Subtle radial grid gradient -->
+                  <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.09" />
+                    <stop offset="65%" stop-color="#1D4ED8" stop-opacity="0.02" />
+                    <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+                  </radialGradient>
+                  <filter id="cardShadow" x="-15%" y="-15%" width="130%" height="130%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#18181B" flood-opacity="0.08" />
+                  </filter>
+                </defs>
+
+                <!-- Background Orbital Rings -->
+                <circle cx="400" cy="330" r="245" fill="url(#centerGlow)" />
+                <circle cx="400" cy="330" r="232" fill="none" stroke="#E4E2DD" stroke-width="1" stroke-dasharray="4 4" />
+                <circle cx="400" cy="330" r="132" fill="none" stroke="#F1EFEA" stroke-width="1.5" />
+
+                <!-- Layer 1: Interconnecting Web Lines (drawn dynamically) -->
+                <g id="svg-links-layer"></g>
+
+                <!-- Layer 2: Spokes to Center Dog (drawn dynamically) -->
+                <g id="svg-spokes-layer"></g>
+
+                <!-- Layer 3: Center Hub — The Dog in Need -->
+                <g id="center-dog-hub" transform="translate(400, 330)">
+                  <circle r="66" fill="#F8F7F4" stroke="#18181B" stroke-width="1.75" filter="url(#cardShadow)" />
+                  <circle r="59" fill="none" stroke="#1D4ED8" stroke-width="1" stroke-opacity="0.25" />
+                  <!-- Minimalist Architectural Dog Silhouette SVG -->
+                  <g transform="translate(-20, -34)" fill="none" stroke="#18181B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 14 L8 6 L16 10 L24 10 L32 6 L28 14" />
+                    <path d="M11 14 C10 21, 13 27, 20 27 C27 27, 30 21, 29 14" />
+                    <circle cx="16.5" cy="17.5" r="1" fill="#18181B" />
+                    <circle cx="23.5" cy="17.5" r="1" fill="#18181B" />
+                    <path d="M18.5 21.5 L20 23 L21.5 21.5" />
+                    <path d="M14 27 L12 37 M26 27 L28 37" />
+                  </g>
+                  <text y="16" text-anchor="middle" class="font-sans font-bold text-[12px] fill-zinc-900">A Dog in Need</text>
+                  <text y="30" text-anchor="middle" class="font-mono text-[9.5px] fill-zinc-500">Stockton, CA</text>
+                </g>
+
+                <!-- Layer 4: The 10 Care Condition Nodes (drawn dynamically) -->
+                <g id="svg-nodes-layer"></g>
+              </svg>
+            </div>
+
+            <!-- Bottom Map Footnote -->
+            <div class="px-4 py-2.5 bg-[#F8F7F4] border-t border-[#E4E2DD] flex flex-wrap items-center justify-between gap-2 text-[11px] text-zinc-500">
+              <span>Click any point of care to inspect records, responsible agencies, initiatives &amp; AI experiments.</span>
+              <span class="font-mono text-zinc-600">54 cataloged records · 17 verified</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: 5-Dimension Point-of-Care Inspector Panel -->
+          <aside id="inspector-panel" class="xl:col-span-5 bg-white border border-[#E4E2DD] rounded-2xl shadow-xs overflow-hidden flex flex-col">
+            <!-- Inspector Header (Dynamic) -->
+            <div id="inspector-header" class="p-5 sm:p-6 border-b border-[#E4E2DD] bg-[#F8F7F4]">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- 5 Required Knowledge Tabs -->
+            <div class="flex border-b border-[#E4E2DD] bg-white px-2 overflow-x-auto" role="tablist" aria-label="Node knowledge dimensions">
+              <button data-tab="overview" onclick="switchInspectorTab('overview')" class="inspector-tab px-3 py-3 text-xs font-medium text-zinc-600 hover:text-zinc-900 whitespace-nowrap cursor-pointer transition">
+                Overview
+              </button>
+              <button data-tab="evidence" onclick="switchInspectorTab('evidence')" class="inspector-tab px-3 py-3 text-xs font-medium text-zinc-600 hover:text-zinc-900 whitespace-nowrap cursor-pointer transition">
+                Evidence
+              </button>
+              <button data-tab="orgs" onclick="switchInspectorTab('orgs')" class="inspector-tab px-3 py-3 text-xs font-medium text-zinc-600 hover:text-zinc-900 whitespace-nowrap cursor-pointer transition">
+                Orgs &amp; Places
+              </button>
+              <button data-tab="initiatives" onclick="switchInspectorTab('initiatives')" class="inspector-tab px-3 py-3 text-xs font-medium text-zinc-600 hover:text-zinc-900 whitespace-nowrap cursor-pointer transition">
+                Initiatives
+              </button>
+              <button data-tab="questions" onclick="switchInspectorTab('questions')" class="inspector-tab px-3 py-3 text-xs font-medium text-zinc-600 hover:text-zinc-900 whitespace-nowrap cursor-pointer transition">
+                Open Questions &amp; AI
+              </button>
+            </div>
+
+            <!-- Tab Content Body -->
+            <div id="inspector-body" class="p-5 sm:p-6 space-y-4 min-h-[380px] max-h-[540px] overflow-y-auto">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Inspector Footer Quick-Nav between Nodes -->
+            <div class="px-5 py-3 bg-[#F8F7F4] border-t border-[#E4E2DD] flex items-center justify-between text-xs">
+              <button onclick="cycleNode(-1)" class="inline-flex items-center gap-1.5 font-medium text-zinc-700 hover:text-blue-700 cursor-pointer">
+                <span>← Previous Condition</span>
+              </button>
+              <span id="inspector-step-indicator" class="font-mono text-[11px] text-zinc-500">Node 3 of 10</span>
+              <button onclick="cycleNode(1)" class="inline-flex items-center gap-1.5 font-medium text-zinc-700 hover:text-blue-700 cursor-pointer">
+                <span>Next Condition →</span>
+              </button>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PILLAR 2: WHAT'S CHANGING (LIVING MODEL FEED) -->
+    <section id="whats-changing" class="py-12 sm:py-16 border-b border-[#E4E2DD] bg-[#F8F7F4]">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-blue-700">02 // Living Investigation Log</span>
+            <h2 class="font-serif text-2xl sm:text-3xl text-zinc-900 font-medium mt-1">What's Changing in the Model</h2>
+            <p class="text-sm text-zinc-600 mt-1 max-w-2xl">
+              As public records arrive, field observations are logged, and local infrastructure progresses, the status of points in the care system updates.
+            </p>
+          </div>
+
+          <!-- Feed Category Filters -->
+          <div class="flex flex-wrap gap-1.5" id="feed-filters">
+            <button onclick="filterFeed('all')" data-feed="all" class="feed-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 text-white cursor-pointer">All Updates</button>
+            <button onclick="filterFeed('evidence')" data-feed="evidence" class="feed-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white border border-[#E4E2DD] text-zinc-700 hover:bg-zinc-100 cursor-pointer">Evidence</button>
+            <button onclick="filterFeed('initiative')" data-feed="initiative" class="feed-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white border border-[#E4E2DD] text-zinc-700 hover:bg-zinc-100 cursor-pointer">Initiatives</button>
+            <button onclick="filterFeed('fieldwork')" data-feed="fieldwork" class="feed-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white border border-[#E4E2DD] text-zinc-700 hover:bg-zinc-100 cursor-pointer">Fieldwork</button>
+          </div>
+        </div>
+
+        <div id="living-feed-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PILLAR 3: WHAT WE'RE TRYING (BOUNDED EXPERIMENTS & AI ROLE) -->
+    <section id="what-were-trying" class="py-12 sm:py-16 bg-white">
+      <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-blue-700">03 // Applied Civic AI &amp; Field Prototypes</span>
+            <h2 class="font-serif text-2xl sm:text-3xl text-zinc-900 font-medium mt-1">What We're Trying</h2>
+            <p class="text-sm text-zinc-600 mt-1 max-w-2xl">
+              Instead of an endless investigation, Crossover asks a bounded question at each point of care: <em>What prevents this condition from working better, and can targeted AI or coordination tools help close the gap?</em>
+            </p>
+          </div>
+          <div class="font-mono text-xs text-zinc-500 bg-[#F8F7F4] border border-[#E4E2DD] px-3 py-2 rounded-lg">
+            Active Experiments: <span class="text-zinc-900 font-semibold">4 bounded prototypes</span>
+          </div>
+        </div>
+
+        <div id="experiments-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#F1EFEA] border-t border-[#E4E2DD] py-8">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-zinc-600">
+      <div class="flex items-center gap-3">
+        <div class="w-6 h-6 bg-[#1D4ED8] text-white font-mono text-[9px] font-bold flex items-center justify-center">CS</div>
+        <div>
+          <span class="font-mono font-semibold text-zinc-900">CROSSOVER STOCKTON</span> — Street Dogs &amp; Access to Care Living Model.
+          <span class="block sm:inline sm:ml-2 text-zinc-500">Evidence-grounded civic inquiry in San Joaquin County.</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 font-mono">
+        <button onclick="openCareHelper()" class="text-blue-700 hover:underline cursor-pointer">Resident Care Pathways</button>
+        <span>•</span>
+        <span>Unknown ≠ Broken</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE MODAL: GET HELP / CARE PATHWAY ASSISTANT -->
+  <div id="care-helper-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-zinc-950/55 backdrop-blur-xs p-4" role="dialog" aria-modal="true" aria-labelledby="care-modal-title">
+    <div class="bg-white border border-[#E4E2DD] rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 bg-[#F8F7F4] border-b border-[#E4E2DD] flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 bg-[#1D4ED8] inline-block"></span>
+          <h3 id="care-modal-title" class="font-semibold text-zinc-900 text-base">Stockton Resident Care Pathway Guide</h3>
+        </div>
+        <button onclick="closeCareHelper()" class="p-1.5 text-zinc-500 hover:text-zinc-900 rounded-lg hover:bg-zinc-200/60 cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 overflow-y-auto space-y-5">
+        <p class="text-sm text-zinc-600">
+          Select your situation below to see practical steps, local Stockton contacts, and options designed to help dogs safely—including keeping pets with their people whenever possible.
+        </p>
+
+        <!-- Situation Selector Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="helper-situations">
+          <button onclick="selectHelperScenario('found_stray')" data-helper="found_stray" class="helper-choice-btn text-left p-3.5 rounded-xl border-2 border-blue-600 bg-blue-50/50 transition cursor-pointer">
+            <div class="font-mono text-[10px] uppercase text-blue-700 font-semibold mb-1">Situation A</div>
+            <div class="font-semibold text-xs sm:text-sm text-zinc-900">I found a stray, lost, or injured dog</div>
+          </button>
+          <button onclick="selectHelperScenario('own_vet')" data-helper="own_vet" class="helper-choice-btn text-left p-3.5 rounded-xl border border-[#E4E2DD] hover:border-zinc-400 bg-white transition cursor-pointer">
+            <div class="font-mono text-[10px] uppercase text-zinc-500 font-semibold mb-1">Situation B</div>
+            <div class="font-semibold text-xs sm:text-sm text-zinc-900">I need low-cost vet care or spay/neuter</div>
+          </button>
+          <button onclick="selectHelperScenario('unhoused_support')" data-helper="unhoused_support" class="helper-choice-btn text-left p-3.5 rounded-xl border border-[#E4E2DD] hover:border-zinc-400 bg-white transition cursor-pointer">
+            <div class="font-mono text-[10px] uppercase text-zinc-500 font-semibold mb-1">Situation C</div>
+            <div class="font-semibold text-xs sm:text-sm text-zinc-900">I'm unhoused or in crisis &amp; want to keep my dog</div>
+          </button>
+        </div>
+
+        <!-- Dynamic Guidance Output -->
+        <div id="helper-guidance-output" class="bg-[#F8F7F4] border border-[#E4E2DD] rounded-xl p-5 space-y-4">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3.5 bg-[#F8F7F4] border-t border-[#E4E2DD] flex items-center justify-between text-xs text-zinc-500">
+        <span>Need to map this gap? Each step connects directly to our Care System model.</span>
+        <button onclick="closeCareHelper()" class="px-4 py-1.5 bg-zinc-900 text-white rounded-lg font-medium hover:bg-zinc-800 cursor-pointer">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION DATA & INTERACTIVE LOGIC -->
+  <script>
+    // =========================================================================
+    // 1. CORE DATA MODEL: THE 10 INTERCONNECTED POINTS OF CARE
+    // =========================================================================
+    const CARE_NODES = [
+      {
+        id: 1,
+        shortTitle: "Recognition",
+        title: "1. Recognition",
+        subtitle: "Noticing a dog needs help and accurately reading the situation",
+        status: "investigation", // functioning | constrained | investigation | unmeasured
+        statusLabel: "Evidence Being Reviewed",
+        angleDeg: -90, // Top (12 o'clock)
+        connections: [2, 3, 4, 10],
+        overview: {
+          whatMustHappen: "A resident, driver, outreach worker, or neighbor notices a dog in distress, roaming loose, or living with an owner lacking supplies—and recognizes whether immediate intervention or non-punitive support is needed.",
+          statusContext: "Crossover is reviewing community field reports and dumping-corridor sightings to understand how often vulnerable dogs go unnoticed or misread until a medical crisis develops."
+        },
+        evidence: [
+          { tag: "Field Observation", text: "3–10 dumped-dog encounters reported per week along recurring Stockton corridors (e.g., levee roads, industrial edges, and highway frontage)." },
+          { tag: "Baseline Context", text: "Total uncounted street-dog population remains unknown; recognition relies heavily on informal neighborhood networks and local rescuers." },
+          { tag: "Archive Status", text: "17 of 54 cataloged investigation records verified; recurring spatial clusters identified in South and East Stockton." }
+        ],
+        orgsAndPlaces: [
+          { name: "Neighborhood Watch & Resident Finder Networks", role: "Primary eyes on street-level sightings and lost-pet posts", location: "Citywide, concentrated along Mormon Slough & industrial corridors" },
+          { name: "Stockton StreetWatch Field Log", role: "Structured documentation of recurring dumping locations", location: "Stockton, CA" }
+        ],
+        initiatives: [
+          { name: "Dumping Corridor Baseline Mapping", status: "Active", impact: "Plotting repeat abandonment corridors so recognition shifts from reactive sightings to predictable monitoring." }
+        ],
+        openQuestions: [
+          "Which Stockton corridors experience repeated abandonment without timely public reporting?",
+          "How often do residents mistake an unhoused person's companion dog for an abandoned stray?"
+        ],
+        aiRole: "Use geospatial clustering on resident sighting logs and 311/dispatch timestamps to identify high-frequency abandonment zones before dogs suffer vehicle strikes."
+      },
+      {
+        id: 2,
+        shortTitle: "Reporting",
+        title: "2. Reporting",
+        subtitle: "Contacting the right agency and communicating urgency clearly",
+        status: "investigation",
+        statusLabel: "Evidence Being Reviewed",
+        angleDeg: -54,
+        connections: [1, 3, 4, 9],
+        overview: {
+          whatMustHappen: "When someone spots a dog in need, they know who to call or message, can reach a working intake channel, and can convey location, injury severity, and behavioral context.",
+          statusContext: "Public records show high call volume, yet community interviews report confusion over when to call Stockton Police non-emergency, Animal Services, or local rescues."
+        },
+        evidence: [
+          { tag: "Public Records", text: "7,183 Animal Services field-call records obtained and under structured analysis." },
+          { tag: "Friction Point", text: "Callers frequently abandon hold queues or post exclusively on social media because they are unsure whether an uninjured stray qualifies for dispatch." }
+        ],
+        orgsAndPlaces: [
+          { name: "City of Stockton Animal Services (Call Center / Non-Emergency)", role: "Official municipal intake for stray, injured, and aggressive animal calls", location: "1575 S. Lincoln St, Stockton" },
+          { name: "San Joaquin County Sheriff Animal Control", role: "Jurisdictional intake for unincorporated Stockton pockets", location: "Unincorporated County islands" }
+        ],
+        initiatives: [
+          { name: "Clear Resident Routing Guide", status: "In Prototype", impact: "Separating urgent injury dispatch from lost-pet reunification and low-cost care inquiries." }
+        ],
+        openQuestions: [
+          "What percentage of the 7,183 field calls resulted in no dispatch due to incomplete location data or jurisdictional confusion?",
+          "How many calls originate from unincorporated county pockets surrounded by Stockton city limits?"
+        ],
+        aiRole: "Parse unstructured call descriptions across the 7,183 field-call logs to classify urgency tiers, drop-off reasons, and geographic dead zones."
+      },
+      {
+        id: 3,
+        shortTitle: "Response",
+        title: "3. Response",
+        subtitle: "Animal Services, rescuer, or outreach worker arrives in time",
+        status: "constrained",
+        statusLabel: "Constrained Capacity",
+        angleDeg: -18,
+        connections: [1, 2, 4, 5],
+        overview: {
+          whatMustHappen: "An Animal Control Officer (ACO), rescue volunteer, or community responder is dispatched and physically arrives while the dog is still safely reachable.",
+          statusContext: "Field dispatch is one of Stockton's five core systemic bottlenecks. High call volume against limited officer staffing forces strict triage, leaving non-critical stray calls waiting hours or days."
+        },
+        evidence: [
+          { tag: "Dispatch Dataset", text: "7,183 Animal Services field-call records received; response latency varies sharply between acute bite/injury calls and roaming stray reports." },
+          { tag: "Field Reality", text: "Independent rescue volunteers frequently step in for after-hours or non-priority street pickups when municipal officers are stretched." }
+        ],
+        orgsAndPlaces: [
+          { name: "Stockton Animal Services Field Division", role: "Municipal field response and emergency animal pick-up", location: "Citywide dispatch" },
+          { name: "Grassroots Stockton Street Rescuers", role: "Informal rapid response for dumped litters and injured strays", location: "Highway 99 / I-5 / Charter Way corridors" }
+        ],
+        initiatives: [
+          { name: "Field-Call Latency Audit", status: "Active Analysis", impact: "Measuring dispatch-to-arrival windows by priority code and council district." }
+        ],
+        openQuestions: [
+          "What is the median response time by call priority level across different Stockton neighborhoods?",
+          "How many calls close as 'Gone on Arrival' due to dispatch delay?"
+        ],
+        aiRole: "Analyze timestamp deltas in the 7,183 field records to pinpoint peak overload hours and model where a civilian community-responder tier could relieve officer bottlenecks."
+      },
+      {
+        id: 4,
+        shortTitle: "Assessment",
+        title: "4. Assessment",
+        subtitle: "Determining if a dog is lost, owned, unhoused companion, or injured",
+        status: "unmeasured",
+        statusLabel: "Access Not Yet Measured",
+        angleDeg: 18,
+        connections: [1, 2, 3, 5, 7, 9, 10],
+        overview: {
+          whatMustHappen: "At the point of contact, someone checks for a microchip/ID, evaluates medical urgency, and determines whether the dog belongs to a nearby family or an unhoused resident—preventing unnecessary shelter intake.",
+          statusContext: "Status is 'Not Yet Measured' (Unknown ≠ Broken). Field chip-scanning rates and street-level triage protocols are not yet systematically tracked in public data."
+        },
+        evidence: [
+          { tag: "System Gap", text: "Dogs picked up without field microchip scans enter the shelter system directly, consuming kennel space even when an owner lives blocks away." },
+          { tag: "Human-Animal Bond", text: "Unhoused residents' dogs are occasionally misclassified as abandoned strays when owners are temporarily away seeking services." }
+        ],
+        orgsAndPlaces: [
+          { name: "Field ACOs & Local Veterinary Clinics", role: "Microchip scanning and initial medical triage", location: "Mobile / Clinic intake" },
+          { name: "Community Chip-Scan Stations (Proposed)", role: "Neighborhood-level scanning before shelter transport", location: "Stockton neighborhoods" }
+        ],
+        initiatives: [
+          { name: "Scan-Before-Shelter Protocol Review", status: "Scoping", impact: "Evaluating neighborhood access to universal microchip scanners to divert lost pets straight home." }
+        ],
+        openQuestions: [
+          "What share of strays entering Stockton Animal Shelter are already microchipped?",
+          "Do field responders carry universal scanners and outreach resource cards for unhoused pet owners?"
+        ],
+        aiRole: "Cross-match intake photos and descriptions with local lost-pet reports automatically at the moment of field assessment."
+      },
+      {
+        id: 5,
+        shortTitle: "Transportation",
+        title: "5. Transportation",
+        subtitle: "Safe humane capture and transport to care or shelter",
+        status: "unmeasured",
+        statusLabel: "Capacity Not Yet Measured",
+        angleDeg: 54,
+        connections: [3, 4, 6, 7, 8],
+        overview: {
+          whatMustHappen: "Once assessed, the dog can be safely contained and transported—whether to a shelter, an emergency vet clinic, a spay/neuter appointment, or a foster home.",
+          statusContext: "Not Yet Measured. For both stray rescue and low-income pet owners without cars, lack of safe animal transport silently blocks veterinary and shelter access."
+        },
+        evidence: [
+          { tag: "Resident Barrier", text: "Families without vehicles cannot transport large dogs on public transit to reach low-cost spay/neuter clinics or emergency care." },
+          { tag: "Rescue Bottleneck", text: "Skittish or injured street dogs often require humane traps and experienced handlers not available on standard calls." }
+        ],
+        orgsAndPlaces: [
+          { name: "Stockton Animal Services Transport Units", role: "Municipal containment and shelter transport", location: "Stockton" },
+          { name: "Volunteer Rescue Transporters", role: "Ad-hoc transport to Bay Area / Sacramento partner rescues", location: "Regional I-5 / Hwy 99 corridor" }
+        ],
+        initiatives: [
+          { name: "Community Care Transport Mapping", status: "Early Inquiry", impact: "Identifying transport gaps for spay/neuter appointments and rescue transfers." }
+        ],
+        openQuestions: [
+          "How many scheduled low-cost spay/neuter appointments are missed due to lack of pet-friendly transportation?",
+          "What equipment and training exist locally for humane capture of fearful street dogs?"
+        ],
+        aiRole: "Optimize volunteer relay routing for multi-dog rescue transports and clinic shuttle days."
+      },
+      {
+        id: 6,
+        shortTitle: "Shelter Capacity",
+        title: "6. Shelter Capacity",
+        subtitle: "Appropriate kennel space, biosecurity, and humane housing",
+        status: "constrained",
+        statusLabel: "Constrained Capacity",
+        angleDeg: 90, // Bottom (6 o'clock)
+        connections: [4, 5, 7, 8, 9],
+        overview: {
+          whatMustHappen: "Safe, clean, disease-controlled housing must be available when a dog cannot immediately return home or enter foster care.",
+          statusContext: "Critically constrained. High stray intake volumes push municipal kennel capacity to its limits, triggering emergency diversion advisories and shortening timelines for placement."
+        },
+        evidence: [
+          { tag: "2024 Intake Baseline", text: "3,106 stray-dog intake events recorded in 2024 alone—averaging over 8.5 stray dogs entering daily before owner surrenders." },
+          { tag: "Infrastructure Record", text: "Aging kennel infrastructure limits isolation capacity for sick or vulnerable puppies." }
+        ],
+        orgsAndPlaces: [
+          { name: "Stockton Animal Shelter", role: "Primary municipal intake facility for the City of Stockton", location: "1575 S. Lincoln St, Stockton" }
+        ],
+        initiatives: [
+          { name: "Stockton Animal Shelter Expansion Project", status: "In Progress", impact: "Capital expansion aimed at adding modern kennel capacity, medical isolation, and improved intake flow." }
+        ],
+        openQuestions: [
+          "How many net new dog kennels will the Stockton Animal Shelter expansion add, and on what timeline?",
+          "How do seasonal intake spikes (spring/summer) compare to effective daily kennel capacity?"
+        ],
+        aiRole: "Forecast seasonal intake surges 30–60 days ahead using historical 3,106-event intake patterns to trigger proactive foster recruitment."
+      },
+      {
+        id: 7,
+        shortTitle: "Veterinary Care",
+        title: "7. Veterinary Care",
+        subtitle: "Exams, trauma treatment, vaccinations, and spay/neuter access",
+        status: "constrained",
+        statusLabel: "Constrained Capacity",
+        angleDeg: 126,
+        connections: [4, 5, 6, 8, 10],
+        overview: {
+          whatMustHappen: "Timely medical exams, parvo/distemper vaccines, emergency trauma care, and affordable high-volume spay/neuter services are accessible to both shelter dogs and owned pets.",
+          statusContext: "One of Stockton's sharpest bottlenecks. Severe local veterinary shortages and multi-month waits for affordable spay/neuter drive both preventable illness and unplanned litters."
+        },
+        evidence: [
+          { tag: "Systemic Bottleneck", text: "Preventive care and spay/neuter waitlists in San Joaquin County regularly stretch weeks to months, directly feeding future stray intake." },
+          { tag: "Cost Barrier", text: "Emergency veterinary care costs force impossible choices for low-income and unhoused Stockton pet owners." }
+        ],
+        orgsAndPlaces: [
+          { name: "ACT Spay/Neuter Clinic", role: "High-volume, low-cost sterilization and basic preventive vaccines", location: "327 E. Channel St, Stockton" },
+          { name: "Stockton Animal Shelter Medical Team", role: "In-shelter triage, vaccination, and pre-adoption sterilization", location: "1575 S. Lincoln St, Stockton" },
+          { name: "Local Private & Emergency Vet Clinics", role: "Acute trauma and specialty care (high cost barrier)", location: "Stockton & Lodi" }
+        ],
+        initiatives: [
+          { name: "Targeted High-Volume Spay/Neuter Expansion", status: "Active Priority", impact: "Increasing weekly surgical slots and mobile vaccine outreach in high-intake ZIP codes." }
+        ],
+        openQuestions: [
+          "What is the current countywide monthly spay/neuter surgical deficit relative to dog population growth?",
+          "Which Stockton ZIP codes have zero walkable or transit-accessible veterinary care?"
+        ],
+        aiRole: "Compare clinic appointment capacity against ZIP-code-level intake and dumping data to target mobile vaccine/spay days where they prevent the most intake."
+      },
+      {
+        id: 8,
+        shortTitle: "Foster & Rescue",
+        title: "8. Foster & Rescue Capacity",
+        subtitle: "Temporary home placement, medical recovery, and rescue handoffs",
+        status: "constrained",
+        statusLabel: "Constrained Capacity",
+        angleDeg: 162,
+        connections: [5, 6, 7, 9],
+        overview: {
+          whatMustHappen: "Foster families and 501(c)(3) rescue partners have the space, funding, and coordination pathways to pull vulnerable dogs—especially puppies, seniors, and medical cases—out of shelter kennels.",
+          statusContext: "Rescue handoffs are a documented systemic bottleneck. Local fosters are saturated, and coordination between municipal intake and regional rescue partners remains manual."
+        },
+        evidence: [
+          { tag: "Bottleneck Analysis", text: "Rescue handoffs rely heavily on urgent last-minute pleas rather than predictable medical/behavioral pipeline matching." },
+          { tag: "Capacity Strain", text: "Rising food and veterinary costs have reduced active local foster households across San Joaquin County." }
+        ],
+        orgsAndPlaces: [
+          { name: "Stockton Animal Shelter Foster Program", role: "Short-term municipal foster placement for underage/recovering dogs", location: "Stockton" },
+          { name: "Regional Rescue Partners (NorCal / Bay Area)", role: "Transfer partners pulling dogs for out-of-area adoption", location: "San Joaquin & neighboring counties" }
+        ],
+        initiatives: [
+          { name: "Proposed Canine Campus", status: "Proposed / Planning", impact: "Dedicated temporary placement, decompression, and medical recovery campus to bridge shelter and adoption." }
+        ],
+        openQuestions: [
+          "What support (vet coverage, supplies, short-term boarding) would unlock 50 new foster households in Stockton?",
+          "How many dogs are lost between rescue interest and final transport handoff?"
+        ],
+        aiRole: "Match shelter dogs needing short-term medical or behavioral decompression with pre-vetted foster profiles based on home environment and duration."
+      },
+      {
+        id: 9,
+        shortTitle: "Reunification & Adoption",
+        title: "9. Reunification & Adoption",
+        subtitle: "Returning lost dogs to owners or matching with permanent homes",
+        status: "investigation",
+        statusLabel: "Evidence Being Reviewed",
+        angleDeg: -162,
+        connections: [2, 4, 6, 8, 10],
+        overview: {
+          whatMustHappen: "Lost dogs are rapidly reunited with their families (ideally before or right after intake), and unowned dogs are matched with supported permanent adopters.",
+          statusContext: "Crossover is examining Return-to-Owner (RTO) rates and fee/documentation barriers that can prevent low-income families from reclaiming a lost pet."
+        },
+        evidence: [
+          { tag: "Intake vs. Return", text: "Of the 3,106 stray intakes in 2024, Crossover is auditing how many resulted in owner reunification versus adoption or rescue transfer." },
+          { tag: "Barrier Check", text: "Impound fees, licensing requirements, and limited viewing hours can delay reunification and extend kennel stays." }
+        ],
+        orgsAndPlaces: [
+          { name: "Stockton Animal Shelter Lost & Found / Adoption Desk", role: "Stray hold viewing, reclaim processing, and public adoptions", location: "1575 S. Lincoln St, Stockton" },
+          { name: "24Petconnect & Local Lost/Found Groups", role: "Digital stray listings and community crowd-matching", location: "Online / Stockton" }
+        ],
+        initiatives: [
+          { name: "Fee-Waived Reunification & Fee-Free Adoption Days", status: "Periodic", impact: "Removing financial penalties when families reclaim lost pets." }
+        ],
+        openQuestions: [
+          "What is Stockton's current Return-to-Owner (RTO) rate by neighborhood?",
+          "How often do reclaim fees prevent a known owner from picking up their dog?"
+        ],
+        aiRole: "Automated visual similarity matching between stray intake photos and community lost-dog posts across platforms."
+      },
+      {
+        id: 10,
+        shortTitle: "Ongoing Support",
+        title: "10. Ongoing Support",
+        subtitle: "Food, preventive care & housing stability without separation",
+        status: "unmeasured",
+        statusLabel: "Access Not Yet Measured",
+        angleDeg: -126,
+        connections: [1, 4, 7, 9],
+        overview: {
+          whatMustHappen: "Pet food pantries, wellness vouchers, boarding-during-crisis, and pet-inclusive shelter/housing options keep dogs healthy and bonded with their owners—especially unhoused residents and families facing economic hardship.",
+          statusContext: "Not Yet Measured. Keeping a dog with a loving owner is the most humane and cost-effective form of care, yet pet-inclusive crisis support in Stockton is fragmented."
+        },
+        evidence: [
+          { tag: "Unhoused Companions", text: "Unhoused Stockton residents frequently prioritize their dogs' food and safety, yet face severe barriers entering shelters, clinics, or cooling centers that prohibit pets." },
+          { tag: "Prevention Logic", text: "Every dog kept stable at home avoids consuming a scarce shelter kennel and emergency rescue resources." }
+        ],
+        orgsAndPlaces: [
+          { name: "Local Pet Food Pantries & Street Outreach Teams", role: "Distributing kibble, leashes, flea/tick prevention, and basic gear", location: "Downtown & South Stockton outreach sites" },
+          { name: "Stockton Homeless Shelters & Navigation Centers", role: "Varying pet-accommodation policies during housing transitions", location: "Stockton" }
+        ],
+        initiatives: [
+          { name: "Pet-Inclusive Crisis Support Mapping", status: "Active Research", impact: "Cataloging which Stockton shelters, food banks, and clinics welcome unhoused residents with companion animals." }
+        ],
+        openQuestions: [
+          "Which Stockton emergency shelters and transitional housing sites currently accept companion dogs?",
+          "Where can an unhoused dog owner access free vaccinations and parasite prevention without a fixed address?"
+        ],
+        aiRole: "Maintain a live, plain-language resource router connecting residents in crisis to pet-friendly shelters, food distribution days, and no-cost wellness clinics."
+      }
+    ];
+
+    // =========================================================================
+    // 2. NON-LINEAR PATHWAY SCENARIOS
+    // =========================================================================
+    const PATHWAYS = [
+      {
+        id: "all",
+        label: "All 10 Care Conditions",
+        nodeIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        narrative: "Full system view: Ten interconnected conditions determine whether a Stockton dog receives care. A breakdown in any linked node—like veterinary access or foster capacity—backs up the entire system."
+      },
+      {
+        id: "injured_stray",
+        label: "Injured Stray on Street",
+        nodeIds: [1, 2, 3, 4, 5, 6, 7, 8],
+        narrative: "Pathway (8 nodes): Someone spots an injured dog (1) and calls dispatch (2). Timely field response (3), trauma assessment (4), safe transport (5), emergency vet care (7), and shelter/foster recovery (6, 8) must align within hours."
+      },
+      {
+        id: "unhoused_companion",
+        label: "Dog with Unhoused Owner",
+        nodeIds: [1, 4, 7, 10],
+        narrative: "Pathway (4 nodes — No Separation): A dog living with an unhoused owner does NOT need shelter intake or adoption. Care means accurate non-punitive assessment (4), accessible vet/vaccine care (7), and ongoing food & pet-inclusive housing support (10)."
+      },
+      {
+        id: "lost_pet",
+        label: "Lost Family Pet",
+        nodeIds: [1, 2, 4, 9, 10],
+        narrative: "Pathway (5 nodes): When a neighbor recognizes a loose family dog (1), quick reporting (2) and field microchip assessment (4) can trigger direct reunification (9) and preventive support (10)—bypassing shelter kennels entirely."
+      },
+      {
+        id: "dumped_litter",
+        label: "Dumped Litter / Urgent Rescue",
+        nodeIds: [1, 3, 5, 6, 7, 8, 9],
+        narrative: "Pathway (7 nodes): Vulnerable puppies dumped along a corridor require rapid recognition (1), immediate pickup (3, 5), isolation/foster placement (6, 8) to prevent parvo, vaccinations/spay-neuter (7), and adoption (9)."
+      }
+    ];
+
+    // =========================================================================
+    // 3. WHAT'S CHANGING (LIVING FEED DATA)
+    // =========================================================================
+    const LIVING_FEED = [
+      {
+        id: "f1",
+        date: "Nov 12, 2026",
+        category: "evidence",
+        categoryLabel: "Evidence Update",
+        nodeRef: 3,
+        nodeName: "3. Response",
+        title: "7,183 Animal Services field-call records ingested for latency & corridor clustering",
+        summary: "Public records covering municipal field calls have been cleaned and geocoded to measure response times across Stockton neighborhoods and identify repeat abandonment zones."
+      },
+      {
+        id: "f2",
+        date: "Nov 04, 2026",
+        category: "initiative",
+        categoryLabel: "Initiative Milestone",
+        nodeRef: 6,
+        nodeName: "6. Shelter Capacity",
+        title: "Stockton Animal Shelter expansion mapped directly to 2024 intake baseline (3,106 dogs)",
+        summary: "Model updated to link capital kennel expansion plans against historical stray intake spikes, highlighting the continued need for foster diversion even after new kennels open."
+      },
+      {
+        id: "f3",
+        date: "Oct 26, 2026",
+        category: "fieldwork",
+        categoryLabel: "Fieldwork Observation",
+        nodeRef: 10,
+        nodeName: "10. Ongoing Support",
+        title: "Unhoused companion care pathway added to prevent unnecessary shelter separation",
+        summary: "Field interviews confirmed that separating dogs from unhoused owners harms both people and animals while consuming scarce shelter space. Node 10 now tracks pet-inclusive resources."
+      },
+      {
+        id: "f4",
+        date: "Oct 18, 2026",
+        category: "initiative",
+        categoryLabel: "Initiative Milestone",
+        nodeRef: 8,
+        nodeName: "8. Foster & Rescue",
+        title: "Proposed Canine Campus linked to temporary placement & decompression bottleneck",
+        summary: "Tracked how the proposed Canine Campus addresses post-intake recovery and behavioral decompression, bridging the gap between municipal kennels and rescue transfer."
+      },
+      {
+        id: "f5",
+        date: "Oct 09, 2026",
+        category: "evidence",
+        categoryLabel: "Evidence Update",
+        nodeRef: 1,
+        nodeName: "1. Recognition",
+        title: "17 of 54 cataloged records verified; 3–10 weekly dumped-dog encounters documented",
+        summary: "Verification audit confirmed recurring weekly abandonment patterns along South and East Stockton corridors, upgrading Recognition from unmeasured to active evidence review."
+      },
+      {
+        id: "f6",
+        date: "Sep 28, 2026",
+        category: "fieldwork",
+        categoryLabel: "Model Architecture",
+        nodeRef: 4,
+        nodeName: "4. Assessment",
+        title: "Distinguished 'Not Yet Measured' from 'Broken' across unverified care conditions",
+        summary: "To keep the investigation honest, nodes like Assessment and Transportation are explicitly marked as unmeasured until field data confirms performance."
+      }
+    ];
+
+    // =========================================================================
+    // 4. WHAT WE'RE TRYING (BOUNDED AI & SYSTEM EXPERIMENTS)
+    // =========================================================================
+    const EXPERIMENTS = [
+      {
+        id: "exp1",
+        nodeId: 3,
+        nodeLabel: "Targets: 2. Reporting & 3. Response",
+        status: "Running Prototype",
+        title: "Field-Call Log Pattern & Bottleneck Clustering",
+        problem: "7,183 Animal Services call logs contain rich operational truth, but unstructured notes obscure why certain calls stall or close 'Gone on Arrival.'",
+        aiApproach: "Using NLP classification and spatial-temporal clustering to map call urgency, response lag by neighborhood, and peak overload windows where civilian outreach could assist.",
+        metric: "Identifying top 5 high-delay corridors & call-type bottlenecks"
+      },
+      {
+        id: "exp2",
+        nodeId: 1,
+        nodeLabel: "Targets: 1. Recognition & 5. Transportation",
+        status: "Field Testing",
+        title: "Dumping Corridor Early-Warning & Sighting Synthesis",
+        problem: "3–10 dumped-dog encounters occur weekly across scattered locations, often reported piecemeal across neighborhood social feeds before official dispatch.",
+        aiApproach: "Deduplicating and geocoding community sighting reports to distinguish repeat sightings of the same dog from new abandonment events.",
+        metric: "Faster coordinated rescue capture before traffic injury"
+      },
+      {
+        id: "exp3",
+        nodeId: 10,
+        nodeLabel: "Targets: 7. Veterinary Care & 10. Ongoing Support",
+        status: "In Design",
+        title: "No-Separation Care & Low-Cost Clinic Router",
+        problem: "Residents in crisis—and unhoused dog owners—struggle to find which clinics, pantries, or shelters accept dogs without steep fees or surrender requirements.",
+        aiApproach: "Building a structured, verified eligibility matcher that routes residents to open spay/neuter slots, free vaccine days, and pet-friendly services.",
+        metric: "Direct care diversions keeping dogs with their people"
+      },
+      {
+        id: "exp4",
+        nodeId: 4,
+        nodeLabel: "Targets: 4. Assessment & 9. Reunification",
+        status: "Scoping",
+        title: "Pre-Intake Lost-Pet Visual & Microchip Matching",
+        problem: "Many stray dogs entering the 3,106 annual shelter intakes belong to families nearby, yet manual lost-and-found cross-checking takes days.",
+        aiApproach: "Testing lightweight visual similarity + location radius matching to alert owners and field responders before a dog ever occupies a shelter kennel.",
+        metric: "Increase direct field Return-to-Owner (RTO) rate"
+      }
+    ];
+
+    // =========================================================================
+    // 5. RESIDENT CARE HELPER PATHWAYS
+    // =========================================================================
+    const HELPER_SCENARIOS = {
+      found_stray: {
+        title: "You found a stray, lost, or injured dog in Stockton",
+        nodesInvolved: [1, 2, 4, 9],
+        steps: [
+          {
+            step: "1. Check immediate safety & injury status",
+            detail: "If the dog is critically injured, aggressive, or in active traffic, keep a safe distance and call Stockton Police Non-Emergency / Animal Services dispatch immediately at (209) 937-8377."
+          },
+          {
+            step: "2. Scan for a microchip before transporting to the shelter",
+            detail: "If the dog is friendly and safe to contain, any local veterinary clinic or Stockton Animal Shelter (1575 S. Lincoln St) can scan for a microchip for free—often reuniting the dog the same day without kennel intake."
+          },
+          {
+            step: "3. Post locally & check Stockton lost-pet boards",
+            detail: "Take a clear photo in daylight, note the exact cross-streets, and post to 24Petconnect and Stockton Lost & Found Pets while filing a found-dog report with Stockton Animal Services."
+          }
+        ]
+      },
+      own_vet: {
+        title: "You need affordable veterinary care, vaccines, or spay/neuter",
+        nodesInvolved: [7, 10],
+        steps: [
+          {
+            step: "1. Book high-volume low-cost spay/neuter early",
+            detail: "Contact ACT Spay/Neuter Clinic (327 E. Channel St, Stockton · (209) 462-7729) or check San Joaquin County mobile clinic dates. Appointments book weeks out, so schedule as early as possible."
+          },
+          {
+            step: "2. Use walk-in vaccine & wellness clinics for preventive care",
+            detail: "Core DHPP and Rabies vaccines prevent fatal shelter outbreaks like parvo. Watch for low-cost weekend vaccine clinics hosted at Stockton community centers and feed stores."
+          },
+          {
+            step: "3. Ask about voucher assistance before surrendering for medical cost",
+            detail: "If an unexpected illness or injury threatens your ability to keep your dog, reach out to local rescue wellness funds and CareCredit/veterinary assistance programs before surrendering."
+          }
+        ]
+      },
+      unhoused_support: {
+        title: "You are unhoused or in housing transition & want to keep your dog",
+        nodesInvolved: [4, 7, 10],
+        steps: [
+          {
+            step: "1. Your bond matters—you do not have to surrender your dog just for supplies",
+            detail: "Local street outreach teams and pet food pantries provide free dog food, leashes, collars, and flea/tick prevention without requiring a permanent address."
+          },
+          {
+            step: "2. Ask for pet-inclusive shelter & navigation intake",
+            detail: "When speaking with Stockton shelter outreach or Coordinated Entry, explicitly state you have a companion animal and ask for pet-accommodating beds or temporary boarding support during intake."
+          },
+          {
+            step: "3. Keep vaccine records on your phone or in a waterproof pouch",
+            detail: "Having proof of rabies and core vaccinations makes it dramatically easier to access pet-friendly shelters, emergency warming/cooling centers, and housing placements."
+          }
+        ]
+      }
+    };
+
+    // =========================================================================
+    // 6. STATE & RENDERING CONTROLLERS
+    // =========================================================================
+    let state = {
+      selectedNodeId: 3, // Default to "3. Response" so evidence & bottleneck are immediately visible
+      activeTab: "overview",
+      activePathwayId: "all",
+      activeFeedFilter: "all"
+    };
+
+    const STATUS_STYLES = {
+      functioning: {
+        stroke: "#059669",
+        fill: "#ECFDF5",
+        badgeBg: "bg-emerald-50 text-emerald-800 border-emerald-200",
+        dot: "bg-emerald-600",
+        dash: "none"
+      },
+      constrained: {
+        stroke: "#D97706",
+        fill: "#FFFBEB",
+        badgeBg: "bg-amber-50 text-amber-800 border-amber-200",
+        dot: "bg-amber-500",
+        dash: "none"
+      },
+      investigation: {
+        stroke: "#1D4ED8",
+        fill: "#EFF6FF",
+        badgeBg: "bg-blue-50 text-blue-800 border-blue-200",
+        dot: "bg-blue-600",
+        dash: "none"
+      },
+      unmeasured: {
+        stroke: "#64748B",
+        fill: "#F8FAFC",
+        badgeBg: "bg-slate-100 text-slate-700 border-slate-300 border-dashed",
+        dot: "bg-slate-500",
+        dash: "4 3"
+      }
+    };
+
+    // Calculate (x, y) coordinates on a responsive elliptical/circular orbit inside 800x660 viewBox
+    function getNodeCoords(node) {
+      const cx = 400;
+      const cy = 330;
+      const rx = 265;
+      const ry = 232;
+      const rad = (node.angleDeg * Math.PI) / 180;
+      return {
+        x: Math.round(cx + rx * Math.cos(rad)),
+        y: Math.round(cy + ry * Math.sin(rad))
+      };
+    }
+
+    // Render Pathway Filter Pills
+    function renderPathwayFilters() {
+      const container = document.getElementById("pathway-filters");
+      const activePathway = PATHWAYS.find(p => p.id === state.activePathwayId);
+
+      container.innerHTML = PATHWAYS.map(p => {
+        const isActive = p.id === state.activePathwayId;
+        return `
+          <button
+            onclick="selectPathway('${p.id}')"
+            role="tab"
+            aria-selected="${isActive}"
+            class="px-3.5 py-1.5 rounded-full text-xs font-medium transition cursor-pointer border ${
+              isActive
+                ? "bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs"
+                : "bg-white text-zinc-700 border-[#E4E2DD] hover:border-zinc-400 hover:bg-[#F1EFEA]"
+            }"
+          >
+            ${p.label}
+          </button>
+        `;
+      }).join("");
+
+      document.getElementById("pathway-narrative").textContent = activePathway.narrative;
+      document.getElementById("active-pathway-count").textContent = `${activePathway.nodeIds.length} of 10 conditions`;
+    }
+
+    // Render the Interactive SVG Care System Network
+    function renderCareSystemSVG() {
+      const linksLayer = document.getElementById("svg-links-layer");
+      const spokesLayer = document.getElementById("svg-spokes-layer");
+      const nodesLayer = document.getElementById("svg-nodes-layer");
+
+      const activePathway = PATHWAYS.find(p => p.id === state.activePathwayId);
+      const activeSet = new Set(activePathway.nodeIds);
+      const selectedNode = CARE_NODES.find(n => n.id === state.selectedNodeId);
+
+      // Map node coordinates
+      const coordsMap = {};
+      CARE_NODES.forEach(n => {
+        coordsMap[n.id] = getNodeCoords(n);
+      });
+
+      // 1. Draw interconnecting web edges between related nodes
+      let linksHTML = "";
+      const drawnPairs = new Set();
+
+      CARE_NODES.forEach(node => {
+        node.connections.forEach(targetId => {
+          const pairKey = [Math.min(node.id, targetId), Math.max(node.id, targetId)].join("-");
+          if (drawnPairs.has(pairKey)) return;
+          drawnPairs.add(pairKey);
+
+          const p1 = coordsMap[node.id];
+          const p2 = coordsMap[targetId];
+
+          const inPathway = activeSet.has(node.id) && activeSet.has(targetId);
+          const connectedToSelected = node.id === state.selectedNodeId || targetId === state.selectedNodeId;
+
+          let stroke = "#E4E2DD";
+          let strokeWidth = 1.25;
+          let opacity = 0.65;
+
+          if (state.activePathwayId !== "all") {
+            if (inPathway) {
+              stroke = "#1D4ED8";
+              strokeWidth = 2.2;
+              opacity = 0.85;
+            } else {
+              opacity = 0.15;
+            }
+          } else if (connectedToSelected) {
+            stroke = "#1D4ED8";
+            strokeWidth = 2;
+            opacity = 0.8;
+          }
+
+          linksHTML += `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="${stroke}" stroke-width="${strokeWidth}" stroke-opacity="${opacity}" class="care-link" />`;
+        });
+      });
+      linksLayer.innerHTML = linksHTML;
+
+      // 2. Draw Spokes from Center Dog to each Point of Care
+      let spokesHTML = "";
+      CARE_NODES.forEach(node => {
+        const p = coordsMap[node.id];
+        const isSelected = node.id === state.selectedNodeId;
+        const inPathway = activeSet.has(node.id);
+        const st = STATUS_STYLES[node.status];
+
+        let stroke = isSelected ? "#1D4ED8" : st.stroke;
+        let width = isSelected ? 2.5 : 1.2;
+        let opacity = inPathway ? (isSelected ? 0.95 : 0.35) : 0.08;
+        let dash = isSelected ? "none" : "3 3";
+
+        spokesHTML += `<line x1="400" y1="330" x2="${p.x}" y2="${p.y}" stroke="${stroke}" stroke-width="${width}" stroke-opacity="${opacity}" stroke-dasharray="${dash}" class="care-link" />`;
+      });
+      spokesLayer.innerHTML = spokesHTML;
+
+      // 3. Draw the 10 Care Nodes
+      let nodesHTML = "";
+      CARE_NODES.forEach(node => {
+        const p = coordsMap[node.id];
+        const isSelected = node.id === state.selectedNodeId;
+        const inPathway = activeSet.has(node.id);
+        const st = STATUS_STYLES[node.status];
+        const opacity = inPathway ? 1 : 0.28;
+
+        // Label positioning slightly outward from center
+        const labelOffsetY = p.y < 330 ? -36 : 42;
+
+        nodesHTML += `
+          <g class="care-node-group" transform="translate(${p.x}, ${p.y})" opacity="${opacity}" onclick="selectNode(${node.id})" role="button" tabindex="0" aria-label="${node.title}: ${node.statusLabel}">
+            ${isSelected ? `<circle r="33" fill="none" stroke="#1D4ED8" stroke-width="2" class="active-pulse" />` : ""}
+            <circle r="29" fill="${st.stroke}" opacity="0" class="node-outer-halo" />
+            
+            <!-- Main Node Circle -->
+            <circle
+              r="24"
+              fill="${isSelected ? '#18181B' : st.fill}"
+              stroke="${isSelected ? '#1D4ED8' : st.stroke}"
+              stroke-width="${isSelected ? '3' : '2.25'}"
+              stroke-dasharray="${isSelected ? 'none' : st.dash}"
+              filter="url(#cardShadow)"
+            />
+
+            <!-- Node Index Number -->
+            <text
+              y="4.5"
+              text-anchor="middle"
+              class="font-mono font-semibold text-[13px] ${isSelected ? 'fill-white' : 'fill-zinc-900'}"
+            >${node.id}</text>
+
+            <!-- Node Pill Label -->
+            <g transform="translate(0, ${labelOffsetY})">
+              <rect
+                x="-68"
+                y="-13"
+                width="136"
+                height="24"
+                rx="6"
+                fill="${isSelected ? '#18181B' : '#FFFFFF'}"
+                stroke="${isSelected ? '#18181B' : '#E4E2DD'}"
+                stroke-width="1.2"
+                filter="url(#cardShadow)"
+              />
+              <text
+                y="2.5"
+                text-anchor="middle"
+                class="font-sans font-semibold text-[11px] ${isSelected ? 'fill-white' : 'fill-zinc-900'}"
+              >${node.shortTitle}</text>
+            </g>
+          </g>
+        `;
+      });
+      nodesLayer.innerHTML = nodesHTML;
+    }
+
+    // Render Right-Hand 5-Dimension Inspector Panel
+    function renderInspector() {
+      const node = CARE_NODES.find(n => n.id === state.selectedNodeId);
+      const st = STATUS_STYLES[node.status];
+
+      // Header
+      document.getElementById("inspector-header").innerHTML = `
+        <div class="flex items-start justify-between gap-3">
+          <div>
+            <div class="flex flex-wrap items-center gap-2 mb-1.5">
+              <span class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Point of Care ${node.id} / 10</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono border ${st.badgeBg}">
+                <span class="w-1.5 h-1.5 rounded-full ${st.dot}"></span>
+                ${node.statusLabel}
+              </span>
+            </div>
+            <h3 class="font-serif text-xl sm:text-2xl font-medium text-zinc-900">${node.title}</h3>
+            <p class="text-xs sm:text-sm text-zinc-600 mt-1">${node.subtitle}</p>
+          </div>
+        </div>
+      `;
+
+      // Highlight Active Tab Button
+      document.querySelectorAll(".inspector-tab").forEach(btn => {
+        if (btn.dataset.tab === state.activeTab) {
+          btn.classList.add("tab-btn-active");
+          btn.classList.remove("text-zinc-600");
+        } else {
+          btn.classList.remove("tab-btn-active");
+          btn.classList.add("text-zinc-600");
+        }
+      });
+
+      // Body Content by Tab
+      const bodyEl = document.getElementById("inspector-body");
+
+      if (state.activeTab === "overview") {
+        const connectedNodes = node.connections
+          .map(cid => CARE_NODES.find(n => n.id === cid))
+          .filter(Boolean);
+
+        bodyEl.innerHTML = `
+          <div class="space-y-4">
+            <div class="bg-[#F8F7F4] border border-[#E4E2DD] rounded-xl p-4">
+              <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 mb-1">What Must Happen Here</div>
+              <p class="text-sm text-zinc-800 leading-relaxed">${node.overview.whatMustHappen}</p>
+            </div>
+
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 mb-1">Current System Condition</div>
+              <p class="text-sm text-zinc-700 leading-relaxed">${node.overview.statusContext}</p>
+            </div>
+
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 mb-2">Directly Connected Points of Care</div>
+              <div class="flex flex-wrap gap-1.5">
+                ${connectedNodes.map(cn => `
+                  <button onclick="selectNode(${cn.id})" class="px-2.5 py-1 rounded-md bg-[#F1EFEA] hover:bg-blue-50 hover:text-blue-700 border border-[#E4E2DD] text-xs font-medium text-zinc-800 transition cursor-pointer">
+                    ${cn.title} →
+                  </button>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-[#E4E2DD] flex items-center justify-between">
+              <span class="text-xs text-zinc-500">Need immediate help with this step?</span>
+              <button onclick="openCareHelper()" class="text-xs font-semibold text-blue-700 hover:underline cursor-pointer">
+                Open Care Pathway Guide →
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (state.activeTab === "evidence") {
+        bodyEl.innerHTML = `
+          <div class="space-y-3">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Verified Records &amp; Field Measurements</div>
+            ${node.evidence.map(ev => `
+              <div class="p-3.5 rounded-xl bg-[#F8F7F4] border border-[#E4E2DD]">
+                <span class="inline-block font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-white border border-[#E4E2DD] text-blue-700 font-semibold mb-1.5">
+                  ${ev.tag}
+                </span>
+                <p class="text-sm text-zinc-800 leading-relaxed">${ev.text}</p>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      } else if (state.activeTab === "orgs") {
+        bodyEl.innerHTML = `
+          <div class="space-y-3">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Responsible Agencies, Providers &amp; Places</div>
+            ${node.orgsAndPlaces.map(org => `
+              <div class="p-3.5 rounded-xl border border-[#E4E2DD] bg-white">
+                <div class="font-semibold text-sm text-zinc-900">${org.name}</div>
+                <p class="text-xs text-zinc-600 mt-1">${org.role}</p>
+                <div class="mt-2 inline-flex items-center gap-1.5 font-mono text-[11px] text-zinc-500 bg-[#F8F7F4] px-2 py-0.5 rounded">
+                  <span>📍</span><span>${org.location}</span>
+                </div>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      } else if (state.activeTab === "initiatives") {
+        bodyEl.innerHTML = `
+          <div class="space-y-3">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500">Efforts Expanding Capacity at This Node</div>
+            ${node.initiatives.map(init => `
+              <div class="p-4 rounded-xl bg-blue-50/40 border border-blue-200/80">
+                <div class="flex items-center justify-between gap-2 mb-1.5">
+                  <span class="font-semibold text-sm text-zinc-900">${init.name}</span>
+                  <span class="font-mono text-[10px] uppercase px-2 py-0.5 rounded-full bg-blue-700 text-white">${init.status}</span>
+                </div>
+                <p class="text-xs sm:text-sm text-zinc-700 leading-relaxed">${init.impact}</p>
+              </div>
+            `).join("")}
+          </div>
+        `;
+      } else if (state.activeTab === "questions") {
+        bodyEl.innerHTML = `
+          <div class="space-y-4">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-zinc-500 mb-2">What Crossover Still Needs to Discover</div>
+              <ul class="space-y-2">
+                ${node.openQuestions.map(q => `
+                  <li class="flex items-start gap-2.5 text-sm text-zinc-800 bg-[#F8F7F4] p-3 rounded-lg border border-[#E4E2DD]">
+                    <span class="font-mono text-blue-700 font-bold">?</span>
+                    <span>${q}</span>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-zinc-900 text-white">
+              <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-blue-300 mb-1.5">
+                <span>AI Role at This Point of Care</span>
+              </div>
+              <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">${node.aiRole}</p>
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById("inspector-step-indicator").textContent = `Node ${node.id} of 10`;
+    }
+
+    // Render Section 2: What's Changing Feed
+    function renderLivingFeed() {
+      const container = document.getElementById("living-feed-grid");
+      const items = state.activeFeedFilter === "all"
+        ? LIVING_FEED
+        : LIVING_FEED.filter(item => item.category === state.activeFeedFilter);
+
+      container.innerHTML = items.map(item => `
+        <article class="bg-white border border-[#E4E2DD] rounded-xl p-5 flex flex-col justify-between hover:border-zinc-400 transition">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="font-mono text-[11px] text-zinc-500">${item.date}</span>
+              <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-[#F1EFEA] text-zinc-700">
+                ${item.categoryLabel}
+              </span>
+            </div>
+            <h3 class="font-semibold text-base text-zinc-900 leading-snug mb-2">${item.title}</h3>
+            <p class="text-xs sm:text-sm text-zinc-600 leading-relaxed">${item.summary}</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-[#E4E2DD] flex items-center justify-between">
+            <span class="font-mono text-[11px] text-zinc-500">Updates Node:</span>
+            <button onclick="jumpToNode(${item.nodeRef})" class="font-mono text-xs font-semibold text-blue-700 hover:underline cursor-pointer">
+              ${item.nodeName} ↑
+            </button>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    // Render Section 3: What We're Trying Experiments
+    function renderExperiments() {
+      const container = document.getElementById("experiments-grid");
+      container.innerHTML = EXPERIMENTS.map(exp => `
+        <div class="bg-[#F8F7F4] border border-[#E4E2DD] rounded-2xl p-6 flex flex-col justify-between">
+          <div>
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <button onclick="jumpToNode(${exp.nodeId})" class="font-mono text-[11px] text-blue-700 font-semibold hover:underline cursor-pointer">
+                ${exp.nodeLabel} ↑
+              </button>
+              <span class="font-mono text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white border border-[#E4E2DD] text-zinc-800">
+                ${exp.status}
+              </span>
+            </div>
+            <h3 class="font-serif text-xl font-medium text-zinc-900 mb-3">${exp.title}</h3>
+            
+            <div class="space-y-3 text-xs sm:text-sm">
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 block mb-0.5">What Prevents Care Today</span>
+                <p class="text-zinc-700 leading-relaxed">${exp.problem}</p>
+              </div>
+              <div>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-blue-700 block mb-0.5">How AI &amp; Systems Tooling Helps</span>
+                <p class="text-zinc-800 leading-relaxed">${exp.aiApproach}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 pt-3.5 border-t border-[#E4E2DD] flex items-center justify-between text-xs">
+            <span class="font-mono text-zinc-500">Target Signal:</span>
+            <span class="font-medium text-zinc-900">${exp.metric}</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // =========================================================================
+    // 7. USER INTERACTION HANDLERS
+    // =========================================================================
+    function selectNode(nodeId) {
+      state.selectedNodeId = nodeId;
+      renderCareSystemSVG();
+      renderInspector();
+    }
+
+    function cycleNode(delta) {
+      let next = state.selectedNodeId + delta;
+      if (next > 10) next = 1;
+      if (next < 1) next = 10;
+      selectNode(next);
+    }
+
+    function switchInspectorTab(tabKey) {
+      state.activeTab = tabKey;
+      renderInspector();
+    }
+
+    function selectPathway(pathwayId) {
+      state.activePathwayId = pathwayId;
+      const pathway = PATHWAYS.find(p => p.id === pathwayId);
+      // If currently selected node is outside the chosen pathway, auto-select the first node in that pathway
+      if (!pathway.nodeIds.includes(state.selectedNodeId)) {
+        state.selectedNodeId = pathway.nodeIds[0];
+      }
+      renderPathwayFilters();
+      renderCareSystemSVG();
+      renderInspector();
+    }
+
+    function resetView() {
+      state.activePathwayId = "all";
+      state.selectedNodeId = 3;
+      state.activeTab = "overview";
+      renderPathwayFilters();
+      renderCareSystemSVG();
+      renderInspector();
+    }
+
+    function jumpToNode(nodeId) {
+      state.activePathwayId = "all";
+      state.selectedNodeId = nodeId;
+      renderPathwayFilters();
+      renderCareSystemSVG();
+      renderInspector();
+      document.getElementById("care-system").scrollIntoView({ behavior: "smooth" });
+    }
+
+    function filterFeed(category) {
+      state.activeFeedFilter = category;
+      document.querySelectorAll(".feed-filter-btn").forEach(btn => {
+        if (btn.dataset.feed === category) {
+          btn.className = "feed-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-zinc-900 text-white cursor-pointer";
+        } else {
+          btn.className = "feed-filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white border border-[#E4E2DD] text-zinc-700 hover:bg-zinc-100 cursor-pointer";
+        }
+      });
+      renderLivingFeed();
+    }
+
+    // Care Helper Modal Functions
+    function openCareHelper() {
+      const modal = document.getElementById("care-helper-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+      selectHelperScenario("found_stray");
+    }
+
+    function closeCareHelper() {
+      const modal = document.getElementById("care-helper-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function selectHelperScenario(key) {
+      document.querySelectorAll(".helper-choice-btn").forEach(btn => {
+        if (btn.dataset.helper === key) {
+          btn.className = "helper-choice-btn text-left p-3.5 rounded-xl border-2 border-blue-600 bg-blue-50/50 transition cursor-pointer";
+        } else {
+          btn.className = "helper-choice-btn text-left p-3.5 rounded-xl border border-[#E4E2DD] hover:border-zinc-400 bg-white transition cursor-pointer";
+        }
+      });
+
+      const data = HELPER_SCENARIOS[key];
+      const output = document.getElementById("helper-guidance-output");
+      output.innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#E4E2DD]">
+          <h4 class="font-semibold text-sm sm:text-base text-zinc-900">${data.title}</h4>
+          <div class="flex items-center gap-1">
+            ${data.nodesInvolved.map(nid => `
+              <button onclick="closeCareHelper(); jumpToNode(${nid});" class="font-mono text-[10px] px-2 py-0.5 rounded bg-white border border-[#E4E2DD] text-blue-700 hover:bg-blue-50 cursor-pointer">
+                Node ${nid}
+              </button>
+            `).join("")}
+          </div>
+        </div>
+        <div class="space-y-3">
+          ${data.steps.map(s => `
+            <div class="bg-white p-3.5 rounded-lg border border-[#E4E2DD]">
+              <div class="font-semibold text-xs sm:text-sm text-zinc-900 mb-1">${s.step}</div>
+              <p class="text-xs sm:text-sm text-zinc-600 leading-relaxed">${s.detail}</p>
+            </div>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    // Close modal on Escape or backdrop click
+    document.getElementById("care-helper-modal").addEventListener("click", function(e) {
+      if (e.target === this) closeCareHelper();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") closeCareHelper();
+    });
+
+    // Initialize entire application on window load
+    window.onload = function() {
+      renderPathwayFilters();
+      renderCareSystemSVG();
+      renderInspector();
+      renderLivingFeed();
+      renderExperiments();
+    };
+  </script>
+</body>
+</html>

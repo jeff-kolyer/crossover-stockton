@@ -1,16 +1,16 @@
 # Crossover Stockton
 
-The current public website is [StreetWatch](https://crossoverstockton.org/), a static investigation of street dogs and access to care in Stockton. It uses the standard Vite layout: `index.html` at the root, application code in `src/main.js` and `src/style.css`, structured data in `src/data/`, and public files in `public/`.
+The public site is an editorial account of Crossover Stockton's local work: clear attention, practical action, and care for Stockton's dogs. It has six sections: Home, Articles, What We're Doing, AI & Ideas, Info Explorer, and About.
 
-## Data
+## Content and sources
 
-- `src/data/catalog-source.json` holds the 45 evidence, activity, and task records selected for this site, with their full source detail retained.
-- `src/data/curated-records.json` holds nine additional StreetWatch source records.
-- `src/data/record-id-ledger.json` maps source IDs to stable StreetWatch display IDs.
-- `src/data/record-presentation.json` and `ui-presentation.json` hold the catalog's editorial and interface details.
-- `npm run build` draws titles, summaries, and source links from the selected records, writes `public/data/records.json` and the generated page module, then runs `vite build`. Editorial status, limitations, and display details remain in the presentation files for review.
+- `src/data/articles.json` contains six sourced care articles and the About article. About keeps its own image and grounding cards in the same article data structure.
+- `src/data/site-content.json` contains the home introduction, three priorities, situation-specific care paths, the ordered work page, and AI ideas.
+- Info Explorer includes the three identified priorities from `site-content.json` as gap records alongside the source catalog. Its quick status buttons follow the mockup and filter the records they label.
+- `src/data/catalog-source.json`, `curated-records.json`, `record-id-ledger.json`, `record-presentation.json`, and `ui-presentation.json` preserve the existing source catalog and its stable IDs. `scripts/build-streetwatch-data.mjs` generates `public/data/records.json` for the Info Explorer.
+- `src/editorial.js` renders the editorial pages and record inspection; `src/gold-demo.css` is the active stylesheet, built from the supplied gold demo's paper, type, spacing, and status colors. `src/editorial.css` remains as the prior visual baseline. The header uses the demo's blue text mark with “STKN” and “See Clearly.”; the footer uses a plain blue square.
 
-The 54 catalog entries include 33 evidence records, five activity records, seven unfinished tasks, and nine curated source records. `npm run check:data` validates their schemas, links, and stable display IDs.
+The attached design prototype informed the layout and typography. The later street-dog care models informed the found-dog article's fictional Bruno example, the doghouse article, the distinct care paths, and bounded AI ideas. Their illustrative statistics, maps, and project claims were not imported as facts. The articles link to Crossover's source records and distinguish historical data, reports, plans, and completed activity.
 
 ## Local development
 
@@ -22,10 +22,8 @@ npm run dev
 Validation and production build:
 
 ```bash
-npm run check:data
 npm run build
+npm run test:ui
 ```
 
-GitHub Actions publishes `dist/` to GitHub Pages from `main`. Vite copies `public/CNAME` and other public assets into `dist/`. A postbuild step adds the direct `/evidence-room/` route.
-
-The StreetWatch tip form saves a draft in the visitor's browser. It does not submit the tip to Crossover.
+GitHub Actions publishes `dist/` to GitHub Pages from `main`. The legacy `/evidence-room/` route and `?tab=evidence-room` links open the new Info Explorer.

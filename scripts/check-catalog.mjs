@@ -7,6 +7,8 @@ const curated = await read('curated-records');
 const ledger = (await read('record-id-ledger')).entries;
 const presentation = await read('record-presentation');
 const ui = await read('ui-presentation');
+const articles = await read('articles');
+const siteContent = await read('site-content');
 const errors = [];
 const groups = [['evidence', 33, 'evidence'], ['activities', 5, 'activity'], ['tasks', 7, 'task']];
 const source = new Map();
@@ -47,6 +49,22 @@ for (const { sourceId, displayId } of ledger) {
 for (const id of source.keys()) if (!sourceIds.has(id)) errors.push(`unused source record: ${id}`);
 for (const id of curatedIds) if (!sourceIds.has(id)) errors.push(`unused curated record: ${id}`);
 for (const id of presentationIds) if (!source.has(id)) errors.push(`orphan record presentation: ${id}`);
+const articleIds = new Set();
+for (const article of articles) {
+  if (!article.id || articleIds.has(article.id)) errors.push(`missing or duplicate article ID: ${article.id}`);
+  articleIds.add(article.id);
+  if (article.type === 'about') {
+    if (!article.title || !article.intro || !article.image || !article.sections?.length || !article.groundingCards?.length) errors.push(`${article.id}: incomplete About article`);
+    continue;
+  }
+  if (!article.title || !article.dek || !article.date || !article.sections?.length || !article.sourceIds?.length) errors.push(`${article.id}: incomplete article`);
+  for (const section of article.sections ?? []) if (!section.paragraphs?.length && !section.bullets?.length) errors.push(`${article.id}: incomplete section`);
+  for (const id of article.sourceIds ?? []) if (!displayIds.has(id)) errors.push(`${article.id}: unknown source record ${id}`);
+}
+for (const item of [...siteContent.priorities, ...siteContent.ai.ideas]) {
+  if (!articleIds.has(item.articleId)) errors.push(`site content references unknown article ${item.articleId}`);
+}
+for (const id of siteContent.doing.order) if (!displayIds.has(id)) errors.push(`doing page references unknown record ${id}`);
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CROSSOVER // STOCKTON — How Are We Failing Stray Dogs?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#F8F7F4',
+            ink: '#111827',
+            cobalt: '#1D4ED8',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+            mono: ['"IBM Plex Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      background-color: #F8F7F4;
+      color: #111827;
+    }
+    body {
+      background-color: #F8F7F4;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    .funnel-bar {
+      transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+    }
+    .sim-bar {
+      transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-blue-700 selection:text-white">
+
+  <!-- STICKY EDITORIAL CIVIC HEADER -->
+  <header class="sticky top-0 z-40 bg-[#F8F7F4]/95 backdrop-blur-md border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between gap-4 py-3.5">
+        
+        <!-- Signature Blue Square + Identity -->
+        <a href="#where-we-fail" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-11 h-11 bg-[#1D4ED8] text-white flex flex-col justify-between p-1.5 shadow-xs shrink-0 transition-transform group-hover:scale-[1.03]">
+            <span class="font-mono text-[8px] leading-none uppercase tracking-wider opacity-85">CASE 01</span>
+            <span class="font-sans font-bold text-[9.5px] leading-[1.05] tracking-tight">Street Dogs &amp; Access to Care</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono font-semibold text-sm sm:text-base tracking-tight text-gray-900">CROSSOVER</span>
+              <span class="text-gray-400 font-mono text-xs">//</span>
+              <span class="font-mono text-xs sm:text-sm tracking-wide text-gray-700 uppercase">Stockton</span>
+            </div>
+            <p class="font-mono text-[11px] text-gray-500">Public Investigation · San Joaquin County</p>
+          </div>
+        </a>
+
+        <!-- Simple 3-Link Navigation -->
+        <nav class="hidden md:flex items-center gap-1 bg-white p-1 rounded-xl border border-gray-200 shadow-2xs" aria-label="Main navigation">
+          <a href="#where-we-fail" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-gray-900 hover:bg-gray-100 transition">1. Where We Fail</a>
+          <a href="#ask-records" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition">2. Ask the Records</a>
+          <a href="#fix-first" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition">3. Fix First</a>
+        </nav>
+
+        <!-- High-Contrast Resident Help Button -->
+        <button onclick="openHelpDrawer()" class="inline-flex items-center gap-2 bg-[#111827] hover:bg-[#1D4ED8] text-white text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-xs cursor-pointer">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Need Help With a Dog?</span>
+        </button>
+      </div>
+
+      <!-- Mobile Quick Links -->
+      <div class="flex md:hidden items-center gap-2 pb-2.5 overflow-x-auto text-xs font-semibold">
+        <a href="#where-we-fail" class="px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-900 whitespace-nowrap">1. Where We Fail</a>
+        <a href="#ask-records" class="px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap">2. Ask the Records</a>
+        <a href="#fix-first" class="px-3 py-1 rounded-lg bg-white border border-gray-200 text-gray-700 whitespace-nowrap">3. Fix First</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1">
+
+    <!-- SECTION 1: HERO & INTERACTIVE DROP-OFF FUNNEL -->
+    <section id="where-we-fail" class="pt-8 pb-12 sm:pt-12 sm:pb-16 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Direct Human Question & Answer -->
+        <div class="max-w-3xl mb-8">
+          <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[#1D4ED8] font-semibold mb-2.5">
+            <span>The Core Question: How Are We Failing Stray Dogs?</span>
+          </div>
+          <h1 class="font-serif text-3xl sm:text-4xl lg:text-[44px] leading-[1.12] text-gray-900 font-semibold tracking-tight">
+            In Stockton, thousands of calls for help are made—here is where dogs fall through the cracks.
+          </h1>
+          <p class="mt-3.5 text-base sm:text-lg text-gray-600 leading-relaxed">
+            A stray dog doesn't fail because people don't care. Care breaks down step-by-step when calls stall, kennels fill up, and affordable vet care is out of reach. Click any step below to see what the public records reveal.
+          </p>
+        </div>
+
+        <!-- THE INTERACTIVE 4-STAGE DROP-OFF FUNNEL -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-5 sm:p-8 shadow-xs">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 mb-6 border-b border-gray-100">
+            <div>
+              <h2 class="text-base sm:text-lg font-bold text-gray-900">The Drop-Off Funnel: From Call for Help to Actual Care</h2>
+              <p class="text-xs sm:text-sm text-gray-500">Click any bar to inspect why dogs are lost at that stage and how AI is auditing the logs.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-[11px] font-mono">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Verified Record
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Under AI Audit
+              </span>
+            </div>
+          </div>
+
+          <!-- 4 Interactive Horizontal Stages -->
+          <div id="funnel-stages" class="space-y-3.5" role="tablist" aria-label="Drop-off funnel stages">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Plain-English Stage Inspector Card -->
+          <div id="funnel-detail-box" class="mt-6 bg-[#F8F7F4] border border-gray-200 rounded-xl p-5 sm:p-6">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: PICK A REAL SITUATION (4 HUMAN STORY CARDS) -->
+    <section class="py-12 sm:py-16 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-7">
+          <span class="font-mono text-xs uppercase tracking-wider text-[#1D4ED8] font-semibold">Real Life on Stockton Streets</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-gray-900 font-semibold mt-1">Pick a real situation to see where care breaks down</h2>
+          <p class="text-sm sm:text-base text-gray-600 mt-1">No abstract flowcharts—choose a situation Stockton residents and dogs face every single week.</p>
+        </div>
+
+        <!-- 4 Situation Selector Cards -->
+        <div id="situation-cards" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6" role="tablist" aria-label="Real Stockton dog situations">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Two-Column Plain-English Breakdown -->
+        <div id="situation-detail" class="bg-white border border-gray-200 rounded-2xl p-5 sm:p-8 shadow-xs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ASK THE 7,183 FIELD-CALL RECORDS (AI AUDIT EXPLORER) -->
+    <section id="ask-records" class="py-12 sm:py-16 border-b border-gray-200 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono text-xs uppercase tracking-wider text-[#1D4ED8] font-semibold">AI Public Record Explorer</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-gray-900 font-semibold mt-1">Ask the 7,183 field-call records</h2>
+          <p class="text-sm sm:text-base text-gray-600 mt-1">
+            We use AI to read across thousands of Stockton Animal Services dispatch logs, intake numbers, and local policies—turning messy spreadsheets into plain answers about where dogs are left behind.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- Left: Question Input, Presets & Corridor Filter -->
+          <div class="lg:col-span-5 bg-[#F8F7F4] border border-gray-200 rounded-2xl p-5 space-y-5">
+            
+            <!-- Search / Custom Question Box -->
+            <div>
+              <label for="ai-question-input" class="block font-mono text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                Ask a plain-English question
+              </label>
+              <form onsubmit="handleCustomQuestion(event)" class="flex gap-2">
+                <input
+                  id="ai-question-input"
+                  type="text"
+                  placeholder="e.g., What happens on Sundays?"
+                  class="flex-1 bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#1D4ED8]"
+                />
+                <button type="submit" class="bg-[#1D4ED8] hover:bg-blue-800 text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition cursor-pointer shrink-0">
+                  Ask AI
+                </button>
+              </form>
+            </div>
+
+            <!-- Preset Question Chips -->
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-gray-500 mb-2">Common Questions</div>
+              <div id="preset-questions" class="flex flex-col gap-2">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+
+            <!-- Neighborhood / Corridor Filter -->
+            <div class="pt-4 border-t border-gray-200">
+              <label for="corridor-select" class="block font-mono text-xs uppercase tracking-wider text-gray-600 font-semibold mb-2">
+                Filter by Stockton Area / Corridor
+              </label>
+              <select
+                id="corridor-select"
+                onchange="selectCorridor(this.value)"
+                class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-medium text-gray-900 focus:outline-none focus:border-[#1D4ED8] cursor-pointer"
+              >
+                <option value="all">All Stockton (Citywide Overview)</option>
+                <option value="south">South Stockton &amp; S. Lincoln St Shelter Corridor</option>
+                <option value="slough">Mormon Slough &amp; Industrial Dumping Corridors</option>
+                <option value="north">North Stockton &amp; Trinity Pkwy Area</option>
+                <option value="central">Central Stockton &amp; Pacific Ave / Downtown</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Right: AI Plain-English Answer & Corridor Pattern Card -->
+          <div class="lg:col-span-7 space-y-5">
+            <!-- AI Answer Output -->
+            <div id="ai-answer-card" class="bg-white border-2 border-[#1D4ED8]/20 rounded-2xl p-6 shadow-xs">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Corridor Summary & Anonymized Log Sample -->
+            <div id="corridor-summary-card" class="bg-[#F8F7F4] border border-gray-200 rounded-2xl p-6">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: WHAT NEEDS FIXING FIRST + IMPACT SIMULATOR -->
+    <section id="fix-first" class="py-12 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-8">
+          <span class="font-mono text-xs uppercase tracking-wider text-[#1D4ED8] font-semibold">Where Do We Start?</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-gray-900 font-semibold mt-1">What needs fixing first—and what happens when we do</h2>
+          <p class="text-sm sm:text-base text-gray-600 mt-1">
+            By ranking where the largest numbers of dogs fall out of the system, the records point to three immediate priorities. Toggle an intervention below to see how fixing one bottleneck relieves pressure across Stockton.
+          </p>
+        </div>
+
+        <!-- Top 3 AI-Ranked Priorities -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          <!-- Priority 1 -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between shadow-2xs">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-red-50 text-red-700 border border-red-200">PRIORITY #1</span>
+                <span class="font-mono text-[11px] text-gray-500">Stops Intake at Source</span>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-gray-900 mb-2">Expand Spay/Neuter &amp; Preventive Vet Access</h3>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                Multi-month surgical waitlists and severe clinical shortages (such as limited vet staffing at Hard Luck Animal Welfare Advocates) lead directly to unplanned litters and preventable medical surrenders.
+              </p>
+            </div>
+            <div class="pt-3.5 border-t border-gray-100 text-xs">
+              <span class="font-mono text-gray-500 block mb-1">Active Effort Underway:</span>
+              <span class="font-semibold text-emerald-700">Animal Balance Spay/Neuter Contract &amp; High-Volume Clinics</span>
+            </div>
+          </div>
+
+          <!-- Priority 2 -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between shadow-2xs">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200">PRIORITY #2</span>
+                <span class="font-mono text-[11px] text-gray-500">Closes Field Drop-Off</span>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-gray-900 mb-2">Fix Dispatch Triage &amp; Appointment-Only Walls</h3>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                When residents call among the 7,183 field logs or bring a found dog to 1575 S. Lincoln St, appointment-only barriers and dispatch delays leave strays roaming or dumped in corridors (3–10/week).
+              </p>
+            </div>
+            <div class="pt-3.5 border-t border-gray-100 text-xs">
+              <span class="font-mono text-gray-500 block mb-1">Active Effort Underway:</span>
+              <span class="font-semibold text-blue-700">Field-Call Latency Audit &amp; Scan-Before-Shelter Triage</span>
+            </div>
+          </div>
+
+          <!-- Priority 3 -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col justify-between shadow-2xs">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-blue-50 text-blue-800 border border-blue-200">PRIORITY #3</span>
+                <span class="font-mono text-[11px] text-gray-500">Unblocks Kennel Exits</span>
+              </div>
+              <h3 class="font-serif text-xl font-semibold text-gray-900 mb-2">Expand Foster, Rescue &amp; Pet-Inclusive Shelter Beds</h3>
+              <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                3,106 stray intakes overwhelm existing kennels, while unhoused owners face scarce pet-friendly shelter beds (such as the 268 beds at St. Mary's Pathways).
+              </p>
+            </div>
+            <div class="pt-3.5 border-t border-gray-100 text-xs">
+              <span class="font-mono text-gray-500 block mb-1">Active Effort Underway:</span>
+              <span class="font-semibold text-emerald-700">Spring 2027 Shelter Expansion &amp; Proposed Canine Campus</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- INTERACTIVE "WHAT IF WE FIX ONE BOTTLENECK?" IMPACT SIMULATOR -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xs">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-6 border-b border-gray-100">
+            <div>
+              <div class="inline-flex items-center gap-2 font-mono text-xs text-[#1D4ED8] font-semibold uppercase mb-1">
+                <span>Interactive Priority Simulator</span>
+              </div>
+              <h3 class="font-serif text-xl sm:text-2xl font-semibold text-gray-900">What happens if Stockton fixes one bottleneck at a time?</h3>
+              <p class="text-xs sm:text-sm text-gray-500 mt-0.5">Toggle practical interventions below to see how upstream fixes reduce shelter overcrowding and street abandonment.</p>
+            </div>
+            <button onclick="resetSimulator()" class="self-start md:self-auto text-xs font-mono text-gray-600 hover:text-gray-900 underline cursor-pointer">
+              Reset Baseline
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Left: 3 Toggleable Interventions -->
+            <div class="lg:col-span-6 space-y-3.5">
+              <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-[#F8F7F4] hover:border-blue-400 transition cursor-pointer">
+                <input type="checkbox" id="sim-spay" onchange="updateSimulator()" class="mt-1 w-4 h-4 accent-[#1D4ED8] rounded cursor-pointer" />
+                <div class="flex-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-semibold text-sm text-gray-900">+250 Monthly Spay/Neuter Surgeries</span>
+                    <span class="font-mono text-[11px] text-emerald-700 font-semibold">High Upstream Impact</span>
+                  </div>
+                  <p class="text-xs text-gray-600 mt-1">Fully funding high-volume sterilization (like Animal Balance) prevents accidental litters from becoming next season's strays.</p>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-[#F8F7F4] hover:border-blue-400 transition cursor-pointer">
+                <input type="checkbox" id="sim-foster" onchange="updateSimulator()" class="mt-1 w-4 h-4 accent-[#1D4ED8] rounded cursor-pointer" />
+                <div class="flex-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-semibold text-sm text-gray-900">+40 Active Foster &amp; Decompression Beds</span>
+                    <span class="font-mono text-[11px] text-blue-700 font-semibold">Frees Shelter Kennels</span>
+                  </div>
+                  <p class="text-xs text-gray-600 mt-1">Supported foster homes and temporary recovery spaces (like Proposed Canine Campus) move dogs out of municipal kennels faster.</p>
+                </div>
+              </label>
+
+              <label class="flex items-start gap-3.5 p-4 rounded-xl border border-gray-200 bg-[#F8F7F4] hover:border-blue-400 transition cursor-pointer">
+                <input type="checkbox" id="sim-triage" onchange="updateSimulator()" class="mt-1 w-4 h-4 accent-[#1D4ED8] rounded cursor-pointer" />
+                <div class="flex-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-semibold text-sm text-gray-900">Field Chip-Scan &amp; Pet-Inclusive Outreach</span>
+                    <span class="font-mono text-[11px] text-amber-700 font-semibold">Prevents Unneeded Intake</span>
+                  </div>
+                  <p class="text-xs text-gray-600 mt-1">Reuniting chipped lost pets in the field and providing food/vet support to unhoused owners keeps dogs out of kennels altogether.</p>
+                </div>
+              </label>
+            </div>
+
+            <!-- Right: Live Visual Impact Output -->
+            <div class="lg:col-span-6 bg-[#F8F7F4] border border-gray-200 rounded-2xl p-6 space-y-5">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1.5">
+                  <span class="text-gray-700">Shelter Kennel Overcrowding Pressure</span>
+                  <span id="sim-pressure-label" class="font-mono text-red-700">Critical (128% of comfortable capacity)</span>
+                </div>
+                <div class="w-full h-3.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div id="sim-pressure-bar" class="sim-bar h-full bg-red-600 rounded-full" style="width: 92%"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1.5">
+                  <span class="text-gray-700">Street Calls Resulting in Timely Help</span>
+                  <span id="sim-pickup-label" class="font-mono text-amber-700">~43% of calls (Baseline)</span>
+                </div>
+                <div class="w-full h-3.5 bg-gray-200 rounded-full overflow-hidden">
+                  <div id="sim-pickup-bar" class="sim-bar h-full bg-amber-500 rounded-full" style="width: 43%"></div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3 pt-2">
+                <div class="bg-white border border-gray-200 rounded-xl p-3.5">
+                  <div class="font-mono text-[10px] uppercase text-gray-500">Dogs Diverted From Kennels / Yr</div>
+                  <div id="sim-diverted-num" class="font-serif text-2xl font-bold text-gray-900 mt-0.5">0 dogs</div>
+                </div>
+                <div class="bg-white border border-gray-200 rounded-xl p-3.5">
+                  <div class="font-mono text-[10px] uppercase text-gray-500">Turn-Aways Prevented</div>
+                  <div id="sim-turnaway-num" class="font-serif text-2xl font-bold text-[#1D4ED8] mt-0.5">Baseline</div>
+                </div>
+              </div>
+
+              <p id="sim-summary-text" class="text-xs text-gray-600 leading-relaxed">
+                <strong>Current Baseline:</strong> With 3,106 annual stray intakes and limited clinical/foster exits, kennels remain near capacity—forcing appointment-only restrictions that leave street calls waiting.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- HONEST DATA METHODOLOGY FOOTER -->
+  <footer class="bg-white border-t border-gray-200 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 bg-[#1D4ED8] text-white font-mono text-[10px] font-bold flex items-center justify-center">CS</div>
+          <span class="font-mono font-semibold text-sm text-gray-900">CROSSOVER // STOCKTON</span>
+        </div>
+        <button onclick="openHelpDrawer()" class="text-xs font-semibold text-[#1D4ED8] hover:underline self-start sm:self-auto cursor-pointer">
+          Need Help With a Dog in Stockton? Open Resident Guide →
+        </button>
+      </div>
+      <p class="text-xs text-gray-500 leading-relaxed max-w-4xl">
+        <strong>Data Transparency Note:</strong> Verified public records cited on this page include <strong>3,106 stray-dog intake events</strong> (Stockton Animal Services, 2024), <strong>7,183 Animal Services field-call records</strong> (received Nov 2026, currently under structured AI audit), and <strong>3–10 reported dumped-dog encounters per week</strong> (Stockton StreetWatch field logs). Stage-by-stage drop-off percentages and simulator projections are illustrative models being refined as the 7,183 dispatch logs are cross-matched against intake outcomes.
+      </p>
+    </div>
+  </footer>
+
+  <!-- PRACTICAL RESIDENT HELP DRAWER / MODAL -->
+  <div id="help-drawer" class="fixed inset-0 z-50 hidden items-center justify-center bg-gray-950/55 backdrop-blur-xs p-4" role="dialog" aria-modal="true" aria-labelledby="help-drawer-title">
+    <div class="bg-white border border-gray-200 rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+      <div class="px-6 py-4 bg-[#F8F7F4] border-b border-gray-200 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 bg-[#1D4ED8] inline-block"></span>
+          <h3 id="help-drawer-title" class="font-bold text-gray-900 text-base">Need Help With a Dog in Stockton?</h3>
+        </div>
+        <button onclick="closeHelpDrawer()" class="p-1.5 text-gray-500 hover:text-gray-900 rounded-lg hover:bg-gray-200/60 cursor-pointer" aria-label="Close help guide">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-6 overflow-y-auto space-y-5">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <button onclick="selectHelpTab('stray')" data-helptab="stray" class="help-tab-btn text-left p-3.5 rounded-xl border-2 border-[#1D4ED8] bg-blue-50/50 cursor-pointer">
+            <div class="font-mono text-[10px] uppercase text-[#1D4ED8] font-bold">Option 1</div>
+            <div class="font-semibold text-xs sm:text-sm text-gray-900 mt-0.5">I found a stray or injured dog</div>
+          </button>
+          <button onclick="selectHelpTab('vet')" data-helptab="vet" class="help-tab-btn text-left p-3.5 rounded-xl border border-gray-200 bg-white hover:border-gray-400 cursor-pointer">
+            <div class="font-mono text-[10px] uppercase text-gray-500 font-bold">Option 2</div>
+            <div class="font-semibold text-xs sm:text-sm text-gray-900 mt-0.5">I need low-cost vet or spay/neuter</div>
+          </button>
+          <button onclick="selectHelpTab('unhoused')" data-helptab="unhoused" class="help-tab-btn text-left p-3.5 rounded-xl border border-gray-200 bg-white hover:border-gray-400 cursor-pointer">
+            <div class="font-mono text-[10px] uppercase text-gray-500 font-bold">Option 3</div>
+            <div class="font-semibold text-xs sm:text-sm text-gray-900 mt-0.5">I'm unhoused &amp; want to keep my dog</div>
+          </button>
+        </div>
+
+        <div id="help-drawer-body" class="bg-[#F8F7F4] border border-gray-200 rounded-xl p-5 space-y-3">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="px-6 py-3.5 bg-[#F8F7F4] border-t border-gray-200 flex items-center justify-between text-xs text-gray-500">
+        <span>Stockton Animal Shelter: 1575 S. Lincoln St · Non-Emergency: (209) 937-8377</span>
+        <button onclick="closeHelpDrawer()" class="px-4 py-1.5 bg-gray-900 text-white rounded-lg font-semibold hover:bg-gray-800 cursor-pointer">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // DATA: 1. DROP-OFF FUNNEL STAGES
+    // =========================================================================
+    const FUNNEL_STAGES = [
+      {
+        id: 1,
+        title: "1. Call for Help Made",
+        countLabel: "7,183 field calls",
+        percent: 100,
+        badge: "Verified Record",
+        badgeType: "verified",
+        barColor: "bg-gray-900",
+        whyLost: "Residents spot stray, injured, or dumped dogs (3–10 dumping encounters reported weekly) and call Stockton Animal Services or non-emergency dispatch—but many callers hit long hold times or aren't sure what qualifies for pickup.",
+        recordsShow: "7,183 Animal Services field-call logs were received in Nov 2026. Call volume spikes sharply in warm months and along recurring South and East Stockton corridors.",
+        aiAudit: "AI is categorizing all 7,183 call descriptions into urgent injury, loose roaming stray, owner surrender, and duplicate sightings so we can measure true street demand."
+      },
+      {
+        id: 2,
+        title: "2. Officer Dispatched",
+        countLabel: "~64% dispatched (Under AI Audit)",
+        percent: 64,
+        badge: "Under AI Audit",
+        badgeType: "audit",
+        barColor: "bg-[#1D4ED8]",
+        whyLost: "Limited Animal Control Officer staffing forces strict triage. Aggressive dogs and acute bite/trauma calls take priority—meaning healthy-looking strays or abandoned litters often sit in a queue for hours or days.",
+        recordsShow: "Public records show high call volume competing against finite field units across Stockton's city limits (while unincorporated pockets fall under County jurisdiction).",
+        aiAudit: "AI is calculating the exact timestamp gap between call creation and officer dispatch across every Stockton neighborhood to expose where delays are longest."
+      },
+      {
+        id: 3,
+        title: "3. Dog Reached & Picked Up",
+        countLabel: "~48% reached (Under AI Audit)",
+        percent: 48,
+        badge: "Under AI Audit",
+        barColor: "bg-amber-500",
+        whyLost: "By the time a unit arrives, roaming dogs have moved on ('Gone on Arrival'), fearful street dogs cannot be safely caught without specialized traps, or residents are told intake is appointment-only.",
+        recordsShow: "3–10 dumped-dog encounters per week are logged by street observers where animals remain on industrial or levee roads without immediate municipal pickup.",
+        aiAudit: "AI is flagging every record closed as 'Gone on Arrival' or 'Unable to Locate' to see how many dogs vanished solely because response took too long."
+      },
+      {
+        id: 4,
+        title: "4. Kennel, Vet Care, or Foster",
+        countLabel: "3,106 stray intakes (2024)",
+        percent: 43,
+        badge: "Verified Bottleneck",
+        badgeType: "bottleneck",
+        barColor: "bg-red-600",
+        whyLost: "Even when a dog reaches 1575 S. Lincoln St, shelter kennels are full, local spay/neuter and vet appointments face multi-week backlogs, and rescue/foster homes are saturated—creating a traffic jam that blocks new street rescues.",
+        recordsShow: "Stockton Animal Services recorded 3,106 stray-dog intake events in 2024. Limited clinical capacity (e.g., 4 vet positions at Hard Luck AWA) slows medical clearance and adoption.",
+        aiAudit: "AI is modeling how expanding upstream spay/neuter (Animal Balance contract) and foster beds relieves kennel gridlock so field officers don't have to hold back on street pickups."
+      }
+    ];
+
+    // =========================================================================
+    // DATA: 2. FOUR REAL-LIFE SITUATION CARDS
+    // =========================================================================
+    const SITUATIONS = [
+      {
+        id: "found_stray",
+        tag: "Street Encounter",
+        title: "“I found a stray or dumped dog on the street”",
+        summary: "Delayed dispatch & appointment-only intake leave finders stuck.",
+        shouldHappen: "You call Animal Services, an officer responds promptly (or you can bring the dog to the shelter), the dog is scanned for a microchip, and it gets safe housing or medical care.",
+        howWeFail: "Because shelter kennels are packed, non-emergency intake is restricted by appointment and field officers are stretched thin across 7,183 calls. Good Samaritans are often left holding a dog they cannot keep—or dogs remain stranded along dumping corridors.",
+        proof: [
+          "7,183 Animal Services field-call logs received Nov 2026 show heavy dispatch strain.",
+          "3–10 dumped-dog encounters documented every week along Stockton levee and industrial corridors.",
+          "Appointment-only shelter intake policies create a wall when kennels hit capacity."
+        ],
+        fixes: [
+          { name: "Spring 2027 Stockton Shelter Expansion", status: "In Construction", note: "Adds modern kennel space and medical isolation at 1575 S. Lincoln St." },
+          { name: "Scan-Before-Shelter Protocol", status: "Proposed", note: "Neighborhood microchip scanning to reunite lost pets without using a kennel." }
+        ]
+      },
+      {
+        id: "need_vet",
+        tag: "Preventive Gap",
+        title: "“My family's dog needs a vet or spay/neuter”",
+        summary: "Clinical shortages & waitlists turn routine care into street strays.",
+        shouldHappen: "Working Stockton families can book an affordable spay/neuter surgery or vaccine visit within a couple of weeks—keeping pets healthy and preventing accidental litters.",
+        howWeFail: "High-volume low-cost surgical slots are overwhelmed by demand, and local nonprofit veterinary capacity is stretched thin. When a family can't get a dog fixed or treated for a treatable illness, unplanned puppies and sick dogs end up abandoned.",
+        proof: [
+          "Severe regional veterinary shortage (e.g., only 4 veterinary positions at Hard Luck Animal Welfare Advocates).",
+          "Multi-week to multi-month waitlists for low-cost sterilization across San Joaquin County.",
+          "Unsterilized roaming dogs directly drive the 3,106 annual stray intake volume."
+        ],
+        fixes: [
+          { name: "Animal Balance Spay/Neuter Contract", status: "Active", note: "High-volume targeted sterilization clinics to cut unplanned litters at the root." },
+          { name: "ACT Spay/Neuter Clinic (E. Channel St)", status: "Operating", note: "Core local provider of low-cost sterilization and basic preventive vaccines." }
+        ]
+      },
+      {
+        id: "unhoused",
+        tag: "No Separation",
+        title: "“I'm unhoused and need help keeping my dog”",
+        summary: "Most shelter doors force an impossible choice: a bed or your dog.",
+        shouldHappen: "An unhoused resident experiencing a medical or housing crisis can access free pet food, vaccines, temporary boarding, or a pet-friendly shelter bed without losing their companion.",
+        howWeFail: "Most emergency shelters and cooling/warming centers prohibit pets or cap animal spots. Meanwhile, unhoused residents' dogs are sometimes mistakenly reported as strays—separating bonded companions and consuming scarce shelter kennels.",
+        proof: [
+          "Pet-inclusive shelter capacity is tightly capped (e.g., 268 total beds at St. Mary's Pathways with limited pet accommodations).",
+          "Lack of a fixed address or vehicle blocks access to routine veterinary clinics.",
+          "Field observations show unhoused owners routinely sacrifice their own meals to feed their dogs."
+        ],
+        fixes: [
+          { name: "Pet-Inclusive Shelter & Outreach Mapping", status: "Active Research", note: "Cataloging pet-friendly beds, street food pantries, and no-barrier vaccine days." },
+          { name: "Co-Sheltering & Temporary Crisis Boarding", status: "Advocacy Target", note: "Keeping dogs with their owners rather than pushing them into municipal intake." }
+        ]
+      },
+      {
+        id: "stuck_kennel",
+        tag: "Backlog Jam",
+        title: "“A healthy stray is stuck in a shelter kennel”",
+        summary: "Slow foster transfers & reclaim hurdles block space for new rescues.",
+        shouldHappen: "Once a stray enters the shelter, rapid owner matching reunites lost dogs within 48 hours, while local fosters and rescue partners pull unowned dogs quickly.",
+        howWeFail: "Reclaim fees, licensing rules, and hard-to-navigate stray listings delay owners from finding their lost dogs. At the same time, local foster homes are tapped out—leaving adoptable dogs in kennels while new street emergencies wait outside.",
+        proof: [
+          "3,106 stray dogs entered Stockton Animal Services in 2024 alone.",
+          "Rescue handoffs depend on last-minute urgent pleas rather than steady pipeline matching.",
+          "Every extra week a dog stays in a kennel blocks intake for another dog on the street."
+        ],
+        fixes: [
+          { name: "Proposed Canine Campus", status: "Planning", note: "Dedicated temporary decompression, medical recovery, and placement hub." },
+          { name: "Fee-Waived Reunification Days", status: "Periodic", note: "Removing financial barriers so families can reclaim lost pets immediately." }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // DATA: 3. ASK THE 7,183 RECORDS (PRESETS & CORRIDORS)
+    // =========================================================================
+    const PRESET_QA = [
+      {
+        q: "Why don't officers always pick up stray dogs?",
+        answer: "Across the 7,183 Animal Services field-call logs, dispatchers must triage emergencies first—such as active dog bites, aggressive animals, or critically injured dogs in traffic. Because officer staffing and shelter kennels (3,106 stray intakes in 2024) are both stretched thin, healthy-looking roaming strays are placed in lower-priority queues, often moving on before a truck arrives.",
+        citation: "Source: SAS 7,183 Field-Call Dataset (Nov 2026) & Municipal Triage Policy"
+      },
+      {
+        q: "Where are dogs dumped most often in Stockton?",
+        answer: "Field logs from Stockton StreetWatch (3–10 dumped-dog encounters per week) combined with dispatch call clusters show repeat abandonment along low-visibility industrial edges, levee roads near Mormon Slough, highway frontage roads (Hwy 99 / I-5), and South Stockton corridors where perpetrators avoid cameras and foot traffic.",
+        citation: "Source: SSD Corridor Logs (Sept–Nov 2026) & Geocoded Dispatch Clusters"
+      },
+      {
+        q: "What happens if I bring a stray to the shelter?",
+        answer: "At 1575 S. Lincoln St, Stockton Animal Services operates under capacity-managed / appointment-based intake for non-emergency strays so existing dogs aren't euthanized simply for space. Finders are encouraged to scan for a microchip at a local vet first and file a found-dog report while holding the dog if safe, unless the animal is injured or dangerous.",
+        citation: "Source: Stockton Animal Services Intake Guidelines & 2024 Capacity Audit"
+      },
+      {
+        q: "How does spay/neuter stop street overcrowding?",
+        answer: "AI cross-matching of intake seasons shows predictable spring and summer surges driven by unsterilized dogs and dumped litters. Expanding high-volume sterilization—such as the Animal Balance spay/neuter contract—stops hundreds of accidental puppies from ever entering the 3,106-dog annual intake pipeline.",
+        citation: "Source: Seasonal Intake Curve Analysis & Animal Balance Program Brief"
+      }
+    ];
+
+    const CORRIDOR_DATA = {
+      all: {
+        name: "All Stockton (Citywide Overview)",
+        callShare: "7,183 total field calls under review",
+        topFailure: "Dispatch triage delays + appointment-only shelter intake bottlenecks",
+        plainSummary: "Citywide, demand outstrips field response and kennel exits. The biggest gap occurs between a resident calling for help and a dog actually being safely contained and housed.",
+        sampleLog: "LOG PATTERN // 'Caller reports 2 loose dogs near roadway; non-aggressive. Held in queue due to priority bite call; Closed: Gone on Arrival (+4h 15m).'"
+      },
+      south: {
+        name: "South Stockton & S. Lincoln St Corridor",
+        callShare: "Highest call & stray intake density",
+        topFailure: "High stray volume + limited nearby low-cost vet/spay-neuter access",
+        plainSummary: "South Stockton generates the highest concentration of field calls and stray intakes near the Lincoln St shelter, compounded by transportation barriers for families seeking routine vet care.",
+        sampleLog: "LOG PATTERN // 'Resident brought found terrier to Lincoln St gate; redirected to schedule non-emergency intake slot; microchip scan negative.'"
+      },
+      slough: {
+        name: "Mormon Slough & Industrial Corridors",
+        callShare: "3–10 weekly dumped-dog encounters",
+        topFailure: "Repeat intentional dumping in low-visibility zones + capture difficulty",
+        plainSummary: "Isolated levee and warehouse roads see recurring abandonment of whole litters and injured dogs. Fearful dogs often require humane traps rather than standard catch-poles.",
+        sampleLog: "LOG PATTERN // 'StreetWatch report: 4 puppies left near industrial cul-de-sac; volunteer rescue arrived prior to municipal unit.'"
+      },
+      north: {
+        name: "North Stockton & Trinity Pkwy Area",
+        callShare: "Moderate call volume · High lost-pet share",
+        topFailure: "Chipped family pets entering shelter instead of direct field return",
+        plainSummary: "A larger share of calls in North Stockton involve escaped family dogs with collars or microchips that could be reunited immediately in the field if scanned before transport.",
+        sampleLog: "LOG PATTERN // 'Loose retriever contained by neighbor in cul-de-sac; transported to shelter; owner reclaimed 36 hours later.'"
+      },
+      central: {
+        name: "Central Stockton & Pacific Ave / Downtown",
+        callShare: "High overlap with unhoused residents",
+        topFailure: "Lack of pet-inclusive shelter beds & street-level veterinary outreach",
+        plainSummary: "Calls downtown frequently involve dogs belonging to unhoused residents—where the true need is pet food, rabies vaccines, and pet-friendly shelter access rather than impoundment.",
+        sampleLog: "LOG PATTERN // 'Welfare check on dog outside service center; dog belongs to unhoused resident seeking indoor bed; no pet-friendly bed open.'"
+      }
+    };
+
+    // =========================================================================
+    // DATA: 5. RESIDENT HELP DRAWER
+    // =========================================================================
+    const HELP_CONTENT = {
+      stray: [
+        {
+          title: "1. Is the dog injured, aggressive, or in traffic?",
+          text: "Keep a safe distance and call Stockton Police Non-Emergency / Animal Services dispatch right away at (209) 937-8377. Give exact cross-streets."
+        },
+        {
+          title: "2. If friendly, scan for a microchip before going to the shelter",
+          text: "Any Stockton vet clinic or Stockton Animal Shelter (1575 S. Lincoln St) will scan for a chip for free. Many dogs go straight home the same day without needing a kennel."
+        },
+        {
+          title: "3. File a found report & post locally",
+          text: "Take a clear photo, post on 24Petconnect and Stockton Lost & Found Pets, and submit a found-dog report with Stockton Animal Services."
+        }
+      ],
+      vet: [
+        {
+          title: "1. Schedule low-cost spay/neuter early",
+          text: "Contact ACT Spay/Neuter Clinic (327 E. Channel St · (209) 462-7729) or ask about upcoming Animal Balance high-volume clinic dates. Spots fill weeks ahead."
+        },
+        {
+          title: "2. Use low-cost vaccine clinics to prevent parvo",
+          text: "Core DHPP and rabies shots cost a fraction of emergency care and prevent the #1 killer of Stockton puppies."
+        },
+        {
+          title: "3. Ask for medical help before surrendering",
+          text: "If a sudden vet bill threatens your ability to keep your dog, ask local rescue groups about emergency wellness vouchers before giving up your pet."
+        }
+      ],
+      unhoused: [
+        {
+          title: "1. Get free dog food & supplies without an address",
+          text: "Local street outreach teams and Stockton pet food pantries distribute kibble, leashes, and flea prevention—no permanent address required."
+        },
+        {
+          title: "2. Ask for pet-accommodating shelter intake",
+          text: "When connecting with Coordinated Entry or shelters like St. Mary's Pathways, tell staff upfront you have a companion dog so they can check pet-bed availability."
+        },
+        {
+          title: "3. Keep vaccine proof handy",
+          text: "A photo of your dog's rabies certificate on your phone makes it much easier to enter pet-friendly shelters and cooling/warming centers."
+        }
+      ]
+    };
+
+    // =========================================================================
+    // RENDER & INTERACTION LOGIC
+    // =========================================================================
+    let activeFunnelId = 1;
+    let activeSituationId = "found_stray";
+    let activePresetIdx = 0;
+    let activeCorridorKey = "all";
+
+    function renderFunnel() {
+      const container = document.getElementById("funnel-stages");
+      container.innerHTML = FUNNEL_STAGES.map(stage => {
+        const isSelected = stage.id === activeFunnelId;
+        const badgeStyle =
+          stage.badgeType === "verified"
+            ? "bg-emerald-50 text-emerald-800 border-emerald-200"
+            : stage.badgeType === "bottleneck"
+            ? "bg-red-50 text-red-800 border-red-200"
+            : "bg-amber-50 text-amber-800 border-amber-200";
+
+        return `
+          <button
+            onclick="selectFunnelStage(${stage.id})"
+            role="tab"
+            aria-selected="${isSelected}"
+            class="w-full text-left p-3.5 sm:p-4 rounded-xl border transition cursor-pointer ${
+              isSelected
+                ? "border-[#1D4ED8] bg-blue-50/35 ring-1 ring-[#1D4ED8]"
+                : "border-gray-200 bg-white hover:border-gray-400"
+            }"
+          >
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <div class="flex items-center gap-2.5">
+                <span class="font-bold text-sm sm:text-base text-gray-900">${stage.title}</span>
+                <span class="font-mono text-[10px] px-2 py-0.5 rounded border ${badgeStyle}">${stage.badge}</span>
+              </div>
+              <span class="font-mono text-xs sm:text-sm font-semibold text-gray-900">${stage.countLabel}</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+              <div class="funnel-bar h-full ${stage.barColor} rounded-full" style="width: ${stage.percent}%"></div>
+            </div>
+          </button>
+        `;
+      }).join("");
+
+      const current = FUNNEL_STAGES.find(s => s.id === activeFunnelId);
+      document.getElementById("funnel-detail-box").innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div>
+            <div class="font-mono text-[11px] uppercase tracking-wider text-red-700 font-semibold mb-1">Why Dogs Are Lost Here</div>
+            <p class="text-sm text-gray-800 leading-relaxed">${current.whyLost}</p>
+          </div>
+          <div>
+            <div class="font-mono text-[11px] uppercase tracking-wider text-gray-500 font-semibold mb-1">What Public Records Show</div>
+            <p class="text-sm text-gray-700 leading-relaxed">${current.recordsShow}</p>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-xl p-4">
+            <div class="font-mono text-[11px] uppercase tracking-wider text-[#1D4ED8] font-semibold mb-1">How AI Audits This Step</div>
+            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">${current.aiAudit}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectFunnelStage(id) {
+      activeFunnelId = id;
+      renderFunnel();
+    }
+
+    function renderSituations() {
+      const cardsEl = document.getElementById("situation-cards");
+      cardsEl.innerHTML = SITUATIONS.map(sit => {
+        const isSelected = sit.id === activeSituationId;
+        return `
+          <button
+            onclick="selectSituation('${sit.id}')"
+            role="tab"
+            aria-selected="${isSelected}"
+            class="text-left p-4 rounded-2xl border transition cursor-pointer flex flex-col justify-between ${
+              isSelected
+                ? "bg-[#111827] text-white border-[#111827] shadow-sm"
+                : "bg-white text-gray-900 border-gray-200 hover:border-gray-400"
+            }"
+          >
+            <div>
+              <span class="font-mono text-[10px] uppercase tracking-wider ${isSelected ? "text-blue-300" : "text-[#1D4ED8]"} font-semibold">
+                ${sit.tag}
+              </span>
+              <h3 class="font-serif text-base sm:text-lg font-semibold leading-snug mt-1">${sit.title}</h3>
+            </div>
+            <p class="text-xs mt-2.5 leading-relaxed ${isSelected ? "text-gray-300" : "text-gray-500"}">
+              ${sit.summary}
+            </p>
+          </button>
+        `;
+      }).join("");
+
+      const current = SITUATIONS.find(s => s.id === activeSituationId);
+      document.getElementById("situation-detail").innerHTML = `
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+          <!-- Left: What Should Happen vs How We Fail -->
+          <div class="lg:col-span-6 space-y-4">
+            <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
+              <div class="font-mono text-[11px] uppercase tracking-wider text-emerald-800 font-semibold mb-1">What Should Happen</div>
+              <p class="text-sm text-gray-800 leading-relaxed">${current.shouldHappen}</p>
+            </div>
+            <div class="p-4 rounded-xl bg-red-50/60 border border-red-200">
+              <div class="font-mono text-[11px] uppercase tracking-wider text-red-800 font-semibold mb-1">How the System Fails Today</div>
+              <p class="text-sm text-gray-800 leading-relaxed">${current.howWeFail}</p>
+            </div>
+          </div>
+
+          <!-- Right: Proof & Active Fixes -->
+          <div class="lg:col-span-6 space-y-4">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-gray-500 font-semibold mb-2">Proof From Stockton Records</div>
+              <ul class="space-y-2">
+                ${current.proof.map(p => `
+                  <li class="flex items-start gap-2 text-sm text-gray-700 bg-[#F8F7F4] px-3.5 py-2.5 rounded-lg border border-gray-200">
+                    <span class="text-[#1D4ED8] font-bold">•</span>
+                    <span>${p}</span>
+                  </li>
+                `).join("")}
+              </ul>
+            </div>
+
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-wider text-gray-500 font-semibold mb-2">Active Fixes Underway</div>
+              <div class="space-y-2">
+                ${current.fixes.map(f => `
+                  <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/35">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="font-semibold text-xs sm:text-sm text-gray-900">${f.name}</span>
+                      <span class="font-mono text-[10px] uppercase px-2 py-0.5 rounded bg-[#1D4ED8] text-white">${f.status}</span>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-1">${f.note}</p>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectSituation(id) {
+      activeSituationId = id;
+      renderSituations();
+    }
+
+    function renderAskRecords(customQuery = null) {
+      const presetsEl = document.getElementById("preset-questions");
+      presetsEl.innerHTML = PRESET_QA.map((item, idx) => {
+        const isActive = !customQuery && idx === activePresetIdx;
+        return `
+          <button
+            onclick="selectPreset(${idx})"
+            class="text-left px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-medium border transition cursor-pointer ${
+              isActive
+                ? "bg-white border-[#1D4ED8] text-[#1D4ED8] shadow-2xs"
+                : "bg-white border-gray-200 text-gray-700 hover:border-gray-400"
+            }"
+          >
+            “${item.q}”
+          </button>
+        `;
+      }).join("");
+
+      const answerEl = document.getElementById("ai-answer-card");
+      if (customQuery) {
+        const qLower = customQuery.toLowerCase();
+        let matched = PRESET_QA[0];
+        if (qLower.includes("dump") || qLower.includes("where") || qLower.includes("corridor")) matched = PRESET_QA[1];
+        else if (qLower.includes("shelter") || qLower.includes("bring") || qLower.includes("intake") || qLower.includes("sunday")) matched = PRESET_QA[2];
+        else if (qLower.includes("spay") || qLower.includes("neuter") || qLower.includes("vet")) matched = PRESET_QA[3];
+
+        answerEl.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-[#1D4ED8] font-semibold">AI Synthesis Across 7,183 Field Logs</span>
+            <span class="font-mono text-[10px] text-gray-400">Query Match</span>
+          </div>
+          <h3 class="font-serif text-lg sm:text-xl font-semibold text-gray-900 mb-2">“${escapeHtml(customQuery)}”</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">${matched.answer}</p>
+          <div class="font-mono text-[11px] text-gray-500 bg-[#F8F7F4] px-3 py-1.5 rounded-lg border border-gray-200">
+            ${matched.citation}
+          </div>
+        `;
+      } else {
+        const qa = PRESET_QA[activePresetIdx];
+        answerEl.innerHTML = `
+          <div class="flex items-center justify-between gap-2 mb-2">
+            <span class="font-mono text-[11px] uppercase tracking-wider text-[#1D4ED8] font-semibold">AI Synthesis Across 7,183 Field Logs</span>
+            <span class="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">Verified Pattern</span>
+          </div>
+          <h3 class="font-serif text-lg sm:text-xl font-semibold text-gray-900 mb-2">“${qa.q}”</h3>
+          <p class="text-sm text-gray-700 leading-relaxed mb-3">${qa.answer}</p>
+          <div class="font-mono text-[11px] text-gray-500 bg-[#F8F7F4] px-3 py-1.5 rounded-lg border border-gray-200">
+            ${qa.citation}
+          </div>
+        `;
+      }
+
+      const corr = CORRIDOR_DATA[activeCorridorKey];
+      document.getElementById("corridor-summary-card").innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <span class="font-mono text-[11px] uppercase tracking-wider text-gray-500 font-semibold">Area Snapshot: ${corr.name}</span>
+          <span class="font-mono text-xs font-semibold text-gray-900">${corr.callShare}</span>
+        </div>
+        <div class="text-xs font-semibold text-red-700 mb-1.5">Primary Failure Point: ${corr.topFailure}</div>
+        <p class="text-sm text-gray-700 leading-relaxed mb-3">${corr.plainSummary}</p>
+        <div class="font-mono text-[11px] text-gray-600 bg-white border border-gray-200 rounded-lg p-3 leading-relaxed">
+          ${corr.sampleLog}
+        </div>
+      `;
+    }
+
+    function selectPreset(idx) {
+      activePresetIdx = idx;
+      document.getElementById("ai-question-input").value = "";
+      renderAskRecords();
+    }
+
+    function handleCustomQuestion(e) {
+      e.preventDefault();
+      const val = document.getElementById("ai-question-input").value.trim();
+      if (!val) return;
+      renderAskRecords(val);
+    }
+
+    function selectCorridor(key) {
+      activeCorridorKey = key;
+      const customVal = document.getElementById("ai-question-input").value.trim();
+      renderAskRecords(customVal || null);
+    }
+
+    // Impact Simulator Logic
+    function updateSimulator() {
+      const spay = document.getElementById("sim-spay").checked;
+      const foster = document.getElementById("sim-foster").checked;
+      const triage = document.getElementById("sim-triage").checked;
+
+      let pressure = 128;
+      let pickupPct = 43;
+      let diverted = 0;
+
+      if (spay) {
+        pressure -= 14;
+        pickupPct += 11;
+        diverted += 420;
+      }
+      if (foster) {
+        pressure -= 16;
+        pickupPct += 14;
+        diverted += 480;
+      }
+      if (triage) {
+        pressure -= 11;
+        pickupPct += 13;
+        diverted += 360;
+      }
+
+      const pressureBar = document.getElementById("sim-pressure-bar");
+      const pressureLabel = document.getElementById("sim-pressure-label");
+      const pickupBar = document.getElementById("sim-pickup-bar");
+      const pickupLabel = document.getElementById("sim-pickup-label");
+
+      const visualPressureWidth = Math.min(100, Math.max(45, Math.round((pressure / 138) * 100)));
+      pressureBar.style.width = `${visualPressureWidth}%`;
+
+      if (pressure <= 95) {
+        pressureBar.className = "sim-bar h-full bg-emerald-600 rounded-full";
+        pressureLabel.className = "font-mono text-emerald-700";
+        pressureLabel.textContent = `Manageable (${pressure}% of capacity)`;
+      } else if (pressure <= 114) {
+        pressureBar.className = "sim-bar h-full bg-amber-500 rounded-full";
+        pressureLabel.className = "font-mono text-amber-700";
+        pressureLabel.textContent = `Strained (${pressure}% of capacity)`;
+      } else {
+        pressureBar.className = "sim-bar h-full bg-red-600 rounded-full";
+        pressureLabel.className = "font-mono text-red-700";
+        pressureLabel.textContent = `Critical (${pressure}% of comfortable capacity)`;
+      }
+
+      pickupBar.style.width = `${pickupPct}%`;
+      pickupBar.className = `sim-bar h-full ${pickupPct >= 65 ? "bg-emerald-600" : pickupPct >= 54 ? "bg-[#1D4ED8]" : "bg-amber-500"} rounded-full`;
+      pickupLabel.textContent = `~${pickupPct}% of calls reached`;
+
+      document.getElementById("sim-diverted-num").textContent = `${diverted.toLocaleString()} dogs`;
+      document.getElementById("sim-turnaway-num").textContent = diverted > 0 ? `~${Math.round(diverted * 0.72)} fewer` : "Baseline";
+
+      const activeCount = [spay, foster, triage].filter(Boolean).length;
+      const summaryEl = document.getElementById("sim-summary-text");
+      if (activeCount === 0) {
+        summaryEl.innerHTML = `<strong>Current Baseline:</strong> With 3,106 annual stray intakes and limited clinical/foster exits, kennels remain near capacity—forcing appointment-only restrictions that leave street calls waiting.`;
+      } else if (activeCount === 3) {
+        summaryEl.innerHTML = `<strong>Combined System Relief:</strong> Pairing upstream sterilization with foster beds and field chip-scanning drops kennel overcrowding below 90%—allowing officers to respond to street calls without turn-aways.`;
+      } else {
+        summaryEl.innerHTML = `<strong>Targeted Relief Active:</strong> Diverting ~${diverted.toLocaleString()} dogs from municipal kennels frees up space at 1575 S. Lincoln St so field units can pick up urgent street strays faster.`;
+      }
+    }
+
+    function resetSimulator() {
+      document.getElementById("sim-spay").checked = false;
+      document.getElementById("sim-foster").checked = false;
+      document.getElementById("sim-triage").checked = false;
+      updateSimulator();
+    }
+
+    // Help Drawer Controls
+    function openHelpDrawer() {
+      const drawer = document.getElementById("help-drawer");
+      drawer.classList.remove("hidden");
+      drawer.classList.add("flex");
+      selectHelpTab("stray");
+    }
+
+    function closeHelpDrawer() {
+      const drawer = document.getElementById("help-drawer");
+      drawer.classList.add("hidden");
+      drawer.classList.remove("flex");
+    }
+
+    function selectHelpTab(key) {
+      document.querySelectorAll(".help-tab-btn").forEach(btn => {
+        if (btn.dataset.helptab === key) {
+          btn.className = "help-tab-btn text-left p-3.5 rounded-xl border-2 border-[#1D4ED8] bg-blue-50/50 cursor-pointer";
+        } else {
+          btn.className = "help-tab-btn text-left p-3.5 rounded-xl border border-gray-200 bg-white hover:border-gray-400 cursor-pointer";
+        }
+      });
+
+      const items = HELP_CONTENT[key];
+      document.getElementById("help-drawer-body").innerHTML = items.map(i => `
+        <div class="bg-white border border-gray-200 rounded-xl p-4">
+          <div class="font-semibold text-sm text-gray-900 mb-1">${i.title}</div>
+          <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">${i.text}</p>
+        </div>
+      `).join("");
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/[&<>"']/g, m => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[m]));
+    }
+
+    document.getElementById("help-drawer").addEventListener("click", function(e) {
+      if (e.target === this) closeHelpDrawer();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") closeHelpDrawer();
+    });
+
+    window.onload = function() {
+      renderFunnel();
+      renderSituations();
+      renderAskRecords();
+      updateSimulator();
+    };
+  </script>
+</body>
+</html>

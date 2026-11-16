@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 240" role="img" aria-label="Golden hour over the Stockton waterfront and San Joaquin River">
+  <defs>
+    <linearGradient id="sky-golden" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#DBEAFE"/><stop offset="55%" stop-color="#FEF3C7"/><stop offset="100%" stop-color="#FDE68A"/></linearGradient>
+    <linearGradient id="water-golden" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#93C5FD"/><stop offset="50%" stop-color="#FCD34D" stop-opacity="0.45"/><stop offset="100%" stop-color="#60A5FA"/></linearGradient>
+  </defs>
+  <rect width="440" height="145" fill="url(#sky-golden)"/>
+  <circle cx="355" cy="96" r="24" fill="#F59E0B" fill-opacity="0.85"/>
+  <rect x="195" y="72" width="28" height="73" fill="#475569"/>
+  <rect x="232" y="88" width="24" height="57" fill="#64748B"/>
+  <rect x="264" y="64" width="32" height="81" fill="#334155"/>
+  <rect x="304" y="95" width="22" height="50" fill="#64748B"/>
+  <path d="M 330 132 Q 375 124, 430 134 L 430 145 L 330 145 Z" fill="#475569"/>
+  <rect x="0" y="145" width="440" height="95" fill="url(#water-golden)"/>
+  <line x1="210" y1="162" x2="385" y2="162" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="2"/>
+  <line x1="245" y1="180" x2="365" y2="180" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1.5"/>
+  <path d="M 0 165 Q 115 175, 175 240 L 0 240 Z" fill="#E7E5E4"/>
+  <path d="M 0 165 Q 115 175, 175 240" fill="none" stroke="#78716C" stroke-width="3"/>
+  <circle cx="48" cy="148" r="22" fill="#166534" fill-opacity="0.85"/>
+  <rect x="46" y="160" width="4" height="22" fill="#57534E"/>
+</svg>

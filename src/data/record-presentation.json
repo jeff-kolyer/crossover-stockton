@@ -1168,13 +1168,13 @@
     "originalId": "crossover-2026-10-12-doggie-day-out-inquiry"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "2026-11-04",
     "checked": "2026-11-04",
     "artifact": "source review",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1217,13 +1217,13 @@
     "originalId": "task-review-sas-field-call-records"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "artifact": "field observation",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1231,15 +1231,15 @@
         "value": "open",
         "unit": "",
         "page": "Work plan",
-        "note": "Plan a limited public-area observation; no visit documented"
+        "note": "Estimate people and dogs outside near St. Mary's; no visit documented"
       },
       {
         "id": "next-step",
         "label": "Next check",
-        "value": "On a future visit, observe a manageable portion of the St.",
+        "value": "Estimate how many people with pets are staying outside near St. Mary's and verify whether the relevant shelter program allows pets.",
         "unit": "",
         "page": "Work plan",
-        "note": "The full instructions are in the data snapshot."
+        "note": "Pet restrictions are a possible reason, not an observed finding; confirm the policy and ask before attributing anyone's circumstances."
       },
       {
         "id": "basis",
@@ -1264,13 +1264,13 @@
     "originalId": "task-verify-st-marys-church-street-dog-scale"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "artifact": "field observation",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1312,13 +1312,13 @@
     "originalId": "task-verify-south-stockton-district-5-reports"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "artifact": "organization contact",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1360,13 +1360,13 @@
     "originalId": "task-ssd-ask-contact-questions"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "artifact": "follow up",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1409,13 +1409,13 @@
     "originalId": "task-sas-volunteer-onboarding-follow-up"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "artifact": "policy monitoring",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1457,13 +1457,13 @@
     "originalId": "task-monitor-animal-control-ordinance"
   },
   {
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "artifact": "organization contact",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",

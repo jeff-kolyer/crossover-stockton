@@ -1816,7 +1816,7 @@
   {
     "id": "WORK-2026-001",
     "title": "Review Animal Services field-call records",
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "2026-11-04",
@@ -1825,7 +1825,7 @@
     "sourceLabel": "Review Animal Services field-call records",
     "summary": "Review began Nov 4 on 7,183 cases; analysis and findings remain pending",
     "artifact": "source review",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1869,17 +1869,17 @@
   },
   {
     "id": "WORK-2026-002",
-    "title": "Verify conditions: scale of the dog problem near St. Mary's",
-    "kind": "Investigation work item",
+    "title": "Visit St. Mary's to understand pet access and street needs",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
     "checked": "Not dated",
     "sourceUrl": null,
-    "sourceLabel": "Verify conditions: scale of the dog problem near St. Mary's",
-    "summary": "Plan a limited public-area observation; no visit documented",
+    "sourceLabel": "Visit St. Mary's to understand pet access and street needs",
+    "summary": "Estimate people and dogs outside near St. Mary's; check shelter pet access",
     "artifact": "field observation",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1887,15 +1887,15 @@
         "value": "open",
         "unit": "",
         "page": "Work plan",
-        "note": "Plan a limited public-area observation; no visit documented"
+        "note": "Estimate people and dogs outside near St. Mary's; no visit documented"
       },
       {
         "id": "next-step",
         "label": "Next check",
-        "value": "On a future visit, observe a manageable portion of the St.",
+        "value": "Estimate how many people with pets are staying outside near St. Mary's and verify whether the relevant shelter program allows pets.",
         "unit": "",
         "page": "Work plan",
-        "note": "The full instructions are in the data snapshot."
+        "note": "Pet restrictions are a possible reason, not an observed finding; confirm the policy and ask before attributing anyone's circumstances."
       },
       {
         "id": "basis",
@@ -1922,7 +1922,7 @@
   {
     "id": "WORK-2026-003",
     "title": "Verify reported conditions in South Stockton / District 5",
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
@@ -1931,7 +1931,7 @@
     "sourceLabel": "Verify reported conditions in South Stockton / District 5",
     "summary": "Identify a supported public location first",
     "artifact": "field observation",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -1975,7 +1975,7 @@
   {
     "id": "WORK-2026-004",
     "title": "Follow up with Stockton Street Dogs",
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
@@ -1984,7 +1984,7 @@
     "sourceLabel": "Follow up with Stockton Street Dogs",
     "summary": "Clarify field access and current care needs",
     "artifact": "organization contact",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -2028,7 +2028,7 @@
   {
     "id": "WORK-2026-005",
     "title": "Follow up with Stockton Animal Services on volunteering",
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
@@ -2037,7 +2037,7 @@
     "sourceLabel": "Follow up with Stockton Animal Services on volunteering",
     "summary": "Check onboarding and orientation",
     "artifact": "follow up",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -2082,7 +2082,7 @@
   {
     "id": "WORK-2026-006",
     "title": "Monitor the proposed animal-control ordinance",
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
@@ -2091,7 +2091,7 @@
     "sourceLabel": "Monitor the proposed animal-control ordinance",
     "summary": "Verify the Council outcome",
     "artifact": "policy monitoring",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",
@@ -2135,7 +2135,7 @@
   {
     "id": "WORK-2026-007",
     "title": "Contact CBS reporter Charlie Lapastora",
-    "kind": "Investigation work item",
+    "kind": "Crossover work item",
     "status": "Open",
     "publisher": "Crossover Stockton",
     "date": "Not dated",
@@ -2144,7 +2144,7 @@
     "sourceLabel": "Contact CBS reporter Charlie Lapastora",
     "summary": "Clarify reported locations and seek firsthand leads",
     "artifact": "organization contact",
-    "limits": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
+    "limits": "This is an open work item. The planned action has not yet been completed.",
     "rows": [
       {
         "id": "progress",

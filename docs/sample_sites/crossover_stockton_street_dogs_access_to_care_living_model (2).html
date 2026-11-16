@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CROSSOVER // STOCKTON — Street Dogs &amp; Access to Care</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#F8F7F4',
+            charcoal: '#16181D',
+            cobalt: '#1E4FD8',
+            coral: '#E04F3E',
+            emerald: '#1F8E5A',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            serif: ['"Newsreader"', 'Georgia', 'serif'],
+            mono: ['"IBM Plex Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+      background-color: #F8F7F4;
+      color: #16181D;
+    }
+    body {
+      background-color: #F8F7F4;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Smooth animations for the Overflowing Doghouse & meters */
+    .water-level {
+      transition: height 0.7s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s ease;
+    }
+    .bar-fill {
+      transition: width 0.65s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s ease;
+    }
+    .valve-wheel {
+      transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .valve-open .valve-wheel {
+      transform: rotate(135deg);
+    }
+
+    @keyframes floatBob {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
+    }
+    .dog-bob {
+      animation: floatBob 2.8s ease-in-out infinite;
+    }
+
+    @keyframes spillPulse {
+      0%, 100% { opacity: 0.9; transform: scaleY(1); }
+      50% { opacity: 0.45; transform: scaleY(1.12); }
+    }
+    .spill-stream {
+      animation: spillPulse 1.5s ease-in-out infinite;
+      transform-origin: top;
+    }
+
+    /* Dedicated Print Styles so "Download Plain-English Explainer PDF" produces a crisp 1-page printable flyer */
+    @media print {
+      body * {
+        visibility: hidden !important;
+      }
+      #printable-explainer-sheet, #printable-explainer-sheet * {
+        visibility: visible !important;
+      }
+      #printable-explainer-sheet {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        color: #16181D !important;
+        padding: 24px !important;
+        display: block !important;
+        z-index: 99999 !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-[#1E4FD8] selection:text-white pb-20 sm:pb-0">
+
+  <!-- ===================================================================== -->
+  <!-- STICKY EDITORIAL HEADER                                               -->
+  <!-- ===================================================================== -->
+  <header class="sticky top-0 z-40 bg-[#F8F7F4]/95 backdrop-blur-md border-b border-stone-200/90">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between gap-2.5 py-3">
+        <!-- Cobalt Blue Investigation Square + Identity -->
+        <a href="#top" class="flex items-center gap-3 group focus:outline-none">
+          <div class="w-11 h-11 bg-[#1E4FD8] text-white flex flex-col justify-between p-1.5 rounded-lg shadow-xs shrink-0 transition-transform group-hover:scale-105">
+            <span class="font-mono text-[7px] uppercase tracking-wider opacity-85 leading-none">CASE 01</span>
+            <span class="font-sans font-bold text-[9.5px] leading-[1.05] tracking-tight">Street Dogs &amp; Access to Care</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="font-mono font-bold text-sm sm:text-base tracking-tight text-[#16181D]">CROSSOVER</span>
+              <span class="text-stone-400 font-mono text-xs">//</span>
+              <span class="font-mono text-xs sm:text-sm text-stone-600 uppercase">Stockton</span>
+            </div>
+            <p class="text-[11px] text-stone-500 hidden xs:block">7,183 Public Records · Plain-English Edition</p>
+          </div>
+        </a>
+
+        <!-- Desktop Section Jumps -->
+        <nav class="hidden lg:flex items-center gap-1 bg-white p-1 rounded-xl border border-stone-200" aria-label="Page sections">
+          <a href="#bruno-game" class="px-3 py-1.5 rounded-lg text-xs font-bold text-[#16181D] hover:bg-stone-100 transition">1. Help Bruno</a>
+          <a href="#doghouse-sim" class="px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 hover:text-[#16181D] hover:bg-stone-100 transition">2. Overflowing Doghouse</a>
+          <a href="#neighborhood-receipts" class="px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 hover:text-[#16181D] hover:bg-stone-100 transition">3. Your Block</a>
+          <a href="#local-help" class="px-3 py-1.5 rounded-lg text-xs font-bold text-stone-600 hover:text-[#16181D] hover:bg-stone-100 transition">4. Get Help</a>
+        </nav>
+
+        <!-- Header Actions: Download Explainer PDF + Found a Dog -->
+        <div class="flex items-center gap-2">
+          <button
+            onclick="openPdfModal()"
+            class="inline-flex items-center gap-1.5 bg-white hover:bg-blue-50 text-[#1E4FD8] border border-blue-200 text-xs font-bold px-3 py-2.5 rounded-xl transition cursor-pointer shadow-2xs"
+            title="Download or print the 1-page Plain-English Explainer PDF"
+          >
+            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span class="hidden sm:inline">Download Plain-English Explainer PDF</span>
+            <span class="sm:hidden">Explainer PDF</span>
+          </button>
+
+          <a
+            href="#local-help"
+            class="inline-flex items-center gap-1.5 bg-[#16181D] hover:bg-[#1E4FD8] text-white text-xs font-bold px-3.5 py-2.5 rounded-xl transition shadow-xs"
+          >
+            <span class="w-2 h-2 rounded-full bg-[#1F8E5A]"></span>
+            <span>Found a Dog?</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="flex-1">
+
+    <!-- =================================================================== -->
+    <!-- EDITORIAL HERO: 5-SECOND TRUTH                                      -->
+    <!-- =================================================================== -->
+    <section class="pt-7 pb-8 sm:pt-11 sm:pb-10 border-b border-stone-200/80">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1E4FD8] text-xs font-bold mb-3.5">
+            <span>Stockton Public Investigation · Zero Jargon</span>
+          </div>
+          <h1 class="font-serif text-3xl sm:text-5xl leading-[1.1] text-[#16181D] font-bold tracking-tight">
+            Stockton neighbors aren’t failing stray dogs. The handoffs are breaking down.
+          </h1>
+          <p class="mt-3.5 text-base sm:text-lg text-stone-600 leading-relaxed">
+            We analyzed <strong>7,183 Animal Services dispatch calls</strong> and <strong>3,106 yearly shelter intakes</strong> to see what actually happens when a neighbor tries to help a dog. Play Bruno’s 60-second walk below, or test the three valves that relieve kennel gridlock.
+          </p>
+        </div>
+
+        <!-- 3 Big Scannable Pill Stats (Normie-Friendly) -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-white border border-stone-200 rounded-2xl p-4 flex items-center gap-3.5 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-red-50 text-[#E04F3E] font-mono font-bold text-sm flex items-center justify-center shrink-0 border border-red-100">
+              128%
+            </div>
+            <div>
+              <div class="font-bold text-sm text-[#16181D]">Shelter Kennel Pressure</div>
+              <p class="text-xs text-stone-500">3,106 stray intakes/yr pack 1575 S. Lincoln St beyond capacity.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-2xl p-4 flex items-center gap-3.5 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-amber-50 text-amber-700 font-mono font-bold text-sm flex items-center justify-center shrink-0 border border-amber-100">
+              43%
+            </div>
+            <div>
+              <div class="font-bold text-sm text-[#16181D]">Timely Field Pickup Rate</div>
+              <p class="text-xs text-stone-500">Out of 7,183 calls, most street requests stall before pickup.</p>
+            </div>
+          </div>
+
+          <div class="bg-white border border-stone-200 rounded-2xl p-4 flex items-center gap-3.5 shadow-2xs">
+            <div class="w-11 h-11 rounded-xl bg-blue-50 text-[#1E4FD8] font-mono font-bold text-sm flex items-center justify-center shrink-0 border border-blue-100">
+              3–10
+            </div>
+            <div>
+              <div class="font-bold text-sm text-[#16181D]">Dumped Dogs Every Week</div>
+              <p class="text-xs text-stone-500">Reported along Mormon Slough &amp; industrial corridors.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 1: "HELP BRUNO GET HOME" — 4-TAP INTERACTIVE STORY GAME     -->
+    <!-- =================================================================== -->
+    <section id="bruno-game" class="py-10 sm:py-14 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+          <div>
+            <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1E4FD8]">Interactive Story · 4 Taps</span>
+            <h2 class="font-serif text-2xl sm:text-4xl text-[#16181D] font-bold mt-1">
+              Help Bruno Get Home
+            </h2>
+            <p class="text-sm sm:text-base text-stone-600 mt-1">
+              Imagine you’re walking near Mormon Slough and spot a friendly brown dog limping. Tap through what happens next in Stockton.
+            </p>
+          </div>
+          <button
+            onclick="resetBrunoGame()"
+            class="self-start sm:self-auto inline-flex items-center gap-1.5 text-xs font-bold text-stone-600 hover:text-[#16181D] bg-white border border-stone-200 px-3 py-2 rounded-xl transition cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            <span>Restart Story</span>
+          </button>
+        </div>
+
+        <!-- Interactive Comic / Story Card -->
+        <div class="bg-white border border-stone-200 rounded-3xl overflow-hidden shadow-xs">
+          
+          <!-- Step Progress Pills -->
+          <div class="bg-[#F8F7F4] px-4 sm:px-7 py-3.5 border-b border-stone-200 flex items-center justify-between gap-2">
+            <div id="bruno-step-pills" class="flex items-center gap-2 flex-wrap">
+              <!-- Populated by JS -->
+            </div>
+            <span id="bruno-step-counter" class="font-mono text-xs font-semibold text-stone-500 shrink-0">Tap 1 of 4</span>
+          </div>
+
+          <!-- Story Stage Body -->
+          <div class="p-5 sm:p-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+              
+              <!-- Left: Friendly Custom SVG Illustration Scene -->
+              <div class="lg:col-span-5">
+                <div id="bruno-illustration" class="rounded-2xl border border-stone-200 p-5 flex flex-col items-center justify-center min-h-[230px] sm:min-h-[260px] transition-colors duration-300">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <!-- Right: Narrative, Real-World Receipt & Choice Buttons -->
+              <div class="lg:col-span-7 space-y-4">
+                <div id="bruno-badge-row" class="flex flex-wrap items-center gap-2">
+                  <!-- Populated by JS -->
+                </div>
+
+                <h3 id="bruno-title" class="font-serif text-2xl sm:text-3xl font-bold text-[#16181D] leading-tight">
+                  <!-- Populated by JS -->
+                </h3>
+
+                <p id="bruno-narrative" class="text-sm sm:text-base text-stone-700 leading-relaxed">
+                  <!-- Populated by JS -->
+                </p>
+
+                <!-- Data Receipt Callout -->
+                <div id="bruno-receipt" class="rounded-2xl p-4 border text-xs sm:text-sm leading-relaxed">
+                  <!-- Populated by JS -->
+                </div>
+
+                <!-- Interactive Choice Buttons -->
+                <div id="bruno-choices" class="pt-1 flex flex-col sm:flex-row gap-2.5">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 2: "THE OVERFLOWING DOGHOUSE" — LIVING INTERACTIVE VISUAL   -->
+    <!-- =================================================================== -->
+    <section id="doghouse-sim" class="py-10 sm:py-14 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="max-w-3xl mb-6">
+          <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1E4FD8]">Interactive Pressure Model</span>
+          <h2 class="font-serif text-2xl sm:text-4xl text-[#16181D] font-bold mt-1">
+            The Overflowing Doghouse
+          </h2>
+          <p class="text-sm sm:text-base text-stone-600 mt-1">
+            You can’t dispatch trucks to pick up street dogs if every kennel is already overflowing. <strong>Tap the three valves below</strong> to relieve pressure at the source, at triage, and at the exit door.
+          </p>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-3xl p-5 sm:p-8 shadow-xs">
+          
+          <!-- TOP LIVING VISUAL: INFLOW -> KENNEL BUCKET -> EXIT FLOW -->
+          <div class="bg-[#F8F7F4] border border-stone-200 rounded-2xl p-4 sm:p-6 mb-7">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-center">
+              
+              <!-- LEFT: INFLOW (Dogs Coming In) -->
+              <div class="lg:col-span-3 bg-white border border-stone-200 rounded-2xl p-4 text-center">
+                <div class="font-mono text-[10px] font-bold uppercase tracking-wider text-stone-500">1. Dogs Coming In</div>
+                <div id="inflow-number" class="font-serif text-2xl sm:text-3xl font-bold text-[#E04F3E] mt-1">3,106 / yr</div>
+                <div id="inflow-sub" class="text-xs text-stone-600 mt-0.5">+ 3–10 dumped weekly</div>
+                <div class="mt-3 flex items-center justify-center gap-1 text-[#E04F3E]" id="inflow-arrows">
+                  <span class="text-xs font-bold">Heavy Unplanned Litters</span>
+                  <span>→</span>
+                </div>
+              </div>
+
+              <!-- CENTER: ILLUSTRATED DOGHOUSE BUCKET -->
+              <div class="lg:col-span-6 flex flex-col items-center">
+                <div class="w-full max-w-sm">
+                  <!-- Roof SVG -->
+                  <svg viewBox="0 0 320 64" class="w-full h-12 sm:h-14 text-[#16181D] drop-shadow-2xs" aria-hidden="true">
+                    <path d="M12 58 L160 8 L308 58" fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="108" y="34" width="104" height="22" rx="6" fill="#16181D"/>
+                    <text x="160" y="49" text-anchor="middle" fill="#F8F7F4" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="700">1575 S. LINCOLN ST</text>
+                  </svg>
+
+                  <!-- Kennel Tank Container -->
+                  <div class="relative mx-auto w-[86%] h-44 sm:h-48 bg-white border-4 border-[#16181D] rounded-b-3xl overflow-hidden shadow-inner">
+                    
+                    <!-- 100% Safe Capacity Dashed Line -->
+                    <div class="absolute left-0 right-0 top-[26%] border-t-2 border-dashed border-[#16181D]/60 z-20 flex justify-between px-2.5 pt-0.5">
+                      <span class="font-mono text-[9px] font-bold uppercase text-[#16181D] bg-white/85 px-1.5 rounded">100% Safe Limit</span>
+                    </div>
+
+                    <!-- Animated Fill Level -->
+                    <div
+                      id="kennel-fill-bar"
+                      class="water-level absolute bottom-0 left-0 right-0 bg-[#E04F3E]/90 z-10 flex flex-col items-center justify-end pb-4"
+                      style="height: 94%;"
+                    >
+                      <!-- Cute Dog Silhouettes Floating Inside -->
+                      <div class="flex items-center gap-2 text-white/95 dog-bob mb-1" aria-hidden="true">
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18 4c-1.1 0-2 .9-2 2v2h-5.2c-.8-1.2-2.2-2-3.8-2-2.5 0-4.5 2-4.5 4.5 0 1.4.6 2.6 1.6 3.4L3 19h3l1.2-3.5c.6.3 1.2.5 1.8.5h6l1.2 3h3l-1.5-4.2c1.4-.8 2.3-2.3 2.3-4V6c0-1.1-.9-2-2-2z"/></svg>
+                        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M18 4c-1.1 0-2 .9-2 2v2h-5.2c-.8-1.2-2.2-2-3.8-2-2.5 0-4.5 2-4.5 4.5 0 1.4.6 2.6 1.6 3.4L3 19h3l1.2-3.5c.6.3 1.2.5 1.8.5h6l1.2 3h3l-1.5-4.2c1.4-.8 2.3-2.3 2.3-4V6c0-1.1-.9-2-2-2z"/></svg>
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18 4c-1.1 0-2 .9-2 2v2h-5.2c-.8-1.2-2.2-2-3.8-2-2.5 0-4.5 2-4.5 4.5 0 1.4.6 2.6 1.6 3.4L3 19h3l1.2-3.5c.6.3 1.2.5 1.8.5h6l1.2 3h3l-1.5-4.2c1.4-.8 2.3-2.3 2.3-4V6c0-1.1-.9-2-2-2z"/></svg>
+                      </div>
+                      <div id="kennel-pct-label" class="font-serif text-3xl sm:text-4xl font-bold text-white leading-none drop-shadow-xs">
+                        128%
+                      </div>
+                      <div id="kennel-status-label" class="font-mono text-[10px] uppercase tracking-wider font-bold text-white/95 mt-1">
+                        Critical Overcrowding
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Overflow Spill Warning Badge -->
+                  <div id="spill-warning" class="mt-2.5 text-center">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-[#E04F3E] text-xs font-bold spill-stream">
+                      <span>⚠ Overflowing: Dogs turned away at door &amp; left on streets</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RIGHT: STREET PICKUP & EXIT OUTCOME -->
+              <div class="lg:col-span-3 bg-white border border-stone-200 rounded-2xl p-4 text-center space-y-3">
+                <div>
+                  <div class="font-mono text-[10px] font-bold uppercase tracking-wider text-stone-500">2. Timely Street Pickup</div>
+                  <div id="pickup-rate-num" class="font-serif text-3xl font-bold text-[#E04F3E] mt-0.5">43%</div>
+                  <div class="w-full h-2.5 bg-stone-200 rounded-full overflow-hidden mt-1.5">
+                    <div id="pickup-rate-bar" class="bar-fill h-full bg-[#E04F3E] rounded-full" style="width: 43%"></div>
+                  </div>
+                </div>
+
+                <div class="pt-2 border-t border-stone-100">
+                  <div class="font-mono text-[10px] font-bold uppercase tracking-wider text-stone-500">3. Safe Exit Flow</div>
+                  <div id="exit-flow-label" class="text-xs font-bold text-[#E04F3E] mt-0.5">Blocked · 0 Turn-Aways Prevented</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- THREE BIG ILLUSTRATED TAP-TO-FIX VALVES -->
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-bold uppercase tracking-wider text-stone-500">Tap the 3 Valves to Relieve Pressure:</span>
+            <button onclick="resetValves()" class="text-xs font-bold text-stone-500 hover:text-[#16181D] underline cursor-pointer">
+              Reset Valves
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+            <!-- VALVE 1 -->
+            <button
+              id="btn-valve-1"
+              onclick="toggleValve(1)"
+              aria-pressed="false"
+              class="text-left p-5 rounded-2xl border-2 border-stone-200 bg-[#F8F7F4] hover:border-[#1E4FD8] transition cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="font-mono text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-white border border-stone-200 text-[#16181D]">
+                    Valve 1 · Source
+                  </span>
+                  <!-- Illustrated Valve Wheel -->
+                  <div class="w-10 h-10 rounded-full bg-white border-2 border-stone-300 flex items-center justify-center valve-wheel" id="wheel-1">
+                    <svg class="w-6 h-6 text-[#E04F3E]" id="wheel-icon-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <circle cx="12" cy="12" r="8"/>
+                      <path d="M12 4v16M4 12h16"/>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-[#16181D]">Turn Down the Faucet</h3>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                  Fund <strong>+250 monthly spay/neuter surgeries</strong> (Animal Balance &amp; ACT) so accidental litters never hit the street.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between">
+                <span id="status-valve-1" class="text-xs font-bold text-[#E04F3E]">Closed (Litters Flooding In)</span>
+                <span id="action-valve-1" class="text-xs font-bold text-[#1E4FD8]">Tap to Open →</span>
+              </div>
+            </button>
+
+            <!-- VALVE 2 -->
+            <button
+              id="btn-valve-2"
+              onclick="toggleValve(2)"
+              aria-pressed="false"
+              class="text-left p-5 rounded-2xl border-2 border-stone-200 bg-[#F8F7F4] hover:border-[#1E4FD8] transition cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="font-mono text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-white border border-stone-200 text-[#16181D]">
+                    Valve 2 · Front Door
+                  </span>
+                  <div class="w-10 h-10 rounded-full bg-white border-2 border-stone-300 flex items-center justify-center valve-wheel" id="wheel-2">
+                    <svg class="w-6 h-6 text-[#E04F3E]" id="wheel-icon-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <circle cx="12" cy="12" r="8"/>
+                      <path d="M12 4v16M4 12h16"/>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-[#16181D]">Widen the Front Door</h3>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                  <strong>Field microchip scanning</strong> &amp; fast triage return lost pets right on their block—bypassing shelter intake walls.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between">
+                <span id="status-valve-2" class="text-xs font-bold text-[#E04F3E]">Closed (Appointment Wall)</span>
+                <span id="action-valve-2" class="text-xs font-bold text-[#1E4FD8]">Tap to Open →</span>
+              </div>
+            </button>
+
+            <!-- VALVE 3 -->
+            <button
+              id="btn-valve-3"
+              onclick="toggleValve(3)"
+              aria-pressed="false"
+              class="text-left p-5 rounded-2xl border-2 border-stone-200 bg-[#F8F7F4] hover:border-[#1E4FD8] transition cursor-pointer flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="font-mono text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-white border border-stone-200 text-[#16181D]">
+                    Valve 3 · Back Door
+                  </span>
+                  <div class="w-10 h-10 rounded-full bg-white border-2 border-stone-300 flex items-center justify-center valve-wheel" id="wheel-3">
+                    <svg class="w-6 h-6 text-[#E04F3E]" id="wheel-icon-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <circle cx="12" cy="12" r="8"/>
+                      <path d="M12 4v16M4 12h16"/>
+                    </svg>
+                  </div>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-[#16181D]">Open the Back Door</h3>
+                <p class="text-xs sm:text-sm text-stone-600 mt-1.5 leading-relaxed">
+                  Add <strong>+40 neighbor foster beds &amp; pet-inclusive shelter spaces</strong> (plus the Spring 2027 clinic expansion).
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between">
+                <span id="status-valve-3" class="text-xs font-bold text-[#E04F3E]">Closed (Kennels Jammed)</span>
+                <span id="action-valve-3" class="text-xs font-bold text-[#1E4FD8]">Tap to Open →</span>
+              </div>
+            </button>
+
+          </div>
+
+          <!-- Live Plain-English Summary Bar -->
+          <div id="valve-summary-box" class="mt-5 p-4 rounded-2xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-stone-800 leading-relaxed">
+            <strong>Status Quo (0 of 3 Valves Open):</strong> With 3,106 stray intakes piling into static kennels (128% capacity), officers can only make timely pickups on ~43% of street calls. Tap any valve above to see how the system decompresses.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 3: NEIGHBORHOOD TRANSLATOR & STREET RECEIPTS                -->
+    <!-- =================================================================== -->
+    <section id="neighborhood-receipts" class="py-10 sm:py-14 border-b border-stone-200">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="max-w-3xl mb-6">
+          <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1E4FD8]">AI Pattern Translation · Zero Prompting</span>
+          <h2 class="font-serif text-2xl sm:text-4xl text-[#16181D] font-bold mt-1">
+            What’s happening on your block?
+          </h2>
+          <p class="text-sm sm:text-base text-stone-600 mt-1">
+            We used AI to read all <strong>7,183 Animal Services dispatch logs</strong> and group them by Stockton neighborhood. Tap your area—or swipe through real anonymized Street Receipts.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- LEFT (7 cols): ZERO-PROMPTING NEIGHBORHOOD TRANSLATOR -->
+          <div class="lg:col-span-7 bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-xs">
+            <div class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-3">
+              1. Tap a Stockton Zone:
+            </div>
+
+            <div id="zone-pills" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Zone Plain-English Snapshot Card -->
+            <div id="zone-detail-card" class="bg-[#F8F7F4] border border-stone-200 rounded-2xl p-5 space-y-3.5">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- RIGHT (5 cols): SWIPEABLE / TAPPABLE "STREET RECEIPTS" -->
+          <div class="lg:col-span-5 bg-white border border-stone-200 rounded-3xl p-5 sm:p-6 shadow-xs">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-stone-500">2. Real Street Receipts</span>
+              <span id="receipt-counter" class="font-mono text-xs font-bold text-[#1E4FD8]">1 of 5</span>
+            </div>
+
+            <!-- Receipt Ticket Card -->
+            <div
+              id="street-receipt-card"
+              class="bg-[#F8F7F4] border-2 border-dashed border-stone-300 rounded-2xl p-5 min-h-[235px] flex flex-col justify-between select-none"
+            >
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Previous / Next Swipe Controls -->
+            <div class="mt-4 flex items-center justify-between gap-2">
+              <button
+                onclick="prevReceipt()"
+                class="flex-1 py-2.5 px-3 rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-xs font-bold text-[#16181D] transition cursor-pointer"
+              >
+                ← Previous Call
+              </button>
+              <button
+                onclick="nextReceipt()"
+                class="flex-1 py-2.5 px-3 rounded-xl bg-[#16181D] hover:bg-[#1E4FD8] text-xs font-bold text-white transition cursor-pointer"
+              >
+                Next Street Receipt →
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SECTION 4: PRACTICAL LOCAL HELP ("FOUND A DOG? / NEED VET CARE?")   -->
+    <!-- =================================================================== -->
+    <section id="local-help" class="py-10 sm:py-14 bg-white">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+          <div>
+            <span class="font-mono text-xs font-bold uppercase tracking-wider text-[#1F8E5A]">Take Action Today in Stockton</span>
+            <h2 class="font-serif text-2xl sm:text-4xl text-[#16181D] font-bold mt-1">
+              Found a Dog? Need Vet Care?
+            </h2>
+            <p class="text-sm sm:text-base text-stone-600 mt-1">
+              Skip the runaround. Here are the direct Stockton numbers, addresses, and programs that work right now.
+            </p>
+          </div>
+          <button
+            onclick="openPdfModal()"
+            class="self-start sm:self-auto inline-flex items-center gap-2 bg-[#1E4FD8] hover:bg-blue-800 text-white text-xs sm:text-sm font-bold px-4 py-3 rounded-xl transition cursor-pointer shadow-xs"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span>Download Plain-English Explainer PDF</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <!-- Card 1: Stockton Animal Shelter -->
+          <div class="bg-[#F8F7F4] border border-stone-200 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <span class="inline-block font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-red-100 text-[#E04F3E]">
+                Strays &amp; Emergencies
+              </span>
+              <h3 class="font-serif text-xl font-bold text-[#16181D] mt-2.5">Stockton Animal Shelter</h3>
+              <p class="text-xs font-mono text-stone-600 mt-1">1575 S. Lincoln St · Tue–Sun, 12–5 PM</p>
+              <p class="text-xs sm:text-sm text-stone-700 mt-3 leading-relaxed">
+                Call <strong>(209) 937-7445</strong> for injured, sick, or aggressive dogs (after-hours dispatch: <strong>(209) 937-8377</strong>). Found a healthy stray? Ask for a <strong>free microchip scan</strong> and the <strong>Temporary Found-Pet Foster</strong> program—they cover vaccines &amp; spay/neuter while you foster.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200">
+              <a href="tel:2099377445" class="inline-flex items-center justify-center w-full py-2.5 px-4 rounded-xl bg-[#16181D] hover:bg-[#1E4FD8] text-white text-xs font-bold transition">
+                Call (209) 937-7445
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Hard Luck Animal Welfare Advocates -->
+          <div class="bg-[#F8F7F4] border border-stone-200 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <span class="inline-block font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-blue-100 text-[#1E4FD8]">
+                Low-Cost Vet &amp; Spay/Neuter
+              </span>
+              <h3 class="font-serif text-xl font-bold text-[#16181D] mt-2.5">Hard Luck Animal Welfare Advocates</h3>
+              <p class="text-xs font-mono text-stone-600 mt-1">Stockton Community Veterinary &amp; Spay/Neuter</p>
+              <p class="text-xs sm:text-sm text-stone-700 mt-3 leading-relaxed">
+                Provides affordable vaccines, wellness exams, and spay/neuter services for Stockton pet families. Because clinical slots fill fast across San Joaquin County, check appointment drops early—alongside <strong>ACT Spay/Neuter Clinic</strong> (327 E. Channel St · (209) 462-7729).
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200">
+              <a href="tel:2094627729" class="inline-flex items-center justify-center w-full py-2.5 px-4 rounded-xl bg-white border border-stone-300 hover:border-[#1E4FD8] text-[#16181D] text-xs font-bold transition">
+                Call ACT Spay/Neuter: (209) 462-7729
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 3: St. Mary's Pathways -->
+          <div class="bg-[#F8F7F4] border border-stone-200 rounded-2xl p-5 flex flex-col justify-between">
+            <div>
+              <span class="inline-block font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg bg-emerald-100 text-[#1F8E5A]">
+                Unhoused Neighbors &amp; Pets
+              </span>
+              <h3 class="font-serif text-xl font-bold text-[#16181D] mt-2.5">St. Mary’s Pathways</h3>
+              <p class="text-xs font-mono text-stone-600 mt-1">545 W. Sonora St · Pet-Inclusive Shelter Access</p>
+              <p class="text-xs sm:text-sm text-stone-700 mt-3 leading-relaxed">
+                Nobody should have to abandon a beloved dog to get off the street. <strong>St. Mary’s Pathways</strong> offers emergency shelter beds and wraparound support with pet accommodations—ask San Joaquin Coordinated Entry or outreach teams about pet-friendly bed availability.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200">
+              <button onclick="openPdfModal()" class="inline-flex items-center justify-center w-full py-2.5 px-4 rounded-xl bg-white border border-stone-300 hover:border-[#1F8E5A] text-[#16181D] text-xs font-bold transition cursor-pointer">
+                Save Resource Sheet (PDF)
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- EDITORIAL FOOTER                                                      -->
+  <!-- ===================================================================== -->
+  <footer class="bg-[#F8F7F4] border-t border-stone-200 py-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <div class="w-5 h-5 bg-[#1E4FD8] text-white font-mono text-[8px] font-bold flex items-center justify-center rounded">CS</div>
+          <span class="font-mono font-bold text-xs text-[#16181D]">CROSSOVER // STOCKTON</span>
+        </div>
+        <p class="text-xs text-stone-500">
+          Based on 7,183 Stockton Animal Services dispatch records, 3,106 annual stray intakes, and ongoing field verification.
+        </p>
+      </div>
+      <button
+        onclick="openPdfModal()"
+        class="inline-flex items-center gap-2 bg-[#16181D] hover:bg-[#1E4FD8] text-white text-xs font-bold px-4 py-2.5 rounded-xl transition cursor-pointer self-start sm:self-auto shrink-0"
+      >
+        <span>Download Plain-English Explainer PDF</span>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- STICKY MOBILE BOTTOM ACTION BAR                                       -->
+  <!-- ===================================================================== -->
+  <div class="fixed bottom-0 inset-x-0 z-40 sm:hidden bg-white/95 backdrop-blur-md border-t border-stone-200 px-3 py-2.5 flex items-center gap-2 shadow-lg">
+    <button
+      onclick="openPdfModal()"
+      class="flex-1 py-2.5 px-3 rounded-xl bg-[#1E4FD8] text-white text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer"
+    >
+      <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      <span>Explainer PDF</span>
+    </button>
+    <a
+      href="#local-help"
+      class="flex-1 py-2.5 px-3 rounded-xl bg-[#16181D] text-white text-xs font-bold text-center"
+    >
+      Found a Dog?
+    </a>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- PLAIN-ENGLISH EXPLAINER PDF PREVIEW & DOWNLOAD MODAL                  -->
+  <!-- ===================================================================== -->
+  <div id="pdf-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-stone-950/60 backdrop-blur-xs p-3 sm:p-5" role="dialog" aria-modal="true" aria-labelledby="pdf-modal-title">
+    <div class="bg-white border border-stone-200 rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+      
+      <!-- Modal Top Controls -->
+      <div class="px-5 py-3.5 bg-[#F8F7F4] border-b border-stone-200 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-xs bg-[#1E4FD8]"></span>
+          <h3 id="pdf-modal-title" class="font-bold text-sm sm:text-base text-[#16181D]">Plain-English Explainer Sheet (1-Page PDF)</h3>
+        </div>
+        <button onclick="closePdfModal()" class="p-1.5 text-stone-500 hover:text-[#16181D] rounded-lg hover:bg-stone-200/70 cursor-pointer" aria-label="Close modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Scrollable 1-Page Printable Summary Sheet Preview -->
+      <div class="p-5 sm:p-7 overflow-y-auto bg-stone-100/70">
+        <div id="printable-explainer-sheet" class="bg-white border border-stone-300 rounded-2xl p-6 sm:p-8 shadow-xs space-y-5 text-[#16181D]">
+          
+          <div class="flex items-start justify-between gap-4 border-b-2 border-[#16181D] pb-4">
+            <div>
+              <div class="font-mono text-[10px] font-bold uppercase tracking-widest text-[#1E4FD8]">CROSSOVER // STOCKTON · CASE 01</div>
+              <h4 class="font-serif text-2xl sm:text-3xl font-bold mt-0.5">Street Dogs &amp; Access to Care</h4>
+              <p class="text-xs text-stone-600 mt-1">What 7,183 Animal Services dispatch records reveal—and the 3 valves that fix it.</p>
+            </div>
+            <div class="bg-[#1E4FD8] text-white font-mono text-[10px] font-bold px-2.5 py-2 rounded-lg text-right shrink-0">
+              PLAIN-ENGLISH<br/>SUMMARY
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2.5 text-center">
+            <div class="p-3 rounded-xl bg-red-50 border border-red-200">
+              <div class="font-serif text-xl font-bold text-[#E04F3E]">128%</div>
+              <div class="text-[11px] font-bold">Kennel Capacity</div>
+              <div class="text-[10px] text-stone-600">3,106 stray intakes/yr</div>
+            </div>
+            <div class="p-3 rounded-xl bg-amber-50 border border-amber-200">
+              <div class="font-serif text-xl font-bold text-amber-800">43%</div>
+              <div class="text-[11px] font-bold">Timely Pickup</div>
+              <div class="text-[10px] text-stone-600">Across 7,183 calls</div>
+            </div>
+            <div class="p-3 rounded-xl bg-blue-50 border border-blue-200">
+              <div class="font-serif text-xl font-bold text-[#1E4FD8]">3–10 / wk</div>
+              <div class="text-[11px] font-bold">Dumped Dogs</div>
+              <div class="text-[10px] text-stone-600">Corridor encounters</div>
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs leading-relaxed">
+            <div class="font-bold uppercase tracking-wider text-stone-500 font-mono text-[10px]">The Core Reality</div>
+            <p>
+              <strong>The public is not failing Stockton’s street dogs—the handoffs are breaking down.</strong> Because municipal kennels at 1575 S. Lincoln St stay packed at 128% capacity, intake shifts to appointment-only, leaving field trucks unable to pick up ~57% of reported street calls in time.
+            </p>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <div class="font-bold uppercase tracking-wider text-stone-500 font-mono text-[10px]">The 3 Valves That Decompress the System</div>
+            <ul class="space-y-1.5">
+              <li><strong>1. Turn Down the Faucet (+250/mo Spay/Neuter):</strong> Expand Animal Balance &amp; ACT surgeries so unplanned litters never hit the street.</li>
+              <li><strong>2. Widen the Front Door (Field Microchip Triage):</strong> Scan found pets in the field and reunite owners on their block without using a kennel.</li>
+              <li><strong>3. Open the Back Door (+40 Foster &amp; Pet-Friendly Beds):</strong> Expand neighbor temporary fosters, St. Mary’s Pathways pet beds, and the Spring 2027 shelter clinic.</li>
+            </ul>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-[#F8F7F4] border border-stone-200 text-[11px] space-y-1">
+            <div class="font-bold text-[#16181D]">Stockton Quick Contacts</div>
+            <div>• <strong>Stockton Animal Shelter (1575 S. Lincoln St):</strong> (209) 937-7445 · After-Hours: (209) 937-8377</div>
+            <div>• <strong>Low-Cost Spay/Neuter:</strong> Hard Luck Animal Welfare Advocates &amp; ACT Clinic (209) 462-7729</div>
+            <div>• <strong>Unhoused Pet-Inclusive Shelter:</strong> St. Mary’s Pathways (545 W. Sonora St)</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modal Footer Buttons -->
+      <div class="px-5 py-3.5 bg-[#F8F7F4] border-t border-stone-200 flex flex-wrap items-center justify-between gap-2">
+        <button
+          onclick="downloadTextSummary()"
+          class="px-3.5 py-2 rounded-xl bg-white border border-stone-300 hover:border-[#16181D] text-xs font-bold text-[#16181D] transition cursor-pointer"
+        >
+          Save Offline Summary (.txt)
+        </button>
+        <div class="flex items-center gap-2">
+          <button
+            onclick="window.print()"
+            class="px-4 py-2 rounded-xl bg-[#1E4FD8] hover:bg-blue-800 text-white text-xs font-bold transition cursor-pointer inline-flex items-center gap-1.5"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            <span>Print / Save as PDF</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT: INTERACTIVE STORY, DOGHOUSE SIM & NEIGHBORHOOD DATA       -->
+  <!-- ===================================================================== -->
+  <script>
+    // =========================================================================
+    // 1. "HELP BRUNO GET HOME" — 4-TAP INTERACTIVE STORY DATA
+    // =========================================================================
+    const BRUNO_STEPS = [
+      {
+        step: 1,
+        pillLabel: "1. Mormon Slough",
+        statusTag: "Spotted by Neighbor",
+        statusColor: "bg-blue-100 text-[#1E4FD8]",
+        bgTint: "bg-blue-50/70",
+        title: "You spot Bruno limping near Mormon Slough.",
+        narrative: "It’s 4:15 PM on a Tuesday. A friendly brown terrier mix is limping along the levee road near Mormon Slough—no collar, ribcage showing, hesitant around passing trucks. You pull over to help.",
+        receiptStyle: "bg-blue-50/70 border-blue-200 text-stone-800",
+        receiptText: "<strong>Street Reality:</strong> Mormon Slough & industrial roads are repeat dumping corridors where <strong>3–10 stray or abandoned dogs</strong> are encountered every week.",
+        svg: `
+          <svg viewBox="0 0 240 160" class="w-52 h-36" aria-label="Friendly brown dog limping near Mormon Slough">
+            <rect x="10" y="118" width="220" height="28" rx="8" fill="#E7E5E4"/>
+            <path d="M20 132 H220" stroke="#A8A29E" stroke-width="2" stroke-dasharray="8 6"/>
+            <!-- Bruno Illustration -->
+            <g class="dog-bob">
+              <ellipse cx="122" cy="92" rx="34" ry="20" fill="#B45309"/>
+              <circle cx="154" cy="72" r="16" fill="#B45309"/>
+              <path d="M144 60 L138 46 L150 56 Z" fill="#78350F"/>
+              <path d="M162 60 L170 46 L166 58 Z" fill="#78350F"/>
+              <circle cx="159" cy="70" r="2.5" fill="#16181D"/>
+              <circle cx="169" cy="74" r="3" fill="#16181D"/>
+              <rect x="98" y="106" width="8" height="18" rx="4" fill="#92400E"/>
+              <rect x="114" y="106" width="8" height="18" rx="4" fill="#92400E"/>
+              <!-- Bandaged / Lifted Front Paw -->
+              <rect x="138" y="103" width="8" height="14" rx="4" fill="#E04F3E" transform="rotate(-22 138 103)"/>
+              <path d="M88 86 Q74 74 80 66" fill="none" stroke="#92400E" stroke-width="6" stroke-linecap="round"/>
+            </g>
+            <!-- Location Pin -->
+            <rect x="20" y="16" width="118" height="24" rx="12" fill="#1E4FD8"/>
+            <text x="79" y="31" text-anchor="middle" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="700">MORMON SLOUGH</text>
+          </svg>
+        `,
+        primaryBtn: "Call Animal Services for Help →",
+        secondaryBtn: null
+      },
+      {
+        step: 2,
+        pillLabel: "2. Dispatch Queue",
+        statusTag: "Bottleneck #1: Dispatch Delay",
+        statusColor: "bg-amber-100 text-amber-900",
+        bgTint: "bg-amber-50/70",
+        title: "Your call joins 7,183 dispatch logs—and stalls.",
+        narrative: "You call Stockton Animal Services. The dispatcher is polite, but explains that field trucks are tied up on active dog-bite and traffic emergencies. Because Bruno isn’t aggressive, his pickup is queued behind higher-priority calls.",
+        receiptStyle: "bg-amber-50/80 border-amber-200 text-stone-800",
+        receiptText: "<strong>Audit Finding:</strong> Across <strong>7,183 field-call logs</strong>, officers only achieve a <strong>~43% timely pickup rate</strong>. Most street dogs wander off—or get hit—before a truck ever arrives.",
+        svg: `
+          <svg viewBox="0 0 240 160" class="w-52 h-36" aria-label="Phone call queued in dispatch">
+            <!-- Phone & Clock -->
+            <rect x="44" y="24" width="64" height="112" rx="14" fill="#16181D"/>
+            <rect x="50" y="34" width="52" height="90" rx="8" fill="#F8F7F4"/>
+            <circle cx="76" cy="64" r="14" fill="#E04F3E"/>
+            <path d="M71 60c2 5 6 9 11 11l3-3c.5-.5 1.2-.6 1.8-.3 1.2.5 2.5.8 3.8.8.8 0 1.4.6 1.4 1.4v3.2c0 .8-.6 1.4-1.4 1.4-9.4 0-17-7.6-17-17 0-.8.6-1.4 1.4-1.4h3.2c.8 0 1.4.6 1.4 1.4 0 1.3.3 2.6.8 3.8.3.6.2 1.3-.3 1.8l-3.1 2.9z" fill="#FFF"/>
+            <rect x="56" y="88" width="40" height="8" rx="4" fill="#D6D3D1"/>
+            <rect x="56" y="102" width="28" height="8" rx="4" fill="#E04F3E"/>
+            <!-- Queued Clock Badge -->
+            <circle cx="164" cy="78" r="34" fill="#FFF" stroke="#D97706" stroke-width="5"/>
+            <path d="M164 58 V78 L178 86" fill="none" stroke="#D97706" stroke-width="4.5" stroke-linecap="round"/>
+            <rect x="124" y="122" width="80" height="22" rx="11" fill="#D97706"/>
+            <text x="164" y="136" text-anchor="middle" fill="#FFF" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700">QUEUED: 3+ HRS</text>
+          </svg>
+        `,
+        primaryBtn: "Drive Bruno to the Shelter Yourself →",
+        secondaryBtn: "← Back"
+      },
+      {
+        step: 3,
+        pillLabel: "3. Shelter Door",
+        statusTag: "Bottleneck #2: 128% Capacity",
+        statusColor: "bg-red-100 text-[#E04F3E]",
+        bgTint: "bg-red-50/70",
+        title: "You drive to 1575 S. Lincoln St—and hit an appointment wall.",
+        narrative: "Not wanting to leave Bruno on the levee, you load him into your backseat and drive to Stockton Animal Shelter. At the door, you learn kennels are overflowing—non-emergency stray drop-offs require an appointment days out.",
+        receiptStyle: "bg-red-50/80 border-red-200 text-stone-800",
+        receiptText: "<strong>The Core Bottleneck:</strong> With <strong>3,106 stray intakes a year</strong>, shelter kennels run at <strong>128% critical capacity</strong>. Because there is nowhere to put new dogs, helpful residents hit a brick wall.",
+        svg: `
+          <svg viewBox="0 0 240 160" class="w-52 h-36" aria-label="Full shelter at 128 percent capacity">
+            <path d="M35 66 L120 22 L205 66" fill="none" stroke="#16181D" stroke-width="8" stroke-linecap="round"/>
+            <rect x="52" y="64" width="136" height="76" rx="10" fill="#FFF" stroke="#16181D" stroke-width="4"/>
+            <rect x="56" y="76" width="128" height="60" rx="6" fill="#E04F3E"/>
+            <text x="120" y="104" text-anchor="middle" fill="#FFF" font-family="Newsreader, serif" font-size="22" font-weight="700">128% FULL</text>
+            <text x="120" y="122" text-anchor="middle" fill="#FEE2E2" font-family="IBM Plex Mono, monospace" font-size="8.5" font-weight="700">BY APPOINTMENT ONLY</text>
+          </svg>
+        `,
+        primaryBtn: "How Does Bruno Actually Get Care? →",
+        secondaryBtn: "← Back"
+      },
+      {
+        step: 4,
+        pillLabel: "4. Community Triage",
+        statusTag: "The Fix: Bypass the Kennel",
+        statusColor: "bg-emerald-100 text-[#1F8E5A]",
+        bgTint: "bg-emerald-50/70",
+        title: "Scan-before-shelter + Temporary Foster saves Bruno!",
+        narrative: "Instead of forcing Bruno into a crowded kennel, a quick chip scan checks if he has a family—and when no chip is found, you sign up for Temporary Found-Pet Foster. The shelter covers Bruno’s free vaccines, microchip, and vet exam while he heals on a quiet porch.",
+        receiptStyle: "bg-emerald-50/80 border-emerald-200 text-stone-800",
+        receiptText: "<strong>Why This Works:</strong> Pairing <strong>field chip-scanning</strong>, <strong>neighbor temporary fosters</strong>, and <strong>high-volume spay/neuter</strong> relieves kennel overcrowding so trucks can rescue true street emergencies.",
+        svg: `
+          <svg viewBox="0 0 240 160" class="w-52 h-36" aria-label="Bruno safe in foster home with microchip and vet care">
+            <circle cx="120" cy="80" r="56" fill="#D1FAE5"/>
+            <path d="M96 82 L113 99 L148 62" fill="none" stroke="#1F8E5A" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="44" y="126" width="152" height="22" rx="11" fill="#1F8E5A"/>
+            <text x="120" y="140" text-anchor="middle" fill="#FFF" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="700">SCANNED · VETTED · FOSTERED</text>
+          </svg>
+        `,
+        primaryBtn: "Try the Overflowing Doghouse Valves ↓",
+        secondaryBtn: "Play Bruno’s Walk Again"
+      }
+    ];
+
+    let brunoIndex = 0;
+
+    function renderBrunoStep() {
+      const s = BRUNO_STEPS[brunoIndex];
+
+      // Step Pills
+      document.getElementById("bruno-step-pills").innerHTML = BRUNO_STEPS.map((item, idx) => {
+        const active = idx === brunoIndex;
+        const passed = idx < brunoIndex;
+        return `
+          <button
+            onclick="goToBrunoStep(${idx})"
+            class="px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+              active
+                ? "bg-[#16181D] text-white"
+                : passed
+                  ? "bg-blue-100 text-[#1E4FD8]"
+                  : "bg-white border border-stone-200 text-stone-500 hover:text-[#16181D]"
+            }"
+          >
+            ${item.pillLabel}
+          </button>
+        `;
+      }).join("");
+
+      document.getElementById("bruno-step-counter").textContent = `Tap ${s.step} of 4`;
+
+      const illEl = document.getElementById("bruno-illustration");
+      illEl.className = `rounded-2xl border border-stone-200 p-5 flex flex-col items-center justify-center min-h-[230px] sm:min-h-[260px] transition-colors duration-300 ${s.bgTint}`;
+      illEl.innerHTML = s.svg;
+
+      document.getElementById("bruno-badge-row").innerHTML = `
+        <span class="px-3 py-1 rounded-full text-xs font-bold ${s.statusColor}">${s.statusTag}</span>
+      `;
+      document.getElementById("bruno-title").textContent = s.title;
+      document.getElementById("bruno-narrative").textContent = s.narrative;
+
+      const receiptEl = document.getElementById("bruno-receipt");
+      receiptEl.className = `rounded-2xl p-4 border text-xs sm:text-sm leading-relaxed ${s.receiptStyle}`;
+      receiptEl.innerHTML = s.receiptText;
+
+      const choicesEl = document.getElementById("bruno-choices");
+      let html = `
+        <button
+          onclick="advanceBrunoStep()"
+          class="flex-1 py-3.5 px-5 rounded-2xl bg-[#1E4FD8] hover:bg-blue-800 text-white text-sm font-bold transition cursor-pointer shadow-xs text-center"
+        >
+          ${s.primaryBtn}
+        </button>
+      `;
+      if (s.secondaryBtn) {
+        html += `
+          <button
+            onclick="prevOrRestartBruno()"
+            class="py-3.5 px-4 rounded-2xl bg-[#F8F7F4] hover:bg-stone-200/70 border border-stone-200 text-xs sm:text-sm font-bold text-[#16181D] transition cursor-pointer"
+          >
+            ${s.secondaryBtn}
+          </button>
+        `;
+      }
+      choicesEl.innerHTML = html;
+    }
+
+    function advanceBrunoStep() {
+      if (brunoIndex < BRUNO_STEPS.length - 1) {
+        brunoIndex++;
+        renderBrunoStep();
+      } else {
+        document.getElementById("doghouse-sim").scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    function prevOrRestartBruno() {
+      if (brunoIndex === BRUNO_STEPS.length - 1) {
+        brunoIndex = 0;
+      } else if (brunoIndex > 0) {
+        brunoIndex--;
+      }
+      renderBrunoStep();
+    }
+
+    function goToBrunoStep(idx) {
+      brunoIndex = idx;
+      renderBrunoStep();
+    }
+
+    function resetBrunoGame() {
+      brunoIndex = 0;
+      renderBrunoStep();
+    }
+
+    // =========================================================================
+    // 2. "THE OVERFLOWING DOGHOUSE" — 3 TAP-TO-FIX VALVES SIMULATOR
+    // =========================================================================
+    const valveState = { 1: false, 2: false, 3: false };
+
+    function toggleValve(num) {
+      valveState[num] = !valveState[num];
+      updateDoghouseSim();
+    }
+
+    function resetValves() {
+      valveState[1] = false;
+      valveState[2] = false;
+      valveState[3] = false;
+      updateDoghouseSim();
+    }
+
+    function updateDoghouseSim() {
+      const v1 = valveState[1];
+      const v2 = valveState[2];
+      const v3 = valveState[3];
+      const openCount = [v1, v2, v3].filter(Boolean).length;
+
+      // Update each valve button appearance
+      const closedTexts = {
+        1: "Closed (Litters Flooding In)",
+        2: "Closed (Appointment Wall)",
+        3: "Closed (Kennels Jammed)"
+      };
+      const openTexts = {
+        1: "OPEN · +250 Surgeries/Mo",
+        2: "OPEN · Field Chip Triage",
+        3: "OPEN · +40 Foster/Pet Beds"
+      };
+
+      [1, 2, 3].forEach(n => {
+        const isOpen = valveState[n];
+        const btn = document.getElementById(`btn-valve-${n}`);
+        const icon = document.getElementById(`wheel-icon-${n}`);
+        const status = document.getElementById(`status-valve-${n}`);
+        const action = document.getElementById(`action-valve-${n}`);
+
+        if (isOpen) {
+          btn.className = "text-left p-5 rounded-2xl border-2 border-[#1F8E5A] bg-emerald-50/50 transition cursor-pointer flex flex-col justify-between valve-open shadow-xs";
+          icon.classList.remove("text-[#E04F3E]");
+          icon.classList.add("text-[#1F8E5A]");
+          status.className = "text-xs font-bold text-[#1F8E5A]";
+          status.textContent = openTexts[n];
+          action.className = "text-xs font-bold text-stone-500";
+          action.textContent = "Tap to Close";
+        } else {
+          btn.className = "text-left p-5 rounded-2xl border-2 border-stone-200 bg-[#F8F7F4] hover:border-[#1E4FD8] transition cursor-pointer flex flex-col justify-between";
+          icon.classList.remove("text-[#1F8E5A]");
+          icon.classList.add("text-[#E04F3E]");
+          status.className = "text-xs font-bold text-[#E04F3E]";
+          status.textContent = closedTexts[n];
+          action.className = "text-xs font-bold text-[#1E4FD8]";
+          action.textContent = "Tap to Open →";
+        }
+      });
+
+      // Calculate Kennel Capacity (starts at 128%, drops to 70% when all 3 valves open)
+      let capacity = 128;
+      if (v1) capacity -= 20;
+      if (v2) capacity -= 18;
+      if (v3) capacity -= 20;
+
+      // Calculate Street Pickup Rate (starts at 43%, climbs to 85% when all 3 valves open)
+      let pickupRate = 43;
+      if (v1) pickupRate += 14;
+      if (v2) pickupRate += 14;
+      if (v3) pickupRate += 14;
+
+      // Inflow display
+      const inflowNum = document.getElementById("inflow-number");
+      const inflowSub = document.getElementById("inflow-sub");
+      const inflowArrows = document.getElementById("inflow-arrows");
+      if (v1) {
+        inflowNum.className = "font-serif text-2xl sm:text-3xl font-bold text-[#1F8E5A] mt-1";
+        inflowNum.textContent = "Reduced Flow";
+        inflowSub.textContent = "+250 surgeries/mo active";
+        inflowArrows.className = "mt-3 flex items-center justify-center gap-1 text-[#1F8E5A]";
+        inflowArrows.innerHTML = `<span class="text-xs font-bold">Unplanned Litters Curbed</span><span>→</span>`;
+      } else {
+        inflowNum.className = "font-serif text-2xl sm:text-3xl font-bold text-[#E04F3E] mt-1";
+        inflowNum.textContent = "3,106 / yr";
+        inflowSub.textContent = "+ 3–10 dumped weekly";
+        inflowArrows.className = "mt-3 flex items-center justify-center gap-1 text-[#E04F3E]";
+        inflowArrows.innerHTML = `<span class="text-xs font-bold">Heavy Unplanned Litters</span><span>→</span>`;
+      }
+
+      // Kennel tank fill height & color
+      const fillBar = document.getElementById("kennel-fill-bar");
+      const pctLabel = document.getElementById("kennel-pct-label");
+      const statusLabel = document.getElementById("kennel-status-label");
+      const spillWarn = document.getElementById("spill-warning");
+
+      // Map 128% -> 94% visual height, 70% -> 52% visual height
+      const visualHeight = Math.round(((capacity - 50) / 85) * 94);
+      fillBar.style.height = `${Math.max(46, Math.min(94, visualHeight))}%`;
+      pctLabel.textContent = `${capacity}%`;
+
+      if (capacity <= 80) {
+        fillBar.className = "water-level absolute bottom-0 left-0 right-0 bg-[#1F8E5A]/90 z-10 flex flex-col items-center justify-end pb-4";
+        statusLabel.textContent = "Sustainable Flow";
+        spillWarn.innerHTML = `
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-[#1F8E5A] text-xs font-bold">
+            <span>✓ Below 100% Limit: Kennels open for street emergencies!</span>
+          </span>
+        `;
+      } else if (capacity <= 108) {
+        fillBar.className = "water-level absolute bottom-0 left-0 right-0 bg-amber-500/90 z-10 flex flex-col items-center justify-end pb-4";
+        statusLabel.textContent = "Pressure Easing";
+        spillWarn.innerHTML = `
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
+            <span>Getting close—open remaining valves to drop under 100%</span>
+          </span>
+        `;
+      } else {
+        fillBar.className = "water-level absolute bottom-0 left-0 right-0 bg-[#E04F3E]/90 z-10 flex flex-col items-center justify-end pb-4";
+        statusLabel.textContent = "Critical Overcrowding";
+        spillWarn.innerHTML = `
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-100 text-[#E04F3E] text-xs font-bold spill-stream">
+            <span>⚠ Overflowing: Dogs turned away at door &amp; left on streets</span>
+          </span>
+        `;
+      }
+
+      // Pickup Rate & Exit Flow
+      const pickupNum = document.getElementById("pickup-rate-num");
+      const pickupBar = document.getElementById("pickup-rate-bar");
+      const exitLabel = document.getElementById("exit-flow-label");
+      const summaryBox = document.getElementById("valve-summary-box");
+
+      pickupNum.textContent = `${pickupRate}%`;
+      pickupBar.style.width = `${pickupRate}%`;
+
+      if (openCount === 3) {
+        pickupNum.className = "font-serif text-3xl font-bold text-[#1F8E5A] mt-0.5";
+        pickupBar.className = "bar-fill h-full bg-[#1F8E5A] rounded-full";
+        exitLabel.className = "text-xs font-bold text-[#1F8E5A] mt-0.5";
+        exitLabel.textContent = "Unblocked · +High Impact Turn-Aways Prevented";
+        summaryBox.className = "mt-5 p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200 text-xs sm:text-sm text-stone-800 leading-relaxed";
+        summaryBox.innerHTML = `<strong>Optimized Baseline (All 3 Valves Open):</strong> Kennel pressure drops from <strong>128% to a sustainable 70%</strong>, street pickup rate jumps from <strong>43% to 85%</strong>, and appointment-only walls disappear.`;
+      } else if (openCount > 0) {
+        pickupNum.className = "font-serif text-3xl font-bold text-amber-700 mt-0.5";
+        pickupBar.className = "bar-fill h-full bg-amber-500 rounded-full";
+        exitLabel.className = "text-xs font-bold text-amber-800 mt-0.5";
+        exitLabel.textContent = `${openCount} of 3 Valves Active · Partial Relief`;
+        summaryBox.className = "mt-5 p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs sm:text-sm text-stone-800 leading-relaxed";
+        summaryBox.innerHTML = `<strong>Partial Decompression (${openCount} of 3 Valves Open):</strong> Kennel pressure is down to <strong>${capacity}%</strong> and field pickups rise to <strong>${pickupRate}%</strong>. Open the remaining valves to see how upstream spay/neuter, field triage, and foster exits work together.`;
+      } else {
+        pickupNum.className = "font-serif text-3xl font-bold text-[#E04F3E] mt-0.5";
+        pickupBar.className = "bar-fill h-full bg-[#E04F3E] rounded-full";
+        exitLabel.className = "text-xs font-bold text-[#E04F3E] mt-0.5";
+        exitLabel.textContent = "Blocked · 0 Turn-Aways Prevented";
+        summaryBox.className = "mt-5 p-4 rounded-2xl bg-red-50/80 border border-red-200 text-xs sm:text-sm text-stone-800 leading-relaxed";
+        summaryBox.innerHTML = `<strong>Status Quo (0 of 3 Valves Open):</strong> With 3,106 stray intakes piling into static kennels (128% capacity), officers can only make timely pickups on ~43% of street calls. Tap any valve above to see how the system decompresses.`;
+      }
+    }
+
+    // =========================================================================
+    // 3. NEIGHBORHOOD TRANSLATOR & STREET RECEIPTS
+    // =========================================================================
+    const NEIGHBORHOOD_ZONES = [
+      {
+        id: "slough",
+        name: "Mormon Slough & Industrial",
+        tag: "Dumping Corridor",
+        tagColor: "bg-red-100 text-[#E04F3E]",
+        barrier: "Geographic Isolation & Repeat Dumping",
+        logPattern: "3–10 stray or dumped dogs encountered weekly along low-visibility levee and warehouse roads.",
+        whatHappens: "Because industrial cul-de-sacs have few cameras or foot traffic, boxes of puppies and injured adult dogs are abandoned here—and delayed dispatch leaves neighbors scrambling to rescue them.",
+        fixNeeded: "Targeted corridor patrols, camera deterrents, and rapid field transport."
+      },
+      {
+        id: "south",
+        name: "South & S. Lincoln St",
+        tag: "Shelter Door Overload",
+        tagColor: "bg-amber-100 text-amber-900",
+        barrier: "Proximity Overload at 1575 S. Lincoln St",
+        logPattern: "High walk-up turn-aways when well-meaning neighbors drive found dogs straight to the shelter.",
+        whatHappens: "Residents do the right thing by bringing found strays to the shelter—only to be turned away by appointment-only rules because kennels are at 128% capacity.",
+        fixNeeded: "Scan-before-shelter chip readers at the front door + Temporary Found-Pet Foster signups."
+      },
+      {
+        id: "central",
+        name: "Central & Pacific Ave",
+        tag: "Unhoused Pet Access",
+        tagColor: "bg-blue-100 text-[#1E4FD8]",
+        barrier: "Unhoused Pet Restrictions & Vet Access",
+        logPattern: "St. Mary’s Pathways (268 beds) has limited pet-friendly spaces; street owners lack transport to vets.",
+        whatHappens: "Unhoused Stockton residents deeply love their dogs, but strict shelter pet caps and lack of mobile street vet care force an impossible choice between a warm bed and their companion.",
+        fixNeeded: "Pet-inclusive emergency shelter beds & mobile street veterinary outreach."
+      },
+      {
+        id: "north",
+        name: "North & Trinity Pkwy",
+        tag: "Preventive Care Gap",
+        tagColor: "bg-purple-100 text-purple-900",
+        barrier: "Multi-Week Spay/Neuter & Clinic Backlogs",
+        logPattern: "Preventable medical surrenders and accidental litters driven by high vet costs and waitlists.",
+        whatHappens: "Even families with cars and housing hit multi-week waitlists for affordable spay/neuter or urgent illness care—causing treatable issues to escalate into shelter surrenders.",
+        fixNeeded: "Subsidized high-volume spay/neuter clinics (Animal Balance & ACT)."
+      }
+    ];
+
+    const STREET_RECEIPTS = [
+      {
+        id: "7183-499",
+        time: "08:14 AM · E. Weber Ave",
+        status: "STATUS: DELAYED",
+        statusColor: "text-[#E04F3E]",
+        rawSnippet: "NOTE: Found dog, brown mix, no collar. Caller waiting on sidewalk.",
+        plainEnglish: "A neighbor stayed with a friendly stray on E. Weber Ave waiting for pickup—but with trucks tied up on bite calls, the call sat in pending status."
+      },
+      {
+        id: "7184-801",
+        time: "09:22 AM · S. El Dorado St",
+        status: "STATUS: QUEUED",
+        statusColor: "text-amber-700",
+        rawSnippet: "NOTE: Injured stray, possible broken leg near roadway.",
+        plainEnglish: "Even injured strays can hit dispatch delays when only a handful of officers are covering all of Stockton at once."
+      },
+      {
+        id: "7185-033",
+        time: "04:15 PM · Mormon Slough",
+        status: "STATUS: INTAKE FULL",
+        statusColor: "text-[#E04F3E]",
+        rawSnippet: "NOTE: Citizen report — box of puppies left by levee road.",
+        plainEnglish: "Repeat weekly dumping along Mormon Slough hits a shelter already at 128% capacity—forcing local volunteers to absorb the overflow."
+      },
+      {
+        id: "7186-112",
+        time: "11:20 AM · N. California St",
+        status: "STATUS: QUEUED",
+        statusColor: "text-amber-700",
+        rawSnippet: "NOTE: Need vet, dog looking sick in park; owner unhoused.",
+        plainEnglish: "An unhoused resident asked for medical help for a sick dog—showing why mobile vet care and pet-inclusive shelter beds keep families together."
+      },
+      {
+        id: "7187-204",
+        time: "02:40 PM · 1575 S. Lincoln St",
+        status: "STATUS: REUNITED",
+        statusColor: "text-[#1F8E5A]",
+        rawSnippet: "NOTE: Walk-up finder scanned chip; owner contacted within 20 mins.",
+        plainEnglish: "When a stray has a microchip and gets scanned before intake, the dog goes straight home—saving a municipal kennel for a true emergency."
+      }
+    ];
+
+    let activeZoneId = "slough";
+    let receiptIdx = 0;
+
+    function renderNeighborhoodSection() {
+      // Zone Pills
+      document.getElementById("zone-pills").innerHTML = NEIGHBORHOOD_ZONES.map(z => {
+        const selected = z.id === activeZoneId;
+        return `
+          <button
+            onclick="selectZone('${z.id}')"
+            class="text-left p-3 rounded-xl border transition cursor-pointer flex items-center justify-between gap-2 ${
+              selected
+                ? "bg-[#16181D] text-white border-[#16181D] shadow-2xs"
+                : "bg-[#F8F7F4] text-[#16181D] border-stone-200 hover:border-stone-400"
+            }"
+          >
+            <span class="font-bold text-xs sm:text-sm">${z.name}</span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+              selected ? "bg-white/15 text-white" : z.tagColor
+            }">${z.tag}</span>
+          </button>
+        `;
+      }).join("");
+
+      const zone = NEIGHBORHOOD_ZONES.find(z => z.id === activeZoneId);
+      document.getElementById("zone-detail-card").innerHTML = `
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="font-mono text-[11px] font-bold uppercase tracking-wider text-[#1E4FD8]">Zone Snapshot</span>
+          <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${zone.tagColor}">${zone.barrier}</span>
+        </div>
+        <h3 class="font-serif text-xl sm:text-2xl font-bold text-[#16181D]">${zone.name}</h3>
+        <div class="p-3.5 rounded-xl bg-white border border-stone-200 text-xs sm:text-sm text-stone-700">
+          <strong class="text-[#16181D]">Dispatch Log Pattern:</strong> ${zone.logPattern}
+        </div>
+        <p class="text-xs sm:text-sm text-stone-700 leading-relaxed">${zone.whatHappens}</p>
+        <div class="pt-2 border-t border-stone-200 text-xs font-bold text-[#1F8E5A]">
+          What Fixes This Zone: <span class="text-stone-800 font-semibold">${zone.fixNeeded}</span>
+        </div>
+      `;
+    }
+
+    function selectZone(id) {
+      activeZoneId = id;
+      renderNeighborhoodSection();
+    }
+
+    function renderStreetReceipt() {
+      const r = STREET_RECEIPTS[receiptIdx];
+      document.getElementById("receipt-counter").textContent = `${receiptIdx + 1} of ${STREET_RECEIPTS.length}`;
+      document.getElementById("street-receipt-card").innerHTML = `
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-2 border-b border-stone-200 pb-2.5">
+            <span class="font-mono text-[11px] font-bold text-stone-500">LOG #${r.id}</span>
+            <span class="font-mono text-[11px] font-bold ${r.statusColor}">${r.status}</span>
+          </div>
+          <div class="font-mono text-xs text-stone-600">${r.time}</div>
+          <div class="p-3 rounded-xl bg-white border border-stone-200 font-mono text-xs text-stone-800">
+            ${r.rawSnippet}
+          </div>
+        </div>
+        <div class="pt-3 mt-3 border-t border-stone-200">
+          <div class="text-[10px] font-mono font-bold uppercase tracking-wider text-[#1E4FD8] mb-1">Plain-English Translation</div>
+          <p class="text-xs sm:text-sm text-stone-700 leading-relaxed">${r.plainEnglish}</p>
+        </div>
+      `;
+    }
+
+    function nextReceipt() {
+      receiptIdx = (receiptIdx + 1) % STREET_RECEIPTS.length;
+      renderStreetReceipt();
+    }
+
+    function prevReceipt() {
+      receiptIdx = (receiptIdx - 1 + STREET_RECEIPTS.length) % STREET_RECEIPTS.length;
+      renderStreetReceipt();
+    }
+
+    // =========================================================================
+    // 4. PDF MODAL & OFFLINE DOWNLOAD
+    // =========================================================================
+    function openPdfModal() {
+      const modal = document.getElementById("pdf-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closePdfModal() {
+      const modal = document.getElementById("pdf-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function downloadTextSummary() {
+      const content = [
+        "CROSSOVER // STOCKTON — CASE 01: STREET DOGS & ACCESS TO CARE",
+        "Plain-English Explainer & Action Sheet (Based on 7,183 Dispatch Records)",
+        "========================================================================",
+        "",
+        "THE CORE REALITY:",
+        "Stockton neighbors aren't failing street dogs—the handoffs are breaking down.",
+        "- Shelter Kennel Pressure: 128% Critical Capacity (3,106 stray intakes/year at 1575 S. Lincoln St)",
+        "- Timely Street Pickup Rate: ~43% across 7,183 Animal Services field-call logs",
+        "- Weekly Dumping Encounters: 3-10 dogs/week reported along Mormon Slough & industrial corridors",
+        "",
+        "THE 3 VALVES THAT DECOMPRESS THE SYSTEM:",
+        "1. Turn Down the Faucet (+250/mo Spay/Neuter): Expand Animal Balance & ACT surgeries so unplanned litters never hit the street.",
+        "2. Widen the Front Door (Field Microchip Triage): Scan found pets in the field and reunite owners on their block without using a kennel.",
+        "3. Open the Back Door (+40 Foster & Pet-Friendly Beds): Expand neighbor temporary fosters, St. Mary's Pathways pet beds, and the Spring 2027 shelter clinic.",
+        "",
+        "STOCKTON QUICK CONTACTS:",
+        "- Stockton Animal Shelter (1575 S. Lincoln St, Tue-Sun 12-5 PM): (209) 937-7445 | After-Hours: (209) 937-8377",
+        "- Low-Cost Spay/Neuter: Hard Luck Animal Welfare Advocates & ACT Clinic (327 E. Channel St): (209) 462-7729",
+        "- Unhoused Pet-Inclusive Shelter: St. Mary's Pathways (545 W. Sonora St)"
+      ].join("\n");
+
+      const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Crossover_Stockton_Dog_Care_Explainer.txt";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // Close modal on backdrop click or Escape key
+    document.getElementById("pdf-modal").addEventListener("click", function(e) {
+      if (e.target === this) closePdfModal();
+    });
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") closePdfModal();
+    });
+
+    // Touch swipe support for Street Receipts on mobile
+    let touchStartX = 0;
+    const receiptCardEl = document.getElementById("street-receipt-card");
+    receiptCardEl.addEventListener("touchstart", e => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    receiptCardEl.addEventListener("touchend", e => {
+      const diff = e.changedTouches[0].screenX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff < 0) nextReceipt();
+        else prevReceipt();
+      }
+    }, { passive: true });
+
+    // Initialize everything on load
+    window.onload = function() {
+      renderBrunoStep();
+      updateDoghouseSim();
+      renderNeighborhoodSection();
+      renderStreetReceipt();
+    };
+  </script>
+</body>
+</html>

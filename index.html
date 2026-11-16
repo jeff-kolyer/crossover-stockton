@@ -1,1014 +1,123 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!doctype html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stockton StreetWatch // Stray Dog &amp; Veterinary Care Gap Investigation</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <meta name="theme-color" content="#f7f6f2" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="description" content="Crossover Stockton: clear attention, practical local action, and care for Stockton's dogs." />
+  <title>Crossover Stockton · Clear attention. Practical local action.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-          colors: {
-            stone: {
-              50: '#fafaf9',
-              100: '#f5f5f4',
-              200: '#e7e5e4',
-              300: '#d6d3d1',
-              400: '#a8a29e',
-              500: '#78716c',
-              600: '#57534e',
-              700: '#44403c',
-              800: '#292524',
-              900: '#1c1917',
-              950: '#0c0a09',
-            },
-            slate: {
-              850: '#172033',
-              900: '#0f172a',
-              950: '#090d16',
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="/src/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/gold-demo.css" />
 </head>
-<body class="min-h-screen flex flex-col antialiased selection:bg-amber-200 selection:text-stone-900">
-
-<header class="sticky top-0 z-40 bg-slate-900 text-stone-100 shadow-md border-b border-slate-800">
-
-    <!-- Active investigation status -->
-    <div id="investigation-status" class="bg-slate-950 text-stone-300 text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 border-b border-slate-800">
-      <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
-        <div class="flex items-center gap-2 font-mono min-w-0 whitespace-nowrap">
-          <span id="status-pulse" class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" aria-hidden="true"></span>
-          <span class="uppercase tracking-wider text-stone-200 font-semibold">Active Investigation</span>
-          <span class="hidden md:inline text-stone-500">|</span>
-          <span class="hidden md:inline text-stone-400">Cycle: FY 2024–2026</span>
-        </div>
-        <div class="flex items-center gap-3 font-mono text-[11px] shrink-0 whitespace-nowrap" aria-label="Record status filters">
-          <button onclick="jumpToEvidenceFilter('VERIFIED')" class="text-stone-400 hover:text-emerald-300 transition">Checked: <strong class="text-emerald-400">17</strong></button>
-          <button onclick="jumpToEvidenceFilter('OPEN')" class="text-stone-400 hover:text-sky-300 transition" title="Show six open investigation work items">Open: <strong class="text-sky-400">6</strong></button>
-          <button onclick="jumpToEvidenceFilter('WAITING')" class="text-stone-400 hover:text-amber-300 transition">Waiting: <strong class="text-amber-400">1</strong></button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tier 2: Main Brand + Navigation Tabs + Persistent Report CTA -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between gap-3 min-h-16">
-
-        <!-- Left: Brand Identity -->
-        <button id="brand-home" onclick="switchTab('overview')" class="flex items-center gap-2.5 text-left group focus:outline-none min-w-0 shrink-0">
-          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-500/15 border border-amber-500/40 flex items-center justify-center group-hover:bg-amber-500/25 group-hover:border-amber-400 transition-colors shrink-0">
-            <img src="/images/crossover-c.svg" alt="" class="w-5 h-5 sm:w-6 sm:h-6" />
-          </div>
-          <div class="min-w-0">
-            <div class="font-mono font-bold text-xs min-[360px]:text-sm lg:text-base tracking-tight text-white flex items-center gap-1.5 whitespace-nowrap">
-              <span>CROSSOVER</span>
-              <span class="hidden min-[360px]:inline text-amber-400">//</span>
-              <span class="hidden min-[360px]:inline-flex items-center gap-1 text-amber-400"><span>STOCKTON,</span> <span>CA</span></span>
-            </div>
-            <p class="font-mono text-xs text-stone-400 hidden min-[360px]:block truncate">Stray Dog Ecology &amp; Veterinary Access Audit</p>
-          </div>
-        </button>
-
-        <!-- Center: Desktop Navigation Tabs -->
-        <nav aria-label="Main Investigation Sections" class="hidden xl:flex items-center space-x-0.5 shrink-0">
-          <button onclick="switchTab('overview')" id="nav-overview" class="tab-btn active px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
-            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-            Overview
-          </button>
-          <button onclick="switchTab('ground-truth')" id="nav-ground-truth" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
-            <i data-lucide="map-pin" class="w-4 h-4"></i>
-            Ground Truth
-          </button>
-          <button onclick="switchTab('evidence-room')" id="nav-evidence-room" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
-            <i data-lucide="folder-open" class="w-4 h-4 text-amber-400"></i>
-            Evidence Room
-          </button>
-          <button onclick="switchTab('initiatives')" id="nav-initiatives" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
-            <i data-lucide="network" class="w-4 h-4"></i>
-            Initiatives
-          </button>
-          <button onclick="switchTab('care-resources')" id="nav-care-resources" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
-            <i data-lucide="heart-handshake" class="w-4 h-4"></i>
-            Care Resources
-          </button>
-          <button onclick="switchTab('methodology')" id="nav-methodology" class="tab-btn px-2.5 xl:px-3 py-5 text-sm font-medium text-stone-300 hover:text-white whitespace-nowrap flex items-center gap-1.5">
-            <i data-lucide="file-search" class="w-4 h-4"></i>
-            Methodology
-          </button>
-        </nav>
-
-      </div>
-
-      <!-- Mobile horizontal navigation -->
-      <div class="relative xl:hidden border-t border-slate-800/90 -mx-4 sm:-mx-6 px-3 sm:px-6">
-        <div id="mobile-nav-scroller" class="flex items-center overflow-x-auto no-scrollbar space-x-1 pr-8">
-          <button onclick="switchTab('overview')" id="mnav-overview" class="tab-btn active px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i>Overview</button>
-          <button onclick="switchTab('ground-truth')" id="mnav-ground-truth" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i>Ground Truth</button>
-          <button onclick="switchTab('evidence-room')" id="mnav-evidence-room" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="folder-open" class="w-3.5 h-3.5 text-amber-400"></i>Evidence Room</button>
-          <button onclick="switchTab('initiatives')" id="mnav-initiatives" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="network" class="w-3.5 h-3.5"></i>Initiatives</button>
-          <button onclick="switchTab('care-resources')" id="mnav-care-resources" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="heart-handshake" class="w-3.5 h-3.5"></i>Care Resources</button>
-          <button onclick="switchTab('methodology')" id="mnav-methodology" class="tab-btn px-3 py-2.5 text-xs font-medium text-stone-300 hover:text-white whitespace-nowrap shrink-0 flex items-center gap-1.5"><i data-lucide="file-search" class="w-3.5 h-3.5"></i>Methodology</button>
-        </div>
-        <div class="pointer-events-none absolute inset-y-0 right-0 w-9 bg-gradient-to-l from-slate-900 via-slate-900/90 to-transparent flex items-center justify-end pr-1.5"><i data-lucide="chevron-right" class="w-3.5 h-3.5 text-amber-400/90"></i></div>
-      </div>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/?page=home" data-page-link="home" aria-label="Crossover Stockton home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="40" height="40" rx="9" fill="#1D4ED8"/>
+            <path d="M25.5 13.5A8.5 8.5 0 1 0 25.5 26.5" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M20 20H31" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-line"><strong>CROSSOVER</strong><span class="brand-slash">//</span><span class="brand-city">STOCKTON</span></span>
+          <small>Presence, Reality &amp; Practical Local Action</small>
+        </span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/?page=home" data-page-link="home">Home</a>
+        <a href="/?page=articles" data-page-link="articles">Articles</a>
+        <a href="/?page=doing" data-page-link="doing">What We're Doing</a>
+        <a href="/?page=ai" data-page-link="ai">AI &amp; Ideas</a>
+        <a href="/?page=explorer" data-page-link="explorer">Info Explorer</a>
+        <a href="/?page=about" data-page-link="about">About</a>
+      </nav>
+      <a class="header-records" href="/?page=explorer" data-page-link="explorer">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
+        </svg>
+        <span>Records</span>
+      </a>
     </div>
   </header>
 
-  <!-- TOAST NOTIFICATION FOR CLIPBOARD / ACTIONS -->
-  <div id="toast-banner" class="fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-sm z-50 hidden bg-slate-950 text-stone-100 border border-amber-500/50 shadow-xl rounded-xl px-4 py-3 text-xs font-mono flex items-center gap-2.5">
-    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0"></i>
-    <span id="toast-message">Citation copied to clipboard.</span>
-  </div>
+  <main id="site-main" tabindex="-1"></main>
 
-  <!-- MAIN CONTENT CONTAINER (Generous pt-6 ensures first KPI card is never tucked behind sticky header) -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-6 pb-10">
-
-    <!-- =====================================================================
-         SECTION 1: OVERVIEW (THE BIG PICTURE)
-    ====================================================================== -->
-    <section id="tab-overview" class="tab-panel space-y-8">
-
-      <!-- Investigative Hero Banner -->
-      <div class="bg-slate-900 text-stone-100 rounded-2xl p-6 sm:p-10 border border-slate-800 shadow-lg relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-72 h-72 bg-amber-500/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
-        <div class="max-w-3xl relative z-10 space-y-4">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 font-mono text-xs font-medium">
-            <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i>
-            INVESTIGATIVE BRIEFING // SYSTEMIC AUDIT
-          </div>
-          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
-            Stockton's Stray Dog &amp; Veterinary Care Gap
-          </h1>
-          <p class="text-stone-300 text-base sm:text-lg leading-relaxed">
-            Five bottlenecks shape this investigation: preventive care, shelter capacity, field response, abandonment reporting, and rescue handoffs. Crossover has received 7,183 Animal Services case records; analysis of their outcomes is underway.
-          </p>
-          <div class="pt-2 flex flex-wrap gap-3">
-            <button onclick="switchTab('ground-truth')" class="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold px-4 py-2.5 rounded-xl text-sm transition-colors shadow-sm">
-              <i data-lucide="map" class="w-4 h-4"></i>
-              Explore Field Map &amp; Records
-            </button>
-            <button onclick="switchTab('care-resources')" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-stone-100 border border-slate-700 font-medium px-4 py-2.5 rounded-xl text-sm transition-colors">
-              <i data-lucide="stethoscope" class="w-4 h-4 text-amber-400"></i>
-              Find Low-Cost Care / Stray Triage
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 High-Impact KPI Cards -->
-      <div>
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="text-xs font-mono uppercase tracking-wider text-stone-500 font-semibold">Baseline System Indicators</h2>
-          <span class="text-xs text-stone-500">Sources checked: Nov 14, 2026</span>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-
-          <!-- KPI 1 -->
-          <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between text-stone-500 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wide">Annual Stray Intake</span>
-                <i data-lucide="warehouse" class="w-4 h-4 text-slate-700"></i>
-              </div>
-              <div class="text-3xl font-extrabold text-slate-900 font-mono">3,106</div>
-              <p class="text-xs text-stone-600 mt-1.5 leading-relaxed">
-                Stray dog intake events in the City’s 2024 report across its multi-jurisdiction service area; this is not a street census.
-              </p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-              <a href="/?tab=evidence-room&record=SHEL-2024-001" class="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">CITY 2024 REPORT ↗</a>
-              <span class="text-[11px] text-stone-400">Verified</span>
-            </div>
-          </div>
-
-          <!-- KPI 2 -->
-          <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between text-stone-500 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wide">Unverified Street Census</span>
-                <i data-lucide="help-circle" class="w-4 h-4 text-amber-600"></i>
-              </div>
-              <div class="text-3xl font-extrabold text-amber-700 font-mono">DATA GAP</div>
-              <p class="text-xs text-stone-600 mt-1.5 leading-relaxed">
-                No comparable street-dog count has been located in the public sources reviewed for this preview.
-              </p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-              <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 font-medium">OPEN DATA QUESTION</span>
-              <span class="text-[11px] text-stone-400">Record needed</span>
-            </div>
-          </div>
-
-          <!-- KPI 3 -->
-          <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between text-stone-500 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wide">Reported Dog Encounters</span>
-                <i data-lucide="alert-triangle" class="w-4 h-4 text-rose-600"></i>
-              </div>
-              <div class="text-3xl font-extrabold text-slate-900 font-mono">3–10 <span class="text-base font-normal text-stone-500">/wk</span></div>
-              <p class="text-xs text-stone-600 mt-1.5 leading-relaxed">
-                Stockton Street Dogs reported this weekly range in September 2026; it is not an independently verified count.
-              </p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-              <a href="/?tab=evidence-room&record=RESC-2026-007" class="font-mono text-[11px] px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200 font-medium">SOURCE: GROUP REPORT ↗</a>
-              <span class="text-[11px] text-stone-400">Reported</span>
-            </div>
-          </div>
-
-          <!-- KPI 4 -->
-          <div class="bg-white rounded-xl p-5 border border-stone-200 shadow-sm flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between text-stone-500 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wide">Field-Call Cases Received</span>
-                <i data-lucide="radio" class="w-4 h-4 text-slate-700"></i>
-              </div>
-              <div class="text-3xl font-extrabold text-slate-900 font-mono">7,183</div>
-              <p class="text-xs text-stone-600 mt-1.5 leading-relaxed">
-                Crossover reports receiving 7,183 Animal Services case records on Nov 2, 2026. Contents and outcomes remain under review.
-              </p>
-            </div>
-            <div class="mt-4 pt-3 border-t border-stone-100 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-              <a href="/?tab=evidence-room&record=CPRA-2026-001-RECEIPT" class="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-medium">RECEIPT RECORD ↗</a>
-              <span class="text-[11px] text-stone-400">In review</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- System Friction Summary (5 Core Bottlenecks) -->
-      <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-stone-200 bg-stone-50/70 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Structural Analysis</span>
-            <h2 class="text-xl font-bold text-slate-900 mt-0.5">System Friction Summary: 5 Core Bottlenecks</h2>
-          </div>
-          <span class="text-xs text-stone-500 font-mono">Evidence &rarr; Finding &rarr; Action Framework</span>
-        </div>
-
-        <div class="divide-y divide-stone-200">
-          <!-- Bottleneck 1 -->
-          <div class="p-6 hover:bg-stone-50/80 transition-colors">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-slate-900 text-white font-mono text-xs font-bold flex items-center justify-center">01</span>
-                <h3 class="font-bold text-slate-900 text-base">Preventive Care Deserts</h3>
-              </div>
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-rose-100 text-rose-800 border border-rose-200">
-                EVIDENCE: DEVELOPING
-              </span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold mb-1">Evidence</div>
-                <p class="text-stone-700 text-xs leading-relaxed">Animal Protection League advertises low-cost dog and cat spay/neuter in Stockton. Current prices, openings, and travel barriers need checking.</p>
-              </div>
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-amber-700 font-semibold mb-1">Finding</div>
-                <p class="text-stone-700 text-xs leading-relaxed">A published clinic location is one access point; actual openings, cost, and travel determine whether residents can use it.</p>
-              </div>
-              <div class="bg-slate-900 text-stone-200 p-3.5 rounded-xl">
-                <div class="font-mono text-[11px] uppercase text-amber-400 font-semibold mb-1">Action</div>
-                <p class="text-xs leading-relaxed">Ask providers for appointment capacity, eligibility, prices, wait times, and service locations; compare these with documented need.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottleneck 2 -->
-          <div class="p-6 hover:bg-stone-50/80 transition-colors">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-slate-900 text-white font-mono text-xs font-bold flex items-center justify-center">02</span>
-                <h3 class="font-bold text-slate-900 text-base">Shelter Capacity Bottlenecks</h3>
-              </div>
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-rose-100 text-rose-800 border border-rose-200">
-                EVIDENCE: DEVELOPING
-              </span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold mb-1">Evidence</div>
-                <p class="text-stone-700 text-xs leading-relaxed">The City reported 3,106 stray dog intakes in 2024 and announced a shelter renovation. Daily kennel census is not in these sources.</p>
-              </div>
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-amber-700 font-semibold mb-1">Finding</div>
-                <p class="text-stone-700 text-xs leading-relaxed">Shelter capacity and intake access need measurement so the renovation can be evaluated against the constraint it aims to relieve.</p>
-              </div>
-              <div class="bg-slate-900 text-stone-200 p-3.5 rounded-xl">
-                <div class="font-mono text-[11px] uppercase text-amber-400 font-semibold mb-1">Action</div>
-                <p class="text-xs leading-relaxed">Obtain current construction status, daily census, capacity, and appointment or turn-away records.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottleneck 3 -->
-          <div class="p-6 hover:bg-stone-50/80 transition-colors">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-slate-900 text-white font-mono text-xs font-bold flex items-center justify-center">03</span>
-                <h3 class="font-bold text-slate-900 text-base">Field Dispatch Delays</h3>
-              </div>
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                EVIDENCE: DEVELOPING
-              </span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold mb-1">Evidence</div>
-                <p class="text-stone-700 text-xs leading-relaxed">Crossover received 7,183 field-call case records. The review has begun, but response times and dispositions have not been established.</p>
-              </div>
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-amber-700 font-semibold mb-1">Finding</div>
-                <p class="text-stone-700 text-xs leading-relaxed">Call timing and dispositions would show where field-response capacity or routing needs improvement.</p>
-              </div>
-              <div class="bg-slate-900 text-stone-200 p-3.5 rounded-xl">
-                <div class="font-mono text-[11px] uppercase text-amber-400 font-semibold mb-1">Action</div>
-                <p class="text-xs leading-relaxed">Seek de-identified call timestamps, priority, disposition, and staffing records before comparing neighborhoods.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottleneck 4 -->
-          <div class="p-6 hover:bg-stone-50/80 transition-colors">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-slate-900 text-white font-mono text-xs font-bold flex items-center justify-center">04</span>
-                <h3 class="font-bold text-slate-900 text-base">Unmonitored Dumping Corridors</h3>
-              </div>
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                EVIDENCE: DEVELOPING
-              </span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold mb-1">Evidence</div>
-                <p class="text-stone-700 text-xs leading-relaxed">Stockton Street Dogs reported 3–10 dumped-dog encounters per week in September 2026. This is attributed reporting, not a verified count.</p>
-              </div>
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-amber-700 font-semibold mb-1">Finding</div>
-                <p class="text-stone-700 text-xs leading-relaxed">The reported increase signals a possible pressure point; specific locations and frequency still need field and agency cross-checks.</p>
-              </div>
-              <div class="bg-slate-900 text-stone-200 p-3.5 rounded-xl">
-                <div class="font-mono text-[11px] uppercase text-amber-400 font-semibold mb-1">Action</div>
-                <p class="text-xs leading-relaxed">Collect dated observations with coarse locations, then seek related agency calls and outcomes before publishing hotspot claims.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottleneck 5 -->
-          <div class="p-6 hover:bg-stone-50/80 transition-colors">
-            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-lg bg-slate-900 text-white font-mono text-xs font-bold flex items-center justify-center">05</span>
-                <h3 class="font-bold text-slate-900 text-base">Fragmented Rescue Handoffs</h3>
-              </div>
-              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-blue-100 text-blue-800 border border-blue-200">
-                EVIDENCE: DEVELOPING
-              </span>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-stone-500 font-semibold mb-1">Evidence</div>
-                <p class="text-stone-700 text-xs leading-relaxed">City Animal Services, Animal Protection League, and Streetdog Sanctuary publish separate service information.</p>
-              </div>
-              <div class="bg-stone-100/80 p-3.5 rounded-xl border border-stone-200/80">
-                <div class="font-mono text-[11px] uppercase text-amber-700 font-semibold mb-1">Finding</div>
-                <p class="text-stone-700 text-xs leading-relaxed">Separate service channels make eligibility and referral handoffs a practical point to improve and verify.</p>
-              </div>
-              <div class="bg-slate-900 text-stone-200 p-3.5 rounded-xl">
-                <div class="font-mono text-[11px] uppercase text-amber-400 font-semibold mb-1">Action</div>
-                <p class="text-xs leading-relaxed">Confirm each resource directly and date every eligibility, hours, and wait-time update.</p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 2: GROUND TRUTH (SPATIAL MAP & EVIDENCE LOG)
-    ====================================================================== -->
-    <section id="tab-ground-truth" class="tab-panel hidden space-y-8">
-
-      <!-- Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div>
-          <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Spatial &amp; Documentary Evidence</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">The Ground Truth: Field Map &amp; Public Records</h2>
-          <p class="text-stone-600 text-sm mt-1 max-w-2xl">
-            Inspect the two verified public service locations on this schematic, then open the linked source records below. Corridor and dispatch layers await data.
-          </p>
-        </div>
-      </div>
-
-      <!-- Interactive Spatial Map + Inspector Panel -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        <!-- Left 2 Cols: Interactive SVG Spatial Map -->
-        <div class="lg:col-span-2 bg-slate-900 rounded-2xl border border-slate-800 shadow-lg overflow-hidden flex flex-col">
-          <!-- Layer Filter Toggles -->
-          <div class="p-4 bg-slate-950/80 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
-            <span class="font-mono text-xs text-stone-400 uppercase tracking-wider">Map Layers:</span>
-            <div class="flex flex-wrap gap-2">
-              <button onclick="toggleMapLayer('dispatch')" id="layer-btn-dispatch" class="map-layer-btn active-layer px-2.5 py-1 rounded-lg text-xs font-medium bg-amber-500/20 text-amber-300 border border-amber-500/50 flex items-center gap-1.5 transition">
-                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-                Field Dispatch Logs
-              </button>
-              <button onclick="toggleMapLayer('dumping')" id="layer-btn-dumping" class="map-layer-btn active-layer px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-500/20 text-rose-300 border border-rose-500/50 flex items-center gap-1.5 transition">
-                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                Dumping Corridors
-              </button>
-              <button onclick="toggleMapLayer('clinic')" id="layer-btn-clinic" class="map-layer-btn active-layer px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/50 flex items-center gap-1.5 transition">
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                Low-Cost Vet Clinics
-              </button>
-              <button onclick="toggleMapLayer('shelter')" id="layer-btn-shelter" class="map-layer-btn active-layer px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-500/20 text-sky-300 border border-sky-500/50 flex items-center gap-1.5 transition">
-                <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-                Municipal Shelter
-              </button>
-            </div>
-          </div>
-
-          <!-- Map Canvas Container -->
-          <div class="relative w-full h-[380px] sm:h-[440px] bg-slate-900 map-grid-bg overflow-hidden select-none">
-            <!-- Stylized Urban Geography & Care Desert SVG -->
-            <svg viewBox="0 0 800 480" class="w-full h-full object-cover" preserveAspectRatio="xMidYMid slice">
-              <!-- Care Desert Highlight Zone (South/East Industrial & Residential Belt) -->
-              <path d="M 380,210 Q 560,180 740,240 L 760,440 L 340,440 Z" fill="rgba(244, 63, 94, 0.10)" stroke="rgba(244, 63, 94, 0.35)" stroke-width="1.5" stroke-dasharray="6,4" />
-              <text x="515" y="395" fill="rgba(253, 164, 175, 0.7)" font-family="JetBrains Mono" font-size="11" font-weight="600">CORRIDOR ANALYSIS PENDING</text>
-              <text x="515" y="410" fill="rgba(253, 164, 175, 0.5)" font-family="JetBrains Mono" font-size="9">No hotspot or care-desert conclusion yet</text>
-
-              <!-- River / Waterway Channel -->
-              <path d="M 0,140 C 180,150 260,230 430,220 C 580,210 680,150 800,165" fill="none" stroke="#1e293b" stroke-width="18" />
-              <path d="M 0,140 C 180,150 260,230 430,220 C 580,210 680,150 800,165" fill="none" stroke="#334155" stroke-width="2" stroke-dasharray="10,6" />
-              <text x="45" y="130" fill="#64748b" font-family="JetBrains Mono" font-size="10">WATERWAY / LEVEE CORRIDOR</text>
-
-              <!-- Major Highway Arterials -->
-              <line x1="220" y1="0" x2="290" y2="480" stroke="#334155" stroke-width="3" />
-              <line x1="0" y1="310" x2="800" y2="280" stroke="#334155" stroke-width="3" />
-              <line x1="520" y1="0" x2="480" y2="480" stroke="#1e293b" stroke-width="2" />
-
-              <!-- District Labels -->
-              <text x="70" y="70" fill="#475569" font-family="Inter" font-size="12" font-weight="700">NORTH COMMERCIAL</text>
-              <text x="570" y="85" fill="#475569" font-family="Inter" font-size="12" font-weight="700">NORTHEAST SUBURBS</text>
-              <text x="65" y="415" fill="#475569" font-family="Inter" font-size="12" font-weight="700">PORT / INDUSTRIAL WEST</text>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div class="footer-identity">
+        <div class="footer-brand">
+          <span class="footer-brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="40" height="40" rx="9" fill="#1D4ED8"/>
+              <path d="M25.5 13.5A8.5 8.5 0 1 0 25.5 26.5" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
+              <path d="M20 20H31" stroke="#93C5FD" stroke-width="3" stroke-linecap="round"/>
             </svg>
-
-            <!-- Interactive HTML Map Pins Positioned Over Canvas -->
-            <div id="map-pins-container" class="absolute inset-0">
-              <!-- Populated dynamically by JS -->
-            </div>
-
-            <!-- Bottom Map Scale / Note -->
-            <div class="absolute bottom-3 left-3 bg-slate-950/85 backdrop-blur-sm border border-slate-800 px-3 py-1.5 rounded-lg text-[11px] font-mono text-stone-400">
-              Schematic, not to scale &bull; Public facility markers only
-            </div>
-          </div>
+          </span>
+          <strong>CROSSOVER <span>//</span> STOCKTON</strong>
         </div>
-
-        <!-- Right 1 Col: Selected Pin Detail Inspector -->
-        <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 flex flex-col justify-between">
-          <div id="map-inspector-content" class="space-y-4">
-            <!-- Default / Active Pin View rendered by JS -->
-          </div>
-          <div class="mt-6 pt-4 border-t border-stone-200">
-            <div class="text-xs text-stone-500 flex items-center justify-between">
-              <span>Have a documented observation?</span>
-              <button onclick="switchTab('methodology'); scrollToTipForm();" class="text-amber-700 hover:text-amber-800 font-semibold underline">
-                Save a Draft &rarr;
-              </button>
-            </div>
-          </div>
-        </div>
-
+        <p>Crossing over from egoic noise and disconnection to clear awareness, non-judgmental presence, and verifiable local action in Stockton, California.</p>
       </div>
-
-      <!-- Quick Records Summary Table -->
-      <div class="bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-        <div class="p-5 sm:p-6 border-b border-stone-200 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
-          <div>
-            <span class="font-mono text-xs uppercase tracking-wider text-stone-500 font-semibold">Catalog Snapshot</span>
-            <h3 class="text-lg font-bold text-slate-900">Primary Records &amp; Work Items (Click any row to open in Evidence Room)</h3>
-          </div>
-          <div class="flex flex-wrap gap-1.5" role="group" aria-label="Filter Ground Truth records">
-            <button onclick="filterGroundTruthRecords('ALL', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition">All (54)</button>
-            <button onclick="filterGroundTruthRecords('VERIFIED', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Checked (17)</button>
-            <button onclick="filterGroundTruthRecords('REPORTED', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Reported (21)</button>
-            <button onclick="filterGroundTruthRecords('FIRSTHAND', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Firsthand (8)</button>
-            <button onclick="filterGroundTruthRecords('OPEN', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Open work (6)</button>
-            <button onclick="filterGroundTruthRecords('WAITING', this)" class="gt-rec-filter px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-stone-100 text-stone-700 hover:bg-stone-200 transition">Waiting (1)</button>
-          </div>
-        </div>
-
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-stone-50 border-b border-stone-200 text-[11px] font-mono uppercase tracking-wider text-stone-500">
-                <th class="py-3.5 px-4 sm:px-5">Catalog ID</th>
-                <th class="py-3.5 px-4 sm:px-5">Entry Title &amp; Type</th>
-                <th class="py-3.5 px-4 sm:px-5">Scope &amp; Verification Note</th>
-                <th class="py-3.5 px-4 sm:px-5">Category</th>
-                <th class="py-3.5 px-4 sm:px-5 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody id="gt-records-tbody" class="divide-y divide-stone-200 text-sm"></tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 3: PRIMARY RECORDS & EVIDENCE ROOM (SPLIT-PANE ARCHIVAL DESK)
-    ====================================================================== -->
-    <section id="tab-evidence-room" class="tab-panel hidden space-y-6">
-
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
-        <div>
-          <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Archival Inspection Desk</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Primary Records &amp; Evidence Room</h2>
-          <p class="text-stone-600 text-xs sm:text-sm mt-1 max-w-2xl">
-            Inspect linked sources, firsthand activity, unfinished work, and the limits of each entry. Catalog IDs are ours, not agency file numbers.
-          </p>
-        </div>
-      </div>
-
-      <!-- Split-Pane Grid: Left Master Drawer (4 Cols) / Right Dossier Inspector (8 Cols) -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-        <!-- LEFT PANE: Master Record Drawer -->
-        <div id="evidence-drawer-pane" class="lg:col-span-4 bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-          <div class="p-4 bg-slate-900 text-stone-100 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="font-mono text-xs uppercase tracking-wider text-amber-400 font-bold">Master File Index (54)</span>
-              <span class="font-mono text-[11px] text-stone-400">Crossover records</span>
-            </div>
-            <!-- Search Input -->
-            <div class="relative">
-              <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3 top-1/2 -translate-y-1/2"></i>
-              <input type="text" id="evidence-search" oninput="renderEvidenceDrawer()" placeholder="Search ID, agency, keyword..." class="w-full bg-slate-950 border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-stone-500 focus:outline-none focus:border-amber-500" />
-            </div>
-            <!-- Status Filter Pills -->
-            <div class="flex flex-wrap gap-1.5">
-              <button onclick="setEvidenceFilter('ALL', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-amber-500 text-slate-950 transition">
-                All (54)
-              </button>
-              <button onclick="setEvidenceFilter('VERIFIED', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">
-                Checked (17)
-              </button>
-              <button onclick="setEvidenceFilter('REPORTED', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">
-                Reported (21)
-              </button>
-              <button onclick="setEvidenceFilter('FIRSTHAND', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">
-                Firsthand (8)
-              </button>
-              <button onclick="setEvidenceFilter('OPEN', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">Open work (6)</button>
-              <button onclick="setEvidenceFilter('WAITING', this)" class="ev-filter-btn px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold bg-slate-800 text-stone-300 hover:bg-slate-700 transition">Waiting (1)</button>
-            </div>
-          </div>
-
-          <!-- Scrollable Record List -->
-          <div id="evidence-list-container" class="divide-y divide-stone-200 max-h-[540px] overflow-y-auto">
-            <!-- Populated dynamically by JS -->
-          </div>
-        </div>
-
-        <!-- RIGHT PANE: Active Dossier Inspector -->
-        <div id="evidence-inspector-pane" class="lg:col-span-8 bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden">
-          <!-- Mobile Back-to-Drawer Jump Bar -->
-          <div class="lg:hidden bg-stone-100 px-4 py-2.5 border-b border-stone-200 flex items-center justify-between">
-            <button onclick="scrollToDrawer()" class="text-xs font-mono font-semibold text-slate-800 flex items-center gap-1.5">
-              <i data-lucide="arrow-up" class="w-3.5 h-3.5 text-amber-600"></i>
-              <span>Back to All Records List</span>
-            </button>
-            <span id="mobile-active-rec-id" class="font-mono text-[11px] text-stone-500">SAS-2024-KENNEL</span>
-          </div>
-
-          <!-- Dossier Content Container -->
-          <div id="dossier-content">
-            <!-- Populated dynamically by JS -->
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =====================================================================
-         SECTION 5: INITIATIVES & ECOSYSTEM
-    ====================================================================== -->
-    <section id="tab-initiatives" class="tab-panel hidden space-y-8">
-
-      <div>
-        <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Institutional Mapping</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">The Ecosystem &amp; Active Initiatives</h2>
-        <p class="text-stone-600 text-sm mt-1 max-w-2xl">
-          Understanding who holds statutory authority, where grassroots volunteers fill the breach, and the current status of structural infrastructure projects.
-        </p>
-      </div>
-
-      <!-- Stakeholder Ecosystem Grid (3 Columns) -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        <!-- Pillar 1: Municipal Agencies -->
-        <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-slate-900 text-amber-400 flex items-center justify-center">
-                <i data-lucide="landmark" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h3 class="font-bold text-slate-900">Municipal Agencies</h3>
-                <span class="text-xs font-mono text-stone-500">Statutory Mandate &amp; Enforcement</span>
-              </div>
-            </div>
-            <p class="text-xs text-stone-600 leading-relaxed">
-              Responsible for stray impoundment, bite quarantine, licensing, and operating the primary open-admission shelter facility.
-            </p>
-            <div class="space-y-2.5 pt-2">
-              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                <div class="font-semibold text-xs text-slate-900">Municipal Animal Services</div>
-                <p class="text-[11px] text-stone-600 mt-0.5">The City’s 2024 multi-jurisdiction report records 3,106 stray dog intakes.</p>
-              </div>
-              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                <div class="font-semibold text-xs text-slate-900">Code &amp; Environmental Enforcement</div>
-                <p class="text-[11px] text-stone-600 mt-0.5">Animal Services lists abandonment and aggressive animals among reportable complaints.</p>
-              </div>
-            </div>
-          </div>
-          <div class="mt-5 pt-4 border-t border-stone-100">
-            <div class="text-[11px] font-mono uppercase text-rose-700 font-semibold">Capacity Constraint</div>
-            <p class="text-xs text-stone-600 mt-0.5">Current occupancy, turn-away counts, and field staffing require additional records.</p>
-          </div>
-        </div>
-
-        <!-- Pillar 2: Grassroots Rescues -->
-        <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-amber-500/15 text-amber-700 border border-amber-500/30 flex items-center justify-center">
-                <i data-lucide="users" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h3 class="font-bold text-slate-900">Grassroots Rescues &amp; Feeders</h3>
-                <span class="text-xs font-mono text-stone-500">Street-Level Safety Net</span>
-              </div>
-            </div>
-            <p class="text-xs text-stone-600 leading-relaxed">
-              Community groups describe rescue and street-level support; their current capacity requires direct confirmation.
-            </p>
-            <div class="space-y-2.5 pt-2">
-              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                <div class="font-semibold text-xs text-slate-900">Streetdog Sanctuary</div>
-                <p class="text-[11px] text-stone-600 mt-0.5">Describes care and health monitoring for abandoned dogs in Stockton.</p>
-              </div>
-              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                <div class="font-semibold text-xs text-slate-900">Other rescue partners</div>
-                <p class="text-[11px] text-stone-600 mt-0.5">Roles, intake criteria, and current openings need provider confirmation.</p>
-              </div>
-            </div>
-          </div>
-          <div class="mt-5 pt-4 border-t border-stone-100">
-            <div class="text-[11px] font-mono uppercase text-amber-700 font-semibold">Capacity Constraint</div>
-            <p class="text-xs text-stone-600 mt-0.5">Funding and available foster capacity have not been independently measured.</p>
-          </div>
-        </div>
-
-        <!-- Pillar 3: Low-Cost Vet Providers -->
-        <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 flex flex-col justify-between">
-          <div class="space-y-4">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/15 text-emerald-700 border border-emerald-500/30 flex items-center justify-center">
-                <i data-lucide="stethoscope" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h3 class="font-bold text-slate-900">Low-Cost Vet Providers</h3>
-                <span class="text-xs font-mono text-stone-500">Preventive &amp; Surgical Care</span>
-              </div>
-            </div>
-            <p class="text-xs text-stone-600 leading-relaxed">
-              Published provider and City pages document some lower-cost services. Appointment access varies.
-            </p>
-            <div class="space-y-2.5 pt-2">
-              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                <div class="font-semibold text-xs text-slate-900">Animal Protection League</div>
-                <p class="text-[11px] text-stone-600 mt-0.5">Advertises low-cost dog and cat spay/neuter at 1409 W Oak St.</p>
-              </div>
-              <div class="p-3 rounded-xl bg-stone-50 border border-stone-200/80">
-                <div class="font-semibold text-xs text-slate-900">City Animal Services</div>
-                <p class="text-[11px] text-stone-600 mt-0.5">Lists low-cost vaccinations and microchips; dog spay/neuter is not listed as a City service.</p>
-              </div>
-            </div>
-          </div>
-          <div class="mt-5 pt-4 border-t border-stone-100">
-            <div class="text-[11px] font-mono uppercase text-amber-700 font-semibold">Capacity Constraint</div>
-            <p class="text-xs text-stone-600 mt-0.5">Current prices, eligibility, and appointment wait times need direct confirmation.</p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Active Initiatives Tracker -->
-      <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 sm:p-8">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-6 border-b border-stone-200">
-          <div><span class="font-mono text-xs uppercase tracking-wider text-stone-500 font-semibold">Accountability Tracker</span>
-          <h3 class="text-xl font-bold text-slate-900 mt-0.5">Active Infrastructure &amp; Policy Initiatives</h3></div>
-          <span class="text-xs text-stone-500 font-mono">5 Tracked Projects</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6"><div class="p-5 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3">
-    <div class="flex items-start justify-between gap-2">
-      <h4 class="font-bold text-slate-900 text-base">Canine Campus</h4>
-      <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200 whitespace-nowrap">PROPOSED</span>
-    </div>
-    <p class="text-xs text-stone-600 leading-relaxed">Stockton Street Dogs / Street Dog Sanctuary proposes a campus for dogs without safe placement, including overflow and recovery care.</p>
-    <p class="text-xs text-stone-600 leading-relaxed"><strong>Affects:</strong> Shelter capacity · Rescue handoffs. <strong>Still to verify:</strong> Fundraising is documented; full funding, site, approvals, opening date, and usable operating capacity remain unverified.</p>
-    <div class="pt-2 border-t border-stone-200/80 flex items-center justify-between gap-3 text-xs font-mono text-stone-500">
-      <span>Not operating yet</span>
-      <a class="text-amber-800 underline text-right" href="/?tab=evidence-room&record=RESC-2026-009">Source ↗</a>
-    </div>
-  </div>
-<div class="p-5 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3">
-    <div class="flex items-start justify-between gap-2">
-      <h4 class="font-bold text-slate-900 text-base">Stockton Animal Shelter expansion</h4>
-      <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200 whitespace-nowrap">DEVELOPING</span>
-    </div>
-    <p class="text-xs text-stone-600 leading-relaxed">City renovation and expansion of the Stockton Animal Shelter, including planned care and public-access improvements.</p>
-    <p class="text-xs text-stone-600 leading-relaxed"><strong>Affects:</strong> Shelter capacity. <strong>Still to verify:</strong> Completion, additional usable dog-care capacity, and effects on outcomes remain unverified.</p>
-    <div class="pt-2 border-t border-stone-200/80 flex items-center justify-between gap-3 text-xs font-mono text-stone-500">
-      <span>Not operating yet</span>
-      <a class="text-amber-800 underline text-right" href="/?tab=evidence-room&record=FLD-2026-001">Source ↗</a>
-    </div>
-  </div>
-<div class="p-5 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3">
-    <div class="flex items-start justify-between gap-2">
-      <h4 class="font-bold text-slate-900 text-base">Pet Wellness &amp; Adoption Center</h4>
-      <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200 whitespace-nowrap">BUILT</span>
-    </div>
-    <p class="text-xs text-stone-600 leading-relaxed">City of Stockton satellite animal resource center with Hard Luck Animal Welfare Advocates as a veterinary-services partner.</p>
-    <p class="text-xs text-stone-600 leading-relaxed"><strong>Affects:</strong> Preventive care · Rescue handoffs. <strong>Still to verify:</strong> Current services and measurable additional veterinary or adoption capacity remain unverified.</p>
-    <div class="pt-2 border-t border-stone-200/80 flex items-center justify-between gap-3 text-xs font-mono text-stone-500">
-      <span>Current service unverified</span>
-      <a class="text-amber-800 underline text-right" href="/?tab=evidence-room&record=GOV-2026-006">Source ↗</a>
-    </div>
-  </div>
-<div class="p-5 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3">
-    <div class="flex items-start justify-between gap-2">
-      <h4 class="font-bold text-slate-900 text-base">Animal Balance spay/neuter contract</h4>
-      <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200 whitespace-nowrap">AUTHORIZED</span>
-    </div>
-    <p class="text-xs text-stone-600 leading-relaxed">Separate three-month City contract with Animal Balance for high-volume shelter spay/neuter services.</p>
-    <p class="text-xs text-stone-600 leading-relaxed"><strong>Affects:</strong> Shelter capacity. <strong>Still to verify:</strong> Completed procedures, dog/cat split, and resulting care capacity remain unverified.</p>
-    <div class="pt-2 border-t border-stone-200/80 flex items-center justify-between gap-3 text-xs font-mono text-stone-500">
-      <span>Current service unverified</span>
-      <a class="text-amber-800 underline text-right" href="/?tab=evidence-room&record=GOV-2026-005">Source ↗</a>
-    </div>
-  </div>
-<div class="p-5 rounded-xl border border-stone-200 bg-stone-50/50 space-y-3">
-    <div class="flex items-start justify-between gap-2">
-      <h4 class="font-bold text-slate-900 text-base">Hard Luck veterinary staffing expansion</h4>
-      <span class="px-2.5 py-1 rounded-full text-xs font-mono font-semibold bg-amber-100 text-amber-800 border border-amber-200 whitespace-nowrap">AUTHORIZED</span>
-    </div>
-    <p class="text-xs text-stone-600 leading-relaxed">City extension of its Hard Luck Animal Welfare Advocates agreement, with four additional positions; separate from the Animal Balance procedure contract.</p>
-    <p class="text-xs text-stone-600 leading-relaxed"><strong>Affects:</strong> Shelter capacity. <strong>Still to verify:</strong> Hiring completion and resulting care capacity remain unverified.</p>
-    <div class="pt-2 border-t border-stone-200/80 flex items-center justify-between gap-3 text-xs font-mono text-stone-500">
-      <span>Current service unverified</span>
-      <a class="text-amber-800 underline text-right" href="/?tab=evidence-room&record=GOV-2026-006">Source ↗</a>
-    </div>
-  </div></div>
-      </div>
-
-    </section>
-
-    <!-- =====================================================================
-         SECTION 5: ACCESS TO CARE (TRIAGE & RESOURCE DIRECTORY)
-    ====================================================================== -->
-    <section id="tab-care-resources" class="tab-panel hidden space-y-8">
-
-      <div>
-        <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Direct Action &amp; Utility</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Access to Care: Triage &amp; Vetted Directory</h2>
-        <p class="text-stone-600 text-sm mt-1 max-w-2xl">
-          Immediate step-by-step protocols for residents who have found a stray dog or need affordable veterinary services.
-        </p>
-      </div>
-
-      <!-- Interactive Quick Triage Selector -->
-      <div class="bg-slate-900 text-stone-100 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-lg">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
-          <div>
-            <span class="font-mono text-xs text-amber-400 uppercase tracking-wider font-semibold">Interactive Decision Guide</span>
-            <h3 class="text-xl font-bold text-white mt-0.5">What situation are you dealing with right now?</h3>
-          </div>
-          <div class="flex gap-2 bg-slate-950 p-1.5 rounded-xl border border-slate-800">
-            <button onclick="setTriageMode('stray')" id="triage-btn-stray" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition shadow-sm">
-              I Found a Stray Dog
-            </button>
-            <button onclick="setTriageMode('vet')" id="triage-btn-vet" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-stone-300 hover:text-white transition">
-              I Need Low-Cost Vet Care
-            </button>
-          </div>
-        </div>
-
-        <!-- Triage Pathway Output -->
-        <div id="triage-output" class="mt-6">
-          <!-- Dynamically populated by JS -->
-        </div>
-      </div>
-
-      <!-- Filterable Vetted Resource Directory -->
-      <div class="space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <h3 class="text-lg font-bold text-slate-900">Vetted Regional Care &amp; Support Providers</h3>
-          <div class="flex flex-wrap gap-1.5">
-            <button onclick="filterResources('ALL', this)" aria-pressed="true" class="res-filter-btn active-res-filter px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white transition">
-              All Services
-            </button>
-            <button onclick="filterResources('Spay/Neuter', this)" aria-pressed="false" class="res-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition">
-              Spay/Neuter
-            </button>
-            <button onclick="filterResources('Vaccines', this)" aria-pressed="false" class="res-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition">
-              Vaccines
-            </button>
-            <button onclick="filterResources('Found Pet', this)" aria-pressed="false" class="res-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition">
-              Found Pet
-            </button>
-            <button onclick="filterResources('Scheduled', this)" aria-pressed="false" class="res-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-white border border-stone-200 text-stone-700 hover:bg-stone-100 transition">
-              Scheduled
-            </button>
-          </div>
-        </div>
-
-        <div id="resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <!-- Populated dynamically by JS -->
-        </div>
-      </div>
-
-    </section>
-
-    <!-- =====================================================================
-         SECTION 6: METHODOLOGY, SEVERITY RUBRIC & FIELD TIPS
-    ====================================================================== -->
-    <section id="tab-methodology" class="tab-panel hidden space-y-8">
-
-      <div>
-        <span class="font-mono text-xs uppercase tracking-wider text-amber-700 font-semibold">Transparency &amp; Participation</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Methodology, Open Questions &amp; Field Tips</h2>
-        <p class="text-stone-600 text-sm mt-1 max-w-2xl">
-          How public records are checked, what remains unknown, and how to prepare a field observation for follow-up.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-        <!-- Left 7 Cols: Standards & Open Questions -->
-        <div class="lg:col-span-7 space-y-6">
-
-          <!-- Verification Standards -->
-          <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 space-y-4">
-            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <i data-lucide="shield-check" class="w-5 h-5 text-emerald-600"></i>
-              Verification &amp; Data Standards
-            </h3>
-            <p class="text-sm text-stone-600 leading-relaxed">
-              Every metric published on StreetWatch is categorized by its evidentiary standard to separate confirmed municipal records from street-level estimates:
-            </p>
-            <div class="space-y-3 text-xs">
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex items-start gap-3">
-                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-mono font-semibold shrink-0">VERIFIED</span>
-                <p class="text-stone-700 leading-relaxed">Linked public agency or provider page, PDF, or council file checked against its publisher. No CPRA production is claimed in this preview.</p>
-              </div>
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex items-start gap-3">
-                <span class="px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-mono font-semibold shrink-0">OPEN / FIELD</span>
-                <p class="text-stone-700 leading-relaxed">A lead or observation is not a published fact until its date, location, source, and corroboration are checked.</p>
-              </div>
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200 flex items-start gap-3">
-                <span class="px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-mono font-semibold shrink-0">WAITING</span>
-                <p class="text-stone-700 leading-relaxed">Records needed for an open question. No request filing or statutory clock is represented without a receipt.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Open Investigative Questions -->
-          <div class="bg-white rounded-2xl border border-stone-200 shadow-sm p-6 space-y-4">
-            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-              <i data-lucide="search" class="w-5 h-5 text-amber-600"></i>
-              Open Questions / Investigation Roadmap
-            </h3>
-            <ul class="space-y-3 text-sm text-stone-700">
-              <li class="flex items-start gap-3">
-                <span class="font-mono text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded mt-0.5">Q1</span>
-                <span><strong>Dispatch Response Disparities:</strong> Do high-intake low-income census tracts experience significantly longer median response times for stray calls than commercial corridors?</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="font-mono text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded mt-0.5">Q2</span>
-                <span><strong>Voucher Redemption Bottlenecks:</strong> How many procedures under the City’s Animal Balance agreement were completed, and where were they offered?</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <span class="font-mono text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded mt-0.5">Q3</span>
-                <span><strong>Turn-Away Tracking:</strong> How many residents attempting to surrender or drop off stray dogs are turned away at the shelter counter without being logged in intake totals?</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- Right 5 Cols: Community Sighting / Tip Form -->
-        <div id="tip-form-card" class="lg:col-span-5">
-          <div class="bg-slate-900 text-stone-100 rounded-2xl border border-slate-800 shadow-lg p-6 sm:p-7 space-y-5">
-            <div>
-              <span class="font-mono text-xs text-amber-400 uppercase tracking-wider font-semibold">Contribute Field Data</span>
-              <h3 class="text-xl font-bold text-white mt-1">Prepare a Sighting or Record Tip</h3>
-              <p class="text-xs text-stone-400 mt-1 leading-relaxed">
-                Draft details here for your own follow-up. This preview has no submission service. For an injured or sick stray, contact City Animal Services directly.
-              </p>
-            </div>
-
-            <form id="field-tip-form" onsubmit="handleTipSubmit(event)" class="space-y-4">
-              <div>
-                <label for="tip-category" class="block text-xs font-mono uppercase text-stone-300 mb-1.5">Observation Type</label>
-                <select id="tip-category" required class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
-                  <option value="Stray Pack / Roaming Sighting">Stray Pack / Roaming Sighting</option>
-                  <option value="Suspected Dumping Corridor">Suspected Dumping Corridor</option>
-                  <option value="Clinic Waitlist / Voucher Experience">Clinic Waitlist / Voucher Experience</option>
-                  <option value="Shelter Intake / Turn-Away Report">Shelter Intake / Turn-Away Report</option>
-                </select>
-              </div>
-
-              <div>
-                <label for="tip-location" class="block text-xs font-mono uppercase text-stone-300 mb-1.5">Nearest Cross-Streets or ZIP Code</label>
-                <input type="text" id="tip-location" required placeholder="e.g., Airport Way & Industrial Dr / 95206" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500" />
-              </div>
-
-              <div>
-                <label for="tip-details" class="block text-xs font-mono uppercase text-stone-300 mb-1.5">Field Notes &amp; Date/Time Observed</label>
-                <textarea id="tip-details" rows="3" required placeholder="Describe number of dogs, physical condition, frequency of sightings, or clinic wait times..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500"></textarea>
-              </div>
-
-              <div>
-                <label for="tip-contact" class="block text-xs font-mono uppercase text-stone-300 mb-1.5">Optional Follow-Up Email</label>
-                <input type="email" id="tip-contact" placeholder="optional@example.com (for verification only)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500" />
-              </div>
-
-              <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-4 rounded-xl text-sm transition-colors flex items-center justify-center gap-2 shadow-md">
-                <i data-lucide="send" class="w-4 h-4"></i>
-                Save Draft in This Browser
-              </button>
-            </form>
-
-            <!-- Inline Confirmation Message Box (Replaces alert()) -->
-            <div id="tip-confirmation" class="hidden p-4 rounded-xl bg-emerald-950/90 border border-emerald-500/40 text-emerald-200 text-xs space-y-1">
-              <div class="font-bold text-emerald-300 flex items-center gap-1.5">
-                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
-                Draft Saved Locally
-              </div>
-              <p>This draft stays in this browser. It was not sent to StreetWatch or an agency.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="bg-slate-950 text-stone-400 border-t border-slate-800 mt-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-      <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 font-mono text-center sm:text-left">
-        <span class="text-white font-bold">CROSSOVER</span>
-        <span class="inline-flex items-center gap-1 text-amber-400 font-bold"><span>// STOCKTON,</span> <span>CA</span></span>
-        <span class="inline-flex max-w-full min-w-0 items-start gap-2"><span aria-hidden="true" class="hidden xl:inline shrink-0">&bull;</span><span>Stray Dog Ecology &amp; Veterinary Access Audit</span></span>
-      </div>
-      <div class="flex flex-wrap items-center justify-center gap-4">
-        <button onclick="switchTab('overview')" class="hover:text-white transition">Overview</button>
-        <button onclick="switchTab('ground-truth')" class="hover:text-white transition">Ground Truth</button>
-        <button onclick="switchTab('evidence-room')" class="hover:text-white transition">Evidence Room</button>
-        <button onclick="switchTab('care-resources')" class="hover:text-white transition">Care Directory</button>
-        <button onclick="switchTab('methodology')" class="hover:text-white transition">Methodology</button>
-      </div>
+      <nav aria-label="Footer navigation">
+        <a href="/?page=home" data-page-link="home">Home</a>
+        <a href="/?page=articles" data-page-link="articles">Articles</a>
+        <a href="/?page=doing" data-page-link="doing">What We're Doing</a>
+        <a href="/?page=ai" data-page-link="ai">AI &amp; Ideas</a>
+        <a href="/?page=explorer" data-page-link="explorer">Info Explorer</a>
+        <a href="/?page=about" data-page-link="about">About</a>
+      </nav>
     </div>
   </footer>
 
-  <!-- INTERACTIVE APPLICATION LOGIC -->
-  <script type="module" src="/src/main.js"></script>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="/?page=home" data-page-link="home">Home</a>
+    <a href="/?page=articles" data-page-link="articles">Articles</a>
+    <a href="/?page=doing" data-page-link="doing">Doing</a>
+    <a href="/?page=ai" data-page-link="ai">AI &amp; Ideas</a>
+    <a href="/?page=about" data-page-link="about">About</a>
+  </nav>
+
+  <dialog id="record-dialog" class="record-dialog" aria-labelledby="record-dialog-title">
+    <div class="dialog-head">
+      <div class="dialog-head-meta">
+        <span id="record-dialog-id" class="mono-label"></span>
+        <span id="record-dialog-status" class="status"></span>
+      </div>
+      <button type="button" data-close-dialog aria-label="Close record">✕</button>
+    </div>
+    <div id="record-dialog-content" class="dialog-content"></div>
+    <div id="record-dialog-foot" class="dialog-foot">
+      <span class="dialog-foot-note">Verified Archive Entry</span>
+      <button type="button" class="button button-dark" data-close-dialog>Done</button>
+    </div>
+  </dialog>
+
+  <div id="fullscreen-map-modal" class="fs-map-modal" role="dialog" aria-modal="true" aria-labelledby="fs-map-title" hidden>
+    <div class="fs-map-topbar">
+      <div class="fs-map-head-left">
+        <span class="status">Single-Layer Map</span>
+        <div class="fs-map-titles">
+          <h2 id="fs-map-title">Map Title</h2>
+          <p id="fs-map-subtitle">Subtitle</p>
+        </div>
+      </div>
+      <div class="fs-map-controls">
+        <button type="button" data-map-zoom="0.2" title="Zoom In">+</button>
+        <button type="button" data-map-zoom="-0.2" title="Zoom Out">−</button>
+        <button type="button" data-map-reset>Reset</button>
+        <button type="button" class="button button-dark button-compact" data-close-map>Close Map ✕</button>
+      </div>
+    </div>
+    <div id="fs-map-viewport" class="fs-map-viewport">
+      <div id="fs-map-transform-layer" class="fs-map-transform-layer"></div>
+      <div id="fs-map-legend" class="fs-map-legend"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/editorial.js"></script>
 </body>
 </html>

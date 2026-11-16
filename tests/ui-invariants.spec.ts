@@ -1,152 +1,149 @@
 import { test, expect } from '@playwright/test';
 
-const sections = ['overview', 'ground-truth', 'evidence-room', 'initiatives', 'care-resources', 'methodology'];
+const pages = ['home', 'articles', 'doing', 'ai', 'explorer', 'about'];
 
-test('page fits the viewport and preserves the header actions', async ({ page }, testInfo) => {
+test('editorial home uses the gold square mark and fits the viewport', async ({ page }, testInfo) => {
   await page.goto('/');
-  await expect(page.locator('#tab-overview')).toBeVisible();
-
+  await expect(page.getByRole('heading', { name: 'Crossing over from noise and disconnection to what is real right where we live.' })).toBeVisible();
+  await expect(page.locator('.hero-art img')).toHaveAttribute('src', '/images/home/stockton-skyline-commons.jpg');
+  await expect(page.locator('.metric-open strong')).toHaveCSS('color', 'rgb(29, 78, 216)');
+  await expect(page.locator('.brand-mark svg')).toBeVisible();
+  await expect(page.locator('.brand-mark svg path')).toHaveCount(2);
+  await expect(page.locator('.footer-brand-mark svg')).toBeVisible();
+  await expect(page.locator('.brand-mark')).toHaveCSS('background-color', 'rgb(29, 78, 216)');
+  await expect(page.locator('.footer-brand-mark')).toHaveCSS('background-color', 'rgb(29, 78, 216)');
   const width = testInfo.project.use.viewport!.width;
-  const dimensions = await page.evaluate(() => ({
-    scroll: document.documentElement.scrollWidth,
-    viewport: document.documentElement.clientWidth,
-  }));
-  expect(dimensions.scroll, `Document overflows at ${width}px: ${JSON.stringify(dimensions)}`).toBeLessThanOrEqual(dimensions.viewport + 1);
-
-  const brand = page.locator('#brand-home');
-  await expect(brand).toContainText('CROSSOVER');
-  if (width >= 360) {
-    await expect(brand).toContainText('STOCKTON, CA');
-    await expect(brand.getByText('Stray Dog Ecology & Veterinary Access Audit')).toBeVisible();
-  }
-  await expect(brand.locator('img')).toHaveAttribute('src', '/images/crossover-c.svg');
-  expect(await brand.locator('img').evaluate(image => (image as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
-  const brandBox = await brand.boundingBox();
-  expect(brandBox).not.toBeNull();
-  expect(brandBox!.x).toBeGreaterThanOrEqual(-1);
-  expect(brandBox!.x + brandBox!.width).toBeLessThanOrEqual(width + 1);
-  const status = page.locator('#investigation-status');
-  await expect(status.getByText('ACTIVE INVESTIGATION')).toBeVisible();
-  const pulse = status.locator('#status-pulse');
-  await expect(pulse).toBeVisible();
-  expect(await pulse.evaluate((element) => getComputedStyle(element).animationName)).not.toBe('none');
-  for (const label of ['Checked: 17', 'Open: 6', 'Waiting: 1']) {
-    await expect(status.getByRole('button', { name: label })).toBeVisible();
-  }
-  await expect(status.getByRole('button', { name: 'Open: 6' }).locator('strong')).toHaveClass(/text-sky-400/);
-  if (width >= 1280) {
-    const navBox = await page.locator('nav[aria-label="Main Investigation Sections"]').boundingBox();
-    expect(navBox).not.toBeNull();
-    expect(Math.abs((brandBox!.y + brandBox!.height / 2) - (navBox!.y + navBox!.height / 2))).toBeLessThan(12);
-    expect(navBox!.x + navBox!.width).toBeLessThanOrEqual(width + 1);
-  }
-
-  await expect(page.locator('header button[onclick*="scrollToTipForm"]')).toHaveCount(0);
-
-  await page.screenshot({ path: `test-results/screenshots/overview-${width}.png`, fullPage: true });
-  await page.screenshot({ path: `test-results/screenshots/header-${width}.png`, clip: { x: 0, y: 0, width, height: width < 1024 ? 280 : 190 } });
-  if (width === 412) {
-    await page.locator('#brand-home').hover();
-    await page.screenshot({ path: 'test-results/screenshots/header-hover-412.png', clip: { x: 0, y: 0, width, height: 140 } });
-  }
-});
-
-test('retired model links return to the overview', async ({ page }) => {
-  await page.goto('/');
-  await expect(page.locator('#tab-solutions, #model-switcher-btn, #ethos-drawer')).toHaveCount(0);
-  await page.goto('/?tab=solutions');
-  await expect(page.locator('#tab-overview')).toBeVisible();
-});
-
-test('footer uses the Crossover Stockton identity', async ({ page }, testInfo) => {
-  await page.goto('/');
-  const footer = page.locator('footer');
-  await expect(footer.getByText('CROSSOVER', { exact: true })).toHaveCSS('color', 'rgb(255, 255, 255)');
-  await expect(footer.getByText('// STOCKTON, CA', { exact: true })).toHaveCSS('color', 'rgb(251, 191, 36)');
-  await expect(footer.getByText('Stray Dog Ecology & Veterinary Access Audit')).toBeVisible();
-  const width = testInfo.project.use.viewport!.width;
-  if ([412, 280].includes(width)) await footer.screenshot({ path: `test-results/screenshots/footer-${width}.png` });
-});
-
-test('all navigation sections are reachable', async ({ page }, testInfo) => {
-  await page.goto('/');
-  const mobile = testInfo.project.use.viewport!.width < 1280;
-  for (const section of sections) {
-    const tab = page.locator(`#${mobile ? 'mnav' : 'nav'}-${section}`);
-    await tab.scrollIntoViewIfNeeded();
-    await expect(tab).toBeInViewport();
-    await tab.click();
-    await expect(page.locator(`#tab-${section}`)).toBeVisible();
-    await expect(tab).toHaveClass(/active/);
-    if (mobile) await expect(tab).toHaveCSS('color', 'rgb(248, 250, 252)');
-  }
-});
-
-test('care resource filters show their selected state', async ({ page }, testInfo) => {
-  await page.goto('/?tab=care-resources');
-  const filters = page.locator('.res-filter-btn');
-  const labels = ['All Services', 'Spay/Neuter', 'Vaccines', 'Found Pet', 'Scheduled'];
-  for (const label of labels) {
-    const selected = filters.filter({ hasText: label });
-    await selected.click();
-    await expect(selected).toHaveAttribute('aria-pressed', 'true');
-    await expect(selected).toHaveCSS('background-color', 'rgb(15, 23, 42)');
-    await expect(page.locator('.res-filter-btn[aria-pressed="true"]')).toHaveCount(1);
-    await expect(page.locator('#resources-grid > *').first()).toBeVisible();
-  }
-  const width = testInfo.project.use.viewport!.width;
+  const size = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, viewport: document.documentElement.clientWidth }));
+  expect(size.scroll, `Page overflows at ${width}px`).toBeLessThanOrEqual(size.viewport + 1);
   if ([1440, 375, 280].includes(width)) {
-    await filters.filter({ hasText: 'Scheduled' }).scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `test-results/screenshots/care-filters-${width}.png` });
+    await page.screenshot({ path: `test-results/screenshots/editorial-home-${width}.png`, fullPage: true });
   }
 });
 
-test('baseline indicators and source labels remain present', async ({ page }) => {
+test('all editorial sections are reachable', async ({ page }, testInfo) => {
   await page.goto('/');
-  const overview = page.locator('#tab-overview');
-  for (const value of ['3,106', 'DATA GAP', '3–10', '7,183']) {
-    await expect(overview.getByText(value, { exact: false }).first()).toBeVisible();
-  }
-  for (const label of ['CITY 2024 REPORT', 'SOURCE: GROUP REPORT', 'RECEIPT RECORD']) {
-    await expect(overview.getByRole('link', { name: new RegExp(label) })).toBeVisible();
+  for (const section of pages) {
+    const link = testInfo.project.use.viewport!.width <= 950
+      ? section === 'explorer' ? page.locator('.header-records') : page.locator(`.mobile-nav [data-page-link="${section}"]`)
+      : page.locator(`.desktop-nav [data-page-link="${section}"]`);
+    await link.click();
+    await expect(page.locator('#site-main')).not.toBeEmpty();
+    await expect(link).toHaveAttribute('aria-current', 'page');
   }
 });
 
-test('Evidence Room renders the 54-record index', async ({ page }, testInfo) => {
-  await page.goto('/?tab=evidence-room');
-  await expect(page.locator('#tab-evidence-room')).toBeVisible();
-  await expect(page.getByText('Master File Index (54)')).toBeVisible();
-  await expect(page.locator('#evidence-list-container').getByRole('button').first()).toBeVisible();
-  await page.screenshot({ path: `test-results/screenshots/evidence-room-${testInfo.project.use.viewport!.width}.png`, fullPage: true });
+test('articles match the gold demo with key takeaways, single-purpose maps, and linked sources', async ({ page }, testInfo) => {
+  await page.goto('/?page=articles');
+  await expect(page.getByRole('heading', { name: "What We've Examined & Written" })).toBeVisible();
+  await expect(page.locator('.article-index-card')).toHaveCount(4);
+  await page.locator('[data-article-link="art-stats-2024-update"]').first().click();
+  await expect(page.getByRole('heading', { name: /A Look at the Stray Dogs Gap Through Statistics/ })).toBeVisible();
+  await expect(page.locator('.key-takeaways li')).toHaveCount(3);
+  await expect(page.locator('.article-map-card')).toBeVisible();
+  await expect(page.locator('.source-list li')).toHaveCount(4);
+  await page.locator('[data-open-map="field-call-density"]').first().click();
+  await expect(page.locator('#fullscreen-map-modal')).toBeVisible();
+  await page.locator('[data-close-map]').click();
+  await expect(page.locator('#fullscreen-map-modal')).toBeHidden();
+  const source = page.locator('.source-list [data-record-link="SHEL-2024-001"]');
+  await source.click();
+  await expect(page.locator('#record-dialog')).toBeVisible();
+  await expect(page.locator('#record-dialog')).toContainText('2024 animal intake and outcome report');
+  await page.locator('#record-dialog [data-close-dialog]').first().click();
+  await expect(page.locator('#record-dialog')).not.toBeVisible();
+  const width = testInfo.project.use.viewport!.width;
+  if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-article-${width}.png`, fullPage: true });
+  await page.locator('[data-page-link="articles"]').filter({ hasText: 'Back to All Articles' }).click();
+  await page.locator('[data-article-link="art-reporting-handoffs"]').first().click();
+  await expect(page.getByRole('heading', { name: /Reporting and Rescue Handoffs/ })).toBeVisible();
+  await expect(page.locator('.article-map-card')).toBeVisible();
+  await expect(page.locator('.source-list li')).toHaveCount(4);
+  if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-handoffs-${width}.png`, fullPage: true });
 });
 
-test('top counts open matching record filters', async ({ page }) => {
+test('doing page follows the work-card layout and documented stages', async ({ page }, testInfo) => {
+  await page.goto('/?page=doing');
+  await expect(page.locator('.doing-steps > div')).toHaveCount(3);
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(12);
+  await expect(page.locator('.doing-card').first()).toContainText("St. Mary's");
+  const width = testInfo.project.use.viewport!.width;
+  if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-doing-${width}.png`, fullPage: true });
+  await page.getByRole('button', { name: 'Active', exact: true }).click();
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(1);
+  await expect(page.locator('#work-list')).toContainText('Review Animal Services field-call records');
+  await page.getByRole('button', { name: 'Completed', exact: true }).click();
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(5);
+  await page.getByRole('button', { name: 'Planned', exact: true }).click();
+  await expect(page.locator('#work-list .doing-card')).toHaveCount(6);
+  await page.locator('#work-list [data-record-link="WORK-2026-002"]').click();
+  await expect(page.locator('#record-dialog')).toContainText('pet access and street needs');
+});
+
+test('AI ideas explain friction and applied roles without the old generic block', async ({ page }, testInfo) => {
+  await page.goto('/?page=ai');
+  await expect(page.getByRole('heading', { name: "Where we're applying AI" })).toBeVisible();
+  await expect(page.locator('.ai-card')).toHaveCount(4);
+  await expect(page.locator('.ai-card').first()).toContainText('Friction:');
+  await expect(page.locator('.ai-card').first()).toContainText('Applied role:');
+  await expect(page.getByText('Our test for an idea')).toHaveCount(0);
+  const width = testInfo.project.use.viewport!.width;
+  if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-ai-${width}.png`, fullPage: true });
+});
+
+test('About is rendered from the About article with the roots image', async ({ page }, testInfo) => {
+  await page.goto('/?page=about');
+  await expect(page.getByRole('heading', { name: 'Crossing Over from Egoic Noise to Simple Reality' })).toBeVisible();
+  await expect(page.locator('.about-figure img')).toHaveAttribute('src', '/images/about/growing.jpg');
+  await expect(page.locator('.about-prose')).toContainText('We set ourselves against no person.');
+  await expect(page.locator('.about-grounding > div')).toHaveCount(3);
+  await expect(page.locator('.about-founder-photo')).toHaveAttribute('src', '/images/about/about-the-founder.jpg');
+  await expect(page.locator('.about-linkedin-link')).toHaveAttribute('href', 'https://www.linkedin.com/in/jeff-kolyer');
+  const width = testInfo.project.use.viewport!.width;
+  if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-about-${width}.png`, fullPage: true });
+});
+
+test('information explorer uses the split-pane dossier desk and full source catalog', async ({ page }, testInfo) => {
+  await page.goto('/?page=explorer');
+  await expect(page.locator('#result-count')).toHaveText('Showing 61 of 61 records');
+  await expect(page.locator('#explorer-dossier-panel')).toBeVisible();
+  await page.locator('#record-kind').selectOption('Article');
+  await expect(page.locator('#record-list .record-row')).toHaveCount(4);
+  await page.locator('#record-kind').selectOption('all');
+  await page.getByRole('button', { name: /^Open Issue \(/ }).click();
+  await expect(page.locator('#record-status')).toHaveValue('open issue');
+  await expect(page.locator('#record-list .record-row')).toHaveCount(8);
+  await page.locator('#record-list [data-select-record="WORK-2026-001"]').click();
+  await expect(page.locator('#explorer-dossier-panel')).toContainText('Review Animal Services field-call records');
+  await page.getByRole('tab', { name: /3\. Custody/ }).click();
+  await expect(page.locator('#explorer-dossier-panel')).toContainText('Archival Chain of Custody');
+  await page.getByRole('button', { name: /^All \(/ }).click();
+  await page.getByRole('button', { name: /^Identified Gap \(/ }).click();
+  await expect(page.locator('#record-list .record-row')).toHaveCount(3);
+  await page.getByRole('button', { name: /^All \(/ }).click();
+  await page.locator('#record-search').fill('microchip');
+  await expect(page.locator('#record-list .record-row').first()).toBeVisible();
+  await expect(page.locator('#result-count')).not.toHaveText('Showing 61 of 61 records');
+  await page.locator('#record-search').fill('');
+  await page.locator('#record-status').selectOption('open issue');
+  await expect(page.locator('#record-list .record-row')).toHaveCount(8);
+  await page.locator('#record-status').selectOption('all');
+  await expect(page.locator('#record-list .record-row')).toHaveCount(61);
+  const width = testInfo.project.use.viewport!.width;
+  if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-explorer-${width}.png`, fullPage: true });
+});
+
+test('home work card opens modal with link to view in info explorer', async ({ page }) => {
   await page.goto('/');
-  const status = page.locator('#investigation-status');
-  for (const [label, count] of [['Checked: 17', 17], ['Open: 6', 6], ['Waiting: 1', 1]] as const) {
-    await status.getByRole('button', { name: label }).click();
-    await expect(page.locator('#tab-evidence-room')).toBeVisible();
-    await expect(page.locator('#evidence-list-container').getByRole('button')).toHaveCount(count);
-    if (label === 'Open: 6') await expect(page.locator('#evidence-list-container .bg-sky-100').first()).toBeVisible();
-  }
+  await page.locator('[data-record-link="WORK-2026-002"]').first().click();
+  await expect(page.locator('#record-dialog')).toBeVisible();
+  await expect(page.locator('#record-dialog')).toContainText("Visit St. Mary's");
+  await page.locator('#record-dialog [data-explorer-record="WORK-2026-002"]').click();
+  await expect(page.getByRole('heading', { name: 'Info Explorer' })).toBeVisible();
+  await expect(page.locator('#explorer-dossier-panel')).toContainText('WORK-2026-002');
 });
 
-test('Ground Truth lists linked records', async ({ page }, testInfo) => {
-  await page.goto('/?tab=ground-truth');
-  const groundTruth = page.locator('#tab-ground-truth');
-  const rows = groundTruth.locator('#gt-records-tbody tr');
-  await expect(rows).toHaveCount(54);
-  for (const [label, count] of [['Checked (17)', 17], ['Reported (21)', 21], ['Firsthand (8)', 8], ['Open work (6)', 6], ['Waiting (1)', 1], ['All (54)', 54]] as const) {
-    const filter = groundTruth.getByRole('button', { name: label, exact: true });
-    await filter.click();
-    await expect(filter).toHaveClass(/bg-slate-900/);
-    await expect(rows).toHaveCount(count);
-    if (label === 'Open work (6)') await expect(rows.first().locator('.bg-sky-100')).toBeVisible();
-  }
-  if ([1440, 390].includes(testInfo.project.use.viewport!.width)) {
-    await groundTruth.getByRole('heading', { name: /Primary Records & Work Items/ }).scrollIntoViewIfNeeded();
-    await page.screenshot({ path: `test-results/screenshots/ground-truth-records-${testInfo.project.use.viewport!.width}.png` });
-  }
-  await rows.first().click();
-  await expect(page.locator('#tab-evidence-room')).toBeVisible();
+test('legacy evidence-room link opens the information explorer', async ({ page }) => {
+  await page.goto('/?tab=evidence-room&record=SHEL-2024-001');
+  await expect(page.getByRole('heading', { name: 'Info Explorer' })).toBeVisible();
+  await expect(page.locator('#explorer-dossier-panel')).toContainText('2024 animal intake and outcome report');
 });
