@@ -632,7 +632,11 @@ function render() {
     if (link.dataset.pageLink === route.page) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   });
-  document.title = route.article && articleById(route.article) ? `${articleById(route.article).title} · Crossover Stockton` : `${route.page === 'home' ? content.tagline : route.page === 'ai' ? 'AI & Ideas' : route.page === 'doing' ? "What We're Doing" : route.page === 'explorer' ? 'Info Explorer' : route.page[0].toUpperCase() + route.page.slice(1)} · Crossover Stockton`;
+  document.title = route.article && articleById(route.article)
+    ? `${articleById(route.article).title} · Crossover Stockton`
+    : route.page === 'home'
+      ? `Crossover Stockton · ${content.tagline}`
+      : `${route.page === 'ai' ? 'AI & Ideas' : route.page === 'doing' ? "What We're Doing" : route.page === 'explorer' ? 'Info Explorer' : route.page[0].toUpperCase() + route.page.slice(1)} · Crossover Stockton`;
   if (route.page === 'explorer') renderResults();
   if (route.page !== 'explorer' && route.record && recordById.has(route.record)) openRecord(route.record, false);
 }

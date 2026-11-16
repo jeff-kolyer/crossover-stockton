@@ -4,6 +4,7 @@ const pages = ['home', 'articles', 'doing', 'ai', 'explorer', 'about'];
 
 test('editorial home uses the gold square mark and fits the viewport', async ({ page }, testInfo) => {
   await page.goto('/');
+  await expect(page).toHaveTitle('Crossover Stockton · Clear attention. Practical local action.');
   await expect(page.getByRole('heading', { name: 'Crossing over from noise and disconnection to what is real right where we live.' })).toBeVisible();
   await expect(page.locator('.hero-art img')).toHaveAttribute('src', '/images/home/stockton-skyline-commons.jpg');
   await expect(page.locator('.metric-open strong')).toHaveCSS('color', 'rgb(29, 78, 216)');
