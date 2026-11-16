@@ -60,14 +60,11 @@
       {"number": "04", "title": "Public data watcher", "stage": "Ready to scope", "friction": "Shelter figures can change while older numbers remain in articles and community discussions.", "role": "A watcher could flag changes in public releases, keep the source and date attached, and prompt a person to check whether species, period, and service area still match before updating a claim.", "articleId": "art-expansion-canine-campus"}
     ],
     "aside": {
-      "eyebrow": "An idea we set aside",
-      "title": "Why an unrestricted dog drop-off space is not our plan",
-      "intro": "An open place for every found dog sounds welcoming. It needs more than a gate and a yard to be safe or sustainable.",
-      "points": [
-        {"title": "Prevent the next intake", "text": "Without reachable spay and neuter care, new litters can keep arriving faster than a temporary space can help them."},
-        {"title": "Protect dogs and people", "text": "Injured, contagious, and fearful dogs need assessment, separation when appropriate, trained handling, and a real route onward."}
-      ],
-      "conclusion": "We are focusing on care access, reunion, and confirmed temporary placements that partners can actually support."
+      "eyebrow": "Intellectual Honesty · Pressure-Testing Ideas",
+      "title": "How We Choose Where AI Can Help",
+      "intro": "A useful AI idea starts with a real obstacle. Can someone find an available spay/neuter appointment? Does a person who finds a dog know whom to call next? Can public records help us see where a response breaks down?",
+      "points": [],
+      "conclusion": "We look at the people, services, and information already involved, then ask whether a small tool could make one step easier. An idea is worth testing when it helps someone get care, saves time for people doing the work, or reveals a problem we can act on. We’ll show what we try, what happens, and what still needs a human hand."
     }
   }
 }

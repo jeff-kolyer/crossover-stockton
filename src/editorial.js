@@ -394,7 +394,7 @@ function renderAi() {
   const ai = content.ai;
   return `<section class="section-page ai-page"><div class="wrap doing-shell"><header class="page-head"><span class="eyebrow">${escapeHtml(ai.eyebrow)}</span><h1 class="page-title">AI & Ideas</h1><p class="page-intro">${escapeHtml(ai.intro)}</p></header>
     <h2 class="section-title ai-section-title">${escapeHtml(ai.sectionTitle)}</h2><div class="ai-grid">${ai.ideas.map(idea => `<article class="ai-card"><div class="ai-card-top"><span>AI-${escapeHtml(idea.number)}</span><span>${escapeHtml(idea.stage)}</span></div><h3>${escapeHtml(idea.title)}</h3><p><strong>Friction:</strong> ${escapeHtml(idea.friction)}</p><p><strong>Applied role:</strong> ${escapeHtml(idea.role)}</p><a class="text-link" href="${articleUrl(idea.articleId)}" data-article-link="${escapeHtml(idea.articleId)}">Read the context →</a></article>`).join('')}</div>
-    <section class="ai-aside"><span class="eyebrow">${escapeHtml(ai.aside.eyebrow)}</span><h2>${escapeHtml(ai.aside.title)}</h2><p>${escapeHtml(ai.aside.intro)}</p><ol>${ai.aside.points.map(point => `<li><strong>${escapeHtml(point.title)}:</strong> ${escapeHtml(point.text)}</li>`).join('')}</ol><p>${escapeHtml(ai.aside.conclusion)}</p></section>
+    <section class="ai-aside"><span class="eyebrow">${escapeHtml(ai.aside.eyebrow)}</span><h2>${escapeHtml(ai.aside.title)}</h2><p>${escapeHtml(ai.aside.intro)}</p>${ai.aside.points?.length ? `<ol>${ai.aside.points.map(point => `<li><strong>${escapeHtml(point.title)}:</strong> ${escapeHtml(point.text)}</li>`).join('')}</ol>` : ''}<p>${escapeHtml(ai.aside.conclusion)}</p></section>
   </div></section>`;
 }
 
