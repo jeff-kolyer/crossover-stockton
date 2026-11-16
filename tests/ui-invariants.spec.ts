@@ -147,3 +147,27 @@ test('legacy evidence-room link opens the information explorer', async ({ page }
   await expect(page.getByRole('heading', { name: 'Info Explorer' })).toBeVisible();
   await expect(page.locator('#explorer-dossier-panel')).toContainText('2024 animal intake and outcome report');
 });
+
+test('mobile hamburger menu sits to the right of Records and opens navigation', async ({ page }, testInfo) => {
+  await page.goto('/');
+  const width = testInfo.project.use.viewport!.width;
+  if (width > 950) {
+    await expect(page.locator('#mobile-menu-btn')).toBeHidden();
+    return;
+  }
+  const recordsBox = await page.locator('.header-records').boundingBox();
+  const menuBtnBox = await page.locator('#mobile-menu-btn').boundingBox();
+  expect(recordsBox).not.toBeNull();
+  expect(menuBtnBox).not.toBeNull();
+  expect(menuBtnBox!.x).toBeGreaterThan(recordsBox!.x + recordsBox!.width - 1);
+  expect(Math.abs(recordsBox!.height - menuBtnBox!.height)).toBeLessThanOrEqual(1);
+  await page.locator('#mobile-menu-btn').click();
+  await expect(page.locator('#mobile-menu-panel')).toBeVisible();
+  await expect(page.locator('#mobile-menu-panel a')).toHaveCount(6);
+  if ([375, 280].includes(width)) {
+    await page.screenshot({ path: `test-results/screenshots/editorial-mobile-menu-${width}.png` });
+  }
+  await page.locator('#mobile-menu-panel [data-page-link="about"]').click();
+  await expect(page.locator('#mobile-menu-panel')).toBeHidden();
+  await expect(page.getByRole('heading', { name: 'Crossing Over from Egoic Noise to Simple Reality' })).toBeVisible();
+});

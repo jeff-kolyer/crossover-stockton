@@ -724,7 +724,26 @@ if (mapViewport) {
   window.addEventListener('mouseup', () => { isDraggingMap = false; });
 }
 
+function setMobileMenuOpen(open) {
+  const btn = document.querySelector('#mobile-menu-btn');
+  const panel = document.querySelector('#mobile-menu-panel');
+  if (!btn || !panel) return;
+  panel.hidden = !open;
+  btn.setAttribute('aria-expanded', String(open));
+  btn.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+}
+
 document.addEventListener('click', event => {
+  const menuBtn = event.target.closest('#mobile-menu-btn');
+  if (menuBtn) {
+    const panel = document.querySelector('#mobile-menu-panel');
+    setMobileMenuOpen(panel ? panel.hidden : false);
+    return;
+  }
+  const openMenu = document.querySelector('#mobile-menu-panel:not([hidden])');
+  if (openMenu && !event.target.closest('.site-header')) {
+    setMobileMenuOpen(false);
+  }
   const openMapBtn = event.target.closest('[data-open-map]');
   if (openMapBtn) { event.preventDefault(); openFullScreenMap(openMapBtn.dataset.openMap); return; }
   const closeMapBtn = event.target.closest('[data-close-map]');
@@ -788,12 +807,15 @@ document.addEventListener('click', event => {
   const articleLink = event.target.closest('[data-article-link]');
   if (articleLink) { event.preventDefault(); closeRecord(); navigate({ page: 'articles', article: articleLink.dataset.articleLink, record: null }); return; }
   const pageLink = event.target.closest('[data-page-link]');
-  if (pageLink) { event.preventDefault(); closeRecord(); closeFullScreenMap(); navigate({ page: pageLink.dataset.pageLink, article: null, record: null }); return; }
+  if (pageLink) { event.preventDefault(); setMobileMenuOpen(false); closeRecord(); closeFullScreenMap(); navigate({ page: pageLink.dataset.pageLink, article: null, record: null }); return; }
   const workButton = event.target.closest('[data-work-filter]');
   if (workButton) { workFilter = workButton.dataset.workFilter; render(); }
 });
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') closeFullScreenMap();
+  if (event.key === 'Escape') {
+    setMobileMenuOpen(false);
+    closeFullScreenMap();
+  }
 });
 document.addEventListener('input', event => {
   if (event.target.id === 'record-search') { explorer.query = event.target.value; renderResults(); }

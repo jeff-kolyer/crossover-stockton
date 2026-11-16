@@ -210,14 +210,22 @@ img {
   font-weight: 700;
 }
 
-.header-records {
+.header-actions {
   display: none;
   align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.header-records {
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
+  height: 36px;
   border: 1px solid #e2dfd7;
   background: #ffffff;
   border-radius: 12px;
-  padding: 8px 12px;
+  padding: 0 12px;
   font-size: 12px;
   font-weight: 600;
   color: #13161c;
@@ -230,6 +238,89 @@ img {
   height: 14px;
   color: #1d4ed8;
   flex: none;
+}
+
+.mobile-menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid #e2dfd7;
+  background: #ffffff;
+  border-radius: 12px;
+  color: #13161c;
+  box-shadow: var(--shadow-card);
+}
+
+.mobile-menu-btn:hover {
+  background: #f0efeb;
+}
+
+.mobile-menu-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.mobile-menu-btn .icon-close {
+  display: none;
+}
+
+.mobile-menu-btn[aria-expanded="true"] {
+  background: #13161c;
+  border-color: #13161c;
+  color: #ffffff;
+}
+
+.mobile-menu-btn[aria-expanded="true"] .icon-menu {
+  display: none;
+}
+
+.mobile-menu-btn[aria-expanded="true"] .icon-close {
+  display: block;
+}
+
+.mobile-menu-panel {
+  display: none;
+  background: rgba(247, 246, 242, 0.98);
+  border-top: 1px solid #e2dfd7;
+  border-bottom: 1px solid #e2dfd7;
+  box-shadow: 0 12px 28px rgba(19, 22, 28, 0.08);
+  padding: 12px 0 16px;
+}
+
+.mobile-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mobile-menu-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #505662;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.mobile-menu-list a:hover {
+  background: #ffffff;
+  border-color: #e2dfd7;
+  color: #13161c;
+}
+
+.mobile-menu-list a[aria-current="page"] {
+  background: #13161c;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 main {
@@ -2321,8 +2412,11 @@ p {
   .desktop-nav {
     display: none;
   }
-  .header-records {
+  .header-actions {
     display: inline-flex;
+  }
+  .mobile-menu-panel:not([hidden]) {
+    display: block;
   }
   .hero-grid {
     gap: 28px;
@@ -2382,6 +2476,19 @@ p {
   }
   .header-inner {
     min-height: 60px;
+    gap: 10px;
+  }
+  .brand {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .header-records {
+    height: 34px;
+    padding: 0 10px;
+  }
+  .mobile-menu-btn {
+    width: 34px;
+    height: 34px;
   }
   .brand-text strong {
     font-size: 14px;
@@ -2552,26 +2659,38 @@ p {
 }
 
 @media (max-width: 360px) {
+  .wrap {
+    width: min(100% - 20px, 540px);
+  }
   .header-inner {
-    gap: 6px;
+    gap: 4px;
   }
   .brand {
-    gap: 7px;
+    gap: 5px;
   }
   .brand-mark {
     width: 34px;
     height: 34px;
   }
+  .brand-line {
+    gap: 2px;
+  }
   .brand-text strong {
-    font-size: 11px;
+    font-size: 10px;
   }
   .brand-city,
   .brand-slash {
-    font-size: 9.5px;
+    font-size: 8.5px;
   }
   .header-records {
+    height: 30px;
     font-size: 10px;
-    padding: 7px 9px;
+    padding: 0 7px;
+    gap: 4px;
+  }
+  .header-records svg {
+    width: 12px;
+    height: 12px;
   }
   .pill {
     font-size: 9.5px;
@@ -2618,5 +2737,16 @@ p {
   .mobile-nav a {
     font-size: 9px;
     white-space: nowrap;
+  }
+  .header-actions {
+    gap: 5px;
+  }
+  .mobile-menu-btn {
+    width: 30px;
+    height: 30px;
+  }
+  .mobile-menu-btn svg {
+    width: 15px;
+    height: 15px;
   }
 }
