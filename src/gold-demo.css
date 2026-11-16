@@ -1653,6 +1653,272 @@ p {
   cursor: pointer;
 }
 
+/* Shelter Space & Handoff Pressure Model (ART-04) */
+.doghouse-card {
+  margin: 0 0 32px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e2dfd7;
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  gap: 18px;
+}
+
+.doghouse-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.doghouse-head h3 {
+  font: 700 1.25rem/1.25 "Newsreader", Georgia, serif;
+  margin: 4px 0 6px;
+  color: #13161c;
+}
+
+.doghouse-head p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #505662;
+  max-width: 620px;
+}
+
+.doghouse-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 1.35fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 16px;
+  background: #f7f6f2;
+  border: 1px solid #e2dfd7;
+  border-radius: 14px;
+}
+
+.doghouse-side {
+  background: #ffffff;
+  border: 1px solid #e2dfd7;
+  border-radius: 12px;
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+}
+
+.doghouse-side strong {
+  font: 700 14px/1.3 "Newsreader", Georgia, serif;
+  color: #13161c;
+}
+
+.doghouse-side p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #505662;
+}
+
+.doghouse-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doghouse-roof {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  color: #13161c;
+  display: block;
+}
+
+.doghouse-tank {
+  position: relative;
+  width: 100%;
+  max-width: 210px;
+  height: 136px;
+  background: #ffffff;
+  border: 3px solid #13161c;
+  border-top: 0;
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+}
+
+.doghouse-limit {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 42%;
+  border-top: 1.5px dashed rgba(19, 22, 28, 0.55);
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px 6px 0;
+}
+
+.doghouse-limit span {
+  font: 700 9px/1.2 "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  color: #13161c;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.doghouse-fill {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px 8px;
+  transition: height 0.25s ease, background-color 0.25s ease;
+}
+
+.doghouse-fill.is-strain {
+  background: rgba(185, 28, 28, 0.88);
+}
+
+.doghouse-fill.is-partial {
+  background: rgba(146, 64, 14, 0.86);
+}
+
+.doghouse-fill.is-clear {
+  background: rgba(22, 101, 52, 0.88);
+}
+
+.doghouse-status-label {
+  font: 700 10px/1.25 "JetBrains Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-align: center;
+}
+
+.doghouse-levers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.doghouse-lever {
+  text-align: left;
+  background: #f7f6f2;
+  border: 1px solid #e2dfd7;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.doghouse-lever:hover {
+  border-color: #1d4ed8;
+}
+
+.doghouse-lever.is-active {
+  background: #ffffff;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 1px rgba(29, 78, 216, 0.18);
+}
+
+.doghouse-lever-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.doghouse-switch {
+  width: 38px;
+  height: 22px;
+  padding: 2px;
+  border-radius: 999px;
+  background: #d6d3cb;
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  transition: background-color 0.18s ease;
+}
+
+.doghouse-switch-knob {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(19, 22, 28, 0.22);
+  transition: transform 0.18s ease;
+}
+
+.doghouse-lever.is-active .doghouse-switch {
+  background: #166534;
+}
+
+.doghouse-lever.is-active .doghouse-switch-knob {
+  transform: translateX(16px);
+}
+
+.doghouse-lever h4 {
+  margin: 0;
+  font: 700 14px/1.25 "Newsreader", Georgia, serif;
+  color: #13161c;
+}
+
+.doghouse-lever p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #505662;
+}
+
+.relay-strip {
+  border-top: 1px solid #e2dfd7;
+  padding-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.relay-strip-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+  font-size: 12px;
+  color: #505662;
+}
+
+.relay-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.relay-step {
+  background: #f7f6f2;
+  border: 1px solid #e2dfd7;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+
+.relay-step strong {
+  font-size: 12.5px;
+  color: #13161c;
+}
+
+.relay-step p {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: #505662;
+}
+
 .source-row-ref:hover {
   text-decoration: underline;
 }
@@ -2557,8 +2823,15 @@ p {
   .system-chain,
   .care-path-grid,
   .found-dog-grid,
-  .doghouse-visual-grid {
+  .doghouse-visual-grid,
+  .doghouse-stage,
+  .doghouse-levers,
+  .relay-grid {
     grid-template-columns: 1fr;
+  }
+  .doghouse-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
   .article-card .card-title {
     font-size: 20px;

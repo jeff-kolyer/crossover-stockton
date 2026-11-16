@@ -176,43 +176,43 @@
     "recordId": "ART-04",
     "eyebrow": "ART-04 · November 2026",
     "title": "Reporting and Rescue Handoffs — The Unseen Glue That Holds It All Together",
-    "dek": "Why caring for a street dog is never a single heroic act, but a chain of human handoffs—and how simple local tools keep the baton from dropping.",
-    "summary": "Between a resident noticing a limping dog and that dog sleeping safely in a home lies a fragile chain of handoffs: reporting, chip scanning, transport, clinic slots, and temporary foster care. Strengthening that unseen glue saves lives without adding a single municipal kennel.",
+    "dek": "Stockton neighbors aren’t failing stray dogs—the handoffs are breaking down. Tracing the relay between finders, chip scanners, fosters, and clinics, and where we look for ways to strengthen the glue.",
+    "summary": "Caring for a street dog isn’t a single event—it’s a relay race where every runner has to show up. Between a neighbor spotting a roaming dog and that dog sleeping safely in a home lies a chain of handoffs. We look for practical ways to improve that unseen glue.",
     "date": "2026-11-16",
     "dateDisplay": "November 2026",
     "readTime": "6 min read",
     "status": "Published · Field Practice",
     "explorerTitle": "Reporting and Rescue Handoffs — The Unseen Glue That Holds It All Together",
     "explorerSource": "Crossover Stockton Editorial // Field Practice & Triage",
-    "explorerSummary": "Tracing the human handoffs between reporting neighbors, chip scanners, temporary fosters, and community clinics.",
+    "explorerSummary": "Tracing the relay between reporting neighbors, chip scanners, temporary fosters, and community clinics—and how to strengthen the unseen glue.",
     "featured": true,
     "mapKey": "handoff-nodes",
     "tags": ["Handoffs", "Microchip Triage", "Temporary Foster"],
     "keyTakeaways": [
-      "Caring for a street dog is a relay where a breakdown at any handoff—unclear reporting, no chip scan, or lack of a 7-day foster—sends the dog back to the street.",
-      "Stockton’s Temporary Found-Animal Foster pathway allows finders to house a stray briefly while Animal Services covers vaccines and sterilization—yet few residents know it exists.",
-      "Direct community resources—ACT Clinic, Shelter walk-in chip/vaccine hours, Home To Home, and Better World Rescue—form a working safety net when connected clearly."
+      "Stockton neighbors aren’t failing stray dogs; caring for a street dog is a relay race where a breakdown at any handoff—unclear reporting, no chip scan, or lack of temporary foster guidance—stalls the effort.",
+      "Kennel pressure at 1575 S. Lincoln St rises when inflows outpace exits; strengthening upstream care, front-door chip scanning, and back-door foster pathways helps keep space open for urgent cases.",
+      "Direct community nodes—walk-in chip/vaccine hours (Wed–Sun, 1:00–3:30 PM), ACT Clinic, Animal Protection League, and City-described Temporary Found-Animal Foster guidance—are where Crossover looks for ways to improve the glue."
     ],
     "sections": [
       {
         "heading": null,
         "paragraphs": [
-          "When someone spots a stray dog on a Stockton sidewalk, they usually imagine a single transaction: <em>\"I call a number, a truck comes, and the dog is taken care of.\"</em>",
-          "In reality, helping a dog in need depends on a sequence of quiet human handoffs—the unseen glue between neighbors, dispatchers, microchip scanners, veterinary techs, and foster homes. When any one link lacks clarity or capacity, the entire effort stalls."
+          "<strong>Stockton neighbors aren’t failing stray dogs. The handoffs are breaking down.</strong>",
+          "Caring for a street dog isn’t a single event—it’s a relay race where every runner has to show up. When someone spots a roaming dog on a Stockton sidewalk, they usually imagine a single transaction: <em>\"I call a number, a truck comes, and the dog is taken care of.\"</em> In reality, helping that dog depends on a sequence of quiet human handoffs between neighbors, dispatchers, microchip scanners, veterinary techs, and foster homes. Crossover focuses on finding practical ways to improve that unseen glue so fewer efforts stall mid-stride."
         ]
       },
       {
         "heading": "Where the Handoff Usually Drops",
         "bullets": [
-          "<strong>Incomplete Field Reports:</strong> Calls logged without exact cross-streets, photos, or containment status make it nearly impossible for an officer or volunteer to locate a moving dog hours later.",
-          "<strong>Skipping the Neighborhood Chip Scan:</strong> Many roaming dogs are lost family pets living within four blocks of where they are found. Driving straight to an overcrowded shelter—instead of scanning at a local vet clinic or during shelter walk-in hours—turns a 20-minute reunion into a multi-day kennel stay.",
-          "<strong>Invisible Temporary Foster Pathways:</strong> Stockton Animal Services maintains a program allowing residents who find a stray to temporarily foster the animal while the shelter provides vaccinations and arranges sterilization—yet most residents are never guided into that option when they call."
+          "<strong>Incomplete Field Reports:</strong> Calls logged without exact cross-streets, photos, or containment status make it much harder for an officer or volunteer to locate a moving dog hours later.",
+          "<strong>Skipping the Neighborhood Chip Scan:</strong> Many roaming dogs are lost family pets living near where they are found. Driving straight to an overcrowded shelter—instead of scanning at a local vet clinic or during shelter walk-in hours—turns a quick reunion into a multi-day kennel stay.",
+          "<strong>Invisible Temporary Foster Pathways:</strong> Stockton Animal Services describes a Temporary Found-Animal Foster pathway allowing residents who find a stray to temporarily foster the animal while the shelter provides vaccines and arranges sterilization—yet many residents never hear about it when they call, and live eligibility still requires shelter confirmation."
         ]
       },
       {
         "heading": "Practical Glue Available in Stockton Right Now",
         "paragraphs": [
-          "Closing the handoff gap doesn't require waiting for new laws. It starts with making existing community nodes easy to reach and use: walk-in vaccine and microchip hours at <strong>1575 S. Lincoln St</strong> (Wed–Sun, 1:00–3:30 PM), low-cost sterilization through <strong>ACT Spay/Neuter Clinic</strong> on Alpine Ave and <strong>Animal Protection League</strong>, pop-up clinics at <strong>St. Mary’s Dining Room</strong>, and direct neighbor-to-neighbor rehoming and temporary foster pathways."
+          "Improving the handoff glue doesn’t require waiting for new buildings. It starts with making existing community nodes easier to reach and connect: walk-in vaccine and microchip hours at <strong>1575 S. Lincoln St</strong> (Wed–Sun, 1:00–3:30 PM), low-cost sterilization through <strong>ACT Spay/Neuter Clinic</strong> on Alpine Ave and <strong>Animal Protection League</strong>, pop-up clinics at <strong>St. Mary’s Dining Room</strong>, and direct neighbor-to-neighbor rehoming and temporary foster pathways. We continue looking for clear, practical ways to strengthen every handoff in that relay."
         ]
       }
     ],

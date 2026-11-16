@@ -58,6 +58,12 @@ test('articles match the gold demo with key takeaways, single-purpose maps, and 
   await page.locator('[data-article-link="art-reporting-handoffs"]').first().click();
   await expect(page.getByRole('heading', { name: /Reporting and Rescue Handoffs/ })).toBeVisible();
   await expect(page.locator('.article-map-card')).toBeVisible();
+  await expect(page.locator('#doghouse-sim')).toBeVisible();
+  await expect(page.locator('.doghouse-status-label')).toContainText('Strained');
+  await page.locator('[data-doghouse-lever="1"]').click();
+  await expect(page.locator('[data-doghouse-lever="1"]')).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('.doghouse-status-label')).toContainText('1 of 3 Handoffs Active');
+  await expect(page.locator('.relay-step')).toHaveCount(4);
   await expect(page.locator('.source-list li')).toHaveCount(4);
   if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-handoffs-${width}.png`, fullPage: true });
 });

@@ -11,6 +11,7 @@ let records = [];
 let route = { page: 'home', article: null, record: null };
 let workFilter = 'all';
 let explorer = { query: '', status: 'all', kind: 'all', selectedId: null, subTab: 'artifact' };
+let doghouseLevers = { 1: false, 2: false, 3: false };
 
 const ARTICLE_MAPS = {
   'field-call-density': {
@@ -224,6 +225,105 @@ function renderArticleMap(article) {
   </div>`;
 }
 
+function renderDoghouseAndRelay() {
+  const activeCount = [1, 2, 3].filter(n => doghouseLevers[n]).length;
+  const fillPct = activeCount === 0 ? 92 : activeCount === 1 ? 74 : activeCount === 2 ? 56 : 38;
+  const tone = activeCount === 0 ? 'strain' : activeCount < 3 ? 'partial' : 'clear';
+  const statusLabel = activeCount === 0
+    ? 'Strained · Kennels Packed'
+    : activeCount === 1
+      ? '1 of 3 Handoffs Active · Partial Relief'
+      : activeCount === 2
+        ? '2 of 3 Handoffs Active · Pressure Easing'
+        : 'All 3 Handoffs Active · Flow Restored';
+  const inflowText = doghouseLevers[1] ? 'Slowed at source' : 'High unplanned litters';
+  const exitText = activeCount === 3
+    ? 'Fast chip reunions + foster exits'
+    : doghouseLevers[2] || doghouseLevers[3]
+      ? 'Some reunions / foster routes open'
+      : 'Bottlenecked at intake & exits';
+
+  const levers = [
+    { id: 1, tag: 'Lever 1 · Source', title: 'Upstream Spay & Neuter', desc: 'Reaching clinics before accidental litters occur slows new arrivals before they ever need a kennel.' },
+    { id: 2, tag: 'Lever 2 · Front Door', title: 'Clear Reports & Chip Scans', desc: 'Exact cross-streets and neighborhood microchip scans reunite lost pets without a multi-day shelter stay.' },
+    { id: 3, tag: 'Lever 3 · Back Door', title: 'Temporary Foster & Exits', desc: 'Connecting finders to Temporary Found-Animal Foster guidance and rescue transfers keeps space open.' }
+  ];
+
+  const relaySteps = [
+    { num: '01', title: 'Pinpoint & Check Safety', text: 'Note exact cross-streets, photo, and whether the dog is injured or safely contained.' },
+    { num: '02', title: 'Scan Nearby First', text: 'Use a local vet clinic or shelter walk-in hours (Wed–Sun, 1:00–3:30 PM at 1575 S. Lincoln St).' },
+    { num: '03', title: 'Post & Log Clearly', text: 'File a found-pet report and post locally so families searching nearby can match fast.' },
+    { num: '04', title: 'Ask About Foster Nodes', text: 'Confirm Temporary Found-Animal Foster eligibility, ACT Clinic, or rescue/rehoming options.' }
+  ];
+
+  return `<section class="doghouse-card" id="doghouse-sim" aria-label="Shelter Space and Handoff Pressure Model">
+    <div class="doghouse-head">
+      <div>
+        <span class="eyebrow">Conceptual Flow Model · Unseen Glue</span>
+        <h3>How Handoffs Affect Shelter Space</h3>
+        <p>You can’t keep up with street calls when every kennel is backed up. Toggle the three handoff levers below to see how upstream care, front-door chip scans, and back-door foster exits relieve pressure.</p>
+      </div>
+      <button type="button" class="button button-compact" data-doghouse-reset>Reset</button>
+    </div>
+
+    <div class="doghouse-stage">
+      <div class="doghouse-side">
+        <span class="mono-label">1. Dogs Arriving</span>
+        <strong>${escapeHtml(inflowText)}</strong>
+        <p>${doghouseLevers[1] ? 'Upstream sterilization eases new litter arrivals.' : 'Unplanned litters &amp; stray calls keep inflow high.'}</p>
+      </div>
+
+      <div class="doghouse-center">
+        <svg viewBox="0 0 280 52" class="doghouse-roof" aria-hidden="true">
+          <path d="M12 48 L140 8 L268 48" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="78" y="28" width="124" height="20" rx="6" fill="currentColor"/>
+          <text x="140" y="42" text-anchor="middle" fill="#f7f6f2" font-family="JetBrains Mono, monospace" font-size="9" font-weight="700">1575 S. LINCOLN ST</text>
+        </svg>
+        <div class="doghouse-tank">
+          <div class="doghouse-limit"><span>Safe Operating Space</span></div>
+          <div class="doghouse-fill is-${tone}" style="height: ${fillPct}%;">
+            <span class="doghouse-status-label">${escapeHtml(statusLabel)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="doghouse-side">
+        <span class="mono-label">3. Safe Exits &amp; Reunions</span>
+        <strong>${escapeHtml(exitText)}</strong>
+        <p>${activeCount === 3 ? 'Lost pets return home quickly and fosters bridge recovery.' : 'Missed chip scans and unclear foster steps slow exits.'}</p>
+      </div>
+    </div>
+
+    <div class="doghouse-levers">
+      ${levers.map(lever => {
+        const active = doghouseLevers[lever.id];
+        return `<button type="button" class="doghouse-lever${active ? ' is-active' : ''}" data-doghouse-lever="${lever.id}" aria-pressed="${active}">
+          <div class="doghouse-lever-top">
+            <span class="mono-label">${escapeHtml(lever.tag)}</span>
+            <span class="doghouse-switch" aria-hidden="true"><span class="doghouse-switch-knob"></span></span>
+          </div>
+          <h4>${escapeHtml(lever.title)}</h4>
+          <p>${escapeHtml(lever.desc)}</p>
+        </button>`;
+      }).join('')}
+    </div>
+
+    <div class="relay-strip">
+      <div class="relay-strip-head">
+        <span class="eyebrow">The 4-Step Relay</span>
+        <span>What a connected handoff looks like when a neighbor spots a roaming dog</span>
+      </div>
+      <div class="relay-grid">
+        ${relaySteps.map(step => `<div class="relay-step">
+          <span class="mono-label">STEP ${escapeHtml(step.num)}</span>
+          <strong>${escapeHtml(step.title)}</strong>
+          <p>${escapeHtml(step.text)}</p>
+        </div>`).join('')}
+      </div>
+    </div>
+  </section>`;
+}
+
 function renderArticle(article) {
   if (!article) return renderArticles();
   const sources = article.sources?.length
@@ -249,12 +349,12 @@ function renderArticle(article) {
     ${renderKeyTakeaways(article)}
     ${renderArticleMap(article)}
     <div class="prose article-prose">
-      ${article.sections.map(section => `<section>
+      ${article.sections.map((section, idx) => `<section>
         ${section.heading ? `<h3>${escapeHtml(section.heading)}</h3>` : ''}
         ${(section.paragraphs ?? []).map(paragraph => `<p>${paragraph}</p>`).join('')}
         ${section.bullets?.length ? `<ul>${section.bullets.map(bullet => `<li>${bullet}</li>`).join('')}</ul>` : ''}
         ${(section.afterParagraphs ?? []).map(paragraph => `<p>${paragraph}</p>`).join('')}
-      </section>`).join('')}
+      </section>${article.id === 'art-reporting-handoffs' && idx === 0 ? `</div>${renderDoghouseAndRelay()}<div class="prose article-prose">` : ''}`).join('')}
     </div>
     <div class="source-list">
       <h2>Linked Sources &amp; Records</h2>
@@ -762,6 +862,19 @@ document.addEventListener('click', event => {
   }
   const openMapBtn = event.target.closest('[data-open-map]');
   if (openMapBtn) { event.preventDefault(); openFullScreenMap(openMapBtn.dataset.openMap); return; }
+  const leverBtn = event.target.closest('[data-doghouse-lever]');
+  if (leverBtn) {
+    const id = Number(leverBtn.dataset.doghouseLever);
+    doghouseLevers[id] = !doghouseLevers[id];
+    render();
+    return;
+  }
+  const resetDoghouseBtn = event.target.closest('[data-doghouse-reset]');
+  if (resetDoghouseBtn) {
+    doghouseLevers = { 1: false, 2: false, 3: false };
+    render();
+    return;
+  }
   const closeMapBtn = event.target.closest('[data-close-map]');
   if (closeMapBtn) { event.preventDefault(); closeFullScreenMap(); return; }
   const zoomBtn = event.target.closest('[data-map-zoom]');
