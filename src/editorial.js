@@ -172,7 +172,7 @@ function renderHome() {
 }
 
 function renderArticles() {
-  const published = articles.filter(article => article.type !== 'about');
+  const published = articles;
   return `<section class="section-page"><div class="wrap doing-shell"><header class="page-head"><span class="eyebrow">Articles & Analyses</span><h1 class="page-title">What We've Examined & Written</h1><p class="page-intro">Each article examines one concrete question using public records, AI pattern synthesis, and direct field observation—with source citations and focused maps where geography matters.</p></header>
     <div class="articles-index-list">${published.map(art => `<article class="paper-card article-card article-index-card">
       <div class="article-index-top">
@@ -584,10 +584,10 @@ function renderExplorer() {
   </div></section>`;
 }
 
-function renderAbout() {
+function renderAbout(fromArticles = false) {
   const about = articleById('about-crossover');
   const founder = about.founder;
-  return `<article class="section-page about-page"><div class="wrap article-shell"><header class="page-head"><span class="eyebrow">${escapeHtml(about.eyebrow)}</span><h1 class="page-title">${escapeHtml(about.title)}</h1><p class="article-dek">${aboutText(about.intro)}</p></header>
+  return `<article class="section-page about-page"><div class="wrap article-shell">${fromArticles ? '<a class="back-link" href="/?page=articles" data-page-link="articles">← Back to All Articles</a>' : ''}<header class="page-head"><span class="eyebrow">${escapeHtml(about.eyebrow)}</span><h1 class="page-title">${escapeHtml(about.title)}</h1><p class="article-dek">${aboutText(about.intro)}</p></header>
     <figure class="about-figure"><img src="${escapeHtml(about.image)}" alt="${escapeHtml(about.imageAlt)}" /><figcaption>${escapeHtml(about.imageCaption)}</figcaption></figure>
     <div class="prose about-prose">${about.sections.map(section => `<section><h2>${escapeHtml(section.heading)}</h2>${section.paragraphs.map(paragraph => `<p>${aboutText(paragraph)}</p>`).join('')}${section.bullets?.length ? `<ul>${section.bullets.map(bullet => `<li>${aboutText(bullet)}</li>`).join('')}</ul>` : ''}</section>`).join('')}</div>
     <div class="about-grounding">${about.groundingCards.map(card => `<div><span class="eyebrow">${escapeHtml(card.eyebrow)}</span><h3>${escapeHtml(card.title)}</h3><p>${escapeHtml(card.text)}</p></div>`).join('')}</div>
@@ -629,7 +629,10 @@ function navigate(next, push = true) {
 }
 
 function render() {
-  if (route.page === 'articles') main.innerHTML = route.article && articleById(route.article)?.type !== 'about' ? renderArticle(articleById(route.article)) : renderArticles();
+  if (route.page === 'articles') {
+    const selectedArticle = route.article ? articleById(route.article) : null;
+    main.innerHTML = selectedArticle ? (selectedArticle.type === 'about' ? renderAbout(true) : renderArticle(selectedArticle)) : renderArticles();
+  }
   else if (route.page === 'doing') main.innerHTML = renderDoing();
   else if (route.page === 'ai') main.innerHTML = renderAi();
   else if (route.page === 'explorer') {
@@ -849,7 +852,7 @@ async function initialize() {
     const response = await fetch('/data/records.json');
     if (!response.ok) throw new Error(`Record catalog unavailable (${response.status})`);
     const baseRecords = await response.json();
-    const articleRecords = articles.filter(article => article.type !== 'about').map(article => ({
+    const articleRecords = articles.map(article => ({
       id: article.recordId,
       kind: 'Article',
       title: article.explorerTitle || article.title,

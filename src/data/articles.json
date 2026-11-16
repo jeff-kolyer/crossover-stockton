@@ -25,7 +25,7 @@
       {
         "heading": null,
         "paragraphs": [
-          "Numbers are useful only when they keep us honest. When Crossover first began looking closely at street dogs in Stockton, public debate was dominated by vague impressions—some claiming the city was overrun by tens of thousands of abandoned animals, others insisting the system was working fine.",
+          "Numbers help us see clearly, but only if we know what they measure. When Crossover began looking at street dogs in Stockton, we heard conflicting claims about the scale of the problem and whether existing services were meeting the need. We turned to public records to establish what we could verify—and to be clear about what we still don’t know.",
           "To get grounded in reality, we started with verifiable records: <strong>3,106 stray-dog intake events</strong> logged by Stockton Animal Services in 2024, paired with <strong>7,183 Animal Services field-call records</strong> and field observations showing roughly <strong>3 to 10 dumped-dog encounters per week</strong> along low-visibility industrial corridors like Mormon Slough."
         ]
       },
@@ -82,7 +82,7 @@
       {
         "heading": null,
         "paragraphs": [
-          "In public meetings and neighborhood comment threads, two familiar stories appear whenever street dogs are discussed. One story blames <em>\"bad owners\"</em> who fail to fix or contain their pets. The other blames <em>\"broken city workers\"</em> who fail to answer the phone or pick up every stray.",
+          "When street dogs come up in public meetings or neighborhood discussions, blame often falls on one of two groups: people who don’t spay, neuter, or contain their dogs, and city workers who can’t respond to every call. Neither explanation tells us what happens when a dog needs help.",
           "Both stories share the same root: the egoic urge to set ourselves above someone else so we don't have to look closely at the shared conditions producing the suffering. When you drop the blame and look at the records with clear eyes, a much more practical picture emerges."
         ]
       },
@@ -139,7 +139,8 @@
       {
         "heading": null,
         "paragraphs": [
-          "Whenever a shelter runs out of kennel space, the most obvious instinct is to build more kennels. In Stockton, two major physical efforts are underway or proposed to expand capacity: the City’s <strong>South Lincoln Street Shelter Expansion &amp; Clinic project</strong> (projected for Spring 2027) and <strong>Stockton Streetdogs’ proposed Canine Campus</strong>.",
+          "Whenever a shelter runs out of kennel space, the most obvious instinct is to build more kennels. More space can help, but its effect depends on what happens beyond the kennel door: whether dogs can get veterinary care, be reunited with their owners, or move into foster and adoptive homes. If dogs keep arriving faster than they can leave safely, even an expanded shelter will face pressure.",
+          "In Stockton, two major physical efforts are underway or proposed to expand capacity: the City’s <strong>South Lincoln Street Shelter Expansion &amp; Clinic project</strong> (projected for Spring 2027) and <strong>Stockton Streetdogs’ proposed Canine Campus</strong>.",
           "Both efforts deserve clear, accurate public tracking—free from both cynical dismissal and magical thinking."
         ]
       },
@@ -226,8 +227,19 @@
   {
     "id": "about-crossover",
     "type": "about",
+    "recordId": "FOUNDATION",
     "eyebrow": "Who We Are · Foundation",
     "title": "Crossing Over from Egoic Noise to Simple Reality",
+    "dek": "Why Crossover exists: moving from compulsive noise and blame into simple awareness, presence, and practical local action—starting with animal care in Stockton.",
+    "summary": "Why Crossover exists: moving from compulsive noise and blame into simple awareness, presence, and practical local action—starting with animal care in Stockton.",
+    "date": "2026-10-01",
+    "dateDisplay": "Foundation",
+    "readTime": "4 min read",
+    "explorerTitle": "Crossing Over from Egoic Noise to Simple Reality",
+    "explorerSource": "Crossover Stockton // Foundation",
+    "explorerSummary": "Crossover Stockton's foundational essay on presence, non-blame, and practical local action—currently focused on animal care in Stockton.",
+    "featured": false,
+    "tags": ["Foundation", "Presence", "Local Action"],
     "intro": "Crossover Stockton is an organization of consciousness and presence—grounded in what Eckhart Tolle points to in A New Earth and what the Gospels point to beneath religious tribalism. Right now, our first area of focus is animal care in Stockton, particularly the gaps affecting dogs in need—a concrete place to explore how awareness, AI, and practical local action can make a difference.",
     "image": "/images/about/growing.jpg",
     "imageAlt": "Roots anchored in real earth with new leaves rising beside the Stockton skyline",

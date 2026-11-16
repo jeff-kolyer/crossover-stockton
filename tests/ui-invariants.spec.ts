@@ -36,7 +36,7 @@ test('all editorial sections are reachable', async ({ page }, testInfo) => {
 test('articles match the gold demo with key takeaways, single-purpose maps, and linked sources', async ({ page }, testInfo) => {
   await page.goto('/?page=articles');
   await expect(page.getByRole('heading', { name: "What We've Examined & Written" })).toBeVisible();
-  await expect(page.locator('.article-index-card')).toHaveCount(4);
+  await expect(page.locator('.article-index-card')).toHaveCount(5);
   await page.locator('[data-article-link="art-stats-2024-update"]').first().click();
   await expect(page.getByRole('heading', { name: /A Look at the Stray Dogs Gap Through Statistics/ })).toBeVisible();
   await expect(page.locator('.key-takeaways li')).toHaveCount(3);
@@ -107,10 +107,10 @@ test('About is rendered from the About article with the roots image', async ({ p
 
 test('information explorer uses the split-pane dossier desk and full source catalog', async ({ page }, testInfo) => {
   await page.goto('/?page=explorer');
-  await expect(page.locator('#result-count')).toHaveText('Showing 65 of 65 records');
+  await expect(page.locator('#result-count')).toHaveText('Showing 66 of 66 records');
   await expect(page.locator('#explorer-dossier-panel')).toBeVisible();
   await page.locator('#record-kind').selectOption('Article');
-  await expect(page.locator('#record-list .record-row')).toHaveCount(4);
+  await expect(page.locator('#record-list .record-row')).toHaveCount(5);
   await page.locator('#record-kind').selectOption('all');
   await page.getByRole('button', { name: /^Open Issue \(/ }).click();
   await expect(page.locator('#record-status')).toHaveValue('open issue');
@@ -130,7 +130,7 @@ test('information explorer uses the split-pane dossier desk and full source cata
   await page.locator('#record-status').selectOption('open issue');
   await expect(page.locator('#record-list .record-row')).toHaveCount(12);
   await page.locator('#record-status').selectOption('all');
-  await expect(page.locator('#record-list .record-row')).toHaveCount(65);
+  await expect(page.locator('#record-list .record-row')).toHaveCount(66);
   const width = testInfo.project.use.viewport!.width;
   if ([1440, 375, 280].includes(width)) await page.screenshot({ path: `test-results/screenshots/editorial-explorer-${width}.png`, fullPage: true });
 });
