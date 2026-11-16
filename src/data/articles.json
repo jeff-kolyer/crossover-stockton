@@ -61,22 +61,22 @@
     "recordId": "ART-02",
     "eyebrow": "ART-02 · November 2026",
     "title": "The Bottlenecks to Care: Where AI Pointed Us First",
-    "dek": "Using structured AI analysis across thousands of dispatch logs to isolate addressable chokepoints—without scapegoating \"bad owners.\"",
-    "summary": "When systems fail, the human mind looks for someone to blame. By using AI to cluster 7,183 dispatch logs and intake barriers, we found that upstream sterilization access and intake friction—not moral failure—explain where care breaks down.",
+    "dek": "Separating verified public records, pending dispatch-log review, and exploratory AI proposals—without scapegoating \"bad owners\" or shelter staff.",
+    "summary": "When systems strain, the human mind looks for someone to blame. As we review 7,183 municipal field-call records alongside public shelter guidance and clinic listings, AI pattern synthesis points to testable friction in spay/neuter access, intake handoffs, and volunteer onboarding—not moral failure.",
     "date": "2026-11-16",
     "dateDisplay": "November 2026",
     "readTime": "7 min read",
     "status": "Published · Systems Analysis",
     "explorerTitle": "The Bottlenecks to Care: Where AI Pointed Us First",
     "explorerSource": "Crossover Stockton Editorial // AI Cluster Audit",
-    "explorerSummary": "How structured AI analysis isolated upstream spay/neuter access, appointment walls, and willing-helper friction without scapegoating residents.",
+    "explorerSummary": "Examining testable care bottlenecks—spay/neuter access, appointment-only intake friction, and pending volunteer onboarding—while distinguishing verified records from exploratory AI proposals.",
     "featured": true,
     "mapKey": null,
     "tags": ["AI Analysis", "Spay/Neuter", "Root Causes"],
     "keyTakeaways": [
       "Blaming \"bad owners\" or \"inept staff\" is an egoic shortcut that explains nothing and changes nothing.",
-      "AI pattern clustering across dispatch notes and clinic waitlists isolates three high-leverage bottlenecks: upstream spay/neuter access, appointment-only shelter walls, and stalled volunteer/foster onboarding.",
-      "Focusing technology on scheduling, navigation, and temporary foster diversion produces immediate relief without waiting years for new concrete."
+      "Review of the 7,183 municipal field-call records received November 2 is still underway; early AI synthesis and public records point to three areas to test rather than proven causal findings: spay/neuter access, appointment-only intake friction, and volunteer onboarding.",
+      "Proposed AI tools—starting with the \"Spay/neuter & clinic navigator\" (Ready to scope) and \"Found-dog & temporary foster guide\" in AI & Ideas—are exploratory concepts to test; navigation can reduce scheduling friction, though it does not create additional surgical capacity."
     ],
     "sections": [
       {
@@ -87,27 +87,28 @@
         ]
       },
       {
-        "heading": "What AI Pattern Extraction Revealed",
+        "heading": "What Records Show and What AI Suggests Testing",
         "paragraphs": [
-          "We used large language models to read, categorize, and cross-reference thousands of repetitive municipal dispatch notes, committee minutes, and local clinic constraints. Instead of a vague cloud of \"too many strays,\" three distinct mechanical bottlenecks stood out:"
+          "On November 2, 2026, Stockton Animal Services provided 7,183 field-call case records in response to our public records request, and our line-by-line review began November 4 (analysis and findings remain pending). Alongside public shelter guidance, clinic listings, and our own field inquiries, we are using large language models to organize recurring patterns and generate testable hypotheses. Three areas stand out to examine further:"
         ],
         "bullets": [
-          "<strong>1. Upstream Spay/Neuter &amp; Preventive Friction:</strong> Multi-week surgical waitlists and out-of-pocket costs turn ordinary, caring families into overwhelmed households with accidental litters. Even municipal rule discussions have struggled to pair mandates with concrete funding and surgical capacity.",
-          "<strong>2. Appointment-Only Shelter Walls:</strong> When kennels at 1575 S. Lincoln St run past capacity, walk-in stray intake closes to non-emergencies. A neighbor who does the right thing by rescuing a dog off the road hits a locked door—and sometimes abandons the effort out of desperation.",
-          "<strong>3. The \"Willing Helper\" Bottleneck:</strong> Stockton has residents actively trying to volunteer, foster found dogs, or walk shelter dogs through programs like Doggie Day Out—yet applications sit unanswered because a small shelter staff is buried in daily kennel triage."
+          "<strong>1. Upstream Spay/Neuter &amp; Preventive Friction (Hypothesis &amp; Service Gap):</strong> Out-of-pocket costs, surgical waitlists, and scheduling or transportation hurdles may prevent willing families from sterilizing dogs before accidental litters occur. Municipal rule discussions have also struggled to pair mandates with concrete funding and surgical capacity.",
+          "<strong>2. Appointment-Only Shelter Intake &amp; Handoff Friction (Observed Guidance):</strong> Public guidance from Stockton Animal Services notes appointment-based stray intake and lost-and-found steps. When a neighbor finds a roaming dog and cannot complete an immediate drop-off without navigating phone or scheduling steps, that handoff friction may cause the effort to stall—something we are still documenting.",
+          "<strong>3. The \"Willing Helper\" Onboarding Question (Documented Follow-Up Pending):</strong> Stockton residents are invited to volunteer or join programs like Doggie Day Out, and Crossover submitted a volunteer application on October 14 alongside an October 12 email inquiry about Doggie Day Out (tracked in WORK-2026-005). Both remain pending follow-up. We have not established why applications or inquiries sit without a response—factors could include staffing, administrative processing, availability of behaviorally suitable dogs, program requirements, or other operational constraints."
         ]
       },
       {
-        "heading": "Why We Choose Addressable Bottlenecks Over Utopian Fixes",
+        "heading": "Why We Test Exploratory Tools Before Claiming Outcomes",
         "paragraphs": [
-          "AI is valuable here not because it replaces human compassion, but because it acts as a filter. It shows us that pouring concrete for new buildings takes years and millions of dollars, whereas <strong>removing navigation friction for spay/neuter</strong> and <strong>routing found dogs directly to local microchip scanners and temporary fosters</strong> can keep hundreds of animals out of kennels right now."
+          "AI is useful here as a structured filter, not as proof of outcomes. While physical expansions take years and capital, small software tools are only worth building if they are tested honestly against real constraints. We track our exploratory concepts in <a href=\"/?page=ai\" data-page-link=\"ai\">AI &amp; Ideas</a> rather than treating them as demonstrated solutions.",
+          "For example, our proposed <strong>Spay/neuter &amp; clinic navigator</strong> (currently <em>Ready to scope</em> in <a href=\"/?page=ai\" data-page-link=\"ai\">AI &amp; Ideas</a>) could help residents check eligibility, locate nearby services, and navigate scheduling or transportation steps—but navigation alone <strong>does not create additional surgical capacity</strong> when clinics are booked out. Likewise, our separate <strong>Found-dog &amp; temporary foster guide</strong> concept could help finders locate microchip scanners or ask about temporary foster pathways, though actual foster availability still depends on current confirmation from the shelter or rescue partners. What reduces friction in practice, and by how much, remains to be tested."
         ]
       }
     ],
     "sources": [
-      {"label": "AI Synthesis of 7,183 Field-Call Logs & Triage Notes", "ref": "CPRA-2026-001-RECEIPT"},
+      {"label": "Received Stockton Animal Services Field-Call Records (7,183 Cases; Analysis Pending)", "ref": "CPRA-2026-001-RECEIPT"},
       {"label": "Identified Gap: Upstream Spay/Neuter Surgical & Scheduling Access", "ref": "GAP-01"},
-      {"label": "Identified Gap: Willing-Helper & Volunteer Onboarding Latency", "ref": "GAP-03"},
+      {"label": "Identified Gap: Willing-Helper & Volunteer Onboarding Follow-Up", "ref": "GAP-03"},
       {"label": "Volunteer & Doggie Day Out Onboarding Follow-Up", "ref": "WORK-2026-005"}
     ],
     "sourceIds": ["CPRA-2026-001-RECEIPT", "CARE-2026-001", "GOV-2026-001", "WORK-2026-005"]
@@ -227,7 +228,7 @@
     "type": "about",
     "eyebrow": "Who We Are · Foundation",
     "title": "Crossing Over from Egoic Noise to Simple Reality",
-    "intro": "Crossover Stockton is an organization of consciousness and presence—grounded in what Eckhart Tolle points to in A New Earth and what the Gospels point to beneath religious tribalism.",
+    "intro": "Crossover Stockton is an organization of consciousness and presence—grounded in what Eckhart Tolle points to in A New Earth and what the Gospels point to beneath religious tribalism. Right now, our first area of focus is animal care in Stockton, particularly the gaps affecting dogs in need—a concrete place to explore how awareness, AI, and practical local action can make a difference.",
     "image": "/images/about/growing.jpg",
     "imageAlt": "Roots anchored in real earth with new leaves rising beside the Stockton skyline",
     "imageCaption": "Awareness without action is sleep. Real transformation puts roots into ordinary ground and produces measurable fruit.",

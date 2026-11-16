@@ -154,7 +154,8 @@ function workCard(record) {
 }
 
 function renderHome() {
-  const selected = ['WORK-2026-002', 'WORK-2026-005', 'WORK-2026-004'].map(id => recordById.get(id)).filter(Boolean);
+  const featuredIds = content.doing.featured?.length ? content.doing.featured : content.doing.order.slice(0, 3);
+  const selected = featuredIds.map(id => recordById.get(id)).filter(Boolean);
   const verifiedCount = records.filter(record => /^(verified|complete)$/i.test(record.status) || record.kind === 'Crossover activity').length;
   const openCount = records.filter(record => /^(active|open)$/i.test(record.status)).length;
   const gapCount = content.priorities.length;

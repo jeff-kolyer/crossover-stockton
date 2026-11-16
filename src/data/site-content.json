@@ -10,9 +10,9 @@
     "imageCaption": "STOCKTON, CALIFORNIA · SEE CLEARLY. ACT LOCALLY."
   },
   "priorities": [
-    {"number": "01", "name": "Upstream Spay/Neuter Surgical & Scheduling Bottleneck", "summary": "Multi-week surgical waitlists and scheduling friction prevent willing low-income pet families from sterilizing dogs before accidental litters occur.", "articleId": "art-bottlenecks-ai"},
-    {"number": "02", "name": "Appointment-Only Shelter Intake Wall & Field Dispatch Latency", "summary": "Overcrowded kennels force appointment-only stray intake, leaving finders without immediate drop-off options and stretching field trucks thin.", "articleId": "art-reporting-handoffs"},
-    {"number": "03", "name": "Willing-Helper & Volunteer Onboarding Stall (Doggie Day Out / Foster)", "summary": "Residents applying to walk shelter dogs or temporarily foster found strays face unanswered email queues due to overwhelmed administrative bandwidth.", "articleId": "art-bottlenecks-ai"}
+    {"number": "01", "name": "Upstream Spay/Neuter Surgical & Scheduling Bottleneck", "summary": "Surgical waitlists, out-of-pocket costs, and scheduling or transport friction may keep willing pet families from getting dogs sterilized before accidental litters occur.", "articleId": "art-bottlenecks-ai"},
+    {"number": "02", "name": "Appointment-Only Shelter Intake & Handoff Friction", "summary": "Appointment-based stray intake and unclear lost-and-found steps can leave finders unsure how to get a roaming dog scanned, housed, or temporarily fostered.", "articleId": "art-reporting-handoffs"},
+    {"number": "03", "name": "Willing-Helper & Volunteer Onboarding Follow-Up (Doggie Day Out / Foster)", "summary": "Crossover's October 14 volunteer application and October 12 Doggie Day Out inquiry remain pending follow-up; it is not yet established what causes onboarding delays or unanswered inquiries.", "articleId": "art-bottlenecks-ai"}
   ],
   "carePaths": [
     {"name": "A lost family dog", "need": "A safe scan and a reliable lost-pet report.", "next": "Check identification and connect the dog with its family when possible."},
@@ -28,6 +28,7 @@
       {"number": "02", "label": "CONNECT", "text": "Clarify the next handoff and who can help."},
       {"number": "03", "label": "ACT", "text": "Follow through with practical local support."}
     ],
+    "featured": ["WORK-2026-001", "WORK-2026-003", "WORK-2026-006"],
     "order": ["WORK-2026-002", "WORK-2026-001", "WORK-2026-005", "WORK-2026-004", "WORK-2026-003", "WORK-2026-006", "WORK-2026-007", "FLD-2026-002", "FLD-2026-003", "FLD-2026-004", "CPRA-2026-001-REQUEST", "CPRA-2026-001-RECEIPT"],
     "areas": {
       "WORK-2026-002": "Street outreach · St. Mary's",

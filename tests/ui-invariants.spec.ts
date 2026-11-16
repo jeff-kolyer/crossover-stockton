@@ -135,12 +135,13 @@ test('information explorer uses the split-pane dossier desk and full source cata
 
 test('home work card opens modal with link to view in info explorer', async ({ page }) => {
   await page.goto('/');
-  await page.locator('[data-record-link="WORK-2026-002"]').first().click();
+  await expect(page.locator('.work-card .card-id')).toHaveText(['WORK-2026-001', 'WORK-2026-003', 'WORK-2026-006']);
+  await page.locator('[data-record-link="WORK-2026-001"]').first().click();
   await expect(page.locator('#record-dialog')).toBeVisible();
-  await expect(page.locator('#record-dialog')).toContainText("Visit St. Mary's");
-  await page.locator('#record-dialog [data-explorer-record="WORK-2026-002"]').click();
+  await expect(page.locator('#record-dialog')).toContainText('Review Animal Services field-call records');
+  await page.locator('#record-dialog [data-explorer-record="WORK-2026-001"]').click();
   await expect(page.getByRole('heading', { name: 'Info Explorer' })).toBeVisible();
-  await expect(page.locator('#explorer-dossier-panel')).toContainText('WORK-2026-002');
+  await expect(page.locator('#explorer-dossier-panel')).toContainText('WORK-2026-001');
 });
 
 test('legacy evidence-room link opens the information explorer', async ({ page }) => {
