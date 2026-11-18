@@ -1,5 +1,6 @@
 import articles from './data/articles.json';
 import content from './data/site-content.json';
+import helpOpportunities from './data/help-opportunities.json';
 import { PRIMARY_RECORDS } from './generated/records.js';
 
 const main = document.querySelector('#site-main');
@@ -161,21 +162,32 @@ function workCard(record) {
 }
 
 function renderHome() {
-  const featuredIds = content.doing.featured?.length ? content.doing.featured : content.doing.order.slice(0, 3);
-  const selected = featuredIds.map(id => recordById.get(id)).filter(Boolean);
-  const verifiedCount = records.filter(record => /^(verified|complete)$/i.test(record.status) || record.kind === 'Crossover activity').length;
-  const openCount = records.filter(record => /^(active|open)$/i.test(record.status)).length;
-  const gapCount = content.priorities.length;
-  const kindCount = new Set(records.map(record => record.kind)).size;
-  return `<section class="hero"><div class="wrap hero-grid">
-    <div class="hero-copy"><span class="pill">${escapeHtml(content.home.eyebrow)}</span>
-      <h1 class="display">${escapeHtml(content.home.title)}</h1><p class="lead">${escapeHtml(content.home.intro)}</p>
-      <div class="hero-actions"><a class="button button-dark" href="/?page=articles" data-page-link="articles">Read Recent Articles ${arrowIcon()}</a><a class="button" href="/?page=doing" data-page-link="doing">See What We're Doing Now</a><a class="button button-quiet" href="/?page=about" data-page-link="about">Why We Exist</a></div>
-    </div><figure class="hero-art"><img src="${escapeHtml(content.home.image)}" alt="${escapeHtml(content.home.imageAlt)}" /><figcaption><span>${escapeHtml(content.home.imageCaption)}</span><span class="hero-art-badge">v2.4</span></figcaption></figure>
-  </div></section>
-  <section class="editorial-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">Open Issues & Current Focus</span><h2 class="section-title">What We're Actively Doing Right Now</h2></div><a class="text-link" href="/?page=doing" data-page-link="doing">View all ${content.doing.order.length} tasks & milestones ${arrowIcon()}</a></div><div class="cards-3">${selected.map(workCard).join('')}</div></div></section>
-  <section class="editorial-section"><div class="wrap"><div class="section-heading"><div><span class="eyebrow">Published Writing & Field Notes</span><h2 class="section-title">Recent Articles & Analyses</h2></div><a class="text-link" href="/?page=articles" data-page-link="articles">Open Articles Index ${arrowIcon()}</a></div><div class="cards-2">${articles.filter(article => article.type !== 'about' && article.featured).map(articleCard).join('')}</div></div></section>
-  <section class="editorial-section archive-section"><div class="wrap"><div class="archive-callout"><div class="archive-top"><div class="archive-copy"><span class="eyebrow">Information Desk & Archive</span><h2 class="section-title">Explore Every Record, Gap & Source</h2><p>Instead of burying evidence inside complicated maps, every article, public dataset, identified gap, open repository issue, and local care resource is indexed in one filterable archive.</p></div><div class="metric-row"><a class="metric metric-complete" href="/?page=explorer" data-explorer-status="verified"><strong>${verifiedCount}</strong><span>Complete / Verified</span></a><a class="metric metric-open" href="/?page=explorer" data-explorer-status="open"><strong>${openCount}</strong><span>Active / Open</span></a><a class="metric metric-gap" href="/?page=doing" data-page-link="doing"><strong>${gapCount}</strong><span>Identified Gaps</span></a></div></div><div class="archive-foot"><span>Total indexed items: <strong>${records.length}</strong> records across ${kindCount} categories</span><a class="button button-dark" href="/?page=explorer" data-page-link="explorer">Open Information Explorer ${arrowIcon()}</a></div></div></div></section>`;
+  // Eligibility for Help is independent of whether a research source is checked.
+  // Publish only needs that have explicit evidence of access, current dates and a recheck date.
+  const today = new Date().toISOString().slice(0, 10);
+  const available = helpOpportunities.filter(item =>
+    item.status === 'confirmed' &&
+    item.confirmedBy && item.confirmedAt &&
+    item.accessInstructions && item.action &&
+    item.sourceRecordId && item.validUntil &&
+    item.validFrom && item.validFrom <= today && item.validUntil >= today &&
+    item.lastCheckedAt && item.recheckBy && item.recheckBy >= today
+  );
+  const cards = available.map(item => '<article class="help-listing">' +
+    '<div class="help-listing-top"><span class="help-category">' + escapeHtml(item.category) + '</span><span class="help-confirmed">Confirmed ' + escapeHtml(dateLabel(item.confirmedAt)) + '</span></div>' +
+    '<h2>' + escapeHtml(item.title) + '</h2><p class="help-listing-org">' + escapeHtml(item.organization) + '</p>' +
+    '<p>' + escapeHtml(item.action) + '</p><div class="help-instructions"><strong>How to help</strong><p>' + escapeHtml(item.accessInstructions) + '</p></div>' +
+    '<div class="help-listing-meta">Checked ' + escapeHtml(dateLabel(item.lastCheckedAt)) + ' · Available through ' + escapeHtml(dateLabel(item.validUntil)) + ' · <a href="' + recordUrl(item.sourceRecordId) + '" data-record-link="' + escapeHtml(item.sourceRecordId) + '">Evidence &amp; verification ↗</a></div></article>').join('');
+  return '<section class="help-home"><div class="wrap help-shell">' +
+    '<div class="help-kicker"><span class="help-kicker-dot"></span> STOCKTON, CALIFORNIA <span class="help-kicker-separator">/</span> INDEPENDENTLY CHECKED</div>' +
+    '<h1>Find the good<br><em>that needs doing.</em></h1>' +
+    '<p class="help-intro">Real ways to help people, animals and places in Stockton. We check that an opportunity exists and that there is a practical way to take part before we publish it here.</p>' +
+    '<div class="help-summary"><div><strong>' + available.length + '</strong><span>Currently verified</span></div><p>No generic volunteer directories. No unconfirmed openings. Just the opportunities we can stand behind.</p></div>' +
+    '<div class="help-content-heading"><div><span class="help-eyebrow">THE PUBLIC SERVICE</span><h2>Ways to help today</h2></div><span class="help-count">' + available.length + ' confirmed</span></div>' +
+    (cards || '<div class="help-empty"><div class="help-empty-symbol" aria-hidden="true">↗</div><h3>Nothing verified yet.</h3><p>We haven’t confirmed a way to help that we can confidently send someone to. We’re finding the first one.</p><a href="/?page=doing" data-page-link="doing" class="help-inline-link">See what we’re working on <span aria-hidden="true">↗</span></a></div>') +
+    '<div class="help-below"><div><span class="help-eyebrow">HOW WE WORK</span><h2>We check the path, not just the claim.</h2><p>A posted volunteer application is not proof that someone can volunteer. A reported need is not proof that help is welcome today. Every listing needs a specific need, a responsible contact, usable instructions and a current verification.</p></div><div class="help-method"><div><span>01</span><strong>Find a need</strong><p>Listen, research, and follow real leads.</p></div><div><span>02</span><strong>Make contact</strong><p>Verify what is needed and how to participate.</p></div><div><span>03</span><strong>Publish &amp; recheck</strong><p>Share a working route, or keep it off Help.</p></div></div></div>' +
+    '<div class="help-explore"><div><span class="help-eyebrow">BEHIND THE DIRECTORY</span><h2>Explore the work.</h2><p>We publish the attempts, records and evidence behind the site, including paths that have not worked.</p></div><div class="help-explore-links"><a href="/?page=doing" data-page-link="doing"><strong>Our work</strong><span>Field visits, inquiries, tasks and follow-ups ↗</span></a><a href="/?page=explorer" data-page-link="explorer"><strong>Evidence explorer</strong><span>Records, sources and measurements ↗</span></a><a href="/?page=articles" data-page-link="articles"><strong>Articles &amp; research</strong><span>Analysis and deeper context ↗</span></a></div></div>' +
+    '</div></section>';
 }
 
 function renderArticles() {
