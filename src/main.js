@@ -1,13 +1,35 @@
 import './tracker.css';
 import trackerConfig from './data/tracker-config.json';
 import initialPathways from './data/pathways.json';
-import EVIDENCE_RECORDS from './data/evidence-records.json';
+import { PRIMARY_RECORDS } from './generated/records.js';
 
 const STAGES = trackerConfig.stages;
 const CONTRIBUTIONS = trackerConfig.contributions;
 const CONFIDENCE_CRITERIA = trackerConfig.confidenceCriteria;
 
 let pathways = structuredClone(initialPathways);
+
+function classifyEvidenceType(rec) {
+  if (rec.id.startsWith('WORK-')) return 'Tasks';
+  if (rec.id.startsWith('FLD-') || rec.id.startsWith('CPRA-') || rec.id.startsWith('PLAN-') || rec.id.startsWith('EDT-')) {
+    return 'Activities';
+  }
+  return 'Records';
+}
+
+const EVIDENCE_RECORDS = PRIMARY_RECORDS.map(rec => {
+  const linked = pathways.find(p => (p.linkedEvidence || []).includes(rec.id));
+  return {
+    id: rec.id,
+    type: classifyEvidenceType(rec),
+    title: rec.title,
+    date: rec.dateAcquired || '',
+    sourceAgency: rec.sourceAgency || '',
+    linkedPathway: linked ? linked.id : null,
+    summary: rec.summary || '',
+    raw: rec
+  };
+});
 
 let state = {
   activeView: 'help',            // 'help' | 'board' | 'tasks' | 'evidence'
@@ -707,6 +729,7 @@ function renderTasksWorkspace() {
           ${getTaskStatusBadge(tState)}
         </td>
         <td class="py-3 px-3.5 min-w-[260px] align-middle">
+          ${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan mr-1.5">${task.taskId}</span>` : ''}
           <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary font-medium'}">${task.text}</span>
         </td>
         <td class="py-3 px-3.5 align-middle">
@@ -835,17 +858,17 @@ function renderEvidenceView() {
   const gridEl = document.getElementById('evidence-grid');
   if (!pillsEl || !gridEl) return;
 
-  const callsCount = EVIDENCE_RECORDS.filter(r => r.type === 'Calls').length;
-  const visitsCount = EVIDENCE_RECORDS.filter(r => r.type === 'Visits').length;
+  const tasksCount = EVIDENCE_RECORDS.filter(r => r.type === 'Tasks').length;
+  const activitiesCount = EVIDENCE_RECORDS.filter(r => r.type === 'Activities').length;
   const recordsCount = EVIDENCE_RECORDS.filter(r => r.type === 'Records').length;
-  const evCalls = document.getElementById('ev-pill-calls');
-  const evVisits = document.getElementById('ev-pill-visits');
+  const evTasks = document.getElementById('ev-pill-tasks');
+  const evActivities = document.getElementById('ev-pill-activities');
   const evRecords = document.getElementById('ev-pill-records');
-  if (evCalls) evCalls.textContent = callsCount;
-  if (evVisits) evVisits.textContent = visitsCount;
+  if (evTasks) evTasks.textContent = tasksCount;
+  if (evActivities) evActivities.textContent = activitiesCount;
   if (evRecords) evRecords.textContent = recordsCount;
 
-  const types = ['All', 'Visits', 'Calls', 'Records'];
+  const types = ['All', 'Activities', 'Tasks', 'Records'];
   pillsEl.innerHTML = types.map(t => {
     const count = t === 'All' ? EVIDENCE_RECORDS.length : EVIDENCE_RECORDS.filter(r => r.type === t).length;
     const active = state.evidenceFilter === t;
@@ -862,33 +885,43 @@ function renderEvidenceView() {
     ? EVIDENCE_RECORDS
     : EVIDENCE_RECORDS.filter(r => r.type === state.evidenceFilter);
 
-  gridEl.innerHTML = filtered.map(rec => {
-    const origIdx = EVIDENCE_RECORDS.indexOf(rec);
-    const isSelected = state.activeEvidenceIdx === origIdx;
-    return `
-      <div onclick="selectEvidenceRecord(${origIdx})" class="cursor-pointer rounded-lg bg-surface hover:bg-elevated/70 border ${
-        isSelected ? 'border-statusCyan' : 'border-borderHairline'
-      } p-4 transition-all space-y-2">
-        <div class="flex items-center justify-between gap-2">
-          <span class="font-mono text-xs font-semibold text-statusCyan">${rec.id} · ${rec.type}</span>
-          <span class="font-mono text-[10px] text-textDim">${rec.date}</span>
+  if (filtered.length === 0) {
+    gridEl.innerHTML = `<div class="col-span-full p-6 text-xs font-mono text-textDim rounded-lg border border-borderHairline bg-surface">No records in this category.</div>`;
+  } else {
+    gridEl.innerHTML = filtered.map(rec => {
+      const origIdx = EVIDENCE_RECORDS.indexOf(rec);
+      const isSelected = state.activeEvidenceIdx === origIdx;
+      return `
+        <div onclick="selectEvidenceRecord(${origIdx})" class="cursor-pointer rounded-lg bg-surface hover:bg-elevated/70 border ${
+          isSelected ? 'border-statusCyan' : 'border-borderHairline'
+        } p-4 transition-all space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-xs font-semibold text-statusCyan">${rec.id} · ${rec.type}</span>
+            <span class="font-mono text-[10px] text-textDim">${rec.date}</span>
+          </div>
+          <h3 class="text-sm font-semibold text-textPrimary leading-snug">${rec.title}</h3>
+          <p class="text-xs text-textMuted leading-relaxed">${rec.summary}</p>
+          <div class="pt-1 flex items-center justify-between font-mono text-[10px]">
+            ${rec.linkedPathway
+              ? `<button onclick="event.stopPropagation(); openPathwayDrawer('${rec.linkedPathway}');" class="text-statusEmerald hover:underline">Linked: ${rec.linkedPathway} &rarr;</button>`
+              : `<span class="text-textDim truncate">${rec.sourceAgency || 'Authoritative record'}</span>`
+            }
+            <span class="text-textDim shrink-0">${isSelected ? 'Inspecting below' : 'Click to inspect'}</span>
+          </div>
         </div>
-        <h3 class="text-sm font-semibold text-textPrimary leading-snug">${rec.title}</h3>
-        <p class="text-xs text-textMuted leading-relaxed">${rec.summary}</p>
-        <div class="pt-1 flex items-center justify-between font-mono text-[10px]">
-          <button onclick="event.stopPropagation(); openPathwayDrawer('${rec.linkedPathway}');" class="text-statusEmerald hover:underline">
-            Linked: ${rec.linkedPathway} &rarr;
-          </button>
-          <span class="text-textDim">${isSelected ? 'Inspecting below' : 'Click to inspect'}</span>
-        </div>
-      </div>
-    `;
-  }).join('');
+      `;
+    }).join('');
+  }
 
   const activeRec = EVIDENCE_RECORDS[state.activeEvidenceIdx] || EVIDENCE_RECORDS[0];
-  if (activeRec) {
-    document.getElementById('active-evidence-title').textContent = `${activeRec.id} — ${activeRec.title}`;
-    document.getElementById('evidence-json-preview').textContent = JSON.stringify(activeRec.raw, null, 2);
+  const titleEl = document.getElementById('active-evidence-title');
+  const previewEl = document.getElementById('evidence-json-preview');
+  if (activeRec && titleEl && previewEl) {
+    titleEl.textContent = `${activeRec.id} — ${activeRec.title}`;
+    previewEl.textContent = JSON.stringify(activeRec.raw, null, 2);
+  } else if (titleEl && previewEl) {
+    titleEl.textContent = 'No record selected';
+    previewEl.textContent = '{}';
   }
 }
 
