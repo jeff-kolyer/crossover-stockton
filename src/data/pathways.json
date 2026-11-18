@@ -1,190 +1,17 @@
 [
   {
     "id": "PW-01",
-    "title": "Same-week intake dog walking & Doggie Day Out",
+    "title": "Volunteer at Stockton Animal Services",
     "org": "Stockton Animal Services",
-    "stage": "Blocked",
-    "contributions": [
-      "Presence"
-    ],
-    "freshness": "n/a",
-    "freshMins": 999999,
-    "freshLabel": "Blocked · No email reply since Nov 14",
-    "updatedAt": "2h ago",
-    "condition": "Shelter accepts volunteers in theory, but sasvolunteers@stocktonca.gov has not replied in 4 days and walk-in signups are paused during kennel compression.",
-    "criteriaMet": {
-      "completed": false,
-      "confirmed": false,
-      "steps": true,
-      "recent": true,
-      "corroborated": false
-    },
-    "linkedEvidence": [
-      "EV-01",
-      "EV-05"
-    ],
-    "actionDetails": {
-      "whatNeeded": "Confirmed weekday afternoon intake dog walking and Doggie Day Out outings.",
-      "howToHelp": "Pending live phone confirmation of intake desk schedule.",
-      "when": "TBD upon coordinator confirmation",
-      "where": "1575 S. Lincoln St, Stockton, CA 95206",
-      "bring": "Closed-toe shoes, water, photo ID",
-      "phone": "209-937-7445"
-    },
-    "checklist": [
-      {
-        "text": "Call Stockton Animal Services volunteer desk (209-937-7445) during morning hours",
-        "done": false,
-        "waiting": true
-      },
-      {
-        "text": "Verify whether Doggie Day Out requires prior orientation class",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Complete one test shift and document exact check-in door",
-        "done": false,
-        "waiting": false
-      }
-    ],
-    "logs": [
-      {
-        "timestamp": "2026-11-17 14:10",
-        "author": "civic-ops",
-        "note": "Moved to Blocked after 72h with no reply to volunteer inquiry email."
-      },
-      {
-        "timestamp": "2026-11-14 10:05",
-        "author": "civic-ops",
-        "note": "Submitted volunteer inquiry to sasvolunteers@stocktonca.gov."
-      }
-    ]
-  },
-  {
-    "id": "PW-02",
-    "title": "Direct kibble & clean water drop-off for street dogs",
-    "org": "Stockton Street Dogs",
-    "stage": "Enabling",
-    "contributions": [
-      "Supplies",
-      "Funding"
-    ],
-    "freshness": "n/a",
-    "freshMins": 999999,
-    "freshLabel": "Enabling · Confirming drop-off window",
-    "updatedAt": "3h ago",
-    "condition": "Organizer confirmed urgent need for unopened dry kibble and bowls; establishing a repeatable weekly drop-off point and handoff contact so anyone can contribute.",
-    "criteriaMet": {
-      "completed": false,
-      "confirmed": true,
-      "steps": false,
-      "recent": true,
-      "corroborated": true
-    },
-    "linkedEvidence": [
-      "EV-02",
-      "EV-08"
-    ],
-    "actionDetails": {
-      "whatNeeded": "Unopened bags of dry dog food, clean water jugs, and stainless bowls for District 5 routes.",
-      "howToHelp": "Coordinating a fixed weekly drop-off window with field feeders.",
-      "when": "Target: Tue/Thu mornings",
-      "where": "District 5 / South Stockton handoff point (TBD)",
-      "bring": "Unopened dry kibble or sealed water jugs",
-      "phone": "209-555-0142"
-    },
-    "checklist": [
-      {
-        "text": "Confirm fixed drop-off address and safe handoff window with founder",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Verify preferred food brands/bag sizes for street feeding",
-        "done": true,
-        "waiting": false
-      },
-      {
-        "text": "Complete one verified supply drop-off to establish pathway",
-        "done": false,
-        "waiting": false
-      }
-    ],
-    "logs": [
-      {
-        "timestamp": "2026-11-17 11:30",
-        "author": "field-ops",
-        "note": "Direct message confirmed kibble shortage; awaiting exact handoff times."
-      }
-    ]
-  },
-  {
-    "id": "PW-04",
-    "title": "Short-term foster intake & clinic transport",
-    "org": "Delta Humane Society & SPCA",
-    "stage": "Blocked",
-    "contributions": [
-      "Transport",
-      "Space"
-    ],
-    "freshness": "n/a",
-    "freshMins": 999999,
-    "freshLabel": "Blocked · Foster approval turnaround unclear",
-    "updatedAt": "4h ago",
-    "condition": "Online foster application does not specify approval turnaround time or whether same-week emergency fosters can bypass the standard queue.",
-    "criteriaMet": {
-      "completed": false,
-      "confirmed": false,
-      "steps": false,
-      "recent": true,
-      "corroborated": false
-    },
-    "linkedEvidence": [
-      "EV-04"
-    ],
-    "actionDetails": {
-      "whatNeeded": "Temporary foster homes (3–14 days) and morning clinic rides.",
-      "howToHelp": "Currently blocked by unverified application turnaround.",
-      "when": "Pending verification",
-      "where": "4590 S. Highway 99, Stockton, CA 95215",
-      "bring": "Valid driver license & proof of residence",
-      "phone": "209-466-0339"
-    },
-    "checklist": [
-      {
-        "text": "Call Delta Humane (209-466-0339) to check current foster application backlog",
-        "done": false,
-        "waiting": true
-      },
-      {
-        "text": "Ask if transport-only volunteers require full foster onboarding",
-        "done": false,
-        "waiting": false
-      }
-    ],
-    "logs": [
-      {
-        "timestamp": "2026-11-17 09:40",
-        "author": "civic-ops",
-        "note": "Submitted test inquiry via info@dhsspca.org; no auto-response or timeline provided."
-      }
-    ]
-  },
-  {
-    "id": "PW-05",
-    "title": "Assess St. Mary's Dining Room area for active pathways",
-    "org": "St. Mary's Dining Room",
     "stage": "Exploring",
     "contributions": [
-      "Presence",
-      "Supplies"
+      "Direct Action"
     ],
-    "freshness": "n/a",
+    "freshness": "unknown",
     "freshMins": 999999,
-    "freshLabel": "Exploring · Site visit queued",
-    "updatedAt": "5h ago",
-    "condition": "Initial exploration of morning pantry shifts and whether pet food donations are accepted alongside human food boxes on Sonora St.",
+    "freshLabel": "Exploring · Details not yet verified",
+    "updatedAt": "",
+    "condition": "Crossover submitted a volunteer application on October 14 and inquired about Doggie Day Out on October 12. Whether and how volunteers can participate remains to be confirmed.",
     "criteriaMet": {
       "completed": false,
       "confirmed": false,
@@ -192,35 +19,177 @@
       "recent": false,
       "corroborated": false
     },
-    "linkedEvidence": [
-      "EV-06"
-    ],
+    "linkedEvidence": [],
     "actionDetails": {
-      "whatNeeded": "Assessment of accessible drop-in volunteer shifts and supply needs.",
-      "howToHelp": "Site visit planned to speak directly with receiving coordinator.",
-      "when": "Weekday mornings 8:00 AM – 11:00 AM",
-      "where": "545 W. Sonora St, Stockton, CA 95203",
-      "bring": "Notebook for coordinator check-in",
-      "phone": "209-467-0703"
+      "whatNeeded": "Determine whether shelter dog walking or Doggie Day Out offers a useful contribution.",
+      "howToHelp": "Follow up on existing application and inquiry; document confirmed requirements and availability.",
+      "when": "Not yet confirmed",
+      "where": "Stockton Animal Services, Stockton, CA",
+      "bring": "To be confirmed",
+      "phone": ""
     },
     "checklist": [
       {
-        "text": "Visit St. Mary's receiving gate on Sonora St and speak with shift lead",
+        "text": "Follow up on October 14 volunteer application",
         "done": false,
         "waiting": false
       },
       {
-        "text": "Confirm whether unopened pet food can be dropped off without prior appointment",
+        "text": "Follow up on October 12 Doggie Day Out inquiry",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Verify any volunteer opportunities, onboarding and schedule directly",
         "done": false,
         "waiting": false
       }
     ],
-    "logs": [
+    "logs": []
+  },
+  {
+    "id": "PW-02",
+    "title": "Direct kibble & clean water drop-off for street dogs",
+    "org": "Stockton Street Dogs",
+    "stage": "Exploring",
+    "contributions": [
+      "Direct Action",
+      "Supplies"
+    ],
+    "freshness": "unknown",
+    "freshMins": 999999,
+    "freshLabel": "Exploring · Details not yet verified",
+    "updatedAt": "",
+    "condition": "Crossover applied to volunteer with Stockton Street Dogs on October 7. Direct feeding or supply contributions are an avenue to explore; current need, permitted activities, delivery logistics and contacts have not been confirmed.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": false,
+      "recent": false,
+      "corroborated": false
+    },
+    "linkedEvidence": [],
+    "actionDetails": {
+      "whatNeeded": "Determine whether providing dog food or clean water directly is needed and appropriate.",
+      "howToHelp": "Follow up with Stockton Street Dogs and document any confirmed needs, approved actions and handoff details.",
+      "when": "Not yet confirmed",
+      "where": "Stockton, CA",
+      "bring": "To be confirmed",
+      "phone": ""
+    },
+    "checklist": [
       {
-        "timestamp": "2026-11-17 08:15",
-        "author": "civic-ops",
-        "note": "Created exploration candidate for St. Mary's corridor."
+        "text": "Follow up on October 7 Stockton Street Dogs volunteer application",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Ask whether feeding or food/water supply contributions are currently useful",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "If confirmed, document safe and approved logistics before offering the pathway",
+        "done": false,
+        "waiting": false
       }
-    ]
+    ],
+    "logs": []
+  },
+  {
+    "id": "PW-04",
+    "title": "Analyze public records",
+    "org": "Crossover Stockton",
+    "stage": "Exploring",
+    "contributions": [
+      "Data Analysis"
+    ],
+    "freshness": "unknown",
+    "freshMins": 999999,
+    "freshLabel": "Exploring · Details not yet verified",
+    "updatedAt": "",
+    "condition": "Crossover received 7,183 Animal Services field-call case records on November 2. Review is in progress; the records are administrative cases, not a census of individual dogs. No published findings are claimed.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": false,
+      "recent": false,
+      "corroborated": false
+    },
+    "linkedEvidence": [],
+    "actionDetails": {
+      "whatNeeded": "Produce source-grounded, useful findings about reported needs and service responses.",
+      "howToHelp": "Review field-call records and reconcile public shelter statistics; publish findings with limitations.",
+      "when": "Not yet confirmed",
+      "where": "Stockton, CA",
+      "bring": "To be confirmed",
+      "phone": ""
+    },
+    "checklist": [
+      {
+        "text": "Review Animal Services field-call records (in progress)",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Reconcile updated public data with 2024 baseline",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Document methods, limitations and supported findings",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": []
+  },
+  {
+    "id": "PW-05",
+    "title": "Observe conditions at St. Mary's",
+    "org": "Crossover Stockton",
+    "stage": "Exploring",
+    "contributions": [
+      "Fieldwork"
+    ],
+    "freshness": "unknown",
+    "freshMins": 999999,
+    "freshLabel": "Exploring · Details not yet verified",
+    "updatedAt": "",
+    "condition": "Crossover has planned field observation around the St. Mary's / Church Street area to understand visible animal-related needs and access to care. A completed observation and its findings are not yet recorded.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": false,
+      "recent": false,
+      "corroborated": false
+    },
+    "linkedEvidence": [],
+    "actionDetails": {
+      "whatNeeded": "Document firsthand observations without assuming dogs with people are abandoned or inferring why people are outside.",
+      "howToHelp": "Undertake safe observation from public areas, record date, scope, findings (including zero), and limitations.",
+      "when": "Not yet confirmed",
+      "where": "St. Mary's / Church Street area, Stockton, CA",
+      "bring": "To be confirmed",
+      "phone": ""
+    },
+    "checklist": [
+      {
+        "text": "Visit St. Mary's area to understand pet access and street needs",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Record observations and limits of what can be inferred",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Verify relevant program policies before drawing conclusions",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": []
   }
 ]
