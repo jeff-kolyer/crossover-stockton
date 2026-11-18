@@ -1048,7 +1048,7 @@ function renderPathwayDrawer(pathwayId) {
           <div class="flex items-center justify-between gap-2 p-2.5 rounded-md bg-canvas border border-borderHairline text-xs">
             <label class="flex items-start gap-2.5 cursor-pointer flex-1 min-w-0">
               <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTaskDone('${p.id}', ${idx})" class="mt-0.5 rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0" />
-              <span class="${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</span>
+              <span class="${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan mr-1.5">${task.taskId}</span>` : ''}${task.text}</span>
             </label>
             <div class="flex items-center gap-1.5 shrink-0">
               ${!task.done ? `

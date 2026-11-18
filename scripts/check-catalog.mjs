@@ -66,33 +66,42 @@ for (const item of [...siteContent.priorities, ...siteContent.ai.ideas]) {
 }
 for (const id of siteContent.doing.order) if (!displayIds.has(id)) errors.push(`doing page references unknown record ${id}`);
 
-// Validate Pathway Tracker data files
+// Validate Pathway Tracker data files against authoritative records
 const trackerConfig = await read('tracker-config');
 const trackerPathways = await read('pathways');
-const evidenceRecords = await read('evidence-records');
+const legacyPreviewEvidence = await read('evidence-records');
+
+if (!Array.isArray(legacyPreviewEvidence) || legacyPreviewEvidence.length > 0) {
+  errors.push('src/data/evidence-records.json must remain empty ([]) so prototype fixtures are not published');
+}
 
 const validStages = new Set((trackerConfig.stages ?? []).map(s => s.id));
 const validContribs = new Set(trackerConfig.contributions ?? []);
-const evidenceIds = new Set();
-for (const ev of evidenceRecords) {
-  if (!ev.id || evidenceIds.has(ev.id)) errors.push(`missing or duplicate evidence ID: ${ev.id}`);
-  evidenceIds.add(ev.id);
-}
 const pathwayIds = new Set();
+let totalTasks = 0;
+
 for (const pw of trackerPathways) {
   if (!pw.id || pathwayIds.has(pw.id)) errors.push(`missing or duplicate pathway ID: ${pw.id}`);
   pathwayIds.add(pw.id);
   if (!validStages.has(pw.stage)) errors.push(`${pw.id}: invalid stage ${pw.stage}`);
-  for (const c of pw.contributions ?? []) if (!validContribs.has(c)) errors.push(`${pw.id}: invalid contribution ${c}`);
-  for (const evId of pw.linkedEvidence ?? []) if (!evidenceIds.has(evId)) errors.push(`${pw.id}: unknown linkedEvidence ${evId}`);
-}
-for (const ev of evidenceRecords) {
-  if (ev.linkedPathway && !pathwayIds.has(ev.linkedPathway)) errors.push(`${ev.id}: unknown linkedPathway ${ev.linkedPathway}`);
+  for (const c of pw.contributions ?? []) {
+    if (!validContribs.has(c)) errors.push(`${pw.id}: invalid contribution ${c}`);
+  }
+  for (const evId of pw.linkedEvidence ?? []) {
+    if (!displayIds.has(evId)) errors.push(`${pw.id}: unknown linkedEvidence ${evId}`);
+  }
+  for (const item of pw.checklist ?? []) {
+    totalTasks++;
+    if (item.taskId && !displayIds.has(item.taskId)) errors.push(`${pw.id}: unknown checklist taskId ${item.taskId}`);
+  }
+  if (pw.stage === 'Established' && ((!pw.criteriaMet?.completed && !pw.criteriaMet?.confirmed) || !(pw.linkedEvidence?.length))) {
+    errors.push(`${pw.id}: Established pathway requires verified confirmation/completion and linkedEvidence`);
+  }
 }
 
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`Catalog check passed: ${source.size} source records, ${curated.length} curated records, ${ledger.length} stable display IDs, ${trackerPathways.length} live pathways, ${evidenceRecords.length} evidence records.`);
+  console.log(`Catalog check passed: ${source.size} source records, ${curated.length} curated records, ${ledger.length} stable display IDs, ${trackerPathways.length} grounded pathways, ${totalTasks} checklist tasks.`);
 }

@@ -4,8 +4,8 @@ test('pathway tracker loads Help Today in live mode and fits the viewport', asyn
   await page.goto('/');
   await expect(page).toHaveTitle('CROSSOVER STOCKTON — Pathway Tracker');
   await expect(page.locator('#stat-established')).toHaveText('0');
-  await expect(page.locator('#stat-enabling')).toHaveText('1');
-  await expect(page.locator('#stat-blocked')).toHaveText('2');
+  await expect(page.locator('#stat-enabling')).toHaveText('0');
+  await expect(page.locator('#stat-blocked')).toHaveText('0');
   await expect(page.locator('#view-help')).toBeVisible();
 
   const width = testInfo.project.use.viewport!.width;
@@ -20,7 +20,7 @@ test('pathway tracker loads Help Today in live mode and fits the viewport', asyn
   }
 });
 
-test('all four workspace views are reachable in live mode without preview controls', async ({ page }, testInfo) => {
+test('all four workspace views use authoritative records in live mode without preview controls', async ({ page }, testInfo) => {
   await page.goto('/');
   const isMobile = testInfo.project.use.viewport!.width < 1024;
 
@@ -31,14 +31,18 @@ test('all four workspace views are reachable in live mode without preview contro
   };
 
   await switchView('board');
-  await expect(page.locator('#pw-pill-enabling')).toHaveText('1');
-  await expect(page.locator('#pw-pill-blocked')).toHaveText('2');
+  await expect(page.locator('#pw-pill-exploring')).toHaveText('4');
+  await expect(page.locator('#pw-pill-enabling')).toHaveText('0');
+  await expect(page.locator('#pw-pill-blocked')).toHaveText('0');
+  await expect(page.locator('#view-board')).toContainText('Direct kibble & clean water drop-off for street dogs');
 
   await switchView('tasks');
-  await expect(page.locator('#view-tasks')).toContainText('PW-01');
+  await expect(page.locator('#view-tasks')).toContainText('WORK-2026-005');
+  await expect(page.locator('#view-tasks')).toContainText('WORK-2026-001');
 
   await switchView('evidence');
-  await expect(page.locator('#view-evidence')).toContainText('EV-01');
+  await expect(page.locator('#view-evidence')).toContainText('SHEL-2024-001');
+  await expect(page.locator('#view-evidence')).toContainText('CPRA-2026-001-RECEIPT');
 
   await switchView('help');
   await expect(page.locator('#help-preview-toggle')).toHaveCount(0);
@@ -50,11 +54,13 @@ test('pathway drawer, about drawer, and new pathway modal open and close cleanly
   await page.goto('/');
 
   // Open pathway drawer from board
-  await page.locator('#top-count-blocked-btn').click();
+  await page.locator('#top-count-enabling-btn').click();
+  await page.locator('#view-board').getByRole('button', { name: 'Reset' }).click();
   await expect(page.locator('#view-board')).toBeVisible();
-  await page.locator('#view-board :text("Same-week intake dog walking & Doggie Day Out"):visible').first().click();
+  await page.locator('#view-board :text("Volunteer at Stockton Animal Services"):visible').first().click();
   await expect(page.locator('#pathway-drawer')).toBeVisible();
-  await expect(page.locator('#pathway-drawer')).toContainText('Same-week intake dog walking & Doggie Day Out');
+  await expect(page.locator('#pathway-drawer')).toContainText('WORK-2026-005');
+  await expect(page.locator('#pathway-drawer')).toContainText('FLD-2026-002');
   await page.keyboard.press('Escape');
   await expect(page.locator('#pathway-drawer')).toBeHidden();
 
