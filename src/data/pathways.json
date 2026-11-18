@@ -108,15 +108,15 @@
     "id": "PW-04",
     "title": "Analyze public records",
     "org": "Crossover Stockton",
-    "stage": "Exploring",
+    "stage": "Enabling",
     "contributions": [
       "Data Analysis"
     ],
     "freshness": "unknown",
     "freshMins": 999999,
-    "freshLabel": "Exploring · Details not yet verified",
+    "freshLabel": "Enabling · Cleaning & analyzing raw records",
     "updatedAt": "",
-    "condition": "Crossover received 7,183 Animal Services field-call case records on November 2. Review is in progress; the records are administrative cases, not a census of individual dogs. No published findings are claimed.",
+    "condition": "Crossover received 7,183 Animal Services field-call case records on November 2. In raw form, administrative records don't by themselves tell us what happens to dogs needing help—they are cases, not a census of individual dogs. Cleaning, interpreting, and analyzing them (and reconciling public shelter data) is underway to remove that barrier to understanding reality. No published findings are claimed yet.",
     "criteriaMet": {
       "completed": false,
       "confirmed": false,
