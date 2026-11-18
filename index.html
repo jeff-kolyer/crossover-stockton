@@ -209,15 +209,6 @@
             <!-- Populated by JS -->
           </div>
         </div>
-
-        <!-- Live vs Preview Mode Switcher -->
-        <div class="px-1">
-          <div class="px-1.5 mb-1.5 font-mono text-[10px] uppercase tracking-wider text-textDim">Help Board Mode</div>
-          <div class="grid grid-cols-2 gap-1 p-0.5 rounded-md bg-canvas border border-borderHairline">
-            <button onclick="setBoardMode('live')" data-mode-btn="live" class="py-1 rounded text-[11px] font-medium bg-elevated text-textPrimary transition-colors">Live (0)</button>
-            <button onclick="setBoardMode('preview')" data-mode-btn="preview" class="py-1 rounded text-[11px] font-medium text-textMuted hover:text-textPrimary transition-colors">Preview (4)</button>
-          </div>
-        </div>
       </div>
 
       <!-- Repo Metadata Footer -->
@@ -261,14 +252,6 @@
           </button>
         </nav>
 
-        <div class="pt-3 border-t border-borderHairline space-y-2">
-          <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Help Board Mode</div>
-          <div class="grid grid-cols-2 gap-1 p-0.5 rounded-md bg-canvas border border-borderHairline">
-            <button onclick="setBoardMode('live')" data-mode-btn="live" class="py-1.5 rounded text-xs font-medium bg-elevated text-textPrimary">Live (0)</button>
-            <button onclick="setBoardMode('preview')" data-mode-btn="preview" class="py-1.5 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Preview (4)</button>
-          </div>
-        </div>
-
         <div class="pt-3 border-t border-borderHairline space-y-1.5">
           <button onclick="toggleMobileSidebar(); openAboutDrawer();" class="w-full text-left px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             About &amp; Methodology
@@ -307,9 +290,6 @@
             <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusAmber">
               Aging: <strong id="help-pill-aging">0</strong>
             </span>
-            <button id="help-preview-toggle" onclick="toggleBoardMode()" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderStrong text-[10px] text-textPrimary transition-colors">
-              Preview (4)
-            </button>
           </div>
         </div>
 
@@ -731,16 +711,6 @@
         <p class="text-textMuted leading-relaxed">
           <strong class="text-textPrimary">A pathway development platform for Stockton, CA.</strong> Instead of listing generic charities or tracking abstract problems, Crossover discovers, unblocks, and verifies concrete routes through which someone can actually help today.
         </p>
-      </div>
-
-      <!-- Mode Switcher -->
-      <div class="p-3.5 rounded-lg bg-canvas border border-borderHairline space-y-2">
-        <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Help Board Mode</div>
-        <div class="grid grid-cols-2 gap-1.5">
-          <button onclick="setBoardMode('live')" data-mode-btn="live" class="py-1.5 rounded-md text-xs font-medium bg-elevated text-textPrimary border border-borderStrong">Live State (0)</button>
-          <button onclick="setBoardMode('preview')" data-mode-btn="preview" class="py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary border border-borderHairline">Preview Examples (4)</button>
-        </div>
-        <p class="text-[11px] text-textDim">Live mode stays honestly empty until a pathway is directly confirmed. Preview loads 4 example Established routes.</p>
       </div>
 
       <!-- Four Non-Mandatory Stages -->

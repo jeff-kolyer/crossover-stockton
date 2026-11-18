@@ -1,7 +1,6 @@
 import './tracker.css';
 import trackerConfig from './data/tracker-config.json';
 import initialPathways from './data/pathways.json';
-import PREVIEW_ESTABLISHED from './data/preview-established.json';
 import EVIDENCE_RECORDS from './data/evidence-records.json';
 
 const STAGES = trackerConfig.stages;
@@ -12,7 +11,6 @@ let pathways = structuredClone(initialPathways);
 
 let state = {
   activeView: 'help',            // 'help' | 'board' | 'tasks' | 'evidence'
-  boardMode: 'live',             // 'live' | 'preview'
   helpLayout: window.innerWidth < 768 ? 'list' : 'board',
   boardLayout: window.innerWidth < 640 ? 'list' : 'kanban',
   tasksSubLayout: 'list',        // 'list' | 'kanban'
@@ -50,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 3. CORE HELPERS & TELEMETRY
 // =========================================================================
 function getAllPathways() {
-  return state.boardMode === 'preview' ? [...PREVIEW_ESTABLISHED, ...pathways] : [...pathways];
+  return [...pathways];
 }
 
 function getEstablishedPathways() {
@@ -191,18 +189,6 @@ function renderTelemetry() {
   document.getElementById('mob-nav-tasks').textContent = `${openTasksCount} open`;
   document.getElementById('mob-nav-evidence').textContent = EVIDENCE_RECORDS.length;
 
-  // Sync Live / Preview mode buttons
-  document.querySelectorAll('[data-mode-btn]').forEach(btn => {
-    const isCurrent = btn.dataset.modeBtn === state.boardMode;
-    if (isCurrent) {
-      btn.classList.add('bg-elevated', 'text-textPrimary', 'border-borderStrong');
-      btn.classList.remove('text-textMuted', 'border-borderHairline');
-    } else {
-      btn.classList.remove('bg-elevated', 'text-textPrimary', 'border-borderStrong');
-      btn.classList.add('text-textMuted', 'border-borderHairline');
-    }
-  });
-
   // Sidebar Contribution filters
   const contribEl = document.getElementById('sidebar-contributions');
   if (contribEl) {
@@ -277,14 +263,7 @@ function renderHelpView() {
   dotEl.className = `w-2 h-2 rounded-full shrink-0 ${
     hasFresh ? 'bg-statusEmerald' : (hasAny ? 'bg-statusAmber' : 'bg-statusSlate')
   }`;
-  textEl.textContent = state.boardMode === 'preview'
-    ? `${established.length} preview · Updated 18m ago`
-    : `${established.length} established · Updated 18m ago`;
-
-  const toggleBtn = document.getElementById('help-preview-toggle');
-  if (toggleBtn) {
-    toggleBtn.textContent = state.boardMode === 'preview' ? 'Live (0)' : 'Preview (4)';
-  }
+  textEl.textContent = `${established.length} established · Updated 18m ago`;
 
   // Toggle Board vs List containers
   document.getElementById('help-board-container').classList.toggle('hidden', state.helpLayout !== 'board');
@@ -307,9 +286,6 @@ function renderHelpView() {
         <div class="flex flex-wrap gap-2 pt-1">
           <button onclick="switchMainView('board')" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary">
             Open Pathways Board (${pathways.length})
-          </button>
-          <button onclick="setBoardMode('preview')" class="h-8 px-3 rounded-md bg-statusEmerald/15 hover:bg-statusEmerald/25 border border-statusEmerald/40 text-xs font-medium text-statusEmerald">
-            Preview Examples (4)
           </button>
         </div>
       </div>
@@ -409,9 +385,6 @@ function renderHelpView() {
         <div class="flex flex-wrap items-center gap-2 pt-1">
           <button onclick="switchMainView('board')" class="h-8 px-3.5 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary transition-colors">
             Open Pathways Board (${pathways.length})
-          </button>
-          <button onclick="setBoardMode('preview')" class="h-8 px-3.5 rounded-md bg-statusEmerald/15 hover:bg-statusEmerald/25 border border-statusEmerald/40 text-xs font-medium text-statusEmerald transition-colors">
-            Preview Example Routes (4)
           </button>
         </div>
       </div>
@@ -1335,16 +1308,6 @@ function jumpToStage(stageId) {
   renderAll();
 }
 
-function setBoardMode(mode) {
-  state.boardMode = mode;
-  renderAll();
-  showToast(mode === 'preview' ? 'Preview mode: 4 example pathways' : 'Live mode: 0 established pathways');
-}
-
-function toggleBoardMode() {
-  setBoardMode(state.boardMode === 'live' ? 'preview' : 'live');
-}
-
 function switchMainView(viewName) {
   state.activeView = viewName;
   ['help', 'board', 'tasks', 'evidence'].forEach(v => {
@@ -1507,8 +1470,6 @@ Object.assign(window, {
   goHome,
   jumpToHelp,
   jumpToStage,
-  setBoardMode,
-  toggleBoardMode,
   switchMainView,
   syncLayoutButtons,
   setBoardLayout,

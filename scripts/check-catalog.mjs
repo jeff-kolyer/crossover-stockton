@@ -69,7 +69,6 @@ for (const id of siteContent.doing.order) if (!displayIds.has(id)) errors.push(`
 // Validate Pathway Tracker data files
 const trackerConfig = await read('tracker-config');
 const trackerPathways = await read('pathways');
-const previewEstablished = await read('preview-established');
 const evidenceRecords = await read('evidence-records');
 
 const validStages = new Set((trackerConfig.stages ?? []).map(s => s.id));
@@ -80,7 +79,7 @@ for (const ev of evidenceRecords) {
   evidenceIds.add(ev.id);
 }
 const pathwayIds = new Set();
-for (const pw of [...trackerPathways, ...previewEstablished]) {
+for (const pw of trackerPathways) {
   if (!pw.id || pathwayIds.has(pw.id)) errors.push(`missing or duplicate pathway ID: ${pw.id}`);
   pathwayIds.add(pw.id);
   if (!validStages.has(pw.stage)) errors.push(`${pw.id}: invalid stage ${pw.stage}`);
@@ -95,5 +94,5 @@ if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`Catalog check passed: ${source.size} source records, ${curated.length} curated records, ${ledger.length} stable display IDs, ${trackerPathways.length} live pathways, ${previewEstablished.length} preview pathways, ${evidenceRecords.length} evidence records.`);
+  console.log(`Catalog check passed: ${source.size} source records, ${curated.length} curated records, ${ledger.length} stable display IDs, ${trackerPathways.length} live pathways, ${evidenceRecords.length} evidence records.`);
 }

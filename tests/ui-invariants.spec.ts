@@ -20,7 +20,7 @@ test('pathway tracker loads Help Today in live mode and fits the viewport', asyn
   }
 });
 
-test('all four workspace views are reachable and preview mode shows established pathways', async ({ page }, testInfo) => {
+test('all four workspace views are reachable in live mode without preview controls', async ({ page }, testInfo) => {
   await page.goto('/');
   const isMobile = testInfo.project.use.viewport!.width < 1024;
 
@@ -41,9 +41,9 @@ test('all four workspace views are reachable and preview mode shows established 
   await expect(page.locator('#view-evidence')).toContainText('EV-01');
 
   await switchView('help');
-  await page.locator('#help-preview-toggle').click();
-  await expect(page.locator('#stat-established')).toHaveText('4');
-  await expect(page.locator('#view-help')).toContainText('Walk & socialize intake dogs');
+  await expect(page.locator('#help-preview-toggle')).toHaveCount(0);
+  await expect(page.locator('#stat-established')).toHaveText('0');
+  await expect(page.locator('#view-help')).toContainText('No established pathways today.');
 });
 
 test('pathway drawer, about drawer, and new pathway modal open and close cleanly', async ({ page }) => {
