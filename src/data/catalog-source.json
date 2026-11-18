@@ -55,47 +55,6 @@
       "supports": []
     },
     {
-      "id": "crossover-2026-10-20-reported-location-check-plan",
-      "gap_ids": [
-        "dogs-safe-placement"
-      ],
-      "organization_ids": [],
-      "published_at": null,
-      "recorded_at": "2026-10-20",
-      "record_type": "planning_update",
-      "trust": "crossover_source",
-      "title": "Check reported stray-dog locations",
-      "summary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented.",
-      "source": {
-        "publisher": "Crossover Stockton",
-        "type": "fieldwork_plan"
-      },
-      "evidence_status": "planned_not_observed",
-      "outcome": {
-        "status": "planned",
-        "summary": "Plan recorded October 20, 2026; visit date to be confirmed. Proposed visits only; no completed observation or field report is documented.",
-        "as_of": "2026-10-20"
-      },
-      "planned_sites": [
-        {
-          "label": "Priority 1 — Louis Park",
-          "location_id": "louis-park-pixie-woods-2026-04-06",
-          "reason": "CBS Sacramento reported a councilmember's concern about abandoned and unaltered dogs particularly around Louis Park. Observe accessible public areas without assuming current dog presence."
-        },
-        {
-          "label": "Priority 2 — Stanislaus Street corridor",
-          "location_id": "stanislaus-street-corridor-2026-04-06",
-          "reason": "CBS Sacramento described a resident helping abandoned dogs off Stanislaus Street, without identifying a block. Reconnoiter only safe, publicly accessible parts of the corridor."
-        },
-        {
-          "label": "Route adjustment",
-          "reason": "Change or defer either stop if safe access or current evidence warrants it; select any additional area only from corroborated evidence."
-        }
-      ],
-      "report_record_ids": [],
-      "supports": []
-    },
-    {
       "id": "crossover-2026-10-14-sas-first-visit",
       "gap_ids": [
         "dogs-safe-placement"
@@ -1188,28 +1147,6 @@
       ]
     },
     {
-      "id": "task-monitor-animal-control-ordinance",
-      "thumbnail_image": "/images/variants/clean/records-desk.jpg",
-      "order_by_id": 7,
-      "list_context": "Verify the Council outcome",
-      "title": "Monitor the proposed animal-control ordinance",
-      "status": "open",
-      "type": "policy_monitoring",
-      "instructions": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date. Keep the October 19 committee referral separate from any later Council adoption.",
-      "location_ids": [],
-      "organization_ids": [
-        "stockton-animal-services"
-      ],
-      "basis_record_ids": [
-        "stockton-2026-10-19-animal-services-ordinance-agenda",
-        "stocktonia-2026-10-20-animal-control-proposals"
-      ],
-      "activity_record_ids": [],
-      "gap_ids": [
-        "dogs-safe-placement"
-      ]
-    },
-    {
       "id": "task-contact-cbs-charlie-lapastora",
       "thumbnail_image": "/images/variants/clean/records-desk.jpg",
       "order_by_id": 3,
@@ -1237,56 +1174,6 @@
       ]
     },
     {
-      "id": "task-check-hard-luck-vet-expansion",
-      "thumbnail_image": "/images/variants/clean/records-desk.jpg",
-      "order_by_id": 8,
-      "list_context": "City Council approved a one-year Hard Luck AWA veterinary-services extension adding four contract positions and an amount not to exceed $3,969,675 (GOV-2026-006). Because a contract ceiling is not verified spending or delivered care, we are checking what positions were filled and whether any services reach community pets.",
-      "title": "Check what the Hard Luck veterinary-services expansion delivers",
-      "status": "open",
-      "type": "source_review",
-      "instructions": "Inspect the Hard Luck Animal Welfare Advocates veterinary-services agreement and its amendments, then seek current, attributable information from the City of Stockton and/or Hard Luck AWA. Record source dates, responses, and limits without treating the $3,969,675 contract ceiling as actual spending or inferring measured impact before evidence exists.",
-      "location_ids": [],
-      "organization_ids": [
-        "hard-luck-awa",
-        "stockton-animal-services"
-      ],
-      "basis_record_ids": [
-        "hlawa-2026-06-09-contract-extension"
-      ],
-      "activity_record_ids": [],
-      "checklist": [
-        "What are the four added contract positions and their intended duties? Have they been filled?",
-        "Which services are for shelter animals and which, if any, are available to community pets, especially low-cost spay/neuter?",
-        "What are the actual eligibility, price, appointment, referral, location, and scheduling routes for residents?",
-        "What has been spent and what services or procedures have actually been delivered under the extension, over what period?",
-        "How does this capacity relate to the separate Animal Balance contract, the Pet Adoption and Wellness Center, and the planned shelter expansion?"
-      ],
-      "gap_ids": [
-        "dogs-safe-placement"
-      ]
-    },
-    {
-      "id": "task-verify-st-marys-pathways-bed-gaps",
-      "thumbnail_image": "/images/variants/clean/dog-sidewalk.jpg",
-      "order_by_id": 9,
-      "list_context": "Confirming real-world pet capacity limits (268 total shelter beds at St. Mary’s Pathways), temporary boarding options during medical/shelter stays, and mobile veterinary pop-up schedules so unhoused neighbors are not forced to separate from their dogs.",
-      "title": "Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary’s Pathways",
-      "status": "open",
-      "type": "field_observation",
-      "instructions": "Cross-check outreach logs with Fremont Animal Clinic pop-up dates at St. Mary’s Dining Room and publish a verified field note.",
-      "location_ids": [
-        "st-marys-community-services-campus"
-      ],
-      "organization_ids": [],
-      "basis_record_ids": [
-        "ssd-2026-06-08-street-response"
-      ],
-      "activity_record_ids": [],
-      "gap_ids": [
-        "dogs-safe-placement"
-      ]
-    },
-    {
       "id": "task-reconcile-sas-public-data-baseline",
       "thumbnail_image": "/images/variants/clean/records-desk.jpg",
       "order_by_id": 10,
@@ -1299,25 +1186,6 @@
       "organization_ids": [
         "stockton-animal-services"
       ],
-      "basis_record_ids": [
-        "crossover-2026-11-02-sas-field-call-records-received"
-      ],
-      "activity_record_ids": [],
-      "gap_ids": [
-        "dogs-safe-placement"
-      ]
-    },
-    {
-      "id": "task-prototype-bilingual-spay-neuter-matcher",
-      "thumbnail_image": "/images/variants/clean/records-desk.jpg",
-      "order_by_id": 11,
-      "list_context": "Once ISSUE-02 and ISSUE-03 are verified, test a lightweight tool that matches Stockton pet owners to open low-cost sterilization slots and sends automated reminders to reduce missed appointments.",
-      "title": "Prototype bilingual (English/Spanish) SMS & web spay/neuter slot matcher",
-      "status": "waiting",
-      "type": "follow_up",
-      "instructions": "Scope and test the bilingual (English/Spanish) SMS & web spay/neuter slot matcher only after public data reconciliation and onboarding checks are verified.",
-      "location_ids": [],
-      "organization_ids": [],
       "basis_record_ids": [
         "crossover-2026-11-02-sas-field-call-records-received"
       ],

@@ -46,10 +46,6 @@
       "displayId": "NEWS-2026-001"
     },
     {
-      "sourceId": "crossover-2026-10-20-reported-location-check-plan",
-      "displayId": "PLAN-2026-001"
-    },
-    {
       "sourceId": "crossover-2026-10-14-sas-first-visit",
       "displayId": "FLD-2026-001"
     },
@@ -210,28 +206,12 @@
       "displayId": "WORK-2026-005"
     },
     {
-      "sourceId": "task-monitor-animal-control-ordinance",
-      "displayId": "WORK-2026-006"
-    },
-    {
       "sourceId": "task-contact-cbs-charlie-lapastora",
       "displayId": "WORK-2026-007"
     },
     {
-      "sourceId": "task-check-hard-luck-vet-expansion",
-      "displayId": "WORK-2026-008"
-    },
-    {
-      "sourceId": "task-verify-st-marys-pathways-bed-gaps",
-      "displayId": "WORK-2026-009"
-    },
-    {
       "sourceId": "task-reconcile-sas-public-data-baseline",
       "displayId": "WORK-2026-010"
-    },
-    {
-      "sourceId": "task-prototype-bilingual-spay-neuter-matcher",
-      "displayId": "WORK-2026-011"
     }
   ]
 }

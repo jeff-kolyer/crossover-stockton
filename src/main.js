@@ -17,16 +17,50 @@ function classifyEvidenceType(rec) {
   return 'Records';
 }
 
+function buildEvidenceSearchText(rec, type, linkedPathway) {
+  const parts = [
+    rec.id,
+    rec.originalId,
+    type,
+    rec.title,
+    rec.summary,
+    rec.sourceAgency,
+    rec.sourceLabel,
+    rec.sourceUrl,
+    rec.limitations,
+    rec.tier,
+    rec.status,
+    rec.statusLabel,
+    rec.categoryLabel,
+    rec.dateAcquired,
+    rec.spatialPrecision,
+    linkedPathway
+  ];
+  for (const it of rec.checklistItems || []) {
+    parts.push(it.item, it.note, it.time, it.status);
+  }
+  for (const c of rec.custodyChain || []) {
+    parts.push(c.date, c.actor, c.action);
+  }
+  for (const ar of rec.agencyResponses || []) {
+    parts.push(ar.date, ar.agency, ar.statement);
+  }
+  return parts.filter(Boolean).join(' ').toLowerCase();
+}
+
 const EVIDENCE_RECORDS = PRIMARY_RECORDS.map(rec => {
   const linked = pathways.find(p => (p.linkedEvidence || []).includes(rec.id));
+  const type = classifyEvidenceType(rec);
+  const linkedPathway = linked ? linked.id : null;
   return {
     id: rec.id,
-    type: classifyEvidenceType(rec),
+    type,
     title: rec.title,
     date: rec.dateAcquired || '',
     sourceAgency: rec.sourceAgency || '',
-    linkedPathway: linked ? linked.id : null,
+    linkedPathway,
     summary: rec.summary || '',
+    searchText: buildEvidenceSearchText(rec, type, linkedPathway),
     raw: rec
   };
 });
@@ -49,8 +83,53 @@ let state = {
   calcState: { completed: false, confirmed: true, steps: true, recent: false, corroborated: false }
 };
 
+function initEvidenceResizer() {
+  const container = document.getElementById('evidence-split-container');
+  const resizer = document.getElementById('evidence-resizer');
+  if (!container || !resizer) return;
+
+  const STORAGE_KEY = 'cs-evidence-split-px';
+  const saved = Number(localStorage.getItem(STORAGE_KEY));
+  if (saved >= 260 && saved <= 760) {
+    container.style.setProperty('--evidence-pane-width', `${saved}px`);
+  }
+
+  let dragging = false;
+
+  resizer.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    resizer.setPointerCapture(e.pointerId);
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor = 'col-resize';
+  });
+
+  resizer.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const rect = container.getBoundingClientRect();
+    const maxW = Math.min(760, Math.max(320, rect.width - 360));
+    const nextW = Math.round(Math.min(maxW, Math.max(260, e.clientX - rect.left)));
+    container.style.setProperty('--evidence-pane-width', `${nextW}px`);
+    localStorage.setItem(STORAGE_KEY, String(nextW));
+  });
+
+  const stopDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    document.body.style.userSelect = '';
+    document.body.style.cursor = '';
+  };
+
+  resizer.addEventListener('pointerup', stopDrag);
+  resizer.addEventListener('pointercancel', stopDrag);
+  resizer.addEventListener('dblclick', () => {
+    container.style.setProperty('--evidence-pane-width', '400px');
+    localStorage.removeItem(STORAGE_KEY);
+  });
+}
+
 function initTracker() {
   syncLayoutButtons();
+  initEvidenceResizer();
   renderAll();
 
   // Keyboard shortcuts: '/' to search, 'Escape' to close drawers/modals
@@ -96,13 +175,19 @@ function getFilteredPathways() {
   return getAllPathways().filter(p => {
     const matchesContrib = state.contributionFilter === 'All' || p.contributions.includes(state.contributionFilter);
     const matchesStage = state.stageFilter === 'All' || p.stage === state.stageFilter;
-    const matchesQuery = !q ||
-      p.id.toLowerCase().includes(q) ||
-      p.title.toLowerCase().includes(q) ||
-      p.org.toLowerCase().includes(q) ||
-      p.condition.toLowerCase().includes(q) ||
-      p.contributions.some(c => c.toLowerCase().includes(q)) ||
-      p.checklist.some(t => t.text.toLowerCase().includes(q));
+    const matchesQuery = !q || [
+      p.id,
+      p.title,
+      p.org,
+      p.stage,
+      p.condition,
+      p.freshLabel,
+      ...(p.contributions || []),
+      ...(p.linkedEvidence || []),
+      ...(p.actionDetails ? Object.values(p.actionDetails) : []),
+      ...(p.checklist || []).flatMap(t => [t.taskId, t.text]),
+      ...(p.logs || []).flatMap(l => [l.author, l.note])
+    ].filter(Boolean).join(' ').toLowerCase().includes(q);
     return matchesContrib && matchesStage && matchesQuery;
   });
 }
@@ -923,11 +1008,7 @@ function renderEvidenceView() {
   const q = (state.evidenceSearch || '').trim().toLowerCase();
   const filtered = EVIDENCE_RECORDS.filter(rec => {
     const matchesType = state.evidenceFilter === 'All' || rec.type === state.evidenceFilter;
-    const matchesQuery = !q ||
-      rec.id.toLowerCase().includes(q) ||
-      rec.title.toLowerCase().includes(q) ||
-      rec.summary.toLowerCase().includes(q) ||
-      (rec.sourceAgency || '').toLowerCase().includes(q);
+    const matchesQuery = !q || rec.searchText.includes(q);
     return matchesType && matchesQuery;
   });
 
@@ -979,7 +1060,7 @@ function renderEvidenceView() {
           : `
             <div class="space-y-2">
               ${custody.map(c => `
-                <div class="p-3 rounded-md bg-canvas border border-borderHairline flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 text-xs">
+                <div class="p-3 rounded-md bg-surface border border-borderHairline flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 text-xs">
                   <span class="font-mono text-[11px] text-statusAmber shrink-0">${c.date || ''}</span>
                   <div class="min-w-0">
                     <span class="font-semibold text-textPrimary mr-1.5">${c.actor || ''}</span>
@@ -1012,11 +1093,11 @@ function renderEvidenceView() {
     tabBody = `
       <div class="space-y-3">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-          <div class="p-3 rounded-md bg-canvas border border-borderHairline">
+          <div class="p-3 rounded-md bg-surface border border-borderHairline">
             <span class="font-mono text-[10px] uppercase tracking-wider text-textDim block mb-0.5">Source / Agency</span>
             <span class="text-textPrimary">${r.sourceAgency || 'Crossover Stockton'}</span>
           </div>
-          <div class="p-3 rounded-md bg-canvas border border-borderHairline">
+          <div class="p-3 rounded-md bg-surface border border-borderHairline">
             <span class="font-mono text-[10px] uppercase tracking-wider text-textDim block mb-0.5">Primary Artifact</span>
             ${r.sourceUrl
               ? `<a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="text-statusCyan hover:underline break-all">${r.sourceLabel || r.sourceUrl} &nearr;</a>`
@@ -1028,7 +1109,7 @@ function renderEvidenceView() {
           <div class="space-y-2">
             <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Extracted Facts &amp; Notes (${items.length})</div>
             ${items.map(it => `
-              <div class="p-3 rounded-md bg-canvas border border-borderHairline space-y-1 text-xs">
+              <div class="p-3 rounded-md bg-surface border border-borderHairline space-y-1 text-xs">
                 <div class="flex items-center justify-between gap-2">
                   <span class="font-semibold text-textPrimary">${it.item || 'Note'}</span>
                   <span class="font-mono text-[10px] text-textDim shrink-0">${it.time || ''} · ${it.status || ''}</span>
@@ -1043,7 +1124,7 @@ function renderEvidenceView() {
   }
 
   inspectorEl.innerHTML = `
-    <div class="p-4 sm:p-5 border-b border-borderHairline bg-elevated/40 space-y-3">
+    <div class="p-4 sm:p-6 border-b border-borderHairline bg-surface/50 space-y-3">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <div class="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
           <span class="font-semibold text-statusCyan">${activeRec.id}</span>
@@ -1079,9 +1160,9 @@ function renderEvidenceView() {
       </div>
     </div>
 
-    <div class="p-4 sm:p-5 space-y-4">
+    <div class="p-4 sm:p-6 space-y-4">
       ${r.limitations ? `
-        <div class="p-3.5 rounded-md bg-canvas border border-borderHairline space-y-1">
+        <div class="p-3.5 rounded-md bg-surface border border-borderHairline space-y-1">
           <div class="flex items-center justify-between gap-2">
             <span class="font-mono text-[10px] uppercase tracking-wider text-statusAmber">Scope &amp; Limits</span>
             <span class="font-mono text-[10px] text-textDim">${r.severityBasis?.level || r.status || ''}</span>
@@ -1606,8 +1687,17 @@ function setStageFilter(val) {
 
 function handleSearch(val) {
   state.searchQuery = val;
+  state.evidenceSearch = val;
+  const gs = document.getElementById('global-search');
+  const ms = document.getElementById('mobile-board-search');
+  const es = document.getElementById('evidence-search');
+  if (gs && gs.value !== val) gs.value = val;
+  if (ms && ms.value !== val) ms.value = val;
+  if (es && es.value !== val) es.value = val;
+  renderHelpView();
   renderBoardAndList();
   renderTasksWorkspace();
+  renderEvidenceView();
 }
 
 function resetFilters() {
@@ -1615,14 +1705,17 @@ function resetFilters() {
   state.stageFilter = 'All';
   state.checklistStatusFilter = 'all';
   state.searchQuery = '';
+  state.evidenceSearch = '';
   const fc = document.getElementById('filter-contribution');
   const fs = document.getElementById('filter-stage');
   const gs = document.getElementById('global-search');
   const ms = document.getElementById('mobile-board-search');
+  const es = document.getElementById('evidence-search');
   if (fc) fc.value = 'All';
   if (fs) fs.value = 'All';
   if (gs) gs.value = '';
   if (ms) ms.value = '';
+  if (es) es.value = '';
   setChecklistStatusFilter('all');
   renderAll();
 }

@@ -631,58 +631,6 @@
     "sourceSummary": "CBS Sacramento reported a councilmember's concern particularly around Louis Park, a resident helping abandoned dogs off Stanislaus Street, and Stockton Street Dogs' account of dumping off Highway 4. Founder Jesse Mejia estimated at least 200–300 dogs on Stockton's streets at any given time and up to 400 during puppy season; this is an advocate estimate, not a verified census. The group reported feeding dogs on the streets up to four times a week, while saying it cannot directly rescue or remove dogs. The report does not establish precise sites, present-day conditions, or verified hotspots. Pixie Woods is an adjacent public landmark, not a location named in the CBS report."
   },
   {
-    "originalId": "crossover-2026-10-20-reported-location-check-plan",
-    "category": "SOURCE",
-    "categoryLabel": "planning_update",
-    "status": "OPEN",
-    "statusLabel": "Open",
-    "tier": "PLAN // UNFINISHED",
-    "dateAcquired": "2026-10-20",
-    "sourceAgency": "Crossover Stockton",
-    "spatialPrecision": "NO_PUBLIC_ARTIFACT",
-    "limitations": "Crossover account; the underlying correspondence or original file is not published in this preview.",
-    "severityBasis": {
-      "level": "OPEN",
-      "formula": "Crossover account; the underlying correspondence or original file is not published in this preview.",
-      "corroboration": ""
-    },
-    "artifactType": "FIELD_CHECKLIST",
-    "checklistItems": [
-      {
-        "time": "planning_update",
-        "item": "Record account",
-        "status": "OPEN",
-        "note": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed;…"
-      }
-    ],
-    "extractedClaims": [],
-    "custodyChain": [
-      {
-        "date": "Catalog",
-        "actor": "Crossover source",
-        "action": "Original record ID: crossover-2026-10-20-reported-location-check-plan"
-      },
-      {
-        "date": "2026-10-20",
-        "actor": "Crossover Stockton",
-        "action": "Crossover record crossover-2026-10-20-reported-location-check-plan."
-      },
-      {
-        "date": "2026-10-20",
-        "actor": "Crossover Stockton",
-        "action": "Recorded 2026-10-20."
-      },
-      {
-        "date": "2026-10-20",
-        "actor": "Crossover Stockton",
-        "action": "Original artifact not attached to this preview."
-      }
-    ],
-    "agencyResponses": [],
-    "summary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or…",
-    "sourceSummary": "October 20 plan to check public areas around Louis Park and the Stanislaus Street corridor for firsthand evidence of dogs, visible condition, existing care, and unmet needs. The visit date is to be confirmed; locations may change with safe access or current evidence. No completed visit or street-condition observation is documented."
-  },
-  {
     "originalId": "crossover-2026-10-14-sas-first-visit",
     "category": "SOURCE",
     "categoryLabel": "field_report",
@@ -2876,9 +2824,9 @@
     "originalId": "task-sas-volunteer-onboarding-follow-up",
     "category": "WORK_ITEM",
     "categoryLabel": "Investigation work item",
-    "status": "WAITING",
-    "statusLabel": "Waiting",
-    "tier": "WORK ITEM // WAITING",
+    "status": "OPEN",
+    "statusLabel": "Open",
+    "tier": "WORK ITEM // OPEN",
     "dateAcquired": "Not dated",
     "sourceAgency": "Crossover Stockton",
     "spatialPrecision": "NO_PUBLIC_ARTIFACT",
@@ -2924,7 +2872,7 @@
       {
         "date": "Not dated",
         "actor": "Crossover Stockton",
-        "action": "Current status: waiting."
+        "action": "Current status: open."
       },
       {
         "date": "Not dated",
@@ -2956,86 +2904,6 @@
     ],
     "summary": "Check onboarding and orientation",
     "sourceSummary": "Check onboarding and orientation"
-  },
-  {
-    "originalId": "task-monitor-animal-control-ordinance",
-    "category": "WORK_ITEM",
-    "categoryLabel": "Investigation work item",
-    "status": "OPEN",
-    "statusLabel": "Open",
-    "tier": "WORK ITEM // OPEN",
-    "dateAcquired": "Not dated",
-    "sourceAgency": "Crossover Stockton",
-    "spatialPrecision": "NO_PUBLIC_ARTIFACT",
-    "limitations": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
-    "severityBasis": {
-      "level": "OPEN",
-      "formula": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
-      "corroboration": ""
-    },
-    "artifactType": "FIELD_CHECKLIST",
-    "checklistItems": [
-      {
-        "time": "Work plan",
-        "item": "Progress",
-        "status": "OPEN",
-        "note": "open — Verify the Council outcome"
-      },
-      {
-        "time": "Work plan",
-        "item": "Next check",
-        "status": "OPEN",
-        "note": "Check the City Council agenda and legislative record for consideration, amended text, vote, and effective date. — The full instructions are in the data snapshot."
-      },
-      {
-        "time": "Work plan",
-        "item": "Basis",
-        "status": "OPEN",
-        "note": "2 existing records — Record IDs are in the provenance trail."
-      }
-    ],
-    "extractedClaims": [],
-    "custodyChain": [
-      {
-        "date": "Catalog",
-        "actor": "Crossover source",
-        "action": "Original record ID: task-monitor-animal-control-ordinance"
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Crossover task task-monitor-animal-control-ordinance."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Current status: open."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Basis record: stockton-2026-10-19-animal-services-ordinance-agenda."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Basis record: stocktonia-2026-10-20-animal-control-proposals."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "No completion record is attached."
-      }
-    ],
-    "agencyResponses": [
-      {
-        "date": "Not dated",
-        "agency": "Crossover Stockton",
-        "statement": "No response is recorded for this unfinished task."
-      }
-    ],
-    "summary": "Verify the Council outcome",
-    "sourceSummary": "Verify the Council outcome"
   },
   {
     "originalId": "task-contact-cbs-charlie-lapastora",
@@ -3118,147 +2986,6 @@
     "sourceSummary": "Clarify reported locations and seek firsthand leads"
   },
   {
-    "originalId": "task-check-hard-luck-vet-expansion",
-    "category": "WORK_ITEM",
-    "categoryLabel": "Investigation work item",
-    "status": "OPEN",
-    "statusLabel": "Open",
-    "tier": "WORK ITEM // OPEN",
-    "dateAcquired": "Not dated",
-    "sourceAgency": "Crossover Stockton",
-    "spatialPrecision": "NO_PUBLIC_ARTIFACT",
-    "limitations": "This is an open work item. It is not evidence that the agreement ceiling was spent, positions were filled, or community low-cost appointments were delivered.",
-    "severityBasis": {
-      "level": "OPEN",
-      "formula": "This is an open work item. It is not evidence that the agreement ceiling was spent, positions were filled, or community low-cost appointments were delivered.",
-      "corroboration": ""
-    },
-    "artifactType": "FIELD_CHECKLIST",
-    "checklistItems": [
-      {
-        "time": "Work plan",
-        "item": "Progress",
-        "status": "OPEN",
-        "note": "open — Inspect the Hard Luck AWA contract extension and seek current service delivery details"
-      },
-      {
-        "time": "Work plan",
-        "item": "Next check",
-        "status": "OPEN",
-        "note": "Inspect the Hard Luck AWA veterinary-services agreement and its amendments (GOV-2026-006: 4 added positions, up to $3,969,675 ceiling), then seek current, attributable information from the City of Stockton and/or Hard Luck AWA."
-      },
-      {
-        "time": "Work plan",
-        "item": "Questions to verify",
-        "status": "OPEN",
-        "note": "(1) Duties & fill status of the 4 positions; (2) Shelter vs. community pet spay/neuter services; (3) Eligibility, pricing, referral, location & scheduling routes; (4) Actual spend & procedures delivered over what period; (5) Overlap with Animal Balance, Pet Adoption & Wellness Center, and shelter expansion."
-      },
-      {
-        "time": "Work plan",
-        "item": "Basis",
-        "status": "OPEN",
-        "note": "1 existing record (GOV-2026-006) — Record IDs are in the provenance trail."
-      }
-    ],
-    "extractedClaims": [],
-    "custodyChain": [
-      {
-        "date": "Catalog",
-        "actor": "Crossover source",
-        "action": "Original record ID: task-check-hard-luck-vet-expansion"
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Crossover task task-check-hard-luck-vet-expansion."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Current status: open."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Basis record: hlawa-2026-06-09-contract-extension (GOV-2026-006)."
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "No completion record is attached."
-      }
-    ],
-    "agencyResponses": [
-      {
-        "date": "Not dated",
-        "agency": "Crossover Stockton",
-        "statement": "No response is recorded for this unfinished task."
-      }
-    ],
-    "summary": "Inspect the Hard Luck AWA contract extension and seek current service delivery details",
-    "sourceSummary": "Inspect the Hard Luck AWA contract extension and seek current service delivery details"
-  },
-  {
-    "originalId": "task-verify-st-marys-pathways-bed-gaps",
-    "category": "WORK_ITEM",
-    "categoryLabel": "Investigation work item",
-    "status": "OPEN",
-    "statusLabel": "Open",
-    "tier": "WORK ITEM // OPEN",
-    "dateAcquired": "Not dated",
-    "sourceAgency": "Crossover Stockton",
-    "spatialPrecision": "NO_PUBLIC_ARTIFACT",
-    "limitations": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
-    "severityBasis": {
-      "level": "OPEN",
-      "formula": "This is an unfinished investigation task. It is not evidence that the planned check occurred or that a new finding was established.",
-      "corroboration": ""
-    },
-    "artifactType": "FIELD_CHECKLIST",
-    "checklistItems": [
-      {
-        "time": "Work plan",
-        "item": "Progress",
-        "status": "OPEN",
-        "note": "open — Confirming real-world pet capacity limits (268 total shelter beds at St. Mary’s Pathways), temporary boarding options, and mobile vet pop-up schedules."
-      },
-      {
-        "time": "Work plan",
-        "item": "Next check",
-        "status": "OPEN",
-        "note": "Cross-check outreach logs with Fremont Animal Clinic pop-up dates at St. Mary’s Dining Room and publish a verified field note."
-      },
-      {
-        "time": "Work plan",
-        "item": "Basis",
-        "status": "OPEN",
-        "note": "1 existing record (RESC-2026-001) — Record IDs are in the provenance trail."
-      }
-    ],
-    "extractedClaims": [],
-    "custodyChain": [
-      {
-        "date": "Catalog",
-        "actor": "Crossover source",
-        "action": "Original record ID: task-verify-st-marys-pathways-bed-gaps"
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Current status: open."
-      }
-    ],
-    "agencyResponses": [
-      {
-        "date": "Not dated",
-        "agency": "Crossover Stockton",
-        "statement": "No response is recorded for this unfinished task."
-      }
-    ],
-    "summary": "Confirming real-world pet capacity limits (268 total shelter beds at St. Mary’s Pathways), temporary boarding options during medical/shelter stays, and mobile veterinary pop-up schedules so unhoused neighbors are not forced to separate from their dogs.",
-    "sourceSummary": "Confirming real-world pet capacity limits (268 total shelter beds at St. Mary’s Pathways), temporary boarding options during medical/shelter stays, and mobile veterinary pop-up schedules so unhoused neighbors are not forced to separate from their dogs."
-  },
-  {
     "originalId": "task-reconcile-sas-public-data-baseline",
     "category": "WORK_ITEM",
     "categoryLabel": "Investigation work item",
@@ -3317,65 +3044,5 @@
     ],
     "summary": "Stockton Animal Services updated its public reporting tables. We are auditing the updated figures side-by-side against our 2024 baseline (3,106 stray intakes) and 7,183 CPRA dispatch records so every number on Crossover remains accurate.",
     "sourceSummary": "Stockton Animal Services updated its public reporting tables. We are auditing the updated figures side-by-side against our 2024 baseline (3,106 stray intakes) and 7,183 CPRA dispatch records so every number on Crossover remains accurate."
-  },
-  {
-    "originalId": "task-prototype-bilingual-spay-neuter-matcher",
-    "category": "WORK_ITEM",
-    "categoryLabel": "Investigation work item",
-    "status": "OPEN",
-    "statusLabel": "Planned",
-    "tier": "WORK ITEM // PLANNED",
-    "dateAcquired": "Not dated",
-    "sourceAgency": "Crossover Stockton",
-    "spatialPrecision": "NO_PUBLIC_ARTIFACT",
-    "limitations": "This is a planned prototype queued behind verification of public data reconciliation and onboarding checks.",
-    "severityBasis": {
-      "level": "OPEN",
-      "formula": "This is a planned prototype queued behind verification of public data reconciliation and onboarding checks.",
-      "corroboration": ""
-    },
-    "artifactType": "FIELD_CHECKLIST",
-    "checklistItems": [
-      {
-        "time": "Work plan",
-        "item": "Progress",
-        "status": "OPEN",
-        "note": "planned — Queued behind ISSUE-02 and ISSUE-03 verification."
-      },
-      {
-        "time": "Work plan",
-        "item": "Next check",
-        "status": "OPEN",
-        "note": "Scope bilingual (English/Spanish) SMS & web spay/neuter slot matcher once prerequisite checks are verified."
-      },
-      {
-        "time": "Work plan",
-        "item": "Basis",
-        "status": "OPEN",
-        "note": "1 existing record (CPRA-2026-001-RECEIPT) — Record IDs are in the provenance trail."
-      }
-    ],
-    "extractedClaims": [],
-    "custodyChain": [
-      {
-        "date": "Catalog",
-        "actor": "Crossover source",
-        "action": "Original record ID: task-prototype-bilingual-spay-neuter-matcher"
-      },
-      {
-        "date": "Not dated",
-        "actor": "Crossover Stockton",
-        "action": "Current status: planned."
-      }
-    ],
-    "agencyResponses": [
-      {
-        "date": "Not dated",
-        "agency": "Crossover Stockton",
-        "statement": "No response is recorded for this planned task."
-      }
-    ],
-    "summary": "Once ISSUE-02 and ISSUE-03 are verified, test a lightweight tool that matches Stockton pet owners to open low-cost sterilization slots and sends automated reminders to reduce missed appointments.",
-    "sourceSummary": "Once ISSUE-02 and ISSUE-03 are verified, test a lightweight tool that matches Stockton pet owners to open low-cost sterilization slots and sends automated reminders to reduce missed appointments."
   }
 ]

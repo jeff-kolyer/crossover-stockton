@@ -10,38 +10,89 @@
     "imageCaption": "STOCKTON, CALIFORNIA · SEE CLEARLY. ACT LOCALLY."
   },
   "priorities": [
-    {"number": "01", "name": "Upstream Spay/Neuter Surgical & Scheduling Bottleneck", "summary": "Surgical waitlists, out-of-pocket costs, and scheduling or transport friction may keep willing pet families from getting dogs sterilized before accidental litters occur.", "articleId": "art-bottlenecks-ai"},
-    {"number": "02", "name": "Appointment-Only Shelter Intake & Handoff Friction", "summary": "Appointment-based stray intake and unclear lost-and-found steps can leave finders unsure how to get a roaming dog scanned, housed, or temporarily fostered.", "articleId": "art-reporting-handoffs"},
-    {"number": "03", "name": "Willing-Helper & Volunteer Onboarding Follow-Up (Doggie Day Out / Foster)", "summary": "Crossover's October 14 volunteer application and October 12 Doggie Day Out inquiry remain pending follow-up; it is not yet established what causes onboarding delays or unanswered inquiries.", "articleId": "art-bottlenecks-ai"}
+    {
+      "number": "01",
+      "name": "Upstream Spay/Neuter Surgical & Scheduling Bottleneck",
+      "summary": "Surgical waitlists, out-of-pocket costs, and scheduling or transport friction may keep willing pet families from getting dogs sterilized before accidental litters occur.",
+      "articleId": "art-bottlenecks-ai"
+    },
+    {
+      "number": "02",
+      "name": "Appointment-Only Shelter Intake & Handoff Friction",
+      "summary": "Appointment-based stray intake and unclear lost-and-found steps can leave finders unsure how to get a roaming dog scanned, housed, or temporarily fostered.",
+      "articleId": "art-reporting-handoffs"
+    },
+    {
+      "number": "03",
+      "name": "Willing-Helper & Volunteer Onboarding Follow-Up (Doggie Day Out / Foster)",
+      "summary": "Crossover's October 14 volunteer application and October 12 Doggie Day Out inquiry remain pending follow-up; it is not yet established what causes onboarding delays or unanswered inquiries.",
+      "articleId": "art-bottlenecks-ai"
+    }
   ],
   "carePaths": [
-    {"name": "A lost family dog", "need": "A safe scan and a reliable lost-pet report.", "next": "Check identification and connect the dog with its family when possible."},
-    {"name": "An injured dog alone", "need": "A safe report, urgent assessment, and transport to care.", "next": "Confirm who can respond and where the dog can recover."},
-    {"name": "A dog with a person in crisis", "need": "Support for the person and dog together.", "next": "Ask about pet-accessible services before assuming the dog needs intake."}
+    {
+      "name": "A lost family dog",
+      "need": "A safe scan and a reliable lost-pet report.",
+      "next": "Check identification and connect the dog with its family when possible."
+    },
+    {
+      "name": "An injured dog alone",
+      "need": "A safe report, urgent assessment, and transport to care.",
+      "next": "Confirm who can respond and where the dog can recover."
+    },
+    {
+      "name": "A dog with a person in crisis",
+      "need": "Support for the person and dog together.",
+      "next": "Ask about pet-accessible services before assuming the dog needs intake."
+    }
   ],
   "doing": {
     "eyebrow": "Local work & documented actions",
     "title": "What we're doing",
     "intro": "Our work follows a simple loop: identify a need, make the next step clear, and help locally. These are the actions we have documented and the work still ahead, with the source record attached to each item.",
     "steps": [
-      {"number": "01", "label": "NOTICE", "text": "Identify a real need and listen to people close to it."},
-      {"number": "02", "label": "CONNECT", "text": "Clarify the next handoff and who can help."},
-      {"number": "03", "label": "ACT", "text": "Follow through with practical local support."}
+      {
+        "number": "01",
+        "label": "NOTICE",
+        "text": "Identify a real need and listen to people close to it."
+      },
+      {
+        "number": "02",
+        "label": "CONNECT",
+        "text": "Clarify the next handoff and who can help."
+      },
+      {
+        "number": "03",
+        "label": "ACT",
+        "text": "Follow through with practical local support."
+      }
     ],
-    "featured": ["WORK-2026-001", "WORK-2026-002", "WORK-2026-008"],
-    "order": ["WORK-2026-002", "WORK-2026-001", "WORK-2026-005", "WORK-2026-004", "WORK-2026-003", "WORK-2026-006", "WORK-2026-007", "WORK-2026-008", "WORK-2026-009", "WORK-2026-010", "WORK-2026-011", "FLD-2026-002", "FLD-2026-003", "FLD-2026-004", "CPRA-2026-001-REQUEST", "CPRA-2026-001-RECEIPT"],
+    "featured": [
+      "WORK-2026-001",
+      "WORK-2026-002"
+    ],
+    "order": [
+      "WORK-2026-002",
+      "WORK-2026-001",
+      "WORK-2026-005",
+      "WORK-2026-004",
+      "WORK-2026-003",
+      "WORK-2026-007",
+      "WORK-2026-010",
+      "FLD-2026-002",
+      "FLD-2026-003",
+      "FLD-2026-004",
+      "CPRA-2026-001-REQUEST",
+      "CPRA-2026-001-RECEIPT"
+    ],
     "areas": {
       "WORK-2026-002": "Street outreach · St. Mary's",
       "WORK-2026-001": "Public records · Animal Services",
       "WORK-2026-005": "Volunteer access · Animal Services",
       "WORK-2026-004": "Partner contact · Stockton Street Dogs",
       "WORK-2026-003": "Field lead · South Stockton",
-      "WORK-2026-006": "Policy · City Council",
       "WORK-2026-007": "Partner contact · Media",
-      "WORK-2026-008": "Veterinary contract · Hard Luck AWA",
-      "WORK-2026-009": "Field Verification · Central Stockton",
       "WORK-2026-010": "Data Hygiene · Public Records",
-      "WORK-2026-011": "Applied AI Prototype",
       "FLD-2026-002": "Volunteering · Animal Services",
       "FLD-2026-003": "Volunteering · Stockton Street Dogs",
       "FLD-2026-004": "Program inquiry · Doggie Day Out",
@@ -54,10 +105,38 @@
     "intro": "We use AI as a clear mirror, not an idol. It can help us see where care stalls and remove practical friction for everyday people. Local partners still confirm the facts, make decisions, and provide the care.",
     "sectionTitle": "Where we're applying AI",
     "ideas": [
-      {"number": "01", "title": "Spay/neuter & clinic navigator", "stage": "Ready to scope", "friction": "A person can find a clinic name yet still miss the right service, eligibility rule, appointment step, or way to get there.", "role": "A plain-English guide could ask about location, dog size and age, and urgency, then show checked care options and what to ask when booking. Live openings would appear only if a provider confirms them.", "articleId": "art-bottlenecks-ai"},
-      {"number": "02", "title": "Found-dog & temporary foster guide", "stage": "Ready to scope", "friction": "A finder may not know where to request a microchip scan, report a found pet, or ask about a temporary foster route when shelter drop-off requires a call.", "role": "A guided path could separate urgent injury from a likely lost pet, link to the City's lost-and-found guidance, and show the next contact. Foster availability would require a current answer from the shelter or partner.", "articleId": "art-reporting-handoffs"},
-      {"number": "03", "title": "Outreach signal organizer", "stage": "Idea to test", "friction": "Reports of a dog in need can be scattered or duplicated, leaving outreach partners unsure whether they describe one dog or several.", "role": "AI could group public reports for human review and help a local partner decide whom to contact. A suggested match would remain a lead, not a verified sighting or dispatch decision.", "articleId": "art-stats-2024-update"},
-      {"number": "04", "title": "Public data watcher", "stage": "Ready to scope", "friction": "Shelter figures can change while older numbers remain in articles and community discussions.", "role": "A watcher could flag changes in public releases, keep the source and date attached, and prompt a person to check whether species, period, and service area still match before updating a claim.", "articleId": "art-expansion-canine-campus"}
+      {
+        "number": "01",
+        "title": "Spay/neuter & clinic navigator",
+        "stage": "Ready to scope",
+        "friction": "A person can find a clinic name yet still miss the right service, eligibility rule, appointment step, or way to get there.",
+        "role": "A plain-English guide could ask about location, dog size and age, and urgency, then show checked care options and what to ask when booking. Live openings would appear only if a provider confirms them.",
+        "articleId": "art-bottlenecks-ai"
+      },
+      {
+        "number": "02",
+        "title": "Found-dog & temporary foster guide",
+        "stage": "Ready to scope",
+        "friction": "A finder may not know where to request a microchip scan, report a found pet, or ask about a temporary foster route when shelter drop-off requires a call.",
+        "role": "A guided path could separate urgent injury from a likely lost pet, link to the City's lost-and-found guidance, and show the next contact. Foster availability would require a current answer from the shelter or partner.",
+        "articleId": "art-reporting-handoffs"
+      },
+      {
+        "number": "03",
+        "title": "Outreach signal organizer",
+        "stage": "Idea to test",
+        "friction": "Reports of a dog in need can be scattered or duplicated, leaving outreach partners unsure whether they describe one dog or several.",
+        "role": "AI could group public reports for human review and help a local partner decide whom to contact. A suggested match would remain a lead, not a verified sighting or dispatch decision.",
+        "articleId": "art-stats-2024-update"
+      },
+      {
+        "number": "04",
+        "title": "Public data watcher",
+        "stage": "Ready to scope",
+        "friction": "Shelter figures can change while older numbers remain in articles and community discussions.",
+        "role": "A watcher could flag changes in public releases, keep the source and date attached, and prompt a person to check whether species, period, and service area still match before updating a claim.",
+        "articleId": "art-expansion-canine-campus"
+      }
     ],
     "aside": {
       "eyebrow": "Intellectual Honesty · Pressure-Testing Ideas",

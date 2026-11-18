@@ -72,7 +72,9 @@
       "RESC-2026-004",
       "RESC-2026-005",
       "WORK-2026-004",
-      "WORK-2026-002"
+      "WORK-2026-002",
+      "WORK-2026-003",
+      "WORK-2026-007"
     ],
     "actionDetails": {
       "whatNeeded": "Determine whether providing dog food or clean water directly is needed and appropriate.",
@@ -92,6 +94,18 @@
       {
         "taskId": "WORK-2026-002",
         "text": "Visit the St. Mary's area to observe conditions (video lead, not proof of current conditions)",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "taskId": "WORK-2026-003",
+        "text": "Verify reported conditions in South Stockton / District 5",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "taskId": "WORK-2026-007",
+        "text": "Contact CBS reporter Charlie Lapastora",
         "done": false,
         "waiting": false
       }
