@@ -65,9 +65,35 @@ for (const item of [...siteContent.priorities, ...siteContent.ai.ideas]) {
   if (!articleIds.has(item.articleId)) errors.push(`site content references unknown article ${item.articleId}`);
 }
 for (const id of siteContent.doing.order) if (!displayIds.has(id)) errors.push(`doing page references unknown record ${id}`);
+
+// Validate Pathway Tracker data files
+const trackerConfig = await read('tracker-config');
+const trackerPathways = await read('pathways');
+const previewEstablished = await read('preview-established');
+const evidenceRecords = await read('evidence-records');
+
+const validStages = new Set((trackerConfig.stages ?? []).map(s => s.id));
+const validContribs = new Set(trackerConfig.contributions ?? []);
+const evidenceIds = new Set();
+for (const ev of evidenceRecords) {
+  if (!ev.id || evidenceIds.has(ev.id)) errors.push(`missing or duplicate evidence ID: ${ev.id}`);
+  evidenceIds.add(ev.id);
+}
+const pathwayIds = new Set();
+for (const pw of [...trackerPathways, ...previewEstablished]) {
+  if (!pw.id || pathwayIds.has(pw.id)) errors.push(`missing or duplicate pathway ID: ${pw.id}`);
+  pathwayIds.add(pw.id);
+  if (!validStages.has(pw.stage)) errors.push(`${pw.id}: invalid stage ${pw.stage}`);
+  for (const c of pw.contributions ?? []) if (!validContribs.has(c)) errors.push(`${pw.id}: invalid contribution ${c}`);
+  for (const evId of pw.linkedEvidence ?? []) if (!evidenceIds.has(evId)) errors.push(`${pw.id}: unknown linkedEvidence ${evId}`);
+}
+for (const ev of evidenceRecords) {
+  if (ev.linkedPathway && !pathwayIds.has(ev.linkedPathway)) errors.push(`${ev.id}: unknown linkedPathway ${ev.linkedPathway}`);
+}
+
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;
 } else {
-  console.log(`Catalog check passed: ${source.size} source records, ${curated.length} curated records, ${ledger.length} stable display IDs.`);
+  console.log(`Catalog check passed: ${source.size} source records, ${curated.length} curated records, ${ledger.length} stable display IDs, ${trackerPathways.length} live pathways, ${previewEstablished.length} preview pathways, ${evidenceRecords.length} evidence records.`);
 }

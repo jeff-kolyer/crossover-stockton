@@ -1,0 +1,68 @@
+{
+  "stages": [
+    {
+      "id": "Exploring",
+      "num": "01",
+      "label": "Exploring",
+      "dotColor": "bg-statusSlate",
+      "textColor": "text-statusSlate"
+    },
+    {
+      "id": "Blocked",
+      "num": "02",
+      "label": "Blocked",
+      "dotColor": "bg-statusAmber",
+      "textColor": "text-statusAmber"
+    },
+    {
+      "id": "Enabling",
+      "num": "03",
+      "label": "Enabling",
+      "dotColor": "bg-statusBlue",
+      "textColor": "text-statusBlue"
+    },
+    {
+      "id": "Established",
+      "num": "04",
+      "label": "Established",
+      "dotColor": "bg-statusEmerald",
+      "textColor": "text-statusEmerald"
+    }
+  ],
+  "contributions": [
+    "All",
+    "Presence",
+    "Funding",
+    "Supplies",
+    "Transport",
+    "Space",
+    "Skills"
+  ],
+  "confidenceCriteria": [
+    {
+      "key": "completed",
+      "label": "We have personally completed this pathway",
+      "points": 30
+    },
+    {
+      "key": "confirmed",
+      "label": "Responsible organization directly confirmed it",
+      "points": 25
+    },
+    {
+      "key": "steps",
+      "label": "Exact steps, requirements, and contact established",
+      "points": 20
+    },
+    {
+      "key": "recent",
+      "label": "Availability has been checked recently",
+      "points": 15
+    },
+    {
+      "key": "corroborated",
+      "label": "Independent corroborating evidence exists",
+      "points": 10
+    }
+  ]
+}

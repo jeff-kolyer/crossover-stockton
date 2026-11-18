@@ -1,0 +1,2810 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CROSSOVER STOCKTON — Pathway Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#0B0D10',
+            surface: '#12161C',
+            elevated: '#1A2029',
+            elevatedHover: '#202733',
+            borderHairline: '#262E3A',
+            borderStrong: '#343F4F',
+            textPrimary: '#F3F5F8',
+            textMuted: '#9AA4B2',
+            textDim: '#687385',
+            statusAmber: '#F59E0B',
+            statusEmerald: '#10B981',
+            statusCyan: '#06B6D4',
+            statusBlue: '#3B82F6',
+            statusSlate: '#94A3B8',
+            statusRose: '#F43F5E'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0B0D10;
+      color: #F3F5F8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    .tabular-nums {
+      font-variant-numeric: tabular-nums;
+    }
+    /* Custom dark scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0B0D10;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #262E3A;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #343F4F;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0.7; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .drawer-enter {
+      animation: slideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="h-[100dvh] overflow-hidden flex flex-col bg-canvas text-textPrimary selection:bg-statusCyan/20 selection:text-textPrimary">
+
+  <!-- =========================================================================
+       TOP COMMAND BAR (CLICKABLE COUNTS VISIBLE ON MOBILE & DESKTOP)
+  ========================================================================== -->
+  <header class="h-14 border-b border-borderHairline bg-surface px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0 z-30">
+    <!-- Left: Mobile Menu + Brand Home -->
+    <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+      <button onclick="toggleMobileSidebar()" class="lg:hidden p-1.5 rounded-md border border-borderHairline bg-elevated text-textMuted hover:text-textPrimary shrink-0" aria-label="Toggle navigation">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+
+      <button onclick="goHome()" class="flex items-center gap-2 text-left group min-w-0" title="Return to Help Today">
+        <div class="w-7 h-7 rounded-md bg-elevated border border-borderStrong flex items-center justify-center font-mono text-xs font-semibold text-statusEmerald shrink-0 group-hover:border-statusEmerald/50 transition-colors">
+          CS
+        </div>
+        <div class="flex items-center gap-2 min-w-0">
+          <span class="font-mono text-xs sm:text-[13px] font-semibold tracking-wider text-textPrimary truncate">
+            <span class="hidden sm:inline">CROSSOVER STOCKTON</span>
+            <span class="sm:hidden">CROSSOVER</span>
+          </span>
+          <span class="hidden md:inline-flex items-center px-2 py-0.5 rounded bg-elevated border border-borderHairline font-mono text-[10px] text-textMuted shrink-0">
+            PATHWAY TRACKER
+          </span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Center/Right: Clickable Status Counts (Always visible on mobile & desktop) -->
+    <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <!-- Live Clickable Count Boxes -->
+      <div class="flex items-center gap-1 sm:gap-1.5 font-mono text-xs tabular-nums" aria-label="Pathway status counts">
+        <button
+          onclick="jumpToHelp()"
+          id="top-count-established-btn"
+          class="h-7 px-2 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Established pathways — Help Today"
+        >
+          <span class="w-2 h-2 rounded-full bg-statusEmerald shrink-0"></span>
+          <span class="hidden xl:inline text-textMuted text-[11px]">Established:</span>
+          <span id="stat-established" class="text-textPrimary font-semibold">0</span>
+        </button>
+
+        <button
+          onclick="jumpToStage('Enabling')"
+          id="top-count-enabling-btn"
+          class="h-7 px-2 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Enabling pathways — active work to open routes"
+        >
+          <span class="w-2 h-2 rounded-full bg-statusBlue shrink-0"></span>
+          <span class="hidden xl:inline text-textMuted text-[11px]">Enabling:</span>
+          <span id="stat-enabling" class="text-textPrimary font-semibold">2</span>
+        </button>
+
+        <button
+          onclick="jumpToStage('Blocked')"
+          id="top-count-blocked-btn"
+          class="h-7 px-2 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Blocked pathways — bottlenecks discovered"
+        >
+          <span class="w-2 h-2 rounded-full bg-statusAmber shrink-0"></span>
+          <span class="hidden xl:inline text-textMuted text-[11px]">Blocked:</span>
+          <span id="stat-blocked" class="text-textPrimary font-semibold">2</span>
+        </button>
+
+        <button
+          onclick="openTasksWorkspace('open')"
+          id="top-count-tasks-btn"
+          class="hidden sm:flex h-7 px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline items-center gap-1.5 transition-colors"
+          title="Open actionable tasks"
+        >
+          <span class="w-2 h-2 rounded-full bg-statusCyan shrink-0"></span>
+          <span class="hidden xl:inline text-textMuted text-[11px]">Tasks:</span>
+          <span id="stat-open-tasks" class="text-statusCyan font-semibold">6</span>
+        </button>
+      </div>
+
+      <!-- Desktop Quick Search -->
+      <div class="relative hidden lg:block ml-1">
+        <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+        </svg>
+        <input
+          type="text"
+          id="global-search"
+          oninput="handleSearch(this.value)"
+          placeholder="Filter pathway, org, tag... (/)"
+          class="w-48 xl:w-56 h-8 pl-8 pr-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan/60 focus:outline-none text-xs text-textPrimary placeholder-textDim"
+        />
+      </div>
+
+      <!-- New Pathway CTA -->
+      <button onclick="openNewPathwayModal()" class="h-7 sm:h-8 px-2.5 sm:px-3 rounded-md bg-textPrimary text-canvas hover:bg-white font-medium text-xs flex items-center gap-1 transition-colors shadow-sm shrink-0">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 5v14M5 12h14"/></svg>
+        <span class="hidden sm:inline">New Pathway</span>
+        <span class="sm:hidden">New</span>
+      </button>
+
+      <!-- About / Methodology Button (?) -->
+      <button onclick="openAboutDrawer()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-elevated hover:bg-elevatedHover border border-borderStrong text-textMuted hover:text-textPrimary font-mono text-xs font-semibold flex items-center justify-center transition-colors shrink-0" title="About &amp; Methodology" aria-label="About and Methodology">
+        ?
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       WORKSPACE BODY
+  ========================================================================== -->
+  <div class="flex-1 flex overflow-hidden relative">
+
+    <!-- DESKTOP LEFT SIDEBAR NAVIGATION -->
+    <aside id="left-sidebar" class="hidden lg:flex flex-col w-60 border-r border-borderHairline bg-surface shrink-0 justify-between overflow-y-auto">
+      <div class="p-3 space-y-6">
+
+        <!-- Primary Workspace Views -->
+        <div>
+          <div class="px-2.5 mb-1.5 font-mono text-[10px] uppercase tracking-wider text-textDim">Platform</div>
+          <nav class="space-y-0.5">
+            <button onclick="switchMainView('help')" data-view-btn="help" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium bg-elevated text-textPrimary border border-borderHairline">
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-statusEmerald" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Help Today</span>
+              </span>
+              <span id="nav-count-help" class="font-mono text-[11px] tabular-nums text-statusEmerald">0</span>
+            </button>
+
+            <button onclick="switchMainView('board')" data-view-btn="board" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-statusBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+                <span>Pathways Board</span>
+              </span>
+              <span id="nav-count-pathways" class="font-mono text-[11px] tabular-nums text-textMuted">6</span>
+            </button>
+
+            <button onclick="switchMainView('tasks')" data-view-btn="tasks" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                <span>Tasks &amp; Checklists</span>
+              </span>
+              <span id="nav-count-tasks" class="font-mono text-[11px] tabular-nums text-statusCyan">6 open</span>
+            </button>
+
+            <button onclick="switchMainView('evidence')" data-view-btn="evidence" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-statusAmber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                <span>Evidence &amp; Records</span>
+              </span>
+              <span id="nav-count-evidence" class="font-mono text-[11px] tabular-nums text-textMuted">8</span>
+            </button>
+          </nav>
+        </div>
+
+        <!-- Contribution Filters -->
+        <div>
+          <div class="px-2.5 mb-1.5 font-mono text-[10px] uppercase tracking-wider text-textDim">Contributions</div>
+          <div id="sidebar-contributions" class="space-y-0.5">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Stage Telemetry -->
+        <div>
+          <div class="px-2.5 mb-2 font-mono text-[10px] uppercase tracking-wider text-textDim">Pathway Pipeline</div>
+          <div class="px-2.5 space-y-2 text-[11px] font-mono tabular-nums" id="sidebar-stage-counts">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Live vs Preview Mode Switcher -->
+        <div class="px-1">
+          <div class="px-1.5 mb-1.5 font-mono text-[10px] uppercase tracking-wider text-textDim">Help Board Mode</div>
+          <div class="grid grid-cols-2 gap-1 p-0.5 rounded-md bg-canvas border border-borderHairline">
+            <button onclick="setBoardMode('live')" data-mode-btn="live" class="py-1 rounded text-[11px] font-medium bg-elevated text-textPrimary transition-colors">Live (0)</button>
+            <button onclick="setBoardMode('preview')" data-mode-btn="preview" class="py-1 rounded text-[11px] font-medium text-textMuted hover:text-textPrimary transition-colors">Preview (4)</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Repo Metadata Footer -->
+      <div class="p-3 border-t border-borderHairline text-[11px] font-mono text-textDim space-y-1">
+        <div class="flex items-center justify-between">
+          <span>crossoverstockton.org</span>
+          <span class="text-statusEmerald">● LIVE</span>
+        </div>
+        <div>Updated 18m ago &middot; Stockton, CA</div>
+      </div>
+    </aside>
+
+    <!-- MOBILE SIDEBAR OVERLAY -->
+    <div id="mobile-sidebar-backdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/65 z-40 hidden lg:hidden"></div>
+    <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 w-72 bg-surface border-r border-borderHairline z-50 hidden flex-col justify-between p-4 lg:hidden">
+      <div class="space-y-5 overflow-y-auto">
+        <div class="flex items-center justify-between border-b border-borderHairline pb-3">
+          <div>
+            <div class="font-mono text-xs font-semibold text-textPrimary">CROSSOVER STOCKTON</div>
+            <div class="font-mono text-[10px] text-textDim">Pathway Development Platform</div>
+          </div>
+          <button onclick="toggleMobileSidebar()" class="text-textMuted hover:text-textPrimary p-1.5 rounded-md hover:bg-elevated">✕</button>
+        </div>
+
+        <nav class="space-y-1">
+          <button onclick="switchMainView('help'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium bg-elevated/60 text-textPrimary">
+            <span>Help Today</span>
+            <span id="mob-nav-help" class="font-mono text-[11px] text-statusEmerald">0</span>
+          </button>
+          <button onclick="switchMainView('board'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+            <span>Pathways Board</span>
+            <span id="mob-nav-pathways" class="font-mono text-[11px]">6</span>
+          </button>
+          <button onclick="switchMainView('tasks'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+            <span>Tasks &amp; Checklists</span>
+            <span id="mob-nav-tasks" class="font-mono text-[11px] text-statusCyan">6 open</span>
+          </button>
+          <button onclick="switchMainView('evidence'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+            <span>Evidence &amp; Records</span>
+            <span id="mob-nav-evidence" class="font-mono text-[11px]">8</span>
+          </button>
+        </nav>
+
+        <div class="pt-3 border-t border-borderHairline space-y-2">
+          <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Help Board Mode</div>
+          <div class="grid grid-cols-2 gap-1 p-0.5 rounded-md bg-canvas border border-borderHairline">
+            <button onclick="setBoardMode('live')" data-mode-btn="live" class="py-1.5 rounded text-xs font-medium bg-elevated text-textPrimary">Live (0)</button>
+            <button onclick="setBoardMode('preview')" data-mode-btn="preview" class="py-1.5 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Preview (4)</button>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-borderHairline space-y-1.5">
+          <button onclick="toggleMobileSidebar(); openAboutDrawer();" class="w-full text-left px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+            About &amp; Methodology
+          </button>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-statusCyan hover:bg-elevated/40">
+            Connect on LinkedIn &rarr;
+          </a>
+        </div>
+      </div>
+
+      <div class="font-mono text-[11px] text-textDim pt-3 border-t border-borderHairline">
+        Updated 18m ago &middot; Stockton, CA
+      </div>
+    </aside>
+
+    <!-- =======================================================================
+         MAIN CONTENT CONTAINER
+    ======================================================================== -->
+    <main class="flex-1 flex flex-col overflow-hidden bg-canvas pb-14 lg:pb-0">
+
+      <!-- ===================================================================
+           VIEW 1: HELP TODAY (PUBLIC PRODUCT — ESTABLISHED PATHWAYS ONLY)
+      ==================================================================== -->
+      <section id="view-help" class="flex-1 flex flex-col overflow-hidden">
+        <!-- Uniform Context Header (Matches Pathways, Tasks & Evidence) -->
+        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex items-center gap-2 min-w-0">
+            <span id="help-status-dot" class="w-2 h-2 rounded-full bg-statusSlate shrink-0"></span>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusEmerald font-semibold truncate">HELP TODAY &middot; FRESH PATHWAYS</span>
+          </div>
+
+          <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
+              Fresh: <strong id="help-pill-fresh">0</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusAmber">
+              Aging: <strong id="help-pill-aging">0</strong>
+            </span>
+            <button id="help-preview-toggle" onclick="toggleBoardMode()" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderStrong text-[10px] text-textPrimary transition-colors">
+              Preview (4)
+            </button>
+          </div>
+        </div>
+
+        <!-- Uniform Sub-Toolbar: List | Board + Contribution Filter -->
+        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5">
+              <button onclick="setHelpLayout('list')" id="btn-help-list" class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span>List</span>
+              </button>
+              <button onclick="setHelpLayout('board')" id="btn-help-board" class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+                <span>Board</span>
+              </button>
+            </div>
+
+            <span class="text-borderHairline hidden sm:inline">|</span>
+
+            <!-- Contribution Filter Select (Matches Pathways View) -->
+            <div class="flex items-center gap-1.5">
+              <label for="help-filter-contribution" class="font-mono text-[11px] text-textMuted hidden sm:inline">Contribution:</label>
+              <select id="help-filter-contribution" onchange="setHelpFilter(this.value)" class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusEmerald">
+                <option value="All">All Contributions</option>
+                <option value="Presence">Presence</option>
+                <option value="Funding">Funding</option>
+                <option value="Supplies">Supplies</option>
+                <option value="Transport">Transport</option>
+                <option value="Space">Space</option>
+                <option value="Skills">Skills</option>
+              </select>
+            </div>
+          </div>
+
+          <span id="help-status-text" class="font-mono text-[11px] text-textDim tabular-nums">
+            0 established &middot; Updated 18m ago
+          </span>
+        </div>
+
+        <!-- DESKTOP BOARD VIEW (Default on >= 768px) -->
+        <div id="help-board-container" class="flex-1 overflow-x-auto overflow-y-auto xl:overflow-y-hidden p-3 sm:p-4 flex flex-col gap-3.5">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- MOBILE SIMPLE LIST VIEW & DESKTOP STRUCTURED TABLE -->
+        <div id="help-list-container" class="hidden flex-1 overflow-y-auto p-0 sm:p-4">
+          <div id="help-list-inner">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================================
+           VIEW 2: PATHWAYS DEVELOPMENT BOARD (KANBAN + LIST TOGGLE)
+      ==================================================================== -->
+      <section id="view-board" class="hidden flex-1 flex-col overflow-hidden">
+        <!-- Uniform Context Header (Matches Help Today, Tasks & Evidence) -->
+        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex items-center gap-2 min-w-0">
+            <button onclick="switchMainView('help')" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
+              <span>&larr;</span>
+              <span>Help</span>
+            </button>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusBlue font-semibold truncate">PATHWAYS &middot; DEVELOPMENT BOARD</span>
+          </div>
+
+          <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusSlate">
+              Exp: <strong id="pw-pill-exploring">2</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusAmber">
+              Blk: <strong id="pw-pill-blocked">2</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusBlue">
+              Enb: <strong id="pw-pill-enabling">2</strong>
+            </span>
+            <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
+              Est: <strong id="pw-pill-established">0</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Uniform Sub-Toolbar: List | Board + Contribution & Stage Filters -->
+        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <!-- List / Board Switcher -->
+            <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5">
+              <button onclick="setBoardLayout('list')" id="btn-layout-list" class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span>List</span>
+              </button>
+              <button onclick="setBoardLayout('kanban')" id="btn-layout-kanban" class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+                <span>Board</span>
+              </button>
+            </div>
+
+            <span class="text-borderHairline hidden sm:inline">|</span>
+
+            <!-- Contribution Filter Select -->
+            <div class="flex items-center gap-1.5">
+              <label for="filter-contribution" class="font-mono text-[11px] text-textMuted hidden sm:inline">Contribution:</label>
+              <select id="filter-contribution" onchange="setContributionFilter(this.value)" class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
+                <option value="All">All Contributions</option>
+                <option value="Presence">Presence</option>
+                <option value="Funding">Funding</option>
+                <option value="Supplies">Supplies</option>
+                <option value="Transport">Transport</option>
+                <option value="Space">Space</option>
+                <option value="Skills">Skills</option>
+              </select>
+            </div>
+
+            <!-- Stage Filter Select -->
+            <div class="flex items-center gap-1.5">
+              <label for="filter-stage" class="font-mono text-[11px] text-textMuted hidden sm:inline">Stage:</label>
+              <select id="filter-stage" onchange="setStageFilter(this.value)" class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
+                <option value="All">All Stages</option>
+                <option value="Exploring">01 Exploring</option>
+                <option value="Blocked">02 Blocked</option>
+                <option value="Enabling">03 Enabling</option>
+                <option value="Established">04 Established</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Search & Reset -->
+          <div class="flex items-center gap-2">
+            <input
+              type="text"
+              id="mobile-board-search"
+              oninput="handleSearch(this.value)"
+              placeholder="Search pathways..."
+              class="lg:hidden h-7 w-32 sm:w-44 px-2.5 rounded-md bg-canvas border border-borderHairline text-xs text-textPrimary placeholder-textDim focus:outline-none focus:border-statusCyan"
+            />
+            <button id="reset-filters-btn" onclick="resetFilters()" class="hidden text-xs font-mono text-statusCyan hover:underline">
+              Reset
+            </button>
+            <span id="visible-pathway-count" class="font-mono text-[11px] text-textMuted tabular-nums hidden sm:inline">
+              6 pathways
+            </span>
+          </div>
+        </div>
+
+        <!-- KANBAN BOARD CONTAINER (4 STAGES: Exploring | Blocked | Enabling | Established) -->
+        <div id="kanban-container" class="flex-1 overflow-x-auto overflow-y-auto xl:overflow-y-hidden p-3 sm:p-4">
+          <div id="kanban-columns" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3.5 xl:h-full">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- LIST VIEW CONTAINER (Mobile-Friendly Flat Dot Rows + Desktop Table) -->
+        <div id="list-container" class="hidden flex-1 overflow-y-auto p-0 sm:p-4">
+          <!-- Mobile Flat Dot List -->
+          <div id="mobile-pathway-list" class="sm:hidden divide-y divide-borderHairline">
+            <!-- Populated by JS -->
+          </div>
+          <!-- Desktop Table -->
+          <div class="hidden sm:block rounded-lg border border-borderHairline bg-surface overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
+                  <th class="py-2.5 px-3.5">ID</th>
+                  <th class="py-2.5 px-3.5">Stage</th>
+                  <th class="py-2.5 px-3.5">Pathway</th>
+                  <th class="py-2.5 px-3.5">Contributions</th>
+                  <th class="py-2.5 px-3.5">Confidence</th>
+                  <th class="py-2.5 px-3.5">Tasks</th>
+                  <th class="py-2.5 px-3.5">Updated</th>
+                </tr>
+              </thead>
+              <tbody id="list-table-body" class="divide-y divide-borderHairline text-xs">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================================
+           VIEW 3: TASKS & CHECKLISTS WORKSPACE
+      ==================================================================== -->
+      <section id="view-tasks" class="hidden flex-1 flex-col overflow-hidden">
+        <!-- Uniform Context Header -->
+        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex items-center gap-2 min-w-0">
+            <button onclick="switchMainView('board')" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
+              <span>&larr;</span>
+              <span>Board</span>
+            </button>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusCyan font-semibold truncate">CONCRETE WORK &middot; TASKS</span>
+          </div>
+
+          <!-- Task Counts -->
+          <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusCyan">
+              Open: <strong id="tasks-pill-open">0</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusAmber">
+              Waiting: <strong id="tasks-pill-waiting">0</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
+              Done: <strong id="tasks-pill-done">0</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Uniform Sub-Toolbar -->
+        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
+          <div class="flex flex-wrap items-center gap-2">
+            <!-- List vs Board Switcher (Matches Pathways View) -->
+            <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5">
+              <button onclick="setTasksSubLayout('list')" id="btn-tasks-list" class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                <span>List</span>
+              </button>
+              <button onclick="setTasksSubLayout('kanban')" id="btn-tasks-kanban" class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+                <span>Board</span>
+              </button>
+            </div>
+
+            <!-- Status Filter Tabs -->
+            <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5 overflow-x-auto no-scrollbar">
+              <button onclick="setChecklistStatusFilter('all')" id="btn-cl-all" class="px-2 py-1 rounded text-xs font-medium bg-elevated text-textPrimary">All</button>
+              <button onclick="setChecklistStatusFilter('open')" id="btn-cl-open" class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Open</button>
+              <button onclick="setChecklistStatusFilter('waiting')" id="btn-cl-waiting" class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Waiting</button>
+              <button onclick="setChecklistStatusFilter('done')" id="btn-cl-done" class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Done</button>
+            </div>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2 font-mono text-[11px] tabular-nums">
+            <div class="w-24 h-1.5 rounded-full bg-canvas border border-borderHairline overflow-hidden">
+              <div id="checklists-progress-bar" class="h-full bg-statusEmerald transition-all" style="width: 0%"></div>
+            </div>
+            <span id="checklists-summary-text" class="text-textMuted">0 of 0 completed</span>
+          </div>
+        </div>
+
+        <!-- Sub-Mode A: Tasks List (Desktop Table matching Pathway List + Mobile Flat Rows) -->
+        <div id="tasks-list-container" class="flex-1 overflow-y-auto p-0 sm:p-4 space-y-3">
+          <!-- Quick Add Task Bar -->
+          <div class="px-3 pt-3 sm:px-0 sm:pt-0">
+            <form onsubmit="addTaskFromToolbar(event)" class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-2.5 rounded-lg bg-surface border border-borderHairline">
+              <select id="quick-task-pathway" class="h-8 px-2.5 rounded-md bg-elevated border border-borderHairline font-mono text-xs text-textPrimary focus:outline-none focus:border-statusCyan shrink-0 max-w-full sm:max-w-[220px]">
+                <!-- Populated by JS -->
+              </select>
+              <input
+                type="text"
+                id="quick-task-input"
+                required
+                placeholder="+ Add concrete next task..."
+                class="flex-1 min-w-[180px] h-8 px-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan focus:outline-none text-xs text-textPrimary placeholder-textDim"
+              />
+              <button type="submit" class="h-8 px-3.5 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary shrink-0 transition-colors">
+                Add Task
+              </button>
+            </form>
+          </div>
+
+          <!-- Mobile Flat Dot List -->
+          <div id="mobile-tasks-list" class="sm:hidden divide-y divide-borderHairline border-t border-b border-borderHairline">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Desktop Table (Matches Pathways List Table) -->
+          <div class="hidden sm:block rounded-lg border border-borderHairline bg-surface overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
+                  <th class="py-2.5 px-3.5 w-10">Done</th>
+                  <th class="py-2.5 px-3.5">Status</th>
+                  <th class="py-2.5 px-3.5">Task</th>
+                  <th class="py-2.5 px-3.5">Pathway</th>
+                  <th class="py-2.5 px-3.5">Organization</th>
+                  <th class="py-2.5 px-3.5 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tasks-table-body" class="divide-y divide-borderHairline text-xs">
+                <!-- Populated by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Sub-Mode B: 3-Column Task Board -->
+        <div id="tasks-kanban-container" class="hidden flex-1 overflow-x-auto overflow-y-auto md:overflow-y-hidden p-3 sm:p-4">
+          <div id="tasks-kanban-columns" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 md:h-full">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ===================================================================
+           VIEW 4: EVIDENCE & RECORDS INSPECTOR
+      ==================================================================== -->
+      <section id="view-evidence" class="hidden flex-1 flex-col overflow-hidden">
+        <!-- Uniform Context Header (Matches Help Today, Pathways & Tasks) -->
+        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex items-center gap-2 min-w-0">
+            <button onclick="switchMainView('board')" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
+              <span>&larr;</span>
+              <span>Board</span>
+            </button>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusAmber font-semibold truncate">EVIDENCE &middot; RECORDS LOG</span>
+          </div>
+
+          <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusCyan">
+              Calls: <strong id="ev-pill-calls">4</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
+              Visits: <strong id="ev-pill-visits">2</strong>
+            </span>
+            <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusAmber">
+              Records: <strong id="ev-pill-records">2</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Uniform Sub-Toolbar: Record Type Filter Pills -->
+        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+          <div class="flex flex-wrap items-center gap-1.5" id="evidence-type-pills">
+            <!-- Populated by JS -->
+          </div>
+          <span class="font-mono text-[11px] text-textDim hidden sm:inline">Ground truth &amp; CPRA disclosures</span>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-3 sm:p-4">
+          <div class="max-w-6xl mx-auto space-y-4">
+            <!-- Evidence Cards Grid -->
+            <div id="evidence-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Interactive JSON Record Inspector -->
+            <div class="rounded-lg border border-borderHairline bg-surface overflow-hidden">
+              <div class="px-4 py-2.5 border-b border-borderHairline bg-elevated/60 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="font-mono text-[11px] font-medium text-textMuted shrink-0">RECORD INSPECTOR:</span>
+                  <span id="active-evidence-title" class="font-mono text-xs text-statusCyan truncate">EV-01</span>
+                </div>
+                <button onclick="copyActiveEvidenceJson()" class="h-7 px-2.5 rounded bg-canvas hover:bg-elevated border border-borderHairline font-mono text-[11px] text-textPrimary transition-colors">
+                  Copy JSON
+                </button>
+              </div>
+              <div class="p-4 bg-canvas overflow-x-auto">
+                <pre id="evidence-json-preview" class="font-mono text-xs leading-relaxed text-textMuted"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       MOBILE FIXED BOTTOM NAVIGATION BAR (< lg)
+  ========================================================================== -->
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 h-14 bg-surface/95 backdrop-blur border-t border-borderHairline grid grid-cols-4 z-30 pb-[env(safe-area-inset-bottom,0px)]" aria-label="Mobile Navigation">
+    <button onclick="switchMainView('help')" data-mob-tab="help" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-statusEmerald relative">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      <span>Help</span>
+    </button>
+    <button onclick="switchMainView('board')" data-mob-tab="board" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-textDim relative">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+      <span>Pathways</span>
+    </button>
+    <button onclick="switchMainView('tasks')" data-mob-tab="tasks" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-textDim relative">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+      <span>Tasks</span>
+    </button>
+    <button onclick="switchMainView('evidence')" data-mob-tab="evidence" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-textDim relative">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+      <span>Evidence</span>
+    </button>
+  </nav>
+
+
+  <!-- =========================================================================
+       SLIDE-OVER PATHWAY INSPECTOR DRAWER
+  ========================================================================== -->
+  <div id="pathway-drawer-backdrop" onclick="closePathwayDrawer()" class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
+  <aside id="pathway-drawer" class="fixed inset-y-0 right-0 w-full max-w-2xl bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
+    <div class="h-13 px-4 sm:px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between gap-3 shrink-0">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span id="drawer-pathway-id" class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusCyan shrink-0">PW-01</span>
+        <span id="drawer-pathway-org" class="font-mono text-xs text-textMuted truncate">Organization</span>
+      </div>
+      <button onclick="closePathwayDrawer()" class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated transition-colors" aria-label="Close inspector">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div id="drawer-content" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
+      <!-- Populated dynamically -->
+    </div>
+  </aside>
+
+
+  <!-- =========================================================================
+       ABOUT & METHODOLOGY DRAWER (?)
+  ========================================================================== -->
+  <div id="about-drawer-backdrop" onclick="closeAboutDrawer()" class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
+  <aside id="about-drawer" class="fixed inset-y-0 right-0 w-full max-w-lg bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
+    <div class="h-13 px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between shrink-0">
+      <span class="font-mono text-xs font-semibold uppercase tracking-wider text-textPrimary">About &amp; Methodology</span>
+      <button onclick="closeAboutDrawer()" class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated">✕</button>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-5 space-y-5 text-xs">
+      <div class="space-y-2">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-statusEmerald">What Crossover Stockton Is</div>
+        <p class="text-textMuted leading-relaxed">
+          <strong class="text-textPrimary">A pathway development platform for Stockton, CA.</strong> Instead of listing generic charities or tracking abstract problems, Crossover discovers, unblocks, and verifies concrete routes through which someone can actually help today.
+        </p>
+      </div>
+
+      <!-- Mode Switcher -->
+      <div class="p-3.5 rounded-lg bg-canvas border border-borderHairline space-y-2">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Help Board Mode</div>
+        <div class="grid grid-cols-2 gap-1.5">
+          <button onclick="setBoardMode('live')" data-mode-btn="live" class="py-1.5 rounded-md text-xs font-medium bg-elevated text-textPrimary border border-borderStrong">Live State (0)</button>
+          <button onclick="setBoardMode('preview')" data-mode-btn="preview" class="py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary border border-borderHairline">Preview Examples (4)</button>
+        </div>
+        <p class="text-[11px] text-textDim">Live mode stays honestly empty until a pathway is directly confirmed. Preview loads 4 example Established routes.</p>
+      </div>
+
+      <!-- Four Non-Mandatory Stages -->
+      <div class="space-y-2">
+        <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Four Pathway States (Non-Mandatory)</div>
+        <div class="space-y-2">
+          <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-statusSlate mt-1 shrink-0"></span>
+            <div><strong class="text-textPrimary">01 Exploring:</strong> <span class="text-textMuted">Checking whether an accessible route to help exists.</span></div>
+          </div>
+          <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-statusAmber mt-1 shrink-0"></span>
+            <div><strong class="text-textPrimary">02 Blocked:</strong> <span class="text-textMuted">A real obstacle prevents helping (e.g., unresponsive inbox, 4-week waitlist, no payment route).</span></div>
+          </div>
+          <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-statusBlue mt-1 shrink-0"></span>
+            <div><strong class="text-textPrimary">03 Enabling:</strong> <span class="text-textMuted">Active intervention underway to clear a bottleneck and make a route usable.</span></div>
+          </div>
+          <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-statusEmerald mt-1 shrink-0"></span>
+            <div><strong class="text-textPrimary">04 Established:</strong> <span class="text-textMuted">Verified, repeatable, and fresh (&lt;48h). Only Established pathways appear in Help Today.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Confidence Calculator -->
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Evidence Confidence Rubric</div>
+          <button onclick="resetCalc()" class="font-mono text-[10px] text-statusCyan hover:underline">Reset (45/100)</button>
+        </div>
+        <div class="p-3 rounded-lg bg-canvas border border-borderHairline space-y-2.5">
+          <div class="flex items-baseline justify-between">
+            <span id="calc-score" class="font-mono text-base font-semibold text-textPrimary">45/100</span>
+            <span id="calc-tier" class="font-mono text-[11px] text-textMuted">Limited evidence</span>
+          </div>
+          <div id="calc-criteria-list" class="space-y-1.5">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- LinkedIn CTA -->
+      <div class="pt-2">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="w-full h-10 rounded-lg bg-elevated hover:bg-elevatedHover border border-borderStrong flex items-center justify-center gap-2 text-xs font-medium text-textPrimary transition-colors">
+          <svg class="w-4 h-4 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" stroke-width="2"/></svg>
+          <span>Connect with us on LinkedIn</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+
+  <!-- =========================================================================
+       NEW PATHWAY MODAL (+ New Pathway)
+  ========================================================================== -->
+  <div id="new-pathway-modal" class="fixed inset-0 bg-black/70 backdrop-blur-[2px] z-50 hidden items-center justify-center p-4" onclick="closeNewPathwayModal()">
+    <div class="bg-surface border border-borderStrong rounded-xl max-w-lg w-full shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+      <div class="px-5 py-3.5 border-b border-borderHairline bg-elevated/60 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-statusEmerald"></span>
+          <h2 class="font-mono text-xs font-semibold uppercase tracking-wider text-textPrimary">Log New Pathway Candidate</h2>
+        </div>
+        <button onclick="closeNewPathwayModal()" class="text-textMuted hover:text-textPrimary text-sm">✕</button>
+      </div>
+
+      <form id="new-pathway-form" onsubmit="submitNewPathway(event)" class="p-5 space-y-4 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-mono text-[11px] text-textMuted mb-1">Pathway ID</label>
+            <input type="text" id="new-id" required class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline font-mono text-textPrimary focus:outline-none focus:border-statusCyan" />
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] text-textMuted mb-1">Initial Stage</label>
+            <select id="new-stage" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan">
+              <option value="Exploring">01 Exploring</option>
+              <option value="Blocked">02 Blocked</option>
+              <option value="Enabling">03 Enabling</option>
+              <option value="Established">04 Established</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-textMuted mb-1">Pathway Headline</label>
+          <input type="text" id="new-title" required placeholder="e.g., Weekend dog walking at Stockton Animal Services" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-mono text-[11px] text-textMuted mb-1">Organization / Area</label>
+            <input type="text" id="new-org" required placeholder="e.g., St. Mary's Dining Room" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan" />
+          </div>
+          <div>
+            <label class="block font-mono text-[11px] text-textMuted mb-1">Primary Contribution</label>
+            <select id="new-contribution" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan">
+              <option value="Presence">Presence</option>
+              <option value="Funding">Funding</option>
+              <option value="Supplies">Supplies</option>
+              <option value="Transport">Transport</option>
+              <option value="Space">Space</option>
+              <option value="Skills">Skills</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-mono text-[11px] text-textMuted mb-1">Current Condition / Bottleneck / Action Note</label>
+          <textarea id="new-condition" rows="3" required placeholder="What are we checking, what is blocking this route, or what makes it usable today?" class="w-full p-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan"></textarea>
+        </div>
+
+        <div class="pt-2 border-t border-borderHairline flex items-center justify-end gap-2">
+          <button type="button" onclick="closeNewPathwayModal()" class="h-8 px-3 rounded border border-borderHairline bg-elevated text-textMuted hover:text-textPrimary">Cancel</button>
+          <button type="submit" class="h-8 px-4 rounded bg-textPrimary text-canvas font-medium hover:bg-white">Create Pathway</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-el" class="fixed left-1/2 -translate-x-1/2 bottom-16 lg:bottom-6 z-50 px-3.5 py-2 rounded-lg bg-elevated border border-borderStrong text-xs font-medium text-textPrimary shadow-lg opacity-0 pointer-events-none transition-opacity duration-150"></div>
+
+  <!-- =========================================================================
+       JAVASCRIPT STATE, SEED DATA & INTERACTIVITY
+  ========================================================================== -->
+  <script>
+    // =========================================================================
+    // 1. STAGE DEFINITIONS, RUBRIC & SEED DATA
+    // =========================================================================
+    const STAGES = [
+      { id: 'Exploring',   num: '01', label: 'Exploring',   dotColor: 'bg-statusSlate',   textColor: 'text-statusSlate' },
+      { id: 'Blocked',     num: '02', label: 'Blocked',     dotColor: 'bg-statusAmber',   textColor: 'text-statusAmber' },
+      { id: 'Enabling',    num: '03', label: 'Enabling',    dotColor: 'bg-statusBlue',    textColor: 'text-statusBlue' },
+      { id: 'Established', num: '04', label: 'Established', dotColor: 'bg-statusEmerald', textColor: 'text-statusEmerald' }
+    ];
+
+    const CONTRIBUTIONS = ['All', 'Presence', 'Funding', 'Supplies', 'Transport', 'Space', 'Skills'];
+
+    const CONFIDENCE_CRITERIA = [
+      { key: 'completed',    label: 'We have personally completed this pathway',         points: 30 },
+      { key: 'confirmed',    label: 'Responsible organization directly confirmed it',    points: 25 },
+      { key: 'steps',        label: 'Exact steps, requirements, and contact established', points: 20 },
+      { key: 'recent',       label: 'Availability has been checked recently',            points: 15 },
+      { key: 'corroborated', label: 'Independent corroborating evidence exists',         points: 10 }
+    ];
+
+    // Live Pathway Candidates (Currently 0 Established in Live Mode)
+    let pathways = [
+      {
+        id: 'PW-01',
+        title: 'Same-week intake dog walking & Doggie Day Out',
+        org: 'Stockton Animal Services',
+        stage: 'Blocked',
+        contributions: ['Presence'],
+        freshness: 'n/a',
+        freshMins: 999999,
+        freshLabel: 'Blocked · No email reply since Nov 14',
+        updatedAt: '2h ago',
+        condition: 'Shelter accepts volunteers in theory, but sasvolunteers@stocktonca.gov has not replied in 4 days and walk-in signups are paused during kennel compression.',
+        criteriaMet: { completed: false, confirmed: false, steps: true, recent: true, corroborated: false },
+        linkedEvidence: ['EV-01', 'EV-05'],
+        actionDetails: {
+          whatNeeded: 'Confirmed weekday afternoon intake dog walking and Doggie Day Out outings.',
+          howToHelp: 'Pending live phone confirmation of intake desk schedule.',
+          when: 'TBD upon coordinator confirmation',
+          where: '1575 S. Lincoln St, Stockton, CA 95206',
+          bring: 'Closed-toe shoes, water, photo ID',
+          phone: '209-937-7445'
+        },
+        checklist: [
+          { text: 'Call Stockton Animal Services volunteer desk (209-937-7445) during morning hours', done: false, waiting: true },
+          { text: 'Verify whether Doggie Day Out requires prior orientation class', done: false, waiting: false },
+          { text: 'Complete one test shift and document exact check-in door', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-17 14:10', author: 'civic-ops', note: 'Moved to Blocked after 72h with no reply to volunteer inquiry email.' },
+          { timestamp: '2026-11-14 10:05', author: 'civic-ops', note: 'Submitted volunteer inquiry to sasvolunteers@stocktonca.gov.' }
+        ]
+      },
+      {
+        id: 'PW-02',
+        title: 'Direct kibble & clean water drop-off for street dogs',
+        org: 'Stockton Street Dogs',
+        stage: 'Enabling',
+        contributions: ['Supplies', 'Funding'],
+        freshness: 'n/a',
+        freshMins: 999999,
+        freshLabel: 'Enabling · Confirming drop-off window',
+        updatedAt: '3h ago',
+        condition: 'Organizer confirmed urgent need for unopened dry kibble and bowls; establishing a repeatable weekly drop-off point and handoff contact so anyone can contribute.',
+        criteriaMet: { completed: false, confirmed: true, steps: false, recent: true, corroborated: true },
+        linkedEvidence: ['EV-02', 'EV-08'],
+        actionDetails: {
+          whatNeeded: 'Unopened bags of dry dog food, clean water jugs, and stainless bowls for District 5 routes.',
+          howToHelp: 'Coordinating a fixed weekly drop-off window with field feeders.',
+          when: 'Target: Tue/Thu mornings',
+          where: 'District 5 / South Stockton handoff point (TBD)',
+          bring: 'Unopened dry kibble or sealed water jugs',
+          phone: '209-555-0142'
+        },
+        checklist: [
+          { text: 'Confirm fixed drop-off address and safe handoff window with founder', done: false, waiting: false },
+          { text: 'Verify preferred food brands/bag sizes for street feeding', done: true, waiting: false },
+          { text: 'Complete one verified supply drop-off to establish pathway', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-17 11:30', author: 'field-ops', note: 'Direct message confirmed kibble shortage; awaiting exact handoff times.' }
+        ]
+      },
+      {
+        id: 'PW-03',
+        title: 'Direct-pay stray spay/neuter procedure sponsorship',
+        org: 'ACT Spay/Neuter Clinic',
+        stage: 'Enabling',
+        contributions: ['Funding'],
+        freshness: 'n/a',
+        freshMins: 999999,
+        freshLabel: 'Enabling · Verifying phone-pay voucher rule',
+        updatedAt: '3h ago',
+        condition: 'Checking whether a donor can call the clinic directly to sponsor a specific stray dog sterilization slot without going through a 3rd-party fundraiser.',
+        criteriaMet: { completed: false, confirmed: true, steps: true, recent: false, corroborated: false },
+        linkedEvidence: ['EV-03'],
+        actionDetails: {
+          whatNeeded: 'Direct-to-clinic sponsorship ($85–$120) for stray spay/neuter appointments.',
+          howToHelp: 'Verifying exact account reference format for phone payments.',
+          when: 'Mon–Thu clinic desk hours',
+          where: '327 E. Alpine Ave, Stockton, CA 95204',
+          bring: 'Phone payment method',
+          phone: '209-462-7729'
+        },
+        checklist: [
+          { text: 'Confirm clinic accepts phone credit-card sponsorship on named stray slots', done: true, waiting: false },
+          { text: 'Get written receipt / confirmation workflow for donors', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-17 11:05', author: 'civic-ops', note: 'Front desk confirmed sponsorships are possible; waiting on clinic manager for exact reference wording.' }
+        ]
+      },
+      {
+        id: 'PW-04',
+        title: 'Short-term foster intake & clinic transport',
+        org: 'Delta Humane Society & SPCA',
+        stage: 'Blocked',
+        contributions: ['Transport', 'Space'],
+        freshness: 'n/a',
+        freshMins: 999999,
+        freshLabel: 'Blocked · Foster approval turnaround unclear',
+        updatedAt: '4h ago',
+        condition: 'Online foster application does not specify approval turnaround time or whether same-week emergency fosters can bypass the standard queue.',
+        criteriaMet: { completed: false, confirmed: false, steps: false, recent: true, corroborated: false },
+        linkedEvidence: ['EV-04'],
+        actionDetails: {
+          whatNeeded: 'Temporary foster homes (3–14 days) and morning clinic rides.',
+          howToHelp: 'Currently blocked by unverified application turnaround.',
+          when: 'Pending verification',
+          where: '4590 S. Highway 99, Stockton, CA 95215',
+          bring: 'Valid driver license & proof of residence',
+          phone: '209-466-0339'
+        },
+        checklist: [
+          { text: 'Call Delta Humane (209-466-0339) to check current foster application backlog', done: false, waiting: true },
+          { text: 'Ask if transport-only volunteers require full foster onboarding', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-17 09:40', author: 'civic-ops', note: 'Submitted test inquiry via info@dhsspca.org; no auto-response or timeline provided.' }
+        ]
+      },
+      {
+        id: 'PW-05',
+        title: "Assess St. Mary's Dining Room area for active pathways",
+        org: "St. Mary's Dining Room",
+        stage: 'Exploring',
+        contributions: ['Presence', 'Supplies'],
+        freshness: 'n/a',
+        freshMins: 999999,
+        freshLabel: 'Exploring · Site visit queued',
+        updatedAt: '5h ago',
+        condition: "Initial exploration of morning pantry shifts and whether pet food donations are accepted alongside human food boxes on Sonora St.",
+        criteriaMet: { completed: false, confirmed: false, steps: false, recent: false, corroborated: false },
+        linkedEvidence: ['EV-06'],
+        actionDetails: {
+          whatNeeded: 'Assessment of accessible drop-in volunteer shifts and supply needs.',
+          howToHelp: 'Site visit planned to speak directly with receiving coordinator.',
+          when: 'Weekday mornings 8:00 AM – 11:00 AM',
+          where: '545 W. Sonora St, Stockton, CA 95203',
+          bring: 'Notebook for coordinator check-in',
+          phone: '209-467-0703'
+        },
+        checklist: [
+          { text: "Visit St. Mary's receiving gate on Sonora St and speak with shift lead", done: false, waiting: false },
+          { text: 'Confirm whether unopened pet food can be dropped off without prior appointment', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-17 08:15', author: 'civic-ops', note: "Created exploration candidate for St. Mary's corridor." }
+        ]
+      },
+      {
+        id: 'PW-06',
+        title: 'AI-assisted volunteer scheduling prototype for local rescues',
+        org: 'Crossover Civic Lab',
+        stage: 'Exploring',
+        contributions: ['Skills'],
+        freshness: 'n/a',
+        freshMins: 999999,
+        freshLabel: 'Exploring · Scoping partner bottleneck',
+        updatedAt: '6h ago',
+        condition: 'Testing whether a lightweight SMS/web intake triage helper can unblock small Stockton rescues that lack staff to answer volunteer emails.',
+        criteriaMet: { completed: false, confirmed: false, steps: false, recent: false, corroborated: false },
+        linkedEvidence: ['EV-07'],
+        actionDetails: {
+          whatNeeded: 'Technical/ops scoping with one local rescue coordinator.',
+          howToHelp: 'Internal exploration until a rescue confirms scheduling is their primary bottleneck.',
+          when: 'Ongoing',
+          where: 'Stockton, CA (Remote / Local)',
+          bring: 'N/A',
+          phone: ''
+        },
+        checklist: [
+          { text: 'Interview one rescue coordinator on where volunteer drop-off occurs', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-17 07:00', author: 'ai-lab', note: 'Scoped lightweight SMS confirmation prototype for blocked pathways.' }
+        ]
+      }
+    ];
+
+    // Preview Established Pathways (Only shown when Board Mode === 'preview')
+    const PREVIEW_ESTABLISHED = [
+      {
+        id: 'EX-01',
+        title: 'Walk & socialize intake dogs',
+        org: 'Stockton Animal Services',
+        stage: 'Established',
+        contributions: ['Presence'],
+        freshness: 'fresh',
+        freshMins: 18,
+        freshLabel: 'Fresh · Checked 18m ago',
+        updatedAt: '18m ago',
+        condition: 'Directly confirmed with kennel coordinator today: afternoon walk slots are open for drop-in helpers who call ahead.',
+        criteriaMet: { completed: true, confirmed: true, steps: true, recent: true, corroborated: false },
+        linkedEvidence: ['EV-01', 'EV-05'],
+        actionDetails: {
+          whatNeeded: 'Volunteers to walk, socialize, and give calm outdoor time to newly arrived intake dogs.',
+          howToHelp: 'Call the front desk to confirm a 1-hour slot, then check in at the south kennel entrance. No prior shelter certification required for supervised walks.',
+          when: 'Today · 12:00 PM – 3:00 PM',
+          where: '1575 S. Lincoln St, Stockton, CA 95206',
+          bring: 'Closed-toe shoes, water bottle, photo ID',
+          phone: '209-937-7445'
+        },
+        checklist: [
+          { text: 'Confirm afternoon kennel walk openings by phone', done: true, waiting: false },
+          { text: 'Verify check-in entrance and leash availability', done: true, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-18 02:56', author: 'civic-ops', note: 'Preview example: confirmed 3 open afternoon walking slots.' }
+        ]
+      },
+      {
+        id: 'EX-02',
+        title: 'Direct-pay stray spay/neuter sponsorship',
+        org: 'ACT Spay/Neuter Clinic',
+        stage: 'Established',
+        contributions: ['Funding'],
+        freshness: 'fresh',
+        freshMins: 42,
+        freshLabel: 'Fresh · Checked 42m ago',
+        updatedAt: '42m ago',
+        condition: 'Clinic desk confirmed direct phone payments can be applied to the active Stockton stray voucher ledger today.',
+        criteriaMet: { completed: false, confirmed: true, steps: true, recent: true, corroborated: true },
+        linkedEvidence: ['EV-03'],
+        actionDetails: {
+          whatNeeded: 'Direct clinic sponsorship ($85–$120) covering immediate sterilization for a scheduled Stockton stray.',
+          howToHelp: 'Call the clinic front desk and request to apply a payment to the "Community Stray Voucher Fund". Ask for an emailed receipt.',
+          when: 'Today · 8:30 AM – 4:00 PM',
+          where: '327 E. Alpine Ave, Stockton, CA 95204',
+          bring: 'Payment card by phone',
+          phone: '209-462-7729'
+        },
+        checklist: [
+          { text: 'Verify active stray voucher ledger balance & phone-pay process', done: true, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-18 02:32', author: 'civic-ops', note: 'Preview example: front desk confirmed 4 stray slots awaiting sponsorship.' }
+        ]
+      },
+      {
+        id: 'EX-03',
+        title: 'Morning food box packing & kibble drop-off',
+        org: "St. Mary's Dining Room",
+        stage: 'Established',
+        contributions: ['Supplies', 'Presence'],
+        freshness: 'fresh',
+        freshMins: 60,
+        freshLabel: 'Fresh · Checked 1h ago',
+        updatedAt: '1h ago',
+        condition: 'Receiving coordinator confirmed unopened dry dog food bags and morning packing helpers are welcome at the Sonora St gate.',
+        criteriaMet: { completed: true, confirmed: true, steps: true, recent: true, corroborated: false },
+        linkedEvidence: ['EV-06'],
+        actionDetails: {
+          whatNeeded: 'Unopened bags of dry dog kibble for unhoused pet owners, plus 2 helpers for morning box assembly.',
+          howToHelp: 'Pull up to the Sonora St receiving gate and ask for the morning dock lead. Drop-offs take under 5 minutes.',
+          when: 'Today · 8:00 AM – 11:30 AM',
+          where: '545 W. Sonora St, Stockton, CA 95203',
+          bring: 'Unopened dry dog food or closed-toe shoes for packing',
+          phone: '209-467-0703'
+        },
+        checklist: [
+          { text: 'Confirm Sonora St dock receiving hours', done: true, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-18 02:14', author: 'civic-ops', note: 'Preview example: completed test drop-off at Sonora St gate.' }
+        ]
+      },
+      {
+        id: 'EX-04',
+        title: 'Short-term crisis foster & clinic transport',
+        org: 'Stockton Street Dogs Network',
+        stage: 'Established',
+        contributions: ['Transport', 'Space', 'Supplies'],
+        freshness: 'aging',
+        freshMins: 1740,
+        freshLabel: 'Aging · Checked 29h ago (reconfirming)',
+        updatedAt: '29h ago',
+        condition: 'Confirmed yesterday for morning vet rides and 48-hour crate holding; approaching 48h expiration unless reconfirmed today.',
+        criteriaMet: { completed: false, confirmed: true, steps: true, recent: false, corroborated: false },
+        linkedEvidence: ['EV-02', 'EV-08'],
+        actionDetails: {
+          whatNeeded: '20-minute morning rides to spay/neuter appointments or 48–72 hour secure yard/crate holding.',
+          howToHelp: 'Call or text the transport coordinator to claim an open morning pickup in District 5.',
+          when: 'Weekdays · 7:30 AM – 9:00 AM',
+          where: 'District 5 / Charter Way corridor, Stockton, CA',
+          bring: 'Vehicle with crate or secure backseat',
+          phone: '209-555-0142'
+        },
+        checklist: [
+          { text: 'Reconfirm morning transport slots before 48h expiration', done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: '2026-11-16 22:14', author: 'field-ops', note: 'Preview example: transport route active; flagged aging at 29h.' }
+        ]
+      }
+    ];
+
+    // Evidence & Public Records Dataset
+    const EVIDENCE_RECORDS = [
+      {
+        id: 'EV-01',
+        type: 'Calls',
+        title: 'Outreach Log — Stockton Animal Services Volunteer Desk',
+        date: '2026-11-17',
+        linkedPathway: 'PW-01',
+        summary: 'Email sent to sasvolunteers@stocktonca.gov on Nov 14 with no reply after 72h; follow-up phone check queued for 209-937-7445.',
+        raw: {
+          evidence_id: 'EV-01',
+          type: 'outreach_call_log',
+          org: 'Stockton Animal Services',
+          contact: 'sasvolunteers@stocktonca.gov / 209-937-7445',
+          outcome: 'NO_RESPONSE_72H',
+          next_step: 'Direct morning phone call to intake desk'
+        }
+      },
+      {
+        id: 'EV-02',
+        type: 'Calls',
+        title: 'Coordinator Check — Stockton Street Dogs Kibble Shortage',
+        date: '2026-11-17',
+        linkedPathway: 'PW-02',
+        summary: 'Field feeders confirmed immediate need for dry kibble and clean water jugs across District 5 routes; drop-off window pending.',
+        raw: {
+          evidence_id: 'EV-02',
+          type: 'coordinator_confirmation',
+          org: 'Stockton Street Dogs',
+          area: 'District 5, Stockton',
+          confirmed_needs: ['Unopened dry kibble', 'Water jugs', 'Stainless bowls'],
+          handoff_confirmed: false
+        }
+      },
+      {
+        id: 'EV-03',
+        type: 'Calls',
+        title: 'Clinic Desk Inquiry — ACT Spay/Neuter Direct Sponsorship',
+        date: '2026-11-17',
+        linkedPathway: 'PW-03',
+        summary: 'Front desk confirmed direct phone payments for stray sterilization are possible; awaiting exact reference wording from clinic manager.',
+        raw: {
+          evidence_id: 'EV-03',
+          type: 'clinic_verification',
+          org: 'ACT Spay/Neuter Clinic',
+          phone: '209-462-7729',
+          address: '327 E. Alpine Ave, Stockton, CA 95204',
+          direct_sponsorship_supported: true,
+          receipt_workflow_verified: false
+        }
+      },
+      {
+        id: 'EV-04',
+        type: 'Calls',
+        title: 'Foster Application Turnaround Check — Delta Humane Society',
+        date: '2026-11-17',
+        linkedPathway: 'PW-04',
+        summary: 'Submitted online foster inquiry to info@dhsspca.org; no timeline or automated acknowledgement received.',
+        raw: {
+          evidence_id: 'EV-04',
+          type: 'outreach_email',
+          org: 'Delta Humane Society & SPCA',
+          contact: 'info@dhsspca.org / 209-466-0339',
+          outcome: 'UNCONFIRMED_TURNAROUND',
+          blocker: 'No published approval window for emergency fosters'
+        }
+      },
+      {
+        id: 'EV-05',
+        type: 'Records',
+        title: 'CPRA_Field_Calls_7183.json — Municipal Animal-Control Calls',
+        date: '2026-11-16',
+        linkedPathway: 'PW-01',
+        summary: '7,183 municipal field call records parsed to identify dispatch latency and high-stray Stockton zip codes (95204/95205/95206).',
+        raw: {
+          dataset: 'CPRA_Field_Calls_7183.json',
+          record_count: 7183,
+          source: 'Stockton Police / Animal Services CPRA Disclosure',
+          sample_row: {
+            call_id: 'SPD-AC-2025-04819',
+            call_type: 'STRAY_INJURED_DOG',
+            corridor: '95205 / Wilson Way',
+            dispatch_latency_mins: 118,
+            disposition: 'UNIT_DISPATCHED_TRANSPORTED'
+          }
+        }
+      },
+      {
+        id: 'EV-06',
+        type: 'Visits',
+        title: "Site Scoping — St. Mary's Dining Room Sonora St Receiving",
+        date: '2026-11-17',
+        linkedPathway: 'PW-05',
+        summary: 'Queued in-person morning check to verify drop-in food box packing and whether pet food donations are accepted on-site.',
+        raw: {
+          evidence_id: 'EV-06',
+          type: 'site_visit_plan',
+          location: "St. Mary's Dining Room — 545 W. Sonora St, Stockton",
+          target_window: '08:00–11:00 PST',
+          questions: ['Drop-in volunteer availability?', 'Unopened pet food drop-off accepted?']
+        }
+      },
+      {
+        id: 'EV-07',
+        type: 'Records',
+        title: 'Shelter_Intakes_2024_3106.json — Municipal Intake Baseline',
+        date: '2026-11-14',
+        linkedPathway: 'PW-06',
+        summary: '3,106 annual shelter intakes documenting kennel compression and shelter expansion delay (Spring 2027, $10.47M CIP).',
+        raw: {
+          dataset: 'Shelter_Intakes_2024_3106.json',
+          record_count: 3106,
+          shelter_cip_usd: 10473000,
+          expansion_target: 'Spring 2027',
+          oct_2026_intakes: 828
+        }
+      },
+      {
+        id: 'EV-08',
+        type: 'Visits',
+        title: 'Street_Sightings_Log.json — District 5 Corridor Observations',
+        date: '2026-11-15',
+        linkedPathway: 'PW-02',
+        summary: 'Field baseline documenting 3–10 newly dumped dogs/week across South Stockton corridors after deduplicating repeat sightings.',
+        raw: {
+          dataset: 'Street_Sightings_Log.json',
+          weekly_new_dump_baseline: '3-10 dogs/week',
+          hotspots: ['District 5', 'Charter Way', 'El Dorado corridor'],
+          deduplication_status: 'ACTIVE'
+        }
+      }
+    ];
+
+    // =========================================================================
+    // 2. APPLICATION STATE & INITIALIZATION
+    // =========================================================================
+    let state = {
+      activeView: 'help',            // 'help' | 'board' | 'tasks' | 'evidence'
+      boardMode: 'live',             // 'live' | 'preview'
+      helpLayout: window.innerWidth < 768 ? 'list' : 'board',
+      boardLayout: window.innerWidth < 640 ? 'list' : 'kanban',
+      tasksSubLayout: 'list',        // 'list' | 'kanban'
+      helpFilter: 'All',
+      contributionFilter: 'All',
+      stageFilter: 'All',
+      checklistStatusFilter: 'all',  // 'all' | 'open' | 'waiting' | 'done'
+      evidenceFilter: 'All',         // 'All' | 'Visits' | 'Calls' | 'Records'
+      searchQuery: '',
+      activePathwayId: null,
+      activeEvidenceIdx: 0,
+      calcState: { completed: false, confirmed: true, steps: true, recent: false, corroborated: false }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      syncLayoutButtons();
+      renderAll();
+
+      // Keyboard shortcuts: '/' to search, 'Escape' to close drawers/modals
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          const searchEl = document.getElementById('global-search');
+          if (searchEl) searchEl.focus();
+        }
+        if (e.key === 'Escape') {
+          closePathwayDrawer();
+          closeAboutDrawer();
+          closeNewPathwayModal();
+        }
+      });
+    });
+
+    // =========================================================================
+    // 3. CORE HELPERS & TELEMETRY
+    // =========================================================================
+    function getAllPathways() {
+      return state.boardMode === 'preview' ? [...PREVIEW_ESTABLISHED, ...pathways] : [...pathways];
+    }
+
+    function getEstablishedPathways() {
+      return getAllPathways()
+        .filter(p => p.stage === 'Established')
+        .sort((a, b) => {
+          const minsDiff = (a.freshMins ?? 999999) - (b.freshMins ?? 999999);
+          if (minsDiff !== 0) return minsDiff;
+          return computeScore(b.criteriaMet) - computeScore(a.criteriaMet);
+        });
+    }
+
+    function getFilteredPathways() {
+      const q = state.searchQuery.trim().toLowerCase();
+      return getAllPathways().filter(p => {
+        const matchesContrib = state.contributionFilter === 'All' || p.contributions.includes(state.contributionFilter);
+        const matchesStage = state.stageFilter === 'All' || p.stage === state.stageFilter;
+        const matchesQuery = !q ||
+          p.id.toLowerCase().includes(q) ||
+          p.title.toLowerCase().includes(q) ||
+          p.org.toLowerCase().includes(q) ||
+          p.condition.toLowerCase().includes(q) ||
+          p.contributions.some(c => c.toLowerCase().includes(q)) ||
+          p.checklist.some(t => t.text.toLowerCase().includes(q));
+        return matchesContrib && matchesStage && matchesQuery;
+      });
+    }
+
+    function getStageMeta(stageId) {
+      return STAGES.find(s => s.id === stageId) || STAGES[0];
+    }
+
+    function computeScore(criteriaMet = {}) {
+      return CONFIDENCE_CRITERIA.reduce((sum, c) => sum + (criteriaMet[c.key] ? c.points : 0), 0);
+    }
+
+    function scoreTier(score) {
+      if (score >= 75) return 'Strong evidence';
+      if (score >= 50) return 'Moderate evidence';
+      if (score >= 25) return 'Limited evidence';
+      return 'Early / unverified';
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById('toast-el');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove('opacity-0');
+      el.classList.add('opacity-100');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.remove('opacity-100');
+        el.classList.add('opacity-0');
+      }, 2200);
+    }
+
+    function copyText(text, label = 'Copied to clipboard') {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showToast(label);
+      } catch (err) {
+        showToast('Unable to copy');
+      }
+    }
+
+    function getCurrentTimestamp() {
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, '0');
+      const dd = String(now.getDate()).padStart(2, '0');
+      const hh = String(now.getHours()).padStart(2, '0');
+      const min = String(now.getMinutes()).padStart(2, '0');
+      return `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+    }
+
+    function renderAll() {
+      renderTelemetry();
+      renderHelpView();
+      renderBoardAndList();
+      renderTasksWorkspace();
+      renderEvidenceView();
+      renderCalcWidget();
+      if (state.activePathwayId) {
+        renderPathwayDrawer(state.activePathwayId);
+      }
+    }
+
+    // =========================================================================
+    // 4. TELEMETRY & SIDEBAR COUNTS
+    // =========================================================================
+    function renderTelemetry() {
+      const all = getAllPathways();
+      const exploringCount = all.filter(p => p.stage === 'Exploring').length;
+      const blockedCount = all.filter(p => p.stage === 'Blocked').length;
+      const enablingCount = all.filter(p => p.stage === 'Enabling').length;
+      const establishedCount = all.filter(p => p.stage === 'Established').length;
+
+      let openTasksCount = 0;
+      all.forEach(p => {
+        p.checklist.forEach(t => {
+          if (!t.done) openTasksCount++;
+        });
+      });
+
+      // Top bar clickable counts
+      document.getElementById('stat-established').textContent = establishedCount;
+      document.getElementById('stat-enabling').textContent = enablingCount;
+      document.getElementById('stat-blocked').textContent = blockedCount;
+      document.getElementById('stat-open-tasks').textContent = openTasksCount;
+
+      // Pathways view header pills
+      const pwExp = document.getElementById('pw-pill-exploring');
+      const pwBlk = document.getElementById('pw-pill-blocked');
+      const pwEnb = document.getElementById('pw-pill-enabling');
+      const pwEst = document.getElementById('pw-pill-established');
+      if (pwExp) pwExp.textContent = exploringCount;
+      if (pwBlk) pwBlk.textContent = blockedCount;
+      if (pwEnb) pwEnb.textContent = enablingCount;
+      if (pwEst) pwEst.textContent = establishedCount;
+
+      // Desktop & mobile nav counts
+      document.getElementById('nav-count-help').textContent = establishedCount;
+      document.getElementById('nav-count-pathways').textContent = all.length;
+      document.getElementById('nav-count-tasks').textContent = `${openTasksCount} open`;
+      document.getElementById('nav-count-evidence').textContent = EVIDENCE_RECORDS.length;
+
+      document.getElementById('mob-nav-help').textContent = establishedCount;
+      document.getElementById('mob-nav-pathways').textContent = all.length;
+      document.getElementById('mob-nav-tasks').textContent = `${openTasksCount} open`;
+      document.getElementById('mob-nav-evidence').textContent = EVIDENCE_RECORDS.length;
+
+      // Sync Live / Preview mode buttons
+      document.querySelectorAll('[data-mode-btn]').forEach(btn => {
+        const isCurrent = btn.dataset.modeBtn === state.boardMode;
+        if (isCurrent) {
+          btn.classList.add('bg-elevated', 'text-textPrimary', 'border-borderStrong');
+          btn.classList.remove('text-textMuted', 'border-borderHairline');
+        } else {
+          btn.classList.remove('bg-elevated', 'text-textPrimary', 'border-borderStrong');
+          btn.classList.add('text-textMuted', 'border-borderHairline');
+        }
+      });
+
+      // Sidebar Contribution filters
+      const contribEl = document.getElementById('sidebar-contributions');
+      if (contribEl) {
+        contribEl.innerHTML = CONTRIBUTIONS.map(c => {
+          const count = c === 'All' ? all.length : all.filter(p => p.contributions.includes(c)).length;
+          const active = state.contributionFilter === c;
+          return `
+            <button onclick="setContributionFilter('${c}'); if (state.activeView !== 'board' && state.activeView !== 'tasks') switchMainView('board');" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors ${
+              active ? 'bg-elevated text-textPrimary font-medium' : 'text-textMuted hover:text-textPrimary hover:bg-elevated/40'
+            }">
+              <span>${c === 'All' ? 'All Contributions' : c}</span>
+              <span class="font-mono text-[11px] tabular-nums text-textDim">${count}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Sidebar Stage Pipeline counts
+      const stageEl = document.getElementById('sidebar-stage-counts');
+      if (stageEl) {
+        stageEl.innerHTML = STAGES.map(st => {
+          const count = all.filter(p => p.stage === st.id).length;
+          return `
+            <button onclick="jumpToStage('${st.id}')" class="w-full flex items-center justify-between text-textMuted hover:text-textPrimary transition-colors">
+              <span class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full ${st.dotColor} shrink-0"></span>
+                <span>${st.num} ${st.label}</span>
+              </span>
+              <span class="text-textPrimary font-semibold">${count}</span>
+            </button>
+          `;
+        }).join('');
+      }
+    }
+
+    // =========================================================================
+    // 5. VIEW 1: HELP TODAY (ESTABLISHED PATHWAYS ONLY)
+    // =========================================================================
+    function setHelpLayout(layout) {
+      state.helpLayout = layout;
+      syncLayoutButtons();
+      renderHelpView();
+    }
+
+    function setHelpFilter(contrib) {
+      state.helpFilter = contrib;
+      const sel = document.getElementById('help-filter-contribution');
+      if (sel) sel.value = contrib;
+      renderHelpView();
+    }
+
+    function renderHelpView() {
+      const established = getEstablishedPathways();
+      const filtered = state.helpFilter === 'All'
+        ? established
+        : established.filter(p => p.contributions.includes(state.helpFilter));
+
+      const freshCount = established.filter(p => p.freshness !== 'aging').length;
+      const agingCount = established.filter(p => p.freshness === 'aging').length;
+
+      const freshPill = document.getElementById('help-pill-fresh');
+      const agingPill = document.getElementById('help-pill-aging');
+      if (freshPill) freshPill.textContent = freshCount;
+      if (agingPill) agingPill.textContent = agingCount;
+
+      // Header status dot & text
+      const dotEl = document.getElementById('help-status-dot');
+      const textEl = document.getElementById('help-status-text');
+      const hasFresh = freshCount > 0;
+      const hasAny = established.length > 0;
+
+      dotEl.className = `w-2 h-2 rounded-full shrink-0 ${
+        hasFresh ? 'bg-statusEmerald' : (hasAny ? 'bg-statusAmber' : 'bg-statusSlate')
+      }`;
+      textEl.textContent = state.boardMode === 'preview'
+        ? `${established.length} preview · Updated 18m ago`
+        : `${established.length} established · Updated 18m ago`;
+
+      const toggleBtn = document.getElementById('help-preview-toggle');
+      if (toggleBtn) {
+        toggleBtn.textContent = state.boardMode === 'preview' ? 'Live (0)' : 'Preview (4)';
+      }
+
+      // Toggle Board vs List containers
+      document.getElementById('help-board-container').classList.toggle('hidden', state.helpLayout !== 'board');
+      document.getElementById('help-list-container').classList.toggle('hidden', state.helpLayout !== 'list');
+
+      // -----------------------------------------------------------------------
+      // A. RENDER MOBILE SIMPLE DOT LIST & DESKTOP STRUCTURED TABLE
+      // -----------------------------------------------------------------------
+      const listInner = document.getElementById('help-list-inner');
+      if (established.length === 0) {
+        listInner.innerHTML = `
+          <div class="p-5 sm:p-6 space-y-3 border-b sm:border sm:border-borderHairline sm:rounded-lg sm:bg-surface">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-statusSlate"></span>
+              <h2 class="text-sm font-semibold text-textPrimary">No established pathways today.</h2>
+            </div>
+            <p class="text-xs text-textMuted leading-relaxed">
+              We only publish routes after confirming they are actually open and repeatable. See what we are currently exploring, unblocking, or enabling in the Pathways Board.
+            </p>
+            <div class="flex flex-wrap gap-2 pt-1">
+              <button onclick="switchMainView('board')" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary">
+                Open Pathways Board (${pathways.length})
+              </button>
+              <button onclick="setBoardMode('preview')" class="h-8 px-3 rounded-md bg-statusEmerald/15 hover:bg-statusEmerald/25 border border-statusEmerald/40 text-xs font-medium text-statusEmerald">
+                Preview Examples (4)
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (filtered.length === 0) {
+        listInner.innerHTML = `<div class="p-6 text-xs font-mono text-textDim sm:rounded-lg sm:border sm:border-borderHairline sm:bg-surface">No established pathways matching "${state.helpFilter}".</div>`;
+      } else {
+        listInner.innerHTML = `
+          <!-- Mobile Simple Flat Dot List (< 640px) -->
+          <div class="sm:hidden divide-y divide-borderHairline border-b border-borderHairline">
+            ${filtered.map(p => {
+              const dotClass = p.freshness === 'aging' ? 'bg-statusAmber' : 'bg-statusEmerald';
+              const score = computeScore(p.criteriaMet);
+              return `
+                <button onclick="openPathwayDrawer('${p.id}')" class="w-full text-left px-4 py-3.5 bg-canvas hover:bg-surface/80 transition-colors flex items-start gap-3">
+                  <span class="w-2 h-2 rounded-full ${dotClass} mt-1.5 shrink-0"></span>
+                  <div class="flex-1 min-w-0">
+                    <div class="text-sm font-medium text-textPrimary truncate">${p.title}</div>
+                    <div class="text-xs text-textMuted truncate mt-0.5"><span class="font-mono text-statusCyan mr-1">${p.id}</span>${p.org} · ${p.freshLabel} · ${score}/100</div>
+                  </div>
+                  <svg class="w-4 h-4 text-textDim mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <!-- Desktop Structured Table (>= 640px — Matches Pathways & Tasks Lists) -->
+          <div class="hidden sm:block rounded-lg border border-borderHairline bg-surface overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
+                  <th class="py-2.5 px-3.5">ID</th>
+                  <th class="py-2.5 px-3.5">Freshness</th>
+                  <th class="py-2.5 px-3.5">Pathway</th>
+                  <th class="py-2.5 px-3.5">Contributions</th>
+                  <th class="py-2.5 px-3.5">Confidence</th>
+                  <th class="py-2.5 px-3.5">When</th>
+                  <th class="py-2.5 px-3.5 text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-borderHairline text-xs">
+                ${filtered.map(p => {
+                  const isAging = p.freshness === 'aging';
+                  const dotClass = isAging ? 'bg-statusAmber' : 'bg-statusEmerald';
+                  const badgeText = isAging ? 'text-statusAmber' : 'text-statusEmerald';
+                  const shortFresh = p.freshLabel.replace(/^[^·]+·\s*/, '');
+                  const score = computeScore(p.criteriaMet);
+                  const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
+
+                  return `
+                    <tr onclick="openPathwayDrawer('${p.id}')" class="hover:bg-elevated/60 cursor-pointer transition-colors">
+                      <td class="py-3 px-3.5 font-mono font-semibold text-statusCyan tabular-nums whitespace-nowrap">${p.id}</td>
+                      <td class="py-3 px-3.5 whitespace-nowrap">
+                        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-canvas border border-borderHairline font-mono text-[10px] ${badgeText}">
+                          <span class="w-1.5 h-1.5 rounded-full ${dotClass}"></span>
+                          <span>${shortFresh}</span>
+                        </span>
+                      </td>
+                      <td class="py-3 px-3.5 min-w-[240px]">
+                        <div class="font-medium text-textPrimary">${p.title}</div>
+                        <div class="text-[11px] text-textDim">${p.org}</div>
+                      </td>
+                      <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textMuted">${p.contributions.join(', ')}</td>
+                      <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textPrimary tabular-nums">${score}/100</td>
+                      <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textMuted">${p.actionDetails.when}</td>
+                      <td class="py-3 px-3.5 whitespace-nowrap text-right">
+                        ${p.actionDetails.phone ? `
+                          <a href="${telHref}" onclick="event.stopPropagation();" class="inline-flex items-center px-2.5 py-1 rounded bg-statusEmerald/15 hover:bg-statusEmerald/25 text-statusEmerald border border-statusEmerald/30 font-mono text-[10px] transition-colors">
+                            Call
+                          </a>
+                        ` : `<span class="font-mono text-[10px] text-textDim">Details &rarr;</span>`}
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+
+      // -----------------------------------------------------------------------
+      // B. RENDER DESKTOP BOARD VIEW (ORDERED BY FRESHNESS & CONFIDENCE)
+      // -----------------------------------------------------------------------
+      const boardContainer = document.getElementById('help-board-container');
+
+      if (established.length === 0) {
+        boardContainer.innerHTML = `
+          <div class="max-w-3xl rounded-lg bg-surface border border-borderHairline p-5 sm:p-6 space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-statusSlate"></span>
+              <h2 class="text-sm sm:text-base font-semibold text-textPrimary">No established pathways today.</h2>
+            </div>
+            <p class="text-xs sm:text-sm text-textMuted leading-relaxed">
+              Help Today only shows directly confirmed, repeatable routes ordered by freshness and evidence confidence. Pathways currently being explored, unblocked, or enabled live in the <strong class="text-textPrimary font-medium">Pathways Board</strong>.
+            </p>
+            <div class="flex flex-wrap items-center gap-2 pt-1">
+              <button onclick="switchMainView('board')" class="h-8 px-3.5 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary transition-colors">
+                Open Pathways Board (${pathways.length})
+              </button>
+              <button onclick="setBoardMode('preview')" class="h-8 px-3.5 rounded-md bg-statusEmerald/15 hover:bg-statusEmerald/25 border border-statusEmerald/40 text-xs font-medium text-statusEmerald transition-colors">
+                Preview Example Routes (4)
+              </button>
+            </div>
+          </div>
+        `;
+      } else if (filtered.length === 0) {
+        boardContainer.innerHTML = `
+          <div class="p-6 text-xs font-mono text-textDim">
+            No established pathways matching "${state.helpFilter}".
+          </div>
+        `;
+      } else {
+        boardContainer.innerHTML = `
+          <div class="flex items-center justify-between font-mono text-[11px] text-textDim px-0.5 shrink-0">
+            <span>ORDERED BY FRESHNESS &amp; CONFIDENCE · NEWEST FIRST</span>
+            <span>${filtered.length} ${filtered.length === 1 ? 'pathway' : 'pathways'}</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5 overflow-y-auto pb-2">
+            ${filtered.map(p => {
+              const isAging = p.freshness === 'aging';
+              const freshDot = isAging ? 'bg-statusAmber' : 'bg-statusEmerald';
+              const freshText = isAging ? 'text-statusAmber' : 'text-statusEmerald';
+              const score = computeScore(p.criteriaMet);
+              const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
+
+              return `
+                <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-surface hover:bg-elevated border border-borderHairline hover:border-borderStrong p-4 transition-all shadow-sm flex flex-col justify-between gap-3">
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="inline-flex items-center gap-1.5 font-mono text-[11px] ${freshText}">
+                        <span class="w-2 h-2 rounded-full ${freshDot}"></span>
+                        <span>${p.freshLabel}</span>
+                      </span>
+                      <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline font-mono text-[10px] text-textPrimary tabular-nums shrink-0" title="${scoreTier(score)}">
+                        ${score}/100
+                      </span>
+                    </div>
+
+                    <div>
+                      <h3 class="text-sm font-semibold text-textPrimary leading-snug group-hover:text-white">
+                        ${p.title}
+                      </h3>
+                      <div class="text-xs text-textDim mt-0.5 truncate">${p.org}</div>
+                    </div>
+
+                    <p class="text-xs text-textMuted leading-relaxed line-clamp-2">
+                      ${p.actionDetails.whatNeeded}
+                    </p>
+                  </div>
+
+                  <div class="space-y-2.5">
+                    <div class="flex flex-wrap items-center gap-1">
+                      ${p.contributions.map(c => `
+                        <span class="px-1.5 py-0.5 rounded bg-canvas border border-borderHairline font-mono text-[10px] text-textMuted">${c}</span>
+                      `).join('')}
+                    </div>
+
+                    <div class="pt-2.5 border-t border-borderHairline flex items-center justify-between gap-2 font-mono text-[11px]">
+                      <span class="text-textMuted truncate">${p.actionDetails.when}</span>
+                      <a href="${telHref}" onclick="event.stopPropagation();" class="px-2.5 py-1 rounded bg-statusEmerald/15 hover:bg-statusEmerald/25 text-statusEmerald border border-statusEmerald/30 shrink-0 transition-colors">
+                        Call
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+    }
+
+    // =========================================================================
+    // 6. VIEW 2: PATHWAYS DEVELOPMENT BOARD & LIST
+    // =========================================================================
+    function renderBoardAndList() {
+      const filtered = getFilteredPathways();
+      const all = getAllPathways();
+
+      const countEl = document.getElementById('visible-pathway-count');
+      if (countEl) countEl.textContent = `${filtered.length} of ${all.length} pathways`;
+
+      const resetBtn = document.getElementById('reset-filters-btn');
+      const hasFilter = state.contributionFilter !== 'All' || state.stageFilter !== 'All' || state.searchQuery.trim() !== '';
+      if (resetBtn) resetBtn.classList.toggle('hidden', !hasFilter);
+
+      // 1. 4-Column Kanban Board
+      const kanbanCols = document.getElementById('kanban-columns');
+      kanbanCols.innerHTML = STAGES.map(st => {
+        const colItems = filtered.filter(p => p.stage === st.id);
+        return `
+          <div class="flex flex-col rounded-lg bg-surface border border-borderHairline xl:h-full overflow-hidden">
+            <div class="px-3 py-2.5 border-b border-borderHairline bg-elevated/40 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="w-2 h-2 rounded-full ${st.dotColor} shrink-0"></span>
+                <span class="font-mono text-[10px] text-textDim">${st.num}</span>
+                <h2 class="font-mono text-xs font-semibold text-textPrimary truncate">${st.label}</h2>
+              </div>
+              <span class="font-mono text-xs tabular-nums px-1.5 py-0.5 rounded bg-canvas border border-borderHairline text-textMuted">${colItems.length}</span>
+            </div>
+
+            <div class="p-2.5 space-y-2.5 overflow-y-auto flex-1">
+              ${colItems.length === 0 ? `
+                <div class="h-20 rounded-md border border-dashed border-borderHairline flex items-center justify-center font-mono text-[11px] text-textDim">
+                  No pathways in ${st.label}
+                </div>
+              ` : colItems.map(p => {
+                const doneCount = p.checklist.filter(t => t.done).length;
+                const waitCount = p.checklist.filter(t => !t.done && t.waiting).length;
+                const score = computeScore(p.criteriaMet);
+                return `
+                  <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-elevated hover:bg-elevatedHover border border-borderHairline hover:border-borderStrong p-3 transition-all shadow-sm space-y-2">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="font-mono text-[11px] font-semibold text-statusCyan group-hover:underline">${p.id}</span>
+                      <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-canvas border border-borderHairline text-textMuted tabular-nums">${score}/100</span>
+                    </div>
+
+                    <div>
+                      <h3 class="text-[13px] font-medium text-textPrimary leading-snug group-hover:text-white">${p.title}</h3>
+                      <div class="text-[11px] text-textDim mt-0.5 truncate">${p.org}</div>
+                    </div>
+
+                    <p class="text-[11px] text-textMuted leading-relaxed line-clamp-2">${p.condition}</p>
+
+                    <div class="flex flex-wrap items-center gap-1 pt-0.5">
+                      ${p.contributions.map(c => `
+                        <span class="px-1.5 py-0.5 rounded bg-canvas border border-borderHairline font-mono text-[10px] text-textMuted">${c}</span>
+                      `).join('')}
+                    </div>
+
+                    <div class="pt-2 border-t border-borderHairline/80 flex items-center justify-between font-mono text-[10px] text-textDim tabular-nums">
+                      <span>${p.updatedAt}</span>
+                      <div class="flex items-center gap-2">
+                        ${waitCount > 0 ? `<span class="text-statusAmber">⏸ ${waitCount}</span>` : ''}
+                        <span class="text-textMuted">${doneCount}/${p.checklist.length} tasks</span>
+                      </div>
+                    </div>
+                  </article>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // 2. Mobile Flat Dot List
+      const mobList = document.getElementById('mobile-pathway-list');
+      mobList.innerHTML = filtered.length === 0
+        ? `<div class="p-6 text-xs font-mono text-textDim">No pathways match the current filters.</div>`
+        : filtered.map(p => {
+            const st = getStageMeta(p.stage);
+            return `
+              <button onclick="openPathwayDrawer('${p.id}')" class="w-full text-left px-4 py-3.5 bg-canvas hover:bg-surface/80 transition-colors flex items-start gap-3">
+                <span class="w-2 h-2 rounded-full ${st.dotColor} mt-1.5 shrink-0"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="text-sm font-medium text-textPrimary truncate">${p.title}</div>
+                  <div class="text-xs text-textMuted truncate mt-0.5">${p.org} · ${st.label} · ${p.updatedAt}</div>
+                </div>
+                <svg class="w-4 h-4 text-textDim mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            `;
+          }).join('');
+
+      // 3. Desktop Table List
+      const tableBody = document.getElementById('list-table-body');
+      tableBody.innerHTML = filtered.length === 0
+        ? `<tr><td colspan="7" class="py-8 px-4 text-center font-mono text-xs text-textDim">No pathways match the current filters.</td></tr>`
+        : filtered.map(p => {
+            const st = getStageMeta(p.stage);
+            const doneCount = p.checklist.filter(t => t.done).length;
+            const score = computeScore(p.criteriaMet);
+            return `
+              <tr onclick="openPathwayDrawer('${p.id}')" class="hover:bg-elevated/60 cursor-pointer transition-colors">
+                <td class="py-3 px-3.5 font-mono font-semibold text-statusCyan whitespace-nowrap">${p.id}</td>
+                <td class="py-3 px-3.5 whitespace-nowrap">
+                  <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-canvas border border-borderHairline font-mono text-[10px] ${st.textColor}">
+                    <span class="w-1.5 h-1.5 rounded-full ${st.dotColor}"></span>
+                    <span>${st.label}</span>
+                  </span>
+                </td>
+                <td class="py-3 px-3.5 min-w-[240px]">
+                  <div class="font-medium text-textPrimary">${p.title}</div>
+                  <div class="text-[11px] text-textDim">${p.org}</div>
+                </td>
+                <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textMuted">${p.contributions.join(', ')}</td>
+                <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textPrimary tabular-nums">${score}/100</td>
+                <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textMuted tabular-nums">${doneCount}/${p.checklist.length}</td>
+                <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textDim">${p.updatedAt}</td>
+              </tr>
+            `;
+          }).join('');
+    }
+
+    // =========================================================================
+    // 7. VIEW 3: TASKS & CHECKLISTS WORKSPACE
+    // =========================================================================
+    function openTasksWorkspace(filter = 'all') {
+      switchMainView('tasks');
+      setChecklistStatusFilter(filter);
+    }
+
+    function setTasksSubLayout(subLayout) {
+      state.tasksSubLayout = subLayout;
+      document.getElementById('tasks-list-container').classList.toggle('hidden', subLayout !== 'list');
+      document.getElementById('tasks-kanban-container').classList.toggle('hidden', subLayout !== 'kanban');
+
+      const btnList = document.getElementById('btn-tasks-list');
+      const btnKanban = document.getElementById('btn-tasks-kanban');
+      btnList.className = subLayout === 'list'
+        ? 'px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5'
+        : 'px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5';
+      btnKanban.className = subLayout === 'kanban'
+        ? 'px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5'
+        : 'px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5';
+
+      renderTasksWorkspace();
+    }
+
+    function setChecklistStatusFilter(filter) {
+      state.checklistStatusFilter = filter;
+      ['all', 'open', 'waiting', 'done'].forEach(f => {
+        const btn = document.getElementById(`btn-cl-${f}`);
+        if (!btn) return;
+        btn.className = f === filter
+          ? 'px-2 py-1 rounded text-xs font-medium bg-elevated text-textPrimary'
+          : 'px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary';
+      });
+      renderTasksWorkspace();
+    }
+
+    function getTaskStatusBadge(tState) {
+      if (tState === 'done') {
+        return `
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-canvas border border-borderHairline font-mono text-[10px] text-statusEmerald">
+            <span class="w-1.5 h-1.5 rounded-full bg-statusEmerald"></span>
+            <span>Done</span>
+          </span>
+        `;
+      }
+      if (tState === 'waiting') {
+        return `
+          <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-canvas border border-borderHairline font-mono text-[10px] text-statusAmber">
+            <span class="w-1.5 h-1.5 rounded-full bg-statusAmber"></span>
+            <span>Waiting</span>
+          </span>
+        `;
+      }
+      return `
+        <span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-canvas border border-borderHairline font-mono text-[10px] text-statusBlue">
+          <span class="w-1.5 h-1.5 rounded-full bg-statusBlue"></span>
+          <span>Open</span>
+        </span>
+      `;
+    }
+
+    function renderTasksWorkspace() {
+      const tableBody = document.getElementById('tasks-table-body');
+      const mobileList = document.getElementById('mobile-tasks-list');
+      const kanbanColsEl = document.getElementById('tasks-kanban-columns');
+      const quickSelect = document.getElementById('quick-task-pathway');
+      if (!tableBody || !mobileList || !kanbanColsEl) return;
+
+      const list = getFilteredPathways();
+
+      if (quickSelect) {
+        const prevVal = quickSelect.value;
+        const allP = getAllPathways();
+        quickSelect.innerHTML = allP.map(p => `<option value="${p.id}">${p.id} · ${p.title}</option>`).join('');
+        if (prevVal && allP.some(p => p.id === prevVal)) {
+          quickSelect.value = prevVal;
+        }
+      }
+
+      let open = 0, waiting = 0, done = 0, total = 0;
+      const flat = [];
+
+      list.forEach(p => {
+        p.checklist.forEach((task, idx) => {
+          total++;
+          const tState = task.done ? 'done' : (task.waiting ? 'waiting' : 'open');
+          if (tState === 'done') done++;
+          else if (tState === 'waiting') waiting++;
+          else open++;
+
+          if (state.checklistStatusFilter === 'all' || state.checklistStatusFilter === tState) {
+            flat.push({ p, task, idx, tState });
+          }
+        });
+      });
+
+      document.getElementById('tasks-pill-open').textContent = open;
+      document.getElementById('tasks-pill-waiting').textContent = waiting;
+      document.getElementById('tasks-pill-done').textContent = done;
+
+      const pct = total === 0 ? 0 : Math.round((done / total) * 100);
+      document.getElementById('checklists-progress-bar').style.width = `${pct}%`;
+      document.getElementById('checklists-summary-text').textContent = `${done} of ${total} completed`;
+
+      // 1. Desktop Table List (Matches Pathways List Table)
+      if (flat.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="6" class="py-8 px-4 text-center font-mono text-xs text-textDim">
+              No tasks match the current filter.
+            </td>
+          </tr>
+        `;
+      } else {
+        tableBody.innerHTML = flat.map(({ p, task, idx, tState }) => `
+          <tr class="hover:bg-elevated/60 transition-colors group">
+            <td class="py-3 px-3.5 align-middle">
+              <input
+                type="checkbox"
+                ${task.done ? 'checked' : ''}
+                onchange="toggleTaskDone('${p.id}', ${idx})"
+                class="rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0 cursor-pointer"
+                aria-label="Mark task complete"
+              />
+            </td>
+            <td class="py-3 px-3.5 whitespace-nowrap align-middle">
+              ${getTaskStatusBadge(tState)}
+            </td>
+            <td class="py-3 px-3.5 min-w-[260px] align-middle">
+              <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary font-medium'}">${task.text}</span>
+            </td>
+            <td class="py-3 px-3.5 align-middle">
+              <button onclick="openPathwayDrawer('${p.id}')" class="text-left group/pw">
+                <span class="font-mono text-[11px] font-semibold text-statusCyan group-hover/pw:underline mr-1.5">${p.id}</span>
+                <span class="text-xs text-textMuted group-hover/pw:text-textPrimary">${p.title}</span>
+              </button>
+            </td>
+            <td class="py-3 px-3.5 font-mono text-[11px] text-textDim whitespace-nowrap align-middle">
+              ${p.org}
+            </td>
+            <td class="py-3 px-3.5 whitespace-nowrap text-right align-middle">
+              <div class="inline-flex items-center gap-1.5">
+                ${!task.done ? `
+                  <button type="button" onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border transition-colors ${
+                    task.waiting
+                      ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30 hover:bg-statusAmber/25'
+                      : 'bg-canvas text-textMuted border-borderHairline hover:text-textPrimary'
+                  }">${task.waiting ? 'Resume' : 'Waiting'}</button>
+                ` : ''}
+                <button type="button" onclick="removeTask('${p.id}', ${idx})" class="opacity-40 group-hover:opacity-100 text-textDim hover:text-statusRose font-mono text-xs px-1.5 py-0.5 rounded transition-opacity" title="Remove task">✕</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // 2. Mobile Flat Dot List
+      mobileList.innerHTML = flat.length === 0
+        ? `<div class="p-6 text-xs font-mono text-textDim">No tasks match the current filter.</div>`
+        : flat.map(({ p, task, idx, tState }) => {
+            const dotClass = tState === 'done' ? 'bg-statusEmerald' : (tState === 'waiting' ? 'bg-statusAmber' : 'bg-statusBlue');
+            return `
+              <div class="px-4 py-3 flex items-start gap-3 bg-canvas hover:bg-surface/80 transition-colors">
+                <input
+                  type="checkbox"
+                  ${task.done ? 'checked' : ''}
+                  onchange="toggleTaskDone('${p.id}', ${idx})"
+                  class="mt-1 rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0 shrink-0"
+                />
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full ${dotClass} shrink-0"></span>
+                    <span class="text-xs font-medium leading-snug ${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</span>
+                  </div>
+                  <button onclick="openPathwayDrawer('${p.id}')" class="mt-1 block text-[11px] text-textMuted truncate text-left">
+                    <span class="font-mono text-statusCyan mr-1">${p.id}</span>${p.org}
+                  </button>
+                </div>
+                ${!task.done ? `
+                  <button type="button" onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border shrink-0 ${
+                    task.waiting ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30' : 'bg-elevated text-textDim border-borderHairline'
+                  }">${task.waiting ? '⏸' : 'Wait'}</button>
+                ` : ''}
+              </div>
+            `;
+          }).join('');
+
+      // 3. 3-Column Task Board
+      const taskCols = [
+        { id: 'open',    label: 'Open / In Progress', dot: 'bg-statusBlue' },
+        { id: 'waiting', label: 'Waiting on Reply',   dot: 'bg-statusAmber' },
+        { id: 'done',    label: 'Completed',          dot: 'bg-statusEmerald' }
+      ];
+
+      kanbanColsEl.innerHTML = taskCols.map(col => {
+        const colTasks = flat.filter(x => x.tState === col.id);
+        return `
+          <div class="flex flex-col rounded-lg bg-surface border border-borderHairline md:h-full overflow-hidden">
+            <div class="px-3 py-2.5 border-b border-borderHairline bg-elevated/40 flex items-center justify-between shrink-0">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full ${col.dot}"></span>
+                <h2 class="font-mono text-xs font-semibold text-textPrimary">${col.label}</h2>
+              </div>
+              <span class="font-mono text-xs tabular-nums px-1.5 py-0.5 rounded bg-canvas border border-borderHairline text-textMuted">${colTasks.length}</span>
+            </div>
+            <div class="p-2.5 space-y-2 overflow-y-auto flex-1">
+              ${colTasks.length === 0
+                ? `<div class="h-20 rounded-md border border-dashed border-borderHairline flex items-center justify-center font-mono text-[11px] text-textDim">No tasks</div>`
+                : colTasks.map(({ p, task, idx }) => `
+                    <div class="rounded-lg bg-elevated border border-borderHairline p-3 space-y-2">
+                      <div class="flex items-center justify-between gap-2">
+                        <button onclick="openPathwayDrawer('${p.id}')" class="font-mono text-[11px] font-semibold text-statusCyan hover:underline">${p.id}</button>
+                        <span class="font-mono text-[10px] text-textDim truncate">${p.org}</span>
+                      </div>
+                      <label class="flex items-start gap-2 cursor-pointer">
+                        <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTaskDone('${p.id}', ${idx})" class="mt-0.5 rounded border-borderStrong bg-canvas text-statusEmerald focus:ring-0" />
+                        <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</span>
+                      </label>
+                      ${!task.done ? `
+                        <div class="pt-1.5 border-t border-borderHairline/70 flex justify-end">
+                          <button onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border ${
+                            task.waiting ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30' : 'bg-canvas text-textMuted border-borderHairline hover:text-textPrimary'
+                          }">${task.waiting ? 'Resume Open' : 'Mark Waiting'}</button>
+                        </div>
+                      ` : ''}
+                    </div>
+                  `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // 8. VIEW 4: EVIDENCE & RECORDS INSPECTOR
+    // =========================================================================
+    function setEvidenceFilter(type) {
+      state.evidenceFilter = type;
+      renderEvidenceView();
+    }
+
+    function selectEvidenceRecord(idx) {
+      state.activeEvidenceIdx = idx;
+      renderEvidenceView();
+    }
+
+    function copyActiveEvidenceJson() {
+      const rec = EVIDENCE_RECORDS[state.activeEvidenceIdx];
+      if (!rec) return;
+      copyText(JSON.stringify(rec.raw, null, 2), `Copied ${rec.id} JSON`);
+    }
+
+    function renderEvidenceView() {
+      const pillsEl = document.getElementById('evidence-type-pills');
+      const gridEl = document.getElementById('evidence-grid');
+      if (!pillsEl || !gridEl) return;
+
+      const callsCount = EVIDENCE_RECORDS.filter(r => r.type === 'Calls').length;
+      const visitsCount = EVIDENCE_RECORDS.filter(r => r.type === 'Visits').length;
+      const recordsCount = EVIDENCE_RECORDS.filter(r => r.type === 'Records').length;
+      const evCalls = document.getElementById('ev-pill-calls');
+      const evVisits = document.getElementById('ev-pill-visits');
+      const evRecords = document.getElementById('ev-pill-records');
+      if (evCalls) evCalls.textContent = callsCount;
+      if (evVisits) evVisits.textContent = visitsCount;
+      if (evRecords) evRecords.textContent = recordsCount;
+
+      const types = ['All', 'Visits', 'Calls', 'Records'];
+      pillsEl.innerHTML = types.map(t => {
+        const count = t === 'All' ? EVIDENCE_RECORDS.length : EVIDENCE_RECORDS.filter(r => r.type === t).length;
+        const active = state.evidenceFilter === t;
+        return `
+          <button onclick="setEvidenceFilter('${t}')" class="h-7 px-3 rounded-full text-xs font-medium border transition-colors ${
+            active ? 'bg-textPrimary text-canvas border-textPrimary' : 'bg-elevated text-textMuted hover:text-textPrimary border-borderHairline'
+          }">
+            ${t} <span class="font-mono text-[10px] opacity-75 ml-0.5">${count}</span>
+          </button>
+        `;
+      }).join('');
+
+      const filtered = state.evidenceFilter === 'All'
+        ? EVIDENCE_RECORDS
+        : EVIDENCE_RECORDS.filter(r => r.type === state.evidenceFilter);
+
+      gridEl.innerHTML = filtered.map(rec => {
+        const origIdx = EVIDENCE_RECORDS.indexOf(rec);
+        const isSelected = state.activeEvidenceIdx === origIdx;
+        return `
+          <div onclick="selectEvidenceRecord(${origIdx})" class="cursor-pointer rounded-lg bg-surface hover:bg-elevated/70 border ${
+            isSelected ? 'border-statusCyan' : 'border-borderHairline'
+          } p-4 transition-all space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-xs font-semibold text-statusCyan">${rec.id} · ${rec.type}</span>
+              <span class="font-mono text-[10px] text-textDim">${rec.date}</span>
+            </div>
+            <h3 class="text-sm font-semibold text-textPrimary leading-snug">${rec.title}</h3>
+            <p class="text-xs text-textMuted leading-relaxed">${rec.summary}</p>
+            <div class="pt-1 flex items-center justify-between font-mono text-[10px]">
+              <button onclick="event.stopPropagation(); openPathwayDrawer('${rec.linkedPathway}');" class="text-statusEmerald hover:underline">
+                Linked: ${rec.linkedPathway} &rarr;
+              </button>
+              <span class="text-textDim">${isSelected ? 'Inspecting below' : 'Click to inspect'}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const activeRec = EVIDENCE_RECORDS[state.activeEvidenceIdx] || EVIDENCE_RECORDS[0];
+      if (activeRec) {
+        document.getElementById('active-evidence-title').textContent = `${activeRec.id} — ${activeRec.title}`;
+        document.getElementById('evidence-json-preview').textContent = JSON.stringify(activeRec.raw, null, 2);
+      }
+    }
+
+    // =========================================================================
+    // 9. PATHWAY INSPECTOR DRAWER & MUTATIONS
+    // =========================================================================
+    function openPathwayDrawer(pathwayId) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      state.activePathwayId = pathwayId;
+      document.getElementById('drawer-pathway-id').textContent = p.id;
+      document.getElementById('drawer-pathway-org').textContent = p.org;
+      renderPathwayDrawer(pathwayId);
+      document.getElementById('pathway-drawer-backdrop').classList.remove('hidden');
+      const drawer = document.getElementById('pathway-drawer');
+      drawer.classList.remove('hidden');
+      drawer.classList.add('flex');
+    }
+
+    function closePathwayDrawer() {
+      state.activePathwayId = null;
+      document.getElementById('pathway-drawer-backdrop').classList.add('hidden');
+      const drawer = document.getElementById('pathway-drawer');
+      drawer.classList.add('hidden');
+      drawer.classList.remove('flex');
+    }
+
+    function renderPathwayDrawer(pathwayId) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+
+      const score = computeScore(p.criteriaMet);
+      const st = getStageMeta(p.stage);
+      const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
+      const mapsHref = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.actionDetails.where || 'Stockton, CA');
+      const linkedEvs = EVIDENCE_RECORDS.filter(ev => (p.linkedEvidence || []).includes(ev.id));
+
+      document.getElementById('drawer-content').innerHTML = `
+        <div class="space-y-3">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-canvas border border-borderHairline font-mono text-[11px] ${st.textColor}">
+              <span class="w-2 h-2 rounded-full ${st.dotColor}"></span>
+              <span>${st.num} ${st.label}</span>
+            </span>
+            <span class="font-mono text-[11px] text-textMuted">${p.freshLabel}</span>
+          </div>
+
+          <h2 class="text-lg sm:text-xl font-semibold text-textPrimary leading-snug">${p.title}</h2>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-lg bg-canvas border border-borderHairline">
+            <div>
+              <label class="block font-mono text-[10px] uppercase tracking-wider text-textDim mb-1">Pathway Stage</label>
+              <select onchange="updatePathwayStage('${p.id}', this.value)" class="w-full h-8 px-2 rounded bg-elevated border border-borderStrong text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
+                ${STAGES.map(s => `<option value="${s.id}" ${p.stage === s.id ? 'selected' : ''}>${s.num} ${s.label}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <span class="block font-mono text-[10px] uppercase tracking-wider text-textDim mb-1">Evidence Confidence</span>
+              <div class="h-8 px-2.5 rounded bg-elevated/60 border border-borderHairline flex items-center justify-between font-mono text-xs">
+                <span class="text-textPrimary font-semibold">${score}/100</span>
+                <span class="text-[10px] text-textMuted">${scoreTier(score)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Condition / Bottleneck -->
+        <div class="space-y-1.5">
+          <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Current Reality / Condition</h3>
+          <p class="text-xs sm:text-sm text-textPrimary leading-relaxed bg-elevated/40 p-3.5 rounded-lg border border-borderHairline">${p.condition}</p>
+        </div>
+
+        <!-- Action Details (Especially relevant for Established pathways) -->
+        <div class="space-y-2.5 p-4 rounded-lg bg-canvas border border-borderHairline text-xs">
+          <div class="font-mono text-[10px] uppercase tracking-wider text-statusEmerald">Action Details</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div><span class="text-textDim block font-mono text-[10px]">WHAT IS NEEDED</span><span class="text-textPrimary">${p.actionDetails.whatNeeded}</span></div>
+            <div><span class="text-textDim block font-mono text-[10px]">HOW TO HELP</span><span class="text-textPrimary">${p.actionDetails.howToHelp}</span></div>
+            <div><span class="text-textDim block font-mono text-[10px]">WHEN</span><span class="text-textPrimary">${p.actionDetails.when}</span></div>
+            <div><span class="text-textDim block font-mono text-[10px]">WHERE</span><span class="text-textPrimary">${p.actionDetails.where}</span></div>
+            <div><span class="text-textDim block font-mono text-[10px]">BRING</span><span class="text-textPrimary">${p.actionDetails.bring}</span></div>
+            <div><span class="text-textDim block font-mono text-[10px]">CONTACT</span><span class="text-textPrimary font-mono">${p.actionDetails.phone || 'Pending'}</span></div>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-2">
+            ${p.actionDetails.phone ? `
+              <a href="${telHref}" class="h-8 px-3.5 rounded-md bg-statusEmerald text-canvas hover:opacity-90 font-semibold text-xs inline-flex items-center gap-1.5">
+                <span>Call to confirm</span>
+              </a>
+            ` : ''}
+            <a href="${mapsHref}" target="_blank" rel="noopener noreferrer" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary inline-flex items-center">
+              Get directions
+            </a>
+            <button type="button" onclick="copyPathwaySummary('${p.id}')" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderHairline text-xs font-medium text-textMuted hover:text-textPrimary">
+              Copy details
+            </button>
+          </div>
+        </div>
+
+        <!-- Evidence Confidence Criteria Checklist -->
+        <div class="space-y-2">
+          <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Evidence Criteria (${score}/100)</h3>
+          <div class="space-y-1.5">
+            ${CONFIDENCE_CRITERIA.map(c => `
+              <label class="flex items-center justify-between gap-2 p-2.5 rounded-md bg-canvas border border-borderHairline cursor-pointer hover:bg-elevated/40 text-xs">
+                <span class="flex items-center gap-2.5">
+                  <input type="checkbox" ${p.criteriaMet[c.key] ? 'checked' : ''} onchange="togglePathwayCriterion('${p.id}', '${c.key}')" class="rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0" />
+                  <span class="${p.criteriaMet[c.key] ? 'text-textPrimary' : 'text-textMuted'}">${c.label}</span>
+                </span>
+                <span class="font-mono text-[10px] text-textDim">+${c.points}</span>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Concrete Work Tasks -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Concrete Work Tasks</h3>
+            <span class="font-mono text-[11px] text-textMuted">${p.checklist.filter(t => t.done).length}/${p.checklist.length} done</span>
+          </div>
+          <div class="space-y-1.5">
+            ${p.checklist.map((task, idx) => `
+              <div class="flex items-center justify-between gap-2 p-2.5 rounded-md bg-canvas border border-borderHairline text-xs">
+                <label class="flex items-start gap-2.5 cursor-pointer flex-1 min-w-0">
+                  <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTaskDone('${p.id}', ${idx})" class="mt-0.5 rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0" />
+                  <span class="${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</span>
+                </label>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${!task.done ? `
+                    <button type="button" onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border ${
+                      task.waiting ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30' : 'bg-elevated text-textDim border-borderHairline'
+                    }">${task.waiting ? 'WAITING' : 'OPEN'}</button>
+                  ` : ''}
+                  <button type="button" onclick="removeTask('${p.id}', ${idx})" class="text-textDim hover:text-statusRose font-mono px-1">✕</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <form onsubmit="addTaskFromDrawer(event, '${p.id}')" class="flex gap-2 pt-1">
+            <input type="text" id="drawer-new-task-input" required placeholder="+ Add doable next task..." class="flex-1 h-8 px-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan focus:outline-none text-xs text-textPrimary placeholder-textDim" />
+            <button type="submit" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary">Add</button>
+          </form>
+        </div>
+
+        <!-- Linked Evidence -->
+        <div class="space-y-2">
+          <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Linked Evidence (${linkedEvs.length})</h3>
+          ${linkedEvs.length === 0
+            ? `<div class="text-xs font-mono text-textDim">No linked evidence records yet.</div>`
+            : `<div class="space-y-1.5">
+                ${linkedEvs.map(ev => `
+                  <button onclick="openEvidenceFromDrawer('${ev.id}')" class="w-full text-left p-2.5 rounded-md bg-canvas hover:bg-elevated/50 border border-borderHairline flex items-center justify-between gap-2 text-xs">
+                    <span class="truncate"><strong class="font-mono text-statusCyan mr-1.5">${ev.id}</strong><span class="text-textPrimary">${ev.title}</span></span>
+                    <span class="font-mono text-[10px] text-textDim shrink-0">Inspect &rarr;</span>
+                  </button>
+                `).join('')}
+              </div>`
+          }
+        </div>
+
+        <!-- Activity Log -->
+        <div class="space-y-2.5 pt-2 border-t border-borderHairline">
+          <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Field Notes &amp; History</h3>
+          <form onsubmit="addPathwayLog(event, '${p.id}')" class="flex gap-2">
+            <input type="text" id="new-log-input" required placeholder="Append timestamped observation..." class="flex-1 h-8 px-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan focus:outline-none text-xs text-textPrimary placeholder-textDim" />
+            <button type="submit" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary">Post</button>
+          </form>
+          <div class="space-y-1.5">
+            ${p.logs.map(entry => `
+              <div class="p-2.5 rounded-md bg-canvas border border-borderHairline text-xs space-y-0.5">
+                <div class="flex items-center justify-between font-mono text-[10px] text-textDim">
+                  <span class="text-statusCyan">@${entry.author}</span>
+                  <span>${entry.timestamp}</span>
+                </div>
+                <p class="text-textMuted">${entry.note}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function copyPathwaySummary(pathwayId) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      const summary = `${p.title} (${p.org})\nStage: ${p.stage} | ${p.freshLabel}\nWhen: ${p.actionDetails.when}\nWhere: ${p.actionDetails.where}\nPhone: ${p.actionDetails.phone || 'N/A'}\nHow: ${p.actionDetails.howToHelp}`;
+      copyText(summary, 'Copied pathway details');
+    }
+
+    function openEvidenceFromDrawer(evId) {
+      const idx = EVIDENCE_RECORDS.findIndex(e => e.id === evId);
+      if (idx !== -1) state.activeEvidenceIdx = idx;
+      closePathwayDrawer();
+      switchMainView('evidence');
+    }
+
+    function updatePathwayStage(pathwayId, newStage) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      p.stage = newStage;
+      p.updatedAt = 'Just now';
+      if (newStage === 'Established') {
+        p.freshness = 'fresh';
+        p.freshMins = 0;
+        p.freshLabel = 'Fresh · Confirmed just now';
+      }
+      p.logs.unshift({
+        timestamp: getCurrentTimestamp(),
+        author: 'civic-ops',
+        note: `Updated pathway stage to "${newStage}".`
+      });
+      showToast(`${p.id} moved to ${newStage}`);
+      renderAll();
+    }
+
+    function togglePathwayCriterion(pathwayId, key) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      p.criteriaMet[key] = !p.criteriaMet[key];
+      renderAll();
+    }
+
+    function toggleTaskDone(pathwayId, idx) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p || !p.checklist[idx]) return;
+      p.checklist[idx].done = !p.checklist[idx].done;
+      if (p.checklist[idx].done) p.checklist[idx].waiting = false;
+      p.updatedAt = 'Just now';
+      renderAll();
+    }
+
+    function toggleTaskWaiting(pathwayId, idx) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p || !p.checklist[idx]) return;
+      p.checklist[idx].waiting = !p.checklist[idx].waiting;
+      if (p.checklist[idx].waiting) p.checklist[idx].done = false;
+      p.updatedAt = 'Just now';
+      renderAll();
+    }
+
+    function removeTask(pathwayId, idx) {
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p || !p.checklist[idx]) return;
+      p.checklist.splice(idx, 1);
+      p.updatedAt = 'Just now';
+      renderAll();
+    }
+
+    function addTaskFromDrawer(e, pathwayId) {
+      e.preventDefault();
+      const input = document.getElementById('drawer-new-task-input');
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      p.checklist.push({ text, done: false, waiting: false });
+      p.updatedAt = 'Just now';
+      input.value = '';
+      renderAll();
+    }
+
+    function addTaskFromToolbar(e) {
+      e.preventDefault();
+      const select = document.getElementById('quick-task-pathway');
+      const input = document.getElementById('quick-task-input');
+      const pathwayId = select ? select.value : '';
+      const text = input ? input.value.trim() : '';
+      if (!pathwayId || !text) return;
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      p.checklist.push({ text, done: false, waiting: false });
+      p.updatedAt = 'Just now';
+      input.value = '';
+      showToast(`Task added to ${p.id}`);
+      renderAll();
+    }
+
+    function addPathwayLog(e, pathwayId) {
+      e.preventDefault();
+      const input = document.getElementById('new-log-input');
+      const text = input ? input.value.trim() : '';
+      if (!text) return;
+      const p = getAllPathways().find(x => x.id === pathwayId);
+      if (!p) return;
+      p.logs.unshift({
+        timestamp: getCurrentTimestamp(),
+        author: 'civic-ops',
+        note: text
+      });
+      p.updatedAt = 'Just now';
+      input.value = '';
+      renderAll();
+    }
+
+    // =========================================================================
+    // 10. ABOUT DRAWER, CONFIDENCE CALCULATOR & NEW PATHWAY MODAL
+    // =========================================================================
+    function openAboutDrawer() {
+      document.getElementById('about-drawer-backdrop').classList.remove('hidden');
+      const d = document.getElementById('about-drawer');
+      d.classList.remove('hidden');
+      d.classList.add('flex');
+      renderCalcWidget();
+    }
+
+    function closeAboutDrawer() {
+      document.getElementById('about-drawer-backdrop').classList.add('hidden');
+      const d = document.getElementById('about-drawer');
+      d.classList.add('hidden');
+      d.classList.remove('flex');
+    }
+
+    function toggleCalcCriterion(key) {
+      state.calcState[key] = !state.calcState[key];
+      renderCalcWidget();
+    }
+
+    function resetCalc() {
+      state.calcState = { completed: false, confirmed: true, steps: true, recent: false, corroborated: false };
+      renderCalcWidget();
+    }
+
+    function renderCalcWidget() {
+      const listEl = document.getElementById('calc-criteria-list');
+      if (!listEl) return;
+      const score = computeScore(state.calcState);
+      document.getElementById('calc-score').textContent = `${score}/100`;
+      document.getElementById('calc-tier').textContent = scoreTier(score);
+
+      listEl.innerHTML = CONFIDENCE_CRITERIA.map(c => `
+        <label class="flex items-center justify-between gap-2 py-1 cursor-pointer text-[11px]">
+          <span class="flex items-center gap-2">
+            <input type="checkbox" ${state.calcState[c.key] ? 'checked' : ''} onchange="toggleCalcCriterion('${c.key}')" class="rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0" />
+            <span class="${state.calcState[c.key] ? 'text-textPrimary' : 'text-textMuted'}">${c.label}</span>
+          </span>
+          <span class="font-mono text-[10px] text-textDim">+${c.points}</span>
+        </label>
+      `).join('');
+    }
+
+    function openNewPathwayModal() {
+      const nextNum = String(pathways.length + 1).padStart(2, '0');
+      document.getElementById('new-id').value = `PW-${nextNum}`;
+      const modal = document.getElementById('new-pathway-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeNewPathwayModal() {
+      const modal = document.getElementById('new-pathway-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function submitNewPathway(e) {
+      e.preventDefault();
+      const id = document.getElementById('new-id').value.trim() || `PW-${pathways.length + 1}`;
+      const stage = document.getElementById('new-stage').value;
+      const title = document.getElementById('new-title').value.trim();
+      const org = document.getElementById('new-org').value.trim();
+      const contribution = document.getElementById('new-contribution').value;
+      const condition = document.getElementById('new-condition').value.trim();
+
+      pathways.unshift({
+        id,
+        title,
+        org,
+        stage,
+        contributions: [contribution],
+        freshness: stage === 'Established' ? 'fresh' : 'n/a',
+        freshMins: stage === 'Established' ? 0 : 999999,
+        freshLabel: stage === 'Established' ? 'Fresh · Confirmed just now' : `${stage} · Just added`,
+        updatedAt: 'Just now',
+        condition,
+        criteriaMet: { completed: false, confirmed: stage === 'Established', steps: false, recent: true, corroborated: false },
+        linkedEvidence: [],
+        actionDetails: {
+          whatNeeded: condition,
+          howToHelp: 'Document exact steps once verified.',
+          when: 'Pending confirmation',
+          where: `${org}, Stockton, CA`,
+          bring: 'TBD',
+          phone: ''
+        },
+        checklist: [
+          { text: `Contact ${org} to confirm current availability`, done: false, waiting: false }
+        ],
+        logs: [
+          { timestamp: getCurrentTimestamp(), author: 'civic-ops', note: `Created pathway ${id} in ${stage}.` }
+        ]
+      });
+
+      document.getElementById('new-pathway-form').reset();
+      closeNewPathwayModal();
+      switchMainView(stage === 'Established' ? 'help' : 'board');
+      renderAll();
+      openPathwayDrawer(id);
+    }
+
+    // =========================================================================
+    // 11. NAVIGATION, MODE & FILTER HANDLERS
+    // =========================================================================
+    function goHome() {
+      switchMainView('help');
+    }
+
+    function jumpToHelp() {
+      switchMainView('help');
+    }
+
+    function jumpToStage(stageId) {
+      state.stageFilter = stageId;
+      const sel = document.getElementById('filter-stage');
+      if (sel) sel.value = stageId;
+      switchMainView('board');
+      renderAll();
+    }
+
+    function setBoardMode(mode) {
+      state.boardMode = mode;
+      renderAll();
+      showToast(mode === 'preview' ? 'Preview mode: 4 example pathways' : 'Live mode: 0 established pathways');
+    }
+
+    function toggleBoardMode() {
+      setBoardMode(state.boardMode === 'live' ? 'preview' : 'live');
+    }
+
+    function switchMainView(viewName) {
+      state.activeView = viewName;
+      ['help', 'board', 'tasks', 'evidence'].forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (!el) return;
+        if (v === viewName) {
+          el.classList.remove('hidden');
+          el.classList.add('flex');
+        } else {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      });
+
+      // Desktop sidebar active state
+      document.querySelectorAll('.sidebar-btn').forEach(btn => {
+        const active = btn.dataset.viewBtn === viewName;
+        btn.classList.toggle('bg-elevated', active);
+        btn.classList.toggle('text-textPrimary', active);
+        btn.classList.toggle('border-borderHairline', active);
+        btn.classList.toggle('text-textMuted', !active);
+        btn.classList.toggle('border-transparent', !active);
+      });
+
+      // Mobile bottom tab active state
+      document.querySelectorAll('.mob-tab').forEach(btn => {
+        const active = btn.dataset.mobTab === viewName;
+        btn.classList.toggle('text-statusEmerald', active);
+        btn.classList.toggle('text-textDim', !active);
+      });
+    }
+
+    function syncLayoutButtons() {
+      // Help layout buttons
+      const btnHB = document.getElementById('btn-help-board');
+      const btnHL = document.getElementById('btn-help-list');
+      if (btnHB && btnHL) {
+        btnHB.className = state.helpLayout === 'board'
+          ? 'px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5'
+          : 'px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5';
+        btnHL.className = state.helpLayout === 'list'
+          ? 'px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5'
+          : 'px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5';
+      }
+
+      // Pathways board/list buttons
+      const kanbanEl = document.getElementById('kanban-container');
+      const listEl = document.getElementById('list-container');
+      const btnK = document.getElementById('btn-layout-kanban');
+      const btnL = document.getElementById('btn-layout-list');
+      if (kanbanEl && listEl && btnK && btnL) {
+        kanbanEl.classList.toggle('hidden', state.boardLayout !== 'kanban');
+        listEl.classList.toggle('hidden', state.boardLayout !== 'list');
+        btnK.className = state.boardLayout === 'kanban'
+          ? 'px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5'
+          : 'px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5';
+        btnL.className = state.boardLayout === 'list'
+          ? 'px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5'
+          : 'px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5';
+      }
+    }
+
+    function setBoardLayout(layout) {
+      state.boardLayout = layout;
+      syncLayoutButtons();
+    }
+
+    function setContributionFilter(val) {
+      state.contributionFilter = val;
+      const sel = document.getElementById('filter-contribution');
+      if (sel) sel.value = val;
+      renderAll();
+    }
+
+    function setStageFilter(val) {
+      state.stageFilter = val;
+      const sel = document.getElementById('filter-stage');
+      if (sel) sel.value = val;
+      renderAll();
+    }
+
+    function handleSearch(val) {
+      state.searchQuery = val;
+      renderBoardAndList();
+      renderTasksWorkspace();
+    }
+
+    function resetFilters() {
+      state.contributionFilter = 'All';
+      state.stageFilter = 'All';
+      state.checklistStatusFilter = 'all';
+      state.searchQuery = '';
+      const fc = document.getElementById('filter-contribution');
+      const fs = document.getElementById('filter-stage');
+      const gs = document.getElementById('global-search');
+      const ms = document.getElementById('mobile-board-search');
+      if (fc) fc.value = 'All';
+      if (fs) fs.value = 'All';
+      if (gs) gs.value = '';
+      if (ms) ms.value = '';
+      setChecklistStatusFilter('all');
+      renderAll();
+    }
+
+    function toggleMobileSidebar() {
+      const sidebar = document.getElementById('mobile-sidebar');
+      const backdrop = document.getElementById('mobile-sidebar-backdrop');
+      sidebar.classList.toggle('hidden');
+      sidebar.classList.toggle('flex');
+      backdrop.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>

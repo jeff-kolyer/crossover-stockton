@@ -1,0 +1,323 @@
+[
+  {
+    "id": "PW-01",
+    "title": "Same-week intake dog walking & Doggie Day Out",
+    "org": "Stockton Animal Services",
+    "stage": "Blocked",
+    "contributions": [
+      "Presence"
+    ],
+    "freshness": "n/a",
+    "freshMins": 999999,
+    "freshLabel": "Blocked · No email reply since Nov 14",
+    "updatedAt": "2h ago",
+    "condition": "Shelter accepts volunteers in theory, but sasvolunteers@stocktonca.gov has not replied in 4 days and walk-in signups are paused during kennel compression.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": true,
+      "recent": true,
+      "corroborated": false
+    },
+    "linkedEvidence": [
+      "EV-01",
+      "EV-05"
+    ],
+    "actionDetails": {
+      "whatNeeded": "Confirmed weekday afternoon intake dog walking and Doggie Day Out outings.",
+      "howToHelp": "Pending live phone confirmation of intake desk schedule.",
+      "when": "TBD upon coordinator confirmation",
+      "where": "1575 S. Lincoln St, Stockton, CA 95206",
+      "bring": "Closed-toe shoes, water, photo ID",
+      "phone": "209-937-7445"
+    },
+    "checklist": [
+      {
+        "text": "Call Stockton Animal Services volunteer desk (209-937-7445) during morning hours",
+        "done": false,
+        "waiting": true
+      },
+      {
+        "text": "Verify whether Doggie Day Out requires prior orientation class",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Complete one test shift and document exact check-in door",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-11-17 14:10",
+        "author": "civic-ops",
+        "note": "Moved to Blocked after 72h with no reply to volunteer inquiry email."
+      },
+      {
+        "timestamp": "2026-11-14 10:05",
+        "author": "civic-ops",
+        "note": "Submitted volunteer inquiry to sasvolunteers@stocktonca.gov."
+      }
+    ]
+  },
+  {
+    "id": "PW-02",
+    "title": "Direct kibble & clean water drop-off for street dogs",
+    "org": "Stockton Street Dogs",
+    "stage": "Enabling",
+    "contributions": [
+      "Supplies",
+      "Funding"
+    ],
+    "freshness": "n/a",
+    "freshMins": 999999,
+    "freshLabel": "Enabling · Confirming drop-off window",
+    "updatedAt": "3h ago",
+    "condition": "Organizer confirmed urgent need for unopened dry kibble and bowls; establishing a repeatable weekly drop-off point and handoff contact so anyone can contribute.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": true,
+      "steps": false,
+      "recent": true,
+      "corroborated": true
+    },
+    "linkedEvidence": [
+      "EV-02",
+      "EV-08"
+    ],
+    "actionDetails": {
+      "whatNeeded": "Unopened bags of dry dog food, clean water jugs, and stainless bowls for District 5 routes.",
+      "howToHelp": "Coordinating a fixed weekly drop-off window with field feeders.",
+      "when": "Target: Tue/Thu mornings",
+      "where": "District 5 / South Stockton handoff point (TBD)",
+      "bring": "Unopened dry kibble or sealed water jugs",
+      "phone": "209-555-0142"
+    },
+    "checklist": [
+      {
+        "text": "Confirm fixed drop-off address and safe handoff window with founder",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Verify preferred food brands/bag sizes for street feeding",
+        "done": true,
+        "waiting": false
+      },
+      {
+        "text": "Complete one verified supply drop-off to establish pathway",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-11-17 11:30",
+        "author": "field-ops",
+        "note": "Direct message confirmed kibble shortage; awaiting exact handoff times."
+      }
+    ]
+  },
+  {
+    "id": "PW-03",
+    "title": "Direct-pay stray spay/neuter procedure sponsorship",
+    "org": "ACT Spay/Neuter Clinic",
+    "stage": "Enabling",
+    "contributions": [
+      "Funding"
+    ],
+    "freshness": "n/a",
+    "freshMins": 999999,
+    "freshLabel": "Enabling · Verifying phone-pay voucher rule",
+    "updatedAt": "3h ago",
+    "condition": "Checking whether a donor can call the clinic directly to sponsor a specific stray dog sterilization slot without going through a 3rd-party fundraiser.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": true,
+      "steps": true,
+      "recent": false,
+      "corroborated": false
+    },
+    "linkedEvidence": [
+      "EV-03"
+    ],
+    "actionDetails": {
+      "whatNeeded": "Direct-to-clinic sponsorship ($85–$120) for stray spay/neuter appointments.",
+      "howToHelp": "Verifying exact account reference format for phone payments.",
+      "when": "Mon–Thu clinic desk hours",
+      "where": "327 E. Alpine Ave, Stockton, CA 95204",
+      "bring": "Phone payment method",
+      "phone": "209-462-7729"
+    },
+    "checklist": [
+      {
+        "text": "Confirm clinic accepts phone credit-card sponsorship on named stray slots",
+        "done": true,
+        "waiting": false
+      },
+      {
+        "text": "Get written receipt / confirmation workflow for donors",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-11-17 11:05",
+        "author": "civic-ops",
+        "note": "Front desk confirmed sponsorships are possible; waiting on clinic manager for exact reference wording."
+      }
+    ]
+  },
+  {
+    "id": "PW-04",
+    "title": "Short-term foster intake & clinic transport",
+    "org": "Delta Humane Society & SPCA",
+    "stage": "Blocked",
+    "contributions": [
+      "Transport",
+      "Space"
+    ],
+    "freshness": "n/a",
+    "freshMins": 999999,
+    "freshLabel": "Blocked · Foster approval turnaround unclear",
+    "updatedAt": "4h ago",
+    "condition": "Online foster application does not specify approval turnaround time or whether same-week emergency fosters can bypass the standard queue.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": false,
+      "recent": true,
+      "corroborated": false
+    },
+    "linkedEvidence": [
+      "EV-04"
+    ],
+    "actionDetails": {
+      "whatNeeded": "Temporary foster homes (3–14 days) and morning clinic rides.",
+      "howToHelp": "Currently blocked by unverified application turnaround.",
+      "when": "Pending verification",
+      "where": "4590 S. Highway 99, Stockton, CA 95215",
+      "bring": "Valid driver license & proof of residence",
+      "phone": "209-466-0339"
+    },
+    "checklist": [
+      {
+        "text": "Call Delta Humane (209-466-0339) to check current foster application backlog",
+        "done": false,
+        "waiting": true
+      },
+      {
+        "text": "Ask if transport-only volunteers require full foster onboarding",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-11-17 09:40",
+        "author": "civic-ops",
+        "note": "Submitted test inquiry via info@dhsspca.org; no auto-response or timeline provided."
+      }
+    ]
+  },
+  {
+    "id": "PW-05",
+    "title": "Assess St. Mary's Dining Room area for active pathways",
+    "org": "St. Mary's Dining Room",
+    "stage": "Exploring",
+    "contributions": [
+      "Presence",
+      "Supplies"
+    ],
+    "freshness": "n/a",
+    "freshMins": 999999,
+    "freshLabel": "Exploring · Site visit queued",
+    "updatedAt": "5h ago",
+    "condition": "Initial exploration of morning pantry shifts and whether pet food donations are accepted alongside human food boxes on Sonora St.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": false,
+      "recent": false,
+      "corroborated": false
+    },
+    "linkedEvidence": [
+      "EV-06"
+    ],
+    "actionDetails": {
+      "whatNeeded": "Assessment of accessible drop-in volunteer shifts and supply needs.",
+      "howToHelp": "Site visit planned to speak directly with receiving coordinator.",
+      "when": "Weekday mornings 8:00 AM – 11:00 AM",
+      "where": "545 W. Sonora St, Stockton, CA 95203",
+      "bring": "Notebook for coordinator check-in",
+      "phone": "209-467-0703"
+    },
+    "checklist": [
+      {
+        "text": "Visit St. Mary's receiving gate on Sonora St and speak with shift lead",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Confirm whether unopened pet food can be dropped off without prior appointment",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-11-17 08:15",
+        "author": "civic-ops",
+        "note": "Created exploration candidate for St. Mary's corridor."
+      }
+    ]
+  },
+  {
+    "id": "PW-06",
+    "title": "AI-assisted volunteer scheduling prototype for local rescues",
+    "org": "Crossover Civic Lab",
+    "stage": "Exploring",
+    "contributions": [
+      "Skills"
+    ],
+    "freshness": "n/a",
+    "freshMins": 999999,
+    "freshLabel": "Exploring · Scoping partner bottleneck",
+    "updatedAt": "6h ago",
+    "condition": "Testing whether a lightweight SMS/web intake triage helper can unblock small Stockton rescues that lack staff to answer volunteer emails.",
+    "criteriaMet": {
+      "completed": false,
+      "confirmed": false,
+      "steps": false,
+      "recent": false,
+      "corroborated": false
+    },
+    "linkedEvidence": [
+      "EV-07"
+    ],
+    "actionDetails": {
+      "whatNeeded": "Technical/ops scoping with one local rescue coordinator.",
+      "howToHelp": "Internal exploration until a rescue confirms scheduling is their primary bottleneck.",
+      "when": "Ongoing",
+      "where": "Stockton, CA (Remote / Local)",
+      "bring": "N/A",
+      "phone": ""
+    },
+    "checklist": [
+      {
+        "text": "Interview one rescue coordinator on where volunteer drop-off occurs",
+        "done": false,
+        "waiting": false
+      }
+    ],
+    "logs": [
+      {
+        "timestamp": "2026-11-17 07:00",
+        "author": "ai-lab",
+        "note": "Scoped lightweight SMS confirmation prototype for blocked pathways."
+      }
+    ]
+  }
+]
