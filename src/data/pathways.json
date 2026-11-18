@@ -19,7 +19,13 @@
       "recent": false,
       "corroborated": false
     },
-    "linkedEvidence": [],
+    "linkedEvidence": [
+      "FLD-2026-001",
+      "FLD-2026-002",
+      "FLD-2026-004",
+      "GOV-2026-007",
+      "WORK-2026-005"
+    ],
     "actionDetails": {
       "whatNeeded": "Determine whether shelter dog walking or Doggie Day Out offers a useful contribution.",
       "howToHelp": "Follow up on existing application and inquiry; document confirmed requirements and availability.",
@@ -30,14 +36,10 @@
     },
     "checklist": [
       {
-        "text": "Follow up on October 14 volunteer application",
+        "taskId": "WORK-2026-005",
+        "text": "Follow up with Stockton Animal Services on volunteering (Oct 14 application & Oct 12 Doggie Day Out inquiry)",
         "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Follow up on October 12 Doggie Day Out inquiry",
-        "done": false,
-        "waiting": false
+        "waiting": true
       },
       {
         "text": "Verify any volunteer opportunities, onboarding and schedule directly",
@@ -68,7 +70,12 @@
       "recent": false,
       "corroborated": false
     },
-    "linkedEvidence": [],
+    "linkedEvidence": [
+      "FLD-2026-003",
+      "RESC-2026-004",
+      "RESC-2026-005",
+      "WORK-2026-004"
+    ],
     "actionDetails": {
       "whatNeeded": "Determine whether providing dog food or clean water directly is needed and appropriate.",
       "howToHelp": "Follow up with Stockton Street Dogs and document any confirmed needs, approved actions and handoff details.",
@@ -79,7 +86,8 @@
     },
     "checklist": [
       {
-        "text": "Follow up on October 7 Stockton Street Dogs volunteer application",
+        "taskId": "WORK-2026-004",
+        "text": "Follow up with Stockton Street Dogs on October 7 volunteer application",
         "done": false,
         "waiting": false
       },
@@ -116,7 +124,14 @@
       "recent": false,
       "corroborated": false
     },
-    "linkedEvidence": [],
+    "linkedEvidence": [
+      "CPRA-2026-001-REQUEST",
+      "CPRA-2026-001-RECEIPT",
+      "SHEL-2024-001",
+      "SHEL-2026-001",
+      "WORK-2026-001",
+      "WORK-2026-010"
+    ],
     "actionDetails": {
       "whatNeeded": "Produce source-grounded, useful findings about reported needs and service responses.",
       "howToHelp": "Review field-call records and reconcile public shelter statistics; publish findings with limitations.",
@@ -127,12 +142,15 @@
     },
     "checklist": [
       {
-        "text": "Review Animal Services field-call records (in progress)",
+        "taskId": "WORK-2026-001",
+        "text": "Review Animal Services field-call records (7,183 case records — in progress)",
         "done": false,
-        "waiting": false
+        "waiting": false,
+        "inProgress": true
       },
       {
-        "text": "Reconcile updated public data with 2024 baseline",
+        "taskId": "WORK-2026-010",
+        "text": "Reconcile newly updated Stockton Animal Services public data with our 2024 baseline",
         "done": false,
         "waiting": false
       },
@@ -164,7 +182,13 @@
       "recent": false,
       "corroborated": false
     },
-    "linkedEvidence": [],
+    "linkedEvidence": [
+      "CARE-2026-002",
+      "DATA-2026-001",
+      "RESC-2026-002",
+      "WORK-2026-002",
+      "WORK-2026-009"
+    ],
     "actionDetails": {
       "whatNeeded": "Document firsthand observations without assuming dogs with people are abandoned or inferring why people are outside.",
       "howToHelp": "Undertake safe observation from public areas, record date, scope, findings (including zero), and limitations.",
@@ -175,7 +199,14 @@
     },
     "checklist": [
       {
-        "text": "Visit St. Mary's area to understand pet access and street needs",
+        "taskId": "WORK-2026-002",
+        "text": "Visit St. Mary's to understand pet access and street needs",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "taskId": "WORK-2026-009",
+        "text": "Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary’s Pathways",
         "done": false,
         "waiting": false
       },
