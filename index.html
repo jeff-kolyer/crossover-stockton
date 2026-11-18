@@ -93,7 +93,7 @@
         >
           <span class="w-2 h-2 rounded-full bg-statusBlue shrink-0"></span>
           <span class="hidden xl:inline text-textMuted text-[11px]">Enabling:</span>
-          <span id="stat-enabling" class="text-textPrimary font-semibold">2</span>
+          <span id="stat-enabling" class="text-textPrimary font-semibold">1</span>
         </button>
 
         <button
@@ -104,7 +104,7 @@
         >
           <span class="w-2 h-2 rounded-full bg-statusAmber shrink-0"></span>
           <span class="hidden xl:inline text-textMuted text-[11px]">Blocked:</span>
-          <span id="stat-blocked" class="text-textPrimary font-semibold">2</span>
+          <span id="stat-blocked" class="text-textPrimary font-semibold">0</span>
         </button>
 
         <button
@@ -115,7 +115,7 @@
         >
           <span class="w-2 h-2 rounded-full bg-statusCyan shrink-0"></span>
           <span class="hidden xl:inline text-textMuted text-[11px]">Tasks:</span>
-          <span id="stat-open-tasks" class="text-statusCyan font-semibold">6</span>
+          <span id="stat-open-tasks" class="text-statusCyan font-semibold">5</span>
         </button>
       </div>
 
@@ -173,7 +173,7 @@
                 <svg class="w-3.5 h-3.5 text-statusBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
                 <span>Pathways Board</span>
               </span>
-              <span id="nav-count-pathways" class="font-mono text-[11px] tabular-nums text-textMuted">6</span>
+              <span id="nav-count-pathways" class="font-mono text-[11px] tabular-nums text-textMuted">3</span>
             </button>
 
             <button onclick="switchMainView('tasks')" data-view-btn="tasks" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
@@ -181,7 +181,7 @@
                 <svg class="w-3.5 h-3.5 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
                 <span>Tasks &amp; Checklists</span>
               </span>
-              <span id="nav-count-tasks" class="font-mono text-[11px] tabular-nums text-statusCyan">6 open</span>
+              <span id="nav-count-tasks" class="font-mono text-[11px] tabular-nums text-statusCyan">5 open</span>
             </button>
 
             <button onclick="switchMainView('evidence')" data-view-btn="evidence" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
@@ -189,7 +189,7 @@
                 <svg class="w-3.5 h-3.5 text-statusAmber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
                 <span>Evidence &amp; Records</span>
               </span>
-              <span id="nav-count-evidence" class="font-mono text-[11px] tabular-nums text-textMuted">8</span>
+              <span id="nav-count-evidence" class="font-mono text-[11px] tabular-nums text-textMuted">58</span>
             </button>
           </nav>
         </div>
@@ -240,15 +240,15 @@
           </button>
           <button onclick="switchMainView('board'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             <span>Pathways Board</span>
-            <span id="mob-nav-pathways" class="font-mono text-[11px]">6</span>
+            <span id="mob-nav-pathways" class="font-mono text-[11px]">3</span>
           </button>
           <button onclick="switchMainView('tasks'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             <span>Tasks &amp; Checklists</span>
-            <span id="mob-nav-tasks" class="font-mono text-[11px] text-statusCyan">6 open</span>
+            <span id="mob-nav-tasks" class="font-mono text-[11px] text-statusCyan">5 open</span>
           </button>
           <button onclick="switchMainView('evidence'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             <span>Evidence &amp; Records</span>
-            <span id="mob-nav-evidence" class="font-mono text-[11px]">8</span>
+            <span id="mob-nav-evidence" class="font-mono text-[11px]">58</span>
           </button>
         </nav>
 
@@ -362,10 +362,10 @@
               Exp: <strong id="pw-pill-exploring">2</strong>
             </span>
             <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusAmber">
-              Blk: <strong id="pw-pill-blocked">2</strong>
+              Blk: <strong id="pw-pill-blocked">0</strong>
             </span>
             <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusBlue">
-              Enb: <strong id="pw-pill-enabling">2</strong>
+              Enb: <strong id="pw-pill-enabling">1</strong>
             </span>
             <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
               Est: <strong id="pw-pill-established">0</strong>
@@ -623,26 +623,35 @@
         </div>
 
         <div class="flex-1 overflow-y-auto p-3 sm:p-4">
-          <div class="max-w-6xl mx-auto space-y-4">
-            <!-- Evidence Cards Grid -->
-            <div id="evidence-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-              <!-- Populated by JS -->
+          <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+            <!-- Left: Master File Index -->
+            <div class="lg:col-span-5 rounded-lg border border-borderHairline bg-surface overflow-hidden flex flex-col">
+              <div class="px-3.5 py-2.5 border-b border-borderHairline bg-elevated/60 flex items-center justify-between gap-2">
+                <span class="font-mono text-[11px] font-semibold uppercase tracking-wider text-textPrimary">Master File Index (<span id="evidence-index-count">58</span>)</span>
+                <span class="font-mono text-[10px] text-textDim">Crossover records</span>
+              </div>
+              <div class="p-3 border-b border-borderHairline bg-surface/60 space-y-2">
+                <div class="relative">
+                  <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+                  </svg>
+                  <input
+                    type="text"
+                    id="evidence-search"
+                    oninput="setEvidenceSearch(this.value)"
+                    placeholder="Search ID, agency, keyword..."
+                    class="w-full h-8 pl-8 pr-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan/60 focus:outline-none text-xs text-textPrimary placeholder-textDim"
+                  />
+                </div>
+              </div>
+              <div id="evidence-grid" class="divide-y divide-borderHairline max-h-[58vh] lg:max-h-[68vh] overflow-y-auto">
+                <!-- Populated by JS -->
+              </div>
             </div>
 
-            <!-- Interactive JSON Record Inspector -->
-            <div class="rounded-lg border border-borderHairline bg-surface overflow-hidden">
-              <div class="px-4 py-2.5 border-b border-borderHairline bg-elevated/60 flex flex-wrap items-center justify-between gap-2">
-                <div class="flex items-center gap-2 min-w-0">
-                  <span class="font-mono text-[11px] font-medium text-textMuted shrink-0">RECORD INSPECTOR:</span>
-                  <span id="active-evidence-title" class="font-mono text-xs text-statusCyan truncate">EV-01</span>
-                </div>
-                <button onclick="copyActiveEvidenceJson()" class="h-7 px-2.5 rounded bg-canvas hover:bg-elevated border border-borderHairline font-mono text-[11px] text-textPrimary transition-colors">
-                  Copy JSON
-                </button>
-              </div>
-              <div class="p-4 bg-canvas overflow-x-auto">
-                <pre id="evidence-json-preview" class="font-mono text-xs leading-relaxed text-textMuted"></pre>
-              </div>
+            <!-- Right: Structured Primary Record & Evidence Inspector -->
+            <div id="evidence-inspector" class="lg:col-span-7 rounded-lg border border-borderHairline bg-surface overflow-hidden">
+              <!-- Populated by JS -->
             </div>
           </div>
         </div>

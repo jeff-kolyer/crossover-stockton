@@ -40,14 +40,16 @@ let state = {
   contributionFilter: 'All',
   stageFilter: 'All',
   checklistStatusFilter: 'all',  // 'all' | 'open' | 'waiting' | 'done'
-  evidenceFilter: 'All',         // 'All' | 'Visits' | 'Calls' | 'Records'
+  evidenceFilter: 'All',         // 'All' | 'Activities' | 'Tasks' | 'Records'
+  evidenceSearch: '',
+  evidenceTab: 'source',         // 'source' | 'custody' | 'json'
   searchQuery: '',
   activePathwayId: null,
   activeEvidenceIdx: 0,
   calcState: { completed: false, confirmed: true, steps: true, recent: false, corroborated: false }
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+function initTracker() {
   syncLayoutButtons();
   renderAll();
 
@@ -64,7 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
       closeNewPathwayModal();
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTracker);
+} else {
+  initTracker();
+}
 
 // =========================================================================
 // 3. CORE HELPERS & TELEMETRY
@@ -842,6 +850,16 @@ function setEvidenceFilter(type) {
   renderEvidenceView();
 }
 
+function setEvidenceSearch(val) {
+  state.evidenceSearch = val;
+  renderEvidenceView();
+}
+
+function setEvidenceTab(tab) {
+  state.evidenceTab = tab;
+  renderEvidenceView();
+}
+
 function selectEvidenceRecord(idx) {
   state.activeEvidenceIdx = idx;
   renderEvidenceView();
@@ -853,10 +871,31 @@ function copyActiveEvidenceJson() {
   copyText(JSON.stringify(rec.raw, null, 2), `Copied ${rec.id} JSON`);
 }
 
+function copyActiveCitation() {
+  const rec = EVIDENCE_RECORDS[state.activeEvidenceIdx];
+  if (!rec) return;
+  const r = rec.raw;
+  const parts = [
+    `${rec.id}: ${rec.title}`,
+    r.sourceAgency ? `Source: ${r.sourceAgency}` : '',
+    rec.date ? `Date: ${rec.date}` : '',
+    r.sourceUrl ? `URL: ${r.sourceUrl}` : ''
+  ].filter(Boolean);
+  copyText(parts.join(' · '), `Copied ${rec.id} citation`);
+}
+
+function getEvidenceStatusTone(status) {
+  if (status === 'VERIFIED' || status === 'FIRSTHAND') return 'text-statusEmerald border-statusEmerald/30 bg-statusEmerald/10';
+  if (status === 'REPORTED') return 'text-statusAmber border-statusAmber/30 bg-statusAmber/10';
+  if (status === 'WAITING') return 'text-statusAmber border-statusAmber/30 bg-statusAmber/10';
+  return 'text-statusCyan border-statusCyan/30 bg-statusCyan/10';
+}
+
 function renderEvidenceView() {
   const pillsEl = document.getElementById('evidence-type-pills');
   const gridEl = document.getElementById('evidence-grid');
-  if (!pillsEl || !gridEl) return;
+  const inspectorEl = document.getElementById('evidence-inspector');
+  if (!pillsEl || !gridEl || !inspectorEl) return;
 
   const tasksCount = EVIDENCE_RECORDS.filter(r => r.type === 'Tasks').length;
   const activitiesCount = EVIDENCE_RECORDS.filter(r => r.type === 'Activities').length;
@@ -868,7 +907,7 @@ function renderEvidenceView() {
   if (evActivities) evActivities.textContent = activitiesCount;
   if (evRecords) evRecords.textContent = recordsCount;
 
-  const types = ['All', 'Activities', 'Tasks', 'Records'];
+  const types = ['All', 'Records', 'Activities', 'Tasks'];
   pillsEl.innerHTML = types.map(t => {
     const count = t === 'All' ? EVIDENCE_RECORDS.length : EVIDENCE_RECORDS.filter(r => r.type === t).length;
     const active = state.evidenceFilter === t;
@@ -881,48 +920,191 @@ function renderEvidenceView() {
     `;
   }).join('');
 
-  const filtered = state.evidenceFilter === 'All'
-    ? EVIDENCE_RECORDS
-    : EVIDENCE_RECORDS.filter(r => r.type === state.evidenceFilter);
+  const q = (state.evidenceSearch || '').trim().toLowerCase();
+  const filtered = EVIDENCE_RECORDS.filter(rec => {
+    const matchesType = state.evidenceFilter === 'All' || rec.type === state.evidenceFilter;
+    const matchesQuery = !q ||
+      rec.id.toLowerCase().includes(q) ||
+      rec.title.toLowerCase().includes(q) ||
+      rec.summary.toLowerCase().includes(q) ||
+      (rec.sourceAgency || '').toLowerCase().includes(q);
+    return matchesType && matchesQuery;
+  });
+
+  const countEl = document.getElementById('evidence-index-count');
+  if (countEl) countEl.textContent = filtered.length;
 
   if (filtered.length === 0) {
-    gridEl.innerHTML = `<div class="col-span-full p-6 text-xs font-mono text-textDim rounded-lg border border-borderHairline bg-surface">No records in this category.</div>`;
+    gridEl.innerHTML = `<div class="p-6 text-xs font-mono text-textDim">No records match "${state.evidenceSearch || state.evidenceFilter}".</div>`;
   } else {
     gridEl.innerHTML = filtered.map(rec => {
       const origIdx = EVIDENCE_RECORDS.indexOf(rec);
       const isSelected = state.activeEvidenceIdx === origIdx;
+      const r = rec.raw;
       return `
-        <div onclick="selectEvidenceRecord(${origIdx})" class="cursor-pointer rounded-lg bg-surface hover:bg-elevated/70 border ${
-          isSelected ? 'border-statusCyan' : 'border-borderHairline'
-        } p-4 transition-all space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <span class="font-mono text-xs font-semibold text-statusCyan">${rec.id} · ${rec.type}</span>
-            <span class="font-mono text-[10px] text-textDim">${rec.date}</span>
+        <button onclick="selectEvidenceRecord(${origIdx})" class="w-full text-left p-3.5 transition-colors block ${
+          isSelected ? 'bg-elevated/90 border-l-2 border-l-statusCyan' : 'hover:bg-elevated/40'
+        }">
+          <div class="flex items-center justify-between gap-2 mb-1">
+            <span class="font-mono text-[11px] font-semibold text-statusCyan">${rec.id}</span>
+            <span class="px-1.5 py-0.5 rounded border font-mono text-[9px] uppercase ${getEvidenceStatusTone(r.status)}">${r.statusLabel || r.status}</span>
           </div>
-          <h3 class="text-sm font-semibold text-textPrimary leading-snug">${rec.title}</h3>
-          <p class="text-xs text-textMuted leading-relaxed">${rec.summary}</p>
-          <div class="pt-1 flex items-center justify-between font-mono text-[10px]">
-            ${rec.linkedPathway
-              ? `<button onclick="event.stopPropagation(); openPathwayDrawer('${rec.linkedPathway}');" class="text-statusEmerald hover:underline">Linked: ${rec.linkedPathway} &rarr;</button>`
-              : `<span class="text-textDim truncate">${rec.sourceAgency || 'Authoritative record'}</span>`
-            }
-            <span class="text-textDim shrink-0">${isSelected ? 'Inspecting below' : 'Click to inspect'}</span>
+          <div class="text-xs font-semibold text-textPrimary leading-snug mb-1">${rec.title}</div>
+          <div class="flex items-center justify-between gap-2 font-mono text-[10px] text-textDim">
+            <span class="truncate">${r.tier || rec.type}</span>
+            <span class="shrink-0">${rec.linkedPathway || rec.date}</span>
           </div>
-        </div>
+        </button>
       `;
     }).join('');
   }
 
-  const activeRec = EVIDENCE_RECORDS[state.activeEvidenceIdx] || EVIDENCE_RECORDS[0];
-  const titleEl = document.getElementById('active-evidence-title');
-  const previewEl = document.getElementById('evidence-json-preview');
-  if (activeRec && titleEl && previewEl) {
-    titleEl.textContent = `${activeRec.id} — ${activeRec.title}`;
-    previewEl.textContent = JSON.stringify(activeRec.raw, null, 2);
-  } else if (titleEl && previewEl) {
-    titleEl.textContent = 'No record selected';
-    previewEl.textContent = '{}';
+  const activeRec = EVIDENCE_RECORDS[state.activeEvidenceIdx] || filtered[0] || EVIDENCE_RECORDS[0];
+  if (!activeRec) {
+    inspectorEl.innerHTML = `<div class="p-6 text-xs font-mono text-textDim">No record selected.</div>`;
+    return;
   }
+
+  const r = activeRec.raw;
+  const items = r.checklistItems || [];
+  const custody = r.custodyChain || [];
+  const responses = r.agencyResponses || [];
+
+  let tabBody = '';
+  if (state.evidenceTab === 'custody') {
+    tabBody = `
+      <div class="space-y-3">
+        ${custody.length === 0 && responses.length === 0
+          ? `<div class="text-xs font-mono text-textDim">No custody entries recorded.</div>`
+          : `
+            <div class="space-y-2">
+              ${custody.map(c => `
+                <div class="p-3 rounded-md bg-canvas border border-borderHairline flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 text-xs">
+                  <span class="font-mono text-[11px] text-statusAmber shrink-0">${c.date || ''}</span>
+                  <div class="min-w-0">
+                    <span class="font-semibold text-textPrimary mr-1.5">${c.actor || ''}</span>
+                    <span class="text-textMuted">${c.action || ''}</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+            ${responses.length > 0 ? `
+              <div class="pt-2 space-y-2">
+                <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Agency / Org Notes</div>
+                ${responses.map(ar => `
+                  <div class="p-3 rounded-md bg-canvas border border-borderHairline text-xs">
+                    <div class="font-mono text-[10px] text-statusCyan mb-0.5">${ar.date || ''} · ${ar.agency || ''}</div>
+                    <div class="text-textMuted">${ar.statement || ''}</div>
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          `}
+      </div>
+    `;
+  } else if (state.evidenceTab === 'json') {
+    tabBody = `
+      <div class="p-3.5 rounded-md bg-canvas border border-borderHairline overflow-x-auto">
+        <pre id="evidence-json-preview" class="font-mono text-xs leading-relaxed text-textMuted">${JSON.stringify(r, null, 2).replace(/</g, '&lt;')}</pre>
+      </div>
+    `;
+  } else {
+    tabBody = `
+      <div class="space-y-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+          <div class="p-3 rounded-md bg-canvas border border-borderHairline">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-textDim block mb-0.5">Source / Agency</span>
+            <span class="text-textPrimary">${r.sourceAgency || 'Crossover Stockton'}</span>
+          </div>
+          <div class="p-3 rounded-md bg-canvas border border-borderHairline">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-textDim block mb-0.5">Primary Artifact</span>
+            ${r.sourceUrl
+              ? `<a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="text-statusCyan hover:underline break-all">${r.sourceLabel || r.sourceUrl} &nearr;</a>`
+              : `<span class="text-textMuted">${r.sourceLabel || 'Internal / no public URL'}</span>`
+            }
+          </div>
+        </div>
+        ${items.length > 0 ? `
+          <div class="space-y-2">
+            <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Extracted Facts &amp; Notes (${items.length})</div>
+            ${items.map(it => `
+              <div class="p-3 rounded-md bg-canvas border border-borderHairline space-y-1 text-xs">
+                <div class="flex items-center justify-between gap-2">
+                  <span class="font-semibold text-textPrimary">${it.item || 'Note'}</span>
+                  <span class="font-mono text-[10px] text-textDim shrink-0">${it.time || ''} · ${it.status || ''}</span>
+                </div>
+                <p class="text-textMuted leading-relaxed">${it.note || ''}</p>
+              </div>
+            `).join('')}
+          </div>
+        ` : `<div class="text-xs font-mono text-textDim">No extracted items attached.</div>`}
+      </div>
+    `;
+  }
+
+  inspectorEl.innerHTML = `
+    <div class="p-4 sm:p-5 border-b border-borderHairline bg-elevated/40 space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-1.5 font-mono text-[11px]">
+          <span class="font-semibold text-statusCyan">${activeRec.id}</span>
+          <span class="px-1.5 py-0.5 rounded border text-[10px] uppercase ${getEvidenceStatusTone(r.status)}">${r.statusLabel || r.status}</span>
+          ${r.spatialPrecision ? `<span class="px-1.5 py-0.5 rounded bg-canvas border border-borderHairline text-[10px] text-textDim">${r.spatialPrecision}</span>` : ''}
+        </div>
+        <span class="font-mono text-[11px] text-textDim">${activeRec.date ? `Recorded ${activeRec.date}` : ''}</span>
+      </div>
+
+      <div>
+        <h2 class="text-base font-semibold text-textPrimary leading-snug">${activeRec.title}</h2>
+        <p class="text-xs text-textMuted leading-relaxed mt-1">${activeRec.summary}</p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-2 pt-1">
+        ${r.sourceUrl ? `
+          <a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="h-7 px-3 rounded-md bg-statusAmber text-canvas hover:opacity-90 font-semibold text-xs inline-flex items-center gap-1.5">
+            <span>Open Source</span>
+            <span>&nearr;</span>
+          </a>
+        ` : ''}
+        ${activeRec.linkedPathway ? `
+          <button onclick="openPathwayDrawer('${activeRec.linkedPathway}')" class="h-7 px-3 rounded-md bg-statusEmerald/15 hover:bg-statusEmerald/25 border border-statusEmerald/40 text-xs font-medium text-statusEmerald">
+            Pathway: ${activeRec.linkedPathway} &rarr;
+          </button>
+        ` : ''}
+        <button onclick="copyActiveCitation()" class="h-7 px-3 rounded-md bg-canvas hover:bg-elevated border border-borderHairline font-mono text-[11px] text-textPrimary">
+          Copy Citation
+        </button>
+        <button onclick="copyActiveEvidenceJson()" class="h-7 px-3 rounded-md bg-canvas hover:bg-elevated border border-borderHairline font-mono text-[11px] text-textMuted hover:text-textPrimary">
+          Copy JSON
+        </button>
+      </div>
+    </div>
+
+    <div class="p-4 sm:p-5 space-y-4">
+      ${r.limitations ? `
+        <div class="p-3.5 rounded-md bg-canvas border border-borderHairline space-y-1">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-mono text-[10px] uppercase tracking-wider text-statusAmber">Scope &amp; Limits</span>
+            <span class="font-mono text-[10px] text-textDim">${r.severityBasis?.level || r.status || ''}</span>
+          </div>
+          <p class="text-xs text-textMuted leading-relaxed">${r.limitations}</p>
+        </div>
+      ` : ''}
+
+      <div class="flex items-center gap-4 border-b border-borderHairline text-xs">
+        <button onclick="setEvidenceTab('source')" class="pb-2 font-medium border-b-2 transition-colors ${state.evidenceTab === 'source' ? 'border-statusAmber text-textPrimary' : 'border-transparent text-textMuted hover:text-textPrimary'}">
+          1. Source &amp; Facts (${items.length})
+        </button>
+        <button onclick="setEvidenceTab('custody')" class="pb-2 font-medium border-b-2 transition-colors ${state.evidenceTab === 'custody' ? 'border-statusAmber text-textPrimary' : 'border-transparent text-textMuted hover:text-textPrimary'}">
+          2. Custody &amp; Agency Log (${custody.length})
+        </button>
+        <button onclick="setEvidenceTab('json')" class="pb-2 font-medium border-b-2 transition-colors ${state.evidenceTab === 'json' ? 'border-statusAmber text-textPrimary' : 'border-transparent text-textMuted hover:text-textPrimary'}">
+          3. Raw JSON
+        </button>
+      </div>
+
+      ${tabBody}
+    </div>
+  `;
 }
 
 // =========================================================================
@@ -1476,7 +1658,10 @@ Object.assign(window, {
   getTaskStatusBadge,
   renderTasksWorkspace,
   setEvidenceFilter,
+  setEvidenceSearch,
+  setEvidenceTab,
   selectEvidenceRecord,
+  copyActiveCitation,
   copyActiveEvidenceJson,
   renderEvidenceView,
   openPathwayDrawer,
