@@ -1141,7 +1141,7 @@ function renderEvidenceView() {
 
       <div class="flex flex-wrap items-center gap-2 pt-1">
         ${r.sourceUrl ? `
-          <a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="h-7 px-3 rounded-md bg-statusAmber text-canvas hover:opacity-90 font-semibold text-xs inline-flex items-center gap-1.5">
+          <a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="h-7 px-3 rounded-md bg-statusCyan/15 hover:bg-statusCyan/25 border border-statusCyan/40 text-xs font-medium text-statusCyan inline-flex items-center gap-1.5 transition-colors">
             <span>Open Source</span>
             <span>&nearr;</span>
           </a>
