@@ -4,7 +4,7 @@ test('pathway tracker loads Help Today in live mode and fits the viewport', asyn
   await page.goto('/');
   await expect(page).toHaveTitle('CROSSOVER STOCKTON — Pathway Tracker');
   await expect(page.locator('#stat-established')).toHaveText('0');
-  await expect(page.locator('#stat-enabling')).toHaveText('2');
+  await expect(page.locator('#stat-enabling')).toHaveText('1');
   await expect(page.locator('#stat-blocked')).toHaveText('2');
   await expect(page.locator('#view-help')).toBeVisible();
 
@@ -31,7 +31,7 @@ test('all four workspace views are reachable in live mode without preview contro
   };
 
   await switchView('board');
-  await expect(page.locator('#pw-pill-enabling')).toHaveText('2');
+  await expect(page.locator('#pw-pill-enabling')).toHaveText('1');
   await expect(page.locator('#pw-pill-blocked')).toHaveText('2');
 
   await switchView('tasks');

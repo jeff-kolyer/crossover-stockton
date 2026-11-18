@@ -40,7 +40,7 @@
     "type": "Calls",
     "title": "Clinic Desk Inquiry — ACT Spay/Neuter Direct Sponsorship",
     "date": "2026-11-17",
-    "linkedPathway": "PW-03",
+    "linkedPathway": null,
     "summary": "Front desk confirmed direct phone payments for stray sterilization are possible; awaiting exact reference wording from clinic manager.",
     "raw": {
       "evidence_id": "EV-03",
@@ -111,7 +111,7 @@
     "type": "Records",
     "title": "Shelter_Intakes_2024_3106.json — Municipal Intake Baseline",
     "date": "2026-11-14",
-    "linkedPathway": "PW-06",
+    "linkedPathway": null,
     "summary": "3,106 annual shelter intakes documenting kennel compression and shelter expansion delay (Spring 2027, $10.47M CIP).",
     "raw": {
       "dataset": "Shelter_Intakes_2024_3106.json",

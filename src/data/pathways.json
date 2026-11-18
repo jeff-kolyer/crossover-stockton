@@ -120,57 +120,6 @@
     ]
   },
   {
-    "id": "PW-03",
-    "title": "Direct-pay stray spay/neuter procedure sponsorship",
-    "org": "ACT Spay/Neuter Clinic",
-    "stage": "Enabling",
-    "contributions": [
-      "Funding"
-    ],
-    "freshness": "n/a",
-    "freshMins": 999999,
-    "freshLabel": "Enabling · Verifying phone-pay voucher rule",
-    "updatedAt": "3h ago",
-    "condition": "Checking whether a donor can call the clinic directly to sponsor a specific stray dog sterilization slot without going through a 3rd-party fundraiser.",
-    "criteriaMet": {
-      "completed": false,
-      "confirmed": true,
-      "steps": true,
-      "recent": false,
-      "corroborated": false
-    },
-    "linkedEvidence": [
-      "EV-03"
-    ],
-    "actionDetails": {
-      "whatNeeded": "Direct-to-clinic sponsorship ($85–$120) for stray spay/neuter appointments.",
-      "howToHelp": "Verifying exact account reference format for phone payments.",
-      "when": "Mon–Thu clinic desk hours",
-      "where": "327 E. Alpine Ave, Stockton, CA 95204",
-      "bring": "Phone payment method",
-      "phone": "209-462-7729"
-    },
-    "checklist": [
-      {
-        "text": "Confirm clinic accepts phone credit-card sponsorship on named stray slots",
-        "done": true,
-        "waiting": false
-      },
-      {
-        "text": "Get written receipt / confirmation workflow for donors",
-        "done": false,
-        "waiting": false
-      }
-    ],
-    "logs": [
-      {
-        "timestamp": "2026-11-17 11:05",
-        "author": "civic-ops",
-        "note": "Front desk confirmed sponsorships are possible; waiting on clinic manager for exact reference wording."
-      }
-    ]
-  },
-  {
     "id": "PW-04",
     "title": "Short-term foster intake & clinic transport",
     "org": "Delta Humane Society & SPCA",
@@ -271,52 +220,6 @@
         "timestamp": "2026-11-17 08:15",
         "author": "civic-ops",
         "note": "Created exploration candidate for St. Mary's corridor."
-      }
-    ]
-  },
-  {
-    "id": "PW-06",
-    "title": "AI-assisted volunteer scheduling prototype for local rescues",
-    "org": "Crossover Civic Lab",
-    "stage": "Exploring",
-    "contributions": [
-      "Skills"
-    ],
-    "freshness": "n/a",
-    "freshMins": 999999,
-    "freshLabel": "Exploring · Scoping partner bottleneck",
-    "updatedAt": "6h ago",
-    "condition": "Testing whether a lightweight SMS/web intake triage helper can unblock small Stockton rescues that lack staff to answer volunteer emails.",
-    "criteriaMet": {
-      "completed": false,
-      "confirmed": false,
-      "steps": false,
-      "recent": false,
-      "corroborated": false
-    },
-    "linkedEvidence": [
-      "EV-07"
-    ],
-    "actionDetails": {
-      "whatNeeded": "Technical/ops scoping with one local rescue coordinator.",
-      "howToHelp": "Internal exploration until a rescue confirms scheduling is their primary bottleneck.",
-      "when": "Ongoing",
-      "where": "Stockton, CA (Remote / Local)",
-      "bring": "N/A",
-      "phone": ""
-    },
-    "checklist": [
-      {
-        "text": "Interview one rescue coordinator on where volunteer drop-off occurs",
-        "done": false,
-        "waiting": false
-      }
-    ],
-    "logs": [
-      {
-        "timestamp": "2026-11-17 07:00",
-        "author": "ai-lab",
-        "note": "Scoped lightweight SMS confirmation prototype for blocked pathways."
       }
     ]
   }
