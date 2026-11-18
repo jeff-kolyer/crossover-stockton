@@ -72,8 +72,7 @@
       "RESC-2026-004",
       "RESC-2026-005",
       "WORK-2026-004",
-      "WORK-2026-002",
-      "WORK-2026-009"
+      "WORK-2026-002"
     ],
     "actionDetails": {
       "whatNeeded": "Determine whether providing dog food or clean water directly is needed and appropriate.",
@@ -93,12 +92,6 @@
       {
         "taskId": "WORK-2026-002",
         "text": "Visit the St. Mary's area to observe conditions (video lead, not proof of current conditions)",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "taskId": "WORK-2026-009",
-        "text": "Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary's Pathways",
         "done": false,
         "waiting": false
       }
