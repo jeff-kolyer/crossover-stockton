@@ -31,13 +31,14 @@ test('all four workspace views use authoritative records in live mode without pr
   };
 
   await switchView('board');
-  await expect(page.locator('#pw-pill-exploring')).toHaveText('3');
+  await expect(page.locator('#pw-pill-exploring')).toHaveText('2');
   await expect(page.locator('#pw-pill-enabling')).toHaveText('1');
   await expect(page.locator('#pw-pill-blocked')).toHaveText('0');
   await expect(page.locator('#view-board')).toContainText('Direct kibble & clean water drop-off for street dogs');
 
   await switchView('tasks');
   await expect(page.locator('#view-tasks')).toContainText('WORK-2026-005');
+  await expect(page.locator('#view-tasks')).toContainText('WORK-2026-002');
   await expect(page.locator('#view-tasks')).toContainText('WORK-2026-001');
 
   await switchView('evidence');

@@ -39,7 +39,7 @@
         "taskId": "WORK-2026-005",
         "text": "Follow up with Stockton Animal Services on volunteering (Oct 14 application & Oct 12 Doggie Day Out inquiry)",
         "done": false,
-        "waiting": true
+        "waiting": false
       },
       {
         "text": "Verify any volunteer opportunities, onboarding and schedule directly",
@@ -56,13 +56,14 @@
     "stage": "Exploring",
     "contributions": [
       "Direct Action",
-      "Supplies"
+      "Supplies",
+      "Fieldwork"
     ],
     "freshness": "unknown",
     "freshMins": 999999,
     "freshLabel": "Exploring · Details not yet verified",
     "updatedAt": "",
-    "condition": "Crossover applied to volunteer with Stockton Street Dogs on October 7. Direct feeding or supply contributions are an avenue to explore; current need, permitted activities, delivery logistics and contacts have not been confirmed.",
+    "condition": "Crossover applied to volunteer with Stockton Street Dogs on October 7. Videos showing Stockton Street Dogs feeding dogs around the St. Mary's / Church Street area give us a lead to investigate, not proof of current conditions. Direct feeding or supply contributions are an avenue to explore; current need, permitted activities, delivery logistics and contacts have not been confirmed.",
     "criteriaMet": {
       "completed": false,
       "confirmed": false,
@@ -72,32 +73,47 @@
     },
     "linkedEvidence": [
       "FLD-2026-003",
+      "RESC-2026-002",
       "RESC-2026-004",
       "RESC-2026-005",
-      "WORK-2026-004"
+      "WORK-2026-004",
+      "WORK-2026-002",
+      "WORK-2026-009"
     ],
     "actionDetails": {
       "whatNeeded": "Determine whether providing dog food or clean water directly is needed and appropriate.",
-      "howToHelp": "Follow up with Stockton Street Dogs and document any confirmed needs, approved actions and handoff details.",
+      "howToHelp": "Contact Stockton Street Dogs, observe conditions around the St. Mary's area, determine whether feeding assistance is needed, and establish a safe, practical way to help.",
       "when": "Not yet confirmed",
-      "where": "Stockton, CA",
+      "where": "St. Mary's / Church Street area & Stockton, CA",
       "bring": "To be confirmed",
       "phone": ""
     },
     "checklist": [
       {
         "taskId": "WORK-2026-004",
-        "text": "Follow up with Stockton Street Dogs on October 7 volunteer application",
+        "text": "Contact Stockton Street Dogs (follow up on October 7 volunteer application)",
         "done": false,
         "waiting": false
       },
       {
-        "text": "Ask whether feeding or food/water supply contributions are currently useful",
+        "taskId": "WORK-2026-002",
+        "text": "Visit the St. Mary's area to observe conditions (video lead, not proof of current conditions)",
         "done": false,
         "waiting": false
       },
       {
-        "text": "If confirmed, document safe and approved logistics before offering the pathway",
+        "taskId": "WORK-2026-009",
+        "text": "Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary's Pathways",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Determine whether feeding or food/water supply assistance is needed",
+        "done": false,
+        "waiting": false
+      },
+      {
+        "text": "Establish a safe, practical way to help before offering the pathway",
         "done": false,
         "waiting": false
       }
@@ -156,67 +172,6 @@
       },
       {
         "text": "Document methods, limitations and supported findings",
-        "done": false,
-        "waiting": false
-      }
-    ],
-    "logs": []
-  },
-  {
-    "id": "PW-05",
-    "title": "Observe conditions at St. Mary's",
-    "org": "Crossover Stockton",
-    "stage": "Exploring",
-    "contributions": [
-      "Fieldwork"
-    ],
-    "freshness": "unknown",
-    "freshMins": 999999,
-    "freshLabel": "Exploring · Details not yet verified",
-    "updatedAt": "",
-    "condition": "Crossover has planned field observation around the St. Mary's / Church Street area to understand visible animal-related needs and access to care. A completed observation and its findings are not yet recorded.",
-    "criteriaMet": {
-      "completed": false,
-      "confirmed": false,
-      "steps": false,
-      "recent": false,
-      "corroborated": false
-    },
-    "linkedEvidence": [
-      "CARE-2026-002",
-      "DATA-2026-001",
-      "RESC-2026-002",
-      "WORK-2026-002",
-      "WORK-2026-009"
-    ],
-    "actionDetails": {
-      "whatNeeded": "Document firsthand observations without assuming dogs with people are abandoned or inferring why people are outside.",
-      "howToHelp": "Undertake safe observation from public areas, record date, scope, findings (including zero), and limitations.",
-      "when": "Not yet confirmed",
-      "where": "St. Mary's / Church Street area, Stockton, CA",
-      "bring": "To be confirmed",
-      "phone": ""
-    },
-    "checklist": [
-      {
-        "taskId": "WORK-2026-002",
-        "text": "Visit St. Mary's to understand pet access and street needs",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "taskId": "WORK-2026-009",
-        "text": "Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary’s Pathways",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Record observations and limits of what can be inferred",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Verify relevant program policies before drawing conclusions",
         "done": false,
         "waiting": false
       }
