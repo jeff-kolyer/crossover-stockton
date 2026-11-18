@@ -40,11 +40,6 @@
         "text": "Follow up with Stockton Animal Services on volunteering (Oct 14 application & Oct 12 Doggie Day Out inquiry)",
         "done": false,
         "waiting": false
-      },
-      {
-        "text": "Verify any volunteer opportunities, onboarding and schedule directly",
-        "done": false,
-        "waiting": false
       }
     ],
     "logs": []
@@ -106,16 +101,6 @@
         "text": "Verify scale of companion-animal need & pet-inclusive bed gaps at St. Mary's Pathways",
         "done": false,
         "waiting": false
-      },
-      {
-        "text": "Determine whether feeding or food/water supply assistance is needed",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Establish a safe, practical way to help before offering the pathway",
-        "done": false,
-        "waiting": false
       }
     ],
     "logs": []
@@ -167,11 +152,6 @@
       {
         "taskId": "WORK-2026-010",
         "text": "Reconcile newly updated Stockton Animal Services public data with our 2024 baseline",
-        "done": false,
-        "waiting": false
-      },
-      {
-        "text": "Document methods, limitations and supported findings",
         "done": false,
         "waiting": false
       }
