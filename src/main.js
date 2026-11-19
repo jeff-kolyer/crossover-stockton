@@ -1,6 +1,8 @@
 import './tracker.css';
 import trackerConfig from './data/tracker-config.json';
 import initialPathways from './data/pathways.json';
+import catalogSource from './data/catalog-source.json';
+import ledgerData from './data/record-id-ledger.json';
 import { PRIMARY_RECORDS } from './generated/records.js';
 
 const STAGES = trackerConfig.stages;
@@ -8,6 +10,14 @@ const CONTRIBUTIONS = trackerConfig.contributions;
 const CONFIDENCE_CRITERIA = trackerConfig.confidenceCriteria;
 
 let pathways = structuredClone(initialPathways);
+
+const DISPLAY_ID_BY_SOURCE_ID = new Map(
+  (ledgerData.entries || []).map(e => [e.sourceId, e.displayId])
+);
+const TASK_CATALOG_MAP = new Map(
+  (catalogSource.tasks || []).map(t => [DISPLAY_ID_BY_SOURCE_ID.get(t.id) || t.id, t])
+);
+const RECORD_BY_ID = new Map(PRIMARY_RECORDS.map(r => [r.id, r]));
 
 function classifyEvidenceType(rec) {
   if (rec.id.startsWith('WORK-')) return 'Tasks';
@@ -141,8 +151,20 @@ function initTracker() {
     }
     if (e.key === 'Escape') {
       closePathwayDrawer();
+      closeTaskDrawer();
       closeAboutDrawer();
       closeNewPathwayModal();
+      const chMenu = document.getElementById('chapter-menu');
+      if (chMenu) chMenu.classList.add('hidden');
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const chMenu = document.getElementById('chapter-menu');
+    const chBtn = document.getElementById('chapter-btn');
+    if (chMenu && chBtn && !chMenu.contains(e.target) && !chBtn.contains(e.target)) {
+      chMenu.classList.add('hidden');
+      chBtn.setAttribute('aria-expanded', 'false');
     }
   });
 }
@@ -277,11 +299,20 @@ function renderTelemetry() {
     });
   });
 
-  // Top bar clickable counts
+  // Top bar clickable counts (desktop + mobile)
   document.getElementById('stat-established').textContent = establishedCount;
   document.getElementById('stat-enabling').textContent = enablingCount;
   document.getElementById('stat-blocked').textContent = blockedCount;
   document.getElementById('stat-open-tasks').textContent = openTasksCount;
+
+  const mobEst = document.getElementById('mob-stat-established');
+  const mobEnb = document.getElementById('mob-stat-enabling');
+  const mobBlk = document.getElementById('mob-stat-blocked');
+  const mobTsk = document.getElementById('mob-stat-open-tasks');
+  if (mobEst) mobEst.textContent = establishedCount;
+  if (mobEnb) mobEnb.textContent = enablingCount;
+  if (mobBlk) mobBlk.textContent = blockedCount;
+  if (mobTsk) mobTsk.textContent = openTasksCount;
 
   // Pathways view header pills
   const pwExp = document.getElementById('pw-pill-exploring');
@@ -311,8 +342,7 @@ function renderTelemetry() {
       const count = c === 'All' ? all.length : all.filter(p => p.contributions.includes(c)).length;
       const active = state.contributionFilter === c;
       return `
-        <button onclick="setContributionFilter('${c}'); if (state.activeView !== 'board' && state.activeView !== 'tasks') switchMainView('board');" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors ${
-          active ? 'bg-elevated text-textPrimary font-medium' : 'text-textMuted hover:text-textPrimary hover:bg-elevated/40'
+        <button onclick="setContributionFilter('${c}'); if (state.activeView !== 'board' && state.activeView !== 'tasks') switchMainView('board');" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs transition-colors ${active ? 'bg-elevated text-textPrimary font-medium' : 'text-textMuted hover:text-textPrimary hover:bg-elevated/40'
         }">
           <span>${c === 'All' ? 'All Contributions' : c}</span>
           <span class="font-mono text-[11px] tabular-nums text-textDim">${count}</span>
@@ -375,9 +405,8 @@ function renderHelpView() {
   const hasFresh = freshCount > 0;
   const hasAny = established.length > 0;
 
-  dotEl.className = `w-2 h-2 rounded-full shrink-0 ${
-    hasFresh ? 'bg-statusEmerald' : (hasAny ? 'bg-statusAmber' : 'bg-statusSlate')
-  }`;
+  dotEl.className = `w-2 h-2 rounded-full shrink-0 ${hasFresh ? 'bg-statusEmerald' : (hasAny ? 'bg-statusAmber' : 'bg-statusSlate')
+    }`;
   textEl.textContent = `${established.length} established · Updated 18m ago`;
 
   // Toggle Board vs List containers
@@ -412,9 +441,9 @@ function renderHelpView() {
       <!-- Mobile Simple Flat Dot List (< 640px) -->
       <div class="sm:hidden divide-y divide-borderHairline border-b border-borderHairline">
         ${filtered.map(p => {
-          const dotClass = p.freshness === 'aging' ? 'bg-statusAmber' : 'bg-statusEmerald';
-          const score = computeScore(p.criteriaMet);
-          return `
+      const dotClass = p.freshness === 'aging' ? 'bg-statusAmber' : 'bg-statusEmerald';
+      const score = computeScore(p.criteriaMet);
+      return `
             <button onclick="openPathwayDrawer('${p.id}')" class="w-full text-left px-4 py-3.5 bg-canvas hover:bg-surface/80 transition-colors flex items-start gap-3">
               <span class="w-2 h-2 rounded-full ${dotClass} mt-1.5 shrink-0"></span>
               <div class="flex-1 min-w-0">
@@ -424,7 +453,7 @@ function renderHelpView() {
               <svg class="w-4 h-4 text-textDim mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </button>
           `;
-        }).join('')}
+    }).join('')}
       </div>
 
       <!-- Desktop Structured Table (>= 640px — Matches Pathways & Tasks Lists) -->
@@ -443,14 +472,14 @@ function renderHelpView() {
           </thead>
           <tbody class="divide-y divide-borderHairline text-xs">
             ${filtered.map(p => {
-              const isAging = p.freshness === 'aging';
-              const dotClass = isAging ? 'bg-statusAmber' : 'bg-statusEmerald';
-              const badgeText = isAging ? 'text-statusAmber' : 'text-statusEmerald';
-              const shortFresh = p.freshLabel.replace(/^[^·]+·\s*/, '');
-              const score = computeScore(p.criteriaMet);
-              const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
+      const isAging = p.freshness === 'aging';
+      const dotClass = isAging ? 'bg-statusAmber' : 'bg-statusEmerald';
+      const badgeText = isAging ? 'text-statusAmber' : 'text-statusEmerald';
+      const shortFresh = p.freshLabel.replace(/^[^·]+·\s*/, '');
+      const score = computeScore(p.criteriaMet);
+      const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
 
-              return `
+      return `
                 <tr onclick="openPathwayDrawer('${p.id}')" class="hover:bg-elevated/60 cursor-pointer transition-colors">
                   <td class="py-3 px-3.5 font-mono font-semibold text-statusCyan tabular-nums whitespace-nowrap">${p.id}</td>
                   <td class="py-3 px-3.5 whitespace-nowrap">
@@ -475,7 +504,7 @@ function renderHelpView() {
                   </td>
                 </tr>
               `;
-            }).join('')}
+    }).join('')}
           </tbody>
         </table>
       </div>
@@ -518,13 +547,13 @@ function renderHelpView() {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3.5 overflow-y-auto pb-2">
         ${filtered.map(p => {
-          const isAging = p.freshness === 'aging';
-          const freshDot = isAging ? 'bg-statusAmber' : 'bg-statusEmerald';
-          const freshText = isAging ? 'text-statusAmber' : 'text-statusEmerald';
-          const score = computeScore(p.criteriaMet);
-          const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
+      const isAging = p.freshness === 'aging';
+      const freshDot = isAging ? 'bg-statusAmber' : 'bg-statusEmerald';
+      const freshText = isAging ? 'text-statusAmber' : 'text-statusEmerald';
+      const score = computeScore(p.criteriaMet);
+      const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
 
-          return `
+      return `
             <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-surface hover:bg-elevated border border-borderHairline hover:border-borderStrong p-4 transition-all shadow-sm flex flex-col justify-between gap-3">
               <div class="space-y-2">
                 <div class="flex items-center justify-between gap-2">
@@ -565,7 +594,7 @@ function renderHelpView() {
               </div>
             </article>
           `;
-        }).join('')}
+    }).join('')}
       </div>
     `;
   }
@@ -606,10 +635,10 @@ function renderBoardAndList() {
               No pathways in ${st.label}
             </div>
           ` : colItems.map(p => {
-            const doneCount = p.checklist.filter(t => t.done).length;
-            const waitCount = p.checklist.filter(t => !t.done && t.waiting).length;
-            const score = computeScore(p.criteriaMet);
-            return `
+      const doneCount = p.checklist.filter(t => t.done).length;
+      const waitCount = p.checklist.filter(t => !t.done && t.waiting).length;
+      const score = computeScore(p.criteriaMet);
+      return `
               <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-elevated hover:bg-elevatedHover border border-borderHairline hover:border-borderStrong p-3 transition-all shadow-sm space-y-2">
                 <div class="flex items-center justify-between gap-2">
                   <span class="font-mono text-[11px] font-semibold text-statusCyan group-hover:underline">${p.id}</span>
@@ -638,7 +667,7 @@ function renderBoardAndList() {
                 </div>
               </article>
             `;
-          }).join('')}
+    }).join('')}
         </div>
       </div>
     `;
@@ -649,8 +678,8 @@ function renderBoardAndList() {
   mobList.innerHTML = filtered.length === 0
     ? `<div class="p-6 text-xs font-mono text-textDim">No pathways match the current filters.</div>`
     : filtered.map(p => {
-        const st = getStageMeta(p.stage);
-        return `
+      const st = getStageMeta(p.stage);
+      return `
           <button onclick="openPathwayDrawer('${p.id}')" class="w-full text-left px-4 py-3.5 bg-canvas hover:bg-surface/80 transition-colors flex items-start gap-3">
             <span class="w-2 h-2 rounded-full ${st.dotColor} mt-1.5 shrink-0"></span>
             <div class="flex-1 min-w-0">
@@ -660,17 +689,17 @@ function renderBoardAndList() {
             <svg class="w-4 h-4 text-textDim mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
         `;
-      }).join('');
+    }).join('');
 
   // 3. Desktop Table List
   const tableBody = document.getElementById('list-table-body');
   tableBody.innerHTML = filtered.length === 0
     ? `<tr><td colspan="7" class="py-8 px-4 text-center font-mono text-xs text-textDim">No pathways match the current filters.</td></tr>`
     : filtered.map(p => {
-        const st = getStageMeta(p.stage);
-        const doneCount = p.checklist.filter(t => t.done).length;
-        const score = computeScore(p.criteriaMet);
-        return `
+      const st = getStageMeta(p.stage);
+      const doneCount = p.checklist.filter(t => t.done).length;
+      const score = computeScore(p.criteriaMet);
+      return `
           <tr onclick="openPathwayDrawer('${p.id}')" class="hover:bg-elevated/60 cursor-pointer transition-colors">
             <td class="py-3 px-3.5 font-mono font-semibold text-statusCyan whitespace-nowrap">${p.id}</td>
             <td class="py-3 px-3.5 whitespace-nowrap">
@@ -689,7 +718,7 @@ function renderBoardAndList() {
             <td class="py-3 px-3.5 whitespace-nowrap font-mono text-[11px] text-textDim">${p.updatedAt}</td>
           </tr>
         `;
-      }).join('');
+    }).join('');
 }
 
 // =========================================================================
@@ -801,32 +830,23 @@ function renderTasksWorkspace() {
   if (flat.length === 0) {
     tableBody.innerHTML = `
       <tr>
-        <td colspan="6" class="py-8 px-4 text-center font-mono text-xs text-textDim">
+        <td colspan="5" class="py-8 px-4 text-center font-mono text-xs text-textDim">
           No tasks match the current filter.
         </td>
       </tr>
     `;
   } else {
     tableBody.innerHTML = flat.map(({ p, task, idx, tState }) => `
-      <tr class="hover:bg-elevated/60 transition-colors group">
-        <td class="py-3 px-3.5 align-middle">
-          <input
-            type="checkbox"
-            ${task.done ? 'checked' : ''}
-            onchange="toggleTaskDone('${p.id}', ${idx})"
-            class="rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0 cursor-pointer"
-            aria-label="Mark task complete"
-          />
-        </td>
+      <tr onclick="openTaskDrawer('${p.id}', ${idx})" class="hover:bg-elevated/60 transition-colors group cursor-pointer">
         <td class="py-3 px-3.5 whitespace-nowrap align-middle">
           ${getTaskStatusBadge(tState)}
         </td>
         <td class="py-3 px-3.5 min-w-[260px] align-middle">
           ${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan mr-1.5">${task.taskId}</span>` : ''}
-          <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary font-medium'}">${task.text}</span>
+          <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary font-medium group-hover:text-white'}">${task.text}</span>
         </td>
         <td class="py-3 px-3.5 align-middle">
-          <button onclick="openPathwayDrawer('${p.id}')" class="text-left group/pw">
+          <button onclick="event.stopPropagation(); openPathwayDrawer('${p.id}');" class="text-left group/pw">
             <span class="font-mono text-[11px] font-semibold text-statusCyan group-hover/pw:underline mr-1.5">${p.id}</span>
             <span class="text-xs text-textMuted group-hover/pw:text-textPrimary">${p.title}</span>
           </button>
@@ -834,17 +854,8 @@ function renderTasksWorkspace() {
         <td class="py-3 px-3.5 font-mono text-[11px] text-textDim whitespace-nowrap align-middle">
           ${p.org}
         </td>
-        <td class="py-3 px-3.5 whitespace-nowrap text-right align-middle">
-          <div class="inline-flex items-center gap-1.5">
-            ${!task.done ? `
-              <button type="button" onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border transition-colors ${
-                task.waiting
-                  ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30 hover:bg-statusAmber/25'
-                  : 'bg-canvas text-textMuted border-borderHairline hover:text-textPrimary'
-              }">${task.waiting ? 'Resume' : 'Waiting'}</button>
-            ` : ''}
-            <button type="button" onclick="removeTask('${p.id}', ${idx})" class="opacity-40 group-hover:opacity-100 text-textDim hover:text-statusRose font-mono text-xs px-1.5 py-0.5 rounded transition-opacity" title="Remove task">✕</button>
-          </div>
+        <td class="py-3 px-3.5 whitespace-nowrap text-right align-middle font-mono text-[11px] text-textDim group-hover:text-statusCyan">
+          Details &rarr;
         </td>
       </tr>
     `).join('');
@@ -854,38 +865,29 @@ function renderTasksWorkspace() {
   mobileList.innerHTML = flat.length === 0
     ? `<div class="p-6 text-xs font-mono text-textDim">No tasks match the current filter.</div>`
     : flat.map(({ p, task, idx, tState }) => {
-        const dotClass = tState === 'done' ? 'bg-statusEmerald' : (tState === 'waiting' ? 'bg-statusAmber' : 'bg-statusBlue');
-        return `
-          <div class="px-4 py-3 flex items-start gap-3 bg-canvas hover:bg-surface/80 transition-colors">
-            <input
-              type="checkbox"
-              ${task.done ? 'checked' : ''}
-              onchange="toggleTaskDone('${p.id}', ${idx})"
-              class="mt-1 rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0 shrink-0"
-            />
+      const dotClass = tState === 'done' ? 'bg-statusEmerald' : (tState === 'waiting' ? 'bg-statusAmber' : 'bg-statusBlue');
+      return `
+          <button onclick="openTaskDrawer('${p.id}', ${idx})" class="w-full text-left px-4 py-3 flex items-start justify-between gap-3 bg-canvas hover:bg-surface/80 transition-colors">
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full ${dotClass} shrink-0"></span>
-                <span class="text-xs font-medium leading-snug ${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</span>
+                ${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan shrink-0">${task.taskId}</span>` : ''}
+                <span class="text-xs font-medium leading-snug ${task.done ? 'line-through text-textDim' : 'text-textPrimary'} truncate">${task.text}</span>
               </div>
-              <button onclick="openPathwayDrawer('${p.id}')" class="mt-1 block text-[11px] text-textMuted truncate text-left">
+              <div class="mt-1 text-[11px] text-textMuted truncate">
                 <span class="font-mono text-statusCyan mr-1">${p.id}</span>${p.org}
-              </button>
+              </div>
             </div>
-            ${!task.done ? `
-              <button type="button" onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border shrink-0 ${
-                task.waiting ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30' : 'bg-elevated text-textDim border-borderHairline'
-              }">${task.waiting ? '⏸' : 'Wait'}</button>
-            ` : ''}
-          </div>
+            <span class="font-mono text-xs text-textDim shrink-0 mt-0.5">&rsaquo;</span>
+          </button>
         `;
-      }).join('');
+    }).join('');
 
   // 3. 3-Column Task Board
   const taskCols = [
-    { id: 'open',    label: 'Open / In Progress', dot: 'bg-statusBlue' },
-    { id: 'waiting', label: 'Waiting on Reply',   dot: 'bg-statusAmber' },
-    { id: 'done',    label: 'Completed',          dot: 'bg-statusEmerald' }
+    { id: 'open', label: 'Open / In Progress', dot: 'bg-statusBlue' },
+    { id: 'waiting', label: 'Waiting on Reply', dot: 'bg-statusAmber' },
+    { id: 'done', label: 'Completed', dot: 'bg-statusEmerald' }
   ];
 
   kanbanColsEl.innerHTML = taskCols.map(col => {
@@ -901,24 +903,14 @@ function renderTasksWorkspace() {
         </div>
         <div class="p-2.5 space-y-2 overflow-y-auto flex-1">
           ${colTasks.length === 0
-            ? `<div class="h-20 rounded-md border border-dashed border-borderHairline flex items-center justify-center font-mono text-[11px] text-textDim">No tasks</div>`
-            : colTasks.map(({ p, task, idx }) => `
-                <div class="rounded-lg bg-elevated border border-borderHairline p-3 space-y-2">
+        ? `<div class="h-20 rounded-md border border-dashed border-borderHairline flex items-center justify-center font-mono text-[11px] text-textDim">No tasks</div>`
+        : colTasks.map(({ p, task, idx }) => `
+                <div onclick="openTaskDrawer('${p.id}', ${idx})" class="cursor-pointer rounded-lg bg-elevated hover:bg-elevatedHover border border-borderHairline hover:border-borderStrong p-3 space-y-2 transition-colors">
                   <div class="flex items-center justify-between gap-2">
-                    <button onclick="openPathwayDrawer('${p.id}')" class="font-mono text-[11px] font-semibold text-statusCyan hover:underline">${p.id}</button>
-                    <span class="font-mono text-[10px] text-textDim truncate">${p.org}</span>
+                    <span class="font-mono text-[11px] font-semibold text-statusCyan">${task.taskId || p.id}</span>
+                    <span class="font-mono text-[10px] text-textDim truncate">${p.id} · ${p.org}</span>
                   </div>
-                  <label class="flex items-start gap-2 cursor-pointer">
-                    <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTaskDone('${p.id}', ${idx})" class="mt-0.5 rounded border-borderStrong bg-canvas text-statusEmerald focus:ring-0" />
-                    <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</span>
-                  </label>
-                  ${!task.done ? `
-                    <div class="pt-1.5 border-t border-borderHairline/70 flex justify-end">
-                      <button onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border ${
-                        task.waiting ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30' : 'bg-canvas text-textMuted border-borderHairline hover:text-textPrimary'
-                      }">${task.waiting ? 'Resume Open' : 'Mark Waiting'}</button>
-                    </div>
-                  ` : ''}
+                  <p class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.text}</p>
                 </div>
               `).join('')}
         </div>
@@ -997,8 +989,7 @@ function renderEvidenceView() {
     const count = t === 'All' ? EVIDENCE_RECORDS.length : EVIDENCE_RECORDS.filter(r => r.type === t).length;
     const active = state.evidenceFilter === t;
     return `
-      <button onclick="setEvidenceFilter('${t}')" class="h-7 px-3 rounded-full text-xs font-medium border transition-colors ${
-        active ? 'bg-textPrimary text-canvas border-textPrimary' : 'bg-elevated text-textMuted hover:text-textPrimary border-borderHairline'
+      <button onclick="setEvidenceFilter('${t}')" class="h-7 px-3 rounded-full text-xs font-medium border transition-colors ${active ? 'bg-textPrimary text-canvas border-textPrimary' : 'bg-elevated text-textMuted hover:text-textPrimary border-borderHairline'
       }">
         ${t} <span class="font-mono text-[10px] opacity-75 ml-0.5">${count}</span>
       </button>
@@ -1023,8 +1014,7 @@ function renderEvidenceView() {
       const isSelected = state.activeEvidenceIdx === origIdx;
       const r = rec.raw;
       return `
-        <button onclick="selectEvidenceRecord(${origIdx})" class="w-full text-left p-3.5 transition-colors block ${
-          isSelected ? 'bg-elevated/90 border-l-2 border-l-statusCyan' : 'hover:bg-elevated/40'
+        <button onclick="selectEvidenceRecord(${origIdx})" class="w-full text-left p-3.5 transition-colors block ${isSelected ? 'bg-elevated/90 border-l-2 border-l-statusCyan' : 'hover:bg-elevated/40'
         }">
           <div class="flex items-center justify-between gap-2 mb-1">
             <span class="font-mono text-[11px] font-semibold text-statusCyan">${rec.id}</span>
@@ -1056,8 +1046,8 @@ function renderEvidenceView() {
     tabBody = `
       <div class="space-y-3">
         ${custody.length === 0 && responses.length === 0
-          ? `<div class="text-xs font-mono text-textDim">No custody entries recorded.</div>`
-          : `
+        ? `<div class="text-xs font-mono text-textDim">No custody entries recorded.</div>`
+        : `
             <div class="space-y-2">
               ${custody.map(c => `
                 <div class="p-3 rounded-md bg-surface border border-borderHairline flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 text-xs">
@@ -1100,9 +1090,9 @@ function renderEvidenceView() {
           <div class="p-3 rounded-md bg-surface border border-borderHairline">
             <span class="font-mono text-[10px] uppercase tracking-wider text-textDim block mb-0.5">Primary Artifact</span>
             ${r.sourceUrl
-              ? `<a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="text-statusCyan hover:underline break-all">${r.sourceLabel || r.sourceUrl} &nearr;</a>`
-              : `<span class="text-textMuted">${r.sourceLabel || 'Internal / no public URL'}</span>`
-            }
+        ? `<a href="${r.sourceUrl}" target="_blank" rel="noopener noreferrer" class="text-statusCyan hover:underline break-all">${r.sourceLabel || r.sourceUrl} &nearr;</a>`
+        : `<span class="text-textMuted">${r.sourceLabel || 'Internal / no public URL'}</span>`
+      }
           </div>
         </div>
         ${items.length > 0 ? `
@@ -1304,38 +1294,30 @@ function renderPathwayDrawer(pathwayId) {
     <div class="space-y-2">
       <div class="flex items-center justify-between">
         <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Concrete Work Tasks</h3>
-        <span class="font-mono text-[11px] text-textMuted">${p.checklist.filter(t => t.done).length}/${p.checklist.length} done</span>
+        <span class="font-mono text-[11px] text-textMuted">${p.checklist.length} tasks</span>
       </div>
       <div class="space-y-1.5">
-        ${p.checklist.map((task, idx) => `
-          <div class="flex items-center justify-between gap-2 p-2.5 rounded-md bg-canvas border border-borderHairline text-xs">
-            <label class="flex items-start gap-2.5 cursor-pointer flex-1 min-w-0">
-              <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTaskDone('${p.id}', ${idx})" class="mt-0.5 rounded border-borderStrong bg-elevated text-statusEmerald focus:ring-0" />
-              <span class="${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan mr-1.5">${task.taskId}</span>` : ''}${task.text}</span>
-            </label>
-            <div class="flex items-center gap-1.5 shrink-0">
-              ${!task.done ? `
-                <button type="button" onclick="toggleTaskWaiting('${p.id}', ${idx})" class="px-2 py-0.5 rounded font-mono text-[10px] border ${
-                  task.waiting ? 'bg-statusAmber/15 text-statusAmber border-statusAmber/30' : 'bg-elevated text-textDim border-borderHairline'
-                }">${task.waiting ? 'WAITING' : 'OPEN'}</button>
-              ` : ''}
-              <button type="button" onclick="removeTask('${p.id}', ${idx})" class="text-textDim hover:text-statusRose font-mono px-1">✕</button>
-            </div>
-          </div>
-        `).join('')}
+        ${p.checklist.map((task, idx) => {
+    const tState = task.done ? 'done' : (task.waiting ? 'waiting' : 'open');
+    return `
+            <button onclick="openTaskDrawer('${p.id}', ${idx})" class="w-full text-left flex items-center justify-between gap-2 p-2.5 rounded-md bg-canvas hover:bg-elevated/50 border border-borderHairline text-xs transition-colors">
+              <span class="min-w-0 truncate ${task.done ? 'line-through text-textDim' : 'text-textPrimary'}">${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan mr-1.5">${task.taskId}</span>` : ''}${task.text}</span>
+              <span class="flex items-center gap-2 shrink-0">
+                ${getTaskStatusBadge(tState)}
+                <span class="font-mono text-[10px] text-textDim">&rarr;</span>
+              </span>
+            </button>
+          `;
+  }).join('')}
       </div>
-      <form onsubmit="addTaskFromDrawer(event, '${p.id}')" class="flex gap-2 pt-1">
-        <input type="text" id="drawer-new-task-input" required placeholder="+ Add doable next task..." class="flex-1 h-8 px-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan focus:outline-none text-xs text-textPrimary placeholder-textDim" />
-        <button type="submit" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary">Add</button>
-      </form>
     </div>
 
     <!-- Linked Evidence -->
     <div class="space-y-2">
       <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Linked Evidence (${linkedEvs.length})</h3>
       ${linkedEvs.length === 0
-        ? `<div class="text-xs font-mono text-textDim">No linked evidence records yet.</div>`
-        : `<div class="space-y-1.5">
+      ? `<div class="text-xs font-mono text-textDim">No linked evidence records yet.</div>`
+      : `<div class="space-y-1.5">
             ${linkedEvs.map(ev => `
               <button onclick="openEvidenceFromDrawer('${ev.id}')" class="w-full text-left p-2.5 rounded-md bg-canvas hover:bg-elevated/50 border border-borderHairline flex items-center justify-between gap-2 text-xs">
                 <span class="truncate"><strong class="font-mono text-statusCyan mr-1.5">${ev.id}</strong><span class="text-textPrimary">${ev.title}</span></span>
@@ -1343,29 +1325,141 @@ function renderPathwayDrawer(pathwayId) {
               </button>
             `).join('')}
           </div>`
-      }
+    }
     </div>
 
     <!-- Activity Log -->
-    <div class="space-y-2.5 pt-2 border-t border-borderHairline">
-      <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Field Notes &amp; History</h3>
-      <form onsubmit="addPathwayLog(event, '${p.id}')" class="flex gap-2">
-        <input type="text" id="new-log-input" required placeholder="Append timestamped observation..." class="flex-1 h-8 px-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan focus:outline-none text-xs text-textPrimary placeholder-textDim" />
-        <button type="submit" class="h-8 px-3 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary">Post</button>
-      </form>
-      <div class="space-y-1.5">
-        ${p.logs.map(entry => `
-          <div class="p-2.5 rounded-md bg-canvas border border-borderHairline text-xs space-y-0.5">
-            <div class="flex items-center justify-between font-mono text-[10px] text-textDim">
-              <span class="text-statusCyan">@${entry.author}</span>
-              <span>${entry.timestamp}</span>
+    ${p.logs.length > 0 ? `
+      <div class="space-y-2.5 pt-2 border-t border-borderHairline">
+        <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Field Notes &amp; History</h3>
+        <div class="space-y-1.5">
+          ${p.logs.map(entry => `
+            <div class="p-2.5 rounded-md bg-canvas border border-borderHairline text-xs space-y-0.5">
+              <div class="flex items-center justify-between font-mono text-[10px] text-textDim">
+                <span class="text-statusCyan">@${entry.author}</span>
+                <span>${entry.timestamp}</span>
+              </div>
+              <p class="text-textMuted">${entry.note}</p>
             </div>
-            <p class="text-textMuted">${entry.note}</p>
-          </div>
-        `).join('')}
+          `).join('')}
+        </div>
       </div>
-    </div>
+    ` : ''}
   `;
+}
+
+function openTaskDrawer(pathwayId, taskIdx) {
+  const p = getAllPathways().find(x => x.id === pathwayId);
+  if (!p) return;
+  const task = p.checklist[taskIdx];
+  if (!task) return;
+
+  closePathwayDrawer();
+
+  const taskId = task.taskId || 'TASK';
+  const cat = task.taskId ? TASK_CATALOG_MAP.get(task.taskId) : null;
+  const rec = task.taskId ? RECORD_BY_ID.get(task.taskId) : null;
+  const tState = task.done ? 'done' : (task.waiting ? 'waiting' : 'open');
+
+  document.getElementById('task-drawer-id').textContent = taskId;
+  document.getElementById('task-drawer-org').textContent = `${p.id} · ${p.org}`;
+
+  const basisIds = (cat?.basis_record_ids || []).map(srcId => DISPLAY_ID_BY_SOURCE_ID.get(srcId)).filter(Boolean);
+  const activityIds = (cat?.activity_record_ids || []).map(srcId => DISPLAY_ID_BY_SOURCE_ID.get(srcId)).filter(Boolean);
+  const relatedRecords = [...new Set([...basisIds, ...activityIds])]
+    .map(id => RECORD_BY_ID.get(id))
+    .filter(Boolean);
+
+  const checklistItems = cat?.checklist || [];
+
+  document.getElementById('task-drawer-content').innerHTML = `
+    <div class="space-y-3">
+      <div class="flex flex-wrap items-center gap-2">
+        ${getTaskStatusBadge(tState)}
+        ${cat?.type ? `<span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline font-mono text-[10px] text-textMuted uppercase">${cat.type.replace(/_/g, ' ')}</span>` : ''}
+        ${cat?.list_date_label ? `<span class="font-mono text-[11px] text-textDim">${cat.list_date_label}</span>` : ''}
+      </div>
+
+      <h2 class="text-lg sm:text-xl font-semibold text-textPrimary leading-snug">${cat?.title || task.text}</h2>
+      ${cat?.list_context ? `<p class="text-xs sm:text-sm text-textMuted">${cat.list_context}</p>` : ''}
+    </div>
+
+    ${cat?.instructions || rec?.summary ? `
+      <div class="space-y-1.5">
+        <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Objective &amp; Instructions</h3>
+        <p class="text-xs sm:text-sm text-textPrimary leading-relaxed bg-elevated/40 p-3.5 rounded-lg border border-borderHairline">${cat?.instructions || rec?.summary}</p>
+      </div>
+    ` : ''}
+
+    ${checklistItems.length > 0 ? `
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Questions &amp; Verification Steps</h3>
+          <span class="font-mono text-[11px] text-textMuted">${checklistItems.length} items</span>
+        </div>
+        <ul class="space-y-1.5">
+          ${checklistItems.map((line, i) => `
+            <li class="p-2.5 rounded-md bg-canvas border border-borderHairline text-xs text-textPrimary flex items-start gap-2.5 leading-relaxed">
+              <span class="font-mono text-[10px] text-statusCyan shrink-0 mt-0.5">${String(i + 1).padStart(2, '0')}</span>
+              <span>${line}</span>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    ` : ''}
+
+    ${rec?.limitations ? `
+      <div class="p-3.5 rounded-md bg-canvas border border-borderHairline space-y-1">
+        <span class="font-mono text-[10px] uppercase tracking-wider text-statusAmber block">Scope &amp; Limits</span>
+        <p class="text-xs text-textMuted leading-relaxed">${rec.limitations}</p>
+      </div>
+    ` : ''}
+
+    <div class="space-y-2">
+      <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Linked Pathway</h3>
+      <button onclick="closeTaskDrawer(); openPathwayDrawer('${p.id}');" class="w-full text-left p-3 rounded-md bg-canvas hover:bg-elevated/50 border border-borderHairline flex items-center justify-between gap-2 text-xs">
+        <span class="truncate"><strong class="font-mono text-statusEmerald mr-1.5">${p.id}</strong><span class="text-textPrimary font-medium">${p.title}</span></span>
+        <span class="font-mono text-[10px] text-textDim shrink-0">Open pathway &rarr;</span>
+      </button>
+    </div>
+
+    ${relatedRecords.length > 0 ? `
+      <div class="space-y-2">
+        <h3 class="font-mono text-[10px] uppercase tracking-wider text-textDim">Basis &amp; Supporting Records (${relatedRecords.length})</h3>
+        <div class="space-y-1.5">
+          ${relatedRecords.map(sr => `
+            <button onclick="closeTaskDrawer(); openEvidenceFromDrawer('${sr.id}');" class="w-full text-left p-2.5 rounded-md bg-canvas hover:bg-elevated/50 border border-borderHairline flex items-center justify-between gap-2 text-xs">
+              <span class="truncate"><strong class="font-mono text-statusCyan mr-1.5">${sr.id}</strong><span class="text-textPrimary">${sr.title}</span></span>
+              <span class="font-mono text-[10px] text-textDim shrink-0">Inspect &rarr;</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+
+    ${rec ? `
+      <div class="pt-2 border-t border-borderHairline flex justify-end">
+        <button onclick="closeTaskDrawer(); openEvidenceFromDrawer('${rec.id}');" class="h-8 px-3 rounded-md bg-statusCyan/15 hover:bg-statusCyan/25 border border-statusCyan/40 text-xs font-medium text-statusCyan">
+          Open ${rec.id} in Evidence &amp; Records &rarr;
+        </button>
+      </div>
+    ` : ''}
+  `;
+
+  document.getElementById('task-drawer-backdrop').classList.remove('hidden');
+  const drawer = document.getElementById('task-drawer');
+  drawer.classList.remove('hidden');
+  drawer.classList.add('flex');
+}
+
+function closeTaskDrawer() {
+  const backdrop = document.getElementById('task-drawer-backdrop');
+  const drawer = document.getElementById('task-drawer');
+  if (backdrop) backdrop.classList.add('hidden');
+  if (drawer) {
+    drawer.classList.add('hidden');
+    drawer.classList.remove('flex');
+  }
 }
 
 function copyPathwaySummary(pathwayId) {
@@ -1632,7 +1726,9 @@ function switchMainView(viewName) {
   document.querySelectorAll('.mob-tab').forEach(btn => {
     const active = btn.dataset.mobTab === viewName;
     btn.classList.toggle('text-statusEmerald', active);
-    btn.classList.toggle('text-textDim', !active);
+    btn.classList.toggle('font-semibold', active);
+    btn.classList.toggle('text-textPrimary/75', !active);
+    btn.classList.toggle('font-medium', !active);
   });
 }
 
@@ -1720,6 +1816,15 @@ function resetFilters() {
   renderAll();
 }
 
+function toggleChapterMenu(e) {
+  if (e) e.stopPropagation();
+  const menu = document.getElementById('chapter-menu');
+  const btn = document.getElementById('chapter-btn');
+  if (!menu || !btn) return;
+  const hidden = menu.classList.toggle('hidden');
+  btn.setAttribute('aria-expanded', String(!hidden));
+}
+
 function toggleMobileSidebar() {
   const sidebar = document.getElementById('mobile-sidebar');
   const backdrop = document.getElementById('mobile-sidebar-backdrop');
@@ -1760,6 +1865,8 @@ Object.assign(window, {
   openPathwayDrawer,
   closePathwayDrawer,
   renderPathwayDrawer,
+  openTaskDrawer,
+  closeTaskDrawer,
   copyPathwaySummary,
   openEvidenceFromDrawer,
   updatePathwayStage,
@@ -1788,5 +1895,6 @@ Object.assign(window, {
   setStageFilter,
   handleSearch,
   resetFilters,
+  toggleChapterMenu,
   toggleMobileSidebar
 });

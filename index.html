@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="Crossover Stockton" />
-  <link rel="manifest" href="/images/favicon/site.webmanifest" />
+  <link rel="icon" type="image/png" href="/images/favicon/multi/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/images/favicon/multi/favicon.svg" />
+  <link rel="shortcut icon" href="/images/favicon/multi/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/multi/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-title" content="Crossover" />
+  <link rel="manifest" href="/images/favicon/multi/site.webmanifest" />
   <title>CROSSOVER STOCKTON — Pathway Tracker</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -45,105 +48,165 @@
     }
   </script>
 </head>
-<body class="h-[100dvh] overflow-hidden flex flex-col bg-canvas text-textPrimary selection:bg-statusCyan/20 selection:text-textPrimary">
+
+<body
+  class="h-[100dvh] overflow-hidden flex flex-col bg-canvas text-textPrimary selection:bg-statusCyan/20 selection:text-textPrimary">
 
   <!-- =========================================================================
        TOP COMMAND BAR (CLICKABLE COUNTS VISIBLE ON MOBILE & DESKTOP)
   ========================================================================== -->
-  <header class="h-14 border-b border-borderHairline bg-surface px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0 z-30">
+  <header
+    class="h-14 border-b border-borderHairline bg-surface px-3 sm:px-4 flex items-center justify-between gap-2 sm:gap-4 shrink-0 z-30">
     <!-- Left: Mobile Menu + Brand Home -->
     <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-      <button onclick="toggleMobileSidebar()" class="lg:hidden p-1.5 rounded-md border border-borderHairline bg-elevated text-textMuted hover:text-textPrimary shrink-0" aria-label="Toggle navigation">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button onclick="toggleMobileSidebar()"
+        class="lg:hidden w-10 h-10 rounded-lg hover:bg-elevated/60 text-textPrimary/90 hover:text-white flex items-center justify-center transition-colors shrink-0"
+        aria-label="Toggle navigation">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <line x1="4" x2="20" y1="12" y2="12" />
+          <line x1="4" x2="20" y1="6" y2="6" />
+          <line x1="4" x2="20" y1="18" y2="18" />
+        </svg>
       </button>
 
       <button onclick="goHome()" class="flex items-center gap-2 text-left group min-w-0" title="Return to Help Today">
-        <img src="/images/favicon/favicon.svg" alt="" class="w-7 h-7 rounded-md border border-borderStrong group-hover:border-statusEmerald/50 transition-colors shrink-0" />
+        <img src="/images/favicon/multi/favicon.svg" alt="" class="w-7 h-7 sm:w-8 sm:h-8 rounded-md shrink-0" />
         <div class="flex items-center gap-2 min-w-0">
-          <span class="font-mono text-[11px] sm:text-[13px] font-semibold tracking-wider text-textPrimary leading-tight sm:leading-normal sm:whitespace-nowrap">
-            CROSSOVER STOCKTON
+          <span
+            class="font-mono text-[13.5px] sm:text-[15px] font-semibold tracking-wider text-textPrimary whitespace-nowrap">
+            CROSSOVER
           </span>
-          <span class="hidden md:inline-flex items-center px-2 py-0.5 rounded bg-elevated border border-borderHairline font-mono text-[10px] text-textMuted shrink-0">
+          <span
+            class="hidden md:inline-flex items-center px-2 py-0.5 rounded bg-elevated border border-borderHairline font-mono text-[10px] text-textMuted shrink-0">
             PATHWAY TRACKER
           </span>
         </div>
       </button>
     </div>
 
-    <!-- Center/Right: Clickable Status Counts (Always visible on mobile & desktop) -->
+    <!-- Center/Right: Desktop Shortcuts, Search, Chapter Location & About -->
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-      <!-- Live Clickable Count Boxes -->
-      <div class="flex items-center gap-1 sm:gap-1.5 font-mono text-xs tabular-nums" aria-label="Pathway status counts">
-        <button
-          onclick="jumpToHelp()"
-          id="top-count-established-btn"
-          class="h-7 px-2 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
-          title="Established pathways — Help Today"
-        >
+      <!-- Desktop Clickable Shortcut Boxes (3 Pathways Board + 1 Tasks) -->
+      <div class="hidden lg:flex items-center gap-1.5 font-mono text-xs tabular-nums"
+        aria-label="Pathway status counts">
+        <button onclick="jumpToStage('Established')" id="top-count-established-btn"
+          class="h-7 px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Established pathways on Pathways Board">
           <span class="w-2 h-2 rounded-full bg-statusEmerald shrink-0"></span>
-          <span class="hidden xl:inline text-textMuted text-[11px]">Established:</span>
+          <span class="text-textMuted text-[11px]">Established:</span>
           <span id="stat-established" class="text-textPrimary font-semibold">0</span>
         </button>
 
-        <button
-          onclick="jumpToStage('Enabling')"
-          id="top-count-enabling-btn"
-          class="h-7 px-2 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
-          title="Enabling pathways — active work to open routes"
-        >
+        <button onclick="jumpToStage('Enabling')" id="top-count-enabling-btn"
+          class="h-7 px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Enabling pathways on Pathways Board">
           <span class="w-2 h-2 rounded-full bg-statusBlue shrink-0"></span>
-          <span class="hidden xl:inline text-textMuted text-[11px]">Enabling:</span>
+          <span class="text-textMuted text-[11px]">Enabling:</span>
           <span id="stat-enabling" class="text-textPrimary font-semibold">1</span>
         </button>
 
-        <button
-          onclick="jumpToStage('Blocked')"
-          id="top-count-blocked-btn"
-          class="h-7 px-2 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
-          title="Blocked pathways — bottlenecks discovered"
-        >
+        <button onclick="jumpToStage('Blocked')" id="top-count-blocked-btn"
+          class="h-7 px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Blocked pathways on Pathways Board">
           <span class="w-2 h-2 rounded-full bg-statusAmber shrink-0"></span>
-          <span class="hidden xl:inline text-textMuted text-[11px]">Blocked:</span>
+          <span class="text-textMuted text-[11px]">Blocked:</span>
           <span id="stat-blocked" class="text-textPrimary font-semibold">0</span>
         </button>
 
-        <button
-          onclick="openTasksWorkspace('open')"
-          id="top-count-tasks-btn"
-          class="hidden sm:flex h-7 px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline items-center gap-1.5 transition-colors"
-          title="Open actionable tasks"
-        >
+        <button onclick="openTasksWorkspace('open')" id="top-count-tasks-btn"
+          class="h-7 px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center gap-1.5 transition-colors"
+          title="Open actionable tasks">
           <span class="w-2 h-2 rounded-full bg-statusCyan shrink-0"></span>
-          <span class="hidden xl:inline text-textMuted text-[11px]">Tasks:</span>
+          <span class="text-textMuted text-[11px]">Tasks:</span>
           <span id="stat-open-tasks" class="text-statusCyan font-semibold">7</span>
         </button>
       </div>
 
       <!-- Desktop Quick Search -->
       <div class="relative hidden lg:block ml-1">
-        <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+        <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none"
+          stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
         </svg>
-        <input
-          type="text"
-          id="global-search"
-          oninput="handleSearch(this.value)"
+        <input type="text" id="global-search" oninput="handleSearch(this.value)"
           placeholder="Filter pathway, org, tag... (/)"
-          class="w-48 xl:w-56 h-8 pl-8 pr-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan/60 focus:outline-none text-xs text-textPrimary placeholder-textDim"
-        />
+          class="w-44 xl:w-52 h-8 pl-8 pr-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan/60 focus:outline-none text-xs text-textPrimary placeholder-textDim" />
       </div>
 
-      <!-- New Pathway CTA (+) -->
-      <button onclick="openNewPathwayModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-elevated hover:bg-elevatedHover border border-borderStrong text-textMuted hover:text-textPrimary flex items-center justify-center transition-colors shrink-0" title="New Pathway" aria-label="New Pathway">
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M12 5v14M5 12h14"/></svg>
-      </button>
+      <!-- Chapter / Location Pill -->
+      <div class="relative">
+        <button id="chapter-btn" onclick="toggleChapterMenu(event)"
+          class="h-7 sm:h-8 px-2.5 sm:px-3 rounded-full bg-canvas hover:bg-elevated border border-borderStrong text-[11px] sm:text-xs font-medium text-textPrimary flex items-center gap-1.5 transition-colors shrink-0"
+          title="Active chapter location" aria-expanded="false" aria-haspopup="true">
+          <svg class="w-3.5 h-3.5 text-textMuted shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"
+              d="M12 21s-6-5.33-6-10a6 6 0 1112 0c0 4.67-6 10-6 10z" />
+            <circle cx="12" cy="11" r="2.2" stroke-width="1.9" />
+          </svg>
+          <span class="whitespace-nowrap">Stockton, CA</span>
+          <svg class="w-3 h-3 text-textDim shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="chapter-menu"
+          class="hidden absolute right-0 mt-1.5 w-56 rounded-lg bg-surface border border-borderStrong shadow-xl py-1.5 z-40 text-xs">
+          <div class="px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-textDim">Active Chapter</div>
+          <button onclick="toggleChapterMenu()"
+            class="w-full text-left px-3 py-2 bg-elevated/60 text-textPrimary flex items-center justify-between">
+            <span class="font-medium">Stockton, CA</span>
+            <span class="font-mono text-[10px] text-statusEmerald">LIVE</span>
+          </button>
+          <div class="px-3 py-1.5 text-[11px] text-textDim border-t border-borderHairline mt-1">
+            Additional chapters will appear here as Crossover expands.
+          </div>
+        </div>
+      </div>
 
-      <!-- About / Methodology Button (?) -->
-      <button onclick="openAboutDrawer()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-elevated hover:bg-elevatedHover border border-borderStrong text-textMuted hover:text-textPrimary font-mono text-xs font-semibold flex items-center justify-center transition-colors shrink-0" title="About &amp; Methodology" aria-label="About and Methodology">
-        ?
+      <!-- About / Methodology Button (circle-help) -->
+      <button onclick="openAboutDrawer()"
+        class="w-10 h-10 rounded-full hover:bg-elevated/60 text-textPrimary/90 hover:text-white flex items-center justify-center transition-colors shrink-0"
+        title="About &amp; Methodology" aria-label="About and Methodology">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+          <path d="M12 17h.01" />
+        </svg>
       </button>
     </div>
   </header>
+
+  <!-- Mobile / Tablet Shortcut Bar (< lg) -->
+  <div id="mobile-shortcut-bar"
+    class="lg:hidden border-b border-borderHairline bg-surface/80 px-2.5 sm:px-3 py-1.5 grid grid-cols-4 gap-1.5 shrink-0 text-[11px] sm:text-xs tabular-nums"
+    aria-label="Mobile pathway shortcuts">
+    <button onclick="jumpToStage('Established')"
+      class="h-7 px-1.5 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center justify-center gap-1 sm:gap-1.5 min-w-0">
+      <span class="w-1.5 h-1.5 rounded-full bg-statusEmerald shrink-0"></span>
+      <span class="text-textMuted font-medium truncate">Verified</span>
+      <span id="mob-stat-established" class="font-mono text-textPrimary font-semibold shrink-0">0</span>
+    </button>
+    <button onclick="jumpToStage('Enabling')"
+      class="h-7 px-1.5 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center justify-center gap-1 sm:gap-1.5 min-w-0">
+      <span class="w-1.5 h-1.5 rounded-full bg-statusBlue shrink-0"></span>
+      <span class="text-textMuted font-medium truncate">Enable</span>
+      <span id="mob-stat-enabling" class="font-mono text-textPrimary font-semibold shrink-0">1</span>
+    </button>
+    <button onclick="jumpToStage('Blocked')"
+      class="h-7 px-1.5 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center justify-center gap-1 sm:gap-1.5 min-w-0">
+      <span class="w-1.5 h-1.5 rounded-full bg-statusAmber shrink-0"></span>
+      <span class="text-textMuted font-medium truncate">Blocked</span>
+      <span id="mob-stat-blocked" class="font-mono text-textPrimary font-semibold shrink-0">0</span>
+    </button>
+    <button onclick="openTasksWorkspace('open')"
+      class="h-7 px-1.5 sm:px-2.5 rounded-md bg-canvas hover:bg-elevated border border-borderHairline flex items-center justify-center gap-1 sm:gap-1.5 min-w-0">
+      <span class="w-1.5 h-1.5 rounded-full bg-statusCyan shrink-0"></span>
+      <span class="text-textMuted font-medium truncate">Tasks</span>
+      <span id="mob-stat-open-tasks" class="font-mono text-statusCyan font-semibold shrink-0">7</span>
+    </button>
+  </div>
 
   <!-- =========================================================================
        WORKSPACE BODY
@@ -151,40 +214,57 @@
   <div class="flex-1 flex overflow-hidden relative">
 
     <!-- DESKTOP LEFT SIDEBAR NAVIGATION -->
-    <aside id="left-sidebar" class="hidden lg:flex flex-col w-60 border-r border-borderHairline bg-surface shrink-0 justify-between overflow-y-auto">
+    <aside id="left-sidebar"
+      class="hidden lg:flex flex-col w-60 border-r border-borderHairline bg-surface shrink-0 justify-between overflow-y-auto">
       <div class="p-3 space-y-6">
 
         <!-- Primary Workspace Views -->
         <div>
           <div class="px-2.5 mb-1.5 font-mono text-[10px] uppercase tracking-wider text-textDim">Platform</div>
           <nav class="space-y-0.5">
-            <button onclick="switchMainView('help')" data-view-btn="help" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium bg-elevated text-textPrimary border border-borderHairline">
+            <button onclick="switchMainView('help')" data-view-btn="help"
+              class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium bg-elevated text-textPrimary border border-borderHairline">
               <span class="flex items-center gap-2">
-                <svg class="w-3.5 h-3.5 text-statusEmerald" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <svg class="w-3.5 h-3.5 text-statusEmerald" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 <span>Help Today</span>
               </span>
               <span id="nav-count-help" class="font-mono text-[11px] tabular-nums text-statusEmerald">0</span>
             </button>
 
-            <button onclick="switchMainView('board')" data-view-btn="board" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
+            <button onclick="switchMainView('board')" data-view-btn="board"
+              class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
               <span class="flex items-center gap-2">
-                <svg class="w-3.5 h-3.5 text-statusBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+                <svg class="w-3.5 h-3.5 text-statusBlue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                </svg>
                 <span>Pathways Board</span>
               </span>
               <span id="nav-count-pathways" class="font-mono text-[11px] tabular-nums text-textMuted">3</span>
             </button>
 
-            <button onclick="switchMainView('tasks')" data-view-btn="tasks" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
+            <button onclick="switchMainView('tasks')" data-view-btn="tasks"
+              class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
               <span class="flex items-center gap-2">
-                <svg class="w-3.5 h-3.5 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                <svg class="w-3.5 h-3.5 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                </svg>
                 <span>Tasks &amp; Checklists</span>
               </span>
               <span id="nav-count-tasks" class="font-mono text-[11px] tabular-nums text-statusCyan">7 open</span>
             </button>
 
-            <button onclick="switchMainView('evidence')" data-view-btn="evidence" class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
+            <button onclick="switchMainView('evidence')" data-view-btn="evidence"
+              class="sidebar-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/60 border border-transparent">
               <span class="flex items-center gap-2">
-                <svg class="w-3.5 h-3.5 text-statusAmber" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+                <svg class="w-3.5 h-3.5 text-statusAmber" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                </svg>
                 <span>Evidence &amp; Records</span>
               </span>
               <span id="nav-count-evidence" class="font-mono text-[11px] tabular-nums text-textMuted">53</span>
@@ -220,47 +300,65 @@
     </aside>
 
     <!-- MOBILE SIDEBAR OVERLAY -->
-    <div id="mobile-sidebar-backdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/65 z-40 hidden lg:hidden"></div>
-    <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 w-72 bg-surface border-r border-borderHairline z-50 hidden flex-col justify-between p-4 lg:hidden">
-      <div class="space-y-5 overflow-y-auto">
-        <div class="flex items-center justify-between border-b border-borderHairline pb-3">
+    <div id="mobile-sidebar-backdrop" onclick="toggleMobileSidebar()"
+      class="fixed inset-0 bg-black/65 z-40 hidden lg:hidden"></div>
+    <aside id="mobile-sidebar"
+      class="fixed inset-y-0 left-0 w-72 bg-surface border-r border-borderHairline z-50 hidden flex-col justify-between lg:hidden">
+      <div class="overflow-y-auto">
+        <div class="h-14 px-3 border-b border-borderHairline flex items-center gap-2">
+          <button onclick="toggleMobileSidebar()"
+            class="w-10 h-10 rounded-lg hover:bg-elevated/60 text-textPrimary/90 hover:text-white flex items-center justify-center transition-colors shrink-0"
+            aria-label="Close navigation">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 6 6 18"/>
+              <path d="m6 6 12 12"/>
+            </svg>
+          </button>
           <div>
-            <div class="font-mono text-xs font-semibold text-textPrimary">CROSSOVER STOCKTON</div>
-            <div class="font-mono text-[10px] text-textDim">Pathway Development Platform</div>
+            <div class="font-mono text-xs font-semibold text-textPrimary">CROSSOVER</div>
+            <div class="font-mono text-[10px] text-textDim">Pathway Tracker · Stockton, CA</div>
           </div>
-          <button onclick="toggleMobileSidebar()" class="text-textMuted hover:text-textPrimary p-1.5 rounded-md hover:bg-elevated">✕</button>
         </div>
 
+        <div class="p-4 space-y-5">
+
         <nav class="space-y-1">
-          <button onclick="switchMainView('help'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium bg-elevated/60 text-textPrimary">
+          <button onclick="switchMainView('help'); toggleMobileSidebar();"
+            class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium bg-elevated/60 text-textPrimary">
             <span>Help Today</span>
             <span id="mob-nav-help" class="font-mono text-[11px] text-statusEmerald">0</span>
           </button>
-          <button onclick="switchMainView('board'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+          <button onclick="switchMainView('board'); toggleMobileSidebar();"
+            class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             <span>Pathways Board</span>
             <span id="mob-nav-pathways" class="font-mono text-[11px]">3</span>
           </button>
-          <button onclick="switchMainView('tasks'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+          <button onclick="switchMainView('tasks'); toggleMobileSidebar();"
+            class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             <span>Tasks &amp; Checklists</span>
             <span id="mob-nav-tasks" class="font-mono text-[11px] text-statusCyan">7 open</span>
           </button>
-          <button onclick="switchMainView('evidence'); toggleMobileSidebar();" class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+          <button onclick="switchMainView('evidence'); toggleMobileSidebar();"
+            class="w-full flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             <span>Evidence &amp; Records</span>
             <span id="mob-nav-evidence" class="font-mono text-[11px]">53</span>
           </button>
         </nav>
 
         <div class="pt-3 border-t border-borderHairline space-y-1.5">
-          <button onclick="toggleMobileSidebar(); openAboutDrawer();" class="w-full text-left px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
+          <button onclick="toggleMobileSidebar(); openAboutDrawer();"
+            class="w-full text-left px-3 py-2 rounded-md text-xs font-medium text-textMuted hover:text-textPrimary hover:bg-elevated/40">
             About &amp; Methodology
           </button>
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-statusCyan hover:bg-elevated/40">
-            Connect on LinkedIn &rarr;
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
+            class="block w-full text-left px-3 py-2 rounded-md text-xs font-medium text-statusCyan hover:bg-elevated/40">
+            Connect on LinkedIn &nearr;
           </a>
         </div>
       </div>
+      </div>
 
-      <div class="font-mono text-[11px] text-textDim pt-3 border-t border-borderHairline">
+      <div class="font-mono text-[11px] text-textDim p-4 border-t border-borderHairline">
         Updated 18m ago &middot; Stockton, CA
       </div>
     </aside>
@@ -268,17 +366,19 @@
     <!-- =======================================================================
          MAIN CONTENT CONTAINER
     ======================================================================== -->
-    <main class="flex-1 flex flex-col overflow-hidden bg-canvas pb-14 lg:pb-0">
+    <main class="flex-1 flex flex-col overflow-hidden bg-canvas pb-[68px] lg:pb-0">
 
       <!-- ===================================================================
            VIEW 1: HELP TODAY (PUBLIC PRODUCT — ESTABLISHED PATHWAYS ONLY)
       ==================================================================== -->
       <section id="view-help" class="flex-1 flex flex-col overflow-hidden">
         <!-- Uniform Context Header (Matches Pathways, Tasks & Evidence) -->
-        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex items-center gap-2 min-w-0">
             <span id="help-status-dot" class="w-2 h-2 rounded-full bg-statusSlate shrink-0"></span>
-            <span class="font-mono text-[11px] uppercase tracking-wider text-statusEmerald font-semibold truncate">HELP TODAY &middot; FRESH PATHWAYS</span>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusEmerald font-semibold truncate">HELP
+              TODAY &middot; FRESH PATHWAYS</span>
           </div>
 
           <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
@@ -292,15 +392,23 @@
         </div>
 
         <!-- Uniform Sub-Toolbar: List | Board + Contribution Filter -->
-        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex flex-wrap items-center gap-2">
             <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5">
-              <button onclick="setHelpLayout('list')" id="btn-help-list" class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+              <button onclick="setHelpLayout('list')" id="btn-help-list"
+                class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
                 <span>List</span>
               </button>
-              <button onclick="setHelpLayout('board')" id="btn-help-board" class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+              <button onclick="setHelpLayout('board')" id="btn-help-board"
+                class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" />
+                </svg>
                 <span>Board</span>
               </button>
             </div>
@@ -309,8 +417,10 @@
 
             <!-- Contribution Filter Select (Matches Pathways View) -->
             <div class="flex items-center gap-1.5">
-              <label for="help-filter-contribution" class="font-mono text-[11px] text-textMuted hidden sm:inline">Contribution:</label>
-              <select id="help-filter-contribution" onchange="setHelpFilter(this.value)" class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusEmerald">
+              <label for="help-filter-contribution"
+                class="font-mono text-[11px] text-textMuted hidden sm:inline">Contribution:</label>
+              <select id="help-filter-contribution" onchange="setHelpFilter(this.value)"
+                class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusEmerald">
                 <option value="All">All Contributions</option>
                 <option value="Presence">Presence</option>
                 <option value="Funding">Funding</option>
@@ -328,7 +438,8 @@
         </div>
 
         <!-- DESKTOP BOARD VIEW (Default on >= 768px) -->
-        <div id="help-board-container" class="flex-1 overflow-x-auto overflow-y-auto xl:overflow-y-hidden p-3 sm:p-4 flex flex-col gap-3.5">
+        <div id="help-board-container"
+          class="flex-1 overflow-x-auto overflow-y-auto xl:overflow-y-hidden p-3 sm:p-4 flex flex-col gap-3.5">
           <!-- Populated by JS -->
         </div>
 
@@ -346,13 +457,16 @@
       ==================================================================== -->
       <section id="view-board" class="hidden flex-1 flex-col overflow-hidden">
         <!-- Uniform Context Header (Matches Help Today, Tasks & Evidence) -->
-        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex items-center gap-2 min-w-0">
-            <button onclick="switchMainView('help')" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
+            <button onclick="switchMainView('help')"
+              class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
               <span>&larr;</span>
               <span>Help</span>
             </button>
-            <span class="font-mono text-[11px] uppercase tracking-wider text-statusBlue font-semibold truncate">PATHWAYS &middot; DEVELOPMENT BOARD</span>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusBlue font-semibold truncate">PATHWAYS
+              &middot; DEVELOPMENT BOARD</span>
           </div>
 
           <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
@@ -365,23 +479,32 @@
             <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusBlue">
               Enb: <strong id="pw-pill-enabling">1</strong>
             </span>
-            <span class="hidden sm:inline-block px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
+            <span
+              class="hidden sm:inline-block px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusEmerald">
               Est: <strong id="pw-pill-established">0</strong>
             </span>
           </div>
         </div>
 
         <!-- Uniform Sub-Toolbar: List | Board + Contribution & Stage Filters -->
-        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex flex-wrap items-center gap-2">
             <!-- List / Board Switcher -->
             <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5">
-              <button onclick="setBoardLayout('list')" id="btn-layout-list" class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+              <button onclick="setBoardLayout('list')" id="btn-layout-list"
+                class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
                 <span>List</span>
               </button>
-              <button onclick="setBoardLayout('kanban')" id="btn-layout-kanban" class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+              <button onclick="setBoardLayout('kanban')" id="btn-layout-kanban"
+                class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" />
+                </svg>
                 <span>Board</span>
               </button>
             </div>
@@ -390,8 +513,10 @@
 
             <!-- Contribution Filter Select -->
             <div class="flex items-center gap-1.5">
-              <label for="filter-contribution" class="font-mono text-[11px] text-textMuted hidden sm:inline">Contribution:</label>
-              <select id="filter-contribution" onchange="setContributionFilter(this.value)" class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
+              <label for="filter-contribution"
+                class="font-mono text-[11px] text-textMuted hidden sm:inline">Contribution:</label>
+              <select id="filter-contribution" onchange="setContributionFilter(this.value)"
+                class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
                 <option value="All">All Contributions</option>
                 <option value="Presence">Presence</option>
                 <option value="Funding">Funding</option>
@@ -405,7 +530,8 @@
             <!-- Stage Filter Select -->
             <div class="flex items-center gap-1.5">
               <label for="filter-stage" class="font-mono text-[11px] text-textMuted hidden sm:inline">Stage:</label>
-              <select id="filter-stage" onchange="setStageFilter(this.value)" class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
+              <select id="filter-stage" onchange="setStageFilter(this.value)"
+                class="h-7 px-2 rounded-md bg-elevated border border-borderHairline text-xs text-textPrimary focus:outline-none focus:border-statusCyan">
                 <option value="All">All Stages</option>
                 <option value="Exploring">01 Exploring</option>
                 <option value="Blocked">02 Blocked</option>
@@ -417,14 +543,11 @@
 
           <!-- Search & Reset -->
           <div class="flex items-center gap-2">
-            <input
-              type="text"
-              id="mobile-board-search"
-              oninput="handleSearch(this.value)"
+            <input type="text" id="mobile-board-search" oninput="handleSearch(this.value)"
               placeholder="Search pathways..."
-              class="lg:hidden h-7 w-32 sm:w-44 px-2.5 rounded-md bg-canvas border border-borderHairline text-xs text-textPrimary placeholder-textDim focus:outline-none focus:border-statusCyan"
-            />
-            <button id="reset-filters-btn" onclick="resetFilters()" class="hidden text-xs font-mono text-statusCyan hover:underline">
+              class="lg:hidden h-7 w-32 sm:w-44 px-2.5 rounded-md bg-canvas border border-borderHairline text-xs text-textPrimary placeholder-textDim focus:outline-none focus:border-statusCyan" />
+            <button id="reset-filters-btn" onclick="resetFilters()"
+              class="hidden text-xs font-mono text-statusCyan hover:underline">
               Reset
             </button>
             <span id="visible-pathway-count" class="font-mono text-[11px] text-textMuted tabular-nums hidden sm:inline">
@@ -450,7 +573,8 @@
           <div class="hidden sm:block rounded-lg border border-borderHairline bg-surface overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
+                <tr
+                  class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
                   <th class="py-2.5 px-3.5">ID</th>
                   <th class="py-2.5 px-3.5">Stage</th>
                   <th class="py-2.5 px-3.5">Pathway</th>
@@ -475,13 +599,16 @@
       ==================================================================== -->
       <section id="view-tasks" class="hidden flex-1 flex-col overflow-hidden">
         <!-- Uniform Context Header -->
-        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex items-center gap-2 min-w-0">
-            <button onclick="switchMainView('board')" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
+            <button onclick="switchMainView('board')"
+              class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
               <span>&larr;</span>
               <span>Board</span>
             </button>
-            <span class="font-mono text-[11px] uppercase tracking-wider text-statusCyan font-semibold truncate">CONCRETE WORK &middot; TASKS</span>
+            <span class="font-mono text-[11px] uppercase tracking-wider text-statusCyan font-semibold truncate">CONCRETE
+              WORK &middot; TASKS</span>
           </div>
 
           <!-- Task Counts -->
@@ -499,26 +626,39 @@
         </div>
 
         <!-- Uniform Sub-Toolbar -->
-        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
           <div class="flex flex-wrap items-center gap-2">
             <!-- List vs Board Switcher (Matches Pathways View) -->
             <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5">
-              <button onclick="setTasksSubLayout('list')" id="btn-tasks-list" class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+              <button onclick="setTasksSubLayout('list')" id="btn-tasks-list"
+                class="px-2.5 py-1 rounded text-xs font-medium bg-elevated text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
                 <span>List</span>
               </button>
-              <button onclick="setTasksSubLayout('kanban')" id="btn-tasks-kanban" class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+              <button onclick="setTasksSubLayout('kanban')" id="btn-tasks-kanban"
+                class="px-2.5 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                    d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" />
+                </svg>
                 <span>Board</span>
               </button>
             </div>
 
             <!-- Status Filter Tabs -->
-            <div class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5 overflow-x-auto no-scrollbar">
-              <button onclick="setChecklistStatusFilter('all')" id="btn-cl-all" class="px-2 py-1 rounded text-xs font-medium bg-elevated text-textPrimary">All</button>
-              <button onclick="setChecklistStatusFilter('open')" id="btn-cl-open" class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Open</button>
-              <button onclick="setChecklistStatusFilter('waiting')" id="btn-cl-waiting" class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Waiting</button>
-              <button onclick="setChecklistStatusFilter('done')" id="btn-cl-done" class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Done</button>
+            <div
+              class="inline-flex rounded-md bg-canvas border border-borderHairline p-0.5 overflow-x-auto no-scrollbar">
+              <button onclick="setChecklistStatusFilter('all')" id="btn-cl-all"
+                class="px-2 py-1 rounded text-xs font-medium bg-elevated text-textPrimary">All</button>
+              <button onclick="setChecklistStatusFilter('open')" id="btn-cl-open"
+                class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Open</button>
+              <button onclick="setChecklistStatusFilter('waiting')" id="btn-cl-waiting"
+                class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Waiting</button>
+              <button onclick="setChecklistStatusFilter('done')" id="btn-cl-done"
+                class="px-2 py-1 rounded text-xs font-medium text-textMuted hover:text-textPrimary">Done</button>
             </div>
           </div>
 
@@ -532,27 +672,9 @@
 
         <!-- Sub-Mode A: Tasks List (Desktop Table matching Pathway List + Mobile Flat Rows) -->
         <div id="tasks-list-container" class="flex-1 overflow-y-auto p-0 sm:p-4 space-y-3">
-          <!-- Quick Add Task Bar -->
-          <div class="px-3 pt-3 sm:px-0 sm:pt-0">
-            <form onsubmit="addTaskFromToolbar(event)" class="flex flex-wrap sm:flex-nowrap items-center gap-2 p-2.5 rounded-lg bg-surface border border-borderHairline">
-              <select id="quick-task-pathway" class="h-8 px-2.5 rounded-md bg-elevated border border-borderHairline font-mono text-xs text-textPrimary focus:outline-none focus:border-statusCyan shrink-0 max-w-full sm:max-w-[220px]">
-                <!-- Populated by JS -->
-              </select>
-              <input
-                type="text"
-                id="quick-task-input"
-                required
-                placeholder="+ Add concrete next task..."
-                class="flex-1 min-w-[180px] h-8 px-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan focus:outline-none text-xs text-textPrimary placeholder-textDim"
-              />
-              <button type="submit" class="h-8 px-3.5 rounded-md bg-elevated hover:bg-elevatedHover border border-borderStrong text-xs font-medium text-textPrimary shrink-0 transition-colors">
-                Add Task
-              </button>
-            </form>
-          </div>
-
           <!-- Mobile Flat Dot List -->
-          <div id="mobile-tasks-list" class="sm:hidden divide-y divide-borderHairline border-t border-b border-borderHairline">
+          <div id="mobile-tasks-list"
+            class="sm:hidden divide-y divide-borderHairline border-t border-b border-borderHairline">
             <!-- Populated by JS -->
           </div>
 
@@ -560,13 +682,13 @@
           <div class="hidden sm:block rounded-lg border border-borderHairline bg-surface overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
-                  <th class="py-2.5 px-3.5 w-10">Done</th>
+                <tr
+                  class="border-b border-borderHairline bg-elevated/60 font-mono text-[11px] uppercase tracking-wider text-textMuted">
                   <th class="py-2.5 px-3.5">Status</th>
                   <th class="py-2.5 px-3.5">Task</th>
                   <th class="py-2.5 px-3.5">Pathway</th>
                   <th class="py-2.5 px-3.5">Organization</th>
-                  <th class="py-2.5 px-3.5 text-right">Actions</th>
+                  <th class="py-2.5 px-3.5 text-right">Details</th>
                 </tr>
               </thead>
               <tbody id="tasks-table-body" class="divide-y divide-borderHairline text-xs">
@@ -577,7 +699,8 @@
         </div>
 
         <!-- Sub-Mode B: 3-Column Task Board -->
-        <div id="tasks-kanban-container" class="hidden flex-1 overflow-x-auto overflow-y-auto md:overflow-y-hidden p-3 sm:p-4">
+        <div id="tasks-kanban-container"
+          class="hidden flex-1 overflow-x-auto overflow-y-auto md:overflow-y-hidden p-3 sm:p-4">
           <div id="tasks-kanban-columns" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 md:h-full">
             <!-- Populated by JS -->
           </div>
@@ -590,13 +713,17 @@
       ==================================================================== -->
       <section id="view-evidence" class="hidden flex-1 flex-col overflow-hidden">
         <!-- Uniform Context Header (Matches Help Today, Pathways & Tasks) -->
-        <div class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface px-3 sm:px-4 py-2.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex items-center gap-2 min-w-0">
-            <button onclick="switchMainView('board')" class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
+            <button onclick="switchMainView('board')"
+              class="h-6 px-2 rounded bg-elevated hover:bg-elevatedHover border border-borderHairline text-[11px] font-mono text-textMuted hover:text-textPrimary flex items-center gap-1 transition-colors shrink-0">
               <span>&larr;</span>
               <span>Board</span>
             </button>
-            <span class="font-mono text-[11px] uppercase tracking-wider text-statusAmber font-semibold truncate">EVIDENCE &middot; RECORDS LOG</span>
+            <span
+              class="font-mono text-[11px] uppercase tracking-wider text-statusAmber font-semibold truncate">EVIDENCE
+              &middot; RECORDS LOG</span>
           </div>
 
           <div class="flex items-center gap-1.5 font-mono text-[11px] tabular-nums shrink-0">
@@ -613,32 +740,35 @@
         </div>
 
         <!-- Uniform Sub-Toolbar: Record Type Filter Pills -->
-        <div class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+        <div
+          class="border-b border-borderHairline bg-surface/60 px-3 sm:px-4 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <div class="flex flex-wrap items-center gap-1.5" id="evidence-type-pills">
             <!-- Populated by JS -->
           </div>
           <span class="font-mono text-[11px] text-textDim hidden sm:inline">Ground truth &amp; CPRA disclosures</span>
         </div>
 
-        <div id="evidence-split-container" class="flex-1 flex flex-col lg:flex-row overflow-hidden" style="--evidence-pane-width: 400px;">
+        <div id="evidence-split-container" class="flex-1 flex flex-col lg:flex-row overflow-hidden"
+          style="--evidence-pane-width: 400px;">
           <!-- Left: Master File Index -->
-          <div id="evidence-index-pane" class="w-full lg:w-[var(--evidence-pane-width)] shrink-0 border-b lg:border-b-0 bg-surface flex flex-col max-h-[40vh] lg:max-h-none overflow-hidden">
-            <div class="px-3.5 py-2 border-b border-borderHairline bg-elevated/40 flex items-center justify-between gap-2 shrink-0">
-              <span class="font-mono text-[10px] font-semibold uppercase tracking-wider text-textMuted">Master File Index (<span id="evidence-index-count">53</span>)</span>
+          <div id="evidence-index-pane"
+            class="w-full lg:w-[var(--evidence-pane-width)] shrink-0 border-b lg:border-b-0 bg-surface flex flex-col max-h-[40vh] lg:max-h-none overflow-hidden">
+            <div
+              class="px-3.5 py-2 border-b border-borderHairline bg-elevated/40 flex items-center justify-between gap-2 shrink-0">
+              <span class="font-mono text-[10px] font-semibold uppercase tracking-wider text-textMuted">Master File
+                Index (<span id="evidence-index-count">53</span>)</span>
               <span class="font-mono text-[10px] text-textDim">Crossover records</span>
             </div>
             <div class="p-2.5 border-b border-borderHairline bg-surface shrink-0">
               <div class="relative">
-                <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+                <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none"
+                  stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
                 </svg>
-                <input
-                  type="text"
-                  id="evidence-search"
-                  oninput="setEvidenceSearch(this.value)"
+                <input type="text" id="evidence-search" oninput="setEvidenceSearch(this.value)"
                   placeholder="Search ID, agency, keyword..."
-                  class="w-full h-8 pl-8 pr-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan/60 focus:outline-none text-xs text-textPrimary placeholder-textDim"
-                />
+                  class="w-full h-8 pl-8 pr-3 rounded-md bg-canvas border border-borderHairline focus:border-statusCyan/60 focus:outline-none text-xs text-textPrimary placeholder-textDim" />
               </div>
             </div>
             <div id="evidence-grid" class="flex-1 overflow-y-auto divide-y divide-borderHairline">
@@ -647,7 +777,9 @@
           </div>
 
           <!-- Draggable Divider (Desktop) -->
-          <div id="evidence-resizer" role="separator" aria-orientation="vertical" aria-label="Resize evidence index pane" title="Drag to resize (double-click to reset)" class="hidden lg:flex w-1.5 shrink-0 cursor-col-resize bg-borderHairline/70 hover:bg-statusCyan/60 active:bg-statusCyan transition-colors items-center justify-center group select-none">
+          <div id="evidence-resizer" role="separator" aria-orientation="vertical"
+            aria-label="Resize evidence index pane" title="Drag to resize (double-click to reset)"
+            class="hidden lg:flex w-1.5 shrink-0 cursor-col-resize bg-borderHairline/70 hover:bg-statusCyan/60 active:bg-statusCyan transition-colors items-center justify-center group select-none">
             <span class="w-0.5 h-8 rounded-full bg-borderStrong group-hover:bg-statusCyan"></span>
           </div>
 
@@ -664,21 +796,50 @@
   <!-- =========================================================================
        MOBILE FIXED BOTTOM NAVIGATION BAR (< lg)
   ========================================================================== -->
-  <nav class="lg:hidden fixed bottom-0 inset-x-0 h-14 bg-surface/95 backdrop-blur border-t border-borderHairline grid grid-cols-4 z-30 pb-[env(safe-area-inset-bottom,0px)]" aria-label="Mobile Navigation">
-    <button onclick="switchMainView('help')" data-mob-tab="help" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-statusEmerald relative">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <nav
+    class="lg:hidden fixed bottom-0 inset-x-0 bg-surface/98 backdrop-blur border-t border-borderStrong grid grid-cols-4 z-30 pb-[env(safe-area-inset-bottom,0px)] shadow-[0_-4px_16px_rgba(0,0,0,0.45)]"
+    aria-label="Mobile Navigation">
+    <button onclick="switchMainView('help')" data-mob-tab="help"
+      class="mob-tab h-[68px] flex flex-col items-center justify-center gap-1 text-xs font-semibold text-statusEmerald relative transition-colors">
+      <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+        stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M11 14h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16" />
+        <path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+        <path d="m2 15 6 6" />
+        <path d="M19.5 8.5c.7-.7 1.5-1.6 1.5-2.7A2.73 2.73 0 0 0 16 4a2.78 2.78 0 0 0-5 1.8c0 1.2.8 2 1.5 2.8L16 12Z" />
+      </svg>
       <span>Help</span>
     </button>
-    <button onclick="switchMainView('board')" data-mob-tab="board" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-textDim relative">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/></svg>
+    <button onclick="switchMainView('board')" data-mob-tab="board"
+      class="mob-tab h-[68px] flex flex-col items-center justify-center gap-1 text-xs font-medium text-textPrimary/75 hover:text-textPrimary relative transition-colors">
+      <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+        stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="6" cy="19" r="3" />
+        <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15" />
+        <circle cx="18" cy="5" r="3" />
+      </svg>
       <span>Pathways</span>
     </button>
-    <button onclick="switchMainView('tasks')" data-mob-tab="tasks" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-textDim relative">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+    <button onclick="switchMainView('tasks')" data-mob-tab="tasks"
+      class="mob-tab h-[68px] flex flex-col items-center justify-center gap-1 text-xs font-medium text-textPrimary/75 hover:text-textPrimary relative transition-colors">
+      <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+        stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m3 17 2 2 4-4" />
+        <path d="m3 7 2 2 4-4" />
+        <path d="M13 6h8" />
+        <path d="M13 12h8" />
+        <path d="M13 18h8" />
+      </svg>
       <span>Tasks</span>
     </button>
-    <button onclick="switchMainView('evidence')" data-mob-tab="evidence" class="mob-tab flex flex-col items-center justify-center gap-0.5 text-[11px] font-medium text-textDim relative">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+    <button onclick="switchMainView('evidence')" data-mob-tab="evidence"
+      class="mob-tab h-[68px] flex flex-col items-center justify-center gap-1 text-xs font-medium text-textPrimary/75 hover:text-textPrimary relative transition-colors">
+      <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"
+        stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 7h-3a2 2 0 0 1-2-2V2" />
+        <path d="M9 18a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7l4 4v10a2 2 0 0 1-2 2Z" />
+        <path d="M3 7.6v12.8A1.6 1.6 0 0 0 4.6 22h9.8" />
+      </svg>
       <span>Evidence</span>
     </button>
   </nav>
@@ -687,15 +848,23 @@
   <!-- =========================================================================
        SLIDE-OVER PATHWAY INSPECTOR DRAWER
   ========================================================================== -->
-  <div id="pathway-drawer-backdrop" onclick="closePathwayDrawer()" class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
-  <aside id="pathway-drawer" class="fixed inset-y-0 right-0 w-full max-w-2xl bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
-    <div class="h-13 px-4 sm:px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between gap-3 shrink-0">
+  <div id="pathway-drawer-backdrop" onclick="closePathwayDrawer()"
+    class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
+  <aside id="pathway-drawer"
+    class="fixed inset-y-0 right-0 w-full max-w-2xl bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
+    <div
+      class="h-13 px-4 sm:px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between gap-3 shrink-0">
       <div class="flex items-center gap-2.5 min-w-0">
-        <span id="drawer-pathway-id" class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusCyan shrink-0">PW-01</span>
+        <span id="drawer-pathway-id"
+          class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusCyan shrink-0">PW-01</span>
         <span id="drawer-pathway-org" class="font-mono text-xs text-textMuted truncate">Organization</span>
       </div>
-      <button onclick="closePathwayDrawer()" class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated transition-colors" aria-label="Close inspector">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      <button onclick="closePathwayDrawer()"
+        class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated transition-colors"
+        aria-label="Close inspector">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
       </button>
     </div>
 
@@ -706,42 +875,83 @@
 
 
   <!-- =========================================================================
+       SLIDE-OVER TASK DETAIL DRAWER
+  ========================================================================== -->
+  <div id="task-drawer-backdrop" onclick="closeTaskDrawer()"
+    class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
+  <aside id="task-drawer"
+    class="fixed inset-y-0 right-0 w-full max-w-2xl bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
+    <div
+      class="h-13 px-4 sm:px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between gap-3 shrink-0">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <span id="task-drawer-id"
+          class="font-mono text-xs font-semibold px-2 py-0.5 rounded bg-canvas border border-borderHairline text-statusCyan shrink-0">WORK-2026-001</span>
+        <span id="task-drawer-org" class="font-mono text-xs text-textMuted truncate">Pathway</span>
+      </div>
+      <button onclick="closeTaskDrawer()"
+        class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated transition-colors"
+        aria-label="Close task detail">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="task-drawer-content" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
+      <!-- Populated dynamically -->
+    </div>
+  </aside>
+
+
+  <!-- =========================================================================
        ABOUT & METHODOLOGY DRAWER (?)
   ========================================================================== -->
-  <div id="about-drawer-backdrop" onclick="closeAboutDrawer()" class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
-  <aside id="about-drawer" class="fixed inset-y-0 right-0 w-full max-w-lg bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
-    <div class="h-13 px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between shrink-0">
-      <span class="font-mono text-xs font-semibold uppercase tracking-wider text-textPrimary">About &amp; Methodology</span>
-      <button onclick="closeAboutDrawer()" class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated">✕</button>
+  <div id="about-drawer-backdrop" onclick="closeAboutDrawer()"
+    class="fixed inset-0 bg-black/65 backdrop-blur-[1px] z-40 hidden"></div>
+  <aside id="about-drawer"
+    class="fixed inset-y-0 right-0 w-full max-w-lg bg-surface border-l border-borderHairline z-50 hidden flex-col shadow-2xl drawer-enter">
+    <div
+      class="h-13 px-5 py-3 border-b border-borderHairline bg-elevated/50 flex items-center justify-between shrink-0">
+      <span class="font-mono text-xs font-semibold uppercase tracking-wider text-textPrimary">About &amp;
+        Methodology</span>
+      <button onclick="closeAboutDrawer()"
+        class="p-1.5 rounded-md text-textMuted hover:text-textPrimary hover:bg-elevated">✕</button>
     </div>
 
     <div class="flex-1 overflow-y-auto p-5 space-y-5 text-xs">
       <div class="space-y-2">
         <div class="font-mono text-[10px] uppercase tracking-wider text-statusEmerald">What Crossover Stockton Is</div>
         <p class="text-textMuted leading-relaxed">
-          <strong class="text-textPrimary">A pathway development platform for Stockton, CA.</strong> Instead of listing generic charities or tracking abstract problems, Crossover discovers, unblocks, and verifies concrete routes through which someone can actually help today.
+          <strong class="text-textPrimary">A pathway development platform for Stockton, CA.</strong> Instead of listing
+          generic charities or tracking abstract problems, Crossover discovers, unblocks, and verifies concrete routes
+          through which someone can actually help today.
         </p>
       </div>
 
       <!-- Four Non-Mandatory Stages -->
       <div class="space-y-2">
-        <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Four Pathway States (Non-Mandatory)</div>
+        <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Four Pathway States (Non-Mandatory)
+        </div>
         <div class="space-y-2">
           <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-statusSlate mt-1 shrink-0"></span>
-            <div><strong class="text-textPrimary">01 Exploring:</strong> <span class="text-textMuted">Checking whether an accessible route to help exists.</span></div>
+            <div><strong class="text-textPrimary">01 Exploring:</strong> <span class="text-textMuted">Checking whether
+                an accessible route to help exists.</span></div>
           </div>
           <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-statusAmber mt-1 shrink-0"></span>
-            <div><strong class="text-textPrimary">02 Blocked:</strong> <span class="text-textMuted">A real obstacle prevents helping (e.g., unresponsive inbox, 4-week waitlist, no payment route).</span></div>
+            <div><strong class="text-textPrimary">02 Blocked:</strong> <span class="text-textMuted">A real obstacle
+                prevents helping (e.g., unresponsive inbox, 4-week waitlist, no payment route).</span></div>
           </div>
           <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-statusBlue mt-1 shrink-0"></span>
-            <div><strong class="text-textPrimary">03 Enabling:</strong> <span class="text-textMuted">Active intervention underway to clear a bottleneck and make a route usable.</span></div>
+            <div><strong class="text-textPrimary">03 Enabling:</strong> <span class="text-textMuted">Active intervention
+                underway to clear a bottleneck and make a route usable.</span></div>
           </div>
           <div class="p-2.5 rounded-md bg-canvas border border-borderHairline flex items-start gap-2.5">
             <span class="w-2 h-2 rounded-full bg-statusEmerald mt-1 shrink-0"></span>
-            <div><strong class="text-textPrimary">04 Established:</strong> <span class="text-textMuted">Verified, repeatable, and fresh (&lt;48h). Only Established pathways appear in Help Today.</span></div>
+            <div><strong class="text-textPrimary">04 Established:</strong> <span class="text-textMuted">Verified,
+                repeatable, and fresh (&lt;48h). Only Established pathways appear in Help Today.</span></div>
           </div>
         </div>
       </div>
@@ -750,7 +960,8 @@
       <div class="space-y-2.5">
         <div class="flex items-center justify-between">
           <div class="font-mono text-[10px] uppercase tracking-wider text-textDim">Evidence Confidence Rubric</div>
-          <button onclick="resetCalc()" class="font-mono text-[10px] text-statusCyan hover:underline">Reset (45/100)</button>
+          <button onclick="resetCalc()" class="font-mono text-[10px] text-statusCyan hover:underline">Reset
+            (45/100)</button>
         </div>
         <div class="p-3 rounded-lg bg-canvas border border-borderHairline space-y-2.5">
           <div class="flex items-baseline justify-between">
@@ -765,8 +976,13 @@
 
       <!-- LinkedIn CTA -->
       <div class="pt-2">
-        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" class="w-full h-10 rounded-lg bg-elevated hover:bg-elevatedHover border border-borderStrong flex items-center justify-center gap-2 text-xs font-medium text-textPrimary transition-colors">
-          <svg class="w-4 h-4 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" stroke-width="2"/></svg>
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"
+          class="w-full h-10 rounded-lg bg-elevated hover:bg-elevatedHover border border-borderStrong flex items-center justify-center gap-2 text-xs font-medium text-textPrimary transition-colors">
+          <svg class="w-4 h-4 text-statusCyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+            <circle cx="4" cy="4" r="2" stroke-width="2" />
+          </svg>
           <span>Connect with us on LinkedIn</span>
         </a>
       </div>
@@ -777,12 +993,16 @@
   <!-- =========================================================================
        NEW PATHWAY MODAL (+ New Pathway)
   ========================================================================== -->
-  <div id="new-pathway-modal" class="fixed inset-0 bg-black/70 backdrop-blur-[2px] z-50 hidden items-center justify-center p-4" onclick="closeNewPathwayModal()">
-    <div class="bg-surface border border-borderStrong rounded-xl max-w-lg w-full shadow-2xl overflow-hidden" onclick="event.stopPropagation()">
+  <div id="new-pathway-modal"
+    class="fixed inset-0 bg-black/70 backdrop-blur-[2px] z-50 hidden items-center justify-center p-4"
+    onclick="closeNewPathwayModal()">
+    <div class="bg-surface border border-borderStrong rounded-xl max-w-lg w-full shadow-2xl overflow-hidden"
+      onclick="event.stopPropagation()">
       <div class="px-5 py-3.5 border-b border-borderHairline bg-elevated/60 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-statusEmerald"></span>
-          <h2 class="font-mono text-xs font-semibold uppercase tracking-wider text-textPrimary">Log New Pathway Candidate</h2>
+          <h2 class="font-mono text-xs font-semibold uppercase tracking-wider text-textPrimary">Log New Pathway
+            Candidate</h2>
         </div>
         <button onclick="closeNewPathwayModal()" class="text-textMuted hover:text-textPrimary text-sm">✕</button>
       </div>
@@ -791,11 +1011,13 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-mono text-[11px] text-textMuted mb-1">Pathway ID</label>
-            <input type="text" id="new-id" required class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline font-mono text-textPrimary focus:outline-none focus:border-statusCyan" />
+            <input type="text" id="new-id" required
+              class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline font-mono text-textPrimary focus:outline-none focus:border-statusCyan" />
           </div>
           <div>
             <label class="block font-mono text-[11px] text-textMuted mb-1">Initial Stage</label>
-            <select id="new-stage" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan">
+            <select id="new-stage"
+              class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan">
               <option value="Exploring">01 Exploring</option>
               <option value="Blocked">02 Blocked</option>
               <option value="Enabling">03 Enabling</option>
@@ -806,17 +1028,20 @@
 
         <div>
           <label class="block font-mono text-[11px] text-textMuted mb-1">Pathway Headline</label>
-          <input type="text" id="new-title" required placeholder="e.g., Weekend dog walking at Stockton Animal Services" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan" />
+          <input type="text" id="new-title" required placeholder="e.g., Weekend dog walking at Stockton Animal Services"
+            class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan" />
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-mono text-[11px] text-textMuted mb-1">Organization / Area</label>
-            <input type="text" id="new-org" required placeholder="e.g., St. Mary's Dining Room" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan" />
+            <input type="text" id="new-org" required placeholder="e.g., St. Mary's Dining Room"
+              class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan" />
           </div>
           <div>
             <label class="block font-mono text-[11px] text-textMuted mb-1">Primary Contribution</label>
-            <select id="new-contribution" class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan">
+            <select id="new-contribution"
+              class="w-full h-8 px-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan">
               <option value="Presence">Presence</option>
               <option value="Funding">Funding</option>
               <option value="Supplies">Supplies</option>
@@ -828,24 +1053,32 @@
         </div>
 
         <div>
-          <label class="block font-mono text-[11px] text-textMuted mb-1">Current Condition / Bottleneck / Action Note</label>
-          <textarea id="new-condition" rows="3" required placeholder="What are we checking, what is blocking this route, or what makes it usable today?" class="w-full p-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan"></textarea>
+          <label class="block font-mono text-[11px] text-textMuted mb-1">Current Condition / Bottleneck / Action
+            Note</label>
+          <textarea id="new-condition" rows="3" required
+            placeholder="What are we checking, what is blocking this route, or what makes it usable today?"
+            class="w-full p-2.5 rounded bg-canvas border border-borderHairline text-textPrimary focus:outline-none focus:border-statusCyan"></textarea>
         </div>
 
         <div class="pt-2 border-t border-borderHairline flex items-center justify-end gap-2">
-          <button type="button" onclick="closeNewPathwayModal()" class="h-8 px-3 rounded border border-borderHairline bg-elevated text-textMuted hover:text-textPrimary">Cancel</button>
-          <button type="submit" class="h-8 px-4 rounded bg-textPrimary text-canvas font-medium hover:bg-white">Create Pathway</button>
+          <button type="button" onclick="closeNewPathwayModal()"
+            class="h-8 px-3 rounded border border-borderHairline bg-elevated text-textMuted hover:text-textPrimary">Cancel</button>
+          <button type="submit" class="h-8 px-4 rounded bg-textPrimary text-canvas font-medium hover:bg-white">Create
+            Pathway</button>
         </div>
       </form>
     </div>
   </div>
 
   <!-- Toast Notification -->
-  <div id="toast-el" class="fixed left-1/2 -translate-x-1/2 bottom-16 lg:bottom-6 z-50 px-3.5 py-2 rounded-lg bg-elevated border border-borderStrong text-xs font-medium text-textPrimary shadow-lg opacity-0 pointer-events-none transition-opacity duration-150"></div>
+  <div id="toast-el"
+    class="fixed left-1/2 -translate-x-1/2 bottom-16 lg:bottom-6 z-50 px-3.5 py-2 rounded-lg bg-elevated border border-borderStrong text-xs font-medium text-textPrimary shadow-lg opacity-0 pointer-events-none transition-opacity duration-150">
+  </div>
 
   <!-- =========================================================================
        JAVASCRIPT STATE, SEED DATA & INTERACTIVITY
   ========================================================================== -->
   <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
