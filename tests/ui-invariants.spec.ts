@@ -4,7 +4,12 @@ test('pathway tracker loads Help Today in live mode and fits the viewport', asyn
   await page.goto('/');
   await expect(page).toHaveTitle('CROSSOVER STOCKTON — Pathway Tracker');
   await expect(page.locator('header')).toContainText('CROSSOVER');
-  await expect(page.locator('#chapter-btn')).toContainText('Stockton, CA');
+  await expect(page.locator('#chapter-btn')).toHaveCount(0);
+  if (testInfo.project.use.viewport!.width >= 1024) {
+    await expect(page.locator('#left-sidebar')).toContainText('Stockton, CA');
+  } else {
+    await expect(page.locator('#mobile-sidebar')).toContainText('Stockton, CA');
+  }
   await expect(page.locator('#stat-established')).toHaveText('0');
   await expect(page.locator('#stat-enabling')).toHaveText('1');
   await expect(page.locator('#stat-blocked')).toHaveText('0');
@@ -70,7 +75,7 @@ test('pathway drawer, task detail drawer, and about drawer open and close cleanl
   await expect(page.locator('#quick-task-input')).toHaveCount(0);
 
   // Open pathway drawer from board using shortcut pill
-  await page.locator('button:visible', { hasText: /Enabl/ }).first().click();
+  await page.locator('button:visible', { hasText: /En:|Enabling/ }).first().click();
   await page.locator('#view-board').getByRole('button', { name: 'Reset' }).click();
   await expect(page.locator('#view-board')).toBeVisible();
   await page.locator('#view-board :text("Volunteer at Stockton Animal Services"):visible').first().click();
@@ -92,9 +97,25 @@ test('pathway drawer, task detail drawer, and about drawer open and close cleanl
   await page.keyboard.press('Escape');
   await expect(page.locator('#task-drawer')).toBeHidden();
 
-  // Open About & Methodology drawer
-  await page.getByRole('button', { name: 'About and Methodology' }).click();
+  // Open About & Methodology drawer from mobile menu (mobile) or left sidebar (desktop)
+  await expect(page.locator('header').getByRole('button', { name: 'About and Methodology' })).toHaveCount(0);
+  await expect(page.locator('nav[aria-label="Mobile Navigation"] button:has-text("About")')).toHaveCount(0);
+  if (isMobile) {
+    await page.locator('header button[aria-label="Toggle navigation"]').click();
+    await page.locator('#mobile-sidebar button:has-text("About")').click();
+  } else {
+    await page.locator('#left-sidebar button:has-text("About")').click();
+  }
   await expect(page.locator('#about-drawer')).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(page.locator('#about-drawer')).toBeHidden();
+
+  // Toggle dark/light theme from header sun/moon button
+  const themeBtn = page.locator('#theme-toggle-btn');
+  await expect(themeBtn).toBeVisible();
+  await expect(page.locator('html')).toHaveClass(/dark/);
+  await themeBtn.click();
+  await expect(page.locator('html')).not.toHaveClass(/dark/);
+  await themeBtn.click();
+  await expect(page.locator('html')).toHaveClass(/dark/);
 });

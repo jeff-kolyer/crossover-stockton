@@ -554,7 +554,7 @@ function renderHelpView() {
       const telHref = 'tel:' + (p.actionDetails.phone || '').replace(/[^\d+]/g, '');
 
       return `
-            <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-surface hover:bg-elevated border border-borderHairline hover:border-borderStrong p-4 transition-all shadow-sm flex flex-col justify-between gap-3">
+            <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-surface hover:bg-surface dark:hover:bg-elevated border border-borderHairline hover:border-borderStrong p-4 transition-all shadow-sm hover:shadow-md flex flex-col justify-between gap-3">
               <div class="space-y-2">
                 <div class="flex items-center justify-between gap-2">
                   <span class="inline-flex items-center gap-1.5 font-mono text-[11px] ${freshText}">
@@ -567,13 +567,13 @@ function renderHelpView() {
                 </div>
 
                 <div>
-                  <h3 class="text-sm font-semibold text-textPrimary leading-snug group-hover:text-white">
+                  <h3 class="text-[15px] font-semibold text-textPrimary leading-snug group-hover:text-textPrimary">
                     ${p.title}
                   </h3>
-                  <div class="text-xs text-textDim mt-0.5 truncate">${p.org}</div>
+                  <div class="text-xs text-textMuted mt-0.5 truncate">${p.org}</div>
                 </div>
 
-                <p class="text-xs text-textMuted leading-relaxed line-clamp-2">
+                <p class="text-[13px] text-textMuted leading-relaxed line-clamp-2">
                   ${p.actionDetails.whatNeeded}
                 </p>
               </div>
@@ -601,6 +601,8 @@ function renderHelpView() {
 }
 
 // =========================================================================
+const collapsedKanbanStages = new Set(['Blocked', 'Enabling', 'Established']);
+
 // 6. VIEW 2: PATHWAYS DEVELOPMENT BOARD & LIST
 // =========================================================================
 function renderBoardAndList() {
@@ -619,19 +621,19 @@ function renderBoardAndList() {
   kanbanCols.innerHTML = STAGES.map(st => {
     const colItems = filtered.filter(p => p.stage === st.id);
     return `
-      <div class="flex flex-col rounded-lg bg-surface border border-borderHairline xl:h-full overflow-hidden">
-        <div class="px-3 py-2.5 border-b border-borderHairline bg-elevated/40 flex items-center justify-between shrink-0">
+      <div class="flex flex-col rounded-lg bg-elevated/60 dark:bg-surface border border-borderHairline xl:h-full overflow-hidden">
+        <div class="px-3 py-2.5 border-b border-borderHairline bg-surface dark:bg-elevated/40 flex items-center justify-between shrink-0">
           <div class="flex items-center gap-2 min-w-0">
             <span class="w-2 h-2 rounded-full ${st.dotColor} shrink-0"></span>
             <span class="font-mono text-[10px] text-textDim">${st.num}</span>
-            <h2 class="font-mono text-xs font-semibold text-textPrimary truncate">${st.label}</h2>
+            <h2 class="text-xs font-semibold text-textPrimary truncate">${st.label}</h2>
           </div>
           <span class="font-mono text-xs tabular-nums px-1.5 py-0.5 rounded bg-canvas border border-borderHairline text-textMuted">${colItems.length}</span>
         </div>
 
         <div class="p-2.5 space-y-2.5 overflow-y-auto flex-1">
           ${colItems.length === 0 ? `
-            <div class="h-20 rounded-md border border-dashed border-borderHairline flex items-center justify-center font-mono text-[11px] text-textDim">
+            <div class="h-20 rounded-md border border-dashed border-borderHairline bg-surface/60 dark:bg-transparent flex items-center justify-center text-xs text-textDim">
               No pathways in ${st.label}
             </div>
           ` : colItems.map(p => {
@@ -639,22 +641,22 @@ function renderBoardAndList() {
       const waitCount = p.checklist.filter(t => !t.done && t.waiting).length;
       const score = computeScore(p.criteriaMet);
       return `
-              <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-elevated hover:bg-elevatedHover border border-borderHairline hover:border-borderStrong p-3 transition-all shadow-sm space-y-2">
+              <article onclick="openPathwayDrawer('${p.id}')" class="group cursor-pointer rounded-lg bg-surface dark:bg-elevated hover:bg-surface dark:hover:bg-elevatedHover border border-borderHairline hover:border-borderStrong p-3.5 transition-all shadow-sm hover:shadow-md space-y-2">
                 <div class="flex items-center justify-between gap-2">
                   <span class="font-mono text-[11px] font-semibold text-statusCyan group-hover:underline">${p.id}</span>
                   <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-canvas border border-borderHairline text-textMuted tabular-nums">${score}/100</span>
                 </div>
 
                 <div>
-                  <h3 class="text-[13px] font-medium text-textPrimary leading-snug group-hover:text-white">${p.title}</h3>
-                  <div class="text-[11px] text-textDim mt-0.5 truncate">${p.org}</div>
+                  <h3 class="text-sm font-semibold text-textPrimary leading-snug group-hover:text-textPrimary">${p.title}</h3>
+                  <div class="text-xs text-textMuted mt-0.5 truncate">${p.org}</div>
                 </div>
 
-                <p class="text-[11px] text-textMuted leading-relaxed line-clamp-2">${p.condition}</p>
+                <p class="text-[13px] text-textMuted leading-relaxed line-clamp-2">${p.condition}</p>
 
                 <div class="flex flex-wrap items-center gap-1 pt-0.5">
                   ${p.contributions.map(c => `
-                    <span class="px-1.5 py-0.5 rounded bg-canvas border border-borderHairline font-mono text-[10px] text-textMuted">${c}</span>
+                    <span class="px-2 py-0.5 rounded bg-canvas border border-borderHairline text-[11px] font-medium text-textMuted">${c}</span>
                   `).join('')}
                 </div>
 
@@ -843,7 +845,7 @@ function renderTasksWorkspace() {
         </td>
         <td class="py-3 px-3.5 min-w-[260px] align-middle">
           ${task.taskId ? `<span class="font-mono text-[10px] text-statusCyan mr-1.5">${task.taskId}</span>` : ''}
-          <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary font-medium group-hover:text-white'}">${task.text}</span>
+          <span class="text-xs leading-relaxed ${task.done ? 'line-through text-textDim' : 'text-textPrimary font-medium group-hover:text-textPrimary'}">${task.text}</span>
         </td>
         <td class="py-3 px-3.5 align-middle">
           <button onclick="event.stopPropagation(); openPathwayDrawer('${p.id}');" class="text-left group/pw">
@@ -1834,6 +1836,46 @@ function toggleMobileSidebar() {
 }
 
 // Expose handlers for inline HTML event attributes
+function toggleMobileHeaderSearch(forceState) {
+  const left = document.getElementById('header-default-left');
+  const right = document.getElementById('header-default-right');
+  const bar = document.getElementById('mobile-header-search');
+  const input = document.getElementById('mobile-header-search-input');
+  if (!left || !right || !bar) return;
+
+  const open = typeof forceState === 'boolean' ? forceState : bar.classList.contains('hidden');
+  left.classList.toggle('hidden', open);
+  right.classList.toggle('hidden', open);
+  bar.classList.toggle('hidden', !open);
+  bar.classList.toggle('flex', open);
+
+  if (open && input) {
+    input.focus();
+  } else if (!open && input) {
+    input.value = '';
+    handleSearch('');
+  }
+}
+
+function syncThemeButton() {
+  const btn = document.getElementById('theme-toggle-btn');
+  if (!btn) return;
+  const isDark = document.documentElement.classList.contains('dark');
+  const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+  btn.setAttribute('aria-label', label);
+  btn.setAttribute('title', label);
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark');
+  try {
+    localStorage.setItem('crossover_theme', isDark ? 'dark' : 'light');
+  } catch (e) {}
+  syncThemeButton();
+}
+
+syncThemeButton();
+
 Object.assign(window, {
   getAllPathways,
   getEstablishedPathways,
@@ -1896,5 +1938,7 @@ Object.assign(window, {
   handleSearch,
   resetFilters,
   toggleChapterMenu,
-  toggleMobileSidebar
+  toggleMobileSidebar,
+  toggleMobileHeaderSearch,
+  toggleTheme
 });
