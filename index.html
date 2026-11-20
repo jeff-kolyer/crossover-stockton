@@ -124,9 +124,9 @@
         </button>
       </div>
 
-      <!-- Dark / Light Mode Toggle (shows current state: Sun in light, Moon & single star in dark) -->
+      <!-- Dark / Light Mode Toggle (before search on mobile, to the right of search on desktop) -->
       <button id="theme-toggle-btn" onclick="toggleTheme()"
-        class="w-9 h-9 sm:w-10 sm:h-10 lg:w-8 lg:h-8 rounded-lg hover:bg-elevated/60 flex items-center justify-center transition-colors shrink-0 lg:ml-1"
+        class="w-9 h-9 sm:w-10 sm:h-10 lg:w-8 lg:h-8 lg:order-2 rounded-lg hover:bg-elevated/60 flex items-center justify-center transition-colors shrink-0"
         aria-label="Switch to light mode" title="Switch to light mode">
         <!-- Sun icon (shown in light mode) -->
         <svg class="w-5 h-5 block dark:hidden text-amber-400" viewBox="0 0 24 24" fill="currentColor"
@@ -144,7 +144,7 @@
       </button>
 
       <!-- Desktop Quick Search -->
-      <div class="relative hidden lg:block">
+      <div class="relative hidden lg:block lg:order-1 lg:ml-1">
         <svg class="w-3.5 h-3.5 text-textDim absolute left-2.5 top-1/2 -translate-y-1/2" fill="none"
           stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
