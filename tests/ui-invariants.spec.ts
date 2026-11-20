@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('pathway tracker loads Help Today in live mode and fits the viewport', async ({ page }, testInfo) => {
   await page.goto('/');
-  await expect(page).toHaveTitle('CROSSOVER STOCKTON — Pathway Tracker');
+  await expect(page).toHaveTitle('Help Today — Crossover Stockton');
   await expect(page.locator('header')).toContainText('CROSSOVER');
   await expect(page.locator('#chapter-btn')).toHaveCount(0);
   if (testInfo.project.use.viewport!.width >= 1024) {
@@ -47,21 +47,25 @@ test('all four workspace views use authoritative records in live mode without pr
   };
 
   await switchView('board');
+  await expect(page).toHaveTitle('Pathways — Crossover Stockton');
   await expect(page.locator('#pw-pill-exploring')).toHaveText('2');
   await expect(page.locator('#pw-pill-enabling')).toHaveText('1');
   await expect(page.locator('#pw-pill-blocked')).toHaveText('0');
   await expect(page.locator('#view-board')).toContainText('Direct kibble & clean water drop-off for street dogs');
 
   await switchView('tasks');
+  await expect(page).toHaveTitle('Tasks — Crossover Stockton');
   await expect(page.locator('#view-tasks')).toContainText('WORK-2026-005');
   await expect(page.locator('#view-tasks')).toContainText('WORK-2026-002');
   await expect(page.locator('#view-tasks')).toContainText('WORK-2026-001');
 
   await switchView('evidence');
+  await expect(page).toHaveTitle('Evidence — Crossover Stockton');
   await expect(page.locator('#view-evidence')).toContainText('SHEL-2024-001');
   await expect(page.locator('#view-evidence')).toContainText('CPRA-2026-001-RECEIPT');
 
   await switchView('help');
+  await expect(page).toHaveTitle('Help Today — Crossover Stockton');
   await expect(page.locator('#help-preview-toggle')).toHaveCount(0);
   await expect(page.locator('#stat-established')).toHaveText('0');
   await expect(page.locator('#view-help')).toContainText('No established pathways today.');
@@ -107,8 +111,10 @@ test('pathway drawer, task detail drawer, and about drawer open and close cleanl
     await page.locator('#left-sidebar button:has-text("About")').click();
   }
   await expect(page.locator('#about-drawer')).toBeVisible();
+  await expect(page).toHaveTitle('About — Crossover Stockton');
   await page.keyboard.press('Escape');
   await expect(page.locator('#about-drawer')).toBeHidden();
+  await expect(page).toHaveTitle('Tasks — Crossover Stockton');
 
   // Toggle dark/light theme from header sun/moon button
   const themeBtn = page.locator('#theme-toggle-btn');

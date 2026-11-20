@@ -1585,6 +1585,7 @@ function openAboutDrawer() {
   d.classList.remove('hidden');
   d.classList.add('flex');
   renderCalcWidget();
+  syncDocumentTitle('about');
 }
 
 function closeAboutDrawer() {
@@ -1592,6 +1593,7 @@ function closeAboutDrawer() {
   const d = document.getElementById('about-drawer');
   d.classList.add('hidden');
   d.classList.remove('flex');
+  syncDocumentTitle();
 }
 
 function toggleCalcCriterion(key) {
@@ -1700,8 +1702,22 @@ function jumpToStage(stageId) {
   renderAll();
 }
 
+const VIEW_TITLES = {
+  help: 'Help Today — Crossover Stockton',
+  board: 'Pathways — Crossover Stockton',
+  tasks: 'Tasks — Crossover Stockton',
+  evidence: 'Evidence — Crossover Stockton',
+  about: 'About — Crossover Stockton'
+};
+
+function syncDocumentTitle(section) {
+  const key = section || state.activeView || 'help';
+  document.title = VIEW_TITLES[key] || VIEW_TITLES.help;
+}
+
 function switchMainView(viewName) {
   state.activeView = viewName;
+  syncDocumentTitle(viewName);
   ['help', 'board', 'tasks', 'evidence'].forEach(v => {
     const el = document.getElementById(`view-${v}`);
     if (!el) return;
