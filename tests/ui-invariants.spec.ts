@@ -1,19 +1,15 @@
 import { test, expect } from '@playwright/test';
 
-test('pathway tracker loads Help Today in live mode and fits the viewport', async ({ page }, testInfo) => {
+test('pathway tracker loads Pathways workspace and fits the viewport without clipping nav counts', async ({ page }, testInfo) => {
   await page.goto('/');
-  await expect(page).toHaveTitle('Help Today — Crossover Stockton');
-  await expect(page.locator('header')).toContainText('CROSSOVER');
-  await expect(page.locator('#chapter-btn')).toHaveCount(0);
-  if (testInfo.project.use.viewport!.width >= 1024) {
-    await expect(page.locator('#left-sidebar')).toContainText('Stockton, CA');
-  } else {
-    await expect(page.locator('#mobile-sidebar')).toContainText('Stockton, CA');
-  }
-  await expect(page.locator('#stat-established')).toHaveText('0');
-  await expect(page.locator('#stat-enabling')).toHaveText('1');
-  await expect(page.locator('#stat-blocked')).toHaveText('0');
-  await expect(page.locator('#view-help')).toBeVisible();
+  await expect(page).toHaveTitle('Pathways · Crossover Stockton');
+  await expect(page.locator('header')).toContainText('Crossover');
+  await expect(page.locator('#chapter')).toContainText('Stockton, CA');
+  await expect(page.locator('#main-nav')).toContainText('0');
+  await expect(page.locator('#main-nav')).toContainText('3');
+  await expect(page.locator('#main-nav')).toContainText('7');
+  await expect(page.locator('#main-nav')).toContainText('53');
+  await expect(page.locator('#workspace-title')).toHaveText('Pathway tracker');
 
   const width = testInfo.project.use.viewport!.width;
   const size = await page.evaluate(() => ({
@@ -22,106 +18,109 @@ test('pathway tracker loads Help Today in live mode and fits the viewport', asyn
   }));
   expect(size.scroll, `Page overflows at ${width}px`).toBeLessThanOrEqual(size.viewport + 1);
 
-  if (width >= 375 && width < 1024) {
-    const barFit = await page.evaluate(() => {
-      const bar = document.getElementById('mobile-shortcut-bar');
-      return bar ? { scroll: bar.scrollWidth, client: bar.clientWidth } : null;
-    });
-    expect(barFit).not.toBeNull();
-    expect(barFit!.scroll, `Shortcut bar clips at ${width}px`).toBeLessThanOrEqual(barFit!.client + 1);
-  }
+  const navFit = await page.evaluate(() => {
+    const nav = document.getElementById('main-nav');
+    if (!nav) return null;
+    const items = Array.from(nav.querySelectorAll('.nav-item'));
+    const clipped = items.some((el) => el.scrollWidth > el.clientWidth + 1);
+    return { scroll: nav.scrollWidth, client: nav.clientWidth, clipped };
+  });
+  expect(navFit).not.toBeNull();
+  expect(navFit!.scroll, `Main nav overflows at ${width}px`).toBeLessThanOrEqual(navFit!.client + 1);
+  expect(navFit!.clipped, `Main nav item clipped at ${width}px`).toBe(false);
 
   if ([1440, 375, 280].includes(width)) {
     await page.screenshot({ path: `test-results/screenshots/pathway-help-${width}.png`, fullPage: true });
   }
 });
 
-test('all four workspace views use authoritative records in live mode without preview controls', async ({ page }, testInfo) => {
+test('all four workspace views use authoritative records, switch layouts, and enforce Help Today verification rules', async ({ page }, testInfo) => {
   await page.goto('/');
-  const isMobile = testInfo.project.use.viewport!.width < 1024;
+  const width = testInfo.project.use.viewport!.width;
 
-  const switchView = async (view: 'help' | 'board' | 'tasks' | 'evidence') => {
-    const selector = isMobile ? `[data-mob-tab="${view}"]` : `#left-sidebar [data-view-btn="${view}"]`;
-    await page.locator(selector).click();
-    await expect(page.locator(`#view-${view}`)).toBeVisible();
-  };
+  // Pathways section (default)
+  await expect(page.locator('#track-title')).toHaveText('Tracked pathways');
+  await expect(page.locator('#page')).toContainText('Food and water for street dogs');
 
-  await switchView('board');
-  await expect(page).toHaveTitle('Pathways — Crossover Stockton');
-  await expect(page.locator('#pw-pill-exploring')).toHaveText('2');
-  await expect(page.locator('#pw-pill-enabling')).toHaveText('1');
-  await expect(page.locator('#pw-pill-blocked')).toHaveText('0');
-  await expect(page.locator('#view-board')).toContainText('Direct kibble & clean water drop-off for street dogs');
+  // Switch pathway layout to Board and verify phone vs desktop stage columns
+  if (width <= 700) {
+    await page.locator('[data-overlay="views"]').click();
+    await expect(page.locator('#panel')).toBeVisible();
+    await page.locator('#panel [data-view="board"]').click();
+    await expect(page.locator('#board-stage')).toBeVisible();
+    await expect(page.locator('.board-col:visible')).toHaveCount(1);
+  } else {
+    await page.locator('.view-switch [data-view="board"]').click();
+    await expect(page.locator('.board-col:visible')).toHaveCount(4);
+  }
 
-  await switchView('tasks');
-  await expect(page).toHaveTitle('Tasks — Crossover Stockton');
-  await expect(page.locator('#view-tasks')).toContainText('WORK-2026-005');
-  await expect(page.locator('#view-tasks')).toContainText('WORK-2026-002');
-  await expect(page.locator('#view-tasks')).toContainText('WORK-2026-001');
+  // Help today section
+  await page.locator('#main-nav a[href="#help"]').click();
+  await expect(page).toHaveTitle('Help today · Crossover Stockton');
+  await expect(page.locator('#page')).toContainText('No verified pathways yet');
+  await expect(page.locator('#page')).toContainText('3 pathways are being tracked');
 
-  await switchView('evidence');
-  await expect(page).toHaveTitle('Evidence — Crossover Stockton');
-  await expect(page.locator('#view-evidence')).toContainText('SHEL-2024-001');
-  await expect(page.locator('#view-evidence')).toContainText('CPRA-2026-001-RECEIPT');
+  // Tasks section
+  await page.locator('#main-nav a[href="#tasks"]').click();
+  await expect(page).toHaveTitle('Tasks · Crossover Stockton');
+  await expect(page.locator('#task-results')).toContainText('7 tasks');
+  await expect(page.locator('#task-results')).toContainText('Follow up with Stockton Animal Services on volunteering');
 
-  await switchView('help');
-  await expect(page).toHaveTitle('Help Today — Crossover Stockton');
-  await expect(page.locator('#help-preview-toggle')).toHaveCount(0);
-  await expect(page.locator('#stat-established')).toHaveText('0');
-  await expect(page.locator('#view-help')).toContainText('No established pathways today.');
+  // Evidence section
+  await page.locator('#main-nav a[href="#evidence"]').click();
+  await expect(page).toHaveTitle('Evidence · Crossover Stockton');
+  await expect(page.locator('#record-results')).toContainText('53 records');
+  await expect(page.locator('#record-results')).toContainText('2024 animal intake and outcome report');
 });
 
-test('pathway drawer, task detail drawer, and about drawer open and close cleanly without create buttons', async ({ page }, testInfo) => {
+test('pathway detail, linked task and evidence traversal, Back/Escape focus restoration, global search, and theme toggle work cleanly', async ({ page }) => {
   await page.goto('/');
 
-  // Verify create controls are hidden
-  await expect(page.locator('header').getByRole('button', { name: /New/ })).toHaveCount(0);
-  await expect(page.locator('#quick-task-input')).toHaveCount(0);
+  // Open PW-01 pathway detail panel
+  const pwCard = page.locator('a[href="#pathways/p/PW-01"]').first();
+  await pwCard.click();
+  await expect(page.locator('#panel')).toBeVisible();
+  await expect(page.locator('#panel-title')).toHaveText('Volunteer at Stockton Animal Services');
+  await expect(page.locator('#panel')).toContainText('Follow up with Stockton Animal Services on volunteering');
 
-  // Open pathway drawer from board using shortcut pill
-  await page.locator('button:visible', { hasText: /En:|Enabling/ }).first().click();
-  await page.locator('#view-board').getByRole('button', { name: 'Reset' }).click();
-  await expect(page.locator('#view-board')).toBeVisible();
-  await page.locator('#view-board :text("Volunteer at Stockton Animal Services"):visible').first().click();
-  await expect(page.locator('#pathway-drawer')).toBeVisible();
-  await expect(page.locator('#pathway-drawer')).toContainText('WORK-2026-005');
-  await expect(page.locator('#pathway-drawer')).toContainText('FLD-2026-002');
+  // Follow linked task WORK-2026-005
+  await page.locator('#panel a[href$="/t/WORK-2026-005"]').click();
+  await expect(page.locator('#panel-title')).toContainText('Follow up with Stockton Animal Services on volunteering');
+
+  // Follow supporting evidence FLD-2026-002
+  await page.locator('#panel a[href$="/r/FLD-2026-002"]').click();
+  await expect(page.locator('#panel')).toContainText('FLD-2026-002');
+  await expect(page.locator('#panel')).toContainText('Limits of this evidence');
+
+  // Return via Back button twice, then Escape to close panel and restore focus
+  await page.locator('#panel [data-action="back"]').click();
+  await expect(page.locator('#panel-title')).toContainText('Follow up with Stockton Animal Services on volunteering');
+  await page.locator('#panel [data-action="back"]').click();
+  await expect(page.locator('#panel-title')).toHaveText('Volunteer at Stockton Animal Services');
   await page.keyboard.press('Escape');
-  await expect(page.locator('#pathway-drawer')).toBeHidden();
+  await expect(page.locator('#panel')).toBeHidden();
 
-  // Open task detail drawer by clicking a task in Tasks & Checklists
-  const isMobile = testInfo.project.use.viewport!.width < 1024;
-  const tasksNav = isMobile ? '[data-mob-tab="tasks"]' : '#left-sidebar [data-view-btn="tasks"]';
-  await page.locator(tasksNav).click();
-  await expect(page.locator('#view-tasks')).toBeVisible();
-  await page.locator('#view-tasks :text("WORK-2026-005"):visible').first().click();
-  await expect(page.locator('#task-drawer')).toBeVisible();
-  await expect(page.locator('#task-drawer')).toContainText('Objective & Instructions');
-  await expect(page.locator('#task-drawer')).toContainText('Basis & Supporting Records');
-  await page.keyboard.press('Escape');
-  await expect(page.locator('#task-drawer')).toBeHidden();
+  // Search by stable record ID SHEL-2024-001 and inspect source and limitations
+  await page.locator('#find').click();
+  await expect(page.locator('#panel')).toBeVisible();
+  await page.locator('#global-q').fill('SHEL-2024-001');
+  await page.locator('#search-hits a[href$="/r/SHEL-2024-001"]').click();
+  await expect(page.locator('#panel')).toContainText('2024 animal intake and outcome report');
+  await expect(page.locator('#panel')).toContainText('Limits of this evidence');
+  await expect(page.locator('#panel a.source-btn')).toHaveAttribute('href', /2024%20-%20Kennel%20Stats\.pdf/);
+  await page.locator('#panel [data-action="close"]').click();
+  await expect(page.locator('#panel')).toBeHidden();
 
-  // Open About & Methodology drawer from mobile menu (mobile) or left sidebar (desktop)
-  await expect(page.locator('header').getByRole('button', { name: 'About and Methodology' })).toHaveCount(0);
-  await expect(page.locator('nav[aria-label="Mobile Navigation"] button:has-text("About")')).toHaveCount(0);
-  if (isMobile) {
-    await page.locator('header button[aria-label="Toggle navigation"]').click();
-    await page.locator('#mobile-sidebar button:has-text("About")').click();
-  } else {
-    await page.locator('#left-sidebar button:has-text("About")').click();
-  }
-  await expect(page.locator('#about-drawer')).toBeVisible();
-  await expect(page).toHaveTitle('About — Crossover Stockton');
-  await page.keyboard.press('Escape');
-  await expect(page.locator('#about-drawer')).toBeHidden();
-  await expect(page).toHaveTitle('Tasks — Crossover Stockton');
-
-  // Toggle dark/light theme from header sun/moon button
-  const themeBtn = page.locator('#theme-toggle-btn');
-  await expect(themeBtn).toBeVisible();
-  await expect(page.locator('html')).toHaveClass(/dark/);
-  await themeBtn.click();
-  await expect(page.locator('html')).not.toHaveClass(/dark/);
-  await themeBtn.click();
-  await expect(page.locator('html')).toHaveClass(/dark/);
+  // Open Stockton, CA chapter dialog, toggle dark/light theme, and open About & methodology
+  await page.locator('#chapter').click();
+  await expect(page.locator('#panel-title')).toHaveText('Stockton, California');
+  await page.locator('#panel [data-theme-choice="dark"]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await page.locator('#panel [data-theme-choice="light"]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.locator('#panel a[href$="/about"]').click();
+  await expect(page.locator('#panel-title')).toHaveText('About & methodology');
+  await expect(page.locator('#panel')).toContainText('Quintin Soloviev');
+  await page.locator('#panel [data-action="close"]').click();
+  await expect(page.locator('#panel')).toBeHidden();
 });

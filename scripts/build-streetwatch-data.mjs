@@ -81,5 +81,8 @@ const uiRecords = records.map((record) => {
   return result;
 });
 await mkdir('src/generated', { recursive: true });
-await writeFile('src/generated/records.js', `export const PRIMARY_RECORDS = ${JSON.stringify(uiRecords)};\n`);
+await writeFile(
+  'src/generated/records.js',
+  `export const PRIMARY_RECORDS = ${JSON.stringify(uiRecords)};\nexport const STREETWATCH_RECORDS = ${JSON.stringify(records)};\n`
+);
 console.log(`Built ${records.length} StreetWatch records from ${source.size} source records and ${curated.size} curated records.`);
