@@ -4,6 +4,7 @@ const paths = {
   right: '<path d="m9 5 7 7-7 7"/>',
   back: '<path d="m15 5-7 7 7 7"/>',
   search: '<circle cx="10.5" cy="10.5" r="6.8"/><path d="m16 16 4.4 4.4"/>',
+  menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
   grid: '<rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/>',
   board: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 4v16"/>',
   list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" stroke-linecap="round" stroke-width="2.5"/>',

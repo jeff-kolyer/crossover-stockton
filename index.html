@@ -11,14 +11,25 @@
   <meta name="apple-mobile-web-app-title" content="Crossover">
   <link rel="preload" href="/assets/plex-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/plex-semibold.woff2" as="font" type="font/woff2" crossorigin>
-  <title>Pathways · Crossover Stockton</title>
+  <script>
+    try {
+      var p = JSON.parse(localStorage.getItem('crossover-field-prefs-1') || 'null');
+      document.documentElement.dataset.theme = p && p.theme === 'dark' ? 'dark' : 'light';
+    } catch (e) {}
+  </script>
+  <style>html{background:#f5f7f9}html[data-theme="dark"]{background:#101b22}</style>
+  <link rel="stylesheet" href="/src/tracker.css">
+  <title>Help Today · Crossover Stockton</title>
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to workspace</a>
   <div class="mast">
     <header class="shell topbar">
-      <a class="brand" href="#pathways" aria-label="Crossover Stockton home"><img src="/assets/crossover.svg" width="39" height="39" alt=""><span>Crossover</span></a>
+      <div class="brand-group">
+        <button id="menu" class="icon-button menu-launch" aria-label="Open menu" title="Menu"></button>
+        <a class="brand" href="/help" aria-label="Crossover Stockton home"><img src="/assets/crossover.svg" width="39" height="39" alt=""><span>Crossover</span></a>
+      </div>
       <nav id="main-nav" aria-label="Workspace sections"></nav>
       <div class="site-actions">
         <button id="find" class="icon-button search-launch" aria-label="Search all sections" title="Search all sections (/)"></button>
@@ -31,7 +42,7 @@
   </main>
   <footer class="shell site-footer">
     <span class="footer-brand"><img src="/assets/crossover.svg" width="22" height="22" alt="">Crossover Stockton</span>
-    <div><button data-overlay="about">About &amp; methodology</button><a href="https://github.com/jeff-kolyer/crossover-stockton" target="_blank" rel="noopener">Source repository</a></div>
+    <div><button data-overlay="about">About &amp; methodology</button></div>
   </footer>
   <dialog id="panel" aria-labelledby="panel-title"><div id="panel-content"></div></dialog>
   <div id="notice" role="status" aria-live="polite"></div>

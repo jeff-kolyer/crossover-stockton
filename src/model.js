@@ -9,7 +9,7 @@ export const stages = {
 export const statuses = {open:'Open',in_progress:'In progress',waiting:'Waiting',done:'Done'};
 export const taskIcons = {open:'circle',in_progress:'working',waiting:'waiting',done:'checkcircle'};
 export const typeNames = {source_review:'Source review',field_observation:'Field observation',organization_contact:'Organization contact',follow_up:'Follow-up'};
-export const sections = {help:'Help today',pathways:'Pathways',tasks:'Tasks',evidence:'Evidence'};
+export const sections = {help:'Help Today',pathways:'Pathways',tasks:'Tasks',evidence:'Evidence'};
 export const recordType = r => r.id.startsWith('WORK-') ? 'Tasks' : /^(FLD|CPRA|PLAN|EDT)-/.test(r.id) ? 'Activities' : 'Records';
 export const typeIcon = category => ({Tasks:'clipboard',Activities:'note',Records:'file'}[category] || 'file');
 const cardCopy = {
