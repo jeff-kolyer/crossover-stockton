@@ -308,7 +308,7 @@ function menuPanel() {
     '</div>');
 }
 function chapterPanel() {
-  return panelTop('Location', 'Stockton, California', 'Active Crossover chapter') + '<div class="chapter-active"><span class="row-icon">' + icon('pin', 21) + '</span><div><strong>Stockton, CA</strong><small>Street dogs &amp; access to care</small></div>' + icon('checkcircle', 19) + '</div>';
+  return panelTop('Location', 'Stockton, California', 'Active Crossover chapter') + '<div class="chapter-active"><span class="row-icon">' + icon('pin', 21) + '</span><div><strong>Stockton, CA</strong><small>Investigating unmet needs &amp; ways to help</small></div>' + icon('checkcircle', 19) + '</div>';
 }
 function aboutPanel() {
   return panelTop('Crossover Stockton', 'About & methodology') +
