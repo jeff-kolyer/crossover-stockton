@@ -1,4 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Crossover Stockton">
-  <rect x="1" y="1" width="30" height="30" rx="6" fill="#1A2029" stroke="#343F4F" stroke-width="1.5"/>
-  <text x="16" y="21" text-anchor="middle" fill="#10B981" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="14" font-weight="700" letter-spacing="-0.5">CS</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" role="img" aria-labelledby="title">
+  <title id="title">Crossover sun icon</title>
+  <style>
+    .rays{stroke:#1b1d1b}
+    @media (prefers-color-scheme:dark){.rays{stroke:#fcfaf4}}
+  </style>
+  <circle cx="18" cy="18" r="6.8" fill="#d4a017"/>
+  <g class="rays" stroke-width="2.9" stroke-linecap="round">
+    <line x1="18" y1="3.5" x2="18" y2="7.5"/>
+    <line x1="18" y1="28.5" x2="18" y2="32.5"/>
+    <line x1="3.5" y1="18" x2="7.5" y2="18"/>
+    <line x1="28.5" y1="18" x2="32.5" y2="18"/>
+    <line x1="8" y1="8" x2="10.6" y2="10.6"/>
+    <line x1="28" y1="8" x2="25.4" y2="10.6"/>
+    <line x1="8" y1="28" x2="10.6" y2="25.4"/>
+    <line x1="28" y1="28" x2="25.4" y2="25.4"/>
+  </g>
 </svg>

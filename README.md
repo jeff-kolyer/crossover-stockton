@@ -1,28 +1,30 @@
 # Crossover Stockton
 
-*See clearly. Act locally.*
+*From thinking to being. From separation to reality.*
 
-Crossover Stockton is an independent civic organization developing and verifying practical pathways to meet needs in Stockton, California. This repository powers Crossover’s working pathway tracker (`crossoverstockton.org`) — an operational workspace built to test whether real routes to help are actually accessible, rather than a promotional site or an unverified directory.
+Crossover Stockton is an independent civic organization developing and verifying practical pathways to meet needs in Stockton, California. The local issue #61 draft leads with one scrolling story, The Animal Outside the Door. The Work and philosophy remain available as optional deeper reading; the working pathway tracker remains at `/workspace.html#help`.
+
+The Work page reads the committed pathway records. It marks the community-cat shelter idea as an uncommitted proposal linked to issue #60. Use the tracker for full evidence, stage calculations, and browser-local fieldwork edits. The previous prototype is preserved at `/preview/previous-prototype.html` for review. This redesign has not been published.
 
 For the underlying philosophy behind this work, see [PHILOSOPHY.md](PHILOSOPHY.md).
 
 ## How the tracker works
 
-The workspace is organized into four counted sections in the top navigation bar (with **About & methodology** and Light/Dark appearance controls in the left menu drawer):
+The workspace at `/workspace.html` is organized into four counted sections in the top navigation bar (with **About & methodology** and Light/Dark appearance controls in the left menu drawer):
 
 | Section | Role |
 |---|---|
-| **Help Today** (`/help`, default home) | Surfaces only verified, repeatable routes ready for action today, with confirmed steps and an availability check under 48 hours old. |
-| **Pathways** (`/pathways`) | Tracks all prospective and active routes (`PW-*`) across **Cards**, **List** (default on phones `<= 700px`), and **Board** (default on desktop `> 700px`) views, with stage, contribution, and text filters. |
-| **Tasks** (`/tasks`) | Tracks concrete fieldwork, follow-ups, source reviews, and organization contacts (`WORK-*`) linked back to pathways and supporting evidence. |
-| **Evidence** (`/evidence`, also `/evidence-room/`) | Searchable source catalog of public records, field activities, and work plans (`SHEL-*`, `GOV-*`, `CPRA-*`, `FLD-*`, `WORK-*`, etc.), including source links, custody history, and explicit limitations. |
+| **Help Today** (`/workspace.html#help`) | Surfaces only verified, repeatable routes ready for action today, with confirmed steps and an availability check under 48 hours old. |
+| **Pathways** (`/workspace.html#pathways`) | Tracks all prospective and active routes (`PW-*`) across **Cards**, **List** (default on phones `<= 700px`), and **Board** (default on desktop `> 700px`) views, with stage, contribution, and text filters. |
+| **Tasks** (`/workspace.html#tasks`) | Tracks concrete fieldwork, follow-ups, source reviews, and organization contacts (`WORK-*`) linked back to pathways and supporting evidence. |
+| **Evidence** (`/workspace.html#evidence`) | Searchable source catalog of public records, field activities, and work plans (`SHEL-*`, `GOV-*`, `CPRA-*`, `FLD-*`, `WORK-*`, etc.), including source links, custody history, and explicit limitations. |
 
 ### Pathway states
 
 Pathways move across four descriptive states — not a mandatory linear sequence:
 
 - **Exploring** — Checking whether a practical, legitimate route to help exists.
-- **Blocked** — A documented obstacle (such as an unanswered application, waitlist, or missing intake channel) currently prevents participation.
+- **Blocked** — A documented specific obstacle to an otherwise viable contribution currently prevents participation. An unanswered application alone is a waiting task, not a Blocked pathway.
 - **Enabling** — Active work is underway to remove a bottleneck or clarify raw records.
 - **Established** — Confirmed open, repeatable, documented with clear steps, and verified within the last 48 hours.
 

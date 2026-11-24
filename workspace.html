@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fcfaf4">
+  <meta name="description" content="We investigate unmet needs in Stockton and discover practical ways to help, tracking the tasks and evidence behind each pathway.">
+  <link rel="icon" href="/favicon.svg?v=sun" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=sun" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/crossover-mark-192.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Crossover">
+  <link rel="preload" href="/assets/plex-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/plex-semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/site.css">
+  <link rel="stylesheet" href="/src/tracker.css">
+  <title>The Work · Crossover</title>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="identity" href="/" aria-label="Crossover home">
+        <svg class="identity-mark" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true">
+          <circle cx="18" cy="18" r="6.5" fill="#d4a017"/>
+          <g stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+            <line x1="18" y1="3.5" x2="18" y2="7.5"/>
+            <line x1="18" y1="28.5" x2="18" y2="32.5"/>
+            <line x1="3.5" y1="18" x2="7.5" y2="18"/>
+            <line x1="28.5" y1="18" x2="32.5" y2="18"/>
+            <line x1="8" y1="8" x2="10.6" y2="10.6"/>
+            <line x1="28" y1="8" x2="25.4" y2="10.6"/>
+            <line x1="8" y1="28" x2="10.6" y2="25.4"/>
+            <line x1="28" y1="28" x2="25.4" y2="25.4"/>
+          </g>
+        </svg>
+        <span class="identity-text">
+          <strong>crossover</strong>
+          <small>From thinking to being</small>
+        </span>
+      </a>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="public-nav">Menu</button>
+      <nav id="public-nav" class="public-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/crossover">The Crossover</a>
+        <a href="/post-scarcity">Post-Scarcity</a>
+        <a href="/stewardship">Stewardship</a>
+        <a href="/work" aria-current="page">The Work</a>
+        <a class="mobile-only" href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="wrap main" tabindex="-1">
+    <nav id="work-tabs" class="work-tabs" aria-label="Work sections"></nav>
+    <div id="page"><h1 class="loading-title">Pathways</h1><p role="status">Loading Stockton’s pathways…</p></div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="footer-name" href="/">crossover</a>
+        <p>From thinking to being. From scarcity to stewardship.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/crossover">The Crossover</a>
+        <a href="/post-scarcity">Post-Scarcity</a>
+        <a href="/stewardship">Stewardship</a>
+        <a href="/work">The Work</a>
+        <a href="/about">About</a>
+      </div>
+    </div>
+  </footer>
+  <dialog id="panel" aria-labelledby="panel-title"><div id="panel-content"></div></dialog>
+  <div id="notice" role="status" aria-live="polite"></div>
+  <noscript><p>This tracker uses JavaScript. <a href="https://github.com/jeff-kolyer/crossover-stockton">Read the source repository</a>.</p></noscript>
+</body>
+</html>

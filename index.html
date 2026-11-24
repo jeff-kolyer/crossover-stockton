@@ -1,51 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#142e4b">
-  <meta name="description" content="We investigate unmet needs in Stockton and discover practical ways to help, tracking the tasks and evidence behind each pathway.">
-  <link rel="icon" href="/assets/crossover.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/touch.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fcfaf4">
+  <meta name="description" content="Crossover explores the shift from thinking to being and from scarcity to stewardship—starting with the animal outside the door and practical work in Stockton.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Crossover · From thinking to being. From scarcity to stewardship.">
+  <meta property="og:description" content="Where should we spend our time? A down-to-earth exploration of consciousness, post-scarcity technology, and conscious stewardship, grounded in Stockton.">
+  <meta property="og:image" content="/assets/animal-outside-door.png">
+  <meta property="og:image:alt" content="Illustration of a dog standing outside an open front door">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg?v=sun" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=sun" sizes="32x32">
   <link rel="manifest" href="/manifest.webmanifest">
-  <meta name="apple-mobile-web-app-title" content="Crossover">
   <link rel="preload" href="/assets/plex-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/plex-semibold.woff2" as="font" type="font/woff2" crossorigin>
-  <script>
-    try {
-      var p = JSON.parse(localStorage.getItem('crossover-field-prefs-1') || 'null');
-      document.documentElement.dataset.theme = p && p.theme === 'dark' ? 'dark' : 'light';
-    } catch (e) {}
-  </script>
-  <style>html{background:#f5f7f9}html[data-theme="dark"]{background:#101b22}</style>
-  <link rel="stylesheet" href="/src/tracker.css">
-  <title>Help Today · Crossover Stockton</title>
-  <script type="module" src="/src/main.js"></script>
+  <link rel="stylesheet" href="/src/site.css">
+  <title>Crossover · From thinking to being. From scarcity to stewardship.</title>
+  <script type="module" src="/src/site.js"></script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to workspace</a>
-  <div class="mast">
-    <header class="shell topbar">
-      <div class="brand-group">
-        <button id="menu" class="icon-button menu-launch" aria-label="Open menu" title="Menu"></button>
-        <a class="brand" href="/help" aria-label="Crossover Stockton home"><img src="/assets/crossover.svg" width="39" height="39" alt=""><span>Crossover</span></a>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="identity" href="/" aria-label="Crossover home">
+        <svg class="identity-mark" viewBox="0 0 36 36" width="32" height="32" aria-hidden="true">
+          <circle cx="18" cy="18" r="6.5" fill="#d4a017"/>
+          <g stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+            <line x1="18" y1="3.5" x2="18" y2="7.5"/>
+            <line x1="18" y1="28.5" x2="18" y2="32.5"/>
+            <line x1="3.5" y1="18" x2="7.5" y2="18"/>
+            <line x1="28.5" y1="18" x2="32.5" y2="18"/>
+            <line x1="8" y1="8" x2="10.6" y2="10.6"/>
+            <line x1="28" y1="8" x2="25.4" y2="10.6"/>
+            <line x1="8" y1="28" x2="10.6" y2="25.4"/>
+            <line x1="28" y1="28" x2="25.4" y2="25.4"/>
+          </g>
+        </svg>
+        <span class="identity-text">
+          <strong>crossover</strong>
+          <small>From thinking to being</small>
+        </span>
+      </a>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="public-nav">Menu</button>
+      <nav id="public-nav" class="public-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/crossover">The Crossover</a>
+        <a href="/post-scarcity">Post-Scarcity</a>
+        <a href="/stewardship">Stewardship</a>
+        <a href="/work">The Work</a>
+        <a class="mobile-only" href="/about">About</a>
+      </nav>
+    </div>
+  </header>
+  <main id="content" tabindex="-1"></main>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="footer-name" href="/">crossover</a>
+        <p>From thinking to being. From scarcity to stewardship.</p>
       </div>
-      <nav id="main-nav" aria-label="Workspace sections"></nav>
-      <div class="site-actions">
-        <button id="find" class="icon-button search-launch" aria-label="Search all sections" title="Search all sections (/)"></button>
-        <button id="chapter" class="chapter-button" aria-label="Current chapter, Stockton, California"></button>
+      <div class="footer-links">
+        <a href="/crossover">The Crossover</a>
+        <a href="/post-scarcity">Post-Scarcity</a>
+        <a href="/stewardship">Stewardship</a>
+        <a href="/work">The Work</a>
+        <a href="/about">About</a>
       </div>
-    </header>
-  </div>
-  <main id="main" class="shell main" tabindex="-1">
-    <div id="page"><h1 class="loading-title">Pathway tracker</h1><p role="status">Loading Stockton’s tracker…</p></div>
-  </main>
-  <footer class="shell site-footer">
-    <span class="footer-brand"><img src="/assets/crossover.svg" width="22" height="22" alt="">Crossover Stockton</span>
-    <div><button data-overlay="about">About &amp; methodology</button></div>
+    </div>
   </footer>
-  <dialog id="panel" aria-labelledby="panel-title"><div id="panel-content"></div></dialog>
-  <div id="notice" role="status" aria-live="polite"></div>
-  <noscript><p>This tracker uses JavaScript. <a href="https://github.com/jeff-kolyer/crossover-stockton">Read the source repository</a>.</p></noscript>
 </body>
 </html>

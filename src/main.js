@@ -15,7 +15,7 @@ const join = items => items.join('');
 const plural = (n, word) => n + ' ' + word + (n === 1 ? '' : 's');
 const displayKind = kind => String(kind || 'Record').replaceAll('_', ' ').replace(/^./, s => s.toUpperCase());
 const external = (url, label, cls = 'text-link') => cleanURL(url) ? '<a class="' + cls + '" href="' + esc(cleanURL(url)) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + '</a>' : '';
-const inLink = (path, html, cls = '', attrs = '') => '<a class="' + cls + '" href="/' + esc(path) + '" ' + attrs + '>' + html + '</a>';
+const inLink = (path, html, cls = '', attrs = '') => '<a class="' + cls + '" href="#' + esc(path) + '" ' + attrs + '>' + html + '</a>';
 const button = (html, attr, cls = 'btn') => '<button type="button" class="' + cls + '" ' + attr + '>' + html + '</button>';
 const badge = stage => '<span class="stage-badge ' + (stageNames.includes(stage) ? stage.toLowerCase() : 'exploring') + '"><i></i>' + esc(stage) + '</span>';
 const statusBadge = status => '<span class="task-status ' + esc(status) + '">' + icon(taskIcons[status] || 'circle', 15) + esc(statuses[status] || 'Open') + '</span>';
@@ -33,7 +33,7 @@ const panelScroll = new Map();
 const panel = $('#panel'), panelContent = $('#panel-content');
 const views = { cards: 'Cards', list: 'List', board: 'Board' };
 const viewIcons = { cards: 'grid', list: 'list', board: 'board' };
-const getView = () => Object.hasOwn(views, prefs.view) ? prefs.view : (window.innerWidth <= 700 ? 'list' : 'board');
+const getView = () => Object.hasOwn(views, prefs.view) ? prefs.view : 'list';
 const theme = () => prefs.theme === 'dark' ? 'dark' : 'light';
 document.documentElement.dataset.theme = theme();
 function message(s) { const n = $('#notice'); n.textContent = s; n.classList.add('on'); clearTimeout(noticeTimer); noticeTimer = setTimeout(() => n.classList.remove('on'), 3200); }
@@ -77,7 +77,7 @@ function parseRoute() {
   const sourcePath = rawHash || location.pathname;
   const tokens = sourcePath.split('/').filter(Boolean).map(s => { try { return decodeURIComponent(s); } catch { return ''; } });
   const head = tokens[0] === 'evidence-room' ? 'evidence' : tokens[0];
-  const section = Object.hasOwn(sections, head) ? head : 'help';
+  const section = ['pathways', 'tasks', 'evidence'].includes(head) ? head : 'pathways';
   const stack = [];
   for (let i = 1; i < tokens.length; i++) {
     const kind = tokens[i];
@@ -92,11 +92,11 @@ function child(kind, id) { return route.hash + '/' + kind + (id ? '/' + segment(
 function go(path, { replace = false } = {}) {
   const nextPath = path.replace(/^\/+/, '');
   if (nextPath === route?.hash && !location.hash) return;
-  const current = route?.hash || 'help';
+  const current = route?.hash || 'pathways';
   const parentDistance = route?.top ? history.state?.closeDistance : 0;
   const enteringPanel = nextPath.startsWith(route.section + '/');
   const closeDistance = enteringPanel && Number.isInteger(parentDistance) ? parentDistance + (replace ? 0 : 1) : null;
-  history[replace ? 'replaceState' : 'pushState']({ crossPrev: replace ? history.state?.crossPrev : current, closeDistance }, '', '/' + nextPath);
+  history[replace ? 'replaceState' : 'pushState']({ crossPrev: replace ? history.state?.crossPrev : current, closeDistance }, '', '/workspace.html#' + nextPath);
   render();
 }
 function popPanel() {
@@ -106,8 +106,9 @@ function popPanel() {
 }
 function refresh() { dirty = true; render(); }
 function navHTML() {
-  const c = counts();
-  return join(Object.entries(sections).map(([key, label]) => inLink(key, (key === 'help' ? '<span class="full-nav-label">Help Today</span><span class="short-nav-label">Help</span>' : '<span>' + esc(label) + '</span>') + '<span class="nav-count">' + c[key] + '</span>', 'nav-item ' + (route.section === key ? 'selected' : ''), 'aria-label="' + esc(label) + ', ' + c[key] + (key === 'tasks' ? ' unfinished tasks' : '') + '" ' + (route.section === key ? 'aria-current="page"' : ''))));
+  const countsMap = counts();
+  const labels = { pathways: 'Pathways', tasks: 'Tasks', evidence: 'Evidence' };
+  return join(['pathways', 'tasks', 'evidence'].map(key => inLink(key, esc(labels[key]) + ' <span>' + esc(countsMap[key]) + '</span>', 'work-tab ' + (route.section === key ? 'selected' : ''), (route.section === key ? 'aria-current="page"' : ''))));
 }
 function hero() {
   return '<section class="hero" aria-labelledby="workspace-title"><div class="hero-image"></div><div class="hero-grid" aria-hidden="true"></div><div class="hero-inner"><span class="focus-line">SEE CLEARLY. ACT LOCALLY.</span><h1 id="workspace-title" tabindex="-1">Pathway tracker</h1><p>How Crossover develops pathways to meet needs in Stockton.</p></div><div class="city-caption">' + icon('focus', 14) + 'Stockton skyline</div></section>';
@@ -117,7 +118,7 @@ function layoutTools() {
   const v = getView();
   const n = Number(filter.stage !== 'All') + Number(filter.contrib !== 'All') + Number(!!filter.text);
   const options = join(Object.entries(views).map(([id, name]) => button(icon(viewIcons[id], 17) + '<span>' + name + '</span>', 'data-view="' + id + '" aria-label="' + name + ' view" title="' + name + ' view" aria-pressed="' + (v === id) + '"', 'layout-choice ' + (v === id ? 'chosen' : ''))));
-  return '<div class="layout-tools">' + button(icon('filter', 17) + '<span>Filters' + (n ? ' (' + n + ')' : '') + '</span>', 'data-overlay="filters" aria-label="Filter pathways' + (n ? ', ' + n + ' applied' : '') + '" title="Filter pathways"', 'btn filter-btn ' + (n ? 'applied' : '')) + '<div class="view-switch" role="group" aria-label="Pathway layout">' + options + '</div>' + button(icon(viewIcons[v], 19), 'data-overlay="views" aria-label="Change layout, ' + views[v] + ' view" title="Change layout"', 'btn mobile-view') + button(icon('plus', 18) + '<span>New pathway</span>', 'data-overlay="new" aria-label="New pathway" title="New pathway"', 'btn primary add-btn') + '</div>';
+  return '<details class="advanced-tools"><summary>Filters and layout' + (n ? ' (' + n + ')' : '') + '</summary><div class="layout-tools">' + button(icon('filter', 17) + '<span>Filter investigations</span>', 'data-overlay="filters" aria-label="Filter investigations"', 'btn filter-btn ' + (n ? 'applied' : '')) + '<div class="view-switch" role="group" aria-label="Investigation layout">' + options + '</div>' + button(icon(viewIcons[v], 19) + '<span>Change layout</span>', 'data-overlay="views" aria-label="Change layout"', 'btn mobile-view') + button(icon('plus', 18) + '<span>New investigation</span>', 'data-overlay="new" aria-label="New investigation"', 'btn add-btn') + '</div></details>';
 }
 function nextCheckHTML(p) {
   const steps = p.actionDetails?.howToHelp?.trim();
@@ -162,18 +163,21 @@ function secondaryPanels() {
   return '<div class="secondary-grid"><section class="work-panel">' + groupTitle('Open tasks', inLink('tasks', 'View tasks', 'panel-link')) + (tt.length ? join(tt.map(t => taskRow(t, true))) : '<p class="panel-empty">All tasks are complete.</p>') + '</section><section class="work-panel">' + groupTitle('Latest evidence', inLink('evidence', 'View evidence', 'panel-link')) + (rr.length ? join(rr.map(r => recordRow(r, true))) : '<p class="panel-empty">No records yet.</p>') + '</section></div>';
 }
 function renderPathways() {
-  const filtered = pathways.filter(p => (filter.stage === 'All' || p.stage === filter.stage) && (filter.contrib === 'All' || (p.contributions || []).includes(filter.contrib)) && (!filter.text || pathText(p).includes(filter.text.toLowerCase())));
-  const listing = !filtered.length ? empty('search', 'No matching pathways', 'Try another search or clear the stage and contribution filters.', button('Clear filters', 'data-action="clear-filters"')) : getView() === 'board' ? boardHTML(filtered) : '<div class="' + (getView() === 'list' ? 'path-list' : 'card-grid') + '">' + join(filtered.map(p => pathCard(p, getView() === 'list' ? 'list-card' : 'card'))) + '</div>';
-  return hero() + '<section class="path-section" aria-labelledby="track-title"><div class="workspace-head"><h2 id="track-title">Tracked pathways</h2>' + layoutTools() + '</div>' + filterTags() + listing + '</section>' + secondaryPanels();
+  const list = pathways.map(p => {
+    const c = presentation(p, seed), tasksCount = pathTasks(p).length, evidenceCount = pathRecords(p).length;
+    return inLink(child('p', p.id),
+      '<div class="pc-content"><div class="pc-kicker">' + badge(p.stage) + '<span class="id">' + esc(p.id) + '</span></div><h3>' + esc(c.title) + '</h3><div class="pc-org">' + esc(p.org) + '</div><p class="pc-summary">' + esc(c.summary) + '</p>' + nextCheckHTML(p) + '</div><div class="pc-foot"><div class="pc-meta"><span>' + icon('clipboard', 15) + plural(tasksCount, 'task') + '</span><span>' + icon('files', 15) + plural(evidenceCount, 'record') + '</span></div><span class="chevron">' + icon('right', 17) + '</span></div>',
+      'path-card');
+  });
+  return sectionHead('Stockton', 'Pathways', 'Ways to make a difference we are checking in Stockton. Tap a pathway to see what we’ve tried, what’s next, and the evidence behind it.', 'route') +
+    '<section class="path-section" aria-labelledby="track-title"><h2 id="track-title" class="sr">Tracked pathways</h2><div class="simple-list">' + join(list) + '</div>' +
+    '<div class="simple-link-group">' +
+      inLink('tasks', 'Tasks <span>(' + openTasks().length + ')</span> →', 'simple-link') +
+      inLink('evidence', 'Evidence <span>(' + records.size + ')</span> →', 'simple-link') +
+    '</div></section>';
 }
 function sectionHead(over, title, desc, iconName) {
   return '<div class="section-head"><div class="section-symbol">' + icon(iconName, 24) + '</div><div><p class="section-over">' + esc(over) + '</p><h1 tabindex="-1">' + esc(title) + '</h1><p class="lead">' + esc(desc) + '</p></div></div>';
-}
-function helpPage() {
-  const available = readyPaths();
-  return sectionHead('Verified routes', 'Help Today', 'Ways to help in Stockton with confirmed steps and a recent availability check.', 'help') +
-    (available.length ? '<div class="card-grid">' + join(available.map(p => pathCard(p))) + '</div>' : '<section class="help-empty"><div class="help-art">' + icon('route', 40) + '</div><h2>No verified pathways today</h2><p>' + esc(plural(pathways.length, 'pathway')) + ' ' + (pathways.length === 1 ? 'is' : 'are') + ' being tracked. A route appears here once someone can follow the steps and its availability has been checked within 48 hours.</p>' + inLink('pathways', 'Explore pathways', 'btn primary') + '</section>') +
-    '<section class="method-strip">' + icon('book', 22) + '<div><h3>What counts as verified?</h3><p>Firsthand attempts, organization confirmations, and recent checks build the evidence for a pathway.</p></div>' + button('View methodology', 'data-overlay="about"', 'text-button') + '</section>';
 }
 function searchField(id, value, label) {
   return '<label class="search-field">' + icon('search', 18) + '<input id="' + id + '" type="search" value="' + esc(value) + '" placeholder="' + esc(label) + '" aria-label="' + esc(label) + '"></label>';
@@ -186,14 +190,26 @@ function taskResults() {
   return '<p class="result-label">' + plural(tt.length, 'task') + '</p>' + (tt.length ? '<div class="table-list">' + join(tt.map(t => taskRow(t))) + '</div>' : empty('tasks', 'No matching tasks', 'Try a different status or search term.', button('Clear search and status', 'data-action="clear-task"')));
 }
 function tasksPage() {
-  return sectionHead('Fieldwork', 'Tasks', 'Follow the checks, contacts, and records work behind each pathway.', 'clipboard') + '<div class="data-tools">' + searchField('task-q', taskQuery, 'Search tasks') + selectBox('task-filter', 'Filter tasks by status', [['all', 'All statuses'], ...Object.entries(statuses)], taskFilter) + button(icon('plus', 16) + '<span>New task</span>', 'data-overlay="addtask" aria-label="New task" title="New task"', 'btn primary add-btn') + '</div><div id="task-results">' + taskResults() + '</div>';
+  return sectionHead('The next checks', 'Tasks', 'Simple calls, visits, and record checks still needed to learn whether a pathway works.', 'clipboard') +
+    '<div class="data-tools">' + searchField('task-q', taskQuery, 'Search tasks') + '</div>' +
+    '<div id="task-results">' + taskResults() + '</div>' +
+    '<div class="simple-link-group">' +
+      inLink('pathways', 'Pathways <span>(' + pathways.length + ')</span> →', 'simple-link') +
+      inLink('evidence', 'Evidence <span>(' + records.size + ')</span> →', 'simple-link') +
+    '</div>';
 }
 function recordResults() {
   const rr = newest(db.records.filter(r => (evidenceFilter === 'All' || recordType(r) === evidenceFilter) && recordText(r).includes(evidenceQuery.trim().toLowerCase())));
   return '<p class="result-label">' + plural(rr.length, 'record') + '</p>' + (rr.length ? '<div class="table-list">' + join(rr.map(r => recordRow(r))) + '</div>' : empty('files', 'No matching evidence', 'Try a different record type, agency, or keyword.', button('Clear search and type', 'data-action="clear-record"')));
 }
 function evidencePage() {
-  return sectionHead('Source catalog', 'Evidence', 'Inspect the public records, field activities, and work plans behind the tracker.', 'files') + '<div class="data-tools">' + searchField('record-q', evidenceQuery, 'Search by title, agency, or record ID') + selectBox('record-filter', 'Filter evidence by type', [['All', 'All types'], ['Records', 'Records'], ['Activities', 'Activities'], ['Tasks', 'Tasks']], evidenceFilter) + '</div><div id="record-results">' + recordResults() + '</div>';
+  return sectionHead('How we know', 'Evidence', 'Public documents, observations, and work plans behind our pathways.', 'files') +
+    '<div class="data-tools">' + searchField('record-q', evidenceQuery, 'Search by title, agency, or record ID') + selectBox('record-filter', 'Filter records by type', [['All', 'All types'], ['Records', 'Records'], ['Activities', 'Activities'], ['Tasks', 'Tasks']], evidenceFilter) + '</div>' +
+    '<div id="record-results">' + recordResults() + '</div>' +
+    '<div class="simple-link-group">' +
+      inLink('pathways', 'Pathways <span>(' + pathways.length + ')</span> →', 'simple-link') +
+      inLink('tasks', 'Tasks <span>(' + openTasks().length + ')</span> →', 'simple-link') +
+    '</div>';
 }
 function panelTop(eyebrow, title, subtitle = '') {
   return '<div class="panel-top"><span class="overline">' + esc(eyebrow) + '</span><h2 id="panel-title" tabindex="-1">' + esc(title) + '</h2>' + (subtitle ? '<p>' + esc(subtitle) + '</p>' : '') + '</div>';
@@ -346,11 +362,8 @@ function render() {
   const change = next.section !== renderedSection;
   route = next;
   if (change || dirty) {
-    $('#main-nav').innerHTML = navHTML();
-    $('#page').innerHTML = ({ pathways: renderPathways, help: helpPage, tasks: tasksPage, evidence: evidencePage }[route.section])();
-    $('#find').innerHTML = icon('search', 21);
-    $('#menu').innerHTML = icon('menu', 21);
-    $('#chapter').innerHTML = icon('pin', 17) + '<span>Stockton, CA</span>' + icon('down', 14);
+    $('#work-tabs').innerHTML = navHTML();
+    $('#page').innerHTML = ({ pathways: renderPathways, tasks: tasksPage, evidence: evidencePage }[route.section])();
     if (change) window.scrollTo(0, 0);
     renderedSection = route.section; dirty = false;
   }
@@ -399,6 +412,14 @@ async function refreshSource() {
   finally { clearTimeout(timeout); sourceBusy = false; render(); }
 }
 document.addEventListener('click', e => {
+  const menuBtn = e.target instanceof Element ? e.target.closest('.menu-button') : null;
+  if (menuBtn) {
+    const nav = $('.public-nav');
+    const open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    return;
+  }
   if (!db || !(e.target instanceof Element)) return;
   const el = e.target.closest('button,a');
   if (!el) return;
@@ -422,7 +443,7 @@ document.addEventListener('click', e => {
   if (el.matches('a[href="#main"]') && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
     e.preventDefault(); $('#main').focus(); return;
   }
-  if ((el.matches('a[href^="/"]') || el.matches('a[href^="#"]')) && !el.target && !el.hasAttribute('download') && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+  if (el.matches('a[href^="#"]') && !el.target && !el.hasAttribute('download') && !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
     const dest = el.getAttribute('href').replace(/^[#/]+/, '');
     e.preventDefault(); go(dest);
   }
