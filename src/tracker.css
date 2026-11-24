@@ -1,31 +1,3 @@
-@font-face {
-  font-family: Plex;
-  src: url('/assets/plex-regular.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap
-}
-
-@font-face {
-  font-family: Plex;
-  src: url('/assets/plex-medium.woff2') format('woff2');
-  font-weight: 500;
-  font-display: swap
-}
-
-@font-face {
-  font-family: Plex;
-  src: url('/assets/plex-semibold.woff2') format('woff2');
-  font-weight: 600;
-  font-display: swap
-}
-
-@font-face {
-  font-family: Plex;
-  src: url('/assets/plex-bold.woff2') format('woff2');
-  font-weight: 700;
-  font-display: swap
-}
-
 :root {
   color-scheme: light;
   --page: #fcfaf4;
@@ -53,8 +25,7 @@
   --block-fg: #8c3a2b;
   --est-bg: #e2f0e8;
   --est-fg: #256042;
-  --radius: 8px;
-  font: 100%/1.55 Plex, 'IBM Plex Sans', system-ui, sans-serif
+  --radius: 8px
 }
 
 * {

@@ -14,6 +14,7 @@
   <meta name="apple-mobile-web-app-title" content="Crossover">
   <link rel="preload" href="/assets/plex-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/plex-semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/plex-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/src/site.css">
   <link rel="stylesheet" href="/src/tracker.css">
   <title>The Work · Crossover</title>
@@ -47,11 +48,12 @@
     </div>
   </header>
   <main id="main" class="wrap main" tabindex="-1">
-    <nav id="work-tabs" class="work-tabs" aria-label="Work sections"></nav>
-    <div id="page">
-      <h1 class="loading-title">Pathways</h1>
-      <p role="status">Loading Stockton’s pathways…</p>
-    </div>
+    <nav id="work-tabs" class="work-tabs" aria-label="Work sections">
+      <a class="work-tab" href="#pathways">Pathways</a>
+      <a class="work-tab" href="#tasks">Tasks</a>
+      <a class="work-tab" href="#evidence">Evidence</a>
+    </nav>
+    <div id="page"><p role="status" class="sr">Loading workspace…</p></div>
   </main>
   <footer class="site-footer">
     <div class="footer-inner">

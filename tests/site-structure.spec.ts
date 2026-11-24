@@ -58,4 +58,27 @@ test('public navigation and layout fit each viewport', async ({ page }, testInfo
   await expect(page).toHaveURL(/\/work$/);
   const dimensions = await page.evaluate(() => ({ width: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
   expect(dimensions.scroll, `Public site overflows at ${testInfo.project.name}`).toBeLessThanOrEqual(dimensions.width + 1);
+
+  const publicHeader = await page.evaluate(() => {
+    const h = document.querySelector('.site-header')?.getBoundingClientRect();
+    const s = document.querySelector('.identity-text strong');
+    const a = document.querySelector('.public-nav a');
+    return {
+      height: Math.round(h?.height || 0),
+      brandFont: s ? getComputedStyle(s).fontSize : '',
+      navFont: a ? getComputedStyle(a).fontSize : ''
+    };
+  });
+  await page.goto('/workspace.html#pathways');
+  const workHeader = await page.evaluate(() => {
+    const h = document.querySelector('.site-header')?.getBoundingClientRect();
+    const s = document.querySelector('.identity-text strong');
+    const a = document.querySelector('.public-nav a');
+    return {
+      height: Math.round(h?.height || 0),
+      brandFont: s ? getComputedStyle(s).fontSize : '',
+      navFont: a ? getComputedStyle(a).fontSize : ''
+    };
+  });
+  expect(workHeader).toEqual(publicHeader);
 });
