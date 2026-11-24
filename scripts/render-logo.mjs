@@ -20,23 +20,28 @@ function chunk(type, data) {
 
 function png(size) {
   const pixels = Buffer.alloc(size * (1 + size * 4));
-  const gold = [212, 160, 23, 255];
+  const bg = [252, 250, 244, 255];
+  const charcoal = [38, 40, 38, 255];
+  const gold = [213, 163, 33, 255];
+  const pad = size >= 192 ? 0.78 : 1;
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
-      const sx = (x + 0.5) * 36 / size;
-      const sy = (y + 0.5) * 36 / size;
+      const sx = 18 + ((x + 0.5) * 36 / size - 18) / pad;
+      const sy = 18 + ((y + 0.5) * 36 / size - 18) / pad;
       const inArch = sy >= 14 ? (sx >= 5 && sx <= 31) : Math.hypot(sx - 18, sy - 14) <= 13;
-      if (!inArch) continue;
-      const leftBottomY = 33.5 + (27.5 - 33.5) * (sx - 5) / (16.0 - 5);
-      const leftDiagY = 10.6 + (3.05 - 10.6) * (sx - 16.0) / (25.0 - 16.0);
-      const inLeft = sx <= 16.0 ? sy <= leftBottomY : sy <= leftDiagY;
-      const rightBottomY = 30.0 + (35.0 - 30.0) * (sx - 18.2) / (31 - 18.2);
-      const rightDiagY = 12.2 + (4.43 - 12.2) * (sx - 18.2) / (26.8 - 18.2);
-      const inRight = sx >= 18.2 && sy <= rightBottomY && sy >= rightDiagY;
-      if (inLeft || inRight) {
-        const offset = y * (1 + size * 4) + 1 + x * 4;
-        for (let i = 0; i < 4; i++) pixels[offset + i] = gold[i];
+      let rgba = bg;
+      if (inArch) {
+        const leftBottomY = 33.5 + (27.5 - 33.5) * (sx - 5) / (16.0 - 5);
+        const leftDiagY = 10.6 + (3.05 - 10.6) * (sx - 16.0) / (25.0 - 16.0);
+        const inLeft = sx <= 16.0 ? sy <= leftBottomY : sy <= leftDiagY;
+        const rightBottomY = 30.0 + (35.0 - 30.0) * (sx - 18.2) / (31 - 18.2);
+        const rightDiagY = 12.2 + (4.43 - 12.2) * (sx - 18.2) / (26.8 - 18.2);
+        const inRight = sx >= 18.2 && sy <= rightBottomY && sy >= rightDiagY;
+        if (inLeft) rgba = charcoal;
+        else if (inRight) rgba = gold;
       }
+      const offset = y * (1 + size * 4) + 1 + x * 4;
+      for (let i = 0; i < 4; i++) pixels[offset + i] = rgba[i];
     }
   }
   const ihdr = Buffer.alloc(13);
