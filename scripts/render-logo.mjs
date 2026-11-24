@@ -18,47 +18,18 @@ function chunk(type, data) {
   return out;
 }
 
-function distToSegment(px, py, ax, ay, bx, by) {
-  const dx = bx - ax, dy = by - ay;
-  const len2 = dx * dx + dy * dy || 1;
-  const u = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / len2));
-  return Math.hypot(px - (ax + u * dx), py - (ay + u * dy));
-}
-
-const rays = [
-  [18, 3.5, 18, 7.5],
-  [18, 28.5, 18, 32.5],
-  [3.5, 18, 7.5, 18],
-  [28.5, 18, 32.5, 18],
-  [8, 8, 10.6, 10.6],
-  [28, 8, 25.4, 10.6],
-  [8, 28, 10.6, 25.4],
-  [28, 28, 25.4, 25.4]
-];
-
 function png(size) {
   const pixels = Buffer.alloc(size * (1 + size * 4));
-  const ink = [27, 29, 27, 255];
   const gold = [212, 160, 23, 255];
-  const halfStroke = 1.45;
+  const radius = 16.5;
+  const p = 0.62;
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
-      const sx = (x + 0.5) * 36 / size;
-      const sy = (y + 0.5) * 36 / size;
-      let rgba = null;
-      if (Math.hypot(sx - 18, sy - 18) <= 6.8) {
-        rgba = gold;
-      } else {
-        for (const [ax, ay, bx, by] of rays) {
-          if (distToSegment(sx, sy, ax, ay, bx, by) <= halfStroke) {
-            rgba = ink;
-            break;
-          }
-        }
-      }
-      if (rgba) {
+      const dx = Math.abs((x + 0.5) * 36 / size - 18) / radius;
+      const dy = Math.abs((y + 0.5) * 36 / size - 18) / radius;
+      if (Math.pow(dx, p) + Math.pow(dy, p) <= 1) {
         const offset = y * (1 + size * 4) + 1 + x * 4;
-        for (let i = 0; i < 4; i++) pixels[offset + i] = rgba[i];
+        for (let i = 0; i < 4; i++) pixels[offset + i] = gold[i];
       }
     }
   }
