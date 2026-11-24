@@ -21,13 +21,17 @@ function chunk(type, data) {
 function png(size) {
   const pixels = Buffer.alloc(size * (1 + size * 4));
   const gold = [212, 160, 23, 255];
-  const radius = 16.5;
-  const p = 0.62;
+  const endY = 60 - Math.sqrt(36 * 36 - 15 * 15);
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
-      const dx = Math.abs((x + 0.5) * 36 / size - 18) / radius;
-      const dy = Math.abs((y + 0.5) * 36 / size - 18) / radius;
-      if (Math.pow(dx, p) + Math.pow(dy, p) <= 1) {
+      const sx = (x + 0.5) * 36 / size;
+      const sy = (y + 0.5) * 36 / size;
+      const inDome = Math.hypot(sx - 18, sy - 16.5) <= 11.8 && Math.hypot(sx - 18, sy - 60) >= 40;
+      const dArc = Math.hypot(sx - 18, sy - 60);
+      const onArc = (Math.abs(sx - 18) <= 15 && Math.abs(dArc - 36) <= 1.6) ||
+        Math.hypot(sx - 3, sy - endY) <= 1.6 ||
+        Math.hypot(sx - 33, sy - endY) <= 1.6;
+      if (inDome || onArc) {
         const offset = y * (1 + size * 4) + 1 + x * 4;
         for (let i = 0; i < 4; i++) pixels[offset + i] = gold[i];
       }
