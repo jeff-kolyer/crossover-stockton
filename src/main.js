@@ -34,8 +34,7 @@ const panel = $('#panel'), panelContent = $('#panel-content');
 const views = { cards: 'Cards', list: 'List', board: 'Board' };
 const viewIcons = { cards: 'grid', list: 'list', board: 'board' };
 const getView = () => Object.hasOwn(views, prefs.view) ? prefs.view : 'list';
-const theme = () => prefs.theme === 'dark' ? 'dark' : 'light';
-document.documentElement.dataset.theme = theme();
+document.documentElement.dataset.theme = 'light';
 function message(s) { const n = $('#notice'); n.textContent = s; n.classList.add('on'); clearTimeout(noticeTimer); noticeTimer = setTimeout(() => n.classList.remove('on'), 3200); }
 function reindex() {
   const original = new Set(db.pathways.map(p => p.id));
@@ -316,8 +315,7 @@ function searchHits() {
 }
 function searchPanel() { return panelTop('Workspace', 'Search Crossover') + searchField('global-q', searchQuery, 'Pathway, task, agency, or record ID') + '<div id="search-hits" aria-live="polite">' + searchHits() + '</div>'; }
 function menuPanel() {
-  return panelTop('Crossover Stockton', 'Menu', 'Navigation & preferences') +
-    block('Appearance', '<div class="theme-group">' + button(icon('sun', 17) + 'Light', 'data-theme-choice="light" aria-pressed="' + (theme() === 'light') + '"', 'btn ' + (theme() === 'light' ? 'selected' : '')) + button(icon('moon', 17) + 'Dark', 'data-theme-choice="dark" aria-pressed="' + (theme() === 'dark') + '"', 'btn ' + (theme() === 'dark' ? 'selected' : '')) + '</div>') +
+  return panelTop('Crossover Stockton', 'Menu', 'Navigation & links') +
     block('More', '<div class="inset-list">' +
       inLink(child('about'), '<span class="row-icon">' + icon('book', 18) + '</span><span class="row-body"><strong>About &amp; methodology</strong><small>How Crossover verifies pathways</small></span>' + icon('right', 16), 'data-row') +
       '<a class="data-row" href="https://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noopener noreferrer"><span class="row-icon">' + icon('link', 18) + '</span><span class="row-body"><strong>Connect on LinkedIn</strong><small>linkedin.com/in/jeff-kolyer</small></span>' + icon('right', 16) + '</a>' +
@@ -428,9 +426,6 @@ document.addEventListener('click', e => {
   if (el.id === 'chapter') { go(child('chapter')); return; }
   if (el.dataset.overlay) { if (el.dataset.overlay === 'search') searchQuery = ''; go(child(el.dataset.overlay)); return; }
   if (el.dataset.view) { selectView(el.dataset.view); return; }
-  if (el.dataset.themeChoice) {
-    prefs.theme = el.dataset.themeChoice; save(prefKey, prefs); document.documentElement.dataset.theme = theme(); render(); return;
-  }
   const a = el.dataset.action;
   if (a === 'back') { popPanel(); return; }
   if (a === 'close') {

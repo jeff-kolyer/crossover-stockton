@@ -1,5 +1,6 @@
 import pathways from './data/pathways.json';
 import { homePage } from './home.js';
+import { communityAnimalPark } from './article-park.js';
 
 const $ = selector => document.querySelector(selector);
 const repo = 'https://github.com/jeff-kolyer/crossover-stockton';
@@ -25,7 +26,7 @@ function postScarcity() {
 
 function stewardship() {
   return intro('Stewardship', 'Care for the whole living system.', 'Helping one animal can affect others. Stewardship means following those effects and changing course when the evidence calls for it.') +
-    section('', 'The cat and the rabbit.', '<p>Food can relieve a cat’s hunger. It can also change where cats gather and how they interact with neighbors and wildlife. A feeding restriction may change people’s behavior without providing care for the cats.</p><p>We need to learn what happens in each place before calling either action a solution.</p>') +
+    section('', 'The cat and the rabbit.', '<p>Food can relieve a cat’s hunger. It can also change where cats gather and how they interact with neighbors and wildlife. A feeding restriction may change people’s behavior without providing care for the cats.</p><p>We need to learn what happens in each place before calling either action a solution.</p><p class="onward"><a href="/community-animal-park">Read the proposal: The Community Animal Park →</a></p>') +
     `<section class="section editorial-section soft-band"><div class="wrap"><figure class="doc-photo"><img src="/assets/stockton.webp" alt="Aerial view of Stockton neighborhoods, trees, and waterways" width="1200" height="630" loading="lazy"><figcaption class="caption">Stockton, California. The image shows shared ground, not a documented animal-care result.</figcaption></figure><div class="reading"><h2>Keep the whole picture in view.</h2><p>Animal welfare, public health, neighbors, habitat, and biodiversity can pull in different directions. We can observe outcomes, test approaches, and revise them. We also have to be honest about the values involved.</p></div></div></section>` +
     section('', 'Begin where we can check the results.', `<p>The same discipline applies to larger systems—water, soil, climate, and the life that depends on them. In Stockton we can start with specific animals and the actual routes available to care for them.</p>${onward('/work', 'See the Stockton work')}`);
 }
@@ -54,6 +55,7 @@ const pages = {
   '/crossover': { title: 'The Crossover', render: crossover },
   '/post-scarcity': { title: 'Post-Scarcity', render: postScarcity },
   '/stewardship': { title: 'Stewardship', render: stewardship },
+  '/community-animal-park': { title: 'The Community Animal Park', render: communityAnimalPark },
   '/work': { title: 'The Work', render: work },
   '/about': { title: 'About', render: about }
 };

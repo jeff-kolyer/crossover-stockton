@@ -57,34 +57,6 @@
   font: 100%/1.55 Plex, 'IBM Plex Sans', system-ui, sans-serif
 }
 
-:root[data-theme=dark] {
-  color-scheme: dark;
-  --page: #09090b;
-  --surface: #121316;
-  --soft: #1b1c20;
-  --quiet: #23252a;
-  --ink: #f4f4f6;
-  --text: #d4d6dc;
-  --muted: #a1a5b0;
-  --dim: #848996;
-  --line: #282a30;
-  --light-line: #1f2126;
-  --blue: #f4f4f6;
-  --bright: #f2c94c;
-  --blue-soft: #252114;
-  --blue-line: #7a5b00;
-  --navy: #181b22;
-  --shadow: none;
-  --explore-bg: #2c2512;
-  --explore-fg: #f2c94c;
-  --enable-bg: #1c2b38;
-  --enable-fg: #9ec6e0;
-  --block-bg: #38221e;
-  --block-fg: #f0a295;
-  --est-bg: #1b3328;
-  --est-fg: #9fddbc
-}
-
 * {
   box-sizing: border-box
 }
@@ -546,8 +518,7 @@ h3 {
 }
 
 .layout-tools,
-.view-switch,
-.theme-group {
+.view-switch {
   display: flex;
   align-items: center;
   gap: 9px

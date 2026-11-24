@@ -86,6 +86,7 @@ export function homePage() {
             <div class="info-card">
               <h3>What Crossover asks instead</h3>
               <p>We don’t ask you to pick a side. We ask: <strong>what is actually happening, and what system would best care for the cats, the wildlife, and the community?</strong></p>
+              <p style="margin-top:12px"><a class="text-link" href="/community-animal-park">Read the proposal: The Community Animal Park →</a></p>
             </div>
           </div>
         </div>

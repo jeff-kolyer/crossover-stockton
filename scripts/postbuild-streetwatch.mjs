@@ -3,7 +3,7 @@ import { copyFile, mkdir, readFile } from 'node:fs/promises';
 await mkdir('dist/evidence-room', { recursive: true });
 await copyFile('dist/index.html', 'dist/evidence-room/index.html');
 await copyFile('dist/index.html', 'dist/404.html');
-for (const route of ['crossover', 'post-scarcity', 'stewardship', 'work', 'about']) {
+for (const route of ['crossover', 'post-scarcity', 'stewardship', 'community-animal-park', 'work', 'about']) {
   await mkdir(`dist/${route}`, { recursive: true });
   await copyFile('dist/index.html', `dist/${route}/index.html`);
 }

@@ -16,6 +16,7 @@ test('editorial pages, sources, and tracker routes remain usable', async ({ page
     ['/crossover', 'The mind can change what we see.'],
     ['/post-scarcity', 'Capacity gives us a choice.'],
     ['/stewardship', 'Care for the whole living system.'],
+    ['/community-animal-park', 'The Community Animal Park'],
     ['/work', 'Follow what happens after we decide to help.'],
     ['/about', 'How Crossover works in Stockton.']
   ]) {
