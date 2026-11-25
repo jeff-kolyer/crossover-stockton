@@ -1,20 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" role="img" aria-labelledby="title">
-  <title id="title">Crossover two-tone open door icon</title>
-  <style>
-    .door-left {
-      fill: #262826;
-    }
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Crossover open door" width="100" height="100"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><style>
+    .door-left { fill: #262826; }
     @media (prefers-color-scheme: dark) {
-      .door-left {
-        fill: #F5F2E9;
-      }
+      .door-left { fill: #F5F2E9; }
     }
-
-    .door-right {
-      fill: #D5A321;
-    }
-  </style>
-  <path class="door-left" d="M 5 33.5 L 5 14 A 13 13 0 0 1 25.0 3.05 L 16.0 10.6 L 16.0 27.5 Z"/>
-  <path class="door-right" d="M 18.2 30.0 L 18.2 12.2 L 26.8 4.43 A 13 13 0 0 1 31 14 L 31 35.0 Z"/>
-</svg>
+  </style><path class="door-left" fill="#262826" d="M12 94V39A38 38 0 0 1 70 7L44 24V73Z"></path><path fill="#D5A321" d="M50 28L76 11Q88 23 88 39V100L50 85Z"></path></svg>
