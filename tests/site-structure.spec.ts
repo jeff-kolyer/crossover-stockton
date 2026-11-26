@@ -27,6 +27,8 @@ test('editorial pages, sources, and tracker routes remain usable', async ({ page
   }
   await expect(page.locator('a[href="https://www.linkedin.com/in/jeff-kolyer"]')).toBeVisible();
   await expect(page.locator('.site-footer a[href="/about"]')).toBeVisible();
+  await page.goto('/stewardship');
+  await expect(page.locator('iframe[title="Planetary stewardship in miniature"]')).toHaveAttribute('src', /K9VX_vF_rpU/);
 
   await page.goto('/workspace.html#pathways');
   await expect(page.locator('#page')).toContainText('Tracked pathways');
