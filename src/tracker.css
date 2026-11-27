@@ -2759,11 +2759,15 @@ dialog.search-panel {
   margin-bottom: 8px;
 }
 
+.work-tabs[hidden] {
+  display: none;
+}
+
 .detail-page {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  margin-top: 16px;
+  margin-top: 0;
 }
 
 .work-tab {

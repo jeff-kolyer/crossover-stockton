@@ -49,11 +49,13 @@ test('Evidence -> record panel Back & Close preserve scroll and opener focus', a
   await firstRecordLink.evaluate((el) => (el as HTMLElement).focus({ preventScroll: true }));
   await firstRecordLink.click();
   await expect(page.locator('#panel')).toBeVisible();
+  await expect(page.locator('#work-tabs')).toBeHidden();
   await expect(page.locator('#panel [data-action="back"]')).toBeVisible();
   await expect(page.locator('#panel [data-action="close"]')).toBeVisible();
 
   await page.locator('#panel [data-action="back"]').click();
   await expect(page.locator('#panel')).toBeHidden();
+  await expect(page.locator('#work-tabs')).toBeVisible();
   expect(Math.abs((await page.evaluate(() => window.scrollY)) - savedScroll)).toBeLessThanOrEqual(5);
 
   await firstRecordLink.evaluate((el) => (el as HTMLElement).focus({ preventScroll: true }));

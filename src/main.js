@@ -171,8 +171,8 @@ function renderPathways() {
   return sectionHead('Stockton', 'Pathways', 'Ways to make a difference we are checking in Stockton. Tap a pathway to see what we’ve tried, what’s next, and the evidence behind it.', 'route') +
     '<section class="path-section" aria-labelledby="track-title"><h2 id="track-title" class="sr">Tracked pathways</h2><div class="simple-list">' + join(list) + '</div>' +
     '<div class="simple-link-group">' +
-      inLink('tasks', 'Tasks <span>(' + openTasks().length + ')</span> →', 'simple-link') +
-      inLink('evidence', 'Evidence <span>(' + records.size + ')</span> →', 'simple-link') +
+    inLink('tasks', 'Tasks <span>(' + openTasks().length + ')</span> →', 'simple-link') +
+    inLink('evidence', 'Evidence <span>(' + records.size + ')</span> →', 'simple-link') +
     '</div></section>';
 }
 function sectionHead(over, title, desc, iconName) {
@@ -193,8 +193,8 @@ function tasksPage() {
     '<div class="data-tools">' + searchField('task-q', taskQuery, 'Search tasks') + '</div>' +
     '<div id="task-results">' + taskResults() + '</div>' +
     '<div class="simple-link-group">' +
-      inLink('pathways', 'Pathways <span>(' + pathways.length + ')</span> →', 'simple-link') +
-      inLink('evidence', 'Evidence <span>(' + records.size + ')</span> →', 'simple-link') +
+    inLink('pathways', 'Pathways <span>(' + pathways.length + ')</span> →', 'simple-link') +
+    inLink('evidence', 'Evidence <span>(' + records.size + ')</span> →', 'simple-link') +
     '</div>';
 }
 function recordResults() {
@@ -206,8 +206,8 @@ function evidencePage() {
     '<div class="data-tools">' + searchField('record-q', evidenceQuery, 'Search by title, agency, or record ID') + selectBox('record-filter', 'Filter records by type', [['All', 'All types'], ['Records', 'Records'], ['Activities', 'Activities'], ['Tasks', 'Tasks']], evidenceFilter) + '</div>' +
     '<div id="record-results">' + recordResults() + '</div>' +
     '<div class="simple-link-group">' +
-      inLink('pathways', 'Pathways <span>(' + pathways.length + ')</span> →', 'simple-link') +
-      inLink('tasks', 'Tasks <span>(' + openTasks().length + ')</span> →', 'simple-link') +
+    inLink('pathways', 'Pathways <span>(' + pathways.length + ')</span> →', 'simple-link') +
+    inLink('tasks', 'Tasks <span>(' + openTasks().length + ')</span> →', 'simple-link') +
     '</div>';
 }
 function panelTop(eyebrow, title, subtitle = '') {
@@ -319,7 +319,7 @@ function menuPanel() {
     block('More', '<div class="inset-list">' +
       inLink(child('about'), '<span class="row-icon">' + icon('book', 18) + '</span><span class="row-body"><strong>About &amp; methodology</strong><small>How Crossover verifies pathways</small></span>' + icon('right', 16), 'data-row') +
       '<a class="data-row" href="https://www.linkedin.com/in/jeff-kolyer" target="_blank" rel="noopener noreferrer"><span class="row-icon">' + icon('link', 18) + '</span><span class="row-body"><strong>Connect on LinkedIn</strong><small>linkedin.com/in/jeff-kolyer</small></span>' + icon('right', 16) + '</a>' +
-    '</div>');
+      '</div>');
 }
 function chapterPanel() {
   return panelTop('Location', 'Stockton, California', 'Active Crossover chapter') + '<div class="chapter-active"><span class="row-icon">' + icon('pin', 21) + '</span><div><strong>Stockton, CA</strong><small>Investigating unmet needs &amp; ways to help</small></div>' + icon('checkcircle', 19) + '</div>';
@@ -343,11 +343,7 @@ function panelBody() {
   return fn ? fn() : panelTop('Workspace', 'Item unavailable', 'This item does not appear in the current source records.') + button('Return to workspace', 'data-action="close"');
 }
 function showPanel() {
-  if (!showingDetail) {
-    openerHref = document.activeElement?.getAttribute?.('href') || '';
-    sectionScroll = window.scrollY;
-    showingDetail = true;
-  }
+  showingDetail = true;
   const kind = route.top.kind;
   const back = button(icon('back', 16) + '<span>Back</span>', 'data-action="back"', 'panel-back');
   const close = button(icon('close', 20), 'data-action="close" aria-label="Close" title="Close"', 'icon-button');
@@ -355,16 +351,22 @@ function showPanel() {
   const target = kind === 'search' ? $('#global-q') : $('#panel-title');
   target?.focus({ preventScroll: true });
   const nextY = panelScroll.get(route.hash) || 0;
-  window.scrollTo(0, nextY);
+  window.scrollTo({ top: nextY, behavior: 'instant' });
 }
 function render() {
   if (!db) return;
   const next = parseRoute();
+  if (!showingDetail && next.top) {
+    openerHref = document.activeElement?.getAttribute?.('href') || '';
+    sectionScroll = window.scrollY;
+  }
   if (showingDetail && lastRoute !== next.hash) panelScroll.set(lastRoute, window.scrollY);
   const change = next.section !== renderedSection;
   route = next;
+  const workTabs = $('#work-tabs');
+  workTabs.hidden = Boolean(route.top);
   if (change || dirty || showingDetail !== Boolean(route.top)) {
-    $('#work-tabs').innerHTML = navHTML();
+    workTabs.innerHTML = navHTML();
   }
   if (route.top) {
     showPanel();
@@ -377,9 +379,9 @@ function render() {
     }
     if (returning) {
       showingDetail = false;
-      window.scrollTo(0, sectionScroll);
-      requestAnimationFrame(() => window.scrollTo(0, sectionScroll));
-      setTimeout(() => window.scrollTo(0, sectionScroll), 0);
+      window.scrollTo({ top: sectionScroll, behavior: 'instant' });
+      requestAnimationFrame(() => window.scrollTo({ top: sectionScroll, behavior: 'instant' }));
+      setTimeout(() => window.scrollTo({ top: sectionScroll, behavior: 'instant' }), 0);
       const openerEl = openerHref ? $('#page a[href="' + CSS.escape(openerHref) + '"]') : null;
       if (openerEl) openerEl.focus({ preventScroll: true });
       else ($('#page h1, #page h2') || $('#main')).focus({ preventScroll: true });
@@ -530,6 +532,7 @@ document.addEventListener('keydown', e => {
   if (!db || e.key !== '/' || e.ctrlKey || e.altKey || e.metaKey || /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
   e.preventDefault(); if (route.top?.kind === 'search') $('#global-q').focus(); else { searchQuery = ''; go(child('search')); }
 });
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 window.addEventListener('popstate', render);
 window.addEventListener('hashchange', render);
 window.addEventListener('storage', e => { if (!db) return; if (e.key === editKey) { edits = readEdits(); reindex(); refresh(); } });
