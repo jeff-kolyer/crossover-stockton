@@ -5,7 +5,7 @@ export function homePage() {
     <section class="hero">
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">From thinking to being · From scarcity to stewardship</p>
+          <p class="eyebrow">From scarcity to stewardship</p>
           <h1>Where should we spend our time?</h1>
           <p class="lead">As AI and robotics take over more of the work required to keep society running, humanity faces a real question: if we don’t have to spend most of our lives just securing survival, what should we live for?</p>
           <p>Crossover explores that shift—from an existence organized mainly around ourselves toward conscious stewardship of the living world. And it begins with something ordinary.</p>
@@ -16,14 +16,14 @@ export function homePage() {
         </div>
         <figure>
           <img src="/assets/animal-outside-door.png" alt="Illustration of a dog standing outside an open front door" width="1024" height="1536" fetchpriority="high">
-          <figcaption class="caption">An ordinary moment: a stray animal appears outside your door. (Illustrative image, not a documented Crossover field encounter.)</figcaption>
+          <figcaption class="caption">A stray dog at your doorstep. (Illustrative image.)</figcaption>
         </figure>
       </div>
     </section>
 
     <section class="section soft-band">
       <div class="wrap reading">
-        <p class="eyebrow">1 · The Animal Outside the Door</p>
+        <p class="eyebrow">The Animal Outside the Door</p>
         <h2>Wanting to help is simpler than knowing how.</h2>
         <p>Most of the time, we’re absorbed in our own lives—our responsibilities, security, possessions, relationships, and plans. An animal outside the door may barely register.</p>
         <p>Crossover calls this <em>unconsciousness</em>: living largely through evolutionary conditioning, experiencing the world mainly in relation to ourselves. That isn’t a judgment about good or bad people. It’s a condition we can all recognize.</p>
@@ -56,7 +56,7 @@ export function homePage() {
             <span>Approximate U.S. dog and cat shelter and rescue admissions in 2025.</span>
           </div>
         </div>
-        <p class="sources">Previously identified national estimates; definitions and primary sources should be reverified before publication. Context from ${source('https://humanepro.org/page/managing-community-cats', 'HumanePro')} and ${source('https://www.shelteranimalscount.org/2025-report', 'Shelter Animals Count 2025 report')}.</p>
+        <p class="sources">Sources: ${source('https://humanepro.org/page/managing-community-cats', 'HumanePro')} and ${source('https://www.shelteranimalscount.org/2025-report', 'Shelter Animals Count 2025 report')}.</p>
       </div>
     </section>
 
@@ -126,19 +126,19 @@ export function homePage() {
 
         <div class="nav-cards">
           <a class="nav-card" href="/crossover">
-            <strong>2. The Crossover →</strong>
+            <strong>The Crossover →</strong>
             <span>From thinking to being: consciousness, conditioning, and participating in reality directly.</span>
           </a>
           <a class="nav-card" href="/post-scarcity">
-            <strong>3. Post-Scarcity →</strong>
+            <strong>Post-Scarcity →</strong>
             <span>What is our time for when machines can do more of the work? Possibilities and real dangers.</span>
           </a>
           <a class="nav-card" href="/stewardship">
-            <strong>4. Stewardship →</strong>
+            <strong>Stewardship →</strong>
             <span>Caring for the living Earth: cats, rabbits, neighbors, and systems that work together.</span>
           </a>
           <a class="nav-card" href="/work">
-            <strong>5. The Work in Stockton →</strong>
+            <strong>The Work in Stockton →</strong>
             <span>Where philosophy meets reality: field investigations, public records, and the Stockton tracker.</span>
           </a>
         </div>

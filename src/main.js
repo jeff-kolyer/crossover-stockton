@@ -30,7 +30,7 @@ let suppressSectionPush = false;
 const filter = { stage: 'All', contrib: 'All', text: '' };
 let taskFilter = 'all', taskQuery = '', evidenceFilter = 'All', evidenceQuery = '', searchQuery = '', boardStage = 'Exploring';
 const panelScroll = new Map();
-const panel = $('#panel'), panelContent = $('#panel-content');
+let showingDetail = false, openerHref = '';
 const views = { cards: 'Cards', list: 'List', board: 'Board' };
 const viewIcons = { cards: 'grid', list: 'list', board: 'board' };
 const getView = () => Object.hasOwn(views, prefs.view) ? prefs.view : 'list';
@@ -343,37 +343,50 @@ function panelBody() {
   return fn ? fn() : panelTop('Workspace', 'Item unavailable', 'This item does not appear in the current source records.') + button('Return to workspace', 'data-action="close"');
 }
 function showPanel() {
-  if (!panel.open) { opener = document.activeElement; sectionScroll = window.scrollY; panel.showModal(); }
+  if (!showingDetail) {
+    openerHref = document.activeElement?.getAttribute?.('href') || '';
+    sectionScroll = window.scrollY;
+    showingDetail = true;
+  }
   const kind = route.top.kind;
-  panel.className = kind === 'menu' ? 'left-drawer' : ['p', 't', 'r', 'about'].includes(kind) ? 'detail-panel' : 'utility-panel ' + (kind === 'search' ? 'search-panel' : '');
   const back = button(icon('back', 16) + '<span>Back</span>', 'data-action="back"', 'panel-back');
   const close = button(icon('close', 20), 'data-action="close" aria-label="Close" title="Close"', 'icon-button');
-  panelContent.innerHTML = '<div class="dialog-bar">' + back + close + '</div><div class="dialog-body">' + panelBody() + '</div>';
+  $('#page').innerHTML = '<article id="panel" class="detail-page"><div class="dialog-bar">' + back + close + '</div><div class="dialog-body">' + panelBody() + '</div></article>';
   const target = kind === 'search' ? $('#global-q') : $('#panel-title');
   target?.focus({ preventScroll: true });
-  panel.scrollTop = panelScroll.get(route.hash) || 0;
+  const nextY = panelScroll.get(route.hash) || 0;
+  window.scrollTo(0, nextY);
 }
 function render() {
   if (!db) return;
   const next = parseRoute();
-  if (panel.open && lastRoute !== next.hash) panelScroll.set(lastRoute, panel.scrollTop);
+  if (showingDetail && lastRoute !== next.hash) panelScroll.set(lastRoute, window.scrollY);
   const change = next.section !== renderedSection;
   route = next;
-  if (change || dirty) {
+  if (change || dirty || showingDetail !== Boolean(route.top)) {
     $('#work-tabs').innerHTML = navHTML();
-    $('#page').innerHTML = ({ pathways: renderPathways, tasks: tasksPage, evidence: evidencePage }[route.section])();
-    if (change) window.scrollTo(0, 0);
-    renderedSection = route.section; dirty = false;
   }
-  if (route.top) showPanel();
-  else if (panel.open) {
-    panel.close();
-    window.scrollTo(0, sectionScroll);
-    requestAnimationFrame(() => window.scrollTo(0, sectionScroll));
-    setTimeout(() => window.scrollTo(0, sectionScroll), 0);
-    if (opener?.isConnected) opener.focus({ preventScroll: true });
-    else ($('#page h1, #page h2') || $('#main')).focus({ preventScroll: true });
-    panelScroll.clear();
+  if (route.top) {
+    showPanel();
+    renderedSection = route.section; dirty = false;
+  } else {
+    const returning = showingDetail;
+    if (change || dirty || returning) {
+      $('#page').innerHTML = ({ pathways: renderPathways, tasks: tasksPage, evidence: evidencePage }[route.section])();
+      renderedSection = route.section; dirty = false;
+    }
+    if (returning) {
+      showingDetail = false;
+      window.scrollTo(0, sectionScroll);
+      requestAnimationFrame(() => window.scrollTo(0, sectionScroll));
+      setTimeout(() => window.scrollTo(0, sectionScroll), 0);
+      const openerEl = openerHref ? $('#page a[href="' + CSS.escape(openerHref) + '"]') : null;
+      if (openerEl) openerEl.focus({ preventScroll: true });
+      else ($('#page h1, #page h2') || $('#main')).focus({ preventScroll: true });
+      panelScroll.clear();
+    } else if (change) {
+      window.scrollTo(0, 0);
+    }
   }
   document.title = (route.top && $('#panel-title') ? $('#panel-title').textContent : sections[route.section]) + ' · Crossover Stockton';
   lastRoute = route.hash;
@@ -473,7 +486,7 @@ document.addEventListener('submit', e => {
     if (!note) { $('#field-note').focus(); return; }
     const id = route.top.id;
     const saved = storeWork(v => { v.notes[id] = [...(v.notes[id] || []), { date: new Date().toISOString(), text: note }]; });
-    panelScroll.set(route.hash, panel.scrollTop); render(); message(saved ? 'Field note saved' : 'Field note added for this session'); return;
+    panelScroll.set(route.hash, window.scrollY); render(); message(saved ? 'Field note saved' : 'Field note added for this session'); return;
   }
   if (form.id === 'update-form') {
     const p = parentPath(); if (!p) return;
@@ -512,13 +525,8 @@ document.addEventListener('submit', e => {
   clearFilters(); boardStage = 'Exploring';
   go('pathways/p/' + segment(id), { replace: true }); message(saved ? 'Pathway saved in this browser' : 'Pathway added for this session');
 });
-panel.addEventListener('cancel', e => { e.preventDefault(); popPanel(); });
-panel.addEventListener('click', e => {
-  if (e.target !== panel) return;
-  const r = panel.getBoundingClientRect();
-  if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) popPanel();
-});
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && route?.top) { e.preventDefault(); popPanel(); return; }
   if (!db || e.key !== '/' || e.ctrlKey || e.altKey || e.metaKey || /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
   e.preventDefault(); if (route.top?.kind === 'search') $('#global-q').focus(); else { searchQuery = ''; go(child('search')); }
 });
