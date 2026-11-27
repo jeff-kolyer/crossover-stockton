@@ -129,7 +129,7 @@ button:focus-visible {
 .identity-mark {
   flex: none;
   color: var(--ink);
-  transform: translateY(2px)
+  transform: translateY(1px)
 }
 
 .identity-text {
